@@ -1,6 +1,7 @@
 ﻿#nullable enable
 using Daipan.Player.Scripts;
 using Daipan.Utility;
+using Daipan.Viewer.MonoScripts;
 using Daipan.Viewer.Scripts;
 using UnityEngine;
 using VContainer;
@@ -17,11 +18,14 @@ namespace Daipan.Viewer.Tests
             builder.RegisterInstance(viewerParameter.ViewerNumberParameter);
 
             builder.Register<ViewerPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<ViewerMono>>();
-
             builder.Register<ViewerFactory>(Lifetime.Scoped);
+            builder.RegisterComponentInHierarchy<ViewerUIMono>();
 
 
-            builder.UseEntryPoints(Lifetime.Singleton, entryPoints => { entryPoints.Add<ViewerFactory>(); });
+            builder.UseEntryPoints(Lifetime.Singleton, entryPoints =>
+            {
+                entryPoints.Add<ViewerFactory>();
+            });
         }
     }
     
