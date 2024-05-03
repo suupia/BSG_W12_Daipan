@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: ViewerParameter
   m_EditorClassIdentifier: 
   ViewerNumberParameter:
-    increaseNumberPerSecond: 0
+    increaseNumberPerSecond: 1

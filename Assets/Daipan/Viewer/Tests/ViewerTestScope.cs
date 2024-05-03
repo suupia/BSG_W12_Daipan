@@ -18,6 +18,8 @@ namespace Daipan.Viewer.Tests
             builder.RegisterInstance(viewerParameter.ViewerNumberParameter);
 
             builder.Register<ViewerPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<ViewerMono>>();
+
+            builder.Register<ViewerNumber>(Lifetime.Scoped);
             builder.Register<ViewerFactory>(Lifetime.Scoped);
             builder.RegisterComponentInHierarchy<ViewerUIMono>();
 
