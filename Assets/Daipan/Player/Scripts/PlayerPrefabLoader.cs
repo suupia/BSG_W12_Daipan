@@ -5,7 +5,7 @@ using VContainer;
 
 namespace Daipan.Player.Scripts
 {
-    public class PlayerPrefabLoader : IPrefabLoader<PlayerMono>
+    public sealed class PlayerPrefabLoader : IPrefabLoader<PlayerMono>
     {
         readonly PrefabLoaderFromResources<PlayerMono> _loader;
      
