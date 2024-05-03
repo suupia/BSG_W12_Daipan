@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using Daipan.Player.Scripts;
 using VContainer;
 using VContainer.Unity;
 
@@ -14,5 +12,7 @@ public class PlayerTestScope : LifetimeScope
         // builder.Register<IRouteSearch, AStarRouteSearch>(Lifetime.Singleton);
         //
         // builder.RegisterComponentInHierarchy<ActorsView>();
+
+        builder.Register<PlayerFactory>(Lifetime.Scoped);
     }
 }
