@@ -34,6 +34,14 @@ namespace Daipan.Viewer.Tests
                 else
                     _distributionStatus.IsExciting = true;
             }
+
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                if(_distributionStatus.ExistIrrationalFactors)
+                    _distributionStatus.ExistIrrationalFactors = false;
+                else
+                    _distributionStatus.ExistIrrationalFactors = true;
+            }
         }
     }
 }
