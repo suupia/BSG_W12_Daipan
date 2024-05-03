@@ -11,6 +11,7 @@ namespace Daipan.Utility.Scripts
         public PrefabLoaderFromResources(string path)
         {
             _path = path;
+            
         }
 
         public T Load()
