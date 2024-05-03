@@ -4,6 +4,7 @@ using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
+// プレイヤーの処理をテストするためのLifetimeScope
 public class PlayerTestScope : LifetimeScope
 {
     protected override void Configure(IContainerBuilder builder)
@@ -14,17 +15,11 @@ public class PlayerTestScope : LifetimeScope
         // Playerの生成を行うクラスを登録（今後様々なPlayerを作れるようにFactoryパターンを採用）
         builder.Register<PlayerAttack>(Lifetime.Scoped);
         builder.Register<PlayerFactory>(Lifetime.Scoped);
-        
-        
-        
-        
+
+
         builder.UseEntryPoints(Lifetime.Singleton, entryPoints =>
-            {
-                entryPoints.Add<PlayerFactory>();
-                // entryPoints.Add<OtherSingletonEntryPointA>();
-                // entryPoints.Add<OtherSingletonEntryPointB>();
-                // entryPoints.Add<OtherSingletonEntryPointC>();
-            })
-            ;
+        {
+            entryPoints.Add<PlayerFactory>();
+        });
     }
 }

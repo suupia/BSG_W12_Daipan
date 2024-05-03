@@ -17,12 +17,13 @@ namespace Daipan.Player.Scripts
         {
             _container = container;
             _loader = loader;
-            Debug.Log($"PlayerFactory Constructor: {loader}");
         }
 
         void IStartable.Start()
         {
+           // PlayerMonoのプレハブをロードして生成 
            var playerMonoPrefab = _loader.Load(); 
+           // IObjectResolverを使ってPlayerMonoを生成すると依存関係が解決される
            var playerMono = _container.Instantiate(playerMonoPrefab);
 
         }

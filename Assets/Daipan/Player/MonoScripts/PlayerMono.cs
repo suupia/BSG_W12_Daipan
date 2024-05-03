@@ -8,6 +8,7 @@ public class PlayerMono : MonoBehaviour
 {
     PlayerAttack _playerAttack;
     
+    // [Inject]を付けないと、VContainerからのInjectが行われないことに注意
     [Inject]
     public void Initialize(PlayerAttack playerAttack)
     {
