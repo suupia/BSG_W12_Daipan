@@ -15,13 +15,24 @@ namespace Daipan.Viewer.Tests
 
         protected override void Configure(IContainerBuilder builder)
         {
+            // Parameter
             builder.RegisterInstance(viewerParameter.ViewerNumberParameter);
+            builder.RegisterInstance(viewerParameter.DaipanParameter);
 
+            // PrefabLoader
             builder.Register<ViewerPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<ViewerMono>>();
 
+            // Domain
             builder.Register<ViewerNumber>(Lifetime.Scoped);
             builder.Register<ViewerFactory>(Lifetime.Scoped);
+            
+            builder.Register<DaipanExecutor>(Lifetime.Scoped);
+            
+            // Mono
             builder.RegisterComponentInHierarchy<ViewerUIMono>();
+            
+            // Test
+            builder.RegisterComponentInHierarchy<PlayerTestInput>();
 
 
             builder.UseEntryPoints(Lifetime.Singleton, entryPoints =>

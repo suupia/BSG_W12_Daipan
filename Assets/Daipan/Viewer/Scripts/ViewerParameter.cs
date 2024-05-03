@@ -10,7 +10,7 @@ namespace Daipan.Viewer.Scripts
         public int increaseNumberPerSecond;
     }
     
-    [SerializeField]
+    [Serializable]
     public sealed class DaipanParameter
     {
         public int increaseNumberByDaipan;

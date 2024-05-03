@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ViewerNumberParameter:
     increaseNumberPerSecond: 1
+  DaipanParameter:
+    increaseNumberByDaipan: 10
