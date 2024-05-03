@@ -6,7 +6,7 @@ using VContainer;
 
 namespace Stream.Viewer.MonoScripts
 {
-    public class ViewerUIMono : MonoBehaviour
+    public class StreamUIMono : MonoBehaviour
     {
         [SerializeField] TextMeshProUGUI viewerNumberText = null!;
         [SerializeField] TextMeshProUGUI isExcitingText = null!;

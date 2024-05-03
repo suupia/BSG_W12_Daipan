@@ -31,7 +31,7 @@ namespace Stream.Viewer.Tests
             builder.Register<DaipanExecutor>(Lifetime.Scoped);
 
             // Mono
-            builder.RegisterComponentInHierarchy<ViewerUIMono>();
+            builder.RegisterComponentInHierarchy<StreamUIMono>();
 
             // Test
             builder.RegisterComponentInHierarchy<PlayerTestInput>();
