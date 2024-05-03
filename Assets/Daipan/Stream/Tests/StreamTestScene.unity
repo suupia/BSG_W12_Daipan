@@ -171,7 +171,7 @@ MonoBehaviour:
     TypeName: 
   autoRun: 1
   autoInjectGameObjects: []
-  streamParameter: {fileID: 11400000, guid: 5750d5d4691bfdd4d88c23ae53fcac4a, type: 2}
+  streamParameter: {fileID: 11400000, guid: 1b8bd700307d7c748a87d7ab4b98611c, type: 2}
 --- !u!1 &148616782
 GameObject:
   m_ObjectHideFlags: 0

@@ -23,7 +23,7 @@ namespace Stream.Viewer.Scripts
         public int increaseNumberWhenExciting;
     }
 
-    [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/ViewerParameter", order = 1)]
+    [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/StreamParameter", order = 1)]
     public sealed class StreamParameter : ScriptableObject
     {
         [FormerlySerializedAs("viewerNumberParameter")] [SerializeField] public ViewerParameter viewerParameter = null!;

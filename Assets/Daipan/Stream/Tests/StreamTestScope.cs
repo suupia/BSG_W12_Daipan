@@ -10,7 +10,7 @@ using VContainer.Unity;
 
 namespace Stream.Viewer.Tests
 {
-    public class ViewerTestScope : LifetimeScope
+    public class StreamTestScope : LifetimeScope
     {
         [FormerlySerializedAs("viewerParameter")] [SerializeField] StreamParameter streamParameter = null!;
 
