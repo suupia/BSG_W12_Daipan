@@ -16,3 +16,4 @@ MonoBehaviour:
     increaseNumberPerSecond: 1
   DaipanParameter:
     increaseNumberByDaipan: 10
+    increaseNumberWhenExciting: 100

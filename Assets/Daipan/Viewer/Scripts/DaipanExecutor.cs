@@ -7,10 +7,14 @@ namespace Daipan.Viewer.Scripts
         readonly ViewerNumber _viewerNumber;
         readonly ViewerStatus _viewerStatus;
 
-        public DaipanExecutor(DaipanParameter daipanParameter, ViewerNumber viewerNumber)
+        public DaipanExecutor(
+            DaipanParameter daipanParameter,
+            ViewerNumber viewerNumber,
+            ViewerStatus viewerStatus)
         {
             _daipanParameter = daipanParameter;
             _viewerNumber = viewerNumber;
+            _viewerStatus = viewerStatus;
         }
 
         bool IsExciting => _viewerStatus.IsExciting;
@@ -18,7 +22,7 @@ namespace Daipan.Viewer.Scripts
         public void DaiPan()
         {
             if (IsExciting)
-                _viewerNumber.IncreaseViewer(_daipanParameter.increaseNumberByDaipan * 2);
+                _viewerNumber.IncreaseViewer(_daipanParameter.increaseNumberWhenExciting);
             else
                 _viewerNumber.IncreaseViewer(_daipanParameter.increaseNumberByDaipan);
         }
