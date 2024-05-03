@@ -1,6 +1,7 @@
 ﻿#nullable enable
 using Daipan.Player.Scripts;
 using Daipan.Utility;
+using Daipan.Viewer.Scripts;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -9,11 +10,11 @@ namespace Daipan.Viewer.Tests
 {
     public class ViewerTestScope : LifetimeScope
     {
-        // [SerializeField] PlayerParameter playerParameter;
+        [SerializeField] ViewerParameter viewerParameter;
 
         protected override void Configure(IContainerBuilder builder)
         {
-            // builder.RegisterInstance(playerParameter.attackParameter);
+            builder.RegisterInstance(viewerParameter.ViewerNumberParameter);
 
             // Playerのプレハブをロードするクラスを登録
             builder.Register<PlayerPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<PlayerMono>>();
