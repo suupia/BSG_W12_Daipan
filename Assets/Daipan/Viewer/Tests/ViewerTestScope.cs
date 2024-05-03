@@ -17,7 +17,7 @@ namespace Daipan.Viewer.Tests
             builder.RegisterInstance(viewerParameter.ViewerNumberParameter);
 
             // Playerのプレハブをロードするクラスを登録
-            builder.Register<PlayerPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<PlayerMono>>();
+            builder.Register<ViewerPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<ViewerMono>>();
 
             // Playerの生成を行うクラスを登録（今後様々なPlayerを作れるようにFactoryパターンを採用）
             builder.Register<PlayerAttack>(Lifetime.Scoped);
