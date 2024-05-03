@@ -10,7 +10,7 @@ namespace Daipan.Viewer.Scripts
 
         public ViewerPrefabLoader()
         {
-            _loader = new PrefabLoaderFromResources<ViewerMono>("Viewer/Viewer");
+            _loader = new PrefabLoaderFromResources<ViewerMono>("Viewer");
         }
 
         public ViewerMono Load()

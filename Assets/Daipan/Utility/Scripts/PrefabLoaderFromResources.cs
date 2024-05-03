@@ -15,20 +15,21 @@ namespace Daipan.Utility.Scripts
 
         public T Load()
         {
-            var result = Resources.Load(_path);
-            if (result == null)
+            var result = Resources.Load<T>(_path);
+            if (result != null) return result;
+
+            var resultObject = Resources.Load(_path);
+            if (resultObject != null)
+            {
+                Debug.LogError($"Failed to load prefab. Path = {_path}. Type = {resultObject.GetType()}");
+            }
+            else
             {
                 Debug.LogError($"Failed to load prefab. Path = {_path}");
-                return null;
             }
 
-            if (result is T prefab)
-            {
-                return prefab;
-            }
 
-            Debug.LogError($"Failed to cast prefab. Path = {_path}");
-            return null;
+            return result;
         }
     }
 }
