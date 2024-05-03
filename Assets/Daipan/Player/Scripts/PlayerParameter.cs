@@ -10,7 +10,7 @@ namespace Daipan.Player.Scripts
         public int AttackAmount;
     }
 
-    [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/PlayerAttackParameter", order = 1)]
+    [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/PlayerParameter", order = 1)]
     public sealed class PlayerParameter : ScriptableObject
     {
        [SerializeField] public PlayerAttackParameter attackParameter; 

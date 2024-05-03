@@ -16,15 +16,12 @@ namespace Daipan.Viewer.Tests
         {
             builder.RegisterInstance(viewerParameter.ViewerNumberParameter);
 
-            // Playerのプレハブをロードするクラスを登録
             builder.Register<ViewerPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<ViewerMono>>();
 
-            // Playerの生成を行うクラスを登録（今後様々なPlayerを作れるようにFactoryパターンを採用）
-            builder.Register<PlayerAttack>(Lifetime.Scoped);
-            builder.Register<PlayerFactory>(Lifetime.Scoped);
+            builder.Register<ViewerFactory>(Lifetime.Scoped);
 
 
-            builder.UseEntryPoints(Lifetime.Singleton, entryPoints => { entryPoints.Add<PlayerFactory>(); });
+            builder.UseEntryPoints(Lifetime.Singleton, entryPoints => { entryPoints.Add<ViewerFactory>(); });
         }
     }
     
