@@ -9,11 +9,12 @@ namespace Daipan.Viewer.Scripts
     {
         public int increaseNumberPerSecond;
     }
-    
+
     [Serializable]
     public sealed class DaipanParameter
     {
         public int increaseNumberByDaipan;
+        public int increaseNumberWhenExciting;
     }
 
     [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/ViewerParameter", order = 1)]
