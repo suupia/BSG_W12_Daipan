@@ -1,5 +1,4 @@
 ﻿#nullable enable
-using Daipan.Player.Scripts;
 using Daipan.Utility;
 using Daipan.Viewer.MonoScripts;
 using Daipan.Viewer.Scripts;
@@ -11,13 +10,13 @@ namespace Daipan.Viewer.Tests
 {
     public class ViewerTestScope : LifetimeScope
     {
-        [SerializeField] ViewerParameter viewerParameter;
+        [SerializeField] ViewerParameter viewerParameter = null!;
 
         protected override void Configure(IContainerBuilder builder)
         {
             // Parameter
-            builder.RegisterInstance(viewerParameter.ViewerNumberParameter);
-            builder.RegisterInstance(viewerParameter.DaipanParameter);
+            builder.RegisterInstance(viewerParameter.viewerNumberParameter);
+            builder.RegisterInstance(viewerParameter.daipanParameter);
 
             // PrefabLoader
             builder.Register<ViewerPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<ViewerMono>>();
@@ -26,23 +25,17 @@ namespace Daipan.Viewer.Tests
             builder.Register<ViewerNumber>(Lifetime.Scoped);
             builder.Register<DistributionStatus>(Lifetime.Scoped);
             builder.Register<ViewerFactory>(Lifetime.Scoped);
-            
+
             builder.Register<DaipanExecutor>(Lifetime.Scoped);
-            
+
             // Mono
             builder.RegisterComponentInHierarchy<ViewerUIMono>();
-            
+
             // Test
             builder.RegisterComponentInHierarchy<PlayerTestInput>();
 
 
-            builder.UseEntryPoints(Lifetime.Singleton, entryPoints =>
-            {
-                entryPoints.Add<ViewerFactory>();
-            });
+            builder.UseEntryPoints(Lifetime.Singleton, entryPoints => { entryPoints.Add<ViewerFactory>(); });
         }
     }
-    
-
-
 }

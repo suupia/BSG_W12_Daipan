@@ -21,7 +21,7 @@ namespace Daipan.Viewer.Scripts
     [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/ViewerParameter", order = 1)]
     public sealed class ViewerParameter : ScriptableObject
     {
-        [SerializeField] public ViewerNumberParameter ViewerNumberParameter;
-        [SerializeField] public DaipanParameter DaipanParameter;
+        [SerializeField] public ViewerNumberParameter viewerNumberParameter = null!;
+        [SerializeField] public DaipanParameter daipanParameter = null!;
     }
 }

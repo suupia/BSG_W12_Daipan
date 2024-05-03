@@ -9,9 +9,9 @@ namespace Daipan.Viewer.MonoScripts
 {
     public class ViewerUIMono : MonoBehaviour
     {
-        [SerializeField] TextMeshProUGUI viewerNumberText;
+        [SerializeField] TextMeshProUGUI viewerNumberText = null!;
         
-        ViewerNumber _viewerNumber;
+        ViewerNumber _viewerNumber = null!;
 
         [Inject]
         public void Initialize(ViewerNumber viewerNumber)

@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace Daipan.Player.Scripts
 {
-    [Serializable] 
-    public sealed class PlayerAttackParameter 
+    [Serializable]
+    public sealed class PlayerAttackParameter
     {
         public int AttackAmount;
     }
@@ -13,6 +13,6 @@ namespace Daipan.Player.Scripts
     [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/PlayerParameter", order = 1)]
     public sealed class PlayerParameter : ScriptableObject
     {
-       [SerializeField] public PlayerAttackParameter attackParameter; 
+        [SerializeField] public PlayerAttackParameter attackParameter = null!;
     }
 }
