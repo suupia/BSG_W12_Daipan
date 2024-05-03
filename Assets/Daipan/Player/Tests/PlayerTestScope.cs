@@ -8,17 +8,16 @@ public class PlayerTestScope : LifetimeScope
 {
     protected override void Configure(IContainerBuilder builder)
     {
-        // builder.RegisterEntryPoint<ActorPresenter>();
-        //
-        // builder.Register<CharacterService>(Lifetime.Scoped);
-        // builder.Register<IRouteSearch, AStarRouteSearch>(Lifetime.Singleton);
-        //
-        // builder.RegisterComponentInHierarchy<ActorsView>();
-
+        // Playerのプレハブをロードするクラスを登録
         builder.Register<PlayerPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<PlayerMono>>();
+       
+        // Playerの生成を行うクラスを登録（今後様々なPlayerを作れるようにFactoryパターンを採用）
+        builder.Register<PlayerAttack>(Lifetime.Scoped);
         builder.Register<PlayerFactory>(Lifetime.Scoped);
-        Debug.Log($"Log from PlayerTestScope.cs");
-
+        
+        
+        
+        
         builder.UseEntryPoints(Lifetime.Singleton, entryPoints =>
             {
                 entryPoints.Add<PlayerFactory>();
