@@ -6,15 +6,15 @@ using VContainer.Unity;
 
 namespace Stream.Viewer.Scripts
 {
-    public class ViewerFactory : IStartable
+    public class StreamFactory : IStartable
     {
         readonly IObjectResolver _container;
-        readonly IPrefabLoader<ViewerMono> _viewerLoader;
+        readonly IPrefabLoader<StreamMono> _viewerLoader;
 
         [Inject]
-        public ViewerFactory(
+        public StreamFactory(
             IObjectResolver container,
-            IPrefabLoader<ViewerMono> viewerLoader)
+            IPrefabLoader<StreamMono> viewerLoader)
         {
             _container = container;
             _viewerLoader = viewerLoader;

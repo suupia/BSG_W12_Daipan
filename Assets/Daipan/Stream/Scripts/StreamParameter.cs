@@ -1,11 +1,12 @@
 ﻿#nullable enable
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Stream.Viewer.Scripts
 {
     [Serializable]
-    public sealed class ViewerNumberParameter
+    public sealed class ViewerParameter
     {
         public int increaseNumberPerSecond;
         public int decreaseNumberWhenIrradiated;
@@ -19,9 +20,9 @@ namespace Stream.Viewer.Scripts
     }
 
     [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/ViewerParameter", order = 1)]
-    public sealed class ViewerParameter : ScriptableObject
+    public sealed class StreamParameter : ScriptableObject
     {
-        [SerializeField] public ViewerNumberParameter viewerNumberParameter = null!;
+        [FormerlySerializedAs("viewerNumberParameter")] [SerializeField] public ViewerParameter viewerParameter = null!;
         [SerializeField] public DaipanParameter daipanParameter = null!;
     }
 }

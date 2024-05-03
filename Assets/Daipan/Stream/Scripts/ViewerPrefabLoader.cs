@@ -5,16 +5,16 @@ using Stream.Utility.Scripts;
 
 namespace Stream.Viewer.Scripts
 {
-    public class ViewerPrefabLoader : IPrefabLoader<ViewerMono>
+    public class ViewerPrefabLoader : IPrefabLoader<StreamMono>
     {
-        readonly PrefabLoaderFromResources<ViewerMono> _loader;
+        readonly PrefabLoaderFromResources<StreamMono> _loader;
 
         public ViewerPrefabLoader()
         {
-            _loader = new PrefabLoaderFromResources<ViewerMono>("Viewer");
+            _loader = new PrefabLoaderFromResources<StreamMono>("Viewer");
         }
 
-        public ViewerMono Load()
+        public StreamMono Load()
         {
             return _loader.Load();
         }

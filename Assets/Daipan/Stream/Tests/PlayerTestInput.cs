@@ -8,7 +8,7 @@ namespace Stream.Viewer.Tests
     public class PlayerTestInput : MonoBehaviour
     {
         DaipanExecutor _daipanExecutor = null!;
-        DistributionStatus _distributionStatus = null!;
+        StreamStatus _streamStatus = null!;
 
         void Update()
         {
@@ -16,28 +16,28 @@ namespace Stream.Viewer.Tests
 
             if (Input.GetKeyDown(KeyCode.S))
             {
-                if (_distributionStatus.IsExciting)
-                    _distributionStatus.IsExciting = false;
+                if (_streamStatus.IsExciting)
+                    _streamStatus.IsExciting = false;
                 else
-                    _distributionStatus.IsExciting = true;
+                    _streamStatus.IsExciting = true;
             }
 
             if (Input.GetKeyDown(KeyCode.D))
             {
-                if (_distributionStatus.ExistIrrationalFactors)
-                    _distributionStatus.ExistIrrationalFactors = false;
+                if (_streamStatus.ExistIrrationalFactors)
+                    _streamStatus.ExistIrrationalFactors = false;
                 else
-                    _distributionStatus.ExistIrrationalFactors = true;
+                    _streamStatus.ExistIrrationalFactors = true;
             }
         }
 
         [Inject]
         public void Construct(
             DaipanExecutor daipanExecutor,
-            DistributionStatus distributionStatus)
+            StreamStatus streamStatus)
         {
             _daipanExecutor = daipanExecutor;
-            _distributionStatus = distributionStatus;
+            _streamStatus = streamStatus;
         }
     }
 }

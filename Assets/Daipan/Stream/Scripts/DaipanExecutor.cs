@@ -5,19 +5,19 @@ namespace Stream.Viewer.Scripts
     {
         readonly DaipanParameter _daipanParameter;
         readonly ViewerNumber _viewerNumber;
-        readonly DistributionStatus _distributionStatus;
+        readonly StreamStatus _streamStatus;
 
         public DaipanExecutor(
             DaipanParameter daipanParameter,
             ViewerNumber viewerNumber,
-            DistributionStatus distributionStatus)
+            StreamStatus streamStatus)
         {
             _daipanParameter = daipanParameter;
             _viewerNumber = viewerNumber;
-            _distributionStatus = distributionStatus;
+            _streamStatus = streamStatus;
         }
 
-        bool IsExciting => _distributionStatus.IsExciting;
+        bool IsExciting => _streamStatus.IsExciting;
 
         public void DaiPan()
         {
