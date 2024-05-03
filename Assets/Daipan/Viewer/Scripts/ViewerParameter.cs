@@ -8,6 +8,7 @@ namespace Daipan.Viewer.Scripts
     public sealed class ViewerNumberParameter
     {
         public int increaseNumberPerSecond;
+        public int decreaseNumberWhenIrradiated;
     }
 
     [Serializable]
