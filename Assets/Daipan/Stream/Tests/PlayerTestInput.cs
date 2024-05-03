@@ -7,8 +7,8 @@ namespace Stream.Viewer.Tests
 {
     public class PlayerTestInput : MonoBehaviour
     {
-        [SerializeField] CustomButton isExcitedButton;
-        [SerializeField] CustomButton isIrritatedButton;
+        [SerializeField] CustomButton isExcitedButton = null!;
+        [SerializeField] CustomButton isIrritatedButton = null!;
         DaipanExecutor _daipanExecutor = null!;
         StreamStatus _streamStatus = null!;
 
