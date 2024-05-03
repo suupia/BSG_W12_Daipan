@@ -18,8 +18,8 @@ namespace Stream.Viewer.MonoScripts
         void Update()
         {
             viewerNumberText.text = $"Current Viewers : {_viewerNumber.Number}";
-            isExcitingText.text = $"IsExciting : {_streamStatus.IsExciting}";
-            existIrrationalFactorsText.text = $"ExistIrrationalFactors : {_streamStatus.ExistIrrationalFactors}";
+            isExcitingText.text = $"IsExciting : {_streamStatus.IsExcited}";
+            existIrrationalFactorsText.text = $"ExistIrrationalFactors : {_streamStatus.IsIrritated}";
         }
 
 

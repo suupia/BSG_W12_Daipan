@@ -17,7 +17,7 @@ namespace Stream.Viewer.Scripts
             _streamStatus = streamStatus;
         }
 
-        bool IsExciting => _streamStatus.IsExciting;
+        bool IsExciting => _streamStatus.IsExcited;
 
         public void DaiPan()
         {

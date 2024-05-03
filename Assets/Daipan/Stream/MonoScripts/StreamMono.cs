@@ -17,7 +17,7 @@ namespace Daipan.Stream.MonoScripts
             Timer += Time.deltaTime;
             if (Timer > 1)
             {
-                if (_streamStatus.ExistIrrationalFactors)
+                if (_streamStatus.IsIrritated)
                     _viewerNumber.DecreaseViewer(_viewerParameter.decreaseNumberWhenIrradiated);
                 else
                     _viewerNumber.IncreaseViewer(_viewerParameter.increaseNumberPerSecond);

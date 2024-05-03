@@ -16,14 +16,14 @@ namespace Stream.Viewer.Tests
         {
             isExcitedButton.AddListener(() =>
             {
-                _streamStatus.IsExciting = !_streamStatus.IsExciting;
-                Debug.Log("IsExciting : " + _streamStatus.IsExciting);
+                _streamStatus.IsExcited = !_streamStatus.IsExcited;
+                Debug.Log("IsExcited : " + _streamStatus.IsExcited);
             });
 
             isIrritatedButton.AddListener(() =>
             {
-                _streamStatus.ExistIrrationalFactors = !_streamStatus.ExistIrrationalFactors;
-                Debug.Log("ExistIrrationalFactors : " + _streamStatus.ExistIrrationalFactors);
+                _streamStatus.IsIrritated = !_streamStatus.IsIrritated;
+                Debug.Log("IsIrritated : " + _streamStatus.IsIrritated);
             });
         }
 

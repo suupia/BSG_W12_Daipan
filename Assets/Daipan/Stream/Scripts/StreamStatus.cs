@@ -2,7 +2,7 @@
 {
     public class StreamStatus
     {
-        public bool IsExciting { get; set; }
-        public bool ExistIrrationalFactors { get; set; }
+        public bool IsExcited { get; set; }
+        public bool IsIrritated { get; set; }
     }
 }
