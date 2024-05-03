@@ -9,6 +9,7 @@ namespace Stream.Viewer.Tests
     {
         [SerializeField] CustomButton isExcitedButton = null!;
         [SerializeField] CustomButton isIrritatedButton = null!;
+        [SerializeField] CustomButton daiPanButton = null!;
         DaipanExecutor _daipanExecutor = null!;
         StreamStatus _streamStatus = null!;
 
@@ -25,12 +26,13 @@ namespace Stream.Viewer.Tests
                 _streamStatus.IsIrritated = !_streamStatus.IsIrritated;
                 Debug.Log("IsIrritated : " + _streamStatus.IsIrritated);
             });
+            
+            daiPanButton.AddListener(() =>
+            {
+                _daipanExecutor.DaiPan();
+            });
         }
-
-        void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Space)) _daipanExecutor.DaiPan();
-        }
+        
 
         [Inject]
         public void Construct(
