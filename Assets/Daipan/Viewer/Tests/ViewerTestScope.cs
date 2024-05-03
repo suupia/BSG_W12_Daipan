@@ -24,7 +24,7 @@ namespace Daipan.Viewer.Tests
 
             // Domain
             builder.Register<ViewerNumber>(Lifetime.Scoped);
-            builder.Register<ViewerStatus>(Lifetime.Scoped);
+            builder.Register<DistributionStatus>(Lifetime.Scoped);
             builder.Register<ViewerFactory>(Lifetime.Scoped);
             
             builder.Register<DaipanExecutor>(Lifetime.Scoped);

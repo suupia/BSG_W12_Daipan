@@ -5,19 +5,19 @@ namespace Daipan.Viewer.Scripts
     {
         readonly DaipanParameter _daipanParameter;
         readonly ViewerNumber _viewerNumber;
-        readonly ViewerStatus _viewerStatus;
+        readonly DistributionStatus _distributionStatus;
 
         public DaipanExecutor(
             DaipanParameter daipanParameter,
             ViewerNumber viewerNumber,
-            ViewerStatus viewerStatus)
+            DistributionStatus distributionStatus)
         {
             _daipanParameter = daipanParameter;
             _viewerNumber = viewerNumber;
-            _viewerStatus = viewerStatus;
+            _distributionStatus = distributionStatus;
         }
 
-        bool IsExciting => _viewerStatus.IsExciting;
+        bool IsExciting => _distributionStatus.IsExciting;
 
         public void DaiPan()
         {

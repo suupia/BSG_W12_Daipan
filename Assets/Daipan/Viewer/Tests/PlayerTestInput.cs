@@ -9,15 +9,15 @@ namespace Daipan.Viewer.Tests
     public class PlayerTestInput : MonoBehaviour
     {
         DaipanExecutor _daipanExecutor;
-        ViewerStatus _viewerStatus;
+        DistributionStatus _distributionStatus;
         
         [Inject]
         public void Construct(
             DaipanExecutor daipanExecutor,
-            ViewerStatus viewerStatus)
+            DistributionStatus distributionStatus)
         {
             _daipanExecutor = daipanExecutor;
-            _viewerStatus = viewerStatus;
+            _distributionStatus = distributionStatus;
         }
 
         void Update()
@@ -29,10 +29,10 @@ namespace Daipan.Viewer.Tests
 
             if (Input.GetKeyDown(KeyCode.S))
             {
-                if(_viewerStatus.IsExciting)
-                    _viewerStatus.IsExciting = false;
+                if(_distributionStatus.IsExciting)
+                    _distributionStatus.IsExciting = false;
                 else
-                    _viewerStatus.IsExciting = true;
+                    _distributionStatus.IsExciting = true;
             }
         }
     }

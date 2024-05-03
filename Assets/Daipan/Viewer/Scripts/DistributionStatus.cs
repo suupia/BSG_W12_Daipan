@@ -1,6 +1,6 @@
 ﻿namespace Daipan.Viewer.Scripts
 {
-    public class ViewerStatus
+    public class DistributionStatus
     {
         public bool IsExciting { get; set; }
     }
