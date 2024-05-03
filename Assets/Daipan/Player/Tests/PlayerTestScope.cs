@@ -1,5 +1,5 @@
-using Daipan.Player.Scripts;
-using Daipan.Utility;
+using Stream.Player.Scripts;
+using Stream.Utility;
 using Unity.VisualScripting;
 using UnityEngine;
 using VContainer;

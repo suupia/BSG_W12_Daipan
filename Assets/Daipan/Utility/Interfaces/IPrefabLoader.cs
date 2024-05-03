@@ -1,7 +1,7 @@
 ﻿#nullable enable
 using UnityEngine;
 
-namespace Daipan.Utility
+namespace Stream.Utility
 {
     public interface IPrefabLoader<out T> where T : Object
     {

@@ -1,12 +1,13 @@
 ﻿#nullable enable
-using Daipan.Utility;
-using Daipan.Viewer.MonoScripts;
-using Daipan.Viewer.Scripts;
+using Daipan.Stream.MonoScripts;
+using Stream.Utility;
+using Stream.Viewer.MonoScripts;
+using Stream.Viewer.Scripts;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace Daipan.Viewer.Tests
+namespace Stream.Viewer.Tests
 {
     public class ViewerTestScope : LifetimeScope
     {

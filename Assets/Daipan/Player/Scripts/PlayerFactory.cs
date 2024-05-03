@@ -1,10 +1,8 @@
-﻿using Daipan.Utility;
-using Unity.VisualScripting;
-using UnityEngine;
+﻿using Stream.Utility;
 using VContainer;
 using VContainer.Unity;
 
-namespace Daipan.Player.Scripts
+namespace Stream.Player.Scripts
 {
     public sealed class PlayerFactory : IStartable
     {
@@ -18,17 +16,14 @@ namespace Daipan.Player.Scripts
         {
             _container = container;
             _playerMonoLoader = playerMonoLoader;
-
         }
 
         void IStartable.Start()
         {
-           // PlayerMonoのプレハブをロードして生成 
-           var playerMonoPrefab = _playerMonoLoader.Load(); 
-           // IObjectResolverを使ってPlayerMonoを生成すると依存関係が解決される
-           var playerMono = _container.Instantiate(playerMonoPrefab);
-           
-         }
-
+            // PlayerMonoのプレハブをロードして生成 
+            var playerMonoPrefab = _playerMonoLoader.Load();
+            // IObjectResolverを使ってPlayerMonoを生成すると依存関係が解決される
+            var playerMono = _container.Instantiate(playerMonoPrefab);
+        }
     }
 }

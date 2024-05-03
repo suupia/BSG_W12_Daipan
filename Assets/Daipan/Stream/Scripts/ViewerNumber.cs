@@ -1,7 +1,7 @@
 ﻿#nullable enable
 using UnityEngine;
 
-namespace Daipan.Viewer.Scripts
+namespace Stream.Viewer.Scripts
 {
     public class ViewerNumber
     {

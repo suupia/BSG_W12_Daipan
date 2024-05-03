@@ -1,9 +1,9 @@
 ﻿#nullable enable
-using Daipan.Viewer.Scripts;
+using Stream.Viewer.Scripts;
 using UnityEngine;
 using VContainer;
 
-namespace Daipan.Viewer.Tests
+namespace Stream.Viewer.Tests
 {
     public class PlayerTestInput : MonoBehaviour
     {

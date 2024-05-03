@@ -2,7 +2,7 @@
 using System;
 using UnityEngine;
 
-namespace Daipan.Viewer.Scripts
+namespace Stream.Viewer.Scripts
 {
     [Serializable]
     public sealed class ViewerNumberParameter

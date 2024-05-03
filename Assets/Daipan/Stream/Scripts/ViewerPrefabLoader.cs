@@ -1,8 +1,9 @@
 ﻿#nullable enable
-using Daipan.Utility;
-using Daipan.Utility.Scripts;
+using Daipan.Stream.MonoScripts;
+using Stream.Utility;
+using Stream.Utility.Scripts;
 
-namespace Daipan.Viewer.Scripts
+namespace Stream.Viewer.Scripts
 {
     public class ViewerPrefabLoader : IPrefabLoader<ViewerMono>
     {
