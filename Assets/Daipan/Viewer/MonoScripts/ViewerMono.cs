@@ -1,18 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
+using Daipan.Viewer.Scripts;
 using UnityEngine;
+using VContainer;
 
 public class ViewerMono : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    ViewerNumberParameter _viewerNumberParameter;
+    ViewerNumber _viewerNumber;
+    
+    float Timer { get; set; }
+    [Inject]
+    public void Initialize(
+        ViewerNumberParameter viewerNumberParameter,
+        ViewerNumber viewerNumber)
     {
-        
+        _viewerNumberParameter = viewerNumberParameter;
+        _viewerNumber = viewerNumber;
     }
-
-    // Update is called once per frame
     void Update()
     {
-        
+        Timer += Time.deltaTime;
+        if (Timer > 1)
+        {
+            _viewerNumber.IncreaseViewer(_viewerNumberParameter.increaseNumberPerSecond);
+            Timer = 0;
+        }
     }
 }
