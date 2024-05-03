@@ -5,7 +5,7 @@ using VContainer;
 namespace Daipan.Player.Scripts
 {
     // このクラスにPlayerの攻撃の処理を追加していってください。
-    public class PlayerAttack
+    public sealed class PlayerAttack
     {
         readonly PlayerAttackParameter _parameter;
         [Inject]

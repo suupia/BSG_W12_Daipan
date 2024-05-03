@@ -6,7 +6,7 @@ using VContainer.Unity;
 
 namespace Daipan.Player.Scripts
 {
-    public class PlayerFactory : IStartable
+    public sealed class PlayerFactory : IStartable
     {
         readonly IObjectResolver _container;
         readonly IPrefabLoader<PlayerMono> _playerMonoLoader;
