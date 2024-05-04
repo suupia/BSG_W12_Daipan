@@ -21,7 +21,7 @@ namespace Stream.Viewer.Tests
             builder.RegisterInstance(streamParameter.daipanParameter);
 
             // PrefabLoader
-            builder.Register<ViewerPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<StreamMono>>();
+            builder.Register<StreamPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<StreamMono>>();
 
             // Domain
             builder.Register<ViewerNumber>(Lifetime.Scoped);
