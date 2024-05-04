@@ -27,8 +27,8 @@ namespace Enemy
     [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/EnemyParameter", order = 1)]
     public sealed class EnemyParameter : ScriptableObject
     {
-        public EnemyAttackParameter attackParameter = null;
-        public EnemyHPParameter hpParameter = null;
-        public EnemyMovementParameter movementParameter = null;
+        public EnemyAttackParameter attackParameter = null!;
+        public EnemyHPParameter hpParameter = null!;
+        public EnemyMovementParameter movementParameter = null!;
     }
 }
