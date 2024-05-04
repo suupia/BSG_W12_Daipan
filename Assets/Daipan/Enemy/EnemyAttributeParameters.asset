@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5395701276db874d824be944f24744a, type: 3}
   m_Name: EnemyAttributeParameters
   m_EditorClassIdentifier: 
-  enemyParameters: []
+  enemyParameters:
+  - {fileID: 11400000, guid: 788ff5aabb5f52d469a9fe5bb675df41, type: 2}

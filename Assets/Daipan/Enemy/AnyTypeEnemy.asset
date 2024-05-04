@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: AnyTypeEnemy
   m_EditorClassIdentifier: 
   attackParameter:
-    AttackAmount: 0
+    AttackAmount: 10
   hpParameter:
-    HPAmount: 0
+    HPAmount: 10
   movementParameter:
-    MovementAmount: 0
+    MovementAmount: 10
