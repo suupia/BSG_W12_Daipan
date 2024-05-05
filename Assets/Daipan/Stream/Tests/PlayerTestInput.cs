@@ -15,24 +15,21 @@ namespace Stream.Viewer.Tests
 
         void Awake()
         {
-            isExcitedButton.AddListener(() =>
+            isExcitedButton.OnClick += () =>
             {
                 _streamStatus.IsExcited = !_streamStatus.IsExcited;
                 Debug.Log("IsExcited : " + _streamStatus.IsExcited);
-            });
+            };
 
-            isIrritatedButton.AddListener(() =>
+            isIrritatedButton.OnClick += () =>
             {
                 _streamStatus.IsIrritated = !_streamStatus.IsIrritated;
                 Debug.Log("IsIrritated : " + _streamStatus.IsIrritated);
-            });
-            
-            daiPanButton.AddListener(() =>
-            {
-                _daipanExecutor.DaiPan();
-            });
+            };
+
+            daiPanButton.OnClick += () => { _daipanExecutor.DaiPan(); };
         }
-        
+
 
         [Inject]
         public void Construct(

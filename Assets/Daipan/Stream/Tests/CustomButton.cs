@@ -3,43 +3,23 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Button))]
-public class CustomButton : UIBehaviour
+public class CustomButton : MonoBehaviour,
+    IPointerClickHandler,
+    IPointerDownHandler,
+    IPointerUpHandler
 {
-    Button _button;
-
-    Button Button
+    public event Action OnClick;
+    
+    public void OnPointerClick(PointerEventData eventData)
     {
-        get
-        {
-            if (_button == null) _button = GetComponent<Button>();
-            return _button;
-        }
+        OnClick?.Invoke();
     }
-
-    public bool Interactable
+    
+    public void OnPointerDown(PointerEventData eventData)
     {
-        get => Button.interactable;
-        set => Button.interactable = value;
     }
-
-    public void ChangeEnableState(bool enableState)
+    
+    public void OnPointerUp(PointerEventData eventData)
     {
-        Button.enabled = enableState;
-    }
-
-    public void AddListener(Action action)
-    {
-        Button.onClick.AddListener(() => { action(); });
-    }
-
-    public void AddListener<T>(Action<T> action, T value)
-    {
-        Button.onClick.AddListener(() => { action(value); });
-    }
-
-    public void ClearListeners()
-    {
-        Button.onClick.RemoveAllListeners();
     }
 }
