@@ -1,21 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using Stream.Utility;
+using Stream.Utility.Scripts;
 using UnityEngine;
 
 namespace Enemy
 {
-    public class EnemyPrefabLoader
+    public sealed class EnemyPrefabLoader : IPrefabLoader<EnemyMono>
     {
-        // Start is called before the first frame update
-        void Start()
-        {
+        private readonly PrefabLoaderFromResources<EnemyMono> _loader;
 
+        public EnemyPrefabLoader()
+        {
+            _loader = new PrefabLoaderFromResources<EnemyMono>("Enemy");
         }
 
-        // Update is called once per frame
-        void Update()
+        public EnemyMono Load()
         {
-
+            return _loader.Load();
         }
     }
 }
