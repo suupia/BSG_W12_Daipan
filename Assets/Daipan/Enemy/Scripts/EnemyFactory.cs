@@ -1,18 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Stream.Utility;
 using UnityEngine;
 
-public class EnemyFactory : MonoBehaviour
+namespace Enemy
 {
-    // Start is called before the first frame update
-    void Start()
+    public class EnemyFactory
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        readonly IPrefabLoader<EnemyMono> _enemyMonoloader;
     }
 }
