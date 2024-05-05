@@ -1,4 +1,4 @@
-﻿#nullable enable
+#nullable enable
 using Stream.Utility;
 using Stream.Utility.Scripts;
 
