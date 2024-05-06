@@ -4,13 +4,13 @@ using VContainer.Unity;
 
 namespace Stream.Player.Scripts
 {
-    public sealed class PlayerFactory : IStartable
+    public sealed class PlayerSpawner : IStartable
     {
         readonly IObjectResolver _container;
         readonly IPrefabLoader<PlayerMono> _playerMonoLoader;
 
         [Inject]
-        public PlayerFactory(
+        public PlayerSpawner(
             IObjectResolver container,
             IPrefabLoader<PlayerMono> playerMonoLoader)
         {
