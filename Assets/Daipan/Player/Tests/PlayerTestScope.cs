@@ -20,12 +20,12 @@ public class PlayerTestScope : LifetimeScope
        
         // Playerの生成を行うクラスを登録（今後様々なPlayerを作れるようにFactoryパターンを採用）
         builder.Register<PlayerAttack>(Lifetime.Scoped);
-        builder.Register<PlayerFactory>(Lifetime.Scoped);
+        builder.Register<PlayerSpawner>(Lifetime.Scoped);
 
 
         builder.UseEntryPoints(Lifetime.Singleton, entryPoints =>
         {
-            entryPoints.Add<PlayerFactory>();
+            entryPoints.Add<PlayerSpawner>();
         });
     }
 }
