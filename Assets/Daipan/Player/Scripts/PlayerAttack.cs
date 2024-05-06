@@ -15,9 +15,9 @@ namespace Stream.Player.Scripts
             _parameter = parameter;
         }
 
-        public void Attack()
+        public void Attack(int attackIndex)
         {
-            Debug.Log($"Temp PlayerAttack Attack() , Temp AttackPower : {_parameter.AttackAmount}");
+            Debug.Log($"Temp PlayerAttack Attack({attackIndex}) , Temp AttackPower : {_parameter.AttackAmount}");
         }
     }
 }
