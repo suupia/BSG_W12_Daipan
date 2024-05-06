@@ -1,3 +1,4 @@
+#nullable enable
 using Enemy;
 using Stream.Utility;
 using VContainer;
@@ -13,6 +14,7 @@ public class EnemyTestScope : LifetimeScope
         builder.Register<EnemyOnHitNormal>(Lifetime.Scoped);
         builder.Register<EnemyFactory>(Lifetime.Scoped);
 
+        //?????ここの書き方がわからない
         builder.UseEntryPoints(Lifetime.Scoped, entryPoints =>
         {
             entryPoints.Add<EnemyFactory>();

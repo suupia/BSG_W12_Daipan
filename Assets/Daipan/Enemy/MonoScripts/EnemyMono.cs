@@ -12,7 +12,8 @@ public class EnemyMono : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A)) _enemyAttack.Attack();
         if (Input.GetKeyDown(KeyCode.S)) _enemyOnHitNormal.OnHit();
     }
-
+    
+    //?????[Inject]をつけると勝手にVContainerに呼び出される？
     [Inject]
     public void Initialize(EnemyAttack enemyAttack, EnemyOnHitNormal enemyOnHitNormal)
     {
