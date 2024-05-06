@@ -1,18 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
+using Enemy;
 using UnityEngine;
+using VContainer;
 
 public class EnemyMono : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    EnemyAttack _enemyAttack;
+    EnemyOnHitNormal _enemyOnHitNormal;
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.A)) _enemyAttack.Attack();
+        if (Input.GetKeyDown(KeyCode.S)) _enemyOnHitNormal.OnHit();
+    }
+    
+    //?????[Inject]をつけると勝手にVContainerに呼び出される？
+    [Inject]
+    public void Initialize(EnemyAttack enemyAttack, EnemyOnHitNormal enemyOnHitNormal)
+    {
+        _enemyAttack = enemyAttack;
+        _enemyOnHitNormal = enemyOnHitNormal; 
     }
 }

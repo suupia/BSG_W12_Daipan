@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+#nullable enable
 using UnityEngine;
 
 namespace Enemy
