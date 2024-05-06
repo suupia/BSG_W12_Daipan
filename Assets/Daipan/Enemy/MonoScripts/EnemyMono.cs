@@ -1,18 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using Enemy;
 using UnityEngine;
 
 public class EnemyMono : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    EnemyAttack _enemyAttack;
+    EnemyOnHitNormal _enemyOnHitNormal;
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.A)) _enemyAttack.Attack();
+        if (Input.GetKeyDown(KeyCode.S)) _enemyOnHitNormal.OnHit();
     }
 }
