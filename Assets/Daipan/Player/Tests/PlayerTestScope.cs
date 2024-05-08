@@ -1,3 +1,4 @@
+using Enemy;
 using Stream.Player.Scripts;
 using Stream.Utility;
 using Unity.VisualScripting;
@@ -21,6 +22,8 @@ public class PlayerTestScope : LifetimeScope
         // Playerの生成を行うクラスを登録（今後様々なPlayerを作れるようにFactoryパターンを採用）
         builder.Register<PlayerAttack>(Lifetime.Scoped);
         builder.Register<PlayerSpawner>(Lifetime.Scoped);
+
+        builder.Register<EnemyCluster>(Lifetime.Scoped);
 
 
         builder.UseEntryPoints(Lifetime.Singleton, entryPoints =>
