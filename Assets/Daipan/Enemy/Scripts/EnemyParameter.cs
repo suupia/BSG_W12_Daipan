@@ -23,6 +23,12 @@ namespace Enemy
         public float MovementAmount;
     }
 
+    [Serializable]
+    public sealed class EnemyAttackCoolTime
+    {
+        public float MaxCoolTime;
+        public float MinCoolTime;
+    }
 
     [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/EnemyParameter", order = 1)]
     public sealed class EnemyParameter : ScriptableObject
@@ -31,5 +37,6 @@ namespace Enemy
         public EnemyAttackParameter attackParameter = null!;
         public EnemyHPParameter hpParameter = null!;
         public EnemyMovementParameter movementParameter = null!;
+        public EnemyAttackCoolTime attackCoolTime = null!;
     }
 }
