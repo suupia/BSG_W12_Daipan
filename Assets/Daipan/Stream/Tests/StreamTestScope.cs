@@ -26,7 +26,7 @@ namespace Stream.Viewer.Tests
             // Domain
             builder.Register<ViewerNumber>(Lifetime.Scoped);
             builder.Register<StreamStatus>(Lifetime.Scoped);
-            builder.Register<StreamFactory>(Lifetime.Scoped);
+            builder.Register<StreamSpawner>(Lifetime.Scoped);
 
             builder.Register<DaipanExecutor>(Lifetime.Scoped);
 
@@ -37,7 +37,7 @@ namespace Stream.Viewer.Tests
             builder.RegisterComponentInHierarchy<PlayerTestInput>();
 
 
-            builder.UseEntryPoints(Lifetime.Singleton, entryPoints => { entryPoints.Add<StreamFactory>(); });
+            builder.UseEntryPoints(Lifetime.Singleton, entryPoints => { entryPoints.Add<StreamSpawner>(); });
         }
     }
 }
