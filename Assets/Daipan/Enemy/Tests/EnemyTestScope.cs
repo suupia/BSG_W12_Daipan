@@ -12,12 +12,12 @@ public class EnemyTestScope : LifetimeScope
 
         builder.Register<EnemyAttack>(Lifetime.Scoped);
         builder.Register<EnemyOnHitNormal>(Lifetime.Scoped);
-        builder.Register<EnemyFactory>(Lifetime.Scoped);
+        builder.Register<EnemySpawner>(Lifetime.Scoped);
 
         //?????ここの書き方がわからない
         builder.UseEntryPoints(Lifetime.Scoped, entryPoints =>
         {
-            entryPoints.Add<EnemyFactory>();
+            entryPoints.Add<EnemySpawner>();
         });
     }
 }
