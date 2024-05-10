@@ -4,8 +4,8 @@ namespace  Enemy
     {
         NON_Type,
         W_Type,
+        A_Type,
         S_Type,
-        D_Type,
         Cheetah_Type
     }
 }
