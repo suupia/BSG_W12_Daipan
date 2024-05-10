@@ -10,20 +10,24 @@ namespace Enemy
     {
         readonly IObjectResolver _container;
         readonly IPrefabLoader<EnemyMono> _enemyMonoLoader;
+        readonly EnemyAttributeParameters _attributeParameters;
 
         [Inject]
         public EnemySpawner(
             IObjectResolver container,
-            IPrefabLoader<EnemyMono> enemyMonoLoader)
+            IPrefabLoader<EnemyMono> enemyMonoLoader,
+            EnemyAttributeParameters attributeParameters)
         {
             _container = container;
             _enemyMonoLoader = enemyMonoLoader;
+            _attributeParameters = attributeParameters;
+
         }
 
         void IStartable.Start()
         {
             var enemyMonoPrefab = _enemyMonoLoader.Load();
-            var playerMono = _container.Instantiate(enemyMonoPrefab);
         }
+
     }
 }
