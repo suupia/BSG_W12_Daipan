@@ -1,4 +1,5 @@
 #nullable enable
+using System.Data.Common;
 using UnityEngine;
 
 namespace Enemy
@@ -8,7 +9,7 @@ namespace Enemy
         public EnemyAttackParameter _enemyAttackParameter;
         public void Attack()
         {
-            Debug.Log("EnemyAttack Test");
+            Debug.Log($"Temp Attack  {_enemyAttackParameter.AttackAmount}");
         }
     }
 }

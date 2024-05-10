@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyType: 2
   attackParameter:
-    AttackAmount: 0
+    AttackAmount: 4
   hpParameter:
     HPAmount: 0
   movementParameter:
