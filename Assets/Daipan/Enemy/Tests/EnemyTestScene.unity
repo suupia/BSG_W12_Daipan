@@ -248,6 +248,7 @@ MonoBehaviour:
     TypeName: 
   autoRun: 1
   autoInjectGameObjects: []
+  enemyAttributeParameters: {fileID: 11400000, guid: 7108c634bce9ad744999f312564846b6, type: 2}
 --- !u!4 &1329793378
 Transform:
   m_ObjectHideFlags: 0
