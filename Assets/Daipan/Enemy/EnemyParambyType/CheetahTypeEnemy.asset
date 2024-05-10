@@ -18,7 +18,7 @@ MonoBehaviour:
   hpParameter:
     HPAmount: 0
   movementParameter:
-    MovementAmount: 0
+    MovementAmount: 10
   attackCoolTime:
     MaxCoolTime: 0
     MinCoolTime: 0

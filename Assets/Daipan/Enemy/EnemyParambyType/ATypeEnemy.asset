@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8d5cf6c51518584bb80933102500c8e, type: 3}
   m_Name: ATypeEnemy
   m_EditorClassIdentifier: 
-  enemyType: 0
+  enemyType: 2
   attackParameter:
     AttackAmount: 0
   hpParameter:
     HPAmount: 0
   movementParameter:
-    MovementAmount: 0
+    MovementAmount: 10
   attackCoolTime:
     MaxCoolTime: 0
     MinCoolTime: 0
