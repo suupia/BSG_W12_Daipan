@@ -8,14 +8,16 @@ namespace Enemy
         public static EnemyCluster Instance = new();
 
         readonly List<EnemyMono> _enemies = new();
-        public IEnumerable<EnemyMono> EnemyMonos => _enemies;
 
+        EnemyCluster()
+        {
+        }
+
+        public IEnumerable<EnemyMono> EnemyMonos => _enemies;
 
         public void AddEnemy(EnemyMono enemy)
         {
             _enemies.Add(enemy);
         }
-
-
-}
+    }
 }
