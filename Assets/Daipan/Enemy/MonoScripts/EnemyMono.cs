@@ -6,6 +6,7 @@ public class EnemyMono : MonoBehaviour
 {
     EnemyAttack _enemyAttack;
     EnemyOnHitNormal _enemyOnHitNormal;
+    EnemyParameter _enemyParameter;
 
     void Update()
     {
@@ -18,6 +19,13 @@ public class EnemyMono : MonoBehaviour
     public void Initialize(EnemyAttack enemyAttack, EnemyOnHitNormal enemyOnHitNormal)
     {
         _enemyAttack = enemyAttack;
-        _enemyOnHitNormal = enemyOnHitNormal; 
+        _enemyOnHitNormal = enemyOnHitNormal;
+    }
+
+    public void PureInitialize(EnemyParameter enemyParameter)
+    {
+        _enemyParameter = enemyParameter;
+
+        _enemyAttack._enemyAttackParameter = _enemyParameter.attackParameter;
     }
 }
