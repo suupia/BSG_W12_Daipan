@@ -47,6 +47,8 @@ namespace Enemy
         {
             var enemyObject = _container.Instantiate(_enemyMonoPrefab);
             enemyObject.PureInitialize(_enemyParameters[enemyType]);
+
+
         }
     }
 }

@@ -5,6 +5,8 @@ namespace Enemy
 {
     public class EnemyCluster
     {
+        public static EnemyCluster Instance = new();
+
         readonly List<EnemyMono> _enemies = new();
         public IEnumerable<EnemyMono> EnemyMonos => _enemies;
 
@@ -13,5 +15,7 @@ namespace Enemy
         {
             _enemies.Add(enemy);
         }
+
+
 }
 }
