@@ -14,6 +14,7 @@ namespace Enemy
         readonly IObjectResolver _container;
         readonly IPrefabLoader<EnemyMono> _enemyMonoLoader;
         readonly EnemyAttributeParameters _attributeParameters;
+        private readonly EnemyCluster _enemyCluster;
 
         readonly Dictionary<ENEMY_TYPE, EnemyParameter> _enemyParameters = new();
         private EnemyMono _enemyMonoPrefab;
@@ -48,7 +49,7 @@ namespace Enemy
             var enemyObject = _container.Instantiate(_enemyMonoPrefab);
             enemyObject.PureInitialize(_enemyParameters[enemyType]);
 
-
+            EnemyCluster.Instance.AddEnemy(enemyObject);
         }
     }
 }
