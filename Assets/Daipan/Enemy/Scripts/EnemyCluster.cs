@@ -5,8 +5,6 @@ namespace Enemy
 {
     public class EnemyCluster
     {
-        public static EnemyCluster Instance = new();
-
         readonly List<EnemyMono> _enemies = new();
 
         EnemyCluster()

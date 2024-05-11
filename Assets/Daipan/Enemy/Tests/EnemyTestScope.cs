@@ -16,6 +16,7 @@ public class EnemyTestScope : LifetimeScope
         builder.Register<EnemyAttack>(Lifetime.Scoped);
         builder.Register<EnemyOnHit>(Lifetime.Scoped).As<IEnemyOnHit>();
         builder.Register<EnemySpawner>(Lifetime.Scoped);
+        builder.Register<EnemyCluster>(Lifetime.Scoped);
 
         //?????ここの書き方がわからない
         builder.UseEntryPoints(Lifetime.Scoped, entryPoints =>

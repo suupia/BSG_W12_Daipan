@@ -13,33 +13,33 @@ namespace Enemy
         readonly EnemyCluster _enemyCluster;
         readonly IPrefabLoader<EnemyMono> _enemyMonoLoader;
 
-        EnemyMono _enemyMonoPrefab;
-
         [Inject]
         public EnemySpawner(
             IObjectResolver container,
             IPrefabLoader<EnemyMono> enemyMonoLoader,
-            EnemyAttributeParameters attributeParameters)
+            EnemyAttributeParameters attributeParameters,
+            EnemyCluster enemyCluster)
         {
             _container = container;
             _enemyMonoLoader = enemyMonoLoader;
             _attributeParameters = attributeParameters;
+            _enemyCluster = enemyCluster;
         }
 
         void IStartable.Start()
         {
-            _enemyMonoPrefab = _enemyMonoLoader.Load();
+            var enemyMonoPrefab = _enemyMonoLoader.Load();
             //Debug.Log(string.Join("\n", _attributeParameters.enemyParameters));
-            SpawnEnemy(ENEMY_TYPE.A_Type);
+            SpawnEnemy(ENEMY_TYPE.A_Type, enemyMonoPrefab);
         }
 
 
-        void SpawnEnemy(ENEMY_TYPE enemyType)
+        void SpawnEnemy(ENEMY_TYPE enemyType, EnemyMono enemyMonoPrefab)
         {
-            var enemyObject = _container.Instantiate(_enemyMonoPrefab);
+            var enemyObject = _container.Instantiate(enemyMonoPrefab);
             enemyObject.PureInitialize(_attributeParameters.enemyParameters.First(x => x.enemyType == enemyType));
 
-            EnemyCluster.Instance.AddEnemy(enemyObject);
+            _enemyCluster.AddEnemy(enemyObject);
         }
     }
 }
