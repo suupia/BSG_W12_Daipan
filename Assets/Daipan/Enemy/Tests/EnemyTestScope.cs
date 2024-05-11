@@ -14,7 +14,7 @@ public class EnemyTestScope : LifetimeScope
         builder.Register<EnemyPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<EnemyMono>>();
 
         builder.Register<EnemyAttack>(Lifetime.Scoped);
-        builder.Register<EnemyOnHitNormal>(Lifetime.Scoped);
+        builder.Register<EnemyOnHit>(Lifetime.Scoped).As<IEnemyOnHit>();
         builder.Register<EnemySpawner>(Lifetime.Scoped);
 
         //?????ここの書き方がわからない
