@@ -27,6 +27,7 @@ namespace Stream.Viewer.Tests
                 Debug.Log("IsIrritated : " + _streamStatus.IsIrritated);
             };
 
+
             daiPanButton.OnClick += () => { _daipanExecutor.DaiPan(); };
         }
 

@@ -19,5 +19,18 @@ namespace Stream.Player.Scripts
         {
             Debug.Log($"Temp PlayerAttack Attack({attackIndex}) , Temp AttackPower : {_parameter.AttackAmount}");
         }
+
+        public void WAttack(int W)
+        {
+
+        }
+        public void AAttack(int A)
+        {
+
+        }
+        public void SAttack(int S)
+        {
+
+        }
     }
 }
