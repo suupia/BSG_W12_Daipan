@@ -8,7 +8,9 @@ namespace Stream.Player.Scripts
     public sealed class PlayerAttackParameter
     {
         public int AttackAmount;
+        public int SAttackAmount;
     }
+    
 
     [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/PlayerParameter", order = 1)]
     public sealed class PlayerParameter : ScriptableObject

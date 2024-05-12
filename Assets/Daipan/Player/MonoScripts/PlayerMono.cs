@@ -8,6 +8,7 @@ public class PlayerMono : MonoBehaviour
 {
     PlayerAttack _playerAttack;
     EnemyCluster _enemyCluster;
+    PlayerAttackParameter _attackParameter;
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.W))
@@ -24,7 +25,7 @@ public class PlayerMono : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.S))
         {
             Debug.Log("Sが押されたよ");
-            _playerAttack.SAttack(8);
+            _playerAttack.SAttack(_attackParameter.SAttackAmount);
         }
         if (Input.GetKeyDown(KeyCode.A))
         {
@@ -32,14 +33,15 @@ public class PlayerMono : MonoBehaviour
             _playerAttack.AAttack(8);
         }
 
-        // AとSの処理はまかせます by すーぴあ
+  
     }
 
     // [Inject]を付けないと、VContainerからのInjectが行われないことに注意
     [Inject]
-    public void Initialize(PlayerAttack playerAttack, EnemyCluster enemyCluster)
+    public void Initialize(PlayerAttack playerAttack, EnemyCluster enemyCluster, PlayerAttackParameter attackParameter)
     {
         _playerAttack = playerAttack;
         _enemyCluster = enemyCluster;
+        _attackParameter = attackParameter;
     }
 }
