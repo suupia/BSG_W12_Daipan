@@ -13,12 +13,23 @@ public class PlayerMono : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.W))
         {
             Debug.Log("Wが押されたよ");
+            _playerAttack.WAttack(8);
             _playerAttack.Attack(0);
             // var enemy = _enemyCluster.Where(e => e.IsAlive).FirstOrDefault();
             // if (enemy != null)
             // {
             //     enemy.Damage(10);
             // }
+        }
+        if(Input.GetKeyDown(KeyCode.S))
+        {
+            Debug.Log("Sが押されたよ");
+            _playerAttack.SAttack(8);
+        }
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            Debug.Log("Aが押されたよ");
+            _playerAttack.AAttack(8);
         }
 
         // AとSの処理はまかせます by すーぴあ
