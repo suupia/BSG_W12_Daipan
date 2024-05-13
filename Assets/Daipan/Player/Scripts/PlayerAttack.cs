@@ -22,15 +22,15 @@ namespace Stream.Player.Scripts
 
         public void WAttack(int W)
         {
-
+            Debug.Log($"W={W}");
         }
         public void AAttack(int A)
         {
-
+            Debug.Log($"A={A}");
         }
         public void SAttack(int S)
         {
-
+            Debug.Log($"S={S}");
         }
     }
 }

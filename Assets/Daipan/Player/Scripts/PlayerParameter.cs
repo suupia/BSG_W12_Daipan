@@ -1,4 +1,4 @@
-﻿#nullable enable
+#nullable enable
 using System;
 using UnityEngine;
 
@@ -8,7 +8,9 @@ namespace Stream.Player.Scripts
     public sealed class PlayerAttackParameter
     {
         public int AttackAmount;
-        public int SAttackAmount;
+        public int SAttackAmount = 0;
+        public int WAttackAmount = 0;
+        public int AAttackAmount = 0;
     }
     
 

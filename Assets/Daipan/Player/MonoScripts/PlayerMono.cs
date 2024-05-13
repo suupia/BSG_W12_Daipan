@@ -14,7 +14,7 @@ public class PlayerMono : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.W))
         {
             Debug.Log("Wが押されたよ");
-            _playerAttack.WAttack(8);
+            _playerAttack.WAttack(_attackParameter.WAttackAmount);
             _playerAttack.Attack(0);
             // var enemy = _enemyCluster.Where(e => e.IsAlive).FirstOrDefault();
             // if (enemy != null)
@@ -30,7 +30,7 @@ public class PlayerMono : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A))
         {
             Debug.Log("Aが押されたよ");
-            _playerAttack.AAttack(8);
+            _playerAttack.AAttack(_attackParameter.AAttackAmount);
         }
 
   
