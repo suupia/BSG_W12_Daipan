@@ -40,6 +40,7 @@ namespace Daipan.Enemy.Scripts
         EnemyType DecideRandomEnemyType()
         {
             var enemyTypes = System.Enum.GetValues(typeof(EnemyType)).Cast<EnemyType>().ToList();
+            enemyTypes.Remove(EnemyType.None);
             var rand = Random.Range(0, enemyTypes.Count());
             return enemyTypes[rand];
         }
