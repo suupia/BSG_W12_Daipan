@@ -9,14 +9,14 @@ using VContainer.Unity;
 
 namespace Daipan.Enemy.Scripts
 {
-    public sealed class EnemyBuilder
+    public sealed class EnemyRandomBuilder : IEnemyBuilder
     {
         readonly IObjectResolver _container;
         readonly IEnemyFactory _enemyFactory;
         readonly IPrefabLoader<EnemyMono> _enemyMonoLoader;
         readonly EnemyAttributeParameters _attributeParameters;
         
-        public EnemyBuilder(
+        public EnemyRandomBuilder(
             // IEnemyFactory enemyFactory,
             IObjectResolver container,
             IPrefabLoader<EnemyMono> enemyMonoLoader,

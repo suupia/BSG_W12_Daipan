@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Enemy.Scripts;
 using Daipan.Stream.Scripts.Utility;
@@ -16,14 +17,14 @@ namespace Daipan.Enemy.Scripts
     public class EnemySpawner : IStartable
     {
         readonly EnemyCluster _enemyCluster;
-        readonly EnemyBuilder _enemyBuilder;
+        readonly IEnemyBuilder _enemyBuilder;
         EnemySpawnPointMono[] _enemySpawnPoints = Array.Empty<EnemySpawnPointMono>();
 
         [Inject]
         public EnemySpawner(
             IObjectResolver container,
             EnemyCluster enemyCluster,
-            EnemyBuilder enemyBuilder)
+            IEnemyBuilder enemyBuilder)
         {
             _enemyCluster = enemyCluster;
             _enemyBuilder = enemyBuilder;
