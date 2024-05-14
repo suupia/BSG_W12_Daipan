@@ -1,6 +1,4 @@
 #nullable enable
-using System.Collections;
-using System.Collections.Generic;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Enemy.Scripts;
@@ -13,6 +11,7 @@ using VContainer.Unity;
 
 public sealed class DaipanScope : LifetimeScope
 {
+    [SerializeField] PlayerParameter playerParameter = null!;
     [SerializeField] EnemyAttributeParameters enemyAttributeParameters = null!;
 
     protected override void Configure(IContainerBuilder builder)
@@ -20,6 +19,12 @@ public sealed class DaipanScope : LifetimeScope
         // Domain
         // Stream
         builder.Register<IrritatedValue>(Lifetime.Scoped).WithParameter(100);
+
+        // Player
+        builder.RegisterInstance(playerParameter.attackParameter);
+        builder.Register<PlayerPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<PlayerMono>>();
+        builder.Register<PlayerAttack>(Lifetime.Scoped);
+        builder.Register<PlayerSpawner>(Lifetime.Scoped);
 
         // Enemy
         builder.RegisterInstance(enemyAttributeParameters);
@@ -36,7 +41,10 @@ public sealed class DaipanScope : LifetimeScope
         builder.RegisterComponentInHierarchy<StreamViewMono>();
 
 
-        builder.UseEntryPoints(Lifetime.Scoped, entryPoints => { entryPoints.Add<EnemySpawner>(); });
+        builder.UseEntryPoints(Lifetime.Scoped, entryPoints =>
+        {
+            entryPoints.Add<PlayerSpawner>();
+            entryPoints.Add<EnemySpawner>();
+        });
     }
-    
 }
