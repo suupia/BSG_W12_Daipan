@@ -13,28 +13,36 @@ namespace Daipan.Enemy.Scripts
         S,
         Cheetah
     }
-    
+
     public struct EnemyEnum
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public bool IsBoss { get; set; }
 
-        EnemyEnum(int id, string name, bool isBoss = false) => 
-            (Id, Name,IsBoss) = (id, name, isBoss);
-        
-        public static IEnumerable<EnemyEnum> GetAll() =>
-            typeof(EnemyEnum).GetFields(BindingFlags.Public |
-                                              BindingFlags.Static |
-                                              BindingFlags.DeclaredOnly)
-                .Where(field => field.FieldType == typeof(EnemyEnum))
-                .Select(field => (EnemyEnum)field.GetValue(null));
+        public static EnemyEnum[] Values { get; }
 
-        public static EnemyEnum None = new EnemyEnum(0, "None");
-        public static EnemyEnum W = new EnemyEnum(1, "W");
-        public static EnemyEnum A = new EnemyEnum(2, "A");
-        public static EnemyEnum S = new EnemyEnum(3, "S");
-        public static EnemyEnum Cheetah = new EnemyEnum(4, "Cheetah", true);
+        EnemyEnum(int id, string name, bool isBoss = false)
+        {
+            (Id, Name, IsBoss) = (id, name, isBoss);
+        }
+
+        static EnemyEnum()
+        {
+            Values = new[]
+            {
+                W,
+                A,
+                S,
+                Cheetah
+            };
+        }
+
+        public static EnemyEnum None = new(0, "None");
+        public static EnemyEnum W = new(1, "W");
+        public static EnemyEnum A = new(2, "A");
+        public static EnemyEnum S = new(3, "S");
+        public static EnemyEnum Cheetah = new(4, "Cheetah", true);
 
         #region Overrides
 
@@ -50,10 +58,7 @@ namespace Daipan.Enemy.Scripts
 
         public override bool Equals(object? obj)
         {
-            if (obj is EnemyEnum enemyEnum)
-            {
-                return this == enemyEnum;
-            } 
+            if (obj is EnemyEnum enemyEnum) return this == enemyEnum;
             return false;
         }
 
@@ -62,10 +67,11 @@ namespace Daipan.Enemy.Scripts
             return Id.GetHashCode() ^ Name.GetHashCode();
         }
 
-        public override string ToString() => Name;
+        public override string ToString()
+        {
+            return Name;
+        }
 
         #endregion
-
-
     }
 }
