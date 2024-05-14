@@ -15,41 +15,29 @@ namespace Daipan.Enemy.Scripts
 {
     public class EnemySpawner : IStartable
     {
-        readonly EnemyAttributeParameters _attributeParameters;
-        readonly IObjectResolver _container;
         readonly EnemyCluster _enemyCluster;
-        readonly IPrefabLoader<EnemyMono> _enemyMonoLoader;
         readonly EnemyBuilder _enemyBuilder;
         EnemySpawnPointMono[] _enemySpawnPoints = Array.Empty<EnemySpawnPointMono>();
 
         [Inject]
         public EnemySpawner(
             IObjectResolver container,
-            IPrefabLoader<EnemyMono> enemyMonoLoader,
-            EnemyAttributeParameters attributeParameters,
             EnemyCluster enemyCluster,
             EnemyBuilder enemyBuilder)
         {
-            _container = container;
-            _enemyMonoLoader = enemyMonoLoader;
-            _attributeParameters = attributeParameters;
             _enemyCluster = enemyCluster;
             _enemyBuilder = enemyBuilder;
         }
 
         void IStartable.Start()
         {
-            var enemyMonoPrefab = _enemyMonoLoader.Load();
-            _enemySpawnPoints = Object.FindObjectsByType<EnemySpawnPointMono>(FindObjectsSortMode.None);
-            SpawnEnemy(EnemyType.A, enemyMonoPrefab);
+            SpawnEnemy();
             
         }
 
-
-        void SpawnEnemy(EnemyType enemyType, EnemyMono enemyMonoPrefab)
+        void SpawnEnemy()
         {
-            // var enemyObject = _container.Instantiate(enemyMonoPrefab, DecideRandomSpawnPosition(), Quaternion.identity);
-            // enemyObject.SetParameter(_attributeParameters.enemyParameters.First(x => x.enemyType == enemyType));
+            _enemySpawnPoints = Object.FindObjectsByType<EnemySpawnPointMono>(FindObjectsSortMode.None);
             var enemyObject = _enemyBuilder.Build(DecideRandomSpawnPosition(), Quaternion.identity);
             _enemyCluster.AddEnemy(enemyObject);
         }
