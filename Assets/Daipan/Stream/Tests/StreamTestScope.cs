@@ -2,7 +2,6 @@
 using Daipan.Stream.MonoScripts;
 using Daipan.Stream.Scripts.Utility;
 using Daipan.Stream.Scripts.Viewer.MonoScripts;
-using Daipan.Stream.Scripts;
 using UnityEngine;
 using UnityEngine.Serialization;
 using VContainer;
@@ -12,13 +11,14 @@ namespace Daipan.Stream.Scripts.Viewer.Tests
 {
     public class StreamTestScope : LifetimeScope
     {
-        [FormerlySerializedAs("viewerParameter")] [SerializeField] StreamParameter streamParameter = null!;
+        [FormerlySerializedAs("viewerParameter")] [SerializeField]
+        StreamParameter streamParameter = null!;
 
         protected override void Configure(IContainerBuilder builder)
         {
             // Parameter
-            builder.RegisterInstance(streamParameter.viewerParameter);
-            builder.RegisterInstance(streamParameter.daipanParameter);
+            builder.RegisterInstance(streamParameter.viewer);
+            builder.RegisterInstance(streamParameter.daipan);
 
             // PrefabLoader
             builder.Register<StreamPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<StreamMono>>();
@@ -28,12 +28,12 @@ namespace Daipan.Stream.Scripts.Viewer.Tests
             builder.Register<StreamStatus>(Lifetime.Scoped);
             builder.Register<StreamSpawner>(Lifetime.Scoped);
             builder.Register<IrritatedValue>(Lifetime.Scoped).WithParameter(100);
-            
+
             builder.Register<DaipanExecutor>(Lifetime.Scoped);
 
             // Mono
             builder.RegisterComponentInHierarchy<StreamUIMono>();
-            
+
             // View
             builder.RegisterComponentInHierarchy<StreamViewMono>();
 

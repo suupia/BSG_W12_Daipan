@@ -2,8 +2,10 @@
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Enemy.Scripts;
+using Daipan.Stream.MonoScripts;
 using Daipan.Stream.Scripts;
 using Daipan.Stream.Scripts.Utility;
+using Daipan.Stream.Scripts.Viewer.Tests;
 using Enemy;
 using UnityEngine;
 using VContainer;
@@ -11,6 +13,7 @@ using VContainer.Unity;
 
 public sealed class DaipanScope : LifetimeScope
 {
+    [SerializeField] StreamParameter streamParameter = null!;
     [SerializeField] PlayerParameter playerParameter = null!;
     [SerializeField] EnemyAttributeParameters enemyAttributeParameters = null!;
 
@@ -18,7 +21,15 @@ public sealed class DaipanScope : LifetimeScope
     {
         // Domain
         // Stream
+        builder.RegisterInstance(streamParameter.viewer);
+        builder.RegisterInstance(streamParameter.daipan);
+        builder.Register<StreamPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<StreamMono>>();
         builder.Register<IrritatedValue>(Lifetime.Scoped).WithParameter(100);
+        builder.Register<ViewerNumber>(Lifetime.Scoped);
+        builder.Register<StreamStatus>(Lifetime.Scoped);
+        builder.Register<StreamSpawner>(Lifetime.Scoped);
+
+        builder.Register<DaipanExecutor>(Lifetime.Scoped);
 
         // Player
         builder.RegisterInstance(playerParameter.attackParameter);
@@ -39,6 +50,9 @@ public sealed class DaipanScope : LifetimeScope
 
         // View
         builder.RegisterComponentInHierarchy<StreamViewMono>();
+
+        // Test
+        builder.RegisterComponentInHierarchy<PlayerTestInput>();
 
 
         builder.UseEntryPoints(Lifetime.Scoped, entryPoints =>

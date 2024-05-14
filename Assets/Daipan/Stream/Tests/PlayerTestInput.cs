@@ -31,6 +31,15 @@ namespace Daipan.Stream.Scripts.Viewer.Tests
             daiPanButton.OnClick += () => { _daipanExecutor.DaiPan(); };
         }
 
+        void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                Debug.Log("DaiPan!");
+                _daipanExecutor.DaiPan();
+            }
+        }
+
 
         [Inject]
         public void Construct(
