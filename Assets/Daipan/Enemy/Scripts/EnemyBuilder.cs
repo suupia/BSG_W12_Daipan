@@ -33,9 +33,16 @@ namespace Daipan.Enemy.Scripts
         {
             var enemyMonoPrefab = _enemyMonoLoader.Load();
             var enemyObject = _container.Instantiate(enemyMonoPrefab, position, rotation);
-            enemyObject.SetParameter(_attributeParameters.enemyParameters.First(x => x.enemyType == EnemyType.A));
+            enemyObject.SetParameter(_attributeParameters.enemyParameters.First(x => x.enemyType == DecideRandomEnemyType()));
             return enemyObject;
-        } 
+        }
+
+        EnemyType DecideRandomEnemyType()
+        {
+            var enemyTypes = System.Enum.GetValues(typeof(EnemyType)).Cast<EnemyType>().ToList();
+            var rand = Random.Range(0, enemyTypes.Count());
+            return enemyTypes[rand];
+        }
     }
 
 }
