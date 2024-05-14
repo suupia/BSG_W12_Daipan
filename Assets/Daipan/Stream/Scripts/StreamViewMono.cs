@@ -20,7 +20,7 @@ namespace Daipan.Stream.Scripts
         
         void Update()
         {
-            irritatedGauge.fillAmount = _irritatedValue.Ratio;
+                irritatedGauge.fillAmount = _irritatedValue.Ratio;
         }
     }
     

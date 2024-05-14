@@ -243,6 +243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b8400a5cb1cf9242855763dfe05a753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  irritatedGauge: {fileID: 573068945}
 --- !u!1 &248697867
 GameObject:
   m_ObjectHideFlags: 0
@@ -542,6 +543,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 145.23}
   m_SizeDelta: {x: 0, y: -290.45}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &573068945 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2652760001807141217, guid: f38a9c71c17607e48a982fe5d7c55e31, type: 3}
+  m_PrefabInstance: {fileID: 577845430108245102}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1148660862
 GameObject:
   m_ObjectHideFlags: 0
