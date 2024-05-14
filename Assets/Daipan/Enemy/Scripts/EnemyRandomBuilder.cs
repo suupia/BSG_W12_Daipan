@@ -12,18 +12,15 @@ namespace Daipan.Enemy.Scripts
     public sealed class EnemyRandomBuilder : IEnemyBuilder
     {
         readonly IObjectResolver _container;
-        readonly IEnemyFactory _enemyFactory;
         readonly IPrefabLoader<EnemyMono> _enemyMonoLoader;
         readonly EnemyAttributeParameters _attributeParameters;
         
         public EnemyRandomBuilder(
-            // IEnemyFactory enemyFactory,
             IObjectResolver container,
             IPrefabLoader<EnemyMono> enemyMonoLoader,
             EnemyAttributeParameters attributeParameters
             )
         {
-            // _enemyFactory = enemyFactory;
             _container = container;
             _enemyMonoLoader = enemyMonoLoader;
             _attributeParameters = attributeParameters;
