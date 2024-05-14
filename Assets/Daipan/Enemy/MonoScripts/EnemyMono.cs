@@ -31,7 +31,7 @@ namespace Daipan.Enemy.MonoScripts
             _enemyOnHit = enemyOnHit;
         }
 
-        public void PureInitialize(EnemyParameter enemyParameter)
+        public void SetParameter(EnemyParameter enemyParameter)
         {
             _enemyParameter = enemyParameter;
 

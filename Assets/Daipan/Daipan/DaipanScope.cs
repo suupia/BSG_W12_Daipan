@@ -27,6 +27,7 @@ public sealed class DaipanScope : LifetimeScope
 
         builder.Register<EnemyAttack>(Lifetime.Scoped);
         builder.Register<EnemyOnHit>(Lifetime.Scoped).As<IEnemyOnHit>();
+        builder.Register<EnemyBuilder>(Lifetime.Scoped);
         builder.Register<EnemySpawner>(Lifetime.Scoped);
         builder.Register<EnemyCluster>(Lifetime.Scoped);
 

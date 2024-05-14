@@ -19,6 +19,7 @@ namespace Daipan.Enemy.Scripts
         readonly IObjectResolver _container;
         readonly EnemyCluster _enemyCluster;
         readonly IPrefabLoader<EnemyMono> _enemyMonoLoader;
+        readonly EnemyBuilder _enemyBuilder;
         EnemySpawnPointMono[] _enemySpawnPoints = Array.Empty<EnemySpawnPointMono>();
 
         [Inject]
@@ -26,12 +27,14 @@ namespace Daipan.Enemy.Scripts
             IObjectResolver container,
             IPrefabLoader<EnemyMono> enemyMonoLoader,
             EnemyAttributeParameters attributeParameters,
-            EnemyCluster enemyCluster)
+            EnemyCluster enemyCluster,
+            EnemyBuilder enemyBuilder)
         {
             _container = container;
             _enemyMonoLoader = enemyMonoLoader;
             _attributeParameters = attributeParameters;
             _enemyCluster = enemyCluster;
+            _enemyBuilder = enemyBuilder;
         }
 
         void IStartable.Start()
@@ -45,9 +48,9 @@ namespace Daipan.Enemy.Scripts
 
         void SpawnEnemy(EnemyType enemyType, EnemyMono enemyMonoPrefab)
         {
-            var enemyObject = _container.Instantiate(enemyMonoPrefab, DecideRandomSpawnPosition(), Quaternion.identity);
-            enemyObject.PureInitialize(_attributeParameters.enemyParameters.First(x => x.enemyType == enemyType));
-
+            // var enemyObject = _container.Instantiate(enemyMonoPrefab, DecideRandomSpawnPosition(), Quaternion.identity);
+            // enemyObject.SetParameter(_attributeParameters.enemyParameters.First(x => x.enemyType == enemyType));
+            var enemyObject = _enemyBuilder.Build(DecideRandomSpawnPosition(), Quaternion.identity);
             _enemyCluster.AddEnemy(enemyObject);
         }
 
