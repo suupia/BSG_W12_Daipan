@@ -11,13 +11,14 @@ namespace Daipan.Enemy.MonoScripts
     public class EnemyMono : MonoBehaviour
     {
         EnemyAttack _enemyAttack = null!;
-        IEnemyOnHit _enemyOnHit = null!;
-        EnemyParameter _enemyParameter = null!;
+        public EnemyParameter EnemyParameter { get; private set; } = null!;
+
+        public IEnemyOnHit EnemyOnHit { get; private set; } = null!;
 
         void Update()
         {
             if (Input.GetKeyDown(KeyCode.A)) _enemyAttack.Attack();
-            if (Input.GetKeyDown(KeyCode.S)) _enemyOnHit.OnHit();
+            if (Input.GetKeyDown(KeyCode.S)) EnemyOnHit.OnHit();
 
 
             transform.position += Vector3.left * Time.deltaTime;
@@ -29,20 +30,20 @@ namespace Daipan.Enemy.MonoScripts
         public void Initialize(EnemyAttack enemyAttack, IEnemyOnHit enemyOnHit)
         {
             _enemyAttack = enemyAttack;
-            _enemyOnHit = enemyOnHit;
+            EnemyOnHit = enemyOnHit;
         }
 
         public void SetParameter(EnemyParameter enemyParameter)
         {
-            _enemyParameter = enemyParameter;
+            EnemyParameter = enemyParameter;
 
-            _enemyAttack.enemyAttackParameter = _enemyParameter.attackParameter;
+            _enemyAttack.enemyAttackParameter = EnemyParameter.attackParameter;
 
             // Sprite
             var spriteRenderer = GetComponent<SpriteRenderer>();
-            spriteRenderer.sprite = _enemyParameter.sprite;
+            spriteRenderer.sprite = EnemyParameter.sprite;
 
-            var enemyOnHit = _enemyOnHit as EnemyOnHit;
+            var enemyOnHit = EnemyOnHit as EnemyOnHit;
             // enemyOnHit.ownEnemyType = _enemyParameter.enemyType;
         }
     }

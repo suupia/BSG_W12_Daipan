@@ -1,14 +1,14 @@
 using Daipan.Enemy.Scripts;
 using Daipan.Stream.Scripts;
-using UnityEditorInternal;
 using UnityEngine;
 using VContainer;
 
 public class PlayerMono : MonoBehaviour
 {
-    PlayerAttack _playerAttack;
-    EnemyCluster _enemyCluster;
     PlayerAttackParameter _attackParameter;
+    EnemyCluster _enemyCluster;
+    PlayerAttack _playerAttack;
+
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.W))
@@ -16,29 +16,33 @@ public class PlayerMono : MonoBehaviour
             Debug.Log("Wが押されたよ");
             _playerAttack.WAttack(8);
             _playerAttack.Attack(0);
-            // var enemy = _enemyCluster.Where(e => e.IsAlive).FirstOrDefault();
-            // if (enemy != null)
-            // {
-            //     enemy.Damage(10);
-            // }
         }
-        if(Input.GetKeyDown(KeyCode.S))
+
+        if (Input.GetKeyDown(KeyCode.S))
         {
             Debug.Log("Sが押されたよ");
             _playerAttack.SAttack(_attackParameter.SAttackAmount);
         }
+
         if (Input.GetKeyDown(KeyCode.A))
         {
             Debug.Log("Aが押されたよ");
-            _playerAttack.AAttack(8);
-        }
 
-  
+            var enemyMono = _enemyCluster.NearestEnemy(transform.position);
+            if (enemyMono.EnemyParameter.enemyType == EnemyType.A)
+            {
+                Debug.Log($"EnemyType: {enemyMono.EnemyParameter.enemyType}を攻撃");
+                enemyMono.EnemyOnHit.OnHit();
+            }
+        }
     }
 
-    // [Inject]を付けないと、VContainerからのInjectが行われないことに注意
     [Inject]
-    public void Initialize(PlayerAttack playerAttack, EnemyCluster enemyCluster, PlayerAttackParameter attackParameter)
+    public void Initialize(
+        PlayerAttack playerAttack,
+        EnemyCluster enemyCluster,
+        PlayerAttackParameter attackParameter
+    )
     {
         _playerAttack = playerAttack;
         _enemyCluster = enemyCluster;
