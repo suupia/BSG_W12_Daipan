@@ -11,6 +11,7 @@ namespace Daipan.Enemy.MonoScripts
     [RequireComponent(typeof(SpriteRenderer))]
     public class EnemyMono : MonoBehaviour, IHpSetter 
     {
+        [SerializeField] HpGaugeMono hpGaugeMono = null!;
         public int CurrentHp
         {
             set => _enemyHp.CurrentHp = value;
@@ -31,6 +32,8 @@ namespace Daipan.Enemy.MonoScripts
 
             transform.position += Vector3.left * Time.deltaTime;
             if (transform.position.x < -10) Destroy(gameObject);
+            
+            hpGaugeMono.SetRatio(CurrentHp / (float)EnemyParameter.hpParameter.HPAmount);
         }
 
 

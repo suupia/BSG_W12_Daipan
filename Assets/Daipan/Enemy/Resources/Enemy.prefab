@@ -146,6 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20e86615af41f1247ae56729e059664a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hpGaugeMono: {fileID: 7829380139561979591}
 --- !u!1 &4003595170673781334
 GameObject:
   m_ObjectHideFlags: 0
