@@ -1,3 +1,4 @@
+#nullable enable
 using Enemy;
 using Stream.Player.Scripts;
 using Stream.Utility;
@@ -9,7 +10,7 @@ using VContainer.Unity;
 // プレイヤーの処理をテストするためのLifetimeScope
 public class PlayerTestScope : LifetimeScope
 {
-    [SerializeField] PlayerParameter playerParameter;
+    [SerializeField] PlayerParameter playerParameter = null!;
     
     protected override void Configure(IContainerBuilder builder)
     {
