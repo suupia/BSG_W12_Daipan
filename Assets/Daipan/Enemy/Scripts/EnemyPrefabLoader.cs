@@ -1,5 +1,5 @@
 #nullable enable
-using Daipan.Enemy.MonoS;
+using Daipan.Enemy.MonoScripts;
 using Daipan.Stream.Scripts.Utility;
 using Daipan.Stream.Scripts.Utility.Scripts;
 

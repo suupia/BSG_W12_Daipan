@@ -6,10 +6,10 @@ namespace Daipan.Enemy.Scripts
 {
     public class EnemyAttack
     {
-        public EnemyAttackParameter _enemyAttackParameter;
+        public EnemyAttackParameter enemyAttackParameter;
         public void Attack()
         {
-            Debug.Log($"Temp Attack  {_enemyAttackParameter.AttackAmount}");
+            Debug.Log($"Temp Attack  {enemyAttackParameter.AttackAmount}");
         }
     }
 }

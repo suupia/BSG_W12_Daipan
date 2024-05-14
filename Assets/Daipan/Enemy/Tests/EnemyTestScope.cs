@@ -1,7 +1,8 @@
 #nullable enable
-using Daipan.Enemy.MonoS;
+using Daipan.Enemy.MonoScripts;
 using Daipan.Enemy.Scripts;
 using Daipan.Stream.Scripts.Utility;
+using Enemy;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -15,8 +16,9 @@ public class EnemyTestScope : LifetimeScope
         builder.Register<EnemyPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<EnemyMono>>();
 
         builder.Register<EnemyAttack>(Lifetime.Scoped);
-        builder.Register<EnemyOnHitNormal>(Lifetime.Scoped);
+        builder.Register<EnemyOnHit>(Lifetime.Scoped).As<IEnemyOnHit>();
         builder.Register<EnemySpawner>(Lifetime.Scoped);
+        builder.Register<EnemyCluster>(Lifetime.Scoped);
 
 
         builder.UseEntryPoints(Lifetime.Scoped, entryPoints =>
