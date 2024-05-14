@@ -2,7 +2,6 @@
 using System;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Daipan.Enemy.Scripts
 {
@@ -51,25 +50,29 @@ namespace Daipan.Enemy.Scripts
         }
     }
 
-    static class EnemyEnumChecker
+    internal static class EnemyEnumChecker
     {
         static bool _isCheckedEnum;
+
         public static void CheckEnum()
         {
             if (_isCheckedEnum) return;
-            Debug.Log("CheckEnum");
-            Debug.Log($"Enum.GetValues(typeof(EnemyType)).Cast<EnemyType>() : {Enum.GetValues(typeof(EnemyType)).Cast<EnemyType>().Count()}");
             foreach (var type in Enum.GetValues(typeof(EnemyType)).Cast<EnemyType>())
             {
-                Debug.Log($"type : {type.ToString()}");
                 var enemy = EnemyEnum.Values.FirstOrDefault(x => x.Name == type.ToString());
-                Debug.Log($"EnemyEnum with name {type.ToString()} found.");
-                if (enemy.Equals(default(EnemyEnum)))
-                {
-                    Debug.LogWarning($"EnemyEnum with name {type.ToString()} not found.");
-                }
+                if (enemy.Equals(default(EnemyEnum))) Debug.LogWarning($"EnemyEnum with name {type.ToString()} not found.");
             }
+
             _isCheckedEnum = true;
         }
+    }
+
+    internal enum EnemyType
+    {
+        None,
+        W,
+        A,
+        S,
+        Cheetah
     }
 }

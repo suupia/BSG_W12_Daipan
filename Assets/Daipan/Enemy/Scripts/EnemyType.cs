@@ -1,19 +1,6 @@
 #nullable enable
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-
 namespace Daipan.Enemy.Scripts
 {
-    public enum EnemyType
-    {
-        None,
-        W,
-        A,
-        S,
-        Cheetah
-    }
-
     public struct EnemyEnum
     {
         public int Id { get; set; }
