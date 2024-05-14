@@ -1,4 +1,5 @@
-namespace  Enemy
+#nullable enable
+namespace Daipan.Enemy.Scripts
 {
     public enum ENEMY_TYPE
     {

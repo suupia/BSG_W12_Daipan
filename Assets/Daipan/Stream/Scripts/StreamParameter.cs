@@ -3,7 +3,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace Stream.Viewer.Scripts
+namespace Daipan.Stream.Scripts
 {
     [Serializable]
     public sealed class ViewerParameter

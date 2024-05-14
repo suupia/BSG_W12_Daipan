@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Stream.Utility.Scripts
+namespace Daipan.Stream.Scripts.Utility.Scripts
 {
     // Other classes can be created by implementing IPrefabLoader, such as PrefabLoaderFromAssetBundle and PrefabLoaderFromStreamingAssets.
     public class PrefabLoaderFromResources<T> : IPrefabLoader<T> where T : Object

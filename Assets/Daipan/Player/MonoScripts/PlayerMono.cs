@@ -1,5 +1,5 @@
-using Enemy;
-using Stream.Player.Scripts;
+using Daipan.Enemy.Scripts;
+using Daipan.Stream.Scripts;
 using UnityEditorInternal;
 using UnityEngine;
 using VContainer;

@@ -1,14 +1,14 @@
 ﻿#nullable enable
 using Daipan.Stream.MonoScripts;
-using Stream.Utility;
-using Stream.Viewer.MonoScripts;
-using Stream.Viewer.Scripts;
+using Daipan.Stream.Scripts.Utility;
+using Daipan.Stream.Scripts.Viewer.MonoScripts;
+using Daipan.Stream.Scripts;
 using UnityEngine;
 using UnityEngine.Serialization;
 using VContainer;
 using VContainer.Unity;
 
-namespace Stream.Viewer.Tests
+namespace Daipan.Stream.Scripts.Viewer.Tests
 {
     public class StreamTestScope : LifetimeScope
     {

@@ -1,8 +1,9 @@
 #nullable enable
-using Stream.Utility;
-using Stream.Utility.Scripts;
+using Daipan.Enemy.MonoS;
+using Daipan.Stream.Scripts.Utility;
+using Daipan.Stream.Scripts.Utility.Scripts;
 
-namespace Enemy
+namespace Daipan.Enemy.Scripts
 {
     public sealed class EnemyPrefabLoader : IPrefabLoader<EnemyMono>
     {

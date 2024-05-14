@@ -1,7 +1,8 @@
 ﻿#nullable enable
 using System.Collections.Generic;
+using Daipan.Enemy.MonoS;
 
-namespace Enemy
+namespace Daipan.Enemy.Scripts
 {
     public class EnemyCluster
     {

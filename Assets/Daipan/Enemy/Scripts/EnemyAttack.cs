@@ -2,7 +2,7 @@
 using System.Data.Common;
 using UnityEngine;
 
-namespace Enemy
+namespace Daipan.Enemy.Scripts
 {
     public class EnemyAttack
     {

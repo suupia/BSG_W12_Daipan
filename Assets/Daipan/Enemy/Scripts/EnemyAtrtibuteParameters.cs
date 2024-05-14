@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace Enemy
+namespace Daipan.Enemy.Scripts
 {
     
     [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/EnemyAttributeParameters", order = 1)]

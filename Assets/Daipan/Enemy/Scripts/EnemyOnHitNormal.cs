@@ -1,7 +1,7 @@
 #nullable enable
 using UnityEngine;
 
-namespace Enemy
+namespace Daipan.Enemy.Scripts
 {
     public class EnemyOnHitNormal : IEnemyOnHit
     {

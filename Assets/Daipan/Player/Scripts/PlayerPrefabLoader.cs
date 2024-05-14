@@ -1,8 +1,8 @@
 #nullable enable
-using Stream.Utility;
-using Stream.Utility.Scripts;
+using Daipan.Stream.Scripts.Utility;
+using Daipan.Stream.Scripts.Utility.Scripts;
 
-namespace Stream.Player.Scripts
+namespace Daipan.Stream.Scripts
 {
     public sealed class PlayerPrefabLoader : IPrefabLoader<PlayerMono>
     {

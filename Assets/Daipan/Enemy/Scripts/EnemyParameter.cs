@@ -3,7 +3,7 @@ using System;
 using UnityEngine;
 
 
-namespace Enemy
+namespace Daipan.Enemy.Scripts
 {
     [Serializable]
     public sealed class EnemyAttackParameter

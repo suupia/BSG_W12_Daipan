@@ -203,7 +203,7 @@ GameObject:
   m_Component:
   - component: {fileID: 247250107}
   m_Layer: 5
-  m_Name: StreamUI
+  m_Name: StreamView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -714,7 +714,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1615007478}
   m_Layer: 5
-  m_Name: RageGauge
+  m_Name: IrritatedGauge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

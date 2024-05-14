@@ -2,7 +2,7 @@
 using UnityEngine;
 using VContainer;
 
-namespace Stream.Player.Scripts
+namespace Daipan.Stream.Scripts
 {
     // このクラスにPlayerの攻撃の処理を追加していってください。
     public sealed class PlayerAttack

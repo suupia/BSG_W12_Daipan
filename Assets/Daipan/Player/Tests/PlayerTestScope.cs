@@ -1,7 +1,7 @@
 #nullable enable
-using Enemy;
-using Stream.Player.Scripts;
-using Stream.Utility;
+using Daipan.Enemy.Scripts;
+using Daipan.Stream.Scripts;
+using Daipan.Stream.Scripts.Utility;
 using Unity.VisualScripting;
 using UnityEngine;
 using VContainer;

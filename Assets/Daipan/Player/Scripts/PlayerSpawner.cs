@@ -1,8 +1,8 @@
-﻿using Stream.Utility;
+﻿using Daipan.Stream.Scripts.Utility;
 using VContainer;
 using VContainer.Unity;
 
-namespace Stream.Player.Scripts
+namespace Daipan.Stream.Scripts
 {
     public sealed class PlayerSpawner : IStartable
     {

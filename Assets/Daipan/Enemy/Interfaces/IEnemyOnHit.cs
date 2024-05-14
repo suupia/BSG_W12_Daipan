@@ -1,4 +1,4 @@
-namespace Enemy
+namespace Daipan.Enemy.Scripts
 {
     public interface IEnemyOnHit
     {
