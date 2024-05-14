@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: ATypeEnemy
   m_EditorClassIdentifier: 
   enemyType: 2
-  attackParameter:
-    AttackAmount: 4
-  hpParameter:
-    HPAmount: 100
-  movementParameter:
-    MovementAmount: 10
+  attack:
+    attackAmount: 4
+  hp:
+    maxHp: 100
+  movement:
+    speed: 0
   attackCoolTime:
     MaxCoolTime: 0
     MinCoolTime: 0

@@ -1,25 +1,26 @@
 #nullable enable
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Daipan.Enemy.Scripts
 {
     [Serializable]
     public sealed class EnemyAttackParameter
     {
-        public int AttackAmount;
+        public int attackAmount;
     }
 
     [Serializable]
-    public sealed class EnemyHPParameter
+    public sealed class EnemyHpParameter
     {
-        public int HPAmount;
+        public int maxHp;
     }
 
     [Serializable]
     public sealed class EnemyMovementParameter
     {
-        public float MovementAmount;
+        public float speed;
     }
 
     [Serializable]
@@ -33,9 +34,9 @@ namespace Daipan.Enemy.Scripts
     public sealed class EnemyParameter : ScriptableObject
     {
         public EnemyType enemyType = EnemyType.None;
-        public EnemyAttackParameter attackParameter = null!;
-        public EnemyHPParameter hpParameter = null!;
-        public EnemyMovementParameter movementParameter = null!;
+        public EnemyAttackParameter attack = null!;
+        public EnemyHpParameter hp = null!;
+        public EnemyMovementParameter movement = null!;
         public EnemyAttackCoolTime attackCoolTime = null!;
         public Sprite sprite = null!;
     }

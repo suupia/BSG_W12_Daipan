@@ -9,39 +9,42 @@ using VContainer;
 namespace Daipan.Enemy.MonoScripts
 {
     [RequireComponent(typeof(SpriteRenderer))]
-    public class EnemyMono : MonoBehaviour, IHpSetter 
+    public class EnemyMono : MonoBehaviour, IHpSetter
     {
         [SerializeField] HpGaugeMono hpGaugeMono = null!;
-        public int CurrentHp
-        {
-            set => _enemyHp.CurrentHp = value;
-            get => _enemyHp.CurrentHp;
-        }
         EnemyAttack _enemyAttack = null!;
+        EnemyCluster _enemyCluster = null!;
+
+        EnemyHp _enemyHp = null!;
         public EnemyParameter EnemyParameter { get; private set; } = null!;
 
         public IEnemyOnHit EnemyOnHit { get; private set; } = null!;
-        
-        EnemyHp _enemyHp = null!;
-        EnemyCluster _enemyCluster = null!;
+
         void Update()
         {
             if (Input.GetKeyDown(KeyCode.A)) _enemyAttack.Attack();
             if (Input.GetKeyDown(KeyCode.S)) EnemyOnHit.OnHit();
 
 
-            transform.position += Vector3.left * Time.deltaTime;
-            if (transform.position.x < -10) Destroy(gameObject);
-            
-            hpGaugeMono.SetRatio(CurrentHp / (float)EnemyParameter.hpParameter.HPAmount);
+            transform.position += Vector3.left * EnemyParameter.movement.speed * Time.deltaTime;
+            if (transform.position.x < -10) Destroy(gameObject);  // Destroy when out of screen
+
+            hpGaugeMono.SetRatio(CurrentHp / (float)EnemyParameter.hp.maxHp);
+        }
+
+        public int CurrentHp
+        {
+            set => _enemyHp.CurrentHp = value;
+            get => _enemyHp.CurrentHp;
         }
 
 
         [Inject]
         public void Initialize(
-            EnemyAttack enemyAttack, 
+            EnemyAttack enemyAttack,
             IEnemyOnHit enemyOnHit,
-            EnemyCluster enemyCluster)
+            EnemyCluster enemyCluster
+        )
         {
             _enemyAttack = enemyAttack;
             EnemyOnHit = enemyOnHit;
@@ -51,8 +54,8 @@ namespace Daipan.Enemy.MonoScripts
         public void SetParameter(EnemyParameter enemyParameter)
         {
             EnemyParameter = enemyParameter;
-            _enemyAttack.enemyAttackParameter = EnemyParameter.attackParameter;
-            _enemyHp = new EnemyHp(enemyParameter.hpParameter.HPAmount, this,_enemyCluster);            
+            _enemyAttack.enemyAttackParameter = EnemyParameter.attack;
+            _enemyHp = new EnemyHp(enemyParameter.hp.maxHp, this, _enemyCluster);
 
             // Sprite
             var spriteRenderer = GetComponent<SpriteRenderer>();
