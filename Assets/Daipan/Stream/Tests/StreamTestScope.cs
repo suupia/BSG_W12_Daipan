@@ -27,11 +27,15 @@ namespace Daipan.Stream.Scripts.Viewer.Tests
             builder.Register<ViewerNumber>(Lifetime.Scoped);
             builder.Register<StreamStatus>(Lifetime.Scoped);
             builder.Register<StreamSpawner>(Lifetime.Scoped);
-
+            builder.Register<IrritatedValue>(Lifetime.Scoped).WithParameter(100);
+            
             builder.Register<DaipanExecutor>(Lifetime.Scoped);
 
             // Mono
             builder.RegisterComponentInHierarchy<StreamUIMono>();
+            
+            // View
+            builder.RegisterComponentInHierarchy<StreamViewMono>();
 
             // Test
             builder.RegisterComponentInHierarchy<PlayerTestInput>();

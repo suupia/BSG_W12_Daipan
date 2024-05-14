@@ -5,9 +5,16 @@ namespace Daipan.Stream.Scripts
 {
     public class IrritatedValue
     {
+        public int MaxValue { get; private set; }
+        public int Ratio => Value / MaxValue;
         public int Value => Mathf.Max(IncreasedValue - DecreasedValue, 0);
         int DecreasedValue { get; set; }
         int IncreasedValue { get; set; }
+
+        public IrritatedValue(int maxValue)
+        {
+            MaxValue = maxValue;
+        }
 
         public void IncreaseValue(int amount)
         {
