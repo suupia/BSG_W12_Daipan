@@ -32,7 +32,7 @@ public class PlayerMono : MonoBehaviour
             if (enemyMono.EnemyParameter.enemyType == EnemyType.A)
             {
                 Debug.Log($"EnemyType: {enemyMono.EnemyParameter.enemyType}を攻撃");
-                enemyMono.EnemyOnHit.OnHit();
+                _playerAttack.AAttack(enemyMono);
             }
         }
     }

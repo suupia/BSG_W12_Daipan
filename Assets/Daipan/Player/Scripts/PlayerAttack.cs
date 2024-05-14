@@ -1,4 +1,5 @@
 #nullable enable
+using Daipan.Battle.interfaces;
 using UnityEngine;
 using VContainer;
 
@@ -24,9 +25,9 @@ namespace Daipan.Stream.Scripts
         {
 
         }
-        public void AAttack(int A)
+        public void AAttack(IHpSetter hpSetter)
         {
-
+            hpSetter.CurrentHp -= _parameter.AttackAmount;
         }
         public void SAttack(int S)
         {
