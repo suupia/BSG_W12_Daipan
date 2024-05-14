@@ -1,11 +1,14 @@
 #nullable enable
+using Daipan.Enemy.Interfaces;
+using Daipan.Enemy.MonoScripts;
+using Daipan.Enemy.Scripts;
+using Daipan.Stream.Scripts.Utility;
 using Enemy;
-using Stream.Utility;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-public class EnemyTestScope : LifetimeScope
+public sealed class EnemyTestScope : LifetimeScope
 {
     [SerializeField] EnemyAttributeParameters enemyAttributeParameters;
     protected override void Configure(IContainerBuilder builder)

@@ -2,7 +2,7 @@
 using System;
 using UnityEngine;
 
-namespace Stream.Player.Scripts
+namespace Daipan.Stream.Scripts
 {
     [Serializable]
     public sealed class PlayerAttackParameter

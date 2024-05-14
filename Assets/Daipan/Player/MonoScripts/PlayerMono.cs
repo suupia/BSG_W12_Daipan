@@ -1,47 +1,49 @@
-using Enemy;
-using Stream.Player.Scripts;
-using UnityEditorInternal;
+using Daipan.Enemy.Scripts;
+using Daipan.Stream.Scripts;
 using UnityEngine;
 using VContainer;
 
 public class PlayerMono : MonoBehaviour
 {
-    PlayerAttack _playerAttack;
-    EnemyCluster _enemyCluster;
     PlayerAttackParameter _attackParameter;
+    EnemyCluster _enemyCluster;
+    PlayerAttack _playerAttack;
+
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.W))
         {
             Debug.Log("Wが押されたよ");
-            //_playerAttack.WAttack(_attackParameter.WAttackAmount);
-            _enemyCluster.EnemyDamage("W", _attackParameter.WAttackAmount);
+            _playerAttack.WAttack(8);
             _playerAttack.Attack(0);
-            // var enemy = _enemyCluster.Where(e => e.IsAlive).FirstOrDefault();
-            // if (enemy != null)
-            // {
-            //     enemy.Damage(10);
-            // }
         }
-        if(Input.GetKeyDown(KeyCode.S))
+
+        if (Input.GetKeyDown(KeyCode.S))
         {
             Debug.Log("Sが押されたよ");
-            _enemyCluster.EnemyDamage("S", _attackParameter.SAttackAmount);
-            //_playerAttack.SAttack(_attackParameter.SAttackAmount);
+            _playerAttack.SAttack(_attackParameter.SAttackAmount);
         }
+
         if (Input.GetKeyDown(KeyCode.A))
         {
             Debug.Log("Aが押されたよ");
-            _enemyCluster.EnemyDamage("A", _attackParameter.AAttackAmount);
-            //_playerAttack.AAttack(_attackParameter.AAttackAmount);
-        }
 
-  
+            var enemyMono = _enemyCluster.NearestEnemy(transform.position);
+            Debug.Log($"enemyMono.EnemyParameter.GetEnemyEnum: {enemyMono.EnemyParameter.GetEnemyEnum}");
+            if (enemyMono.EnemyParameter.GetEnemyEnum == EnemyEnum.A)
+            {
+                Debug.Log($"EnemyType: {enemyMono.EnemyParameter.GetEnemyEnum}を攻撃");
+                _playerAttack.AAttack(enemyMono);
+            }
+        }
     }
 
-    // [Inject]を付けないと、VContainerからのInjectが行われないことに注意
     [Inject]
-    public void Initialize(PlayerAttack playerAttack, EnemyCluster enemyCluster, PlayerAttackParameter attackParameter)
+    public void Initialize(
+        PlayerAttack playerAttack,
+        EnemyCluster enemyCluster,
+        PlayerAttackParameter attackParameter
+    )
     {
         _playerAttack = playerAttack;
         _enemyCluster = enemyCluster;

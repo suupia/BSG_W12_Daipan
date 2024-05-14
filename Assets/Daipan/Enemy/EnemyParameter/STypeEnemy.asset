@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f8d5cf6c51518584bb80933102500c8e, type: 3}
-  m_Name: WTypeEnemy
+  m_Name: STypeEnemy
   m_EditorClassIdentifier: 
-  enemyType: 1
+  enemyType: 3
   attackParameter:
     AttackAmount: 0
   hpParameter:
@@ -22,3 +22,4 @@ MonoBehaviour:
   attackCoolTime:
     MaxCoolTime: 0
     MinCoolTime: 0
+  sprite: {fileID: 21300000, guid: 9936721966a213e478f581389d4b8827, type: 3}

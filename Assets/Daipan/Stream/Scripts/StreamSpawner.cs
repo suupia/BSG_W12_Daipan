@@ -1,10 +1,10 @@
 ﻿#nullable enable
 using Daipan.Stream.MonoScripts;
-using Stream.Utility;
+using Daipan.Stream.Scripts.Utility;
 using VContainer;
 using VContainer.Unity;
 
-namespace Stream.Viewer.Scripts
+namespace Daipan.Stream.Scripts
 {
     public class StreamSpawner : IStartable
     {

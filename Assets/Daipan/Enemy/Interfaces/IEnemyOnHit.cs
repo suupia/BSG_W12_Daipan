@@ -1,7 +1,8 @@
-namespace Enemy
+#nullable enable
+namespace Daipan.Enemy.Interfaces
 {
     public interface IEnemyOnHit
     {
-        public void OnHit(ENEMY_TYPE enemyType);
+        public void OnHit();
     }
 }

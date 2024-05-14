@@ -1,8 +1,9 @@
 #nullable enable
+using Daipan.Battle.interfaces;
 using UnityEngine;
 using VContainer;
 
-namespace Stream.Player.Scripts
+namespace Daipan.Stream.Scripts
 {
     // このクラスにPlayerの攻撃の処理を追加していってください。
     public sealed class PlayerAttack
@@ -22,15 +23,15 @@ namespace Stream.Player.Scripts
 
         public void WAttack(int W)
         {
-            Debug.Log($"W={W}");
+
         }
-        public void AAttack(int A)
+        public void AAttack(IHpSetter hpSetter)
         {
-            Debug.Log($"A={A}");
+            hpSetter.CurrentHp -= _parameter.AttackAmount;
         }
         public void SAttack(int S)
         {
-            Debug.Log($"S={S}");
+
         }
     }
 }

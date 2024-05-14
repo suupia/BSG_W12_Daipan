@@ -1,8 +1,8 @@
-﻿using Stream.Utility;
+﻿using Daipan.Stream.Scripts.Utility;
 using VContainer;
 using VContainer.Unity;
 
-namespace Stream.Player.Scripts
+namespace Daipan.Stream.Scripts
 {
     public sealed class PlayerSpawner : IStartable
     {
@@ -23,7 +23,8 @@ namespace Stream.Player.Scripts
             // PlayerMonoのプレハブをロードして生成 
             var playerMonoPrefab = _playerMonoLoader.Load();
             // IObjectResolverを使ってPlayerMonoを生成すると依存関係が解決される
-            var playerMono = _container.Instantiate(playerMonoPrefab);
+            var position = new UnityEngine.Vector3(-10, 0, 0); // 左
+            var playerMono = _container.Instantiate(playerMonoPrefab,position, UnityEngine.Quaternion.identity);
         }
     }
 }

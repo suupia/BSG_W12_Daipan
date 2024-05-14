@@ -1,9 +1,9 @@
 ﻿#nullable enable
-using Stream.Viewer.Scripts;
+using Daipan.Stream.Scripts;
 using UnityEngine;
 using VContainer;
 
-namespace Stream.Viewer.Tests
+namespace Daipan.Stream.Scripts.Viewer.Tests
 {
     public class PlayerTestInput : MonoBehaviour
     {
@@ -29,6 +29,15 @@ namespace Stream.Viewer.Tests
 
 
             daiPanButton.OnClick += () => { _daipanExecutor.DaiPan(); };
+        }
+
+        void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                Debug.Log("DaiPan!");
+                _daipanExecutor.DaiPan();
+            }
         }
 
 

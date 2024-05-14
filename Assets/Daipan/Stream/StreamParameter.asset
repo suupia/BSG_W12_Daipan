@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bc412536ca8468b8fc3a6dbfce48b6f, type: 3}
   m_Name: StreamParameter
   m_EditorClassIdentifier: 
-  viewerParameter:
-    increaseNumberPerSecond: 1
+  viewer:
+    increaseNumberPerSecond: 100
     decreaseNumberWhenIrradiated: 5
-  daipanParameter:
+  daipan:
     increaseNumberByDaipan: 10
     increaseNumberWhenExciting: 100

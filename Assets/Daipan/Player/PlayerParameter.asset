@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: PlayerParameter
   m_EditorClassIdentifier: 
   attackParameter:
-    AttackAmount: 100
+    AttackAmount: 30
+    SAttackAmount: 0

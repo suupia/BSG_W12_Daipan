@@ -1,10 +1,10 @@
 ﻿#nullable enable
-using Stream.Viewer.Scripts;
+using Daipan.Stream.Scripts;
 using TMPro;
 using UnityEngine;
 using VContainer;
 
-namespace Stream.Viewer.MonoScripts
+namespace Daipan.Stream.Scripts.Viewer.MonoScripts
 {
     public class StreamUIMono : MonoBehaviour
     {

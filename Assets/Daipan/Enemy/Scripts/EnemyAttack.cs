@@ -2,14 +2,14 @@
 using System.Data.Common;
 using UnityEngine;
 
-namespace Enemy
+namespace Daipan.Enemy.Scripts
 {
     public class EnemyAttack
     {
         public EnemyAttackParameter enemyAttackParameter;
         public void Attack()
         {
-            Debug.Log($"Temp Attack  {enemyAttackParameter.AttackAmount}");
+            Debug.Log($"Temp Attack  {enemyAttackParameter.attackAmount}");
         }
     }
 }
