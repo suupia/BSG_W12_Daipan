@@ -48,31 +48,31 @@ namespace Daipan.Enemy.Scripts
                 return EnemyEnum.Values.First(x => x.Name == enemyType.ToString());
             }
         }
-    }
 
-    internal static class EnemyEnumChecker
-    {
-        static bool _isCheckedEnum;
-
-        public static void CheckEnum()
+        static class EnemyEnumChecker
         {
-            if (_isCheckedEnum) return;
-            foreach (var type in Enum.GetValues(typeof(EnemyType)).Cast<EnemyType>())
+            static bool _isCheckedEnum;
+
+            public static void CheckEnum()
             {
-                var enemy = EnemyEnum.Values.FirstOrDefault(x => x.Name == type.ToString());
-                if (enemy.Equals(default(EnemyEnum))) Debug.LogWarning($"EnemyEnum with name {type.ToString()} not found.");
+                if (_isCheckedEnum) return;
+                foreach (var type in Enum.GetValues(typeof(EnemyType)).Cast<EnemyType>())
+                {
+                    var enemy = EnemyEnum.Values.FirstOrDefault(x => x.Name == type.ToString());
+                    if (enemy.Equals(default(EnemyEnum))) Debug.LogWarning($"EnemyEnum with name {type.ToString()} not found.");
+                }
+
+                _isCheckedEnum = true;
             }
-
-            _isCheckedEnum = true;
         }
-    }
 
-    internal enum EnemyType
-    {
-        None,
-        W,
-        A,
-        S,
-        Cheetah
+        enum EnemyType
+        {
+            None,
+            W,
+            A,
+            S,
+            Cheetah
+        }
     }
 }
