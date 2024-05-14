@@ -14,7 +14,8 @@ public class PlayerMono : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.W))
         {
             Debug.Log("Wが押されたよ");
-            _playerAttack.WAttack(_attackParameter.WAttackAmount);
+            //_playerAttack.WAttack(_attackParameter.WAttackAmount);
+            _enemyCluster.EnemyDamage("W", _attackParameter.WAttackAmount);
             _playerAttack.Attack(0);
             // var enemy = _enemyCluster.Where(e => e.IsAlive).FirstOrDefault();
             // if (enemy != null)
@@ -25,12 +26,14 @@ public class PlayerMono : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.S))
         {
             Debug.Log("Sが押されたよ");
-            _playerAttack.SAttack(_attackParameter.SAttackAmount);
+            _enemyCluster.EnemyDamage("S", _attackParameter.SAttackAmount);
+            //_playerAttack.SAttack(_attackParameter.SAttackAmount);
         }
         if (Input.GetKeyDown(KeyCode.A))
         {
             Debug.Log("Aが押されたよ");
-            _playerAttack.AAttack(_attackParameter.AAttackAmount);
+            _enemyCluster.EnemyDamage("A", _attackParameter.AAttackAmount);
+            //_playerAttack.AAttack(_attackParameter.AAttackAmount);
         }
 
   

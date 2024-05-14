@@ -8,9 +8,9 @@ namespace Stream.Player.Scripts
     public sealed class PlayerAttackParameter
     {
         public int AttackAmount;
-        public int SAttackAmount = 0;
-        public int WAttackAmount = 0;
-        public int AAttackAmount = 0;
+        public int SAttackAmount = 10;
+        public int WAttackAmount = 20;
+        public int AAttackAmount = 30;
     }
     
 
