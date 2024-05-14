@@ -10,15 +10,15 @@ namespace Daipan.Enemy.Scripts
     {
         readonly List<EnemyMono> _enemies = new();
 
-        EnemyCluster()
-        {
-        }
-
         public IEnumerable<EnemyMono> EnemyMonos => _enemies;
 
         public void AddEnemy(EnemyMono enemy)
         {
             _enemies.Add(enemy);
+        }
+        public void RemoveEnemy(EnemyMono enemy)
+        {
+            _enemies.Remove(enemy);
         }
 
         public EnemyMono NearestEnemy(Vector3 position)

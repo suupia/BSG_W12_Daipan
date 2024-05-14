@@ -9,11 +9,13 @@ namespace Daipan.Enemy.Scripts
     {
         int _currentHp;
         readonly EnemyMono _enemyMono;
+        readonly EnemyCluster _enemyCluster;
 
-        public EnemyHp(int maxHp, EnemyMono enemyMono)
+        public EnemyHp(int maxHp, EnemyMono enemyMono, EnemyCluster enemyCluster)
         {
             CurrentHp = maxHp;
             _enemyMono = enemyMono;
+            _enemyCluster = enemyCluster;
         }
 
         public int CurrentHp
@@ -23,7 +25,11 @@ namespace Daipan.Enemy.Scripts
             {
                 _currentHp = value;
                 Debug.Log($"Enemy CurrentHp : {_currentHp}");
-                if (_currentHp <= 0) Object.Destroy(_enemyMono.gameObject);
+                if (_currentHp <= 0)
+                {
+                    _enemyCluster.RemoveEnemy(_enemyMono);
+                    Object.Destroy(_enemyMono.gameObject);
+                }
             }
         }
     }

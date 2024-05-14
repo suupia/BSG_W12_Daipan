@@ -15,25 +15,28 @@ namespace Daipan.Enemy.Scripts
         readonly IPrefabLoader<EnemyMono> _enemyMonoLoader;
         readonly EnemyAttributeParameters _attributeParameters;
         readonly EnemyType _enemyType;
+        readonly EnemyCluster _enemyCluster;
         
         public EnemySpecificBuilder(
             IObjectResolver container,
             IPrefabLoader<EnemyMono> enemyMonoLoader,
             EnemyAttributeParameters attributeParameters,
-            EnemyType enemyType
+            EnemyType enemyType,
+            EnemyCluster enemyCluster
         )
         {
             _container = container;
             _enemyMonoLoader = enemyMonoLoader;
             _attributeParameters = attributeParameters;
             _enemyType = enemyType;
+            _enemyCluster = enemyCluster;
         }
 
         public EnemyMono Build(Vector3 position, Quaternion rotation)
         {
             var enemyMonoPrefab = _enemyMonoLoader.Load();
             var enemyObject = _container.Instantiate(enemyMonoPrefab, position, rotation);
-            enemyObject.SetParameter(_attributeParameters.enemyParameters.First(x => x.enemyType == _enemyType));
+            enemyObject.SetParameter(_attributeParameters.enemyParameters.First(x => x.enemyType == _enemyType),_enemyCluster);
             return enemyObject;
         }
 

@@ -15,25 +15,28 @@ namespace Daipan.Enemy.Scripts
         readonly IEnemyFactory _enemyFactory;
         readonly IPrefabLoader<EnemyMono> _enemyMonoLoader;
         readonly EnemyAttributeParameters _attributeParameters;
+        readonly EnemyCluster _enemyCluster;
         
         public EnemyRandomBuilder(
             // IEnemyFactory enemyFactory,
             IObjectResolver container,
             IPrefabLoader<EnemyMono> enemyMonoLoader,
-            EnemyAttributeParameters attributeParameters
+            EnemyAttributeParameters attributeParameters,
+            EnemyCluster enemyCluster
             )
         {
             // _enemyFactory = enemyFactory;
             _container = container;
             _enemyMonoLoader = enemyMonoLoader;
             _attributeParameters = attributeParameters;
+            _enemyCluster = enemyCluster;
         }
         
         public EnemyMono Build(Vector3 position, Quaternion rotation)
         {
             var enemyMonoPrefab = _enemyMonoLoader.Load();
             var enemyObject = _container.Instantiate(enemyMonoPrefab, position, rotation);
-            enemyObject.SetParameter(_attributeParameters.enemyParameters.First(x => x.enemyType == DecideRandomEnemyType()));
+            enemyObject.SetParameter(_attributeParameters.enemyParameters.First(x => x.enemyType == DecideRandomEnemyType()),_enemyCluster);
             return enemyObject;
         }
 

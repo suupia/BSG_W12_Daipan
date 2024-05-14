@@ -14,11 +14,13 @@ using Random = UnityEngine.Random;
 
 namespace Daipan.Enemy.Scripts
 {
-    public class EnemySpawner : IStartable
+    public class EnemySpawner : IStartable, ITickable
     {
         readonly EnemyCluster _enemyCluster;
         readonly IEnemyBuilder _enemyBuilder;
         EnemySpawnPointMono[] _enemySpawnPoints = Array.Empty<EnemySpawnPointMono>();
+        float _timer;
+        readonly float _spawnInterval = 1.0f;
 
         [Inject]
         public EnemySpawner(
@@ -32,8 +34,18 @@ namespace Daipan.Enemy.Scripts
 
         void IStartable.Start()
         {
-            SpawnEnemy();
+            // SpawnEnemy();
             
+        }
+        
+        void ITickable.Tick()
+        {
+            _timer += Time.deltaTime;
+            if (_timer > _spawnInterval)
+            {
+                SpawnEnemy();
+                _timer = 0;
+            }
         }
 
         void SpawnEnemy()

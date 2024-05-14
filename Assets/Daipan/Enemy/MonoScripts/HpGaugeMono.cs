@@ -8,7 +8,7 @@ public class HpGaugeMono : MonoBehaviour
     [SerializeField] SpriteRenderer hpGaugeSpriteRenderer = null!;
     Material? _hpGaugeMaterial;
     
-    void Start()
+    void Awake()
     {
         _hpGaugeMaterial = hpGaugeSpriteRenderer.material;
     }

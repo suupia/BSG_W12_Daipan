@@ -44,11 +44,11 @@ namespace Daipan.Enemy.MonoScripts
             EnemyOnHit = enemyOnHit;
         }
 
-        public void SetParameter(EnemyParameter enemyParameter)
+        public void SetParameter(EnemyParameter enemyParameter, EnemyCluster enemyCluster)
         {
             EnemyParameter = enemyParameter;
             _enemyAttack.enemyAttackParameter = EnemyParameter.attackParameter;
-            _enemyHp = new EnemyHp(enemyParameter.hpParameter.HPAmount, this);            
+            _enemyHp = new EnemyHp(enemyParameter.hpParameter.HPAmount, this,enemyCluster);            
 
             // Sprite
             var spriteRenderer = GetComponent<SpriteRenderer>();
