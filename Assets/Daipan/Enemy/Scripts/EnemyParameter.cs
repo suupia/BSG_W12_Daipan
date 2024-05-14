@@ -2,7 +2,6 @@
 using System;
 using UnityEngine;
 
-
 namespace Daipan.Enemy.Scripts
 {
     [Serializable]
@@ -38,5 +37,6 @@ namespace Daipan.Enemy.Scripts
         public EnemyHPParameter hpParameter = null!;
         public EnemyMovementParameter movementParameter = null!;
         public EnemyAttackCoolTime attackCoolTime = null!;
+        public Sprite sprite = null!;
     }
 }

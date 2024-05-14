@@ -7,11 +7,12 @@ using VContainer;
 
 namespace Daipan.Enemy.MonoScripts
 {
+    [RequireComponent(typeof(SpriteRenderer))]
     public class EnemyMono : MonoBehaviour
     {
-        EnemyAttack _enemyAttack;
-        IEnemyOnHit _enemyOnHit;
-        EnemyParameter _enemyParameter;
+        EnemyAttack _enemyAttack = null!;
+        IEnemyOnHit _enemyOnHit = null!;
+        EnemyParameter _enemyParameter = null!;
 
         void Update()
         {
@@ -36,6 +37,10 @@ namespace Daipan.Enemy.MonoScripts
             _enemyParameter = enemyParameter;
 
             _enemyAttack.enemyAttackParameter = _enemyParameter.attackParameter;
+
+            // Sprite
+            var spriteRenderer = GetComponent<SpriteRenderer>();
+            spriteRenderer.sprite = _enemyParameter.sprite;
 
             var enemyOnHit = _enemyOnHit as EnemyOnHit;
             // enemyOnHit.ownEnemyType = _enemyParameter.enemyType;
