@@ -1,4 +1,5 @@
 #nullable enable
+using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.Scripts;
 using Enemy;
 using UnityEngine;
@@ -16,9 +17,13 @@ namespace Daipan.Enemy.MonoScripts
         {
             if (Input.GetKeyDown(KeyCode.A)) _enemyAttack.Attack();
             if (Input.GetKeyDown(KeyCode.S)) _enemyOnHit.OnHit();
+
+
+            transform.position += Vector3.left * Time.deltaTime;
+            if (transform.position.x < -10) Destroy(gameObject);
         }
 
-        //?????[Inject]をつけると勝手にVContainerに呼び出される？
+
         [Inject]
         public void Initialize(EnemyAttack enemyAttack, IEnemyOnHit enemyOnHit)
         {
@@ -36,5 +41,4 @@ namespace Daipan.Enemy.MonoScripts
             // enemyOnHit.ownEnemyType = _enemyParameter.enemyType;
         }
     }
-    
 }

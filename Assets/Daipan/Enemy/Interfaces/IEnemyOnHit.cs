@@ -1,5 +1,5 @@
 #nullable enable
-namespace Daipan.Enemy.Scripts
+namespace Daipan.Enemy.Interfaces
 {
     public interface IEnemyOnHit
     {

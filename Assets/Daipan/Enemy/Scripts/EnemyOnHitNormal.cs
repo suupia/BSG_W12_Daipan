@@ -1,4 +1,5 @@
 #nullable enable
+using Daipan.Enemy.Interfaces;
 using UnityEngine;
 
 namespace Daipan.Enemy.Scripts
