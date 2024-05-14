@@ -11,14 +11,14 @@ namespace Stream.Viewer.Scripts
 
         public void IncreaseViewer(int amount)
         {
-            // Prerequisite
+            // [Prerequisite]
             if (amount < 0) Debug.LogWarning($"ViewerNumber.IncreaseViewer() amount is negative : {amount}");
             IncreasedNumber += amount;
         }
 
         public void DecreaseViewer(int amount)
         {
-            // Prerequisite
+            // [Prerequisite]
             if (amount < 0) Debug.LogWarning($"ViewerNumber.DecreaseViewer() amount is negative : {amount}");
 
             if (Number <= 0) return;
