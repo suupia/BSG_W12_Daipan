@@ -29,9 +29,10 @@ public class PlayerMono : MonoBehaviour
             Debug.Log("Aが押されたよ");
 
             var enemyMono = _enemyCluster.NearestEnemy(transform.position);
-            if (enemyMono.EnemyParameter.enemyType == EnemyType.A)
+            Debug.Log($"enemyMono.EnemyParameter.GetEnemyEnum: {enemyMono.EnemyParameter.GetEnemyEnum}");
+            if (enemyMono.EnemyParameter.GetEnemyEnum == EnemyEnum.A)
             {
-                Debug.Log($"EnemyType: {enemyMono.EnemyParameter.enemyType}を攻撃");
+                Debug.Log($"EnemyType: {enemyMono.EnemyParameter.GetEnemyEnum}を攻撃");
                 _playerAttack.AAttack(enemyMono);
             }
         }

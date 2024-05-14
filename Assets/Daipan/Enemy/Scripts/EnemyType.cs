@@ -31,6 +31,7 @@ namespace Daipan.Enemy.Scripts
         {
             Values = new[]
             {
+                None,
                 W,
                 A,
                 S,

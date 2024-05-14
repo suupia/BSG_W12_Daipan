@@ -41,14 +41,35 @@ namespace Daipan.Enemy.Scripts
         public EnemyAttackCoolTime attackCoolTime = null!;
         public Sprite sprite = null!;
 
-        public EnemyEnum GetEnemyEnum()
+        public EnemyEnum GetEnemyEnum
         {
-            var enemy = EnemyEnum.Values.FirstOrDefault(x => x.Name == enemyType.ToString());
-            if (enemy.Equals(default(EnemyEnum)))
+            get
             {
-                Debug.LogWarning($"EnemyEnum with name {enemyType.ToString()} not found.");
+                EnemyEnumChecker.CheckEnum();
+                return EnemyEnum.Values.First(x => x.Name == enemyType.ToString());
             }
-            return enemy;
+        }
+    }
+
+    static class EnemyEnumChecker
+    {
+        static bool _isCheckedEnum;
+        public static void CheckEnum()
+        {
+            if (_isCheckedEnum) return;
+            Debug.Log("CheckEnum");
+            Debug.Log($"Enum.GetValues(typeof(EnemyType)).Cast<EnemyType>() : {Enum.GetValues(typeof(EnemyType)).Cast<EnemyType>().Count()}");
+            foreach (var type in Enum.GetValues(typeof(EnemyType)).Cast<EnemyType>())
+            {
+                Debug.Log($"type : {type.ToString()}");
+                var enemy = EnemyEnum.Values.FirstOrDefault(x => x.Name == type.ToString());
+                Debug.Log($"EnemyEnum with name {type.ToString()} found.");
+                if (enemy.Equals(default(EnemyEnum)))
+                {
+                    Debug.LogWarning($"EnemyEnum with name {type.ToString()} not found.");
+                }
+            }
+            _isCheckedEnum = true;
         }
     }
 }

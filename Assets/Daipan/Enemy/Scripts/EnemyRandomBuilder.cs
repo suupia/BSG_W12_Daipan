@@ -30,16 +30,15 @@ namespace Daipan.Enemy.Scripts
         {
             var enemyMonoPrefab = _enemyMonoLoader.Load();
             var enemyObject = _container.Instantiate(enemyMonoPrefab, position, rotation);
-            enemyObject.SetParameter(_attributeParameters.enemyParameters.First(x => x.enemyType == DecideRandomEnemyType()));
+            enemyObject.SetParameter(_attributeParameters.enemyParameters.First(x => x.GetEnemyEnum == DecideRandomEnemyType()));
             return enemyObject;
         }
 
-        EnemyType DecideRandomEnemyType()
+        EnemyEnum DecideRandomEnemyType()
         {
-            var enemyTypes = System.Enum.GetValues(typeof(EnemyType)).Cast<EnemyType>().ToList();
-            enemyTypes.Remove(EnemyType.None);
-            var rand = Random.Range(0, enemyTypes.Count());
-            return enemyTypes[rand];
+            var enemyEnums = EnemyEnum.Values;
+            var rand = Random.Range(0, enemyEnums.Count());
+            return enemyEnums[rand];
         }
     }
 
