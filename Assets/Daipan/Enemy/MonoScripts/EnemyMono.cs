@@ -22,8 +22,8 @@ namespace Daipan.Enemy.MonoScripts
 
         public IEnemyOnHit EnemyOnHit { get; private set; } = null!;
         
-
         EnemyHp _enemyHp = null!;
+        EnemyCluster _enemyCluster = null!;
         void Update()
         {
             if (Input.GetKeyDown(KeyCode.A)) _enemyAttack.Attack();
@@ -38,17 +38,21 @@ namespace Daipan.Enemy.MonoScripts
 
 
         [Inject]
-        public void Initialize(EnemyAttack enemyAttack, IEnemyOnHit enemyOnHit)
+        public void Initialize(
+            EnemyAttack enemyAttack, 
+            IEnemyOnHit enemyOnHit,
+            EnemyCluster enemyCluster)
         {
             _enemyAttack = enemyAttack;
             EnemyOnHit = enemyOnHit;
+            _enemyCluster = enemyCluster;
         }
 
-        public void SetParameter(EnemyParameter enemyParameter, EnemyCluster enemyCluster)
+        public void SetParameter(EnemyParameter enemyParameter)
         {
             EnemyParameter = enemyParameter;
             _enemyAttack.enemyAttackParameter = EnemyParameter.attackParameter;
-            _enemyHp = new EnemyHp(enemyParameter.hpParameter.HPAmount, this,enemyCluster);            
+            _enemyHp = new EnemyHp(enemyParameter.hpParameter.HPAmount, this,_enemyCluster);            
 
             // Sprite
             var spriteRenderer = GetComponent<SpriteRenderer>();
