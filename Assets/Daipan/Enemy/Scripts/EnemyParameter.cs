@@ -33,7 +33,7 @@ namespace Daipan.Enemy.Scripts
     [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/EnemyParameter", order = 1)]
     public sealed class EnemyParameter : ScriptableObject
     {
-        public ENEMY_TYPE enemyType = ENEMY_TYPE.NON_Type;
+        public EnemyType enemyType = EnemyType.None;
         public EnemyAttackParameter attackParameter = null!;
         public EnemyHPParameter hpParameter = null!;
         public EnemyMovementParameter movementParameter = null!;

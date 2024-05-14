@@ -15,7 +15,7 @@ namespace Daipan.Enemy.Scripts
         readonly IPrefabLoader<EnemyMono> _enemyMonoLoader;
         readonly EnemyAttributeParameters _attributeParameters;
 
-        readonly Dictionary<ENEMY_TYPE, EnemyParameter> _enemyParameters = new();
+        readonly Dictionary<EnemyType, EnemyParameter> _enemyParameters = new();
         private EnemyMono _enemyMonoPrefab;
 
         [Inject]
@@ -39,11 +39,11 @@ namespace Daipan.Enemy.Scripts
         {
             _enemyMonoPrefab = _enemyMonoLoader.Load();
             //Debug.Log(string.Join("\n", _attributeParameters.enemyParameters));
-            SpawnEnemy(ENEMY_TYPE.A_Type);
+            SpawnEnemy(EnemyType.A);
         }
 
 
-        void SpawnEnemy(ENEMY_TYPE enemyType)
+        void SpawnEnemy(EnemyType enemyType)
         {
             var enemyObject = _container.Instantiate(_enemyMonoPrefab);
             enemyObject.PureInitialize(_enemyParameters[enemyType]);
