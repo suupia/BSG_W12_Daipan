@@ -5,9 +5,11 @@ namespace Daipan.Stream.Scripts
 {
     public class ViewerNumber
     {
+        public float Ratio => (float)Number / MaxNumber;
         public int Number => Mathf.Max(IncreasedNumber - DecreasedNumber, 0);
         int DecreasedNumber { get; set; }
         int IncreasedNumber { get; set; }
+        int MaxNumber => 10_000;
 
         public void IncreaseViewer(int amount)
         {
@@ -23,13 +25,9 @@ namespace Daipan.Stream.Scripts
 
             if (Number <= 0) return;
             if (Number - amount < 0)
-            {
                 DecreasedNumber += Number;
-            }
             else
-            {
                 DecreasedNumber += amount;
-            }
         }
     }
 }

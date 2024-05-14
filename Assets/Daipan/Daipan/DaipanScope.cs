@@ -59,6 +59,7 @@ public sealed class DaipanScope : LifetimeScope
         {
             entryPoints.Add<PlayerSpawner>();
             entryPoints.Add<EnemySpawner>();
+            entryPoints.Add<StreamSpawner>();
         });
     }
 }

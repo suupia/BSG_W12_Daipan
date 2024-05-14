@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using VContainer;
@@ -9,19 +8,27 @@ namespace Daipan.Stream.Scripts
     public class StreamViewMono : MonoBehaviour
     {
         [SerializeField] Image irritatedGauge = null!;
-        
+        [SerializeField] Image viewerGauge = null!;
+        [SerializeField] TextMeshProUGUI viewerNumberText = null!;
+
         IrritatedValue _irritatedValue = null!;
-        
-        [Inject]
-        public void Initialize(IrritatedValue irritatedValue)
-        {
-            _irritatedValue = irritatedValue;
-        }
-        
+        ViewerNumber _viewerNumber = null!;
+
         void Update()
         {
-                irritatedGauge.fillAmount = _irritatedValue.Ratio;
+            irritatedGauge.fillAmount = _irritatedValue.Ratio;
+            viewerGauge.fillAmount = _viewerNumber.Ratio;
+            viewerNumberText.text = $"Viewers : {_viewerNumber.Number}";
+        }
+
+        [Inject]
+        public void Initialize(
+            IrritatedValue irritatedValue,
+            ViewerNumber viewerNumber
+        )
+        {
+            _irritatedValue = irritatedValue;
+            _viewerNumber = viewerNumber;
         }
     }
-    
 }
