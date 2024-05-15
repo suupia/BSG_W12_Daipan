@@ -20,10 +20,10 @@ namespace Daipan.Comment.Scripts
             Object.Destroy(comment.gameObject);
         }
 
-        // public void BlownAway()
-        // {
-        //     var comments = _comments.ToArray();
-        //     foreach (var comment in comments) comment.BlownAway();
-        // }
+        public void BlownAway()
+        {
+            var comments = _comments.ToArray();
+            foreach (var comment in comments) comment.BlownAway();
+        }
     }
 }

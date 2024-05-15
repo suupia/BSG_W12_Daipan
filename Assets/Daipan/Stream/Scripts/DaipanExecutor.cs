@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using Daipan.Comment.Scripts;
 using Daipan.Enemy.Scripts;
 using UnityEngine;
 
@@ -11,13 +12,15 @@ namespace Daipan.Stream.Scripts
         readonly StreamStatus _streamStatus;
         readonly IrritatedValue _irritatedValue;
         readonly EnemyCluster _enemyCluster;
+        readonly CommentCluster _commentCluster;
 
         public DaipanExecutor(
             DaipanParameter daipanParameter,
             ViewerNumber viewerNumber,
             StreamStatus streamStatus,
             IrritatedValue irritatedValue,
-            EnemyCluster enemyCluster
+            EnemyCluster enemyCluster,
+            CommentCluster commentCluster
             )
         {
             _daipanParameter = daipanParameter;
@@ -25,6 +28,7 @@ namespace Daipan.Stream.Scripts
             _streamStatus = streamStatus;
             _irritatedValue = irritatedValue;
             _enemyCluster = enemyCluster;
+            _commentCluster = commentCluster;
         }
 
         bool IsExciting => _streamStatus.IsExcited;
@@ -55,6 +59,7 @@ namespace Daipan.Stream.Scripts
                 Debug.Log($"Blow all comment");
                 
                 _enemyCluster.BlownAway();
+                _commentCluster.BlownAway();
             }
             
             // 台パンしたら怒りゲージは0になる
