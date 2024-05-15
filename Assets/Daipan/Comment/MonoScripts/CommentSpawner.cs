@@ -1,5 +1,6 @@
 #nullable enable
 using Daipan.Comment.Scripts;
+using Daipan.Stream.Scripts;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -16,6 +17,8 @@ namespace Daipan.Comment.MonoScripts
         CommentSpawnPointContainer _commentSpawnPointContainer = null!;
         CommentCluster _commentCluster = null!;
         
+        // todo : 後で分離する
+        ViewerNumber _viewerNumber = null!;
 
         void Update()
         {
@@ -32,20 +35,27 @@ namespace Daipan.Comment.MonoScripts
         {
             var comment = _container.Instantiate(superCommentPrefab, _commentSpawnPointContainer.SpawnPosition, Quaternion.identity,
                 commentSection.transform);
-            _commentCluster.Add(comment);
             comment.IsSuperComment = true;
+            comment.OnDespawn += (sender, args) =>
+            {
+                _viewerNumber.IncreaseViewer(30);
+            };
+            _commentCluster.Add(comment);
         }
 
         [Inject]
         public void Initialized(
             IObjectResolver container,
             CommentSpawnPointContainer commentSpawnPointContainer,
-            CommentCluster commentCluster)
+            CommentCluster commentCluster,
+            ViewerNumber viewerNumber
+            )
         
         {
             _container = container;
             _commentSpawnPointContainer = commentSpawnPointContainer;
             _commentCluster = commentCluster;
+            _viewerNumber = viewerNumber;
         }
     }
 }
