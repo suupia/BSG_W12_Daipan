@@ -1,7 +1,8 @@
 #nullable enable
+using Daipan.Enemy.Interfaces;
 using UnityEngine;
 
-namespace Enemy
+namespace Daipan.Enemy.Scripts
 {
     public class EnemyOnHitNormal : IEnemyOnHit
     {

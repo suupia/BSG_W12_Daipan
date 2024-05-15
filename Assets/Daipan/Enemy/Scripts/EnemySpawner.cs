@@ -1,52 +1,78 @@
 #nullable enable
 using System;
-using System.Collections.Generic;
-using Stream.Utility;
+using Daipan.Core.Interfaces;
+using Daipan.Enemy.Interfaces;
+using Daipan.Stream.Scripts;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
+using Object = UnityEngine.Object;
+using Random = UnityEngine.Random;
 
-
-namespace Enemy
+namespace Daipan.Enemy.Scripts
 {
-    public class EnemySpawner : IStartable
+    public class EnemySpawner : IStart, ITickable
     {
-        readonly IObjectResolver _container;
-        readonly IPrefabLoader<EnemyMono> _enemyMonoLoader;
-        readonly EnemyAttributeParameters _attributeParameters;
-
-        readonly Dictionary<ENEMY_TYPE, EnemyParameter> _enemyParameters = new();
-        private EnemyMono _enemyMonoPrefab;
+        readonly IEnemyBuilder _enemyBuilder;
+        readonly EnemyCluster _enemyCluster;
+        readonly IrritatedValue _irritatedValue;
+        readonly float _spawnInterval = 1.0f;
+        EnemySpawnPointMono[] _enemySpawnPoints = Array.Empty<EnemySpawnPointMono>();
+        float _timer;
 
         [Inject]
         public EnemySpawner(
             IObjectResolver container,
-            IPrefabLoader<EnemyMono> enemyMonoLoader,
-            EnemyAttributeParameters attributeParameters)
+            EnemyCluster enemyCluster,
+            IrritatedValue irritatedValue,
+            IEnemyBuilder enemyBuilder)
         {
-            _container = container;
-            _enemyMonoLoader = enemyMonoLoader;
-            _attributeParameters = attributeParameters;
+            _enemyCluster = enemyCluster;
+            _enemyBuilder = enemyBuilder;
+            _irritatedValue = irritatedValue;
+        }
 
-            foreach (var enemyParam in _attributeParameters.enemyParameters)
+        void IStart.Start()
+        {
+            // SpawnEnemy();
+        }
+
+        void ITickable.Tick()
+        {
+            _timer += Time.deltaTime;
+            if (_timer > _spawnInterval)
             {
-                if(_enemyParameters.ContainsKey(enemyParam.enemyType)) continue;
-                _enemyParameters.Add(enemyParam.enemyType,enemyParam);
+                SpawnEnemy();
+                _timer = 0;
             }
         }
 
-        void IStartable.Start()
+        void SpawnEnemy()
         {
-            _enemyMonoPrefab = _enemyMonoLoader.Load();
-            //Debug.Log(string.Join("\n", _attributeParameters.enemyParameters));
-            SpawnEnemy(ENEMY_TYPE.A_Type);
+            _enemySpawnPoints = Object.FindObjectsByType<EnemySpawnPointMono>(FindObjectsSortMode.None);
+            var enemyObject = _enemyBuilder.Build(DecideRandomSpawnPosition(), Quaternion.identity);
+            IncreaseIrritatedValueByEnemy(enemyObject.EnemyParameter.GetEnemyEnum);
+            _enemyCluster.Add(enemyObject);
         }
 
-
-        void SpawnEnemy(ENEMY_TYPE enemyType)
+        Vector3 DecideRandomSpawnPosition()
         {
-            var enemyObject = _container.Instantiate(_enemyMonoPrefab);
-            enemyObject.PureInitialize(_enemyParameters[enemyType]);
+            if (_enemySpawnPoints == Array.Empty<EnemySpawnPointMono>())
+            {
+                Debug.LogWarning("No spawn points found");
+                return Vector3.zero;
+            }
+
+            var rand = Random.Range(0, _enemySpawnPoints.Length);
+            return _enemySpawnPoints[rand].transform.position;
+        }
+
+        void IncreaseIrritatedValueByEnemy(EnemyEnum enemy)
+        {
+            if (enemy == EnemyEnum.Cheetah)
+            {
+                _irritatedValue.IncreaseValue(8); // todo : parameter もらう
+            }
         }
     }
 }

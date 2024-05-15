@@ -1,6 +1,7 @@
-using Enemy;
-using Stream.Player.Scripts;
-using Stream.Utility;
+#nullable enable
+using Daipan.Enemy.Scripts;
+using Daipan.Stream.Scripts;
+using Daipan.Stream.Scripts.Utility;
 using Unity.VisualScripting;
 using UnityEngine;
 using VContainer;
@@ -9,7 +10,7 @@ using VContainer.Unity;
 // プレイヤーの処理をテストするためのLifetimeScope
 public class PlayerTestScope : LifetimeScope
 {
-    [SerializeField] PlayerParameter playerParameter;
+    [SerializeField] PlayerParameter playerParameter = null!;
     
     protected override void Configure(IContainerBuilder builder)
     {

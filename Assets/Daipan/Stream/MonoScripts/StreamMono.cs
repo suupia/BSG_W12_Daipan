@@ -1,4 +1,4 @@
-using Stream.Viewer.Scripts;
+using Daipan.Stream.Scripts;
 using UnityEngine;
 using VContainer;
 

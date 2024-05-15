@@ -1,12 +1,13 @@
 ﻿#nullable enable
+using Daipan.Core.Interfaces;
 using Daipan.Stream.MonoScripts;
-using Stream.Utility;
+using Daipan.Stream.Scripts.Utility;
 using VContainer;
 using VContainer.Unity;
 
-namespace Stream.Viewer.Scripts
+namespace Daipan.Stream.Scripts
 {
-    public class StreamSpawner : IStartable
+    public class StreamSpawner : IStart
     {
         readonly IObjectResolver _container;
         readonly IPrefabLoader<StreamMono> _viewerLoader;
@@ -20,7 +21,7 @@ namespace Stream.Viewer.Scripts
             _viewerLoader = viewerLoader;
         }
 
-        void IStartable.Start()
+        void IStart.Start()
         {
             var viewerMonoPrefab = _viewerLoader.Load();
             var viewerMono = _container.Instantiate(viewerMonoPrefab);

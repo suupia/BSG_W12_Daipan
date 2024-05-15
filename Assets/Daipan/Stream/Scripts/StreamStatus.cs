@@ -1,4 +1,4 @@
-﻿namespace Stream.Viewer.Scripts
+﻿namespace Daipan.Stream.Scripts
 {
     public class StreamStatus
     {

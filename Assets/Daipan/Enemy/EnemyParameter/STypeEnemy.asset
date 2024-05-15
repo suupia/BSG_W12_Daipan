@@ -22,3 +22,4 @@ MonoBehaviour:
   attackCoolTime:
     MaxCoolTime: 0
     MinCoolTime: 0
+  sprite: {fileID: 21300000, guid: 9936721966a213e478f581389d4b8827, type: 3}

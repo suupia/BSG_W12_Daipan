@@ -1,9 +1,9 @@
 ﻿#nullable enable
 using Daipan.Stream.MonoScripts;
-using Stream.Utility;
-using Stream.Utility.Scripts;
+using Daipan.Stream.Scripts.Utility;
+using Daipan.Stream.Scripts.Utility.Scripts;
 
-namespace Stream.Viewer.Scripts
+namespace Daipan.Stream.Scripts
 {
     public class StreamPrefabLoader : IPrefabLoader<StreamMono>
     {

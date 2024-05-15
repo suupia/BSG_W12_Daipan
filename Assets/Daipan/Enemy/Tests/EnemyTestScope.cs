@@ -1,11 +1,14 @@
 #nullable enable
+using Daipan.Enemy.Interfaces;
+using Daipan.Enemy.MonoScripts;
+using Daipan.Enemy.Scripts;
+using Daipan.Stream.Scripts.Utility;
 using Enemy;
-using Stream.Utility;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-public class EnemyTestScope : LifetimeScope
+public sealed class EnemyTestScope : LifetimeScope
 {
     [SerializeField] EnemyAttributeParameters enemyAttributeParameters;
     protected override void Configure(IContainerBuilder builder)
@@ -14,10 +17,11 @@ public class EnemyTestScope : LifetimeScope
         builder.Register<EnemyPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<EnemyMono>>();
 
         builder.Register<EnemyAttack>(Lifetime.Scoped);
-        builder.Register<EnemyOnHitNormal>(Lifetime.Scoped);
+        builder.Register<EnemyOnHit>(Lifetime.Scoped).As<IEnemyOnHit>();
         builder.Register<EnemySpawner>(Lifetime.Scoped);
+        builder.Register<EnemyCluster>(Lifetime.Scoped);
 
-        //?????ここの書き方がわからない
+
         builder.UseEntryPoints(Lifetime.Scoped, entryPoints =>
         {
             entryPoints.Add<EnemySpawner>();
