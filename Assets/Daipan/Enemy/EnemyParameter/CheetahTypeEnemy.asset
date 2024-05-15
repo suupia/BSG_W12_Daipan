@@ -18,7 +18,7 @@ MonoBehaviour:
   hp:
     maxHp: 100
   movement:
-    speed: 0.01
+    speed: 1
   attackCoolTime:
     MaxCoolTime: 0
     MinCoolTime: 0

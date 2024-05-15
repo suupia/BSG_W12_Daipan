@@ -719,8 +719,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   commentSection: {fileID: 1604941675}
-  commentPrefab: {fileID: 6012322395250088482, guid: 6278e7f36c4524633a2cced54019d9b8, type: 3}
-  commentSpeed: 0.01
+  commentPrefab: {fileID: 6062068569337538736, guid: 6278e7f36c4524633a2cced54019d9b8, type: 3}
 --- !u!4 &375716989
 Transform:
   m_ObjectHideFlags: 0
