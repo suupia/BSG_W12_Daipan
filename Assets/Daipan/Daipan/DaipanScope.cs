@@ -36,6 +36,7 @@ public sealed class DaipanScope : LifetimeScope
         // Comment
         builder.Register<IStart, CommentSpawnPointContainer>(Lifetime.Scoped).AsSelf();
         builder.RegisterComponentInHierarchy<CommentSpawner>(); // とりあえずMonoで実装
+        builder.Register<CommentCluster>(Lifetime.Scoped);
 
 
         builder.Register<DaipanExecutor>(Lifetime.Scoped);

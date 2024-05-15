@@ -52,7 +52,7 @@ namespace Daipan.Enemy.Scripts
             _enemySpawnPoints = Object.FindObjectsByType<EnemySpawnPointMono>(FindObjectsSortMode.None);
             var enemyObject = _enemyBuilder.Build(DecideRandomSpawnPosition(), Quaternion.identity);
             IncreaseIrritatedValueByEnemy(enemyObject.EnemyParameter.GetEnemyEnum);
-            _enemyCluster.AddEnemy(enemyObject);
+            _enemyCluster.Add(enemyObject);
         }
 
         Vector3 DecideRandomSpawnPosition()

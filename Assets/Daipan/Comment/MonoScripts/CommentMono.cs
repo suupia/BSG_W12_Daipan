@@ -10,6 +10,7 @@ namespace Daipan.Comment.MonoScripts
         [SerializeField] float speed = 0.01f;
 
         CommentSpawnPointContainer _spawnPointContainer = null!;
+        CommentCluster _commentCluster = null!;
 
         void Update()
         {
@@ -18,9 +19,20 @@ namespace Daipan.Comment.MonoScripts
         }
 
         [Inject]
-        public void Initialize(CommentSpawnPointContainer spawnPointContainer)
+        public void Initialize(
+            CommentSpawnPointContainer spawnPointContainer,
+            CommentCluster commentCluster
+            )
         {
             _spawnPointContainer = spawnPointContainer;
+            _commentCluster = commentCluster;
         }
+
+        public void BlownAway()
+        {
+            _commentCluster.Remove(this);
+        }
+        
+        
     }
 }

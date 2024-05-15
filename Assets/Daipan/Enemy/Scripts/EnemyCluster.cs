@@ -12,12 +12,12 @@ namespace Daipan.Enemy.Scripts
 
         public IEnumerable<EnemyMono> EnemyMonos => _enemies;
 
-        public void AddEnemy(EnemyMono enemy)
+        public void Add(EnemyMono enemy)
         {
             _enemies.Add(enemy);
         }
 
-        public void RemoveEnemy(EnemyMono enemy)
+        public void Remove(EnemyMono enemy)
         {
             _enemies.Remove(enemy);
             Object.Destroy(enemy.gameObject);
