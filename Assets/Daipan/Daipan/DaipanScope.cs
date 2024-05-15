@@ -1,4 +1,6 @@
 #nullable enable
+using Daipan.Comment.MonoScripts;
+using Daipan.Comment.Scripts;
 using Daipan.Core.Interfaces;
 using Daipan.Daipan;
 using Daipan.Enemy.Interfaces;

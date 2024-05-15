@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace Daipan.Stream.MonoScripts
+namespace Daipan.Comment.MonoScripts
 {
     public class CommentSpawnPointMono : MonoBehaviour
     {

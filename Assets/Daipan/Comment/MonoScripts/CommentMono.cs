@@ -1,9 +1,9 @@
 #nullable enable
-using Daipan.Stream.Scripts;
+using Daipan.Comment.Scripts;
 using UnityEngine;
 using VContainer;
 
-namespace Daipan.Stream.MonoScripts
+namespace Daipan.Comment.MonoScripts
 {
     public class CommentMono : MonoBehaviour
     {

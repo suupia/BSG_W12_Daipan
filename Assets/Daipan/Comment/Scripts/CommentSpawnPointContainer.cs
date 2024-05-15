@@ -1,11 +1,11 @@
 #nullable enable
 using System.Linq;
+using Daipan.Comment.MonoScripts;
 using Daipan.Core.Interfaces;
-using Daipan.Stream.MonoScripts;
 using UnityEngine;
 using VContainer;
 
-namespace Daipan.Stream.Scripts
+namespace Daipan.Comment.Scripts
 {
     public sealed class CommentSpawnPointContainer : IStart
     {
