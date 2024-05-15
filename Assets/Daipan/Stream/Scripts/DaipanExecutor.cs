@@ -1,4 +1,6 @@
 ﻿#nullable enable
+using UnityEngine;
+
 namespace Daipan.Stream.Scripts
 {
     public class DaipanExecutor
@@ -6,25 +8,48 @@ namespace Daipan.Stream.Scripts
         readonly DaipanParameter _daipanParameter;
         readonly ViewerNumber _viewerNumber;
         readonly StreamStatus _streamStatus;
+        readonly IrritatedValue _irritatedValue;
 
         public DaipanExecutor(
             DaipanParameter daipanParameter,
             ViewerNumber viewerNumber,
-            StreamStatus streamStatus)
+            StreamStatus streamStatus,
+            IrritatedValue irritatedValue
+            )
         {
             _daipanParameter = daipanParameter;
             _viewerNumber = viewerNumber;
             _streamStatus = streamStatus;
+            _irritatedValue = irritatedValue;
         }
 
         bool IsExciting => _streamStatus.IsExcited;
 
         public void DaiPan()
         {
-            if (IsExciting)
-                _viewerNumber.IncreaseViewer(_daipanParameter.increaseNumberWhenExciting);
+            // if (IsExciting)
+            //     _viewerNumber.IncreaseViewer(_daipanParameter.increaseNumberWhenExciting);
+            // else
+            //     _viewerNumber.IncreaseViewer(_daipanParameter.increaseNumberByDaipan);
+
+            if (_irritatedValue.Value < 50)
+            {
+                // 敵、コメント欄共に何も起きない
+                Debug.Log($"Do nothing");
+            } else if (_irritatedValue.Value < 100)
+            {
+                // 通常の敵が吹き飛ぶ
+                // コメントは確率で吹き飛ぶ
+                Debug.Log($"Blow normal enemy");
+                Debug.Log($"Blow comment by probability");
+            }
             else
-                _viewerNumber.IncreaseViewer(_daipanParameter.increaseNumberByDaipan);
+            {
+                // 全ての敵が吹き飛ぶ
+                // 全てのコメントが吹き飛ぶ
+                Debug.Log($"Blow all enemy");
+                Debug.Log($"Blow all comment");
+            }
         }
     }
 }
