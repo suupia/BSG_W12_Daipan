@@ -11,20 +11,14 @@ namespace Daipan.Stream.MonoScripts
         [SerializeField] GameObject commentSection = null!; // [Prerequisite
         [SerializeField] GameObject commentPrefab = null!;
 
-        [SerializeField] float commentSpeed = 0.01f;
-        CommentSpawnPointContainer _commentSpawnPointContainer = null!;
-
         IObjectResolver _container = null!;
+        CommentSpawnPointContainer _commentSpawnPointContainer = null!;
 
 
         void Update()
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                Debug.Log(
-                    $"_commentSpawnPointConatiner._isInitialized: {_commentSpawnPointContainer._isInitialized}"); // [Prerequisite
-                Debug.Log(
-                    $"spawn position: {_commentSpawnPointContainer.SpawnPosition}, despawn position: {_commentSpawnPointContainer.DespawnPosition}");
                 _container.Instantiate(commentPrefab, _commentSpawnPointContainer.SpawnPosition, Quaternion.identity,
                     commentSection.transform);
             }
@@ -37,7 +31,6 @@ namespace Daipan.Stream.MonoScripts
         {
             _container = container;
             _commentSpawnPointContainer = commentSpawnPointContainer;
-            Debug.Log("Initialized CommentSpawner");
         }
     }
 }

@@ -9,35 +9,18 @@ namespace Daipan.Stream.Scripts
 {
     public sealed class CommentSpawnPointContainer : IStart
     {
-        public bool _isInitialized;
-        Vector3 _spawnPosition = new(1, 1, 1);
-
         [Inject]
         public CommentSpawnPointContainer()
         {
         }
 
-        public Vector3 SpawnPosition
-        {
-            get
-            {
-                Debug.Log($"Spawn position requested: {_spawnPosition}");
-                return _spawnPosition;
-            }
-            private set
-            {
-                Debug.Log($"Spawn position set to {value}");
-                _spawnPosition = value;
-            }
-        }
+        public Vector3 SpawnPosition { get; private set; }
 
         public Vector3 DespawnPosition { get; private set; }
 
         void IStart.Start()
         {
             SetSpawnPositions();
-            _isInitialized = true;
-            Debug.Log("");
         }
 
         void SetSpawnPositions()
