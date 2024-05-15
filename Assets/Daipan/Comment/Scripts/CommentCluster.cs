@@ -1,4 +1,5 @@
 #nullable enable
+using System;
 using System.Collections.Generic;
 using Daipan.Comment.MonoScripts;
 using Object = UnityEngine.Object;
@@ -27,6 +28,14 @@ namespace Daipan.Comment.Scripts
             var comments = _comments.ToArray();
             foreach (var comment in comments)
                 if (Random.value < probability)
+                    comment.BlownAway();
+        }
+
+        public void BlownAway(Func<CommentMono, bool> blowAwayCondition)
+        {
+            var comments = _comments.ToArray();
+            foreach (var comment in comments)
+                if (blowAwayCondition(comment))
                     comment.BlownAway();
         }
     }

@@ -59,7 +59,8 @@ namespace Daipan.Stream.Scripts
                 Debug.Log("Blow all comment");
 
                 _enemyCluster.BlownAway();
-                _commentCluster.BlownAway();
+                // _commentCluster.BlownAway();  // すべてを吹き飛ばす
+                _commentCluster.BlownAway(commentMono => !commentMono.IsSuperComment);  // SuperComment以外を吹き飛ばす
             }
 
             // 台パンしたら怒りゲージは0になる

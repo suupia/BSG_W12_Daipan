@@ -8,6 +8,7 @@ namespace Daipan.Comment.MonoScripts
     public class CommentMono : MonoBehaviour
     {
         [SerializeField] float speed = 0.01f;
+        public bool IsSuperComment { get; set; }
 
         CommentSpawnPointContainer _spawnPointContainer = null!;
         CommentCluster _commentCluster = null!;
@@ -33,6 +34,11 @@ namespace Daipan.Comment.MonoScripts
             _commentCluster.Remove(this);
         }
         
+        public void SetParameter(bool isSuperComment)
+        {
+            IsSuperComment = isSuperComment;
+            // GetComponent<SpriteRenderer>().color = isSuperComment ? Color.red : Color.white;
+        }
         
     }
 }

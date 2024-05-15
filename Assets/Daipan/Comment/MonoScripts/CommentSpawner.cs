@@ -24,6 +24,7 @@ namespace Daipan.Comment.MonoScripts
                 var comment = _container.Instantiate(commentPrefab, _commentSpawnPointContainer.SpawnPosition, Quaternion.identity,
                     commentSection.transform);
                 _commentCluster.Add(comment);
+                comment.IsSuperComment = false;
             }
         }
         
@@ -32,6 +33,7 @@ namespace Daipan.Comment.MonoScripts
             var comment = _container.Instantiate(superCommentPrefab, _commentSpawnPointContainer.SpawnPosition, Quaternion.identity,
                 commentSection.transform);
             _commentCluster.Add(comment);
+            comment.IsSuperComment = true;
         }
 
         [Inject]
