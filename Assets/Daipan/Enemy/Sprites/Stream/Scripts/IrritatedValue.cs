@@ -6,7 +6,7 @@ namespace Daipan.Stream.Scripts
     public class IrritatedValue
     {
         public int MaxValue { get; private set; }
-        public int Ratio => Value / MaxValue;
+        public float Ratio => (float) Value / MaxValue;
         public int Value => Mathf.Max(IncreasedValue - DecreasedValue, 0);
         int DecreasedValue { get; set; }
         int IncreasedValue { get; set; }
@@ -22,6 +22,8 @@ namespace Daipan.Stream.Scripts
             if (amount < 0) Debug.LogWarning($"IrritatedValue.IncreaseValue() amount is negative : {amount}");
             
             IncreasedValue += amount;
+            
+            Debug.Log($"IncreaseValue() IrritatedValue : {Value}");
         }
 
         public void DecreaseValue(int amount)

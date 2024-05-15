@@ -2,6 +2,7 @@
 using System;
 using Daipan.Core.Interfaces;
 using Daipan.Enemy.Interfaces;
+using Daipan.Stream.Scripts;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -14,6 +15,7 @@ namespace Daipan.Enemy.Scripts
     {
         readonly IEnemyBuilder _enemyBuilder;
         readonly EnemyCluster _enemyCluster;
+        readonly IrritatedValue _irritatedValue;
         readonly float _spawnInterval = 1.0f;
         EnemySpawnPointMono[] _enemySpawnPoints = Array.Empty<EnemySpawnPointMono>();
         float _timer;
@@ -22,10 +24,12 @@ namespace Daipan.Enemy.Scripts
         public EnemySpawner(
             IObjectResolver container,
             EnemyCluster enemyCluster,
+            IrritatedValue irritatedValue,
             IEnemyBuilder enemyBuilder)
         {
             _enemyCluster = enemyCluster;
             _enemyBuilder = enemyBuilder;
+            _irritatedValue = irritatedValue;
         }
 
         void IStart.Start()
@@ -47,6 +51,7 @@ namespace Daipan.Enemy.Scripts
         {
             _enemySpawnPoints = Object.FindObjectsByType<EnemySpawnPointMono>(FindObjectsSortMode.None);
             var enemyObject = _enemyBuilder.Build(DecideRandomSpawnPosition(), Quaternion.identity);
+            IncreaseIrritatedValueByEnemy(enemyObject.EnemyParameter.GetEnemyEnum);
             _enemyCluster.AddEnemy(enemyObject);
         }
 
@@ -60,6 +65,14 @@ namespace Daipan.Enemy.Scripts
 
             var rand = Random.Range(0, _enemySpawnPoints.Length);
             return _enemySpawnPoints[rand].transform.position;
+        }
+
+        void IncreaseIrritatedValueByEnemy(EnemyEnum enemy)
+        {
+            if (enemy == EnemyEnum.Cheetah)
+            {
+                _irritatedValue.IncreaseValue(8); // todo : parameter もらう
+            }
         }
     }
 }
