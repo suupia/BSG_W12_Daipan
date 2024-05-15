@@ -1,4 +1,5 @@
 #nullable enable
+using System;
 using Daipan.Battle.interfaces;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.Scripts;
@@ -37,11 +38,19 @@ namespace Daipan.Enemy.MonoScripts
             get => _enemyHp.CurrentHp;
         }
 
+        public event EventHandler<DiedEventArgs>? OnDied;
+
         public void BlownAway()
         {
             Debug.Log("Blown away");
             _enemyCluster.Remove(this);
-            
+        }
+
+        public void Died()
+        {
+            var args = new DiedEventArgs(EnemyParameter.GetEnemyEnum.IsBoss);
+            OnDied?.Invoke(this, args);
+            Destroy(gameObject);
         }
 
 
@@ -71,4 +80,6 @@ namespace Daipan.Enemy.MonoScripts
             // enemyOnHit.ownEnemyType = _enemyParameter.enemyType;
         }
     }
+
+    public record DiedEventArgs(bool IsBoss);
 }
