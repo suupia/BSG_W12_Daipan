@@ -41,5 +41,9 @@ namespace Daipan.Enemy.Scripts
 
             return result;
         }
+        public void EnemyDamage(int damage)
+        {
+            Debug.Log(damage);
+        }
     }
 }

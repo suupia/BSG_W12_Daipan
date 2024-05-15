@@ -16,17 +16,20 @@ public class PlayerMono : MonoBehaviour
             Debug.Log("Wが押されたよ");
             _playerAttack.WAttack(8);
             _playerAttack.Attack(0);
+            _enemyCluster.EnemyDamage(_attackParameter.WAttackAmount);
         }
 
         if (Input.GetKeyDown(KeyCode.S))
         {
             Debug.Log("Sが押されたよ");
             _playerAttack.SAttack(_attackParameter.SAttackAmount);
+            _enemyCluster.EnemyDamage(_attackParameter.SAttackAmount);
         }
 
         if (Input.GetKeyDown(KeyCode.A))
         {
             Debug.Log("Aが押されたよ");
+            _enemyCluster.EnemyDamage(_attackParameter.AAttackAmount);
 
             var enemyMono = _enemyCluster.NearestEnemy(transform.position);
             Debug.Log($"enemyMono.EnemyParameter.GetEnemyEnum: {enemyMono.EnemyParameter.GetEnemyEnum}");
