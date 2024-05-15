@@ -41,5 +41,15 @@ namespace Daipan.Enemy.Scripts
 
             return result;
         }
+
+        public void BlownAway()
+        {
+            var enemies = _enemies.ToArray();
+            foreach (var enemy in enemies)
+            {
+                enemy.BlownAway();
+                
+            }
+        }
     }
 }

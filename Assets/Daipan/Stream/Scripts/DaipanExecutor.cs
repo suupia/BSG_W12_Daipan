@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using Daipan.Enemy.Scripts;
 using UnityEngine;
 
 namespace Daipan.Stream.Scripts
@@ -9,18 +10,21 @@ namespace Daipan.Stream.Scripts
         readonly ViewerNumber _viewerNumber;
         readonly StreamStatus _streamStatus;
         readonly IrritatedValue _irritatedValue;
+        readonly EnemyCluster _enemyCluster;
 
         public DaipanExecutor(
             DaipanParameter daipanParameter,
             ViewerNumber viewerNumber,
             StreamStatus streamStatus,
-            IrritatedValue irritatedValue
+            IrritatedValue irritatedValue,
+            EnemyCluster enemyCluster
             )
         {
             _daipanParameter = daipanParameter;
             _viewerNumber = viewerNumber;
             _streamStatus = streamStatus;
             _irritatedValue = irritatedValue;
+            _enemyCluster = enemyCluster;
         }
 
         bool IsExciting => _streamStatus.IsExcited;
@@ -32,6 +36,7 @@ namespace Daipan.Stream.Scripts
             // else
             //     _viewerNumber.IncreaseViewer(_daipanParameter.increaseNumberByDaipan);
 
+            _irritatedValue.IncreaseValue(100);
             if (_irritatedValue.Value < 50)
             {
                 // 敵、コメント欄共に何も起きない
@@ -49,6 +54,8 @@ namespace Daipan.Stream.Scripts
                 // 全てのコメントが吹き飛ぶ
                 Debug.Log($"Blow all enemy");
                 Debug.Log($"Blow all comment");
+                
+                _enemyCluster.BlownAway();
             }
         }
     }

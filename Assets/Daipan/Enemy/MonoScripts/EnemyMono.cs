@@ -37,6 +37,14 @@ namespace Daipan.Enemy.MonoScripts
             get => _enemyHp.CurrentHp;
         }
 
+        public void BlownAway()
+        {
+            Debug.Log("Blown away");
+            _enemyCluster.RemoveEnemy(this);
+            Destroy(gameObject);
+            
+        }
+
 
         [Inject]
         public void Initialize(
