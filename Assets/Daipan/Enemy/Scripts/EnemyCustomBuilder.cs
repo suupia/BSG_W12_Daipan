@@ -1,5 +1,6 @@
 #nullable enable
 using System.Linq;
+using Daipan.Comment.MonoScripts;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Stream.Scripts.Utility;
@@ -15,17 +16,20 @@ namespace Daipan.Enemy.Scripts
         readonly IObjectResolver _container;
         readonly IPrefabLoader<EnemyMono> _enemyMonoLoader;
         readonly EnemyAttributeParameters _attributeParameters;
+        readonly CommentSpawner _commentSpawner;
         
         public EnemyCustomBuilder(
             IObjectResolver container,
             IPrefabLoader<EnemyMono> enemyMonoLoader,
             EnemyAttributeParameters attributeParameters,
-            EnemyEnum enemyEnum
-        )
+            EnemyEnum enemyEnum,
+            CommentSpawner commentSpawner
+            )
         {
             _container = container;
             _enemyMonoLoader = enemyMonoLoader;
             _attributeParameters = attributeParameters;
+            _commentSpawner = commentSpawner;
         }
 
         public EnemyMono Build(Vector3 position, Quaternion rotation)
@@ -35,6 +39,10 @@ namespace Daipan.Enemy.Scripts
             var enemyEnum = DecideRandomEnemyType();
             Debug.Log($"enemyEnum: {enemyEnum}");
             enemyObject.SetParameter(_attributeParameters.enemyParameters.First(x => x.GetEnemyEnum == enemyEnum));
+            enemyObject.OnDied += (sender, args) =>
+            {
+                if(args.IsBoss) _commentSpawner.SpawnSuperComment();
+            };
             return enemyObject;
         }
         

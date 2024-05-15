@@ -8,13 +8,14 @@ namespace Daipan.Comment.MonoScripts
 {
     public class CommentSpawner : MonoBehaviour
     {
-        [SerializeField] GameObject commentSection = null!; // [Prerequisite
+        [SerializeField] GameObject commentSection = null!; 
         [SerializeField] CommentMono commentPrefab = null!;
+        [SerializeField] CommentMono superCommentPrefab = null!;
 
         IObjectResolver _container = null!;
         CommentSpawnPointContainer _commentSpawnPointContainer = null!;
         CommentCluster _commentCluster = null!;
-
+        
 
         void Update()
         {
@@ -24,6 +25,13 @@ namespace Daipan.Comment.MonoScripts
                     commentSection.transform);
                 _commentCluster.Add(comment);
             }
+        }
+        
+        public void SpawnSuperComment()
+        {
+            var comment = _container.Instantiate(superCommentPrefab, _commentSpawnPointContainer.SpawnPosition, Quaternion.identity,
+                commentSection.transform);
+            _commentCluster.Add(comment);
         }
 
         [Inject]
