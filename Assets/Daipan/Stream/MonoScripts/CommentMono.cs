@@ -5,9 +5,8 @@ namespace Daipan.Stream.MonoScripts
 {
     public class CommentMono : MonoBehaviour
     {
+        [SerializeField] GameObject commentSection = null!; // [Prerequisite
         [SerializeField] GameObject commentPrefab = null!;
-        [SerializeField] GameObject commentSection = null!;
-        [SerializeField] GameObject commentSectionHead = null!;
         [SerializeField] GameObject spawnPoint = null!;
         [SerializeField] GameObject despawnPoint = null!;
 
@@ -18,7 +17,7 @@ namespace Daipan.Stream.MonoScripts
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                _commentUnit = Object.Instantiate(commentPrefab,spawnPoint.transform.position ,Quaternion.identity, commentSection.transform);
+                _commentUnit = Instantiate(commentPrefab,spawnPoint.transform.position ,Quaternion.identity, commentSection.transform);
             }
 
             if (_commentUnit != null)
@@ -27,7 +26,7 @@ namespace Daipan.Stream.MonoScripts
                 
                 if (_commentUnit.transform.position.y > despawnPoint.transform.position.y)
                 {
-                    Object.Destroy(_commentUnit);
+                    Destroy(_commentUnit);
                 }
             }
         }
