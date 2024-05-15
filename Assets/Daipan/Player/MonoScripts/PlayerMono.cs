@@ -11,29 +11,48 @@ public class PlayerMono : MonoBehaviour
 
     public void Update()
     {
+        
+        var enemyMono = _enemyCluster.NearestEnemy(transform.position);
+        
         if (Input.GetKeyDown(KeyCode.W))
         {
             Debug.Log("Wが押されたよ");
-            _playerAttack.WAttack(8);
-            _playerAttack.Attack(0);
+            if(enemyMono.EnemyParameter.GetEnemyEnum == EnemyEnum.W)
+            {
+                Debug.Log($"EnemyType: {enemyMono.EnemyParameter.GetEnemyEnum}を攻撃");
+                _playerAttack.WAttack(enemyMono);
+            }
+            else
+            {
+                Debug.Log("Wが押されたけど攻撃対象がいないよ");
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.S))
         {
             Debug.Log("Sが押されたよ");
-            _playerAttack.SAttack(_attackParameter.SAttackAmount);
+            if (enemyMono.EnemyParameter.GetEnemyEnum == EnemyEnum.S)
+            {
+                Debug.Log($"EnemyType: {enemyMono.EnemyParameter.GetEnemyEnum}を攻撃");
+                _playerAttack.SAttack(enemyMono);
+            }
+            else
+            {
+                Debug.Log("Sが押されたけど攻撃対象がいないよ");
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.A))
         {
             Debug.Log("Aが押されたよ");
-
-            var enemyMono = _enemyCluster.NearestEnemy(transform.position);
-            Debug.Log($"enemyMono.EnemyParameter.GetEnemyEnum: {enemyMono.EnemyParameter.GetEnemyEnum}");
             if (enemyMono.EnemyParameter.GetEnemyEnum == EnemyEnum.A)
             {
                 Debug.Log($"EnemyType: {enemyMono.EnemyParameter.GetEnemyEnum}を攻撃");
                 _playerAttack.AAttack(enemyMono);
+            }
+            else
+            {
+                Debug.Log("Aが押されたけど攻撃対象がいないよ");
             }
         }
     }
