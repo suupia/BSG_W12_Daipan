@@ -29,6 +29,11 @@ public sealed class DaipanScope : LifetimeScope
         builder.Register<StreamStatus>(Lifetime.Scoped);
         builder.Register<StreamSpawner>(Lifetime.Scoped);
 
+        // Comment
+        builder.RegisterEntryPoint<CommentSpawnPointContainer>(Lifetime.Scoped);
+        builder.RegisterComponentInHierarchy<CommentSpawner>(); // とりあえずMonoで実装
+
+
         builder.Register<DaipanExecutor>(Lifetime.Scoped);
 
         // Player
@@ -57,6 +62,7 @@ public sealed class DaipanScope : LifetimeScope
 
         builder.UseEntryPoints(Lifetime.Scoped, entryPoints =>
         {
+            entryPoints.Add<CommentSpawnPointContainer>();
             entryPoints.Add<PlayerSpawner>();
             entryPoints.Add<EnemySpawner>();
             entryPoints.Add<StreamSpawner>();

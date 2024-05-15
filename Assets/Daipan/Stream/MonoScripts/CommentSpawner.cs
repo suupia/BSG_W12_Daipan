@@ -1,5 +1,8 @@
 #nullable enable
+using Daipan.Stream.Scripts;
 using UnityEngine;
+using VContainer;
+using VContainer.Unity;
 
 namespace Daipan.Stream.MonoScripts
 {
@@ -7,28 +10,34 @@ namespace Daipan.Stream.MonoScripts
     {
         [SerializeField] GameObject commentSection = null!; // [Prerequisite
         [SerializeField] GameObject commentPrefab = null!;
-        [SerializeField] GameObject spawnPoint = null!;
-        [SerializeField] GameObject despawnPoint = null!;
 
-        GameObject? _commentUnit;
         [SerializeField] float commentSpeed = 0.01f;
-        
+        CommentSpawnPointContainer _commentSpawnPointContainer = null!;
+
+        IObjectResolver _container = null!;
+
+
         void Update()
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                _commentUnit = Instantiate(commentPrefab,spawnPoint.transform.position ,Quaternion.identity, commentSection.transform);
+                Debug.Log(
+                    $"_commentSpawnPointConatiner._isInitialized: {_commentSpawnPointContainer._isInitialized}"); // [Prerequisite
+                Debug.Log(
+                    $"spawn position: {_commentSpawnPointContainer.SpawnPosition}, despawn position: {_commentSpawnPointContainer.DespawnPosition}");
+                _container.Instantiate(commentPrefab, _commentSpawnPointContainer.SpawnPosition, Quaternion.identity,
+                    commentSection.transform);
             }
+        }
 
-            if (_commentUnit != null)
-            {
-                _commentUnit.transform.position += Vector3.up * commentSpeed;
-                
-                if (_commentUnit.transform.position.y > despawnPoint.transform.position.y)
-                {
-                    Destroy(_commentUnit);
-                }
-            }
+        [Inject]
+        public void Initialized(
+            IObjectResolver container,
+            CommentSpawnPointContainer commentSpawnPointContainer)
+        {
+            _container = container;
+            _commentSpawnPointContainer = commentSpawnPointContainer;
+            Debug.Log("Initialized CommentSpawner");
         }
     }
 }

@@ -16,6 +16,7 @@ namespace Daipan.Enemy.Scripts
         {
             _enemies.Add(enemy);
         }
+
         public void RemoveEnemy(EnemyMono enemy)
         {
             _enemies.Remove(enemy);
@@ -27,7 +28,7 @@ namespace Daipan.Enemy.Scripts
             if (!_enemies.Any())
             {
                 Debug.LogWarning("No enemies found");
-                return null;
+                return null!;
             }
 
             var minDistance = float.MaxValue;
@@ -45,11 +46,7 @@ namespace Daipan.Enemy.Scripts
         public void BlownAway()
         {
             var enemies = _enemies.ToArray();
-            foreach (var enemy in enemies)
-            {
-                enemy.BlownAway();
-                
-            }
+            foreach (var enemy in enemies) enemy.BlownAway();
         }
     }
 }
