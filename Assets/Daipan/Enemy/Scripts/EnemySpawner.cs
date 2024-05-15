@@ -1,11 +1,7 @@
 #nullable enable
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using Daipan.Core.Interfaces;
 using Daipan.Enemy.Interfaces;
-using Daipan.Enemy.MonoScripts;
-using Daipan.Enemy.Scripts;
-using Daipan.Stream.Scripts.Utility;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -14,13 +10,13 @@ using Random = UnityEngine.Random;
 
 namespace Daipan.Enemy.Scripts
 {
-    public class EnemySpawner : IStartable, ITickable
+    public class EnemySpawner : IStart, ITickable
     {
-        readonly EnemyCluster _enemyCluster;
         readonly IEnemyBuilder _enemyBuilder;
+        readonly EnemyCluster _enemyCluster;
+        readonly float _spawnInterval = 1.0f;
         EnemySpawnPointMono[] _enemySpawnPoints = Array.Empty<EnemySpawnPointMono>();
         float _timer;
-        readonly float _spawnInterval = 1.0f;
 
         [Inject]
         public EnemySpawner(
@@ -32,12 +28,11 @@ namespace Daipan.Enemy.Scripts
             _enemyBuilder = enemyBuilder;
         }
 
-        void IStartable.Start()
+        void IStart.Start()
         {
             // SpawnEnemy();
-            
         }
-        
+
         void ITickable.Tick()
         {
             _timer += Time.deltaTime;
@@ -62,8 +57,9 @@ namespace Daipan.Enemy.Scripts
                 Debug.LogWarning("No spawn points found");
                 return Vector3.zero;
             }
+
             var rand = Random.Range(0, _enemySpawnPoints.Length);
             return _enemySpawnPoints[rand].transform.position;
-        } 
+        }
     }
 }

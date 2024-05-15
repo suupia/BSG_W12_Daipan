@@ -51,7 +51,7 @@ public sealed class DaipanScope : LifetimeScope
         builder.Register<EnemyAttack>(Lifetime.Scoped);
         builder.Register<EnemyOnHit>(Lifetime.Scoped).As<IEnemyOnHit>();
         builder.Register<EnemySpecificBuilder>(Lifetime.Scoped).AsImplementedInterfaces().WithParameter(EnemyEnum.A);
-        builder.Register<EnemySpawner>(Lifetime.Scoped);
+        builder.Register<IStart, EnemySpawner>(Lifetime.Scoped).AsSelf();
         builder.Register<EnemyCluster>(Lifetime.Scoped);
 
 
@@ -64,11 +64,6 @@ public sealed class DaipanScope : LifetimeScope
         // Initializer
         builder.RegisterEntryPoint<DaipanInitializer>();
 
-        builder.UseEntryPoints(Lifetime.Scoped, entryPoints =>
-        {
-            // entryPoints.Add<PlayerSpawner>();
-            entryPoints.Add<EnemySpawner>();
-            // entryPoints.Add<StreamSpawner>();
-        });
+        builder.UseEntryPoints(Lifetime.Scoped, entryPoints => { entryPoints.Add<EnemySpawner>(); });
     }
 }
