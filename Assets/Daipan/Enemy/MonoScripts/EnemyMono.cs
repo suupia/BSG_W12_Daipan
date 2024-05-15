@@ -26,7 +26,7 @@ namespace Daipan.Enemy.MonoScripts
             if (Input.GetKeyDown(KeyCode.S)) EnemyOnHit.OnHit();
 
             transform.position += Vector3.left * EnemyParameter.movement.speed * Time.deltaTime;
-            if (transform.position.x < -10) Destroy(gameObject); // Destroy when out of screen
+            if (transform.position.x < -10) _enemyCluster.RemoveEnemy(this); // Destroy when out of screen
 
             hpGaugeMono.SetRatio(CurrentHp / (float)EnemyParameter.hp.maxHp);
         }

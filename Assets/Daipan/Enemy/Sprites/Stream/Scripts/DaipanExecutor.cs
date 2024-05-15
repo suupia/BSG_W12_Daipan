@@ -36,7 +36,6 @@ namespace Daipan.Stream.Scripts
             // else
             //     _viewerNumber.IncreaseViewer(_daipanParameter.increaseNumberByDaipan);
 
-            _irritatedValue.IncreaseValue(100);
             if (_irritatedValue.Value < 50)
             {
                 // 敵、コメント欄共に何も起きない

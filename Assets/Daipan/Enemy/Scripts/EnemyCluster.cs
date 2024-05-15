@@ -20,6 +20,7 @@ namespace Daipan.Enemy.Scripts
         public void RemoveEnemy(EnemyMono enemy)
         {
             _enemies.Remove(enemy);
+            Object.Destroy(enemy.gameObject);
         }
 
         public EnemyMono NearestEnemy(Vector3 position)
