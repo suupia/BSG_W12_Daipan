@@ -57,6 +57,9 @@ namespace Daipan.Stream.Scripts
                 
                 _enemyCluster.BlownAway();
             }
+            
+            // 台パンしたら怒りゲージは0になる
+            _irritatedValue.DecreaseValue(_irritatedValue.Value);
         }
     }
 }
