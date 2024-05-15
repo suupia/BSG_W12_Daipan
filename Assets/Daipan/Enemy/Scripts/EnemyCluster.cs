@@ -1,8 +1,11 @@
 #nullable enable
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Daipan.Enemy.MonoScripts;
 using UnityEngine;
+using Object = UnityEngine.Object;
+using Random = UnityEngine.Random;
 
 namespace Daipan.Enemy.Scripts
 {
@@ -44,10 +47,20 @@ namespace Daipan.Enemy.Scripts
             return result;
         }
 
-        public void BlownAway()
+        public void BlownAway(float probability = 1.0f)
         {
             var enemies = _enemies.ToArray();
-            foreach (var enemy in enemies) enemy.BlownAway();
+            foreach (var enemy in enemies)
+                if (Random.value < probability)
+                    Remove(enemy);
+        }
+
+        public void BlownAway(Func<EnemyEnum, bool> blowAwayCondition)
+        {
+            var enemies = _enemies.ToArray();
+            foreach (var enemy in enemies)
+                if (blowAwayCondition(enemy.EnemyParameter.GetEnemyEnum))
+                    Remove(enemy);
         }
     }
 }

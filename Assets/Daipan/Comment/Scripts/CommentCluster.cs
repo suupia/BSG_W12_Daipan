@@ -1,7 +1,8 @@
 #nullable enable
-using UnityEngine;
 using System.Collections.Generic;
 using Daipan.Comment.MonoScripts;
+using Object = UnityEngine.Object;
+using Random = UnityEngine.Random;
 
 namespace Daipan.Comment.Scripts
 {
@@ -14,6 +15,7 @@ namespace Daipan.Comment.Scripts
         {
             _comments.Add(comment);
         }
+
         public void Remove(CommentMono comment)
         {
             _comments.Remove(comment);
@@ -24,9 +26,8 @@ namespace Daipan.Comment.Scripts
         {
             var comments = _comments.ToArray();
             foreach (var comment in comments)
-            {
-                if (Random.value < probability) comment.BlownAway();
-            }
+                if (Random.value < probability)
+                    comment.BlownAway();
         }
     }
 }
