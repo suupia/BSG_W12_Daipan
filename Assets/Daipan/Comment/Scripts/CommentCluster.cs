@@ -20,10 +20,13 @@ namespace Daipan.Comment.Scripts
             Object.Destroy(comment.gameObject);
         }
 
-        public void BlownAway()
+        public void BlownAway(float probability = 1.0f)
         {
             var comments = _comments.ToArray();
-            foreach (var comment in comments) comment.BlownAway();
+            foreach (var comment in comments)
+            {
+                if (Random.value < probability) comment.BlownAway();
+            }
         }
     }
 }

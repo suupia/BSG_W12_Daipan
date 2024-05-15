@@ -15,7 +15,7 @@ namespace Daipan.Comment.MonoScripts
         void Update()
         {
             transform.position += Vector3.up * speed;
-            if (transform.position.y > _spawnPointContainer.DespawnPosition.y) Destroy(gameObject);
+            if (transform.position.y > _spawnPointContainer.DespawnPosition.y) _commentCluster.Remove(this);
         }
 
         [Inject]

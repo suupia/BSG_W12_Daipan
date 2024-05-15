@@ -50,6 +50,8 @@ namespace Daipan.Stream.Scripts
                 // コメントは確率で吹き飛ぶ
                 Debug.Log($"Blow normal enemy");
                 Debug.Log($"Blow comment by probability");
+                float blowAwayProbability = 0.5f;
+                _commentCluster.BlownAway(blowAwayProbability); 
             }
             else
             {

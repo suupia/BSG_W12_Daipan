@@ -41,7 +41,6 @@ namespace Daipan.Enemy.MonoScripts
         {
             Debug.Log("Blown away");
             _enemyCluster.Remove(this);
-            Destroy(gameObject);
             
         }
 
