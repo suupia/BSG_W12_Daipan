@@ -33,6 +33,7 @@ namespace Daipan.Enemy.Scripts
         {
             var enemyMonoPrefab = _enemyMonoLoader.Load();
             var enemyObject = _container.Instantiate(enemyMonoPrefab, position, rotation);
+            Debug.Log($"_enemyEnum: {_enemyEnum}");
             enemyObject.SetParameter(_attributeParameters.enemyParameters.First(x => x.GetEnemyEnum == _enemyEnum));
             return enemyObject;
         }

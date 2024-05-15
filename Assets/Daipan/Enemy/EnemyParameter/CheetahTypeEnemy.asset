@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: CheetahTypeEnemy
   m_EditorClassIdentifier: 
   enemyType: 4
-  attackParameter:
-    AttackAmount: 0
-  hpParameter:
-    HPAmount: 0
-  movementParameter:
-    MovementAmount: 10
+  attack:
+    attackAmount: 0
+  hp:
+    maxHp: 100
+  movement:
+    speed: 0.01
   attackCoolTime:
     MaxCoolTime: 0
     MinCoolTime: 0
-  sprite: {fileID: 21300000, guid: beb0c28c153bb764bba3062060553f3e, type: 3}
+  sprite: {fileID: 21300000, guid: c329e779f94ad40a3b6c6d7848b3de3d, type: 3}
