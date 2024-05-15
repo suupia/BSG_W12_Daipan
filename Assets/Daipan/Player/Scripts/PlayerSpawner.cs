@@ -1,10 +1,11 @@
-﻿using Daipan.Stream.Scripts.Utility;
+﻿using Daipan.Core.Interfaces;
+using Daipan.Stream.Scripts.Utility;
 using VContainer;
 using VContainer.Unity;
 
 namespace Daipan.Stream.Scripts
 {
-    public sealed class PlayerSpawner : IStartable
+    public sealed class PlayerSpawner : IStart
     {
         readonly IObjectResolver _container;
         readonly IPrefabLoader<PlayerMono> _playerMonoLoader;
@@ -18,7 +19,7 @@ namespace Daipan.Stream.Scripts
             _playerMonoLoader = playerMonoLoader;
         }
 
-        void IStartable.Start()
+        void IStart.Start()
         {
             // PlayerMonoのプレハブをロードして生成 
             var playerMonoPrefab = _playerMonoLoader.Load();

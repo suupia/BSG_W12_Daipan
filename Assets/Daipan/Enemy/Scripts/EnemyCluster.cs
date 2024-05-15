@@ -1,8 +1,11 @@
 #nullable enable
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Daipan.Enemy.MonoScripts;
 using UnityEngine;
+using Object = UnityEngine.Object;
+using Random = UnityEngine.Random;
 
 namespace Daipan.Enemy.Scripts
 {
@@ -12,13 +15,15 @@ namespace Daipan.Enemy.Scripts
 
         public IEnumerable<EnemyMono> EnemyMonos => _enemies;
 
-        public void AddEnemy(EnemyMono enemy)
+        public void Add(EnemyMono enemy)
         {
             _enemies.Add(enemy);
         }
-        public void RemoveEnemy(EnemyMono enemy)
+
+        public void Remove(EnemyMono enemy)
         {
             _enemies.Remove(enemy);
+            Object.Destroy(enemy.gameObject);
         }
 
         public EnemyMono NearestEnemy(Vector3 position)
@@ -27,7 +32,7 @@ namespace Daipan.Enemy.Scripts
             if (!_enemies.Any())
             {
                 Debug.LogWarning("No enemies found");
-                return null;
+                return null!;
             }
 
             var minDistance = float.MaxValue;
@@ -41,9 +46,21 @@ namespace Daipan.Enemy.Scripts
 
             return result;
         }
-        public void EnemyDamage(int damage)
+
+        public void BlownAway(float probability = 1.0f)
         {
-            Debug.Log(damage);
+            var enemies = _enemies.ToArray();
+            foreach (var enemy in enemies)
+                if (Random.value < probability)
+                    Remove(enemy);
+        }
+
+        public void BlownAway(Func<EnemyEnum, bool> blowAwayCondition)
+        {
+            var enemies = _enemies.ToArray();
+            foreach (var enemy in enemies)
+                if (blowAwayCondition(enemy.EnemyParameter.GetEnemyEnum))
+                    Remove(enemy);
         }
     }
 }

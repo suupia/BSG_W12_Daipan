@@ -27,8 +27,7 @@ namespace Daipan.Enemy.Scripts
                 Debug.Log($"Enemy CurrentHp : {_currentHp}");
                 if (_currentHp <= 0)
                 {
-                    _enemyCluster.RemoveEnemy(_enemyMono);
-                    Object.Destroy(_enemyMono.gameObject);
+                    _enemyCluster.Remove(_enemyMono);
                 }
             }
         }

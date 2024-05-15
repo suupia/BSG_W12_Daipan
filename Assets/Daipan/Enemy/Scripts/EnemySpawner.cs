@@ -1,11 +1,8 @@
 #nullable enable
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using Daipan.Core.Interfaces;
 using Daipan.Enemy.Interfaces;
-using Daipan.Enemy.MonoScripts;
-using Daipan.Enemy.Scripts;
-using Daipan.Stream.Scripts.Utility;
+using Daipan.Stream.Scripts;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -14,30 +11,32 @@ using Random = UnityEngine.Random;
 
 namespace Daipan.Enemy.Scripts
 {
-    public class EnemySpawner : IStartable, ITickable
+    public class EnemySpawner : IStart, ITickable
     {
-        readonly EnemyCluster _enemyCluster;
         readonly IEnemyBuilder _enemyBuilder;
+        readonly EnemyCluster _enemyCluster;
+        readonly IrritatedValue _irritatedValue;
+        readonly float _spawnInterval = 1.0f;
         EnemySpawnPointMono[] _enemySpawnPoints = Array.Empty<EnemySpawnPointMono>();
         float _timer;
-        readonly float _spawnInterval = 1.0f;
 
         [Inject]
         public EnemySpawner(
             IObjectResolver container,
             EnemyCluster enemyCluster,
+            IrritatedValue irritatedValue,
             IEnemyBuilder enemyBuilder)
         {
             _enemyCluster = enemyCluster;
             _enemyBuilder = enemyBuilder;
+            _irritatedValue = irritatedValue;
         }
 
-        void IStartable.Start()
+        void IStart.Start()
         {
             // SpawnEnemy();
-            
         }
-        
+
         void ITickable.Tick()
         {
             _timer += Time.deltaTime;
@@ -52,7 +51,8 @@ namespace Daipan.Enemy.Scripts
         {
             _enemySpawnPoints = Object.FindObjectsByType<EnemySpawnPointMono>(FindObjectsSortMode.None);
             var enemyObject = _enemyBuilder.Build(DecideRandomSpawnPosition(), Quaternion.identity);
-            _enemyCluster.AddEnemy(enemyObject);
+            IncreaseIrritatedValueByEnemy(enemyObject.EnemyParameter.GetEnemyEnum);
+            _enemyCluster.Add(enemyObject);
         }
 
         Vector3 DecideRandomSpawnPosition()
@@ -62,8 +62,17 @@ namespace Daipan.Enemy.Scripts
                 Debug.LogWarning("No spawn points found");
                 return Vector3.zero;
             }
+
             var rand = Random.Range(0, _enemySpawnPoints.Length);
             return _enemySpawnPoints[rand].transform.position;
-        } 
+        }
+
+        void IncreaseIrritatedValueByEnemy(EnemyEnum enemy)
+        {
+            if (enemy == EnemyEnum.Cheetah)
+            {
+                _irritatedValue.IncreaseValue(8); // todo : parameter もらう
+            }
+        }
     }
 }
