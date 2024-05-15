@@ -1,4 +1,4 @@
-﻿#nullable enable
+#nullable enable
 using System.Linq;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.MonoScripts;
@@ -9,15 +9,14 @@ using VContainer.Unity;
 
 namespace Daipan.Enemy.Scripts
 {
-    // 特定のenemyのみを生成する
-    public sealed class EnemySpecificBuilder : IEnemyBuilder
+    // デバッグように好き勝手いじるBuilder
+    public sealed class EnemyCustomBuilder : IEnemyBuilder
     {
         readonly IObjectResolver _container;
         readonly IPrefabLoader<EnemyMono> _enemyMonoLoader;
         readonly EnemyAttributeParameters _attributeParameters;
-        readonly EnemyEnum _enemyEnum;
         
-        public EnemySpecificBuilder(
+        public EnemyCustomBuilder(
             IObjectResolver container,
             IPrefabLoader<EnemyMono> enemyMonoLoader,
             EnemyAttributeParameters attributeParameters,
@@ -27,16 +26,23 @@ namespace Daipan.Enemy.Scripts
             _container = container;
             _enemyMonoLoader = enemyMonoLoader;
             _attributeParameters = attributeParameters;
-            _enemyEnum = enemyEnum;
         }
 
         public EnemyMono Build(Vector3 position, Quaternion rotation)
         {
             var enemyMonoPrefab = _enemyMonoLoader.Load();
             var enemyObject = _container.Instantiate(enemyMonoPrefab, position, rotation);
-            Debug.Log($"_enemyEnum: {_enemyEnum}");
-            enemyObject.SetParameter(_attributeParameters.enemyParameters.First(x => x.GetEnemyEnum == _enemyEnum));
+            var enemyEnum = DecideRandomEnemyType();
+            Debug.Log($"enemyEnum: {enemyEnum}");
+            enemyObject.SetParameter(_attributeParameters.enemyParameters.First(x => x.GetEnemyEnum == enemyEnum));
             return enemyObject;
+        }
+        
+        EnemyEnum DecideRandomEnemyType()
+        {
+            var rand = Random.value;
+            if(rand < 0.5f) return EnemyEnum.A;
+            else return EnemyEnum.Cheetah;
         }
 
     }

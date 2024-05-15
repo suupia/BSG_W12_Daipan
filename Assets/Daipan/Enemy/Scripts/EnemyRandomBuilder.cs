@@ -9,6 +9,7 @@ using VContainer.Unity;
 
 namespace Daipan.Enemy.Scripts
 {
+    // 本番環境で使うことを想定
     public sealed class EnemyRandomBuilder : IEnemyBuilder
     {
         readonly IObjectResolver _container;
