@@ -1,13 +1,13 @@
 #nullable enable
 using System.Linq;
+using Daipan.Core.Interfaces;
 using Daipan.Stream.MonoScripts;
 using UnityEngine;
 using VContainer;
-using VContainer.Unity;
 
 namespace Daipan.Stream.Scripts
 {
-    public sealed class CommentSpawnPointContainer : IStartable, ITickable
+    public sealed class CommentSpawnPointContainer : IStart
     {
         public bool _isInitialized;
         Vector3 _spawnPosition = new(1, 1, 1);
@@ -15,7 +15,6 @@ namespace Daipan.Stream.Scripts
         [Inject]
         public CommentSpawnPointContainer()
         {
-            
         }
 
         public Vector3 SpawnPosition
@@ -34,18 +33,12 @@ namespace Daipan.Stream.Scripts
 
         public Vector3 DespawnPosition { get; private set; }
 
-        void IStartable.Start()
+        void IStart.Start()
         {
             SetSpawnPositions();
             _isInitialized = true;
             Debug.Log("");
         }
-
-        void ITickable.Tick()
-        {
-            Debug.Log($"Tick Spawn position: {_spawnPosition}");
-        }
-
 
         void SetSpawnPositions()
         {
