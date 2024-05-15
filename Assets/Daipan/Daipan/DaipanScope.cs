@@ -29,7 +29,7 @@ public sealed class DaipanScope : LifetimeScope
         builder.Register<IrritatedValue>(Lifetime.Scoped).WithParameter(100);
         builder.Register<ViewerNumber>(Lifetime.Scoped);
         builder.Register<StreamStatus>(Lifetime.Scoped);
-        builder.Register<StreamSpawner>(Lifetime.Scoped);
+        builder.Register<IStart, StreamSpawner>(Lifetime.Scoped).AsSelf();
 
         // Comment
         builder.Register<IStart, CommentSpawnPointContainer>(Lifetime.Scoped).AsSelf();
@@ -42,7 +42,7 @@ public sealed class DaipanScope : LifetimeScope
         builder.RegisterInstance(playerParameter.attackParameter);
         builder.Register<PlayerPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<PlayerMono>>();
         builder.Register<PlayerAttack>(Lifetime.Scoped);
-        builder.Register<PlayerSpawner>(Lifetime.Scoped);
+        builder.Register<IStart, PlayerSpawner>(Lifetime.Scoped);
 
         // Enemy
         builder.RegisterInstance(enemyAttributeParameters);
@@ -66,9 +66,9 @@ public sealed class DaipanScope : LifetimeScope
 
         builder.UseEntryPoints(Lifetime.Scoped, entryPoints =>
         {
-            entryPoints.Add<PlayerSpawner>();
+            // entryPoints.Add<PlayerSpawner>();
             entryPoints.Add<EnemySpawner>();
-            entryPoints.Add<StreamSpawner>();
+            // entryPoints.Add<StreamSpawner>();
         });
     }
 }
