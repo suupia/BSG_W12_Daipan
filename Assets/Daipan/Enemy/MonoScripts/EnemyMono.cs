@@ -40,19 +40,6 @@ namespace Daipan.Enemy.MonoScripts
 
         public event EventHandler<DiedEventArgs>? OnDied;
 
-        public void BlownAway()
-        {
-            Debug.Log("Blown away");
-            _enemyCluster.Remove(this);
-        }
-
-        public void Died()
-        {
-            var args = new DiedEventArgs(EnemyParameter.GetEnemyEnum.IsBoss);
-            OnDied?.Invoke(this, args);
-            Destroy(gameObject);
-        }
-
 
         [Inject]
         public void Initialize(
@@ -64,6 +51,20 @@ namespace Daipan.Enemy.MonoScripts
             _enemyAttack = enemyAttack;
             EnemyOnHit = enemyOnHit;
             _enemyCluster = enemyCluster;
+        }
+
+        public void Died()
+        {
+            var args = new DiedEventArgs(EnemyParameter.GetEnemyEnum.IsBoss);
+            OnDied?.Invoke(this, args);
+            Destroy(gameObject);
+        }
+
+
+        public void BlownAway()
+        {
+            Debug.Log("Blown away");
+            _enemyCluster.Remove(this);
         }
 
         public void SetParameter(EnemyParameter enemyParameter)

@@ -20,7 +20,7 @@ namespace Daipan.Comment.Scripts
         public void Remove(CommentMono comment)
         {
             _comments.Remove(comment);
-            Object.Destroy(comment.gameObject);
+            comment.Despawn();
         }
 
         public void BlownAway(float probability = 1.0f)
