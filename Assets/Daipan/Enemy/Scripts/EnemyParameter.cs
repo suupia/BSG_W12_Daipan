@@ -30,7 +30,7 @@ namespace Daipan.Enemy.Scripts
         public float MinCoolTime;
     }
 
-    [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/EnemyParameter", order = 1)]
+    [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/Enemy/Parameter", order = 1)]
     public sealed class EnemyParameter : ScriptableObject
     {
         [SerializeField] EnemyType enemyType = EnemyType.None;
