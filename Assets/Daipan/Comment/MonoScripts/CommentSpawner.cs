@@ -11,11 +11,10 @@ namespace Daipan.Comment.MonoScripts
     public class CommentSpawner : MonoBehaviour
     {
         [SerializeField] GameObject commentSection = null!; 
-        // [SerializeField] CommentMono commentPrefab = null!;
         [SerializeField] CommentMono superCommentPrefab = null!;
 
         IObjectResolver _container = null!;
-        IPrefabLoader<CommentMono> _loader;
+        IPrefabLoader<CommentMono> _loader = null!;
         CommentSpawnPointContainer _commentSpawnPointContainer = null!;
         CommentCluster _commentCluster = null!;
         
