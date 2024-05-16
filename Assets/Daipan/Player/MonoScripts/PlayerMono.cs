@@ -7,7 +7,7 @@ using VContainer;
 
 public class PlayerMono : MonoBehaviour , IHpSetter
 {
-    public PlayerParameter Parameter { get; private set;}
+    public PlayerParameter Parameter { get; private set; } = null!;
     EnemyCluster _enemyCluster = null!;
     PlayerAttack _playerAttack = null!;
     PlayerHp _playerHp = null!;
