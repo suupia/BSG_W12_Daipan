@@ -7,7 +7,7 @@ using VContainer;
 
 public class PlayerMono : MonoBehaviour , IHpSetter
 {
-    PlayerAttackParameter _attackParameter = null!;
+    public PlayerParameter Parameter { get; private set;}
     EnemyCluster _enemyCluster = null!;
     PlayerAttack _playerAttack = null!;
     PlayerHp _playerHp = null!;
@@ -69,13 +69,12 @@ public class PlayerMono : MonoBehaviour , IHpSetter
     public void Initialize(
         PlayerAttack playerAttack,
         EnemyCluster enemyCluster,
-        PlayerAttackParameter attackParameter,
-        PlayerHp playerHp
+        PlayerParameter playerParameter
     )
     {
         _playerAttack = playerAttack;
         _enemyCluster = enemyCluster;
-        _attackParameter = attackParameter;
-        _playerHp = playerHp;
+        Parameter = playerParameter;
+        _playerHp = new PlayerHp(playerParameter.hp.maxHp, this);
     }
 }

@@ -15,7 +15,7 @@ public class PlayerTestScope : LifetimeScope
     protected override void Configure(IContainerBuilder builder)
     {
         // ScriptableObjectのPlayerParameterを登録
-        builder.RegisterInstance(playerParameter.attackParameter);
+        builder.RegisterInstance(playerParameter.attack);
 
         // Playerのプレハブをロードするクラスを登録
         builder.Register<PlayerPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<PlayerMono>>();

@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5825f4c09a74db880f524fe3043dde9, type: 3}
   m_Name: PlayerParameter
   m_EditorClassIdentifier: 
-  attackParameter:
-    AttackAmount: 30
-    SAttackAmount: 0
+  attack:
+    AttackAmount: 0
+    SAttackAmount: 10
+    WAttackAmount: 20
+    AAttackAmount: 30
+  hp:
+    maxHp: 100
