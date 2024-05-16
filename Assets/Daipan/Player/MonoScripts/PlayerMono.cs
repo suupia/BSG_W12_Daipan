@@ -1,13 +1,22 @@
+#nullable enable
+using Daipan.Battle.interfaces;
 using Daipan.Enemy.Scripts;
 using Daipan.Player.Scripts;
 using UnityEngine;
 using VContainer;
 
-public class PlayerMono : MonoBehaviour
+public class PlayerMono : MonoBehaviour , IHpSetter
 {
-    PlayerAttackParameter _attackParameter;
-    EnemyCluster _enemyCluster;
-    PlayerAttack _playerAttack;
+    PlayerAttackParameter _attackParameter = null!;
+    EnemyCluster _enemyCluster = null!;
+    PlayerAttack _playerAttack = null!;
+    PlayerHp _playerHp = null!;
+    
+    public int CurrentHp
+    {
+        set => _playerHp.CurrentHp = value;
+        get => _playerHp.CurrentHp;
+    }
 
     public void Update()
     {
@@ -60,11 +69,13 @@ public class PlayerMono : MonoBehaviour
     public void Initialize(
         PlayerAttack playerAttack,
         EnemyCluster enemyCluster,
-        PlayerAttackParameter attackParameter
+        PlayerAttackParameter attackParameter,
+        PlayerHp playerHp
     )
     {
         _playerAttack = playerAttack;
         _enemyCluster = enemyCluster;
         _attackParameter = attackParameter;
+        _playerHp = playerHp;
     }
 }
