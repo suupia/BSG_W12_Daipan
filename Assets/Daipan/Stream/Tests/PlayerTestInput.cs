@@ -3,9 +3,9 @@ using Daipan.Stream.Scripts;
 using UnityEngine;
 using VContainer;
 
-namespace Daipan.Stream.Scripts.Viewer.Tests
+namespace Daipan.Stream.Tests
 {
-    public class PlayerTestInput : MonoBehaviour
+    public sealed class PlayerTestInput : MonoBehaviour
     {
         [SerializeField] CustomButton isExcitedButton = null!;
         [SerializeField] CustomButton isIrritatedButton = null!;

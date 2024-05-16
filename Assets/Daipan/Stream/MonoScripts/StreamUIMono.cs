@@ -1,12 +1,11 @@
 ﻿#nullable enable
-using Daipan.Stream.Scripts;
 using TMPro;
 using UnityEngine;
 using VContainer;
 
 namespace Daipan.Stream.Scripts.Viewer.MonoScripts
 {
-    public class StreamUIMono : MonoBehaviour
+    public sealed class StreamUIMono : MonoBehaviour
     {
         [SerializeField] TextMeshProUGUI viewerNumberText = null!;
         [SerializeField] TextMeshProUGUI isExcitingText = null!;

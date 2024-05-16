@@ -22,7 +22,7 @@ namespace Daipan.Enemy.Scripts
                 W,
                 A,
                 S,
-                Cheetah
+                Cheetah,
             };
         }
 

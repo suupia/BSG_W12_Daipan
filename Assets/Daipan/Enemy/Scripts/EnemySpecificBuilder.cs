@@ -33,10 +33,11 @@ namespace Daipan.Enemy.Scripts
         public EnemyMono Build(Vector3 position, Quaternion rotation)
         {
             var enemyMonoPrefab = _enemyMonoLoader.Load();
-            var enemyObject = _container.Instantiate(enemyMonoPrefab, position, rotation);
+            var enemyMono = _container.Instantiate(enemyMonoPrefab, position, rotation);
             Debug.Log($"_enemyEnum: {_enemyEnum}");
-            enemyObject.SetParameter(_attributeParameters.enemyParameters.First(x => x.GetEnemyEnum == _enemyEnum));
-            return enemyObject;
+            enemyMono.SetDomain(new EnemyAttack(enemyMono));
+            enemyMono.SetParameter(_attributeParameters.enemyParameters.First(x => x.GetEnemyEnum == _enemyEnum));
+            return enemyMono;
         }
 
     }

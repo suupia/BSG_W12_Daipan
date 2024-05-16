@@ -1,8 +1,9 @@
 #nullable enable
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-namespace Daipan.Stream.Scripts
+namespace Daipan.Player.Scripts
 {
     [Serializable]
     public sealed class PlayerAttackParameter
@@ -12,11 +13,18 @@ namespace Daipan.Stream.Scripts
         public int WAttackAmount = 20;
         public int AAttackAmount = 30;
     }
-    
+
+    [Serializable]
+    public sealed class PlayerHpParameter
+    {
+        public int maxHp;
+    }
+
 
     [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/PlayerParameter", order = 1)]
     public sealed class PlayerParameter : ScriptableObject
     {
-        [SerializeField] public PlayerAttackParameter attackParameter = null!;
+        [SerializeField] public PlayerAttackParameter attack = null!;
+        [SerializeField] public PlayerHpParameter hp = null!;
     }
 }

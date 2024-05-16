@@ -1,12 +1,10 @@
-using Daipan.Enemy.Interfaces;
-using Daipan.Enemy.Scripts;
-using Enemy;
 #nullable enable
+using Daipan.Enemy.Interfaces;
 using UnityEngine;
 
-namespace Enemy
+namespace Daipan.Enemy.Scripts
 {
-    public class EnemyOnHit : IEnemyOnHit
+    public sealed class EnemyOnHit : IEnemyOnHit
     {
         public void OnHit()
         {

@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawnPointMono : MonoBehaviour
+public sealed class EnemySpawnPointMono : MonoBehaviour
 {
 }

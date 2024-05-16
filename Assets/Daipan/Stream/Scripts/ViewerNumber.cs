@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Daipan.Stream.Scripts
 {
-    public class ViewerNumber
+    public sealed class ViewerNumber
     {
         public float Ratio => (float)Number / MaxNumber;
         public int Number => Mathf.Max(IncreasedNumber - DecreasedNumber, 0);

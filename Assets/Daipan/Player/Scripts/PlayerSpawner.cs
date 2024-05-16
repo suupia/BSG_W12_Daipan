@@ -1,22 +1,27 @@
-﻿using Daipan.Core.Interfaces;
+﻿#nullable enable
+using Daipan.Core.Interfaces;
 using Daipan.Stream.Scripts.Utility;
+using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace Daipan.Stream.Scripts
+namespace Daipan.Player.Scripts
 {
     public sealed class PlayerSpawner : IStart
     {
         readonly IObjectResolver _container;
         readonly IPrefabLoader<PlayerMono> _playerMonoLoader;
+        readonly PlayerHolder _playerHolder;
 
         [Inject]
         public PlayerSpawner(
             IObjectResolver container,
-            IPrefabLoader<PlayerMono> playerMonoLoader)
+            IPrefabLoader<PlayerMono> playerMonoLoader,
+            PlayerHolder playerHolder)
         {
             _container = container;
             _playerMonoLoader = playerMonoLoader;
+            _playerHolder = playerHolder;
         }
 
         void IStart.Start()
@@ -24,8 +29,9 @@ namespace Daipan.Stream.Scripts
             // PlayerMonoのプレハブをロードして生成 
             var playerMonoPrefab = _playerMonoLoader.Load();
             // IObjectResolverを使ってPlayerMonoを生成すると依存関係が解決される
-            var position = new UnityEngine.Vector3(-10, 0, 0); // 左
-            var playerMono = _container.Instantiate(playerMonoPrefab,position, UnityEngine.Quaternion.identity);
+            var position = new Vector3(-8, 0, 0); // 左
+            var playerMono = _container.Instantiate(playerMonoPrefab, position, Quaternion.identity);
+            _playerHolder.PlayerMono = playerMono;
         }
     }
 }
