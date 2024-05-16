@@ -47,20 +47,12 @@ namespace Daipan.Comment.MonoScripts
             comment.SetParameter(parameter);
             comment.OnDespawn += (sender, args) =>
             {
-                if (args.IsSuperComment) _viewerNumber.IncreaseViewer(30);
+                if (args.CommentEnum == CommentEnum.Super) _viewerNumber.IncreaseViewer(30);
+                if (args.CommentEnum == CommentEnum.Spiky) _viewerNumber.DecreaseViewer(10);
             };
             _commentCluster.Add(comment);
         }
-        public void SpawnSuperComment()
-        {
-            var commentPrefab = _loader.Load();
-            var comment = _container.Instantiate(superCommentPrefab, _commentSpawnPointContainer.SpawnPosition,
-                Quaternion.identity,
-                commentSection.transform);
-            comment.SetParameter(_attributeParameters.CommentParameters.First(c => c.GetCommentEnum == CommentEnum.Super));
-            comment.OnDespawn += (sender, args) => { _viewerNumber.IncreaseViewer(30); };
-            _commentCluster.Add(comment);
-        }
+        
 
         [Inject]
         public void Initialized(

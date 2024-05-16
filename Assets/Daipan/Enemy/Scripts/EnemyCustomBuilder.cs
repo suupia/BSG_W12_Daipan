@@ -1,6 +1,7 @@
 #nullable enable
 using System.Linq;
 using Daipan.Comment.MonoScripts;
+using Daipan.Comment.Scripts;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Stream.Scripts.Utility;
@@ -42,7 +43,7 @@ namespace Daipan.Enemy.Scripts
             enemyMono.SetParameter(_attributeParameters.enemyParameters.First(x => x.GetEnemyEnum == enemyEnum));
             enemyMono.OnDied += (sender, args) =>
             {
-                if(args.IsBoss) _commentSpawner.SpawnSuperComment();
+                if(args.IsBoss) _commentSpawner.SpawnComment(CommentEnum.Super);
             };
             return enemyMono;
         }

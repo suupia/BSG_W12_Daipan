@@ -42,7 +42,7 @@ namespace Daipan.Comment.MonoScripts
 
         public void Despawn()
         {
-            var args = new DespawnEventArgs(Parameter.GetCommentEnum == CommentEnum.Super);
+            var args = new DespawnEventArgs(Parameter.GetCommentEnum);
             OnDespawn?.Invoke(this, args);
             Destroy(gameObject);
         }
@@ -53,5 +53,5 @@ namespace Daipan.Comment.MonoScripts
         }
     }
 
-    public record DespawnEventArgs(bool IsSuperComment);
+        public record DespawnEventArgs(CommentEnum CommentEnum);
 }
