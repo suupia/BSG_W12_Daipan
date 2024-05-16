@@ -25,16 +25,7 @@ namespace Daipan.Comment.MonoScripts
 
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                var commentPrefab = _loader.Load();
-                var comment = _container.Instantiate(commentPrefab, _commentSpawnPointContainer.SpawnPosition,
-                    Quaternion.identity,
-                    commentSection.transform);
-                _commentCluster.Add(comment);
-                comment.SetParameter(
-                    _attributeParameters.CommentParameters.First(c => c.GetCommentEnum == CommentEnum.Normal));
-            }
+            if (Input.GetKeyDown(KeyCode.Space)) SpawnComment(CommentEnum.Normal);
         }
 
         [Inject]
@@ -52,14 +43,14 @@ namespace Daipan.Comment.MonoScripts
             var commentPrefab = _loader.Load();
             var comment = _container.Instantiate(commentPrefab, _commentSpawnPointContainer.SpawnPosition,
                 Quaternion.identity, commentSection.transform);
-            comment.SetParameter(_attributeParameters.CommentParameters.First(c => c.GetCommentEnum == commentEnum));
+            var parameter = _attributeParameters.CommentParameters.First(c => c.GetCommentEnum == commentEnum);
+            comment.SetParameter(parameter);
             comment.OnDespawn += (sender, args) =>
             {
-                if(args.IsSuperComment) _viewerNumber.IncreaseViewer(30);
+                if (args.IsSuperComment) _viewerNumber.IncreaseViewer(30);
             };
             _commentCluster.Add(comment);
         }
-
         public void SpawnSuperComment()
         {
             var commentPrefab = _loader.Load();

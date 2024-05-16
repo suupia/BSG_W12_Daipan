@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: SpikyComment
   m_EditorClassIdentifier: 
   commentType: 3
-  sprite: {fileID: 21300000, guid: c329e779f94ad40a3b6c6d7848b3de3d, type: 3}
+  sprite: {fileID: 21300000, guid: 099318b04e800a64aa175e442617f52c, type: 3}

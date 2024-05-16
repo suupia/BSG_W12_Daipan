@@ -1,23 +1,18 @@
 #nullable enable
 using Daipan.Battle.interfaces;
 using Daipan.Comment.MonoScripts;
+using Daipan.Comment.Scripts;
 using Daipan.Enemy.Scripts;
 using Daipan.Player.Scripts;
 using UnityEngine;
 using VContainer;
 
-public class PlayerMono : MonoBehaviour , IHpSetter
+public class PlayerMono : MonoBehaviour, IHpSetter
 {
-    public PlayerParameter Parameter { get; private set; } = null!;
     EnemyCluster _enemyCluster = null!;
     PlayerAttack _playerAttack = null!;
     PlayerHp _playerHp = null!;
-    
-    public int CurrentHp
-    {
-        set => _playerHp.CurrentHp = value;
-        get => _playerHp.CurrentHp;
-    }
+    public PlayerParameter Parameter { get; private set; } = null!;
 
     public void Update()
     {
@@ -66,6 +61,12 @@ public class PlayerMono : MonoBehaviour , IHpSetter
         }
     }
 
+    public int CurrentHp
+    {
+        set => _playerHp.CurrentHp = value;
+        get => _playerHp.CurrentHp;
+    }
+
     [Inject]
     public void Initialize(
         PlayerAttack playerAttack,
@@ -77,7 +78,7 @@ public class PlayerMono : MonoBehaviour , IHpSetter
         _playerAttack = playerAttack;
         _enemyCluster = enemyCluster;
         Parameter = playerParameter;
-        _playerHp = new PlayerHp(playerParameter.hp.maxHp, this );
-        _playerHp.OnDamage += (sender, args) => { commentSpawner.SpawnSuperComment(); };
+        _playerHp = new PlayerHp(playerParameter.hp.maxHp, this);
+        _playerHp.OnDamage += (sender, args) => { commentSpawner.SpawnComment(CommentEnum.Spiky); };
     }
 }
