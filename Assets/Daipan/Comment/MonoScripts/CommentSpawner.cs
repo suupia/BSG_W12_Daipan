@@ -13,7 +13,7 @@ namespace Daipan.Comment.MonoScripts
     {
         [SerializeField] GameObject commentSection = null!;
         [SerializeField] CommentMono superCommentPrefab = null!;
-        CommentAttributeParameters _attributeParameters;
+        CommentAttributeParameters _attributeParameters = null!;
         CommentCluster _commentCluster = null!;
         CommentSpawnPointContainer _commentSpawnPointContainer = null!;
 

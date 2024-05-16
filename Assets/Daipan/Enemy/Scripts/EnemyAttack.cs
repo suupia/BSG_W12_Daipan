@@ -5,7 +5,7 @@ namespace Daipan.Enemy.Scripts
 {
     public sealed class EnemyAttack
     {
-        public EnemyAttackParameter enemyAttackParameter;
+        public EnemyAttackParameter enemyAttackParameter = null!;
 
         public void Attack()
         {

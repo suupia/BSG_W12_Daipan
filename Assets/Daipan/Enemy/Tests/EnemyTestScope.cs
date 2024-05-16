@@ -9,7 +9,7 @@ using VContainer.Unity;
 
 public sealed class EnemyTestScope : LifetimeScope
 {
-    [SerializeField] EnemyAttributeParameters enemyAttributeParameters;
+    [SerializeField] EnemyAttributeParameters enemyAttributeParameters = null!;
     protected override void Configure(IContainerBuilder builder)
     {
         builder.RegisterInstance(enemyAttributeParameters);
@@ -25,5 +25,6 @@ public sealed class EnemyTestScope : LifetimeScope
         {
             entryPoints.Add<EnemySpawner>();
         });
+        
     }
 }
