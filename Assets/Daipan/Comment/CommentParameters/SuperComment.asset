@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: SuperComment
   m_EditorClassIdentifier: 
   commentType: 2
+  sprite: {fileID: 21300000, guid: 029efe77e9ace42fc8aa8d1c77ceb5ae, type: 3}

@@ -9,6 +9,7 @@ namespace Daipan.Comment.MonoScripts
     public sealed class CommentMono : MonoBehaviour
     {
         [SerializeField] float speed = 0.01f;
+        [SerializeField] SpriteRenderer spriteRenderer = null!;
         CommentCluster _commentCluster = null!;
         CommentSpawnPointContainer _spawnPointContainer = null!;
         public CommentParameter Parameter { get; private set; } = null!;
@@ -35,6 +36,8 @@ namespace Daipan.Comment.MonoScripts
         public void SetParameter(CommentParameter parameter)
         {
             Parameter = parameter;
+            spriteRenderer.sprite = Parameter.Sprite;
+            Debug.Log($"spriteRenderer.sprite : {spriteRenderer.sprite}");
         }
 
         public void Despawn()

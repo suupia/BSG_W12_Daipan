@@ -7,7 +7,9 @@ namespace Daipan.Comment.Scripts
     public sealed class CommentParameter : ScriptableObject
     {
         [SerializeField] CommentType commentType = CommentType.None;
+        [SerializeField] Sprite sprite = null!;
         public CommentType CommentType => commentType;
+        public Sprite Sprite => sprite;
     }
 
     public enum CommentType
