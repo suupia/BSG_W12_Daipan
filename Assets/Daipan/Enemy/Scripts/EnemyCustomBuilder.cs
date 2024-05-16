@@ -4,6 +4,7 @@ using Daipan.Comment.MonoScripts;
 using Daipan.Comment.Scripts;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.MonoScripts;
+using Daipan.Stream.Scripts;
 using Daipan.Stream.Scripts.Utility;
 using UnityEngine;
 using VContainer;
@@ -18,19 +19,22 @@ namespace Daipan.Enemy.Scripts
         readonly IPrefabLoader<EnemyMono> _enemyMonoLoader;
         readonly EnemyAttributeParameters _attributeParameters;
         readonly CommentSpawner _commentSpawner;
+        readonly ViewerNumber _viewerNumber;
         
         public EnemyCustomBuilder(
             IObjectResolver container,
             IPrefabLoader<EnemyMono> enemyMonoLoader,
             EnemyAttributeParameters attributeParameters,
             EnemyEnum enemyEnum,
-            CommentSpawner commentSpawner
+            CommentSpawner commentSpawner,
+            ViewerNumber viewerNumber
             )
         {
             _container = container;
             _enemyMonoLoader = enemyMonoLoader;
             _attributeParameters = attributeParameters;
             _commentSpawner = commentSpawner;
+            _viewerNumber = viewerNumber;
         }
 
         public EnemyMono Build(Vector3 position, Quaternion rotation)
@@ -43,6 +47,7 @@ namespace Daipan.Enemy.Scripts
             enemyMono.SetParameter(_attributeParameters.enemyParameters.First(x => x.GetEnemyEnum == enemyEnum));
             enemyMono.OnDied += (sender, args) =>
             {
+                if(!args.IsBoss) _viewerNumber.IncreaseViewer(7);
                 if(args.IsBoss) _commentSpawner.SpawnComment(CommentEnum.Super);
             };
             return enemyMono;
