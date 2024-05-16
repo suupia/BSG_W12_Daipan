@@ -3,7 +3,7 @@ using Daipan.Battle.interfaces;
 using UnityEngine;
 using VContainer;
 
-namespace Daipan.Stream.Scripts
+namespace Daipan.Player.Scripts
 {
     public sealed class PlayerAttack
     {
@@ -24,10 +24,12 @@ namespace Daipan.Stream.Scripts
         {
             hpSetter.CurrentHp -= _parameter.WAttackAmount;
         }
+
         public void AAttack(IHpSetter hpSetter)
         {
             hpSetter.CurrentHp -= _parameter.AAttackAmount;
         }
+
         public void SAttack(IHpSetter hpSetter)
         {
             hpSetter.CurrentHp -= _parameter.SAttackAmount;

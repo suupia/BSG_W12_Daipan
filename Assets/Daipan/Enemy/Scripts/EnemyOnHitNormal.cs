@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Daipan.Enemy.Scripts
 {
-    public class EnemyOnHitNormal : IEnemyOnHit
+    public sealed class EnemyOnHitNormal : IEnemyOnHit
     {
         public void OnHit()
         {

@@ -3,7 +3,6 @@ using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Enemy.Scripts;
 using Daipan.Stream.Scripts.Utility;
-using Enemy;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;

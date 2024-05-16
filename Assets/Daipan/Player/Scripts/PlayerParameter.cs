@@ -2,7 +2,7 @@
 using System;
 using UnityEngine;
 
-namespace Daipan.Stream.Scripts
+namespace Daipan.Player.Scripts
 {
     [Serializable]
     public sealed class PlayerAttackParameter
@@ -12,7 +12,7 @@ namespace Daipan.Stream.Scripts
         public int WAttackAmount = 20;
         public int AAttackAmount = 30;
     }
-    
+
 
     [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/PlayerParameter", order = 1)]
     public sealed class PlayerParameter : ScriptableObject

@@ -11,7 +11,7 @@ using Random = UnityEngine.Random;
 
 namespace Daipan.Enemy.Scripts
 {
-    public class EnemySpawner : IStart, ITickable
+    public sealed class EnemySpawner : IStart, ITickable
     {
         readonly IEnemyBuilder _enemyBuilder;
         readonly EnemyCluster _enemyCluster;
@@ -69,10 +69,7 @@ namespace Daipan.Enemy.Scripts
 
         void IncreaseIrritatedValueByEnemy(EnemyEnum enemy)
         {
-            if (enemy == EnemyEnum.Cheetah)
-            {
-                _irritatedValue.IncreaseValue(8); // todo : parameter もらう
-            }
+            if (enemy == EnemyEnum.Cheetah) _irritatedValue.IncreaseValue(8); // todo : parameter もらう
         }
     }
 }

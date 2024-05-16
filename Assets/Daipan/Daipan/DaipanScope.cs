@@ -6,11 +6,11 @@ using Daipan.Daipan;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Enemy.Scripts;
+using Daipan.Player.Scripts;
 using Daipan.Stream.MonoScripts;
 using Daipan.Stream.Scripts;
 using Daipan.Stream.Scripts.Utility;
-using Daipan.Stream.Scripts.Viewer.Tests;
-using Enemy;
+using Daipan.Stream.Tests;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -56,7 +56,8 @@ public sealed class DaipanScope : LifetimeScope
 
         builder.Register<EnemyAttack>(Lifetime.Scoped);
         builder.Register<EnemyOnHit>(Lifetime.Scoped).As<IEnemyOnHit>();
-        builder.Register<EnemyCustomBuilder>(Lifetime.Scoped).AsImplementedInterfaces().WithParameter(EnemyEnum.Cheetah);
+        builder.Register<EnemyCustomBuilder>(Lifetime.Scoped).AsImplementedInterfaces()
+            .WithParameter(EnemyEnum.Cheetah);
         builder.Register<IStart, EnemySpawner>(Lifetime.Scoped).AsSelf();
         builder.Register<EnemyCluster>(Lifetime.Scoped);
 

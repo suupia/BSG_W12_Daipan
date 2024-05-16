@@ -4,12 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using Daipan.Enemy.MonoScripts;
 using UnityEngine;
-using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
 namespace Daipan.Enemy.Scripts
 {
-    public class EnemyCluster
+    public sealed class EnemyCluster
     {
         readonly List<EnemyMono> _enemies = new();
 

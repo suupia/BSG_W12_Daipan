@@ -1,5 +1,5 @@
 using Daipan.Enemy.Scripts;
-using Daipan.Stream.Scripts;
+using Daipan.Player.Scripts;
 using UnityEngine;
 using VContainer;
 
@@ -11,13 +11,12 @@ public class PlayerMono : MonoBehaviour
 
     public void Update()
     {
-        
         var enemyMono = _enemyCluster.NearestEnemy(transform.position);
-        
+
         if (Input.GetKeyDown(KeyCode.W))
         {
             Debug.Log("Wが押されたよ");
-            if(enemyMono.Parameter.GetEnemyEnum == EnemyEnum.W)
+            if (enemyMono.Parameter.GetEnemyEnum == EnemyEnum.W)
             {
                 Debug.Log($"EnemyType: {enemyMono.Parameter.GetEnemyEnum}を攻撃");
                 _playerAttack.WAttack(enemyMono);

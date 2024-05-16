@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Daipan.Stream.Scripts
 {
-    public class DaipanExecutor
+    public sealed class DaipanExecutor
     {
         readonly CommentCluster _commentCluster;
         readonly DaipanParameter _daipanParameter;
@@ -60,7 +60,8 @@ namespace Daipan.Stream.Scripts
 
                 _enemyCluster.BlownAway();
                 // _commentCluster.BlownAway();  // すべてを吹き飛ばす
-                _commentCluster.BlownAway(commentMono => commentMono.Parameter.CommentType != CommentType.Super);  // SuperComment以外を吹き飛ばす
+                _commentCluster.BlownAway(commentMono =>
+                    commentMono.Parameter.CommentType != CommentType.Super); // SuperComment以外を吹き飛ばす
             }
 
             // 台パンしたら怒りゲージは0になる

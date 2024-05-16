@@ -5,7 +5,7 @@ using VContainer;
 
 namespace Daipan.Stream.Scripts
 {
-    public class StreamViewMono : MonoBehaviour
+    public sealed class StreamViewMono : MonoBehaviour
     {
         [SerializeField] Image irritatedGauge = null!;
         [SerializeField] Image viewerGauge = null!;

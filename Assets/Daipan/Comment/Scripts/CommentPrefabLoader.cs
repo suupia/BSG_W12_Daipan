@@ -5,7 +5,7 @@ using Daipan.Stream.Scripts.Utility.Scripts;
 
 namespace Daipan.Comment.Scripts
 {
-    public class CommentPrefabLoader : IPrefabLoader<CommentMono>
+    public sealed class CommentPrefabLoader : IPrefabLoader<CommentMono>
     {
         readonly PrefabLoaderFromResources<CommentMono> _loader;
 

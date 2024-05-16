@@ -6,7 +6,7 @@ using VContainer.Unity;
 
 namespace Daipan.Daipan
 {
-    public class DaipanInitializer : IInitializable
+    public sealed class DaipanInitializer : IInitializable
     {
         IEnumerable<IStart> _starts = null!;
 

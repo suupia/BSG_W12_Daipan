@@ -3,14 +3,13 @@ using System;
 using Daipan.Battle.interfaces;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.Scripts;
-using Enemy;
 using UnityEngine;
 using VContainer;
 
 namespace Daipan.Enemy.MonoScripts
 {
     [RequireComponent(typeof(SpriteRenderer))]
-    public class EnemyMono : MonoBehaviour, IHpSetter
+    public sealed class EnemyMono : MonoBehaviour, IHpSetter
     {
         [SerializeField] HpGaugeMono hpGaugeMono = null!;
         EnemyAttack _enemyAttack = null!;

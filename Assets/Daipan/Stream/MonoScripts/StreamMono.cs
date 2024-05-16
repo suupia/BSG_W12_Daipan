@@ -4,7 +4,7 @@ using VContainer;
 
 namespace Daipan.Stream.MonoScripts
 {
-    public class StreamMono : MonoBehaviour
+    public sealed class StreamMono : MonoBehaviour
     {
         StreamStatus _streamStatus;
         ViewerNumber _viewerNumber;

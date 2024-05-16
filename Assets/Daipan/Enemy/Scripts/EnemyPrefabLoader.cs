@@ -7,7 +7,7 @@ namespace Daipan.Enemy.Scripts
 {
     public sealed class EnemyPrefabLoader : IPrefabLoader<EnemyMono>
     {
-        private readonly PrefabLoaderFromResources<EnemyMono> _loader;
+        readonly PrefabLoaderFromResources<EnemyMono> _loader;
 
         public EnemyPrefabLoader()
         {

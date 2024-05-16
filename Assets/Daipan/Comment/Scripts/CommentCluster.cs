@@ -2,12 +2,11 @@
 using System;
 using System.Collections.Generic;
 using Daipan.Comment.MonoScripts;
-using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
 namespace Daipan.Comment.Scripts
 {
-    public class CommentCluster
+    public sealed class CommentCluster
     {
         readonly List<CommentMono> _comments = new();
         public IEnumerable<CommentMono> CommentMonos => _comments;

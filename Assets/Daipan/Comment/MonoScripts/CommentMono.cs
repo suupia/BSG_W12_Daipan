@@ -6,7 +6,7 @@ using VContainer;
 
 namespace Daipan.Comment.MonoScripts
 {
-    public class CommentMono : MonoBehaviour
+    public sealed class CommentMono : MonoBehaviour
     {
         [SerializeField] float speed = 0.01f;
         CommentCluster _commentCluster = null!;
