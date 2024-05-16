@@ -18,6 +18,7 @@ using VContainer.Unity;
 public sealed class DaipanScope : LifetimeScope
 {
     [SerializeField] StreamParameter streamParameter = null!;
+    [SerializeField] CommentAttributeParameters commentAttributeParameters = null!;
     [SerializeField] PlayerParameter playerParameter = null!;
     [SerializeField] EnemyAttributeParameters enemyAttributeParameters = null!;
 
@@ -34,6 +35,7 @@ public sealed class DaipanScope : LifetimeScope
         builder.Register<IStart, StreamSpawner>(Lifetime.Scoped).AsSelf();
 
         // Comment
+        builder.RegisterInstance(commentAttributeParameters);
         builder.Register<IStart, CommentSpawnPointContainer>(Lifetime.Scoped).AsSelf();
         builder.Register<CommentPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<CommentMono>>();
         builder.RegisterComponentInHierarchy<CommentSpawner>(); // とりあえずMonoで実装

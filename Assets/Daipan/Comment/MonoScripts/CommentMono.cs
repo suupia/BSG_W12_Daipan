@@ -11,7 +11,7 @@ namespace Daipan.Comment.MonoScripts
         [SerializeField] float speed = 0.01f;
         CommentCluster _commentCluster = null!;
         CommentSpawnPointContainer _spawnPointContainer = null!;
-        public bool IsSuperComment { get; set; }
+        public CommentParameter CommentParameter { get; private set; }
 
         void Update()
         {
@@ -32,9 +32,14 @@ namespace Daipan.Comment.MonoScripts
             _commentCluster = commentCluster;
         }
 
+        public void SetParameter(CommentParameter parameter)
+        {
+            CommentParameter = parameter;
+        }
+
         public void Despawn()
         {
-            var args = new DespawnEventArgs(IsSuperComment);
+            var args = new DespawnEventArgs(CommentParameter.CommentType == CommentType.Super);
             OnDespawn?.Invoke(this, args);
             Destroy(gameObject);
         }
@@ -42,13 +47,6 @@ namespace Daipan.Comment.MonoScripts
         public void BlownAway()
         {
             _commentCluster.Remove(this);
-        }
-
-
-        public void SetParameter(bool isSuperComment)
-        {
-            IsSuperComment = isSuperComment;
-            // GetComponent<SpriteRenderer>().color = isSuperComment ? Color.red : Color.white;
         }
     }
 

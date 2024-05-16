@@ -1,4 +1,5 @@
 #nullable enable
+using System.Linq;
 using Daipan.Comment.Scripts;
 using Daipan.Stream.Scripts;
 using Daipan.Stream.Scripts.Utility;
@@ -17,14 +18,19 @@ namespace Daipan.Comment.MonoScripts
         IPrefabLoader<CommentMono> _loader = null!;
         CommentSpawnPointContainer _commentSpawnPointContainer = null!;
         CommentCluster _commentCluster = null!;
+        CommentAttributeParameters _attributeParameters;
         
         // todo : 後で分離する
         ViewerNumber _viewerNumber = null!;
 
         [Inject]
-        public void Initialize(IPrefabLoader<CommentMono> loader)
+        public void Initialize(
+            IPrefabLoader<CommentMono> loader,
+            CommentAttributeParameters attributeParameters
+            )
         {
             _loader = loader;
+            _attributeParameters = attributeParameters;
         }
 
         void Update()
@@ -35,7 +41,7 @@ namespace Daipan.Comment.MonoScripts
                 var comment = _container.Instantiate(commentPrefab, _commentSpawnPointContainer.SpawnPosition, Quaternion.identity,
                     commentSection.transform);
                 _commentCluster.Add(comment);
-                comment.IsSuperComment = false;
+                comment.SetParameter(_attributeParameters.CommentParameters.First(c => c.CommentType == CommentType.Normal));
             }
         }
         
@@ -44,7 +50,7 @@ namespace Daipan.Comment.MonoScripts
             var commentPrefab = _loader.Load();
             var comment = _container.Instantiate(superCommentPrefab, _commentSpawnPointContainer.SpawnPosition, Quaternion.identity,
                 commentSection.transform);
-            comment.IsSuperComment = true;
+            comment.SetParameter(_attributeParameters.CommentParameters.First(c => c.CommentType == CommentType.Super));
             comment.OnDespawn += (sender, args) =>
             {
                 _viewerNumber.IncreaseViewer(30);

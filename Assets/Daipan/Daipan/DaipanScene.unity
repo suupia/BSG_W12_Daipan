@@ -672,6 +672,7 @@ MonoBehaviour:
   autoRun: 1
   autoInjectGameObjects: []
   streamParameter: {fileID: 11400000, guid: 1b8bd700307d7c748a87d7ab4b98611c, type: 2}
+  commentAttributeParameters: {fileID: 11400000, guid: 6c322bbd414e14912b268705f024633b, type: 2}
   playerParameter: {fileID: 11400000, guid: 08c00b8a603c55f438238ade5e13bd29, type: 2}
   enemyAttributeParameters: {fileID: 11400000, guid: 7108c634bce9ad744999f312564846b6, type: 2}
 --- !u!4 &309620969
@@ -719,7 +720,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   commentSection: {fileID: 1604941675}
-  commentPrefab: {fileID: 6062068569337538736, guid: 6278e7f36c4524633a2cced54019d9b8, type: 3}
   superCommentPrefab: {fileID: 6062068569337538736, guid: c4075f8bfd59bc2458686ba9240ded55, type: 3}
 --- !u!4 &375716989
 Transform:
