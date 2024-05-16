@@ -9,9 +9,10 @@ namespace Daipan.Enemy.Scripts
     {
         public EnemyAttackParameter enemyAttackParameter = null!;
 
-        EnemyMono? _enemyMono;
+        readonly EnemyMono _enemyMono;
         float Timer { get; set; }
-        public void SetEnemyMono(EnemyMono enemyMono)
+
+        public EnemyAttack(EnemyMono enemyMono)
         {
             _enemyMono = enemyMono;
         }
@@ -27,12 +28,7 @@ namespace Daipan.Enemy.Scripts
 
         void Attack(PlayerMono playerMono)
         {
-            // [Prerequisite]
-            if (_enemyMono == null)
-            {
-                Debug.LogWarning($"_enemyMono is null");
-                return;
-            }
+            Debug.Log("Attack");
             if (!CanAttack(_enemyMono, playerMono)) return;
             playerMono.CurrentHp -= enemyAttackParameter.attackAmount;
         }
@@ -40,6 +36,8 @@ namespace Daipan.Enemy.Scripts
         bool CanAttack(EnemyMono enemyMono, PlayerMono playerMono)
         {
             if (playerMono.CurrentHp <= 0) return false;
+            Debug.Log($"enemy.transform.position : {enemyMono.transform.position}, player.transform.position : {playerMono.transform.position}");
+            Debug.Log($"distance : {(playerMono.transform.position - enemyMono.transform.position).magnitude}");
             if ((playerMono.transform.position - enemyMono.transform.position).magnitude > enemyAttackParameter.range) return false;
             return true;
         }

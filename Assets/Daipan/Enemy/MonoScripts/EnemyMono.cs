@@ -43,17 +43,19 @@ namespace Daipan.Enemy.MonoScripts
 
         [Inject]
         public void Initialize(
-            EnemyAttack enemyAttack,
             IEnemyOnHit enemyOnHit,
             EnemyCluster enemyCluster,
             PlayerHolder playerHolder
         )
         {
-            _enemyAttack = enemyAttack;
             EnemyOnHit = enemyOnHit;
             _enemyCluster = enemyCluster;
             _playerHolder = playerHolder;
-            enemyAttack.SetEnemyMono(this);
+        }
+
+        public void SetDomain(EnemyAttack enemyAttack)
+        {
+            _enemyAttack = enemyAttack;
         }
 
         public void Died()

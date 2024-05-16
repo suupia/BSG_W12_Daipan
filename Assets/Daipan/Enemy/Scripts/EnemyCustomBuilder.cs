@@ -35,15 +35,16 @@ namespace Daipan.Enemy.Scripts
         public EnemyMono Build(Vector3 position, Quaternion rotation)
         {
             var enemyMonoPrefab = _enemyMonoLoader.Load();
-            var enemyObject = _container.Instantiate(enemyMonoPrefab, position, rotation);
+            var enemyMono = _container.Instantiate(enemyMonoPrefab, position, rotation);
             var enemyEnum = DecideRandomEnemyType();
             Debug.Log($"enemyEnum: {enemyEnum}");
-            enemyObject.SetParameter(_attributeParameters.enemyParameters.First(x => x.GetEnemyEnum == enemyEnum));
-            enemyObject.OnDied += (sender, args) =>
+            enemyMono.SetDomain(new EnemyAttack(enemyMono));
+            enemyMono.SetParameter(_attributeParameters.enemyParameters.First(x => x.GetEnemyEnum == enemyEnum));
+            enemyMono.OnDied += (sender, args) =>
             {
                 if(args.IsBoss) _commentSpawner.SpawnSuperComment();
             };
-            return enemyObject;
+            return enemyMono;
         }
         
         EnemyEnum DecideRandomEnemyType()
