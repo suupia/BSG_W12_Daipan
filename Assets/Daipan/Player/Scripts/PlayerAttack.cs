@@ -10,9 +10,9 @@ namespace Daipan.Player.Scripts
         readonly PlayerAttackParameter _parameter;
 
         [Inject]
-        public PlayerAttack(PlayerAttackParameter parameter)
+        public PlayerAttack(PlayerParameter parameter)
         {
-            _parameter = parameter;
+            _parameter = parameter.attack;
         }
 
         public void Attack(int attackIndex)

@@ -33,7 +33,7 @@ namespace Daipan.Comment.MonoScripts
                     commentSection.transform);
                 _commentCluster.Add(comment);
                 comment.SetParameter(
-                    _attributeParameters.CommentParameters.First(c => c.CommentType == CommentType.Normal));
+                    _attributeParameters.CommentParameters.First(c => c.GetCommentEnum == CommentEnum.Normal));
             }
         }
 
@@ -53,7 +53,7 @@ namespace Daipan.Comment.MonoScripts
             var comment = _container.Instantiate(superCommentPrefab, _commentSpawnPointContainer.SpawnPosition,
                 Quaternion.identity,
                 commentSection.transform);
-            comment.SetParameter(_attributeParameters.CommentParameters.First(c => c.CommentType == CommentType.Super));
+            comment.SetParameter(_attributeParameters.CommentParameters.First(c => c.GetCommentEnum == CommentEnum.Super));
             comment.OnDespawn += (sender, args) => { _viewerNumber.IncreaseViewer(30); };
             _commentCluster.Add(comment);
         }
