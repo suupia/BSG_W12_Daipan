@@ -17,9 +17,9 @@ public class PlayerMono : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.W))
         {
             Debug.Log("Wが押されたよ");
-            if(enemyMono.EnemyParameter.GetEnemyEnum == EnemyEnum.W)
+            if(enemyMono.Parameter.GetEnemyEnum == EnemyEnum.W)
             {
-                Debug.Log($"EnemyType: {enemyMono.EnemyParameter.GetEnemyEnum}を攻撃");
+                Debug.Log($"EnemyType: {enemyMono.Parameter.GetEnemyEnum}を攻撃");
                 _playerAttack.WAttack(enemyMono);
             }
             else
@@ -31,9 +31,9 @@ public class PlayerMono : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.S))
         {
             Debug.Log("Sが押されたよ");
-            if (enemyMono.EnemyParameter.GetEnemyEnum == EnemyEnum.S)
+            if (enemyMono.Parameter.GetEnemyEnum == EnemyEnum.S)
             {
-                Debug.Log($"EnemyType: {enemyMono.EnemyParameter.GetEnemyEnum}を攻撃");
+                Debug.Log($"EnemyType: {enemyMono.Parameter.GetEnemyEnum}を攻撃");
                 _playerAttack.SAttack(enemyMono);
             }
             else
@@ -45,9 +45,9 @@ public class PlayerMono : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A))
         {
             Debug.Log("Aが押されたよ");
-            if (enemyMono.EnemyParameter.GetEnemyEnum == EnemyEnum.A)
+            if (enemyMono.Parameter.GetEnemyEnum == EnemyEnum.A)
             {
-                Debug.Log($"EnemyType: {enemyMono.EnemyParameter.GetEnemyEnum}を攻撃");
+                Debug.Log($"EnemyType: {enemyMono.Parameter.GetEnemyEnum}を攻撃");
                 _playerAttack.AAttack(enemyMono);
             }
             else

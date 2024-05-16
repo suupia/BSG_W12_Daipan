@@ -11,7 +11,7 @@ namespace Daipan.Comment.MonoScripts
         [SerializeField] float speed = 0.01f;
         CommentCluster _commentCluster = null!;
         CommentSpawnPointContainer _spawnPointContainer = null!;
-        public CommentParameter CommentParameter { get; private set; }
+        public CommentParameter Parameter { get; private set; } = null!;
 
         void Update()
         {
@@ -34,12 +34,12 @@ namespace Daipan.Comment.MonoScripts
 
         public void SetParameter(CommentParameter parameter)
         {
-            CommentParameter = parameter;
+            Parameter = parameter;
         }
 
         public void Despawn()
         {
-            var args = new DespawnEventArgs(CommentParameter.CommentType == CommentType.Super);
+            var args = new DespawnEventArgs(Parameter.CommentType == CommentType.Super);
             OnDespawn?.Invoke(this, args);
             Destroy(gameObject);
         }

@@ -17,7 +17,7 @@ namespace Daipan.Enemy.MonoScripts
         EnemyCluster _enemyCluster = null!;
 
         EnemyHp _enemyHp = null!;
-        public EnemyParameter EnemyParameter { get; private set; } = null!;
+        public EnemyParameter Parameter { get; private set; } = null!;
 
         public IEnemyOnHit EnemyOnHit { get; private set; } = null!;
 
@@ -26,10 +26,10 @@ namespace Daipan.Enemy.MonoScripts
             if (Input.GetKeyDown(KeyCode.A)) _enemyAttack.Attack();
             if (Input.GetKeyDown(KeyCode.S)) EnemyOnHit.OnHit();
 
-            transform.position += Vector3.left * EnemyParameter.movement.speed * Time.deltaTime;
+            transform.position += Vector3.left * Parameter.movement.speed * Time.deltaTime;
             if (transform.position.x < -10) _enemyCluster.Remove(this); // Destroy when out of screen
 
-            hpGaugeMono.SetRatio(CurrentHp / (float)EnemyParameter.hp.maxHp);
+            hpGaugeMono.SetRatio(CurrentHp / (float)Parameter.hp.maxHp);
         }
 
         public int CurrentHp
@@ -55,7 +55,7 @@ namespace Daipan.Enemy.MonoScripts
 
         public void Died()
         {
-            var args = new DiedEventArgs(EnemyParameter.GetEnemyEnum.IsBoss);
+            var args = new DiedEventArgs(Parameter.GetEnemyEnum.IsBoss);
             OnDied?.Invoke(this, args);
             Destroy(gameObject);
         }
@@ -69,13 +69,13 @@ namespace Daipan.Enemy.MonoScripts
 
         public void SetParameter(EnemyParameter enemyParameter)
         {
-            EnemyParameter = enemyParameter;
-            _enemyAttack.enemyAttackParameter = EnemyParameter.attack;
+            Parameter = enemyParameter;
+            _enemyAttack.enemyAttackParameter = Parameter.attack;
             _enemyHp = new EnemyHp(enemyParameter.hp.maxHp, this, _enemyCluster);
 
             // Sprite
             var spriteRenderer = GetComponent<SpriteRenderer>();
-            spriteRenderer.sprite = EnemyParameter.sprite;
+            spriteRenderer.sprite = Parameter.sprite;
 
             var enemyOnHit = EnemyOnHit as EnemyOnHit;
             // enemyOnHit.ownEnemyType = _enemyParameter.enemyType;

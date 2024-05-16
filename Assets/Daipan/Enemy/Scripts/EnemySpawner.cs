@@ -51,7 +51,7 @@ namespace Daipan.Enemy.Scripts
         {
             _enemySpawnPoints = Object.FindObjectsByType<EnemySpawnPointMono>(FindObjectsSortMode.None);
             var enemyObject = _enemyBuilder.Build(DecideRandomSpawnPosition(), Quaternion.identity);
-            IncreaseIrritatedValueByEnemy(enemyObject.EnemyParameter.GetEnemyEnum);
+            IncreaseIrritatedValueByEnemy(enemyObject.Parameter.GetEnemyEnum);
             _enemyCluster.Add(enemyObject);
         }
 
