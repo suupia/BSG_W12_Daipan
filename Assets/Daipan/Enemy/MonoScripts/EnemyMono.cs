@@ -3,6 +3,7 @@ using System;
 using Daipan.Battle.interfaces;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.Scripts;
+using Daipan.Player.Scripts;
 using UnityEngine;
 using VContainer;
 
@@ -14,15 +15,15 @@ namespace Daipan.Enemy.MonoScripts
         [SerializeField] HpGaugeMono hpGaugeMono = null!;
         EnemyAttack _enemyAttack = null!;
         EnemyCluster _enemyCluster = null!;
-
         EnemyHp _enemyHp = null!;
+        PlayerHolder _playerHolder = null!;
         public EnemyParameter Parameter { get; private set; } = null!;
 
         public IEnemyOnHit EnemyOnHit { get; private set; } = null!;
 
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.A)) _enemyAttack.Attack();
+            _enemyAttack.Update(_playerHolder.PlayerMono);
             if (Input.GetKeyDown(KeyCode.S)) EnemyOnHit.OnHit();
 
             transform.position += Vector3.left * Parameter.movement.speed * Time.deltaTime;
@@ -44,12 +45,15 @@ namespace Daipan.Enemy.MonoScripts
         public void Initialize(
             EnemyAttack enemyAttack,
             IEnemyOnHit enemyOnHit,
-            EnemyCluster enemyCluster
+            EnemyCluster enemyCluster,
+            PlayerHolder playerHolder
         )
         {
             _enemyAttack = enemyAttack;
             EnemyOnHit = enemyOnHit;
             _enemyCluster = enemyCluster;
+            _playerHolder = playerHolder;
+            enemyAttack.SetEnemyMono(this);
         }
 
         public void Died()

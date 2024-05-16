@@ -48,6 +48,7 @@ public sealed class DaipanScope : LifetimeScope
         builder.RegisterInstance(playerParameter);
         builder.Register<PlayerPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<PlayerMono>>();
         builder.Register<PlayerAttack>(Lifetime.Scoped);
+        builder.Register<PlayerHolder>(Lifetime.Scoped);
         builder.Register<IStart, PlayerSpawner>(Lifetime.Scoped);
 
         // Enemy

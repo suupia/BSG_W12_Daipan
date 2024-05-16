@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyType: 4
   attack:
-    attackAmount: 0
+    attackAmount: 5
+    coolTimeSeconds: 1
+    range: 5
   hp:
     maxHp: 100
   movement:

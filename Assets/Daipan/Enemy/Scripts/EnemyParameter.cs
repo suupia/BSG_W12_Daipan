@@ -9,6 +9,8 @@ namespace Daipan.Enemy.Scripts
     public sealed class EnemyAttackParameter
     {
         public int attackAmount;
+        public int coolTimeSeconds;
+        public float range;
     }
 
     [Serializable]
