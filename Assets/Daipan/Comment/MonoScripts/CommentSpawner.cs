@@ -1,6 +1,7 @@
 #nullable enable
 using Daipan.Comment.Scripts;
 using Daipan.Stream.Scripts;
+using Daipan.Stream.Scripts.Utility;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -10,20 +11,28 @@ namespace Daipan.Comment.MonoScripts
     public class CommentSpawner : MonoBehaviour
     {
         [SerializeField] GameObject commentSection = null!; 
-        [SerializeField] CommentMono commentPrefab = null!;
+        // [SerializeField] CommentMono commentPrefab = null!;
         [SerializeField] CommentMono superCommentPrefab = null!;
 
         IObjectResolver _container = null!;
+        IPrefabLoader<CommentMono> _loader;
         CommentSpawnPointContainer _commentSpawnPointContainer = null!;
         CommentCluster _commentCluster = null!;
         
         // todo : 後で分離する
         ViewerNumber _viewerNumber = null!;
 
+        [Inject]
+        public void Initialize(IPrefabLoader<CommentMono> loader)
+        {
+            _loader = loader;
+        }
+
         void Update()
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                var commentPrefab = _loader.Load();
                 var comment = _container.Instantiate(commentPrefab, _commentSpawnPointContainer.SpawnPosition, Quaternion.identity,
                     commentSection.transform);
                 _commentCluster.Add(comment);
@@ -33,6 +42,7 @@ namespace Daipan.Comment.MonoScripts
         
         public void SpawnSuperComment()
         {
+            var commentPrefab = _loader.Load();
             var comment = _container.Instantiate(superCommentPrefab, _commentSpawnPointContainer.SpawnPosition, Quaternion.identity,
                 commentSection.transform);
             comment.IsSuperComment = true;
