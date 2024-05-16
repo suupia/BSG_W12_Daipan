@@ -47,6 +47,19 @@ namespace Daipan.Comment.MonoScripts
             _attributeParameters = attributeParameters;
         }
 
+        public void SpawnComment(CommentEnum commentEnum)
+        {
+            var commentPrefab = _loader.Load();
+            var comment = _container.Instantiate(commentPrefab, _commentSpawnPointContainer.SpawnPosition,
+                Quaternion.identity, commentSection.transform);
+            comment.SetParameter(_attributeParameters.CommentParameters.First(c => c.GetCommentEnum == commentEnum));
+            comment.OnDespawn += (sender, args) =>
+            {
+                if(args.IsSuperComment) _viewerNumber.IncreaseViewer(30);
+            };
+            _commentCluster.Add(comment);
+        }
+
         public void SpawnSuperComment()
         {
             var commentPrefab = _loader.Load();
