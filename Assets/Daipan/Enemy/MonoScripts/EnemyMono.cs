@@ -27,7 +27,7 @@ namespace Daipan.Enemy.MonoScripts
             if (Input.GetKeyDown(KeyCode.S)) EnemyOnHit.OnHit();
 
             transform.position += Vector3.left * Parameter.movement.speed * Time.deltaTime;
-            if (transform.position.x < -10) _enemyCluster.Remove(this); // Destroy when out of screen
+            if (transform.position.x < -10) _enemyCluster.Remove(this, false); // Destroy when out of screen
 
             hpGaugeMono.SetRatio(CurrentHp / (float)Parameter.hp.maxHp);
         }
@@ -58,10 +58,14 @@ namespace Daipan.Enemy.MonoScripts
             _enemyAttack = enemyAttack;
         }
 
-        public void Died()
+        public void Died(bool isTriggerCallback)
         {
-            var args = new DiedEventArgs(Parameter.GetEnemyEnum.IsBoss);
-            OnDied?.Invoke(this, args);
+            if (isTriggerCallback)
+            {
+                var args = new DiedEventArgs(Parameter.GetEnemyEnum.IsBoss);
+                OnDied?.Invoke(this, args);
+            }
+
             Destroy(gameObject);
         }
 
@@ -87,5 +91,5 @@ namespace Daipan.Enemy.MonoScripts
         }
     }
 
-    public record DiedEventArgs(bool IsBoss);
+    public record DiedEventArgs(bool IsBoss, bool IsTrigger = false);
 }

@@ -19,10 +19,10 @@ namespace Daipan.Enemy.Scripts
             _enemies.Add(enemy);
         }
 
-        public void Remove(EnemyMono enemy)
+        public void Remove(EnemyMono enemy, bool isTriggerCallback = true)
         {
             _enemies.Remove(enemy);
-            enemy.Died();
+            enemy.Died(isTriggerCallback);
         }
 
         public EnemyMono NearestEnemy(Vector3 position)
