@@ -1,6 +1,8 @@
 #nullable enable
+using System;
 using Daipan.Battle.interfaces;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Daipan.Player.Scripts
 {
@@ -8,6 +10,7 @@ namespace Daipan.Player.Scripts
     {
         readonly PlayerMono _playerMono;
         int _currentHp;
+        public event EventHandler<DamageEventArgs>? OnDamage;
 
         public PlayerHp(int maxHp, PlayerMono playerMono)
         {
@@ -22,6 +25,7 @@ namespace Daipan.Player.Scripts
             {
                 _currentHp = value;
                 Debug.Log($"Player CurrentHp : {_currentHp}");
+                OnDamage?.Invoke(this, new DamageEventArgs(value));
                 if (_currentHp <= 0)
                 {
                     Debug.Log($"Player died");
@@ -30,4 +34,6 @@ namespace Daipan.Player.Scripts
         }
 
     }
+
+    public record DamageEventArgs(int DamageValue);
 }

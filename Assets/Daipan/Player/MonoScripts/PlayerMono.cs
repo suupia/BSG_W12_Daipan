@@ -1,5 +1,6 @@
 #nullable enable
 using Daipan.Battle.interfaces;
+using Daipan.Comment.MonoScripts;
 using Daipan.Enemy.Scripts;
 using Daipan.Player.Scripts;
 using UnityEngine;
@@ -69,12 +70,14 @@ public class PlayerMono : MonoBehaviour , IHpSetter
     public void Initialize(
         PlayerAttack playerAttack,
         EnemyCluster enemyCluster,
-        PlayerParameter playerParameter
+        PlayerParameter playerParameter,
+        CommentSpawner commentSpawner
     )
     {
         _playerAttack = playerAttack;
         _enemyCluster = enemyCluster;
         Parameter = playerParameter;
-        _playerHp = new PlayerHp(playerParameter.hp.maxHp, this);
+        _playerHp = new PlayerHp(playerParameter.hp.maxHp, this );
+        _playerHp.OnDamage += (sender, args) => { commentSpawner.SpawnSuperComment(); };
     }
 }
