@@ -1,5 +1,6 @@
 ﻿#nullable enable
 using Daipan.Stream.MonoScripts;
+using Daipan.Stream.Scripts;
 using Daipan.Stream.Scripts.Utility;
 using Daipan.Stream.Scripts.Viewer.MonoScripts;
 using UnityEngine;
@@ -7,9 +8,9 @@ using UnityEngine.Serialization;
 using VContainer;
 using VContainer.Unity;
 
-namespace Daipan.Stream.Scripts.Viewer.Tests
+namespace Daipan.Stream.Tests
 {
-    public class StreamTestScope : LifetimeScope
+    public sealed class StreamTestScope : LifetimeScope
     {
         [FormerlySerializedAs("viewerParameter")] [SerializeField]
         StreamParameter streamParameter = null!;

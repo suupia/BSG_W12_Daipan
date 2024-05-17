@@ -2,7 +2,7 @@
 using Daipan.Stream.Scripts.Utility;
 using Daipan.Stream.Scripts.Utility.Scripts;
 
-namespace Daipan.Stream.Scripts
+namespace Daipan.Player.Scripts
 {
     public sealed class PlayerPrefabLoader : IPrefabLoader<PlayerMono>
     {

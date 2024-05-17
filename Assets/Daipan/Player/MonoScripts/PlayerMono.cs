@@ -1,25 +1,29 @@
+#nullable enable
+using Daipan.Battle.interfaces;
+using Daipan.Comment.MonoScripts;
+using Daipan.Comment.Scripts;
 using Daipan.Enemy.Scripts;
-using Daipan.Stream.Scripts;
+using Daipan.Player.Scripts;
 using UnityEngine;
 using VContainer;
 
-public class PlayerMono : MonoBehaviour
+public class PlayerMono : MonoBehaviour, IHpSetter
 {
-    PlayerAttackParameter _attackParameter;
-    EnemyCluster _enemyCluster;
-    PlayerAttack _playerAttack;
+    EnemyCluster _enemyCluster = null!;
+    PlayerAttack _playerAttack = null!;
+    PlayerHp _playerHp = null!;
+    public PlayerParameter Parameter { get; private set; } = null!;
 
     public void Update()
     {
-        
         var enemyMono = _enemyCluster.NearestEnemy(transform.position);
-        
+
         if (Input.GetKeyDown(KeyCode.W))
         {
             Debug.Log("Wが押されたよ");
-            if(enemyMono.EnemyParameter.GetEnemyEnum == EnemyEnum.W)
+            if (enemyMono.Parameter.GetEnemyEnum == EnemyEnum.W)
             {
-                Debug.Log($"EnemyType: {enemyMono.EnemyParameter.GetEnemyEnum}を攻撃");
+                Debug.Log($"EnemyType: {enemyMono.Parameter.GetEnemyEnum}を攻撃");
                 _playerAttack.WAttack(enemyMono);
             }
             else
@@ -31,9 +35,9 @@ public class PlayerMono : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.S))
         {
             Debug.Log("Sが押されたよ");
-            if (enemyMono.EnemyParameter.GetEnemyEnum == EnemyEnum.S)
+            if (enemyMono.Parameter.GetEnemyEnum == EnemyEnum.S)
             {
-                Debug.Log($"EnemyType: {enemyMono.EnemyParameter.GetEnemyEnum}を攻撃");
+                Debug.Log($"EnemyType: {enemyMono.Parameter.GetEnemyEnum}を攻撃");
                 _playerAttack.SAttack(enemyMono);
             }
             else
@@ -45,9 +49,9 @@ public class PlayerMono : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A))
         {
             Debug.Log("Aが押されたよ");
-            if (enemyMono.EnemyParameter.GetEnemyEnum == EnemyEnum.A)
+            if (enemyMono.Parameter.GetEnemyEnum == EnemyEnum.A)
             {
-                Debug.Log($"EnemyType: {enemyMono.EnemyParameter.GetEnemyEnum}を攻撃");
+                Debug.Log($"EnemyType: {enemyMono.Parameter.GetEnemyEnum}を攻撃");
                 _playerAttack.AAttack(enemyMono);
             }
             else
@@ -57,15 +61,24 @@ public class PlayerMono : MonoBehaviour
         }
     }
 
+    public int CurrentHp
+    {
+        set => _playerHp.CurrentHp = value;
+        get => _playerHp.CurrentHp;
+    }
+
     [Inject]
     public void Initialize(
         PlayerAttack playerAttack,
         EnemyCluster enemyCluster,
-        PlayerAttackParameter attackParameter
+        PlayerParameter playerParameter,
+        CommentSpawner commentSpawner
     )
     {
         _playerAttack = playerAttack;
         _enemyCluster = enemyCluster;
-        _attackParameter = attackParameter;
+        Parameter = playerParameter;
+        _playerHp = new PlayerHp(playerParameter.hp.maxHp, this);
+        _playerHp.OnDamage += (sender, args) => { commentSpawner.SpawnComment(CommentEnum.Spiky); };
     }
 }

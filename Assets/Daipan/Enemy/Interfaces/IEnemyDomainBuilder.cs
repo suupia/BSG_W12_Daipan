@@ -2,8 +2,8 @@
 using Daipan.Enemy.MonoScripts;
 namespace Daipan.Enemy.Interfaces
 {
-    public interface IEnemyFactory
+    public interface IEnemyDomainBuilder
     {
-        //Scripts.Enemy Create();
+        EnemyMono SetDomain(EnemyMono enemyMono);
     }
 }

@@ -5,7 +5,7 @@ using Daipan.Stream.Scripts.Utility.Scripts;
 
 namespace Daipan.Stream.Scripts
 {
-    public class StreamPrefabLoader : IPrefabLoader<StreamMono>
+    public sealed class StreamPrefabLoader : IPrefabLoader<StreamMono>
     {
         readonly PrefabLoaderFromResources<StreamMono> _loader;
 

@@ -5,11 +5,11 @@ using UnityEngine;
 
 namespace Daipan.Enemy.Scripts
 {
-    public class EnemyHp : IHpSetter
+    public sealed class EnemyHp : IHpSetter
     {
-        int _currentHp;
-        readonly EnemyMono _enemyMono;
         readonly EnemyCluster _enemyCluster;
+        readonly EnemyMono _enemyMono;
+        int _currentHp;
 
         public EnemyHp(int maxHp, EnemyMono enemyMono, EnemyCluster enemyCluster)
         {
@@ -25,10 +25,7 @@ namespace Daipan.Enemy.Scripts
             {
                 _currentHp = value;
                 Debug.Log($"Enemy CurrentHp : {_currentHp}");
-                if (_currentHp <= 0)
-                {
-                    _enemyCluster.Remove(_enemyMono);
-                }
+                if (_currentHp <= 0) _enemyCluster.Remove(_enemyMono);
             }
         }
     }

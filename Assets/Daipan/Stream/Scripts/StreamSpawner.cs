@@ -7,7 +7,7 @@ using VContainer.Unity;
 
 namespace Daipan.Stream.Scripts
 {
-    public class StreamSpawner : IStart
+    public sealed class StreamSpawner : IStart
     {
         readonly IObjectResolver _container;
         readonly IPrefabLoader<StreamMono> _viewerLoader;
@@ -26,7 +26,5 @@ namespace Daipan.Stream.Scripts
             var viewerMonoPrefab = _viewerLoader.Load();
             var viewerMono = _container.Instantiate(viewerMonoPrefab);
         }
-        
-
     }
 }

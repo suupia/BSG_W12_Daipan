@@ -4,12 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using Daipan.Enemy.MonoScripts;
 using UnityEngine;
-using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
 namespace Daipan.Enemy.Scripts
 {
-    public class EnemyCluster
+    public sealed class EnemyCluster
     {
         readonly List<EnemyMono> _enemies = new();
 
@@ -20,10 +19,10 @@ namespace Daipan.Enemy.Scripts
             _enemies.Add(enemy);
         }
 
-        public void Remove(EnemyMono enemy)
+        public void Remove(EnemyMono enemy, bool isTriggerCallback = true)
         {
             _enemies.Remove(enemy);
-            Object.Destroy(enemy.gameObject);
+            enemy.Died(isTriggerCallback);
         }
 
         public EnemyMono NearestEnemy(Vector3 position)
@@ -59,7 +58,7 @@ namespace Daipan.Enemy.Scripts
         {
             var enemies = _enemies.ToArray();
             foreach (var enemy in enemies)
-                if (blowAwayCondition(enemy.EnemyParameter.GetEnemyEnum))
+                if (blowAwayCondition(enemy.Parameter.GetEnemyEnum))
                     Remove(enemy);
         }
     }

@@ -6,11 +6,11 @@ using Daipan.Daipan;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Enemy.Scripts;
+using Daipan.Player.Scripts;
 using Daipan.Stream.MonoScripts;
 using Daipan.Stream.Scripts;
 using Daipan.Stream.Scripts.Utility;
-using Daipan.Stream.Scripts.Viewer.Tests;
-using Enemy;
+using Daipan.Stream.Tests;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -18,6 +18,7 @@ using VContainer.Unity;
 public sealed class DaipanScope : LifetimeScope
 {
     [SerializeField] StreamParameter streamParameter = null!;
+    [SerializeField] CommentAttributeParameters commentAttributeParameters = null!;
     [SerializeField] PlayerParameter playerParameter = null!;
     [SerializeField] EnemyAttributeParameters enemyAttributeParameters = null!;
 
@@ -34,7 +35,9 @@ public sealed class DaipanScope : LifetimeScope
         builder.Register<IStart, StreamSpawner>(Lifetime.Scoped).AsSelf();
 
         // Comment
+        builder.RegisterInstance(commentAttributeParameters);
         builder.Register<IStart, CommentSpawnPointContainer>(Lifetime.Scoped).AsSelf();
+        builder.Register<CommentPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<CommentMono>>();
         builder.RegisterComponentInHierarchy<CommentSpawner>(); // とりあえずMonoで実装
         builder.Register<CommentCluster>(Lifetime.Scoped);
 
@@ -42,18 +45,20 @@ public sealed class DaipanScope : LifetimeScope
         builder.Register<DaipanExecutor>(Lifetime.Scoped);
 
         // Player
-        builder.RegisterInstance(playerParameter.attackParameter);
+        builder.RegisterInstance(playerParameter);
         builder.Register<PlayerPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<PlayerMono>>();
         builder.Register<PlayerAttack>(Lifetime.Scoped);
+        builder.Register<PlayerHolder>(Lifetime.Scoped);
         builder.Register<IStart, PlayerSpawner>(Lifetime.Scoped);
 
         // Enemy
         builder.RegisterInstance(enemyAttributeParameters);
         builder.Register<EnemyPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<EnemyMono>>();
+        builder.Register<EnemyDomainBuilder>(Lifetime.Scoped).As<IEnemyDomainBuilder>();
 
         builder.Register<EnemyAttack>(Lifetime.Scoped);
-        builder.Register<EnemyOnHit>(Lifetime.Scoped).As<IEnemyOnHit>();
-        builder.Register<EnemyCustomBuilder>(Lifetime.Scoped).AsImplementedInterfaces().WithParameter(EnemyEnum.Cheetah);
+        builder.Register<EnemyMonoBuilder>(Lifetime.Scoped).AsImplementedInterfaces()
+            .WithParameter(EnemyEnum.Cheetah);
         builder.Register<IStart, EnemySpawner>(Lifetime.Scoped).AsSelf();
         builder.Register<EnemyCluster>(Lifetime.Scoped);
 

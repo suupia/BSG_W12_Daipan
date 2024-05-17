@@ -1,18 +1,16 @@
 #nullable enable
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class HpGaugeMono : MonoBehaviour
+public sealed class HpGaugeMono : MonoBehaviour
 {
     [SerializeField] SpriteRenderer hpGaugeSpriteRenderer = null!;
     Material? _hpGaugeMaterial;
-    
+
     void Awake()
     {
         _hpGaugeMaterial = hpGaugeSpriteRenderer.material;
     }
-    
+
     public void SetRatio(float ratio)
     {
         if (_hpGaugeMaterial == null)
@@ -20,6 +18,7 @@ public class HpGaugeMono : MonoBehaviour
             Debug.LogWarning("_hpGaugeMaterial is null");
             return;
         }
+
         _hpGaugeMaterial.SetFloat("_Ratio", ratio);
     }
 }
