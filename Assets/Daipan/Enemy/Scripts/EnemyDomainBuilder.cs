@@ -14,14 +14,14 @@ using Random = UnityEngine.Random;
 
 namespace Daipan.Enemy.Scripts
 {
-    // デバッグ用に好き勝手にいじるBuilder
-    public class EnemyDomainBuilderCustom : IEnemyDomainBuilder
+
+    public class EnemyDomainBuilder : IEnemyDomainBuilder
     {
         readonly EnemyAttributeParameters _attributeParameters;
         readonly CommentSpawner _commentSpawner;
         readonly ViewerNumber _viewerNumber;
 
-        public EnemyDomainBuilderCustom(
+        public EnemyDomainBuilder(
             EnemyAttributeParameters attributeParameters,
             CommentSpawner commentSpawner,
             ViewerNumber viewerNumber
@@ -34,7 +34,7 @@ namespace Daipan.Enemy.Scripts
     
         public EnemyMono SetDomain(EnemyMono enemyMono)
         {
-            var enemyEnum = DecideRandomEnemyType();
+            var enemyEnum = DecideRandomEnemyTypeCustom();
             Debug.Log($"enemyEnum: {enemyEnum}");
             enemyMono.SetDomain(new EnemyAttack(enemyMono));
             enemyMono.SetParameter(_attributeParameters.enemyParameters.First(x => x.GetEnemyEnum == enemyEnum));
@@ -46,12 +46,22 @@ namespace Daipan.Enemy.Scripts
             return enemyMono;
         }
         
-        EnemyEnum DecideRandomEnemyType()
+        // 本来はScriptableObjectで制御するのでこれは後でパラメータをもらうようにして消す
+        // 今はスクリプトで制御するために書いておく
+        EnemyEnum DecideRandomEnemyTypeCustom()
         {
             var rand = Random.value;
             if(rand < 0.5f) return EnemyEnum.A;
             else return EnemyEnum.Cheetah;
         }
+        
+        EnemyEnum DecideRandomFromAllEnemyType()
+        {
+            var enemyEnums = EnemyEnum.Values;
+            var rand = Random.Range(0, enemyEnums.Count());
+            return enemyEnums[rand];
+        }
+
     }
     
 

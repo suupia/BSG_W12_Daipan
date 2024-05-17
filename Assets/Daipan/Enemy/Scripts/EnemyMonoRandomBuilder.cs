@@ -10,13 +10,13 @@ using VContainer.Unity;
 namespace Daipan.Enemy.Scripts
 {
     // 本番環境で使うことを想定
-    public sealed class EnemyRandomBuilder : IEnemyBuilder
+    public sealed class EnemyMonoRandomBuilder : IEnemyMonoBuilder
     {
         readonly IObjectResolver _container;
         readonly IPrefabLoader<EnemyMono> _enemyMonoLoader;
         readonly EnemyAttributeParameters _attributeParameters;
         
-        public EnemyRandomBuilder(
+        public EnemyMonoRandomBuilder(
             IObjectResolver container,
             IPrefabLoader<EnemyMono> enemyMonoLoader,
             EnemyAttributeParameters attributeParameters

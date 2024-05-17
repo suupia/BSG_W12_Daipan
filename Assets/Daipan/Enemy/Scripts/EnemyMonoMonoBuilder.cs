@@ -12,13 +12,13 @@ using VContainer.Unity;
 
 namespace Daipan.Enemy.Scripts
 {
-    public sealed class EnemyBuilder : IEnemyBuilder
+    public sealed class EnemyMonoMonoBuilder : IEnemyMonoBuilder
     {
         readonly IObjectResolver _container;
         readonly IPrefabLoader<EnemyMono> _enemyMonoLoader;
         readonly IEnemyDomainBuilder _enemyDomainBuilder;
         
-        public EnemyBuilder(
+        public EnemyMonoMonoBuilder(
             IObjectResolver container,
             IPrefabLoader<EnemyMono> enemyMonoLoader,
             IEnemyDomainBuilder enemyDomainBuilder

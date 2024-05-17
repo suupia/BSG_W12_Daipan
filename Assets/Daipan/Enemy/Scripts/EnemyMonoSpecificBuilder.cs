@@ -10,14 +10,14 @@ using VContainer.Unity;
 namespace Daipan.Enemy.Scripts
 {
     // 特定のenemyのみを生成する
-    public sealed class EnemySpecificBuilder : IEnemyBuilder
+    public sealed class EnemyMonoSpecificBuilder : IEnemyMonoBuilder
     {
         readonly IObjectResolver _container;
         readonly IPrefabLoader<EnemyMono> _enemyMonoLoader;
         readonly EnemyAttributeParameters _attributeParameters;
         readonly EnemyEnum _enemyEnum;
         
-        public EnemySpecificBuilder(
+        public EnemyMonoSpecificBuilder(
             IObjectResolver container,
             IPrefabLoader<EnemyMono> enemyMonoLoader,
             EnemyAttributeParameters attributeParameters,
