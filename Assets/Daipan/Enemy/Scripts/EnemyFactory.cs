@@ -14,14 +14,14 @@ using Random = UnityEngine.Random;
 
 namespace Daipan.Enemy.Scripts
 {
-    // デバッグ用に好き勝手にいじるFactory
-    public class EnemyDomainBuilder : IEnemyDomainBuilder
+    // デバッグ用に好き勝手にいじるBuilder
+    public class EnemyDomainBuilderCustom : IEnemyDomainBuilder
     {
         readonly EnemyAttributeParameters _attributeParameters;
         readonly CommentSpawner _commentSpawner;
         readonly ViewerNumber _viewerNumber;
 
-        public EnemyDomainBuilder(
+        public EnemyDomainBuilderCustom(
             EnemyAttributeParameters attributeParameters,
             CommentSpawner commentSpawner,
             ViewerNumber viewerNumber
