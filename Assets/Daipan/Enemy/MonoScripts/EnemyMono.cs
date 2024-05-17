@@ -19,12 +19,10 @@ namespace Daipan.Enemy.MonoScripts
         PlayerHolder _playerHolder = null!;
         public EnemyParameter Parameter { get; private set; } = null!;
 
-        public IEnemyOnHit EnemyOnHit { get; private set; } = null!;
 
         void Update()
         {
             _enemyAttack.AttackUpdate(_playerHolder.PlayerMono);
-            if (Input.GetKeyDown(KeyCode.S)) EnemyOnHit.OnHit();
 
             transform.position += Vector3.left * Parameter.movement.speed * Time.deltaTime;
             if (transform.position.x < -10) _enemyCluster.Remove(this, false); // Destroy when out of screen
@@ -43,12 +41,10 @@ namespace Daipan.Enemy.MonoScripts
 
         [Inject]
         public void Initialize(
-            IEnemyOnHit enemyOnHit,
             EnemyCluster enemyCluster,
             PlayerHolder playerHolder
         )
         {
-            EnemyOnHit = enemyOnHit;
             _enemyCluster = enemyCluster;
             _playerHolder = playerHolder;
         }
