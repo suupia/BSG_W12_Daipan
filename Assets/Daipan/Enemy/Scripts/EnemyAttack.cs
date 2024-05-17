@@ -16,7 +16,7 @@ namespace Daipan.Enemy.Scripts
         {
             _enemyMono = enemyMono;
         }
-        public void Update(PlayerMono playerMono)
+        public void AttackUpdate(PlayerMono playerMono)
         {
             Timer += Time.deltaTime;
             if (Timer >= enemyAttackParameter.coolTimeSeconds)

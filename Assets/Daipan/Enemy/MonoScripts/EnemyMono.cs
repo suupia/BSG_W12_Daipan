@@ -23,7 +23,7 @@ namespace Daipan.Enemy.MonoScripts
 
         void Update()
         {
-            _enemyAttack.Update(_playerHolder.PlayerMono);
+            _enemyAttack.AttackUpdate(_playerHolder.PlayerMono);
             if (Input.GetKeyDown(KeyCode.S)) EnemyOnHit.OnHit();
 
             transform.position += Vector3.left * Parameter.movement.speed * Time.deltaTime;
