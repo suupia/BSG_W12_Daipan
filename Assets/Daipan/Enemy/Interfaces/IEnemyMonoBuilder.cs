@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Daipan.Enemy.Interfaces
 {
-    public interface IEnemyBuilder
+    public interface IEnemyMonoBuilder
     {
         EnemyMono Build(Vector3 position, Quaternion rotation);
     }

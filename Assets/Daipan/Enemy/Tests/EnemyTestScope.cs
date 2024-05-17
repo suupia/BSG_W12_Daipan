@@ -16,7 +16,6 @@ public sealed class EnemyTestScope : LifetimeScope
         builder.Register<EnemyPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<EnemyMono>>();
 
         builder.Register<EnemyAttack>(Lifetime.Scoped);
-        builder.Register<EnemyOnHit>(Lifetime.Scoped).As<IEnemyOnHit>();
         builder.Register<EnemySpawner>(Lifetime.Scoped);
         builder.Register<EnemyCluster>(Lifetime.Scoped);
 

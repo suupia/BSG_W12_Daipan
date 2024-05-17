@@ -12,7 +12,6 @@ namespace Daipan.Comment.MonoScripts
     public sealed class CommentSpawner : MonoBehaviour
     {
         [SerializeField] GameObject commentSection = null!;
-        [SerializeField] CommentMono superCommentPrefab = null!;
         CommentAttributeParameters _attributeParameters = null!;
         CommentCluster _commentCluster = null!;
         CommentSpawnPointContainer _commentSpawnPointContainer = null!;

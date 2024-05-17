@@ -1,4 +1,5 @@
-#nullable enable
+﻿#nullable enable
+using System;
 using System.Linq;
 using Daipan.Comment.MonoScripts;
 using Daipan.Comment.Scripts;
@@ -9,39 +10,31 @@ using Daipan.Stream.Scripts.Utility;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
+using Random = UnityEngine.Random;
 
 namespace Daipan.Enemy.Scripts
 {
-    // デバッグように好き勝手いじるBuilder
-    public sealed class EnemyCustomBuilder : IEnemyBuilder
+
+    public class EnemyDomainBuilder : IEnemyDomainBuilder
     {
-        readonly IObjectResolver _container;
-        readonly IPrefabLoader<EnemyMono> _enemyMonoLoader;
         readonly EnemyAttributeParameters _attributeParameters;
         readonly CommentSpawner _commentSpawner;
         readonly ViewerNumber _viewerNumber;
-        
-        public EnemyCustomBuilder(
-            IObjectResolver container,
-            IPrefabLoader<EnemyMono> enemyMonoLoader,
+
+        public EnemyDomainBuilder(
             EnemyAttributeParameters attributeParameters,
-            EnemyEnum enemyEnum,
             CommentSpawner commentSpawner,
             ViewerNumber viewerNumber
             )
         {
-            _container = container;
-            _enemyMonoLoader = enemyMonoLoader;
             _attributeParameters = attributeParameters;
             _commentSpawner = commentSpawner;
             _viewerNumber = viewerNumber;
         }
-
-        public EnemyMono Build(Vector3 position, Quaternion rotation)
+    
+        public EnemyMono SetDomain(EnemyMono enemyMono)
         {
-            var enemyMonoPrefab = _enemyMonoLoader.Load();
-            var enemyMono = _container.Instantiate(enemyMonoPrefab, position, rotation);
-            var enemyEnum = DecideRandomEnemyType();
+            var enemyEnum = DecideRandomEnemyTypeCustom();
             Debug.Log($"enemyEnum: {enemyEnum}");
             enemyMono.SetDomain(new EnemyAttack(enemyMono));
             enemyMono.SetParameter(_attributeParameters.enemyParameters.First(x => x.GetEnemyEnum == enemyEnum));
@@ -53,12 +46,23 @@ namespace Daipan.Enemy.Scripts
             return enemyMono;
         }
         
-        EnemyEnum DecideRandomEnemyType()
+        // 本来はScriptableObjectで制御するのでこれは後でパラメータをもらうようにして消す
+        // 今はスクリプトで制御するために書いておく
+        EnemyEnum DecideRandomEnemyTypeCustom()
         {
             var rand = Random.value;
             if(rand < 0.5f) return EnemyEnum.A;
             else return EnemyEnum.Cheetah;
         }
+        
+        EnemyEnum DecideRandomFromAllEnemyType()
+        {
+            var enemyEnums = EnemyEnum.Values;
+            var rand = Random.Range(0, enemyEnums.Count());
+            return enemyEnums[rand];
+        }
 
     }
+    
+
 }
