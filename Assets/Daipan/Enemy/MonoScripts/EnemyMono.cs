@@ -86,8 +86,6 @@ namespace Daipan.Enemy.MonoScripts
             var spriteRenderer = GetComponent<SpriteRenderer>();
             spriteRenderer.sprite = Parameter.sprite;
 
-            var enemyOnHit = EnemyOnHit as EnemyOnHit;
-            // enemyOnHit.ownEnemyType = _enemyParameter.enemyType;
         }
     }
 

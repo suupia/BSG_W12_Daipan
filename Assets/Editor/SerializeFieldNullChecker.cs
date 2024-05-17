@@ -66,7 +66,7 @@ public static class SerializeFieldNullChecker
             if (existsMissingField)
             {
                 Assert.IsNotNull(_errorIcon);
-                DrawIcon(selectionRect, _errorIcon);
+                if(_errorIcon != null) DrawIcon(selectionRect, _errorIcon);
             }
         }
         
