@@ -1,12 +1,13 @@
 #nullable enable
 using System;
 using Daipan.Comment.Scripts;
+using Daipan.Core.Interfaces;
 using UnityEngine;
 using VContainer;
 
 namespace Daipan.Comment.MonoScripts
 {
-    public sealed class CommentMono : MonoBehaviour
+    public sealed class CommentMono : MonoBehaviour// , IUpdate
     {
         [SerializeField] float speed = 0.01f;
         [SerializeField] SpriteRenderer spriteRenderer = null!;
@@ -14,8 +15,10 @@ namespace Daipan.Comment.MonoScripts
         CommentSpawnPointContainer _spawnPointContainer = null!;
         public CommentParameter Parameter { get; private set; } = null!;
 
+        //void IUpdate.Update()
         void Update()
         {
+            Debug.Log("CommentMono");
             transform.position += Vector3.up * speed;
             if (transform.position.y > _spawnPointContainer.DespawnPosition.y) _commentCluster.Remove(this);
         }
