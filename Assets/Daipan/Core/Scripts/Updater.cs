@@ -4,6 +4,8 @@ using Daipan.Core.Interfaces;
 using VContainer;
 using VContainer.Unity;
 
+using UnityEngine;
+
 namespace Daipan.Core
 {
     public sealed class Updater : ITickable

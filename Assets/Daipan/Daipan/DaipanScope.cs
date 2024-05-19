@@ -1,6 +1,7 @@
 #nullable enable
 using Daipan.Comment.MonoScripts;
 using Daipan.Comment.Scripts;
+using Daipan.Core;
 using Daipan.Core.Interfaces;
 using Daipan.Daipan;
 using Daipan.Enemy.Interfaces;
@@ -65,7 +66,7 @@ public sealed class DaipanScope : LifetimeScope
 
         // View
         builder.RegisterComponentInHierarchy<StreamViewMono>();
-
+        
         // Test
         builder.RegisterComponentInHierarchy<PlayerTestInput>();
 
@@ -73,5 +74,8 @@ public sealed class DaipanScope : LifetimeScope
         builder.RegisterEntryPoint<DaipanInitializer>();
 
         builder.UseEntryPoints(Lifetime.Scoped, entryPoints => { entryPoints.Add<EnemySpawner>(); });
+
+        // Updater
+        builder.UseEntryPoints(Lifetime.Scoped, entryPoints => { entryPoints.Add<Updater>(); });
     }
 }
