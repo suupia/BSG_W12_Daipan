@@ -11,7 +11,7 @@ using Random = UnityEngine.Random;
 
 namespace Daipan.Enemy.Scripts
 {
-    public sealed class EnemySpawner : IStart, ITickable
+    public sealed class EnemySpawner : IStart, IUpdate
     {
         readonly IEnemyMonoBuilder _enemyMonoBuilder;
         readonly EnemyCluster _enemyCluster;
@@ -37,7 +37,7 @@ namespace Daipan.Enemy.Scripts
             // SpawnEnemy();
         }
 
-        void ITickable.Tick()
+        void IUpdate.Update()
         {
             _timer += Time.deltaTime;
             if (_timer > _spawnInterval)

@@ -41,6 +41,7 @@ public sealed class DaipanScope : LifetimeScope
         builder.Register<CommentPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<CommentMono>>();
         builder.RegisterComponentInHierarchy<CommentSpawner>(); // とりあえずMonoで実装
         builder.Register<CommentCluster>(Lifetime.Scoped);
+        //builder.Register<IUpdate, CommentMono>(Lifetime.Scoped).AsSelf();
 
 
         builder.Register<DaipanExecutor>(Lifetime.Scoped);
@@ -60,7 +61,7 @@ public sealed class DaipanScope : LifetimeScope
         builder.Register<EnemyAttack>(Lifetime.Scoped);
         builder.Register<EnemyMonoBuilder>(Lifetime.Scoped).AsImplementedInterfaces()
             .WithParameter(EnemyEnum.Cheetah);
-        builder.Register<IStart, EnemySpawner>(Lifetime.Scoped).AsSelf();
+        builder.Register<EnemySpawner>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
         builder.Register<EnemyCluster>(Lifetime.Scoped);
 
 
@@ -73,7 +74,6 @@ public sealed class DaipanScope : LifetimeScope
         // Initializer
         builder.RegisterEntryPoint<DaipanInitializer>();
 
-        builder.UseEntryPoints(Lifetime.Scoped, entryPoints => { entryPoints.Add<EnemySpawner>(); });
 
         // Updater
         builder.UseEntryPoints(Lifetime.Scoped, entryPoints => { entryPoints.Add<Updater>(); });
