@@ -1,4 +1,4 @@
-namespace Daipan.Core.Interfaces
+ namespace Daipan.Core.Interfaces
 {
     public interface IStart
     {
