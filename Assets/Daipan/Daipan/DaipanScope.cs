@@ -7,6 +7,7 @@ using Daipan.Daipan;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Enemy.Scripts;
+using Daipan.LevelDesign.Comment.Scripts;
 using Daipan.Player.Scripts;
 using Daipan.Stream.MonoScripts;
 using Daipan.Stream.Scripts;
@@ -22,6 +23,7 @@ public sealed class DaipanScope : LifetimeScope
     [SerializeField] CommentAttributeParameters commentAttributeParameters = null!;
     [SerializeField] PlayerParameter playerParameter = null!;
     [SerializeField] EnemyAttributeParameters enemyAttributeParameters = null!;
+    [SerializeField] CommentParams commentParams = null!;
 
     protected override void Configure(IContainerBuilder builder)
     {
@@ -37,11 +39,10 @@ public sealed class DaipanScope : LifetimeScope
 
         // Comment
         builder.RegisterInstance(commentAttributeParameters);
-        builder.Register<IStart, CommentSpawnPointContainer>(Lifetime.Scoped).AsSelf();
+        //builder.Register<IStart, CommentSpawnPointContainer>(Lifetime.Scoped).AsSelf();
         builder.Register<CommentPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<CommentMono>>();
-        builder.RegisterComponentInHierarchy<CommentSpawner>(); // とりあえずMonoで実装
+        builder.Register<IUpdate,CommentSpawner>(Lifetime.Scoped).AsSelf();
         builder.Register<CommentCluster>(Lifetime.Scoped);
-        //builder.Register<IUpdate, CommentMono>(Lifetime.Scoped).AsSelf();
 
 
         builder.Register<DaipanExecutor>(Lifetime.Scoped);
@@ -70,6 +71,13 @@ public sealed class DaipanScope : LifetimeScope
         
         // Test
         builder.RegisterComponentInHierarchy<PlayerTestInput>();
+
+        // Parameters
+        /*comment*/
+        builder.Register<CommentParamsServer>(Lifetime.Scoped);
+        builder.RegisterComponentInHierarchy<CommentPosition>();
+        builder.RegisterInstance(commentParams);
+
 
         // Initializer
         builder.RegisterEntryPoint<DaipanInitializer>();

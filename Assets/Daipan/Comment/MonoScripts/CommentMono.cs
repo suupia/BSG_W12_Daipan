@@ -2,25 +2,24 @@
 using System;
 using Daipan.Comment.Scripts;
 using Daipan.Core.Interfaces;
+using Daipan.LevelDesign.Comment.Scripts;
 using UnityEngine;
 using VContainer;
 
 namespace Daipan.Comment.MonoScripts
 {
-    public sealed class CommentMono : MonoBehaviour// , IUpdate
+    public sealed class CommentMono : MonoBehaviour
     {
         [SerializeField] float speed = 0.01f;
         [SerializeField] SpriteRenderer spriteRenderer = null!;
         CommentCluster _commentCluster = null!;
-        CommentSpawnPointContainer _spawnPointContainer = null!;
+        CommentParamsServer _commentParamsServer = null!;
         public CommentParameter Parameter { get; private set; } = null!;
-
-        //void IUpdate.Update()
+        
         void Update()
         {
-            Debug.Log("CommentMono");
             transform.position += Vector3.up * speed;
-            if (transform.position.y > _spawnPointContainer.DespawnPosition.y) _commentCluster.Remove(this);
+            if (transform.position.y > _commentParamsServer.GetDespawnedPosition().y) _commentCluster.Remove(this);
         }
 
         public event EventHandler<DespawnEventArgs>? OnDespawn;
@@ -28,11 +27,11 @@ namespace Daipan.Comment.MonoScripts
 
         [Inject]
         public void Initialize(
-            CommentSpawnPointContainer spawnPointContainer,
+            CommentParamsServer commentParamsServer,   
             CommentCluster commentCluster
         )
         {
-            _spawnPointContainer = spawnPointContainer;
+            _commentParamsServer = commentParamsServer;
             _commentCluster = commentCluster;
         }
 
