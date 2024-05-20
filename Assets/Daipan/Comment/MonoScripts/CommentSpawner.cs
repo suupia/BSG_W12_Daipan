@@ -1,6 +1,7 @@
 #nullable enable
 using System.Linq;
 using Daipan.Comment.Scripts;
+using Daipan.Core.Interfaces;
 using Daipan.Stream.Scripts;
 using Daipan.Stream.Scripts.Utility;
 using UnityEngine;
@@ -9,9 +10,9 @@ using VContainer.Unity;
 
 namespace Daipan.Comment.MonoScripts
 {
-    public sealed class CommentSpawner : MonoBehaviour
+    public sealed class CommentSpawner : IUpdate
     {
-        [SerializeField] GameObject commentSection = null!;
+        /*ScriptableObjectを参照する*/ GameObject commentSection = null!;
         CommentAttributeParameters _attributeParameters = null!;
         CommentCluster _commentCluster = null!;
         CommentSpawnPointContainer _commentSpawnPointContainer = null!;
@@ -22,7 +23,7 @@ namespace Daipan.Comment.MonoScripts
         // todo : 後で分離する
         ViewerNumber _viewerNumber = null!;
 
-        void Update()
+        void IUpdate.Update()
         {
             if (Input.GetKeyDown(KeyCode.Space)) SpawnComment(CommentEnum.Normal);
         }

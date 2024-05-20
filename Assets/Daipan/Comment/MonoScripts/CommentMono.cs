@@ -7,18 +7,16 @@ using VContainer;
 
 namespace Daipan.Comment.MonoScripts
 {
-    public sealed class CommentMono : MonoBehaviour// , IUpdate
+    public sealed class CommentMono : MonoBehaviour
     {
         [SerializeField] float speed = 0.01f;
         [SerializeField] SpriteRenderer spriteRenderer = null!;
         CommentCluster _commentCluster = null!;
         CommentSpawnPointContainer _spawnPointContainer = null!;
         public CommentParameter Parameter { get; private set; } = null!;
-
-        //void IUpdate.Update()
+        
         void Update()
         {
-            Debug.Log("CommentMono");
             transform.position += Vector3.up * speed;
             if (transform.position.y > _spawnPointContainer.DespawnPosition.y) _commentCluster.Remove(this);
         }
