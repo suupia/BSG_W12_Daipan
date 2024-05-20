@@ -2,6 +2,7 @@
 using System.Linq;
 using Daipan.Comment.Scripts;
 using Daipan.Core.Interfaces;
+using Daipan.LevelDesign.Comment.Scripts;
 using Daipan.Stream.Scripts;
 using Daipan.Stream.Scripts.Utility;
 using UnityEngine;
@@ -12,10 +13,9 @@ namespace Daipan.Comment.MonoScripts
 {
     public sealed class CommentSpawner : IUpdate
     {
-        /*ScriptableObjectを参照する*/ GameObject commentSection = null!;
+        CommentParamsServer _commentParamsServer = null!;
         CommentAttributeParameters _attributeParameters = null!;
         CommentCluster _commentCluster = null!;
-        CommentSpawnPointContainer _commentSpawnPointContainer = null!;
 
         IObjectResolver _container = null!;
         IPrefabLoader<CommentMono> _loader = null!;
@@ -41,8 +41,8 @@ namespace Daipan.Comment.MonoScripts
         public void SpawnComment(CommentEnum commentEnum)
         {
             var commentPrefab = _loader.Load();
-            var comment = _container.Instantiate(commentPrefab, _commentSpawnPointContainer.SpawnPosition,
-                Quaternion.identity, commentSection.transform);
+            var comment = _container.Instantiate(commentPrefab, _commentParamsServer.GetSpawnedPosiion(),
+                Quaternion.identity, _commentParamsServer.GetCommentParent());
             var parameter = _attributeParameters.CommentParameters.First(c => c.GetCommentEnum == commentEnum);
             comment.SetParameter(parameter);
             comment.OnDespawn += (sender, args) =>
@@ -57,14 +57,14 @@ namespace Daipan.Comment.MonoScripts
         [Inject]
         public void Initialized(
             IObjectResolver container,
-            CommentSpawnPointContainer commentSpawnPointContainer,
+            CommentParamsServer commentParamsServer,
             CommentCluster commentCluster,
             ViewerNumber viewerNumber
         )
 
         {
             _container = container;
-            _commentSpawnPointContainer = commentSpawnPointContainer;
+            _commentParamsServer = commentParamsServer;
             _commentCluster = commentCluster;
             _viewerNumber = viewerNumber;
         }
