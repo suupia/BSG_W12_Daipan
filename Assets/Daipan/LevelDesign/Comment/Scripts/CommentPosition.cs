@@ -10,17 +10,19 @@ namespace Daipan.LevelDesign.Comment.Scripts
     {
         [Header("コメントの座標たちをセットする場所です！")]
         [Space(30)]
-        
-        
-        
+
+
         [Header("コメントの生成位置")]
         [Tooltip("コメントの生成位置を示すGameObjectを入れて！！")]
-        [SerializeField]
-        GameObject CommentSpawnedPoint = null!;
+        public Transform CommentSpawnedPoint = null!;
+
 
         [Header("コメントの消滅位置")]
         [Tooltip("コメントの消滅位置を示すGameObjectを入れて！！")]
-        [SerializeField]
-        GameObject CommentDespawnedPoint = null!;
+        public Transform CommentDespawnedPoint = null!;
+
+        [Header("コメントの親オブジェクト")]
+        [Tooltip("コメントの親オブジェクトを入れて！！")]
+        public Transform CommentParent = null;
     }
 }
