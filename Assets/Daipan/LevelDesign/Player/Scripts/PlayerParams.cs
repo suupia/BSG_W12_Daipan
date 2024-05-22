@@ -17,7 +17,6 @@ namespace Daipan.LevelDesign.Player.Scripts
         public int HPAmount;
 
         [Header(("プレイヤーの攻撃力"))]
-        [Min(0)]
         public PlayerAttackParameter playerAtatckParameter;
     }
 
@@ -25,9 +24,10 @@ namespace Daipan.LevelDesign.Player.Scripts
     [Serializable]
     public sealed class PlayerAttackParameter
     {
-        public int AttackAmount;
-        public int SAttackAmount = 10;
-        public int WAttackAmount = 20;
-        public int AAttackAmount = 30;
+
+        [Min(0)] public int AttackAmount;
+        [Min(0)] public int SAttackAmount = 10;
+        [Min(0)] public int WAttackAmount = 20;
+        [Min(0)] public int AAttackAmount = 30;
     }
 }
