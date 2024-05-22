@@ -673,7 +673,7 @@ MonoBehaviour:
   autoRun: 1
   autoInjectGameObjects: []
   streamParameter: {fileID: 11400000, guid: 1b8bd700307d7c748a87d7ab4b98611c, type: 2}
-  playerParameter: {fileID: 11400000, guid: 08c00b8a603c55f438238ade5e13bd29, type: 2}
+  playerParams: {fileID: 11400000, guid: e609f29f26d888f4b9d6d419ed118ab7, type: 2}
   enemyAttributeParameters: {fileID: 11400000, guid: 7108c634bce9ad744999f312564846b6, type: 2}
   enemyParams: {fileID: 11400000, guid: 3d02a7325e47a6740ab90681a62a8b8c, type: 2}
   commentManagerParams: {fileID: 11400000, guid: b83c7fae0686b214fb53fc224da8567a, type: 2}

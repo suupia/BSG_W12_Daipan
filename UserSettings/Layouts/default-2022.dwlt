@@ -99,7 +99,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 49
+  controlID: 25
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -172,7 +172,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 50
+  controlID: 26
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -192,8 +192,8 @@ MonoBehaviour:
     y: 0
     width: 607
     height: 1299
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 12}
   m_Panes:
   - {fileID: 12}
@@ -804,7 +804,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Daipan/LevelDesign/Player
+    - Assets/Daipan/Enemy/Scripts
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -812,30 +812,30 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Daipan/LevelDesign/Player
+  - Assets/Daipan/Enemy/Scripts
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\mikoto\Desktop\BSG_W12_Daipan
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 123}
-    m_SelectedIDs: 48730000
-    m_LastClickedID: 29512
-    m_ExpandedIDs: 00000000ea720000ee720000f0720000f2720000f47200002c7300002e73000032730000347300004273000048730000
+    scrollPos: {x: 0, y: 87}
+    m_SelectedIDs: fc730000
+    m_LastClickedID: 29692
+    m_ExpandedIDs: 00000000bc730000be730000c0730000c2730000c4730000c6730000c8730000ca730000cc7300000a7400000c740000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: MonoScripts
-      m_OriginalName: MonoScripts
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 42056
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 10}
     m_SearchString: 
@@ -849,7 +849,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000ea720000ec720000ee720000f0720000f2720000f4720000
+    m_ExpandedIDs: 00000000bc730000be730000c0730000c2730000c4730000c6730000c8730000ca730000cc730000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1040,9 +1040,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 48730000
+      m_SelectedIDs: ac330000
       m_LastClickedID: 0
-      m_ExpandedIDs: 561bffff3224ffff18fbfffff06f000018a1000022a100000ea20000
+      m_ExpandedIDs: d0f7ffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
