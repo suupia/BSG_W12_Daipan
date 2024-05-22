@@ -20,12 +20,37 @@ namespace Daipan.LevelDesign.Enemy.Scripts
             _enemyPosition = enemyPosition;
         }
 
-        public Vector3 GetSpawnedPosition()
+        public Vector3 GetSpawnedPositionRandom()
         {
-            var positions = _enemyPosition.enemySpawnedPoints.Select(tra => tra.position);
-            return positions.First();
-        }
+            List<Vector3> position = new();
+            List<float> ratio = new();
+            float totalRatio = 0f;
 
+            foreach (var point in _enemyPosition.enemySpawnedPoints)
+            {
+                position.Add(point.transform.position);
+                ratio.Add(point.ratio);
+                totalRatio += point.ratio;
+            }
+
+            float random = Random.value * totalRatio;
+
+            int i;
+            for (i = 0;i < ratio.Count; i++)
+            {
+                if (random < ratio[i])
+                {
+                    break;
+                }
+                else
+                {
+                    random -= ratio[i];
+                }
+            }
+
+            return position[i];
+
+        }
         public Vector3 GetDespawnedPosition()
         {
             return _enemyPosition.enemyDespawnedPoint.position;

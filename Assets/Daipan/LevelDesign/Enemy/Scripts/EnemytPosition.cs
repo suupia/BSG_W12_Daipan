@@ -1,4 +1,5 @@
 #nullable enable
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,9 +13,8 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         [Space(30)]
 
 
-        [Header("エネミーの生成位置")]
-        [Tooltip("エネミーの生成位置を示すGameObjectを入れて！！複数可")]
-        public List<Transform> enemySpawnedPoints;
+        
+        public List<EnemySpawnedPositon> enemySpawnedPoints;
 
 
         [Header("エネミーの消滅位置")]
@@ -22,4 +22,16 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         public Transform enemyDespawnedPoint;
 
     }
+
+    [Serializable]
+    public class EnemySpawnedPositon
+    {
+        [Header("エネミーの生成位置")]
+        [Tooltip("エネミーの生成位置を示すGameObjectを入れて！！")]
+        public Transform transform;
+        [Header("エネミーの生成される確率（相対的に設定してよい)")]
+        [Min(0)]
+        public float ratio;
+    }
+
 }
