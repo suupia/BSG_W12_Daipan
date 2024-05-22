@@ -8,6 +8,7 @@ using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Enemy.Scripts;
 using Daipan.LevelDesign.Comment.Scripts;
+using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.Player.Scripts;
 using Daipan.Stream.MonoScripts;
 using Daipan.Stream.Scripts;
@@ -24,6 +25,7 @@ public sealed class DaipanScope : LifetimeScope
     [SerializeField] PlayerParameter playerParameter = null!;
     [SerializeField] EnemyAttributeParameters enemyAttributeParameters = null!;
     [SerializeField] CommentParams commentParams = null!;
+    [SerializeField] EnemyParams enemyParams = null!; 
 
     protected override void Configure(IContainerBuilder builder)
     {
@@ -77,6 +79,10 @@ public sealed class DaipanScope : LifetimeScope
         builder.Register<CommentParamsServer>(Lifetime.Scoped);
         builder.RegisterComponentInHierarchy<CommentPosition>();
         builder.RegisterInstance(commentParams);
+        /*enemy*/
+        builder.Register<EnemyParamsServer>(Lifetime.Scoped);
+        builder.RegisterComponentInHierarchy<EnemyPosition>();
+        builder.RegisterInstance(enemyParams);
 
 
         // Initializer
