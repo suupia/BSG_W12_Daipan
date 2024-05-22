@@ -9,8 +9,8 @@ namespace Daipan.LevelDesign.Comment.Scripts
 {
     public class CommentParamsServer
     {
-        readonly CommentParams _commentParams = null!;
-        readonly CommentPosition _commentPosition = null!;
+        readonly CommentParams _commentParams = null;
+        readonly CommentPosition _commentPosition = null;
 
         [Inject]
         CommentParamsServer (CommentParams commentParams, CommentPosition commentPosition)
@@ -19,7 +19,7 @@ namespace Daipan.LevelDesign.Comment.Scripts
             _commentPosition = commentPosition;
         }
 
-        public Vector3 GetSpawnedPosiion()
+        public Vector3 GetSpawnedPosition()
         {
             return _commentPosition.CommentSpawnedPoint.position;
         }

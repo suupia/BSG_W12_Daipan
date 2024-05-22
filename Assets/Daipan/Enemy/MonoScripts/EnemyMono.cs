@@ -3,6 +3,7 @@ using System;
 using Daipan.Battle.interfaces;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.Scripts;
+using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.Player.Scripts;
 using UnityEngine;
 using VContainer;
@@ -17,15 +18,16 @@ namespace Daipan.Enemy.MonoScripts
         EnemyCluster _enemyCluster = null!;
         EnemyHp _enemyHp = null!;
         PlayerHolder _playerHolder = null!;
+        EnemyParamsServer _enemyParamsServer = null!;
         public EnemyParameter Parameter { get; private set; } = null!;
 
-
+         
         void Update()
         {
             _enemyAttack.AttackUpdate(_playerHolder.PlayerMono);
 
             transform.position += Vector3.left * Parameter.movement.speed * Time.deltaTime;
-            if (transform.position.x < -10) _enemyCluster.Remove(this, false); // Destroy when out of screen
+            if (transform.position.x < _enemyParamsServer.GetDespawnedPosition().x) _enemyCluster.Remove(this, false); // Destroy when out of screen
 
             hpGaugeMono.SetRatio(CurrentHp / (float)Parameter.hp.maxHp);
         }
@@ -42,11 +44,13 @@ namespace Daipan.Enemy.MonoScripts
         [Inject]
         public void Initialize(
             EnemyCluster enemyCluster,
-            PlayerHolder playerHolder
+            PlayerHolder playerHolder,
+            EnemyParamsServer enemyParamsServer
         )
         {
             _enemyCluster = enemyCluster;
             _playerHolder = playerHolder;
+            _enemyParamsServer = enemyParamsServer;
         }
 
         public void SetDomain(EnemyAttack enemyAttack)
