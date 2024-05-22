@@ -69,7 +69,7 @@ namespace Daipan.Enemy.Scripts
 
         void IncreaseIrritatedValueByEnemy(EnemyEnum enemy)
         {
-            if (enemy == EnemyEnum.Cheetah) _irritatedValue.IncreaseValue(8); // todo : parameter もらう
+            if (enemy == EnemyEnum.Boss) _irritatedValue.IncreaseValue(8); // todo : parameter もらう
         }
     }
 }
