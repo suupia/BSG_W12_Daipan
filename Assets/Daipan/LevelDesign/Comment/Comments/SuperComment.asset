@@ -15,4 +15,4 @@ MonoBehaviour:
   commentType: 2
   sprite: {fileID: 21300000, guid: 4214423a1fde27d43af2a003641dadc1, type: 3}
   commentSpeed_ups: 0
-  diffViewer: 0
+  diffViewer: 100

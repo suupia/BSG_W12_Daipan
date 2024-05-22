@@ -1,9 +1,8 @@
 #nullable enable
 using System.Collections.Generic;
-using Daipan.LevelDesign.Comment.Scripts;
 using UnityEngine;
 
-namespace Daipan.Comment.Scripts
+namespace Daipan.LevelDesign.Comment.Scripts
 {
     [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/Comment/ManagerParameters", order = 1)]
     public class CommentManagerParams : ScriptableObject
