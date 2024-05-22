@@ -8,6 +8,7 @@ public class GetScene:MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+#if UNITY_EDITOR        
          if (Input.GetKeyUp(KeyCode.G))
          {
              Debug.Log("---- AssetDatabase ----");
@@ -17,5 +18,6 @@ public class GetScene:MonoBehaviour
                  Debug.Log(AssetDatabase.LoadMainAssetAtPath(path));
              }
          }
+#endif         
     }
 }
