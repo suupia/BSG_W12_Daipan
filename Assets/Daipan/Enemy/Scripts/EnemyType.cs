@@ -22,7 +22,7 @@ namespace Daipan.Enemy.Scripts
                 W,
                 A,
                 S,
-                Cheetah,
+                Boss,
             };
         }
 
@@ -30,7 +30,7 @@ namespace Daipan.Enemy.Scripts
         public static EnemyEnum W = new(1, "W");
         public static EnemyEnum A = new(2, "A");
         public static EnemyEnum S = new(3, "S");
-        public static EnemyEnum Cheetah = new(4, "Cheetah", true);
+        public static EnemyEnum Boss = new(4, "Boss", true);
 
         #region Overrides
 
