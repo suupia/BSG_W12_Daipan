@@ -2,6 +2,7 @@
 using System;
 using Daipan.Core.Interfaces;
 using Daipan.Enemy.Interfaces;
+using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.Stream.Scripts;
 using UnityEngine;
 using VContainer;
@@ -17,7 +18,7 @@ namespace Daipan.Enemy.Scripts
         readonly EnemyCluster _enemyCluster;
         readonly IrritatedValue _irritatedValue;
         readonly float _spawnInterval = 1.0f;
-        EnemySpawnPointMono[] _enemySpawnPoints = Array.Empty<EnemySpawnPointMono>();
+        readonly EnemyParamsServer _enemyParamsServer;
         float _timer;
 
         [Inject]
@@ -25,11 +26,13 @@ namespace Daipan.Enemy.Scripts
             IObjectResolver container,
             EnemyCluster enemyCluster,
             IrritatedValue irritatedValue,
-            IEnemyMonoBuilder enemyMonoBuilder)
+            IEnemyMonoBuilder enemyMonoBuilder,
+            EnemyParamsServer enemyParamsServer)
         {
             _enemyCluster = enemyCluster;
             _enemyMonoBuilder = enemyMonoBuilder;
             _irritatedValue = irritatedValue;
+            _enemyParamsServer = enemyParamsServer;
         }
 
         void IStart.Start()
@@ -49,23 +52,11 @@ namespace Daipan.Enemy.Scripts
 
         void SpawnEnemy()
         {
-            _enemySpawnPoints = Object.FindObjectsByType<EnemySpawnPointMono>(FindObjectsSortMode.None);
-            var enemyObject = _enemyMonoBuilder.Build(DecideRandomSpawnPosition(), Quaternion.identity);
+            var enemyObject = _enemyMonoBuilder.Build(_enemyParamsServer.GetSpawnedPosition(), Quaternion.identity);
             IncreaseIrritatedValueByEnemy(enemyObject.Parameter.GetEnemyEnum);
             _enemyCluster.Add(enemyObject);
         }
 
-        Vector3 DecideRandomSpawnPosition()
-        {
-            if (_enemySpawnPoints == Array.Empty<EnemySpawnPointMono>())
-            {
-                Debug.LogWarning("No spawn points found");
-                return Vector3.zero;
-            }
-
-            var rand = Random.Range(0, _enemySpawnPoints.Length);
-            return _enemySpawnPoints[rand].transform.position;
-        }
 
         void IncreaseIrritatedValueByEnemy(EnemyEnum enemy)
         {

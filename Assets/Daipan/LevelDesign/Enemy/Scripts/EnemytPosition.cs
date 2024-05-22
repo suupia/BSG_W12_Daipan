@@ -14,12 +14,12 @@ namespace Daipan.LevelDesign.Enemy.Scripts
 
         [Header("エネミーの生成位置")]
         [Tooltip("エネミーの生成位置を示すGameObjectを入れて！！複数可")]
-        public List<Transform> EnemySpawnedPoints;
+        public List<Transform> enemySpawnedPoints;
 
 
         [Header("エネミーの消滅位置")]
         [Tooltip("エネミーの消滅位置を示すGameObjectを入れて！！")]
-        public Transform EnemyDespawnedPoint;
+        public Transform enemyDespawnedPoint;
 
     }
 }
