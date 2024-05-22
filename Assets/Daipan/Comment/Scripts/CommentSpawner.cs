@@ -1,6 +1,6 @@
 #nullable enable
 using System.Linq;
-using Daipan.Comment.Scripts;
+using Daipan.Comment.MonoScripts;
 using Daipan.Core.Interfaces;
 using Daipan.LevelDesign.Comment.Scripts;
 using Daipan.Stream.Scripts;
@@ -9,7 +9,7 @@ using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace Daipan.Comment.MonoScripts
+namespace Daipan.Comment.Scripts
 {
     public sealed class CommentSpawner : IUpdate
     {
@@ -41,7 +41,7 @@ namespace Daipan.Comment.MonoScripts
         public void SpawnComment(CommentEnum commentEnum)
         {
             var commentPrefab = _loader.Load();
-            var comment = _container.Instantiate(commentPrefab, _commentParamsServer.GetSpawnedPosiion(),
+            var comment = _container.Instantiate(commentPrefab, _commentParamsServer.GetSpawnedPosition(),
                 Quaternion.identity, _commentParamsServer.GetCommentParent());
             var parameter = _attributeParameters.CommentParameters.First(c => c.GetCommentEnum == commentEnum);
             comment.SetParameter(parameter);
