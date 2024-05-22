@@ -30,7 +30,7 @@ namespace Daipan.LevelDesign.Comment.Scripts
         [Min(0)]
         public float commentSpeed_ups;
 
-        [Header("コメントが生成されたときの変化量")]
+        [Header("コメントが上部へ到達したときの視聴者数の変化量")]
         public int diffViewer;
 
 

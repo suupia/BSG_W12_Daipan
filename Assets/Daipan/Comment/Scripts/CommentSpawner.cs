@@ -5,6 +5,7 @@ using Daipan.Core.Interfaces;
 using Daipan.LevelDesign.Comment.Scripts;
 using Daipan.Stream.Scripts;
 using Daipan.Stream.Scripts.Utility;
+using Unity.Mathematics;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -43,8 +44,9 @@ namespace Daipan.Comment.Scripts
             comment.SetParameter(commentEnum);
             comment.OnDespawn += (sender, args) =>
             {
-                if (args.CommentEnum == CommentEnum.Super) _viewerNumber.IncreaseViewer(30);
-                if (args.CommentEnum == CommentEnum.Spiky) _viewerNumber.DecreaseViewer(1000);
+                int amount = _commentParamsServer.GetViewerDiffNumber(args.CommentEnum);
+                if (amount > 0) _viewerNumber.IncreaseViewer(amount);
+                else _viewerNumber.DecreaseViewer(-amount);
             };
             _commentCluster.Add(comment);
         }

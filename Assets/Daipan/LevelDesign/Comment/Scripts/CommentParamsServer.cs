@@ -42,6 +42,11 @@ namespace Daipan.LevelDesign.Comment.Scripts
             var cparams = GetCommentParams(commentEnum);
             return cparams.commentSpeed_ups;
         }
+
+        public int GetViewerDiffNumber(CommentEnum commentEnum)
+        {
+            return GetCommentParams(commentEnum).diffViewer;
+        }
         
         
         CommentParams GetCommentParams(CommentEnum commentEnum)
