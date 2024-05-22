@@ -10,17 +10,25 @@ namespace Daipan.LevelDesign.Comment.Scripts
     [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/Comment/Parameters", order = 1)]
     public sealed class CommentParams : ScriptableObject
     {
-        [Header("コメントのレベルデザインはこちら！！")]
+        [Header("個別のコメントのレベルデザインはこちら！！")]
         [Space(30)]
 
 
         [Header("コメントのタイプ")]
         [Tooltip("None      : 設定しないでください-_-\n" +
-                 "Normal    : ")]
+                 "Normal    : 普通のコメント\n" +
+                 "Super     : めっちゃいいときのコメント\n" +
+                 "Spiky     : イライラとげとげコメント")]
         [SerializeField] CommentType commentType = CommentType.None;
 
+        [Header("コメントの背景スプライト")]
         [SerializeField] Sprite sprite = null!;
         public Sprite Sprite => sprite;
+
+
+        [Header("コメントが流れる速度(unit/s)")]
+        [Min(0)]
+        public float commentSpeed_ups;
 
         public CommentEnum GetCommentEnum
         {
@@ -32,7 +40,7 @@ namespace Daipan.LevelDesign.Comment.Scripts
         }
     }
 
-    
+
 
     static class CommentEnumChecker
     {
