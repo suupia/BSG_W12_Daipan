@@ -13,12 +13,14 @@ MonoBehaviour:
   m_Name: STypeEnemy
   m_EditorClassIdentifier: 
   enemyType: 3
-  attackParameter:
-    AttackAmount: 0
-  hpParameter:
-    HPAmount: 0
-  movementParameter:
-    MovementAmount: 10
+  attack:
+    attackAmount: 0
+    coolTimeSeconds: 0
+    range: 0
+  hp:
+    maxHp: 1
+  movement:
+    speed: 0
   attackCoolTime:
     MaxCoolTime: 0
     MinCoolTime: 0
