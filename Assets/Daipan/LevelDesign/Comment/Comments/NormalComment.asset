@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: NormalComment
   m_EditorClassIdentifier: 
   commentType: 1
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 5c853bec84f2b44479169018d043ff5b, type: 3}
   commentSpeed_ups: 0
+  diffViewer: 0

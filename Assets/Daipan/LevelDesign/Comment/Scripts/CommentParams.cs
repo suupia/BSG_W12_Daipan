@@ -30,6 +30,10 @@ namespace Daipan.LevelDesign.Comment.Scripts
         [Min(0)]
         public float commentSpeed_ups;
 
+        [Header("コメントが生成されたときの変化量")]
+        public int diffViewer;
+
+
         public CommentEnum GetCommentEnum
         {
             get

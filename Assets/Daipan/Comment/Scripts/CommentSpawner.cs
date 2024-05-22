@@ -14,7 +14,6 @@ namespace Daipan.Comment.Scripts
     public sealed class CommentSpawner : IUpdate
     {
         CommentParamsServer _commentParamsServer = null!;
-        CommentAttributeParameters _attributeParameters = null!;
         CommentCluster _commentCluster = null!;
 
         IObjectResolver _container = null!;
@@ -30,12 +29,10 @@ namespace Daipan.Comment.Scripts
 
         [Inject]
         public void Initialize(
-            IPrefabLoader<CommentMono> loader,
-            CommentAttributeParameters attributeParameters
+            IPrefabLoader<CommentMono> loader
         )
         {
             _loader = loader;
-            _attributeParameters = attributeParameters;
         }
 
         public void SpawnComment(CommentEnum commentEnum)
@@ -43,12 +40,11 @@ namespace Daipan.Comment.Scripts
             var commentPrefab = _loader.Load();
             var comment = _container.Instantiate(commentPrefab, _commentParamsServer.GetSpawnedPosition(),
                 Quaternion.identity, _commentParamsServer.GetCommentParent());
-            var parameter = _attributeParameters.CommentParameters.First(c => c.GetCommentEnum == commentEnum);
-            comment.SetParameter(parameter);
+            comment.SetParameter(commentEnum);
             comment.OnDespawn += (sender, args) =>
             {
                 if (args.CommentEnum == CommentEnum.Super) _viewerNumber.IncreaseViewer(30);
-                if (args.CommentEnum == CommentEnum.Spiky) _viewerNumber.DecreaseViewer(10);
+                if (args.CommentEnum == CommentEnum.Spiky) _viewerNumber.DecreaseViewer(1000);
             };
             _commentCluster.Add(comment);
         }

@@ -12,4 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 839a2ef908ddf4448a4e73cbb9911532, type: 3}
   m_Name: CommentManagerParams
   m_EditorClassIdentifier: 
-  commentParams: []
+  isAdaptSameSpeed: 1
+  commentSpeed: 8
+  commentParams:
+  - {fileID: 11400000, guid: 2350145f134c98b4d941f740096f4ddc, type: 2}
+  - {fileID: 11400000, guid: 5bafa771adcd6db4ca2d4197e6d4618e, type: 2}
+  - {fileID: 11400000, guid: 82fc30a48920419469a696a71e7a11aa, type: 2}

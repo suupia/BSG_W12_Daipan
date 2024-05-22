@@ -21,11 +21,12 @@ using VContainer.Unity;
 public sealed class DaipanScope : LifetimeScope
 {
     [SerializeField] StreamParameter streamParameter = null!;
-    [SerializeField] CommentAttributeParameters commentAttributeParameters = null!;
     [SerializeField] PlayerParameter playerParameter = null!;
     [SerializeField] EnemyAttributeParameters enemyAttributeParameters = null!;
-    [SerializeField] CommentParams commentParams = null!;
-    [SerializeField] EnemyParams enemyParams = null!; 
+
+    [SerializeField] EnemyParams enemyParams = null!;
+
+    [SerializeField] CommentManagerParams commentManagerParams = null!;
 
     protected override void Configure(IContainerBuilder builder)
     {
@@ -40,7 +41,7 @@ public sealed class DaipanScope : LifetimeScope
         builder.Register<IStart, StreamSpawner>(Lifetime.Scoped).AsSelf();
 
         // Comment
-        builder.RegisterInstance(commentAttributeParameters);
+        //builder.RegisterInstance(commentAttributeParameters);
         //builder.Register<IStart, CommentSpawnPointContainer>(Lifetime.Scoped).AsSelf();
         builder.Register<CommentPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<CommentMono>>();
         builder.Register<IUpdate,CommentSpawner>(Lifetime.Scoped).AsSelf();
@@ -78,7 +79,8 @@ public sealed class DaipanScope : LifetimeScope
         /*comment*/
         builder.Register<CommentParamsServer>(Lifetime.Scoped);
         builder.RegisterComponentInHierarchy<CommentPosition>();
-        builder.RegisterInstance(commentParams);
+        builder.RegisterInstance(commentManagerParams);
+
         /*enemy*/
         builder.Register<EnemyParamsServer>(Lifetime.Scoped);
         builder.RegisterComponentInHierarchy<EnemyPosition>();
