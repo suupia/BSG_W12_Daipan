@@ -9,6 +9,7 @@ using Daipan.Enemy.MonoScripts;
 using Daipan.Enemy.Scripts;
 using Daipan.LevelDesign.Comment.Scripts;
 using Daipan.LevelDesign.Enemy.Scripts;
+using Daipan.LevelDesign.Player.Scripts;
 using Daipan.Player.Scripts;
 using Daipan.Stream.MonoScripts;
 using Daipan.Stream.Scripts;
@@ -21,7 +22,7 @@ using VContainer.Unity;
 public sealed class DaipanScope : LifetimeScope
 {
     [SerializeField] StreamParameter streamParameter = null!;
-    [SerializeField] PlayerParameter playerParameter = null!;
+    [SerializeField] PlayerParams playerParams = null!;
     [SerializeField] EnemyAttributeParameters enemyAttributeParameters = null!;
 
     [SerializeField] EnemyParams enemyParams = null!;
@@ -51,7 +52,7 @@ public sealed class DaipanScope : LifetimeScope
         builder.Register<DaipanExecutor>(Lifetime.Scoped);
 
         // Player
-        builder.RegisterInstance(playerParameter);
+        //builder.RegisterInstance(playerParameter);
         builder.Register<PlayerPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<PlayerMono>>();
         builder.Register<PlayerAttack>(Lifetime.Scoped);
         builder.Register<PlayerHolder>(Lifetime.Scoped);
@@ -86,6 +87,9 @@ public sealed class DaipanScope : LifetimeScope
         builder.RegisterComponentInHierarchy<EnemyPosition>();
         builder.RegisterInstance(enemyParams);
 
+        /*player*/
+        builder.Register<PlayerParamsServer>(Lifetime.Scoped);
+        builder.RegisterInstance(playerParams);
 
         // Initializer
         builder.RegisterEntryPoint<DaipanInitializer>();

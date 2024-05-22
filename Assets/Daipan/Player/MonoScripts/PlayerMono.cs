@@ -3,6 +3,7 @@ using Daipan.Battle.interfaces;
 using Daipan.Comment.MonoScripts;
 using Daipan.Comment.Scripts;
 using Daipan.Enemy.Scripts;
+using Daipan.LevelDesign.Player.Scripts;
 using Daipan.Player.Scripts;
 using UnityEngine;
 using VContainer;
@@ -12,7 +13,7 @@ public class PlayerMono : MonoBehaviour, IHpSetter
     EnemyCluster _enemyCluster = null!;
     PlayerAttack _playerAttack = null!;
     PlayerHp _playerHp = null!;
-    public PlayerParameter Parameter { get; private set; } = null!;
+    public PlayerParamsServer _playerParamsServer { get; private set; } = null!;
 
     public void Update()
     {
@@ -71,14 +72,14 @@ public class PlayerMono : MonoBehaviour, IHpSetter
     public void Initialize(
         PlayerAttack playerAttack,
         EnemyCluster enemyCluster,
-        PlayerParameter playerParameter,
+        PlayerParamsServer  playerParamsServer,
         CommentSpawner commentSpawner
     )
     {
         _playerAttack = playerAttack;
         _enemyCluster = enemyCluster;
-        Parameter = playerParameter;
-        _playerHp = new PlayerHp(playerParameter.hp.maxHp, this);
+        _playerParamsServer = playerParamsServer; 
+        _playerHp = new PlayerHp(_playerParamsServer.GetHPAmount(), this);
         _playerHp.OnDamage += (sender, args) => { commentSpawner.SpawnComment(CommentEnum.Spiky); };
     }
 }
