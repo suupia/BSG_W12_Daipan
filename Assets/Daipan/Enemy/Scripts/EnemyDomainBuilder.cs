@@ -52,7 +52,7 @@ namespace Daipan.Enemy.Scripts
         {
             var rand = Random.value;
             if(rand < 0.5f) return EnemyEnum.A;
-            else return EnemyEnum.Cheetah;
+            else return EnemyEnum.Boss;
         }
         
         EnemyEnum DecideRandomFromAllEnemyType()
