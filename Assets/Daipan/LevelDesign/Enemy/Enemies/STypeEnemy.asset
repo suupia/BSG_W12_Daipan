@@ -9,9 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2e89188dcc98dd4fa434cbf0f33b51c, type: 3}
-  m_Name: Data
+  m_Script: {fileID: 11500000, guid: 96b8821efde96c546a1c64bd8587af84, type: 3}
+  m_Name: STypeEnemy
   m_EditorClassIdentifier: 
-  spawnDelaySec: 0
-  spawnBossAmount: 0
-  enemyLifeParams: []
+  enemyType: 3
+  HPAmount: 1
+  attackAmount: 1
+  moveSpeed_ups: 1
+  attackDelaySec: 1
+  diffViewer: 10
