@@ -38,10 +38,4 @@ namespace Daipan.Comment.Scripts
                     comment.BlownAway();
         }
     }
-    
-    public class User
-    {
-        public required string Name { get; set; }
-    }
-    public record DespawnRecord(CommentEnum CommentEnum);
 }
