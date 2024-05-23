@@ -9,6 +9,12 @@ EditorBuildSettings:
     path: Assets/Daipan/Player/Tests/PlayerTestScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
-    path: Assets/Daipan/Player/Tests/testscene.unity
-    guid: d8770ab225426de4b8dae31c2e33cd70
+    path: Assets/Daipan/LevelDesign/Battle/TitleScene.unity
+    guid: 1efd790989c62034a8e1c53dcadccb72
+  - enabled: 1
+    path: Assets/Daipan/LevelDesign/Battle/DaipanScene.unity
+    guid: 2c81fcb3af7fef6459a8e1cc6da8ec6b
+  - enabled: 1
+    path: Assets/Daipan/LevelDesign/Battle/ResultScene.unity
+    guid: a27e10849f907fa458ef57fd9b98107c
   m_configObjects: {}
