@@ -82,9 +82,9 @@ namespace Daipan.Enemy.MonoScripts
             _enemyAttack.enemyAttackParameter = _enemyParamsServer.GetAtatckParameter(enemyEnum);
             _enemyHp = new EnemyHp(_enemyParamsServer.GetHP(_enemyEnum), this, _enemyCluster);
 
-            // Sprite
-            //var spriteRenderer = GetComponent<SpriteRenderer>();
-            //spriteRenderer.sprite = Parameter.sprite;
+            //Sprite
+           var spriteRenderer = GetComponent<SpriteRenderer>();
+            spriteRenderer.sprite = _enemyParamsServer.GetSprite(enemyEnum);
 
         }
     }

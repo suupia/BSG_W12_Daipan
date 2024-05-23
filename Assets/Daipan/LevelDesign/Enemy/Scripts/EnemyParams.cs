@@ -43,6 +43,10 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         [Header("このエネミーを倒したときの視聴者数の変化")]
         public float diffViewer;
 
+
+        [Header("スプライト")] 
+        public Sprite sprite;
+
         public EnemyEnum GetEnemyEnum
         {
             get
