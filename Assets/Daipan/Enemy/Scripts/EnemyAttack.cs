@@ -1,6 +1,7 @@
 #nullable enable
 using Daipan.Battle.interfaces;
 using Daipan.Enemy.MonoScripts;
+using Daipan.LevelDesign.Enemy.Scripts;
 using UnityEngine;
 
 namespace Daipan.Enemy.Scripts
@@ -19,7 +20,7 @@ namespace Daipan.Enemy.Scripts
         public void AttackUpdate(PlayerMono playerMono)
         {
             Timer += Time.deltaTime;
-            if (Timer >= enemyAttackParameter.coolTimeSeconds)
+            if (Timer >= enemyAttackParameter.attackDelaySec)
             {
                 Attack(playerMono);
                 Timer = 0;
@@ -38,7 +39,7 @@ namespace Daipan.Enemy.Scripts
             if (playerMono.CurrentHp <= 0) return false;
             Debug.Log($"enemy.transform.position : {enemyMono.transform.position}, player.transform.position : {playerMono.transform.position}");
             Debug.Log($"distance : {(playerMono.transform.position - enemyMono.transform.position).magnitude}");
-            if ((playerMono.transform.position - enemyMono.transform.position).magnitude > enemyAttackParameter.range) return false;
+            if ((playerMono.transform.position - enemyMono.transform.position).magnitude > enemyAttackParameter.attackRange) return false;
             return true;
         }
         

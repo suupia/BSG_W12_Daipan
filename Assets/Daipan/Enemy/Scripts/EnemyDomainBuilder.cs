@@ -1,4 +1,4 @@
-﻿#nullable enable
+#nullable enable
 using System;
 using System.Linq;
 using Daipan.Comment.MonoScripts;
@@ -17,17 +17,14 @@ namespace Daipan.Enemy.Scripts
 
     public class EnemyDomainBuilder : IEnemyDomainBuilder
     {
-        readonly EnemyAttributeParameters _attributeParameters;
         readonly CommentSpawner _commentSpawner;
         readonly ViewerNumber _viewerNumber;
 
         public EnemyDomainBuilder(
-            EnemyAttributeParameters attributeParameters,
             CommentSpawner commentSpawner,
             ViewerNumber viewerNumber
             )
         {
-            _attributeParameters = attributeParameters;
             _commentSpawner = commentSpawner;
             _viewerNumber = viewerNumber;
         }
@@ -37,7 +34,7 @@ namespace Daipan.Enemy.Scripts
             var enemyEnum = DecideRandomEnemyTypeCustom();
             Debug.Log($"enemyEnum: {enemyEnum}");
             enemyMono.SetDomain(new EnemyAttack(enemyMono));
-            enemyMono.SetParameter(_attributeParameters.enemyParameters.First(x => x.GetEnemyEnum == enemyEnum));
+            enemyMono.SetParameter(enemyEnum);
             enemyMono.OnDied += (sender, args) =>
             {
                 if(!args.IsBoss) _viewerNumber.IncreaseViewer(7);

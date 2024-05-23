@@ -1,4 +1,4 @@
-﻿#nullable enable
+#nullable enable
 using Daipan.Comment.Scripts;
 using Daipan.Enemy.Scripts;
 using UnityEngine;
@@ -61,7 +61,7 @@ namespace Daipan.Stream.Scripts
                 _enemyCluster.BlownAway();
                 // _commentCluster.BlownAway();  // すべてを吹き飛ばす
                 _commentCluster.BlownAway(commentMono =>
-                    commentMono.Parameter.GetCommentEnum != CommentEnum.Super); // SuperComment以外を吹き飛ばす
+                    commentMono._commentEnum != CommentEnum.Super); // SuperComment以外を吹き飛ばす
             }
 
             // 台パンしたら怒りゲージは0になる
