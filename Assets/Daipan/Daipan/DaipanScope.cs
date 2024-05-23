@@ -9,6 +9,7 @@ using Daipan.Enemy.MonoScripts;
 using Daipan.Enemy.Scripts;
 using Daipan.LevelDesign.Comment.Scripts;
 using Daipan.LevelDesign.Enemy.Scripts;
+using Daipan.LevelDesign.Player.Scripts;
 using Daipan.Player.Scripts;
 using Daipan.Stream.MonoScripts;
 using Daipan.Stream.Scripts;
@@ -21,11 +22,12 @@ using VContainer.Unity;
 public sealed class DaipanScope : LifetimeScope
 {
     [SerializeField] StreamParameter streamParameter = null!;
-    [SerializeField] CommentAttributeParameters commentAttributeParameters = null!;
-    [SerializeField] PlayerParameter playerParameter = null!;
-    [SerializeField] EnemyAttributeParameters enemyAttributeParameters = null!;
-    [SerializeField] CommentParams commentParams = null!;
-    [SerializeField] EnemyParams enemyParams = null!; 
+    
+    [SerializeField] PlayerParams playerParams = null!;
+
+    [SerializeField] EnemyManagerParams enemyManagerParams = null!;
+
+    [SerializeField] CommentManagerParams commentManagerParams = null!;
 
     protected override void Configure(IContainerBuilder builder)
     {
@@ -40,7 +42,7 @@ public sealed class DaipanScope : LifetimeScope
         builder.Register<IStart, StreamSpawner>(Lifetime.Scoped).AsSelf();
 
         // Comment
-        builder.RegisterInstance(commentAttributeParameters);
+        //builder.RegisterInstance(commentAttributeParameters);
         //builder.Register<IStart, CommentSpawnPointContainer>(Lifetime.Scoped).AsSelf();
         builder.Register<CommentPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<CommentMono>>();
         builder.Register<IUpdate,CommentSpawner>(Lifetime.Scoped).AsSelf();
@@ -50,14 +52,14 @@ public sealed class DaipanScope : LifetimeScope
         builder.Register<DaipanExecutor>(Lifetime.Scoped);
 
         // Player
-        builder.RegisterInstance(playerParameter);
+        //builder.RegisterInstance(playerParameter);
         builder.Register<PlayerPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<PlayerMono>>();
         builder.Register<PlayerAttack>(Lifetime.Scoped);
         builder.Register<PlayerHolder>(Lifetime.Scoped);
         builder.Register<IStart, PlayerSpawner>(Lifetime.Scoped);
 
         // Enemy
-        builder.RegisterInstance(enemyAttributeParameters);
+        //builder.RegisterInstance(enemyAttributeParameters);
         builder.Register<EnemyPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<EnemyMono>>();
         builder.Register<EnemyDomainBuilder>(Lifetime.Scoped).As<IEnemyDomainBuilder>();
 
@@ -78,12 +80,16 @@ public sealed class DaipanScope : LifetimeScope
         /*comment*/
         builder.Register<CommentParamsServer>(Lifetime.Scoped);
         builder.RegisterComponentInHierarchy<CommentPosition>();
-        builder.RegisterInstance(commentParams);
+        builder.RegisterInstance(commentManagerParams);
+
         /*enemy*/
         builder.Register<EnemyParamsServer>(Lifetime.Scoped);
         builder.RegisterComponentInHierarchy<EnemyPosition>();
-        builder.RegisterInstance(enemyParams);
+        builder.RegisterInstance(enemyManagerParams);
 
+        /*player*/
+        builder.Register<PlayerParamsServer>(Lifetime.Scoped);
+        builder.RegisterInstance(playerParams);
 
         // Initializer
         builder.RegisterEntryPoint<DaipanInitializer>();

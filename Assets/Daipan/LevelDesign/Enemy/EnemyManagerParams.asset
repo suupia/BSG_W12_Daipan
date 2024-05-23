@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2e89188dcc98dd4fa434cbf0f33b51c, type: 3}
+  m_Name: EnemyManagerParams
+  m_EditorClassIdentifier: 
+  spawnDelaySec: 1
+  spawnBossAmount: 10
+  enemyLifeParams:
+  - enemyParams: {fileID: 11400000, guid: 3d02a7325e47a6740ab90681a62a8b8c, type: 2}
+    spawnRatio: 1
+    daipanThreshold: 50
+    daipanProbability: 1
+  - enemyParams: {fileID: 11400000, guid: a0ecde75d40c7384eb89f196b12211d6, type: 2}
+    spawnRatio: 1
+    daipanThreshold: 50
+    daipanProbability: 1
+  - enemyParams: {fileID: 11400000, guid: 1bc38471a67677d47a4587970863cfda, type: 2}
+    spawnRatio: 1
+    daipanThreshold: 50
+    daipanProbability: 1
+  - enemyParams: {fileID: 11400000, guid: d6743ea78c918ae4ea68711cdcff5031, type: 2}
+    spawnRatio: 0
+    daipanThreshold: 90
+    daipanProbability: 1

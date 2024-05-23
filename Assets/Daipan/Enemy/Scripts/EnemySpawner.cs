@@ -53,7 +53,7 @@ namespace Daipan.Enemy.Scripts
         void SpawnEnemy()
         {
             var enemyObject = _enemyMonoBuilder.Build(_enemyParamsServer.GetSpawnedPositionRandom(), Quaternion.identity);
-            IncreaseIrritatedValueByEnemy(enemyObject.Parameter.GetEnemyEnum);
+            IncreaseIrritatedValueByEnemy(enemyObject._enemyEnum);
             _enemyCluster.Add(enemyObject);
         }
 
