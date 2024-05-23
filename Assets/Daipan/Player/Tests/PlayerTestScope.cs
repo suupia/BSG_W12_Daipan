@@ -10,12 +10,12 @@ using VContainer.Unity;
 // プレイヤーの処理をテストするためのLifetimeScope
 public class PlayerTestScope : LifetimeScope
 {
-    [SerializeField] PlayerParameter playerParameter = null!;
+    //[SerializeField] PlayerParameter playerParameter = null!;
 
     protected override void Configure(IContainerBuilder builder)
     {
         // ScriptableObjectのPlayerParameterを登録
-        builder.RegisterInstance(playerParameter.attack);
+        //builder.RegisterInstance(playerParameter.attack);
 
         // Playerのプレハブをロードするクラスを登録
         builder.Register<PlayerPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<PlayerMono>>();

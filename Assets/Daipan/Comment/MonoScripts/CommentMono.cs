@@ -14,11 +14,12 @@ namespace Daipan.Comment.MonoScripts
         [SerializeField] SpriteRenderer spriteRenderer = null!;
         CommentCluster _commentCluster = null!;
         CommentParamsServer _commentParamsServer = null!;
-        public CommentParameter Parameter { get; private set; } = null!;
+
+        public CommentEnum _commentEnum { get; private set; } = CommentEnum.None;
         
         void Update()
         {
-            transform.position += Vector3.up * speed;
+            transform.position += Vector3.up * _commentParamsServer.GetSpeed(_commentEnum) * Time.deltaTime;
             if (transform.position.y > _commentParamsServer.GetDespawnedPosition().y) _commentCluster.Remove(this);
         }
 
@@ -35,16 +36,16 @@ namespace Daipan.Comment.MonoScripts
             _commentCluster = commentCluster;
         }
 
-        public void SetParameter(CommentParameter parameter)
+        public void SetParameter(CommentEnum commentEnum)
         {
-            Parameter = parameter;
-            spriteRenderer.sprite = Parameter.Sprite;
+            _commentEnum = commentEnum;
+            spriteRenderer.sprite = _commentParamsServer.GetSprite(commentEnum);
             Debug.Log($"spriteRenderer.sprite : {spriteRenderer.sprite}");
         }
 
         public void Despawn()
         {
-            var args = new DespawnEventArgs(Parameter.GetCommentEnum);
+            var args = new DespawnEventArgs(_commentEnum);
             OnDespawn?.Invoke(this, args);
             Destroy(gameObject);
         }
