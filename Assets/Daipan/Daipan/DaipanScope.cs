@@ -22,10 +22,10 @@ using VContainer.Unity;
 public sealed class DaipanScope : LifetimeScope
 {
     [SerializeField] StreamParameter streamParameter = null!;
+    
     [SerializeField] PlayerParams playerParams = null!;
-    [SerializeField] EnemyAttributeParameters enemyAttributeParameters = null!;
 
-    [SerializeField] EnemyParams enemyParams = null!;
+    [SerializeField] EnemyManagerParams enemyManagerParams = null!;
 
     [SerializeField] CommentManagerParams commentManagerParams = null!;
 
@@ -59,7 +59,7 @@ public sealed class DaipanScope : LifetimeScope
         builder.Register<IStart, PlayerSpawner>(Lifetime.Scoped);
 
         // Enemy
-        builder.RegisterInstance(enemyAttributeParameters);
+        //builder.RegisterInstance(enemyAttributeParameters);
         builder.Register<EnemyPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<EnemyMono>>();
         builder.Register<EnemyDomainBuilder>(Lifetime.Scoped).As<IEnemyDomainBuilder>();
 
@@ -85,7 +85,7 @@ public sealed class DaipanScope : LifetimeScope
         /*enemy*/
         builder.Register<EnemyParamsServer>(Lifetime.Scoped);
         builder.RegisterComponentInHierarchy<EnemyPosition>();
-        builder.RegisterInstance(enemyParams);
+        builder.RegisterInstance(enemyManagerParams);
 
         /*player*/
         builder.Register<PlayerParamsServer>(Lifetime.Scoped);

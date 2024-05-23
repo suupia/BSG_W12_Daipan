@@ -19,17 +19,17 @@ namespace Daipan.Enemy.MonoScripts
         EnemyHp _enemyHp = null!;
         PlayerHolder _playerHolder = null!;
         EnemyParamsServer _enemyParamsServer = null!;
-        public EnemyParameter Parameter { get; private set; } = null!;
+        public EnemyEnum _enemyEnum { get; private set; } = EnemyEnum.None;
 
          
         void Update()
         {
             _enemyAttack.AttackUpdate(_playerHolder.PlayerMono);
 
-            transform.position += Vector3.left * Parameter.movement.speed * Time.deltaTime;
+            transform.position += Vector3.left * _enemyParamsServer.GetSpeed(_enemyEnum) * Time.deltaTime;
             if (transform.position.x < _enemyParamsServer.GetDespawnedPosition().x) _enemyCluster.Remove(this, false); // Destroy when out of screen
 
-            hpGaugeMono.SetRatio(CurrentHp / (float)Parameter.hp.maxHp);
+            hpGaugeMono.SetRatio(CurrentHp / (float)_enemyParamsServer.GetHP(_enemyEnum));
         }
 
         public int CurrentHp
@@ -62,7 +62,7 @@ namespace Daipan.Enemy.MonoScripts
         {
             if (isTriggerCallback)
             {
-                var args = new DiedEventArgs(Parameter.GetEnemyEnum.IsBoss);
+                var args = new DiedEventArgs(_enemyEnum.IsBoss);
                 OnDied?.Invoke(this, args);
             }
 
@@ -76,15 +76,15 @@ namespace Daipan.Enemy.MonoScripts
             _enemyCluster.Remove(this);
         }
 
-        public void SetParameter(EnemyParameter enemyParameter)
+        public void SetParameter(EnemyEnum enemyEnum)
         {
-            Parameter = enemyParameter;
-            _enemyAttack.enemyAttackParameter = Parameter.attack;
-            _enemyHp = new EnemyHp(enemyParameter.hp.maxHp, this, _enemyCluster);
+            _enemyEnum = enemyEnum;
+            _enemyAttack.enemyAttackParameter = _enemyParamsServer.GetAtatckParameter(enemyEnum);
+            _enemyHp = new EnemyHp(_enemyParamsServer.GetHP(_enemyEnum), this, _enemyCluster);
 
             // Sprite
-            var spriteRenderer = GetComponent<SpriteRenderer>();
-            spriteRenderer.sprite = Parameter.sprite;
+            //var spriteRenderer = GetComponent<SpriteRenderer>();
+            //spriteRenderer.sprite = Parameter.sprite;
 
         }
     }

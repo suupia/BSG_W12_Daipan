@@ -28,7 +28,7 @@ namespace Daipan.LevelDesign.Comment.Scripts
 
         // CommentManagerParamsについて
 
-        #region MyRegion
+        #region Params
 
         public Sprite GetSprite(CommentEnum commentEnum)
         {
@@ -57,7 +57,7 @@ namespace Daipan.LevelDesign.Comment.Scripts
         #endregion
 
         // CommentPositionについて
-        #region 
+        #region Position 
         public Vector3 GetSpawnedPosition()
         {
             return _commentPosition.CommentSpawnedPoint.position;

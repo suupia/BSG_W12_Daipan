@@ -36,6 +36,10 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         [Min(0)]
         public float attackDelaySec;
 
+        [Header("攻撃範囲")]
+        [Min(0)]
+        public float attackRange;
+
         [Header("このエネミーを倒したときの視聴者数の変化")]
         public float diffViewer;
 
