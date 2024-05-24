@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f2e89188dcc98dd4fa434cbf0f33b51c, type: 3}
-  m_Name: EnemyManagerParams
+  m_Name: EnemyParamsManager
   m_EditorClassIdentifier: 
   spawnDelaySec: 1
   spawnBossAmount: 10

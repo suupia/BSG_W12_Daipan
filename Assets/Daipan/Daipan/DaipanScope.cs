@@ -16,6 +16,7 @@ using Daipan.Stream.Scripts;
 using Daipan.Stream.Scripts.Utility;
 using Daipan.Stream.Tests;
 using UnityEngine;
+using UnityEngine.Serialization;
 using VContainer;
 using VContainer.Unity;
 
@@ -25,9 +26,9 @@ public sealed class DaipanScope : LifetimeScope
     
     [SerializeField] PlayerParams playerParams = null!;
 
-    [SerializeField] EnemyManagerParams enemyManagerParams = null!;
+    [SerializeField] EnemyParamsManager enemyParamsManager = null!;
 
-    [SerializeField] CommentManagerParams commentManagerParams = null!;
+    [SerializeField] CommentParamsManager commentParamsManager = null!;
 
     protected override void Configure(IContainerBuilder builder)
     {
@@ -80,12 +81,12 @@ public sealed class DaipanScope : LifetimeScope
         /*comment*/
         builder.Register<CommentParamsServer>(Lifetime.Scoped);
         builder.RegisterComponentInHierarchy<CommentPosition>();
-        builder.RegisterInstance(commentManagerParams);
+        builder.RegisterInstance(commentParamsManager);
 
         /*enemy*/
         builder.Register<EnemyParamsServer>(Lifetime.Scoped);
         builder.RegisterComponentInHierarchy<EnemyPosition>();
-        builder.RegisterInstance(enemyManagerParams);
+        builder.RegisterInstance(enemyParamsManager);
 
         /*player*/
         builder.Register<PlayerParamsServer>(Lifetime.Scoped);

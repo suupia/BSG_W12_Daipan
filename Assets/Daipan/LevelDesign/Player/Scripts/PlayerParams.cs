@@ -14,10 +14,10 @@ namespace Daipan.LevelDesign.Player.Scripts
 
         [Header("プレイヤーのHP")]
         [Min(0)]
-        public int HPAmount;
+        public int hpAmount;
 
         [Header(("プレイヤーの攻撃力"))]
-        public PlayerAttackParameter playerAtatckParameter;
+        public PlayerAttackParameter playerAttackParameter = null!;
     }
 
 
