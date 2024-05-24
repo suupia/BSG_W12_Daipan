@@ -10,7 +10,7 @@ namespace Daipan.LevelDesign.Player.Scripts
 {
     public class PlayerParamsServer
     {
-        readonly PlayerParams _playerParams = null;
+        readonly PlayerParams _playerParams;
 
         [Inject]
         PlayerParamsServer (PlayerParams playerParams)
@@ -19,13 +19,13 @@ namespace Daipan.LevelDesign.Player.Scripts
         }
 
 
-        public int GetHPAmount()
+        public int GetHpAmount()
         {
-            return _playerParams.HPAmount;
+            return _playerParams.hpAmount;
         }
         public PlayerAttackParameter GetAttackAmount()
         {
-            return _playerParams.playerAtatckParameter;
+            return _playerParams.playerAttackParameter;
         }
     }
 }

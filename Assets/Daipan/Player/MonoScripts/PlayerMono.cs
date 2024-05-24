@@ -20,7 +20,7 @@ public class PlayerMono : MonoBehaviour, IHpSetter
     {
         var enemyMono = _enemyCluster.NearestEnemy(transform.position);
         
-        hpGaugeMono.SetRatio(CurrentHp / (float)_playerParamsServer.GetHPAmount());
+        hpGaugeMono.SetRatio(CurrentHp / (float)_playerParamsServer.GetHpAmount());
 
         if (Input.GetKeyDown(KeyCode.W))
         {
@@ -82,7 +82,7 @@ public class PlayerMono : MonoBehaviour, IHpSetter
         _playerAttack = playerAttack;
         _enemyCluster = enemyCluster;
         _playerParamsServer = playerParamsServer; 
-        _playerHp = new PlayerHp(_playerParamsServer.GetHPAmount(), this);
+        _playerHp = new PlayerHp(_playerParamsServer.GetHpAmount(), this);
         _playerHp.OnDamage += (sender, args) => { commentSpawner.SpawnComment(CommentEnum.Spiky); };
     }
 }
