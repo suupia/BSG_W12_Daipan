@@ -54,6 +54,14 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         }
 
 
+        public void AddCurrentKillAmount()
+        {
+            _enemyManagerParams.currentKillAmount++;
+        }
+        /// <summary>
+        /// 現在の状態に応じて生成する敵を決定
+        /// </summary>
+        /// <returns></returns>
         public EnemyEnum DecideRandomEnemyType()
         {
             // ボス発生条件を満たしていればBOSSを生成

@@ -42,6 +42,9 @@ namespace Daipan.Enemy.Scripts
             enemyMono.SetParameter(enemyEnum);
             enemyMono.OnDied += (sender, args) =>
             {
+                // ボスを倒したときも含む
+                _enemyParamsServer.AddCurrentKillAmount();
+
                 if(!args.IsBoss) _viewerNumber.IncreaseViewer(7);
                 if(args.IsBoss) _commentSpawner.SpawnComment(CommentEnum.Super);
             };
