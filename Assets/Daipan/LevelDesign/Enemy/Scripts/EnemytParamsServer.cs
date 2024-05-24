@@ -52,7 +52,27 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         {
             return GetEnemyParams(enemyEnum).sprite;
         }
-        
+
+
+        public EnemyEnum DecideRandomEnemyType()
+        {
+            // ボス発生条件を満たしていればBOSSを生成
+            if (_enemyManagerParams.currentKillAmount >= _enemyManagerParams.spawnBossAmount)
+            {
+                _enemyManagerParams.currentKillAmount = 0;
+                return EnemyEnum.Boss;
+            }
+
+            // 通常敵のType決め
+            List<float> ratio = new();
+
+            foreach (var enemyLife in _enemyManagerParams.enemyLifeParams)
+            {
+                ratio.Add(enemyLife.spawnRatio);
+            }
+
+            return _enemyManagerParams.enemyLifeParams[Randoms.RandomByRatio(ratio)].enemyParams.GetEnemyEnum;
+        }
 
         EnemyParams GetEnemyParams(EnemyEnum enemyEnum)
         {

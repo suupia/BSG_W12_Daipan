@@ -24,6 +24,9 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         [Min(0)]
         public int spawnBossAmount;
 
+        [Header(("現在通常敵討伐数（自動更新されます）"))]
+        public int currentKillAmount;
+
 
         [Header("使用するエネミーを設定してください。")]
         public List<EnemyLifeParams> enemyLifeParams;
