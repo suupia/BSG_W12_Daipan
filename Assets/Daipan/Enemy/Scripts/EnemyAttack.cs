@@ -20,7 +20,7 @@ namespace Daipan.Enemy.Scripts
         public void AttackUpdate(PlayerMono playerMono)
         {
             Timer += Time.deltaTime;
-            if (Timer >= enemyAttackParameter.attackDelaySec)
+            if (Timer >= enemyAttackParameter.AttackDelaySec)
             {
                 Attack(playerMono);
                 Timer = 0;
@@ -29,9 +29,9 @@ namespace Daipan.Enemy.Scripts
 
         void Attack(PlayerMono playerMono)
         {
-            Debug.Log($"Attack, attackAmount:{enemyAttackParameter.attackAmount}");
+            Debug.Log($"Attack, attackAmount:{enemyAttackParameter.AttackAmount}");
             if (!CanAttack(_enemyMono, playerMono)) return;
-            playerMono.CurrentHp -= enemyAttackParameter.attackAmount;
+            playerMono.CurrentHp -= enemyAttackParameter.AttackAmount;
             Debug.Log($"playerHP after attack : {playerMono.CurrentHp}");
         }
         
@@ -40,7 +40,7 @@ namespace Daipan.Enemy.Scripts
             if (playerMono.CurrentHp <= 0) return false;
             Debug.Log($"enemy.transform.position : {enemyMono.transform.position}, player.transform.position : {playerMono.transform.position}");
             Debug.Log($"distance : {(playerMono.transform.position - enemyMono.transform.position).magnitude}");
-            if ((playerMono.transform.position - enemyMono.transform.position).magnitude > enemyAttackParameter.attackRange) return false;
+            if ((playerMono.transform.position - enemyMono.transform.position).magnitude > enemyAttackParameter.AttackRange) return false;
             return true;
         }
         

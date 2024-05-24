@@ -51,7 +51,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
             return GetEnemyParams(enemyEnum).moveSpeed_ups;
         }
 
-        public EnemyAttackParameter GetAtatckParameter(EnemyEnum enemyEnum)
+        public EnemyAttackParameter GetAttackParameter(EnemyEnum enemyEnum)
         {
             var enemy = GetEnemyParams(enemyEnum);
             return new EnemyAttackParameter(
@@ -61,7 +61,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
             );
         }
 
-        public int GetHP(EnemyEnum enemyEnum)
+        public int GetHp(EnemyEnum enemyEnum)
         {
             return GetEnemyParams(enemyEnum).HPAmount; 
         }
@@ -133,16 +133,16 @@ namespace Daipan.LevelDesign.Enemy.Scripts
 
     public class EnemyAttackParameter
     {
-        public int attackAmount { get; private set; }
-        public float attackDelaySec { get; private set; }
+        public int AttackAmount { get; private set; }
+        public float AttackDelaySec { get; private set; }
 
-        public float attackRange{ get; private set; }
+        public float AttackRange{ get; private set; }
 
         public EnemyAttackParameter(int attackAmount, float attackDelaySec, float attackRange)
         {
-            this.attackAmount = attackAmount;
-            this.attackDelaySec = attackDelaySec;
-            this.attackRange = attackRange;
+            this.AttackAmount = attackAmount;
+            this.AttackDelaySec = attackDelaySec;
+            this.AttackRange = attackRange;
         }
     }
 }
