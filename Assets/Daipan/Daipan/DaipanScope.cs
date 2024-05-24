@@ -26,9 +26,9 @@ public sealed class DaipanScope : LifetimeScope
     
     [SerializeField] PlayerParams playerParams = null!;
 
-    [SerializeField] EnemyManagerParams enemyManagerParams = null!;
+    [SerializeField] EnemyParamsManager enemyParamsManager = null!;
 
-    [FormerlySerializedAs("commentManagerParams")] [SerializeField] CommentParamsManager commentParamsManager = null!;
+    [SerializeField] CommentParamsManager commentParamsManager = null!;
 
     protected override void Configure(IContainerBuilder builder)
     {
@@ -86,7 +86,7 @@ public sealed class DaipanScope : LifetimeScope
         /*enemy*/
         builder.Register<EnemyParamsServer>(Lifetime.Scoped);
         builder.RegisterComponentInHierarchy<EnemyPosition>();
-        builder.RegisterInstance(enemyManagerParams);
+        builder.RegisterInstance(enemyParamsManager);
 
         /*player*/
         builder.Register<PlayerParamsServer>(Lifetime.Scoped);

@@ -15,19 +15,19 @@ namespace Daipan.LevelDesign.Enemy.Scripts
 {
     public class EnemyParamsServer
     {
-        readonly EnemyManagerParams _enemyManagerParams;
+        readonly EnemyParamsManager _enemyParamsManager;
         readonly EnemyPosition _enemyPosition;
 
         [Inject]
-        EnemyParamsServer (EnemyManagerParams enemyManagerParams, EnemyPosition enemyPosition)
+        EnemyParamsServer (EnemyParamsManager enemyParamsManager, EnemyPosition enemyPosition)
         {
-            _enemyManagerParams = enemyManagerParams;
+            _enemyParamsManager = enemyParamsManager;
             _enemyPosition = enemyPosition;
             
-            CheckIsValid(_enemyManagerParams);
+            CheckIsValid(_enemyParamsManager);
         }
         
-        void CheckIsValid(EnemyManagerParams parameters)
+        void CheckIsValid(EnemyParamsManager parameters)
         {
             foreach (var enemyLifeParam in parameters.enemyLifeParams)
             {
@@ -74,7 +74,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
 
         public void AddCurrentKillAmount()
         {
-            _enemyManagerParams.currentKillAmount++;
+            _enemyParamsManager.currentKillAmount++;
         }
         /// <summary>
         /// 現在の状態に応じて生成する敵を決定
@@ -83,26 +83,26 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         public EnemyEnum DecideRandomEnemyType()
         {
             // ボス発生条件を満たしていればBOSSを生成
-            if (_enemyManagerParams.currentKillAmount >= _enemyManagerParams.spawnBossAmount)
+            if (_enemyParamsManager.currentKillAmount >= _enemyParamsManager.spawnBossAmount)
             {
-                _enemyManagerParams.currentKillAmount = 0;
+                _enemyParamsManager.currentKillAmount = 0;
                 return EnemyEnum.Boss;
             }
 
             // 通常敵のType決め
             List<float> ratio = new();
 
-            foreach (var enemyLife in _enemyManagerParams.enemyLifeParams)
+            foreach (var enemyLife in _enemyParamsManager.enemyLifeParams)
             {
                 ratio.Add(enemyLife.spawnRatio);
             }
 
-            return _enemyManagerParams.enemyLifeParams[Randoms.RandomByRatio(ratio)].enemyParams.GetEnemyEnum;
+            return _enemyParamsManager.enemyLifeParams[Randoms.RandomByRatio(ratio)].enemyParams.GetEnemyEnum;
         }
 
         EnemyParams GetEnemyParams(EnemyEnum enemyEnum)
         {
-            return _enemyManagerParams.enemyLifeParams.First(c => c.enemyParams.GetEnemyEnum == enemyEnum).enemyParams;
+            return _enemyParamsManager.enemyLifeParams.First(c => c.enemyParams.GetEnemyEnum == enemyEnum).enemyParams;
         }
 
         #endregion
