@@ -29,9 +29,10 @@ namespace Daipan.Enemy.Scripts
 
         void Attack(PlayerMono playerMono)
         {
-            Debug.Log("Attack");
+            Debug.Log($"Attack, attackAmount:{enemyAttackParameter.attackAmount}");
             if (!CanAttack(_enemyMono, playerMono)) return;
             playerMono.CurrentHp -= enemyAttackParameter.attackAmount;
+            Debug.Log($"playerHP after attack : {playerMono.CurrentHp}");
         }
         
         bool CanAttack(EnemyMono enemyMono, PlayerMono playerMono)

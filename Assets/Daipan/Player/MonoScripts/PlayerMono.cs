@@ -10,14 +10,17 @@ using VContainer;
 
 public class PlayerMono : MonoBehaviour, IHpSetter
 {
+    [SerializeField] HpGaugeMono hpGaugeMono = null!; 
     EnemyCluster _enemyCluster = null!;
     PlayerAttack _playerAttack = null!;
     PlayerHp _playerHp = null!;
-    public PlayerParamsServer _playerParamsServer { get; private set; } = null!;
+    PlayerParamsServer _playerParamsServer = null!;
 
     public void Update()
     {
         var enemyMono = _enemyCluster.NearestEnemy(transform.position);
+        
+        hpGaugeMono.SetRatio(CurrentHp / (float)_playerParamsServer.GetHPAmount());
 
         if (Input.GetKeyDown(KeyCode.W))
         {
