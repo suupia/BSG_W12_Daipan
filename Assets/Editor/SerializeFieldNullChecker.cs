@@ -65,8 +65,8 @@ public static class SerializeFieldNullChecker
             var existsMissingField = ExistsNullField(component);
             if (existsMissingField)
             {
-                Assert.IsNotNull(_errorIcon);
-                if(_errorIcon != null) DrawIcon(selectionRect, _errorIcon);
+                Assert.IsNotNull(_warnIcon);
+                if(_warnIcon != null) DrawIcon(selectionRect, _warnIcon);
             }
         }
         
@@ -97,7 +97,7 @@ public static class SerializeFieldNullChecker
             //var fileId = serializedProp.FindPropertyRelative(PropertyNameOfFieldId);
             //if (fileId == null || fileId.intValue == 0) continue;
 
-            Debug.LogError($"GameObject: { component.name}, Component: {component.GetType().Name}, Field: {serializedProp.propertyPath} is null.");
+            Debug.LogWarning($"GameObject: { component.name}, Component: {component.GetType().Name}, Field: {serializedProp.propertyPath} is null.");
             return true;
         }
 
