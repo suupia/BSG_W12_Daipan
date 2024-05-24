@@ -22,8 +22,7 @@ namespace Daipan.LevelDesign.Comment.Scripts
         [SerializeField] CommentType commentType = CommentType.None;
 
         [Header("コメントの背景スプライト")]
-        [SerializeField] Sprite sprite = null!;
-        public Sprite Sprite => sprite;
+        [SerializeField] public Sprite sprite = null!;
 
 
         [Header("コメントが流れる速度(unit/s)")]

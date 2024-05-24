@@ -14,14 +14,14 @@ namespace Daipan.LevelDesign.Comment.Scripts
 {
     public class CommentParamsServer
     {
-        readonly CommentManagerParams _commentManagerParams;
+        readonly CommentParamsManager _commentParamsManager;
         readonly CommentPosition _commentPosition;
         
 
         [Inject]
-        CommentParamsServer (CommentManagerParams commentManagerParams, CommentPosition commentPosition)
+        CommentParamsServer (CommentParamsManager commentParamsManager, CommentPosition commentPosition)
         {
-            _commentManagerParams = commentManagerParams;
+            _commentParamsManager = commentParamsManager;
             _commentPosition = commentPosition;
         }
 
@@ -33,12 +33,12 @@ namespace Daipan.LevelDesign.Comment.Scripts
         public Sprite GetSprite(CommentEnum commentEnum)
         {
             var cparams = GetCommentParams(commentEnum);
-            return cparams.Sprite;
+            return cparams.sprite;
         }
 
         public float GetSpeed(CommentEnum commentEnum)
         {
-            if (_commentManagerParams.isAdaptSameSpeed) return _commentManagerParams.commentSpeed;
+            if (_commentParamsManager.isAdaptSameSpeed) return _commentParamsManager.commentSpeed;
             var cparams = GetCommentParams(commentEnum);
             return cparams.commentSpeed_ups;
         }
@@ -51,7 +51,7 @@ namespace Daipan.LevelDesign.Comment.Scripts
         
         CommentParams GetCommentParams(CommentEnum commentEnum)
         {
-            return _commentManagerParams.commentParams.First(c => c.GetCommentEnum == commentEnum);
+            return _commentParamsManager.commentParams.First(c => c.GetCommentEnum == commentEnum);
         }
 
         #endregion
