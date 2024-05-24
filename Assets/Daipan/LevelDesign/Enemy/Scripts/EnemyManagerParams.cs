@@ -29,14 +29,14 @@ namespace Daipan.LevelDesign.Enemy.Scripts
 
 
         [Header("使用するエネミーを設定してください。")]
-        public List<EnemyLifeParams> enemyLifeParams;
+        public List<EnemyLifeParams> enemyLifeParams = null!;
     }
 
     [Serializable]
     public class EnemyLifeParams
     {
         [Header("使用するエネミーを設定")]
-        public EnemyParams enemyParams;
+        public EnemyParams enemyParams = null!;
 
         [Header("エネミーの生成割合 (相対的に指定可)")]
         [Min(0)]

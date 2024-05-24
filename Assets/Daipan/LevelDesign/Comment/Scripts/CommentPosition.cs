@@ -23,6 +23,6 @@ namespace Daipan.LevelDesign.Comment.Scripts
 
         [Header("コメントの親オブジェクト")]
         [Tooltip("コメントの親オブジェクトを入れて！！")]
-        public Transform CommentParent = null;
+        public Transform CommentParent = null!;
     }
 }

@@ -23,6 +23,6 @@ namespace Daipan.LevelDesign.Comment.Scripts
 
 
         [Header("使用するコメントを設定してください。")]
-        public List<CommentParams> commentParams;
+        public List<CommentParams> commentParams = null!;
     }
 }

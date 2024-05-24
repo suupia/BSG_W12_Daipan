@@ -15,8 +15,8 @@ namespace Daipan.LevelDesign.Enemy.Scripts
 {
     public class EnemyParamsServer
     {
-        readonly EnemyManagerParams _enemyManagerParams = null;
-        readonly EnemyPosition _enemyPosition = null;
+        readonly EnemyManagerParams _enemyManagerParams;
+        readonly EnemyPosition _enemyPosition;
 
         [Inject]
         EnemyParamsServer (EnemyManagerParams enemyManagerParams, EnemyPosition enemyPosition)

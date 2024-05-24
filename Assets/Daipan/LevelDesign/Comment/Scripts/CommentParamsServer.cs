@@ -14,8 +14,8 @@ namespace Daipan.LevelDesign.Comment.Scripts
 {
     public class CommentParamsServer
     {
-        readonly CommentManagerParams _commentManagerParams = null;
-        readonly CommentPosition _commentPosition = null;
+        readonly CommentManagerParams _commentManagerParams;
+        readonly CommentPosition _commentPosition;
         
 
         [Inject]
