@@ -27,10 +27,10 @@ namespace Daipan.Enemy.Scripts
 
         public EnemyMono NearestEnemy(Vector3 position)
         {
-            // [Prerequisite] The enemy list is not empty
+            // [Precondition] The enemy list is not empty
             if (!_enemies.Any())
             {
-                Debug.LogWarning("No enemies found");
+                // Debug.LogWarning("No enemies found");
                 return null!;
             }
 

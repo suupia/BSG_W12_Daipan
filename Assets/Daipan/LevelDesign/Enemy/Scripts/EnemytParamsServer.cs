@@ -23,6 +23,24 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         {
             _enemyManagerParams = enemyManagerParams;
             _enemyPosition = enemyPosition;
+            
+            CheckIsValid(_enemyManagerParams);
+        }
+        
+        void CheckIsValid(EnemyManagerParams parameters)
+        {
+            foreach (var enemyLifeParam in parameters.enemyLifeParams)
+            {
+                var enemyParam = enemyLifeParam.enemyParams;
+                if (enemyParam.attackAmount <= 0)
+                {
+                    Debug.LogWarning($"{enemyParam.GetEnemyEnum}の攻撃力が0以下です。");
+                }
+                if (enemyParam.attackRange <= 0)
+                {
+                    Debug.LogWarning($"{enemyParam.GetEnemyEnum}の攻撃範囲が0以下です。");
+                }
+            }
         }
 
 

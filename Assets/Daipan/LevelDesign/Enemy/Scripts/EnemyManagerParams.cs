@@ -43,7 +43,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         public float spawnRatio;
 
         [Header("台パンの影響を受けるイライラ度の閾値")]
-        [Min((0))]
+        [Min(0)]
         public int daipanThreshold;
 
         [Header("台パンされたときに死ぬ確率 (0～1)")]
