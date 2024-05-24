@@ -674,8 +674,8 @@ MonoBehaviour:
   autoInjectGameObjects: []
   streamParameter: {fileID: 11400000, guid: 1b8bd700307d7c748a87d7ab4b98611c, type: 2}
   playerParams: {fileID: 11400000, guid: e609f29f26d888f4b9d6d419ed118ab7, type: 2}
-  enemyManagerParams: {fileID: 11400000, guid: d5c28246bf0490340a52cc25d5aafc71, type: 2}
-  commentManagerParams: {fileID: 11400000, guid: b83c7fae0686b214fb53fc224da8567a, type: 2}
+  enemyParamsManager: {fileID: 11400000, guid: d5c28246bf0490340a52cc25d5aafc71, type: 2}
+  commentParamsManager: {fileID: 11400000, guid: b83c7fae0686b214fb53fc224da8567a, type: 2}
 --- !u!4 &309620969
 Transform:
   m_ObjectHideFlags: 0
@@ -4184,7 +4184,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1951700564}
-  - {fileID: 309620969}
   - {fileID: 262770952}
   - {fileID: 1349062969}
   - {fileID: 141214692}
@@ -4192,4 +4191,5 @@ SceneRoots:
   - {fileID: 1904880345}
   - {fileID: 375716989}
   - {fileID: 1103018221}
+  - {fileID: 309620969}
   - {fileID: 1170389373}
