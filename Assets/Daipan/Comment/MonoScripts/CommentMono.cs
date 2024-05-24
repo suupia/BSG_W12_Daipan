@@ -57,4 +57,5 @@ namespace Daipan.Comment.MonoScripts
     }
 
         public record DespawnEventArgs(CommentEnum CommentEnum);
+
 }
