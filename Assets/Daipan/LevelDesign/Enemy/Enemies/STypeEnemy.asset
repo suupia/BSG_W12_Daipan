@@ -17,6 +17,6 @@ MonoBehaviour:
   attackAmount: 1
   moveSpeed_ups: 1
   attackDelaySec: 1
-  attackRange: 0
+  attackRange: 7
   diffViewer: 10
-  sprite: {fileID: 21300000, guid: 5c853bec84f2b44479169018d043ff5b, type: 3}
+  sprite: {fileID: 21300000, guid: de401ab12c255432dae79e3ba8c3ab65, type: 3}

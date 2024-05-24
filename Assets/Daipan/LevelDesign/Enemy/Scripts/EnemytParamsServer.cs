@@ -15,14 +15,32 @@ namespace Daipan.LevelDesign.Enemy.Scripts
 {
     public class EnemyParamsServer
     {
-        readonly EnemyManagerParams _enemyManagerParams = null;
-        readonly EnemyPosition _enemyPosition = null;
+        readonly EnemyParamsManager _enemyParamsManager;
+        readonly EnemyPosition _enemyPosition;
 
         [Inject]
-        EnemyParamsServer (EnemyManagerParams enemyManagerParams, EnemyPosition enemyPosition)
+        EnemyParamsServer (EnemyParamsManager enemyParamsManager, EnemyPosition enemyPosition)
         {
-            _enemyManagerParams = enemyManagerParams;
+            _enemyParamsManager = enemyParamsManager;
             _enemyPosition = enemyPosition;
+            
+            CheckIsValid(_enemyParamsManager);
+        }
+        
+        void CheckIsValid(EnemyParamsManager parameters)
+        {
+            foreach (var enemyLifeParam in parameters.enemyLifeParams)
+            {
+                var enemyParam = enemyLifeParam.enemyParams;
+                if (enemyParam.attackAmount <= 0)
+                {
+                    Debug.LogWarning($"{enemyParam.GetEnemyEnum}の攻撃力が0以下です。");
+                }
+                if (enemyParam.attackRange <= 0)
+                {
+                    Debug.LogWarning($"{enemyParam.GetEnemyEnum}の攻撃範囲が0以下です。");
+                }
+            }
         }
 
 
@@ -33,7 +51,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
             return GetEnemyParams(enemyEnum).moveSpeed_ups;
         }
 
-        public EnemyAttackParameter GetAtatckParameter(EnemyEnum enemyEnum)
+        public EnemyAttackParameter GetAttackParameter(EnemyEnum enemyEnum)
         {
             var enemy = GetEnemyParams(enemyEnum);
             return new EnemyAttackParameter(
@@ -43,7 +61,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
             );
         }
 
-        public int GetHP(EnemyEnum enemyEnum)
+        public int GetHp(EnemyEnum enemyEnum)
         {
             return GetEnemyParams(enemyEnum).HPAmount; 
         }
@@ -52,11 +70,39 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         {
             return GetEnemyParams(enemyEnum).sprite;
         }
-        
+
+
+        public void AddCurrentKillAmount()
+        {
+            _enemyParamsManager.currentKillAmount++;
+        }
+        /// <summary>
+        /// 現在の状態に応じて生成する敵を決定
+        /// </summary>
+        /// <returns></returns>
+        public EnemyEnum DecideRandomEnemyType()
+        {
+            // ボス発生条件を満たしていればBOSSを生成
+            if (_enemyParamsManager.currentKillAmount >= _enemyParamsManager.spawnBossAmount)
+            {
+                _enemyParamsManager.currentKillAmount = 0;
+                return EnemyEnum.Boss;
+            }
+
+            // 通常敵のType決め
+            List<float> ratio = new();
+
+            foreach (var enemyLife in _enemyParamsManager.enemyLifeParams)
+            {
+                ratio.Add(enemyLife.spawnRatio);
+            }
+
+            return _enemyParamsManager.enemyLifeParams[Randoms.RandomByRatio(ratio)].enemyParams.GetEnemyEnum;
+        }
 
         EnemyParams GetEnemyParams(EnemyEnum enemyEnum)
         {
-            return _enemyManagerParams.enemyLifeParams.First(c => c.enemyParams.GetEnemyEnum == enemyEnum).enemyParams;
+            return _enemyParamsManager.enemyLifeParams.First(c => c.enemyParams.GetEnemyEnum == enemyEnum).enemyParams;
         }
 
         #endregion
@@ -87,16 +133,16 @@ namespace Daipan.LevelDesign.Enemy.Scripts
 
     public class EnemyAttackParameter
     {
-        public int attackAmount { get; private set; }
-        public float attackDelaySec { get; private set; }
+        public int AttackAmount { get; private set; }
+        public float AttackDelaySec { get; private set; }
 
-        public float attackRange{ get; private set; }
+        public float AttackRange{ get; private set; }
 
         public EnemyAttackParameter(int attackAmount, float attackDelaySec, float attackRange)
         {
-            this.attackAmount = attackAmount;
-            this.attackDelaySec = attackDelaySec;
-            this.attackRange = attackRange;
+            this.AttackAmount = attackAmount;
+            this.AttackDelaySec = attackDelaySec;
+            this.AttackRange = attackRange;
         }
     }
 }

@@ -5,6 +5,7 @@ using Daipan.Comment.MonoScripts;
 using Daipan.Comment.Scripts;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.MonoScripts;
+using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.Stream.Scripts;
 using Daipan.Stream.Scripts.Utility;
 using UnityEngine;
@@ -19,24 +20,31 @@ namespace Daipan.Enemy.Scripts
     {
         readonly CommentSpawner _commentSpawner;
         readonly ViewerNumber _viewerNumber;
+        readonly EnemyParamsServer _enemyParamsServer;
 
         public EnemyDomainBuilder(
             CommentSpawner commentSpawner,
-            ViewerNumber viewerNumber
+            ViewerNumber viewerNumber,
+            EnemyParamsServer enemyParamsServer
             )
         {
             _commentSpawner = commentSpawner;
             _viewerNumber = viewerNumber;
+            _enemyParamsServer = enemyParamsServer;
         }
     
         public EnemyMono SetDomain(EnemyMono enemyMono)
         {
-            var enemyEnum = DecideRandomEnemyTypeCustom();
+            //var enemyEnum = DecideRandomEnemyTypeCustom();
+            var enemyEnum = _enemyParamsServer.DecideRandomEnemyType();
             Debug.Log($"enemyEnum: {enemyEnum}");
             enemyMono.SetDomain(new EnemyAttack(enemyMono));
             enemyMono.SetParameter(enemyEnum);
             enemyMono.OnDied += (sender, args) =>
             {
+                // ボスを倒したときも含む
+                _enemyParamsServer.AddCurrentKillAmount();
+
                 if(!args.IsBoss) _viewerNumber.IncreaseViewer(7);
                 if(args.IsBoss) _commentSpawner.SpawnComment(CommentEnum.Super);
             };

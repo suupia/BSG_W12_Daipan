@@ -14,23 +14,23 @@ namespace Daipan.LevelDesign.Enemy.Scripts
 
 
         
-        public List<EnemySpawnedPositon> enemySpawnedPoints;
+        public List<EnemySpawnedPosition> enemySpawnedPoints = null!;
 
 
         [Header("エネミーの消滅位置")]
         [Tooltip("エネミーの消滅位置を示すGameObjectを入れて！！")]
-        public Transform enemyDespawnedPoint;
+        public Transform enemyDespawnedPoint = null!;
 
     }
 
     [Serializable]
-    public class EnemySpawnedPositon
+    public class EnemySpawnedPosition
     {
         [Header("エネミーの生成位置")]
         [Tooltip("エネミーの生成位置を示すGameObjectを入れて！！")]
-        public Transform transform;
+        public Transform transform = null!;
         [Header("エネミーの生成される確率（相対的に設定してよい)")]
-        [Min(0)]
+        [Min(0)]    
         public float ratio;
     }
 

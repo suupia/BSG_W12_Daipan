@@ -29,7 +29,7 @@ namespace Daipan.Enemy.MonoScripts
             transform.position += Vector3.left * _enemyParamsServer.GetSpeed(_enemyEnum) * Time.deltaTime;
             if (transform.position.x < _enemyParamsServer.GetDespawnedPosition().x) _enemyCluster.Remove(this, false); // Destroy when out of screen
 
-            hpGaugeMono.SetRatio(CurrentHp / (float)_enemyParamsServer.GetHP(_enemyEnum));
+            hpGaugeMono.SetRatio(CurrentHp / (float)_enemyParamsServer.GetHp(_enemyEnum));
         }
 
         public int CurrentHp
@@ -79,8 +79,8 @@ namespace Daipan.Enemy.MonoScripts
         public void SetParameter(EnemyEnum enemyEnum)
         {
             _enemyEnum = enemyEnum;
-            _enemyAttack.enemyAttackParameter = _enemyParamsServer.GetAtatckParameter(enemyEnum);
-            _enemyHp = new EnemyHp(_enemyParamsServer.GetHP(_enemyEnum), this, _enemyCluster);
+            _enemyAttack.enemyAttackParameter = _enemyParamsServer.GetAttackParameter(enemyEnum);
+            _enemyHp = new EnemyHp(_enemyParamsServer.GetHp(_enemyEnum), this, _enemyCluster);
 
             //Sprite
            var spriteRenderer = GetComponent<SpriteRenderer>();
