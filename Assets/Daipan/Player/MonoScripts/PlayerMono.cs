@@ -25,7 +25,7 @@ public class PlayerMono : MonoBehaviour, IHpSetter
         if (Input.GetKeyDown(KeyCode.W))
         {
             Debug.Log("Wが押されたよ");
-            if (enemyMono._enemyEnum == EnemyEnum.W)
+            if (enemyMono._enemyEnum == EnemyEnum.W || enemyMono._enemyEnum == EnemyEnum.Boss)
             {
                 Debug.Log($"EnemyType: {enemyMono._enemyEnum}を攻撃");
                 _playerAttack.WAttack(enemyMono);
@@ -39,7 +39,7 @@ public class PlayerMono : MonoBehaviour, IHpSetter
         if (Input.GetKeyDown(KeyCode.S))
         {
             Debug.Log("Sが押されたよ");
-            if (enemyMono._enemyEnum == EnemyEnum.S)
+            if (enemyMono._enemyEnum == EnemyEnum.S || enemyMono._enemyEnum == EnemyEnum.Boss)
             {
                 Debug.Log($"EnemyType: {enemyMono._enemyEnum}を攻撃");
                 _playerAttack.SAttack(enemyMono);
@@ -53,7 +53,7 @@ public class PlayerMono : MonoBehaviour, IHpSetter
         if (Input.GetKeyDown(KeyCode.A))
         {
             Debug.Log("Aが押されたよ");
-            if (enemyMono._enemyEnum == EnemyEnum.A)
+            if (enemyMono._enemyEnum == EnemyEnum.A || enemyMono._enemyEnum == EnemyEnum.Boss)
             {
                 Debug.Log($"EnemyType: {enemyMono._enemyEnum}を攻撃");
                 _playerAttack.AAttack(enemyMono);
