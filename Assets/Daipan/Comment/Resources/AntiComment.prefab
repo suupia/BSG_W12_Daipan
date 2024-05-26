@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2501272673469683439}
-  - component: {fileID: 5457748004809117929}
+  - component: {fileID: 8498270373437524366}
   m_Layer: 0
   m_Name: AntiComment
   m_TagString: Untagged
@@ -34,7 +34,7 @@ Transform:
   - {fileID: 2065785709832557957}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5457748004809117929
+--- !u!114 &8498270373437524366
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,7 +43,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6012322395250088482}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e625b052f65845218d9aced63c3df371, type: 3}
+  m_Script: {fileID: 11500000, guid: e405131eef5a4b15ab9d2adee4cca478, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 8202679621555953744}

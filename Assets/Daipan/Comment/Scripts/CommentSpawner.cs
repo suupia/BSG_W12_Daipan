@@ -12,7 +12,7 @@ namespace Daipan.Comment.Scripts;
 public sealed class CommentSpawner : IUpdate
 {
     readonly AntiCommentCluster _antiCommentCluster;
-    readonly IPrefabLoader<AntiCommentMono> _antiCommentLoader;
+    readonly IPrefabLoader<AntiMono> _antiCommentLoader;
     readonly CommentCluster _commentCluster;
     readonly IPrefabLoader<CommentMono> _commentLoader;
     readonly CommentParamsServer _commentParamsServer;
@@ -29,7 +29,7 @@ public sealed class CommentSpawner : IUpdate
         AntiCommentCluster antiCommentCluster,
         ViewerNumber viewerNumber,
         IPrefabLoader<CommentMono> commentCommentLoader,
-        IPrefabLoader<AntiCommentMono> antiCommentLoader
+        IPrefabLoader<AntiMono> antiCommentLoader
     )
     {
         _container = container;
