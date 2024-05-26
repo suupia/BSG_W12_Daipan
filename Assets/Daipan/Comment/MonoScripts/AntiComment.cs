@@ -11,13 +11,15 @@ public sealed class AntiCommentMono : MonoBehaviour
     [SerializeField] SpriteRenderer spriteRenderer = null!;
     CommentParamsServer _commentParamsServer = null!;
 
+    readonly float _despawneTime = 5f; // todo : パラメータから受け取るようにする
+    float _timer;
+
     CommentEnum CommentEnum { get; set; } = CommentEnum.None;
 
     void Update()
     {
-        // var direction = (_commentParamsServer.GetDespawnedPosition() - transform.position).normalized;
-        // transform.position += direction * _commentParamsServer.GetSpeed(_commentEnum) * Time.deltaTime;
-        // if ((transform.position - _commentParamsServer.GetDespawnedPosition()).magnitude < float.Epsilon) _commentCluster.Remove(this);
+        _timer += Time.deltaTime;
+        if (_timer > _despawneTime) Despawn();
     }
 
     public event EventHandler<DespawnEventArgs>? OnDespawn;

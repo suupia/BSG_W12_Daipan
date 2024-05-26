@@ -71,7 +71,8 @@ public sealed class CommentSpawner : IUpdate
     void SpawnAntiComment()
     {
         var commentPrefab = _antiCommentLoader.Load();
-        var comment = _container.Instantiate(commentPrefab, _commentParamsServer.GetSpawnedPosition(),
+        var spawnPosition = Vector3.zero; // todo : とりあえず画面中央に配置 配置が面倒なら、親オブジェクト指定してVerticalLayoutGroupを使う
+        var comment = _container.Instantiate(commentPrefab, spawnPosition, 
             Quaternion.identity, _commentParamsServer.GetCommentParent());
         comment.SetParameter(CommentEnum.Super);
         comment.OnDespawn += (sender, args) =>
