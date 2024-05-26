@@ -72,6 +72,7 @@ public sealed class DaipanScope : LifetimeScope
             .WithParameter(EnemyEnum.Boss);
         builder.Register<EnemySpawner>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
         builder.Register<EnemyCluster>(Lifetime.Scoped);
+        builder.Register<EnemyQuickDefeatChecker>(Lifetime.Scoped);
 
 
         // View
