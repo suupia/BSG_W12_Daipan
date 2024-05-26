@@ -29,14 +29,14 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         
         void CheckIsValid(EnemyParamsManager parameters)
         {
-            foreach (var enemyLifeParam in parameters.enemyLifeParams)
+            Debug.Log($"EnemeyCount : {parameters.enemyParams.Count}");
+            foreach (var enemyParam in parameters.enemyParams)
             {
-                var enemyParam = enemyLifeParam.enemyParams;
-                if (enemyParam.attackAmount <= 0)
+                if (enemyParam.enemyAttackParam.attackAmount <= 0)
                 {
                     Debug.LogWarning($"{enemyParam.GetEnemyEnum}の攻撃力が0以下です。");
                 }
-                if (enemyParam.attackRange <= 0)
+                if (enemyParam.enemyAttackParam.attackRange <= 0)
                 {
                     Debug.LogWarning($"{enemyParam.GetEnemyEnum}の攻撃範囲が0以下です。");
                 }
@@ -48,22 +48,22 @@ namespace Daipan.LevelDesign.Enemy.Scripts
 
         public float GetSpeed(EnemyEnum enemyEnum)
         {
-            return GetEnemyParams(enemyEnum).moveSpeed_ups;
+            return GetEnemyParams(enemyEnum).enemyMoveParam.moveSpeedPerSec;
         }
 
         public EnemyAttackParameter GetAttackParameter(EnemyEnum enemyEnum)
         {
             var enemy = GetEnemyParams(enemyEnum);
             return new EnemyAttackParameter(
-                enemy.attackAmount,
-                enemy.attackDelaySec,
-                enemy.attackRange
+                enemy.enemyAttackParam.attackAmount,
+                enemy.enemyAttackParam.attackDelaySec,
+                enemy.enemyAttackParam.attackRange
             );
         }
 
         public int GetHp(EnemyEnum enemyEnum)
         {
-            return GetEnemyParams(enemyEnum).HPAmount; 
+            return GetEnemyParams(enemyEnum).enemyHpParam.hpAmount; 
         }
 
         public Sprite GetSprite(EnemyEnum enemyEnum)
@@ -92,17 +92,17 @@ namespace Daipan.LevelDesign.Enemy.Scripts
             // 通常敵のType決め
             List<float> ratio = new();
 
-            foreach (var enemyLife in _enemyParamsManager.enemyLifeParams)
+            foreach (var enemyLife in _enemyParamsManager.enemyParams)
             {
-                ratio.Add(enemyLife.spawnRatio);
+                ratio.Add(enemyLife.enemySpawnParam.spawnRatio);
             }
 
-            return _enemyParamsManager.enemyLifeParams[Randoms.RandomByRatio(ratio)].enemyParams.GetEnemyEnum;
+            return _enemyParamsManager.enemyParams[Randoms.RandomByRatio(ratio)].GetEnemyEnum;
         }
 
-        EnemyParams GetEnemyParams(EnemyEnum enemyEnum)
+        EnemyParam GetEnemyParams(EnemyEnum enemyEnum)
         {
-            return _enemyParamsManager.enemyLifeParams.First(c => c.enemyParams.GetEnemyEnum == enemyEnum).enemyParams;
+            return _enemyParamsManager.enemyParams.First(c => c.GetEnemyEnum == enemyEnum);
         }
 
         #endregion
