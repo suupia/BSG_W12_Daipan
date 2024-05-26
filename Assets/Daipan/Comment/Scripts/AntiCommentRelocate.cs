@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Daipan.Core.Interfaces;
+using Daipan.Stream.Scripts;
 using UnityEngine;
 
 namespace Daipan.Comment.Scripts;
@@ -8,21 +9,25 @@ namespace Daipan.Comment.Scripts;
 public sealed class AntiCommentRelocate : IUpdate
 {
     readonly AntiCommentCluster _antiCommentCluster;
+    readonly StreamStatus _streamStatus;
 
     // todo : あとで調整する必要あり 必ずしもパラメータでもらう必要はない
     readonly float _verticalSpacing = 1.0f; // オブジェクト間の垂直間隔
 
 
     public AntiCommentRelocate(
-        AntiCommentCluster antiCommentCluster
+        AntiCommentCluster antiCommentCluster,
+        StreamStatus streamStatus
     )
     {
         _antiCommentCluster = antiCommentCluster;
+        _streamStatus = streamStatus;
     }
 
     void IUpdate.Update()
     {
-        var objectsToAlign = _antiCommentCluster.CommentMonos.Select(x => x.gameObject);
+        var objectsToAlign = _antiCommentCluster.CommentMonos.Select(x => x.gameObject).ToList();
+        _streamStatus.IsIrritated = objectsToAlign.Count > 0;
         AlignVertically(objectsToAlign);
     }
 

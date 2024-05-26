@@ -6,33 +6,45 @@ namespace Daipan.Stream.MonoScripts
 {
     public sealed class StreamMono : MonoBehaviour
     {
-        StreamStatus _streamStatus;
-        ViewerNumber _viewerNumber;
-        ViewerParameter _viewerParameter;
+        StreamStatus _streamStatus = null!;
+        ViewerNumber _viewerNumber = null!;
+        ViewerParameter _viewerParameter = null!;
+        IrritatedValue _irritatedValue = null!;
 
-        float Timer { get; set; }
+        float OneSecTimer { get; set; }
 
         void Update()
         {
-            Timer += Time.deltaTime;
-            if (Timer > 1)
+            OneSecTimer += Time.deltaTime;
+            if (OneSecTimer > 1)
             {
                 if (_streamStatus.IsIrritated)
                     _viewerNumber.DecreaseViewer(_viewerParameter.decreaseNumberWhenIrradiated);
                 else
                     _viewerNumber.IncreaseViewer(_viewerParameter.increaseNumberPerSecond);
-                Timer = 0;
+                
+
+                OneSecTimer = 0;
             }
+
+            if (_streamStatus.IsIrritated)
+            {
+                _irritatedValue.IncreaseValue(1/60.0f);
+            }
+
+
         }
 
         [Inject]
         public void Initialize(
             ViewerParameter viewerParameter,
             ViewerNumber viewerNumber,
+            IrritatedValue irritatedValue,
             StreamStatus streamStatus)
         {
             _viewerParameter = viewerParameter;
             _viewerNumber = viewerNumber;
+            _irritatedValue = irritatedValue;
             _streamStatus = streamStatus;
         }
     }
