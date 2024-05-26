@@ -49,6 +49,7 @@ namespace Daipan.Enemy.Scripts
                 // else _commentSpawner.SpawnCommentByType(CommentEnum.Normal);
                 
                 if(args.IsBoss || args.IsQuickDefeat) _commentSpawner.SpawnCommentByType(CommentEnum.Normal);
+                if (args.IsSlowDefeat) _commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
             };
             return enemyMono;
         }

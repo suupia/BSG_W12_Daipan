@@ -20,6 +20,7 @@ namespace Daipan.Enemy.MonoScripts
         PlayerHolder _playerHolder = null!;
         EnemyParamsServer _enemyParamsServer = null!;
         EnemyQuickDefeatChecker _quickDefeatChecker = null!;
+        EnemySlowDefeatChecker _slowDefeatChecker = null!;
         public EnemyEnum _enemyEnum { get; private set; } = EnemyEnum.None;
 
          
@@ -47,13 +48,15 @@ namespace Daipan.Enemy.MonoScripts
             EnemyCluster enemyCluster,
             PlayerHolder playerHolder,
             EnemyParamsServer enemyParamsServer,
-            EnemyQuickDefeatChecker quickDefeatChecker
+            EnemyQuickDefeatChecker quickDefeatChecker,
+            EnemySlowDefeatChecker slowDefeatChecker
         )
         {
             _enemyCluster = enemyCluster;
             _playerHolder = playerHolder;
             _enemyParamsServer = enemyParamsServer;
             _quickDefeatChecker = quickDefeatChecker;
+            _slowDefeatChecker = slowDefeatChecker;
 
         }
 
@@ -67,7 +70,8 @@ namespace Daipan.Enemy.MonoScripts
             if (isTriggerCallback)
             {
                 var isQuickDefeat = _quickDefeatChecker.IsQuickDefeat(transform.position);
-                var args = new DiedEventArgs(_enemyEnum.IsBoss,isQuickDefeat);
+                var isSlowDefeat = _slowDefeatChecker.IsSlowDefeat();
+                var args = new DiedEventArgs(_enemyEnum.IsBoss,isQuickDefeat,isSlowDefeat);
                 OnDied?.Invoke(this, args);
             }
 
@@ -94,5 +98,5 @@ namespace Daipan.Enemy.MonoScripts
         }
     }
 
-    public record DiedEventArgs(bool IsBoss, bool IsQuickDefeat, bool IsTrigger = false);
+    public record DiedEventArgs(bool IsBoss, bool IsQuickDefeat, bool IsSlowDefeat, bool IsTrigger = false);
 }
