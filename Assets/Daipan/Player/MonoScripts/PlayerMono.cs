@@ -83,6 +83,6 @@ public class PlayerMono : MonoBehaviour, IHpSetter
         _enemyCluster = enemyCluster;
         _playerParamsServer = playerParamsServer; 
         _playerHp = new PlayerHp(_playerParamsServer.GetHpAmount(), this);
-        _playerHp.OnDamage += (sender, args) => { commentSpawner.SpawnComment(CommentEnum.Spiky); };
+        _playerHp.OnDamage += (sender, args) => { commentSpawner.SpawnCommentByType(CommentEnum.Spiky); };
     }
 }

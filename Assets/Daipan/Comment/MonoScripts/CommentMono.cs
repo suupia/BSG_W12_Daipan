@@ -19,8 +19,9 @@ namespace Daipan.Comment.MonoScripts
         
         void Update()
         {
-            transform.position += Vector3.up * _commentParamsServer.GetSpeed(_commentEnum) * Time.deltaTime;
-            if (transform.position.y > _commentParamsServer.GetDespawnedPosition().y) _commentCluster.Remove(this);
+            var direction = (_commentParamsServer.GetDespawnedPosition() - transform.position).normalized;
+            transform.position += direction * _commentParamsServer.GetSpeed(_commentEnum) * Time.deltaTime;
+            if ((transform.position - _commentParamsServer.GetDespawnedPosition()).magnitude < float.Epsilon) _commentCluster.Remove(this);
         }
 
         public event EventHandler<DespawnEventArgs>? OnDespawn;
@@ -39,8 +40,10 @@ namespace Daipan.Comment.MonoScripts
         public void SetParameter(CommentEnum commentEnum)
         {
             _commentEnum = commentEnum;
-            spriteRenderer.sprite = _commentParamsServer.GetSprite(commentEnum);
-            Debug.Log($"spriteRenderer.sprite : {spriteRenderer.sprite}");
+            
+            // コメントの背景は一旦なし
+            // spriteRenderer.sprite = _commentParamsServer.GetSprite(commentEnum);
+            // Debug.Log($"spriteRenderer.sprite : {spriteRenderer.sprite}");
         }
 
         public void Despawn()

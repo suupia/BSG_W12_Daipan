@@ -96,7 +96,8 @@ namespace Daipan.LevelDesign.Enemy.Scripts
             {
                 ratio.Add(enemyLife.enemySpawnParam.spawnRatio);
             }
-
+            Debug.Log($"enemyPrams.Length : {_enemyParamsManager.enemyParams.Count}");
+            Debug.Log($"Randoms.RandomByRatio(ratio) : {Randoms.RandomByRatio(ratio)}");
             return _enemyParamsManager.enemyParams[Randoms.RandomByRatio(ratio)].GetEnemyEnum;
         }
 

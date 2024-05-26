@@ -8,6 +8,7 @@ namespace Daipan.Stream.Scripts
     public sealed class DaipanExecutor
     {
         readonly CommentCluster _commentCluster;
+        readonly AntiCommentCluster _antiCommentCluster;
         readonly DaipanParameter _daipanParameter;
         readonly EnemyCluster _enemyCluster;
         readonly IrritatedValue _irritatedValue;
@@ -20,7 +21,8 @@ namespace Daipan.Stream.Scripts
             StreamStatus streamStatus,
             IrritatedValue irritatedValue,
             EnemyCluster enemyCluster,
-            CommentCluster commentCluster
+            CommentCluster commentCluster,
+            AntiCommentCluster antiCommentCluster
         )
         {
             _daipanParameter = daipanParameter;
@@ -29,6 +31,7 @@ namespace Daipan.Stream.Scripts
             _irritatedValue = irritatedValue;
             _enemyCluster = enemyCluster;
             _commentCluster = commentCluster;
+            _antiCommentCluster = antiCommentCluster;
         }
 
         bool IsExciting => _streamStatus.IsExcited;
@@ -49,6 +52,7 @@ namespace Daipan.Stream.Scripts
                 // _enemyCluster.BlownAway(blowAwayProbability);
                 _enemyCluster.BlownAway(enemyEnum => !enemyEnum.IsBoss);
                 _commentCluster.BlownAway(blowAwayProbability);
+                _antiCommentCluster.BlownAway(blowAwayProbability);
             }
             else if (irritatedRatio < _irritatedValue.RatioTable[2])
             {
@@ -58,6 +62,7 @@ namespace Daipan.Stream.Scripts
                 // _enemyCluster.BlownAway(blowAwayProbability);
                 _enemyCluster.BlownAway(enemyEnum => !enemyEnum.IsBoss);
                 _commentCluster.BlownAway(blowAwayProbability);
+                _antiCommentCluster.BlownAway(blowAwayProbability);
             }
             else if (irritatedRatio < _irritatedValue.RatioTable[3])
             {
@@ -67,6 +72,7 @@ namespace Daipan.Stream.Scripts
                 // _enemyCluster.BlownAway(blowAwayProbability);
                 _enemyCluster.BlownAway(enemyEnum => !enemyEnum.IsBoss);
                 _commentCluster.BlownAway(blowAwayProbability);
+                _antiCommentCluster.BlownAway(blowAwayProbability);
             }
             else
             {
@@ -76,6 +82,7 @@ namespace Daipan.Stream.Scripts
                 // _commentCluster.BlownAway();  // すべてを吹き飛ばす
                 _commentCluster.BlownAway(commentMono =>
                     commentMono._commentEnum != CommentEnum.Super); // SuperComment以外を吹き飛ばす
+                _antiCommentCluster.BlownAway();
             }
 
             // 台パンしたら怒りゲージは0になる

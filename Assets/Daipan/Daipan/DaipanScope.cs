@@ -1,4 +1,3 @@
-#nullable enable
 using Daipan.Comment.MonoScripts;
 using Daipan.Comment.Scripts;
 using Daipan.Core;
@@ -16,21 +15,21 @@ using Daipan.Stream.Scripts;
 using Daipan.Stream.Scripts.Utility;
 using Daipan.Stream.Tests;
 using UnityEngine;
-using UnityEngine.Serialization;
 using VContainer;
 using VContainer.Unity;
 
 public sealed class DaipanScope : LifetimeScope
 {
     [SerializeField] StreamParameter streamParameter = null!;
-    
+
     [SerializeField] PlayerParams playerParams = null!;
 
     [SerializeField] EnemyParamsManager enemyParamsManager = null!;
 
     [SerializeField] CommentParamsManager commentParamsManager = null!;
 
-    [SerializeField] IrritatedParams irritatedParams= null!;
+    [SerializeField] IrritatedParams irritatedParams = null!;
+
     protected override void Configure(IContainerBuilder builder)
     {
         // Domain
@@ -48,9 +47,11 @@ public sealed class DaipanScope : LifetimeScope
         //builder.RegisterInstance(commentAttributeParameters);
         //builder.Register<IStart, CommentSpawnPointContainer>(Lifetime.Scoped).AsSelf();
         builder.Register<CommentPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<CommentMono>>();
-        builder.Register<IUpdate,CommentSpawner>(Lifetime.Scoped).AsSelf();
+        builder.Register<AntiCommentPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<AntiCommentMono>>();
+        builder.Register<IUpdate, CommentSpawner>(Lifetime.Scoped).AsSelf();
         builder.Register<CommentCluster>(Lifetime.Scoped);
-
+        builder.Register<AntiCommentCluster>(Lifetime.Scoped);
+        builder.Register<IUpdate, AntiCommentRelocate>(Lifetime.Scoped);
 
         builder.Register<DaipanExecutor>(Lifetime.Scoped);
 
@@ -71,11 +72,13 @@ public sealed class DaipanScope : LifetimeScope
             .WithParameter(EnemyEnum.Boss);
         builder.Register<EnemySpawner>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
         builder.Register<EnemyCluster>(Lifetime.Scoped);
+        builder.Register<EnemyQuickDefeatChecker>(Lifetime.Scoped);
+        builder.Register<EnemySlowDefeatChecker>(Lifetime.Scoped);
 
 
         // View
         builder.RegisterComponentInHierarchy<StreamViewMono>();
-        
+
         // Test
         builder.RegisterComponentInHierarchy<PlayerTestInput>();
 
