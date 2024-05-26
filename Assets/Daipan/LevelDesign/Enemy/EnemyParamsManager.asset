@@ -17,62 +17,62 @@ MonoBehaviour:
   currentKillAmount: 0
   enemyParams:
   - enemyType: 1
-    diffViewer: 10
-    sprite: {fileID: 21300000, guid: de401ab12c255432dae79e3ba8c3ab65, type: 3}
-    EnemySpawnParam:
+    enemySpawnParam:
       spawnRatio: 60
       daipanThreshold: 0
       daipanProbability: 0
-    EnemyAttackParam:
-      attackAmount: 0
-      attackDelaySec: 0
-      attackRange: 0
-    EnemyHpParam:
-      hpAmount: 0
-    EnemyMoveParam:
-      moveSpeedPerSec: 0
+    enemyAttackParam:
+      attackAmount: 1
+      attackDelaySec: 1
+      attackRange: 7
+    enemyHpParam:
+      hpAmount: 10
+    enemyMoveParam:
+      moveSpeedPerSec: 2
+    sprite: {fileID: 21300000, guid: de401ab12c255432dae79e3ba8c3ab65, type: 3}
+    diffViewer: 10
   - enemyType: 2
-    diffViewer: 10
+    enemySpawnParam:
+      spawnRatio: 20
+      daipanThreshold: 0
+      daipanProbability: 0
+    enemyAttackParam:
+      attackAmount: 1
+      attackDelaySec: 1
+      attackRange: 7
+    enemyHpParam:
+      hpAmount: 10
+    enemyMoveParam:
+      moveSpeedPerSec: 2
     sprite: {fileID: 21300000, guid: c329e779f94ad40a3b6c6d7848b3de3d, type: 3}
-    EnemySpawnParam:
-      spawnRatio: 20
-      daipanThreshold: 0
-      daipanProbability: 0
-    EnemyAttackParam:
-      attackAmount: 0
-      attackDelaySec: 0
-      attackRange: 0
-    EnemyHpParam:
-      hpAmount: 10
-    EnemyMoveParam:
-      moveSpeedPerSec: 0
-  - enemyType: 3
     diffViewer: 10
-    sprite: {fileID: 21300000, guid: 0c2b631544598420a99228de44fd33a0, type: 3}
-    EnemySpawnParam:
+  - enemyType: 3
+    enemySpawnParam:
       spawnRatio: 20
       daipanThreshold: 0
       daipanProbability: 0
-    EnemyAttackParam:
-      attackAmount: 0
-      attackDelaySec: 0
-      attackRange: 0
-    EnemyHpParam:
+    enemyAttackParam:
+      attackAmount: 1
+      attackDelaySec: 1
+      attackRange: 7
+    enemyHpParam:
       hpAmount: 10
-    EnemyMoveParam:
-      moveSpeedPerSec: 0
+    enemyMoveParam:
+      moveSpeedPerSec: 2
+    sprite: {fileID: 21300000, guid: 0c2b631544598420a99228de44fd33a0, type: 3}
+    diffViewer: 10
   - enemyType: 4
-    diffViewer: 30
-    sprite: {fileID: 21300000, guid: 0ee4fb82c347340cebbd590720da6a2c, type: 3}
-    EnemySpawnParam:
-      spawnRatio: 0
+    enemySpawnParam:
+      spawnRatio: 20
       daipanThreshold: 0
       daipanProbability: 0
-    EnemyAttackParam:
-      attackAmount: 0
-      attackDelaySec: 0
-      attackRange: 0
-    EnemyHpParam:
+    enemyAttackParam:
+      attackAmount: 1
+      attackDelaySec: 1
+      attackRange: 7
+    enemyHpParam:
       hpAmount: 10
-    EnemyMoveParam:
-      moveSpeedPerSec: 0
+    enemyMoveParam:
+      moveSpeedPerSec: 1.5
+    sprite: {fileID: 21300000, guid: 0ee4fb82c347340cebbd590720da6a2c, type: 3}
+    diffViewer: 30

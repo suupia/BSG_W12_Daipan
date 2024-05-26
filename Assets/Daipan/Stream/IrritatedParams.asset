@@ -12,10 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61396e67de5fba64da335d1203de3606, type: 3}
   m_Name: IrritatedParams
   m_EditorClassIdentifier: 
-  RatioTable: []
-  hpAmount: 0
-  playerAttackParameter:
-    AttackAmount: 0
-    SAttackAmount: 10
-    WAttackAmount: 20
-    AAttackAmount: 30
+  RatioTable:
+  - 0.2
+  - 0.4
+  - 0.6
+  - 0.8
