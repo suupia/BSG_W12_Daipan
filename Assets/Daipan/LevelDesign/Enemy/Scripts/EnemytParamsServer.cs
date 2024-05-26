@@ -32,11 +32,11 @@ namespace Daipan.LevelDesign.Enemy.Scripts
             Debug.Log($"EnemeyCount : {parameters.enemyParams.Count}");
             foreach (var enemyParam in parameters.enemyParams)
             {
-                if (enemyParam.EnemyAttackParam.attackAmount <= 0)
+                if (enemyParam.enemyAttackParam.attackAmount <= 0)
                 {
                     Debug.LogWarning($"{enemyParam.GetEnemyEnum}の攻撃力が0以下です。");
                 }
-                if (enemyParam.EnemyAttackParam.attackRange <= 0)
+                if (enemyParam.enemyAttackParam.attackRange <= 0)
                 {
                     Debug.LogWarning($"{enemyParam.GetEnemyEnum}の攻撃範囲が0以下です。");
                 }
@@ -48,22 +48,22 @@ namespace Daipan.LevelDesign.Enemy.Scripts
 
         public float GetSpeed(EnemyEnum enemyEnum)
         {
-            return GetEnemyParams(enemyEnum).EnemyMoveParam.moveSpeedPerSec;
+            return GetEnemyParams(enemyEnum).enemyMoveParam.moveSpeedPerSec;
         }
 
         public EnemyAttackParameter GetAttackParameter(EnemyEnum enemyEnum)
         {
             var enemy = GetEnemyParams(enemyEnum);
             return new EnemyAttackParameter(
-                enemy.EnemyAttackParam.attackAmount,
-                enemy.EnemyAttackParam.attackDelaySec,
-                enemy.EnemyAttackParam.attackRange
+                enemy.enemyAttackParam.attackAmount,
+                enemy.enemyAttackParam.attackDelaySec,
+                enemy.enemyAttackParam.attackRange
             );
         }
 
         public int GetHp(EnemyEnum enemyEnum)
         {
-            return GetEnemyParams(enemyEnum).EnemyHpParam.hpAmount; 
+            return GetEnemyParams(enemyEnum).enemyHpParam.hpAmount; 
         }
 
         public Sprite GetSprite(EnemyEnum enemyEnum)
@@ -94,7 +94,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
 
             foreach (var enemyLife in _enemyParamsManager.enemyParams)
             {
-                ratio.Add(enemyLife.EnemySpawnParam.spawnRatio);
+                ratio.Add(enemyLife.enemySpawnParam.spawnRatio);
             }
 
             return _enemyParamsManager.enemyParams[Randoms.RandomByRatio(ratio)].GetEnemyEnum;

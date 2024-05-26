@@ -5,9 +5,9 @@ using Daipan.Enemy.Scripts;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace Daipan.LevelDesign.Enemy.Scripts;
-
-[CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/Enemy/ManagerParameters", order = 1)]
+namespace Daipan.LevelDesign.Enemy.Scripts
+{
+   [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/Enemy/ManagerParameters", order = 1)]
 public sealed class EnemyParamsManager : ScriptableObject
 {
     [Header("エネミー全体のレベルデザインはこちら")]
@@ -48,52 +48,54 @@ public sealed class EnemySpawnParam
 [Serializable]
 public sealed class EnemyAttackParam
 {
-    [Header("エネミーの攻撃力")] public int attackAmount;
+    [Header("エネミーの攻撃力")] 
+    public int attackAmount;
 
-    [Header("攻撃間隔")] [Min(0)] public float attackDelaySec;
+    [Header("攻撃間隔")] 
+    [Min(0)] 
+    public float attackDelaySec;
 
-    [Header("攻撃範囲")] [Min(0)] public float attackRange;
+    [Header("攻撃範囲")]
+    [Min(0)] 
+    public float attackRange;
 }
 
 [Serializable]
 public sealed class EnemyHpParam
 {
-    [Header("エネミーのHP")] [Min(0)] public int hpAmount;
+    [Header("エネミーのHP")]
+    [Min(0)]
+    public int hpAmount;
 }
 
 [Serializable]
 public sealed class EnemyMoveParam
 {
-    [Header("移動速度 [unit/s]")] [Min(0)] 
+    [Header("移動速度 [unit/s]")]
+    [Min(0)] 
     public float moveSpeedPerSec;
 }
 
 [Serializable]
 public sealed class EnemyParam
 {
-    [Header("エネミーのレベルデザインはこちら！！")]
+    [Header("Enemyのレベルデザインはこちら")]
     [Space(30)]
-    [Header("エネミーのタイプ")]
-    [Tooltip("None      : 設定しないでください-_-\n" +
-             "W         : Wキーで倒せる敵\n" +
-             "A         : Aキーで倒せる敵\n" +
-             "S         : Sキーで倒せる敵\n" +
-             "Boss      ; ボス")]
+    
+    [Header("Enemyの種類")]
     [SerializeField]
     EnemyType enemyType = EnemyType.None;
     
-
-
+    public EnemySpawnParam enemySpawnParam = null!;
+    public EnemyAttackParam enemyAttackParam = null!;
+    public EnemyHpParam enemyHpParam = null!;
+    public EnemyMoveParam enemyMoveParam = null!;
+    
+    [Header("スプライト")]
+    public Sprite sprite = null!;
+    
     [Header("このエネミーを倒したときの視聴者数の変化")] public float diffViewer;
-
-
-    [Header("スプライト")] public Sprite sprite = null!;
-
-    public EnemySpawnParam EnemySpawnParam = null!;
-    public EnemyAttackParam EnemyAttackParam = null!;
-    public EnemyHpParam EnemyHpParam = null!;
-    public EnemyMoveParam EnemyMoveParam = null!;
-
+    
     public EnemyEnum GetEnemyEnum
     {
         get
@@ -129,4 +131,6 @@ public sealed class EnemyParam
         S,
         Boss
     }
+} 
 }
+
