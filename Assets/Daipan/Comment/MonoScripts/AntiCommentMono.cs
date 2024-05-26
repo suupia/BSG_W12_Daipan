@@ -19,7 +19,10 @@ public sealed class AntiCommentMono : MonoBehaviour
     void Update()
     {
         _timer += Time.deltaTime;
-        if (_timer > _despawneTime) Despawn();
+        if (_timer > _despawneTime) {
+            // todo : 仕様になかったのでいったんコメントアウト
+            // Despawn();
+        }
     }
 
     public event EventHandler<DespawnEventArgs>? OnDespawn;
