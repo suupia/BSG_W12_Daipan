@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Daipan.LevelDesign.Enemy.Scripts
 {
@@ -23,14 +24,14 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         [SerializeField] EnemyType enemyType = EnemyType.None;
 
         [Header("エネミーのHP")]
-        public int HPAmount;
+        public int hpAmount;
 
         [Header("エネミーの攻撃力")] 
         public int attackAmount;
-
+        
         [Header("移動速度 [unit/s]")]
         [Min(0)]
-        public float moveSpeed_ups;
+        public float moveSpeedPerSec;
 
         [Header("攻撃間隔")]
         [Min(0)]
@@ -45,7 +46,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
 
 
         [Header("スプライト")] 
-        public Sprite sprite;
+        public Sprite sprite = null!;
 
         public EnemyEnum GetEnemyEnum
         {

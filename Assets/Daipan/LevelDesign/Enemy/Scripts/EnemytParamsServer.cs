@@ -48,7 +48,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
 
         public float GetSpeed(EnemyEnum enemyEnum)
         {
-            return GetEnemyParams(enemyEnum).moveSpeed_ups;
+            return GetEnemyParams(enemyEnum).moveSpeedPerSec;
         }
 
         public EnemyAttackParameter GetAttackParameter(EnemyEnum enemyEnum)
@@ -63,7 +63,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
 
         public int GetHp(EnemyEnum enemyEnum)
         {
-            return GetEnemyParams(enemyEnum).HPAmount; 
+            return GetEnemyParams(enemyEnum).hpAmount; 
         }
 
         public Sprite GetSprite(EnemyEnum enemyEnum)
