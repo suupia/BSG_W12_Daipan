@@ -47,7 +47,7 @@ public sealed class DaipanScope : LifetimeScope
         //builder.RegisterInstance(commentAttributeParameters);
         //builder.Register<IStart, CommentSpawnPointContainer>(Lifetime.Scoped).AsSelf();
         builder.Register<CommentPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<CommentMono>>();
-        builder.Register<AntiCommentPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<AntiMono>>();
+        builder.Register<AntiCommentPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<AntiCommentMono>>();
         builder.Register<IUpdate, CommentSpawner>(Lifetime.Scoped).AsSelf();
         builder.Register<CommentCluster>(Lifetime.Scoped);
         builder.Register<AntiCommentCluster>(Lifetime.Scoped);

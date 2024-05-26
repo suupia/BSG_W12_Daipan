@@ -6,7 +6,7 @@ using VContainer;
 
 namespace Daipan.Comment.MonoScripts
 {
-    public  class AntiMono : MonoBehaviour
+    public  class AntiCommentMono : MonoBehaviour
     {
         [SerializeField] SpriteRenderer spriteRenderer = null!;
 
