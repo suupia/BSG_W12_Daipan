@@ -10,7 +10,8 @@ namespace Daipan.Comment.MonoScripts
     {
         [SerializeField] SpriteRenderer spriteRenderer = null!;
 
-        readonly float _despawneTime = 5f; // todo : パラメータから受け取るようにする
+        AntiCommentCluster _antiCommentCluster = null!;
+        readonly float _despawnTime = 5f; // todo : パラメータから受け取るようにする
         float _timer;
 
         CommentEnum CommentEnum { get; set; } = CommentEnum.None;
@@ -18,14 +19,22 @@ namespace Daipan.Comment.MonoScripts
         void Update()
         {
             _timer += Time.deltaTime;
-            if (_timer > _despawneTime) {
+            if (_timer > _despawnTime) {
                 // todo : 仕様になかったのでいったんコメントアウト
                 // Despawn();
             }
         }
 
         public event EventHandler<DespawnEventArgs>? OnDespawn;
-
+        
+        
+        [Inject]
+        public void Initialize(
+            AntiCommentCluster antiCommentCluster
+        )
+        {
+            _antiCommentCluster = antiCommentCluster;
+        }
 
 
         public void SetParameter(CommentEnum commentEnum)
@@ -42,6 +51,10 @@ namespace Daipan.Comment.MonoScripts
             var args = new DespawnEventArgs(CommentEnum);
             OnDespawn?.Invoke(this, args);
             Destroy(gameObject);
+        }
+        public void BlownAway()
+        {
+            _antiCommentCluster.Remove(this);
         }
 
 
