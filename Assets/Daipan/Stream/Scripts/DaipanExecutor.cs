@@ -35,16 +35,31 @@ namespace Daipan.Stream.Scripts
 
         public void DaiPan()
         {
-            // if (IsExciting)
-            //     _viewerNumber.IncreaseViewer(_daipanParameter.increaseNumberWhenExciting);
-            // else
-            //     _viewerNumber.IncreaseViewer(_daipanParameter.increaseNumberByDaipan);
+            float irritatedRatio = _irritatedValue.Ratio;
 
-            if (_irritatedValue.Value < 50)
+            if(irritatedRatio < _irritatedValue.RatioTable[0])
             {
                 Debug.Log("Do nothing");
             }
-            else if (_irritatedValue.Value < 100)
+            else if (irritatedRatio < _irritatedValue.RatioTable[1])
+            {
+                Debug.Log("Blow normal enemy");
+                Debug.Log("Blow comment by probability");
+                var blowAwayProbability = 0.5f;
+                // _enemyCluster.BlownAway(blowAwayProbability);
+                _enemyCluster.BlownAway(enemyEnum => !enemyEnum.IsBoss);
+                _commentCluster.BlownAway(blowAwayProbability);
+            }
+            else if (irritatedRatio < _irritatedValue.RatioTable[2])
+            {
+                Debug.Log("Blow normal enemy");
+                Debug.Log("Blow comment by probability");
+                var blowAwayProbability = 0.5f;
+                // _enemyCluster.BlownAway(blowAwayProbability);
+                _enemyCluster.BlownAway(enemyEnum => !enemyEnum.IsBoss);
+                _commentCluster.BlownAway(blowAwayProbability);
+            }
+            else if (irritatedRatio < _irritatedValue.RatioTable[3])
             {
                 Debug.Log("Blow normal enemy");
                 Debug.Log("Blow comment by probability");
@@ -57,7 +72,6 @@ namespace Daipan.Stream.Scripts
             {
                 Debug.Log("Blow all enemy");
                 Debug.Log("Blow all comment");
-
                 _enemyCluster.BlownAway();
                 // _commentCluster.BlownAway();  // すべてを吹き飛ばす
                 _commentCluster.BlownAway(commentMono =>

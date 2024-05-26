@@ -1,13 +1,16 @@
-﻿#nullable enable
+#nullable enable
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Daipan.Stream.Scripts
 {
     public sealed class IrritatedValue
     {
-        public IrritatedValue(int maxValue)
+        readonly IrritatedParams _irritatedParams;
+        public IrritatedValue(IrritatedParams irritatedParams)
         {
-            MaxValue = maxValue;
+            MaxValue = 100;
+            _irritatedParams = irritatedParams;
         }
 
         public int MaxValue { get; }
@@ -15,6 +18,7 @@ namespace Daipan.Stream.Scripts
         public int Value => Mathf.Max(IncreasedValue - DecreasedValue, 0);
         int DecreasedValue { get; set; }
         int IncreasedValue { get; set; }
+        public IReadOnlyList<float> RatioTable=>_irritatedParams.RatioTable;
 
         public void IncreaseValue(int amount)
         {

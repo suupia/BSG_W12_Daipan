@@ -30,14 +30,16 @@ public sealed class DaipanScope : LifetimeScope
 
     [SerializeField] CommentParamsManager commentParamsManager = null!;
 
+    [SerializeField] IrritatedParams irritatedParams= null!;
     protected override void Configure(IContainerBuilder builder)
     {
         // Domain
         // Stream
         builder.RegisterInstance(streamParameter.viewer);
         builder.RegisterInstance(streamParameter.daipan);
+        builder.RegisterInstance(irritatedParams);
         builder.Register<StreamPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<StreamMono>>();
-        builder.Register<IrritatedValue>(Lifetime.Scoped).WithParameter(100);
+        builder.Register<IrritatedValue>(Lifetime.Scoped);
         builder.Register<ViewerNumber>(Lifetime.Scoped);
         builder.Register<StreamStatus>(Lifetime.Scoped);
         builder.Register<IStart, StreamSpawner>(Lifetime.Scoped).AsSelf();
