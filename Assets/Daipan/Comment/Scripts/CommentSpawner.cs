@@ -19,8 +19,8 @@ public sealed class CommentSpawner : IUpdate
 
     // todo : 後で分離する
     readonly ViewerNumber _viewerNumber;
-    IPrefabLoader<AntiCommentMono> _antiCommentLoader;
-    
+    readonly IPrefabLoader<AntiCommentMono> _antiCommentLoader;
+
     public CommentSpawner(
         IObjectResolver container,
         CommentParamsServer commentParamsServer,
@@ -42,9 +42,16 @@ public sealed class CommentSpawner : IUpdate
     {
         if (Input.GetKeyDown(KeyCode.Space)) SpawnComment(CommentEnum.Normal);
     }
+    
+    
+    public void SpawnCommentByType(CommentEnum commentEnum)
+    {
+        if(commentEnum == CommentEnum.Normal) SpawnComment(commentEnum);
+        else if (commentEnum == CommentEnum.Super) SpawnComment(commentEnum);
+        else if (commentEnum == CommentEnum.Spiky) SpawnAntiComment();
+    }
 
-
-    public void SpawnComment(CommentEnum commentEnum)
+    void SpawnComment(CommentEnum commentEnum)
     {
         Debug.Log($"commentEnum: {commentEnum}");
         var commentPrefab = _commentLoader.Load();
@@ -59,5 +66,20 @@ public sealed class CommentSpawner : IUpdate
         };
         _commentCluster.Add(comment);
         Debug.Log($"Comment spawned: {commentEnum}");
+    }
+
+    void SpawnAntiComment()
+    {
+        var commentPrefab = _antiCommentLoader.Load();
+        var comment = _container.Instantiate(commentPrefab, _commentParamsServer.GetSpawnedPosition(),
+            Quaternion.identity, _commentParamsServer.GetCommentParent());
+        comment.SetParameter(CommentEnum.Super);
+        comment.OnDespawn += (sender, args) =>
+        {
+            var amount = _commentParamsServer.GetViewerDiffNumber(args.CommentEnum);
+            if (amount > 0) _viewerNumber.IncreaseViewer(amount);
+            else _viewerNumber.DecreaseViewer(-amount);
+        };
+        Debug.Log($"Comment spawned: {CommentEnum.Super}");
     }
 }

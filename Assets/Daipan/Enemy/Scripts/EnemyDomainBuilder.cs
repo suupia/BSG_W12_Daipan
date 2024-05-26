@@ -45,8 +45,8 @@ namespace Daipan.Enemy.Scripts
                 _enemyParamsServer.AddCurrentKillAmount();
 
                 if(!args.IsBoss) _viewerNumber.IncreaseViewer(7);
-                if(args.IsBoss) _commentSpawner.SpawnComment(CommentEnum.Super);
-                else _commentSpawner.SpawnComment(CommentEnum.Normal);
+                if(args.IsBoss) _commentSpawner.SpawnCommentByType(CommentEnum.Super);
+                else _commentSpawner.SpawnCommentByType(CommentEnum.Normal);
             };
             return enemyMono;
         }
