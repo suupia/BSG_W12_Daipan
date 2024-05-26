@@ -38,6 +38,7 @@ namespace Daipan.Comment.Scripts
 
         public void SpawnComment(CommentEnum commentEnum)
         {
+            Debug.Log($"commentEnum: {commentEnum}");
             var commentPrefab = _loader.Load();
             var comment = _container.Instantiate(commentPrefab, _commentParamsServer.GetSpawnedPosition(),
                 Quaternion.identity, _commentParamsServer.GetCommentParent());
@@ -49,6 +50,7 @@ namespace Daipan.Comment.Scripts
                 else _viewerNumber.DecreaseViewer(-amount);
             };
             _commentCluster.Add(comment);
+            Debug.Log($"Comment spawned: {commentEnum}");
         }
         
 

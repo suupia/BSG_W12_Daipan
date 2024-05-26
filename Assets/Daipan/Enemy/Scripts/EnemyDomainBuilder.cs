@@ -35,7 +35,6 @@ namespace Daipan.Enemy.Scripts
     
         public EnemyMono SetDomain(EnemyMono enemyMono)
         {
-            //var enemyEnum = DecideRandomEnemyTypeCustom();
             var enemyEnum = _enemyParamsServer.DecideRandomEnemyType();
             Debug.Log($"enemyEnum: {enemyEnum}");
             enemyMono.SetDomain(new EnemyAttack(enemyMono));
