@@ -8,8 +8,8 @@ using UnityEngine;
 
 namespace Daipan.LevelDesign.Enemy.Scripts
 {
-    [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/Enemy/Parameters", order = 1)]
-    public sealed class EnemyParams : ScriptableObject
+    [Serializable]
+    public sealed class EnemyParams 
     {
         [Header("エネミーのレベルデザインはこちら！！")]
         [Space(30)]
