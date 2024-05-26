@@ -40,8 +40,10 @@ namespace Daipan.Comment.MonoScripts
         public void SetParameter(CommentEnum commentEnum)
         {
             _commentEnum = commentEnum;
-            spriteRenderer.sprite = _commentParamsServer.GetSprite(commentEnum);
-            Debug.Log($"spriteRenderer.sprite : {spriteRenderer.sprite}");
+            
+            // コメントの背景は一旦なし
+            // spriteRenderer.sprite = _commentParamsServer.GetSprite(commentEnum);
+            // Debug.Log($"spriteRenderer.sprite : {spriteRenderer.sprite}");
         }
 
         public void Despawn()
