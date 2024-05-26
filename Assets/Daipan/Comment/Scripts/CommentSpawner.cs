@@ -11,6 +11,8 @@ namespace Daipan.Comment.Scripts;
 
 public sealed class CommentSpawner : IUpdate
 {
+    readonly AntiCommentCluster _antiCommentCluster;
+    readonly IPrefabLoader<AntiCommentMono> _antiCommentLoader;
     readonly CommentCluster _commentCluster;
     readonly IPrefabLoader<CommentMono> _commentLoader;
     readonly CommentParamsServer _commentParamsServer;
@@ -19,12 +21,12 @@ public sealed class CommentSpawner : IUpdate
 
     // todo : 後で分離する
     readonly ViewerNumber _viewerNumber;
-    readonly IPrefabLoader<AntiCommentMono> _antiCommentLoader;
 
     public CommentSpawner(
         IObjectResolver container,
         CommentParamsServer commentParamsServer,
         CommentCluster commentCluster,
+        AntiCommentCluster antiCommentCluster,
         ViewerNumber viewerNumber,
         IPrefabLoader<CommentMono> commentCommentLoader,
         IPrefabLoader<AntiCommentMono> antiCommentLoader
@@ -33,6 +35,7 @@ public sealed class CommentSpawner : IUpdate
         _container = container;
         _commentParamsServer = commentParamsServer;
         _commentCluster = commentCluster;
+        _antiCommentCluster = antiCommentCluster;
         _viewerNumber = viewerNumber;
         _commentLoader = commentCommentLoader;
         _antiCommentLoader = antiCommentLoader;
@@ -42,11 +45,11 @@ public sealed class CommentSpawner : IUpdate
     {
         if (Input.GetKeyDown(KeyCode.Space)) SpawnComment(CommentEnum.Normal);
     }
-    
-    
+
+
     public void SpawnCommentByType(CommentEnum commentEnum)
     {
-        if(commentEnum == CommentEnum.Normal) SpawnComment(commentEnum);
+        if (commentEnum == CommentEnum.Normal) SpawnComment(commentEnum);
         else if (commentEnum == CommentEnum.Super) SpawnComment(commentEnum);
         else if (commentEnum == CommentEnum.Spiky) SpawnAntiComment();
     }
@@ -72,7 +75,7 @@ public sealed class CommentSpawner : IUpdate
     {
         var commentPrefab = _antiCommentLoader.Load();
         var spawnPosition = Vector3.zero; // todo : とりあえず画面中央に配置 配置が面倒なら、親オブジェクト指定してVerticalLayoutGroupを使う
-        var comment = _container.Instantiate(commentPrefab, spawnPosition, 
+        var comment = _container.Instantiate(commentPrefab, spawnPosition,
             Quaternion.identity, _commentParamsServer.GetCommentParent());
         comment.SetParameter(CommentEnum.Super);
         comment.OnDespawn += (sender, args) =>
@@ -81,6 +84,7 @@ public sealed class CommentSpawner : IUpdate
             if (amount > 0) _viewerNumber.IncreaseViewer(amount);
             else _viewerNumber.DecreaseViewer(-amount);
         };
+        _antiCommentCluster.Add(comment);
         Debug.Log($"Comment spawned: {CommentEnum.Super}");
     }
 }
