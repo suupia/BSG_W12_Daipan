@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnDelaySec: 1
   spawnBossAmount: 10
-  currentKillAmount: 0
+  currentKillAmount: 1
   enemyParams:
   - enemyType: 1
     enemySpawnParam:
@@ -24,7 +24,7 @@ MonoBehaviour:
     enemyAttackParam:
       attackAmount: 1
       attackDelaySec: 1
-      attackRange: 7
+      attackRange: 5
     enemyHpParam:
       hpAmount: 10
     enemyMoveParam:
@@ -39,7 +39,7 @@ MonoBehaviour:
     enemyAttackParam:
       attackAmount: 1
       attackDelaySec: 1
-      attackRange: 7
+      attackRange: 5
     enemyHpParam:
       hpAmount: 10
     enemyMoveParam:
@@ -54,7 +54,7 @@ MonoBehaviour:
     enemyAttackParam:
       attackAmount: 1
       attackDelaySec: 1
-      attackRange: 7
+      attackRange: 5
     enemyHpParam:
       hpAmount: 10
     enemyMoveParam:
@@ -69,7 +69,7 @@ MonoBehaviour:
     enemyAttackParam:
       attackAmount: 1
       attackDelaySec: 1
-      attackRange: 7
+      attackRange: 5
     enemyHpParam:
       hpAmount: 10
     enemyMoveParam:

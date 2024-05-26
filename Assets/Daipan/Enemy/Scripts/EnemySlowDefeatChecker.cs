@@ -1,32 +1,31 @@
-#nullable enable
+using Daipan.Comment.Scripts;
 using UnityEngine;
 
 namespace Daipan.Enemy.Scripts;
 
 public class EnemySlowDefeatChecker
 {
-    int SlowDefeatCounter { get; set; }
+    readonly CommentSpawner _commentSpawner;
     readonly int _slowDefeatThreshold = 5; // todo : パラメータで設定できるようにする
-    readonly float _slowDefeatCoordinate = 2; // todo 
-    
 
-    public void MayIncrementSlowDefeatCounter(Vector3 currentPosition)
+    public EnemySlowDefeatChecker(CommentSpawner commentSpawner)
     {
-        if(_slowDefeatCoordinate < currentPosition.x)
-         SlowDefeatCounter++;
+        _commentSpawner = commentSpawner;
     }
-    
-    /// <summary>
-    /// trueの時にslowDefeatCounterをリセットしていることに注意
-    /// </summary>
-    public bool IsSlowDefeat()
-    {
-        if(SlowDefeatCounter > _slowDefeatThreshold)
-        {
-            SlowDefeatCounter = 0;
-            return true;
-        }
 
-        return false;
+    public float SlowDefeatCoordinate { get; } = 2;
+
+    int SlowDefeatCounter { get; set; }
+
+
+    public void IncrementSlowDefeatCounter()
+    {
+        SlowDefeatCounter++;
+        if (SlowDefeatCounter > _slowDefeatThreshold)
+        {
+            Debug.Log("Spawn comment");
+            _commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
+            SlowDefeatCounter = 0;
+        }
     }
 }
