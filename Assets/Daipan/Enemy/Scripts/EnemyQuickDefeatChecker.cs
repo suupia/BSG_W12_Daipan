@@ -1,14 +1,21 @@
-#nullable enable
+using Daipan.LevelDesign.Enemy.Scripts;
 using UnityEngine;
 
 namespace Daipan.Enemy.Scripts;
 
 public class EnemyQuickDefeatChecker
 {
-    readonly float _quickDefeatCoordinate = 2; // todo : パラメータで設定できるようにする
-    
+    readonly EnemyDefeatConfig _enemyDefeatConfig;
+
+    public EnemyQuickDefeatChecker(EnemyDefeatConfig enemyDefeatConfig)
+    {
+        _enemyDefeatConfig = enemyDefeatConfig;
+    }
+
+    float QuickDefeatCoordinate => _enemyDefeatConfig.GetEnemyDefeatQuickPosition().x;
+
     public bool IsQuickDefeat(Vector3 currentPosition)
     {
-        return _quickDefeatCoordinate < currentPosition.x;
+        return QuickDefeatCoordinate < currentPosition.x;
     }
 }

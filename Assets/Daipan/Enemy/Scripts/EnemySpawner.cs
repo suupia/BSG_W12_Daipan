@@ -18,7 +18,7 @@ namespace Daipan.Enemy.Scripts
         readonly EnemyCluster _enemyCluster;
         readonly IrritatedValue _irritatedValue;
         readonly float _spawnInterval = 1.0f;
-        readonly EnemyParamsServer _enemyParamsServer;
+        readonly EnemyParamsConfig _enemyParamsConfig;
         float _timer;
 
         [Inject]
@@ -27,12 +27,12 @@ namespace Daipan.Enemy.Scripts
             EnemyCluster enemyCluster,
             IrritatedValue irritatedValue,
             IEnemyMonoBuilder enemyMonoBuilder,
-            EnemyParamsServer enemyParamsServer)
+            EnemyParamsConfig enemyParamsConfig)
         {
             _enemyCluster = enemyCluster;
             _enemyMonoBuilder = enemyMonoBuilder;
             _irritatedValue = irritatedValue;
-            _enemyParamsServer = enemyParamsServer;
+            _enemyParamsConfig = enemyParamsConfig;
         }
 
         void IStart.Start()
@@ -52,7 +52,7 @@ namespace Daipan.Enemy.Scripts
 
         void SpawnEnemy()
         {
-            var enemyObject = _enemyMonoBuilder.Build(_enemyParamsServer.GetSpawnedPositionRandom(), Quaternion.identity);
+            var enemyObject = _enemyMonoBuilder.Build(_enemyParamsConfig.GetSpawnedPositionRandom(), Quaternion.identity);
             IncreaseIrritatedValueByEnemy(enemyObject._enemyEnum);
             _enemyCluster.Add(enemyObject);
         }

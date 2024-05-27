@@ -7,7 +7,7 @@ using UnityEngine.Serialization;
 
 namespace Daipan.LevelDesign.Enemy.Scripts
 {
-   [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/Enemy/ManagerParameters", order = 1)]
+   [CreateAssetMenu(fileName = "EnemyParamsManager", menuName = "ScriptableObjects/Enemy/EnemyParamsManager", order = 1)]
 public sealed class EnemyParamsManager : ScriptableObject
 {
     [Header("エネミー全体のレベルデザインはこちら")]
