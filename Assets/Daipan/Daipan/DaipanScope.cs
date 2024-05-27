@@ -94,7 +94,7 @@ public sealed class DaipanScope : LifetimeScope
         builder.RegisterInstance(enemyParamsManager);
 
         /*player*/
-        builder.Register<PlayerParamsServer>(Lifetime.Scoped);
+        builder.Register<PlayerParamConfig>(Lifetime.Scoped);
         builder.RegisterInstance(playerParams);
 
         // Initializer
