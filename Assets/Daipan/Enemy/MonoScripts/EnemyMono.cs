@@ -6,8 +6,9 @@ using Daipan.Player.Scripts;
 using UnityEngine;
 using VContainer;
 
-namespace Daipan.Enemy.MonoScripts;
-
+namespace Daipan.Enemy.MonoScripts
+{
+    
 [RequireComponent(typeof(SpriteRenderer))]
 public sealed class EnemyMono : MonoBehaviour, IHpSetter
 {
@@ -101,3 +102,4 @@ public sealed class EnemyMono : MonoBehaviour, IHpSetter
 }
 
 public record DiedEventArgs(bool IsBoss, bool IsQuickDefeat, bool IsTrigger = false);
+}
