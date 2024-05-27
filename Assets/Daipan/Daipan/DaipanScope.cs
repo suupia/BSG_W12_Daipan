@@ -89,8 +89,8 @@ public sealed class DaipanScope : LifetimeScope
         builder.RegisterInstance(commentParamsManager);
 
         /*enemy*/
-        builder.Register<EnemyParamsServer>(Lifetime.Scoped);
-        builder.RegisterComponentInHierarchy<EnemyPosition>();
+        builder.Register<EnemyParamsConfig>(Lifetime.Scoped);
+        builder.RegisterComponentInHierarchy<EnemyPositionMono>();
         builder.RegisterInstance(enemyParamsManager);
 
         /*player*/

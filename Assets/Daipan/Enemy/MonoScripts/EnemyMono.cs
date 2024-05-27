@@ -15,7 +15,7 @@ public sealed class EnemyMono : MonoBehaviour, IHpSetter
     EnemyAttack _enemyAttack = null!;
     EnemyCluster _enemyCluster = null!;
     EnemyHp _enemyHp = null!;
-    EnemyParamsServer _enemyParamsServer = null!;
+    EnemyParamsConfig _enemyParamsConfig = null!;
     bool _isSlowDefeat;
     PlayerHolder _playerHolder = null!;
     EnemyQuickDefeatChecker _quickDefeatChecker = null!;
@@ -26,11 +26,11 @@ public sealed class EnemyMono : MonoBehaviour, IHpSetter
     {
         _enemyAttack.AttackUpdate(_playerHolder.PlayerMono);
 
-        transform.position += Vector3.left * _enemyParamsServer.GetSpeed(_enemyEnum) * Time.deltaTime;
-        if (transform.position.x < _enemyParamsServer.GetDespawnedPosition().x)
+        transform.position += Vector3.left * _enemyParamsConfig.GetSpeed(_enemyEnum) * Time.deltaTime;
+        if (transform.position.x < _enemyParamsConfig.GetDespawnedPosition().x)
             _enemyCluster.Remove(this, false); // Destroy when out of screen
 
-        hpGaugeMono.SetRatio(CurrentHp / (float)_enemyParamsServer.GetHp(_enemyEnum));
+        hpGaugeMono.SetRatio(CurrentHp / (float)_enemyParamsConfig.GetHp(_enemyEnum));
 
         if (_isSlowDefeat == false && transform.position.x <= _slowDefeatChecker.SlowDefeatCoordinate)
         {
@@ -52,14 +52,14 @@ public sealed class EnemyMono : MonoBehaviour, IHpSetter
     public void Initialize(
         EnemyCluster enemyCluster,
         PlayerHolder playerHolder,
-        EnemyParamsServer enemyParamsServer,
+        EnemyParamsConfig enemyParamsConfig,
         EnemyQuickDefeatChecker quickDefeatChecker,
         EnemySlowDefeatChecker slowDefeatChecker
     )
     {
         _enemyCluster = enemyCluster;
         _playerHolder = playerHolder;
-        _enemyParamsServer = enemyParamsServer;
+        _enemyParamsConfig = enemyParamsConfig;
         _quickDefeatChecker = quickDefeatChecker;
         _slowDefeatChecker = slowDefeatChecker;
     }
@@ -91,12 +91,12 @@ public sealed class EnemyMono : MonoBehaviour, IHpSetter
     public void SetParameter(EnemyEnum enemyEnum)
     {
         _enemyEnum = enemyEnum;
-        _enemyAttack.enemyAttackParameter = _enemyParamsServer.GetAttackParameter(enemyEnum);
-        _enemyHp = new EnemyHp(_enemyParamsServer.GetHp(_enemyEnum), this, _enemyCluster);
+        _enemyAttack.enemyAttackParameter = _enemyParamsConfig.GetAttackParameter(enemyEnum);
+        _enemyHp = new EnemyHp(_enemyParamsConfig.GetHp(_enemyEnum), this, _enemyCluster);
 
         //Sprite
         var spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = _enemyParamsServer.GetSprite(enemyEnum);
+        spriteRenderer.sprite = _enemyParamsConfig.GetSprite(enemyEnum);
     }
 }
 

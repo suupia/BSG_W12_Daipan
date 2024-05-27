@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Daipan.LevelDesign.Enemy.Scripts
 {
-    public class EnemyPosition : MonoBehaviour
+    public class EnemyPositionMono : MonoBehaviour
     {
         [Header("エネミーの座標たちをセットする場所です！")]
         [Space(30)]

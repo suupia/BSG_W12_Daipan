@@ -12,30 +12,30 @@ namespace Daipan.Enemy.Scripts;
 public class EnemyDomainBuilder : IEnemyDomainBuilder
 {
     readonly CommentSpawner _commentSpawner;
-    readonly EnemyParamsServer _enemyParamsServer;
+    readonly EnemyParamsConfig _enemyParamsConfig;
     readonly ViewerNumber _viewerNumber;
 
     public EnemyDomainBuilder(
         CommentSpawner commentSpawner,
         ViewerNumber viewerNumber,
-        EnemyParamsServer enemyParamsServer
+        EnemyParamsConfig enemyParamsConfig
     )
     {
         _commentSpawner = commentSpawner;
         _viewerNumber = viewerNumber;
-        _enemyParamsServer = enemyParamsServer;
+        _enemyParamsConfig = enemyParamsConfig;
     }
 
     public EnemyMono SetDomain(EnemyMono enemyMono)
     {
-        var enemyEnum = _enemyParamsServer.DecideRandomEnemyType();
+        var enemyEnum = _enemyParamsConfig.DecideRandomEnemyType();
         Debug.Log($"enemyEnum: {enemyEnum}");
         enemyMono.SetDomain(new EnemyAttack(enemyMono));
         enemyMono.SetParameter(enemyEnum);
         enemyMono.OnDied += (sender, args) =>
         {
             // ボスを倒したときも含む
-            _enemyParamsServer.AddCurrentKillAmount();
+            _enemyParamsConfig.AddCurrentKillAmount();
 
             if (!args.IsBoss) _viewerNumber.IncreaseViewer(7);
             // if(args.IsBoss) _commentSpawner.SpawnCommentByType(CommentEnum.Super);
