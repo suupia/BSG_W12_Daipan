@@ -14,6 +14,7 @@ using Daipan.Stream.MonoScripts;
 using Daipan.Stream.Scripts;
 using Daipan.Stream.Scripts.Utility;
 using Daipan.Stream.Tests;
+using Daipan.Utility.Scripts;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -101,6 +102,8 @@ public sealed class DaipanScope : LifetimeScope
         // Initializer
         builder.RegisterEntryPoint<DaipanInitializer>();
 
+        // Timer
+        builder.Register<IUpdate, Timer>(Lifetime.Scoped).AsSelf();
 
         // Updater
         builder.UseEntryPoints(Lifetime.Scoped, entryPoints => { entryPoints.Add<Updater>(); });
