@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Daipan.LevelDesign.Enemy.Scripts;
 
-public sealed class EnemyDefeatParamsManager : ScriptableObject
+public sealed class EnemyDefeatParamManager : ScriptableObject
 {
    [SerializeField] EnemyQuickDefeatParam enemyQuickDefeatParam = null!;
    [SerializeField] EnemySlowDefeatParam enemySlowDefeatParam = null!;
