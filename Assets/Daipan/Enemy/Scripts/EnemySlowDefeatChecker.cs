@@ -1,4 +1,5 @@
 using Daipan.Comment.Scripts;
+using Daipan.LevelDesign.Enemy.Scripts;
 using UnityEngine;
 
 namespace Daipan.Enemy.Scripts;
@@ -6,14 +7,19 @@ namespace Daipan.Enemy.Scripts;
 public class EnemySlowDefeatChecker
 {
     readonly CommentSpawner _commentSpawner;
-    readonly int _slowDefeatThreshold = 5; // todo : パラメータで設定できるようにする
+    readonly EnemyDefeatConfig _enemyDefeatConfig;
 
-    public EnemySlowDefeatChecker(CommentSpawner commentSpawner)
+    public EnemySlowDefeatChecker(
+        EnemyDefeatConfig enemyDefeatConfig,
+        CommentSpawner commentSpawner)
     {
+        _enemyDefeatConfig = enemyDefeatConfig;
         _commentSpawner = commentSpawner;
     }
 
-    public float SlowDefeatCoordinate { get; } = 2;
+    int SlowDefeatThreshold => _enemyDefeatConfig.GetSlowDefeatThreshold();
+
+    public float SlowDefeatCoordinate => _enemyDefeatConfig.GetEnemyDefeatSlowPosition().x;
 
     int SlowDefeatCounter { get; set; }
 
@@ -21,7 +27,7 @@ public class EnemySlowDefeatChecker
     public void IncrementSlowDefeatCounter()
     {
         SlowDefeatCounter++;
-        if (SlowDefeatCounter > _slowDefeatThreshold)
+        if (SlowDefeatCounter > SlowDefeatThreshold)
         {
             Debug.Log("Spawn comment");
             _commentSpawner.SpawnCommentByType(CommentEnum.Spiky);

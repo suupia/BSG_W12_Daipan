@@ -21,14 +21,11 @@ using VContainer.Unity;
 public sealed class DaipanScope : LifetimeScope
 {
     [SerializeField] StreamParameter streamParameter = null!;
-
     [SerializeField] PlayerParams playerParams = null!;
-
     [SerializeField] EnemyParamsManager enemyParamsManager = null!;
-
     [SerializeField] CommentParamsManager commentParamsManager = null!;
-
     [SerializeField] IrritatedParams irritatedParams = null!;
+    [SerializeField] EnemyDefeatParamManager enemyDefeatParamManager = null!;
 
     protected override void Configure(IContainerBuilder builder)
     {
@@ -92,6 +89,10 @@ public sealed class DaipanScope : LifetimeScope
         builder.Register<EnemyParamsConfig>(Lifetime.Scoped);
         builder.RegisterComponentInHierarchy<EnemyPositionMono>();
         builder.RegisterInstance(enemyParamsManager);
+
+        builder.Register<EnemyDefeatConfig>(Lifetime.Scoped);
+        builder.RegisterComponentInHierarchy<EnemyDefeatPositionMono>();
+        builder.RegisterInstance(enemyDefeatParamManager);
 
         /*player*/
         builder.Register<PlayerParamConfig>(Lifetime.Scoped);
