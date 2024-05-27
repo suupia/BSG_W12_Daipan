@@ -15,18 +15,23 @@ namespace Daipan.LevelDesign.Enemy.Scripts
 {
     public class EnemyParamsConfig
     {
+        readonly Timer _timer;
         readonly EnemyParamsManager _enemyParamsManager;
         readonly EnemyPositionMono _enemyPositionMono;
 
         [Inject]
-        EnemyParamsConfig (EnemyParamsManager enemyParamsManager, EnemyPositionMono enemyPositionMono)
+        EnemyParamsConfig(
+            EnemyParamsManager enemyParamsManager,
+            EnemyPositionMono enemyPositionMono,
+            Timer timer)
         {
             _enemyParamsManager = enemyParamsManager;
             _enemyPositionMono = enemyPositionMono;
-            
+            _timer = timer;
+
             CheckIsValid(_enemyParamsManager);
         }
-        
+
         void CheckIsValid(EnemyParamsManager parameters)
         {
             Debug.Log($"EnemeyCount : {parameters.enemyParams.Count}");
@@ -48,7 +53,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
 
         public float GetSpeed(EnemyEnum enemyEnum)
         {
-            return GetEnemyParams(enemyEnum).enemyMoveParam.moveSpeedPerSec;
+            return GetEnemyParams(enemyEnum).enemyMoveParam.moveSpeedPerSec * GetEnemyTimeLineParam().moveSpeedRate;
         }
 
         public EnemyAttackParameter GetAttackParameter(EnemyEnum enemyEnum)
@@ -63,7 +68,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
 
         public int GetHp(EnemyEnum enemyEnum)
         {
-            return GetEnemyParams(enemyEnum).enemyHpParam.hpAmount; 
+            return GetEnemyParams(enemyEnum).enemyHpParam.hpAmount;
         }
 
         public Sprite GetSprite(EnemyEnum enemyEnum)
@@ -71,7 +76,15 @@ namespace Daipan.LevelDesign.Enemy.Scripts
             return GetEnemyParams(enemyEnum).sprite;
         }
 
+        public float GetSpawnDelaySec()
+        {
+            return GetEnemyTimeLineParam().spawnDelaySec;
+        }
 
+        public int GetSpawnBossAmount()
+        {
+            return GetEnemyTimeLineParam().spawnBossAmount;
+        }
         public void AddCurrentKillAmount()
         {
             _enemyParamsManager.currentKillAmount++;
@@ -83,7 +96,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         public EnemyEnum DecideRandomEnemyType()
         {
             // ボス発生条件を満たしていればBOSSを生成
-            if (_enemyParamsManager.currentKillAmount >= _enemyParamsManager.spawnBossAmount)
+            if (_enemyParamsManager.currentKillAmount >= GetSpawnBossAmount())
             {
                 _enemyParamsManager.currentKillAmount = 0;
                 return EnemyEnum.Boss;
@@ -104,6 +117,25 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         EnemyParam GetEnemyParams(EnemyEnum enemyEnum)
         {
             return _enemyParamsManager.enemyParams.First(c => c.GetEnemyEnum == enemyEnum);
+        }
+
+        EnemyTimeLineParam GetEnemyTimeLineParam()
+        {
+            if (_enemyParamsManager.enemyTimeLines.Count == 0)
+            {
+                var etlp = new EnemyTimeLineParam();
+                etlp.spawnDelaySec = _enemyParamsManager.spawnDelaySec;
+                etlp.moveSpeedRate = 1f;
+                etlp.spawnBossAmount = _enemyParamsManager.spawnBossAmount;
+                return etlp;
+            }
+            else
+            {
+                var i = _enemyParamsManager.enemyTimeLines.Where(e => e.startTime <= _timer.GetCurrentTime())
+                   .OrderByDescending(e => e.startTime).First();
+                Debug.Log($"EnemyTimeLineParam{i}");
+                return i;
+            }
         }
 
         #endregion
@@ -129,7 +161,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         }
 
         #endregion
-        
+
     }
 
     public class EnemyAttackParameter
@@ -137,7 +169,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         public int AttackAmount { get; private set; }
         public float AttackDelaySec { get; private set; }
 
-        public float AttackRange{ get; private set; }
+        public float AttackRange { get; private set; }
 
         public EnemyAttackParameter(int attackAmount, float attackDelaySec, float attackRange)
         {

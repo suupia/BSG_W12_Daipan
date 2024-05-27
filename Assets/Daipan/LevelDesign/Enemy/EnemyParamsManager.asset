@@ -76,3 +76,12 @@ MonoBehaviour:
       moveSpeedPerSec: 1.5
     sprite: {fileID: 21300000, guid: 0ee4fb82c347340cebbd590720da6a2c, type: 3}
     diffViewer: 30
+  enemyTimeLines:
+  - startTime: 0
+    spawnDelaySec: 1
+    moveSpeedRate: 1
+    spawnBossAmount: 10
+  - startTime: 10
+    spawnDelaySec: 0.5
+    moveSpeedRate: 1.5
+    spawnBossAmount: 5

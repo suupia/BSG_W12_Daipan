@@ -15,6 +15,10 @@ namespace Daipan.Utility.Scripts
         
         private bool _isPlaying = false;
 
+        Timer()
+        {
+            Start();
+        }
 
         void IUpdate.Update()
         {
