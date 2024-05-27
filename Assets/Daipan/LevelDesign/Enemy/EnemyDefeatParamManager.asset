@@ -9,10 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a3446c2a9f0f3f47a3d95ec96634bfb, type: 3}
-  m_Name: SuperComment
+  m_Script: {fileID: 11500000, guid: c906967214f84a29b7f3b35bc701bccb, type: 3}
+  m_Name: EnemyDefeatParamManager
   m_EditorClassIdentifier: 
-  commentType: 2
-  sprite: {fileID: 21300000, guid: 4214423a1fde27d43af2a003641dadc1, type: 3}
-  commentSpeed_ups: 1
-  diffViewer: 100
+  enemySlowDefeatParam:
+    slowDefeatThreshold: 5

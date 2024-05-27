@@ -96,6 +96,9 @@ public static class SerializeFieldNullChecker
 
             //var fileId = serializedProp.FindPropertyRelative(PropertyNameOfFieldId);
             //if (fileId == null || fileId.intValue == 0) continue;
+            
+            // Text Mesh Pro
+            if (serializedProp.propertyPath == "m_Material") return false;
 
             Debug.LogWarning($"GameObject: { component.name}, Component: {component.GetType().Name}, Field: {serializedProp.propertyPath} is null.");
             return true;

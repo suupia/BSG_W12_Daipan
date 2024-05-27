@@ -8,32 +8,32 @@ namespace Daipan.Player.Scripts
 {
     public sealed class PlayerAttack
     {
-        readonly PlayerParamsServer _playerParamsServer;
+        readonly PlayerParamConfig _playerParamConfig;
 
         [Inject]
-        public PlayerAttack(PlayerParamsServer playerParamsServer)
+        public PlayerAttack(PlayerParamConfig playerParamConfig)
         {
-            _playerParamsServer = playerParamsServer;
+            _playerParamConfig = playerParamConfig;
         }
 
         public void Attack(int attackIndex)
         {
-            Debug.Log($"Temp PlayerAttack Attack({attackIndex}) , Temp AttackPower : {_playerParamsServer.GetAttackAmount().AttackAmount}");
+            Debug.Log($"Temp PlayerAttack Attack({attackIndex}) , Temp AttackPower : {_playerParamConfig.GetAttackAmount().AttackAmount}");
         }
 
         public void WAttack(IHpSetter hpSetter)
         {
-            hpSetter.CurrentHp -= _playerParamsServer.GetAttackAmount().WAttackAmount;
+            hpSetter.CurrentHp -= _playerParamConfig.GetAttackAmount().WAttackAmount;
         }
 
         public void AAttack(IHpSetter hpSetter)
         {
-            hpSetter.CurrentHp -= _playerParamsServer.GetAttackAmount().AAttackAmount;
+            hpSetter.CurrentHp -= _playerParamConfig.GetAttackAmount().AAttackAmount;
         }
 
         public void SAttack(IHpSetter hpSetter)
         {
-            hpSetter.CurrentHp -= _playerParamsServer.GetAttackAmount().SAttackAmount;
+            hpSetter.CurrentHp -= _playerParamConfig.GetAttackAmount().SAttackAmount;
         }
     }
 }
