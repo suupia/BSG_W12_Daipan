@@ -116,26 +116,30 @@ namespace Daipan.LevelDesign.Enemy.Scripts
                 ratio.Add(enemyLife.enemySpawnParam.spawnRatio);
             }
             // ここで100%に正規化
-            
+            ratio = NormalizeEnemySpawnRatioWithBoss(ratio, GetEnemyTimeLineParam().spawnBossRatio);
 
             Debug.Log($"enemyPrams.Length : {_enemyParamsManager.enemyParams.Count}");
             Debug.Log($"Randoms.RandomByRatio(ratio) : {Randoms.RandomByRatio(ratio)}");
-            return _enemyParamsManager.enemyParams[Randoms.RandomByRatio(ratio)].GetEnemyEnum;
+            
+            
+            var enem =  _enemyParamsManager.enemyParams[Randoms.RandomByRatio(ratio)].GetEnemyEnum;
+            if(enem == EnemyEnum.Boss ) ResetCurrentKillAmount();
+            return enem;
         }
         /// <summary>
         /// Bossを含めないスポーン確率の入ったリストを受け取り、Bossを含めて返す
         /// </summary>
-        List<float> NormalizeEnemySpawnRatioWithBoss(List<float> ratio)
+        List<float> NormalizeEnemySpawnRatioWithBoss(List<float> ratio,float bossRatio)
         {
             float beforeRatio = 0f;
             foreach (var f in ratio)
             {
                 beforeRatio += f;
             }
-            float afterRatio = (100f - GetEnemyTimeLineParam().spawnBossRatio) / beforeRatio;
+            float afterRatio = (100f - bossRatio) / beforeRatio;
 
             var ret = ratio.Select(x => x * afterRatio).ToList();
-            ret.Add(GetEnemyTimeLineParam().spawnBossRatio);
+            ret.Add(bossRatio);
             return ret;
         }
 
