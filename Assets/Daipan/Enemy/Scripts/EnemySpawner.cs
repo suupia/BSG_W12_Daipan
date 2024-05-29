@@ -43,7 +43,7 @@ namespace Daipan.Enemy.Scripts
         void IUpdate.Update()
         {
             _timer += Time.deltaTime;
-            if (_timer > _spawnInterval)
+            if (_timer > _enemyParamsConfig.GetSpawnDelaySec())
             {
                 SpawnEnemy();
                 _timer = 0;

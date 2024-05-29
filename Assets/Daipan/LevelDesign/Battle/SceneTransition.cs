@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneTransition : MonoBehaviour
+public class SceneTransition:MonoBehaviour
 {
     [SerializeField]
-    private string SceneName;
-    // Update is called once per frame
-    void Update()
+    private string[] SceneName;
+    [SerializeField]
+    private bool[] scene;
+    private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Return) && scene[0])
         {
-            SceneManager.LoadScene(SceneName);
+            SceneManager.LoadScene(SceneName[0]);
         }
     }
 }
