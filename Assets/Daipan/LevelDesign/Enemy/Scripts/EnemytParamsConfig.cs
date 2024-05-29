@@ -89,6 +89,11 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         {
             _enemyParamsManager.currentKillAmount++;
         }
+
+        public void ResetCurrentKillAmount()
+        {
+            _enemyParamsManager.currentKillAmount = 0;
+        }
         /// <summary>
         /// 現在の状態に応じて生成する敵を決定
         /// </summary>
@@ -98,7 +103,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
             // ボス発生条件を満たしていればBOSSを生成
             if (_enemyParamsManager.currentKillAmount >= GetSpawnBossAmount())
             {
-                _enemyParamsManager.currentKillAmount = 0;
+                ResetCurrentKillAmount();
                 return EnemyEnum.Boss;
             }
 
@@ -107,11 +112,31 @@ namespace Daipan.LevelDesign.Enemy.Scripts
 
             foreach (var enemyLife in _enemyParamsManager.enemyParams)
             {
+                if(enemyLife.GetEnemyEnum == EnemyEnum.Boss) continue;
                 ratio.Add(enemyLife.enemySpawnParam.spawnRatio);
             }
+            // ここで100%に正規化
+            
+
             Debug.Log($"enemyPrams.Length : {_enemyParamsManager.enemyParams.Count}");
             Debug.Log($"Randoms.RandomByRatio(ratio) : {Randoms.RandomByRatio(ratio)}");
             return _enemyParamsManager.enemyParams[Randoms.RandomByRatio(ratio)].GetEnemyEnum;
+        }
+        /// <summary>
+        /// Bossを含めないスポーン確率の入ったリストを受け取り、Bossを含めて返す
+        /// </summary>
+        List<float> NormalizeEnemySpawnRatioWithBoss(List<float> ratio)
+        {
+            float beforeRatio = 0f;
+            foreach (var f in ratio)
+            {
+                beforeRatio += f;
+            }
+            float afterRatio = (100f - GetEnemyTimeLineParam().spawnBossRatio) / beforeRatio;
+
+            var ret = ratio.Select(x => x * afterRatio).ToList();
+            ret.Add(GetEnemyTimeLineParam().spawnBossRatio);
+            return ret;
         }
 
         EnemyParam GetEnemyParams(EnemyEnum enemyEnum)
@@ -133,7 +158,6 @@ namespace Daipan.LevelDesign.Enemy.Scripts
             {
                 var i = _enemyParamsManager.enemyTimeLines.Where(e => e.startTime <= _timer.GetCurrentTime())
                    .OrderByDescending(e => e.startTime).First();
-                Debug.Log($"EnemyTimeLineParam{i}");
                 return i;
             }
         }
