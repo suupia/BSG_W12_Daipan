@@ -9,10 +9,12 @@ namespace Daipan.LevelDesign.Enemy.Scripts
     public sealed class TowerParamsConfig
     {
         readonly TowerPositionMono _towerPositionMono;
+        readonly TowerParams _towerParams;
 
-        public TowerParamsConfig(TowerPositionMono towerPositionMono)
+        public TowerParamsConfig(TowerPositionMono towerPositionMono, TowerParams towerParams)
         {
             _towerPositionMono = towerPositionMono;
+            _towerParams = towerParams;
         }
 
         public Vector3 GetTowerSpawnPosition()

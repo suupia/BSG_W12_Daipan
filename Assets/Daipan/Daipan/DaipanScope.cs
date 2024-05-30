@@ -29,6 +29,7 @@ public sealed class DaipanScope : LifetimeScope
     [SerializeField] CommentParamsManager commentParamsManager = null!;
     [SerializeField] IrritatedParams irritatedParams = null!;
     [SerializeField] EnemyDefeatParamManager enemyDefeatParamManager = null!;
+    [SerializeField] TowerParams towerParams = null!;
 
     protected override void Configure(IContainerBuilder builder)
     {
@@ -108,6 +109,7 @@ public sealed class DaipanScope : LifetimeScope
         /*tower*/
         builder.Register<TowerParamsConfig>(Lifetime.Scoped);
         builder.RegisterComponentInHierarchy<TowerPositionMono>();
+        builder.RegisterInstance(towerParams);
 
         // Initializer
         builder.RegisterEntryPoint<DaipanInitializer>();
