@@ -40,7 +40,7 @@ namespace Daipan.Enemy.Scripts
             if (playerMono.CurrentHp <= 0) return false;
             Debug.Log($"enemy.transform.position : {enemyMono.transform.position}, player.transform.position : {playerMono.transform.position}");
             Debug.Log($"distance : {(playerMono.transform.position - enemyMono.transform.position).magnitude}");
-            if ((playerMono.transform.position - enemyMono.transform.position).magnitude > enemyAttackParameter.AttackRange) return false;
+            if (enemyMono.transform.position.x - playerMono.transform.position.x > enemyAttackParameter.AttackRange) return false;
             return true;
         }
         
