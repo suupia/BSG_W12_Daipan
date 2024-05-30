@@ -14,6 +14,7 @@ using Daipan.Stream.MonoScripts;
 using Daipan.Stream.Scripts;
 using Daipan.Stream.Scripts.Utility;
 using Daipan.Stream.Tests;
+using Daipan.Tower.Scripts;
 using Daipan.Utility.Scripts;
 using UnityEngine;
 using VContainer;
@@ -59,6 +60,10 @@ public sealed class DaipanScope : LifetimeScope
         builder.Register<PlayerAttack>(Lifetime.Scoped);
         builder.Register<PlayerHolder>(Lifetime.Scoped);
         builder.Register<IStart, PlayerSpawner>(Lifetime.Scoped);
+
+        // Tower
+        builder.Register<TowerPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<TowerMono>>();
+        builder.Register<IStart, TowerSpawner>(Lifetime.Scoped);
 
         // Enemy
         //builder.RegisterInstance(enemyAttributeParameters);

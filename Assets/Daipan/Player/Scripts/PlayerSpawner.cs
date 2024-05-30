@@ -1,4 +1,4 @@
-﻿#nullable enable
+#nullable enable
 using Daipan.Core.Interfaces;
 using Daipan.Stream.Scripts.Utility;
 using UnityEngine;
