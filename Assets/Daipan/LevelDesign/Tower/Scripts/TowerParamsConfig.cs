@@ -1,6 +1,7 @@
 #nullable enable
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Daipan.LevelDesign.Tower.Scripts;
 using UnityEngine;
 
@@ -20,6 +21,14 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         public Vector3 GetTowerSpawnPosition()
         {
             return _towerPositionMono.towerSpawnTransform.position;
+        }
+
+        public Sprite GetCurrentSprite(float HP)
+        {
+            var i = _towerParams.towerSprites.Where(t => t.hpThreshold >= HP)
+                .OrderBy(t => t.hpThreshold).First();
+
+            return i.sprite;
         }
     }
 
