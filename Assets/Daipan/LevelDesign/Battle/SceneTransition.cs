@@ -2,18 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SceneTransition:MonoBehaviour
 {
+    Button button;
     [SerializeField]
-    private string[] SceneName;
-    [SerializeField]
-    private bool[] scene;
-    private void Update()
+    private string SceneName;
+
+    private void Start()
     {
-        if (Input.GetKeyDown(KeyCode.Return) && scene[0])
-        {
-            SceneManager.LoadScene(SceneName[0]);
-        }
+        button = GetComponent<Button>();
+        button.onClick.AddListener(() => SceneManager.LoadScene(SceneName));
     }
 }
