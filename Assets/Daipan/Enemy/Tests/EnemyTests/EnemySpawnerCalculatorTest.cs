@@ -1,18 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
+using NUnit.Framework;
 using UnityEngine;
 
 public class EnemySpawnerCalculatorTest 
 {
-    // Start is called before the first frame update
-    void Start()
+    [Test]
+    public void NormalizeEnemySpawnRatioWithBossTest()
     {
-        
-    }
+        var ratio = new List<float> { 1.0f, 2.0f, 3.0f };
+        float bossRatio = 40;
+        var expected = new List<float> { 10.0f, 20.0f, 30.0f, 40.0f };
 
-    // Update is called once per frame
-    void Update()
+        List<float> actual = Daipan.Enemy.Scripts.EnemySpawnCalculator.NormalizeEnemySpawnRatioWithBoss(ratio, bossRatio);
+
+        Assert.AreEqual(expected, actual);
+    }
+    
+    [Test]
+    public void NormalizeEnemySpawnRatioWithBossTest2()
     {
-        
+        var ratio = new List<float> { 1.0f, 2.0f, 2.0f };
+        float bossRatio = 50;
+        var expected = new List<float> { 10.0f, 20.0f, 20.0f, 50.0f };
+
+        List<float> actual = Daipan.Enemy.Scripts.EnemySpawnCalculator.NormalizeEnemySpawnRatioWithBoss(ratio, bossRatio);
+
+        Assert.AreEqual(expected, actual);
     }
 }
