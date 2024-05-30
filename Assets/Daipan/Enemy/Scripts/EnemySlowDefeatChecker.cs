@@ -2,36 +2,38 @@ using Daipan.Comment.Scripts;
 using Daipan.LevelDesign.Enemy.Scripts;
 using UnityEngine;
 
-namespace Daipan.Enemy.Scripts;
-
-public class EnemySlowDefeatChecker
+namespace Daipan.Enemy.Scripts
 {
-    readonly CommentSpawner _commentSpawner;
-    readonly EnemyDefeatConfig _enemyDefeatConfig;
-
-    public EnemySlowDefeatChecker(
-        EnemyDefeatConfig enemyDefeatConfig,
-        CommentSpawner commentSpawner)
+    public class EnemySlowDefeatChecker
     {
-        _enemyDefeatConfig = enemyDefeatConfig;
-        _commentSpawner = commentSpawner;
-    }
+        readonly CommentSpawner _commentSpawner;
+        readonly EnemyDefeatConfig _enemyDefeatConfig;
 
-    int SlowDefeatThreshold => _enemyDefeatConfig.GetSlowDefeatThreshold();
-
-    public float SlowDefeatCoordinate => _enemyDefeatConfig.GetEnemyDefeatSlowPosition().x;
-
-    int SlowDefeatCounter { get; set; }
-
-
-    public void IncrementSlowDefeatCounter()
-    {
-        SlowDefeatCounter++;
-        if (SlowDefeatCounter > SlowDefeatThreshold)
+        public EnemySlowDefeatChecker(
+            EnemyDefeatConfig enemyDefeatConfig,
+            CommentSpawner commentSpawner)
         {
-            Debug.Log("Spawn comment");
-            _commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
-            SlowDefeatCounter = 0;
+            _enemyDefeatConfig = enemyDefeatConfig;
+            _commentSpawner = commentSpawner;
         }
-    }
+
+        int SlowDefeatThreshold => _enemyDefeatConfig.GetSlowDefeatThreshold();
+
+        public float SlowDefeatCoordinate => _enemyDefeatConfig.GetEnemyDefeatSlowPosition().x;
+
+        int SlowDefeatCounter { get; set; }
+
+
+        public void IncrementSlowDefeatCounter()
+        {
+            SlowDefeatCounter++;
+            if (SlowDefeatCounter > SlowDefeatThreshold)
+            {
+                Debug.Log("Spawn comment");
+                _commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
+                SlowDefeatCounter = 0;
+            }
+        }
+    } 
 }
+
