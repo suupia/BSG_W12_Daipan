@@ -1,21 +1,23 @@
 using Daipan.LevelDesign.Enemy.Scripts;
 using UnityEngine;
 
-namespace Daipan.Enemy.Scripts;
-
-public class EnemyQuickDefeatChecker
+namespace Daipan.Enemy.Scripts
 {
-    readonly EnemyDefeatConfig _enemyDefeatConfig;
-
-    public EnemyQuickDefeatChecker(EnemyDefeatConfig enemyDefeatConfig)
+    public class EnemyQuickDefeatChecker
     {
-        _enemyDefeatConfig = enemyDefeatConfig;
-    }
+        readonly EnemyDefeatConfig _enemyDefeatConfig;
 
-    float QuickDefeatCoordinate => _enemyDefeatConfig.GetEnemyDefeatQuickPosition().x;
+        public EnemyQuickDefeatChecker(EnemyDefeatConfig enemyDefeatConfig)
+        {
+            _enemyDefeatConfig = enemyDefeatConfig;
+        }
 
-    public bool IsQuickDefeat(Vector3 currentPosition)
-    {
-        return QuickDefeatCoordinate < currentPosition.x;
-    }
+        float QuickDefeatCoordinate => _enemyDefeatConfig.GetEnemyDefeatQuickPosition().x;
+
+        public bool IsQuickDefeat(Vector3 currentPosition)
+        {
+            return QuickDefeatCoordinate < currentPosition.x;
+        }
+    } 
 }
+
