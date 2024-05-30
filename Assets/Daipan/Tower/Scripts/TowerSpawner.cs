@@ -1,6 +1,7 @@
 #nullable enable
 using UnityEngine;
 using Daipan.Core.Interfaces;
+using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.Stream.Scripts.Utility;
 using VContainer;
 using VContainer.Unity;
@@ -11,22 +12,23 @@ namespace Daipan.Tower.Scripts
     {
         readonly IObjectResolver _container;
         readonly IPrefabLoader<TowerMono> _towerMonoLoader;
+        readonly TowerParamsConfig _towerParamsConfig;
 
         [Inject]
         public TowerSpawner(
             IObjectResolver container,
-            IPrefabLoader<TowerMono> towerMonoLoader)
+            IPrefabLoader<TowerMono> towerMonoLoader,
+            TowerParamsConfig towerParamsConfig)
         {
             _container = container;
             _towerMonoLoader = towerMonoLoader;
+            _towerParamsConfig = towerParamsConfig;
         }
 
         void IStart.Start()
         {
-            // PlayerMonoのプレハブをロードして生成 
             var towerMonoPrefab = _towerMonoLoader.Load();
-            // IObjectResolverを使ってPlayerMonoを生成すると依存関係が解決される
-            var position = new Vector3(-8, 0, 0); // 左
+            var position = _towerParamsConfig.GetTowerSpawnPosition();
             _container.Instantiate(towerMonoPrefab, position, Quaternion.identity);
         }
     }

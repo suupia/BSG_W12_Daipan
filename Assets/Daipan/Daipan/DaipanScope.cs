@@ -9,6 +9,7 @@ using Daipan.Enemy.Scripts;
 using Daipan.LevelDesign.Comment.Scripts;
 using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.LevelDesign.Player.Scripts;
+using Daipan.LevelDesign.Tower.Scripts;
 using Daipan.Player.Scripts;
 using Daipan.Stream.MonoScripts;
 using Daipan.Stream.Scripts;
@@ -103,6 +104,10 @@ public sealed class DaipanScope : LifetimeScope
         /*player*/
         builder.Register<PlayerParamConfig>(Lifetime.Scoped);
         builder.RegisterInstance(playerParams);
+
+        /*tower*/
+        builder.Register<TowerParamsConfig>(Lifetime.Scoped);
+        builder.RegisterComponentInHierarchy<TowerPositionMono>();
 
         // Initializer
         builder.RegisterEntryPoint<DaipanInitializer>();
