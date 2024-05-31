@@ -9,11 +9,13 @@ using Daipan.Enemy.Scripts;
 using Daipan.LevelDesign.Comment.Scripts;
 using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.LevelDesign.Player.Scripts;
+using Daipan.LevelDesign.Tower.Scripts;
 using Daipan.Player.Scripts;
 using Daipan.Stream.MonoScripts;
 using Daipan.Stream.Scripts;
 using Daipan.Stream.Scripts.Utility;
 using Daipan.Stream.Tests;
+using Daipan.Tower.Scripts;
 using Daipan.Utility.Scripts;
 using UnityEngine;
 using VContainer;
@@ -27,6 +29,7 @@ public sealed class DaipanScope : LifetimeScope
     [SerializeField] CommentParamsManager commentParamsManager = null!;
     [SerializeField] IrritatedParams irritatedParams = null!;
     [SerializeField] EnemyDefeatParamManager enemyDefeatParamManager = null!;
+    [SerializeField] TowerParams towerParams = null!;
 
     protected override void Configure(IContainerBuilder builder)
     {
@@ -59,6 +62,10 @@ public sealed class DaipanScope : LifetimeScope
         builder.Register<PlayerAttack>(Lifetime.Scoped);
         builder.Register<PlayerHolder>(Lifetime.Scoped);
         builder.Register<IStart, PlayerSpawner>(Lifetime.Scoped);
+
+        // Tower
+        builder.Register<TowerPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<TowerMono>>();
+        builder.Register<IStart, TowerSpawner>(Lifetime.Scoped);
 
         // Enemy
         //builder.RegisterInstance(enemyAttributeParameters);
@@ -98,6 +105,11 @@ public sealed class DaipanScope : LifetimeScope
         /*player*/
         builder.Register<PlayerParamConfig>(Lifetime.Scoped);
         builder.RegisterInstance(playerParams);
+
+        /*tower*/
+        builder.Register<TowerParamsConfig>(Lifetime.Scoped);
+        builder.RegisterComponentInHierarchy<TowerPositionMono>();
+        builder.RegisterInstance(towerParams);
 
         // Initializer
         builder.RegisterEntryPoint<DaipanInitializer>();
