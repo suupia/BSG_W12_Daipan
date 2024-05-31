@@ -77,9 +77,24 @@ namespace Daipan.Enemy.MonoScripts
             _slowDefeatChecker = slowDefeatChecker;
         }
 
-        public void SetDomain(EnemyAttackDecider enemyAttackDecider)
+        public void SetDomain(
+            EnemyEnum enemyEnum,
+            EnemyHp enemyHp,
+            EnemyAttackDecider enemyAttackDecider
+            )
         {
+            EnemyEnum = enemyEnum;
+            _enemyHp = enemyHp;
             _enemyAttackDecider = enemyAttackDecider;
+            
+            SetSprite(enemyEnum);
+        }
+
+
+        void SetSprite(EnemyEnum enemyEnum)
+        {
+            var spriteRenderer = GetComponent<SpriteRenderer>();
+            spriteRenderer.sprite = _enemyParamsConfig.GetSprite(enemyEnum);
         }
 
         public void Died(bool isTriggerCallback)
@@ -101,16 +116,7 @@ namespace Daipan.Enemy.MonoScripts
             _enemyCluster.Remove(this);
         }
 
-        public void SetParameter(EnemyEnum enemyEnum)
-        {
-            EnemyEnum = enemyEnum;
 
-            _enemyHp = new EnemyHp(_enemyParamDataContainer.GetEnemyParamData(EnemyEnum).GetCurrentHp(), this, _enemyCluster);
-
-            //Sprite
-            var spriteRenderer = GetComponent<SpriteRenderer>();
-            spriteRenderer.sprite = _enemyParamsConfig.GetSprite(enemyEnum);
-        }
     }
 
     public record DiedEventArgs(bool IsBoss, bool IsQuickDefeat, bool IsTrigger = false);

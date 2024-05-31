@@ -18,13 +18,15 @@ namespace Daipan.Enemy.Scripts
         readonly EnemyParamsManager _enemyParamsManager;
         readonly EnemyParamsConfig _enemyParamsConfig;
         readonly ViewerNumber _viewerNumber;
+        readonly EnemyCluster _enemyCluster;
 
         public EnemyDomainBuilder(
             EnemyParamDataContainer enemyParamDataContainer,
             CommentSpawner commentSpawner,
             ViewerNumber viewerNumber,
             EnemyParamsManager enemyParamsManager,
-            EnemyParamsConfig enemyParamsConfig
+            EnemyParamsConfig enemyParamsConfig,
+            EnemyCluster enemyCluster
         )
         {
             _enemyParamDataContainer = enemyParamDataContainer;
@@ -32,6 +34,7 @@ namespace Daipan.Enemy.Scripts
             _viewerNumber = viewerNumber;
             _enemyParamsManager = enemyParamsManager;
             _enemyParamsConfig = enemyParamsConfig;
+            _enemyCluster = enemyCluster;
         }
 
         public EnemyMono SetDomain(EnemyMono enemyMono)
@@ -39,8 +42,11 @@ namespace Daipan.Enemy.Scripts
             var enemyEnum = DecideRandomEnemyType();
             Debug.Log($"enemyEnum: {enemyEnum}");
             var enemyParamData = _enemyParamDataContainer.GetEnemyParamData(enemyEnum);
-            enemyMono.SetDomain(new EnemyAttackDecider(enemyMono, enemyParamData, new EnemyAttack(enemyParamData)));
-            enemyMono.SetParameter(enemyEnum);
+            enemyMono.SetDomain(
+                enemyEnum,
+                new EnemyHp(enemyParamData.GetCurrentHp(),enemyMono, _enemyCluster),
+                new EnemyAttackDecider(enemyMono, enemyParamData, new EnemyAttack(enemyParamData))
+                );
             enemyMono.OnDied += (sender, args) =>
             {
                 // ボスを倒したときも含む
