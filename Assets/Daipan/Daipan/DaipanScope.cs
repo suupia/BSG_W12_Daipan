@@ -105,7 +105,7 @@ namespace Daipan.Daipan
          builder.RegisterInstance(enemyDefeatParamManager);
  
          /*player*/
-         builder.RegisterInstance(new PlayerParamBuilder(builder, playerParam));
+         builder.RegisterInstance(new PlayerParamDataBuilder(builder, playerParam));
          builder.RegisterInstance(playerParam);
  
          /*tower*/

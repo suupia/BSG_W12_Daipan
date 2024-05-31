@@ -75,7 +75,7 @@ public class PlayerMono : MonoBehaviour, IHpSetter
     public void Initialize(
         PlayerAttack playerAttack,
         EnemyCluster enemyCluster,
-        PlayerParamBuilder  playerParamBuilder,
+        PlayerParamDataBuilder  playerParamDataBuilder,
         PlayerParamData playerParamData,
         CommentSpawner commentSpawner
     )

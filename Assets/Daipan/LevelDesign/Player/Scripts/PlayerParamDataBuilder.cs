@@ -8,32 +8,22 @@ using VContainer;
 
 namespace Daipan.LevelDesign.Player.Scripts
 {
-    public class PlayerParamBuilder
+    public class PlayerParamDataBuilder
     {
-        readonly PlayerParam _playerParam;
-
-        public PlayerParamBuilder (
+        public PlayerParamDataBuilder (
             IContainerBuilder builder,
             PlayerParam playerParam)
         {
-            _playerParam = playerParam;
-            
-            var playerParamDTO = new PlayerParamData
+            var playerParamData = new PlayerParamData
             {
-                GetCurrentHp = () => _playerParam.hpAmount,
-                SetCurrentHp = (hp) => _playerParam.hpAmount = hp,
+                GetCurrentHp = () => playerParam.hpAmount,
+                SetCurrentHp = (hp) => playerParam.hpAmount = hp,
                 
                 GetWAttack = () => playerParam.playerAttackParam.WAttackAmount,
                 GetAAttack = () => playerParam.playerAttackParam.AAttackAmount,
                 GetSAttack = () => playerParam.playerAttackParam.SAttackAmount
             };
-            builder.RegisterInstance(playerParamDTO);
-        }
-
-
-        public int GetHpAmount()
-        {
-            return _playerParam.hpAmount;
+            builder.RegisterInstance(playerParamData);
         }
 
     }
