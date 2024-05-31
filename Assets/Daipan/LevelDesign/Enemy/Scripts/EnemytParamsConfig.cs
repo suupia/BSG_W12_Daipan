@@ -82,10 +82,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
             _enemyParamsManager.currentKillAmount++;
         }
 
-        public void ResetCurrentKillAmount()
-        {
-            _enemyParamsManager.currentKillAmount = 0;
-        }
+
 
         /// <summary>
         ///     現在の状態に応じて生成する敵を決定
@@ -96,7 +93,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
             // ボス発生条件を満たしていればBOSSを生成
             if (_enemyParamsManager.currentKillAmount >= GetSpawnBossAmount())
             {
-                ResetCurrentKillAmount();
+                _enemyParamsManager.currentKillAmount = 0;
                 return EnemyEnum.Boss;
             }
 
@@ -110,14 +107,15 @@ namespace Daipan.LevelDesign.Enemy.Scripts
             }
 
             // ここで100%に正規化
-            ratio = EnemySpawnCalculator.NormalizeEnemySpawnRatioWithBoss(ratio, GetEnemyTimeLineParam().spawnBossRatio);
+            ratio = EnemySpawnCalculator.NormalizeEnemySpawnRatioWithBoss(ratio,
+                GetEnemyTimeLineParam().spawnBossRatio);
 
             Debug.Log($"enemyPrams.Length : {_enemyParamsManager.enemyParams.Count}");
             Debug.Log($"Randoms.RandomByRatio(ratio) : {Randoms.RandomByRatio(ratio)}");
 
 
             var enem = _enemyParamsManager.enemyParams[Randoms.RandomByRatio(ratio)].GetEnemyEnum;
-            if (enem == EnemyEnum.Boss) ResetCurrentKillAmount();
+            if (enem == EnemyEnum.Boss)  _enemyParamsManager.currentKillAmount = 0;
             return enem;
         }
 
