@@ -101,7 +101,7 @@ namespace Daipan.Enemy.MonoScripts
         public void SetParameter(EnemyEnum enemyEnum)
         {
             _enemyEnum = enemyEnum;
-            _enemyAttack.enemyAttackParameter = _enemyParamsConfig.GetAttackParameter(enemyEnum);
+
             _enemyHp = new EnemyHp(_enemyParamsConfig.GetHp(_enemyEnum), this, _enemyCluster);
 
             //Sprite

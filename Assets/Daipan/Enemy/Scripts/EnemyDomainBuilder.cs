@@ -13,18 +13,21 @@ namespace Daipan.Enemy.Scripts
 {
     public class EnemyDomainBuilder : IEnemyDomainBuilder
     {
+        readonly EnemyParamDataContainer _enemyParamDataContainer;
         readonly CommentSpawner _commentSpawner;
         readonly EnemyParamsManager _enemyParamsManager;
         readonly EnemyParamsConfig _enemyParamsConfig;
         readonly ViewerNumber _viewerNumber;
 
         public EnemyDomainBuilder(
+            EnemyParamDataContainer enemyParamDataContainer,
             CommentSpawner commentSpawner,
             ViewerNumber viewerNumber,
             EnemyParamsManager enemyParamsManager,
             EnemyParamsConfig enemyParamsConfig
         )
         {
+            _enemyParamDataContainer = enemyParamDataContainer;
             _commentSpawner = commentSpawner;
             _viewerNumber = viewerNumber;
             _enemyParamsManager = enemyParamsManager;
@@ -35,7 +38,7 @@ namespace Daipan.Enemy.Scripts
         {
             var enemyEnum = DecideRandomEnemyType();
             Debug.Log($"enemyEnum: {enemyEnum}");
-            enemyMono.SetDomain(new EnemyAttack(enemyMono));
+            enemyMono.SetDomain(new EnemyAttack(enemyMono, _enemyParamDataContainer.GetEnemyParamData(enemyEnum)));
             enemyMono.SetParameter(enemyEnum);
             enemyMono.OnDied += (sender, args) =>
             {

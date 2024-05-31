@@ -8,19 +8,22 @@ namespace Daipan.Enemy.Scripts
 {
     public sealed class EnemyAttack
     {
-        public EnemyAttackParameter enemyAttackParameter = null!;
+        readonly EnemyParamData _enemyParamData;
 
         readonly EnemyMono _enemyMono;
         float Timer { get; set; }
 
-        public EnemyAttack(EnemyMono enemyMono)
+        public EnemyAttack(
+            EnemyMono enemyMono,
+            EnemyParamData enemyParamData)
         {
+            _enemyParamData = enemyParamData;
             _enemyMono = enemyMono;
         }
         public void AttackUpdate(PlayerMono playerMono)
         {
             Timer += Time.deltaTime;
-            if (Timer >= enemyAttackParameter.AttackDelaySec)
+            if (Timer >= _enemyParamData.AttackDelayDec())
             {
                 Attack(playerMono);
                 Timer = 0;
@@ -29,9 +32,9 @@ namespace Daipan.Enemy.Scripts
 
         void Attack(PlayerMono playerMono)
         {
-            Debug.Log($"Attack, attackAmount:{enemyAttackParameter.AttackAmount}");
+            Debug.Log($"Attack, attackAmount:{_enemyParamData.AttackAmount()}");
             if (!CanAttack(_enemyMono, playerMono)) return;
-            playerMono.CurrentHp -= enemyAttackParameter.AttackAmount;
+            playerMono.CurrentHp -= _enemyParamData.AttackAmount();
             Debug.Log($"playerHP after attack : {playerMono.CurrentHp}");
         }
         
@@ -40,7 +43,7 @@ namespace Daipan.Enemy.Scripts
             if (playerMono.CurrentHp <= 0) return false;
             Debug.Log($"enemy.transform.position : {enemyMono.transform.position}, player.transform.position : {playerMono.transform.position}");
             Debug.Log($"distance : {(playerMono.transform.position - enemyMono.transform.position).magnitude}");
-            if (enemyMono.transform.position.x - playerMono.transform.position.x > enemyAttackParameter.AttackRange) return false;
+            if (enemyMono.transform.position.x - playerMono.transform.position.x > _enemyParamData.AttackRange()) return false;
             return true;
         }
         
