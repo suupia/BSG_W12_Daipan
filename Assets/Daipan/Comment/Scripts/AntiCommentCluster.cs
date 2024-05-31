@@ -2,8 +2,9 @@ using System.Collections.Generic;
 using Daipan.Comment.MonoScripts;
 using UnityEngine;
 
-namespace Daipan.Comment.Scripts;
-
+namespace Daipan.Comment.Scripts
+{
+    
 public sealed class AntiCommentCluster
 {
     readonly List<AntiCommentMono> _comments = new();
@@ -27,4 +28,5 @@ public sealed class AntiCommentCluster
                 comment.BlownAway();
     }
 
+}
 }

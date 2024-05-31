@@ -2,19 +2,21 @@ using Daipan.Comment.MonoScripts;
 using Daipan.Stream.Scripts.Utility;
 using Daipan.Stream.Scripts.Utility.Scripts;
 
-namespace Daipan.Comment.Scripts;
-
-public sealed class AntiCommentPrefabLoader : IPrefabLoader<AntiCommentMono>
+namespace Daipan.Comment.Scripts
 {
-    readonly PrefabLoaderFromResources<AntiCommentMono> _loader;
-
-    public AntiCommentPrefabLoader()
+    public sealed class AntiCommentPrefabLoader : IPrefabLoader<AntiCommentMono>
     {
-        _loader = new PrefabLoaderFromResources<AntiCommentMono>("AntiComment");
-    }
-
-    public AntiCommentMono Load()
-    {
-        return _loader.Load();
+        readonly PrefabLoaderFromResources<AntiCommentMono> _loader;
+    
+        public AntiCommentPrefabLoader()
+        {
+            _loader = new PrefabLoaderFromResources<AntiCommentMono>("AntiComment");
+        }
+    
+        public AntiCommentMono Load()
+        {
+            return _loader.Load();
+        }
     }
 }
+
