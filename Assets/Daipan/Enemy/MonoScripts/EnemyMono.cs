@@ -41,7 +41,7 @@ namespace Daipan.Enemy.MonoScripts
             if (transform.position.x < _enemyParamsConfig.GetDespawnedPosition().x)
                 _enemyCluster.Remove(this, false); // Destroy when out of screen
 
-            hpGaugeMono.SetRatio(CurrentHp / (float)_enemyParamsConfig.GetHp(EnemyEnum));
+            hpGaugeMono.SetRatio(CurrentHp / (float)_enemyParamDataContainer.GetEnemyParamData(EnemyEnum).GetCurrentHp());
 
             if (_isSlowDefeat == false && transform.position.x <= _slowDefeatChecker.SlowDefeatCoordinate)
             {
@@ -105,7 +105,7 @@ namespace Daipan.Enemy.MonoScripts
         {
             EnemyEnum = enemyEnum;
 
-            _enemyHp = new EnemyHp(_enemyParamsConfig.GetHp(EnemyEnum), this, _enemyCluster);
+            _enemyHp = new EnemyHp(_enemyParamDataContainer.GetEnemyParamData(EnemyEnum).GetCurrentHp(), this, _enemyCluster);
 
             //Sprite
             var spriteRenderer = GetComponent<SpriteRenderer>();

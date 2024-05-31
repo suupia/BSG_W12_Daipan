@@ -20,7 +20,8 @@ namespace Daipan.LevelDesign.Enemy.Scripts
                     EnemyEnum = () => enemyParam.GetEnemyEnum,
                     AttackAmount = () => enemyParam.enemyAttackParam.attackAmount,
                     AttackDelayDec = () => enemyParam.enemyAttackParam.attackDelaySec,
-                    AttackRange = () => enemyParam.enemyAttackParam.attackRange
+                    AttackRange = () => enemyParam.enemyAttackParam.attackRange,
+                    GetCurrentHp = () => enemyParam.enemyHpParam.hpAmount
                 }); 
             }
             var enemyParamContainer = new EnemyParamDataContainer(enemyParams);

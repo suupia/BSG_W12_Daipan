@@ -54,11 +54,6 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         }
 
 
-        public int GetHp(EnemyEnum enemyEnum)
-        {
-            return GetEnemyParams(enemyEnum).enemyHpParam.hpAmount;
-        }
-
         public Sprite GetSprite(EnemyEnum enemyEnum)
         {
             return GetEnemyParams(enemyEnum).sprite;

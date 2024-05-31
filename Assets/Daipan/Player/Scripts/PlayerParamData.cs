@@ -3,6 +3,9 @@ using System;
 
 namespace Daipan.Player.Scripts 
 {
+    /// <summary>
+    /// このクラスは、IPlayerHp, IPlayerAttackなどを実装するクラスとして捉えている
+    /// </summary>
     public class PlayerParamData
     {
         // Hp
