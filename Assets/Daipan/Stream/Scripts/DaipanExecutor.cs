@@ -80,7 +80,7 @@ namespace Daipan.Stream.Scripts
                 Debug.Log("Blow all comment");
                 _enemyCluster.BlownAway();
                 _commentCluster.BlownAway(commentMono =>
-                    commentMono._commentEnum != CommentEnum.Super); // SuperComment以外を吹き飛ばす
+                    commentMono.CommentEnum != CommentEnum.Super); // SuperComment以外を吹き飛ばす
                 _antiCommentCluster.BlownAway();
             }
 

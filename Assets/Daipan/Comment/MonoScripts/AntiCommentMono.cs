@@ -1,6 +1,6 @@
+#nullable enable
 using System;
 using Daipan.Comment.Scripts;
-using Daipan.LevelDesign.Comment.Scripts;
 using UnityEngine;
 using VContainer;
 
