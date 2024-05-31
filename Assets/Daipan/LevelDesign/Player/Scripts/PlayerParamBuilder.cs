@@ -18,8 +18,11 @@ namespace Daipan.LevelDesign.Player.Scripts
         {
             _playerParam = playerParam;
             
-            var playerParamDTO = new PlayerParamDTO
+            var playerParamDTO = new PlayerParamData
             {
+                GetCurrentHp = () => _playerParam.hpAmount,
+                SetCurrentHp = (hp) => _playerParam.hpAmount = hp,
+                
                 GetWAttack = () => playerParam.playerAttackParam.WAttackAmount,
                 GetAAttack = () => playerParam.playerAttackParam.AAttackAmount,
                 GetSAttack = () => playerParam.playerAttackParam.SAttackAmount

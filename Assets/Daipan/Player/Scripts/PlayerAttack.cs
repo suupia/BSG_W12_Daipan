@@ -8,27 +8,27 @@ namespace Daipan.Player.Scripts
 {
     public sealed class PlayerAttack
     {
-        readonly PlayerParamDTO _playerParamDto;
+        readonly PlayerParamData _playerParamData;
 
         [Inject]
-        public PlayerAttack(PlayerParamDTO playerParamDto)
+        public PlayerAttack(PlayerParamData playerParamData)
         {
-            _playerParamDto = playerParamDto;
+            _playerParamData = playerParamData;
         }
 
         public void WAttack(IHpSetter hpSetter)
         {
-            hpSetter.CurrentHp -= _playerParamDto.GetWAttack();
+            hpSetter.CurrentHp -= _playerParamData.GetWAttack();
         }
 
         public void AAttack(IHpSetter hpSetter)
         {
-            hpSetter.CurrentHp -= _playerParamDto.GetAAttack();
+            hpSetter.CurrentHp -= _playerParamData.GetAAttack();
         }
 
         public void SAttack(IHpSetter hpSetter)
         {
-            hpSetter.CurrentHp -= _playerParamDto.GetSAttack();
+            hpSetter.CurrentHp -= _playerParamData.GetSAttack();
         }
     }
 }

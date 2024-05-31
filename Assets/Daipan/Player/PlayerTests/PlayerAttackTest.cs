@@ -13,7 +13,7 @@ public class PlayerAttackTest
     {
         // Arrange
         var enemy = new DummyEnemy() { CurrentHp = 100 };
-        var playerParamDto = new PlayerParamDTO()
+        var playerParamDto = new PlayerParamData()
         {
             GetWAttack = () => 10,
             GetAAttack = () => 10,
