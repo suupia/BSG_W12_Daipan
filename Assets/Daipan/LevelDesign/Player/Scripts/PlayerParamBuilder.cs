@@ -32,9 +32,6 @@ namespace Daipan.LevelDesign.Player.Scripts
         {
             return _playerParam.hpAmount;
         }
-        public PlayerAttackParam GetAttackAmount()
-        {
-            return _playerParam.playerAttackParam;
-        }
+
     }
 }
