@@ -10,7 +10,6 @@ namespace Daipan.Player.Scripts
     {
         readonly PlayerParamData _playerParamData;
 
-        [Inject]
         public PlayerAttack(PlayerParamData playerParamData)
         {
             _playerParamData = playerParamData;
