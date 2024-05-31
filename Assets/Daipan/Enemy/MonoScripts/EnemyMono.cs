@@ -14,7 +14,7 @@ namespace Daipan.Enemy.MonoScripts
     public sealed class EnemyMono : MonoBehaviour, IHpSetter
     {
         [SerializeField] HpGaugeMono hpGaugeMono = null!;
-        EnemyAttack _enemyAttack = null!;
+        EnemyAttackDecider _enemyAttackDecider = null!;
         EnemyCluster _enemyCluster = null!;
         EnemyHp _enemyHp = null!;
         EnemyParamsConfig _enemyParamsConfig = null!;
@@ -27,7 +27,7 @@ namespace Daipan.Enemy.MonoScripts
 
         void Update()
         {
-            _enemyAttack.AttackUpdate(_playerHolder.PlayerMono);
+            _enemyAttackDecider.AttackUpdate(_playerHolder.PlayerMono);
 
             // 攻撃範囲よりプレイヤーとの距離が大きいときだけ動く
             Debug.Log($"_enemyParamsConfig : {_enemyParamsConfig}");
@@ -77,9 +77,9 @@ namespace Daipan.Enemy.MonoScripts
             _slowDefeatChecker = slowDefeatChecker;
         }
 
-        public void SetDomain(EnemyAttack enemyAttack)
+        public void SetDomain(EnemyAttackDecider enemyAttackDecider)
         {
-            _enemyAttack = enemyAttack;
+            _enemyAttackDecider = enemyAttackDecider;
         }
 
         public void Died(bool isTriggerCallback)

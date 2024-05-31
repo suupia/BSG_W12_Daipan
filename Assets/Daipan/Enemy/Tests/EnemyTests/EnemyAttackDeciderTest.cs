@@ -5,7 +5,7 @@ using NUnit.Framework;
 
 namespace Daipan.Enemy.Tests.EnemyTests
 {
-    public class EnemyAttackTest
+    public class EnemyAttackDeciderTest
     {
         // [Test]
         // public void AttackTest1()

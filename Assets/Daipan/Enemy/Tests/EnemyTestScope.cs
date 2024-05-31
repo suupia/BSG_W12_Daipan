@@ -17,7 +17,7 @@ namespace Daipan.Enemy.Tests
             //builder.RegisterInstance(enemyAttributeParameters);
             builder.Register<EnemyPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<EnemyMono>>();
 
-            builder.Register<EnemyAttack>(Lifetime.Scoped);
+            builder.Register<EnemyAttackDecider>(Lifetime.Scoped);
             builder.Register<EnemySpawner>(Lifetime.Scoped);
             builder.Register<EnemyCluster>(Lifetime.Scoped);
 

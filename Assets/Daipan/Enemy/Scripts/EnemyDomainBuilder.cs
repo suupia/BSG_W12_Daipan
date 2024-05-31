@@ -38,7 +38,7 @@ namespace Daipan.Enemy.Scripts
         {
             var enemyEnum = DecideRandomEnemyType();
             Debug.Log($"enemyEnum: {enemyEnum}");
-            enemyMono.SetDomain(new EnemyAttack(enemyMono, _enemyParamDataContainer.GetEnemyParamData(enemyEnum)));
+            enemyMono.SetDomain(new EnemyAttackDecider(enemyMono, _enemyParamDataContainer.GetEnemyParamData(enemyEnum)));
             enemyMono.SetParameter(enemyEnum);
             enemyMono.OnDied += (sender, args) =>
             {
