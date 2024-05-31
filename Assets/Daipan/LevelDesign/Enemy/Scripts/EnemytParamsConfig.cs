@@ -77,21 +77,6 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         {
             return GetEnemyTimeLineParam().spawnDelaySec;
         }
-
-        public int GetSpawnBossAmount()
-        {
-            return GetEnemyTimeLineParam().spawnBossAmount;
-        }
-
-        public void AddCurrentKillAmount()
-        {
-            _enemyParamsManager.currentKillAmount++;
-        }
-
-        public int GetCurrentKillAmount()
-        {
-            return _enemyParamsManager.currentKillAmount;
-        }
         
         public void SetCurrentKillAmount(int amount)
         {
