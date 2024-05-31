@@ -17,6 +17,7 @@ using Daipan.Stream.Tests;
 using Daipan.Tower.Scripts;
 using Daipan.Utility.Scripts;
 using UnityEngine;
+using UnityEngine.Serialization;
 using VContainer;
 using VContainer.Unity;
 
@@ -25,7 +26,7 @@ namespace Daipan.Daipan
  public sealed class DaipanScope : LifetimeScope
  {
      [SerializeField] StreamParameter streamParameter = null!;
-     [SerializeField] PlayerParams playerParams = null!;
+     [FormerlySerializedAs("playerParams")] [SerializeField] PlayerParam playerParam = null!;
      [SerializeField] EnemyParamsManager enemyParamsManager = null!;
      [SerializeField] CommentParamsManager commentParamsManager = null!;
      [SerializeField] IrritatedParams irritatedParams = null!;
@@ -105,7 +106,7 @@ namespace Daipan.Daipan
  
          /*player*/
          builder.Register<PlayerParamConfig>(Lifetime.Scoped);
-         builder.RegisterInstance(playerParams);
+         builder.RegisterInstance(playerParam);
  
          /*tower*/
          builder.Register<TowerParamsConfig>(Lifetime.Scoped);
