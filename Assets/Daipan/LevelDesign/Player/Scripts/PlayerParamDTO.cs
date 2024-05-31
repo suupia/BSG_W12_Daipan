@@ -5,6 +5,8 @@ namespace Daipan.LevelDesign.Player.Scripts
 {
     public class PlayerParamDTO
     {
-        public required Func<int> CurrentHp { get; init; } = () => 10;
+        public required Func<int> GetWAttack { get; init; }
+        public required Func<int> GetAAttack { get; init; }
+        public required Func<int> GetSAttack { get; init; }
     }
 }

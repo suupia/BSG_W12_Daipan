@@ -12,10 +12,21 @@ namespace Daipan.LevelDesign.Player.Scripts
     {
         readonly PlayerParam _playerParam;
 
-        [Inject]
-        PlayerParamConfig (PlayerParam playerParam)
+
+        public PlayerParamConfig (
+            IContainerBuilder builder,
+            PlayerParam playerParam)
         {
             _playerParam = playerParam;
+            
+            var playerParamDTO = new PlayerParamDTO
+            {
+                GetWAttack = () => playerParam.playerAttackParam.WAttackAmount,
+                GetAAttack = () => playerParam.playerAttackParam.AAttackAmount,
+                GetSAttack = () => playerParam.playerAttackParam.SAttackAmount
+            };
+            Debug.Log($"builder = {builder}");
+            builder.RegisterInstance(playerParamDTO);
         }
 
 
