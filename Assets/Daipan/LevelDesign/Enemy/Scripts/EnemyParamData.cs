@@ -10,9 +10,9 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         public required Func<EnemyEnum> EnemyEnum { get; init; } 
         
         // Attack
-        public Func<int> AttackAmount { get; init; } = () => 10;
-        public Func<double> AttackDelayDec { get; init; } = () => 1.0;
-        public Func<double> AttackRange { get; init; } = () => 5.0;
+        public Func<int> GetAttackAmount { get; init; } = () => 10;
+        public Func<double> GetAttackDelayDec { get; init; } = () => 1.0;
+        public Func<double> GetAttackRange { get; init; } = () => 5.0;
         
         // Hp
         public Func<int> GetCurrentHp { get; init; } = () => 100;

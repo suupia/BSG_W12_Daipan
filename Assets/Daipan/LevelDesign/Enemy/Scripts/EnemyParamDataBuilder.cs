@@ -18,9 +18,9 @@ namespace Daipan.LevelDesign.Enemy.Scripts
                 enemyParams.Add(new EnemyParamData()
                 {
                     EnemyEnum = () => enemyParam.GetEnemyEnum,
-                    AttackAmount = () => enemyParam.enemyAttackParam.attackAmount,
-                    AttackDelayDec = () => enemyParam.enemyAttackParam.attackDelaySec,
-                    AttackRange = () => enemyParam.enemyAttackParam.attackRange,
+                    GetAttackAmount = () => enemyParam.enemyAttackParam.attackAmount,
+                    GetAttackDelayDec = () => enemyParam.enemyAttackParam.attackDelaySec,
+                    GetAttackRange = () => enemyParam.enemyAttackParam.attackRange,
                     GetCurrentHp = () => enemyParam.enemyHpParam.hpAmount
                 }); 
             }
