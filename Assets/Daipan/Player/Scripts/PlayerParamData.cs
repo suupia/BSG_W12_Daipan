@@ -1,7 +1,7 @@
 #nullable enable
 using System;
 
-namespace Daipan.LevelDesign.Player.Scripts
+namespace Daipan.Player.Scripts 
 {
     public class PlayerParamData
     {
