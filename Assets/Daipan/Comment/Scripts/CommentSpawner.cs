@@ -7,9 +7,9 @@ using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace Daipan.Comment.Scripts;
-
-public sealed class CommentSpawner : IUpdate
+namespace Daipan.Comment.Scripts
+{
+   public sealed class CommentSpawner : IUpdate
 {
     readonly AntiCommentCluster _antiCommentCluster;
     readonly IPrefabLoader<AntiCommentMono> _antiCommentLoader;
@@ -87,4 +87,6 @@ public sealed class CommentSpawner : IUpdate
         _antiCommentCluster.Add(comment);
         Debug.Log($"Comment spawned: {CommentEnum.Super}");
     }
+} 
 }
+
