@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using Daipan.Battle.interfaces;
 using Daipan.Enemy.Scripts;
