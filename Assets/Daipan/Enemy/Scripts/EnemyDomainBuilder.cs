@@ -15,17 +15,20 @@ namespace Daipan.Enemy.Scripts
     {
         readonly CommentSpawner _commentSpawner;
         readonly EnemyParamsManager _enemyParamsManager;
+        readonly EnemyParamsConfig _enemyParamsConfig;
         readonly ViewerNumber _viewerNumber;
 
         public EnemyDomainBuilder(
             CommentSpawner commentSpawner,
             ViewerNumber viewerNumber,
-            EnemyParamsManager enemyParamsManager
+            EnemyParamsManager enemyParamsManager,
+            EnemyParamsConfig enemyParamsConfig
         )
         {
             _commentSpawner = commentSpawner;
             _viewerNumber = viewerNumber;
-            _enemyParamsManager = enemyParamsManager;{}
+            _enemyParamsManager = enemyParamsManager;
+            _enemyParamsConfig = enemyParamsConfig;
         }
 
         public EnemyMono SetDomain(EnemyMono enemyMono)
@@ -65,13 +68,8 @@ namespace Daipan.Enemy.Scripts
         }
         
         
-        
-
-        /// <summary>
-        ///     現在の状態に応じて生成する敵を決定
-        /// </summary>
-        /// <returns></returns>
-        public EnemyEnum DecideRandomEnemyType()
+   
+        EnemyEnum DecideRandomEnemyType()
         {
             // ボス発生条件を満たしていればBOSSを生成
             if (_enemyParamsManager.currentKillAmount >= _enemyParamsManager.spawnBossAmount)
@@ -91,15 +89,15 @@ namespace Daipan.Enemy.Scripts
 
             // ここで100%に正規化
             ratio = EnemySpawnCalculator.NormalizeEnemySpawnRatioWithBoss(ratio,
-                GetEnemyTimeLineParam().spawnBossRatio);
+               _enemyParamsConfig.GetEnemyTimeLineParam().spawnBossRatio);
 
             Debug.Log($"enemyPrams.Length : {_enemyParamsManager.enemyParams.Count}");
             Debug.Log($"Randoms.RandomByRatio(ratio) : {Randoms.RandomByRatio(ratio)}");
 
 
-            var enem = _enemyParamsManager.enemyParams[Randoms.RandomByRatio(ratio)].GetEnemyEnum;
-            if (enem == EnemyEnum.Boss) _enemyParamsConfig.SetCurrentKillAmount(0);
-            return enem;
+            var enemyEnum = _enemyParamsManager.enemyParams[Randoms.RandomByRatio(ratio)].GetEnemyEnum;
+            if (enemyEnum == EnemyEnum.Boss) _enemyParamsConfig.SetCurrentKillAmount(0);
+            return enemyEnum;
         }
 
     }

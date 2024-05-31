@@ -104,7 +104,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
             return _enemyParamsManager.enemyParams.First(c => c.GetEnemyEnum == enemyEnum);
         }
 
-        EnemyTimeLineParam GetEnemyTimeLineParam()
+       public  EnemyTimeLineParam GetEnemyTimeLineParam()
         {
             var timeLineParam = _enemyParamsManager.enemyTimeLines
                 .Where(e => e.startTime <= _timer.GetCurrentTime())
