@@ -53,15 +53,6 @@ namespace Daipan.LevelDesign.Enemy.Scripts
             return GetEnemyParams(enemyEnum).enemyMoveParam.moveSpeedPerSec * GetEnemyTimeLineParam().moveSpeedRate;
         }
 
-        public EnemyAttackParameter GetAttackParameter(EnemyEnum enemyEnum)
-        {
-            var enemy = GetEnemyParams(enemyEnum);
-            return new EnemyAttackParameter(
-                enemy.enemyAttackParam.attackAmount,
-                enemy.enemyAttackParam.attackDelaySec,
-                enemy.enemyAttackParam.attackRange
-            );
-        }
 
         public int GetHp(EnemyEnum enemyEnum)
         {
@@ -123,18 +114,4 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         #endregion
     }
 
-    public class EnemyAttackParameter
-    {
-        public EnemyAttackParameter(int attackAmount, float attackDelaySec, float attackRange)
-        {
-            AttackAmount = attackAmount;
-            AttackDelaySec = attackDelaySec;
-            AttackRange = attackRange;
-        }
-
-        public int AttackAmount { get; private set; }
-        public float AttackDelaySec { get; private set; }
-
-        public float AttackRange { get; private set; }
-    }
 }
