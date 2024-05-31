@@ -8,12 +8,11 @@ using VContainer;
 
 namespace Daipan.LevelDesign.Player.Scripts
 {
-    public class PlayerParamConfig
+    public class PlayerParamBuilder
     {
         readonly PlayerParam _playerParam;
 
-
-        public PlayerParamConfig (
+        public PlayerParamBuilder (
             IContainerBuilder builder,
             PlayerParam playerParam)
         {
@@ -25,7 +24,6 @@ namespace Daipan.LevelDesign.Player.Scripts
                 GetAAttack = () => playerParam.playerAttackParam.AAttackAmount,
                 GetSAttack = () => playerParam.playerAttackParam.SAttackAmount
             };
-            Debug.Log($"builder = {builder}");
             builder.RegisterInstance(playerParamDTO);
         }
 

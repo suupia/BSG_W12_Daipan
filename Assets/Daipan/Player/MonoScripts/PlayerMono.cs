@@ -14,13 +14,13 @@ public class PlayerMono : MonoBehaviour, IHpSetter
     EnemyCluster _enemyCluster = null!;
     PlayerAttack _playerAttack = null!;
     PlayerHp _playerHp = null!;
-    PlayerParamConfig _playerParamConfig = null!;
+    PlayerParamBuilder _playerParamBuilder = null!;
 
     public void Update()
     {
         var enemyMono = _enemyCluster.NearestEnemy(transform.position);
         
-        hpGaugeMono.SetRatio(CurrentHp / (float)_playerParamConfig.GetHpAmount());
+        hpGaugeMono.SetRatio(CurrentHp / (float)_playerParamBuilder.GetHpAmount());
 
         if (Input.GetKeyDown(KeyCode.W))
         {
@@ -75,14 +75,14 @@ public class PlayerMono : MonoBehaviour, IHpSetter
     public void Initialize(
         PlayerAttack playerAttack,
         EnemyCluster enemyCluster,
-        PlayerParamConfig  playerParamConfig,
+        PlayerParamBuilder  playerParamBuilder,
         CommentSpawner commentSpawner
     )
     {
         _playerAttack = playerAttack;
         _enemyCluster = enemyCluster;
-        _playerParamConfig = playerParamConfig; 
-        _playerHp = new PlayerHp(_playerParamConfig.GetHpAmount(), this);
+        _playerParamBuilder = playerParamBuilder; 
+        _playerHp = new PlayerHp(_playerParamBuilder.GetHpAmount(), this);
         _playerHp.OnDamage += (sender, args) => { commentSpawner.SpawnCommentByType(CommentEnum.Spiky); };
     }
 }
