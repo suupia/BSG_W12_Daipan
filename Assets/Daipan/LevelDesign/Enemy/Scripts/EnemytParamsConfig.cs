@@ -37,6 +37,12 @@ namespace Daipan.LevelDesign.Enemy.Scripts
                 if (enemyParam.enemyAttackParam.attackRange <= 0)
                     Debug.LogWarning($"{enemyParam.GetEnemyEnum}の攻撃範囲が0以下です。");
             }
+
+            if (_enemyParamsManager.enemyTimeLines.Count == 0)
+            {
+                Debug.LogWarning("EnemyTimeLineParamが設定されていません。");
+                _enemyParamsManager.enemyTimeLines.Add(new EnemyTimeLineParam());
+            }
         }
 
 
@@ -82,43 +88,16 @@ namespace Daipan.LevelDesign.Enemy.Scripts
             _enemyParamsManager.currentKillAmount++;
         }
 
-
-
-        /// <summary>
-        ///     現在の状態に応じて生成する敵を決定
-        /// </summary>
-        /// <returns></returns>
-        public EnemyEnum DecideRandomEnemyType()
+        public int GetCurrentKillAmount()
         {
-            // ボス発生条件を満たしていればBOSSを生成
-            if (_enemyParamsManager.currentKillAmount >= GetSpawnBossAmount())
-            {
-                _enemyParamsManager.currentKillAmount = 0;
-                return EnemyEnum.Boss;
-            }
-
-            // 通常敵のType決め
-            List<float> ratio = new();
-
-            foreach (var enemyLife in _enemyParamsManager.enemyParams)
-            {
-                if (enemyLife.GetEnemyEnum == EnemyEnum.Boss) continue;
-                ratio.Add(enemyLife.enemySpawnParam.spawnRatio);
-            }
-
-            // ここで100%に正規化
-            ratio = EnemySpawnCalculator.NormalizeEnemySpawnRatioWithBoss(ratio,
-                GetEnemyTimeLineParam().spawnBossRatio);
-
-            Debug.Log($"enemyPrams.Length : {_enemyParamsManager.enemyParams.Count}");
-            Debug.Log($"Randoms.RandomByRatio(ratio) : {Randoms.RandomByRatio(ratio)}");
-
-
-            var enem = _enemyParamsManager.enemyParams[Randoms.RandomByRatio(ratio)].GetEnemyEnum;
-            if (enem == EnemyEnum.Boss)  _enemyParamsManager.currentKillAmount = 0;
-            return enem;
+            return _enemyParamsManager.currentKillAmount;
         }
-
+        
+        public void SetCurrentKillAmount(int amount)
+        {
+            _enemyParamsManager.currentKillAmount = amount;
+        }
+        
 
         EnemyParam GetEnemyParams(EnemyEnum enemyEnum)
         {
@@ -127,18 +106,10 @@ namespace Daipan.LevelDesign.Enemy.Scripts
 
         EnemyTimeLineParam GetEnemyTimeLineParam()
         {
-            if (_enemyParamsManager.enemyTimeLines.Count == 0)
-            {
-                var etlp = new EnemyTimeLineParam();
-                etlp.spawnDelaySec = _enemyParamsManager.spawnDelaySec;
-                etlp.moveSpeedRate = 1f;
-                etlp.spawnBossAmount = _enemyParamsManager.spawnBossAmount;
-                return etlp;
-            }
-
-            var i = _enemyParamsManager.enemyTimeLines.Where(e => e.startTime <= _timer.GetCurrentTime())
+            var timeLineParam = _enemyParamsManager.enemyTimeLines
+                .Where(e => e.startTime <= _timer.GetCurrentTime())
                 .OrderByDescending(e => e.startTime).First();
-            return i;
+            return timeLineParam;
         }
 
         #endregion
