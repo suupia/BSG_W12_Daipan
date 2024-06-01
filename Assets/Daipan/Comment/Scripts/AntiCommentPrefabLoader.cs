@@ -7,16 +7,16 @@ namespace Daipan.Comment.Scripts
     public sealed class AntiCommentPrefabLoader : IPrefabLoader<AntiCommentMono>
     {
         readonly PrefabLoaderFromResources<AntiCommentMono> _loader;
-
+    
         public AntiCommentPrefabLoader()
         {
             _loader = new PrefabLoaderFromResources<AntiCommentMono>("AntiComment");
         }
-
+    
         public AntiCommentMono Load()
         {
             return _loader.Load();
         }
-    } 
+    }
 }
 

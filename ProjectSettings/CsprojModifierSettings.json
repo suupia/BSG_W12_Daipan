@@ -1,1 +1,1 @@
-{"AdditionalImports":[{"Path":"LangVersion.props","Position":0}],"AdditionalImportsAdditionalProjects":["Daipan.csproj"],"EnableAddAnalyzerReferences":false,"AddAnalyzerReferencesAdditionalProjects":[]}
+{"AdditionalImports":[{"Path":"LangVersion.props","Position":0}],"AdditionalImportsAdditionalProjects":["Assembly-CSharp.csproj","Assembly-CSharp-Editor.csproj","Daipan.csproj","Daipan/Player/PlayerTests/PlayerTests.asmdef"],"EnableAddAnalyzerReferences":false,"AddAnalyzerReferencesAdditionalProjects":[]}

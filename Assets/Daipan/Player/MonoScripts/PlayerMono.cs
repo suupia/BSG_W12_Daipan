@@ -14,20 +14,20 @@ public class PlayerMono : MonoBehaviour, IHpSetter
     EnemyCluster _enemyCluster = null!;
     PlayerAttack _playerAttack = null!;
     PlayerHp _playerHp = null!;
-    PlayerParamConfig _playerParamConfig = null!;
+    PlayerParamData _playerParamData = null!;
 
     public void Update()
     {
         var enemyMono = _enemyCluster.NearestEnemy(transform.position);
         
-        hpGaugeMono.SetRatio(CurrentHp / (float)_playerParamConfig.GetHpAmount());
+        hpGaugeMono.SetRatio(CurrentHp / (float)_playerParamData.GetCurrentHp());
 
         if (Input.GetKeyDown(KeyCode.W))
         {
             Debug.Log("Wが押されたよ");
-            if (enemyMono._enemyEnum == EnemyEnum.W || enemyMono._enemyEnum == EnemyEnum.Boss)
+            if (enemyMono.EnemyEnum == EnemyEnum.W || enemyMono.EnemyEnum == EnemyEnum.Boss)
             {
-                Debug.Log($"EnemyType: {enemyMono._enemyEnum}を攻撃");
+                Debug.Log($"EnemyType: {enemyMono.EnemyEnum}を攻撃");
                 _playerAttack.WAttack(enemyMono);
             }
             else
@@ -39,9 +39,9 @@ public class PlayerMono : MonoBehaviour, IHpSetter
         if (Input.GetKeyDown(KeyCode.S))
         {
             Debug.Log("Sが押されたよ");
-            if (enemyMono._enemyEnum == EnemyEnum.S || enemyMono._enemyEnum == EnemyEnum.Boss)
+            if (enemyMono.EnemyEnum == EnemyEnum.S || enemyMono.EnemyEnum == EnemyEnum.Boss)
             {
-                Debug.Log($"EnemyType: {enemyMono._enemyEnum}を攻撃");
+                Debug.Log($"EnemyType: {enemyMono.EnemyEnum}を攻撃");
                 _playerAttack.SAttack(enemyMono);
             }
             else
@@ -53,9 +53,9 @@ public class PlayerMono : MonoBehaviour, IHpSetter
         if (Input.GetKeyDown(KeyCode.A))
         {
             Debug.Log("Aが押されたよ");
-            if (enemyMono._enemyEnum == EnemyEnum.A || enemyMono._enemyEnum == EnemyEnum.Boss)
+            if (enemyMono.EnemyEnum == EnemyEnum.A || enemyMono.EnemyEnum == EnemyEnum.Boss)
             {
-                Debug.Log($"EnemyType: {enemyMono._enemyEnum}を攻撃");
+                Debug.Log($"EnemyType: {enemyMono.EnemyEnum}を攻撃");
                 _playerAttack.AAttack(enemyMono);
             }
             else
@@ -75,14 +75,16 @@ public class PlayerMono : MonoBehaviour, IHpSetter
     public void Initialize(
         PlayerAttack playerAttack,
         EnemyCluster enemyCluster,
-        PlayerParamConfig  playerParamConfig,
+        PlayerParamDataBuilder  playerParamDataBuilder,
+        PlayerParamData playerParamData,
         CommentSpawner commentSpawner
     )
     {
         _playerAttack = playerAttack;
         _enemyCluster = enemyCluster;
-        _playerParamConfig = playerParamConfig; 
-        _playerHp = new PlayerHp(_playerParamConfig.GetHpAmount(), this);
+
+        _playerParamData = playerParamData;
+        _playerHp = new PlayerHp(_playerParamData.GetCurrentHp(), this);
         _playerHp.OnDamage += (sender, args) => { commentSpawner.SpawnCommentByType(CommentEnum.Spiky); };
     }
 }

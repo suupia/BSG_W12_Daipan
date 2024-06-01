@@ -5,16 +5,16 @@ namespace Daipan.Enemy.Scripts
 {
     public class Enemy : IEnemyAttack
     {
-        readonly EnemyAttack _enemyAttack;
-        public Enemy(EnemyAttack enemyAttack)
+        readonly EnemyAttackDecider _enemyAttackDecider;
+        public Enemy(EnemyAttackDecider enemyAttackDecider)
         {
-            _enemyAttack = enemyAttack;
+            _enemyAttackDecider = enemyAttackDecider;
         }
         
         // IEnemyAttack
         public void AttackUpdate(PlayerMono playerMono)
         {
-            _enemyAttack.AttackUpdate(playerMono);
+            _enemyAttackDecider.AttackUpdate(playerMono);
         } 
     }
 }

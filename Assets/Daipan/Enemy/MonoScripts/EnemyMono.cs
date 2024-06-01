@@ -14,31 +14,34 @@ namespace Daipan.Enemy.MonoScripts
     public sealed class EnemyMono : MonoBehaviour, IHpSetter
     {
         [SerializeField] HpGaugeMono hpGaugeMono = null!;
-        EnemyAttack _enemyAttack = null!;
+        EnemyAttackDecider _enemyAttackDecider = null!;
         EnemyCluster _enemyCluster = null!;
         EnemyHp _enemyHp = null!;
         EnemyParamsConfig _enemyParamsConfig = null!;
+        EnemyParamDataContainer _enemyParamDataContainer = null!;
         bool _isSlowDefeat;
         PlayerHolder _playerHolder = null!;
         EnemyQuickDefeatChecker _quickDefeatChecker = null!;
         EnemySlowDefeatChecker _slowDefeatChecker = null!;
-        public EnemyEnum _enemyEnum { get; private set; } = EnemyEnum.None;
+        public EnemyEnum EnemyEnum { get; private set; } = EnemyEnum.None;
 
         void Update()
         {
-            _enemyAttack.AttackUpdate(_playerHolder.PlayerMono);
+            _enemyAttackDecider.AttackUpdate(_playerHolder.PlayerMono);
 
             // 攻撃範囲よりプレイヤーとの距離が大きいときだけ動く
+            Debug.Log($"_enemyParamsConfig : {_enemyParamsConfig}");
+            Debug.Log($"GetAttackParameter : { _enemyParamDataContainer.GetEnemyParamData(EnemyEnum).GetAttackRange()}"); 
             if (transform.position.x - _playerHolder.PlayerMono.transform.position.x >=
-                _enemyParamsConfig.GetAttackParameter(_enemyEnum).AttackRange)
+                _enemyParamDataContainer.GetEnemyParamData(EnemyEnum).GetAttackRange())
             {
-                transform.position += Vector3.left * _enemyParamsConfig.GetSpeed(_enemyEnum) * Time.deltaTime;
+                transform.position += Vector3.left * _enemyParamsConfig.GetSpeed(EnemyEnum) * Time.deltaTime;
             }
 
             if (transform.position.x < _enemyParamsConfig.GetDespawnedPosition().x)
                 _enemyCluster.Remove(this, false); // Destroy when out of screen
 
-            hpGaugeMono.SetRatio(CurrentHp / (float)_enemyParamsConfig.GetHp(_enemyEnum));
+            hpGaugeMono.SetRatio(CurrentHp / (float)_enemyParamDataContainer.GetEnemyParamData(EnemyEnum).GetCurrentHp());
 
             if (_isSlowDefeat == false && transform.position.x <= _slowDefeatChecker.SlowDefeatCoordinate)
             {
@@ -61,6 +64,7 @@ namespace Daipan.Enemy.MonoScripts
             EnemyCluster enemyCluster,
             PlayerHolder playerHolder,
             EnemyParamsConfig enemyParamsConfig,
+            EnemyParamDataContainer enemyParamDataContainer,
             EnemyQuickDefeatChecker quickDefeatChecker,
             EnemySlowDefeatChecker slowDefeatChecker
         )
@@ -68,13 +72,29 @@ namespace Daipan.Enemy.MonoScripts
             _enemyCluster = enemyCluster;
             _playerHolder = playerHolder;
             _enemyParamsConfig = enemyParamsConfig;
+            _enemyParamDataContainer = enemyParamDataContainer;
             _quickDefeatChecker = quickDefeatChecker;
             _slowDefeatChecker = slowDefeatChecker;
         }
 
-        public void SetDomain(EnemyAttack enemyAttack)
+        public void SetDomain(
+            EnemyEnum enemyEnum,
+            EnemyHp enemyHp,
+            EnemyAttackDecider enemyAttackDecider
+            )
         {
-            _enemyAttack = enemyAttack;
+            EnemyEnum = enemyEnum;
+            _enemyHp = enemyHp;
+            _enemyAttackDecider = enemyAttackDecider;
+            
+            SetSprite(enemyEnum);
+        }
+
+
+        void SetSprite(EnemyEnum enemyEnum)
+        {
+            var spriteRenderer = GetComponent<SpriteRenderer>();
+            spriteRenderer.sprite = _enemyParamsConfig.GetSprite(enemyEnum);
         }
 
         public void Died(bool isTriggerCallback)
@@ -82,7 +102,7 @@ namespace Daipan.Enemy.MonoScripts
             if (isTriggerCallback)
             {
                 var isQuickDefeat = _quickDefeatChecker.IsQuickDefeat(transform.position);
-                var args = new DiedEventArgs(_enemyEnum.IsBoss, isQuickDefeat);
+                var args = new DiedEventArgs(EnemyEnum.IsBoss, isQuickDefeat);
                 OnDied?.Invoke(this, args);
             }
 
@@ -96,16 +116,7 @@ namespace Daipan.Enemy.MonoScripts
             _enemyCluster.Remove(this);
         }
 
-        public void SetParameter(EnemyEnum enemyEnum)
-        {
-            _enemyEnum = enemyEnum;
-            _enemyAttack.enemyAttackParameter = _enemyParamsConfig.GetAttackParameter(enemyEnum);
-            _enemyHp = new EnemyHp(_enemyParamsConfig.GetHp(_enemyEnum), this, _enemyCluster);
 
-            //Sprite
-            var spriteRenderer = GetComponent<SpriteRenderer>();
-            spriteRenderer.sprite = _enemyParamsConfig.GetSprite(enemyEnum);
-        }
     }
 
     public record DiedEventArgs(bool IsBoss, bool IsQuickDefeat, bool IsTrigger = false);

@@ -17,6 +17,7 @@ using Daipan.Stream.Tests;
 using Daipan.Tower.Scripts;
 using Daipan.Utility.Scripts;
 using UnityEngine;
+using UnityEngine.Serialization;
 using VContainer;
 using VContainer.Unity;
 
@@ -25,7 +26,7 @@ namespace Daipan.Daipan
  public sealed class DaipanScope : LifetimeScope
  {
      [SerializeField] StreamParameter streamParameter = null!;
-     [SerializeField] PlayerParams playerParams = null!;
+     [FormerlySerializedAs("playerParams")] [SerializeField] PlayerParam playerParam = null!;
      [SerializeField] EnemyParamsManager enemyParamsManager = null!;
      [SerializeField] CommentParamsManager commentParamsManager = null!;
      [SerializeField] IrritatedParams irritatedParams = null!;
@@ -73,7 +74,7 @@ namespace Daipan.Daipan
          builder.Register<EnemyPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<EnemyMono>>();
          builder.Register<EnemyDomainBuilder>(Lifetime.Scoped).As<IEnemyDomainBuilder>();
  
-         builder.Register<EnemyAttack>(Lifetime.Scoped);
+         builder.Register<EnemyAttackDecider>(Lifetime.Scoped);
          builder.Register<EnemyMonoBuilder>(Lifetime.Scoped).AsImplementedInterfaces()
              .WithParameter(EnemyEnum.Boss);
          builder.Register<EnemySpawner>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
@@ -96,6 +97,7 @@ namespace Daipan.Daipan
  
          /*enemy*/
          builder.Register<EnemyParamsConfig>(Lifetime.Scoped);
+         builder.RegisterInstance(new EnemyParamDataBuilder(builder, enemyParamsManager));
          builder.RegisterComponentInHierarchy<EnemyPositionMono>();
          builder.RegisterInstance(enemyParamsManager);
  
@@ -104,8 +106,8 @@ namespace Daipan.Daipan
          builder.RegisterInstance(enemyDefeatParamManager);
  
          /*player*/
-         builder.Register<PlayerParamConfig>(Lifetime.Scoped);
-         builder.RegisterInstance(playerParams);
+         builder.RegisterInstance(new PlayerParamDataBuilder(builder, playerParam));
+         builder.RegisterInstance(playerParam);
  
          /*tower*/
          builder.Register<TowerParamsConfig>(Lifetime.Scoped);

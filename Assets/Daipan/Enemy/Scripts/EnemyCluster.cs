@@ -58,7 +58,7 @@ namespace Daipan.Enemy.Scripts
         {
             var enemies = _enemies.ToArray();
             foreach (var enemy in enemies)
-                if (blowAwayCondition(enemy._enemyEnum))
+                if (blowAwayCondition(enemy.EnemyEnum))
                     Remove(enemy);
         }
     }
