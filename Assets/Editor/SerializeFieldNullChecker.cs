@@ -20,11 +20,11 @@ using UnityEngine.UI;
 /// </remarks>
 public static class SerializeFieldNullChecker
 {
-     const int IconSize = 16;
-     const string WarnIconName = "console.warnicon";
-     const string ErrorIconName = "console.erroricon";
-     static Texture? _warnIcon;
-     static Texture? _errorIcon;
+    const int IconSize = 16;
+    const string WarnIconName = "console.warnicon";
+    const string ErrorIconName = "console.erroricon";
+    static Texture? _warnIcon;
+    static Texture? _errorIcon;
 
     [InitializeOnLoadMethod]
     static void Initialize()
@@ -59,19 +59,18 @@ public static class SerializeFieldNullChecker
         // Missingなコンポーネントが存在する場合はWarningアイコン表示
         foreach (var component in components)
         {
-            if(IsIgnoreComponent(component)) continue;
-            
+            if (IsIgnoreComponent(component)) continue;
+
             // SerializeFieldsにMissingなものが存在する場合はWarningアイコン表示
             var existsMissingField = ExistsNullField(component);
             if (existsMissingField)
             {
                 Assert.IsNotNull(_warnIcon);
-                if(_warnIcon != null) DrawIcon(selectionRect, _warnIcon);
+                if (_warnIcon != null) DrawIcon(selectionRect, _warnIcon);
             }
         }
-        
     }
-    
+
     static bool IsIgnoreComponent(MonoBehaviour component)
     {
         if (component is UniversalAdditionalCameraData) return true;
@@ -84,7 +83,7 @@ public static class SerializeFieldNullChecker
         if (component is ScrollRect) return true;
         return false;
     }
-    
+
     static bool ExistsNullField(MonoBehaviour component)
     {
         using var serializedProp = new SerializedObject(component).GetIterator();
@@ -96,11 +95,15 @@ public static class SerializeFieldNullChecker
 
             //var fileId = serializedProp.FindPropertyRelative(PropertyNameOfFieldId);
             //if (fileId == null || fileId.intValue == 0) continue;
-            
+
             // Text Mesh Pro
             if (serializedProp.propertyPath == "m_Material") return false;
 
-            Debug.LogWarning($"GameObject: { component.name}, Component: {component.GetType().Name}, Field: {serializedProp.propertyPath} is null.");
+            // Slider
+            if (serializedProp.propertyPath == "m_Navigation.m_SelectOnUp") return false;
+
+            Debug.LogWarning(
+                $"GameObject: {component.name}, Component: {component.GetType().Name}, Field: {serializedProp.propertyPath} is null.");
             return true;
         }
 
@@ -113,7 +116,7 @@ public static class SerializeFieldNullChecker
         pos.x = pos.xMax - IconSize;
         pos.width = IconSize;
         pos.height = IconSize;
-        
+
         GUI.DrawTexture(pos, image, ScaleMode.ScaleToFit);
     }
 }

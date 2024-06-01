@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Daipan.Enemy.Scripts;
+using Daipan.Stream.Scripts;
 using Daipan.Utility.Scripts;
 using UnityEngine;
 using VContainer;
@@ -63,19 +64,19 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         {
             return GetEnemyTimeLineParam().spawnDelaySec;
         }
-        
+
         public void SetCurrentKillAmount(int amount)
         {
             _enemyParamsManager.currentKillAmount = amount;
         }
-        
+
 
         EnemyParam GetEnemyParams(EnemyEnum enemyEnum)
         {
             return _enemyParamsManager.enemyParams.First(c => c.GetEnemyEnum == enemyEnum);
         }
 
-       public  EnemyTimeLineParam GetEnemyTimeLineParam()
+        public EnemyTimeLineParam GetEnemyTimeLineParam()
         {
             var timeLineParam = _enemyParamsManager.enemyTimeLines
                 .Where(e => e.startTime <= _timer.GetCurrentTime())
@@ -108,5 +109,4 @@ namespace Daipan.LevelDesign.Enemy.Scripts
 
         #endregion
     }
-
 }
