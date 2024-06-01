@@ -2,6 +2,7 @@ using Daipan.Comment.MonoScripts;
 using Daipan.Comment.Scripts;
 using Daipan.Core;
 using Daipan.Core.Interfaces;
+using Daipan.Core.Scripts;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Enemy.Scripts;
@@ -15,7 +16,6 @@ using Daipan.Stream.Scripts;
 using Daipan.Stream.Scripts.Utility;
 using Daipan.Stream.Tests;
 using Daipan.Tower.Scripts;
-using Daipan.Utility.Scripts;
 using UnityEngine;
 using UnityEngine.Serialization;
 using VContainer;
@@ -85,6 +85,7 @@ namespace Daipan.Daipan
  
          // View
          builder.RegisterComponentInHierarchy<StreamViewMono>();
+         builder.RegisterComponentInHierarchy<TimerViewMono>();
  
          // Test
          builder.RegisterComponentInHierarchy<PlayerTestInput>();
@@ -118,7 +119,7 @@ namespace Daipan.Daipan
          builder.RegisterEntryPoint<DaipanInitializer>();
  
          // Timer
-         builder.Register<IUpdate, StreamTimer>(Lifetime.Scoped).AsSelf();
+         builder.Register<StreamTimer>(Lifetime.Scoped).AsSelf().As<IStart>().As<IUpdate>();
  
          // Updater
          builder.UseEntryPoints(Lifetime.Scoped, entryPoints => { entryPoints.Add<Updater>(); });

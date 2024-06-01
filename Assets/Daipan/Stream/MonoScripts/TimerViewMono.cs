@@ -1,20 +1,25 @@
 #nullable enable
+using Daipan.Stream.Scripts;
 using UnityEngine;
+using UnityEngine.UI;
 using VContainer;
 
 namespace Daipan.Stream.MonoScripts
 {
     public class TimerViewMono : MonoBehaviour
     {
+        [SerializeField] Slider timerSlider = null!;
+        
+        StreamTimer _streamTimer = null!;
         void Update()
         {
-            // Update Timer
+            timerSlider.value = (float)_streamTimer.GetCurrentTime(); 
         }
 
         [Inject]
-        public void Initialize()
+        public void Initialize(StreamTimer timer)
         {
-            // Initialize Timer
+            _streamTimer = timer;
         }
     }
 }
