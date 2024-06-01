@@ -13,17 +13,17 @@ namespace Daipan.LevelDesign.Enemy.Scripts
     {
         readonly EnemyParamsManager _enemyParamsManager;
         readonly EnemyPositionMono _enemyPositionMono;
-        readonly Timer _timer;
+        readonly StreamTimer _streamTimer;
 
         [Inject]
         EnemyParamsConfig(
             EnemyParamsManager enemyParamsManager,
             EnemyPositionMono enemyPositionMono,
-            Timer timer)
+            StreamTimer streamTimer)
         {
             _enemyParamsManager = enemyParamsManager;
             _enemyPositionMono = enemyPositionMono;
-            _timer = timer;
+            _streamTimer = streamTimer;
 
             CheckIsValid(_enemyParamsManager);
         }
@@ -79,7 +79,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         public EnemyTimeLineParam GetEnemyTimeLineParam()
         {
             var timeLineParam = _enemyParamsManager.enemyTimeLines
-                .Where(e => e.startTime <= _timer.GetCurrentTime())
+                .Where(e => e.startTime <= _streamTimer.GetCurrentTime())
                 .OrderByDescending(e => e.startTime).First();
             return timeLineParam;
         }

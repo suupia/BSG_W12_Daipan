@@ -9,43 +9,42 @@ using VContainer.Unity;
 
 namespace Daipan.Stream.Scripts
 {
-    public class Timer : IUpdate
+    public class StreamTimer : IStart, IUpdate
     {
-        float _currentTime = 0f;
+        double CurrentTime { get; set; }
 
-        bool _isPlaying = false;
+        bool IsTicking { get; set; } 
 
-        Timer()
+        void IStart.Start()
         {
             Start();
         }
 
-
         void IUpdate.Update()
         {
-            if (!_isPlaying) return;
-            _currentTime += Time.deltaTime;
+            if (!IsTicking) return;
+            CurrentTime += Time.deltaTime;
         }
 
         public void Start()
         {
-            _isPlaying = true;
-            _currentTime = 0f;
+            IsTicking = true;
+            CurrentTime = 0f;
         }
 
         public void Stop()
         {
-            _isPlaying = false;
+            IsTicking = false;
         }
 
         public void Resume()
         {
-            _isPlaying = true;
+            IsTicking = true;
         }
 
-        public float GetCurrentTime()
+        public double GetCurrentTime()
         {
-            return _currentTime;
+            return CurrentTime;
         }
     }
 }

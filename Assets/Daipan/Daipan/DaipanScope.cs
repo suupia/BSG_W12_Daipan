@@ -118,7 +118,7 @@ namespace Daipan.Daipan
          builder.RegisterEntryPoint<DaipanInitializer>();
  
          // Timer
-         builder.Register<IUpdate, Timer>(Lifetime.Scoped).AsSelf();
+         builder.Register<IUpdate, StreamTimer>(Lifetime.Scoped).AsSelf();
  
          // Updater
          builder.UseEntryPoints(Lifetime.Scoped, entryPoints => { entryPoints.Add<Updater>(); });
