@@ -3183,7 +3183,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 539550700685783175, guid: dfff351a7e8284e4aa8df9c9d1467282, type: 3}
       propertyPath: m_Name
-      value: TimerView
+      value: StreamTimerView
       objectReference: {fileID: 0}
     - target: {fileID: 5322341746803176733, guid: dfff351a7e8284e4aa8df9c9d1467282, type: 3}
       propertyPath: m_AnchorMax.x
