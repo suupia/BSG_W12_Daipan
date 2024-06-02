@@ -20,5 +20,11 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         // Hp
         public Func<int> GetCurrentHp { get; init; } = () => 100;
         
+        // Move
+        public Func<double> GetMoveSpeedPreSec { get; init; } = () => 1.0;
+        
+        // Spawn
+        public Func<double> GetSpawnRatio { get; init; } = () => 1.0;
+        
     }
 }

@@ -19,7 +19,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
 
         [Header("エネミーの移動速度変化率（通常に対してx倍される）")]
         [Min(0)]
-        public float moveSpeedRate = 1f;
+        public double moveSpeedRate = 1f;
 
         [Header("Bossの出現確率(0%～100%)")]
         [Range(0f, 100f)]

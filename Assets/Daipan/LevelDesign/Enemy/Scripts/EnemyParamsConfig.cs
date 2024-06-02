@@ -14,16 +14,19 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         readonly EnemyParamManager _enemyParamManager;
         readonly EnemyPositionMono _enemyPositionMono;
         readonly StreamTimer _streamTimer;
+        readonly EnemyParamDataContainer _enemyParamDataContainer;
 
         [Inject]
         EnemyParamsConfig(
             EnemyParamManager enemyParamManager,
             EnemyPositionMono enemyPositionMono,
-            StreamTimer streamTimer)
+            StreamTimer streamTimer,
+            EnemyParamDataContainer enemyParamDataContainer)
         {
             _enemyParamManager = enemyParamManager;
             _enemyPositionMono = enemyPositionMono;
             _streamTimer = streamTimer;
+            _enemyParamDataContainer = enemyParamDataContainer;
 
             CheckIsValid(_enemyParamManager);
         }
@@ -42,21 +45,15 @@ namespace Daipan.LevelDesign.Enemy.Scripts
 
         #region Params
 
-        public float GetSpeed(EnemyEnum enemyEnum)
+        public double GetSpeed(EnemyEnum enemyEnum)
         {
-            return GetEnemyParams(enemyEnum).enemyMoveParam.moveSpeedPerSec * GetEnemyTimeLineParam().moveSpeedRate;
+            return _enemyParamDataContainer.GetEnemyParamData(enemyEnum).GetMoveSpeedPreSec() * GetEnemyTimeLineParam().moveSpeedRate;
         }
 
 
         public float GetSpawnDelaySec()
         {
             return GetEnemyTimeLineParam().spawnDelaySec;
-        }
-
-
-        EnemyParam GetEnemyParams(EnemyEnum enemyEnum)
-        {
-            return _enemyParamManager.enemyParams.First(c => c.GetEnemyEnum == enemyEnum);
         }
 
         public EnemyTimeLineParam GetEnemyTimeLineParam()

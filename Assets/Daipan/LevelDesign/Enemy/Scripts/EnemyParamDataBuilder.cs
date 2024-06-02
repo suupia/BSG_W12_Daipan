@@ -22,7 +22,9 @@ namespace Daipan.LevelDesign.Enemy.Scripts
                     GetAttackAmount = () => enemyParam.enemyAttackParam.attackAmount,
                     GetAttackDelayDec = () => enemyParam.enemyAttackParam.attackDelaySec,
                     GetAttackRange = () => enemyParam.enemyAttackParam.attackRange,
-                    GetCurrentHp = () => enemyParam.enemyHpParam.hpAmount
+                    GetCurrentHp = () => enemyParam.enemyHpParam.hpAmount,
+                    GetMoveSpeedPreSec = () => enemyParam.enemyMoveParam.moveSpeedPerSec,
+                    GetSpawnRatio = () => enemyParam.enemySpawnParam.spawnRatio,
                 }); 
             }
             var enemyParamContainer = new EnemyParamDataContainer(enemyParams);

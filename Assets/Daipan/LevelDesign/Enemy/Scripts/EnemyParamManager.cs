@@ -13,7 +13,8 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         [Header("敵に関するレベルデザインはこちら。")] [Space] [Header("BOSSに関するパラメータを設定してください。")]
         public EnemyLevelDesignParam enemyLevelDesignParam = null!;
 
-        [Header("個々の敵のパラメータを設定してください。")] public List<EnemyParam> enemyParams = null!;
+        [Header("個々の敵のパラメータを設定してください。")] 
+        public List<EnemyParam> enemyParams = null!;
 
         [FormerlySerializedAs("enemyTimeLines")]
         [Header("時間による変化を設定してください。\n" +
