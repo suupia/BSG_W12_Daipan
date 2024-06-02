@@ -73,7 +73,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
 
         public Vector3 GetDespawnedPosition()
         {
-            return _enemyPositionMonoData.GetEnemyDespawnedPoint().position;
+            return _enemyPositionMonoData.GetEnemyDespawnedPoint();
         }
 
         #endregion

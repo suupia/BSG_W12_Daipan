@@ -13,7 +13,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
             var data = new EnemyPositionMonoData()
             {
                 GetEnemySpawnedPoints = () => enemyPositionMono.enemySpawnedPoints,
-                GetEnemyDespawnedPoint = () => enemyPositionMono.enemyDespawnedPoint,
+                GetEnemyDespawnedPoint = () => enemyPositionMono.enemyDespawnedPoint.transform.position,
             };
             builder.RegisterInstance(data);
         }
