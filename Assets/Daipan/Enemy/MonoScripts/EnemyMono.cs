@@ -22,7 +22,7 @@ namespace Daipan.Enemy.MonoScripts
         EnemyCluster _enemyCluster = null!;
         EnemyHp _enemyHp = null!;
         EnemyParamsConfig _enemyParamsConfig = null!;
-        EnemyPositionMonoData _enemyPositionMonoData = null!;
+        EnemySpawnPointData _enemySpawnPointData = null!;
         EnemyParamDataContainer _enemyParamDataContainer = null!;
         bool _isSlowDefeat;
         PlayerHolder _playerHolder = null!;
@@ -41,7 +41,7 @@ namespace Daipan.Enemy.MonoScripts
                 transform.position += Vector3.left * (float)_enemyParamsConfig.GetSpeedRate(EnemyEnum) * Time.deltaTime;
             }
 
-            if (transform.position.x < _enemyPositionMonoData.GetEnemyDespawnedPoint().x)
+            if (transform.position.x < _enemySpawnPointData.GetEnemyDespawnedPoint().x)
                 _enemyCluster.Remove(this, false); // Destroy when out of screen
 
             hpGaugeMono.SetRatio(CurrentHp / (float)_enemyParamDataContainer.GetEnemyParamData(EnemyEnum).GetCurrentHp());
@@ -67,7 +67,7 @@ namespace Daipan.Enemy.MonoScripts
             EnemyCluster enemyCluster,
             PlayerHolder playerHolder,
             EnemyParamsConfig enemyParamsConfig,
-            EnemyPositionMonoData enemyPositionMonoData,
+            EnemySpawnPointData enemySpawnPointData,
             EnemyParamDataContainer enemyParamDataContainer,
             EnemyQuickDefeatChecker quickDefeatChecker,
             EnemySlowDefeatChecker slowDefeatChecker
@@ -76,7 +76,7 @@ namespace Daipan.Enemy.MonoScripts
             _enemyCluster = enemyCluster;
             _playerHolder = playerHolder;
             _enemyParamsConfig = enemyParamsConfig;
-            _enemyPositionMonoData = enemyPositionMonoData;
+            _enemySpawnPointData = enemySpawnPointData;
             _enemyParamDataContainer = enemyParamDataContainer;
             _quickDefeatChecker = quickDefeatChecker;
             _slowDefeatChecker = slowDefeatChecker;

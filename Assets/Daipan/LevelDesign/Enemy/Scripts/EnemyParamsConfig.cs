@@ -11,19 +11,19 @@ namespace Daipan.LevelDesign.Enemy.Scripts
 {
     public class EnemyParamsConfig
     {
-        readonly EnemyPositionMonoData _enemyPositionMonoData;
+        readonly EnemySpawnPointData _enemySpawnPointData;
         readonly StreamTimer _streamTimer;
         readonly EnemyParamDataContainer _enemyParamDataContainer;
         readonly EnemyTimeLineParamDataContainer _enemyTimeLineParamDataContainer;
 
         [Inject]
         EnemyParamsConfig(
-            EnemyPositionMonoData enemyPositionMonoData,
+            EnemySpawnPointData enemySpawnPointData,
             StreamTimer streamTimer,
             EnemyParamDataContainer enemyParamDataContainer,
             EnemyTimeLineParamDataContainer enemyTimeLineParamDataContainer)
         {
-            _enemyPositionMonoData = enemyPositionMonoData;
+            _enemySpawnPointData = enemySpawnPointData;
             _streamTimer = streamTimer;
             _enemyParamDataContainer = enemyParamDataContainer;
             _enemyTimeLineParamDataContainer = enemyTimeLineParamDataContainer;
@@ -62,7 +62,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
             List<Vector3> position = new();
             List<float> ratio = new();
 
-            foreach (var point in _enemyPositionMonoData.GetEnemySpawnedPoints())
+            foreach (var point in _enemySpawnPointData.GetEnemySpawnedPoints())
             {
                 position.Add(point.transform.position);
                 ratio.Add(point.ratio);

@@ -10,7 +10,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
             EnemyPositionMono enemyPositionMono
         )
         {
-            var data = new EnemyPositionMonoData()
+            var data = new EnemySpawnPointData()
             {
                 GetEnemySpawnedPoints = () => enemyPositionMono.enemySpawnedPoints,
                 GetEnemyDespawnedPoint = () => enemyPositionMono.enemyDespawnedPoint.transform.position,

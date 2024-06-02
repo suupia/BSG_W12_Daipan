@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace Daipan.LevelDesign.Enemy.Scripts
 {
    
-    public class EnemyPositionMonoData
+    public class EnemySpawnPointData
     {
         public Func<List<EnemySpawnedPosition>> GetEnemySpawnedPoints { get; init; } =
             () => new List<EnemySpawnedPosition>(); 
