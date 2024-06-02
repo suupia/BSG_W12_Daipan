@@ -15,18 +15,21 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         readonly EnemyPositionMono _enemyPositionMono;
         readonly StreamTimer _streamTimer;
         readonly EnemyParamDataContainer _enemyParamDataContainer;
+        readonly EnemyTimeLineParamDataContainer _enemyTimeLineParamDataContainer;
 
         [Inject]
         EnemyParamsConfig(
             EnemyParamManager enemyParamManager,
             EnemyPositionMono enemyPositionMono,
             StreamTimer streamTimer,
-            EnemyParamDataContainer enemyParamDataContainer)
+            EnemyParamDataContainer enemyParamDataContainer,
+            EnemyTimeLineParamDataContainer enemyTimeLineParamDataContainer)
         {
             _enemyParamManager = enemyParamManager;
             _enemyPositionMono = enemyPositionMono;
             _streamTimer = streamTimer;
             _enemyParamDataContainer = enemyParamDataContainer;
+            _enemyTimeLineParamDataContainer = enemyTimeLineParamDataContainer;
 
             CheckIsValid(_enemyParamManager);
         }
@@ -47,21 +50,19 @@ namespace Daipan.LevelDesign.Enemy.Scripts
 
         public double GetSpeed(EnemyEnum enemyEnum)
         {
-            return _enemyParamDataContainer.GetEnemyParamData(enemyEnum).GetMoveSpeedPreSec() * GetEnemyTimeLineParam().moveSpeedRate;
+            return _enemyParamDataContainer.GetEnemyParamData(enemyEnum).GetMoveSpeedPreSec() *
+                   GetEnemyTimeLineParam().GetMoveSpeedRate();
         }
 
 
-        public float GetSpawnDelaySec()
+        public double GetSpawnDelaySec()
         {
-            return GetEnemyTimeLineParam().spawnDelaySec;
+            return GetEnemyTimeLineParam().GetSpawnDelaySec();
         }
 
-        public EnemyTimeLineParam GetEnemyTimeLineParam()
+        public EnemyTimeLineParamData GetEnemyTimeLineParam()
         {
-            var timeLineParam = _enemyParamManager.enemyTimeLineParams
-                .Where(e => e.startTime <= _streamTimer.CurrentTime)
-                .OrderByDescending(e => e.startTime).First();
-            return timeLineParam;
+            return _enemyTimeLineParamDataContainer.GetEnemyTimeLineParamData(_streamTimer); 
         }
 
         #endregion
