@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Daipan/LevelDesign/Battle/TitleScene.unity
+    path: Assets/Daipan/Title/TitleScene.unity
     guid: 1efd790989c62034a8e1c53dcadccb72
   - enabled: 1
     path: Assets/Daipan/LevelDesign/Battle/DaipanScene.unity
