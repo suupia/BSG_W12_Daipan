@@ -1,9 +1,11 @@
 #nullable enable
 using System;
+using System.Collections.Generic;
 using Daipan.Core.Interfaces;
 using Daipan.Enemy.Interfaces;
 using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.Stream.Scripts;
+using Daipan.Utility.Scripts;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -17,6 +19,7 @@ namespace Daipan.Enemy.Scripts
         readonly EnemyCluster _enemyCluster;
         readonly IrritatedValue _irritatedValue;
         readonly EnemyParamsConfig _enemyParamsConfig;
+        readonly EnemySpawnPointData _enemySpawnPointData;
         readonly EnemyLevelDesignParamData _enemyLevelDesignParamData;
         float _timer;
 
@@ -27,6 +30,7 @@ namespace Daipan.Enemy.Scripts
             IrritatedValue irritatedValue,
             IEnemyMonoBuilder enemyMonoBuilder,
             EnemyParamsConfig enemyParamsConfig,
+            EnemySpawnPointData enemySpawnPointData,
             EnemyLevelDesignParamData enemyLevelDesignParamData
             )
         {
@@ -34,6 +38,7 @@ namespace Daipan.Enemy.Scripts
             _enemyMonoBuilder = enemyMonoBuilder;
             _irritatedValue = irritatedValue;
             _enemyParamsConfig = enemyParamsConfig;
+            _enemySpawnPointData = enemySpawnPointData;
             _enemyLevelDesignParamData = enemyLevelDesignParamData;
         }
 
@@ -54,7 +59,7 @@ namespace Daipan.Enemy.Scripts
 
         void SpawnEnemy()
         {
-            var enemyObject = _enemyMonoBuilder.Build(_enemyParamsConfig.GetSpawnedPositionRandom(), Quaternion.identity);
+            var enemyObject = _enemyMonoBuilder.Build(GetSpawnedPositionRandom(), Quaternion.identity);
             IncreaseIrritatedValueByEnemy(enemyObject.EnemyEnum);
             _enemyCluster.Add(enemyObject);
         }
@@ -64,5 +69,21 @@ namespace Daipan.Enemy.Scripts
         {
             if (enemy == EnemyEnum.Boss) _irritatedValue.IncreaseValue(_enemyLevelDesignParamData.GetCurrentKillAmount()); 
         }
+        
+        Vector3 GetSpawnedPositionRandom()
+        {
+            List<Vector3> position = new();
+            List<float> ratio = new();
+
+            foreach (var point in _enemySpawnPointData.GetEnemySpawnedPoints())
+            {
+                position.Add(point.transform.position);
+                ratio.Add(point.ratio);
+            }
+
+            return position[Randoms.RandomByRatio(ratio)];
+        }
+
+
     }
 }

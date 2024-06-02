@@ -55,22 +55,5 @@ namespace Daipan.LevelDesign.Enemy.Scripts
 
 
 
-        #region Position
-
-        public Vector3 GetSpawnedPositionRandom()
-        {
-            List<Vector3> position = new();
-            List<float> ratio = new();
-
-            foreach (var point in _enemySpawnPointData.GetEnemySpawnedPoints())
-            {
-                position.Add(point.transform.position);
-                ratio.Add(point.ratio);
-            }
-
-            return position[Randoms.RandomByRatio(ratio)];
-        }
-
-        #endregion
     }
 }
