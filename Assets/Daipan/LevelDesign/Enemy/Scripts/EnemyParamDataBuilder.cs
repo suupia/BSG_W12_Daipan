@@ -17,6 +17,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
             {
                 enemyParams.Add(new EnemyParamData()
                 {
+                    GetSprite = () => enemyParam.sprite,
                     EnemyEnum = () => enemyParam.GetEnemyEnum,
                     GetAttackAmount = () => enemyParam.enemyAttackParam.attackAmount,
                     GetAttackDelayDec = () => enemyParam.enemyAttackParam.attackDelaySec,

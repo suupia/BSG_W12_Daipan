@@ -60,7 +60,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
     public sealed class EnemyParam
     {
         [Header("敵のレベルデザインはこちら")]
-        [Space(30)]
+        [Space]
 
         [Header("敵の種類")]
         [SerializeField]

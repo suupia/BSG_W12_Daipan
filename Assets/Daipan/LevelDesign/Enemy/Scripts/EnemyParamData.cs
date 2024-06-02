@@ -1,11 +1,15 @@
 #nullable enable
 using System;
 using Daipan.Enemy.Scripts;
+using UnityEngine;
 
 namespace Daipan.LevelDesign.Enemy.Scripts
 {
     public class EnemyParamData
     {
+        // Sprite
+        public Func<UnityEngine.Sprite?> GetSprite { get; init; } = () => null; 
+        
         // Enum
         public required Func<EnemyEnum> EnemyEnum { get; init; } 
         

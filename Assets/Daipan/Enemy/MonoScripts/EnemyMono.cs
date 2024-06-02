@@ -96,8 +96,7 @@ namespace Daipan.Enemy.MonoScripts
 
         void SetSprite(EnemyEnum enemyEnum)
         {
-            var spriteRenderer = this.spriteRenderer; 
-            spriteRenderer.sprite = _enemyParamsConfig.GetSprite(enemyEnum);
+            spriteRenderer.sprite = _enemyParamDataContainer.GetEnemyParamData(enemyEnum).GetSprite();
         }
 
         void SetAnimator(EnemyEnum enemyEnum)

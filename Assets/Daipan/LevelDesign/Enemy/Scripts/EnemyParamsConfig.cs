@@ -48,11 +48,6 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         }
 
 
-        public Sprite GetSprite(EnemyEnum enemyEnum)
-        {
-            return GetEnemyParams(enemyEnum).sprite;
-        }
-
         public float GetSpawnDelaySec()
         {
             return GetEnemyTimeLineParam().spawnDelaySec;
