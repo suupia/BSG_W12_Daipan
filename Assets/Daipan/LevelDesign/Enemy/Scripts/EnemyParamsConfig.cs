@@ -30,14 +30,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
 
         void CheckIsValid(EnemyParamManager parameters)
         {
-            Debug.Log($"EnemeyCount : {parameters.enemyParams.Count}");
-            foreach (var enemyParam in parameters.enemyParams)
-            {
-                if (enemyParam.enemyAttackParam.attackAmount <= 0)
-                    Debug.LogWarning($"{enemyParam.GetEnemyEnum}の攻撃力が0以下です。");
-                if (enemyParam.enemyAttackParam.attackRange <= 0)
-                    Debug.LogWarning($"{enemyParam.GetEnemyEnum}の攻撃範囲が0以下です。");
-            }
+            Debug.Log($"EnemyCount : {parameters.enemyParams.Count}");
 
             if (_enemyParamManager.enemyTimeLines.Count == 0)
             {

@@ -11,6 +11,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
     public sealed class EnemyAttackParam
     {
         [Header("敵の攻撃力")]
+        [Min(0)]
         public int attackAmount;
 
         [Header("攻撃間隔")]
