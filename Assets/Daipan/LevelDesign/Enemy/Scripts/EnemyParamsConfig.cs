@@ -46,26 +46,29 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         }
 
 
-        #region Params
+        // EnemyTimeLineParamDataの一部をデコレートしている
 
-        public double GetSpeed(EnemyEnum enemyEnum)
+        public double GetSpeedRate(EnemyEnum enemyEnum)
         {
             return _enemyParamDataContainer.GetEnemyParamData(enemyEnum).GetMoveSpeedPreSec() *
                    GetEnemyTimeLineParam().GetMoveSpeedRate();
         }
 
-
         public double GetSpawnDelaySec()
         {
             return GetEnemyTimeLineParam().GetSpawnDelaySec();
         }
+        public double GetSpawnBossPercent()
+        {
+            return GetEnemyTimeLineParam().GetSpawnBossPercent();
+        }
 
-        public EnemyTimeLineParamData GetEnemyTimeLineParam()
+        EnemyTimeLineParamData GetEnemyTimeLineParam()
         {
             return _enemyTimeLineParamDataContainer.GetEnemyTimeLineParamData(_streamTimer); 
         }
 
-        #endregion
+
 
         #region Position
 

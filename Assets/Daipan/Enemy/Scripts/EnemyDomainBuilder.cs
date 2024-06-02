@@ -102,7 +102,7 @@ namespace Daipan.Enemy.Scripts
 
             // ここで100%に正規化
             ratio = EnemySpawnCalculator.NormalizeEnemySpawnRatioWithBoss(ratio,
-                (float)_enemyParamsConfig.GetEnemyTimeLineParam().GetSpawnBossPercent());
+                (float)_enemyParamsConfig.GetSpawnBossPercent());
 
             Debug.Log($"enemyPrams.Length : {_enemyParamManager.enemyParams.Count}");
             Debug.Log($"Randoms.RandomByRatio(ratio) : {Randoms.RandomByRatio(ratio)}");

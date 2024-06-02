@@ -37,7 +37,7 @@ namespace Daipan.Enemy.MonoScripts
             if (transform.position.x - _playerHolder.PlayerMono.transform.position.x >=
                 _enemyParamDataContainer.GetEnemyParamData(EnemyEnum).GetAttackRange())
             {
-                transform.position += Vector3.left * (float)_enemyParamsConfig.GetSpeed(EnemyEnum) * Time.deltaTime;
+                transform.position += Vector3.left * (float)_enemyParamsConfig.GetSpeedRate(EnemyEnum) * Time.deltaTime;
             }
 
             if (transform.position.x < _enemyParamsConfig.GetDespawnedPosition().x)
