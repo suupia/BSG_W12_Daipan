@@ -32,10 +32,10 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         {
             Debug.Log($"EnemyCount : {parameters.enemyParams.Count}");
 
-            if (_enemyParamManager.enemyTimeLines.Count == 0)
+            if (_enemyParamManager.enemyTimeLineParams.Count == 0)
             {
                 Debug.LogWarning("EnemyTimeLineParamが設定されていません。");
-                _enemyParamManager.enemyTimeLines.Add(new EnemyTimeLineParam());
+                _enemyParamManager.enemyTimeLineParams.Add(new EnemyTimeLineParam());
             }
         }
 
@@ -61,12 +61,11 @@ namespace Daipan.LevelDesign.Enemy.Scripts
 
         public EnemyTimeLineParam GetEnemyTimeLineParam()
         {
-            var timeLineParam = _enemyParamManager.enemyTimeLines
+            var timeLineParam = _enemyParamManager.enemyTimeLineParams
                 .Where(e => e.startTime <= _streamTimer.CurrentTime)
                 .OrderByDescending(e => e.startTime).First();
             return timeLineParam;
         }
-
 
         #endregion
 

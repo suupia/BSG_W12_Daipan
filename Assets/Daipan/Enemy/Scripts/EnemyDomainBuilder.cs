@@ -48,15 +48,15 @@ namespace Daipan.Enemy.Scripts
             var enemyParamData = _enemyParamDataContainer.GetEnemyParamData(enemyEnum);
             enemyMono.SetDomain(
                 enemyEnum,
-                new EnemyHp(enemyParamData.GetCurrentHp(),enemyMono, _enemyCluster),
+                new EnemyHp(enemyParamData.GetCurrentHp(), enemyMono, _enemyCluster),
                 new EnemyAttackDecider(enemyMono, enemyParamData, new EnemyAttack(enemyParamData))
-                );
+            );
             enemyMono.OnDied += (sender, args) =>
             {
                 // ボスを倒したときも含む
                 _enemyLevelDesignParamData.SetCurrentKillAmount(_enemyLevelDesignParamData.GetCurrentKillAmount() + 1);
 
-                if (!args.IsBoss) _viewerNumber.IncreaseViewer(7);
+                if (!args.IsBoss) _viewerNumber.IncreaseViewer(7); // todo :パラメータを設定できるようにする
                 // if(args.IsBoss) _commentSpawner.SpawnCommentByType(CommentEnum.Super);
                 // else _commentSpawner.SpawnCommentByType(CommentEnum.Normal);
 
@@ -80,9 +80,8 @@ namespace Daipan.Enemy.Scripts
             var rand = Random.Range(0, enemyEnums.Count());
             return enemyEnums[rand];
         }
-        
-        
-   
+
+
         EnemyEnum DecideRandomEnemyType()
         {
             // ボス発生条件を満たしていればBOSSを生成
@@ -103,7 +102,7 @@ namespace Daipan.Enemy.Scripts
 
             // ここで100%に正規化
             ratio = EnemySpawnCalculator.NormalizeEnemySpawnRatioWithBoss(ratio,
-               _enemyParamsConfig.GetEnemyTimeLineParam().spawnBossPercent);
+                _enemyParamsConfig.GetEnemyTimeLineParam().spawnBossPercent);
 
             Debug.Log($"enemyPrams.Length : {_enemyParamManager.enemyParams.Count}");
             Debug.Log($"Randoms.RandomByRatio(ratio) : {Randoms.RandomByRatio(ratio)}");
@@ -113,6 +112,5 @@ namespace Daipan.Enemy.Scripts
             if (enemyEnum == EnemyEnum.Boss) _enemyLevelDesignParamData.SetCurrentKillAmount(0);
             return enemyEnum;
         }
-
     }
 }
