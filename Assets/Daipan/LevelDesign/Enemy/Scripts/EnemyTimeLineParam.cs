@@ -1,6 +1,7 @@
 #nullable enable
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Daipan.LevelDesign.Enemy.Scripts
 {
@@ -20,13 +21,9 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         [Min(0)]
         public float moveSpeedRate = 1f;
 
-        [Header("Bossの出現確率(n回敵を倒してもBossが出現しなかったら強制召喚)")]
-        [Min(0)]
-        public int spawnBossAmount = 10;
-
         [Header("Bossの出現確率(0%～100%)")]
         [Range(0f, 100f)]
-        public float spawnBossRatio = 10f;
+        public float spawnBossPercent = 10f;
     }
    
 }

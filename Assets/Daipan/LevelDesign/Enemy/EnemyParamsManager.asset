@@ -77,10 +77,8 @@ MonoBehaviour:
   - startTime: 0
     spawnDelaySec: 1
     moveSpeedRate: 1
-    spawnBossAmount: 10
-    spawnBossRatio: 0
+    spawnBossPercent: 0
   - startTime: 10
     spawnDelaySec: 0.1
     moveSpeedRate: 1.5
-    spawnBossAmount: 5
-    spawnBossRatio: 100
+    spawnBossPercent: 100

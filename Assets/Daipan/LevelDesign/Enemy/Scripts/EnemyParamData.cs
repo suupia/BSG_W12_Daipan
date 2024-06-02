@@ -1,7 +1,6 @@
 #nullable enable
 using System;
 using Daipan.Enemy.Scripts;
-using UnityEngine;
 
 namespace Daipan.LevelDesign.Enemy.Scripts
 {
