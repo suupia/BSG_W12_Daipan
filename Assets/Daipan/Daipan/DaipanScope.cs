@@ -9,6 +9,7 @@ using Daipan.Enemy.Scripts;
 using Daipan.LevelDesign.Comment.Scripts;
 using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.LevelDesign.Player.Scripts;
+using Daipan.LevelDesign.Stream;
 using Daipan.LevelDesign.Tower.Scripts;
 using Daipan.Player.Scripts;
 using Daipan.Stream.MonoScripts;
@@ -105,6 +106,9 @@ namespace Daipan.Daipan
          builder.Register<EnemyDefeatConfig>(Lifetime.Scoped);
          builder.RegisterComponentInHierarchy<EnemyDefeatPositionMono>();
          builder.RegisterInstance(enemyDefeatParamManager);
+         
+         /*stream*/
+         builder.RegisterInstance(new StreamParamDataBuilder(builder, streamParameter));
  
          /*player*/
          builder.RegisterInstance(new PlayerParamDataBuilder(builder, playerParam));
