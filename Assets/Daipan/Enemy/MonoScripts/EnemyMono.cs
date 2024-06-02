@@ -21,7 +21,7 @@ namespace Daipan.Enemy.MonoScripts
         EnemyAttackDecider _enemyAttackDecider = null!;
         EnemyCluster _enemyCluster = null!;
         EnemyHp _enemyHp = null!;
-        EnemyParamsConfig _enemyParamsConfig = null!;
+        EnemyParamModifyWithTimer _enemyParamModifyWithTimer = null!;
         EnemySpawnPointData _enemySpawnPointData = null!;
         EnemyParamDataContainer _enemyParamDataContainer = null!;
         bool _isSlowDefeat;
@@ -38,7 +38,7 @@ namespace Daipan.Enemy.MonoScripts
             if (transform.position.x - _playerHolder.PlayerMono.transform.position.x >=
                 _enemyParamDataContainer.GetEnemyParamData(EnemyEnum).GetAttackRange())
             {
-                transform.position += Vector3.left * (float)_enemyParamsConfig.GetSpeedRate(EnemyEnum) * Time.deltaTime;
+                transform.position += Vector3.left * (float)_enemyParamModifyWithTimer.GetSpeedRate(EnemyEnum) * Time.deltaTime;
             }
 
             if (transform.position.x < _enemySpawnPointData.GetEnemyDespawnedPoint().x)
@@ -66,7 +66,7 @@ namespace Daipan.Enemy.MonoScripts
         public void Initialize(
             EnemyCluster enemyCluster,
             PlayerHolder playerHolder,
-            EnemyParamsConfig enemyParamsConfig,
+            EnemyParamModifyWithTimer enemyParamModifyWithTimer,
             EnemySpawnPointData enemySpawnPointData,
             EnemyParamDataContainer enemyParamDataContainer,
             EnemyQuickDefeatChecker quickDefeatChecker,
@@ -75,7 +75,7 @@ namespace Daipan.Enemy.MonoScripts
         {
             _enemyCluster = enemyCluster;
             _playerHolder = playerHolder;
-            _enemyParamsConfig = enemyParamsConfig;
+            _enemyParamModifyWithTimer = enemyParamModifyWithTimer;
             _enemySpawnPointData = enemySpawnPointData;
             _enemyParamDataContainer = enemyParamDataContainer;
             _quickDefeatChecker = quickDefeatChecker;

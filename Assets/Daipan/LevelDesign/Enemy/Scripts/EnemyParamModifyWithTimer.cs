@@ -9,29 +9,25 @@ using VContainer;
 
 namespace Daipan.LevelDesign.Enemy.Scripts
 {
-    public class EnemyParamsConfig
+    public class EnemyParamModifyWithTimer
     {
-        readonly EnemySpawnPointData _enemySpawnPointData;
         readonly StreamTimer _streamTimer;
         readonly EnemyParamDataContainer _enemyParamDataContainer;
         readonly EnemyTimeLineParamDataContainer _enemyTimeLineParamDataContainer;
 
         [Inject]
-        EnemyParamsConfig(
-            EnemySpawnPointData enemySpawnPointData,
+        EnemyParamModifyWithTimer(
             StreamTimer streamTimer,
             EnemyParamDataContainer enemyParamDataContainer,
             EnemyTimeLineParamDataContainer enemyTimeLineParamDataContainer)
         {
-            _enemySpawnPointData = enemySpawnPointData;
             _streamTimer = streamTimer;
             _enemyParamDataContainer = enemyParamDataContainer;
             _enemyTimeLineParamDataContainer = enemyTimeLineParamDataContainer;
 
         }
 
-
-        // EnemyTimeLineParamDataの一部をデコレートしている
+        // EnemyParamDataの一部をデコレートしている
 
         public double GetSpeedRate(EnemyEnum enemyEnum)
         {
@@ -52,8 +48,6 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         {
             return _enemyTimeLineParamDataContainer.GetEnemyTimeLineParamData(_streamTimer); 
         }
-
-
 
     }
 }

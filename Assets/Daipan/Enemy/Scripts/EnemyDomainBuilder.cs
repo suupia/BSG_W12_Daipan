@@ -17,7 +17,7 @@ namespace Daipan.Enemy.Scripts
         readonly EnemyParamDataContainer _enemyParamDataContainer;
         readonly CommentSpawner _commentSpawner;
         readonly EnemyParamManager _enemyParamManager;
-        readonly EnemyParamsConfig _enemyParamsConfig;
+        readonly EnemyParamModifyWithTimer _enemyParamModifyWithTimer;
         readonly ViewerNumber _viewerNumber;
         readonly EnemyCluster _enemyCluster;
         readonly EnemyLevelDesignParamData _enemyLevelDesignParamData;
@@ -27,7 +27,7 @@ namespace Daipan.Enemy.Scripts
             CommentSpawner commentSpawner,
             ViewerNumber viewerNumber,
             EnemyParamManager enemyParamManager,
-            EnemyParamsConfig enemyParamsConfig,
+            EnemyParamModifyWithTimer enemyParamModifyWithTimer,
             EnemyCluster enemyCluster,
             EnemyLevelDesignParamData enemyLevelDesignParamData
         )
@@ -36,7 +36,7 @@ namespace Daipan.Enemy.Scripts
             _commentSpawner = commentSpawner;
             _viewerNumber = viewerNumber;
             _enemyParamManager = enemyParamManager;
-            _enemyParamsConfig = enemyParamsConfig;
+            _enemyParamModifyWithTimer = enemyParamModifyWithTimer;
             _enemyCluster = enemyCluster;
             _enemyLevelDesignParamData = enemyLevelDesignParamData;
         }
@@ -102,7 +102,7 @@ namespace Daipan.Enemy.Scripts
 
             // ここで100%に正規化
             ratio = EnemySpawnCalculator.NormalizeEnemySpawnRatioWithBoss(ratio,
-                (float)_enemyParamsConfig.GetSpawnBossPercent());
+                (float)_enemyParamModifyWithTimer.GetSpawnBossPercent());
 
             Debug.Log($"enemyPrams.Length : {_enemyParamManager.enemyParams.Count}");
             Debug.Log($"Randoms.RandomByRatio(ratio) : {Randoms.RandomByRatio(ratio)}");

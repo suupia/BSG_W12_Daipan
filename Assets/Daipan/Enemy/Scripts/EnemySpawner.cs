@@ -18,7 +18,7 @@ namespace Daipan.Enemy.Scripts
         readonly IEnemyMonoBuilder _enemyMonoBuilder;
         readonly EnemyCluster _enemyCluster;
         readonly IrritatedValue _irritatedValue;
-        readonly EnemyParamsConfig _enemyParamsConfig;
+        readonly EnemyParamModifyWithTimer _enemyParamModifyWithTimer;
         readonly EnemySpawnPointData _enemySpawnPointData;
         readonly EnemyLevelDesignParamData _enemyLevelDesignParamData;
         float _timer;
@@ -29,7 +29,7 @@ namespace Daipan.Enemy.Scripts
             EnemyCluster enemyCluster,
             IrritatedValue irritatedValue,
             IEnemyMonoBuilder enemyMonoBuilder,
-            EnemyParamsConfig enemyParamsConfig,
+            EnemyParamModifyWithTimer enemyParamModifyWithTimer,
             EnemySpawnPointData enemySpawnPointData,
             EnemyLevelDesignParamData enemyLevelDesignParamData
             )
@@ -37,7 +37,7 @@ namespace Daipan.Enemy.Scripts
             _enemyCluster = enemyCluster;
             _enemyMonoBuilder = enemyMonoBuilder;
             _irritatedValue = irritatedValue;
-            _enemyParamsConfig = enemyParamsConfig;
+            _enemyParamModifyWithTimer = enemyParamModifyWithTimer;
             _enemySpawnPointData = enemySpawnPointData;
             _enemyLevelDesignParamData = enemyLevelDesignParamData;
         }
@@ -50,7 +50,7 @@ namespace Daipan.Enemy.Scripts
         void IUpdate.Update()
         {
             _timer += Time.deltaTime;
-            if (_timer > _enemyParamsConfig.GetSpawnDelaySec())
+            if (_timer > _enemyParamModifyWithTimer.GetSpawnDelaySec())
             {
                 SpawnEnemy();
                 _timer = 0;
