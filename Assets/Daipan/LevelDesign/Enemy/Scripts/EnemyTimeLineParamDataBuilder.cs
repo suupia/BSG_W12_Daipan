@@ -23,6 +23,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
                 });
             }
             var enemyTimeLineParamContainer = new EnemyTimeLineParamDataContainer(enemyTimeLineParams);
+            builder.RegisterInstance(enemyTimeLineParamContainer);
         }
     
     } 

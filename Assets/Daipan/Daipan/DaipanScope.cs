@@ -103,6 +103,7 @@ namespace Daipan.Daipan
          builder.Register<EnemyParamsConfig>(Lifetime.Scoped);
          builder.RegisterInstance(new EnemyParamDataBuilder(builder, enemyParamManager));
          builder.RegisterInstance(new EnemyLevelDesignParamDataBuilder(builder, enemyParamManager.enemyLevelDesignParam));
+         builder.RegisterInstance(new EnemyTimeLineParamDataBuilder(builder, enemyParamManager));
          builder.RegisterComponentInHierarchy<EnemyPositionMono>();
 
          builder.Register<EnemyDefeatConfig>(Lifetime.Scoped);
