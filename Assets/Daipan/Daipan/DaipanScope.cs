@@ -102,6 +102,7 @@ namespace Daipan.Daipan
          builder.RegisterInstance(enemyParamManager.enemyLevelDesignParam);
          builder.Register<EnemyParamsConfig>(Lifetime.Scoped);
          builder.RegisterInstance(new EnemyParamDataBuilder(builder, enemyParamManager));
+         builder.RegisterInstance(new EnemyLevelDesignParamDataBuilder(builder, enemyParamManager.enemyLevelDesignParam));
          builder.RegisterComponentInHierarchy<EnemyPositionMono>();
 
          builder.Register<EnemyDefeatConfig>(Lifetime.Scoped);
