@@ -26,7 +26,7 @@ namespace Daipan.Daipan
 {
  public sealed class DaipanScope : LifetimeScope
  {
-     [SerializeField] StreamParameter streamParameter = null!;
+     [FormerlySerializedAs("streamParameter")] [SerializeField] StreamParam streamParam = null!;
      [FormerlySerializedAs("playerParams")] [SerializeField] PlayerParam playerParam = null!;
      [SerializeField] EnemyParamsManager enemyParamsManager = null!;
      [SerializeField] CommentParamsManager commentParamsManager = null!;
@@ -38,8 +38,8 @@ namespace Daipan.Daipan
      {
          // Domain
          // Stream
-         builder.RegisterInstance(streamParameter.viewer);
-         builder.RegisterInstance(streamParameter.daipan);
+         builder.RegisterInstance(streamParam.viewer);
+         builder.RegisterInstance(streamParam.daipan);
          builder.RegisterInstance(irritatedParams);
          builder.Register<StreamPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<StreamMono>>();
          builder.Register<IrritatedValue>(Lifetime.Scoped);
@@ -108,7 +108,7 @@ namespace Daipan.Daipan
          builder.RegisterInstance(enemyDefeatParamManager);
          
          /*stream*/
-         builder.RegisterInstance(new StreamParamDataBuilder(builder, streamParameter));
+         builder.RegisterInstance(new StreamParamDataBuilder(builder, streamParam));
  
          /*player*/
          builder.RegisterInstance(new PlayerParamDataBuilder(builder, playerParam));

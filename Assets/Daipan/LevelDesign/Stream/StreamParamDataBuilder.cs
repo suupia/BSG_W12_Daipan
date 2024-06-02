@@ -8,12 +8,12 @@ namespace Daipan.LevelDesign.Stream
     {
         public StreamParamDataBuilder(
             IContainerBuilder builder,
-            StreamParameter streamParameter
+            StreamParam streamParam
         )
         {
             var streamData = new StreamData()
             {
-                GetMaxTime = () => streamParameter.timer.maxTime
+                GetMaxTime = () => streamParam.timer.maxTime
             };
             builder.RegisterInstance(streamData);
         }

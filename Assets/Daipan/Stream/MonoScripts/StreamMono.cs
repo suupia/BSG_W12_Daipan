@@ -8,7 +8,7 @@ namespace Daipan.Stream.MonoScripts
     {
         StreamStatus _streamStatus = null!;
         ViewerNumber _viewerNumber = null!;
-        ViewerParameter _viewerParameter = null!;
+        ViewerParam _viewerParam = null!;
         IrritatedValue _irritatedValue = null!;
 
         float OneSecTimer { get; set; }
@@ -19,9 +19,9 @@ namespace Daipan.Stream.MonoScripts
             if (OneSecTimer > 1)
             {
                 if (_streamStatus.IsIrritated)
-                    _viewerNumber.DecreaseViewer(_viewerParameter.decreaseNumberWhenIrradiated);
+                    _viewerNumber.DecreaseViewer(_viewerParam.decreaseNumberWhenIrradiated);
                 else
-                    _viewerNumber.IncreaseViewer(_viewerParameter.increaseNumberPerSecond);
+                    _viewerNumber.IncreaseViewer(_viewerParam.increaseNumberPerSecond);
                 
 
                 OneSecTimer = 0;
@@ -37,12 +37,12 @@ namespace Daipan.Stream.MonoScripts
 
         [Inject]
         public void Initialize(
-            ViewerParameter viewerParameter,
+            ViewerParam viewerParam,
             ViewerNumber viewerNumber,
             IrritatedValue irritatedValue,
             StreamStatus streamStatus)
         {
-            _viewerParameter = viewerParameter;
+            _viewerParam = viewerParam;
             _viewerNumber = viewerNumber;
             _irritatedValue = irritatedValue;
             _streamStatus = streamStatus;
