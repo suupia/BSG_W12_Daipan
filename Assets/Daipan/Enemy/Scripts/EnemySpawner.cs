@@ -7,8 +7,7 @@ using Daipan.Stream.Scripts;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
-using Object = UnityEngine.Object;
-using Random = UnityEngine.Random;
+
 
 namespace Daipan.Enemy.Scripts
 {
@@ -17,7 +16,6 @@ namespace Daipan.Enemy.Scripts
         readonly IEnemyMonoBuilder _enemyMonoBuilder;
         readonly EnemyCluster _enemyCluster;
         readonly IrritatedValue _irritatedValue;
-        readonly float _spawnInterval = 1.0f;
         readonly EnemyParamsConfig _enemyParamsConfig;
         float _timer;
 
