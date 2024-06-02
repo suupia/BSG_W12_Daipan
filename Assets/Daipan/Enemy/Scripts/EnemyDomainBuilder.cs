@@ -21,6 +21,7 @@ namespace Daipan.Enemy.Scripts
         readonly EnemyParamsConfig _enemyParamsConfig;
         readonly ViewerNumber _viewerNumber;
         readonly EnemyCluster _enemyCluster;
+        readonly EnemyLevelDesignParamData _enemyLevelDesignParamData;
 
         public EnemyDomainBuilder(
             EnemyParamDataContainer enemyParamDataContainer,
@@ -29,7 +30,8 @@ namespace Daipan.Enemy.Scripts
             EnemyParamManager enemyParamManager,
             EnemyLevelDesignParam enemyLevelDesignParam,
             EnemyParamsConfig enemyParamsConfig,
-            EnemyCluster enemyCluster
+            EnemyCluster enemyCluster,
+            EnemyLevelDesignParamData enemyLevelDesignParamData
         )
         {
             _enemyParamDataContainer = enemyParamDataContainer;
@@ -39,6 +41,7 @@ namespace Daipan.Enemy.Scripts
             _enemyLevelDesignParam = enemyLevelDesignParam;
             _enemyParamsConfig = enemyParamsConfig;
             _enemyCluster = enemyCluster;
+            _enemyLevelDesignParamData = enemyLevelDesignParamData;
         }
 
         public EnemyMono SetDomain(EnemyMono enemyMono)
@@ -110,7 +113,7 @@ namespace Daipan.Enemy.Scripts
 
 
             var enemyEnum = _enemyParamManager.enemyParams[Randoms.RandomByRatio(ratio)].GetEnemyEnum;
-            if (enemyEnum == EnemyEnum.Boss) _enemyParamsConfig.SetCurrentKillAmount(0);
+            if (enemyEnum == EnemyEnum.Boss) _enemyLevelDesignParamData.SetCurrentKillAmount(0);
             return enemyEnum;
         }
 

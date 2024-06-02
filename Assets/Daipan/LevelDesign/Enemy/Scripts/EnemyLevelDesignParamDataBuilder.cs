@@ -12,9 +12,9 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         {
             var data = new EnemyLevelDesignParamData()
             {
-                spawnBossAmount = () => levelDesignParam.spawnBossAmount,
-                increaseIrritatedValueByBoss = () => levelDesignParam.increaseIrritatedValueByBoss,
-                currentKillAmount = () => levelDesignParam.currentKillAmount,
+                GetSpawnBossAmount = () => levelDesignParam.spawnBossAmount,
+                GetIncreaseIrritatedValueByBoss = () => levelDesignParam.increaseIrritatedValueByBoss,
+                GetCurrentKillAmount = () => levelDesignParam.currentKillAmount,
             };
             builder.RegisterInstance(data);
         }

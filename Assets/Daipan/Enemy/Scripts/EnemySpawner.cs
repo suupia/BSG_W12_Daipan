@@ -17,6 +17,7 @@ namespace Daipan.Enemy.Scripts
         readonly EnemyCluster _enemyCluster;
         readonly IrritatedValue _irritatedValue;
         readonly EnemyParamsConfig _enemyParamsConfig;
+        readonly EnemyLevelDesignParamData _enemyLevelDesignParamData;
         float _timer;
 
         [Inject]
@@ -25,12 +26,15 @@ namespace Daipan.Enemy.Scripts
             EnemyCluster enemyCluster,
             IrritatedValue irritatedValue,
             IEnemyMonoBuilder enemyMonoBuilder,
-            EnemyParamsConfig enemyParamsConfig)
+            EnemyParamsConfig enemyParamsConfig,
+            EnemyLevelDesignParamData enemyLevelDesignParamData
+            )
         {
             _enemyCluster = enemyCluster;
             _enemyMonoBuilder = enemyMonoBuilder;
             _irritatedValue = irritatedValue;
             _enemyParamsConfig = enemyParamsConfig;
+            _enemyLevelDesignParamData = enemyLevelDesignParamData;
         }
 
         void IStart.Start()
@@ -58,7 +62,7 @@ namespace Daipan.Enemy.Scripts
 
         void IncreaseIrritatedValueByEnemy(EnemyEnum enemy)
         {
-            if (enemy == EnemyEnum.Boss) _irritatedValue.IncreaseValue(_enemyParamsConfig.GetIncreaseIrritatedValueByBoss()); 
+            if (enemy == EnemyEnum.Boss) _irritatedValue.IncreaseValue(_enemyLevelDesignParamData.GetCurrentKillAmount()); 
         }
     }
 }

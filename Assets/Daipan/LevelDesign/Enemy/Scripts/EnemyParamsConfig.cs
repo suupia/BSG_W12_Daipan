@@ -12,19 +12,16 @@ namespace Daipan.LevelDesign.Enemy.Scripts
     public class EnemyParamsConfig
     {
         readonly EnemyParamManager _enemyParamManager;
-        readonly EnemyLevelDesignParam _enemyLevelDesignParam;
         readonly EnemyPositionMono _enemyPositionMono;
         readonly StreamTimer _streamTimer;
 
         [Inject]
         EnemyParamsConfig(
             EnemyParamManager enemyParamManager,
-            EnemyLevelDesignParam enemyLevelDesignParam,
             EnemyPositionMono enemyPositionMono,
             StreamTimer streamTimer)
         {
             _enemyParamManager = enemyParamManager;
-            _enemyLevelDesignParam = enemyLevelDesignParam;
             _enemyPositionMono = enemyPositionMono;
             _streamTimer = streamTimer;
 
@@ -68,11 +65,6 @@ namespace Daipan.LevelDesign.Enemy.Scripts
             return GetEnemyTimeLineParam().spawnDelaySec;
         }
 
-        public void SetCurrentKillAmount(int amount)
-        {
-            _enemyLevelDesignParam.currentKillAmount = amount;
-        }
-
 
         EnemyParam GetEnemyParams(EnemyEnum enemyEnum)
         {
@@ -87,10 +79,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
             return timeLineParam;
         }
 
-        public int GetIncreaseIrritatedValueByBoss()
-        {
-            return _enemyLevelDesignParam.increaseIrritatedValueByBoss;
-        }
+
         #endregion
 
         #region Position
