@@ -9,14 +9,14 @@ namespace Daipan.Stream.Scripts
     {
         readonly CommentCluster _commentCluster;
         readonly AntiCommentCluster _antiCommentCluster;
-        readonly DaipanParameter _daipanParameter;
+        readonly DaipanParam _daipanParam;
         readonly EnemyCluster _enemyCluster;
         readonly IrritatedValue _irritatedValue;
         readonly StreamStatus _streamStatus;
         readonly ViewerNumber _viewerNumber;
 
         public DaipanExecutor(
-            DaipanParameter daipanParameter,
+            DaipanParam daipanParam,
             ViewerNumber viewerNumber,
             StreamStatus streamStatus,
             IrritatedValue irritatedValue,
@@ -25,7 +25,7 @@ namespace Daipan.Stream.Scripts
             AntiCommentCluster antiCommentCluster
         )
         {
-            _daipanParameter = daipanParameter;
+            _daipanParam = daipanParam;
             _viewerNumber = viewerNumber;
             _streamStatus = streamStatus;
             _irritatedValue = irritatedValue;

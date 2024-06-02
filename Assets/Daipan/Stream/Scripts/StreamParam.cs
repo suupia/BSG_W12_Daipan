@@ -6,7 +6,7 @@ using UnityEngine.Serialization;
 namespace Daipan.Stream.Scripts
 {
     [Serializable]
-    public sealed class ViewerParameter
+    public sealed class ViewerParam
     {
         [Header("一秒間に増える視聴者の数")] public int increaseNumberPerSecond;
 
@@ -14,20 +14,29 @@ namespace Daipan.Stream.Scripts
     }
 
     [Serializable]
-    public sealed class DaipanParameter
+    public sealed class DaipanParam
     {
         [Header("台パンによって増える視聴者の数")] public int increaseNumberByDaipan;
 
         [Header("盛り上がっているときに増える視聴者の数")] public int increaseNumberWhenExciting;
     }
 
-    [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/StreamParameter", order = 1)]
-    public sealed class StreamParameter : ScriptableObject
+    [Serializable]
+    public sealed class TimerParam
     {
-        [FormerlySerializedAs("viewerParameter")] [FormerlySerializedAs("viewerNumberParameter")] [SerializeField]
-        public ViewerParameter viewer = null!;
+        [Header("最大時間")] public double maxTime;
+    }
+    
+    [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/Stream/SteamParam", order = 1)]
+    public sealed class StreamParam : ScriptableObject
+    {
+        [SerializeField]
+        public ViewerParam viewer = null!;
 
-        [FormerlySerializedAs("daipanParameter")] [SerializeField]
-        public DaipanParameter daipan = null!;
+        [SerializeField]
+        public DaipanParam daipan = null!;
+        
+        [SerializeField]
+        public TimerParam timer = null!;
     }
 }

@@ -11,9 +11,19 @@ namespace Daipan.Stream.Scripts
 {
     public class StreamTimer : IStart, IUpdate
     {
-        double CurrentTime { get; set; }
+        public double CurrentTime { get; private set; }
+        
+       public double CurrentProgressRatio => CurrentTime / MaxTime;
 
-        bool IsTicking { get; set; } 
+        bool IsTicking { get; set; }
+        
+        double MaxTime { get; }
+
+        public StreamTimer(StreamData data)
+        {
+            MaxTime = data.GetMaxTime();
+        }
+        
 
         void IStart.Start()
         {
@@ -42,9 +52,5 @@ namespace Daipan.Stream.Scripts
             IsTicking = true;
         }
 
-        public double GetCurrentTime()
-        {
-            return CurrentTime;
-        }
     }
 }

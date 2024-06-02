@@ -79,7 +79,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         public EnemyTimeLineParam GetEnemyTimeLineParam()
         {
             var timeLineParam = _enemyParamsManager.enemyTimeLines
-                .Where(e => e.startTime <= _streamTimer.GetCurrentTime())
+                .Where(e => e.startTime <= _streamTimer.CurrentTime)
                 .OrderByDescending(e => e.startTime).First();
             return timeLineParam;
         }

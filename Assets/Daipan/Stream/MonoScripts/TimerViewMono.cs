@@ -13,7 +13,7 @@ namespace Daipan.Stream.MonoScripts
         StreamTimer _streamTimer = null!;
         void Update()
         {
-            timerSlider.value = (float)_streamTimer.GetCurrentTime(); 
+            timerSlider.value = (float)_streamTimer.CurrentProgressRatio;
         }
 
         [Inject]
