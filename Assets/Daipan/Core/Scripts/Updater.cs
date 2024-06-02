@@ -6,7 +6,7 @@ using VContainer.Unity;
 
 using UnityEngine;
 
-namespace Daipan.Core
+namespace Daipan.Core.Scripts
 {
     public sealed class Updater : ITickable
     {
@@ -19,10 +19,10 @@ namespace Daipan.Core
 
         [Inject]
         public void Initialize(
-            IEnumerable<IUpdate> Updates
+            IEnumerable<IUpdate> うpdates
         )
         {
-            _updates = Updates;
+            _updates = うpdates;
         }
     }
 }

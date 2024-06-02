@@ -1,9 +1,10 @@
+using Daipan.Stream.Scripts;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using VContainer;
 
-namespace Daipan.Stream.Scripts
+namespace Daipan.Stream.MonoScripts
 {
     public sealed class StreamViewMono : MonoBehaviour
     {
