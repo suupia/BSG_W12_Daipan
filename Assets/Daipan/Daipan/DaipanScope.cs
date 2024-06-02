@@ -98,11 +98,12 @@ namespace Daipan.Daipan
          builder.RegisterInstance(commentParamsManager);
  
          /*enemy*/
+         builder.RegisterInstance(enemyParamsManager);
+         builder.RegisterInstance(enemyParamsManager.enemyLevelDesignParam);
          builder.Register<EnemyParamsConfig>(Lifetime.Scoped);
          builder.RegisterInstance(new EnemyParamDataBuilder(builder, enemyParamsManager));
          builder.RegisterComponentInHierarchy<EnemyPositionMono>();
-         builder.RegisterInstance(enemyParamsManager);
- 
+
          builder.Register<EnemyDefeatConfig>(Lifetime.Scoped);
          builder.RegisterComponentInHierarchy<EnemyDefeatPositionMono>();
          builder.RegisterInstance(enemyDefeatParamManager);

@@ -13,19 +13,8 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         [Header("エネミー全体のレベルデザインはこちら")]
         [Space(30)]
 
-
-        [Header("ボスの生成周期 (n回通常敵を倒したら生成)")]
-        [Min(0)]
-        public int spawnBossAmount;
+        public EnemyLevelDesignParam enemyLevelDesignParam = null!;
         
-        [Header("ボス出現時に増加するイライラ度の量")]
-        [Min(0)]
-        public int increaseIrritatedValueByBoss;
-
-        [Header("現在通常敵討伐数（自動更新されます）")]
-        public int currentKillAmount;
-
-
         [Header("使用するエネミーを設定してください。")]
         public List<EnemyParam> enemyParams = null!;
 

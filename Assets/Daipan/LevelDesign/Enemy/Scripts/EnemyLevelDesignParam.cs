@@ -1,8 +1,10 @@
 #nullable enable
+using System;
 using UnityEngine;
 
 namespace Daipan.LevelDesign.Enemy.Scripts
 {
+    [Serializable]
     public class EnemyLevelDesignParam
     {
         [Header("敵全体のレベルデザインはこちら")]

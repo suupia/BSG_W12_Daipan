@@ -1,3 +1,4 @@
+#nullable enable
 using System.Collections.Generic;
 using System.Linq;
 using Daipan.Comment.Scripts;
@@ -16,6 +17,7 @@ namespace Daipan.Enemy.Scripts
         readonly EnemyParamDataContainer _enemyParamDataContainer;
         readonly CommentSpawner _commentSpawner;
         readonly EnemyParamsManager _enemyParamsManager;
+        readonly EnemyLevelDesignParam _enemyLevelDesignParam;
         readonly EnemyParamsConfig _enemyParamsConfig;
         readonly ViewerNumber _viewerNumber;
         readonly EnemyCluster _enemyCluster;
@@ -25,6 +27,7 @@ namespace Daipan.Enemy.Scripts
             CommentSpawner commentSpawner,
             ViewerNumber viewerNumber,
             EnemyParamsManager enemyParamsManager,
+            EnemyLevelDesignParam enemyLevelDesignParam,
             EnemyParamsConfig enemyParamsConfig,
             EnemyCluster enemyCluster
         )
@@ -33,6 +36,7 @@ namespace Daipan.Enemy.Scripts
             _commentSpawner = commentSpawner;
             _viewerNumber = viewerNumber;
             _enemyParamsManager = enemyParamsManager;
+            _enemyLevelDesignParam = enemyLevelDesignParam;
             _enemyParamsConfig = enemyParamsConfig;
             _enemyCluster = enemyCluster;
         }
@@ -50,7 +54,7 @@ namespace Daipan.Enemy.Scripts
             enemyMono.OnDied += (sender, args) =>
             {
                 // ボスを倒したときも含む
-                _enemyParamsManager.currentKillAmount++;
+                _enemyLevelDesignParam.currentKillAmount++;
 
                 if (!args.IsBoss) _viewerNumber.IncreaseViewer(7);
                 // if(args.IsBoss) _commentSpawner.SpawnCommentByType(CommentEnum.Super);
@@ -82,9 +86,9 @@ namespace Daipan.Enemy.Scripts
         EnemyEnum DecideRandomEnemyType()
         {
             // ボス発生条件を満たしていればBOSSを生成
-            if (_enemyParamsManager.currentKillAmount >= _enemyParamsManager.spawnBossAmount)
+            if (_enemyLevelDesignParam.currentKillAmount >= _enemyLevelDesignParam.spawnBossAmount)
             {
-                _enemyParamsManager.currentKillAmount = 0;
+                _enemyLevelDesignParam.currentKillAmount = 0;
                 return EnemyEnum.Boss;
             }
 
