@@ -1,5 +1,6 @@
 #nullable enable
 using System.Collections.Generic;
+using Daipan.Stream.Scripts;
 using VContainer;
 
 namespace Daipan.LevelDesign.Enemy.Scripts

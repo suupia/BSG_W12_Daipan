@@ -2,22 +2,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using Daipan.Enemy.Scripts;
+using Daipan.Stream.Scripts;
 
 namespace Daipan.LevelDesign.Enemy.Scripts
 {
     public class EnemyTimeLineParamDataContainer
     {
-        readonly IEnumerable<EnemyTimeLineParamData> _enemyParamDataList;
-
-        public EnemyTimeLineParamDataContainer(IEnumerable<EnemyTimeLineParamData> enemyParamDataList)
+        readonly IList<EnemyTimeLineParamData> _enemyTimeLineParamDatas;
+        
+        public EnemyTimeLineParamDataContainer(
+            IList<EnemyTimeLineParamData> enemyTimeLineParamDatas
+            )
         {
-            _enemyParamDataList = enemyParamDataList;
+            _enemyTimeLineParamDatas = enemyTimeLineParamDatas;
+          
         }
 
-        public EnemyTimeLineParamData GetEnemyParamData(EnemyEnum enemyEnum)
+        public EnemyTimeLineParamData GetEnemyTimeLineParamData(StreamTimer streamTimer)
         {
-            // return _enemyParamDataList.First(x => x.EnemyEnum() == enemyEnum);
-            return null!;
+            return _enemyTimeLineParamDatas
+                .Where(e => e.GetStartTime() <= streamTimer.CurrentTime)
+                .OrderByDescending(e => e.GetStartTime()).First();
         }
     }
 }
