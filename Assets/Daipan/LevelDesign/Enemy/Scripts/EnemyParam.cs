@@ -10,7 +10,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
     [Serializable]
     public sealed class EnemyAttackParam
     {
-        [Header("エネミーの攻撃力")]
+        [Header("敵の攻撃力")]
         public int attackAmount;
 
         [Header("攻撃間隔")]
@@ -25,7 +25,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
     [Serializable]
     public sealed class EnemyHpParam
     {
-        [Header("エネミーのHP")]
+        [Header("敵のHP")]
         [Min(0)]
         public int hpAmount;
     }
@@ -41,7 +41,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
     [Serializable]
     public sealed class EnemySpawnParam
     {
-        [Header("エネミーの生成割合 (相対的に指定可)")]
+        [Header("敵の生成割合 (相対的に指定可)")]
         [Min(0)]
         public float spawnRatio;
 
@@ -58,10 +58,10 @@ namespace Daipan.LevelDesign.Enemy.Scripts
     [Serializable]
     public sealed class EnemyParam
     {
-        [Header("Enemyのレベルデザインはこちら")]
+        [Header("敵のレベルデザインはこちら")]
         [Space(30)]
 
-        [Header("Enemyの種類")]
+        [Header("敵の種類")]
         [SerializeField]
         EnemyType enemyType = EnemyType.None;
 
