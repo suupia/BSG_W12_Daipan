@@ -11,27 +11,27 @@ namespace Daipan.LevelDesign.Enemy.Scripts
 {
     public class EnemyParamsConfig
     {
-        readonly EnemyParamsManager _enemyParamsManager;
+        readonly EnemyParamManager _enemyParamManager;
         readonly EnemyLevelDesignParam _enemyLevelDesignParam;
         readonly EnemyPositionMono _enemyPositionMono;
         readonly StreamTimer _streamTimer;
 
         [Inject]
         EnemyParamsConfig(
-            EnemyParamsManager enemyParamsManager,
+            EnemyParamManager enemyParamManager,
             EnemyLevelDesignParam enemyLevelDesignParam,
             EnemyPositionMono enemyPositionMono,
             StreamTimer streamTimer)
         {
-            _enemyParamsManager = enemyParamsManager;
+            _enemyParamManager = enemyParamManager;
             _enemyLevelDesignParam = enemyLevelDesignParam;
             _enemyPositionMono = enemyPositionMono;
             _streamTimer = streamTimer;
 
-            CheckIsValid(_enemyParamsManager);
+            CheckIsValid(_enemyParamManager);
         }
 
-        void CheckIsValid(EnemyParamsManager parameters)
+        void CheckIsValid(EnemyParamManager parameters)
         {
             Debug.Log($"EnemeyCount : {parameters.enemyParams.Count}");
             foreach (var enemyParam in parameters.enemyParams)
@@ -42,10 +42,10 @@ namespace Daipan.LevelDesign.Enemy.Scripts
                     Debug.LogWarning($"{enemyParam.GetEnemyEnum}の攻撃範囲が0以下です。");
             }
 
-            if (_enemyParamsManager.enemyTimeLines.Count == 0)
+            if (_enemyParamManager.enemyTimeLines.Count == 0)
             {
                 Debug.LogWarning("EnemyTimeLineParamが設定されていません。");
-                _enemyParamsManager.enemyTimeLines.Add(new EnemyTimeLineParam());
+                _enemyParamManager.enemyTimeLines.Add(new EnemyTimeLineParam());
             }
         }
 
@@ -76,12 +76,12 @@ namespace Daipan.LevelDesign.Enemy.Scripts
 
         EnemyParam GetEnemyParams(EnemyEnum enemyEnum)
         {
-            return _enemyParamsManager.enemyParams.First(c => c.GetEnemyEnum == enemyEnum);
+            return _enemyParamManager.enemyParams.First(c => c.GetEnemyEnum == enemyEnum);
         }
 
         public EnemyTimeLineParam GetEnemyTimeLineParam()
         {
-            var timeLineParam = _enemyParamsManager.enemyTimeLines
+            var timeLineParam = _enemyParamManager.enemyTimeLines
                 .Where(e => e.startTime <= _streamTimer.CurrentTime)
                 .OrderByDescending(e => e.startTime).First();
             return timeLineParam;

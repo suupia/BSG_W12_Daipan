@@ -7,9 +7,6 @@ namespace Daipan.LevelDesign.Enemy.Scripts
     [Serializable]
     public class EnemyLevelDesignParam
     {
-        [Header("敵全体のレベルデザインはこちら")]
-        [Space(30)]
-        
         [Header("BOSSの生成周期 (n回雑魚敵を倒したら生成)")]
         [Min(0)]
         public int spawnBossAmount;

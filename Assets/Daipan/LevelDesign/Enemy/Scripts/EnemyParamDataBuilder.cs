@@ -9,11 +9,11 @@ namespace Daipan.LevelDesign.Enemy.Scripts
     {
         public EnemyParamDataBuilder(
             IContainerBuilder builder,
-            EnemyParamsManager enemyParamsManager
+            EnemyParamManager enemyParamManager
             )
         {
             var enemyParams = new List<EnemyParamData>();
-            foreach (var enemyParam in enemyParamsManager.enemyParams)
+            foreach (var enemyParam in enemyParamManager.enemyParams)
             {
                 enemyParams.Add(new EnemyParamData()
                 {
