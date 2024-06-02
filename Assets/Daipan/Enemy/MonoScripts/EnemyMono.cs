@@ -5,15 +5,19 @@ using Daipan.Enemy.Scripts;
 using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.Player.Scripts;
 using UnityEngine;
+using UnityEngine.Serialization;
 using VContainer;
 
 namespace Daipan.Enemy.MonoScripts
 {
 
-    [RequireComponent(typeof(SpriteRenderer))]
     public sealed class EnemyMono : MonoBehaviour, IHpSetter
     {
+        // todo: SerializeFieldがあるのは嫌なので、EnmeyViewMonoを作成して、Viewに依存せずに処理を行えるようにする。
         [SerializeField] HpGaugeMono hpGaugeMono = null!;
+        [SerializeField] SpriteRenderer spriteRenderer = null!;  // todo:すべてanimatorに置き換える。
+        [SerializeField] Animator animator = null!;
+        
         EnemyAttackDecider _enemyAttackDecider = null!;
         EnemyCluster _enemyCluster = null!;
         EnemyHp _enemyHp = null!;
@@ -88,13 +92,19 @@ namespace Daipan.Enemy.MonoScripts
             _enemyAttackDecider = enemyAttackDecider;
             
             SetSprite(enemyEnum);
+            SetAnimator(enemyEnum);
         }
 
 
         void SetSprite(EnemyEnum enemyEnum)
         {
-            var spriteRenderer = GetComponent<SpriteRenderer>();
+            var spriteRenderer = this.spriteRenderer; 
             spriteRenderer.sprite = _enemyParamsConfig.GetSprite(enemyEnum);
+        }
+
+        void SetAnimator(EnemyEnum enemyEnum)
+        {
+            // まだ何もしない
         }
 
         public void Died(bool isTriggerCallback)
