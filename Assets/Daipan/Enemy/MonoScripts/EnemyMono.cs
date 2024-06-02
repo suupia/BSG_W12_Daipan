@@ -34,8 +34,6 @@ namespace Daipan.Enemy.MonoScripts
             _enemyAttackDecider.AttackUpdate(_playerHolder.PlayerMono);
 
             // 攻撃範囲よりプレイヤーとの距離が大きいときだけ動く
-            Debug.Log($"_enemyParamsConfig : {_enemyParamsConfig}");
-            Debug.Log($"GetAttackParameter : { _enemyParamDataContainer.GetEnemyParamData(EnemyEnum).GetAttackRange()}"); 
             if (transform.position.x - _playerHolder.PlayerMono.transform.position.x >=
                 _enemyParamDataContainer.GetEnemyParamData(EnemyEnum).GetAttackRange())
             {

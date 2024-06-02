@@ -18,11 +18,11 @@ namespace Daipan.Stream.Scripts
         public float Value => Mathf.Max(IncreasedValue - DecreasedValue, 0);
         float DecreasedValue { get; set; }
         float  IncreasedValue { get; set; }
-        public IReadOnlyList<float> RatioTable=>_irritatedParams.RatioTable;
+        public IReadOnlyList<float> RatioTable => _irritatedParams.RatioTable;
 
         public void IncreaseValue(float amount)
         {
-            // [Prerequisite]
+            // [Precondition]
             if (amount < 0) Debug.LogWarning($"IrritatedValue.IncreaseValue() amount is negative : {amount}");
 
             IncreasedValue += amount;
@@ -32,7 +32,7 @@ namespace Daipan.Stream.Scripts
 
         public void DecreaseValue(float amount)
         {
-            // [Prerequisite]
+            // [Precondition]
             if (amount < 0) Debug.LogWarning($"IrritatedValue.DecreaseValue() amount is negative : {amount}");
 
             if (Value <= 0) return;
