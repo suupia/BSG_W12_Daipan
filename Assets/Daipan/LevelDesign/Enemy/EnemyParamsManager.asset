@@ -15,27 +15,23 @@ MonoBehaviour:
   enemyLevelDesignParam:
     spawnBossAmount: 10
     increaseIrritatedValueByBoss: 10
-    currentKillAmount: 0
+    currentKillAmount: 5
   enemyParams:
   - enemyType: 1
+    enemyAttackParam:
+      attackAmount: 1
+      attackDelaySec: 1
+      attackRange: 5
+    enemyHpParam:
+      hpAmount: 10
+    enemyMoveParam:
+      moveSpeedPerSec: 2
     enemySpawnParam:
       spawnRatio: 60
       daipanThreshold: 0
       daipanProbability: 0
-    enemyAttackParam:
-      attackAmount: 1
-      attackDelaySec: 1
-      attackRange: 5
-    enemyHpParam:
-      hpAmount: 10
-    enemyMoveParam:
-      moveSpeedPerSec: 2
     sprite: {fileID: 21300000, guid: de401ab12c255432dae79e3ba8c3ab65, type: 3}
   - enemyType: 2
-    enemySpawnParam:
-      spawnRatio: 20
-      daipanThreshold: 0
-      daipanProbability: 0
     enemyAttackParam:
       attackAmount: 1
       attackDelaySec: 1
@@ -44,12 +40,12 @@ MonoBehaviour:
       hpAmount: 10
     enemyMoveParam:
       moveSpeedPerSec: 2
+    enemySpawnParam:
+      spawnRatio: 20
+      daipanThreshold: 0
+      daipanProbability: 0
     sprite: {fileID: 21300000, guid: c329e779f94ad40a3b6c6d7848b3de3d, type: 3}
   - enemyType: 3
-    enemySpawnParam:
-      spawnRatio: 20
-      daipanThreshold: 0
-      daipanProbability: 0
     enemyAttackParam:
       attackAmount: 1
       attackDelaySec: 1
@@ -58,12 +54,12 @@ MonoBehaviour:
       hpAmount: 10
     enemyMoveParam:
       moveSpeedPerSec: 2
-    sprite: {fileID: 21300000, guid: 0c2b631544598420a99228de44fd33a0, type: 3}
-  - enemyType: 4
     enemySpawnParam:
       spawnRatio: 20
       daipanThreshold: 0
       daipanProbability: 0
+    sprite: {fileID: 21300000, guid: 0c2b631544598420a99228de44fd33a0, type: 3}
+  - enemyType: 4
     enemyAttackParam:
       attackAmount: 1
       attackDelaySec: 1
@@ -72,6 +68,10 @@ MonoBehaviour:
       hpAmount: 10
     enemyMoveParam:
       moveSpeedPerSec: 1.5
+    enemySpawnParam:
+      spawnRatio: 20
+      daipanThreshold: 0
+      daipanProbability: 0
     sprite: {fileID: 21300000, guid: 0ee4fb82c347340cebbd590720da6a2c, type: 3}
   enemyTimeLines:
   - startTime: 0
