@@ -28,7 +28,7 @@ namespace Daipan.Daipan
  {
      [FormerlySerializedAs("streamParameter")] [SerializeField] StreamParam streamParam = null!;
      [FormerlySerializedAs("playerParams")] [SerializeField] PlayerParam playerParam = null!;
-     [SerializeField] EnemyParamsManager enemyParamsManager = null!;
+     [FormerlySerializedAs("enemyParamsManager")] [SerializeField] EnemyParamManager enemyParamManager = null!;
      [SerializeField] CommentParamsManager commentParamsManager = null!;
      [SerializeField] IrritatedParams irritatedParams = null!;
      [SerializeField] EnemyDefeatParamManager enemyDefeatParamManager = null!;
@@ -98,11 +98,14 @@ namespace Daipan.Daipan
          builder.RegisterInstance(commentParamsManager);
  
          /*enemy*/
-         builder.Register<EnemyParamsConfig>(Lifetime.Scoped);
-         builder.RegisterInstance(new EnemyParamDataBuilder(builder, enemyParamsManager));
-         builder.RegisterComponentInHierarchy<EnemyPositionMono>();
-         builder.RegisterInstance(enemyParamsManager);
- 
+         builder.RegisterInstance(enemyParamManager);
+         builder.RegisterInstance(enemyParamManager.enemyLevelDesignParam);
+         builder.Register<EnemyParamModifyWithTimer>(Lifetime.Scoped);
+         builder.RegisterInstance(new EnemyParamDataBuilder(builder, enemyParamManager));
+         builder.RegisterInstance(new EnemyLevelDesignParamDataBuilder(builder, enemyParamManager.enemyLevelDesignParam));
+         builder.RegisterInstance(new EnemyTimeLineParamDataBuilder(builder, enemyParamManager));
+         builder.RegisterInstance(new EnemyPositionMonoBuilder(builder, Object.FindObjectOfType<EnemyPositionMono>()));
+            
          builder.Register<EnemyDefeatConfig>(Lifetime.Scoped);
          builder.RegisterComponentInHierarchy<EnemyDefeatPositionMono>();
          builder.RegisterInstance(enemyDefeatParamManager);

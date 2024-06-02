@@ -21,7 +21,8 @@ namespace Daipan.Enemy.MonoScripts
         EnemyAttackDecider _enemyAttackDecider = null!;
         EnemyCluster _enemyCluster = null!;
         EnemyHp _enemyHp = null!;
-        EnemyParamsConfig _enemyParamsConfig = null!;
+        EnemyParamModifyWithTimer _enemyParamModifyWithTimer = null!;
+        EnemySpawnPointData _enemySpawnPointData = null!;
         EnemyParamDataContainer _enemyParamDataContainer = null!;
         bool _isSlowDefeat;
         PlayerHolder _playerHolder = null!;
@@ -34,15 +35,13 @@ namespace Daipan.Enemy.MonoScripts
             _enemyAttackDecider.AttackUpdate(_playerHolder.PlayerMono);
 
             // 攻撃範囲よりプレイヤーとの距離が大きいときだけ動く
-            Debug.Log($"_enemyParamsConfig : {_enemyParamsConfig}");
-            Debug.Log($"GetAttackParameter : { _enemyParamDataContainer.GetEnemyParamData(EnemyEnum).GetAttackRange()}"); 
             if (transform.position.x - _playerHolder.PlayerMono.transform.position.x >=
                 _enemyParamDataContainer.GetEnemyParamData(EnemyEnum).GetAttackRange())
             {
-                transform.position += Vector3.left * _enemyParamsConfig.GetSpeed(EnemyEnum) * Time.deltaTime;
+                transform.position += Vector3.left * (float)_enemyParamModifyWithTimer.GetSpeedRate(EnemyEnum) * Time.deltaTime;
             }
 
-            if (transform.position.x < _enemyParamsConfig.GetDespawnedPosition().x)
+            if (transform.position.x < _enemySpawnPointData.GetEnemyDespawnedPoint().x)
                 _enemyCluster.Remove(this, false); // Destroy when out of screen
 
             hpGaugeMono.SetRatio(CurrentHp / (float)_enemyParamDataContainer.GetEnemyParamData(EnemyEnum).GetCurrentHp());
@@ -67,7 +66,8 @@ namespace Daipan.Enemy.MonoScripts
         public void Initialize(
             EnemyCluster enemyCluster,
             PlayerHolder playerHolder,
-            EnemyParamsConfig enemyParamsConfig,
+            EnemyParamModifyWithTimer enemyParamModifyWithTimer,
+            EnemySpawnPointData enemySpawnPointData,
             EnemyParamDataContainer enemyParamDataContainer,
             EnemyQuickDefeatChecker quickDefeatChecker,
             EnemySlowDefeatChecker slowDefeatChecker
@@ -75,7 +75,8 @@ namespace Daipan.Enemy.MonoScripts
         {
             _enemyCluster = enemyCluster;
             _playerHolder = playerHolder;
-            _enemyParamsConfig = enemyParamsConfig;
+            _enemyParamModifyWithTimer = enemyParamModifyWithTimer;
+            _enemySpawnPointData = enemySpawnPointData;
             _enemyParamDataContainer = enemyParamDataContainer;
             _quickDefeatChecker = quickDefeatChecker;
             _slowDefeatChecker = slowDefeatChecker;
@@ -98,8 +99,7 @@ namespace Daipan.Enemy.MonoScripts
 
         void SetSprite(EnemyEnum enemyEnum)
         {
-            var spriteRenderer = this.spriteRenderer; 
-            spriteRenderer.sprite = _enemyParamsConfig.GetSprite(enemyEnum);
+            spriteRenderer.sprite = _enemyParamDataContainer.GetEnemyParamData(enemyEnum).GetSprite();
         }
 
         void SetAnimator(EnemyEnum enemyEnum)

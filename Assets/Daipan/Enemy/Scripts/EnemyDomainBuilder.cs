@@ -1,3 +1,4 @@
+#nullable enable
 using System.Collections.Generic;
 using System.Linq;
 using Daipan.Comment.Scripts;
@@ -15,26 +16,29 @@ namespace Daipan.Enemy.Scripts
     {
         readonly EnemyParamDataContainer _enemyParamDataContainer;
         readonly CommentSpawner _commentSpawner;
-        readonly EnemyParamsManager _enemyParamsManager;
-        readonly EnemyParamsConfig _enemyParamsConfig;
+        readonly EnemyParamManager _enemyParamManager;
+        readonly EnemyParamModifyWithTimer _enemyParamModifyWithTimer;
         readonly ViewerNumber _viewerNumber;
         readonly EnemyCluster _enemyCluster;
+        readonly EnemyLevelDesignParamData _enemyLevelDesignParamData;
 
         public EnemyDomainBuilder(
             EnemyParamDataContainer enemyParamDataContainer,
             CommentSpawner commentSpawner,
             ViewerNumber viewerNumber,
-            EnemyParamsManager enemyParamsManager,
-            EnemyParamsConfig enemyParamsConfig,
-            EnemyCluster enemyCluster
+            EnemyParamManager enemyParamManager,
+            EnemyParamModifyWithTimer enemyParamModifyWithTimer,
+            EnemyCluster enemyCluster,
+            EnemyLevelDesignParamData enemyLevelDesignParamData
         )
         {
             _enemyParamDataContainer = enemyParamDataContainer;
             _commentSpawner = commentSpawner;
             _viewerNumber = viewerNumber;
-            _enemyParamsManager = enemyParamsManager;
-            _enemyParamsConfig = enemyParamsConfig;
+            _enemyParamManager = enemyParamManager;
+            _enemyParamModifyWithTimer = enemyParamModifyWithTimer;
             _enemyCluster = enemyCluster;
+            _enemyLevelDesignParamData = enemyLevelDesignParamData;
         }
 
         public EnemyMono SetDomain(EnemyMono enemyMono)
@@ -44,15 +48,15 @@ namespace Daipan.Enemy.Scripts
             var enemyParamData = _enemyParamDataContainer.GetEnemyParamData(enemyEnum);
             enemyMono.SetDomain(
                 enemyEnum,
-                new EnemyHp(enemyParamData.GetCurrentHp(),enemyMono, _enemyCluster),
+                new EnemyHp(enemyParamData.GetCurrentHp(), enemyMono, _enemyCluster),
                 new EnemyAttackDecider(enemyMono, enemyParamData, new EnemyAttack(enemyParamData))
-                );
+            );
             enemyMono.OnDied += (sender, args) =>
             {
                 // ボスを倒したときも含む
-                _enemyParamsManager.currentKillAmount++;
+                _enemyLevelDesignParamData.SetCurrentKillAmount(_enemyLevelDesignParamData.GetCurrentKillAmount() + 1);
 
-                if (!args.IsBoss) _viewerNumber.IncreaseViewer(7);
+                if (!args.IsBoss) _viewerNumber.IncreaseViewer(7); // todo :パラメータを設定できるようにする
                 // if(args.IsBoss) _commentSpawner.SpawnCommentByType(CommentEnum.Super);
                 // else _commentSpawner.SpawnCommentByType(CommentEnum.Normal);
 
@@ -76,22 +80,21 @@ namespace Daipan.Enemy.Scripts
             var rand = Random.Range(0, enemyEnums.Count());
             return enemyEnums[rand];
         }
-        
-        
-   
+
+
         EnemyEnum DecideRandomEnemyType()
         {
             // ボス発生条件を満たしていればBOSSを生成
-            if (_enemyParamsManager.currentKillAmount >= _enemyParamsManager.spawnBossAmount)
+            if (_enemyLevelDesignParamData.GetCurrentKillAmount() >= _enemyLevelDesignParamData.GetSpawnBossAmount())
             {
-                _enemyParamsManager.currentKillAmount = 0;
+                _enemyLevelDesignParamData.SetCurrentKillAmount(0);
                 return EnemyEnum.Boss;
             }
 
             // 通常敵のType決め
             List<float> ratio = new();
 
-            foreach (var enemyLife in _enemyParamsManager.enemyParams)
+            foreach (var enemyLife in _enemyParamManager.enemyParams)
             {
                 if (enemyLife.GetEnemyEnum == EnemyEnum.Boss) continue;
                 ratio.Add(enemyLife.enemySpawnParam.spawnRatio);
@@ -99,16 +102,15 @@ namespace Daipan.Enemy.Scripts
 
             // ここで100%に正規化
             ratio = EnemySpawnCalculator.NormalizeEnemySpawnRatioWithBoss(ratio,
-               _enemyParamsConfig.GetEnemyTimeLineParam().spawnBossRatio);
+                (float)_enemyParamModifyWithTimer.GetSpawnBossPercent());
 
-            Debug.Log($"enemyPrams.Length : {_enemyParamsManager.enemyParams.Count}");
+            Debug.Log($"enemyPrams.Length : {_enemyParamManager.enemyParams.Count}");
             Debug.Log($"Randoms.RandomByRatio(ratio) : {Randoms.RandomByRatio(ratio)}");
 
 
-            var enemyEnum = _enemyParamsManager.enemyParams[Randoms.RandomByRatio(ratio)].GetEnemyEnum;
-            if (enemyEnum == EnemyEnum.Boss) _enemyParamsConfig.SetCurrentKillAmount(0);
+            var enemyEnum = _enemyParamManager.enemyParams[Randoms.RandomByRatio(ratio)].GetEnemyEnum;
+            if (enemyEnum == EnemyEnum.Boss) _enemyLevelDesignParamData.SetCurrentKillAmount(0);
             return enemyEnum;
         }
-
     }
 }

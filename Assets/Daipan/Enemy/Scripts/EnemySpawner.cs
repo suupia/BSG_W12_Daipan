@@ -1,14 +1,15 @@
 #nullable enable
 using System;
+using System.Collections.Generic;
 using Daipan.Core.Interfaces;
 using Daipan.Enemy.Interfaces;
 using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.Stream.Scripts;
+using Daipan.Utility.Scripts;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
-using Object = UnityEngine.Object;
-using Random = UnityEngine.Random;
+
 
 namespace Daipan.Enemy.Scripts
 {
@@ -17,8 +18,9 @@ namespace Daipan.Enemy.Scripts
         readonly IEnemyMonoBuilder _enemyMonoBuilder;
         readonly EnemyCluster _enemyCluster;
         readonly IrritatedValue _irritatedValue;
-        readonly float _spawnInterval = 1.0f;
-        readonly EnemyParamsConfig _enemyParamsConfig;
+        readonly EnemyParamModifyWithTimer _enemyParamModifyWithTimer;
+        readonly EnemySpawnPointData _enemySpawnPointData;
+        readonly EnemyLevelDesignParamData _enemyLevelDesignParamData;
         float _timer;
 
         [Inject]
@@ -27,12 +29,17 @@ namespace Daipan.Enemy.Scripts
             EnemyCluster enemyCluster,
             IrritatedValue irritatedValue,
             IEnemyMonoBuilder enemyMonoBuilder,
-            EnemyParamsConfig enemyParamsConfig)
+            EnemyParamModifyWithTimer enemyParamModifyWithTimer,
+            EnemySpawnPointData enemySpawnPointData,
+            EnemyLevelDesignParamData enemyLevelDesignParamData
+            )
         {
             _enemyCluster = enemyCluster;
             _enemyMonoBuilder = enemyMonoBuilder;
             _irritatedValue = irritatedValue;
-            _enemyParamsConfig = enemyParamsConfig;
+            _enemyParamModifyWithTimer = enemyParamModifyWithTimer;
+            _enemySpawnPointData = enemySpawnPointData;
+            _enemyLevelDesignParamData = enemyLevelDesignParamData;
         }
 
         void IStart.Start()
@@ -43,7 +50,7 @@ namespace Daipan.Enemy.Scripts
         void IUpdate.Update()
         {
             _timer += Time.deltaTime;
-            if (_timer > _enemyParamsConfig.GetSpawnDelaySec())
+            if (_timer > _enemyParamModifyWithTimer.GetSpawnDelaySec())
             {
                 SpawnEnemy();
                 _timer = 0;
@@ -52,7 +59,7 @@ namespace Daipan.Enemy.Scripts
 
         void SpawnEnemy()
         {
-            var enemyObject = _enemyMonoBuilder.Build(_enemyParamsConfig.GetSpawnedPositionRandom(), Quaternion.identity);
+            var enemyObject = _enemyMonoBuilder.Build(GetSpawnedPositionRandom(), Quaternion.identity);
             IncreaseIrritatedValueByEnemy(enemyObject.EnemyEnum);
             _enemyCluster.Add(enemyObject);
         }
@@ -60,7 +67,23 @@ namespace Daipan.Enemy.Scripts
 
         void IncreaseIrritatedValueByEnemy(EnemyEnum enemy)
         {
-            if (enemy == EnemyEnum.Boss) _irritatedValue.IncreaseValue(8); // todo : parameter もらう
+            if (enemy == EnemyEnum.Boss) _irritatedValue.IncreaseValue(_enemyLevelDesignParamData.GetCurrentKillAmount()); 
         }
+        
+        Vector3 GetSpawnedPositionRandom()
+        {
+            List<Vector3> position = new();
+            List<float> ratio = new();
+
+            foreach (var point in _enemySpawnPointData.GetEnemySpawnedPoints())
+            {
+                position.Add(point.transform.position);
+                ratio.Add(point.ratio);
+            }
+
+            return position[Randoms.RandomByRatio(ratio)];
+        }
+
+
     }
 }
