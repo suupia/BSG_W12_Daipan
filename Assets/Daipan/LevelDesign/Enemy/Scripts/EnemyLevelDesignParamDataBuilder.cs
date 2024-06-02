@@ -14,6 +14,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
             {
                 GetSpawnBossAmount = () => levelDesignParam.spawnBossAmount,
                 GetIncreaseIrritatedValueByBoss = () => levelDesignParam.increaseIrritatedValueByBoss,
+                increaseViewerOnEnemyKill = () => levelDesignParam.increaseViewerOnEnemyKill,
                 GetCurrentKillAmount = () => levelDesignParam.currentKillAmount,
             };
             builder.RegisterInstance(data);

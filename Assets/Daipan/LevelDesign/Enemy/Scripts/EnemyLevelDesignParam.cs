@@ -15,6 +15,9 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         [Min(0)]
         public int increaseIrritatedValueByBoss;
 
+        [Header("敵を倒した時に増加する視聴者数")] [Min(0)] 
+        public int increaseViewerOnEnemyKill = 5;
+
         [Header("現在の雑魚敵の倒した数（自動更新されます）")]
         public int currentKillAmount;
     } 
