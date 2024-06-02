@@ -11,7 +11,6 @@ namespace Daipan.LevelDesign.Enemy.Scripts
 {
     public class EnemyParamsConfig
     {
-        readonly EnemyParamManager _enemyParamManager;
         readonly EnemyPositionMono _enemyPositionMono;
         readonly StreamTimer _streamTimer;
         readonly EnemyParamDataContainer _enemyParamDataContainer;
@@ -19,30 +18,16 @@ namespace Daipan.LevelDesign.Enemy.Scripts
 
         [Inject]
         EnemyParamsConfig(
-            EnemyParamManager enemyParamManager,
             EnemyPositionMono enemyPositionMono,
             StreamTimer streamTimer,
             EnemyParamDataContainer enemyParamDataContainer,
             EnemyTimeLineParamDataContainer enemyTimeLineParamDataContainer)
         {
-            _enemyParamManager = enemyParamManager;
             _enemyPositionMono = enemyPositionMono;
             _streamTimer = streamTimer;
             _enemyParamDataContainer = enemyParamDataContainer;
             _enemyTimeLineParamDataContainer = enemyTimeLineParamDataContainer;
 
-            CheckIsValid(_enemyParamManager);
-        }
-
-        void CheckIsValid(EnemyParamManager parameters)
-        {
-            Debug.Log($"EnemyCount : {parameters.enemyParams.Count}");
-
-            if (_enemyParamManager.enemyTimeLineParams.Count == 0)
-            {
-                Debug.LogWarning("EnemyTimeLineParamが設定されていません。");
-                _enemyParamManager.enemyTimeLineParams.Add(new EnemyTimeLineParam());
-            }
         }
 
 
