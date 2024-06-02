@@ -11,19 +11,19 @@ namespace Daipan.LevelDesign.Enemy.Scripts
 {
     public class EnemyParamsConfig
     {
-        readonly EnemyPositionMono _enemyPositionMono;
+        readonly EnemyPositionMonoData _enemyPositionMonoData;
         readonly StreamTimer _streamTimer;
         readonly EnemyParamDataContainer _enemyParamDataContainer;
         readonly EnemyTimeLineParamDataContainer _enemyTimeLineParamDataContainer;
 
         [Inject]
         EnemyParamsConfig(
-            EnemyPositionMono enemyPositionMono,
+            EnemyPositionMonoData enemyPositionMonoData,
             StreamTimer streamTimer,
             EnemyParamDataContainer enemyParamDataContainer,
             EnemyTimeLineParamDataContainer enemyTimeLineParamDataContainer)
         {
-            _enemyPositionMono = enemyPositionMono;
+            _enemyPositionMonoData = enemyPositionMonoData;
             _streamTimer = streamTimer;
             _enemyParamDataContainer = enemyParamDataContainer;
             _enemyTimeLineParamDataContainer = enemyTimeLineParamDataContainer;
@@ -62,7 +62,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
             List<Vector3> position = new();
             List<float> ratio = new();
 
-            foreach (var point in _enemyPositionMono.enemySpawnedPoints)
+            foreach (var point in _enemyPositionMonoData.GetEnemySpawnedPoints())
             {
                 position.Add(point.transform.position);
                 ratio.Add(point.ratio);
@@ -73,7 +73,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
 
         public Vector3 GetDespawnedPosition()
         {
-            return _enemyPositionMono.enemyDespawnedPoint.position;
+            return _enemyPositionMonoData.GetEnemyDespawnedPoint().position;
         }
 
         #endregion

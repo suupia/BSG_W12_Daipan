@@ -7,13 +7,13 @@ namespace Daipan.LevelDesign.Enemy.Scripts
     {
         public EnemyPositionMonoBuilder(
             IContainerBuilder builder,
-            EnemyPositionMonoData enemyPositionMonoData
+            EnemyPositionMono enemyPositionMono
         )
         {
             var data = new EnemyPositionMonoData()
             {
-                GetEnemySpawnedPoints = () => enemyPositionMonoData.GetEnemySpawnedPoints(),
-                GetEnemyDespawnedPoint = () => enemyPositionMonoData.GetEnemyDespawnedPoint()
+                GetEnemySpawnedPoints = () => enemyPositionMono.enemySpawnedPoints,
+                GetEnemyDespawnedPoint = () => enemyPositionMono.enemyDespawnedPoint,
             };
             builder.RegisterInstance(data);
         }
