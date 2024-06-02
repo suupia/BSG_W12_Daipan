@@ -13,13 +13,14 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         [Header("エネミー全体のレベルデザインはこちら")]
         [Space(30)]
 
-        [Header("エネミー生成のクールタイム")]
-        [Min(0)]
-        public float spawnDelaySec;
 
         [Header("ボスの生成周期 (n回通常敵を倒したら生成)")]
         [Min(0)]
         public int spawnBossAmount;
+        
+        [Header("ボス出現時に増加するイライラ度の量")]
+        [Min(0)]
+        public int increaseIrritatedValueByBoss;
 
         [Header("現在通常敵討伐数（自動更新されます）")]
         public int currentKillAmount;
@@ -123,7 +124,6 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         [Header("スプライト")]
         public Sprite sprite = null!;
 
-        [Header("このエネミーを倒したときの視聴者数の変化")] public float diffViewer;
 
         public EnemyEnum GetEnemyEnum
         {

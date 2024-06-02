@@ -84,6 +84,10 @@ namespace Daipan.LevelDesign.Enemy.Scripts
             return timeLineParam;
         }
 
+        public int GetIncreaseIrritatedValueByBoss()
+        {
+            return _enemyParamsManager.increaseIrritatedValueByBoss;
+        }
         #endregion
 
         #region Position
