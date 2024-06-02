@@ -71,11 +71,6 @@ namespace Daipan.LevelDesign.Enemy.Scripts
             return position[Randoms.RandomByRatio(ratio)];
         }
 
-        public Vector3 GetDespawnedPosition()
-        {
-            return _enemyPositionMonoData.GetEnemyDespawnedPoint();
-        }
-
         #endregion
     }
 }
