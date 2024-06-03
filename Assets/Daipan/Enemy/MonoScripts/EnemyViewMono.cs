@@ -1,4 +1,5 @@
 #nullable enable
+using System;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.Scripts;
 using Daipan.LevelDesign.Enemy.Scripts;
