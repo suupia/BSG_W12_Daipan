@@ -5,13 +5,12 @@ namespace Daipan.Comment.Scripts
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public bool IsBoss { get; set; }
 
         public static CommentEnum[] Values { get; }
 
-        CommentEnum(int id, string name, bool isBoss = false)
+        CommentEnum(int id, string name)
         {
-            (Id, Name, IsBoss) = (id, name, isBoss);
+            (Id, Name) = (id, name);
         }
 
         static CommentEnum()
@@ -26,9 +25,9 @@ namespace Daipan.Comment.Scripts
         }
 
         public static CommentEnum None = new(0, "None");
-        public static CommentEnum Normal = new(0, "Normal");
-        public static CommentEnum Super = new(0, "Super");
-        public static CommentEnum Spiky = new(0, "Spiky");
+        public static CommentEnum Normal = new(1, "Normal");
+        public static CommentEnum Super = new(2, "Super");
+        public static CommentEnum Spiky = new(3, "Spiky");
         
 
         #region Overrides
