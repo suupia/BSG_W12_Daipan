@@ -8,39 +8,18 @@ public class EnumEnumerationCheckerTest
     [Test]
     public void CheckEnumType1()
     {
-        Assert.IsTrue(EnumEnumerationChecker.CheckEnum<EnumType1, TestEnum1>());
-    }
-
-    enum EnumType1
-    {
-        A,
-        B
-    }
-
-    class TestEnum1 : Enumeration
-    {
-        public static TestEnum1[] Values { get; }
-
-        TestEnum1(int id, string name) : base(id, name)
-        {
-        }
-
-        static TestEnum1()
-        {
-            Values = new[]
-            {
-                A, B
-            };
-        }
-
-        public static TestEnum1 A = new(0, "A");
-        public static TestEnum1 B = new(1, "B");
+        Assert.IsTrue(EnumEnumerationChecker.CheckEnum<EnumType1, TestEnum>());
     }
 
     [Test]
     public void CheckEnumType2()
     {
-        Assert.IsFalse(EnumEnumerationChecker.CheckEnum<EnumType2, TestEnum2>());
+        Assert.IsFalse(EnumEnumerationChecker.CheckEnum<EnumType2, TestEnum>());
+    }
+    enum EnumType1
+    {
+        A,
+        B
     }
 
     enum EnumType2
@@ -49,16 +28,16 @@ public class EnumEnumerationCheckerTest
         B,
         C
     }
-
-    class TestEnum2 : Enumeration
+    
+    class TestEnum : Enumeration
     {
-        public static TestEnum2[] Values { get; }
+        public static TestEnum[] Values { get; }
 
-        TestEnum2(int id, string name) : base(id, name)
+        TestEnum(int id, string name) : base(id, name)
         {
         }
 
-        static TestEnum2()
+        static TestEnum()
         {
             Values = new[]
             {
@@ -66,7 +45,7 @@ public class EnumEnumerationCheckerTest
             };
         }
 
-        public static TestEnum2 A = new(0, "A");
-        public static TestEnum2 B = new(1, "B");
+        public static TestEnum A = new(0, "A");
+        public static TestEnum B = new(1, "B");
     }
 }
