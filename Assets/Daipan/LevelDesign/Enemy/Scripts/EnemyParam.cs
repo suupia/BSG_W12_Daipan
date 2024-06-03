@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 using Daipan.Enemy.Scripts;
+using Daipan.Utility.Scripts;
 using UnityEngine;
 
 namespace Daipan.LevelDesign.Enemy.Scripts
@@ -79,26 +80,8 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         {
             get
             {
-                EnemyEnumChecker.CheckEnum();
+                EnumEnumerationChecker.CheckEnum<EnemyType,EnemyEnum>();
                 return EnemyEnum.Values.First(x => x.Name == enemyType.ToString());
-            }
-        }
-
-        static class EnemyEnumChecker
-        {
-            static bool _isCheckedEnum;
-
-            public static void CheckEnum()
-            {
-                if (_isCheckedEnum) return;
-                foreach (var type in Enum.GetValues(typeof(EnemyType)).Cast<EnemyType>())
-                {
-                    var enemy = EnemyEnum.Values.FirstOrDefault(x => x.Name == type.ToString());
-                    if (enemy.Equals(default(EnemyEnum)))
-                        Debug.LogWarning($"EnemyEnum with name {type.ToString()} not found.");
-                }
-
-                _isCheckedEnum = true;
             }
         }
 
@@ -111,5 +94,5 @@ namespace Daipan.LevelDesign.Enemy.Scripts
             Boss
         }
     }
-   
+
 }
