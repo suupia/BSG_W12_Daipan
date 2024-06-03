@@ -1,6 +1,7 @@
 #nullable enable
 using System;
 using Daipan.Battle.interfaces;
+using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.Scripts;
 using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.Player.Scripts;
@@ -13,11 +14,7 @@ namespace Daipan.Enemy.MonoScripts
 
     public sealed class EnemyMono : MonoBehaviour, IHpSetter
     {
-        // todo: SerializeFieldがあるのは嫌なので、EnmeyViewMonoを作成して、Viewに依存せずに処理を行えるようにする。
-        [SerializeField] HpGaugeMono hpGaugeMono = null!;
-        [SerializeField] SpriteRenderer spriteRenderer = null!;  // todo:すべてanimatorに置き換える。
-        [SerializeField] Animator animator = null!;
-        
+        [SerializeField] AbstractEnemyViewMono? enemyViewMono;
         EnemyAttackDecider _enemyAttackDecider = null!;
         EnemyCluster _enemyCluster = null!;
         EnemyHp _enemyHp = null!;
@@ -44,7 +41,7 @@ namespace Daipan.Enemy.MonoScripts
             if (transform.position.x < _enemySpawnPointData.GetEnemyDespawnedPoint().x)
                 _enemyCluster.Remove(this, false); // Destroy when out of screen
 
-            hpGaugeMono.SetRatio(CurrentHp / (float)_enemyParamDataContainer.GetEnemyParamData(EnemyEnum).GetCurrentHp());
+            enemyViewMono?.SetHpGauge(CurrentHp, _enemyParamDataContainer.GetEnemyParamData(EnemyEnum).GetCurrentHp());
 
             if (_isSlowDefeat == false && transform.position.x <= _slowDefeatChecker.SlowDefeatCoordinate)
             {
@@ -92,19 +89,7 @@ namespace Daipan.Enemy.MonoScripts
             _enemyHp = enemyHp;
             _enemyAttackDecider = enemyAttackDecider;
             
-            SetSprite(enemyEnum);
-            SetAnimator(enemyEnum);
-        }
-
-
-        void SetSprite(EnemyEnum enemyEnum)
-        {
-            spriteRenderer.sprite = _enemyParamDataContainer.GetEnemyParamData(enemyEnum).GetSprite();
-        }
-
-        void SetAnimator(EnemyEnum enemyEnum)
-        {
-            // まだ何もしない
+            enemyViewMono?.SetView(enemyEnum);
         }
 
         public void Died(bool isTriggerCallback)
