@@ -63,17 +63,6 @@ namespace Daipan.Enemy.MonoScripts
                 .AddTo(this);
         }
 
-        void Update()
-        {
-            Debug.Log($"Died Update state name: {animator.GetCurrentAnimatorStateInfo(0).fullPathHash}");
-            Debug.Log($"animation normalized time: {animator.GetCurrentAnimatorStateInfo(0).normalizedTime}");
-            
-            if(Input.GetKeyDown(KeyCode.I)) 
-            {
-                Died(() => Debug.Log("Destroy"));
-            }
-        }
-
         public override void Daipaned()
         {
             animator.SetTrigger("OnDaipaned");
