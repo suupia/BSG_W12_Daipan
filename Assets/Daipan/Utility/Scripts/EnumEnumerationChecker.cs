@@ -8,28 +8,29 @@ using UnityEngine;
 
 namespace Daipan.Utility.Scripts
 {
-    static class EnumEnumerationChecker
+    public static class EnumEnumerationChecker
     {
-        static readonly HashSet<Type> CheckedEnums = new(); 
-        public static void CheckEnum<TEnum,TEnumeration>() 
+        public static bool CheckEnum<TEnum,TEnumeration>() 
             where TEnum : Enum
             where TEnumeration : Enumeration
         {
-            if (CheckedEnums.Contains(typeof(TEnum)))
-                return;
             foreach (var type in Enum.GetValues(typeof(TEnum)).Cast<TEnum>())
             {
                 var enumeration = Enumeration.GetAll<TEnumeration>().FirstOrDefault(x => x.Name == type.ToString());
                 if (enumeration == null)
                 {
                     Debug.LogWarning($"{typeof(TEnumeration)} with name {type.ToString()} not found.");
-                    break;
+                    return false;
                 }
+
                 if (enumeration.Equals(default(EnemyEnum)))
+                {
                     Debug.LogWarning($"EnemyEnum with name {type.ToString()} not found.");
+                    return false;
+                }
             }
 
-            CheckedEnums.Add(typeof(TEnum)); 
+            return true;
         }
     }
 }

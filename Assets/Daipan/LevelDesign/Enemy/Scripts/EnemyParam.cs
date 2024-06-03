@@ -75,15 +75,12 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         [Header("スプライト")]
         public Sprite sprite = null!;
 
-
-        public EnemyEnum GetEnemyEnum
+        public EnemyParam()
         {
-            get
-            {
-                EnumEnumerationChecker.CheckEnum<EnemyType,EnemyEnum>();
-                return EnemyEnum.Values.First(x => x.Name == enemyType.ToString());
-            }
+            EnumEnumerationChecker.CheckEnum<EnemyType,EnemyEnum>();
         }
+
+        public EnemyEnum GetEnemyEnum => EnemyEnum.Values.First(x => x.Name == enemyType.ToString()); 
 
         enum EnemyType
         {

@@ -32,16 +32,11 @@ namespace Daipan.LevelDesign.Comment.Scripts
 
         [Header("コメントが上部へ到達したときの視聴者数の変化量")]
         public int diffViewer;
-
-
-        public CommentEnum GetCommentEnum
+        public CommentParams()
         {
-            get
-            {
-                EnumEnumerationChecker.CheckEnum<CommentType,CommentEnum>();
-                return CommentEnum.Values.First(x => x.Name == commentType.ToString());
-            }
+           EnumEnumerationChecker.CheckEnum<CommentType,CommentEnum>(); 
         }
+        public CommentEnum GetCommentEnum => CommentEnum.Values.First(x => x.Name == commentType.ToString()); 
     }
 
     enum CommentType
