@@ -1,6 +1,7 @@
 #nullable enable
 using System;
 using Daipan.Battle.interfaces;
+using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.Scripts;
 using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.Player.Scripts;
@@ -13,11 +14,7 @@ namespace Daipan.Enemy.MonoScripts
 
     public sealed class EnemyMono : MonoBehaviour, IHpSetter
     {
-        // todo: SerializeFieldがあるのは嫌なので、EnmeyViewMonoを作成して、Viewに依存せずに処理を行えるようにする。
-        [SerializeField] HpGaugeMono hpGaugeMono = null!;
-        [SerializeField] SpriteRenderer spriteRenderer = null!;  // todo:すべてanimatorに置き換える。
-        [SerializeField] Animator animator = null!;
-        
+        [SerializeField] AbstractEnemyViewMono? enemyViewMono;
         EnemyAttackDecider _enemyAttackDecider = null!;
         EnemyCluster _enemyCluster = null!;
         EnemyHp _enemyHp = null!;
@@ -32,7 +29,7 @@ namespace Daipan.Enemy.MonoScripts
 
         void Update()
         {
-            _enemyAttackDecider.AttackUpdate(_playerHolder.PlayerMono);
+            _enemyAttackDecider.AttackUpdate(_playerHolder.PlayerMono, enemyViewMono);
 
             // 攻撃範囲よりプレイヤーとの距離が大きいときだけ動く
             if (transform.position.x - _playerHolder.PlayerMono.transform.position.x >=
@@ -44,7 +41,7 @@ namespace Daipan.Enemy.MonoScripts
             if (transform.position.x < _enemySpawnPointData.GetEnemyDespawnedPoint().x)
                 _enemyCluster.Remove(this, false); // Destroy when out of screen
 
-            hpGaugeMono.SetRatio(CurrentHp / (float)_enemyParamDataContainer.GetEnemyParamData(EnemyEnum).GetCurrentHp());
+            enemyViewMono?.SetHpGauge(CurrentHp, _enemyParamDataContainer.GetEnemyParamData(EnemyEnum).GetCurrentHp());
 
             if (_isSlowDefeat == false && transform.position.x <= _slowDefeatChecker.SlowDefeatCoordinate)
             {
@@ -92,22 +89,11 @@ namespace Daipan.Enemy.MonoScripts
             _enemyHp = enemyHp;
             _enemyAttackDecider = enemyAttackDecider;
             
-            SetSprite(enemyEnum);
-            SetAnimator(enemyEnum);
+            enemyViewMono?.SetDomain(_enemyParamDataContainer);
+            enemyViewMono?.SetView(enemyEnum);
         }
 
-
-        void SetSprite(EnemyEnum enemyEnum)
-        {
-            spriteRenderer.sprite = _enemyParamDataContainer.GetEnemyParamData(enemyEnum).GetSprite();
-        }
-
-        void SetAnimator(EnemyEnum enemyEnum)
-        {
-            // まだ何もしない
-        }
-
-        public void Died(bool isTriggerCallback)
+        public void Died(bool isDaipaned, bool isTriggerCallback)
         {
             if (isTriggerCallback)
             {
@@ -116,7 +102,12 @@ namespace Daipan.Enemy.MonoScripts
                 OnDied?.Invoke(this, args);
             }
 
-            Destroy(gameObject);
+            if (enemyViewMono == null) Destroy(gameObject);
+            else
+            {
+                if (isDaipaned) enemyViewMono.Daipaned(() => Destroy(gameObject)); 
+                else enemyViewMono.Died(() => Destroy(gameObject));
+            }
         }
 
 

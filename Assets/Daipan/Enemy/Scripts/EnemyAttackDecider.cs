@@ -1,5 +1,6 @@
 #nullable enable
 using Daipan.Battle.interfaces;
+using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.MonoScripts;
 using Daipan.LevelDesign.Enemy.Scripts;
 using UnityEngine;
@@ -23,19 +24,20 @@ namespace Daipan.Enemy.Scripts
             _enemyMono = enemyMono;
             _enemyAttack = enemyAttack;
         }
-        public void AttackUpdate(PlayerMono playerMono)
+        public void AttackUpdate(PlayerMono playerMono, AbstractEnemyViewMono? enemyViewMono)
         {
             Timer += Time.deltaTime;
             if (Timer >= _enemyParamData.GetAttackDelayDec())
             {
-                Attack(playerMono);
+                Attack(playerMono, enemyViewMono);
                 Timer = 0;
             }
         }
 
-        void Attack(PlayerMono playerMono)
+        void Attack(PlayerMono playerMono, AbstractEnemyViewMono? enemyViewMono)
         {
             if (!CanAttack(_enemyMono, playerMono)) return;
+            enemyViewMono?.Attack();
             _enemyAttack.Attack(playerMono);
         }
         
