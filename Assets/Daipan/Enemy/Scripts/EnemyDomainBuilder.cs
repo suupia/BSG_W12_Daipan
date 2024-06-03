@@ -56,7 +56,7 @@ namespace Daipan.Enemy.Scripts
                 // ボスを倒したときも含む
                 _enemyLevelDesignParamData.SetCurrentKillAmount(_enemyLevelDesignParamData.GetCurrentKillAmount() + 1);
 
-                if (!args.IsBoss) _viewerNumber.IncreaseViewer(_enemyLevelDesignParamData.increaseViewerOnEnemyKill()); // todo :パラメータを設定できるようにする
+                if (!args.IsBoss) _viewerNumber.IncreaseViewer(_enemyLevelDesignParamData.GetIncreaseViewerOnEnemyKill()); // todo :パラメータを設定できるようにする
 
                 if (args.IsBoss || args.IsQuickDefeat) _commentSpawner.SpawnCommentByType(CommentEnum.Normal);
             };
