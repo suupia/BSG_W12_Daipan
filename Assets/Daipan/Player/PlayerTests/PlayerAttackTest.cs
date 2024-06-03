@@ -22,7 +22,7 @@ public class PlayerAttackTest
         var playerAttack = new PlayerAttack(playerParamDto);
 
         // Act
-        playerAttack.WAttack(enemy);
+        playerAttack.Attack(enemy);
 
         // Assert
         Assert.AreEqual(90, enemy.CurrentHp);

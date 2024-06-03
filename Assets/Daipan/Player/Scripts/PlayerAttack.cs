@@ -15,17 +15,7 @@ namespace Daipan.Player.Scripts
             _playerParamData = playerParamData;
         }
 
-        public void WAttack(IHpSetter hpSetter)
-        {
-            hpSetter.CurrentHp -= _playerParamData.GetWAttack();
-        }
-
-        public void AAttack(IHpSetter hpSetter)
-        {
-            hpSetter.CurrentHp -= _playerParamData.GetAAttack();
-        }
-
-        public void SAttack(IHpSetter hpSetter)
+        public void Attack(IHpSetter hpSetter)
         {
             hpSetter.CurrentHp -= _playerParamData.GetSAttack();
         }
