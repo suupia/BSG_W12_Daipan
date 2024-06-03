@@ -54,17 +54,11 @@ namespace Daipan.Enemy.MonoScripts
 
         public override void Died(Action onDied)
         {
-            Debug.Log($"Died GetAnimatorTransitionInfo.IsName(hoge): {animator.GetAnimatorTransitionInfo(0).IsName("hoge")}");
-            Debug.Log("Died Current State before trigger: " + animator.GetCurrentAnimatorStateInfo(0).fullPathHash);
-            Debug.Log($"Died Next State before trigger: {animator.GetNextAnimatorStateInfo(0).fullPathHash}");
             animator.SetTrigger("OnDied");
-            Debug.Log("Died animation");
-            Debug.Log($"IsDied: {animator.IsEnd()}");
-            Debug.Log($"Died normalized time: {animator.GetCurrentAnimatorStateInfo(0).normalizedTime}");
-            Debug.Log($"Died Current State: {animator.GetCurrentAnimatorStateInfo(0).fullPathHash}");
-            Debug.Log($"Died Next State: {animator.GetNextAnimatorStateInfo(0).fullPathHash}");
+            var preState = animator.GetCurrentAnimatorStateInfo(0).fullPathHash;
             Observable.EveryValueChanged(animator, a => a.IsEnd())
-                .Where(isEnd => isEnd && !animator.IsInTransition(0))
+                .Where(_ => preState != animator.GetCurrentAnimatorStateInfo(0).fullPathHash) 
+                .Where(isEnd => isEnd)
                 .Subscribe(_ => onDied())
                 .AddTo(this);
         }
@@ -76,7 +70,7 @@ namespace Daipan.Enemy.MonoScripts
             
             if(Input.GetKeyDown(KeyCode.I)) 
             {
-                Died(() => Debug.Log("Died"));
+                Died(() => Debug.Log("Destroy"));
             }
         }
 
