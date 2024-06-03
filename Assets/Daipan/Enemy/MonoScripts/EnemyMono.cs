@@ -102,7 +102,8 @@ namespace Daipan.Enemy.MonoScripts
                 OnDied?.Invoke(this, args);
             }
 
-            Destroy(gameObject);
+            if (enemyViewMono == null) Destroy(gameObject);
+            else enemyViewMono.Died(() => Destroy(gameObject));
         }
 
 

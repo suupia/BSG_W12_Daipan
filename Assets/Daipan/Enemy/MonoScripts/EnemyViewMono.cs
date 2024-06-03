@@ -3,6 +3,8 @@ using System;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.Scripts;
 using Daipan.LevelDesign.Enemy.Scripts;
+using Daipan.Utility.Scripts;
+using R3;
 using UnityEngine;
 
 namespace Daipan.Enemy.MonoScripts
@@ -48,17 +50,17 @@ namespace Daipan.Enemy.MonoScripts
         {
             animator.SetBool("IsMoving", false);
             animator.SetBool("IsAttacking", true);
-            Debug.Log("Attack animation");
-            
         }
-        void Update(){
-            if(Input.GetKeyDown(KeyCode.Space)){
-                Attack();
-            }
-        }   
-        public override void Died()
+
+        public override void Died(Action onDied)
         {
             animator.SetTrigger("OnDied");
+            Debug.Log("Died animation");
+            Debug.Log($"IsDied: {animator.IsEnd()}");
+            Observable.EveryValueChanged(animator, a => a.IsEnd())
+                .Where(isEnd => isEnd)
+                .Subscribe(_ => onDied())
+                .AddTo(this);
         }
         
         public override void Daipaned()
