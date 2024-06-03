@@ -10,8 +10,8 @@ namespace Daipan.Utility.Scripts
             // When the animator is not active, it is considered to be in the end state.
             if (!animator.gameObject.activeInHierarchy)
                 return true;
-
-            return animator.GetCurrentAnimatorStateInfo(layerIndex).normalizedTime >= 1;
+            var stateInfo = animator.GetCurrentAnimatorStateInfo(layerIndex);
+            return stateInfo.normalizedTime >= 1;
         }
     }
 
