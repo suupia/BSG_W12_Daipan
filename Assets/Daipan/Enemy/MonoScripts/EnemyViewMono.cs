@@ -6,23 +6,20 @@ using UnityEngine;
 
 namespace Daipan.Enemy.MonoScripts
 {
-    [RequireComponent(typeof(SpriteRenderer))]
-    [RequireComponent(typeof(Animator))]
     public class EnemyViewMono : AbstractEnemyViewMono
     {
         [SerializeField] HpGaugeMono hpGaugeMono = null!;
         [SerializeField] SpriteRenderer spriteRenderer = null!;  // todo:まだanimatorが作りきっていないので仮置き
         [SerializeField] Animator animator = null!;
 
-        SpriteRenderer _spriteRenderer = null!;
-        Animator _animator = null!;
         
         EnemyParamDataContainer _enemyParamDataContainer = null!;
         
         void Awake()
         {
-            _spriteRenderer = GetComponent<SpriteRenderer>();
-            _animator = GetComponent<Animator>();
+            if (hpGaugeMono == null) Debug.LogWarning("hpGaugeMono is null");
+            if (spriteRenderer == null) Debug.LogWarning("spriteRenderer is null");
+            if (animator == null) Debug.LogWarning("animator is null");
         }
         
         public override void SetDomain(EnemyParamDataContainer enemyParamDataContainer)
@@ -42,22 +39,30 @@ namespace Daipan.Enemy.MonoScripts
 
         public override void Move()
         {
-            _animator.SetTrigger("OnMove");
+            animator.SetBool("IsMoving",true);
+            animator.SetBool("IsAttacking", false);
         }
 
         public override void Attack()
         {
-            _animator.SetTrigger("OnAttack");   
+            animator.SetBool("IsMoving", false);
+            animator.SetBool("IsAttacking", true);
+            Debug.Log("Attack animation");
+            
         }
-
+        void Update(){
+            if(Input.GetKeyDown(KeyCode.Space)){
+                Attack();
+            }
+        }   
         public override void Died()
         {
-            _animator.SetTrigger("OnDied");
+            animator.SetTrigger("OnDied");
         }
         
         public override void Daipaned()
         {
-            _animator.SetTrigger("OnDaipaned");
+            animator.SetTrigger("OnDaipaned");
         }
         
         
