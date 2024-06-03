@@ -25,13 +25,13 @@ namespace Daipan.Enemy.Scripts
             enemy.Died(isDaipaned, isTriggerCallback);
         }
 
-        public EnemyMono NearestEnemy(Vector3 position)
+        public EnemyMono? NearestEnemy(Vector3 position)
         {
             // [Precondition] The enemy list is not empty
             if (!_enemies.Any())
             {
                 // Debug.LogWarning("No enemies found");
-                return null!;
+                return null;
             }
 
             var minDistance = float.MaxValue;

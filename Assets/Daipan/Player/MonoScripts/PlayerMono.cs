@@ -2,6 +2,7 @@
 using Daipan.Battle.interfaces;
 using Daipan.Comment.MonoScripts;
 using Daipan.Comment.Scripts;
+using Daipan.Enemy.MonoScripts;
 using Daipan.Enemy.Scripts;
 using Daipan.LevelDesign.Player.Scripts;
 using Daipan.Player.Scripts;
@@ -25,44 +26,39 @@ public class PlayerMono : MonoBehaviour, IHpSetter
         if (Input.GetKeyDown(KeyCode.W))
         {
             Debug.Log("Wが押されたよ");
-            if (enemyMono.EnemyEnum == EnemyEnum.W || enemyMono.EnemyEnum == EnemyEnum.Boss)
-            {
-                Debug.Log($"EnemyType: {enemyMono.EnemyEnum}を攻撃");
-                _playerAttack.WAttack(enemyMono);
-            }
-            else
-            {
-                Debug.Log("Wが押されたけど攻撃対象がいないよ");
-            }
+            AttackEnemyMono(enemyMono, EnemyEnum.W);
         }
 
         if (Input.GetKeyDown(KeyCode.S))
         {
             Debug.Log("Sが押されたよ");
-            if (enemyMono.EnemyEnum == EnemyEnum.S || enemyMono.EnemyEnum == EnemyEnum.Boss)
-            {
-                Debug.Log($"EnemyType: {enemyMono.EnemyEnum}を攻撃");
-                _playerAttack.SAttack(enemyMono);
-            }
-            else
-            {
-                Debug.Log("Sが押されたけど攻撃対象がいないよ");
-            }
+            AttackEnemyMono(enemyMono, EnemyEnum.S); 
         }
 
         if (Input.GetKeyDown(KeyCode.A))
         {
             Debug.Log("Aが押されたよ");
-            if (enemyMono.EnemyEnum == EnemyEnum.A || enemyMono.EnemyEnum == EnemyEnum.Boss)
-            {
-                Debug.Log($"EnemyType: {enemyMono.EnemyEnum}を攻撃");
-                _playerAttack.AAttack(enemyMono);
-            }
-            else
-            {
-                Debug.Log("Aが押されたけど攻撃対象がいないよ");
-            }
+            AttackEnemyMono(enemyMono, EnemyEnum.A);
         }
+    }
+
+    void AttackEnemyMono(EnemyMono? enemyMono, EnemyEnum enemyEnum)
+    {
+        if (enemyMono == null)
+        {
+            Debug.Log($"攻撃対象がいないよ");
+            return;
+        } 
+        if(enemyMono.EnemyEnum == enemyEnum || enemyMono.EnemyEnum == EnemyEnum.Boss)
+        {
+            Debug.Log($"EnemyType: {enemyMono.EnemyEnum}を攻撃");
+            _playerAttack.Attack(enemyMono);
+        }
+        else
+        {
+            Debug.Log($"攻撃対象が{enemyEnum}ではないよ");
+        }
+        
     }
 
     public int CurrentHp
