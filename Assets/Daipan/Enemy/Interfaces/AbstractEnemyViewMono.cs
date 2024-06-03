@@ -14,7 +14,7 @@ namespace Daipan.Enemy.Interfaces
         public abstract void Move();
         public abstract void Attack();
         public abstract void Died(Action onDied);
-        public abstract void Daipaned();
+        public abstract void Daipaned(Action onDaipaned);
 
     }
 }

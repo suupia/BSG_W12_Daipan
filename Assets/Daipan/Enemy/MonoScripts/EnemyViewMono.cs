@@ -55,6 +55,7 @@ namespace Daipan.Enemy.MonoScripts
         public override void Died(Action onDied)
         {
             animator.SetTrigger("OnDied");
+            spriteRenderer.color = new Color(1, 1, 1, 0);  // todo: 一時的な処理として透明にする
             var preState = animator.GetCurrentAnimatorStateInfo(0).fullPathHash;
             Observable.EveryValueChanged(animator, a => a.IsEnd())
                 .Where(_ => preState != animator.GetCurrentAnimatorStateInfo(0).fullPathHash) 
@@ -63,9 +64,16 @@ namespace Daipan.Enemy.MonoScripts
                 .AddTo(this);
         }
 
-        public override void Daipaned()
+        public override void Daipaned(Action onDied)
         {
             animator.SetTrigger("OnDaipaned");
+            spriteRenderer.color = new Color(1, 1, 1, 0);  // todo: 一時的な処理として透明にする
+            var preState = animator.GetCurrentAnimatorStateInfo(0).fullPathHash;
+            Observable.EveryValueChanged(animator, a => a.IsEnd())
+                .Where(_ => preState != animator.GetCurrentAnimatorStateInfo(0).fullPathHash) 
+                .Where(isEnd => isEnd)
+                .Subscribe(_ => onDied()) 
+                .AddTo(this);
         }
         
         

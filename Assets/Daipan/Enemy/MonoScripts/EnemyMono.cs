@@ -93,7 +93,7 @@ namespace Daipan.Enemy.MonoScripts
             enemyViewMono?.SetView(enemyEnum);
         }
 
-        public void Died(bool isTriggerCallback)
+        public void Died(bool isDaipaned, bool isTriggerCallback)
         {
             if (isTriggerCallback)
             {
@@ -103,7 +103,11 @@ namespace Daipan.Enemy.MonoScripts
             }
 
             if (enemyViewMono == null) Destroy(gameObject);
-            else enemyViewMono.Died(() => Destroy(gameObject));
+            else
+            {
+                if (isDaipaned) enemyViewMono.Daipaned(() => Destroy(gameObject)); 
+                else enemyViewMono.Died(() => Destroy(gameObject));
+            }
         }
 
 
