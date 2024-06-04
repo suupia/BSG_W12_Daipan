@@ -16,6 +16,12 @@ public class EnumEnumerationCheckerTest
     {
         Assert.IsFalse(EnumEnumerationChecker.CheckEnum<EnumType2, TestEnum>());
     }
+    
+    [Test]
+    public void CheckEnumType3()
+    {
+        Assert.IsFalse(EnumEnumerationChecker.CheckEnum<EnumType3, TestEnum>());
+    }
     enum EnumType1
     {
         A,
@@ -27,6 +33,11 @@ public class EnumEnumerationCheckerTest
         A,
         B,
         C
+    }
+
+    enum EnumType3
+    {
+        A
     }
     
     class TestEnum : Enumeration
