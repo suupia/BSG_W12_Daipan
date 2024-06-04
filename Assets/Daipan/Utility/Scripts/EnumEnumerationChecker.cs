@@ -14,18 +14,18 @@ namespace Daipan.Utility.Scripts
             where TEnum : Enum
             where TEnumeration : Enumeration
         {
+            if(Enum.GetValues(typeof(TEnum)).Length != Enumeration.GetAll<TEnumeration>().Count())
+            {
+                Debug.LogWarning($"The number of {typeof(TEnum)} and {typeof(TEnumeration)} is different.");
+                return false;
+            }
+            
             foreach (var type in Enum.GetValues(typeof(TEnum)).Cast<TEnum>())
             {
                 var enumeration = Enumeration.GetAll<TEnumeration>().FirstOrDefault(x => x.Name == type.ToString());
                 if (enumeration == null)
                 {
                     Debug.LogWarning($"{typeof(TEnumeration)} with name {type.ToString()} not found.");
-                    return false;
-                }
-
-                if (enumeration.Equals(default(EnemyEnum)))
-                {
-                    Debug.LogWarning($"EnemyEnum with name {type.ToString()} not found.");
                     return false;
                 }
             }
