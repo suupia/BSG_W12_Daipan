@@ -9,14 +9,14 @@ namespace Daipan.Stream.Scripts
     {
         readonly CommentCluster _commentCluster;
         readonly AntiCommentCluster _antiCommentCluster;
-        readonly DaipanParameter _daipanParameter;
+        readonly DaipanParam _daipanParam;
         readonly EnemyCluster _enemyCluster;
         readonly IrritatedValue _irritatedValue;
         readonly StreamStatus _streamStatus;
         readonly ViewerNumber _viewerNumber;
 
         public DaipanExecutor(
-            DaipanParameter daipanParameter,
+            DaipanParam daipanParam,
             ViewerNumber viewerNumber,
             StreamStatus streamStatus,
             IrritatedValue irritatedValue,
@@ -25,7 +25,7 @@ namespace Daipan.Stream.Scripts
             AntiCommentCluster antiCommentCluster
         )
         {
-            _daipanParameter = daipanParameter;
+            _daipanParam = daipanParam;
             _viewerNumber = viewerNumber;
             _streamStatus = streamStatus;
             _irritatedValue = irritatedValue;
@@ -50,7 +50,7 @@ namespace Daipan.Stream.Scripts
                 Debug.Log("Blow comment by probability");
                 var blowAwayProbability = 0.5f;
                 // _enemyCluster.BlownAway(blowAwayProbability);
-                _enemyCluster.BlownAway(enemyEnum => !enemyEnum.IsBoss);
+                _enemyCluster.Daipaned(enemyEnum => !enemyEnum.IsBoss);
                 _commentCluster.BlownAway(blowAwayProbability);
                 _antiCommentCluster.BlownAway(blowAwayProbability);
             }
@@ -60,7 +60,7 @@ namespace Daipan.Stream.Scripts
                 Debug.Log("Blow comment by probability");
                 var blowAwayProbability = 0.5f;
                 // _enemyCluster.BlownAway(blowAwayProbability);
-                _enemyCluster.BlownAway(enemyEnum => !enemyEnum.IsBoss);
+                _enemyCluster.Daipaned(enemyEnum => !enemyEnum.IsBoss);
                 _commentCluster.BlownAway(blowAwayProbability);
                 _antiCommentCluster.BlownAway(blowAwayProbability);
             }
@@ -70,7 +70,7 @@ namespace Daipan.Stream.Scripts
                 Debug.Log("Blow comment by probability");
                 var blowAwayProbability = 0.5f;
                 // _enemyCluster.BlownAway(blowAwayProbability);
-                _enemyCluster.BlownAway(enemyEnum => !enemyEnum.IsBoss);
+                _enemyCluster.Daipaned(enemyEnum => !enemyEnum.IsBoss);
                 _commentCluster.BlownAway(blowAwayProbability);
                 _antiCommentCluster.BlownAway(blowAwayProbability);
             }
@@ -78,9 +78,9 @@ namespace Daipan.Stream.Scripts
             {
                 Debug.Log("Blow all enemy");
                 Debug.Log("Blow all comment");
-                _enemyCluster.BlownAway();
+                _enemyCluster.Daipaned();
                 _commentCluster.BlownAway(commentMono =>
-                    commentMono._commentEnum != CommentEnum.Super); // SuperComment以外を吹き飛ばす
+                    commentMono.CommentEnum != CommentEnum.Super); // SuperComment以外を吹き飛ばす
                 _antiCommentCluster.BlownAway();
             }
 

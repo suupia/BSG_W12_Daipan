@@ -2,6 +2,7 @@
 using Daipan.Battle.interfaces;
 using Daipan.Comment.MonoScripts;
 using Daipan.Comment.Scripts;
+using Daipan.Enemy.MonoScripts;
 using Daipan.Enemy.Scripts;
 using Daipan.LevelDesign.Player.Scripts;
 using Daipan.Player.Scripts;
@@ -14,55 +15,50 @@ public class PlayerMono : MonoBehaviour, IHpSetter
     EnemyCluster _enemyCluster = null!;
     PlayerAttack _playerAttack = null!;
     PlayerHp _playerHp = null!;
-    PlayerParamConfig _playerParamConfig = null!;
+    PlayerParamData _playerParamData = null!;
 
     public void Update()
     {
         var enemyMono = _enemyCluster.NearestEnemy(transform.position);
         
-        hpGaugeMono.SetRatio(CurrentHp / (float)_playerParamConfig.GetHpAmount());
+        hpGaugeMono.SetRatio(CurrentHp / (float)_playerParamData.GetCurrentHp());
 
         if (Input.GetKeyDown(KeyCode.W))
         {
             Debug.Log("Wが押されたよ");
-            if (enemyMono._enemyEnum == EnemyEnum.W || enemyMono._enemyEnum == EnemyEnum.Boss)
-            {
-                Debug.Log($"EnemyType: {enemyMono._enemyEnum}を攻撃");
-                _playerAttack.WAttack(enemyMono);
-            }
-            else
-            {
-                Debug.Log("Wが押されたけど攻撃対象がいないよ");
-            }
+            AttackEnemyMono(enemyMono, EnemyEnum.W);
         }
 
         if (Input.GetKeyDown(KeyCode.S))
         {
             Debug.Log("Sが押されたよ");
-            if (enemyMono._enemyEnum == EnemyEnum.S || enemyMono._enemyEnum == EnemyEnum.Boss)
-            {
-                Debug.Log($"EnemyType: {enemyMono._enemyEnum}を攻撃");
-                _playerAttack.SAttack(enemyMono);
-            }
-            else
-            {
-                Debug.Log("Sが押されたけど攻撃対象がいないよ");
-            }
+            AttackEnemyMono(enemyMono, EnemyEnum.S); 
         }
 
         if (Input.GetKeyDown(KeyCode.A))
         {
             Debug.Log("Aが押されたよ");
-            if (enemyMono._enemyEnum == EnemyEnum.A || enemyMono._enemyEnum == EnemyEnum.Boss)
-            {
-                Debug.Log($"EnemyType: {enemyMono._enemyEnum}を攻撃");
-                _playerAttack.AAttack(enemyMono);
-            }
-            else
-            {
-                Debug.Log("Aが押されたけど攻撃対象がいないよ");
-            }
+            AttackEnemyMono(enemyMono, EnemyEnum.A);
         }
+    }
+
+    void AttackEnemyMono(EnemyMono? enemyMono, EnemyEnum enemyEnum)
+    {
+        if (enemyMono == null)
+        {
+            Debug.Log($"攻撃対象がいないよ");
+            return;
+        } 
+        if(enemyMono.EnemyEnum == enemyEnum || enemyMono.EnemyEnum == EnemyEnum.Boss)
+        {
+            Debug.Log($"EnemyType: {enemyMono.EnemyEnum}を攻撃");
+            _playerAttack.Attack(enemyMono);
+        }
+        else
+        {
+            Debug.Log($"攻撃対象が{enemyEnum}ではないよ");
+        }
+        
     }
 
     public int CurrentHp
@@ -75,14 +71,16 @@ public class PlayerMono : MonoBehaviour, IHpSetter
     public void Initialize(
         PlayerAttack playerAttack,
         EnemyCluster enemyCluster,
-        PlayerParamConfig  playerParamConfig,
+        PlayerParamDataBuilder  playerParamDataBuilder,
+        PlayerParamData playerParamData,
         CommentSpawner commentSpawner
     )
     {
         _playerAttack = playerAttack;
         _enemyCluster = enemyCluster;
-        _playerParamConfig = playerParamConfig; 
-        _playerHp = new PlayerHp(_playerParamConfig.GetHpAmount(), this);
+
+        _playerParamData = playerParamData;
+        _playerHp = new PlayerHp(_playerParamData.GetCurrentHp(), this);
         _playerHp.OnDamage += (sender, args) => { commentSpawner.SpawnCommentByType(CommentEnum.Spiky); };
     }
 }

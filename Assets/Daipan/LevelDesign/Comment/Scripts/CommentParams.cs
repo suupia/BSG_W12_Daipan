@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Daipan.Utility.Scripts;
 using UnityEngine;
 
 namespace Daipan.LevelDesign.Comment.Scripts
@@ -31,36 +32,11 @@ namespace Daipan.LevelDesign.Comment.Scripts
 
         [Header("コメントが上部へ到達したときの視聴者数の変化量")]
         public int diffViewer;
-
-
-        public CommentEnum GetCommentEnum
+        public CommentParams()
         {
-            get
-            {
-                CommentEnumChecker.CheckEnum();
-                return CommentEnum.Values.First(x => x.Name == commentType.ToString());
-            }
+           EnumEnumerationChecker.CheckEnum<CommentType,CommentEnum>(); 
         }
-    }
-
-
-
-    static class CommentEnumChecker
-    {
-        static bool _isCheckedEnum;
-
-        public static void CheckEnum()
-        {
-            if (_isCheckedEnum) return;
-            foreach (var type in Enum.GetValues(typeof(CommentType)).Cast<CommentType>())
-            {
-                var comment = CommentEnum.Values.FirstOrDefault(x => x.Name == type.ToString());
-                if (comment.Equals(default(CommentEnum)))
-                    Debug.LogWarning($"CommentEnum with name {type.ToString()} not found.");
-            }
-
-            _isCheckedEnum = true;
-        }
+        public CommentEnum GetCommentEnum => CommentEnum.Values.First(x => x.Name == commentType.ToString()); 
     }
 
     enum CommentType

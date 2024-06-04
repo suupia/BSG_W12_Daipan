@@ -1,43 +1,47 @@
+#nullable enable
 using System;
 using Daipan.Battle.interfaces;
+using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.Scripts;
 using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.Player.Scripts;
 using UnityEngine;
+using UnityEngine.Serialization;
 using VContainer;
 
 namespace Daipan.Enemy.MonoScripts
 {
 
-    [RequireComponent(typeof(SpriteRenderer))]
     public sealed class EnemyMono : MonoBehaviour, IHpSetter
     {
-        [SerializeField] HpGaugeMono hpGaugeMono = null!;
-        EnemyAttack _enemyAttack = null!;
+        [SerializeField] AbstractEnemyViewMono? enemyViewMono;
+        EnemyAttackDecider _enemyAttackDecider = null!;
         EnemyCluster _enemyCluster = null!;
         EnemyHp _enemyHp = null!;
-        EnemyParamsConfig _enemyParamsConfig = null!;
+        EnemyParamModifyWithTimer _enemyParamModifyWithTimer = null!;
+        EnemySpawnPointData _enemySpawnPointData = null!;
+        EnemyParamDataContainer _enemyParamDataContainer = null!;
         bool _isSlowDefeat;
         PlayerHolder _playerHolder = null!;
         EnemyQuickDefeatChecker _quickDefeatChecker = null!;
         EnemySlowDefeatChecker _slowDefeatChecker = null!;
-        public EnemyEnum _enemyEnum { get; private set; } = EnemyEnum.None;
+        public EnemyEnum EnemyEnum { get; private set; } = EnemyEnum.None;
 
         void Update()
         {
-            _enemyAttack.AttackUpdate(_playerHolder.PlayerMono);
+            _enemyAttackDecider.AttackUpdate(_playerHolder.PlayerMono, enemyViewMono);
 
             // 攻撃範囲よりプレイヤーとの距離が大きいときだけ動く
             if (transform.position.x - _playerHolder.PlayerMono.transform.position.x >=
-                _enemyParamsConfig.GetAttackParameter(_enemyEnum).AttackRange)
+                _enemyParamDataContainer.GetEnemyParamData(EnemyEnum).GetAttackRange())
             {
-                transform.position += Vector3.left * _enemyParamsConfig.GetSpeed(_enemyEnum) * Time.deltaTime;
+                transform.position += Vector3.left * (float)_enemyParamModifyWithTimer.GetSpeedRate(EnemyEnum) * Time.deltaTime;
             }
 
-            if (transform.position.x < _enemyParamsConfig.GetDespawnedPosition().x)
+            if (transform.position.x < _enemySpawnPointData.GetEnemyDespawnedPoint().x)
                 _enemyCluster.Remove(this, false); // Destroy when out of screen
 
-            hpGaugeMono.SetRatio(CurrentHp / (float)_enemyParamsConfig.GetHp(_enemyEnum));
+            enemyViewMono?.SetHpGauge(CurrentHp, _enemyParamDataContainer.GetEnemyParamData(EnemyEnum).GetCurrentHp());
 
             if (_isSlowDefeat == false && transform.position.x <= _slowDefeatChecker.SlowDefeatCoordinate)
             {
@@ -59,33 +63,51 @@ namespace Daipan.Enemy.MonoScripts
         public void Initialize(
             EnemyCluster enemyCluster,
             PlayerHolder playerHolder,
-            EnemyParamsConfig enemyParamsConfig,
+            EnemyParamModifyWithTimer enemyParamModifyWithTimer,
+            EnemySpawnPointData enemySpawnPointData,
+            EnemyParamDataContainer enemyParamDataContainer,
             EnemyQuickDefeatChecker quickDefeatChecker,
             EnemySlowDefeatChecker slowDefeatChecker
         )
         {
             _enemyCluster = enemyCluster;
             _playerHolder = playerHolder;
-            _enemyParamsConfig = enemyParamsConfig;
+            _enemyParamModifyWithTimer = enemyParamModifyWithTimer;
+            _enemySpawnPointData = enemySpawnPointData;
+            _enemyParamDataContainer = enemyParamDataContainer;
             _quickDefeatChecker = quickDefeatChecker;
             _slowDefeatChecker = slowDefeatChecker;
         }
 
-        public void SetDomain(EnemyAttack enemyAttack)
+        public void SetDomain(
+            EnemyEnum enemyEnum,
+            EnemyHp enemyHp,
+            EnemyAttackDecider enemyAttackDecider
+            )
         {
-            _enemyAttack = enemyAttack;
+            EnemyEnum = enemyEnum;
+            _enemyHp = enemyHp;
+            _enemyAttackDecider = enemyAttackDecider;
+            
+            enemyViewMono?.SetDomain(_enemyParamDataContainer);
+            enemyViewMono?.SetView(enemyEnum);
         }
 
-        public void Died(bool isTriggerCallback)
+        public void Died(bool isDaipaned, bool isTriggerCallback)
         {
             if (isTriggerCallback)
             {
                 var isQuickDefeat = _quickDefeatChecker.IsQuickDefeat(transform.position);
-                var args = new DiedEventArgs(_enemyEnum.IsBoss, isQuickDefeat);
+                var args = new DiedEventArgs(EnemyEnum.IsBoss, isQuickDefeat);
                 OnDied?.Invoke(this, args);
             }
 
-            Destroy(gameObject);
+            if (enemyViewMono == null) Destroy(gameObject);
+            else
+            {
+                if (isDaipaned) enemyViewMono.Daipaned(() => Destroy(gameObject)); 
+                else enemyViewMono.Died(() => Destroy(gameObject));
+            }
         }
 
 
@@ -95,16 +117,7 @@ namespace Daipan.Enemy.MonoScripts
             _enemyCluster.Remove(this);
         }
 
-        public void SetParameter(EnemyEnum enemyEnum)
-        {
-            _enemyEnum = enemyEnum;
-            _enemyAttack.enemyAttackParameter = _enemyParamsConfig.GetAttackParameter(enemyEnum);
-            _enemyHp = new EnemyHp(_enemyParamsConfig.GetHp(_enemyEnum), this, _enemyCluster);
 
-            //Sprite
-            var spriteRenderer = GetComponent<SpriteRenderer>();
-            spriteRenderer.sprite = _enemyParamsConfig.GetSprite(enemyEnum);
-        }
     }
 
     public record DiedEventArgs(bool IsBoss, bool IsQuickDefeat, bool IsTrigger = false);

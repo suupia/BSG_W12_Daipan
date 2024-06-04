@@ -19,19 +19,19 @@ namespace Daipan.Enemy.Scripts
             _enemies.Add(enemy);
         }
 
-        public void Remove(EnemyMono enemy, bool isTriggerCallback = true)
+        public void Remove(EnemyMono enemy, bool isDaipaned = false, bool isTriggerCallback = true)
         {
             _enemies.Remove(enemy);
-            enemy.Died(isTriggerCallback);
+            enemy.Died(isDaipaned, isTriggerCallback);
         }
 
-        public EnemyMono NearestEnemy(Vector3 position)
+        public EnemyMono? NearestEnemy(Vector3 position)
         {
             // [Precondition] The enemy list is not empty
             if (!_enemies.Any())
             {
                 // Debug.LogWarning("No enemies found");
-                return null!;
+                return null;
             }
 
             var minDistance = float.MaxValue;
@@ -46,20 +46,20 @@ namespace Daipan.Enemy.Scripts
             return result;
         }
 
-        public void BlownAway(float probability = 1.0f)
+        public void Daipaned(float probability = 1.0f)
         {
             var enemies = _enemies.ToArray();
             foreach (var enemy in enemies)
                 if (Random.value < probability)
-                    Remove(enemy);
+                    Remove(enemy, isDaipaned:true);
         }
 
-        public void BlownAway(Func<EnemyEnum, bool> blowAwayCondition)
+        public void Daipaned(Func<EnemyEnum, bool> blowAwayCondition)
         {
             var enemies = _enemies.ToArray();
             foreach (var enemy in enemies)
-                if (blowAwayCondition(enemy._enemyEnum))
-                    Remove(enemy);
+                if (blowAwayCondition(enemy.EnemyEnum))
+                    Remove(enemy, isDaipaned:true);
         }
     }
 }

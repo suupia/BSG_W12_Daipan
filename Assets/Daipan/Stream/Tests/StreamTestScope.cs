@@ -12,14 +12,14 @@ namespace Daipan.Stream.Tests
 {
     public sealed class StreamTestScope : LifetimeScope
     {
-        [FormerlySerializedAs("viewerParameter")] [SerializeField]
-        StreamParameter streamParameter = null!;
+        [FormerlySerializedAs("streamParameter")] [FormerlySerializedAs("viewerParameter")] [SerializeField]
+        StreamParam streamParam = null!;
 
         protected override void Configure(IContainerBuilder builder)
         {
             // Parameter
-            builder.RegisterInstance(streamParameter.viewer);
-            builder.RegisterInstance(streamParameter.daipan);
+            builder.RegisterInstance(streamParam.viewer);
+            builder.RegisterInstance(streamParam.daipan);
 
             // PrefabLoader
             builder.Register<StreamPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<StreamMono>>();

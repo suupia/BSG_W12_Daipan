@@ -7,23 +7,27 @@ using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-public sealed class EnemyTestScope : LifetimeScope
+namespace Daipan.Enemy.Tests
 {
-    //[SerializeField] EnemyAttributeParameters enemyAttributeParameters = null!;
-    protected override void Configure(IContainerBuilder builder)
+    public sealed class EnemyTestScope : LifetimeScope
     {
-        //builder.RegisterInstance(enemyAttributeParameters);
-        builder.Register<EnemyPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<EnemyMono>>();
-
-        builder.Register<EnemyAttack>(Lifetime.Scoped);
-        builder.Register<EnemySpawner>(Lifetime.Scoped);
-        builder.Register<EnemyCluster>(Lifetime.Scoped);
-
-
-        builder.UseEntryPoints(Lifetime.Scoped, entryPoints =>
+        //[SerializeField] EnemyAttributeParameters enemyAttributeParameters = null!;
+        protected override void Configure(IContainerBuilder builder)
         {
-            entryPoints.Add<EnemySpawner>();
-        });
+            //builder.RegisterInstance(enemyAttributeParameters);
+            builder.Register<EnemyPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<EnemyMono>>();
+
+            builder.Register<EnemyAttackDecider>(Lifetime.Scoped);
+            builder.Register<EnemySpawner>(Lifetime.Scoped);
+            builder.Register<EnemyCluster>(Lifetime.Scoped);
+
+
+            builder.UseEntryPoints(Lifetime.Scoped, entryPoints =>
+            {
+                entryPoints.Add<EnemySpawner>();
+            });
         
+        }
     }
+ 
 }
