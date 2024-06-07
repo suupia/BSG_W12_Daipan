@@ -33,6 +33,7 @@ namespace Daipan.Enemy.MonoScripts
         public override void SetView(EnemyEnum enemyEnum)
         {
             spriteRenderer.sprite = _enemyParamDataContainer.GetEnemyParamData(enemyEnum).GetSprite();
+            animator.runtimeAnimatorController = _enemyParamDataContainer.GetEnemyParamData(enemyEnum).GetAnimator();
         }
         
         public override void SetHpGauge(int currentHp, int maxHp)
