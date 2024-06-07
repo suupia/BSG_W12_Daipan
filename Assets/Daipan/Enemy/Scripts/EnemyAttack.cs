@@ -7,7 +7,6 @@ namespace Daipan.Enemy.Scripts
 {
     public class EnemyAttack
     {
-        public event EventHandler<PlayerOnAttackedEventArgs>? PlayerOnAttacked;
         readonly EnemyParamData _enemyParamData;
         public EnemyAttack(EnemyParamData enemyParamData)
         {
@@ -21,6 +20,6 @@ namespace Daipan.Enemy.Scripts
             playerMono.OnAttacked(_enemyParamData.EnemyEnum());
         }
     } 
-    public record PlayerOnAttackedEventArgs(EnemyEnum enemyEnum);
+
 }
 
