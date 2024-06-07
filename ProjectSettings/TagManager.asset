@@ -44,6 +44,15 @@ TagManager:
   - name: Comment
     uniqueID: 2838269711
     locked: 0
+  - name: Player_Yellow
+    uniqueID: 1134426891
+    locked: 0
+  - name: Player_Bule
+    uniqueID: 1912312005
+    locked: 0
+  - name: Player_Red
+    uniqueID: 1124539877
+    locked: 0
   - name: Tower_Light
     uniqueID: 764982475
     locked: 0

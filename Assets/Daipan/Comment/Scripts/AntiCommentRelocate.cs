@@ -28,7 +28,6 @@ namespace Daipan.Comment.Scripts
         {
             var objectsToAlign = _antiCommentCluster.CommentMonos.Select(x => x.gameObject).ToList();
             _streamStatus.IsIrritated = objectsToAlign.Count > 0;
-            Debug.Log($"objectsToAlign.Count : {objectsToAlign.Count}");
             AlignVertically(objectsToAlign);
         }
     

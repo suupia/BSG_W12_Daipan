@@ -12,7 +12,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         {
             _enemyParamDataList = enemyParamDataList;
         }
-        public EnemyParamData GetEnemyParamData(NewEnemyType enemyEnum)
+        public EnemyParamData GetEnemyParamData(EnemyEnum enemyEnum)
         {
             return _enemyParamDataList.First(x => x.EnemyEnum() == enemyEnum);
         }

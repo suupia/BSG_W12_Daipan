@@ -30,7 +30,7 @@ namespace Daipan.Enemy.Scripts
             _enemyDomainBuilder = enemyDomainBuilder;
         }
 
-        public EnemyMono Build(NewEnemyType enemyEnum, Vector3 position, Quaternion rotation)
+        public EnemyMono Build(EnemyEnum enemyEnum, Vector3 position, Quaternion rotation)
         {
             var enemyMonoPrefab = _enemyMonoLoader.Load();
             var enemyMono = _container.Instantiate(enemyMonoPrefab, position, rotation);

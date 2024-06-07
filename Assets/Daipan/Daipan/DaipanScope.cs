@@ -78,7 +78,7 @@ namespace Daipan.Daipan
  
          builder.Register<EnemyAttackDecider>(Lifetime.Scoped);
          builder.Register<EnemyMonoBuilder>(Lifetime.Scoped).AsImplementedInterfaces()
-             .WithParameter(NewEnemyType.Boss);
+             .WithParameter(EnemyEnum.Boss);
          builder.Register<EnemySpawner>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
          builder.Register<EnemyCluster>(Lifetime.Scoped);
          builder.Register<EnemyQuickDefeatChecker>(Lifetime.Scoped);

@@ -8,6 +8,6 @@ namespace Daipan.Enemy.Interfaces
 {
     public interface IEnemyMonoBuilder
     {
-        EnemyMono Build(NewEnemyType enemyEnum, Vector3 position, Quaternion rotation);
+        EnemyMono Build(EnemyEnum enemyEnum, Vector3 position, Quaternion rotation);
     }
 }

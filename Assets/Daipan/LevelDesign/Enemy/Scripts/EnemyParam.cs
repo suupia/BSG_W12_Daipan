@@ -5,6 +5,7 @@ using System.Reflection;
 using Daipan.Enemy.Scripts;
 using Daipan.Utility.Scripts;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Daipan.LevelDesign.Enemy.Scripts
 {
@@ -61,9 +62,10 @@ namespace Daipan.LevelDesign.Enemy.Scripts
     [Serializable]
     public sealed class EnemyParam
     {
+        [FormerlySerializedAs("EnemyType")]
         [Header("敵のレベルデザインはこちら")] [Space] 
         [Header("敵の種類")] [SerializeField]
-        public NewEnemyType EnemyType = NewEnemyType.None;
+        public EnemyEnum enemyEnum = EnemyEnum.None;
 
         public EnemyAttackParam enemyAttackParam = null!;
         public EnemyHpParam enemyHpParam = null!;
@@ -76,7 +78,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
     }
     
     
-    public enum NewEnemyType {
+    public enum EnemyEnum {
         None,
         W,
         A,
@@ -86,7 +88,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
     }
 
     public static class AnyTypesExtensions{
-        public static bool? IsBoss(this NewEnemyType self)
+        public static bool? IsBoss(this EnemyEnum self)
         {
             var fieldInfo = self.GetType().GetField(self.ToString());
             return fieldInfo?.GetCustomAttribute<IsBossAttribute>()?.IsBoss;
