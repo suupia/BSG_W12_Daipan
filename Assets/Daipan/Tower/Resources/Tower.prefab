@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9b5cf95676a46294dbf6b02ae5c8b4e3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a3a8ce269ca644bb3a668060555e8e0c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -93,6 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2317507978793509795}
+  - component: {fileID: 2205246946638565881}
   m_Layer: 0
   m_Name: View
   m_TagString: Untagged
@@ -118,6 +119,19 @@ Transform:
   - {fileID: 2318260188793144847}
   m_Father: {fileID: 2618412036318428857}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2205246946638565881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1283160449810670774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce2da47d874446b1b68923088a498566, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerFullRender: {fileID: 5134397269868678225}
 --- !u!1 &3076105473501547873
 GameObject:
   m_ObjectHideFlags: 0
@@ -191,7 +205,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 9b5cf95676a46294dbf6b02ae5c8b4e3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4036792149ae249fe87b185787cbd541, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -247,6 +261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 051f291537713e244a59eef6960f2a34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  towerViewMono: {fileID: 2205246946638565881}
 --- !u!1 &8662967730334091610
 GameObject:
   m_ObjectHideFlags: 0
@@ -320,7 +335,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9b5cf95676a46294dbf6b02ae5c8b4e3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cfd27f862de974af69b7e62f5a041d4b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -1,16 +1,19 @@
-using System.Collections;
+#nullable enable
 using System.Collections.Generic;
 using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.Player.Scripts;
+using Daipan.Tower.MonoScripts;
+using JetBrains.Annotations;
 using PlasticPipe.PlasticProtocol.Messages;
 using UnityEngine;
 using VContainer;
 
 public class TowerMono : MonoBehaviour
 {
+    [SerializeField] TowerViewMono? towerViewMono;
     TowerParamsConfig _towerParamsConfig = null!;
     PlayerHolder _playerHolder = null!;
-    SpriteRenderer _spriteRenderer = null;
+    SpriteRenderer _spriteRenderer = null!;
 
     [Inject]
     public void Initialize(
@@ -27,6 +30,7 @@ public class TowerMono : MonoBehaviour
     }
     void Update()
     {
+        towerViewMono?.SetRatio(_playerHolder.PlayerMono.CurrentHp / (float)_playerHolder.PlayerMono.MaxHp);
         _spriteRenderer.sprite = _towerParamsConfig.GetCurrentSprite(_playerHolder.PlayerMono.CurrentHp);
     }
 
