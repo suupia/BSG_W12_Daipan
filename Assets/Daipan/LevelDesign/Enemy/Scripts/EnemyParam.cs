@@ -74,6 +74,9 @@ namespace Daipan.LevelDesign.Enemy.Scripts
 
         [Header("スプライト")]
         public Sprite sprite = null!;
+        
+        [Header("AnimatorController")]
+        public RuntimeAnimatorController animatorController = null!;
 
         public EnemyParam()
         {
