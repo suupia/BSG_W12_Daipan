@@ -71,9 +71,6 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         public EnemyHpParam enemyHpParam = null!;
         public EnemyMoveParam enemyMoveParam = null!;
         public EnemySpawnParam enemySpawnParam = null!;
-
-        [Header("スプライト")]
-        public Sprite sprite = null!;
         
         [Header("AnimatorController")]
         public RuntimeAnimatorController animatorController = null!;
