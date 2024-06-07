@@ -59,17 +59,20 @@ public class PlayerMono : MonoBehaviour, IHpSetter
         {
             Debug.Log($"EnemyType: {enemyMono.EnemyEnum}を攻撃");
             _playerAttack.Attack(enemyMono);
+            
+            // Animation
+            foreach (var playerViewMono in playerViewMonos)
+            {
+                if (playerViewMono == null) continue;
+                if (IsTargetEnemy(playerViewMono.playerColor, enemyEnum)) playerViewMono.Attack();
+            }
         }
         else
         {
             Debug.Log($"攻撃対象が{enemyEnum}ではないよ");
         }
         
-        // Animation
-        foreach (var playerViewMono in playerViewMonos)
-        {
-            if (IsTargetEnemy(playerViewMono.playerColor, enemyEnum)) playerViewMono.Attack();
-        }
+
     }
 
     public void OnAttacked(EnemyEnum enemyEnum)

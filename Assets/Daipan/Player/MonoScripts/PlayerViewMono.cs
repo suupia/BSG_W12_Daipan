@@ -8,7 +8,6 @@ namespace Daipan.Player.MonoScripts
 {
     public class PlayerViewMono : AbstractPlayerViewMono
     {
-        [SerializeField] public PlayerColor PlayerColor;
         [SerializeField] Animator animator = null!;
 
         public override void Idle()
@@ -18,6 +17,7 @@ namespace Daipan.Player.MonoScripts
 
         public override void Attack()
         {
+            Debug.Log("PlayerViewMono Attack");
             animator.SetTrigger("OnAttack");
         }
 
