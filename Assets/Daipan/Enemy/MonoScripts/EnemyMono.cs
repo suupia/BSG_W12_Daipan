@@ -25,7 +25,7 @@ namespace Daipan.Enemy.MonoScripts
         PlayerHolder _playerHolder = null!;
         EnemyQuickDefeatChecker _quickDefeatChecker = null!;
         EnemySlowDefeatChecker _slowDefeatChecker = null!;
-        public EnemyEnum EnemyEnum { get; private set; } = EnemyEnum.None;
+        public NewEnemyType EnemyEnum { get; private set; } = NewEnemyType.None;
 
         void Update()
         {
@@ -80,7 +80,7 @@ namespace Daipan.Enemy.MonoScripts
         }
 
         public void SetDomain(
-            EnemyEnum enemyEnum,
+            NewEnemyType enemyEnum,
             EnemyHp enemyHp,
             EnemyAttackDecider enemyAttackDecider
             )
@@ -98,7 +98,7 @@ namespace Daipan.Enemy.MonoScripts
             if (isTriggerCallback)
             {
                 var isQuickDefeat = _quickDefeatChecker.IsQuickDefeat(transform.position);
-                var args = new DiedEventArgs(EnemyEnum.IsBoss, isQuickDefeat);
+                var args = new DiedEventArgs(EnemyEnum.IsBoss() == true, isQuickDefeat);
                 OnDied?.Invoke(this, args);
             }
 

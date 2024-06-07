@@ -4,6 +4,7 @@ using Daipan.Comment.MonoScripts;
 using Daipan.Comment.Scripts;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Enemy.Scripts;
+using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.LevelDesign.Player.Scripts;
 using Daipan.Player.Scripts;
 using UnityEngine;
@@ -26,30 +27,30 @@ public class PlayerMono : MonoBehaviour, IHpSetter
         if (Input.GetKeyDown(KeyCode.W))
         {
             Debug.Log("Wが押されたよ");
-            AttackEnemyMono(enemyMono, EnemyEnum.W);
+            AttackEnemyMono(enemyMono, NewEnemyType.W);
         }
 
         if (Input.GetKeyDown(KeyCode.S))
         {
             Debug.Log("Sが押されたよ");
-            AttackEnemyMono(enemyMono, EnemyEnum.S); 
+            AttackEnemyMono(enemyMono, NewEnemyType.S); 
         }
 
         if (Input.GetKeyDown(KeyCode.A))
         {
             Debug.Log("Aが押されたよ");
-            AttackEnemyMono(enemyMono, EnemyEnum.A);
+            AttackEnemyMono(enemyMono, NewEnemyType.A);
         }
     }
 
-    void AttackEnemyMono(EnemyMono? enemyMono, EnemyEnum enemyEnum)
+    void AttackEnemyMono(EnemyMono? enemyMono, NewEnemyType enemyEnum)
     {
         if (enemyMono == null)
         {
             Debug.Log($"攻撃対象がいないよ");
             return;
         } 
-        if(enemyMono.EnemyEnum == enemyEnum || enemyMono.EnemyEnum == EnemyEnum.Boss)
+        if(enemyMono.EnemyEnum == enemyEnum || enemyMono.EnemyEnum == NewEnemyType.Boss)
         {
             Debug.Log($"EnemyType: {enemyMono.EnemyEnum}を攻撃");
             _playerAttack.Attack(enemyMono);

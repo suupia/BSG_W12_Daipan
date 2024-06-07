@@ -1,6 +1,7 @@
 #nullable enable
 using System;
 using System.Linq;
+using System.Reflection;
 using Daipan.Enemy.Scripts;
 using Daipan.Utility.Scripts;
 using UnityEngine;
@@ -60,12 +61,9 @@ namespace Daipan.LevelDesign.Enemy.Scripts
     [Serializable]
     public sealed class EnemyParam
     {
-        [Header("敵のレベルデザインはこちら")]
-        [Space]
-
-        [Header("敵の種類")]
-        [SerializeField]
-        EnemyType enemyType = EnemyType.None;
+        [Header("敵のレベルデザインはこちら")] [Space] 
+        [Header("敵の種類")] [SerializeField]
+        public NewEnemyType EnemyType = NewEnemyType.None;
 
         public EnemyAttackParam enemyAttackParam = null!;
         public EnemyHpParam enemyHpParam = null!;
@@ -75,21 +73,32 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         [Header("AnimatorController")]
         public RuntimeAnimatorController animatorController = null!;
 
-        public EnemyParam()
-        {
-            EnumEnumerationChecker.CheckEnum<EnemyType,EnemyEnum>();
-        }
+    }
+    
+    
+    public enum NewEnemyType {
+        None,
+        W,
+        A,
+        S,
+        [IsBoss(true)]
+        Boss
+    }
 
-        public EnemyEnum GetEnemyEnum => EnemyEnum.Values.First(x => x.Name == enemyType.ToString()); 
-
-        enum EnemyType
+    public static class AnyTypesExtensions{
+        public static bool? IsBoss(this NewEnemyType self)
         {
-            None,
-            W,
-            A,
-            S,
-            Boss
+            var fieldInfo = self.GetType().GetField(self.ToString());
+            return fieldInfo?.GetCustomAttribute<IsBossAttribute>()?.IsBoss;
         }
     }
+
+    [AttributeUsage(AttributeTargets.Field, Inherited = false, AllowMultiple = false)]
+    class IsBossAttribute : Attribute
+    {
+        public bool IsBoss {get;}
+        public IsBossAttribute(bool isBoss) : base() => this.IsBoss = isBoss;
+    }
+
 
 }

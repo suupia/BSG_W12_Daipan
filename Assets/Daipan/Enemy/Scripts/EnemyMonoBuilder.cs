@@ -4,6 +4,7 @@ using Daipan.Comment.MonoScripts;
 using Daipan.Comment.Scripts;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.MonoScripts;
+using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.Stream.Scripts;
 using Daipan.Stream.Scripts.Utility;
 using UnityEngine;
@@ -29,11 +30,11 @@ namespace Daipan.Enemy.Scripts
             _enemyDomainBuilder = enemyDomainBuilder;
         }
 
-        public EnemyMono Build(Vector3 position, Quaternion rotation)
+        public EnemyMono Build(NewEnemyType enemyEnum, Vector3 position, Quaternion rotation)
         {
             var enemyMonoPrefab = _enemyMonoLoader.Load();
             var enemyMono = _container.Instantiate(enemyMonoPrefab, position, rotation);
-            return _enemyDomainBuilder.SetDomain(enemyMono);
+            return _enemyDomainBuilder.SetDomain(enemyEnum,enemyMono);
         }
         
 

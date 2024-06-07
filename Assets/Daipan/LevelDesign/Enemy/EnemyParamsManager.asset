@@ -18,7 +18,7 @@ MonoBehaviour:
     increaseViewerOnEnemyKill: 5
     currentKillAmount: 5
   enemyParams:
-  - enemyType: 1
+  - EnemyType: 1
     enemyAttackParam:
       attackAmount: 1
       attackDelaySec: 1
@@ -31,9 +31,8 @@ MonoBehaviour:
       spawnRatio: 60
       daipanThreshold: 0
       daipanProbability: 0
-    sprite: {fileID: 21300000, guid: de401ab12c255432dae79e3ba8c3ab65, type: 3}
     animatorController: {fileID: 22100000, guid: c27b5fdedd0b746b98785a17c33d1040, type: 2}
-  - enemyType: 2
+  - EnemyType: 2
     enemyAttackParam:
       attackAmount: 1
       attackDelaySec: 1
@@ -46,9 +45,8 @@ MonoBehaviour:
       spawnRatio: 20
       daipanThreshold: 0
       daipanProbability: 0
-    sprite: {fileID: 21300000, guid: c329e779f94ad40a3b6c6d7848b3de3d, type: 3}
     animatorController: {fileID: 22100000, guid: 140eb1db085be4c0faf71dccd1868e71, type: 2}
-  - enemyType: 3
+  - EnemyType: 3
     enemyAttackParam:
       attackAmount: 1
       attackDelaySec: 1
@@ -61,9 +59,8 @@ MonoBehaviour:
       spawnRatio: 20
       daipanThreshold: 0
       daipanProbability: 0
-    sprite: {fileID: 21300000, guid: 0c2b631544598420a99228de44fd33a0, type: 3}
     animatorController: {fileID: 22100000, guid: 52de61f2a207442fb89bea680f9bb1f9, type: 2}
-  - enemyType: 4
+  - EnemyType: 4
     enemyAttackParam:
       attackAmount: 1
       attackDelaySec: 1
@@ -76,7 +73,6 @@ MonoBehaviour:
       spawnRatio: 20
       daipanThreshold: 0
       daipanProbability: 0
-    sprite: {fileID: 21300000, guid: 0ee4fb82c347340cebbd590720da6a2c, type: 3}
     animatorController: {fileID: 0}
   enemyTimeLineParams:
   - startTime: 0
