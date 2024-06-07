@@ -23,7 +23,7 @@ namespace Daipan.Player.MonoScripts
 
         public override void Damage()
         {
-            animator.SetTrigger("OnDamage");
+            animator.SetTrigger("OnDamaged");
         }
     }
 
