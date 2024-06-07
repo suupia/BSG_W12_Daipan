@@ -15,16 +15,22 @@ namespace Daipan.Player.MonoScripts
         {
             animator.SetBool("IsIdling", true);
         }
+
+        public override void Attack()
+        {
+            animator.SetTrigger("OnAttack");
+        }
+
         public override void Damage()
         {
             animator.SetTrigger("OnDamage");
         }
     }
-    
+
     public enum PlayerColor
     {
         Red,
         Blue,
-        Yellow,
+        Yellow
     }
 }

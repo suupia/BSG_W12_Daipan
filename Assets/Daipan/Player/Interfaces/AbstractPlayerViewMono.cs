@@ -9,6 +9,7 @@ namespace Daipan.Player.Interfaces
     {
         public PlayerColor playerColor;
         public abstract void Idle();
+        public abstract void Attack();
         public abstract void Damage();
     }
 }

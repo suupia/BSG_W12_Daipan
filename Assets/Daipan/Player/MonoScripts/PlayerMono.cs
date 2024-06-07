@@ -64,6 +64,12 @@ public class PlayerMono : MonoBehaviour, IHpSetter
         {
             Debug.Log($"攻撃対象が{enemyEnum}ではないよ");
         }
+        
+        // Animation
+        foreach (var playerViewMono in playerViewMonos)
+        {
+            if (IsTargetEnemy(playerViewMono.playerColor, enemyEnum)) playerViewMono.Attack();
+        }
     }
 
     public void OnAttacked(EnemyEnum enemyEnum)
@@ -71,10 +77,18 @@ public class PlayerMono : MonoBehaviour, IHpSetter
         foreach (var playerViewMono in playerViewMonos)
         {
             if (playerViewMono == null) continue;
-            if (enemyEnum == EnemyEnum.W && playerViewMono.playerColor == PlayerColor.Red) playerViewMono.Damage();
-            if (enemyEnum == EnemyEnum.A && playerViewMono.playerColor == PlayerColor.Blue) playerViewMono.Damage();
-            if (enemyEnum == EnemyEnum.S && playerViewMono.playerColor == PlayerColor.Yellow) playerViewMono.Damage();
+            if(IsTargetEnemy(playerViewMono.playerColor, enemyEnum)) playerViewMono.Damage();
         }
+    }
+    
+    bool IsTargetEnemy(PlayerColor playerColor, EnemyEnum enemyEnum){
+        return playerColor switch
+        {
+            PlayerColor.Red => enemyEnum == EnemyEnum.W,
+            PlayerColor.Blue => enemyEnum == EnemyEnum.A,
+            PlayerColor.Yellow => enemyEnum == EnemyEnum.S,
+            _ => false
+        };
     }
 
     public int CurrentHp
