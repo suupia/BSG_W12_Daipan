@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Daipan.Enemy.MonoScripts;
+using Daipan.LevelDesign.Enemy.Scripts;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -54,7 +55,7 @@ namespace Daipan.Enemy.Scripts
                     Remove(enemy, isDaipaned:true);
         }
 
-        public void Daipaned(Func<EnemyEnum, bool> blowAwayCondition)
+        public void Daipaned(Func<NewEnemyType, bool> blowAwayCondition)
         {
             var enemies = _enemies.ToArray();
             foreach (var enemy in enemies)

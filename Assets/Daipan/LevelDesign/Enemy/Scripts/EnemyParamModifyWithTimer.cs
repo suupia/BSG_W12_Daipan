@@ -29,7 +29,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
 
         // EnemyParamDataの一部をデコレートしている
 
-        public double GetSpeedRate(EnemyEnum enemyEnum)
+        public double GetSpeedRate(NewEnemyType enemyEnum)
         {
             return _enemyParamDataContainer.GetEnemyParamData(enemyEnum).GetMoveSpeedPreSec() *
                    GetEnemyTimeLineParam().GetMoveSpeedRate();

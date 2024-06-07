@@ -33,26 +33,8 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         [Min(0)]    
         public float ratio;
         [Header("生成される敵（指定しないとランダム）")]
-        [SerializeField]
-        EnemyType enemyType  = EnemyType.None;
+        public NewEnemyType EnemyType  = NewEnemyType.None;
         
-        public EnemySpawnedPosition()
-        {
-            EnumEnumerationChecker.CheckEnum<EnemyType,EnemyEnum>();
-        }
-
-        public EnemyEnum GetEnemyEnum => EnemyEnum.Values.First(x => x.Name == enemyType.ToString()); 
-
-
-        
-        enum EnemyType
-        {
-            None,
-            W,
-            A,
-            S,
-            Boss
-        }
-    }
+     }
 
 }

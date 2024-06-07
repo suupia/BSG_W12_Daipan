@@ -61,12 +61,9 @@ namespace Daipan.LevelDesign.Enemy.Scripts
     [Serializable]
     public sealed class EnemyParam
     {
-        [Header("敵のレベルデザインはこちら")]
-        [Space]
-
-        [Header("敵の種類")]
-        [SerializeField]
-        EnemyType enemyType = EnemyType.None;
+        [Header("敵のレベルデザインはこちら")] [Space] 
+        [Header("敵の種類")] [SerializeField]
+        public NewEnemyType EnemyType = NewEnemyType.None;
 
         public EnemyAttackParam enemyAttackParam = null!;
         public EnemyHpParam enemyHpParam = null!;
@@ -76,21 +73,6 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         [Header("AnimatorController")]
         public RuntimeAnimatorController animatorController = null!;
 
-        public EnemyParam()
-        {
-            EnumEnumerationChecker.CheckEnum<EnemyType,EnemyEnum>();
-        }
-
-        public EnemyEnum GetEnemyEnum => EnemyEnum.Values.First(x => x.Name == enemyType.ToString()); 
-
-        enum EnemyType
-        {
-            None,
-            W,
-            A,
-            S,
-            Boss
-        }
     }
     
     

@@ -1,6 +1,7 @@
 #nullable enable
 using Daipan.Comment.Scripts;
 using Daipan.Enemy.Scripts;
+using Daipan.LevelDesign.Enemy.Scripts;
 using UnityEngine;
 
 namespace Daipan.Stream.Scripts
@@ -50,7 +51,7 @@ namespace Daipan.Stream.Scripts
                 Debug.Log("Blow comment by probability");
                 var blowAwayProbability = 0.5f;
                 // _enemyCluster.BlownAway(blowAwayProbability);
-                _enemyCluster.Daipaned(enemyEnum => !enemyEnum.IsBoss);
+                _enemyCluster.Daipaned(enemyEnum => enemyEnum.IsBoss() == false);
                 _commentCluster.BlownAway(blowAwayProbability);
                 _antiCommentCluster.BlownAway(blowAwayProbability);
             }
@@ -60,7 +61,7 @@ namespace Daipan.Stream.Scripts
                 Debug.Log("Blow comment by probability");
                 var blowAwayProbability = 0.5f;
                 // _enemyCluster.BlownAway(blowAwayProbability);
-                _enemyCluster.Daipaned(enemyEnum => !enemyEnum.IsBoss);
+                _enemyCluster.Daipaned(enemyEnum => enemyEnum.IsBoss() == false);
                 _commentCluster.BlownAway(blowAwayProbability);
                 _antiCommentCluster.BlownAway(blowAwayProbability);
             }
@@ -70,7 +71,7 @@ namespace Daipan.Stream.Scripts
                 Debug.Log("Blow comment by probability");
                 var blowAwayProbability = 0.5f;
                 // _enemyCluster.BlownAway(blowAwayProbability);
-                _enemyCluster.Daipaned(enemyEnum => !enemyEnum.IsBoss);
+                _enemyCluster.Daipaned(enemyEnum => enemyEnum.IsBoss() == false);
                 _commentCluster.BlownAway(blowAwayProbability);
                 _antiCommentCluster.BlownAway(blowAwayProbability);
             }
