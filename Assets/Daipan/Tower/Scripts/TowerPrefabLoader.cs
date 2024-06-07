@@ -2,6 +2,7 @@
 using Daipan.Comment.MonoScripts;
 using Daipan.Stream.Scripts.Utility;
 using Daipan.Stream.Scripts.Utility.Scripts;
+using Daipan.Tower.MonoScripts;
 
 namespace Daipan.Tower.Scripts
 {
