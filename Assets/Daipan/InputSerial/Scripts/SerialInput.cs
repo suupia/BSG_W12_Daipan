@@ -12,6 +12,7 @@ namespace Daipan.InputSerial.Scripts
 
         [SerializeField] private string portName = "COM?";
         [SerializeField] private int baurate = 115200;
+        [SerializeField] private int MAX_PORT_NUM = 10;
 
         private SerialPort serial;
         private bool isLoop = true;
@@ -19,15 +20,14 @@ namespace Daipan.InputSerial.Scripts
 
 
         public int number = 0;
+        public bool isSerial = false;
         void Start()
         {
             this.serial = new SerialPort(portName, baurate, Parity.None, 8, StopBits.One);
             serial.DtrEnable = true;
             serial.RtsEnable = true;
 
-            //テスト
-
-            for(int portNum = 0; portNum < 11; portNum++)
+            for(int portNum = 0; portNum <= MAX_PORT_NUM; portNum++)
             {
                 serial = new SerialPort(portName + portNum, baurate, Parity.None, 8, StopBits.One);
                 serial.DtrEnable = true;
@@ -40,20 +40,18 @@ namespace Daipan.InputSerial.Scripts
                 {
                     Debug.LogWarning(portName + portNum + "ポートが開けませんでした。設定している値が間違っている場合があります" +
                          e.Message);
+                    serial = null;
                     continue;
                 }
-                portNum = 1000;
+                portNum = MAX_PORT_NUM + 10;
             }
-            //try
-            //{
-            //    this.serial.Open();
+            // ポートがない場合
+            if (serial == null)
+            {
+                Debug.LogWarning("ポートがありませんでした。");
+                return;
+            }
 
-            //}
-            //catch (Exception e)
-            //{
-            //    Debug.LogWarning("ポートが開けませんでした。設定している値が間違っている場合があります" +
-            //              e.Message);
-            //}
 
             try
             {
@@ -64,8 +62,10 @@ namespace Daipan.InputSerial.Scripts
             }
             catch
             {
-                Debug.Log("なんかミスってる");
+                Debug.LogWarning("なんかミスってる");
+                return;
             }
+            isSerial = true;
         }
 
         //データ受信時に呼ばれる
