@@ -26,7 +26,7 @@ namespace Daipan.Enemy.Scripts
             enemy.Died(isDaipaned, isTriggerCallback);
         }
 
-        public EnemyMono? NearestEnemy(Vector3 position)
+        public EnemyMono? NearestEnemy(NewEnemyType enemyEnum, Vector3 position)
         {
             // [Precondition] The enemy list is not empty
             if (!_enemies.Any())
@@ -36,7 +36,7 @@ namespace Daipan.Enemy.Scripts
             }
 
             var minDistance = float.MaxValue;
-            var result = _enemies.First();
+            var result = _enemies.FirstOrDefault(e => e.EnemyEnum == enemyEnum);
             foreach (var enemy in _enemies)
                 if ((position - enemy.transform.position).sqrMagnitude < minDistance)
                 {

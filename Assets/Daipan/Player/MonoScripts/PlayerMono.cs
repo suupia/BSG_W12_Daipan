@@ -15,7 +15,7 @@ using VContainer;
 
 public class PlayerMono : MonoBehaviour, IHpSetter
 {
-    [SerializeField] List<AbstractPlayerViewMono?> playerViewMonos = new(); 
+    [SerializeField] List<AbstractPlayerViewMono?> playerViewMonos = new();
     EnemyCluster _enemyCluster = null!;
     PlayerAttack _playerAttack = null!;
     PlayerHp _playerHp = null!;
@@ -23,41 +23,38 @@ public class PlayerMono : MonoBehaviour, IHpSetter
 
     public void Update()
     {
-        var enemyMono = _enemyCluster.NearestEnemy(transform.position);
-        
         if (Input.GetKeyDown(KeyCode.W))
         {
             Debug.Log("Wが押されたよ");
-            AttackEnemyMono(enemyMono, NewEnemyType.W);
+            AttackEnemyMono(NewEnemyType.W);
         }
 
         if (Input.GetKeyDown(KeyCode.S))
         {
             Debug.Log("Sが押されたよ");
-            AttackEnemyMono(enemyMono, NewEnemyType.S); 
+            AttackEnemyMono(NewEnemyType.S);
         }
 
         if (Input.GetKeyDown(KeyCode.A))
         {
             Debug.Log("Aが押されたよ");
-            AttackEnemyMono(enemyMono, NewEnemyType.A);
+            AttackEnemyMono(NewEnemyType.A);
         }
-        
+
         // todo : 攻撃やHPの状況に応じて、AbstractPlayerViewMonoのメソッドを呼ぶ
-        foreach (var playerViewMono in playerViewMonos)
-        {
-            playerViewMono?.Idle();
-        }
+        foreach (var playerViewMono in playerViewMonos) playerViewMono?.Idle();
     }
 
-    void AttackEnemyMono(EnemyMono? enemyMono, NewEnemyType enemyEnum)
+    void AttackEnemyMono(NewEnemyType enemyEnum)
     {
+        var enemyMono = _enemyCluster.NearestEnemy(enemyEnum, transform.position);
         if (enemyMono == null)
         {
             Debug.Log($"攻撃対象がいないよ");
             return;
-        } 
-        if(enemyMono.EnemyEnum == enemyEnum || enemyMono.EnemyEnum == NewEnemyType.Boss)
+        }
+
+        if (enemyMono.EnemyEnum == enemyEnum || enemyMono.EnemyEnum == NewEnemyType.Boss)
         {
             Debug.Log($"EnemyType: {enemyMono.EnemyEnum}を攻撃");
             _playerAttack.Attack(enemyMono);
@@ -66,7 +63,6 @@ public class PlayerMono : MonoBehaviour, IHpSetter
         {
             Debug.Log($"攻撃対象が{enemyEnum}ではないよ");
         }
-        
     }
 
     public int CurrentHp
@@ -81,7 +77,7 @@ public class PlayerMono : MonoBehaviour, IHpSetter
     public void Initialize(
         PlayerAttack playerAttack,
         EnemyCluster enemyCluster,
-        PlayerParamDataBuilder  playerParamDataBuilder,
+        PlayerParamDataBuilder playerParamDataBuilder,
         PlayerParamData playerParamData,
         CommentSpawner commentSpawner
     )
@@ -93,5 +89,4 @@ public class PlayerMono : MonoBehaviour, IHpSetter
         _playerHp = new PlayerHp(_playerParamData.GetCurrentHp());
         _playerHp.OnDamage += (sender, args) => { commentSpawner.SpawnCommentByType(CommentEnum.Spiky); };
     }
-
 }
