@@ -6,6 +6,7 @@ using Daipan.Enemy.MonoScripts;
 using Daipan.Enemy.Scripts;
 using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.LevelDesign.Player.Scripts;
+using Daipan.Player.MonoScripts;
 using Daipan.Player.Scripts;
 using UnityEngine;
 using VContainer;
@@ -13,6 +14,7 @@ using VContainer;
 public class PlayerMono : MonoBehaviour, IHpSetter
 {
     [SerializeField] HpGaugeMono hpGaugeMono = null!; 
+    [SerializeField] PlayerViewMono playerViewMono = null!;
     EnemyCluster _enemyCluster = null!;
     PlayerAttack _playerAttack = null!;
     PlayerHp _playerHp = null!;
