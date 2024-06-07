@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: HpGauge
-  m_Shader: {fileID: -6465566751694194690, guid: dfc0c54c0ee117241be10be48d6c5fce, type: 3}
+  m_Name: TowerGauge
+  m_Shader: {fileID: -6465566751694194690, guid: 5a1aa08033ead421bb0714c56e43fed6, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
