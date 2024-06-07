@@ -2,6 +2,7 @@
 using System;
 using Daipan.Player.Interfaces;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Daipan.Player.MonoScripts
 {
@@ -9,15 +10,10 @@ namespace Daipan.Player.MonoScripts
     {
         [SerializeField] Animator animator = null!;
 
-        void Awake()
-        {
-            if (animator == null) Debug.LogWarning("animator is null");
-        }
-        
-        
         public override void Idle()
         {
             animator.SetBool("IsIdling", true);
         }
+
     }
 }
