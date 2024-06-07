@@ -6,7 +6,6 @@ using PlasticPipe.PlasticProtocol.Messages;
 using UnityEngine;
 using VContainer;
 
-[RequireComponent(typeof(SpriteRenderer))]
 public class TowerMono : MonoBehaviour
 {
     TowerParamsConfig _towerParamsConfig = null!;
