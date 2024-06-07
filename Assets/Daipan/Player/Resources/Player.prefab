@@ -146,6 +146,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 870fe9b7037341d2baf533c6639dd3dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerColor: 0
+  PlayerColor: 0
   animator: {fileID: 6665741849164830164}
 --- !u!1 &1444341888447804276
 GameObject:
@@ -192,6 +194,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 870fe9b7037341d2baf533c6639dd3dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerColor: 0
+  PlayerColor: 0
   animator: {fileID: 2771418761982781436}
 --- !u!1 &2054133449518600275
 GameObject:
@@ -491,7 +495,7 @@ Animator:
   m_GameObject: {fileID: 2636401679552121264}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d38d63db1327444b6ab08a053e605394, type: 2}
+  m_Controller: {fileID: 22100000, guid: c27b5fdedd0b746b98785a17c33d1040, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -541,7 +545,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1134426891
-  m_SortingLayer: 4
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -597,7 +601,7 @@ Animator:
   m_GameObject: {fileID: 4991814992150294134}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f70a2f7d5178440eb8f325ca8d1a3176, type: 2}
+  m_Controller: {fileID: 22100000, guid: 785cf14c798ed4b83a9329c7a7dda36b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -647,7 +651,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1124539877
-  m_SortingLayer: 2
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -703,7 +707,7 @@ Animator:
   m_GameObject: {fileID: 5306487592069222295}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 862ba9238d1074abc8a2052e4fd002c0, type: 2}
+  m_Controller: {fileID: 22100000, guid: 97f2f3e0ec7b747479a93fedcdd3eeff, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -811,6 +815,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 870fe9b7037341d2baf533c6639dd3dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerColor: 0
+  PlayerColor: 0
   animator: {fileID: 6019039635231306478}
 --- !u!1 &8462788269711151845
 GameObject:
