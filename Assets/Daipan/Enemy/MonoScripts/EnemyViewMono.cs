@@ -12,16 +12,13 @@ namespace Daipan.Enemy.MonoScripts
     public class EnemyViewMono : AbstractEnemyViewMono
     {
         [SerializeField] HpGaugeMono hpGaugeMono = null!;
-        [SerializeField] SpriteRenderer spriteRenderer = null!;  // todo:まだanimatorが作りきっていないので仮置き
         [SerializeField] Animator animator = null!;
 
-        
         EnemyParamDataContainer _enemyParamDataContainer = null!;
         
         void Awake()
         {
             if (hpGaugeMono == null) Debug.LogWarning("hpGaugeMono is null");
-            if (spriteRenderer == null) Debug.LogWarning("spriteRenderer is null");
             if (animator == null) Debug.LogWarning("animator is null");
         }
         
@@ -32,7 +29,6 @@ namespace Daipan.Enemy.MonoScripts
         
         public override void SetView(EnemyEnum enemyEnum)
         {
-            spriteRenderer.sprite = _enemyParamDataContainer.GetEnemyParamData(enemyEnum).GetSprite();
             animator.runtimeAnimatorController = _enemyParamDataContainer.GetEnemyParamData(enemyEnum).GetAnimator();
         }
         
@@ -56,7 +52,6 @@ namespace Daipan.Enemy.MonoScripts
         public override void Died(Action onDied)
         {
             animator.SetTrigger("OnDied");
-            spriteRenderer.sprite = null; // todo: 一時的な処理としてspriteをnullにする
             var preState = animator.GetCurrentAnimatorStateInfo(0).fullPathHash;
             Observable.EveryValueChanged(animator, a => a.IsEnd())
                 .Where(_ => preState != animator.GetCurrentAnimatorStateInfo(0).fullPathHash) 
@@ -68,7 +63,6 @@ namespace Daipan.Enemy.MonoScripts
         public override void Daipaned(Action onDied)
         {
             animator.SetTrigger("OnDaipaned");
-            spriteRenderer.sprite = null; // todo: 一時的な処理としてspriteをnullにする
             var preState = animator.GetCurrentAnimatorStateInfo(0).fullPathHash;
             Observable.EveryValueChanged(animator, a => a.IsEnd())
                 .Where(_ => preState != animator.GetCurrentAnimatorStateInfo(0).fullPathHash) 
