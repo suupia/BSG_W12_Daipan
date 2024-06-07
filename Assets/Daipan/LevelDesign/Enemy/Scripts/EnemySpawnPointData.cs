@@ -1,6 +1,7 @@
 #nullable enable
 using System;
 using System.Collections.Generic;
+using Daipan.Enemy.Scripts;
 
 namespace Daipan.LevelDesign.Enemy.Scripts
 {

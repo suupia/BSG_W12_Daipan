@@ -59,7 +59,8 @@ namespace Daipan.Enemy.Scripts
 
         void SpawnEnemy()
         {
-            var enemyObject = _enemyMonoBuilder.Build(GetSpawnedPositionRandom(), Quaternion.identity);
+            var tuple = GetSpawnedPositionRandom();
+            var enemyObject = _enemyMonoBuilder.Build(tuple.enemyEnum, tuple.spawnedPos , Quaternion.identity);
             IncreaseIrritatedValueByEnemy(enemyObject.EnemyEnum);
             _enemyCluster.Add(enemyObject);
         }
@@ -70,18 +71,22 @@ namespace Daipan.Enemy.Scripts
             if (enemy == EnemyEnum.Boss) _irritatedValue.IncreaseValue(_enemyLevelDesignParamData.GetCurrentKillAmount()); 
         }
         
-        Vector3 GetSpawnedPositionRandom()
+        // Todo : タプル返す、これでいいのか？
+        (Vector3 spawnedPos, EnemyEnum enemyEnum) GetSpawnedPositionRandom()
         {
             List<Vector3> position = new();
+            List<EnemyEnum> enums = new();
             List<float> ratio = new();
 
             foreach (var point in _enemySpawnPointData.GetEnemySpawnedPoints())
             {
                 position.Add(point.transform.position);
+                enums.Add(point.GetEnemyEnum);
                 ratio.Add(point.ratio);
             }
 
-            return position[Randoms.RandomByRatio(ratio)];
+            var rand = Randoms.RandomByRatio(ratio);
+            return (position[rand], enums[rand]);
         }
 
 

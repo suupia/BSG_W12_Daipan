@@ -41,9 +41,9 @@ namespace Daipan.Enemy.Scripts
             _enemyLevelDesignParamData = enemyLevelDesignParamData;
         }
 
-        public EnemyMono SetDomain(EnemyMono enemyMono)
+        public EnemyMono SetDomain(EnemyEnum enemyEnum, EnemyMono enemyMono)
         {
-            var enemyEnum = DecideRandomEnemyType();
+            if(enemyEnum == EnemyEnum.None) enemyEnum = DecideRandomEnemyType();
             Debug.Log($"enemyEnum: {enemyEnum}");
             var enemyParamData = _enemyParamDataContainer.GetEnemyParamData(enemyEnum);
             enemyMono.SetDomain(
