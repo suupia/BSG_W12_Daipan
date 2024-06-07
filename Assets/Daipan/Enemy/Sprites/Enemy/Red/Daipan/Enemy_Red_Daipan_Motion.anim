@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Enemy_Attack_Daipan_Motion
+  m_Name: Enemy_Red_Daipan_Motion
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
