@@ -6,6 +6,7 @@ using UnityEngine;
 
 namespace Daipan.Enemy.Interfaces
 {
+    // SerializeFieldで受け取れるように抽象クラスとした
     public abstract class AbstractEnemyViewMono : MonoBehaviour
     {
         public abstract void SetDomain(EnemyParamDataContainer enemyParamDataContainer);

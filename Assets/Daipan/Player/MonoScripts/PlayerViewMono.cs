@@ -1,10 +1,11 @@
 #nullable enable
 using System;
+using Daipan.Player.Interfaces;
 using UnityEngine;
 
 namespace Daipan.Player.MonoScripts
 {
-    public class PlayerViewMono : MonoBehaviour
+    public class PlayerViewMono : AbstractPlayerViewMono
     {
         [SerializeField] Animator animator = null!;
 
@@ -12,8 +13,9 @@ namespace Daipan.Player.MonoScripts
         {
             if (animator == null) Debug.LogWarning("animator is null");
         }
-
-        public void Idle()
+        
+        
+        public override void Idle()
         {
             animator.SetBool("IsIdling", true);
         }
