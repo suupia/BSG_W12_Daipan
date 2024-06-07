@@ -70,10 +70,10 @@ public class PlayerMono : MonoBehaviour, IHpSetter
     {
         foreach (var playerViewMono in playerViewMonos)
         {
-            if(playerViewMono == null) continue;
-            if(enemyEnum == EnemyEnum.A && playerViewMono.playerColor == PlayerColor.Red) playerViewMono.Damage();
-            if(enemyEnum == EnemyEnum.S && playerViewMono.playerColor == PlayerColor.Blue) playerViewMono.Damage();
-            if(enemyEnum == EnemyEnum.W && playerViewMono.playerColor == PlayerColor.Yellow) playerViewMono.Damage();
+            if (playerViewMono == null) continue;
+            if (enemyEnum == EnemyEnum.W && playerViewMono.playerColor == PlayerColor.Red) playerViewMono.Damage();
+            if (enemyEnum == EnemyEnum.A && playerViewMono.playerColor == PlayerColor.Blue) playerViewMono.Damage();
+            if (enemyEnum == EnemyEnum.S && playerViewMono.playerColor == PlayerColor.Yellow) playerViewMono.Damage();
         }
     }
 
