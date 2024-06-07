@@ -7,7 +7,9 @@ namespace Daipan.LevelDesign.Enemy.Scripts
     public class EnemyParamData
     {
         // Sprite
-        public Func<UnityEngine.Sprite?> GetSprite { get; init; } = () => null; 
+        public Func<UnityEngine.Sprite?> GetSprite { get; init; } = () => null;
+        // Animator
+        public Func<UnityEngine.RuntimeAnimatorController?> GetAnimator { get; init; } = () => null;
         
         // Enum
         public required Func<EnemyEnum> EnemyEnum { get; init; } 
