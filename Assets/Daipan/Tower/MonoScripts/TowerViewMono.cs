@@ -7,6 +7,7 @@ namespace Daipan.Tower.MonoScripts
     public class TowerViewMono : MonoBehaviour
     {
         [SerializeField] SpriteRenderer towerFullRender = null!;
+        [SerializeField] GameObject lightView = null!;
         Material? _towerFullMaterial;
 
         void Awake()
@@ -23,6 +24,11 @@ namespace Daipan.Tower.MonoScripts
             }
 
             _towerFullMaterial.SetFloat("_Ratio", ratio);
+        }
+        
+        public void SwitchLight(bool isOn)
+        {
+            lightView.SetActive(isOn);
         }
     }
 }

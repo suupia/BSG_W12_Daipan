@@ -12,11 +12,7 @@ namespace Daipan.LevelDesign.Tower.Scripts
         [Header("タワーのレベルデザインはこちら！！")]
         [Space(30)]
         
-        public double hpAmount;
-        public Sprite backgroundSprite;
-        public Sprite emptySprite;
-        public Sprite fullSprite;
-        public Sprite lightSprite;
+        public double LightIsOnRatio = 0.5;
     }
 
 }

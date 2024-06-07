@@ -217,6 +217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerFullRender: {fileID: 5134397269868678225}
+  lightView: {fileID: 200387929700669889}
 --- !u!1 &3076105473501547873
 GameObject:
   m_ObjectHideFlags: 0

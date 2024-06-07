@@ -22,11 +22,12 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         {
             return _towerPositionMono.towerSpawnTransform.position;
         }
-
-        public Sprite GetCurrentSprite(float hp)
+        
+        public double GetLightIsOnRatio()
         {
-            return _towerParams.emptySprite;
+            return _towerParams.LightIsOnRatio;
         }
+
     }
 
 }
