@@ -1,35 +1,41 @@
-using System.Collections;
+#nullable enable
 using System.Collections.Generic;
 using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.Player.Scripts;
+using Daipan.Tower.MonoScripts;
+using JetBrains.Annotations;
 using PlasticPipe.PlasticProtocol.Messages;
 using UnityEngine;
 using VContainer;
 
-[RequireComponent(typeof(SpriteRenderer))]
-public class TowerMono : MonoBehaviour
+namespace Daipan.Tower.MonoScripts
 {
-    TowerParamsConfig _towerParamsConfig = null!;
-    PlayerHolder _playerHolder = null!;
-    SpriteRenderer _spriteRenderer = null;
-
-    [Inject]
-    public void Initialize(
-        TowerParamsConfig towerParamsConfig,
-        PlayerHolder playerHolder)
+    public class TowerMono : MonoBehaviour
     {
-        _towerParamsConfig = towerParamsConfig;
-        _playerHolder = playerHolder;
-    }
+        [SerializeField] TowerViewMono? towerViewMono;
+        TowerParamsConfig _towerParamsConfig = null!;
+        PlayerHolder _playerHolder = null!;
 
-    void Start()
-    {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-    }
-    void Update()
-    {
-        _spriteRenderer.sprite = _towerParamsConfig.GetCurrentSprite(_playerHolder.PlayerMono.CurrentHp);
-    }
+        [Inject]
+        public void Initialize(
+            TowerParamsConfig towerParamsConfig,
+            PlayerHolder playerHolder)
+        {
+            _towerParamsConfig = towerParamsConfig;
+            _playerHolder = playerHolder;
+        }
+
+        void Update()
+        {
+            // Update tower gauge
+            var playerHpRatio = _playerHolder.PlayerMono.CurrentHp / (float)_playerHolder.PlayerMono.MaxHp;
+            towerViewMono?.SetRatio(playerHpRatio);
+            towerViewMono?.SwitchLight(playerHpRatio < _towerParamsConfig.GetLightIsOnRatio());
+             
+        }
 
 
+    }
+ 
 }
+

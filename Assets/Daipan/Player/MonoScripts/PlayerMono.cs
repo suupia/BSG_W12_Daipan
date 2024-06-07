@@ -67,6 +67,8 @@ public class PlayerMono : MonoBehaviour, IHpSetter
         get => _playerHp.CurrentHp;
     }
 
+    public int MaxHp => _playerHp.MaxHp;
+
     [Inject]
     public void Initialize(
         PlayerAttack playerAttack,
@@ -80,7 +82,7 @@ public class PlayerMono : MonoBehaviour, IHpSetter
         _enemyCluster = enemyCluster;
 
         _playerParamData = playerParamData;
-        _playerHp = new PlayerHp(_playerParamData.GetCurrentHp(), this);
+        _playerHp = new PlayerHp(_playerParamData.GetCurrentHp());
         _playerHp.OnDamage += (sender, args) => { commentSpawner.SpawnCommentByType(CommentEnum.Spiky); };
     }
 }

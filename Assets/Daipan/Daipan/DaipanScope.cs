@@ -16,6 +16,7 @@ using Daipan.Stream.MonoScripts;
 using Daipan.Stream.Scripts;
 using Daipan.Stream.Scripts.Utility;
 using Daipan.Stream.Tests;
+using Daipan.Tower.MonoScripts;
 using Daipan.Tower.Scripts;
 using UnityEngine;
 using UnityEngine.Serialization;

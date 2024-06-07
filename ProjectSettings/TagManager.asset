@@ -44,3 +44,6 @@ TagManager:
   - name: Comment
     uniqueID: 2838269711
     locked: 0
+  - name: Tower_Light
+    uniqueID: 764982475
+    locked: 0

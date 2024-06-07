@@ -8,14 +8,14 @@ namespace Daipan.Player.Scripts
 {
     public class PlayerHp : IHpSetter
     {
-        readonly PlayerMono _playerMono;
+        public int MaxHp { get; private set; }
         int _currentHp;
         public event EventHandler<DamageEventArgs>? OnDamage;
 
-        public PlayerHp(int maxHp, PlayerMono playerMono)
+        public PlayerHp(int maxHp)
         {
+            MaxHp = maxHp;
             CurrentHp = maxHp;
-            _playerMono = playerMono;
         }
 
         public int CurrentHp

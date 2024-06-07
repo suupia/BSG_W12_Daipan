@@ -11,16 +11,8 @@ namespace Daipan.LevelDesign.Tower.Scripts
     {
         [Header("タワーのレベルデザインはこちら！！")]
         [Space(30)]
-
-        [Header("HPごとのタワーのスプライト変更")]
-        public List<TowerSprite> towerSprites;
+        
+        public double LightIsOnRatio = 0.5;
     }
 
-    [Serializable]
-    public sealed class TowerSprite
-    {
-        [Header("HPがnを切ったらSpriteを変更")]
-        public float hpThreshold = 0;
-        public Sprite sprite;
-    }
 }
