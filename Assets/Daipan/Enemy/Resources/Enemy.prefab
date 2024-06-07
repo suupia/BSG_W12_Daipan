@@ -446,5 +446,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpGaugeMono: {fileID: 7829380139561979591}
-  spriteRenderer: {fileID: 0}
   animator: {fileID: 965030349165906812}
