@@ -8,6 +8,7 @@ using Daipan.Enemy.Scripts;
 using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.LevelDesign.Player.Scripts;
 using Daipan.Player.Interfaces;
+using Daipan.Player.MonoScripts;
 using Daipan.Player.Scripts;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -62,6 +63,17 @@ public class PlayerMono : MonoBehaviour, IHpSetter
         else
         {
             Debug.Log($"攻撃対象が{enemyEnum}ではないよ");
+        }
+    }
+
+    public void OnAttacked(EnemyEnum enemyEnum)
+    {
+        foreach (var playerViewMono in playerViewMonos)
+        {
+            if(playerViewMono == null) continue;
+            if(enemyEnum == EnemyEnum.A && playerViewMono.playerColor == PlayerColor.Red) playerViewMono.Damage();
+            if(enemyEnum == EnemyEnum.S && playerViewMono.playerColor == PlayerColor.Blue) playerViewMono.Damage();
+            if(enemyEnum == EnemyEnum.W && playerViewMono.playerColor == PlayerColor.Yellow) playerViewMono.Damage();
         }
     }
 
