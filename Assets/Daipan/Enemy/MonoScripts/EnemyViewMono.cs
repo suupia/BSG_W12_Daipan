@@ -27,7 +27,7 @@ namespace Daipan.Enemy.MonoScripts
             _enemyParamDataContainer = enemyParamDataContainer;
         }
         
-        public override void SetView(NewEnemyType enemyEnum)
+        public override void SetView(EnemyEnum enemyEnum)
         {
             animator.runtimeAnimatorController = _enemyParamDataContainer.GetEnemyParamData(enemyEnum).GetAnimator();
         }

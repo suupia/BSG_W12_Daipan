@@ -26,7 +26,7 @@ namespace Daipan.Enemy.Scripts
             enemy.Died(isDaipaned, isTriggerCallback);
         }
 
-        public EnemyMono? NearestEnemy(NewEnemyType enemyEnum, Vector3 position)
+        public EnemyMono? NearestEnemy(EnemyEnum enemyEnum, Vector3 position)
         {
             // [Precondition] The enemy list is not empty
             if (!_enemies.Any())
@@ -55,7 +55,7 @@ namespace Daipan.Enemy.Scripts
                     Remove(enemy, isDaipaned:true);
         }
 
-        public void Daipaned(Func<NewEnemyType, bool> blowAwayCondition)
+        public void Daipaned(Func<EnemyEnum, bool> blowAwayCondition)
         {
             var enemies = _enemies.ToArray();
             foreach (var enemy in enemies)

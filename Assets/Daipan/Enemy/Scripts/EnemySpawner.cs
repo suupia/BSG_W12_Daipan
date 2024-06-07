@@ -66,22 +66,22 @@ namespace Daipan.Enemy.Scripts
         }
 
 
-        void IncreaseIrritatedValueByEnemy(NewEnemyType enemy)
+        void IncreaseIrritatedValueByEnemy(EnemyEnum enemy)
         {
-            if (enemy == NewEnemyType.Boss) _irritatedValue.IncreaseValue(_enemyLevelDesignParamData.GetCurrentKillAmount()); 
+            if (enemy == EnemyEnum.Boss) _irritatedValue.IncreaseValue(_enemyLevelDesignParamData.GetCurrentKillAmount()); 
         }
         
         // Todo : タプル返す、これでいいのか？
-        (Vector3 spawnedPos, NewEnemyType enemyEnum) GetSpawnedPositionRandom()
+        (Vector3 spawnedPos, EnemyEnum enemyEnum) GetSpawnedPositionRandom()
         {
             List<Vector3> position = new();
-            List<NewEnemyType> enums = new();
+            List<EnemyEnum> enums = new();
             List<float> ratio = new();
 
             foreach (var point in _enemySpawnPointData.GetEnemySpawnedPoints())
             {
                 position.Add(point.transform.position);
-                enums.Add(point.EnemyType);
+                enums.Add(point.enemyEnum);
                 ratio.Add(point.ratio);
             }
 

@@ -41,9 +41,9 @@ namespace Daipan.Enemy.Scripts
             _enemyLevelDesignParamData = enemyLevelDesignParamData;
         }
 
-        public EnemyMono SetDomain(NewEnemyType enemyEnum, EnemyMono enemyMono)
+        public EnemyMono SetDomain(EnemyEnum enemyEnum, EnemyMono enemyMono)
         {
-            if(enemyEnum == NewEnemyType.None) enemyEnum = DecideRandomEnemyType();
+            if(enemyEnum == EnemyEnum.None) enemyEnum = DecideRandomEnemyType();
             Debug.Log($"enemyEnum: {enemyEnum}");
             var enemyParamData = _enemyParamDataContainer.GetEnemyParamData(enemyEnum);
             enemyMono.SetDomain(
@@ -65,21 +65,21 @@ namespace Daipan.Enemy.Scripts
 
         // 本来はScriptableObjectで制御するのでこれは後でパラメータをもらうようにして消す
         // 今はスクリプトで制御するために書いておく
-        NewEnemyType DecideRandomEnemyTypeCustom()
+        EnemyEnum DecideRandomEnemyTypeCustom()
         {
             var rand = Random.value;
-            if (rand < 0.5f) return NewEnemyType.A;
-            return NewEnemyType.Boss;
+            if (rand < 0.5f) return EnemyEnum.A;
+            return EnemyEnum.Boss;
         }
 
 
-        NewEnemyType DecideRandomEnemyType()
+        EnemyEnum DecideRandomEnemyType()
         {
             // ボス発生条件を満たしていればBOSSを生成
             if (_enemyLevelDesignParamData.GetCurrentKillAmount() >= _enemyLevelDesignParamData.GetSpawnBossAmount())
             {
                 _enemyLevelDesignParamData.SetCurrentKillAmount(0);
-                return NewEnemyType.Boss;
+                return EnemyEnum.Boss;
             }
 
             // 通常敵のType決め
@@ -87,7 +87,7 @@ namespace Daipan.Enemy.Scripts
 
             foreach (var enemyLife in _enemyParamManager.enemyParams)
             {
-                if (enemyLife.EnemyType == NewEnemyType.Boss) continue;
+                if (enemyLife.enemyEnum == EnemyEnum.Boss) continue;
                 ratio.Add(enemyLife.enemySpawnParam.spawnRatio);
             }
 
@@ -99,8 +99,8 @@ namespace Daipan.Enemy.Scripts
             Debug.Log($"Randoms.RandomByRatio(ratio) : {Randoms.RandomByRatio(ratio)}");
 
 
-            var enemyEnum = _enemyParamManager.enemyParams[Randoms.RandomByRatio(ratio)].EnemyType;
-            if (enemyEnum == NewEnemyType.Boss) _enemyLevelDesignParamData.SetCurrentKillAmount(0);
+            var enemyEnum = _enemyParamManager.enemyParams[Randoms.RandomByRatio(ratio)].enemyEnum;
+            if (enemyEnum == EnemyEnum.Boss) _enemyLevelDesignParamData.SetCurrentKillAmount(0);
             return enemyEnum;
         }
     }

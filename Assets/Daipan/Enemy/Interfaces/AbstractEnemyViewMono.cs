@@ -10,7 +10,7 @@ namespace Daipan.Enemy.Interfaces
     public abstract class AbstractEnemyViewMono : MonoBehaviour
     {
         public abstract void SetDomain(EnemyParamDataContainer enemyParamDataContainer);
-        public abstract void SetView(NewEnemyType enemyEnum);
+        public abstract void SetView(EnemyEnum enemyEnum);
         public abstract void SetHpGauge(int currentHp, int maxHp);
         public abstract void Move();
         public abstract void Attack();

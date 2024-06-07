@@ -26,26 +26,26 @@ public class PlayerMono : MonoBehaviour, IHpSetter
         if (Input.GetKeyDown(KeyCode.W))
         {
             Debug.Log("Wが押されたよ");
-            AttackEnemyMono(NewEnemyType.W);
+            AttackEnemyMono(EnemyEnum.W);
         }
 
         if (Input.GetKeyDown(KeyCode.S))
         {
             Debug.Log("Sが押されたよ");
-            AttackEnemyMono(NewEnemyType.S);
+            AttackEnemyMono(EnemyEnum.S);
         }
 
         if (Input.GetKeyDown(KeyCode.A))
         {
             Debug.Log("Aが押されたよ");
-            AttackEnemyMono(NewEnemyType.A);
+            AttackEnemyMono(EnemyEnum.A);
         }
 
         // todo : 攻撃やHPの状況に応じて、AbstractPlayerViewMonoのメソッドを呼ぶ
         foreach (var playerViewMono in playerViewMonos) playerViewMono?.Idle();
     }
 
-    void AttackEnemyMono(NewEnemyType enemyEnum)
+    void AttackEnemyMono(EnemyEnum enemyEnum)
     {
         var enemyMono = _enemyCluster.NearestEnemy(enemyEnum, transform.position);
         if (enemyMono == null)
@@ -54,7 +54,7 @@ public class PlayerMono : MonoBehaviour, IHpSetter
             return;
         }
 
-        if (enemyMono.EnemyEnum == enemyEnum || enemyMono.EnemyEnum == NewEnemyType.Boss)
+        if (enemyMono.EnemyEnum == enemyEnum || enemyMono.EnemyEnum == EnemyEnum.Boss)
         {
             Debug.Log($"EnemyType: {enemyMono.EnemyEnum}を攻撃");
             _playerAttack.Attack(enemyMono);

@@ -14,7 +14,7 @@ public class EnemyAttackTest
         var player = new DummyPlayer() { CurrentHp = 100 };
         var enemyParamData = new EnemyParamData()
         {
-            EnemyEnum = () => NewEnemyType.None,
+            EnemyEnum = () => EnemyEnum.None,
             GetAttackAmount = () => 10
         };
         var enemyAttack = new EnemyAttack(enemyParamData);

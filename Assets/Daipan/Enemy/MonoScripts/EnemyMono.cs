@@ -25,7 +25,7 @@ namespace Daipan.Enemy.MonoScripts
         PlayerHolder _playerHolder = null!;
         EnemyQuickDefeatChecker _quickDefeatChecker = null!;
         EnemySlowDefeatChecker _slowDefeatChecker = null!;
-        public NewEnemyType EnemyEnum { get; private set; } = NewEnemyType.None;
+        public EnemyEnum EnemyEnum { get; private set; } = EnemyEnum.None;
 
         void Update()
         {
@@ -80,7 +80,7 @@ namespace Daipan.Enemy.MonoScripts
         }
 
         public void SetDomain(
-            NewEnemyType enemyEnum,
+            EnemyEnum enemyEnum,
             EnemyHp enemyHp,
             EnemyAttackDecider enemyAttackDecider
             )
