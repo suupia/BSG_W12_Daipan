@@ -1432,13 +1432,13 @@ MonoBehaviour:
   enemySpawnedPoints:
   - transform: {fileID: 2139454379639670455}
     ratio: 60
-    EnemyType: 1
+    enemyEnum: 1
   - transform: {fileID: 2139454379681994179}
     ratio: 20
-    EnemyType: 2
+    enemyEnum: 2
   - transform: {fileID: 2139454380265612660}
     ratio: 20
-    EnemyType: 3
+    enemyEnum: 3
   enemyDespawnedPoint: {fileID: 1495197751}
 --- !u!1 &1239697016
 GameObject:
