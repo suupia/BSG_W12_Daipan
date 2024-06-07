@@ -1,6 +1,7 @@
 #nullable enable
 using System;
 using System.Linq;
+using System.Reflection;
 using Daipan.Enemy.Scripts;
 using Daipan.Utility.Scripts;
 using UnityEngine;
@@ -92,6 +93,30 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         }
     }
     
+    
+    public enum NewEnemyType {
+        None,
+        W,
+        A,
+        S,
+        [IsBoss(true)]
+        Boss
+    }
+
+    public static class AnyTypesExtensions{
+        public static bool? IsBoss(this NewEnemyType self)
+        {
+            var fieldInfo = self.GetType().GetField(self.ToString());
+            return fieldInfo?.GetCustomAttribute<IsBossAttribute>()?.IsBoss;
+        }
+    }
+
+    [AttributeUsage(AttributeTargets.Field, Inherited = false, AllowMultiple = false)]
+    class IsBossAttribute : Attribute
+    {
+        public bool IsBoss {get;}
+        public IsBossAttribute(bool isBoss) : base() => this.IsBoss = isBoss;
+    }
 
 
 }
