@@ -29,6 +29,7 @@ namespace Daipan.Player.MonoScripts
 
     public enum PlayerColor
     {
+        None,
         Red,
         Blue,
         Yellow
