@@ -28,7 +28,6 @@ namespace Daipan.Enemy.Scripts
 
         public EnemyMono? NearestEnemy(EnemyEnum enemyEnum, Vector3 position)
         {
-            // [Precondition] The enemy list is not empty
             if (!_enemies.Any())
             {
                 // Debug.LogWarning("No enemies found");
@@ -37,6 +36,19 @@ namespace Daipan.Enemy.Scripts
 
             return _enemies
                 .Where(e => e.EnemyEnum == enemyEnum)
+                .OrderBy(e => (position - e.transform.position).sqrMagnitude)
+                .FirstOrDefault();
+        }
+        
+        public EnemyMono? NearestEnemy(Vector3 position)
+        {
+            if (!_enemies.Any())
+            {
+                // Debug.LogWarning("No enemies found");
+                return null;
+            }
+
+            return _enemies
                 .OrderBy(e => (position - e.transform.position).sqrMagnitude)
                 .FirstOrDefault();
         }

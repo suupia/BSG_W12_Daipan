@@ -53,7 +53,10 @@ namespace Daipan.Player.MonoScripts
 
     void AttackEnemyMono(EnemyEnum enemyEnum)
     {
+        // そのレーンの敵を取得
         var enemyMono = _enemyCluster.NearestEnemy(enemyEnum, transform.position);
+        // レーンの敵がいなければ、ボスを取得
+        if (enemyMono == null) enemyMono = _enemyCluster.NearestEnemy(transform.position);
         if (enemyMono == null)
         {
             Debug.Log($"攻撃対象がいないよ");
