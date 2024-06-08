@@ -12,12 +12,9 @@ namespace Daipan.Enemy.Tests
 {
     public sealed class InputSerialScope : LifetimeScope
     {
-        [SerializeField] SerialInput serialInput = null!;
-
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.RegisterInstance(serialInput);
-
+            builder.Register<SerialInput>(Lifetime.Scoped);
         }
     }
 

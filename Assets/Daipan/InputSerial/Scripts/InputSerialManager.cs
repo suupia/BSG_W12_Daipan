@@ -80,9 +80,16 @@ namespace Daipan.InputSerial.Scripts
         }
         static bool isSerial()
         {
-            if (_serialInput == null) return false;
-            if (!_serialInput.isSerial) return false;
-
+            if (_serialInput == null)
+            {
+                Debug.LogWarning("_serialPortがnullです。");
+                return false;
+            }
+            if (!_serialInput.isSerial)
+            {
+                Debug.LogWarning("_serialPortが開かれていません。");
+                return false;
+            }
             return true;
         }
 

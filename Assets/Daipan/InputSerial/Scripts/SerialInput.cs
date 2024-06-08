@@ -7,12 +7,12 @@ using UnityEngine;
 
 namespace Daipan.InputSerial.Scripts
 {
-    public class SerialInput : MonoBehaviour
+    public class SerialInput
     {
 
-        [SerializeField] private string portName = "COM?";
-        [SerializeField] private int baurate = 115200;
-        [SerializeField] private int MAX_PORT_NUM = 10;
+        private string portName = "COM";
+        private int baurate = 115200;
+        private int MAX_PORT_NUM = 10;
 
         private SerialPort serial;
         private bool isLoop = true;
@@ -21,7 +21,7 @@ namespace Daipan.InputSerial.Scripts
 
         public int number = 0;
         public bool isSerial = false;
-        void Start()
+        SerialInput()
         {
             this.serial = new SerialPort(portName, baurate, Parity.None, 8, StopBits.One);
             serial.DtrEnable = true;
@@ -80,7 +80,7 @@ namespace Daipan.InputSerial.Scripts
             }
         }
 
-        void OnDestroy()
+        ~SerialInput()
         {
             this.isLoop = false;
             this.serial.Close();

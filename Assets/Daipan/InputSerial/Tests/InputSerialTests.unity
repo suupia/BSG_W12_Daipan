@@ -156,7 +156,6 @@ MonoBehaviour:
     TypeName: 
   autoRun: 1
   autoInjectGameObjects: []
-  serialInput: {fileID: 404156731}
 --- !u!4 &236826095
 Transform:
   m_ObjectHideFlags: 0
@@ -181,7 +180,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 404156732}
-  - component: {fileID: 404156731}
   - component: {fileID: 404156733}
   m_Layer: 0
   m_Name: ButtonTest
@@ -190,23 +188,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &404156731
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 404156730}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46fd1b2009154e448b4096db1426ffaa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  portName: COM
-  baurate: 115200
-  MAX_PORT_NUM: 10
-  number: 0
-  isSerial: 0
 --- !u!4 &404156732
 Transform:
   m_ObjectHideFlags: 0
