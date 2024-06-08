@@ -41,5 +41,17 @@ namespace Daipan.Stream.Scripts
             else
                 DecreasedValue += amount;
         }
+
+        public int GetIrritatedPhase()
+        {
+            for(int i = 0; i < RatioTable.Count; i++)
+            {
+                if(Ratio < RatioTable[i])
+                {
+                    return i;
+                }
+            }
+            return RatioTable.Count;
+        }
     }
 }
