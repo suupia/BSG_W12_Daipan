@@ -44,6 +44,13 @@ namespace Daipan.Enemy.Scripts
         public EnemyMono SetDomain(EnemyEnum enemyEnum, EnemyMono enemyMono)
         {
             if(enemyEnum == EnemyEnum.None) enemyEnum = DecideRandomEnemyType();
+            
+            // ボス発生条件を満たしていればBOSSを生成
+            if (_enemyLevelDesignParamData.GetCurrentKillAmount() >= _enemyLevelDesignParamData.GetSpawnBossAmount())
+            {
+                _enemyLevelDesignParamData.SetCurrentKillAmount(0);
+                enemyEnum = EnemyEnum.Boss;
+            }
             Debug.Log($"enemyEnum: {enemyEnum}");
             var enemyParamData = _enemyParamDataContainer.GetEnemyParamData(enemyEnum);
             enemyMono.SetDomain(
@@ -75,12 +82,7 @@ namespace Daipan.Enemy.Scripts
 
         EnemyEnum DecideRandomEnemyType()
         {
-            // ボス発生条件を満たしていればBOSSを生成
-            if (_enemyLevelDesignParamData.GetCurrentKillAmount() >= _enemyLevelDesignParamData.GetSpawnBossAmount())
-            {
-                _enemyLevelDesignParamData.SetCurrentKillAmount(0);
-                return EnemyEnum.Boss;
-            }
+
 
             // 通常敵のType決め
             List<float> ratio = new();

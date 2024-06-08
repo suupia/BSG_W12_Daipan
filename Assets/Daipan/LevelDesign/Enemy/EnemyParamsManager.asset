@@ -73,7 +73,7 @@ MonoBehaviour:
       spawnRatio: 20
       daipanThreshold: 0
       daipanProbability: 0
-    animatorController: {fileID: 0}
+    animatorController: {fileID: 22100000, guid: 785cf14c798ed4b83a9329c7a7dda36b, type: 2}
   enemyTimeLineParams:
   - startTime: 0
     spawnDelaySec: 1
