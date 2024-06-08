@@ -1,4 +1,5 @@
 #nullable enable
+using Daipan.Stream.Scripts;
 using UnityEngine;
 
 
@@ -8,7 +9,7 @@ namespace Daipan.Streamer.Scripts
     {
         [SerializeField] Animator animator = null!;
 
-
+        readonly IrritatedValue _irritatedValue = null!;
 
         private void Awake()
         {

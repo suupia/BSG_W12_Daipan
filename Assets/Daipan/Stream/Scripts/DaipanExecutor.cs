@@ -39,13 +39,13 @@ namespace Daipan.Stream.Scripts
 
         public void DaiPan()
         {
-            float irritatedRatio = _irritatedValue.Ratio;
+            int irritatedPhase = _irritatedValue.GetIrritatedPhase();
 
-            if(irritatedRatio < _irritatedValue.RatioTable[0])
+            if(irritatedPhase == 0)
             {
                 Debug.Log("Do nothing");
             }
-            else if (irritatedRatio < _irritatedValue.RatioTable[1])
+            else if (irritatedPhase == 1)
             {
                 Debug.Log("Blow normal enemy");
                 Debug.Log("Blow comment by probability");
@@ -55,7 +55,7 @@ namespace Daipan.Stream.Scripts
                 _commentCluster.BlownAway(blowAwayProbability);
                 _antiCommentCluster.BlownAway(blowAwayProbability);
             }
-            else if (irritatedRatio < _irritatedValue.RatioTable[2])
+            else if (irritatedPhase == 2)
             {
                 Debug.Log("Blow normal enemy");
                 Debug.Log("Blow comment by probability");
@@ -65,7 +65,7 @@ namespace Daipan.Stream.Scripts
                 _commentCluster.BlownAway(blowAwayProbability);
                 _antiCommentCluster.BlownAway(blowAwayProbability);
             }
-            else if (irritatedRatio < _irritatedValue.RatioTable[3])
+            else if (irritatedPhase == 3)
             {
                 Debug.Log("Blow normal enemy");
                 Debug.Log("Blow comment by probability");
