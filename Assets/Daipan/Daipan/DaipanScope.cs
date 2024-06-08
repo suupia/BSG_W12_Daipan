@@ -18,6 +18,7 @@ using Daipan.Stream.MonoScripts;
 using Daipan.Stream.Scripts;
 using Daipan.Stream.Scripts.Utility;
 using Daipan.Stream.Tests;
+using Daipan.Streamer.Scripts;
 using Daipan.Tower.MonoScripts;
 using Daipan.Tower.Scripts;
 using UnityEngine;
@@ -26,6 +27,7 @@ using VContainer;
 using VContainer.Unity;
 
 namespace Daipan.Daipan
+
 {
     public sealed class DaipanScope : LifetimeScope
     {
@@ -92,6 +94,7 @@ namespace Daipan.Daipan
             // View
             builder.RegisterComponentInHierarchy<StreamViewMono>();
             builder.RegisterComponentInHierarchy<TimerViewMono>();
+            builder.RegisterComponentInHierarchy<StreamerViewMono>();
 
             // Test
             builder.RegisterComponentInHierarchy<PlayerTestInput>();
