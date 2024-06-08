@@ -14,7 +14,15 @@ namespace Daipan.Player.MonoScripts
         {   
             if(animator == null) Debug.LogWarning("animator is null");
         }
-      
-        
+
+        public override void Idle()
+        {
+            animator.SetBool("IsIdling", true);
+        }
+
+        public override void Hit()
+        {
+            animator.SetTrigger("OnHit");
+        }
     }
 }
