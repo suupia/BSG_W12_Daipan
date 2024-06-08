@@ -1,4 +1,5 @@
 #nullable enable
+using Daipan.Player.MonoScripts;
 using UnityEngine;
 
 namespace Daipan.Player.Scripts

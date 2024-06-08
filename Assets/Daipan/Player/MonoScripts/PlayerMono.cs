@@ -14,7 +14,9 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using VContainer;
 
-public class PlayerMono : MonoBehaviour, IHpSetter
+namespace Daipan.Player.MonoScripts
+{
+   public class PlayerMono : MonoBehaviour, IHpSetter
 {
     [SerializeField] List<AbstractPlayerViewMono?> playerViewMonos = new();
     EnemyCluster _enemyCluster = null!;
@@ -118,4 +120,6 @@ public class PlayerMono : MonoBehaviour, IHpSetter
         _playerHp = new PlayerHp(_playerParamData.GetCurrentHp());
         _playerHp.OnDamage += (sender, args) => { commentSpawner.SpawnCommentByType(CommentEnum.Spiky); };
     }
+} 
 }
+
