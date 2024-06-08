@@ -36,7 +36,8 @@ namespace Daipan.Player.MonoScripts
         }
 
         public void SetDomain(PlayerParamData playerPramaData)
-        {
+        { 
+            Debug.Log($"PlayerAttackEffectMono data.Enum = {playerPramaData.PlayerEnum()}");
            _playerParamData = playerPramaData; 
            viewMono?.SetDomain(playerPramaData);
         }

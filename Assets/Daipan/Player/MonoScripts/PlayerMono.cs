@@ -82,11 +82,9 @@ namespace Daipan.Player.MonoScripts
             Debug.Log($"攻撃対象が{enemyEnum}ではないよ");
         }
         
-        
         var effect = _playerAttackEffectSpawner.SpawnEffect(transform.position, Quaternion.identity);
         effect.SetDomain(_playerParamDataContainer.GetPlayerParamData(playerColor));
         effect.TargetPosition = () => enemyMono != null ? enemyMono.transform.position : null;
-        
 
     }
 
