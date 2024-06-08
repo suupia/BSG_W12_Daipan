@@ -83,12 +83,12 @@ namespace Daipan.InputSerial.Scripts
         {
             if (_serialInput == null)
             {
-                Debug.LogWarning("_serialPortがnullです。");
+                //Debug.LogWarning("_serialPortがnullです。");
                 return false;
             }
             if (!_serialInput.isSerial)
             {
-                Debug.LogWarning("_serialPortが開かれていません。");
+                //Debug.LogWarning("_serialPortが開かれていません。");
                 return false;
             }
             return true;
