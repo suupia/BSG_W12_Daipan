@@ -1,6 +1,7 @@
 #nullable enable
 using Daipan.Core.Interfaces;
 using Daipan.LevelDesign.Enemy.Scripts;
+using Daipan.Player.MonoScripts;
 using Daipan.Stream.Scripts.Utility;
 using UnityEngine;
 using VContainer;

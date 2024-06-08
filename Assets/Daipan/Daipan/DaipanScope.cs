@@ -11,6 +11,7 @@ using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.LevelDesign.Player.Scripts;
 using Daipan.LevelDesign.Stream;
 using Daipan.LevelDesign.Tower.Scripts;
+using Daipan.Player.MonoScripts;
 using Daipan.Player.Scripts;
 using Daipan.Stream.MonoScripts;
 using Daipan.Stream.Scripts;
@@ -63,6 +64,7 @@ namespace Daipan.Daipan
          // Player
          //builder.RegisterInstance(playerParameter);
          builder.Register<PlayerPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<PlayerMono>>();
+         builder.Register<PlayerAttackEffectPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<PlayerAttackEffectMono>>();
          builder.Register<PlayerAttack>(Lifetime.Scoped);
          builder.Register<PlayerHolder>(Lifetime.Scoped);
          builder.Register<IStart, PlayerSpawner>(Lifetime.Scoped);
