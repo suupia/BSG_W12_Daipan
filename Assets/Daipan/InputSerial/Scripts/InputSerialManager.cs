@@ -8,15 +8,15 @@ using R3;
 
 namespace Daipan.InputSerial.Scripts
 {
-    public static class InputSerialManager
+    public class InputSerialManager
     {
-        static SerialInput _serialInput = null;
-        static float _chatteringSec = 0.02f;
-        static bool[] _isFirstInputs = new bool[30];
-        static bool[] _isDuringPress = new bool[30];
+        SerialInput _serialInput = null;
+        float _chatteringSec = 0.02f;
+        bool[] _isFirstInputs = new bool[30];
+        bool[] _isDuringPress = new bool[30];
 
         [Inject]
-        public static void Initialize(SerialInput serialInput)
+        public void Initialize(SerialInput serialInput)
         {
             _serialInput = serialInput;
             for(int i = 0; i < _isFirstInputs.Length; i++)
@@ -30,15 +30,15 @@ namespace Daipan.InputSerial.Scripts
         }
 
         // キー入力
-        public static bool GetButtonRed()
+        public bool GetButtonRed()
         {
             return getInput(0);
         }
-        public static bool GetButtonGreen()
+        public bool GetButtonGreen()
         {
             return getInput(1);
         }
-        public static bool GetButtonBlue()
+        public bool GetButtonBlue()
         {
             return getInput(2);
         }
@@ -46,7 +46,7 @@ namespace Daipan.InputSerial.Scripts
 
 
 
-        static bool getInput(int digit)
+        bool getInput(int digit)
         {
             // シリアルポートが有効か？
             if (!isSerial()) return false;
@@ -78,7 +78,7 @@ namespace Daipan.InputSerial.Scripts
 
             return true;
         }
-        static bool isSerial()
+        bool isSerial()
         {
             if (_serialInput == null)
             {

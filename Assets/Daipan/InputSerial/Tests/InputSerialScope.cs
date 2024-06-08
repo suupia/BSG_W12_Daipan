@@ -15,6 +15,7 @@ namespace Daipan.Enemy.Tests
         protected override void Configure(IContainerBuilder builder)
         {
             builder.Register<SerialInput>(Lifetime.Scoped);
+            builder.Register<InputSerialManager>(Lifetime.Scoped);
         }
     }
 
