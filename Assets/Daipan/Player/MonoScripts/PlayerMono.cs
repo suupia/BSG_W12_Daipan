@@ -4,6 +4,7 @@ using Daipan.Comment.MonoScripts;
 using Daipan.Comment.Scripts;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Enemy.Scripts;
+using Daipan.InputSerial.Scripts;
 using Daipan.LevelDesign.Player.Scripts;
 using Daipan.Player.Scripts;
 using UnityEngine;
@@ -16,6 +17,7 @@ public class PlayerMono : MonoBehaviour, IHpSetter
     PlayerAttack _playerAttack = null!;
     PlayerHp _playerHp = null!;
     PlayerParamData _playerParamData = null!;
+    InputSerialManager _inputSerialManager = null!;
 
     public void Update()
     {
@@ -23,19 +25,19 @@ public class PlayerMono : MonoBehaviour, IHpSetter
         
         hpGaugeMono.SetRatio(CurrentHp / (float)_playerParamData.GetCurrentHp());
 
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.W) || _inputSerialManager.GetButtonBlue())
         {
             Debug.Log("Wが押されたよ");
             AttackEnemyMono(enemyMono, EnemyEnum.W);
         }
 
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.S) || _inputSerialManager.GetButtonBlue())
         {
             Debug.Log("Sが押されたよ");
             AttackEnemyMono(enemyMono, EnemyEnum.S); 
         }
 
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.A) || _inputSerialManager.GetButtonBlue())
         {
             Debug.Log("Aが押されたよ");
             AttackEnemyMono(enemyMono, EnemyEnum.A);
@@ -73,7 +75,8 @@ public class PlayerMono : MonoBehaviour, IHpSetter
         EnemyCluster enemyCluster,
         PlayerParamDataBuilder  playerParamDataBuilder,
         PlayerParamData playerParamData,
-        CommentSpawner commentSpawner
+        CommentSpawner commentSpawner,
+        InputSerialManager inputSerialManager
     )
     {
         _playerAttack = playerAttack;
@@ -82,5 +85,7 @@ public class PlayerMono : MonoBehaviour, IHpSetter
         _playerParamData = playerParamData;
         _playerHp = new PlayerHp(_playerParamData.GetCurrentHp(), this);
         _playerHp.OnDamage += (sender, args) => { commentSpawner.SpawnCommentByType(CommentEnum.Spiky); };
+
+        _inputSerialManager = inputSerialManager;
     }
 }

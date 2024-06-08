@@ -34,7 +34,6 @@ namespace Daipan.Daipan
         [SerializeField] IrritatedParams irritatedParams = null!;
         [SerializeField] EnemyDefeatParamManager enemyDefeatParamManager = null!;
         [SerializeField] TowerParams towerParams = null!;
-        [SerializeField] SerialInput serialInput = null!;
 
         protected override void Configure(IContainerBuilder builder)
         {
@@ -125,7 +124,8 @@ namespace Daipan.Daipan
             builder.RegisterInstance(towerParams);
 
             // SerialInput
-            builder.RegisterInstance(serialInput);
+            builder.Register<SerialInput>(Lifetime.Scoped);
+            builder.Register<InputSerialManager>(Lifetime.Scoped);
 
             // Initializer
             builder.RegisterEntryPoint<DaipanInitializer>();
