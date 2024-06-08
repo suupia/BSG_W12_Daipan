@@ -35,16 +35,10 @@ namespace Daipan.Enemy.Scripts
                 return null;
             }
 
-            var minDistance = float.MaxValue;
-            var result = _enemies.FirstOrDefault(e => e.EnemyEnum == enemyEnum);
-            foreach (var enemy in _enemies)
-                if ((position - enemy.transform.position).sqrMagnitude < minDistance)
-                {
-                    minDistance = (position - enemy.transform.position).sqrMagnitude;
-                    result = enemy;
-                }
-
-            return result;
+            return _enemies
+                .Where(e => e.EnemyEnum == enemyEnum)
+                .OrderBy(e => (position - e.transform.position).sqrMagnitude)
+                .FirstOrDefault();
         }
 
         public void Daipaned(float probability = 1.0f)

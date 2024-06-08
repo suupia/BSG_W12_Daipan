@@ -29,17 +29,17 @@ public class PlayerMono : MonoBehaviour, IHpSetter
             Debug.Log("Wが押されたよ");
             AttackEnemyMono(EnemyEnum.W);
         }
+        
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            Debug.Log("Aが押されたよ");
+            AttackEnemyMono(EnemyEnum.A);
+        }
 
         if (Input.GetKeyDown(KeyCode.S))
         {
             Debug.Log("Sが押されたよ");
             AttackEnemyMono(EnemyEnum.S);
-        }
-
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            Debug.Log("Aが押されたよ");
-            AttackEnemyMono(EnemyEnum.A);
         }
 
         // todo : 攻撃やHPの状況に応じて、AbstractPlayerViewMonoのメソッドを呼ぶ
@@ -59,11 +59,20 @@ public class PlayerMono : MonoBehaviour, IHpSetter
         {
             Debug.Log($"EnemyType: {enemyMono.EnemyEnum}を攻撃");
             _playerAttack.Attack(enemyMono);
+            
+            // Animation
+            foreach (var playerViewMono in playerViewMonos)
+            {
+                if (playerViewMono == null) continue;
+                if (IsTargetEnemy(playerViewMono.playerColor, enemyEnum)) playerViewMono.Attack();
+            }
         }
         else
         {
             Debug.Log($"攻撃対象が{enemyEnum}ではないよ");
         }
+        
+
     }
 
     public void OnAttacked(EnemyEnum enemyEnum)
@@ -71,10 +80,18 @@ public class PlayerMono : MonoBehaviour, IHpSetter
         foreach (var playerViewMono in playerViewMonos)
         {
             if (playerViewMono == null) continue;
-            if (enemyEnum == EnemyEnum.W && playerViewMono.playerColor == PlayerColor.Red) playerViewMono.Damage();
-            if (enemyEnum == EnemyEnum.A && playerViewMono.playerColor == PlayerColor.Blue) playerViewMono.Damage();
-            if (enemyEnum == EnemyEnum.S && playerViewMono.playerColor == PlayerColor.Yellow) playerViewMono.Damage();
+            if(IsTargetEnemy(playerViewMono.playerColor, enemyEnum)) playerViewMono.Damage();
         }
+    }
+    
+    bool IsTargetEnemy(PlayerColor playerColor, EnemyEnum enemyEnum){
+        return playerColor switch
+        {
+            PlayerColor.Red => enemyEnum == EnemyEnum.W,
+            PlayerColor.Blue => enemyEnum == EnemyEnum.A,
+            PlayerColor.Yellow => enemyEnum == EnemyEnum.S,
+            _ => false
+        };
     }
 
     public int CurrentHp
