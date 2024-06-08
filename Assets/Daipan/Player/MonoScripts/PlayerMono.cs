@@ -1,6 +1,7 @@
 #nullable enable
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Daipan.Battle.interfaces;
 using Daipan.Comment.MonoScripts;
 using Daipan.Comment.Scripts;
@@ -55,7 +56,11 @@ namespace Daipan.Player.MonoScripts
 
     void OnAttackEffectHit(PlayerColor playerColor)
     {
-        var effect = _playerAttackEffectSpawner.SpawnEffect(transform.position, Quaternion.identity);
+        var spawnPosition = playerViewMonos
+            .Where(playerViewMono => playerViewMono?.playerColor == playerColor)
+            .Select(playerViewMono => playerViewMono?.transform.position)
+            .FirstOrDefault(); 
+        var effect = _playerAttackEffectSpawner.SpawnEffect(spawnPosition ?? transform.position, Quaternion.identity);
         effect.SetDomain(_playerParamDataContainer.GetPlayerParamData(playerColor));
         effect.TargetPosition = () => GetNearestEnemy(GetEnemyEnum(playerColor))?.transform.position;
         effect.OnHit += (sender, args) => AttackEnemy(playerColor);
