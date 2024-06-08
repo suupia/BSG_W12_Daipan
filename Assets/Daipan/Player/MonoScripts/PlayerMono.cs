@@ -57,7 +57,7 @@ namespace Daipan.Player.MonoScripts
     {
         var effect = _playerAttackEffectSpawner.SpawnEffect(transform.position, Quaternion.identity);
         effect.SetDomain(_playerParamDataContainer.GetPlayerParamData(playerColor));
-        effect.TargetPosition = () => _enemyCluster.NearestEnemy(GetEnemyEnum(playerColor), transform.position)?.transform.position;
+        effect.TargetPosition = () => GetNearestEnemy(GetEnemyEnum(playerColor))?.transform.position;
         effect.OnHit += (sender, args) => AttackEnemy(playerColor);
     }
     
@@ -70,6 +70,21 @@ namespace Daipan.Player.MonoScripts
             PlayerColor.Yellow => EnemyEnum.S,
             _ => throw new ArgumentOutOfRangeException()
         };
+    }
+    
+    EnemyMono? GetNearestEnemy(EnemyEnum enemyEnum)
+    {
+        // そのレーンの敵を取得
+        var enemyMono = _enemyCluster.NearestEnemy(enemyEnum, transform.position);
+        // レーンの敵がいなければ、ボスを取得
+        if (enemyMono == null) enemyMono = _enemyCluster.NearestEnemy(transform.position);
+        if (enemyMono == null)
+        {
+            Debug.Log($"攻撃対象がいないよ");
+            return null;
+        }
+
+        return enemyMono;
     }
     
     EnemyMono? AttackEnemy(PlayerColor playerColor)
