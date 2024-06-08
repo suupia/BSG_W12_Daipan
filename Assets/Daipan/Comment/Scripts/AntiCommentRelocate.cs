@@ -26,9 +26,10 @@ namespace Daipan.Comment.Scripts
     
         void IUpdate.Update()
         {
-            var objectsToAlign = _antiCommentCluster.CommentMonos.Select(x => x.gameObject).ToList();
-            _streamStatus.IsIrritated = objectsToAlign.Count > 0;
-            AlignVertically(objectsToAlign);
+            // いったんランダム生成の動作をみたい
+            //var objectsToAlign = _antiCommentCluster.CommentMonos.Select(x => x.gameObject).ToList();
+            //_streamStatus.IsIrritated = objectsToAlign.Count > 0;
+            //AlignVertically(objectsToAlign);
         }
     
         void AlignVertically(IEnumerable<GameObject> objectsToAlign)

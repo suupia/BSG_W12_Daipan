@@ -28,39 +28,38 @@ namespace Daipan.LevelDesign.Comment.Scripts
 
         // CommentManagerParamsについて
 
-        #region Params
-
-        public Sprite GetSprite(CommentEnum commentEnum)
+        public float GetSpeed()
         {
-            var cparams = GetCommentParams(commentEnum);
-            return cparams.sprite;
+            return _commentParamsManager.commentSpeed;
         }
 
-        public float GetSpeed(CommentEnum commentEnum)
+        public int GetViewerDiffCommentNumber()
         {
-            if (_commentParamsManager.isAdaptSameSpeed) return _commentParamsManager.commentSpeed;
-            var cparams = GetCommentParams(commentEnum);
-            return cparams.commentSpeed_ups;
+            return _commentParamsManager.diffCommentViewer;
+        }
+        public int GetViewerDiffAntiCommentNumber()
+        {
+            return _commentParamsManager.diffAntiCommentViewer;
         }
 
-        public int GetViewerDiffNumber(CommentEnum commentEnum)
+        public string GetRandomCommentWord()
         {
-            return GetCommentParams(commentEnum).diffViewer;
+            int index = (int)(Random.value * _commentParamsManager.CommentWords.Count);
+            return _commentParamsManager.CommentWords[index];
         }
-        
-        
-        CommentParams GetCommentParams(CommentEnum commentEnum)
+        public string GetRandomAntiCommentWord()
         {
-            return _commentParamsManager.commentParams.First(c => c.GetCommentEnum == commentEnum);
+            int index = (int)(Random.value * _commentParamsManager.AntiCommentWords.Count);
+            return _commentParamsManager.AntiCommentWords[index];
         }
 
-        #endregion
+
 
         // CommentPositionについて
-        #region Position 
         public Vector3 GetSpawnedPosition()
         {
-            return _commentPosition.CommentSpawnedPoint.position;
+            float band = (Random.value - 0.5f) * 2 * _commentPosition.SpawnBand;
+            return _commentPosition.CommentSpawnedPoint.position + new Vector3(0, band, 0);
         }
 
         public Vector3 GetDespawnedPosition()
@@ -73,9 +72,16 @@ namespace Daipan.LevelDesign.Comment.Scripts
             return _commentPosition.CommentParent;
         }
 
-        #endregion
+        public Vector3 GetAntiSpawnedPosition()
+        {
+            Vector3 band = new Vector3(
+                (Random.value - 0.5f) * _commentPosition.AntiCommentSpawnArea.size.x,
+                (Random.value - 0.5f) * _commentPosition.AntiCommentSpawnArea.size.y,
+                0
+                );
 
+            return _commentPosition.AntiCommentSpawnArea.gameObject.transform.position + band;
 
-
+        }
     }
 }
