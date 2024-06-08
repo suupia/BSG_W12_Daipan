@@ -23,6 +23,7 @@ namespace Daipan.Player.MonoScripts
     PlayerAttack _playerAttack = null!;
     PlayerHp _playerHp = null!;
     PlayerParamData _playerParamData = null!;
+    InputSerialManager _inputSerialManager = null!;
 
     public void Update()
     {
@@ -38,7 +39,7 @@ namespace Daipan.Player.MonoScripts
             AttackEnemyMono(EnemyEnum.A);
         }
 
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.S) || _inputSerialManager.GetButtonBlue())
         {
             Debug.Log("Sが押されたよ");
             AttackEnemyMono(EnemyEnum.S);
@@ -110,7 +111,8 @@ namespace Daipan.Player.MonoScripts
         EnemyCluster enemyCluster,
         PlayerParamDataBuilder playerParamDataBuilder,
         PlayerParamData playerParamData,
-        CommentSpawner commentSpawner
+        CommentSpawner commentSpawner,
+        InputSerialManager inputSerialManager
     )
     {
         _playerAttack = playerAttack;
@@ -119,6 +121,8 @@ namespace Daipan.Player.MonoScripts
         _playerParamData = playerParamData;
         _playerHp = new PlayerHp(_playerParamData.GetCurrentHp());
         _playerHp.OnDamage += (sender, args) => { commentSpawner.SpawnCommentByType(CommentEnum.Spiky); };
+
+        _inputSerialManager = inputSerialManager;
     }
 } 
 }
