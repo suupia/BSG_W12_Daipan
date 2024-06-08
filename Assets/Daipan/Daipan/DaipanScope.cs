@@ -66,6 +66,7 @@ namespace Daipan.Daipan
             //builder.RegisterInstance(playerParameter);
             builder.Register<PlayerPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<PlayerMono>>();
             builder.Register<PlayerAttackEffectPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<PlayerAttackEffectMono>>();
+            builder.Register<PlayerAttackEffectSpawner>(Lifetime.Scoped);
             builder.Register<PlayerAttack>(Lifetime.Scoped);
             builder.Register<PlayerHolder>(Lifetime.Scoped);
             builder.Register<IStart, PlayerSpawner>(Lifetime.Scoped);

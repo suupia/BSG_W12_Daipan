@@ -14,7 +14,7 @@ namespace Daipan.Player.Scripts
             _effectLoader = effectLoader;
         }
 
-        public PlayerAttackEffectMono Spawn(Vector3 position, Quaternion rotation)
+        public PlayerAttackEffectMono SpawnEffect(Vector3 position, Quaternion rotation)
         {
             var effectPrefab = _effectLoader.Load();
             var effectObject = Object.Instantiate(effectPrefab, position, rotation);
