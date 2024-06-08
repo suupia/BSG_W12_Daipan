@@ -16,7 +16,7 @@ MonoBehaviour:
     spawnBossAmount: 10
     increaseIrritatedValueByBoss: 10
     increaseViewerOnEnemyKill: 5
-    currentKillAmount: 9
+    currentKillAmount: 8
   enemyParams:
   - enemyEnum: 1
     enemyAttackParam:
@@ -73,7 +73,7 @@ MonoBehaviour:
       spawnRatio: 20
       daipanThreshold: 0
       daipanProbability: 0
-    animatorController: {fileID: 22100000, guid: 785cf14c798ed4b83a9329c7a7dda36b, type: 2}
+    animatorController: {fileID: 22100000, guid: 140eb1db085be4c0faf71dccd1868e71, type: 2}
   enemyTimeLineParams:
   - startTime: 0
     spawnDelaySec: 1
