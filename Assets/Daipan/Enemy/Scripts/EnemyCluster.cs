@@ -41,11 +41,10 @@ namespace Daipan.Enemy.Scripts
                 .FirstOrDefault();
         }
 
-        public void Daipaned(float probability = 1.0f)
+        public void Daipaned()
         {
             var enemies = _enemies.ToArray();
             foreach (var enemy in enemies)
-                if (Random.value < probability)
                     Remove(enemy, isDaipaned:true);
         }
 
