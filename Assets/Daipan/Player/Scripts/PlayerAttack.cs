@@ -17,7 +17,9 @@ namespace Daipan.Player.Scripts
 
         public void Attack(IHpSetter hpSetter)
         {
-            hpSetter.CurrentHp -= _playerParamData.GetSAttack();
+            Debug.Log("Attack Enemy");
+            hpSetter.CurrentHp -= _playerParamData.GetAttack();
+            Debug.Log($"_playerParamData.GetAttack() = {_playerParamData.GetAttack()}");
         }
     }
 }

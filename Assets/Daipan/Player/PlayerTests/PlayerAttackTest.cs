@@ -15,9 +15,7 @@ public class PlayerAttackTest
         var enemy = new DummyEnemy() { CurrentHp = 100 };
         var playerParamDto = new PlayerParamData()
         {
-            GetWAttack = () => 10,
-            GetAAttack = () => 10,
-            GetSAttack = () => 10
+            GetAttack = () => 10,
         };
         var playerAttack = new PlayerAttack(playerParamDto);
 

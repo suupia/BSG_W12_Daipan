@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Daipan.Enemy.Interfaces;
 using Daipan.Player.Interfaces;
+using Daipan.Player.Scripts;
 using UnityEngine;
 
 namespace Daipan.Player.MonoScripts
@@ -13,6 +14,10 @@ namespace Daipan.Player.MonoScripts
         void Awake()
         {   
             if(animator == null) Debug.LogWarning("animator is null");
+        }
+        public void SetDomain(PlayerParamData playerParamData)
+        {
+            animator.runtimeAnimatorController = playerParamData.GetAnimator();
         }
 
         public override void Idle()

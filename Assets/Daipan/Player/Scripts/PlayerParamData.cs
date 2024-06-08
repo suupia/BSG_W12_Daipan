@@ -1,20 +1,22 @@
 #nullable enable
 using System;
+using Daipan.Player.MonoScripts;
 
 namespace Daipan.Player.Scripts 
 {
-    /// <summary>
-    /// このクラスは、IPlayerHp, IPlayerAttackなどを実装するクラスとして捉えている
-    /// </summary>
     public class PlayerParamData
     {
-        // Hp
-        public  Func<int> GetCurrentHp { get; init; } = () => 100;
-        public  Action<int> SetCurrentHp { get; init; } = _ => { };
-        
+        // Animator
+        public Func<UnityEngine.RuntimeAnimatorController?> GetAnimator { get; init; } = () => null;
+        // Enum
+        public Func<PlayerColor> PlayerEnum { get; init; } = () => PlayerColor.None;
         // Attack
-        public  Func<int> GetWAttack { get; init; } = () => 10;
-        public  Func<int> GetAAttack { get; init; } = () => 10;
-        public  Func<int> GetSAttack { get; init; } = () => 10;
+        public  Func<int> GetAttack { get; init; } = () => 10;
+    }
+
+    public class PlayerHpParamData
+    {
+        public Func<int> GetCurrentHp { get; init; } = () => 0;
+        public Action<int> SetCurrentHp { get; init; } = (value) => { };
     }
 }

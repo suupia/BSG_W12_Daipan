@@ -10,7 +10,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         public Func<UnityEngine.RuntimeAnimatorController?> GetAnimator { get; init; } = () => null;
         
         // Enum
-        public required Func<EnemyEnum> EnemyEnum { get; init; } 
+        public Func<EnemyEnum> EnemyEnum { get; init; } 
         
         // Attack
         public Func<int> GetAttackAmount { get; init; } = () => 10;

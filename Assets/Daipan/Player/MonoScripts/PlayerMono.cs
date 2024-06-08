@@ -1,4 +1,5 @@
 #nullable enable
+using System;
 using System.Collections.Generic;
 using Daipan.Battle.interfaces;
 using Daipan.Comment.MonoScripts;
@@ -21,37 +22,38 @@ namespace Daipan.Player.MonoScripts
 {
     [SerializeField] List<AbstractPlayerViewMono?> playerViewMonos = new();
     EnemyCluster _enemyCluster = null!;
-    PlayerAttack _playerAttack = null!;
+    Dictionary<PlayerColor, PlayerAttack> _playerAttacks = new();
     PlayerHp _playerHp = null!;
     PlayerParamData _playerParamData = null!;
     InputSerialManager _inputSerialManager = null!;
     PlayerAttackEffectSpawner _playerAttackEffectSpawner = null!;
+    PlayerParamDataContainer _playerParamDataContainer = null!;
 
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.W))
         {
             Debug.Log("Wが押されたよ");
-            AttackEnemyMono(EnemyEnum.W);
+            AttackEnemyMono(PlayerColor.Red, EnemyEnum.W);
         }
         
         if (Input.GetKeyDown(KeyCode.A))
         {
             Debug.Log("Aが押されたよ");
-            AttackEnemyMono(EnemyEnum.A);
+            AttackEnemyMono(PlayerColor.Blue, EnemyEnum.A);
         }
 
-        if (Input.GetKeyDown(KeyCode.S) || _inputSerialManager.GetButtonBlue())
+        if (Input.GetKeyDown(KeyCode.S))
         {
             Debug.Log("Sが押されたよ");
-            AttackEnemyMono(EnemyEnum.S);
+            AttackEnemyMono(PlayerColor.Yellow, EnemyEnum.S);
         }
 
         // todo : 攻撃やHPの状況に応じて、AbstractPlayerViewMonoのメソッドを呼ぶ
         foreach (var playerViewMono in playerViewMonos) playerViewMono?.Idle();
     }
 
-    void AttackEnemyMono(EnemyEnum enemyEnum)
+    void AttackEnemyMono(PlayerColor playerColor, EnemyEnum enemyEnum)
     {
         // そのレーンの敵を取得
         var enemyMono = _enemyCluster.NearestEnemy(enemyEnum, transform.position);
@@ -66,7 +68,7 @@ namespace Daipan.Player.MonoScripts
         if (enemyMono.EnemyEnum == enemyEnum || enemyMono.EnemyEnum == EnemyEnum.Boss)
         {
             Debug.Log($"EnemyType: {enemyMono.EnemyEnum}を攻撃");
-            _playerAttack.Attack(enemyMono);
+            _playerAttacks[playerColor].Attack(enemyMono);
             
             // Animation
             foreach (var playerViewMono in playerViewMonos)
@@ -80,11 +82,9 @@ namespace Daipan.Player.MonoScripts
             Debug.Log($"攻撃対象が{enemyEnum}ではないよ");
         }
         
-        
         var effect = _playerAttackEffectSpawner.SpawnEffect(transform.position, Quaternion.identity);
-        effect.SetDomain(PlayerColor.Red);
+        effect.SetDomain(_playerParamDataContainer.GetPlayerParamData(playerColor));
         effect.TargetPosition = () => enemyMono != null ? enemyMono.transform.position : null;
-        
 
     }
 
@@ -99,20 +99,23 @@ namespace Daipan.Player.MonoScripts
 
     [Inject]
     public void Initialize(
-        PlayerAttack playerAttack,
+        PlayerParamDataContainer playerParamDataContainer, 
         EnemyCluster enemyCluster,
-        PlayerParamDataBuilder playerParamDataBuilder,
-        PlayerParamData playerParamData,
+        PlayerHpParamData playerHpParamData,
         CommentSpawner commentSpawner,
         InputSerialManager inputSerialManager,
         PlayerAttackEffectSpawner playerAttackEffectSpawner
     )
     {
-        _playerAttack = playerAttack;
+        _playerParamDataContainer = playerParamDataContainer;
+        foreach(PlayerColor playerColor in Enum.GetValues(typeof(PlayerColor)))
+        {
+            if(playerColor == PlayerColor.None) continue;
+            _playerAttacks[playerColor] = new PlayerAttack(playerParamDataContainer.GetPlayerParamData(playerColor));
+        }
         _enemyCluster = enemyCluster;
 
-        _playerParamData = playerParamData;
-        _playerHp = new PlayerHp(_playerParamData.GetCurrentHp());
+        _playerHp = new PlayerHp(playerHpParamData.GetCurrentHp());
         _playerHp.OnDamage += (sender, args) => { commentSpawner.SpawnCommentByType(CommentEnum.Spiky); };
 
         _inputSerialManager = inputSerialManager;

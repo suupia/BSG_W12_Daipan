@@ -1,13 +1,16 @@
 #nullable enable
 using System;
+using Daipan.LevelDesign.Player.Scripts;
+using Daipan.Player.Scripts;
 using UnityEngine;
 
 namespace Daipan.Player.MonoScripts
 {
     public class PlayerAttackEffectMono : MonoBehaviour
     {
+        [SerializeField] PlayerAttackEffectViewMono? viewMono;
         public Func<Vector3?>? TargetPosition;
-        PlayerColor _playerColor;
+        PlayerParamData _playerParamData = null; 
         double _speed = 10;
         Vector3 TargetPositionCached { get; set; }
             
@@ -32,9 +35,11 @@ namespace Daipan.Player.MonoScripts
             }
         }
 
-        public void SetDomain(PlayerColor playerColor)
-        {
-           _playerColor = playerColor; 
+        public void SetDomain(PlayerParamData playerPramaData)
+        { 
+            Debug.Log($"PlayerAttackEffectMono data.Enum = {playerPramaData.PlayerEnum()}");
+           _playerParamData = playerPramaData; 
+           viewMono?.SetDomain(playerPramaData);
         }
     }
 }
