@@ -1,5 +1,6 @@
 #nullable enable
 using System;
+using Daipan.Enemy.MonoScripts;
 using Daipan.LevelDesign.Player.Scripts;
 using Daipan.Player.Scripts;
 using UnityEngine;
@@ -10,9 +11,11 @@ namespace Daipan.Player.MonoScripts
     {
         [SerializeField] PlayerAttackEffectViewMono? viewMono;
         public Func<Vector3?>? TargetPosition;
-        PlayerParamData _playerParamData = null; 
-        double _speed = 10;
+        PlayerParamData _playerParamData = null;
+        EnemyMono _enemyMono;
+        readonly double _speed = 10;
         Vector3 TargetPositionCached { get; set; }
+        public event EventHandler<OnHitEventArgs>? OnHit;
             
         void Update()
         {
@@ -31,6 +34,7 @@ namespace Daipan.Player.MonoScripts
             
             if (Vector3.Distance(transform.position, TargetPositionCached) < 0.1f) 
             {
+                OnHit?.Invoke(this, new OnHitEventArgs(_enemyMono));
                 Destroy(gameObject);
             }
         }
@@ -41,7 +45,12 @@ namespace Daipan.Player.MonoScripts
            _playerParamData = playerParamData; 
            viewMono?.SetDomain(playerParamData);
         }
+
+        public void SetTarget(EnemyMono enemyMono)
+        {
+            _enemyMono = enemyMono;
+        }
     }
     
-    public record OnHitEventArgs(PlayerColor PlayerColor);
+    public record OnHitEventArgs(EnemyMono EnemyMono);
 }
