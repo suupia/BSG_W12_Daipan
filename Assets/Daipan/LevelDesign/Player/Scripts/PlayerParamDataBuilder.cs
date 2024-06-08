@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Daipan.Player.Scripts;
+using Unity.VisualScripting.YamlDotNet.Core.Tokens;
 using UnityEngine;
 using VContainer;
 
@@ -13,18 +14,25 @@ namespace Daipan.LevelDesign.Player.Scripts
     {
         public PlayerParamDataBuilder (
             IContainerBuilder builder,
-            PlayerParam playerParam)
+            PlayerParamManager playerParamManager)
         {
-            var playerParamData = new PlayerParamData
+            var playerParams = new List<PlayerParamData>();
+            foreach (var playerParam in playerParamManager.playerParams)
             {
-                GetCurrentHp = () => playerParam.hpAmount,
-                SetCurrentHp = (hp) => playerParam.hpAmount = hp,
-                
-                GetWAttack = () => playerParam.playerAttackParam.WAttackAmount,
-                GetAAttack = () => playerParam.playerAttackParam.AAttackAmount,
-                GetSAttack = () => playerParam.playerAttackParam.SAttackAmount
-            };
-            builder.RegisterInstance(playerParamData);
+                playerParams.Add(new PlayerParamData()
+                {
+                    PlayerEnum = () => playerParam.playerColor,
+                    GetAttack = () => playerParam.playerAttackParam.attackAmount
+                });  
+            }
+            var playerParamContainer = new PlayerParamDataContainer(playerParams);
+            builder.RegisterInstance(playerParamContainer);
+            
+            builder.RegisterInstance(new PlayerHpParamData()
+            {
+                GetCurrentHp  = () => playerParamManager.playerHpParam.hpAmount,
+                SetCurrentHp = value => playerParamManager.playerHpParam.hpAmount = value
+            });
         }
 
     }

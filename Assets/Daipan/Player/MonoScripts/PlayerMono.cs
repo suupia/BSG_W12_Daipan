@@ -1,4 +1,5 @@
 #nullable enable
+using System;
 using System.Collections.Generic;
 using Daipan.Battle.interfaces;
 using Daipan.Comment.MonoScripts;
@@ -21,7 +22,7 @@ namespace Daipan.Player.MonoScripts
 {
     [SerializeField] List<AbstractPlayerViewMono?> playerViewMonos = new();
     EnemyCluster _enemyCluster = null!;
-    PlayerAttack _playerAttack = null!;
+    Dictionary<PlayerColor, PlayerAttack> _playerAttacks = new();
     PlayerHp _playerHp = null!;
     PlayerParamData _playerParamData = null!;
     InputSerialManager _inputSerialManager = null!;
@@ -41,7 +42,7 @@ namespace Daipan.Player.MonoScripts
             AttackEnemyMono(PlayerColor.Blue, EnemyEnum.A);
         }
 
-        if (Input.GetKeyDown(KeyCode.S) || _inputSerialManager.GetButtonBlue())
+        if (Input.GetKeyDown(KeyCode.S))
         {
             Debug.Log("Sが押されたよ");
             AttackEnemyMono(PlayerColor.Yellow, EnemyEnum.S);
@@ -66,7 +67,7 @@ namespace Daipan.Player.MonoScripts
         if (enemyMono.EnemyEnum == enemyEnum || enemyMono.EnemyEnum == EnemyEnum.Boss)
         {
             Debug.Log($"EnemyType: {enemyMono.EnemyEnum}を攻撃");
-            _playerAttack.Attack(enemyMono);
+            _playerAttacks[playerColor].Attack(enemyMono);
             
             // Animation
             foreach (var playerViewMono in playerViewMonos)
@@ -99,20 +100,22 @@ namespace Daipan.Player.MonoScripts
 
     [Inject]
     public void Initialize(
-        PlayerAttack playerAttack,
+        PlayerParamDataContainer playerParamDataContainer, 
         EnemyCluster enemyCluster,
-        PlayerParamDataBuilder playerParamDataBuilder,
-        PlayerParamData playerParamData,
+        PlayerHpParamData playerHpParamData,
         CommentSpawner commentSpawner,
         InputSerialManager inputSerialManager,
         PlayerAttackEffectSpawner playerAttackEffectSpawner
     )
     {
-        _playerAttack = playerAttack;
+        foreach(PlayerColor playerColor in Enum.GetValues(typeof(PlayerColor)))
+        {
+            if(playerColor == PlayerColor.None) continue;
+            _playerAttacks[playerColor] = new PlayerAttack(playerParamDataContainer.GetPlayerParamData(playerColor));
+        }
         _enemyCluster = enemyCluster;
 
-        _playerParamData = playerParamData;
-        _playerHp = new PlayerHp(_playerParamData.GetCurrentHp());
+        _playerHp = new PlayerHp(playerHpParamData.GetCurrentHp());
         _playerHp.OnDamage += (sender, args) => { commentSpawner.SpawnCommentByType(CommentEnum.Spiky); };
 
         _inputSerialManager = inputSerialManager;
