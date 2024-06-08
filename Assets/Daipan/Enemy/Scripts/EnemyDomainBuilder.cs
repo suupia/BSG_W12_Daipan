@@ -43,14 +43,10 @@ namespace Daipan.Enemy.Scripts
 
         public EnemyMono SetDomain(EnemyEnum enemyEnum, EnemyMono enemyMono)
         {
-            if(enemyEnum == EnemyEnum.None) enemyEnum = DecideRandomEnemyType();
+            if(enemyEnum == EnemyEnum.None) enemyEnum = DecideRandomEnemyType();  // EnemyEnum.Noneが設定されていない時の処理
             
-            // ボス発生条件を満たしていればBOSSを生成
-            if (_enemyLevelDesignParamData.GetCurrentKillAmount() >= _enemyLevelDesignParamData.GetSpawnBossAmount())
-            {
-                _enemyLevelDesignParamData.SetCurrentKillAmount(0);
-                enemyEnum = EnemyEnum.Boss;
-            }
+            if(IsSpawnBoss()) enemyEnum = EnemyEnum.Boss;
+            
             Debug.Log($"enemyEnum: {enemyEnum}");
             var enemyParamData = _enemyParamDataContainer.GetEnemyParamData(enemyEnum);
             enemyMono.SetDomain(
@@ -79,27 +75,46 @@ namespace Daipan.Enemy.Scripts
             return EnemyEnum.Boss;
         }
 
+        bool IsSpawnBoss()
+        {
+            // ボスが出現する条件1
+            if (_enemyLevelDesignParamData.GetCurrentKillAmount() >= _enemyLevelDesignParamData.GetSpawnBossAmount())
+            {
+                _enemyLevelDesignParamData.SetCurrentKillAmount(0);
+                return true;
+            } 
+            
+            // ボスが出現する条件2
+            if (Random.value < _enemyParamModifyWithTimer.GetSpawnBossPercent() / 100.0)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
 
         EnemyEnum DecideRandomEnemyType()
         {
-
+            // BOSSをスポーンするかどうかの判定
+            if (Random.value < _enemyParamModifyWithTimer.GetSpawnBossPercent() / 100.0)
+            {
+                return EnemyEnum.Boss;
+            }
 
             // 通常敵のType決め
             List<float> ratio = new();
-
             foreach (var enemyLife in _enemyParamManager.enemyParams)
             {
                 if (enemyLife.enemyEnum == EnemyEnum.Boss) continue;
                 ratio.Add(enemyLife.enemySpawnParam.spawnRatio);
             }
-
+            
             // ここで100%に正規化
             ratio = EnemySpawnCalculator.NormalizeEnemySpawnRatioWithBoss(ratio,
                 (float)_enemyParamModifyWithTimer.GetSpawnBossPercent());
-
             Debug.Log($"enemyPrams.Length : {_enemyParamManager.enemyParams.Count}");
             Debug.Log($"Randoms.RandomByRatio(ratio) : {Randoms.RandomByRatio(ratio)}");
-
 
             var enemyEnum = _enemyParamManager.enemyParams[Randoms.RandomByRatio(ratio)].enemyEnum;
             if (enemyEnum == EnemyEnum.Boss) _enemyLevelDesignParamData.SetCurrentKillAmount(0);
