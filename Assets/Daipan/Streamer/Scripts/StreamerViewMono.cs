@@ -6,7 +6,7 @@ using Daipan.Stream.Scripts;
 
 namespace Daipan.Streamer.Scripts
 {
-    public class StreamViewMono : MonoBehaviour
+    public class StreamerViewMono : MonoBehaviour
     {
         [SerializeField] Animator animator = null!;
 
@@ -26,7 +26,7 @@ namespace Daipan.Streamer.Scripts
         }
         void Update()
         {
-
+            animator.SetInteger("IrritatedPhase", _irritatedValue.GetIrritatedPhase());
         }
     }
 }
