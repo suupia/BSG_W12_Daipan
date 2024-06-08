@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Daipan.Enemy.Interfaces;
 using Daipan.Player.Interfaces;
+using Daipan.Player.Scripts;
 using UnityEngine;
 
 namespace Daipan.Player.MonoScripts
@@ -14,10 +15,11 @@ namespace Daipan.Player.MonoScripts
         {   
             if(animator == null) Debug.LogWarning("animator is null");
         }
-        public void SetDomain(PlayerColor playerColor)
+        public void SetDomain(PlayerParamData playerParamData)
         {
-            // animator.runtimeAnimatorController = playerColor.GetAnimator();
+            animator.runtimeAnimatorController = playerParamData.GetAnimator();
         }
+
         public override void Idle()
         {
             animator.SetBool("IsIdling", true);

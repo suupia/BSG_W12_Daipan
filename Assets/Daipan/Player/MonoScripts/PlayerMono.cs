@@ -27,6 +27,7 @@ namespace Daipan.Player.MonoScripts
     PlayerParamData _playerParamData = null!;
     InputSerialManager _inputSerialManager = null!;
     PlayerAttackEffectSpawner _playerAttackEffectSpawner = null!;
+    PlayerParamDataContainer _playerParamDataContainer = null!;
 
     public void Update()
     {
@@ -83,7 +84,7 @@ namespace Daipan.Player.MonoScripts
         
         
         var effect = _playerAttackEffectSpawner.SpawnEffect(transform.position, Quaternion.identity);
-        effect.SetDomain(playerColor);
+        effect.SetDomain(_playerParamDataContainer.GetPlayerParamData(playerColor));
         effect.TargetPosition = () => enemyMono != null ? enemyMono.transform.position : null;
         
 
@@ -108,6 +109,7 @@ namespace Daipan.Player.MonoScripts
         PlayerAttackEffectSpawner playerAttackEffectSpawner
     )
     {
+        _playerParamDataContainer = playerParamDataContainer;
         foreach(PlayerColor playerColor in Enum.GetValues(typeof(PlayerColor)))
         {
             if(playerColor == PlayerColor.None) continue;

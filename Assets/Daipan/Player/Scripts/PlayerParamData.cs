@@ -6,7 +6,11 @@ namespace Daipan.Player.Scripts
 {
     public class PlayerParamData
     {
+        // Animator
+        public Func<UnityEngine.RuntimeAnimatorController?> GetAnimator { get; init; } = () => null;
+        // Enum
         public Func<PlayerColor> PlayerEnum { get; init; } = () => PlayerColor.None;
+        // Attack
         public  Func<int> GetAttack { get; init; } = () => 10;
     }
 

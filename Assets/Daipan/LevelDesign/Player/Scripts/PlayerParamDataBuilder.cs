@@ -21,6 +21,7 @@ namespace Daipan.LevelDesign.Player.Scripts
             {
                 playerParams.Add(new PlayerParamData()
                 {
+                    GetAnimator = () => playerParam.attackEffectAnimatorController,
                     PlayerEnum = () => playerParam.playerColor,
                     GetAttack = () => playerParam.playerAttackParam.attackAmount
                 });  
