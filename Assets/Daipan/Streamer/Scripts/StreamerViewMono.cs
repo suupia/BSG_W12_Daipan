@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Daipan.Streamer.Scripts
 {
-    public class EnemyViewMono : MonoBehaviour
+    public class StreamViewMono : MonoBehaviour
     {
         [SerializeField] Animator animator = null!;
 
@@ -18,5 +18,7 @@ namespace Daipan.Streamer.Scripts
         {
 
         }
+
+
     }
 }
