@@ -2,6 +2,7 @@
 using System;
 using Daipan.Battle.interfaces;
 using Daipan.LevelDesign.Enemy.Scripts;
+using Daipan.Player.MonoScripts;
 
 namespace Daipan.Enemy.Scripts
 {

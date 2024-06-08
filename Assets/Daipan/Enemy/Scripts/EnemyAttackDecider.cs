@@ -3,6 +3,7 @@ using Daipan.Battle.interfaces;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.MonoScripts;
 using Daipan.LevelDesign.Enemy.Scripts;
+using Daipan.Player.MonoScripts;
 using UnityEngine;
 
 namespace Daipan.Enemy.Scripts
