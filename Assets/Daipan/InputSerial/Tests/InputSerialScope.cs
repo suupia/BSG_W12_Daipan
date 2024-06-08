@@ -8,7 +8,7 @@ using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace Daipan.Enemy.Tests
+namespace Daipan.InputSerial.Tests
 {
     public sealed class InputSerialScope : LifetimeScope
     {
@@ -16,6 +16,8 @@ namespace Daipan.Enemy.Tests
         {
             builder.Register<SerialInput>(Lifetime.Scoped);
             builder.Register<InputSerialManager>(Lifetime.Scoped);
+
+            builder.RegisterComponentInHierarchy<InputTest>();
         }
     }
 

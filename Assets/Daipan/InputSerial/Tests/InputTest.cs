@@ -6,10 +6,10 @@ using VContainer;
 
 public class InputTest : MonoBehaviour
 {
-    InputSerialManager _inputSerialManager;
+    InputSerialManager _inputSerialManager = null;
 
     [Inject]
-    InputTest(InputSerialManager inputSerialManager)
+    public void Initialize(InputSerialManager inputSerialManager)
     {
         _inputSerialManager = inputSerialManager;
     }

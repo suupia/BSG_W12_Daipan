@@ -21,7 +21,7 @@ namespace Daipan.InputSerial.Scripts
 
         public int number = 0;
         public bool isSerial = false;
-        SerialInput()
+        public SerialInput()
         {
             this.serial = new SerialPort(portName, baurate, Parity.None, 8, StopBits.One);
             serial.DtrEnable = true;
@@ -75,7 +75,7 @@ namespace Daipan.InputSerial.Scripts
             {
                 //ReadLineで読み込む
                 string message = this.serial.ReadLine();
-                Debug.Log(message);
+                //Debug.Log(message);
                 number = int.Parse(message);
             }
         }

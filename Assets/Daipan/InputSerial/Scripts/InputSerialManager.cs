@@ -52,7 +52,7 @@ namespace Daipan.InputSerial.Scripts
             if (!isSerial()) return false;
 
             // チャタリングチェック
-            if (_isDuringPress[digit]) return true;
+            if (_isDuringPress[digit]) return false;
 
             // 受け取った入力がT/Fか？
             if ((_serialInput.number & 1 << digit) == 0)
@@ -78,6 +78,7 @@ namespace Daipan.InputSerial.Scripts
 
             return true;
         }
+        
         bool isSerial()
         {
             if (_serialInput == null)
