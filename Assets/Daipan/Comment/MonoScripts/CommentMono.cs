@@ -20,9 +20,9 @@ namespace Daipan.Comment.MonoScripts
 
         void Update()
         {
-            var direction = (_commentParamsServer.GetDespawnedPosition() - transform.position).normalized;
+            var direction = (new Vector3(_commentParamsServer.GetDespawnedPosition().x - transform.position.x, 0, 0)).normalized;
             transform.position += direction * _commentParamsServer.GetSpeed() * Time.deltaTime;
-            if ((transform.position - _commentParamsServer.GetDespawnedPosition()).magnitude < 0.001f) _commentCluster.Remove(this);
+            if (transform.position.x - _commentParamsServer.GetDespawnedPosition().x < 0.001f) _commentCluster.Remove(this);
         }
 
         public event EventHandler<DespawnEventArgs>? OnDespawn;

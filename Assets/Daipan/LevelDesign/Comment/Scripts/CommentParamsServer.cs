@@ -28,7 +28,6 @@ namespace Daipan.LevelDesign.Comment.Scripts
 
         // CommentManagerParamsについて
 
-        #region Params
         public float GetSpeed()
         {
             return _commentParamsManager.commentSpeed;
@@ -53,13 +52,14 @@ namespace Daipan.LevelDesign.Comment.Scripts
             int index = (int)(Random.value * _commentParamsManager.AntiCommentWords.Count);
             return _commentParamsManager.AntiCommentWords[index];
         }
-        #endregion
+
+
 
         // CommentPositionについて
-        #region Position 
         public Vector3 GetSpawnedPosition()
         {
-            return _commentPosition.CommentSpawnedPoint.position;
+            float band = (Random.value - 0.5f) * 2 * _commentPosition.SpawnBand;
+            return _commentPosition.CommentSpawnedPoint.position + new Vector3(0, band, 0);
         }
 
         public Vector3 GetDespawnedPosition()
@@ -71,10 +71,6 @@ namespace Daipan.LevelDesign.Comment.Scripts
         {
             return _commentPosition.CommentParent;
         }
-
-        #endregion
-
-
 
     }
 }

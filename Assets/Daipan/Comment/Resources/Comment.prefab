@@ -46,7 +46,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d486975050b40edb5115c30f0a95d10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.01
   spriteRenderer: {fileID: 8202679621555953744}
   commentText: {fileID: 8977289515075342155}
 --- !u!1 &6328872238912023510
@@ -265,7 +264,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535

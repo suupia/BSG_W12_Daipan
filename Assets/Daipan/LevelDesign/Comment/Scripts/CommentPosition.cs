@@ -15,6 +15,9 @@ namespace Daipan.LevelDesign.Comment.Scripts
         [Header("コメントの生成位置")]
         [Tooltip("コメントの生成位置を示すGameObjectを入れて！！")]
         public Transform CommentSpawnedPoint = null!;
+        [Header("上下にnの幅でコメントを生成")]
+        [Min(0)]
+        public float SpawnBand = 0;
 
 
         [Header("コメントの消滅位置")]
