@@ -3,6 +3,7 @@ using System;
 using Daipan.Comment.Scripts;
 using Daipan.Core.Interfaces;
 using Daipan.LevelDesign.Comment.Scripts;
+using TMPro;
 using UnityEngine;
 using VContainer;
 
@@ -10,18 +11,18 @@ namespace Daipan.Comment.MonoScripts
 {
     public sealed class CommentMono : MonoBehaviour
     {
-        [SerializeField] float speed = 0.01f;
         [SerializeField] SpriteRenderer spriteRenderer = null!;
+        [SerializeField] TextMeshPro commentText = null!;
         CommentCluster _commentCluster = null!;
         CommentParamsServer _commentParamsServer = null!;
 
-        public CommentEnum CommentEnum { get; private set; } = CommentEnum.None;
-        
+        string _commentWord = null!;
+
         void Update()
         {
-            var direction = (_commentParamsServer.GetDespawnedPosition() - transform.position).normalized;
-            transform.position += direction * _commentParamsServer.GetSpeed(CommentEnum) * Time.deltaTime;
-            if ((transform.position - _commentParamsServer.GetDespawnedPosition()).magnitude < float.Epsilon) _commentCluster.Remove(this);
+            var direction = (new Vector3(_commentParamsServer.GetDespawnedPosition().x - transform.position.x, 0, 0)).normalized;
+            transform.position += direction * _commentParamsServer.GetSpeed() * Time.deltaTime;
+            if (transform.position.x - _commentParamsServer.GetDespawnedPosition().x < 0.001f) _commentCluster.Remove(this);
         }
 
         public event EventHandler<DespawnEventArgs>? OnDespawn;
@@ -37,18 +38,15 @@ namespace Daipan.Comment.MonoScripts
             _commentCluster = commentCluster;
         }
 
-        public void SetParameter(CommentEnum commentEnum)
+        public void SetParameter(string commentWord)
         {
-            CommentEnum = commentEnum;
-            
-            // コメントの背景は一旦なし
-            // spriteRenderer.sprite = _commentParamsServer.GetSprite(commentEnum);
-            // Debug.Log($"spriteRenderer.sprite : {spriteRenderer.sprite}");
+            _commentWord = commentWord;
+            commentText.text = commentWord;
         }
 
         public void Despawn()
         {
-            var args = new DespawnEventArgs(CommentEnum);
+            var args = new DespawnEventArgs(CommentEnum.None);
             OnDespawn?.Invoke(this, args);
             Destroy(gameObject);
         }

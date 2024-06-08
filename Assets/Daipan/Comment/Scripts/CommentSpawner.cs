@@ -18,7 +18,7 @@ namespace Daipan.Comment.Scripts
         readonly CommentParamsServer _commentParamsServer;
     
         readonly IObjectResolver _container;
-    
+        
         // todo : 後で分離する
         readonly ViewerNumber _viewerNumber;
     
@@ -60,10 +60,10 @@ namespace Daipan.Comment.Scripts
             var commentPrefab = _commentLoader.Load();
             var comment = _container.Instantiate(commentPrefab, _commentParamsServer.GetSpawnedPosition(),
                 Quaternion.identity, _commentParamsServer.GetCommentParent());
-            comment.SetParameter(commentEnum);
+            comment.SetParameter(_commentParamsServer.GetRandomCommentWord()); // コメント文を入れる
             comment.OnDespawn += (sender, args) =>
             {
-                var amount = _commentParamsServer.GetViewerDiffNumber(args.CommentEnum);
+                var amount = _commentParamsServer.GetViewerDiffCommentNumber();
                 if (amount > 0) _viewerNumber.IncreaseViewer(amount);
                 else _viewerNumber.DecreaseViewer(-amount);
             };
@@ -74,13 +74,13 @@ namespace Daipan.Comment.Scripts
         void SpawnAntiComment()
         {
             var commentPrefab = _antiCommentLoader.Load();
-            var spawnPosition = Vector3.zero; // todo : とりあえず画面中央に配置 配置が面倒なら、親オブジェクト指定してVerticalLayoutGroupを使う
+            var spawnPosition = _commentParamsServer.GetAntiSpawnedPosition();
             var comment = _container.Instantiate(commentPrefab, spawnPosition,
                 Quaternion.identity, _commentParamsServer.GetCommentParent());
-            comment.SetParameter(CommentEnum.Super);
+            comment.SetParameter(_commentParamsServer.GetRandomAntiCommentWord());　// コメント文を入れる
             comment.OnDespawn += (sender, args) =>
             {
-                var amount = _commentParamsServer.GetViewerDiffNumber(args.CommentEnum);
+                var amount = _commentParamsServer.GetViewerDiffAntiCommentNumber();
                 if (amount > 0) _viewerNumber.IncreaseViewer(amount);
                 else _viewerNumber.DecreaseViewer(-amount);
             };

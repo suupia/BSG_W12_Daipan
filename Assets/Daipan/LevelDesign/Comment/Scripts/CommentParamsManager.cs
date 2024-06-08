@@ -11,18 +11,19 @@ namespace Daipan.LevelDesign.Comment.Scripts
         [Space(30)]
 
 
-        [Header("これをオンにするとコメントの流れる速度が一定になります。")]
-        public bool isAdaptSameSpeed;
+        [Header("コメントの流れる速度")]
         [Min(0)] public float commentSpeed;
 
+        [Header("コメントが流れ切ったときのViewer(高評価)の変化量")]
+        public int diffCommentViewer;
 
-        [Space(30)]
-        [Header("いらいら度による各コメントの吹っ飛び率は未実装です")]
-        [Space(30)]
+        [Header("アンチコメントが時間あたりのViewer(高評価)の変化量")]
+        public int diffAntiCommentViewer;
 
+        [Header("コメント集")]
+        public List<string> CommentWords;
 
-
-        [Header("使用するコメントを設定してください。")]
-        public List<CommentParams> commentParams = null!;
+        [Header("アンチコメント集")]
+        public List<string> AntiCommentWords;
     }
 }

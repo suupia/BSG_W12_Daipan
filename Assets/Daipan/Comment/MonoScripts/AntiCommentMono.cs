@@ -3,27 +3,18 @@ using System;
 using Daipan.Comment.Scripts;
 using UnityEngine;
 using VContainer;
+using TMPro;
 
 namespace Daipan.Comment.MonoScripts
 {
     public  class AntiCommentMono : MonoBehaviour
     {
         [SerializeField] SpriteRenderer spriteRenderer = null!;
+        [SerializeField] TextMeshPro commentText = null!;
 
         AntiCommentCluster _antiCommentCluster = null!;
-        readonly float _despawnTime = 5f; // todo : パラメータから受け取るようにする
-        float _timer;
 
-        CommentEnum CommentEnum { get; set; } = CommentEnum.None;
-
-        void Update()
-        {
-            _timer += Time.deltaTime;
-            if (_timer > _despawnTime) {
-                // todo : 仕様になかったのでいったんコメントアウト
-                // Despawn();
-            }
-        }
+        string _antiCommentWord = null!;
 
         public event EventHandler<DespawnEventArgs>? OnDespawn;
         
@@ -37,18 +28,15 @@ namespace Daipan.Comment.MonoScripts
         }
 
 
-        public void SetParameter(CommentEnum commentEnum)
+        public void SetParameter(string commentWord)
         {
-            CommentEnum = commentEnum;
-
-            // コメントの背景は一旦なし
-            // spriteRenderer.sprite = _commentParamsServer.GetSprite(commentEnum);
-            // Debug.Log($"spriteRenderer.sprite : {spriteRenderer.sprite}");
+            _antiCommentWord = commentWord;
+            commentText.text = commentWord;
         }
 
         public void Despawn()
         {
-            var args = new DespawnEventArgs(CommentEnum);
+            var args = new DespawnEventArgs(CommentEnum.None);
             OnDespawn?.Invoke(this, args);
             Destroy(gameObject);
         }
