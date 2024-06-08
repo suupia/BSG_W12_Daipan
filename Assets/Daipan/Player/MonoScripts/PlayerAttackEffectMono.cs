@@ -6,6 +6,7 @@ namespace Daipan.Player.MonoScripts
 {
     public class PlayerAttackEffectMono : MonoBehaviour
     {
+        [SerializeField] PlayerAttackEffectViewMono? viewMono;
         public Func<Vector3?>? TargetPosition;
         PlayerColor _playerColor;
         double _speed = 10;
@@ -35,6 +36,7 @@ namespace Daipan.Player.MonoScripts
         public void SetDomain(PlayerColor playerColor)
         {
            _playerColor = playerColor; 
+           viewMono?.SetDomain(playerColor);
         }
     }
 }

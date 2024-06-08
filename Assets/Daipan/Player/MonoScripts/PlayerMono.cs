@@ -32,26 +32,26 @@ namespace Daipan.Player.MonoScripts
         if (Input.GetKeyDown(KeyCode.W))
         {
             Debug.Log("Wが押されたよ");
-            AttackEnemyMono(EnemyEnum.W);
+            AttackEnemyMono(PlayerColor.Red, EnemyEnum.W);
         }
         
         if (Input.GetKeyDown(KeyCode.A))
         {
             Debug.Log("Aが押されたよ");
-            AttackEnemyMono(EnemyEnum.A);
+            AttackEnemyMono(PlayerColor.Blue, EnemyEnum.A);
         }
 
         if (Input.GetKeyDown(KeyCode.S) || _inputSerialManager.GetButtonBlue())
         {
             Debug.Log("Sが押されたよ");
-            AttackEnemyMono(EnemyEnum.S);
+            AttackEnemyMono(PlayerColor.Yellow, EnemyEnum.S);
         }
 
         // todo : 攻撃やHPの状況に応じて、AbstractPlayerViewMonoのメソッドを呼ぶ
         foreach (var playerViewMono in playerViewMonos) playerViewMono?.Idle();
     }
 
-    void AttackEnemyMono(EnemyEnum enemyEnum)
+    void AttackEnemyMono(PlayerColor playerColor, EnemyEnum enemyEnum)
     {
         // そのレーンの敵を取得
         var enemyMono = _enemyCluster.NearestEnemy(enemyEnum, transform.position);
@@ -82,7 +82,7 @@ namespace Daipan.Player.MonoScripts
         
         
         var effect = _playerAttackEffectSpawner.SpawnEffect(transform.position, Quaternion.identity);
-        effect.SetDomain(PlayerColor.Red);
+        effect.SetDomain(playerColor);
         effect.TargetPosition = () => enemyMono != null ? enemyMono.transform.position : null;
         
 

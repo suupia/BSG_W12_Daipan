@@ -14,7 +14,10 @@ namespace Daipan.Player.MonoScripts
         {   
             if(animator == null) Debug.LogWarning("animator is null");
         }
-
+        public void SetDomain(PlayerColor playerColor)
+        {
+            // animator.runtimeAnimatorController = playerColor.GetAnimator();
+        }
         public override void Idle()
         {
             animator.SetBool("IsIdling", true);
