@@ -28,11 +28,12 @@ namespace Daipan.Player.MonoScripts
             {
                 TargetPositionCached = targetPosition;
             }
-            var direction = (TargetPositionCached - transform.position).normalized;
+            // var direction = (TargetPositionCached - transform.position).normalized;
+            var direction = Vector3.Project((TargetPositionCached - transform.position), Vector3.right).normalized;
             transform.position += (Vector3)direction * (float)(_speed * Time.deltaTime);
             
             
-            if (Vector3.Distance(transform.position, TargetPositionCached) < 0.1f) 
+            if (Mathf.Abs(transform.position.x - TargetPositionCached.x) < 0.1f) 
             {
                 OnHit?.Invoke(this, new OnHitEventArgs(_enemyMono));
                 Destroy(gameObject);
