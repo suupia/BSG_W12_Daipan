@@ -25,6 +25,7 @@ namespace Daipan.Player.MonoScripts
     PlayerHp _playerHp = null!;
     PlayerParamData _playerParamData = null!;
     InputSerialManager _inputSerialManager = null!;
+    PlayerAttackEffectSpawner _playerAttackEffectSpawner = null!;
 
     public void Update()
     {
@@ -52,7 +53,10 @@ namespace Daipan.Player.MonoScripts
 
     void AttackEnemyMono(EnemyEnum enemyEnum)
     {
+        // そのレーンの敵を取得
         var enemyMono = _enemyCluster.NearestEnemy(enemyEnum, transform.position);
+        // レーンの敵がいなければ、ボスを取得
+        if (enemyMono == null) enemyMono = _enemyCluster.NearestEnemy(transform.position);
         if (enemyMono == null)
         {
             Debug.Log($"攻撃対象がいないよ");
@@ -76,6 +80,11 @@ namespace Daipan.Player.MonoScripts
             Debug.Log($"攻撃対象が{enemyEnum}ではないよ");
         }
         
+        
+        var effect = _playerAttackEffectSpawner.SpawnEffect(transform.position, Quaternion.identity);
+        effect.SetDomain(PlayerColor.Red);
+        effect.TargetPosition = () => enemyMono != null ? enemyMono.transform.position : null;
+        
 
     }
 
@@ -87,7 +96,29 @@ namespace Daipan.Player.MonoScripts
             if(IsTargetEnemy(playerViewMono.playerColor, enemyEnum)) playerViewMono.Damage();
         }
     }
-    
+
+    [Inject]
+    public void Initialize(
+        PlayerAttack playerAttack,
+        EnemyCluster enemyCluster,
+        PlayerParamDataBuilder playerParamDataBuilder,
+        PlayerParamData playerParamData,
+        CommentSpawner commentSpawner,
+        InputSerialManager inputSerialManager,
+        PlayerAttackEffectSpawner playerAttackEffectSpawner
+    )
+    {
+        _playerAttack = playerAttack;
+        _enemyCluster = enemyCluster;
+
+        _playerParamData = playerParamData;
+        _playerHp = new PlayerHp(_playerParamData.GetCurrentHp());
+        _playerHp.OnDamage += (sender, args) => { commentSpawner.SpawnCommentByType(CommentEnum.Spiky); };
+
+        _inputSerialManager = inputSerialManager;
+        _playerAttackEffectSpawner = playerAttackEffectSpawner;
+    }
+
     bool IsTargetEnemy(PlayerColor playerColor, EnemyEnum enemyEnum){
         return playerColor switch
         {
@@ -105,26 +136,6 @@ namespace Daipan.Player.MonoScripts
     }
 
     public int MaxHp => _playerHp.MaxHp;
-
-    [Inject]
-    public void Initialize(
-        PlayerAttack playerAttack,
-        EnemyCluster enemyCluster,
-        PlayerParamDataBuilder playerParamDataBuilder,
-        PlayerParamData playerParamData,
-        CommentSpawner commentSpawner,
-        InputSerialManager inputSerialManager
-    )
-    {
-        _playerAttack = playerAttack;
-        _enemyCluster = enemyCluster;
-
-        _playerParamData = playerParamData;
-        _playerHp = new PlayerHp(_playerParamData.GetCurrentHp());
-        _playerHp.OnDamage += (sender, args) => { commentSpawner.SpawnCommentByType(CommentEnum.Spiky); };
-
-        _inputSerialManager = inputSerialManager;
-    }
 } 
 }
 
