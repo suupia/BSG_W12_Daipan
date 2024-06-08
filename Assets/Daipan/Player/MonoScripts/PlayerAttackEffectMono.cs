@@ -8,7 +8,7 @@ namespace Daipan.Player.MonoScripts
     {
         public Func<Vector3?>? TargetPosition;
         PlayerColor _playerColor;
-        double _speed = 4;
+        double _speed = 10;
         Vector3 TargetPositionCached { get; set; }
             
         void Update()

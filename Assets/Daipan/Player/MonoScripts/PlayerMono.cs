@@ -33,7 +33,6 @@ namespace Daipan.Player.MonoScripts
         {
             Debug.Log("Wが押されたよ");
             AttackEnemyMono(EnemyEnum.W);
-
         }
         
         if (Input.GetKeyDown(KeyCode.A))
