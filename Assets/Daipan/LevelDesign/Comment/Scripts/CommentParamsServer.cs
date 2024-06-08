@@ -29,31 +29,30 @@ namespace Daipan.LevelDesign.Comment.Scripts
         // CommentManagerParamsについて
 
         #region Params
-
-        public Sprite GetSprite(CommentEnum commentEnum)
+        public float GetSpeed()
         {
-            var cparams = GetCommentParams(commentEnum);
-            return cparams.sprite;
+            return _commentParamsManager.commentSpeed;
         }
 
-        public float GetSpeed(CommentEnum commentEnum)
+        public int GetViewerDiffCommentNumber()
         {
-            if (_commentParamsManager.isAdaptSameSpeed) return _commentParamsManager.commentSpeed;
-            var cparams = GetCommentParams(commentEnum);
-            return cparams.commentSpeed_ups;
+            return _commentParamsManager.diffCommentViewer;
+        }
+        public int GetViewerDiffAntiCommentNumber()
+        {
+            return _commentParamsManager.diffAntiCommentViewer;
         }
 
-        public int GetViewerDiffNumber(CommentEnum commentEnum)
+        public string GetRandomCommentWord()
         {
-            return GetCommentParams(commentEnum).diffViewer;
+            int index = (int)(Random.value * _commentParamsManager.CommentWords.Count);
+            return _commentParamsManager.CommentWords[index];
         }
-        
-        
-        CommentParams GetCommentParams(CommentEnum commentEnum)
+        public string GetRandomAntiCommentWord()
         {
-            return _commentParamsManager.commentParams.First(c => c.GetCommentEnum == commentEnum);
+            int index = (int)(Random.value * _commentParamsManager.AntiCommentWords.Count);
+            return _commentParamsManager.AntiCommentWords[index];
         }
-
         #endregion
 
         // CommentPositionについて

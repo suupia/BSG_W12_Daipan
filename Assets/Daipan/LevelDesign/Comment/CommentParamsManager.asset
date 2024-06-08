@@ -12,9 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 839a2ef908ddf4448a4e73cbb9911532, type: 3}
   m_Name: CommentParamsManager
   m_EditorClassIdentifier: 
-  isAdaptSameSpeed: 1
   commentSpeed: 8
-  commentParams:
-  - {fileID: 11400000, guid: 2350145f134c98b4d941f740096f4ddc, type: 2}
-  - {fileID: 11400000, guid: 5bafa771adcd6db4ca2d4197e6d4618e, type: 2}
-  - {fileID: 11400000, guid: 82fc30a48920419469a696a71e7a11aa, type: 2}
+  diffCommentViewer: 0
+  diffAntiCommentViewer: 0
+  CommentWords:
+  - "\u3059\u3054\u30FC\u3044"
+  - "\u4E0A\u624B"
+  - "\u8349"
+  AntiCommentWords:
+  - "\u96D1\u9B5A\u4E59"
+  - "\u30EF\u30ED\u30BF"
+  - "\u4E59"
