@@ -35,11 +35,13 @@ namespace Daipan.Player.MonoScripts
             }
         }
 
-        public void SetDomain(PlayerParamData playerPramaData)
+        public void SetDomain(PlayerParamData playerParamData)
         { 
-            Debug.Log($"PlayerAttackEffectMono data.Enum = {playerPramaData.PlayerEnum()}");
-           _playerParamData = playerPramaData; 
-           viewMono?.SetDomain(playerPramaData);
+            Debug.Log($"PlayerAttackEffectMono data.Enum = {playerParamData.PlayerEnum()}");
+           _playerParamData = playerParamData; 
+           viewMono?.SetDomain(playerParamData);
         }
     }
+    
+    public record OnHitEventArgs(PlayerColor PlayerColor);
 }

@@ -22,7 +22,7 @@ namespace Daipan.Player.MonoScripts
 {
     [SerializeField] List<AbstractPlayerViewMono?> playerViewMonos = new();
     EnemyCluster _enemyCluster = null!;
-    Dictionary<PlayerColor, PlayerAttack> _playerAttacks = new();
+    readonly Dictionary<PlayerColor, PlayerAttack> _playerAttacks = new();
     PlayerHp _playerHp = null!;
     PlayerParamData _playerParamData = null!;
     InputSerialManager _inputSerialManager = null!;
@@ -34,27 +34,35 @@ namespace Daipan.Player.MonoScripts
         if (Input.GetKeyDown(KeyCode.W))
         {
             Debug.Log("Wが押されたよ");
-            AttackEnemyMono(PlayerColor.Red, EnemyEnum.W);
+            AttackEnemyMono(PlayerColor.Red);
         }
         
         if (Input.GetKeyDown(KeyCode.A))
         {
             Debug.Log("Aが押されたよ");
-            AttackEnemyMono(PlayerColor.Blue, EnemyEnum.A);
+            AttackEnemyMono(PlayerColor.Blue);
         }
 
         if (Input.GetKeyDown(KeyCode.S))
         {
             Debug.Log("Sが押されたよ");
-            AttackEnemyMono(PlayerColor.Yellow, EnemyEnum.S);
+            AttackEnemyMono(PlayerColor.Yellow);
         }
 
         // todo : 攻撃やHPの状況に応じて、AbstractPlayerViewMonoのメソッドを呼ぶ
         foreach (var playerViewMono in playerViewMonos) playerViewMono?.Idle();
     }
 
-    void AttackEnemyMono(PlayerColor playerColor, EnemyEnum enemyEnum)
+    void AttackEnemyMono(PlayerColor playerColor)
     {
+        var enemyEnum = playerColor switch
+        {
+            PlayerColor.Red => EnemyEnum.W,
+            PlayerColor.Blue => EnemyEnum.A,
+            PlayerColor.Yellow => EnemyEnum.S,
+            _ => throw new ArgumentOutOfRangeException()
+        };
+        
         // そのレーンの敵を取得
         var enemyMono = _enemyCluster.NearestEnemy(enemyEnum, transform.position);
         // レーンの敵がいなければ、ボスを取得
