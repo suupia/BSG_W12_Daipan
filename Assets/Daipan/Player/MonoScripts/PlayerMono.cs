@@ -29,17 +29,17 @@ public class PlayerMono : MonoBehaviour, IHpSetter
             Debug.Log("Wが押されたよ");
             AttackEnemyMono(EnemyEnum.W);
         }
+        
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            Debug.Log("Aが押されたよ");
+            AttackEnemyMono(EnemyEnum.A);
+        }
 
         if (Input.GetKeyDown(KeyCode.S))
         {
             Debug.Log("Sが押されたよ");
             AttackEnemyMono(EnemyEnum.S);
-        }
-
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            Debug.Log("Aが押されたよ");
-            AttackEnemyMono(EnemyEnum.A);
         }
 
         // todo : 攻撃やHPの状況に応じて、AbstractPlayerViewMonoのメソッドを呼ぶ
