@@ -72,5 +72,16 @@ namespace Daipan.LevelDesign.Comment.Scripts
             return _commentPosition.CommentParent;
         }
 
+        public Vector3 GetAntiSpawnedPosition()
+        {
+            Vector3 band = new Vector3(
+                (Random.value - 0.5f) * _commentPosition.AntiCommentSpawnArea.size.x,
+                (Random.value - 0.5f) * _commentPosition.AntiCommentSpawnArea.size.y,
+                0
+                );
+
+            return _commentPosition.AntiCommentSpawnArea.gameObject.transform.position + band;
+
+        }
     }
 }

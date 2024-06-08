@@ -24,6 +24,10 @@ namespace Daipan.LevelDesign.Comment.Scripts
         [Tooltip("コメントの消滅位置を示すGameObjectを入れて！！")]
         public Transform CommentDespawnedPoint = null!;
 
+        [Header("アンチコメントの生成エリア")]
+        public BoxCollider2D AntiCommentSpawnArea = null!;
+
+
         [Header("コメントの親オブジェクト")]
         [Tooltip("コメントの親オブジェクトを入れて！！")]
         public Transform CommentParent = null!;
