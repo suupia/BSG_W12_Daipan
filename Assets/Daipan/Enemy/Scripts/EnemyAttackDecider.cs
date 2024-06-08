@@ -38,7 +38,7 @@ namespace Daipan.Enemy.Scripts
         void Attack(PlayerMono playerMono, AbstractEnemyViewMono? enemyViewMono)
         {
             if (!CanAttack(_enemyMono, playerMono)) return;
-            enemyViewMono?.Attack();
+            if (enemyViewMono != null) enemyViewMono.Attack();
             _enemyAttack.Attack(playerMono);
         }
         
