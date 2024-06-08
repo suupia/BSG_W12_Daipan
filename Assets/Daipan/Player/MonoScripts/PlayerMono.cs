@@ -89,14 +89,7 @@ namespace Daipan.Player.MonoScripts
     
     EnemyMono? AttackEnemy(PlayerColor playerColor)
     {
-        var enemyEnum = playerColor switch
-        {
-            PlayerColor.Red => EnemyEnum.W,
-            PlayerColor.Blue => EnemyEnum.A,
-            PlayerColor.Yellow => EnemyEnum.S,
-            _ => throw new ArgumentOutOfRangeException()
-        };
-        
+        var enemyEnum = GetEnemyEnum(playerColor);
         // そのレーンの敵を取得
         var enemyMono = _enemyCluster.NearestEnemy(enemyEnum, transform.position);
         // レーンの敵がいなければ、ボスを取得
@@ -125,48 +118,6 @@ namespace Daipan.Player.MonoScripts
         }
 
         return null;
-    }
-    void AttackEnemyMono(PlayerColor playerColor)
-    {
-        var enemyEnum = playerColor switch
-        {
-            PlayerColor.Red => EnemyEnum.W,
-            PlayerColor.Blue => EnemyEnum.A,
-            PlayerColor.Yellow => EnemyEnum.S,
-            _ => throw new ArgumentOutOfRangeException()
-        };
-        
-        // そのレーンの敵を取得
-        var enemyMono = _enemyCluster.NearestEnemy(enemyEnum, transform.position);
-        // レーンの敵がいなければ、ボスを取得
-        if (enemyMono == null) enemyMono = _enemyCluster.NearestEnemy(transform.position);
-        if (enemyMono == null)
-        {
-            Debug.Log($"攻撃対象がいないよ");
-            return;
-        }
-
-        if (enemyMono.EnemyEnum == enemyEnum || enemyMono.EnemyEnum == EnemyEnum.Boss)
-        {
-            Debug.Log($"EnemyType: {enemyMono.EnemyEnum}を攻撃");
-            _playerAttacks[playerColor].Attack(enemyMono);
-            
-            // Animation
-            foreach (var playerViewMono in playerViewMonos)
-            {
-                if (playerViewMono == null) continue;
-                if (IsTargetEnemy(playerViewMono.playerColor, enemyEnum)) playerViewMono.Attack();
-            }
-        }
-        else
-        {
-            Debug.Log($"攻撃対象が{enemyEnum}ではないよ");
-        }
-        
-        var effect = _playerAttackEffectSpawner.SpawnEffect(transform.position, Quaternion.identity);
-        effect.SetDomain(_playerParamDataContainer.GetPlayerParamData(playerColor));
-        effect.TargetPosition = () => enemyMono != null ? enemyMono.transform.position : null;
-
     }
 
     public void OnAttacked(EnemyEnum enemyEnum)

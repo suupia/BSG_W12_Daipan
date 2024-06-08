@@ -470,7 +470,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CommentSpawnedPoint: {fileID: 66397682059597407}
-  SpawnBand: 3
+  SpawnBand: 0
   CommentDespawnedPoint: {fileID: 833285825}
   AntiCommentSpawnArea: {fileID: 2111853975}
   CommentParent: {fileID: 375716989}
@@ -708,11 +708,6 @@ MonoBehaviour:
   autoRun: 1
   autoInjectGameObjects: []
   streamParam: {fileID: 11400000, guid: 1b8bd700307d7c748a87d7ab4b98611c, type: 2}
-  playerParam:
-    playerAttackParam:
-      attackAmount: 0
-    playerColor: 0
-    attackEffectAnimatorController: {fileID: 0}
   playerParamManager: {fileID: 11400000, guid: d71b3fd7f8a374233a7394fc485c913d, type: 2}
   enemyParamManager: {fileID: 11400000, guid: d5c28246bf0490340a52cc25d5aafc71, type: 2}
   commentParamsManager: {fileID: 11400000, guid: b83c7fae0686b214fb53fc224da8567a, type: 2}
