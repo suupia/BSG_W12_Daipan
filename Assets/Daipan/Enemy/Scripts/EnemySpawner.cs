@@ -61,16 +61,10 @@ namespace Daipan.Enemy.Scripts
         {
             var tuple = GetSpawnedPositionRandom();
             var enemyObject = _enemyMonoBuilder.Build(tuple.enemyEnum, tuple.spawnedPos , Quaternion.identity);
-            IncreaseIrritatedValueByEnemy(enemyObject.EnemyEnum);
+            if (enemyObject.EnemyEnum == EnemyEnum.Boss) _irritatedValue.IncreaseValue(_enemyLevelDesignParamData.GetIncreaseIrritatedValueByBoss()); 
             _enemyCluster.Add(enemyObject);
         }
 
-
-        void IncreaseIrritatedValueByEnemy(EnemyEnum enemy)
-        {
-            if (enemy == EnemyEnum.Boss) _irritatedValue.IncreaseValue(_enemyLevelDesignParamData.GetCurrentKillAmount()); 
-        }
-        
         // Todo : タプル返す、これでいいのか？
         (Vector3 spawnedPos, EnemyEnum enemyEnum) GetSpawnedPositionRandom()
         {

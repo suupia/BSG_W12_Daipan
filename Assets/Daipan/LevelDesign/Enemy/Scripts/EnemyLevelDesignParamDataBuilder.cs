@@ -1,4 +1,5 @@
 #nullable enable
+using Unity.VisualScripting.YamlDotNet.Core.Tokens;
 using VContainer;
 
 namespace Daipan.LevelDesign.Enemy.Scripts
@@ -16,6 +17,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
                 GetIncreaseIrritatedValueByBoss = () => levelDesignParam.increaseIrritatedValueByBoss,
                 GetIncreaseViewerOnEnemyKill = () => levelDesignParam.increaseViewerOnEnemyKill,
                 GetCurrentKillAmount = () => levelDesignParam.currentKillAmount,
+                SetCurrentKillAmount = value => levelDesignParam.currentKillAmount = value
             };
             builder.RegisterInstance(data);
         }
