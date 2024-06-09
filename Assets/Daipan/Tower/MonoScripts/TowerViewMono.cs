@@ -6,6 +6,7 @@ namespace Daipan.Tower.MonoScripts
 {
     public class TowerViewMono : MonoBehaviour
     {
+        [SerializeField] Animator animator = null!;
         [SerializeField] SpriteRenderer towerFullRender = null!;
         [SerializeField] GameObject lightView = null!;
         Material? _towerFullMaterial;
@@ -29,6 +30,11 @@ namespace Daipan.Tower.MonoScripts
         public void SwitchLight(bool isOn)
         {
             lightView.SetActive(isOn);
+        }
+
+        public void Daipan()
+        {
+            animator.SetTrigger("OnDaipan");
         }
     }
 }
