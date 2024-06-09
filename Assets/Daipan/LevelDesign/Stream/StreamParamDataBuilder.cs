@@ -13,7 +13,7 @@ namespace Daipan.LevelDesign.Stream
         {
             var streamData = new StreamData()
             {
-                //GetMaxTime = () => streamParam.timer.maxTime
+                GetMaxTime = () => streamParam.timer.maxTime
             };
             builder.RegisterInstance(streamData);
         }
