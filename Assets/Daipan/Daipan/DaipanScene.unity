@@ -470,7 +470,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CommentSpawnedPoint: {fileID: 66397682059597407}
-  SpawnBand: 0
+  SpawnBand: 3
   CommentDespawnedPoint: {fileID: 833285825}
   AntiCommentSpawnArea: {fileID: 2111853975}
   CommentParent: {fileID: 375716989}

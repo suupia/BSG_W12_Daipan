@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: EnemyParamsManager
   m_EditorClassIdentifier: 
   enemyLevelDesignParam:
-    spawnBossAmount: 50
+    spawnBossAmount: 20
     increaseIrritatedValueByBoss: 18
     increaseViewerOnEnemyKill: 5
-    currentKillAmount: 38
+    currentKillAmount: 8
   enemyParams:
   - enemyEnum: 1
     enemyAttackParam:
@@ -79,7 +79,7 @@ MonoBehaviour:
     spawnDelaySec: 1
     moveSpeedRate: 1
     spawnBossPercent: 0
-  - startTime: 75
+  - startTime: 30
     spawnDelaySec: 0.3
     moveSpeedRate: 1.5
-    spawnBossPercent: 15
+    spawnBossPercent: 10
