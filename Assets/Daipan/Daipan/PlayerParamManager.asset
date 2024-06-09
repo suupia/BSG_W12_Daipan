@@ -13,17 +13,17 @@ MonoBehaviour:
   m_Name: PlayerParamManager
   m_EditorClassIdentifier: 
   playerHpParam:
-    hpAmount: 0
+    hpAmount: 100
   playerParams:
   - playerAttackParam:
-      attackAmount: 0
+      attackAmount: 10
     playerColor: 1
     attackEffectAnimatorController: {fileID: 9100000, guid: c69616a59aa0643a5ae72f77cd3e0c46, type: 2}
   - playerAttackParam:
-      attackAmount: 0
+      attackAmount: 10
     playerColor: 2
     attackEffectAnimatorController: {fileID: 9100000, guid: e989ca0b72f11438fa4579f961fa9d85, type: 2}
   - playerAttackParam:
-      attackAmount: 0
+      attackAmount: 10
     playerColor: 3
     attackEffectAnimatorController: {fileID: 9100000, guid: 353163f1a66d3489781404a76f2f8233, type: 2}
