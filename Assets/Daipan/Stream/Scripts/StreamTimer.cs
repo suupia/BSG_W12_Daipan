@@ -21,7 +21,7 @@ namespace Daipan.Stream.Scripts
 
         public StreamTimer(StreamData data)
         {
-            //MaxTime = data.GetMaxTime();
+            MaxTime = data.GetMaxTime();
         }
         
 
