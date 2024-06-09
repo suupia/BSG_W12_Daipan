@@ -17,18 +17,16 @@ namespace Daipan.Player.MonoScripts
             
         void Update()
         {
-            if (TargetEnemyMono() == null)
-            {
-                Debug.LogWarning("TargetEnemyMono is null");
-                return;
-            }
             if (TargetEnemyMono() is {} enemyMono)
             {
                 TargetPositionCached = enemyMono.transform.position;
             }
+            else
+            {
+                Debug.Log("TargetEnemyMono is null");
+            }
             var direction = Vector3.Project((TargetPositionCached - transform.position), Vector3.right).normalized;
             transform.position += direction * (float)(_speed * Time.deltaTime);
-            
             
             if (Mathf.Abs(transform.position.x - TargetPositionCached.x) < 0.1f) 
             {
