@@ -127,7 +127,7 @@ namespace Daipan.Enemy.MonoScripts
                 enemyMono.transform
                     .DOMoveY(-1.7f, 0.3f)
                     .SetEase(Ease.InQuint)
-                    .OnComplete(() =>
+                    .OnStart(() =>
                     {
                         enemyViewMono.Daipaned(() => Destroy(enemyMono.gameObject));
                     });
