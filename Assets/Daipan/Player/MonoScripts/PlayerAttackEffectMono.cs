@@ -1,5 +1,6 @@
 #nullable enable
 using System;
+using Daipan.Enemy.MonoScripts;
 using Daipan.LevelDesign.Player.Scripts;
 using Daipan.Player.Scripts;
 using UnityEngine;
@@ -9,37 +10,38 @@ namespace Daipan.Player.MonoScripts
     public class PlayerAttackEffectMono : MonoBehaviour
     {
         [SerializeField] PlayerAttackEffectViewMono? viewMono;
-        public Func<Vector3?>? TargetPosition;
-        PlayerParamData _playerParamData = null; 
-        double _speed = 10;
+        public Func<EnemyMono?> TargetEnemyMono = () => null;
+        readonly double _speed = 10;
         Vector3 TargetPositionCached { get; set; }
+        public event EventHandler<OnHitEventArgs>? OnHit;
             
         void Update()
         {
-            if (TargetPosition == null)
+            if (TargetEnemyMono() is {} enemyMono)
             {
-                Debug.LogWarning("TargetPosition is null");
-                return;
+                TargetPositionCached = enemyMono.transform.position;
             }
-            if (TargetPosition() is {} targetPosition)
+            else
             {
-                TargetPositionCached = targetPosition;
+                Debug.Log("TargetEnemyMono is null");
             }
-            var direction = (TargetPositionCached - transform.position).normalized;
-            transform.position += (Vector3)direction * (float)(_speed * Time.deltaTime);
+            var direction = Vector3.Project((TargetPositionCached - transform.position), Vector3.right).normalized;
+            transform.position += direction * (float)(_speed * Time.deltaTime);
             
-            
-            if (Vector3.Distance(transform.position, TargetPositionCached) < 0.1f) 
+            if (Mathf.Abs(transform.position.x - TargetPositionCached.x) < 0.1f) 
             {
+                OnHit?.Invoke(this, new OnHitEventArgs(TargetEnemyMono()));
                 Destroy(gameObject);
             }
         }
 
-        public void SetDomain(PlayerParamData playerPramaData)
+        public void SetDomain(PlayerParamData playerParamData)
         { 
-            Debug.Log($"PlayerAttackEffectMono data.Enum = {playerPramaData.PlayerEnum()}");
-           _playerParamData = playerPramaData; 
-           viewMono?.SetDomain(playerPramaData);
+            Debug.Log($"PlayerAttackEffectMono data.Enum = {playerParamData.PlayerEnum()}");
+           viewMono?.SetDomain(playerParamData);
         }
+        
     }
+    
+    public record OnHitEventArgs(EnemyMono? EnemyMono);
 }

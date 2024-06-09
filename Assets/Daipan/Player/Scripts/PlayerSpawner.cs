@@ -35,7 +35,8 @@ namespace Daipan.Player.Scripts
             var playerMonoPrefab = _playerMonoLoader.Load();
             // IObjectResolverを使ってPlayerMonoを生成すると依存関係が解決される
             var position = _towerParamsConfig.GetTowerSpawnPosition();
-            var playerMono = _container.Instantiate(playerMonoPrefab, position, Quaternion.identity);
+            var positionOnlyX = new Vector3(position.x, 0, position.z); // todo : 一旦ポジションをタワーに合わせるのはやめる
+            var playerMono = _container.Instantiate(playerMonoPrefab, positionOnlyX, Quaternion.identity); 
             _playerHolder.PlayerMono = playerMono;
         }
     }

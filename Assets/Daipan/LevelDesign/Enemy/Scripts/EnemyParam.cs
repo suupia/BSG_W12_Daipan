@@ -80,9 +80,9 @@ namespace Daipan.LevelDesign.Enemy.Scripts
     
     public enum EnemyEnum {
         None,
-        W,
-        A,
-        S,
+        Red,
+        Blue,
+        Yellow,
         [IsBoss(true)]
         Boss
     }
