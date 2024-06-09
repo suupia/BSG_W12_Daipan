@@ -45,3 +45,6 @@ PaperSoulsServer/build/
 PaperSoulsServer/.editorconfig
 PaperSoulsServer/*.exe
 PaperSoulsServer/*.a
+
+# User settings
+UserSettings/Layouts/default-2022.dwlt
