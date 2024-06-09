@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: EnemyParamsManager
   m_EditorClassIdentifier: 
   enemyLevelDesignParam:
-    spawnBossAmount: 15
-    increaseIrritatedValueByBoss: 15
+    spawnBossAmount: 50
+    increaseIrritatedValueByBoss: 18
     increaseViewerOnEnemyKill: 5
-    currentKillAmount: 12
+    currentKillAmount: 38
   enemyParams:
   - enemyEnum: 1
     enemyAttackParam:
@@ -66,48 +66,20 @@ MonoBehaviour:
       attackDelaySec: 1
       attackRange: 5
     enemyHpParam:
-      hpAmount: 30
+      hpAmount: 200
     enemyMoveParam:
       moveSpeedPerSec: 1.5
     enemySpawnParam:
       spawnRatio: 20
       daipanThreshold: 0
       daipanProbability: 0
-    animatorController: {fileID: 22100000, guid: b0fcf5b5a88cf4da59006325423d57fb, type: 2}
-  - enemyEnum: 5
-    enemyAttackParam:
-      attackAmount: 1
-      attackDelaySec: 1
-      attackRange: 5
-    enemyHpParam:
-      hpAmount: 30
-    enemyMoveParam:
-      moveSpeedPerSec: 1.5
-    enemySpawnParam:
-      spawnRatio: 20
-      daipanThreshold: 0
-      daipanProbability: 0
-    animatorController: {fileID: 22100000, guid: a93ed4ebd5af9443dacfed98726a7b03, type: 2}
-  - enemyEnum: 6
-    enemyAttackParam:
-      attackAmount: 1
-      attackDelaySec: 1
-      attackRange: 5
-    enemyHpParam:
-      hpAmount: 30
-    enemyMoveParam:
-      moveSpeedPerSec: 1.5
-    enemySpawnParam:
-      spawnRatio: 20
-      daipanThreshold: 0
-      daipanProbability: 0
-    animatorController: {fileID: 22100000, guid: 3501b26833dde400baffa8aa2dccff6f, type: 2}
+    animatorController: {fileID: 22100000, guid: 140eb1db085be4c0faf71dccd1868e71, type: 2}
   enemyTimeLineParams:
   - startTime: 0
     spawnDelaySec: 1
     moveSpeedRate: 1
     spawnBossPercent: 0
-  - startTime: 10
-    spawnDelaySec: 0.35
-    moveSpeedRate: 1.4
+  - startTime: 75
+    spawnDelaySec: 0.3
+    moveSpeedRate: 1.5
     spawnBossPercent: 15
