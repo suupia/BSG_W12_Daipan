@@ -24,9 +24,13 @@ public class InputTest : MonoBehaviour
         {
             Debug.Log("Red");
         }
-        if (_inputSerialManager.GetButtonGreen())
+        if (_inputSerialManager.GetButtonYellow())
         {
-            Debug.Log("Green");
+            Debug.Log("Yellow");
+        }
+        if(_inputSerialManager.GetButtonMenu())
+        {
+            Debug.Log("Menu");
         }
     }
 }

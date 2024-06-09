@@ -32,15 +32,23 @@ namespace Daipan.InputSerial.Scripts
         // キー入力
         public bool GetButtonRed()
         {
-            return getInput(0);
-        }
-        public bool GetButtonGreen()
-        {
-            return getInput(1);
+            return getInput(0)
+                || Input.GetKeyDown(KeyCode.W);
         }
         public bool GetButtonBlue()
         {
-            return getInput(2);
+            return getInput(1)
+                || Input.GetKeyDown(KeyCode.A);
+        }
+        public bool GetButtonYellow()
+        {
+            return getInput(2)
+                || Input.GetKeyDown(KeyCode.S);
+        }
+        public bool GetButtonMenu()
+        {
+            return getInput(3)
+                || Input.GetKeyDown(KeyCode.Tab);
         }
         // ここまで
 
