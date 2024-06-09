@@ -61,7 +61,7 @@ namespace Daipan.Enemy.Scripts
         {
             var tuple = GetSpawnedPositionRandom();
             var enemyObject = _enemyMonoBuilder.Build(tuple.enemyEnum, tuple.spawnedPos , Quaternion.identity);
-            if (enemyObject.EnemyEnum == EnemyEnum.Boss) _irritatedValue.IncreaseValue(_enemyLevelDesignParamData.GetIncreaseIrritatedValueByBoss()); 
+            if (enemyObject.EnemyEnum == EnemyEnum.RedBoss) _irritatedValue.IncreaseValue(_enemyLevelDesignParamData.GetIncreaseIrritatedValueByBoss()); 
             _enemyCluster.Add(enemyObject);
         }
 
