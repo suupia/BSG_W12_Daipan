@@ -32,19 +32,19 @@ namespace Daipan.Player.MonoScripts
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.W))
+        if (_inputSerialManager.GetButtonRed())
         {
             Debug.Log("Wが押されたよ");
             OnAttackEffectHit(PlayerColor.Red);
         }
         
-        if (Input.GetKeyDown(KeyCode.A))
+        if (_inputSerialManager.GetButtonBlue())
         {
             Debug.Log("Aが押されたよ");
             OnAttackEffectHit(PlayerColor.Blue);
         }
 
-        if (Input.GetKeyDown(KeyCode.S))
+        if (_inputSerialManager.GetButtonYellow())
         {
             Debug.Log("Sが押されたよ");
             OnAttackEffectHit(PlayerColor.Yellow);
