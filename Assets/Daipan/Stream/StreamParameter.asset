@@ -19,4 +19,4 @@ MonoBehaviour:
     increaseNumberByDaipan: 10
     increaseNumberWhenExciting: 100
   timer:
-    maxTime: 30
+    maxTime: 150
