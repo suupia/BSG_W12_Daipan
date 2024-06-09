@@ -84,7 +84,11 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         Blue,
         Yellow,
         [IsBoss(true)]
-        Boss
+        RedBoss,
+        [IsBoss(true)]
+        BlueBoss,
+        [IsBoss(true)]
+        YellowBoss,
     }
 
     public static class AnyTypesExtensions{

@@ -98,7 +98,7 @@ namespace Daipan.Player.MonoScripts
         if (enemyMono == null) return;
         var targetEnemyEnum = GetTargetEnemyEnum(playerColor);
 
-        if (enemyMono.EnemyEnum == targetEnemyEnum || enemyMono.EnemyEnum == EnemyEnum.Boss)
+        if (enemyMono.EnemyEnum == targetEnemyEnum || enemyMono.EnemyEnum == EnemyEnum.RedBoss)
         {
             Debug.Log($"EnemyType: {enemyMono.EnemyEnum}を攻撃");
             _playerAttacks[playerColor].Attack(enemyMono);
