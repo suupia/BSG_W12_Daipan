@@ -70,9 +70,9 @@ namespace Daipan.Player.MonoScripts
     {
         return playerColor switch
         {
-            PlayerColor.Red => EnemyEnum.W,
-            PlayerColor.Blue => EnemyEnum.A,
-            PlayerColor.Yellow => EnemyEnum.S,
+            PlayerColor.Red => EnemyEnum.Red,
+            PlayerColor.Blue => EnemyEnum.Blue,
+            PlayerColor.Yellow => EnemyEnum.Yellow,
             _ => throw new ArgumentOutOfRangeException()
         };
     }
@@ -162,9 +162,9 @@ namespace Daipan.Player.MonoScripts
     bool IsTargetEnemy(PlayerColor playerColor, EnemyEnum enemyEnum){
         return playerColor switch
         {
-            PlayerColor.Red => enemyEnum == EnemyEnum.W,
-            PlayerColor.Blue => enemyEnum == EnemyEnum.A,
-            PlayerColor.Yellow => enemyEnum == EnemyEnum.S,
+            PlayerColor.Red => enemyEnum == EnemyEnum.Red,
+            PlayerColor.Blue => enemyEnum == EnemyEnum.Blue,
+            PlayerColor.Yellow => enemyEnum == EnemyEnum.Yellow,
             _ => false
         };
     }

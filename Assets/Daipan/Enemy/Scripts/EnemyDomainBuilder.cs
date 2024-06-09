@@ -71,7 +71,7 @@ namespace Daipan.Enemy.Scripts
         EnemyEnum DecideRandomEnemyTypeCustom()
         {
             var rand = Random.value;
-            if (rand < 0.5f) return EnemyEnum.A;
+            if (rand < 0.5f) return EnemyEnum.Blue;
             return EnemyEnum.Boss;
         }
 
