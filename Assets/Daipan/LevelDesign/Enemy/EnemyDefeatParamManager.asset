@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: EnemyDefeatParamManager
   m_EditorClassIdentifier: 
   enemySlowDefeatParam:
-    slowDefeatThreshold: 5
+    slowDefeatThreshold: 15
