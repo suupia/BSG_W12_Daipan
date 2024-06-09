@@ -5,8 +5,8 @@ using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.Scripts;
 using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.Player.Scripts;
+using DG.Tweening;
 using UnityEngine;
-using UnityEngine.Serialization;
 using VContainer;
 
 namespace Daipan.Enemy.MonoScripts
@@ -105,11 +105,36 @@ namespace Daipan.Enemy.MonoScripts
                 OnDied?.Invoke(this, args);
             }
 
-            if (enemyViewMono == null) Destroy(gameObject);
+            // if (enemyViewMono == null) Destroy(gameObject);
+            // else
+            // {
+            //     if (isDaipaned) enemyViewMono.Daipaned(() => OnDiedProcess(this)); 
+            //     else enemyViewMono.Died(() => OnDiedProcess(this));
+            // }
+            OnDiedProcess(this, isDaipaned, enemyViewMono);
+        }
+
+        static void OnDiedProcess(EnemyMono enemyMono, bool isDaipaned, AbstractEnemyViewMono? enemyViewMono)
+        {
+            if (enemyViewMono == null)
+            {
+                Destroy(enemyMono.gameObject);
+                return;
+            }
+
+            if (isDaipaned)
+            {
+                enemyMono.transform
+                    .DOMoveY(-1.7f, 0.3f)
+                    .SetEase(Ease.InQuint)
+                    .OnComplete(() =>
+                    {
+                        enemyViewMono.Daipaned(() => Destroy(enemyMono.gameObject));
+                    });
+            }
             else
             {
-                if (isDaipaned) enemyViewMono.Daipaned(() => Destroy(gameObject)); 
-                else enemyViewMono.Died(() => Destroy(gameObject));
+                enemyViewMono.Died(() => Destroy(enemyMono.gameObject));
             }
         }
 
