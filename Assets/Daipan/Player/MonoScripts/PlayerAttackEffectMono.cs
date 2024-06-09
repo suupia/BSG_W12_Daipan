@@ -11,7 +11,6 @@ namespace Daipan.Player.MonoScripts
     {
         [SerializeField] PlayerAttackEffectViewMono? viewMono;
         public Func<EnemyMono?> TargetEnemyMono = () => null;
-        PlayerParamData _playerParamData = null;
         readonly double _speed = 10;
         Vector3 TargetPositionCached { get; set; }
         public event EventHandler<OnHitEventArgs>? OnHit;
@@ -27,9 +26,8 @@ namespace Daipan.Player.MonoScripts
             {
                 TargetPositionCached = enemyMono.transform.position;
             }
-            // var direction = (TargetPositionCached - transform.position).normalized;
             var direction = Vector3.Project((TargetPositionCached - transform.position), Vector3.right).normalized;
-            transform.position += (Vector3)direction * (float)(_speed * Time.deltaTime);
+            transform.position += direction * (float)(_speed * Time.deltaTime);
             
             
             if (Mathf.Abs(transform.position.x - TargetPositionCached.x) < 0.1f) 
@@ -42,7 +40,6 @@ namespace Daipan.Player.MonoScripts
         public void SetDomain(PlayerParamData playerParamData)
         { 
             Debug.Log($"PlayerAttackEffectMono data.Enum = {playerParamData.PlayerEnum()}");
-           _playerParamData = playerParamData; 
            viewMono?.SetDomain(playerParamData);
         }
         
