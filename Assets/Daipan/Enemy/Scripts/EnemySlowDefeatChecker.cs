@@ -27,6 +27,7 @@ namespace Daipan.Enemy.Scripts
         public void IncrementSlowDefeatCounter()
         {
             SlowDefeatCounter++;
+            Debug.Log($"SlowDefeatCounter = {SlowDefeatCounter}");
             if (SlowDefeatCounter > SlowDefeatThreshold)
             {
                 Debug.Log("Spawn comment");

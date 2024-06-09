@@ -21,7 +21,6 @@ namespace Daipan.Enemy.MonoScripts
         EnemyParamModifyWithTimer _enemyParamModifyWithTimer = null!;
         EnemySpawnPointData _enemySpawnPointData = null!;
         EnemyParamDataContainer _enemyParamDataContainer = null!;
-        bool _isSlowDefeat;
         PlayerHolder _playerHolder = null!;
         EnemyQuickDefeatChecker _quickDefeatChecker = null!;
         EnemySlowDefeatChecker _slowDefeatChecker = null!;
@@ -43,11 +42,7 @@ namespace Daipan.Enemy.MonoScripts
 
             enemyViewMono?.SetHpGauge(CurrentHp, _enemyParamDataContainer.GetEnemyParamData(EnemyEnum).GetCurrentHp());
 
-            if (_isSlowDefeat == false && transform.position.x <= _slowDefeatChecker.SlowDefeatCoordinate)
-            {
-                _isSlowDefeat = true;
-                _slowDefeatChecker.IncrementSlowDefeatCounter();
-            }
+
         }
 
         public int CurrentHp
@@ -95,6 +90,14 @@ namespace Daipan.Enemy.MonoScripts
 
         public void Died(bool isDaipaned, bool isTriggerCallback)
         {
+            // Check SlowDefeat
+            if (!isDaipaned && transform.position.x <= _slowDefeatChecker.SlowDefeatCoordinate)
+            {
+                _slowDefeatChecker.IncrementSlowDefeatCounter();
+            }
+
+            
+            // Callback
             if (isTriggerCallback)
             {
                 var isQuickDefeat = _quickDefeatChecker.IsQuickDefeat(transform.position);
