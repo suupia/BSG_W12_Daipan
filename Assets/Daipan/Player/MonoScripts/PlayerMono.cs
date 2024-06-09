@@ -62,11 +62,11 @@ namespace Daipan.Player.MonoScripts
             .FirstOrDefault(); 
         var effect = _playerAttackEffectSpawner.SpawnEffect(spawnPosition ?? transform.position, Quaternion.identity);
         effect.SetDomain(_playerParamDataContainer.GetPlayerParamData(playerColor));
-        effect.TargetPosition = () => GetNearestEnemy(GetEnemyEnum(playerColor))?.transform.position;
-        effect.OnHit += (sender, args) => AttackEnemy(playerColor);
+        effect.TargetEnemyMono = () => GetNearestEnemy(GetTargetEnemyEnum(playerColor));
+        effect.OnHit += (sender, args) => AttackEnemy(playerColor, args.EnemyMono);
     }
     
-    EnemyEnum GetEnemyEnum(PlayerColor playerColor)
+    EnemyEnum GetTargetEnemyEnum(PlayerColor playerColor)
     {
         return playerColor switch
         {
@@ -92,20 +92,13 @@ namespace Daipan.Player.MonoScripts
         return enemyMono;
     }
     
-    EnemyMono? AttackEnemy(PlayerColor playerColor)
+    void AttackEnemy(PlayerColor playerColor, EnemyMono? enemyMono)
     {
-        var enemyEnum = GetEnemyEnum(playerColor);
-        // そのレーンの敵を取得
-        var enemyMono = _enemyCluster.NearestEnemy(enemyEnum, transform.position);
-        // レーンの敵がいなければ、ボスを取得
-        if (enemyMono == null) enemyMono = _enemyCluster.NearestEnemy(transform.position);
-        if (enemyMono == null)
-        {
-            Debug.Log($"攻撃対象がいないよ");
-            return null;
-        }
+        Debug.Log($"Attack enemyMono: {enemyMono}");
+        if (enemyMono == null) return;
+        var targetEnemyEnum = GetTargetEnemyEnum(playerColor);
 
-        if (enemyMono.EnemyEnum == enemyEnum || enemyMono.EnemyEnum == EnemyEnum.Boss)
+        if (enemyMono.EnemyEnum == targetEnemyEnum || enemyMono.EnemyEnum == EnemyEnum.Boss)
         {
             Debug.Log($"EnemyType: {enemyMono.EnemyEnum}を攻撃");
             _playerAttacks[playerColor].Attack(enemyMono);
@@ -114,15 +107,14 @@ namespace Daipan.Player.MonoScripts
             foreach (var playerViewMono in playerViewMonos)
             {
                 if (playerViewMono == null) continue;
-                if (IsTargetEnemy(playerViewMono.playerColor, enemyEnum)) playerViewMono.Attack();
+                if (IsTargetEnemy(playerViewMono.playerColor, targetEnemyEnum)) playerViewMono.Attack();
             }
         }
         else
         {
-            Debug.Log($"攻撃対象が{enemyEnum}ではないよ");
+            Debug.Log($"攻撃対象が{targetEnemyEnum}ではないよ");
         }
 
-        return null;
     }
 
     public void OnAttacked(EnemyEnum enemyEnum)
