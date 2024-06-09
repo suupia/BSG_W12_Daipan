@@ -18,7 +18,7 @@ namespace Daipan.Enemy.Scripts
         {
             hpSetter.CurrentHp -= _enemyParamData.GetAttackAmount();
             var playerMono = (PlayerMono)hpSetter;
-            playerMono.OnAttacked(_enemyParamData.EnemyEnum());
+            playerMono.OnAttacked(_enemyParamData.GetEnemyEnum());
         }
     } 
 
