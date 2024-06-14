@@ -79,20 +79,5 @@ namespace Daipan.LevelDesign.Enemy.Scripts
     
 
 
-    public static class AnyTypesExtensions{
-        public static bool? IsBoss(this EnemyEnum self)
-        {
-            var fieldInfo = self.GetType().GetField(self.ToString());
-            return fieldInfo?.GetCustomAttribute<IsBossAttribute>()?.IsBoss;
-        }
-    }
-
-    [AttributeUsage(AttributeTargets.Field, Inherited = false, AllowMultiple = false)]
-    class IsBossAttribute : Attribute
-    {
-        public bool IsBoss {get;}
-        public IsBossAttribute(bool isBoss) : base() => this.IsBoss = isBoss;
-    }
-
 
 }
