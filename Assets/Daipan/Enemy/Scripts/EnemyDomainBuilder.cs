@@ -108,7 +108,7 @@ namespace Daipan.Enemy.Scripts
             }
 
             // 通常敵のType決め
-            List<float> ratio = new();
+            List<double> ratio = new();
             foreach (var enemyLife in _enemyParamManager.enemyParams)
             {
                 if (enemyLife.enemyEnum == EnemyEnum.RedBoss) continue;
@@ -117,11 +117,9 @@ namespace Daipan.Enemy.Scripts
             
             // ここで100%に正規化
             ratio = EnemySpawnCalculator.NormalizeEnemySpawnRatioWithBoss(ratio,
-                (float)_enemyParamModifyWithTimer.GetSpawnBossPercent());
+                _enemyParamModifyWithTimer.GetSpawnBossPercent());
             Debug.Log($"enemyPrams.Length : {_enemyParamManager.enemyParams.Count}");
-            Debug.Log($"Randoms.RandomByRatio(ratio) : {Randoms.RandomByRatio(ratio)}");
-
-            var enemyEnum = _enemyParamManager.enemyParams[Randoms.RandomByRatio(ratio)].enemyEnum;
+            var enemyEnum = _enemyParamManager.enemyParams[Randoms.RandomByRatios(ratio,Random.value)].enemyEnum;
             if (enemyEnum == EnemyEnum.RedBoss) _enemyLevelDesignParamData.SetCurrentKillAmount(0);
             return enemyEnum;
         }

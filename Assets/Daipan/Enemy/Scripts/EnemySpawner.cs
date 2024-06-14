@@ -9,6 +9,7 @@ using Daipan.Utility.Scripts;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
+using Random = UnityEngine.Random;
 
 
 namespace Daipan.Enemy.Scripts
@@ -69,7 +70,7 @@ namespace Daipan.Enemy.Scripts
         {
             List<Vector3> position = new();
             List<EnemyEnum> enums = new();
-            List<float> ratio = new();
+            List<double> ratio = new();
 
             foreach (var point in _enemySpawnPointData.GetEnemySpawnedPointXs())
             {
@@ -78,7 +79,7 @@ namespace Daipan.Enemy.Scripts
                 ratio.Add(point.enemySpawnRatio);
             }
             Debug.Log($"ratio.Count : {ratio.Count}");
-            var rand = Randoms.RandomByRatio(ratio);
+            var rand = Randoms.RandomByRatios(ratio,Random.value);
             Debug.Log($"position.Count : {position.Count}, rand : {rand}");
             return (position[rand], enums[rand]);
         }

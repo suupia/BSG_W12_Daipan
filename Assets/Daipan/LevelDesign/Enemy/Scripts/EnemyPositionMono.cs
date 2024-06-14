@@ -34,7 +34,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         
         [Header("敵の生成される確率（相対的に設定できる)")]
         [Min(0)]    
-        public float enemySpawnRatio;
+        public float enemySpawnRatio = 10;
         
         [FormerlySerializedAs("EnemyType")] [Header("生成される敵（指定しないとランダム）")]
         public EnemyEnum enemyEnum  = EnemyEnum.None;

@@ -118,6 +118,7 @@ namespace Daipan.Daipan
                 var enemyPositionMono = new GameObject().AddComponent<EnemyPositionMono>();
                 enemyPositionMono.enemySpawnedPoints =
                     lanePositionMono.lanePositions.Select(x => x.enemySpawnedPosition).ToList();
+                enemyPositionMono.enemyDespawnedPoint = lanePositionMono.enemyDespawnedPoint;
                 return enemyPositionMono;
             }
             builder.RegisterInstance(new EnemyPositionMonoBuilder(builder, SetUpEnemyPositionMono()));

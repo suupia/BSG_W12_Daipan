@@ -2920,19 +2920,19 @@ MonoBehaviour:
     playerSpawnXTransform: {fileID: 0}
     enemySpawnedPosition:
       enemySpawnTransformX: {fileID: 2139454379639670455}
-      enemySpawnRatio: 0
+      enemySpawnRatio: 10
       enemyEnum: 0
   - laneYTransform: {fileID: 0}
     playerSpawnXTransform: {fileID: 0}
     enemySpawnedPosition:
       enemySpawnTransformX: {fileID: 2139454379681994179}
-      enemySpawnRatio: 0
+      enemySpawnRatio: 10
       enemyEnum: 0
   - laneYTransform: {fileID: 0}
     playerSpawnXTransform: {fileID: 0}
     enemySpawnedPosition:
       enemySpawnTransformX: {fileID: 2139454380265612660}
-      enemySpawnRatio: 0
+      enemySpawnRatio: 10
       enemyEnum: 0
   enemyDespawnedPoint: {fileID: 1495197751}
   attackEffectDespawnedPoint: {fileID: 1242288914}
