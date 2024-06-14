@@ -1,6 +1,7 @@
 #nullable enable
 using System;
 using System.Collections.Generic;
+using Daipan.LevelDesign.Enemy.Scripts;
 using UnityEngine;
 
 namespace Daipan.LevelDesign.Battle.Scripts
@@ -22,5 +23,15 @@ namespace Daipan.LevelDesign.Battle.Scripts
     {
         [Header("プレイヤーや敵の生成される高さ")]
         public Transform transform = null!;
+        
+        [Header("敵の生成される確率（相対的に設定できる")]
+        [Min(0)]
+        public float enemySpawnRatio;
+
+        [Header("生成される敵の種類（指定しないとランダム）")] 
+        public EnemyEnum enemyEnum = EnemyEnum.None;
+
+        // このクラスがWaveごとにあって、ListでそのWaveにおけるレーンを表してもいいかも。
+
     }
 }
