@@ -66,7 +66,7 @@ namespace Daipan.Enemy.Scripts
 
                 if (args.enemyEnum.IsBoss() == false) _viewerNumber.IncreaseViewer(_enemyLevelDesignParamData.GetIncreaseViewerOnEnemyKill()); // todo :パラメータを設定できるようにする
 
-                if (args.enemyEnum.IsBoss() == true || args.IsQuickDefeat) _commentSpawner.SpawnCommentByType(CommentEnum.Normal);
+                if (args.enemyEnum.IsBoss() == true) _commentSpawner.SpawnCommentByType(CommentEnum.Normal);
             };
             return enemyMono;
         }
