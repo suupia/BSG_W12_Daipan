@@ -1,4 +1,5 @@
 #nullable enable
+using Daipan.LevelDesign.Battle.Scripts;
 using VContainer;
 
 namespace Daipan.LevelDesign.Enemy.Scripts

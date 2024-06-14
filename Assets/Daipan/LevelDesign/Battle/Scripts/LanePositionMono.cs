@@ -21,8 +21,14 @@ namespace Daipan.LevelDesign.Battle.Scripts
     [Serializable]
     public class LanePosition
     {
-        [Header("プレイヤーや敵の生成される高さ")]
-        public Transform transform = null!;
+        [Header("レーンのy座標を決めるゲームオブジェクト")]
+        public Transform laneYTransform = null!;
+
+        [Header("プレイヤーの生成されるx座標を決めるゲームオブジェクト")]
+        public Transform playerSpawnXTransform = null!;
+
+        [Header("敵の生成されるx座標を決めるゲームオブジェクト")]
+        public Transform enemySpawnXTransform = null!;
         
         [Header("敵の生成される確率（相対的に設定できる")]
         [Min(0)]
