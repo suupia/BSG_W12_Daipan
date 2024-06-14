@@ -58,6 +58,13 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         [Tooltip("最終的には別途、イライラ度に応じた確率シートを作成する")]
         public float daipanProbability;
     }
+
+    [SerializeField]
+    public sealed class EnemyRewardParam
+    {
+        [Header("敵を倒したときに獲得するイライラゲージの量")] [Min(0)]
+        public int irritationAfterKill;
+    }
     
     [Serializable]
     public sealed class EnemyParam
@@ -71,6 +78,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         public EnemyHpParam enemyHpParam = null!;
         public EnemyMoveParam enemyMoveParam = null!;
         public EnemySpawnParam enemySpawnParam = null!;
+        public EnemyRewardParam enemyRewardParam = null!;
         
         [Header("AnimatorController")]
         public RuntimeAnimatorController animatorController = null!;

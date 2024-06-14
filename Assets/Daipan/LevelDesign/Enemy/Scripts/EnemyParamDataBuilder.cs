@@ -26,6 +26,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
                     GetCurrentHp = () => enemyParam.enemyHpParam.hpAmount,
                     GetMoveSpeedPreSec = () => enemyParam.enemyMoveParam.moveSpeedPerSec,
                     GetSpawnRatio = () => enemyParam.enemySpawnParam.spawnRatio,
+                    GetIrritationAfterKill = () => enemyParam.enemyRewardParam.irritationAfterKill,
                 }); 
             }
             var enemyParamContainer = new EnemyParamDataContainer(enemyParams);
