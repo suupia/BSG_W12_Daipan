@@ -58,8 +58,8 @@ namespace Daipan.Enemy.MonoScripts
 
         public override void Died(Action onDied)
         {
+            SetTriggerAll("OnDied");
             // animatorLineを代表とする
-            animatorLine.SetTrigger("OnDied");
             var preState = animatorLine.GetCurrentAnimatorStateInfo(0).fullPathHash;
             Observable.EveryValueChanged(animatorLine, a => a.IsEnd())
                 .Where(_ => preState != animatorLine.GetCurrentAnimatorStateInfo(0).fullPathHash) 
@@ -70,8 +70,8 @@ namespace Daipan.Enemy.MonoScripts
 
         public override void Daipaned(Action onDied)
         {
+            SetTriggerAll("OnDaipaned");
             // animatorLineを代表とする
-            animatorLine.SetTrigger("OnDaipaned");
             var preState = animatorLine.GetCurrentAnimatorStateInfo(0).fullPathHash;
             Observable.EveryValueChanged(animatorLine, a => a.IsEnd())
                 .Where(_ => preState != animatorLine.GetCurrentAnimatorStateInfo(0).fullPathHash) 
