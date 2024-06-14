@@ -8,9 +8,9 @@ namespace Daipan.Stream.Scripts
     {
         readonly IrritatedParams _irritatedParams;
 
-        public IrritatedValue(IrritatedParams irritatedParams)
+        public IrritatedValue(int maxValue, IrritatedParams irritatedParams)
         {
-            MaxValue = 100;
+            MaxValue = maxValue;
             _irritatedParams = irritatedParams;
         }
 
@@ -28,6 +28,7 @@ namespace Daipan.Stream.Scripts
             if (amount < 0) Debug.LogWarning($"IrritatedValue.IncreaseValue() amount is negative : {amount}");
 
             IncreasedValue += amount;
+            if (Value >= MaxValue) IncreasedValue = MaxValue;
 
             Debug.Log($"IncreaseValue() IrritatedValue : {Value}");
         }
