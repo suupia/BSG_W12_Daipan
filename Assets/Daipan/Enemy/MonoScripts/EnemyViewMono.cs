@@ -13,25 +13,38 @@ namespace Daipan.Enemy.MonoScripts
     {
         [SerializeField] HpGaugeMono hpGaugeMono = null!;
         [SerializeField] Animator animator = null!;
+        [SerializeField] SpriteRenderer tempSpriteRenderer = null!; // todo: 完成時には削除する
 
         EnemyParamDataContainer _enemyParamDataContainer = null!;
-        
+
         void Awake()
         {
             if (hpGaugeMono == null) Debug.LogWarning("hpGaugeMono is null");
             if (animator == null) Debug.LogWarning("animator is null");
+            if (tempSpriteRenderer == null) Debug.LogWarning("tempSpriteRenderer is null");
         }
-        
+
         public override void SetDomain(EnemyParamDataContainer enemyParamDataContainer)
         {
             _enemyParamDataContainer = enemyParamDataContainer;
         }
-        
+
         public override void SetView(EnemyEnum enemyEnum)
         {
             animator.runtimeAnimatorController = _enemyParamDataContainer.GetEnemyParamData(enemyEnum).GetAnimator();
+
+            // temp
+            tempSpriteRenderer.color = enemyEnum switch
+            {
+                EnemyEnum.Red => Color.red,
+                EnemyEnum.Blue => Color.blue,
+                EnemyEnum.Yellow => Color.yellow,
+                EnemyEnum.RedBoss => Color.Lerp(Color.red, Color.black, 0.5f), // 半分暗くする
+                EnemyEnum.Special => Color.Lerp(Color.red, Color.yellow, 0.5f), // 赤と黄色の中間色
+                _ => Color.white
+            };
         }
-        
+
         public override void SetHpGauge(int currentHp, int maxHp)
         {
             hpGaugeMono.SetRatio(currentHp / (float)maxHp);
@@ -39,7 +52,7 @@ namespace Daipan.Enemy.MonoScripts
 
         public override void Move()
         {
-            animator.SetBool("IsMoving",true);
+            animator.SetBool("IsMoving", true);
             animator.SetBool("IsAttacking", false);
         }
 
@@ -54,7 +67,7 @@ namespace Daipan.Enemy.MonoScripts
             animator.SetTrigger("OnDied");
             var preState = animator.GetCurrentAnimatorStateInfo(0).fullPathHash;
             Observable.EveryValueChanged(animator, a => a.IsEnd())
-                .Where(_ => preState != animator.GetCurrentAnimatorStateInfo(0).fullPathHash) 
+                .Where(_ => preState != animator.GetCurrentAnimatorStateInfo(0).fullPathHash)
                 .Where(isEnd => isEnd)
                 .Subscribe(_ => onDied())
                 .AddTo(this);
@@ -65,14 +78,10 @@ namespace Daipan.Enemy.MonoScripts
             animator.SetTrigger("OnDaipaned");
             var preState = animator.GetCurrentAnimatorStateInfo(0).fullPathHash;
             Observable.EveryValueChanged(animator, a => a.IsEnd())
-                .Where(_ => preState != animator.GetCurrentAnimatorStateInfo(0).fullPathHash) 
+                .Where(_ => preState != animator.GetCurrentAnimatorStateInfo(0).fullPathHash)
                 .Where(isEnd => isEnd)
-                .Subscribe(_ => onDied()) 
+                .Subscribe(_ => onDied())
                 .AddTo(this);
         }
-        
-        
-        
-
     }
 }
