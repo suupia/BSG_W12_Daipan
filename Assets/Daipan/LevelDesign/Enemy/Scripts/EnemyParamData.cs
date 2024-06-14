@@ -1,6 +1,7 @@
 #nullable enable
 using System;
 using Daipan.Enemy.Scripts;
+using UnityEngine;
 
 namespace Daipan.LevelDesign.Enemy.Scripts
 {
@@ -25,6 +26,12 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         
         // Spawn
         public Func<double> GetSpawnRatio { get; init; } = () => 1.0;
+        
+        // Animator 
+        public Func<Color> GetBodyColor { get; init; } = () => Color.white;
+        public Func<Color> GetEyeColor { get; init; } = () => Color.white;
+        public Func<Color> GetEyeBallColor { get; init; } = () => Color.white;
+        public Func<Color> GetLineColor { get; init; } = () => Color.white;
         
     }
 

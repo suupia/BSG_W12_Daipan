@@ -31,12 +31,12 @@ namespace Daipan.Enemy.MonoScripts
         
         public override void SetView(EnemyEnum enemyEnum)
         {
-            // animator.runtimeAnimatorController = _enemyParamDataContainer.GetEnemyParamData(enemyEnum).GetAnimator();
-            animatorBody.GetComponent<SpriteRenderer>().color = Color.blue;
-            animatorEye.GetComponent<SpriteRenderer>().color = Color.blue;
-            animatorEyeBall.GetComponent<SpriteRenderer>().color = Color.blue;
-            animatorLine.GetComponent<SpriteRenderer>().color = Color.blue;
-            
+            var enemyParamData = _enemyParamDataContainer.GetEnemyParamData(enemyEnum);
+            animatorBody.GetComponent<SpriteRenderer>().color = enemyParamData.GetBodyColor();
+            animatorEye.GetComponent<SpriteRenderer>().color = enemyParamData.GetEyeColor();
+            animatorEyeBall.GetComponent<SpriteRenderer>().color = enemyParamData.GetEyeBallColor();
+            animatorLine.GetComponent<SpriteRenderer>().color = enemyParamData.GetLineColor();
+
         }
         
         public override void SetHpGauge(int currentHp, int maxHp)
