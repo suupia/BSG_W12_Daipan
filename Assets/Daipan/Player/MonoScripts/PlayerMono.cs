@@ -118,14 +118,14 @@ namespace Daipan.Player.MonoScripts
 
     }
 
-    public void OnAttacked(EnemyEnum enemyEnum)
-    {
-        foreach (var playerViewMono in playerViewMonos)
-        {
-            if (playerViewMono == null) continue;
-            if(IsTargetEnemy(playerViewMono.playerColor, enemyEnum)) playerViewMono.Damage();
-        }
-    }
+    // public void OnAttacked(EnemyEnum enemyEnum)
+    // {
+    //     foreach (var playerViewMono in playerViewMonos)
+    //     {
+    //         if (playerViewMono == null) continue;
+    //         if(IsTargetEnemy(playerViewMono.playerColor, enemyEnum)) playerViewMono.Damage();
+    //     }
+    // }
 
     [Inject]
     public void Initialize(
@@ -147,7 +147,18 @@ namespace Daipan.Player.MonoScripts
         _enemyCluster = enemyCluster;
 
         _playerHp = new PlayerHp(playerHpParamData.GetCurrentHp());
-        _playerHp.OnDamage += (sender, args) => { irritatedValue.IncreaseValue(args.DamageValue); };
+        _playerHp.OnDamage += (sender, args) =>
+        {
+            // Domain
+            irritatedValue.IncreaseValue(args.DamageValue);
+            
+            // View
+            foreach (var playerViewMono in playerViewMonos)
+            {
+                if (playerViewMono == null) continue;
+                if(IsTargetEnemy(playerViewMono.playerColor, args.enemyEnum)) playerViewMono.Damage();
+            } 
+        };
 
         _inputSerialManager = inputSerialManager;
         _playerAttackEffectSpawner = playerAttackEffectSpawner;

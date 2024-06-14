@@ -16,9 +16,10 @@ namespace Daipan.Enemy.Scripts
         
         public void Attack(IPlayerHp playerHp)
         {
-            playerHp.SetHp(new DamageArgs(_enemyParamData.GetAttackAmount()));
-            var playerMono = (PlayerMono)playerHp;
-            playerMono.OnAttacked(_enemyParamData.GetEnemyEnum());
+            playerHp.SetHp(
+                new DamageArgs(_enemyParamData.GetAttackAmount(),
+                _enemyParamData.GetEnemyEnum())
+                );
         }
     } 
 
