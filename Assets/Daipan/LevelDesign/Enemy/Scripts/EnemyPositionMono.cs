@@ -29,7 +29,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
     {
         [Header("敵の生成位置")]
         [Tooltip("敵の生成位置を示すGameObjectを入れて！！")]
-        public Transform transform = null!;
+        public Transform enemySpawnTransformX = null!;
         [Header("敵の生成される確率（相対的に設定してよい)")]
         [Min(0)]    
         public float ratio;

@@ -71,9 +71,9 @@ namespace Daipan.Enemy.Scripts
             List<EnemyEnum> enums = new();
             List<float> ratio = new();
 
-            foreach (var point in _enemySpawnPointData.GetEnemySpawnedPoints())
+            foreach (var point in _enemySpawnPointData.GetEnemySpawnedPointXs())
             {
-                position.Add(point.transform.position);
+                position.Add(point.enemySpawnTransformX.position);
                 enums.Add(point.enemyEnum);
                 ratio.Add(point.ratio);
             }

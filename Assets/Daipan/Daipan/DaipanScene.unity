@@ -1401,13 +1401,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemySpawnedPoints:
-  - transform: {fileID: 2139454379639670455}
+  - enemySpawnTransformX: {fileID: 2139454379639670455}
     ratio: 60
     enemyEnum: 1
-  - transform: {fileID: 2139454379681994179}
+  - enemySpawnTransformX: {fileID: 2139454379681994179}
     ratio: 20
     enemyEnum: 2
-  - transform: {fileID: 2139454380265612660}
+  - enemySpawnTransformX: {fileID: 2139454380265612660}
     ratio: 20
     enemyEnum: 3
   enemyDespawnedPoint: {fileID: 1495197751}
@@ -2916,9 +2916,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lanePositions:
-  - transform: {fileID: 2139454379639670455}
-  - transform: {fileID: 2139454379681994179}
-  - transform: {fileID: 2139454380265612660}
+  - laneYTransform: {fileID: 0}
+    playerSpawnXTransform: {fileID: 0}
+    enemySpawnXTransform: {fileID: 0}
+    enemySpawnRatio: 0
+    enemyEnum: 0
+  - laneYTransform: {fileID: 0}
+    playerSpawnXTransform: {fileID: 0}
+    enemySpawnXTransform: {fileID: 0}
+    enemySpawnRatio: 0
+    enemyEnum: 0
+  - laneYTransform: {fileID: 0}
+    playerSpawnXTransform: {fileID: 0}
+    enemySpawnXTransform: {fileID: 0}
+    enemySpawnRatio: 0
+    enemyEnum: 0
   enemyDespawnedPoint: {fileID: 1495197751}
   attackEffectDespawnedPoint: {fileID: 1242288914}
 --- !u!4 &1916099520
