@@ -7,6 +7,7 @@ namespace Daipan.Stream.Scripts
     public sealed class IrritatedValue
     {
         readonly IrritatedParams _irritatedParams;
+
         public IrritatedValue(IrritatedParams irritatedParams)
         {
             MaxValue = 100;
@@ -14,10 +15,11 @@ namespace Daipan.Stream.Scripts
         }
 
         public int MaxValue { get; }
+        public bool IsFull => Value >= MaxValue;
         public float Ratio => (float)Value / MaxValue;
         public float Value => Mathf.Max(IncreasedValue - DecreasedValue, 0);
         float DecreasedValue { get; set; }
-        float  IncreasedValue { get; set; }
+        float IncreasedValue { get; set; }
         public IReadOnlyList<float> RatioTable => _irritatedParams.RatioTable;
 
         public void IncreaseValue(float amount)
@@ -40,18 +42,6 @@ namespace Daipan.Stream.Scripts
                 DecreasedValue += Value;
             else
                 DecreasedValue += amount;
-        }
-
-        public int GetIrritatedPhase()
-        {
-            for(int i = 0; i < RatioTable.Count; i++)
-            {
-                if(Ratio < RatioTable[i])
-                {
-                    return i;
-                }
-            }
-            return RatioTable.Count;
         }
     }
 }
