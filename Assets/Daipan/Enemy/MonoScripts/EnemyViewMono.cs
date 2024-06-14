@@ -12,14 +12,16 @@ namespace Daipan.Enemy.MonoScripts
     public class EnemyViewMono : AbstractEnemyViewMono
     {
         [SerializeField] HpGaugeMono hpGaugeMono = null!;
-        [SerializeField] Animator animator = null!;
+        [SerializeField] Animator animatorBody = null!;
+        [SerializeField] Animator animatorEye = null!;
+        [SerializeField] Animator animatorEyeBall = null!;
+        [SerializeField] Animator animatorLine = null!;
 
         EnemyParamDataContainer _enemyParamDataContainer = null!;
         
         void Awake()
         {
             if (hpGaugeMono == null) Debug.LogWarning("hpGaugeMono is null");
-            if (animator == null) Debug.LogWarning("animator is null");
         }
         
         public override void SetDomain(EnemyParamDataContainer enemyParamDataContainer)
@@ -29,7 +31,12 @@ namespace Daipan.Enemy.MonoScripts
         
         public override void SetView(EnemyEnum enemyEnum)
         {
-            animator.runtimeAnimatorController = _enemyParamDataContainer.GetEnemyParamData(enemyEnum).GetAnimator();
+            // animator.runtimeAnimatorController = _enemyParamDataContainer.GetEnemyParamData(enemyEnum).GetAnimator();
+            animatorBody.GetComponent<SpriteRenderer>().color = Color.blue;
+            animatorEye.GetComponent<SpriteRenderer>().color = Color.blue;
+            animatorEyeBall.GetComponent<SpriteRenderer>().color = Color.blue;
+            animatorLine.GetComponent<SpriteRenderer>().color = Color.blue;
+            
         }
         
         public override void SetHpGauge(int currentHp, int maxHp)
@@ -39,22 +46,23 @@ namespace Daipan.Enemy.MonoScripts
 
         public override void Move()
         {
-            animator.SetBool("IsMoving",true);
-            animator.SetBool("IsAttacking", false);
+            SetBoolAll("IsMoving", true);
+            SetBoolAll("IsAttacking", false);
         }
 
         public override void Attack()
         {
-            animator.SetBool("IsMoving", false);
-            animator.SetBool("IsAttacking", true);
+            SetBoolAll("IsMoving", false);
+            SetBoolAll("IsAttacking", true);
         }
 
         public override void Died(Action onDied)
         {
-            animator.SetTrigger("OnDied");
-            var preState = animator.GetCurrentAnimatorStateInfo(0).fullPathHash;
-            Observable.EveryValueChanged(animator, a => a.IsEnd())
-                .Where(_ => preState != animator.GetCurrentAnimatorStateInfo(0).fullPathHash) 
+            // animatorLineを代表とする
+            animatorLine.SetTrigger("OnDied");
+            var preState = animatorLine.GetCurrentAnimatorStateInfo(0).fullPathHash;
+            Observable.EveryValueChanged(animatorLine, a => a.IsEnd())
+                .Where(_ => preState != animatorLine.GetCurrentAnimatorStateInfo(0).fullPathHash) 
                 .Where(isEnd => isEnd)
                 .Subscribe(_ => onDied())
                 .AddTo(this);
@@ -62,16 +70,31 @@ namespace Daipan.Enemy.MonoScripts
 
         public override void Daipaned(Action onDied)
         {
-            animator.SetTrigger("OnDaipaned");
-            var preState = animator.GetCurrentAnimatorStateInfo(0).fullPathHash;
-            Observable.EveryValueChanged(animator, a => a.IsEnd())
-                .Where(_ => preState != animator.GetCurrentAnimatorStateInfo(0).fullPathHash) 
+            // animatorLineを代表とする
+            animatorLine.SetTrigger("OnDaipaned");
+            var preState = animatorLine.GetCurrentAnimatorStateInfo(0).fullPathHash;
+            Observable.EveryValueChanged(animatorLine, a => a.IsEnd())
+                .Where(_ => preState != animatorLine.GetCurrentAnimatorStateInfo(0).fullPathHash) 
                 .Where(isEnd => isEnd)
                 .Subscribe(_ => onDied()) 
                 .AddTo(this);
         }
+
+        void SetTriggerAll(string paramName)
+        {
+            animatorBody.SetTrigger(paramName);
+            animatorEye.SetTrigger(paramName);
+            animatorEyeBall.SetTrigger(paramName);
+            animatorLine.SetTrigger(paramName);
+        }
         
-        
+        void SetBoolAll(string paramName, bool value)
+        {
+            animatorBody.SetBool(paramName, value);
+            animatorEye.SetBool(paramName, value);
+            animatorEyeBall.SetBool(paramName, value);
+            animatorLine.SetBool(paramName, value);
+        }
         
 
     }
