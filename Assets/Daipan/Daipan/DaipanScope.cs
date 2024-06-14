@@ -87,9 +87,6 @@ namespace Daipan.Daipan
                 .WithParameter(EnemyEnum.RedBoss);
             builder.Register<EnemySpawner>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
             builder.Register<EnemyCluster>(Lifetime.Scoped);
-            builder.Register<EnemyQuickDefeatChecker>(Lifetime.Scoped);
-            builder.Register<EnemySlowDefeatChecker>(Lifetime.Scoped);
-
 
             // View
             builder.RegisterComponentInHierarchy<StreamViewMono>();
