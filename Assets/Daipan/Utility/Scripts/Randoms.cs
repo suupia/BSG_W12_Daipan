@@ -37,7 +37,7 @@ namespace Daipan.Utility.Scripts
                     random -= ratio[i];
                 }
             }
-
+            Debug.Log($"totalRatio: {totalRatio}, random: {random}, i: {i}");
             return i;
 
         }

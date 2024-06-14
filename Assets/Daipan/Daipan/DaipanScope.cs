@@ -1,3 +1,4 @@
+using System.Linq;
 using Daipan.Comment.MonoScripts;
 using Daipan.Comment.Scripts;
 using Daipan.Core;
@@ -7,6 +8,7 @@ using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Enemy.Scripts;
 using Daipan.InputSerial.Scripts;
+using Daipan.LevelDesign.Battle.Scripts;
 using Daipan.LevelDesign.Comment.Scripts;
 using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.LevelDesign.Player.Scripts;
@@ -109,7 +111,16 @@ namespace Daipan.Daipan
             builder.RegisterInstance(new EnemyParamDataBuilder(builder, enemyParamManager));
             builder.RegisterInstance(new EnemyLevelDesignParamDataBuilder(builder, enemyParamManager.enemyLevelDesignParam));
             builder.RegisterInstance(new EnemyTimeLineParamDataBuilder(builder, enemyParamManager));
-            builder.RegisterInstance(new EnemyPositionMonoBuilder(builder, Object.FindObjectOfType<EnemyPositionMono>()));
+
+            EnemyPositionMono SetUpEnemyPositionMono()
+            {
+                var lanePositionMono = Object.FindObjectOfType<LanePositionMono>();
+                var enemyPositionMono = new GameObject().AddComponent<EnemyPositionMono>();
+                enemyPositionMono.enemySpawnedPoints =
+                    lanePositionMono.lanePositions.Select(x => x.enemySpawnedPosition).ToList();
+                return enemyPositionMono;
+            }
+            builder.RegisterInstance(new EnemyPositionMonoBuilder(builder, SetUpEnemyPositionMono()));
 
             builder.Register<EnemyDefeatConfig>(Lifetime.Scoped);
             builder.RegisterComponentInHierarchy<EnemyDefeatPositionMono>();

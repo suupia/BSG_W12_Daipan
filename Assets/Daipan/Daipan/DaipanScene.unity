@@ -1402,13 +1402,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawnedPoints:
   - enemySpawnTransformX: {fileID: 2139454379639670455}
-    ratio: 60
+    enemySpawnRatio: 0
     enemyEnum: 1
   - enemySpawnTransformX: {fileID: 2139454379681994179}
-    ratio: 20
+    enemySpawnRatio: 0
     enemyEnum: 2
   - enemySpawnTransformX: {fileID: 2139454380265612660}
-    ratio: 20
+    enemySpawnRatio: 0
     enemyEnum: 3
   enemyDespawnedPoint: {fileID: 1495197751}
 --- !u!1 &1239697016
@@ -2918,19 +2918,22 @@ MonoBehaviour:
   lanePositions:
   - laneYTransform: {fileID: 0}
     playerSpawnXTransform: {fileID: 0}
-    enemySpawnXTransform: {fileID: 0}
-    enemySpawnRatio: 0
-    enemyEnum: 0
+    enemySpawnedPosition:
+      enemySpawnTransformX: {fileID: 2139454379639670455}
+      enemySpawnRatio: 0
+      enemyEnum: 0
   - laneYTransform: {fileID: 0}
     playerSpawnXTransform: {fileID: 0}
-    enemySpawnXTransform: {fileID: 0}
-    enemySpawnRatio: 0
-    enemyEnum: 0
+    enemySpawnedPosition:
+      enemySpawnTransformX: {fileID: 2139454379681994179}
+      enemySpawnRatio: 0
+      enemyEnum: 0
   - laneYTransform: {fileID: 0}
     playerSpawnXTransform: {fileID: 0}
-    enemySpawnXTransform: {fileID: 0}
-    enemySpawnRatio: 0
-    enemyEnum: 0
+    enemySpawnedPosition:
+      enemySpawnTransformX: {fileID: 2139454380265612660}
+      enemySpawnRatio: 0
+      enemyEnum: 0
   enemyDespawnedPoint: {fileID: 1495197751}
   attackEffectDespawnedPoint: {fileID: 1242288914}
 --- !u!4 &1916099520

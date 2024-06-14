@@ -27,16 +27,7 @@ namespace Daipan.LevelDesign.Battle.Scripts
         [Header("プレイヤーの生成されるx座標を決めるゲームオブジェクト")]
         public Transform playerSpawnXTransform = null!;
 
-        [Header("敵の生成されるx座標を決めるゲームオブジェクト")]
-        public Transform enemySpawnXTransform = null!;
-        
-        [Header("敵の生成される確率（相対的に設定できる")]
-        [Min(0)]
-        public float enemySpawnRatio;
-
-        [Header("生成される敵の種類（指定しないとランダム）")] 
-        public EnemyEnum enemyEnum = EnemyEnum.None;
-
+        public EnemySpawnedPosition enemySpawnedPosition = null!;
         // このクラスがWaveごとにあって、ListでそのWaveにおけるレーンを表してもいいかも。
 
     }

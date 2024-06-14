@@ -28,11 +28,14 @@ namespace Daipan.LevelDesign.Enemy.Scripts
     public class EnemySpawnedPosition
     {
         [Header("敵の生成位置")]
-        [Tooltip("敵の生成位置を示すGameObjectを入れて！！")]
+        
+        [Tooltip("敵の生成位置のx座標を決めるゲームオブジェクト")]
         public Transform enemySpawnTransformX = null!;
-        [Header("敵の生成される確率（相対的に設定してよい)")]
+        
+        [Header("敵の生成される確率（相対的に設定できる)")]
         [Min(0)]    
-        public float ratio;
+        public float enemySpawnRatio;
+        
         [FormerlySerializedAs("EnemyType")] [Header("生成される敵（指定しないとランダム）")]
         public EnemyEnum enemyEnum  = EnemyEnum.None;
         

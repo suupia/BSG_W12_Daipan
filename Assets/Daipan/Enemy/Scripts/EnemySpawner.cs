@@ -75,10 +75,11 @@ namespace Daipan.Enemy.Scripts
             {
                 position.Add(point.enemySpawnTransformX.position);
                 enums.Add(point.enemyEnum);
-                ratio.Add(point.ratio);
+                ratio.Add(point.enemySpawnRatio);
             }
-
+            Debug.Log($"ratio.Count : {ratio.Count}");
             var rand = Randoms.RandomByRatio(ratio);
+            Debug.Log($"position.Count : {position.Count}, rand : {rand}");
             return (position[rand], enums[rand]);
         }
 
