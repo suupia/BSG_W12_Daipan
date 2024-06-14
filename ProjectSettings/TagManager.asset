@@ -56,3 +56,15 @@ TagManager:
   - name: Tower_Light
     uniqueID: 764982475
     locked: 0
+  - name: Enemy_Body
+    uniqueID: 2461177809
+    locked: 0
+  - name: Enemy_Eye
+    uniqueID: 1845780385
+    locked: 0
+  - name: Enemy_EyeBall
+    uniqueID: 1848816841
+    locked: 0
+  - name: Enemy_Line
+    uniqueID: 651323995
+    locked: 0

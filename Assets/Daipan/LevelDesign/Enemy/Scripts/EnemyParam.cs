@@ -66,6 +66,18 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         public int irritationAfterKill;
     }
     
+    [Serializable ]
+    public sealed class EnemyAnimatorParam
+    {
+        [Header("AnimatorController")]
+        public RuntimeAnimatorController animatorController = null!;
+        
+        public Color bodyColor = Color.white;
+        public Color eyeColor = new (226f / 255f, 248f / 255f, 227f / 255f); 
+        public Color eyeBallColor = Color.white;
+        public Color lineColor = new (111f / 255f, 87f / 255f, 107f / 255f);
+    }
+    
     [Serializable]
     public sealed class EnemyParam
     {
@@ -79,10 +91,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         public EnemyMoveParam enemyMoveParam = null!;
         public EnemySpawnParam enemySpawnParam = null!;
         public EnemyRewardParam enemyRewardParam = null!;
-        
-        [Header("AnimatorController")]
-        public RuntimeAnimatorController animatorController = null!;
-
+        public EnemyAnimatorParam enemyAnimatorParam = null!;
     }
     
 

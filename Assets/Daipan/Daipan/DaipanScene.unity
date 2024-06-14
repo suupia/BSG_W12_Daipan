@@ -3535,6 +3535,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: StreamTimerView
       objectReference: {fileID: 0}
+    - target: {fileID: 4206957047553217799, guid: dfff351a7e8284e4aa8df9c9d1467282, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 21.800049
+      objectReference: {fileID: 0}
     - target: {fileID: 5322341746803176733, guid: dfff351a7e8284e4aa8df9c9d1467282, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

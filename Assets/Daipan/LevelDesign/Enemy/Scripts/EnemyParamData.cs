@@ -1,6 +1,7 @@
 #nullable enable
 using System;
 using Daipan.Enemy.Scripts;
+using UnityEngine;
 
 namespace Daipan.LevelDesign.Enemy.Scripts
 {
@@ -28,6 +29,11 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         
         // Irritated value
         public Func<int> GetIrritationAfterKill { get; init; } = () => 10;
+        // Animator 
+        public Func<Color> GetBodyColor { get; init; } = () => Color.white;
+        public Func<Color> GetEyeColor { get; init; } = () => Color.white;
+        public Func<Color> GetEyeBallColor { get; init; } = () => Color.white;
+        public Func<Color> GetLineColor { get; init; } = () => Color.white;
         
     }
 
