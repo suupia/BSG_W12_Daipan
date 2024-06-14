@@ -18,12 +18,12 @@ namespace Daipan.Utility.Scripts
             // [Precondition]
             if (random is < 0 or >= 1)
             {
-                Debug.LogError("rand must be between 0 and 1.");
+                Debug.LogWarning("rand must be between 0 and 1.");
                 return -1;
             }
             if (ratios.Sum() <= 0)
             {
-                Debug.LogError("Sum of ratios must be greater than 0.");
+                Debug.LogWarning("Sum of ratios must be greater than 0.");
                 return -1;
             }
 
@@ -35,7 +35,7 @@ namespace Daipan.Utility.Scripts
             
             if(result == null)
             {
-                Debug.LogError($"Failed to get random index. normalizedAccumulatedRatios: {string.Join(",",normalizedAccumulatedRatios)}, random: {random}");
+                Debug.LogWarning($"Failed to get random index. normalizedAccumulatedRatios: {string.Join(",",normalizedAccumulatedRatios)}, random: {random}");
                 return -1;
             }
 
