@@ -74,6 +74,20 @@ MonoBehaviour:
       daipanThreshold: 0
       daipanProbability: 0
     animatorController: {fileID: 22100000, guid: 140eb1db085be4c0faf71dccd1868e71, type: 2}
+  - enemyEnum: 7
+    enemyAttackParam:
+      attackAmount: 1
+      attackDelaySec: 1
+      attackRange: 5
+    enemyHpParam:
+      hpAmount: 200
+    enemyMoveParam:
+      moveSpeedPerSec: 1.5
+    enemySpawnParam:
+      spawnRatio: 20
+      daipanThreshold: 0
+      daipanProbability: 0
+    animatorController: {fileID: 22100000, guid: fa630c3020b184de2b74b1f116ccd60b, type: 2}
   enemyTimeLineParams:
   - startTime: 0
     spawnDelaySec: 1
