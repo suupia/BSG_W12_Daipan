@@ -118,15 +118,6 @@ namespace Daipan.Player.MonoScripts
 
     }
 
-    // public void OnAttacked(EnemyEnum enemyEnum)
-    // {
-    //     foreach (var playerViewMono in playerViewMonos)
-    //     {
-    //         if (playerViewMono == null) continue;
-    //         if(IsTargetEnemy(playerViewMono.playerColor, enemyEnum)) playerViewMono.Damage();
-    //     }
-    // }
-
     [Inject]
     public void Initialize(
         PlayerParamDataContainer playerParamDataContainer, 
