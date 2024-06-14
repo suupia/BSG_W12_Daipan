@@ -11,7 +11,7 @@ public class EnemyAttackTest
     public void IHpSetterShouldDecrease10WithAttack()
     {
         // Arrange
-        var player = new DummyPlayer() { CurrentHp = 100 };
+        var player = new DummyPlayer();
         var enemyParamData = new EnemyParamData()
         {
             GetEnemyEnum = () => EnemyEnum.None,
@@ -25,8 +25,19 @@ public class EnemyAttackTest
         // Assert
         Assert.AreEqual(90, player.CurrentHp);
     }
-    class DummyPlayer : IHpSetter
+    class DummyPlayer : IPlayerHp
     {
+        public DummyPlayer()
+        {
+            MaxHp = 100;
+            CurrentHp = 100;
+        }
+        public int MaxHp { get; }
         public int CurrentHp { get; set; }
+        public void SetHp(DamageArgs damageArgs)
+        {
+            CurrentHp -= damageArgs.DamageValue;
+        } 
+
     }
 }

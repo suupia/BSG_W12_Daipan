@@ -20,7 +20,7 @@ using VContainer;
 
 namespace Daipan.Player.MonoScripts
 {
-   public class PlayerMono : MonoBehaviour, IHpSetter
+   public class PlayerMono : MonoBehaviour, IPlayerHp
 {
     [SerializeField] List<AbstractPlayerViewMono?> playerViewMonos = new();
     EnemyCluster _enemyCluster = null!;
@@ -163,11 +163,8 @@ namespace Daipan.Player.MonoScripts
         };
     }
 
-    public int CurrentHp
-    {
-        set => _playerHp.CurrentHp = value;
-        get => _playerHp.CurrentHp;
-    }
+    public int CurrentHp => _playerHp.CurrentHp;
+    public void SetHp(DamageArgs damageArgs) => _playerHp.SetHp(damageArgs);
 
     public int MaxHp => _playerHp.MaxHp;
 } 
