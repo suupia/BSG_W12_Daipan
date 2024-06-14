@@ -6,11 +6,10 @@ using UnityEngine.EventSystems;
 
 namespace Daipan.Player.Scripts
 {
-    public class PlayerHp : IHpSetter
+    public class PlayerHp : IPlayerHp 
     {
-        public int MaxHp { get; private set; }
-        int _currentHp;
-        public event EventHandler<DamageEventArgs>? OnDamage;
+        public int MaxHp { get; }
+        public event EventHandler<DamageArgs>? OnDamage;
 
         public PlayerHp(int maxHp)
         {
@@ -18,22 +17,20 @@ namespace Daipan.Player.Scripts
             CurrentHp = maxHp;
         }
 
-        public int CurrentHp
+        public int CurrentHp { get; set; }
+
+        public void SetHp(DamageArgs damageArgs)
         {
-            get => _currentHp;
-            set
+            CurrentHp -= damageArgs.DamageValue;
+            OnDamage?.Invoke(this, damageArgs);
+            if (CurrentHp <= 0)
             {
-                _currentHp = value;
-                Debug.Log($"Player CurrentHp : {_currentHp}");
-                OnDamage?.Invoke(this, new DamageEventArgs(value));
-                if (_currentHp <= 0)
-                {
-                    Debug.Log($"Player died");
-                } 
+                Debug.Log($"Player died");
+                // todo: コールバックで次のシーンへの遷移を挟みたい
             }
         }
 
     }
 
-    public record DamageEventArgs(int DamageValue);
+    
 }

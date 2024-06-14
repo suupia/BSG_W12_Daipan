@@ -7,17 +7,19 @@ namespace Daipan.Stream.Scripts
     public sealed class IrritatedValue
     {
         readonly IrritatedParams _irritatedParams;
-        public IrritatedValue(IrritatedParams irritatedParams)
+
+        public IrritatedValue(int maxValue, IrritatedParams irritatedParams)
         {
-            MaxValue = 100;
+            MaxValue = maxValue;
             _irritatedParams = irritatedParams;
         }
 
         public int MaxValue { get; }
+        public bool IsFull => Value >= MaxValue;
         public float Ratio => (float)Value / MaxValue;
         public float Value => Mathf.Max(IncreasedValue - DecreasedValue, 0);
         float DecreasedValue { get; set; }
-        float  IncreasedValue { get; set; }
+        float IncreasedValue { get; set; }
         public IReadOnlyList<float> RatioTable => _irritatedParams.RatioTable;
 
         public void IncreaseValue(float amount)
@@ -26,8 +28,9 @@ namespace Daipan.Stream.Scripts
             if (amount < 0) Debug.LogWarning($"IrritatedValue.IncreaseValue() amount is negative : {amount}");
 
             IncreasedValue += amount;
+            if (Value >= MaxValue) IncreasedValue = MaxValue;
 
-            Debug.Log($"IncreaseValue() IrritatedValue : {Value}");
+            Debug.Log($"IncreaseValue(amount: {amount}) IrritatedValue : {Value}");
         }
 
         public void DecreaseValue(float amount)
@@ -40,18 +43,6 @@ namespace Daipan.Stream.Scripts
                 DecreasedValue += Value;
             else
                 DecreasedValue += amount;
-        }
-
-        public int GetIrritatedPhase()
-        {
-            for(int i = 0; i < RatioTable.Count; i++)
-            {
-                if(Ratio < RatioTable[i])
-                {
-                    return i;
-                }
-            }
-            return RatioTable.Count;
         }
     }
 }

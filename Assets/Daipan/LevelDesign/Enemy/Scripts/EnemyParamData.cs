@@ -27,6 +27,8 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         // Spawn
         public Func<double> GetSpawnRatio { get; init; } = () => 1.0;
         
+        // Irritated value
+        public Func<int> GetIrritationAfterKill { get; init; } = () => 10;
         // Animator 
         public Func<Color> GetBodyColor { get; init; } = () => Color.white;
         public Func<Color> GetEyeColor { get; init; } = () => Color.white;

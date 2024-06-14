@@ -47,7 +47,7 @@ namespace Daipan.Daipan
             builder.RegisterInstance(streamParam.daipan);
             builder.RegisterInstance(irritatedParams);
             builder.Register<StreamPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<StreamMono>>();
-            builder.Register<IrritatedValue>(Lifetime.Scoped);
+            builder.Register<IrritatedValue>(Lifetime.Scoped).WithParameter("maxValue", 100);
             builder.Register<ViewerNumber>(Lifetime.Scoped);
             builder.Register<StreamStatus>(Lifetime.Scoped);
             builder.Register<IStart, StreamSpawner>(Lifetime.Scoped).AsSelf();

@@ -58,6 +58,13 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         [Tooltip("最終的には別途、イライラ度に応じた確率シートを作成する")]
         public float daipanProbability;
     }
+
+    [SerializeField]
+    public sealed class EnemyRewardParam
+    {
+        [Header("敵を倒したときに獲得するイライラゲージの量")] [Min(0)]
+        public int irritationAfterKill;
+    }
     
     [Serializable ]
     public sealed class EnemyAnimatorParam
@@ -83,37 +90,11 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         public EnemyHpParam enemyHpParam = null!;
         public EnemyMoveParam enemyMoveParam = null!;
         public EnemySpawnParam enemySpawnParam = null!;
+        public EnemyRewardParam enemyRewardParam = null!;
         public EnemyAnimatorParam enemyAnimatorParam = null!;
     }
     
-    
-    public enum EnemyEnum {
-        None,
-        Red,
-        Blue,
-        Yellow,
-        [IsBoss(true)]
-        RedBoss,
-        [IsBoss(true)]
-        BlueBoss,
-        [IsBoss(true)]
-        YellowBoss,
-    }
 
-    public static class AnyTypesExtensions{
-        public static bool? IsBoss(this EnemyEnum self)
-        {
-            var fieldInfo = self.GetType().GetField(self.ToString());
-            return fieldInfo?.GetCustomAttribute<IsBossAttribute>()?.IsBoss;
-        }
-    }
-
-    [AttributeUsage(AttributeTargets.Field, Inherited = false, AllowMultiple = false)]
-    class IsBossAttribute : Attribute
-    {
-        public bool IsBoss {get;}
-        public IsBossAttribute(bool isBoss) : base() => this.IsBoss = isBoss;
-    }
 
 
 }

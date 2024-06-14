@@ -26,7 +26,7 @@ namespace Daipan.Streamer.Scripts
         }
         void Update()
         {
-            animator.SetInteger("IrritatedPhase", _irritatedValue.GetIrritatedPhase());
+            animator.SetBool("IsAngry", _irritatedValue.IsFull);
         }
     }
 }

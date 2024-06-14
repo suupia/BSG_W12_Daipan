@@ -13,13 +13,14 @@ using Daipan.LevelDesign.Player.Scripts;
 using Daipan.Player.Interfaces;
 using Daipan.Player.MonoScripts;
 using Daipan.Player.Scripts;
+using Daipan.Stream.Scripts;
 using UnityEngine;
 using UnityEngine.Serialization;
 using VContainer;
 
 namespace Daipan.Player.MonoScripts
 {
-   public class PlayerMono : MonoBehaviour, IHpSetter
+   public class PlayerMono : MonoBehaviour, IPlayerHp
 {
     [SerializeField] List<AbstractPlayerViewMono?> playerViewMonos = new();
     EnemyCluster _enemyCluster = null!;
@@ -117,15 +118,6 @@ namespace Daipan.Player.MonoScripts
 
     }
 
-    public void OnAttacked(EnemyEnum enemyEnum)
-    {
-        foreach (var playerViewMono in playerViewMonos)
-        {
-            if (playerViewMono == null) continue;
-            if(IsTargetEnemy(playerViewMono.playerColor, enemyEnum)) playerViewMono.Damage();
-        }
-    }
-
     [Inject]
     public void Initialize(
         PlayerParamDataContainer playerParamDataContainer, 
@@ -133,7 +125,8 @@ namespace Daipan.Player.MonoScripts
         PlayerHpParamData playerHpParamData,
         CommentSpawner commentSpawner,
         InputSerialManager inputSerialManager,
-        PlayerAttackEffectSpawner playerAttackEffectSpawner
+        PlayerAttackEffectSpawner playerAttackEffectSpawner,
+        IrritatedValue irritatedValue
     )
     {
         _playerParamDataContainer = playerParamDataContainer;
@@ -145,7 +138,18 @@ namespace Daipan.Player.MonoScripts
         _enemyCluster = enemyCluster;
 
         _playerHp = new PlayerHp(playerHpParamData.GetCurrentHp());
-        _playerHp.OnDamage += (sender, args) => { commentSpawner.SpawnCommentByType(CommentEnum.Spiky); };
+        _playerHp.OnDamage += (sender, args) =>
+        {
+            // Domain
+            irritatedValue.IncreaseValue(args.DamageValue);
+            
+            // View
+            foreach (var playerViewMono in playerViewMonos)
+            {
+                if (playerViewMono == null) continue;
+                if(IsTargetEnemy(playerViewMono.playerColor, args.enemyEnum)) playerViewMono.Damage();
+            } 
+        };
 
         _inputSerialManager = inputSerialManager;
         _playerAttackEffectSpawner = playerAttackEffectSpawner;
@@ -161,11 +165,8 @@ namespace Daipan.Player.MonoScripts
         };
     }
 
-    public int CurrentHp
-    {
-        set => _playerHp.CurrentHp = value;
-        get => _playerHp.CurrentHp;
-    }
+    public int CurrentHp => _playerHp.CurrentHp;
+    public void SetHp(DamageArgs damageArgs) => _playerHp.SetHp(damageArgs);
 
     public int MaxHp => _playerHp.MaxHp;
 } 

@@ -25,6 +25,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
                     GetCurrentHp = () => enemyParam.enemyHpParam.hpAmount,
                     GetMoveSpeedPreSec = () => enemyParam.enemyMoveParam.moveSpeedPerSec,
                     GetSpawnRatio = () => enemyParam.enemySpawnParam.spawnRatio,
+                    GetIrritationAfterKill = () => enemyParam.enemyRewardParam.irritationAfterKill,
                     
                     // Animator
                     GetBodyColor = () => enemyParam.enemyAnimatorParam.bodyColor,

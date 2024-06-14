@@ -34,59 +34,25 @@ namespace Daipan.Stream.Scripts
             _commentCluster = commentCluster;
             _antiCommentCluster = antiCommentCluster;
         }
-
-        bool IsExciting => _streamStatus.IsExcited;
-
         public void DaiPan()
         {
-            int irritatedPhase = _irritatedValue.GetIrritatedPhase();
-
-            if(irritatedPhase == 0)
+            var canDaipan = _irritatedValue.IsFull;
+            if (canDaipan)
             {
-                Debug.Log("Do nothing");
-            }
-            else if (irritatedPhase == 1)
-            {
-                Debug.Log("Blow normal enemy");
-                Debug.Log("Blow comment by probability");
-                var blowAwayProbability = 0.5f;
-                // _enemyCluster.BlownAway(blowAwayProbability);
-                _enemyCluster.Daipaned(enemyEnum => enemyEnum.IsBoss() != false);
-                _commentCluster.BlownAway(blowAwayProbability);
-                _antiCommentCluster.BlownAway(blowAwayProbability);
-            }
-            else if (irritatedPhase == 2)
-            {
-                Debug.Log("Blow normal enemy");
-                Debug.Log("Blow comment by probability");
-                var blowAwayProbability = 0.5f;
-                // _enemyCluster.BlownAway(blowAwayProbability);
-                _enemyCluster.Daipaned(enemyEnum => enemyEnum.IsBoss() != false);
-                _commentCluster.BlownAway(blowAwayProbability);
-                _antiCommentCluster.BlownAway(blowAwayProbability);
-            }
-            else if (irritatedPhase == 3)
-            {
-                Debug.Log("Blow normal enemy");
-                Debug.Log("Blow comment by probability");
-                var blowAwayProbability = 0.5f;
-                // _enemyCluster.BlownAway(blowAwayProbability);
-                _enemyCluster.Daipaned(enemyEnum => enemyEnum.IsBoss() != true);
-                _commentCluster.BlownAway(blowAwayProbability);
-                _antiCommentCluster.BlownAway(blowAwayProbability);
+                Debug.Log($"Daipan!");
+                _enemyCluster.Daipaned();
+                _antiCommentCluster.BlownAway();
+                
+                // 台パンしたら怒りゲージは0になる
+                _irritatedValue.DecreaseValue(_irritatedValue.Value);
             }
             else
             {
-                Debug.Log("Blow all enemy");
-                Debug.Log("Blow all comment");
-                _enemyCluster.Daipaned();
-                //_commentCluster.BlownAway(commentMono =>
-                //    commentMono); // SuperComment以外を吹き飛ばす
-                _antiCommentCluster.BlownAway();
+                // 何もしない
+                // 台パンをスカした時のアニメーションを再生するかもしれない
             }
 
-            // 台パンしたら怒りゲージは0になる
-            _irritatedValue.DecreaseValue(_irritatedValue.Value);
+   
         }
     }
 }

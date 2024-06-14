@@ -19,6 +19,7 @@ namespace Daipan.Enemy.Scripts
         readonly EnemyParamManager _enemyParamManager;
         readonly EnemyParamModifyWithTimer _enemyParamModifyWithTimer;
         readonly ViewerNumber _viewerNumber;
+        readonly IrritatedValue _irritatedValue;
         readonly EnemyCluster _enemyCluster;
         readonly EnemyLevelDesignParamData _enemyLevelDesignParamData;
 
@@ -26,6 +27,7 @@ namespace Daipan.Enemy.Scripts
             EnemyParamDataContainer enemyParamDataContainer,
             CommentSpawner commentSpawner,
             ViewerNumber viewerNumber,
+            IrritatedValue irritatedValue,
             EnemyParamManager enemyParamManager,
             EnemyParamModifyWithTimer enemyParamModifyWithTimer,
             EnemyCluster enemyCluster,
@@ -35,6 +37,7 @@ namespace Daipan.Enemy.Scripts
             _enemyParamDataContainer = enemyParamDataContainer;
             _commentSpawner = commentSpawner;
             _viewerNumber = viewerNumber;
+            _irritatedValue = irritatedValue;
             _enemyParamManager = enemyParamManager;
             _enemyParamModifyWithTimer = enemyParamModifyWithTimer;
             _enemyCluster = enemyCluster;
@@ -58,10 +61,12 @@ namespace Daipan.Enemy.Scripts
             {
                 // ボスを倒したときも含む
                 _enemyLevelDesignParamData.SetCurrentKillAmount(_enemyLevelDesignParamData.GetCurrentKillAmount() + 1);
+                
+                if(args.enemyEnum.IsSpecial() == true) _irritatedValue.IncreaseValue(enemyParamData.GetIrritationAfterKill());
 
-                if (!args.IsBoss) _viewerNumber.IncreaseViewer(_enemyLevelDesignParamData.GetIncreaseViewerOnEnemyKill()); // todo :パラメータを設定できるようにする
+                if (args.enemyEnum.IsBoss() == false) _viewerNumber.IncreaseViewer(_enemyLevelDesignParamData.GetIncreaseViewerOnEnemyKill()); // todo :パラメータを設定できるようにする
 
-                if (args.IsBoss || args.IsQuickDefeat) _commentSpawner.SpawnCommentByType(CommentEnum.Normal);
+                if (args.enemyEnum.IsBoss() == true || args.IsQuickDefeat) _commentSpawner.SpawnCommentByType(CommentEnum.Normal);
             };
             return enemyMono;
         }

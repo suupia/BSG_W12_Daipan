@@ -14,11 +14,12 @@ namespace Daipan.Enemy.Scripts
             _enemyParamData = enemyParamData;
         }
         
-        public void Attack(IHpSetter hpSetter)
+        public void Attack(IPlayerHp playerHp)
         {
-            hpSetter.CurrentHp -= _enemyParamData.GetAttackAmount();
-            var playerMono = (PlayerMono)hpSetter;
-            playerMono.OnAttacked(_enemyParamData.GetEnemyEnum());
+            playerHp.SetHp(
+                new DamageArgs(_enemyParamData.GetAttackAmount(),
+                _enemyParamData.GetEnemyEnum())
+                );
         }
     } 
 

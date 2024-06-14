@@ -101,16 +101,10 @@ namespace Daipan.Enemy.MonoScripts
             if (isTriggerCallback)
             {
                 var isQuickDefeat = _quickDefeatChecker.IsQuickDefeat(transform.position);
-                var args = new DiedEventArgs(EnemyEnum.IsBoss() == true, isQuickDefeat);
+                var args = new DiedEventArgs(EnemyEnum, isQuickDefeat);
                 OnDied?.Invoke(this, args);
             }
 
-            // if (enemyViewMono == null) Destroy(gameObject);
-            // else
-            // {
-            //     if (isDaipaned) enemyViewMono.Daipaned(() => OnDiedProcess(this)); 
-            //     else enemyViewMono.Died(() => OnDiedProcess(this));
-            // }
             OnDiedProcess(this, isDaipaned, enemyViewMono);
         }
 
@@ -138,15 +132,7 @@ namespace Daipan.Enemy.MonoScripts
             }
         }
 
-
-        public void BlownAway()
-        {
-            Debug.Log("Blown away");
-            _enemyCluster.Remove(this);
-        }
-
-
     }
 
-    public record DiedEventArgs(bool IsBoss, bool IsQuickDefeat, bool IsTrigger = false);
+    public record DiedEventArgs(EnemyEnum enemyEnum, bool IsQuickDefeat, bool IsTrigger = false);
 }
