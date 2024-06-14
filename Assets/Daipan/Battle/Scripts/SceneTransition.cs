@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace SceneName
+namespace Daipan.Battle.scripts
 {
     public static class SceneTransition
     {
