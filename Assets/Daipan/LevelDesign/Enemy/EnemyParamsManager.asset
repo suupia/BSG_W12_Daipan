@@ -16,7 +16,7 @@ MonoBehaviour:
     spawnBossAmount: 20
     increaseIrritatedValueByBoss: 18
     increaseViewerOnEnemyKill: 5
-    currentKillAmount: 8
+    currentKillAmount: 16
   enemyParams:
   - enemyEnum: 1
     enemyAttackParam:
@@ -31,7 +31,12 @@ MonoBehaviour:
       spawnRatio: 60
       daipanThreshold: 0
       daipanProbability: 0
-    animatorController: {fileID: 22100000, guid: 140eb1db085be4c0faf71dccd1868e71, type: 2}
+    enemyAnimatorParam:
+      animatorController: {fileID: 0}
+      bodyColor: {r: 1, g: 0.3529412, b: 0.54901963, a: 1}
+      eyeColor: {r: 0.8862745, g: 0.972549, b: 0.8901961, a: 1}
+      eyeBallColor: {r: 1, g: 0.3529412, b: 0.54901963, a: 1}
+      lineColor: {r: 0.43529412, g: 0.34117648, b: 0.41960785, a: 1}
   - enemyEnum: 2
     enemyAttackParam:
       attackAmount: 1
@@ -45,7 +50,12 @@ MonoBehaviour:
       spawnRatio: 20
       daipanThreshold: 0
       daipanProbability: 0
-    animatorController: {fileID: 22100000, guid: 52de61f2a207442fb89bea680f9bb1f9, type: 2}
+    enemyAnimatorParam:
+      animatorController: {fileID: 0}
+      bodyColor: {r: 0.41568628, g: 0.6862745, b: 0.80784315, a: 1}
+      eyeColor: {r: 0.8862745, g: 0.972549, b: 0.8901961, a: 1}
+      eyeBallColor: {r: 0.41568628, g: 0.6862745, b: 0.80784315, a: 1}
+      lineColor: {r: 0.43529412, g: 0.34117648, b: 0.41960785, a: 1}
   - enemyEnum: 3
     enemyAttackParam:
       attackAmount: 1
@@ -59,7 +69,12 @@ MonoBehaviour:
       spawnRatio: 20
       daipanThreshold: 0
       daipanProbability: 0
-    animatorController: {fileID: 22100000, guid: c27b5fdedd0b746b98785a17c33d1040, type: 2}
+    enemyAnimatorParam:
+      animatorController: {fileID: 0}
+      bodyColor: {r: 0.972549, g: 0.6784314, b: 0.3882353, a: 1}
+      eyeColor: {r: 0.8862745, g: 0.972549, b: 0.8901961, a: 1}
+      eyeBallColor: {r: 0.972549, g: 0.6784314, b: 0.3882353, a: 1}
+      lineColor: {r: 0.43529412, g: 0.34117648, b: 0.41960785, a: 1}
   - enemyEnum: 4
     enemyAttackParam:
       attackAmount: 1
@@ -73,7 +88,12 @@ MonoBehaviour:
       spawnRatio: 20
       daipanThreshold: 0
       daipanProbability: 0
-    animatorController: {fileID: 22100000, guid: 140eb1db085be4c0faf71dccd1868e71, type: 2}
+    enemyAnimatorParam:
+      animatorController: {fileID: 0}
+      bodyColor: {r: 1, g: 1, b: 1, a: 1}
+      eyeColor: {r: 0.8862745, g: 0.972549, b: 0.8901961, a: 1}
+      eyeBallColor: {r: 1, g: 1, b: 1, a: 1}
+      lineColor: {r: 0.43529412, g: 0.34117648, b: 0.41960785, a: 1}
   enemyTimeLineParams:
   - startTime: 0
     spawnDelaySec: 1

@@ -18,7 +18,6 @@ namespace Daipan.LevelDesign.Enemy.Scripts
             {
                 enemyParams.Add(new EnemyParamData()
                 {
-                    GetAnimator = () => enemyParam.animatorController,
                     GetEnemyEnum = () => enemyParam.enemyEnum,
                     GetAttackAmount = () => enemyParam.enemyAttackParam.attackAmount,
                     GetAttackDelayDec = () => enemyParam.enemyAttackParam.attackDelaySec,
@@ -26,6 +25,13 @@ namespace Daipan.LevelDesign.Enemy.Scripts
                     GetCurrentHp = () => enemyParam.enemyHpParam.hpAmount,
                     GetMoveSpeedPreSec = () => enemyParam.enemyMoveParam.moveSpeedPerSec,
                     GetSpawnRatio = () => enemyParam.enemySpawnParam.spawnRatio,
+                    
+                    // Animator
+                    GetBodyColor = () => enemyParam.enemyAnimatorParam.bodyColor,
+                    GetEyeColor = () => enemyParam.enemyAnimatorParam.eyeColor,
+                    GetEyeBallColor = () => enemyParam.enemyAnimatorParam.eyeBallColor,
+                    GetLineColor = () => enemyParam.enemyAnimatorParam.lineColor,
+                    
                 }); 
             }
             var enemyParamContainer = new EnemyParamDataContainer(enemyParams);
