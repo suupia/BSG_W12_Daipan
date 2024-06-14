@@ -22,8 +22,6 @@ namespace Daipan.Enemy.MonoScripts
         EnemySpawnPointData _enemySpawnPointData = null!;
         EnemyParamDataContainer _enemyParamDataContainer = null!;
         PlayerHolder _playerHolder = null!;
-        EnemyQuickDefeatChecker _quickDefeatChecker = null!;
-        EnemySlowDefeatChecker _slowDefeatChecker = null!;
         public EnemyEnum EnemyEnum { get; private set; } = EnemyEnum.None;
 
         void Update()
@@ -60,9 +58,7 @@ namespace Daipan.Enemy.MonoScripts
             PlayerHolder playerHolder,
             EnemyParamModifyWithTimer enemyParamModifyWithTimer,
             EnemySpawnPointData enemySpawnPointData,
-            EnemyParamDataContainer enemyParamDataContainer,
-            EnemyQuickDefeatChecker quickDefeatChecker,
-            EnemySlowDefeatChecker slowDefeatChecker
+            EnemyParamDataContainer enemyParamDataContainer
         )
         {
             _enemyCluster = enemyCluster;
@@ -70,8 +66,6 @@ namespace Daipan.Enemy.MonoScripts
             _enemyParamModifyWithTimer = enemyParamModifyWithTimer;
             _enemySpawnPointData = enemySpawnPointData;
             _enemyParamDataContainer = enemyParamDataContainer;
-            _quickDefeatChecker = quickDefeatChecker;
-            _slowDefeatChecker = slowDefeatChecker;
         }
 
         public void SetDomain(
@@ -90,18 +84,11 @@ namespace Daipan.Enemy.MonoScripts
 
         public void Died(bool isDaipaned, bool isTriggerCallback)
         {
-            // Check SlowDefeat
-            if (!isDaipaned && transform.position.x <= _slowDefeatChecker.SlowDefeatCoordinate)
-            {
-                _slowDefeatChecker.IncrementSlowDefeatCounter();
-            }
 
-            
             // Callback
             if (isTriggerCallback)
             {
-                var isQuickDefeat = _quickDefeatChecker.IsQuickDefeat(transform.position);
-                var args = new DiedEventArgs(EnemyEnum, isQuickDefeat);
+                var args = new DiedEventArgs(EnemyEnum);
                 OnDied?.Invoke(this, args);
             }
 
@@ -134,5 +121,5 @@ namespace Daipan.Enemy.MonoScripts
 
     }
 
-    public record DiedEventArgs(EnemyEnum enemyEnum, bool IsQuickDefeat, bool IsTrigger = false);
+    public record DiedEventArgs(EnemyEnum enemyEnum, bool IsTrigger = false);
 }
