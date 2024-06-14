@@ -30,7 +30,7 @@ namespace Daipan.Stream.Scripts
             IncreasedValue += amount;
             if (Value >= MaxValue) IncreasedValue = MaxValue;
 
-            Debug.Log($"IncreaseValue() IrritatedValue : {Value}");
+            Debug.Log($"IncreaseValue(amount: {amount}) IrritatedValue : {Value}");
         }
 
         public void DecreaseValue(float amount)

@@ -23,9 +23,10 @@ namespace Daipan.Player.Scripts
             get => _currentHp;
             set
             {
+                var damageAmount = _currentHp - value;
                 _currentHp = value;
                 Debug.Log($"Player CurrentHp : {_currentHp}");
-                OnDamage?.Invoke(this, new DamageEventArgs(value));
+                OnDamage?.Invoke(this, new DamageEventArgs(damageAmount));
                 if (_currentHp <= 0)
                 {
                     Debug.Log($"Player died");

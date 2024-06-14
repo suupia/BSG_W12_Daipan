@@ -13,6 +13,7 @@ using Daipan.LevelDesign.Player.Scripts;
 using Daipan.Player.Interfaces;
 using Daipan.Player.MonoScripts;
 using Daipan.Player.Scripts;
+using Daipan.Stream.Scripts;
 using UnityEngine;
 using UnityEngine.Serialization;
 using VContainer;
@@ -133,7 +134,8 @@ namespace Daipan.Player.MonoScripts
         PlayerHpParamData playerHpParamData,
         CommentSpawner commentSpawner,
         InputSerialManager inputSerialManager,
-        PlayerAttackEffectSpawner playerAttackEffectSpawner
+        PlayerAttackEffectSpawner playerAttackEffectSpawner,
+        IrritatedValue irritatedValue
     )
     {
         _playerParamDataContainer = playerParamDataContainer;
@@ -145,7 +147,7 @@ namespace Daipan.Player.MonoScripts
         _enemyCluster = enemyCluster;
 
         _playerHp = new PlayerHp(playerHpParamData.GetCurrentHp());
-        _playerHp.OnDamage += (sender, args) => { commentSpawner.SpawnCommentByType(CommentEnum.Spiky); };
+        _playerHp.OnDamage += (sender, args) => { irritatedValue.IncreaseValue(args.DamageValue); };
 
         _inputSerialManager = inputSerialManager;
         _playerAttackEffectSpawner = playerAttackEffectSpawner;
