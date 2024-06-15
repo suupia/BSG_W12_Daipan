@@ -131,6 +131,16 @@ namespace Daipan.Daipan
             builder.RegisterInstance(new StreamParamDataBuilder(builder, streamParam));
 
             /*player*/
+            PlayerPositionMono SetUpPlayerPositionMono()
+            {
+                var lanePositionMono = Object.FindObjectOfType<LanePositionMono>();
+                var playerPositionMono = new GameObject().AddComponent<PlayerPositionMono>();
+                playerPositionMono.playerSpawnedPoints =lanePositionMono.lanePositions.Select(x => x.playerSpawnedPosition).ToList();
+                playerPositionMono.attackEffectDespawnedPoint = lanePositionMono.attackEffectDespawnedPoint;
+                return playerPositionMono;
+            }
+            builder.RegisterInstance(new PlayerPositionMonoBuilder(builder, SetUpPlayerPositionMono()));
+            
             builder.RegisterInstance(new PlayerParamDataBuilder(builder, playerParamManager));
 
             /*tower*/
