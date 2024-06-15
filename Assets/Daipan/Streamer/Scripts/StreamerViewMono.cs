@@ -2,7 +2,6 @@
 using Daipan.Stream.Scripts;
 using UnityEngine;
 using VContainer;
-using Daipan.Stream.Scripts;
 
 namespace Daipan.Streamer.Scripts
 {
@@ -10,8 +9,7 @@ namespace Daipan.Streamer.Scripts
     {
         [SerializeField] Animator animator = null!;
 
-        IrritatedValue _irritatedValue;
-
+        IrritatedValue _irritatedValue = null!;
 
         [Inject]
         void Initialize(IrritatedValue irritatedValue)
@@ -19,11 +17,6 @@ namespace Daipan.Streamer.Scripts
             _irritatedValue = irritatedValue;
         }
 
-        
-        private void Awake()
-        {
-            if (animator == null) Debug.LogWarning("animator is null");
-        }
         void Update()
         {
             animator.SetBool("IsAngry", _irritatedValue.IsFull);

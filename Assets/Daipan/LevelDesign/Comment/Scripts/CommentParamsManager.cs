@@ -21,9 +21,9 @@ namespace Daipan.LevelDesign.Comment.Scripts
         public int diffAntiCommentViewer;
 
         [Header("コメント集")]
-        public List<string> CommentWords;
+        public List<string> CommentWords = new ();
 
         [Header("アンチコメント集")]
-        public List<string> AntiCommentWords;
+        public List<string> AntiCommentWords = new ();
     }
 }

@@ -9,7 +9,6 @@ namespace Daipan.Comment.MonoScripts
 {
     public  class AntiCommentMono : MonoBehaviour
     {
-        [SerializeField] SpriteRenderer spriteRenderer = null!;
         [SerializeField] TextMeshPro commentText = null!;
 
         AntiCommentCluster _antiCommentCluster = null!;
