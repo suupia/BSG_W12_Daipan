@@ -74,7 +74,7 @@ namespace Daipan.Enemy.Scripts
             
             for(int i=0; i<_enemySpawnPointData.GetEnemySpawnedPointXs().Count; i++)
             {
-                var spawnPoint = new Vector3(_enemySpawnPointData.GetEnemySpawnedPointXs()[i].x, _enemySpawnPointData.GetEnemySpawnedPointXs()[i].z);
+                var spawnPoint = new Vector3(_enemySpawnPointData.GetEnemySpawnedPointXs()[i].x, _enemySpawnPointData.GetEnemySpawnedPointYs()[i].y);
                 position.Add(spawnPoint);
                 enums.Add(_enemySpawnPointData.GetEnemySpawnedEnemyEnums()[i]);
                 ratio.Add(_enemySpawnPointData.GetEnemySpawnRatios()[i]);
