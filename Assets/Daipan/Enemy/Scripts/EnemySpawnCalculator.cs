@@ -9,7 +9,7 @@ namespace Daipan.Enemy.Scripts
         /// <summary>
         ///     Bossを含めないスポーン確率の入ったリストを受け取り、Bossを含めて返す
         /// </summary>
-        public static List<float> NormalizeEnemySpawnRatioWithBoss(List<float> ratio, float bossRatio)
+        public static List<double> NormalizeEnemySpawnRatioWithBoss(List<double> ratio, double bossRatio)
         {
             var beforeRatio = ratio.Sum();
             var afterRatio = (100f - bossRatio) / beforeRatio;

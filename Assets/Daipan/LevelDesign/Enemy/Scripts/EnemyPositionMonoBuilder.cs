@@ -1,4 +1,6 @@
 #nullable enable
+using System.Linq;
+using Daipan.LevelDesign.Battle.Scripts;
 using VContainer;
 
 namespace Daipan.LevelDesign.Enemy.Scripts
@@ -12,7 +14,14 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         {
             var data = new EnemySpawnPointData()
             {
-                GetEnemySpawnedPoints = () => enemyPositionMono.enemySpawnedPoints,
+                GetEnemySpawnedPointXs = () => enemyPositionMono.enemySpawnedPoints
+                    .Select(x => x.enemySpawnTransformX.position).ToList(),
+                GetEnemySpawnedPointYs = () => enemyPositionMono.enemySpawnedPoints
+                    .Select(x => x.enemySpawnTransformY.position).ToList(),
+                GetEnemySpawnedEnemyEnums = enemyPositionMono.enemySpawnedPoints
+                    .Select(x => x.enemyEnum).ToList,
+                GetEnemySpawnRatios = () => enemyPositionMono.enemySpawnedPoints
+                    .Select(x => (double)x.enemySpawnRatio).ToList(),
                 GetEnemyDespawnedPoint = () => enemyPositionMono.enemyDespawnedPoint.transform.position,
             };
             builder.RegisterInstance(data);

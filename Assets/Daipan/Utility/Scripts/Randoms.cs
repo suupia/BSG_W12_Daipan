@@ -1,6 +1,8 @@
 using Daipan.LevelDesign.Enemy.Scripts;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Daipan.Extensions;
 using UnityEngine;
 
 namespace Daipan.Utility.Scripts
@@ -8,38 +10,39 @@ namespace Daipan.Utility.Scripts
     public static class Randoms
     {
         /// <summary>
-        /// 割合に応じて乱数を返す
+        /// 割合に応じてランダムなインデックスを返す。
         /// </summary>
-        /// <param name="ratio">各要素の割合が入ったリスト</param>
-        /// <returns>抽選結果の引数</returns>
-        public static int RandomByRatio(List<float> ratio)
+        /// <param name="ratios">各要素の割合が入ったリスト。</param>
+        /// <param name="random">[0,1)の範囲のランダムな値。</param>
+        public static int RandomByRatios(List<double> ratios, double random)
         {
-            float totalRatio = 0f;
-
-            if (ratio.Count == 0) return 0;
-
-            foreach (var r in ratio)
+            // [Precondition]
+            if (random is < 0 or >= 1)
             {
-                totalRatio += r;
+                Debug.LogWarning("rand must be between 0 and 1.");
+                return -1;
             }
 
-            float random = Random.value * totalRatio;
-
-            int i;
-            for (i = 0; i < ratio.Count; i++)
+            if (ratios.Sum() <= 0)
             {
-                if (random < ratio[i])
-                {
-                    break;
-                }
-                else
-                {
-                    random -= ratio[i];
-                }
+                Debug.LogWarning("Sum of ratios must be greater than 0.");
+                return -1;
             }
 
-            return i;
+            var accumulatedRatios = ratios.Scan(0.0, (acc, ratio) => acc + ratio).ToList();
+            var normalizedAccumulatedRatios =
+                accumulatedRatios.Select(ratio => ratio / accumulatedRatios.Last()).ToList();
+            var result = normalizedAccumulatedRatios.Select((ratio, index) => new { ratio, index })
+                .FirstOrDefault(pair => random < pair.ratio);
+            // Debug.Log($"normalizedAccumulatedRatios: {string.Join(",", normalizedAccumulatedRatios)}, random: {random}, result: {result}");
+            if (result == null)
+            {
+                Debug.LogWarning(
+                    $"Failed to get random index. normalizedAccumulatedRatios: {string.Join(",", normalizedAccumulatedRatios)}, random: {random}");
+                return -1;
+            }
 
+            return result.index - 1;
         }
     }
 }

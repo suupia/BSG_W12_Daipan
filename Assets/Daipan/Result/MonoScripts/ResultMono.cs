@@ -1,6 +1,6 @@
-using SceneName;
 using System.Collections;
 using System.Collections.Generic;
+using Daipan.Battle.scripts;
 using UnityEngine;
 
 public class ResultMono : MonoBehaviour
@@ -10,7 +10,7 @@ public class ResultMono : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            SceneTransition.TransitioningScene(SceneName.SceneName.TitleScene);
+            SceneTransition.TransitioningScene(SceneName.TitleScene);
         }
     }
 }

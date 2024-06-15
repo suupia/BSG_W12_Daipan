@@ -14,6 +14,7 @@ namespace Daipan.Player.Scripts
         readonly IObjectResolver _container;
         readonly IPrefabLoader<PlayerMono> _playerMonoLoader;
         readonly PlayerHolder _playerHolder;
+        readonly PlayerSpawnPointData _playerSpawnPointData;
         readonly TowerParamsConfig _towerParamsConfig;
 
         [Inject]
@@ -21,21 +22,21 @@ namespace Daipan.Player.Scripts
             IObjectResolver container,
             IPrefabLoader<PlayerMono> playerMonoLoader,
             PlayerHolder playerHolder,
+            PlayerSpawnPointData playerSpawnPointData,
             TowerParamsConfig towerParamsConfig)
         {
             _container = container;
             _playerMonoLoader = playerMonoLoader;
             _playerHolder = playerHolder;
+            _playerSpawnPointData = playerSpawnPointData;
             _towerParamsConfig = towerParamsConfig;
         }
 
         void IStart.Start()
         {
-            // PlayerMonoのプレハブをロードして生成 
             var playerMonoPrefab = _playerMonoLoader.Load();
-            // IObjectResolverを使ってPlayerMonoを生成すると依存関係が解決される
             var position = _towerParamsConfig.GetTowerSpawnPosition();
-            var positionOnlyX = new Vector3(position.x + 1.0f, 0, position.z); // todo : 一旦ポジションをタワーに合わせるのはやめる
+            var positionOnlyX = new Vector3(_playerSpawnPointData.GetPlayerSpawnedPointX().playerSpawnTransformX.position.x, 0, position.z); 
             var playerMono = _container.Instantiate(playerMonoPrefab, positionOnlyX, Quaternion.identity); 
             _playerHolder.PlayerMono = playerMono;
         }

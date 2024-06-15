@@ -1,6 +1,6 @@
-using SceneName;
 using System.Collections;
 using System.Collections.Generic;
+using Daipan.Battle.scripts;
 using UnityEngine;
 
 public class TitleMono : MonoBehaviour
@@ -16,7 +16,7 @@ public class TitleMono : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Return))
         {
-            SceneTransition.TransitioningScene(SceneName.SceneName.DaipanScene);
+            SceneTransition.TransitioningScene(SceneName.DaipanScene);
         }
     }
 }
