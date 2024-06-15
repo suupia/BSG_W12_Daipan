@@ -54,8 +54,6 @@ namespace Daipan.Daipan
             builder.Register<IStart, StreamSpawner>(Lifetime.Scoped).AsSelf();
 
             // Comment
-            //builder.RegisterInstance(commentAttributeParameters);
-            //builder.Register<IStart, CommentSpawnPointContainer>(Lifetime.Scoped).AsSelf();
             builder.Register<CommentPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<CommentMono>>();
             builder.Register<AntiCommentPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<AntiCommentMono>>();
             builder.Register<IUpdate, CommentSpawner>(Lifetime.Scoped).AsSelf();
@@ -66,7 +64,6 @@ namespace Daipan.Daipan
             builder.Register<DaipanExecutor>(Lifetime.Scoped);
 
             // Player
-            //builder.RegisterInstance(playerParameter);
             builder.Register<PlayerPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<PlayerMono>>();
             builder.Register<PlayerAttackEffectPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<PlayerAttackEffectMono>>();
             builder.Register<PlayerAttackEffectSpawner>(Lifetime.Scoped);
@@ -79,7 +76,6 @@ namespace Daipan.Daipan
             builder.Register<IStart, TowerSpawner>(Lifetime.Scoped);
 
             // Enemy
-            //builder.RegisterInstance(enemyAttributeParameters);
             builder.Register<EnemyPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<EnemyMono>>();
             builder.Register<EnemyDomainBuilder>(Lifetime.Scoped).As<IEnemyDomainBuilder>();
 
@@ -118,7 +114,8 @@ namespace Daipan.Daipan
                 enemyPositionMono.enemySpawnedPoints =
                     lanePositionMono.lanePositions.Select(x => x.enemySpawnedPosition).ToList();
                 enemyPositionMono.enemyDespawnedPoint = lanePositionMono.enemyDespawnedPoint;
-                Debug.Log($"enemySpawnedPoints : {string.Join(",", enemyPositionMono.enemySpawnedPoints.Select(x => x.enemySpawnTransformY.position).ToArray())}");
+                // Debug.Log($"enemySpawnedPoints : {string.Join(",", enemyPositionMono.enemySpawnedPoints
+                //     .Select(x => x.enemySpawnTransformY.position).ToArray())}");
                 return enemyPositionMono;
             }
             builder.RegisterInstance(new EnemyPositionMonoBuilder(builder, SetUpEnemyPositionMono()));
