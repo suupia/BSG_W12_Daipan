@@ -38,7 +38,7 @@ namespace Daipan.InputSerial.Scripts
                 }
                 catch(Exception e)
                 {
-                    Debug.LogWarning(portName + portNum + "ポートが開けませんでした。設定している値が間違っている場合があります" +
+                    Debug.Log(portName + portNum + "ポートが開けませんでした。設定している値が間違っている場合があります" +
                          e.Message);
                     serial = null;
                     continue;
@@ -48,7 +48,7 @@ namespace Daipan.InputSerial.Scripts
             // ポートがない場合
             if (serial == null)
             {
-                Debug.LogWarning("ポートがありませんでした。");
+                Debug.Log("ポートがありませんでした。");
                 return;
             }
 
