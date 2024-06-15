@@ -135,7 +135,7 @@ namespace Daipan.Daipan
             {
                 var lanePositionMono = Object.FindObjectOfType<LanePositionMono>();
                 var playerPositionMono = new GameObject().AddComponent<PlayerPositionMono>();
-                playerPositionMono.playerSpawnedPoints =lanePositionMono.lanePositions.Select(x => x.playerSpawnedPosition).ToList();
+                playerPositionMono.playerSpawnedPoint =lanePositionMono.playerSpawnedPosition;
                 playerPositionMono.attackEffectDespawnedPoint = lanePositionMono.attackEffectDespawnedPoint;
                 return playerPositionMono;
             }

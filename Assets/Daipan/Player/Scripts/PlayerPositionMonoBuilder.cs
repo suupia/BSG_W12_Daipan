@@ -13,7 +13,7 @@ namespace Daipan.Player.Scripts
         {
             var data = new PlayerSpawnPointData()
             {
-                GetPlayerSpawnedPointXs = () => playerPositionMono.playerSpawnedPoints,
+                GetPlayerSpawnedPointX = () => playerPositionMono.playerSpawnedPoint,
                 GetAttackEffectDespawnedPoint = () => playerPositionMono.attackEffectDespawnedPoint.position,
             };
             builder.RegisterInstance(data);
