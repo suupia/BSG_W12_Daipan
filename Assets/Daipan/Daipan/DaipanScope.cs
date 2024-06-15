@@ -123,8 +123,6 @@ namespace Daipan.Daipan
             }
             builder.RegisterInstance(new EnemyPositionMonoBuilder(builder, SetUpEnemyPositionMono()));
 
-            builder.Register<EnemyDefeatConfig>(Lifetime.Scoped);
-            builder.RegisterComponentInHierarchy<EnemyDefeatPositionMono>();
             builder.RegisterInstance(enemyDefeatParamManager);
 
             /*stream*/

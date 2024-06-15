@@ -29,7 +29,6 @@ namespace Daipan.LevelDesign.Battle.Scripts
         [Header("レーンのy座標を決めるゲームオブジェクト")]
         public Transform laneYTransform = null!;
 
-
         public EnemySpawnedPosition enemySpawnedPosition = null!;
         // このクラスがWaveごとにあって、ListでそのWaveにおけるレーンを表してもいいかも。
 
