@@ -20,12 +20,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 30
-    width: 1920
-    height: 977
+    width: 2560
+    height: 1337
   m_MinSize: {x: 400, y: 100}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 953
+  controlID: 1522
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -34,22 +34,22 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 12914, guid: 0000000000000000e000000000000000, type: 0}
+  m_EditorHideFlags: 1
+  m_Script: {fileID: 12015, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MinSize: {x: 100, y: 100}
+  m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
-    m_Text: Animator
-    m_Image: {fileID: 1711060831702674872, guid: 0000000000000000d000000000000000, type: 0}
+    m_Text: Game
+    m_Image: {fileID: -6423792434712278376, guid: 0000000000000000d000000000000000, type: 0}
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 2065.5
-    y: 83
-    width: 681.5
-    height: 488.5
+    x: -2110
+    y: -240
+    width: 909
+    height: 677
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -60,333 +60,70 @@ MonoBehaviour:
     m_LastAppliedPresetName: Default
     m_SaveData: []
     m_OverlaysVisible: 1
-  m_ViewTransforms:
-    m_KeySerializationHelper:
-    - {fileID: 2169789383934712858, guid: 012782c4ab07a471e90184d07624d365, type: 2}
-    - {fileID: 5251806468912063749, guid: 4940888e47d3047739df2882aa2ba248, type: 2}
-    - {fileID: -6809296529708534003, guid: f2eb1916e1af6424a8d4661c0686c047, type: 2}
-    - {fileID: -6888241071226555630, guid: 4468fd2fb11aa411687c5362afe124cd, type: 2}
-    - {fileID: -7684948700404153162, guid: 94d45951fc7574d81ba40a5c5d092100, type: 2}
-    - {fileID: -5677961451353378042, guid: 32b17751352774a079d0d608b5dc0b56, type: 2}
-    - {fileID: 2392157859902970044, guid: 2e1f45c120b0c45acada80102a182cfc, type: 2}
-    - {fileID: -4556366846336342083, guid: 83f80b89b841947eab74e1dbfe0ca43c, type: 2}
-    - {fileID: 1641543118319400922, guid: 52f82eb8cb337453eb78bd1a2fedc13b, type: 2}
-    - {fileID: 3862347182040762624, guid: cc415a37616674b73999c43d38c84e6e, type: 2}
-    - {fileID: 2924820367441541354, guid: f70a2f7d5178440eb8f325ca8d1a3176, type: 2}
-    - {fileID: -2234072855413917515, guid: 2c905b92aa26f4a9b90f92701cb32dcb, type: 2}
-    - {fileID: -8961858958162411611, guid: 862ba9238d1074abc8a2052e4fd002c0, type: 2}
-    - {fileID: -6030272443333359595, guid: d38d63db1327444b6ab08a053e605394, type: 2}
-    - {fileID: -4839855751223980620, guid: 7367c03104935465683cdfc2f561d183, type: 2}
-    - {fileID: 5251806468912063749, guid: ef14e8f6d9f014e73a16531da38cc1af, type: 2}
-    - {fileID: 5251806468912063749, guid: ad34c605d959e455983204456f111146, type: 2}
-    - {fileID: 5520724070702050312, guid: ad34c605d959e455983204456f111146, type: 2}
-    m_ValueSerializationHelper:
-    - e00: 0.24505495
-      e01: 0
-      e02: 0
-      e03: 2.7472534
-      e10: 0
-      e11: 0.24505495
-      e12: 0
-      e13: 359.7434
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    - e00: 0.4559091
-      e01: 0
-      e02: 0
-      e03: -7.795471
-      e10: 0
-      e11: 0.4559091
-      e12: 0
-      e13: 147.24545
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    - e00: 0.1363158
-      e01: 0
-      e02: 0
-      e03: 8.184212
-      e10: 0
-      e11: 0.1363158
-      e12: 0
-      e13: 235.41316
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    - e00: 0.1
-      e01: 0
-      e02: 0
-      e03: -52.5
-      e10: 0
-      e11: 0.1
-      e12: 0
-      e13: 238.5
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    - e00: 0.1
-      e01: 0
-      e02: 0
-      e03: -52.5
-      e10: 0
-      e11: 0.1
-      e12: 0
-      e13: 238.5
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    - e00: 0.1363158
-      e01: 0
-      e02: 0
-      e03: 8.184212
-      e10: 0
-      e11: 0.1363158
-      e12: 0
-      e13: 235.41316
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    - e00: 0.1
-      e01: 0
-      e02: 0
-      e03: -5.75
-      e10: 0
-      e11: 0.1
-      e12: 0
-      e13: 234
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    - e00: 0.1
-      e01: 0
-      e02: 0
-      e03: -8.75
-      e10: 0
-      e11: 0.1
-      e12: 0
-      e13: 232.5
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    - e00: 0.21210526
-      e01: 0
-      e02: 0
-      e03: 4.3947372
-      e10: 0
-      e11: 0.21210526
-      e12: 0
-      e13: 228.97105
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    - e00: 0.29157895
-      e01: 0
-      e02: 0
-      e03: 0.42105103
-      e10: 0
-      e11: 0.29157895
-      e12: 0
-      e13: 222.21579
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    - e00: 0.21210526
-      e01: 0
-      e02: 0
-      e03: 4.3947372
-      e10: 0
-      e11: 0.21210526
-      e12: 0
-      e13: 228.97105
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    - e00: 0.21210526
-      e01: 0
-      e02: 0
-      e03: 4.3947372
-      e10: 0
-      e11: 0.21210526
-      e12: 0
-      e13: 228.97105
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    - e00: 0.21210526
-      e01: 0
-      e02: 0
-      e03: 4.3947372
-      e10: 0
-      e11: 0.21210526
-      e12: 0
-      e13: 228.97105
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    - e00: 0.21210526
-      e01: 0
-      e02: 0
-      e03: 4.3947372
-      e10: 0
-      e11: 0.21210526
-      e12: 0
-      e13: 228.97105
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    - e00: 0.9079366
-      e01: 0
-      e02: 0
-      e03: -3.128286
-      e10: 0
-      e11: 0.9079366
-      e12: 0
-      e13: 49.69356
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    - e00: 0.9060548
-      e01: 0
-      e02: 0
-      e03: -211.95396
-      e10: 0
-      e11: 0.9060548
-      e12: 0
-      e13: 44.384254
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    - e00: 1.0957477
-      e01: 0
-      e02: 0
-      e03: -106.723206
-      e10: 0
-      e11: 1.0957477
-      e12: 0
-      e13: -15.1871
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    - e00: 0.52789474
-      e01: 0
-      e02: 0
-      e03: -11.394745
-      e10: 0
-      e11: 0.52789474
-      e12: 0
-      e13: 174.6
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-  m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: ad34c605d959e455983204456f111146, type: 2}
-  m_BreadCrumbs:
-  - m_Target: {fileID: 5251806468912063749, guid: ad34c605d959e455983204456f111146, type: 2}
-    m_ScrollPosition: {x: 0, y: 0}
-  - m_Target: {fileID: 5520724070702050312, guid: ad34c605d959e455983204456f111146, type: 2}
-    m_ScrollPosition: {x: 0, y: 0}
-  stateMachineGraph: {fileID: 0}
-  stateMachineGraphGUI: {fileID: 0}
-  blendTreeGraph: {fileID: 0}
-  blendTreeGraphGUI: {fileID: 0}
-  m_AutoLiveLink: 1
-  m_MiniTool: 0
-  m_LockTracker:
-    m_IsLocked: 0
-  m_CurrentEditor: 1
-  m_LayerEditor:
-    m_SelectedLayerIndex: 0
+  m_SerializedViewNames: []
+  m_SerializedViewValues: []
+  m_PlayModeViewName: GameView
+  m_ShowGizmos: 0
+  m_TargetDisplay: 0
+  m_ClearColor: {r: 0, g: 0, b: 0, a: 0}
+  m_TargetSize: {x: 1920, y: 1080}
+  m_TextureFilterMode: 0
+  m_TextureHideFlags: 61
+  m_RenderIMGUI: 1
+  m_EnterPlayModeBehavior: 0
+  m_UseMipMap: 0
+  m_VSyncEnabled: 0
+  m_Gizmos: 0
+  m_Stats: 0
+  m_SelectedSizes: 03000000000000000000000000000000000000000000000000000000000000000000000000000000
+  m_ZoomArea:
+    m_HRangeLocked: 0
+    m_VRangeLocked: 0
+    hZoomLockedByDefault: 0
+    vZoomLockedByDefault: 0
+    m_HBaseRangeMin: -960
+    m_HBaseRangeMax: 960
+    m_VBaseRangeMin: -540
+    m_VBaseRangeMax: 540
+    m_HAllowExceedBaseRangeMin: 1
+    m_HAllowExceedBaseRangeMax: 1
+    m_VAllowExceedBaseRangeMin: 1
+    m_VAllowExceedBaseRangeMax: 1
+    m_ScaleWithWindow: 0
+    m_HSlider: 0
+    m_VSlider: 0
+    m_IgnoreScrollWheelUntilClicked: 0
+    m_EnableMouseInput: 0
+    m_EnableSliderZoomHorizontal: 0
+    m_EnableSliderZoomVertical: 0
+    m_UniformScale: 1
+    m_UpDirection: 1
+    m_DrawArea:
+      serializedVersion: 2
+      x: 0
+      y: 21
+      width: 909
+      height: 656
+    m_Scale: {x: 0.4734375, y: 0.4734375}
+    m_Translation: {x: 454.5, y: 328}
+    m_MarginLeft: 0
+    m_MarginRight: 0
+    m_MarginTop: 0
+    m_MarginBottom: 0
+    m_LastShownAreaInsideMargins:
+      serializedVersion: 2
+      x: -960
+      y: -692.8053
+      width: 1920
+      height: 1385.6106
+    m_MinimalGUI: 1
+  m_defaultScale: 0.4734375
+  m_LastWindowPixelSize: {x: 909, y: 677}
+  m_ClearInEditMode: 1
+  m_NoCameraWarning: 1
+  m_LowResolutionForAspectRatios: 01000000000000000000
+  m_XRRenderMode: 0
+  m_RenderTexture: {fileID: 0}
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -406,12 +143,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1021
-    height: 977
+    width: 1361
+    height: 1337
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 954
+  controlID: 1523
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -431,12 +168,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1021
-    height: 509.5
+    width: 1361
+    height: 698
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 955
+  controlID: 1524
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -454,8 +191,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 337.5
-    height: 509.5
+    width: 450
+    height: 698
   m_MinSize: {x: 101, y: 121}
   m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 6}
@@ -479,14 +216,14 @@ MonoBehaviour:
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
     m_Text: Scene
-    m_Image: {fileID: 8634526014445323508, guid: 0000000000000000d000000000000000, type: 0}
+    m_Image: {fileID: 2593428753322112591, guid: 0000000000000000d000000000000000, type: 0}
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1728
-    y: 83
-    width: 336.5
-    height: 488.5
+    x: -2560
+    y: -240
+    width: 449
+    height: 677
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -845,9 +582,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0, y: 0, z: 0}
+    m_Target: {x: 10, y: 0, z: 0}
     speed: 2
-    m_Value: {x: 0, y: 0, z: 0}
+    m_Value: {x: 10, y: 0, z: 0}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -897,9 +634,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 0.9521686
+    m_Target: 10
     speed: 2
-    m_Value: 0.9521686
+    m_Value: 10
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -934,124 +671,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: AnimatorControllerTool
+  m_Name: GameView
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 337.5
+    x: 450
     y: 0
-    width: 683.5
-    height: 509.5
-  m_MinSize: {x: 102, y: 121}
+    width: 911
+    height: 698
+  m_MinSize: {x: 202, y: 221}
   m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 2}
   m_Panes:
+  - {fileID: 2}
   - {fileID: 8}
   - {fileID: 9}
-  - {fileID: 2}
   - {fileID: 10}
-  m_Selected: 2
-  m_LastSelected: 0
+  m_Selected: 0
+  m_LastSelected: 3
 --- !u!114 &8
-MonoBehaviour:
-  m_ObjectHideFlags: 52
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 1
-  m_Script: {fileID: 12015, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_TitleContent:
-    m_Text: Game
-    m_Image: {fileID: 4621777727084837110, guid: 0000000000000000d000000000000000, type: 0}
-    m_Tooltip: 
-  m_Pos:
-    serializedVersion: 2
-    x: 2065.5
-    y: 83
-    width: 681.5
-    height: 488.5
-  m_SerializedDataModeController:
-    m_DataMode: 0
-    m_PreferredDataMode: 0
-    m_SupportedDataModes: 
-    isAutomatic: 1
-  m_ViewDataDictionary: {fileID: 0}
-  m_OverlayCanvas:
-    m_LastAppliedPresetName: Default
-    m_SaveData: []
-    m_OverlaysVisible: 1
-  m_SerializedViewNames: []
-  m_SerializedViewValues: []
-  m_PlayModeViewName: GameView
-  m_ShowGizmos: 0
-  m_TargetDisplay: 0
-  m_ClearColor: {r: 0, g: 0, b: 0, a: 0}
-  m_TargetSize: {x: 1920, y: 1080}
-  m_TextureFilterMode: 0
-  m_TextureHideFlags: 61
-  m_RenderIMGUI: 1
-  m_EnterPlayModeBehavior: 0
-  m_UseMipMap: 0
-  m_VSyncEnabled: 0
-  m_Gizmos: 0
-  m_Stats: 0
-  m_SelectedSizes: 03000000000000000000000000000000000000000000000000000000000000000000000000000000
-  m_ZoomArea:
-    m_HRangeLocked: 0
-    m_VRangeLocked: 0
-    hZoomLockedByDefault: 0
-    vZoomLockedByDefault: 0
-    m_HBaseRangeMin: -480
-    m_HBaseRangeMax: 480
-    m_VBaseRangeMin: -270
-    m_VBaseRangeMax: 270
-    m_HAllowExceedBaseRangeMin: 1
-    m_HAllowExceedBaseRangeMax: 1
-    m_VAllowExceedBaseRangeMin: 1
-    m_VAllowExceedBaseRangeMax: 1
-    m_ScaleWithWindow: 0
-    m_HSlider: 0
-    m_VSlider: 0
-    m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 1
-    m_EnableSliderZoomHorizontal: 0
-    m_EnableSliderZoomVertical: 0
-    m_UniformScale: 1
-    m_UpDirection: 1
-    m_DrawArea:
-      serializedVersion: 2
-      x: 0
-      y: 21
-      width: 681.5
-      height: 467.5
-    m_Scale: {x: 0.70989585, y: 0.70989585}
-    m_Translation: {x: 340.75, y: 233.75}
-    m_MarginLeft: 0
-    m_MarginRight: 0
-    m_MarginTop: 0
-    m_MarginBottom: 0
-    m_LastShownAreaInsideMargins:
-      serializedVersion: 2
-      x: -480
-      y: -329.27365
-      width: 960
-      height: 658.5473
-    m_MinimalGUI: 1
-  m_defaultScale: 0.70989585
-  m_LastWindowPixelSize: {x: 1363, y: 977}
-  m_ClearInEditMode: 1
-  m_NoCameraWarning: 1
-  m_LowResolutionForAspectRatios: 01000000000000000000
-  m_XRRenderMode: 0
-  m_RenderTexture: {fileID: 0}
---- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1067,7 +706,7 @@ MonoBehaviour:
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
     m_Text: Animation
-    m_Image: {fileID: -3237396543322336831, guid: 0000000000000000d000000000000000, type: 0}
+    m_Image: {fileID: -8166618308981325432, guid: 0000000000000000d000000000000000, type: 0}
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
@@ -1087,7 +726,332 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 51398
+  m_LastSelectedObjectID: -114896
+--- !u!114 &9
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 12914, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_TitleContent:
+    m_Text: Animator
+    m_Image: {fileID: -1673928668082335149, guid: 0000000000000000d000000000000000, type: 0}
+    m_Tooltip: 
+  m_Pos:
+    serializedVersion: 2
+    x: 2065.5
+    y: 83
+    width: 681.5
+    height: 488.5
+  m_SerializedDataModeController:
+    m_DataMode: 0
+    m_PreferredDataMode: 0
+    m_SupportedDataModes: 
+    isAutomatic: 1
+  m_ViewDataDictionary: {fileID: 0}
+  m_OverlayCanvas:
+    m_LastAppliedPresetName: Default
+    m_SaveData: []
+    m_OverlaysVisible: 1
+  m_ViewTransforms:
+    m_KeySerializationHelper:
+    - {fileID: 2169789383934712858, guid: 012782c4ab07a471e90184d07624d365, type: 2}
+    - {fileID: 5251806468912063749, guid: 4940888e47d3047739df2882aa2ba248, type: 2}
+    - {fileID: -6809296529708534003, guid: f2eb1916e1af6424a8d4661c0686c047, type: 2}
+    - {fileID: -6888241071226555630, guid: 4468fd2fb11aa411687c5362afe124cd, type: 2}
+    - {fileID: -7684948700404153162, guid: 94d45951fc7574d81ba40a5c5d092100, type: 2}
+    - {fileID: -5677961451353378042, guid: 32b17751352774a079d0d608b5dc0b56, type: 2}
+    - {fileID: 2392157859902970044, guid: 2e1f45c120b0c45acada80102a182cfc, type: 2}
+    - {fileID: -4556366846336342083, guid: 83f80b89b841947eab74e1dbfe0ca43c, type: 2}
+    - {fileID: 1641543118319400922, guid: 52f82eb8cb337453eb78bd1a2fedc13b, type: 2}
+    - {fileID: 3862347182040762624, guid: cc415a37616674b73999c43d38c84e6e, type: 2}
+    - {fileID: 2924820367441541354, guid: f70a2f7d5178440eb8f325ca8d1a3176, type: 2}
+    - {fileID: -2234072855413917515, guid: 2c905b92aa26f4a9b90f92701cb32dcb, type: 2}
+    - {fileID: -8961858958162411611, guid: 862ba9238d1074abc8a2052e4fd002c0, type: 2}
+    - {fileID: -6030272443333359595, guid: d38d63db1327444b6ab08a053e605394, type: 2}
+    - {fileID: -4839855751223980620, guid: 7367c03104935465683cdfc2f561d183, type: 2}
+    - {fileID: 5251806468912063749, guid: ef14e8f6d9f014e73a16531da38cc1af, type: 2}
+    m_ValueSerializationHelper:
+    - e00: 0.24505495
+      e01: 0
+      e02: 0
+      e03: 2.7472534
+      e10: 0
+      e11: 0.24505495
+      e12: 0
+      e13: 359.7434
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    - e00: 0.4559091
+      e01: 0
+      e02: 0
+      e03: -7.795471
+      e10: 0
+      e11: 0.4559091
+      e12: 0
+      e13: 147.24545
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    - e00: 0.1363158
+      e01: 0
+      e02: 0
+      e03: 8.184212
+      e10: 0
+      e11: 0.1363158
+      e12: 0
+      e13: 235.41316
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    - e00: 0.1
+      e01: 0
+      e02: 0
+      e03: -52.5
+      e10: 0
+      e11: 0.1
+      e12: 0
+      e13: 238.5
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    - e00: 0.1
+      e01: 0
+      e02: 0
+      e03: -52.5
+      e10: 0
+      e11: 0.1
+      e12: 0
+      e13: 238.5
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    - e00: 0.1363158
+      e01: 0
+      e02: 0
+      e03: 8.184212
+      e10: 0
+      e11: 0.1363158
+      e12: 0
+      e13: 235.41316
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    - e00: 0.1
+      e01: 0
+      e02: 0
+      e03: -5.75
+      e10: 0
+      e11: 0.1
+      e12: 0
+      e13: 234
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    - e00: 0.1
+      e01: 0
+      e02: 0
+      e03: -8.75
+      e10: 0
+      e11: 0.1
+      e12: 0
+      e13: 232.5
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    - e00: 0.21210526
+      e01: 0
+      e02: 0
+      e03: 4.3947372
+      e10: 0
+      e11: 0.21210526
+      e12: 0
+      e13: 228.97105
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    - e00: 0.29157895
+      e01: 0
+      e02: 0
+      e03: 0.42105103
+      e10: 0
+      e11: 0.29157895
+      e12: 0
+      e13: 222.21579
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    - e00: 0.21210526
+      e01: 0
+      e02: 0
+      e03: 4.3947372
+      e10: 0
+      e11: 0.21210526
+      e12: 0
+      e13: 228.97105
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    - e00: 0.21210526
+      e01: 0
+      e02: 0
+      e03: 4.3947372
+      e10: 0
+      e11: 0.21210526
+      e12: 0
+      e13: 228.97105
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    - e00: 0.21210526
+      e01: 0
+      e02: 0
+      e03: 4.3947372
+      e10: 0
+      e11: 0.21210526
+      e12: 0
+      e13: 228.97105
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    - e00: 0.21210526
+      e01: 0
+      e02: 0
+      e03: 4.3947372
+      e10: 0
+      e11: 0.21210526
+      e12: 0
+      e13: 228.97105
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    - e00: 0.9079366
+      e01: 0
+      e02: 0
+      e03: -3.128286
+      e10: 0
+      e11: 0.9079366
+      e12: 0
+      e13: 49.69356
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    - e00: 0.9060548
+      e01: 0
+      e02: 0
+      e03: -211.95396
+      e10: 0
+      e11: 0.9060548
+      e12: 0
+      e13: 44.384254
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+  m_PreviewAnimator: {fileID: 0}
+  m_AnimatorController: {fileID: 9100000, guid: 4940888e47d3047739df2882aa2ba248, type: 2}
+  m_BreadCrumbs:
+  - m_Target: {fileID: 5251806468912063749, guid: 4940888e47d3047739df2882aa2ba248, type: 2}
+    m_ScrollPosition: {x: 0, y: 0}
+  stateMachineGraph: {fileID: 0}
+  stateMachineGraphGUI: {fileID: 0}
+  blendTreeGraph: {fileID: 0}
+  blendTreeGraphGUI: {fileID: 0}
+  m_AutoLiveLink: 1
+  m_MiniTool: 0
+  m_LockTracker:
+    m_IsLocked: 0
+  m_CurrentEditor: 1
+  m_LayerEditor:
+    m_SelectedLayerIndex: 0
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1108,10 +1072,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1981.5
-    y: 83
-    width: 804.5
-    height: 488.5
+    x: -2110
+    y: -240
+    width: 909
+    height: 677
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -1123,12 +1087,12 @@ MonoBehaviour:
     m_SaveData: []
     m_OverlaysVisible: 1
   m_Spl:
-    ID: 4412
+    ID: 13325
     splitterInitialOffset: 0
     currentActiveSplitter: -1
     realSizes:
-    - 313.5
-    - 104.5
+    - 455
+    - 152
     relativeSizes:
     - 0.75
     - 0.25
@@ -1138,7 +1102,7 @@ MonoBehaviour:
     maxSizes:
     - 0
     - 0
-    lastTotalSize: 418
+    lastTotalSize: 607
     splitSize: 6
     xOffset: 0
     m_Version: 1
@@ -1189,9 +1153,9 @@ MonoBehaviour:
       uniqueId: '[BSG_W12_Daipan][suite]'
       name: BSG_W12_Daipan
       fullName: BSG_W12_Daipan
-      resultStatus: 1
-      duration: 0.1348918
-      messages: 
+      resultStatus: 2
+      duration: 0.0351275
+      messages: One or more child tests had errors
       output: 
       stacktrace: 
       notRunnable: 0
@@ -1206,7 +1170,7 @@ MonoBehaviour:
       name: EnemyTests.dll
       fullName: /Users/koki/Unity/UnityProjects/BSG_W12_Daipan/Library/ScriptAssemblies/EnemyTests.dll
       resultStatus: 1
-      duration: 0.0542052
+      duration: 0.0839547
       messages: 
       output: 
       stacktrace: 
@@ -1222,7 +1186,7 @@ MonoBehaviour:
       name: EnemyAttackTest
       fullName: EnemyAttackTest
       resultStatus: 1
-      duration: 0.0139295
+      duration: 0.0325022
       messages: 
       output: 
       stacktrace: 
@@ -1238,7 +1202,7 @@ MonoBehaviour:
       name: IHpSetterShouldDecrease10WithAttack
       fullName: EnemyAttackTest.IHpSetterShouldDecrease10WithAttack
       resultStatus: 1
-      duration: 0.0076337
+      duration: 0.0162594
       messages: 
       output: 
       stacktrace: 
@@ -1255,7 +1219,7 @@ MonoBehaviour:
       name: EnemySpawnerCalculatorTest
       fullName: EnemySpawnerCalculatorTest
       resultStatus: 1
-      duration: 0.0392898
+      duration: 0.0505789
       messages: 
       output: 
       stacktrace: 
@@ -1271,7 +1235,7 @@ MonoBehaviour:
       name: NormalizeEnemySpawnRatioWithBossTest
       fullName: EnemySpawnerCalculatorTest.NormalizeEnemySpawnRatioWithBossTest
       resultStatus: 1
-      duration: 0.0018582
+      duration: 0.0019389
       messages: 
       output: 
       stacktrace: 
@@ -1288,7 +1252,7 @@ MonoBehaviour:
       name: NormalizeEnemySpawnRatioWithBossTest2
       fullName: EnemySpawnerCalculatorTest.NormalizeEnemySpawnRatioWithBossTest2
       resultStatus: 1
-      duration: 0.000227
+      duration: 0.0001978
       messages: 
       output: 
       stacktrace: 
@@ -1305,7 +1269,7 @@ MonoBehaviour:
       name: PlayerTests.dll
       fullName: /Users/koki/Unity/UnityProjects/BSG_W12_Daipan/Library/ScriptAssemblies/PlayerTests.dll
       resultStatus: 1
-      duration: 0.0149062
+      duration: 0.0137369
       messages: 
       output: 
       stacktrace: 
@@ -1321,7 +1285,7 @@ MonoBehaviour:
       name: PlayerAttackTest
       fullName: PlayerAttackTest
       resultStatus: 1
-      duration: 0.0067781
+      duration: 0.0062495
       messages: 
       output: 
       stacktrace: 
@@ -1337,7 +1301,7 @@ MonoBehaviour:
       name: IHpSetterShouldDecrease10WithAttack
       fullName: PlayerAttackTest.IHpSetterShouldDecrease10WithAttack
       resultStatus: 1
-      duration: 0.0024853
+      duration: 0.0023379
       messages: 
       output: 'Attack Enemy
 
@@ -1358,7 +1322,7 @@ MonoBehaviour:
       name: StreamTests.dll
       fullName: /Users/koki/Unity/UnityProjects/BSG_W12_Daipan/Library/ScriptAssemblies/StreamTests.dll
       resultStatus: 1
-      duration: 0.0263449
+      duration: 0.0256567
       messages: 
       output: 
       stacktrace: 
@@ -1374,7 +1338,7 @@ MonoBehaviour:
       name: Daipan
       fullName: Daipan
       resultStatus: 1
-      duration: 0.0161582
+      duration: 0.0131798
       messages: 
       output: 
       stacktrace: 
@@ -1390,7 +1354,7 @@ MonoBehaviour:
       name: Stream
       fullName: Daipan.Stream
       resultStatus: 1
-      duration: 0.0145977
+      duration: 0.0129978
       messages: 
       output: 
       stacktrace: 
@@ -1406,7 +1370,7 @@ MonoBehaviour:
       name: StreamTests
       fullName: Daipan.Stream.StreamTests
       resultStatus: 1
-      duration: 0.0107896
+      duration: 0.009481
       messages: 
       output: 
       stacktrace: 
@@ -1422,7 +1386,7 @@ MonoBehaviour:
       name: IrritatedValueTest
       fullName: Daipan.Stream.StreamTests.IrritatedValueTest
       resultStatus: 1
-      duration: 0.0070521
+      duration: 0.0059525
       messages: 
       output: 
       stacktrace: 
@@ -1438,7 +1402,7 @@ MonoBehaviour:
       name: DecrementTest
       fullName: Daipan.Stream.StreamTests.IrritatedValueTest.DecrementTest
       resultStatus: 1
-      duration: 0.0013712
+      duration: 0.0013764
       messages: 
       output: 'Daipan.Stream.Scripts.IrritatedParams must be instantiated using the
         ScriptableObject.CreateInstance method instead of new IrritatedParams.
@@ -1461,7 +1425,7 @@ MonoBehaviour:
       name: IncrementTest
       fullName: Daipan.Stream.StreamTests.IrritatedValueTest.IncrementTest
       resultStatus: 1
-      duration: 0.0012573
+      duration: 0.0008286
       messages: 
       output: 'Daipan.Stream.Scripts.IrritatedParams must be instantiated using the
         ScriptableObject.CreateInstance method instead of new IrritatedParams.
@@ -1482,13 +1446,13 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1010
       parentUniqueId: StreamTests.dll/Daipan/Stream/StreamTests/[StreamTests][Daipan.Stream.StreamTests.IrritatedValueTest][suite]
-    - id: 1026
-      uniqueId: '[UtilityTests][/Users/koki/Unity/UnityProjects/BSG_W12_Daipan/Library/ScriptAssemblies/UtilityTests.dll][suite]'
+    - id: 1029
+      uniqueId: '[UtilityTests.dll][suite]'
       name: UtilityTests.dll
       fullName: /Users/koki/Unity/UnityProjects/BSG_W12_Daipan/Library/ScriptAssemblies/UtilityTests.dll
-      resultStatus: 1
-      duration: 0.0167987
-      messages: 
+      resultStatus: 2
+      duration: 0.0182246
+      messages: One or more child tests had errors
       output: 
       stacktrace: 
       notRunnable: 0
@@ -1498,12 +1462,121 @@ MonoBehaviour:
       categories: []
       parentId: 1000
       parentUniqueId: '[BSG_W12_Daipan][suite]'
+    - id: 1030
+      uniqueId: UtilityTests.dll/[Daipan][suite]
+      name: Daipan
+      fullName: Daipan
+      resultStatus: 2
+      duration: 0.0156159
+      messages: One or more child tests had errors
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1029
+      parentUniqueId: '[UtilityTests.dll][suite]'
+    - id: 1031
+      uniqueId: UtilityTests.dll/Daipan/[Utility][suite]
+      name: Utility
+      fullName: Daipan.Utility
+      resultStatus: 2
+      duration: 0.0119368
+      messages: One or more child tests had errors
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1030
+      parentUniqueId: UtilityTests.dll/[Daipan][suite]
+    - id: 1032
+      uniqueId: UtilityTests.dll/Daipan/Utility/[UtilityTests][Daipan.Utility.Tests][suite]
+      name: Tests
+      fullName: Daipan.Utility.Tests
+      resultStatus: 2
+      duration: 0.0083026
+      messages: One or more child tests had errors
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1031
+      parentUniqueId: UtilityTests.dll/Daipan/[Utility][suite]
+    - id: 1026
+      uniqueId: UtilityTests.dll/Daipan/Utility/Tests/[UtilityTests][Daipan.Utility.Tests.RandomByRatiosTest][suite]
+      name: RandomByRatiosTest
+      fullName: Daipan.Utility.Tests.RandomByRatiosTest
+      resultStatus: 2
+      duration: 0.0046637
+      messages: One or more child tests had errors
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1032
+      parentUniqueId: UtilityTests.dll/Daipan/Utility/[UtilityTests][Daipan.Utility.Tests][suite]
+    - id: 1027
+      uniqueId: UtilityTests.dll/Daipan/Utility/Tests/RandomByRatiosTest/[UtilityTests][Daipan.Utility.Tests.RandomByRatiosTest.AccumulateRatiosTest1]
+      name: AccumulateRatiosTest1
+      fullName: Daipan.Utility.Tests.RandomByRatiosTest.AccumulateRatiosTest1
+      resultStatus: 1
+      duration: 0.0010254
+      messages: 
+      output: 'accumulatedRatios: 0,1,3,6
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1026
+      parentUniqueId: UtilityTests.dll/Daipan/Utility/Tests/[UtilityTests][Daipan.Utility.Tests.RandomByRatiosTest][suite]
+    - id: 1028
+      uniqueId: UtilityTests.dll/Daipan/Utility/Tests/RandomByRatiosTest/[UtilityTests][Daipan.Utility.Tests.RandomByRatiosTest.RandomByRatiosTest1]
+      name: RandomByRatiosTest1
+      fullName: Daipan.Utility.Tests.RandomByRatiosTest.RandomByRatiosTest1
+      resultStatus: 2
+      duration: 0.0008579
+      messages: "  Expected: 1\n  But was:  2\n"
+      output: 'normalizedAccumulatedRatios: 0,0.2,0.4,1, random: 0, result: { ratio
+        = 0.2, index = 1 }
+
+        normalizedAccumulatedRatios: 0,0.2,0.4,1, random:
+        0.4, result: { ratio = 1, index = 3 }
+
+'
+      stacktrace: 'at Daipan.Utility.Tests.RandomByRatiosTest.RandomByRatiosTest1
+        () [0x00063] in /Users/koki/Unity/UnityProjects/BSG_W12_Daipan/Assets/Daipan/Utility/Tests/RandomByRatiosTest.cs:34
+
+'
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1026
+      parentUniqueId: UtilityTests.dll/Daipan/Utility/Tests/[UtilityTests][Daipan.Utility.Tests.RandomByRatiosTest][suite]
     - id: 1021
       uniqueId: UtilityTests.dll/[UtilityTests][EnumEnumerationCheckerTest][suite]
       name: EnumEnumerationCheckerTest
       fullName: EnumEnumerationCheckerTest
       resultStatus: 1
-      duration: 0.0097194
+      duration: 0.061767
       messages: 
       output: 
       stacktrace: 
@@ -1519,7 +1592,7 @@ MonoBehaviour:
       name: CheckEnumType1
       fullName: EnumEnumerationCheckerTest.CheckEnumType1
       resultStatus: 1
-      duration: 0.0028191
+      duration: 0.0246815
       messages: 
       output: 
       stacktrace: 
@@ -1536,7 +1609,7 @@ MonoBehaviour:
       name: CheckEnumType2
       fullName: EnumEnumerationCheckerTest.CheckEnumType2
       resultStatus: 1
-      duration: 0.0007316
+      duration: 0.0011272
       messages: 
       output: 'The number of EnumEnumerationCheckerTest+EnumType2 and EnumEnumerationCheckerTest+TestEnum
         is different.
@@ -1556,7 +1629,7 @@ MonoBehaviour:
       name: CheckEnumType3
       fullName: EnumEnumerationCheckerTest.CheckEnumType3
       resultStatus: 1
-      duration: 0.0006125
+      duration: 0.0004816
       messages: 
       output: 'The number of EnumEnumerationCheckerTest+EnumType3 and EnumEnumerationCheckerTest+TestEnum
         is different.
@@ -1576,7 +1649,7 @@ MonoBehaviour:
       name: CheckEnumType4
       fullName: EnumEnumerationCheckerTest.CheckEnumType4
       resultStatus: 1
-      duration: 0.0008587
+      duration: 0.0007885
       messages: 
       output: 'EnumEnumerationCheckerTest+TestEnum with name X not found.
 
@@ -1590,13 +1663,20 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1021
       parentUniqueId: UtilityTests.dll/[UtilityTests][EnumEnumerationCheckerTest][suite]
-    m_ResultText: BSG_W12_Daipan (0.135s)
-    m_ResultStacktrace: 
+    m_ResultText: "RandomByRatiosTest1 (0.001s)\n---\nExpected: 1\n  But was:  2\n---\nat
+      Daipan.Utility.Tests.RandomByRatiosTest.RandomByRatiosTest1 () [0x00063] in
+      /Users/koki/Unity/UnityProjects/BSG_W12_Daipan/Assets/Daipan/Utility/Tests/RandomByRatiosTest.cs:34\n---\nnormalizedAccumulatedRatios:
+      0,0.2,0.4,1, random: 0, result: { ratio = 0.2, index = 1 }\nnormalizedAccumulatedRatios:
+      0,0.2,0.4,1, random: 0.4, result: { ratio = 1, index = 3 }"
+    m_ResultStacktrace: 'at Daipan.Utility.Tests.RandomByRatiosTest.RandomByRatiosTest1
+      () [0x00063] in /Users/koki/Unity/UnityProjects/BSG_W12_Daipan/Assets/Daipan/Utility/Tests/RandomByRatiosTest.cs:34
+
+'
     m_TestListState:
-      scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: fb0dce08
-      m_LastClickedID: 147721723
-      m_ExpandedIDs: 5567d180e953d688cc4edb8db5613b8e356acc9f75befeae6dbf46bbba882ec0716255c430ae7cd7fb0dce08de986858c9dc8a75ffffff7f
+      scrollPos: {x: 0, y: 13}
+      m_SelectedIDs: 0019b16b
+      m_LastClickedID: 1806768384
+      m_ExpandedIDs: 5567d180e953d688cc4edb8db5613b8e356acc9f75befeae6dbf46bbba882ec0716255c430ae7cd7507ce3f0fcf507f2fb0dce0861471d41e9f0684fde986858c9dc8a75385db376ffffff7f
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1638,9 +1718,9 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
-    y: 509.5
-    width: 1021
-    height: 467.5
+    y: 698
+    width: 1361
+    height: 639
   m_MinSize: {x: 101, y: 121}
   m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 12}
@@ -1664,14 +1744,14 @@ MonoBehaviour:
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
     m_Text: Console
-    m_Image: {fileID: -4950941429401207979, guid: 0000000000000000d000000000000000, type: 0}
+    m_Image: {fileID: -4327648978806127646, guid: 0000000000000000d000000000000000, type: 0}
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1728
-    y: 592.5
-    width: 1020
-    height: 446.5
+    x: -2560
+    y: 458
+    width: 1360
+    height: 618
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -1699,14 +1779,14 @@ MonoBehaviour:
   - {fileID: 16}
   m_Position:
     serializedVersion: 2
-    x: 1021
+    x: 1361
     y: 0
-    width: 469
-    height: 977
+    width: 625
+    height: 1337
   m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 835
+  controlID: 1461
 --- !u!114 &14
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1724,10 +1804,10 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 469
-    height: 392.5
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
+    width: 625
+    height: 744
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 15}
   m_Panes:
   - {fileID: 15}
@@ -1749,14 +1829,14 @@ MonoBehaviour:
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
     m_Text: Hierarchy
-    m_Image: {fileID: -3734745235275155857, guid: 0000000000000000d000000000000000, type: 0}
+    m_Image: {fileID: 7966133145522015247, guid: 0000000000000000d000000000000000, type: 0}
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 2749
-    y: 83
-    width: 467
-    height: 371.5
+    x: -1199
+    y: -240
+    width: 623
+    height: 723
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -1770,23 +1850,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: fe7a0000
+      m_SelectedIDs: 303ffeff
       m_LastClickedID: 0
-      m_ExpandedIDs: 16fbffff
+      m_ExpandedIDs: 3c58fdffd459fdff7a5bfdff7a5efdff1e60fdffca61fdff7463fdff1a65fdff3668fdffde69fdff066dfdffa26efdff4670fdfff071fdff1675fdffae76fdff5078fdfff679fdff2e7dfdff6680fdffee84fdff4e88fdff748bfdff248dfdffa291fdff5c93fdff8c96fdff7e99fdff3a9bfdff469efdffec9ffdff56a6fdff5ca9fdff82acfdff3eaefdffbc4fffffd84fffff16fbffff86720000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: EnemyDespawnPoint
+        m_OriginalName: EnemyDespawnPoint
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: 29488
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 14}
       m_SearchString: 
@@ -1812,9 +1892,9 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
-    y: 392.5
-    width: 469
-    height: 584.5
+    y: 744
+    width: 625
+    height: 593
   m_MinSize: {x: 232, y: 271}
   m_MaxSize: {x: 10002, y: 10021}
   m_ActualView: {fileID: 17}
@@ -1838,14 +1918,14 @@ MonoBehaviour:
   m_MaxSize: {x: 10000, y: 10000}
   m_TitleContent:
     m_Text: Project
-    m_Image: {fileID: -5179483145760003458, guid: 0000000000000000d000000000000000, type: 0}
+    m_Image: {fileID: -5467254957812901981, guid: 0000000000000000d000000000000000, type: 0}
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 2749
-    y: 475.5
-    width: 467
-    height: 563.5
+    x: -1199
+    y: 504
+    width: 623
+    height: 572
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -1867,7 +1947,7 @@ MonoBehaviour:
     m_SkipHidden: 1
     m_SearchArea: 1
     m_Folders:
-    - Assets/Daipan/Enemy/Sprites/Enemy/Move/Enemy_MoveMotion_Fix
+    - Assets/Daipan/Enemy/Scripts
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -1875,15 +1955,15 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Daipan/Enemy/Sprites/Enemy/Move/Enemy_MoveMotion_Fix
+  - Assets/Daipan/Enemy/Scripts
   m_LastFoldersGridSize: -1
   m_LastProjectPath: /Users/koki/Unity/UnityProjects/BSG_W12_Daipan
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 218.99512}
-    m_SelectedIDs: 2c7c0000
-    m_LastClickedID: 31788
+    scrollPos: {x: 0, y: 224.5}
+    m_SelectedIDs: 727a0000
+    m_LastClickedID: 31346
     m_ExpandedIDs: 00000000147a0000167a0000187a00001a7a00001c7a00001e7a0000207a0000227a0000247a0000267a0000287a00002a7a00002c7a00002e7a0000307a0000327a0000347a0000367a0000387a00003a7a00003c7a00003e7a0000847a000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1912,7 +1992,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000147a0000167a0000187a00001a7a00001c7a00001e7a0000207a0000227a0000247a0000267a0000287a00002a7a00002c7a00002e7a0000307a0000327a0000347a0000367a0000387a00003a7a00003c7a00003e7a000000ca9a3bffffff7f
+    m_ExpandedIDs: 00000000147a0000167a0000187a00001a7a00001c7a00001e7a0000207a0000227a0000247a0000267a0000287a00002a7a00002c7a00002e7a0000307a0000327a0000347a0000367a0000387a00003a7a00003c7a00003e7a0000847a000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1937,10 +2017,10 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: fe7a0000
-    m_LastClickedInstanceID: 31486
+    m_SelectedInstanceIDs: 303ffeff
+    m_LastClickedInstanceID: -114896
     m_HadKeyboardFocusLastEvent: 1
-    m_ExpandedInstanceIDs: c62300002471000032710000868a000096710000c6cdf7ff2a890000
+    m_ExpandedInstanceIDs: c62300002471000032710000868a000096710000c6cdf7ff2a89000010760000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1983,12 +2063,12 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 1490
+    x: 1986
     y: 0
-    width: 430
-    height: 977
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
+    width: 574
+    height: 1337
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 19}
   m_Panes:
   - {fileID: 19}
@@ -2010,14 +2090,14 @@ MonoBehaviour:
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
     m_Text: Inspector
-    m_Image: {fileID: -440750813802333266, guid: 0000000000000000d000000000000000, type: 0}
+    m_Image: {fileID: -2667387946076563598, guid: 0000000000000000d000000000000000, type: 0}
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 3218
-    y: 83
-    width: 429
-    height: 956
+    x: -574
+    y: -240
+    width: 573
+    height: 1316
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
