@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using Daipan.LevelDesign.Enemy.Scripts;
+using Daipan.Player.MonoScripts;
 using UnityEngine;
 
 namespace Daipan.LevelDesign.Battle.Scripts
@@ -23,12 +24,13 @@ namespace Daipan.LevelDesign.Battle.Scripts
     {
         [Header("レーンのy座標を決めるゲームオブジェクト")]
         public Transform laneYTransform = null!;
-
-        [Header("プレイヤーの生成されるx座標を決めるゲームオブジェクト")]
-        public Transform playerSpawnXTransform = null!;
+        
+        public PlayerSpawnedPosition playerSpawnedPosition = null!;
 
         public EnemySpawnedPosition enemySpawnedPosition = null!;
         // このクラスがWaveごとにあって、ListでそのWaveにおけるレーンを表してもいいかも。
 
     }
+    
+
 }
