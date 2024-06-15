@@ -38,7 +38,6 @@ namespace Daipan.Daipan
         [FormerlySerializedAs("enemyParamsManager")][SerializeField] EnemyParamManager enemyParamManager = null!;
         [SerializeField] CommentParamsManager commentParamsManager = null!;
         [SerializeField] IrritatedParams irritatedParams = null!;
-        [SerializeField] EnemyDefeatParamManager enemyDefeatParamManager = null!;
         [SerializeField] TowerParams towerParams = null!;
 
         protected override void Configure(IContainerBuilder builder)
@@ -123,7 +122,6 @@ namespace Daipan.Daipan
             }
             builder.RegisterInstance(new EnemyPositionMonoBuilder(builder, SetUpEnemyPositionMono()));
 
-            builder.RegisterInstance(enemyDefeatParamManager);
 
             /*stream*/
             builder.RegisterInstance(new StreamParamDataBuilder(builder, streamParam));
