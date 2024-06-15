@@ -52,6 +52,13 @@ public static class SerializeFieldNullChecker
     {
         // instanceIDをオブジェクト参照に変換
         if (!(EditorUtility.InstanceIDToObject(instanceID) is GameObject gameObject)) return;
+        
+        // オブジェクトが非アクティブであればログを出力してリターン
+        if (!gameObject.activeSelf)
+        {
+            // Debug.Log($"GameObject with instance ID {instanceID} is inactive.");
+            return;
+        }
 
         // オブジェクトが所持しているコンポーネント一覧を取得
         var components = gameObject.GetComponents<MonoBehaviour>().Where(x => x != null);

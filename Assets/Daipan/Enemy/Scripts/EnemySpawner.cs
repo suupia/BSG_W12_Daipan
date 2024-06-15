@@ -71,13 +71,15 @@ namespace Daipan.Enemy.Scripts
             List<Vector3> position = new();
             List<EnemyEnum> enums = new();
             List<double> ratio = new();
-
-            foreach (var point in _enemySpawnPointData.GetEnemySpawnedPointXs())
+            
+            for(int i=0; i<_enemySpawnPointData.GetEnemySpawnedPointXs().Count; i++)
             {
-                position.Add(point.enemySpawnTransformX.position);
-                enums.Add(point.enemyEnum);
-                ratio.Add(point.enemySpawnRatio);
+                var spawnPoint = new Vector3(_enemySpawnPointData.GetEnemySpawnedPointXs()[i].x, _enemySpawnPointData.GetEnemySpawnedPointXs()[i].z);
+                position.Add(spawnPoint);
+                enums.Add(_enemySpawnPointData.GetEnemySpawnedEnemyEnums()[i]);
+                ratio.Add(_enemySpawnPointData.GetEnemySpawnRatios()[i]);
             }
+
             Debug.Log($"ratio.Count : {ratio.Count}");
             var rand = Randoms.RandomByRatios(ratio,Random.value);
             Debug.Log($"position.Count : {position.Count}, rand : {rand}");

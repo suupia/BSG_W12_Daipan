@@ -31,6 +31,9 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         
         [Tooltip("敵の生成位置のx座標を決めるゲームオブジェクト")]
         public Transform enemySpawnTransformX = null!;
+       
+        [Tooltip("敵の生成位置のy座標を決めるゲームオブジェクト")]
+        public Transform enemySpawnTransformY = null!;
         
         [Header("敵の生成される確率（相対的に設定できる)")]
         [Min(0)]    

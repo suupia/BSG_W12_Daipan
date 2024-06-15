@@ -713,7 +713,6 @@ MonoBehaviour:
   enemyParamManager: {fileID: 11400000, guid: d5c28246bf0490340a52cc25d5aafc71, type: 2}
   commentParamsManager: {fileID: 11400000, guid: b83c7fae0686b214fb53fc224da8567a, type: 2}
   irritatedParams: {fileID: 11400000, guid: 3f5d33a9375f2154fb5cc4220a5c60f0, type: 2}
-  enemyDefeatParamManager: {fileID: 11400000, guid: b4bc45c1e7d474831b25bda4cd7cd91d, type: 2}
   towerParams: {fileID: 11400000, guid: a3fb232ddade9e043b16e8c587a459ff, type: 2}
 --- !u!4 &309620969
 Transform:
@@ -1541,7 +1540,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1170389373
 Transform:
   m_ObjectHideFlags: 0
@@ -1571,12 +1570,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawnedPoints:
   - enemySpawnTransformX: {fileID: 2139454379639670455}
+    enemySpawnTransformY: {fileID: 0}
     enemySpawnRatio: 0
     enemyEnum: 1
   - enemySpawnTransformX: {fileID: 2139454379681994179}
+    enemySpawnTransformY: {fileID: 0}
     enemySpawnRatio: 0
     enemyEnum: 2
   - enemySpawnTransformX: {fileID: 2139454380265612660}
+    enemySpawnTransformY: {fileID: 0}
     enemySpawnRatio: 0
     enemyEnum: 3
   enemyDespawnedPoint: {fileID: 1495197751}
@@ -2830,52 +2832,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1814382758
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1814382760}
-  - component: {fileID: 1814382759}
-  m_Layer: 0
-  m_Name: EnemyDefeatPosition
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1814382759
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1814382758}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8039ec7624a04d1d8af8f5f5aeb0008d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyDefeatQuickPosition: {fileID: 0}
-  enemyDefeatSlowPosition: {fileID: 0}
---- !u!4 &1814382760
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1814382758}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1826392493
 GameObject:
   m_ObjectHideFlags: 0
@@ -3174,16 +3130,19 @@ MonoBehaviour:
   - laneYTransform: {fileID: 1180065130}
     enemySpawnedPosition:
       enemySpawnTransformX: {fileID: 2139454379639670455}
+      enemySpawnTransformY: {fileID: 1180065130}
       enemySpawnRatio: 10
       enemyEnum: 0
   - laneYTransform: {fileID: 1556018666}
     enemySpawnedPosition:
       enemySpawnTransformX: {fileID: 2139454379681994179}
+      enemySpawnTransformY: {fileID: 1556018666}
       enemySpawnRatio: 10
       enemyEnum: 0
   - laneYTransform: {fileID: 788730769}
     enemySpawnedPosition:
       enemySpawnTransformX: {fileID: 2139454380265612660}
+      enemySpawnTransformY: {fileID: 788730769}
       enemySpawnRatio: 10
       enemyEnum: 0
   playerSpawnedPosition:
@@ -4324,7 +4283,6 @@ SceneRoots:
   - {fileID: 1103018221}
   - {fileID: 1916099520}
   - {fileID: 1170389373}
-  - {fileID: 1814382760}
   - {fileID: 244808958}
   - {fileID: 1744158046}
   - {fileID: 309620969}
