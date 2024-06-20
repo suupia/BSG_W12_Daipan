@@ -18,5 +18,8 @@ namespace Daipan.Enemy.LevelDesign.Scripts
 
         [Header("Bossの出現確率(0%～100%)")] [Range(0f, 100f)]
         public float spawnBossPercent = 10f;
+        
+        [Header("Specialの出現確率(0%～100%)")] [Range(0f, 100f)]
+        public float spawnSpecialPercent = 10f;
     }
 }

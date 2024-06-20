@@ -54,13 +54,7 @@ namespace Daipan.Enemy.Scripts
 
             var enemyTimeLineParams = new List<EnemyTimeLineParamData>();
             foreach (var enemyTimeLineParam in enemyParamManager.enemyTimeLineParams)
-                enemyTimeLineParams.Add(new EnemyTimeLineParamData()
-                {
-                    GetStartTime = () => enemyTimeLineParam.startTime,
-                    GetSpawnIntervalSec = () => enemyTimeLineParam.spawnIntervalSec,
-                    GetMoveSpeedRate = () => enemyTimeLineParam.moveSpeedRate,
-                    GetSpawnBossPercent = () => enemyTimeLineParam.spawnBossPercent
-                });
+                enemyTimeLineParams.Add(new EnemyTimeLineParamData(enemyTimeLineParam));
             return enemyTimeLineParams;
         }
     }

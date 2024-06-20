@@ -1,13 +1,23 @@
 #nullable enable
-using System;
+using Daipan.Enemy.Interfaces;
+using Daipan.Enemy.LevelDesign.Scripts;
+using Daipan.LevelDesign.Enemy.Scripts;
 
 namespace Daipan.Enemy.Scripts
 {
-    public class EnemyTimeLineParamData
+    public class EnemyTimeLineParamData : IEnemyTimeLineParamData
     {
-        public Func<double> GetStartTime { get; init; } = () => 0;
-        public Func<double> GetSpawnIntervalSec { get; init; } = () => 1;
-        public Func<double> GetMoveSpeedRate { get; init; } = () => 1;
-        public Func<double> GetSpawnBossPercent { get; init; } = () => 10;
+        readonly EnemyTimeLineParam _enemyTimeLineParam;
+
+        public EnemyTimeLineParamData(EnemyTimeLineParam enemyTimeLineParam)
+        {
+            _enemyTimeLineParam = enemyTimeLineParam;
+        }
+
+        public double GetStartTime() => _enemyTimeLineParam.startTime;
+        public double GetSpawnIntervalSec() => _enemyTimeLineParam.spawnIntervalSec;
+        public double GetMoveSpeedRate() => _enemyTimeLineParam.moveSpeedRate;
+        public double GetSpawnBossPercent() => _enemyTimeLineParam.spawnBossPercent;
+        public double GetSpawnSpecialPercent() => _enemyTimeLineParam.spawnSpecialPercent;
     }
 }

@@ -94,16 +94,38 @@ MonoBehaviour:
       eyeColor: {r: 0.8862745, g: 0.972549, b: 0.8901961, a: 1}
       eyeBallColor: {r: 1, g: 1, b: 1, a: 1}
       lineColor: {r: 0.43529412, g: 0.34117648, b: 0.41960785, a: 1}
+  - enemyEnum: 7
+    enemyAttackParam:
+      attackAmount: 1
+      attackDelaySec: 1
+      attackRange: 5
+    enemyHpParam:
+      hpAmount: 200
+    enemyMoveParam:
+      moveSpeedPerSec: 1.5
+    enemySpawnParam:
+      spawnRatio: 20
+      daipanThreshold: 0
+      daipanProbability: 0
+    enemyAnimatorParam:
+      animatorController: {fileID: 0}
+      bodyColor: {r: 1, g: 0.8135679, b: 0, a: 1}
+      eyeColor: {r: 1, g: 0.0990566, b: 0.68081635, a: 1}
+      eyeBallColor: {r: 1, g: 1, b: 1, a: 1}
+      lineColor: {r: 0.43529412, g: 0.34117648, b: 0.41960785, a: 1}
   enemyTimeLineParams:
   - startTime: 0
     spawnIntervalSec: 1
     moveSpeedRate: 1
     spawnBossPercent: 0
+    spawnSpecialPercent: 10
   - startTime: 30
     spawnIntervalSec: 1
     moveSpeedRate: 1.5
     spawnBossPercent: 10
+    spawnSpecialPercent: 10
   - startTime: 60
     spawnIntervalSec: 1
     moveSpeedRate: 1.5
     spawnBossPercent: 23.9
+    spawnSpecialPercent: 10
