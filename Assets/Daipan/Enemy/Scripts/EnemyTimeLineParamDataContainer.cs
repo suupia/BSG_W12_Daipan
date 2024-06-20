@@ -21,13 +21,6 @@ namespace Daipan.Enemy.Scripts
             _enemyTimeLineParamDatas = CreateEnemyTimeLineParamData(enemyParamManager);
         }
 
-        public EnemyTimeLineParamDataContainer(
-            IList<EnemyTimeLineParamData> enemyTimeLineParamDatas
-        )
-        {
-            _enemyTimeLineParamDatas = enemyTimeLineParamDatas;
-        }
-
         public EnemyTimeLineParamData GetEnemyTimeLineParamData(StreamTimer streamTimer)
         {
             return _enemyTimeLineParamDatas
