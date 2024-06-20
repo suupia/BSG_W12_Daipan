@@ -63,10 +63,10 @@ namespace Daipan.Enemy.Scripts
 
         (Vector3 spawnedPos, EnemyEnum enemyEnum) GetSpawnedPositionRandom()
         {
-            List<Vector3> positions = _enemySpawnPointData.GetEnemySpawnedPointXs()
+            var positions = _enemySpawnPointData.GetEnemySpawnedPointXs()
                 .Zip(_enemySpawnPointData.GetEnemySpawnedPointYs(), (x, y) => new Vector3(x.x, y.y))
                 .ToList();
-            List<EnemyEnum> enums = _enemySpawnPointData.GetEnemySpawnedEnemyEnums();
+            var enums = _enemySpawnPointData.GetEnemySpawnedEnemyEnums();
             
             var randomIndex = Randoms.RandomByRatios(_enemySpawnPointData.GetEnemySpawnRatios(), Random.value);
             return (positions[randomIndex], enums[randomIndex]);

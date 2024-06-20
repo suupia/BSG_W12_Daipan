@@ -13,10 +13,18 @@ namespace Daipan.Enemy.LevelDesign.Scripts
 {
     public class EnemyPositionMono : MonoBehaviour
     {
-        [Header("敵の座標に関する設定はここです")] [Space] public List<EnemySpawnedPosition> enemySpawnedPoints = null!;
+        [Header("各Waveごとの敵の生成位置の候補")] 
+        public List<EnemySpawnedPositionContainer> enemySpawnedPositionContainers = null!;
+        
 
         [Header("敵の消滅位置")] [Tooltip("敵の消滅位置を示すGameObjectを入れて！！")]
         public Transform enemyDespawnedPoint = null!;
+    }
+
+    [Serializable]
+    public class EnemySpawnedPositionContainer
+    {
+        public List<EnemySpawnedPosition> enemySpawnedPoints = null!;
     }
 
     [Serializable]
