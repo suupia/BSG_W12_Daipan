@@ -28,7 +28,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
                 enemyTimeLineParams.Add(new EnemyTimeLineParamData()
                 {
                     GetStartTime = () => enemyTimeLineParam.startTime,
-                    GetSpawnDelaySec = () => enemyTimeLineParam.spawnDelaySec,
+                    GetSpawnDelaySec = () => enemyTimeLineParam.spawnIntervalSec,
                     GetMoveSpeedRate = () => enemyTimeLineParam.moveSpeedRate,
                     GetSpawnBossPercent = () => enemyTimeLineParam.spawnBossPercent
                 });

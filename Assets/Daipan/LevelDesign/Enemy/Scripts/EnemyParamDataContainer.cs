@@ -7,14 +7,15 @@ namespace Daipan.LevelDesign.Enemy.Scripts
 {
     public class EnemyParamDataContainer
     {
-        readonly IEnumerable<EnemyParamData> _enemyParamDataList;
-        public EnemyParamDataContainer(IEnumerable<EnemyParamData> enemyParamDataList)
+        public IEnumerable<EnemyParamWarp> EnemyParamWarps => _enemyParamWarps;
+        readonly IEnumerable<EnemyParamWarp> _enemyParamWarps;
+        public EnemyParamDataContainer(IEnumerable<EnemyParamWarp> enemyParamWarps)
         {
-            _enemyParamDataList = enemyParamDataList;
+            _enemyParamWarps = enemyParamWarps;
         }
-        public EnemyParamData GetEnemyParamData(EnemyEnum enemyEnum)
+        public EnemyParamWarp GetEnemyParamData(EnemyEnum enemyEnum)
         {
-            return _enemyParamDataList.First(x => x.GetEnemyEnum() == enemyEnum);
+            return _enemyParamWarps.First(x => x.GetEnemyEnum() == enemyEnum);
         }
     } 
 }

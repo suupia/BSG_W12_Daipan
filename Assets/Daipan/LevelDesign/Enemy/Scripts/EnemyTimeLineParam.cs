@@ -15,7 +15,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
 
         [Header("エネミー生成のクールタイム")]
         [Min(0)]
-        public float spawnDelaySec = 1f;
+        public float spawnIntervalSec = 1f;
 
         [Header("エネミーの移動速度変化率（通常に対してx倍される）")]
         [Min(0)]

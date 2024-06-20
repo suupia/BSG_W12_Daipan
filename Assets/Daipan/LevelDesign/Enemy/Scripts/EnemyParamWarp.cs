@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Daipan.LevelDesign.Enemy.Scripts
 {
-    public class EnemyParamData
+    public class EnemyParamWarp
     {
         // Animator
         public Func<UnityEngine.RuntimeAnimatorController?> GetAnimator { get; init; } = () => null;

@@ -13,10 +13,10 @@ namespace Daipan.LevelDesign.Enemy.Scripts
             EnemyParamManager enemyParamManager
             )
         {
-            var enemyParams = new List<EnemyParamData>();
+            var enemyParams = new List<EnemyParamWarp>();
             foreach (var enemyParam in enemyParamManager.enemyParams)
             {
-                enemyParams.Add(new EnemyParamData()
+                enemyParams.Add(new EnemyParamWarp()
                 {
                     GetEnemyEnum = () => enemyParam.enemyEnum,
                     GetAttackAmount = () => enemyParam.enemyAttackParam.attackAmount,

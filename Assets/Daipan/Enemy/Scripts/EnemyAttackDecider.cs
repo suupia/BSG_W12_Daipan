@@ -10,25 +10,25 @@ namespace Daipan.Enemy.Scripts
 {
     public sealed class EnemyAttackDecider
     {
-        readonly EnemyParamData _enemyParamData;
+        readonly EnemyParamWarp _enemyParamWarp;
         readonly EnemyAttack _enemyAttack;
         readonly EnemyMono _enemyMono;
         float Timer { get; set; }
 
         public EnemyAttackDecider(
             EnemyMono enemyMono,
-            EnemyParamData enemyParamData,
+            EnemyParamWarp enemyParamWarp,
             EnemyAttack enemyAttack
             )
         {
-            _enemyParamData = enemyParamData;
+            _enemyParamWarp = enemyParamWarp;
             _enemyMono = enemyMono;
             _enemyAttack = enemyAttack;
         }
         public void AttackUpdate(PlayerMono playerMono, AbstractEnemyViewMono? enemyViewMono)
         {
             Timer += Time.deltaTime;
-            if (Timer >= _enemyParamData.GetAttackDelayDec())
+            if (Timer >= _enemyParamWarp.GetAttackDelayDec())
             {
                 Attack(playerMono, enemyViewMono);
                 Timer = 0;
@@ -47,7 +47,7 @@ namespace Daipan.Enemy.Scripts
             if (playerMono.CurrentHp <= 0) return false;
             Debug.Log($"enemy.transform.position : {enemyMono.transform.position}, player.transform.position : {playerMono.transform.position}");
             Debug.Log($"distance : {(playerMono.transform.position - enemyMono.transform.position).magnitude}");
-            if (enemyMono.transform.position.x - playerMono.transform.position.x > _enemyParamData.GetAttackRange()) return false;
+            if (enemyMono.transform.position.x - playerMono.transform.position.x > _enemyParamWarp.GetAttackRange()) return false;
             return true;
         }
         

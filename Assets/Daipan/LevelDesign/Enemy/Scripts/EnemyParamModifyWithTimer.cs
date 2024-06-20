@@ -1,6 +1,7 @@
 #nullable enable
 using System.Collections.Generic;
 using System.Linq;
+using Daipan.Core.Interfaces;
 using Daipan.Enemy.Scripts;
 using Daipan.Stream.Scripts;
 using Daipan.Utility.Scripts;
@@ -9,7 +10,7 @@ using VContainer;
 
 namespace Daipan.LevelDesign.Enemy.Scripts
 {
-    public class EnemyParamModifyWithTimer
+    public class EnemyParamModifyWithTimer 
     {
         readonly StreamTimer _streamTimer;
         readonly EnemyParamDataContainer _enemyParamDataContainer;
