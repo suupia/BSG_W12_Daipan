@@ -107,7 +107,7 @@ namespace Daipan.Player.MonoScripts
             foreach (var playerViewMono in playerViewMonos)
             {
                 if (playerViewMono == null) continue;
-                if (IsTargetEnemy(playerViewMono.playerColor, targetEnemyEnum)) playerViewMono.Attack();
+                if (GetTargetEnemyEnum(playerViewMono.playerColor) == targetEnemyEnum) playerViewMono.Attack();
             }
         }
         else
@@ -146,22 +146,12 @@ namespace Daipan.Player.MonoScripts
             foreach (var playerViewMono in playerViewMonos)
             {
                 if (playerViewMono == null) continue;
-                if(IsTargetEnemy(playerViewMono.playerColor, args.enemyEnum)) playerViewMono.Damage();
+                if(GetTargetEnemyEnum(playerViewMono.playerColor) == args.enemyEnum) playerViewMono.Damage();
             } 
         };
 
         _inputSerialManager = inputSerialManager;
         _playerAttackEffectSpawner = playerAttackEffectSpawner;
-    }
-
-    bool IsTargetEnemy(PlayerColor playerColor, EnemyEnum enemyEnum){
-        return playerColor switch
-        {
-            PlayerColor.Red => enemyEnum == EnemyEnum.Red,
-            PlayerColor.Blue => enemyEnum == EnemyEnum.Blue,
-            PlayerColor.Yellow => enemyEnum == EnemyEnum.Yellow,
-            _ => false
-        };
     }
 
     public int CurrentHp => _playerHp.CurrentHp;
