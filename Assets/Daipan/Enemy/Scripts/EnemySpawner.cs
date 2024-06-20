@@ -20,8 +20,9 @@ namespace Daipan.Enemy.Scripts
     {
         readonly IEnemyMonoBuilder _enemyMonoBuilder;
         readonly EnemyCluster _enemyCluster;
-        readonly EnemyParamModifyWithTimer _enemyParamModifyWithTimer;
         readonly EnemySpawnPointData _enemySpawnPointData;
+        readonly EnemyTimeLineParamWrapContainer _enemyTimeLInePramWrapContainer;
+        readonly StreamTimer _streamTimer;
         float _timer;
 
         [Inject]
@@ -29,14 +30,16 @@ namespace Daipan.Enemy.Scripts
             IObjectResolver container,
             EnemyCluster enemyCluster,
             IEnemyMonoBuilder enemyMonoBuilder,
-            EnemyParamModifyWithTimer enemyParamModifyWithTimer,
-            EnemySpawnPointData enemySpawnPointData
+            EnemySpawnPointData enemySpawnPointData,
+            EnemyTimeLineParamWrapContainer enemyTimeLInePramWrapContainer,
+            StreamTimer streamTimer
         )
         {
             _enemyCluster = enemyCluster;
             _enemyMonoBuilder = enemyMonoBuilder;
-            _enemyParamModifyWithTimer = enemyParamModifyWithTimer;
             _enemySpawnPointData = enemySpawnPointData;
+            _enemyTimeLInePramWrapContainer = enemyTimeLInePramWrapContainer;
+            _streamTimer = streamTimer;
         }
 
         void IStart.Start()
@@ -47,7 +50,7 @@ namespace Daipan.Enemy.Scripts
         void IUpdate.Update()
         {
             _timer += Time.deltaTime;
-            if (_timer > _enemyParamModifyWithTimer.GetSpawnIntervalSec())
+            if (_timer > _enemyTimeLInePramWrapContainer.GetEnemyTimeLineParamData(_streamTimer).GetSpawnIntervalSec())
             {
                 SpawnEnemy();
                 _timer = 0;

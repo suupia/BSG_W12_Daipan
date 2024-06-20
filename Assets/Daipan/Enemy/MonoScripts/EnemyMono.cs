@@ -18,7 +18,6 @@ namespace Daipan.Enemy.MonoScripts
         EnemyAttackDecider _enemyAttackDecider = null!;
         EnemyCluster _enemyCluster = null!;
         EnemyHp _enemyHp = null!;
-        EnemyParamModifyWithTimer _enemyParamModifyWithTimer = null!;
         EnemySpawnPointData _enemySpawnPointData = null!;
         EnemyParamWarpContainer _enemyParamWarpContainer = null!;
         PlayerHolder _playerHolder = null!;
@@ -55,14 +54,12 @@ namespace Daipan.Enemy.MonoScripts
         public void Initialize(
             EnemyCluster enemyCluster,
             PlayerHolder playerHolder,
-            EnemyParamModifyWithTimer enemyParamModifyWithTimer,
             EnemySpawnPointData enemySpawnPointData,
             EnemyParamWarpContainer enemyParamWarpContainer
         )
         {
             _enemyCluster = enemyCluster;
             _playerHolder = playerHolder;
-            _enemyParamModifyWithTimer = enemyParamModifyWithTimer;
             _enemySpawnPointData = enemySpawnPointData;
             _enemyParamWarpContainer = enemyParamWarpContainer;
         }
