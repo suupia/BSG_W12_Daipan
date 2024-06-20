@@ -38,7 +38,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
 
         public double GetSpawnDelaySec()
         {
-            return GetEnemyTimeLineParam().GetSpawnDelaySec();
+            return GetEnemyTimeLineParam().GetSpawnIntervalSec();
         }
         public double GetSpawnBossPercent()
         {
