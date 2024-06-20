@@ -3,7 +3,7 @@ using System.Linq;
 using Daipan.LevelDesign.Battle.Scripts;
 using VContainer;
 
-namespace Daipan.LevelDesign.Enemy.Scripts
+namespace Daipan.Enemy.LevelDesign.Scripts
 {
     public class EnemyPositionMonoBuilder
     {

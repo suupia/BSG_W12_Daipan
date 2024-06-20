@@ -1,7 +1,8 @@
+using Daipan.Enemy.Scripts;
 using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.Stream.Scripts;
 
-namespace Daipan.LevelDesign.Enemy.Interfaces
+namespace Daipan.Enemy.Interfaces
 {
     public interface IEnemyTimeLineParamContainer
     {

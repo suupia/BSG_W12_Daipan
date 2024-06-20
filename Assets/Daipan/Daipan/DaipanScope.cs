@@ -1,10 +1,10 @@
 using System.Linq;
 using Daipan.Comment.MonoScripts;
 using Daipan.Comment.Scripts;
-using Daipan.Core;
 using Daipan.Core.Interfaces;
 using Daipan.Core.Scripts;
 using Daipan.Enemy.Interfaces;
+using Daipan.Enemy.LevelDesign.Scripts;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Enemy.Scripts;
 using Daipan.InputSerial.Scripts;

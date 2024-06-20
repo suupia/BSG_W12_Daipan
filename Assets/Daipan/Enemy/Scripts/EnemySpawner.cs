@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Daipan.Core.Interfaces;
 using Daipan.Enemy.Interfaces;
+using Daipan.Enemy.LevelDesign.Scripts;
 using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.Stream.Scripts;
 using Daipan.Utility.Scripts;
@@ -33,7 +34,7 @@ namespace Daipan.Enemy.Scripts
             EnemyParamModifyWithTimer enemyParamModifyWithTimer,
             EnemySpawnPointData enemySpawnPointData,
             EnemyLevelDesignParamData enemyLevelDesignParamData
-            )
+        )
         {
             _enemyCluster = enemyCluster;
             _enemyMonoBuilder = enemyMonoBuilder;
@@ -61,7 +62,7 @@ namespace Daipan.Enemy.Scripts
         void SpawnEnemy()
         {
             var tuple = GetSpawnedPositionRandom();
-            var enemyObject = _enemyMonoBuilder.Build(tuple.enemyEnum, tuple.spawnedPos , Quaternion.identity);
+            var enemyObject = _enemyMonoBuilder.Build(tuple.enemyEnum, tuple.spawnedPos, Quaternion.identity);
             _enemyCluster.Add(enemyObject);
         }
 
@@ -71,21 +72,20 @@ namespace Daipan.Enemy.Scripts
             List<Vector3> position = new();
             List<EnemyEnum> enums = new();
             List<double> ratio = new();
-            
-            for(int i=0; i<_enemySpawnPointData.GetEnemySpawnedPointXs().Count; i++)
+
+            for (var i = 0; i < _enemySpawnPointData.GetEnemySpawnedPointXs().Count; i++)
             {
-                var spawnPoint = new Vector3(_enemySpawnPointData.GetEnemySpawnedPointXs()[i].x, _enemySpawnPointData.GetEnemySpawnedPointYs()[i].y);
+                var spawnPoint = new Vector3(_enemySpawnPointData.GetEnemySpawnedPointXs()[i].x,
+                    _enemySpawnPointData.GetEnemySpawnedPointYs()[i].y);
                 position.Add(spawnPoint);
                 enums.Add(_enemySpawnPointData.GetEnemySpawnedEnemyEnums()[i]);
                 ratio.Add(_enemySpawnPointData.GetEnemySpawnRatios()[i]);
             }
 
             Debug.Log($"ratio.Count : {ratio.Count}");
-            var rand = Randoms.RandomByRatios(ratio,Random.value);
+            var rand = Randoms.RandomByRatios(ratio, Random.value);
             Debug.Log($"position.Count : {position.Count}, rand : {rand}");
             return (position[rand], enums[rand]);
         }
-
-
     }
 }

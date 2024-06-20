@@ -1,8 +1,7 @@
 #nullable enable
-//using Unity.VisualScripting.YamlDotNet.Core.Tokens;
 using VContainer;
 
-namespace Daipan.LevelDesign.Enemy.Scripts
+namespace Daipan.Enemy.LevelDesign.Scripts
 {
     public class EnemyLevelDesignParamDataBuilder
     {

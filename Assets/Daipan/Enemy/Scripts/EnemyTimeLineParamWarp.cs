@@ -1,7 +1,7 @@
 #nullable enable
 using System;
 
-namespace Daipan.LevelDesign.Enemy.Scripts
+namespace Daipan.Enemy.Scripts
 {
     public class EnemyTimeLineParamWarp
     {

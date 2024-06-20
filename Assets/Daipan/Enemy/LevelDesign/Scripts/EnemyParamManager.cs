@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Daipan.Enemy.Scripts;
+using Daipan.LevelDesign.Enemy.Scripts;
 using UnityEngine;
 using UnityEngine.Serialization;
-
-namespace Daipan.LevelDesign.Enemy.Scripts
+namespace Daipan.Enemy.LevelDesign.Scripts
 {
     [CreateAssetMenu(fileName = "EnemyParamManager", menuName = "ScriptableObjects/Enemy/EnemyParamManager", order = 1)]
     public sealed class EnemyParamManager : ScriptableObject

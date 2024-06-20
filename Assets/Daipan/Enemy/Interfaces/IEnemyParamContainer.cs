@@ -1,6 +1,7 @@
+using Daipan.Enemy.Scripts;
 using Daipan.LevelDesign.Enemy.Scripts;
 
-namespace Daipan.LevelDesign.Enemy.Interfaces
+namespace Daipan.Enemy.Interfaces
 {
     public interface IEnemyParamContainer
     {

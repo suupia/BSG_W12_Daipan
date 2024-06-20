@@ -8,9 +8,9 @@ using Daipan.Utility.Scripts;
 using UnityEngine;
 using VContainer;
 
-namespace Daipan.LevelDesign.Enemy.Scripts
+namespace Daipan.Enemy.LevelDesign.Scripts
 {
-    public class EnemyParamModifyWithTimer 
+    public class EnemyParamModifyWithTimer
     {
         readonly StreamTimer _streamTimer;
         readonly EnemyParamWarpContainer _enemyParamWarpContainer;
@@ -25,7 +25,6 @@ namespace Daipan.LevelDesign.Enemy.Scripts
             _streamTimer = streamTimer;
             _enemyParamWarpContainer = enemyParamWarpContainer;
             _enemyTimeLineParamWrapContainer = enemyTimeLineParamWrapContainer;
-
         }
 
         // EnemyParamDataの一部をデコレートしている
@@ -40,6 +39,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         {
             return GetEnemyTimeLineParam().GetSpawnIntervalSec();
         }
+
         public double GetSpawnBossPercent()
         {
             return GetEnemyTimeLineParam().GetSpawnBossPercent();
@@ -47,8 +47,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
 
         EnemyTimeLineParamWarp GetEnemyTimeLineParam()
         {
-            return _enemyTimeLineParamWrapContainer.GetEnemyTimeLineParamData(_streamTimer); 
+            return _enemyTimeLineParamWrapContainer.GetEnemyTimeLineParamData(_streamTimer);
         }
-
     }
 }

@@ -1,11 +1,12 @@
 #nullable enable
 using System.Collections.Generic;
+using Daipan.Enemy.Scripts;
 using Daipan.Stream.Scripts;
 using TMPro;
 using UnityEngine;
 using VContainer;
 
-namespace Daipan.LevelDesign.Enemy.Scripts
+namespace Daipan.Enemy.LevelDesign.Scripts
 {
     public class EnemyTimeLineParamDataBuilder
     {
@@ -15,16 +16,15 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         )
         {
             // [Precondition]
-            if(enemyParamManager.enemyTimeLineParams.Count == 0)
+            if (enemyParamManager.enemyTimeLineParams.Count == 0)
             {
-               Debug.LogWarning("EnemyTimeLineParams.Count is 0");
-               enemyParamManager.enemyTimeLineParams.Add(new EnemyTimeLineParam());
+                Debug.LogWarning("EnemyTimeLineParams.Count is 0");
+                enemyParamManager.enemyTimeLineParams.Add(new EnemyTimeLineParam());
             }
-            
-            
+
+
             var enemyTimeLineParams = new List<EnemyTimeLineParamWarp>();
-            foreach(var enemyTimeLineParam in enemyParamManager.enemyTimeLineParams)
-            {
+            foreach (var enemyTimeLineParam in enemyParamManager.enemyTimeLineParams)
                 enemyTimeLineParams.Add(new EnemyTimeLineParamWarp()
                 {
                     GetStartTime = () => enemyTimeLineParam.startTime,
@@ -32,11 +32,8 @@ namespace Daipan.LevelDesign.Enemy.Scripts
                     GetMoveSpeedRate = () => enemyTimeLineParam.moveSpeedRate,
                     GetSpawnBossPercent = () => enemyTimeLineParam.spawnBossPercent
                 });
-            }
             var enemyTimeLineParamContainer = new EnemyTimeLineParamWrapContainer(enemyTimeLineParams);
             builder.RegisterInstance(enemyTimeLineParamContainer);
         }
-    
-    } 
+    }
 }
-
