@@ -6,9 +6,9 @@ using VContainer;
 
 namespace Daipan.LevelDesign.Enemy.Scripts
 {
-    public class EnemyParamDataBuilder
+    public class EnemyParamWarpBuilder
     {
-        public EnemyParamDataBuilder(
+        public EnemyParamWarpBuilder(
             IContainerBuilder builder,
             EnemyParamManager enemyParamManager
             )
@@ -35,7 +35,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
                     
                 }); 
             }
-            var enemyParamContainer = new EnemyParamDataContainer(enemyParams);
+            var enemyParamContainer = new EnemyParamWarpContainer(enemyParams);
             builder.RegisterInstance(enemyParamContainer);
         }
     } 

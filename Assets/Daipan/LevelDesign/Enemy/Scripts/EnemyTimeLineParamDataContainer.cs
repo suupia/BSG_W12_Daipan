@@ -8,17 +8,17 @@ namespace Daipan.LevelDesign.Enemy.Scripts
 {
     public class EnemyTimeLineParamDataContainer
     {
-        readonly IList<EnemyTimeLineParamData> _enemyTimeLineParamDatas;
+        readonly IList<EnemyTimeLineParamWarp> _enemyTimeLineParamDatas;
         
         public EnemyTimeLineParamDataContainer(
-            IList<EnemyTimeLineParamData> enemyTimeLineParamDatas
+            IList<EnemyTimeLineParamWarp> enemyTimeLineParamDatas
             )
         {
             _enemyTimeLineParamDatas = enemyTimeLineParamDatas;
           
         }
 
-        public EnemyTimeLineParamData GetEnemyTimeLineParamData(StreamTimer streamTimer)
+        public EnemyTimeLineParamWarp GetEnemyTimeLineParamData(StreamTimer streamTimer)
         {
             return _enemyTimeLineParamDatas
                 .Where(e => e.GetStartTime() <= streamTimer.CurrentTime)

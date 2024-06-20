@@ -22,10 +22,10 @@ namespace Daipan.LevelDesign.Enemy.Scripts
             }
             
             
-            var enemyTimeLineParams = new List<EnemyTimeLineParamData>();
+            var enemyTimeLineParams = new List<EnemyTimeLineParamWarp>();
             foreach(var enemyTimeLineParam in enemyParamManager.enemyTimeLineParams)
             {
-                enemyTimeLineParams.Add(new EnemyTimeLineParamData()
+                enemyTimeLineParams.Add(new EnemyTimeLineParamWarp()
                 {
                     GetStartTime = () => enemyTimeLineParam.startTime,
                     GetSpawnDelaySec = () => enemyTimeLineParam.spawnIntervalSec,

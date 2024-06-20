@@ -5,11 +5,11 @@ using Daipan.Enemy.Scripts;
 
 namespace Daipan.LevelDesign.Enemy.Scripts
 {
-    public class EnemyParamDataContainer
+    public class EnemyParamWarpContainer
     {
         public IEnumerable<EnemyParamWarp> EnemyParamWarps => _enemyParamWarps;
         readonly IEnumerable<EnemyParamWarp> _enemyParamWarps;
-        public EnemyParamDataContainer(IEnumerable<EnemyParamWarp> enemyParamWarps)
+        public EnemyParamWarpContainer(IEnumerable<EnemyParamWarp> enemyParamWarps)
         {
             _enemyParamWarps = enemyParamWarps;
         }

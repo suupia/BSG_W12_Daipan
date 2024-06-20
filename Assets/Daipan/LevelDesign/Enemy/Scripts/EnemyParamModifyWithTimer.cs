@@ -13,17 +13,17 @@ namespace Daipan.LevelDesign.Enemy.Scripts
     public class EnemyParamModifyWithTimer 
     {
         readonly StreamTimer _streamTimer;
-        readonly EnemyParamDataContainer _enemyParamDataContainer;
+        readonly EnemyParamWarpContainer _enemyParamWarpContainer;
         readonly EnemyTimeLineParamDataContainer _enemyTimeLineParamDataContainer;
 
         [Inject]
         EnemyParamModifyWithTimer(
             StreamTimer streamTimer,
-            EnemyParamDataContainer enemyParamDataContainer,
+            EnemyParamWarpContainer enemyParamWarpContainer,
             EnemyTimeLineParamDataContainer enemyTimeLineParamDataContainer)
         {
             _streamTimer = streamTimer;
-            _enemyParamDataContainer = enemyParamDataContainer;
+            _enemyParamWarpContainer = enemyParamWarpContainer;
             _enemyTimeLineParamDataContainer = enemyTimeLineParamDataContainer;
 
         }
@@ -32,7 +32,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
 
         public double GetSpeedRate(EnemyEnum enemyEnum)
         {
-            return _enemyParamDataContainer.GetEnemyParamData(enemyEnum).GetMoveSpeedPreSec() *
+            return _enemyParamWarpContainer.GetEnemyParamData(enemyEnum).GetMoveSpeedPreSec() *
                    GetEnemyTimeLineParam().GetMoveSpeedRate();
         }
 
@@ -45,7 +45,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
             return GetEnemyTimeLineParam().GetSpawnBossPercent();
         }
 
-        EnemyTimeLineParamData GetEnemyTimeLineParam()
+        EnemyTimeLineParamWarp GetEnemyTimeLineParam()
         {
             return _enemyTimeLineParamDataContainer.GetEnemyTimeLineParamData(_streamTimer); 
         }

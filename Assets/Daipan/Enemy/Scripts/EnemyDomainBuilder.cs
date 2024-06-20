@@ -14,7 +14,7 @@ namespace Daipan.Enemy.Scripts
 {
     public class EnemyDomainBuilder : IEnemyDomainBuilder
     {
-        readonly EnemyParamDataContainer _enemyParamDataContainer;
+        readonly EnemyParamWarpContainer _enemyParamWarpContainer;
         readonly CommentSpawner _commentSpawner;
         readonly EnemyParamManager _enemyParamManager;
         readonly EnemyParamModifyWithTimer _enemyParamModifyWithTimer;
@@ -24,7 +24,7 @@ namespace Daipan.Enemy.Scripts
         readonly EnemyLevelDesignParamData _enemyLevelDesignParamData;
 
         public EnemyDomainBuilder(
-            EnemyParamDataContainer enemyParamDataContainer,
+            EnemyParamWarpContainer enemyParamWarpContainer,
             CommentSpawner commentSpawner,
             ViewerNumber viewerNumber,
             IrritatedValue irritatedValue,
@@ -34,7 +34,7 @@ namespace Daipan.Enemy.Scripts
             EnemyLevelDesignParamData enemyLevelDesignParamData
         )
         {
-            _enemyParamDataContainer = enemyParamDataContainer;
+            _enemyParamWarpContainer = enemyParamWarpContainer;
             _commentSpawner = commentSpawner;
             _viewerNumber = viewerNumber;
             _irritatedValue = irritatedValue;
@@ -51,7 +51,7 @@ namespace Daipan.Enemy.Scripts
             if(IsSpawnBoss()) enemyEnum = EnemyEnum.RedBoss;
             
             Debug.Log($"enemyEnum: {enemyEnum}");
-            var enemyParamData = _enemyParamDataContainer.GetEnemyParamData(enemyEnum);
+            var enemyParamData = _enemyParamWarpContainer.GetEnemyParamData(enemyEnum);
             enemyMono.SetDomain(
                 enemyEnum,
                 new EnemyHp(enemyParamData.GetCurrentHp(), enemyMono, _enemyCluster),

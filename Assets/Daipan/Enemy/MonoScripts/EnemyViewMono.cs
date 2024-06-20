@@ -18,7 +18,7 @@ namespace Daipan.Enemy.MonoScripts
         [SerializeField] Animator animatorEyeBall = null!;
         [SerializeField] Animator animatorLine = null!;
 
-        EnemyParamDataContainer _enemyParamDataContainer = null!;
+        EnemyParamWarpContainer _enemyParamWarpContainer = null!;
 
         void Awake()
         {
@@ -27,9 +27,9 @@ namespace Daipan.Enemy.MonoScripts
 
         }
 
-        public override void SetDomain(EnemyParamDataContainer enemyParamDataContainer)
+        public override void SetDomain(EnemyParamWarpContainer enemyParamWarpContainer)
         {
-            _enemyParamDataContainer = enemyParamDataContainer;
+            _enemyParamWarpContainer = enemyParamWarpContainer;
         }
 
         public override void SetView(EnemyEnum enemyEnum)
@@ -44,7 +44,7 @@ namespace Daipan.Enemy.MonoScripts
                 EnemyEnum.Special => Color.Lerp(Color.red, Color.yellow, 0.5f), // 赤と黄色の中間色
                 _ => Color.white
             };
-            var enemyParamData = _enemyParamDataContainer.GetEnemyParamData(enemyEnum);
+            var enemyParamData = _enemyParamWarpContainer.GetEnemyParamData(enemyEnum);
             animatorBody.GetComponent<SpriteRenderer>().color = enemyParamData.GetBodyColor();
             animatorEye.GetComponent<SpriteRenderer>().color = enemyParamData.GetEyeColor();
             animatorEyeBall.GetComponent<SpriteRenderer>().color = enemyParamData.GetEyeBallColor();
