@@ -1,5 +1,7 @@
 #nullable enable
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Enemy.Scripts;
 using Daipan.LevelDesign.Player.Scripts;
@@ -34,7 +36,8 @@ namespace Daipan.Player.MonoScripts
             {
                 if (enemyMono.transform.position.x - transform.position.x < _hitDistance)
                 {
-                    var isTargetEnemy = PlayerAttackModule.GetTargetEnemyEnum(_playerParamData.PlayerEnum()) == enemyMono.EnemyEnum;
+                    var isTargetEnemy = PlayerAttackModule.GetTargetEnemyEnum(_playerParamData.PlayerEnum())
+                        .Contains(enemyMono.EnemyEnum);
                     OnHit?.Invoke(this, new OnHitEventArgs(enemyMono, isTargetEnemy));
                     Destroy(gameObject);
  
@@ -60,13 +63,13 @@ namespace Daipan.Player.MonoScripts
     
     public static class PlayerAttackModule
     {
-        public static EnemyEnum GetTargetEnemyEnum(PlayerColor playerColor)
+        public static IEnumerable<EnemyEnum> GetTargetEnemyEnum(PlayerColor playerColor)
         {
             return playerColor switch
             {
-                PlayerColor.Red => EnemyEnum.Red,
-                PlayerColor.Blue => EnemyEnum.Blue,
-                PlayerColor.Yellow => EnemyEnum.Yellow,
+                PlayerColor.Red => new[] {EnemyEnum.Red,EnemyEnum.RedBoss,EnemyEnum.Special},
+                PlayerColor.Blue => new[] {EnemyEnum.Blue,EnemyEnum.BlueBoss,EnemyEnum.Special},
+                PlayerColor.Yellow => new[] {EnemyEnum.Yellow,EnemyEnum.YellowBoss,EnemyEnum.Special},
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
