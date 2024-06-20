@@ -10,13 +10,11 @@ namespace Daipan.Player.MonoScripts
     public class PlayerAttackEffectMono : MonoBehaviour
     {
         [SerializeField] PlayerAttackEffectViewMono? viewMono;
-        public Func<EnemyMono?> TargetEnemyMono = () => null;
         readonly double _speed = 10;
-        Vector3 TargetPositionCached { get; set; }
         public event EventHandler<OnHitEventArgs>? OnHit;
 
-        EnemyMono? _targetEnemyMono; 
-            
+        EnemyMono? _targetEnemyMono;
+
         void Update()
         {
             var direction = Vector3.right;
@@ -24,7 +22,7 @@ namespace Daipan.Player.MonoScripts
             if (_targetEnemyMono != null)
             {
                 var enemyMono = _targetEnemyMono;
-                if(enemyMono.transform.position.x - transform.position.x < float.Epsilon) 
+                if (enemyMono.transform.position.x - transform.position.x < float.Epsilon)
                 {
                     OnHit?.Invoke(this, new OnHitEventArgs(enemyMono));
                     Destroy(gameObject);
@@ -32,25 +30,18 @@ namespace Daipan.Player.MonoScripts
             }
             else
             {
-                if(transform.position.x > 10)  // todo: parameterからもらう
-                {
+                if (transform.position.x > 10) // todo: parameterからもらう
                     Destroy(gameObject);
-                }
             }
         }
 
-        public void SetDomain(PlayerParamData playerParamData)
-        { 
-            Debug.Log($"PlayerAttackEffectMono data.Enum = {playerParamData.PlayerEnum()}");
-           viewMono?.SetDomain(playerParamData);
-        }
-        
-        public void SetTargetEnemyMono(EnemyMono? enemyMono)
+        public void SetUp(PlayerParamData playerParamData, EnemyMono? targetEnemyMono)
         {
-            _targetEnemyMono = enemyMono;
+            Debug.Log($"PlayerAttackEffectMono data.Enum = {playerParamData.PlayerEnum()}");
+            viewMono?.SetDomain(playerParamData);
+            _targetEnemyMono = targetEnemyMono;
         }
-        
     }
-    
+
     public record OnHitEventArgs(EnemyMono? EnemyMono);
 }
