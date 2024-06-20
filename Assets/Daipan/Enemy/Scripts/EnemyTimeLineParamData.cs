@@ -3,7 +3,7 @@ using System;
 
 namespace Daipan.Enemy.Scripts
 {
-    public class EnemyTimeLineParamWarp
+    public class EnemyTimeLineParamData
     {
         public Func<double> GetStartTime { get; init; } = () => 0;
         public Func<double> GetSpawnIntervalSec { get; init; } = () => 1;

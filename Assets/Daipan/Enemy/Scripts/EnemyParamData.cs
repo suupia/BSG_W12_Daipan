@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Daipan.Enemy.Scripts
 {
-    public class EnemyParamWarp
+    public class EnemyParamData
     {
         // Animator
         public Func<RuntimeAnimatorController?> GetAnimator { get; init; } = () => null;

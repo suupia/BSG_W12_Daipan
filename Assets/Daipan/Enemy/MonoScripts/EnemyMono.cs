@@ -19,7 +19,7 @@ namespace Daipan.Enemy.MonoScripts
         EnemyCluster _enemyCluster = null!;
         EnemyHp _enemyHp = null!;
         EnemySpawnPointData _enemySpawnPointData = null!;
-        EnemyParamWarpContainer _enemyParamWarpContainer = null!;
+        EnemyParamDataContainer _enemyParamDataContainer = null!;
         PlayerHolder _playerHolder = null!;
         public EnemyEnum EnemyEnum { get; private set; } = EnemyEnum.None;
 
@@ -29,16 +29,16 @@ namespace Daipan.Enemy.MonoScripts
 
             // 攻撃範囲よりプレイヤーとの距離が大きいときだけ動く
             if (transform.position.x - _playerHolder.PlayerMono.transform.position.x >=
-                _enemyParamWarpContainer.GetEnemyParamData(EnemyEnum).GetAttackRange())
+                _enemyParamDataContainer.GetEnemyParamData(EnemyEnum).GetAttackRange())
             {
-                float moveSpeed = (float)_enemyParamWarpContainer.GetEnemyParamData(EnemyEnum).GetMoveSpeedPreSec();
+                float moveSpeed = (float)_enemyParamDataContainer.GetEnemyParamData(EnemyEnum).GetMoveSpeedPreSec();
                 transform.position += Time.deltaTime * moveSpeed * Vector3.left;
             }
 
             if (transform.position.x < _enemySpawnPointData.GetEnemyDespawnedPoint().x)
                 _enemyCluster.Remove(this, false); // Destroy when out of screen
 
-            enemyViewMono?.SetHpGauge(CurrentHp, _enemyParamWarpContainer.GetEnemyParamData(EnemyEnum).GetCurrentHp());
+            enemyViewMono?.SetHpGauge(CurrentHp, _enemyParamDataContainer.GetEnemyParamData(EnemyEnum).GetCurrentHp());
         }
 
         public int CurrentHp
@@ -55,13 +55,13 @@ namespace Daipan.Enemy.MonoScripts
             EnemyCluster enemyCluster,
             PlayerHolder playerHolder,
             EnemySpawnPointData enemySpawnPointData,
-            EnemyParamWarpContainer enemyParamWarpContainer
+            EnemyParamDataContainer enemyParamDataContainer
         )
         {
             _enemyCluster = enemyCluster;
             _playerHolder = playerHolder;
             _enemySpawnPointData = enemySpawnPointData;
-            _enemyParamWarpContainer = enemyParamWarpContainer;
+            _enemyParamDataContainer = enemyParamDataContainer;
         }
 
         public void SetDomain(
@@ -74,7 +74,7 @@ namespace Daipan.Enemy.MonoScripts
             _enemyHp = enemyHp;
             _enemyAttackDecider = enemyAttackDecider;
 
-            enemyViewMono?.SetDomain(_enemyParamWarpContainer);
+            enemyViewMono?.SetDomain(_enemyParamDataContainer);
             enemyViewMono?.SetView(enemyEnum);
         }
 

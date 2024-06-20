@@ -14,6 +14,7 @@ using Daipan.Player.Interfaces;
 using Daipan.Player.MonoScripts;
 using Daipan.Player.Scripts;
 using Daipan.Stream.Scripts;
+using UnityEditor.IMGUI.Controls;
 using UnityEngine;
 using UnityEngine.Serialization;
 using VContainer;
@@ -35,27 +36,32 @@ namespace Daipan.Player.MonoScripts
         if (_inputSerialManager.GetButtonRed())
         {
             Debug.Log("Wが押されたよ");
-            OnAttackEffectHit(PlayerColor.Red);
+            FireAttackEffect(PlayerColor.Red);
         }
         
         if (_inputSerialManager.GetButtonBlue())
         {
             Debug.Log("Aが押されたよ");
-            OnAttackEffectHit(PlayerColor.Blue);
+            FireAttackEffect(PlayerColor.Blue);
         }
 
         if (_inputSerialManager.GetButtonYellow())
         {
             Debug.Log("Sが押されたよ");
-            OnAttackEffectHit(PlayerColor.Yellow);
+            FireAttackEffect(PlayerColor.Yellow);
         }
 
         // todo : 攻撃やHPの状況に応じて、AbstractPlayerViewMonoのメソッドを呼ぶ
         foreach (var playerViewMono in playerViewMonos) playerViewMono?.Idle();
     }
 
-    void OnAttackEffectHit(PlayerColor playerColor)
+    void FireAttackEffect(PlayerColor playerColor)
     {
+        var targetEnemy = GetNearestEnemy(GetTargetEnemyEnum(playerColor));
+        if (targetEnemy == null) return; // 攻撃対象がいない場合はAttackEffectを生成しない
+        
+        
+        
         var spawnPosition = playerViewMonos
             .Where(playerViewMono => playerViewMono?.playerColor == playerColor)
             .Select(playerViewMono => playerViewMono?.transform.position)

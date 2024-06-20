@@ -15,35 +15,35 @@ namespace Daipan.Enemy.Scripts
 {
     public class EnemyDomainBuilder : IEnemyDomainBuilder
     {
-        readonly EnemyParamWarpContainer _enemyParamWarpContainer;
+        readonly EnemyParamDataContainer _enemyParamDataContainer;
         readonly CommentSpawner _commentSpawner;
         readonly EnemyParamManager _enemyParamManager;
         readonly ViewerNumber _viewerNumber;
         readonly IrritatedValue _irritatedValue;
         readonly EnemyCluster _enemyCluster;
         readonly EnemyLevelDesignParamData _enemyLevelDesignParamData;
-        readonly EnemyTimeLineParamWrapContainer _enemyTimeLineParamWrapContainer;
+        readonly EnemyTimeLineParamDataContainer _enemyTimeLineParamDataContainer;
         readonly StreamTimer _streamTimer;
         public EnemyDomainBuilder(
-            EnemyParamWarpContainer enemyParamWarpContainer,
+            EnemyParamDataContainer enemyParamDataContainer,
             CommentSpawner commentSpawner,
             ViewerNumber viewerNumber,
             IrritatedValue irritatedValue,
             EnemyParamManager enemyParamManager,
             EnemyCluster enemyCluster,
             EnemyLevelDesignParamData enemyLevelDesignParamData,
-            EnemyTimeLineParamWrapContainer enemyTimeLineParamWrapContainer,
+            EnemyTimeLineParamDataContainer enemyTimeLineParamDataContainer,
             StreamTimer streamTimer
         )
         {
-            _enemyParamWarpContainer = enemyParamWarpContainer;
+            _enemyParamDataContainer = enemyParamDataContainer;
             _commentSpawner = commentSpawner;
             _viewerNumber = viewerNumber;
             _irritatedValue = irritatedValue;
             _enemyParamManager = enemyParamManager;
             _enemyCluster = enemyCluster;
             _enemyLevelDesignParamData = enemyLevelDesignParamData;
-            _enemyTimeLineParamWrapContainer = enemyTimeLineParamWrapContainer;
+            _enemyTimeLineParamDataContainer = enemyTimeLineParamDataContainer;
             _streamTimer = streamTimer;
         }
 
@@ -54,7 +54,7 @@ namespace Daipan.Enemy.Scripts
             if (IsSpawnBoss()) enemyEnum = EnemyEnum.RedBoss;
 
             Debug.Log($"enemyEnum: {enemyEnum}");
-            var enemyParamData = _enemyParamWarpContainer.GetEnemyParamData(enemyEnum);
+            var enemyParamData = _enemyParamDataContainer.GetEnemyParamData(enemyEnum);
             enemyMono.SetDomain(
                 enemyEnum,
                 new EnemyHp(enemyParamData.GetCurrentHp(), enemyMono, _enemyCluster),
@@ -96,7 +96,7 @@ namespace Daipan.Enemy.Scripts
             }
 
             // ボスが出現する条件2
-            if (Random.value < _enemyTimeLineParamWrapContainer.GetEnemyTimeLineParamData(_streamTimer).GetSpawnBossPercent() / 100.0) return true;
+            if (Random.value < _enemyTimeLineParamDataContainer.GetEnemyTimeLineParamData(_streamTimer).GetSpawnBossPercent() / 100.0) return true;
 
             return false;
         }
@@ -105,7 +105,7 @@ namespace Daipan.Enemy.Scripts
         EnemyEnum DecideRandomEnemyType()
         {
             // BOSSをスポーンするかどうかの判定
-            if (Random.value < _enemyTimeLineParamWrapContainer.GetEnemyTimeLineParamData(_streamTimer).GetSpawnBossPercent() / 100.0) return EnemyEnum.RedBoss;
+            if (Random.value < _enemyTimeLineParamDataContainer.GetEnemyTimeLineParamData(_streamTimer).GetSpawnBossPercent() / 100.0) return EnemyEnum.RedBoss;
 
             // 通常敵のType決め
             List<double> ratio = new();
@@ -117,7 +117,7 @@ namespace Daipan.Enemy.Scripts
 
             // ここで100%に正規化
             ratio = EnemySpawnCalculator.NormalizeEnemySpawnRatioWithBoss(ratio,
-                _enemyTimeLineParamWrapContainer.GetEnemyTimeLineParamData(_streamTimer).GetSpawnBossPercent());
+                _enemyTimeLineParamDataContainer.GetEnemyTimeLineParamData(_streamTimer).GetSpawnBossPercent());
             Debug.Log($"enemyPrams.Length : {_enemyParamManager.enemyParams.Count}");
             var enemyEnum = _enemyParamManager.enemyParams[Randoms.RandomByRatios(ratio, Random.value)].enemyEnum;
             if (enemyEnum == EnemyEnum.RedBoss) _enemyLevelDesignParamData.SetCurrentKillAmount(0);

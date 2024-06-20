@@ -11,31 +11,31 @@ using VContainer;
 
 namespace Daipan.Enemy.Scripts
 {
-    public class EnemyTimeLineParamWrapContainer : IEnemyTimeLineParamContainer
+    public class EnemyTimeLineParamDataContainer : IEnemyTimeLineParamContainer
     {
-        readonly IList<EnemyTimeLineParamWarp> _enemyTimeLineParamWarps;
+        readonly IList<EnemyTimeLineParamData> _enemyTimeLineParamDatas;
 
         [Inject]
-        public EnemyTimeLineParamWrapContainer(EnemyParamManager enemyParamManager)
+        public EnemyTimeLineParamDataContainer(EnemyParamManager enemyParamManager)
         {
-            _enemyTimeLineParamWarps = CreateEnemyTimeLineParamWarp(enemyParamManager);
+            _enemyTimeLineParamDatas = CreateEnemyTimeLineParamData(enemyParamManager);
         }
 
-        public EnemyTimeLineParamWrapContainer(
-            IList<EnemyTimeLineParamWarp> enemyTimeLineParamWarps
+        public EnemyTimeLineParamDataContainer(
+            IList<EnemyTimeLineParamData> enemyTimeLineParamDatas
         )
         {
-            _enemyTimeLineParamWarps = enemyTimeLineParamWarps;
+            _enemyTimeLineParamDatas = enemyTimeLineParamDatas;
         }
 
-        public EnemyTimeLineParamWarp GetEnemyTimeLineParamData(StreamTimer streamTimer)
+        public EnemyTimeLineParamData GetEnemyTimeLineParamData(StreamTimer streamTimer)
         {
-            return _enemyTimeLineParamWarps
+            return _enemyTimeLineParamDatas
                 .Where(e => e.GetStartTime() <= streamTimer.CurrentTime)
                 .OrderByDescending(e => e.GetStartTime()).First();
         }
 
-        static List<EnemyTimeLineParamWarp> CreateEnemyTimeLineParamWarp(EnemyParamManager enemyParamManager)
+        static List<EnemyTimeLineParamData> CreateEnemyTimeLineParamData(EnemyParamManager enemyParamManager)
         {
             // [Precondition]
             if (enemyParamManager.enemyTimeLineParams.Count == 0)
@@ -45,9 +45,9 @@ namespace Daipan.Enemy.Scripts
             }
 
 
-            var enemyTimeLineParams = new List<EnemyTimeLineParamWarp>();
+            var enemyTimeLineParams = new List<EnemyTimeLineParamData>();
             foreach (var enemyTimeLineParam in enemyParamManager.enemyTimeLineParams)
-                enemyTimeLineParams.Add(new EnemyTimeLineParamWarp()
+                enemyTimeLineParams.Add(new EnemyTimeLineParamData()
                 {
                     GetStartTime = () => enemyTimeLineParam.startTime,
                     GetSpawnIntervalSec = () => enemyTimeLineParam.spawnIntervalSec,
