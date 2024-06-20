@@ -17,6 +17,7 @@ using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.Player.LevelDesign.Scripts;
 using Daipan.LevelDesign.Stream;
 using Daipan.LevelDesign.Tower.Scripts;
+using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Player.MonoScripts;
 using Daipan.Player.Scripts;
 using Daipan.Stream.MonoScripts;
@@ -47,6 +48,7 @@ namespace Daipan.Daipan
         [SerializeField] CommentParamsManager commentParamsManager = null!;
         [SerializeField] IrritatedParams irritatedParams = null!;
         [SerializeField] TowerParams towerParams = null!;
+        [SerializeField] ComboParamManager comboParamManager = null!;
 
         protected override void Configure(IContainerBuilder builder)
         {
@@ -79,6 +81,10 @@ namespace Daipan.Daipan
             builder.Register<PlayerAttack>(Lifetime.Scoped);
             builder.Register<PlayerHolder>(Lifetime.Scoped);
             builder.Register<IStart, PlayerSpawner>(Lifetime.Scoped);
+            
+            // Combo
+            builder.RegisterInstance(comboParamManager);
+            builder.Register<ComboParamContainer>(Lifetime.Scoped).As<IComboParamContainer>();
             builder.Register<ComboCounter>(Lifetime.Scoped);
             builder.RegisterComponentInHierarchy<ComboViewMono>();
 
@@ -156,6 +162,7 @@ namespace Daipan.Daipan
             builder.RegisterInstance(new PlayerPositionMonoBuilder(builder, SetUpPlayerPositionMono()));
 
             builder.RegisterInstance(new PlayerParamDataBuilder(builder, playerParamManager));
+
 
             /*tower*/
             builder.Register<TowerParamsConfig>(Lifetime.Scoped);
