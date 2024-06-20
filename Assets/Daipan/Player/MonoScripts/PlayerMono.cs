@@ -22,8 +22,6 @@ namespace Daipan.Player.MonoScripts
         PlayerHp _playerHp = null!;
         InputSerialManager _inputSerialManager = null!;
         PlayerAttackEffectSpawner _playerAttackEffectSpawner = null!;
-        PlayerParamDataContainer _playerParamDataContainer = null!;
-        ComboCounter _comboCounter = null!;
 
         public void Update()
         {
@@ -70,64 +68,18 @@ namespace Daipan.Player.MonoScripts
                 : sameColorPlayerViewMono.transform.position.y;
             var spawnPosition = new Vector3(sameColorPlayerViewMono.transform.position.x, spawnPositionY, 0);
 
-            var effect = _playerAttackEffectSpawner.SpawnEffect(spawnPosition, Quaternion.identity);
-            effect.SetUp(_playerParamDataContainer.GetPlayerParamData(playerColor),
-                () => _enemyCluster.NearestEnemy(transform.position));
-            effect.OnHit += (sender, args) =>
-            {
-                if (args.IsTargetEnemy)
-                {
-                    OnAttackEnemy(_playerParamDataContainer, playerViewMonos, playerColor, args.EnemyMono);
-                    _comboCounter.IncreaseCombo();
-                }
-                else
-                {
-                    Debug.Log($"攻撃対象が{PlayerAttackModule.GetTargetEnemyEnum(playerColor)}ではないです args.EnemyMono?.EnemyEnum: {args.EnemyMono?.EnemyEnum}");
-                    _comboCounter.ResetCombo();
-                    // todo : 特攻処理を書く
-                }
-            };
-        }
-
-        static void OnAttackEnemy(PlayerParamDataContainer playerParamDataContainer,
-            List<AbstractPlayerViewMono?> playerViewMonos,
-            PlayerColor playerColor, EnemyMono? enemyMono)
-        {
-            Debug.Log($"Attack enemyMono?.EnemyEnum: {enemyMono?.EnemyEnum}");
-            if (enemyMono == null) return;
-            var targetEnemies = PlayerAttackModule.GetTargetEnemyEnum(playerColor);
-
-            if (targetEnemies.Contains(enemyMono.EnemyEnum))
-            {
-                Debug.Log($"EnemyType: {enemyMono.EnemyEnum}を攻撃");
-                enemyMono.CurrentHp -= playerParamDataContainer.GetPlayerParamData(playerColor).GetAttack();
-
-                // Animation
-                foreach (var playerViewMono in playerViewMonos)
-                {
-                    if (playerViewMono == null) continue;
-                    if(playerViewMono.playerColor == playerColor)
-                        playerViewMono.Attack();
-                }
-            }
-            else
-            {
-                Debug.Log($"攻撃対象が{enemyMono.EnemyEnum}ではないよ");
-            }
+            _playerAttackEffectSpawner.SpawnEffect(this, playerViewMonos,playerColor, spawnPosition, Quaternion.identity);
         }
 
         [Inject]
         public void Initialize(
-            PlayerParamDataContainer playerParamDataContainer,
             EnemyCluster enemyCluster,
             PlayerHpParamData playerHpParamData,
             InputSerialManager inputSerialManager,
             PlayerAttackEffectSpawner playerAttackEffectSpawner,
-            IrritatedValue irritatedValue,
-            ComboCounter comboCounter
+            IrritatedValue irritatedValue
         )
         {
-            _playerParamDataContainer = playerParamDataContainer;
             _enemyCluster = enemyCluster;
 
             _playerHp = new PlayerHp(playerHpParamData.GetCurrentHp());
@@ -147,7 +99,6 @@ namespace Daipan.Player.MonoScripts
 
             _inputSerialManager = inputSerialManager;
             _playerAttackEffectSpawner = playerAttackEffectSpawner;
-            _comboCounter = comboCounter;
         }
 
         public int CurrentHp => _playerHp.CurrentHp;

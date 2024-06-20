@@ -45,7 +45,7 @@ namespace Daipan.Daipan
         [FormerlySerializedAs("enemyParamsManager")] [SerializeField]
         EnemyParamManager enemyParamManager = null!;
 
-        [SerializeField] CommentParamsManager commentParamsManager = null!;
+        [FormerlySerializedAs("commentParamsManager")] [SerializeField] CommentParamManager commentParamManager = null!;
         [SerializeField] IrritatedParams irritatedParams = null!;
         [SerializeField] TowerParams towerParams = null!;
         [SerializeField] ComboParamManager comboParamManager = null!;
@@ -78,6 +78,7 @@ namespace Daipan.Daipan
             builder.Register<PlayerAttackEffectPrefabLoader>(Lifetime.Scoped)
                 .As<IPrefabLoader<PlayerAttackEffectMono>>();
             builder.Register<PlayerAttackEffectSpawner>(Lifetime.Scoped);
+            builder.Register<PlayerAttackEffectBuilder>(Lifetime.Scoped);
             builder.Register<PlayerAttack>(Lifetime.Scoped);
             builder.Register<PlayerHolder>(Lifetime.Scoped);
             builder.Register<IStart, PlayerSpawner>(Lifetime.Scoped);
@@ -91,14 +92,12 @@ namespace Daipan.Daipan
             // Tower
             builder.Register<TowerPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<TowerMono>>();
             builder.Register<IStart, TowerSpawner>(Lifetime.Scoped);
-
+ 
             // Enemy
             builder.Register<EnemyPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<EnemyMono>>();
-            builder.Register<EnemyDomainBuilder>(Lifetime.Scoped).As<IEnemyDomainBuilder>();
+            builder.Register<EnemyBuilder>(Lifetime.Scoped).As<IEnemyBuilder>();
 
             builder.Register<EnemyAttackDecider>(Lifetime.Scoped);
-            builder.Register<EnemyMonoBuilder>(Lifetime.Scoped).AsImplementedInterfaces()
-                .WithParameter(EnemyEnum.RedBoss);
             builder.Register<EnemySpawner>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
             builder.Register<EnemyCluster>(Lifetime.Scoped);
 
@@ -114,7 +113,7 @@ namespace Daipan.Daipan
             /*comment*/
             builder.Register<CommentParamsServer>(Lifetime.Scoped);
             builder.RegisterComponentInHierarchy<CommentPosition>();
-            builder.RegisterInstance(commentParamsManager);
+            builder.RegisterInstance(commentParamManager);
 
             /*enemy*/
             builder.RegisterInstance(enemyParamManager);

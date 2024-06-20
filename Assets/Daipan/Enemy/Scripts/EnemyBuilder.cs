@@ -13,7 +13,7 @@ using Random = UnityEngine.Random;
 
 namespace Daipan.Enemy.Scripts
 {
-    public class EnemyDomainBuilder : IEnemyDomainBuilder
+    public class EnemyBuilder : IEnemyBuilder
     {
         readonly EnemyParamDataContainer _enemyParamDataContainer;
         readonly CommentSpawner _commentSpawner;
@@ -23,7 +23,7 @@ namespace Daipan.Enemy.Scripts
         readonly EnemyCluster _enemyCluster;
         readonly EnemyLevelDesignParamData _enemyLevelDesignParamData;
         readonly IEnemyTimeLineParamContainer _enemyTimeLineParamContainer;
-        public EnemyDomainBuilder(
+        public EnemyBuilder(
             EnemyParamDataContainer enemyParamDataContainer,
             CommentSpawner commentSpawner,
             ViewerNumber viewerNumber,
@@ -44,7 +44,7 @@ namespace Daipan.Enemy.Scripts
             _enemyTimeLineParamContainer = enemyTimeLineParamContainer;
         }
 
-        public EnemyMono SetDomain(EnemyEnum enemyEnum, EnemyMono enemyMono)
+        public EnemyMono Build(EnemyEnum enemyEnum, EnemyMono enemyMono)
         {
             if (enemyEnum == EnemyEnum.None) enemyEnum = DecideRandomEnemyType(); // EnemyEnum.Noneが設定されていない時の処理
 

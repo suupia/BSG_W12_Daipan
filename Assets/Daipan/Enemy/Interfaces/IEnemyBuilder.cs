@@ -5,8 +5,8 @@ using Daipan.LevelDesign.Enemy.Scripts;
 
 namespace Daipan.Enemy.Interfaces
 {
-    public interface IEnemyDomainBuilder
+    public interface IEnemyBuilder
     {
-        EnemyMono SetDomain(EnemyEnum enemyEnum, EnemyMono enemyMono);
+        EnemyMono Build(EnemyEnum enemyEnum, EnemyMono enemyMono);
     }
 }
