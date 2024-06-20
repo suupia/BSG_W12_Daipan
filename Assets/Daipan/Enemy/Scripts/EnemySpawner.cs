@@ -28,7 +28,7 @@ namespace Daipan.Enemy.Scripts
         readonly IEnemySpawnPoint _enemySpawnPoint;
         readonly IEnemyTimeLineParamContainer _enemyTimeLInePramContainer;
         readonly float _spawnRandomPositionY = 0.2f;
-        readonly IEnemyDomainBuilder _enemyDomainBuilder;
+        readonly IEnemyBuilder _enemyBuilder;
         float _timer;
 
         [Inject]
@@ -38,7 +38,7 @@ namespace Daipan.Enemy.Scripts
             EnemyCluster enemyCluster,
             IEnemySpawnPoint enemySpawnPoint,
             IEnemyTimeLineParamContainer enemyTimeLInePramContainer,
-            IEnemyDomainBuilder enemyDomainBuilder
+            IEnemyBuilder enemyBuilder
         )
         {
             _container = container;
@@ -46,7 +46,7 @@ namespace Daipan.Enemy.Scripts
             _enemyCluster = enemyCluster;
             _enemySpawnPoint = enemySpawnPoint;
             _enemyTimeLInePramContainer = enemyTimeLInePramContainer;
-            _enemyDomainBuilder = enemyDomainBuilder;
+            _enemyBuilder = enemyBuilder;
         }
 
         void IStart.Start()
@@ -69,8 +69,8 @@ namespace Daipan.Enemy.Scripts
             var tuple = GetSpawnedPositionRandom();
             var spawnPosition = new Vector3 { x = tuple.spawnedPos.x, y = tuple.spawnedPos.y + Random.Range(-_spawnRandomPositionY, _spawnRandomPositionY) };
             var enemyMonoPrefab = _enemyMonoLoader.Load();
-            var enemyMono = _container.Instantiate(enemyMonoPrefab, spawnPosition, Quaternion.identity);
-            _enemyDomainBuilder.SetDomain(tuple.enemyEnum,enemyMono);
+            var enemyMonoObject = _container.Instantiate(enemyMonoPrefab, spawnPosition, Quaternion.identity);
+            var enemyMono = _enemyBuilder.Build(tuple.enemyEnum,enemyMonoObject);
             _enemyCluster.Add(enemyMono);
         }
 

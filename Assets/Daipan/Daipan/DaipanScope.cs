@@ -95,7 +95,7 @@ namespace Daipan.Daipan
  
             // Enemy
             builder.Register<EnemyPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<EnemyMono>>();
-            builder.Register<EnemyDomainBuilder>(Lifetime.Scoped).As<IEnemyDomainBuilder>();
+            builder.Register<EnemyBuilder>(Lifetime.Scoped).As<IEnemyBuilder>();
 
             builder.Register<EnemyAttackDecider>(Lifetime.Scoped);
             builder.Register<EnemySpawner>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
