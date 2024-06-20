@@ -98,8 +98,6 @@ namespace Daipan.Daipan
             builder.Register<EnemyDomainBuilder>(Lifetime.Scoped).As<IEnemyDomainBuilder>();
 
             builder.Register<EnemyAttackDecider>(Lifetime.Scoped);
-            builder.Register<EnemyMonoBuilder>(Lifetime.Scoped).AsImplementedInterfaces()
-                .WithParameter(EnemyEnum.RedBoss);
             builder.Register<EnemySpawner>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
             builder.Register<EnemyCluster>(Lifetime.Scoped);
 
