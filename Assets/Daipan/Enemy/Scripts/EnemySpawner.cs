@@ -23,6 +23,7 @@ namespace Daipan.Enemy.Scripts
         readonly EnemySpawnPointData _enemySpawnPointData;
         readonly EnemyTimeLineParamDataContainer _enemyTimeLInePramDataContainer;
         readonly StreamTimer _streamTimer;
+        readonly float _spawnRandomPositionY = 0.2f;
         float _timer;
 
         [Inject]
@@ -60,7 +61,8 @@ namespace Daipan.Enemy.Scripts
         void SpawnEnemy()
         {
             var tuple = GetSpawnedPositionRandom();
-            var enemyObject = _enemyMonoBuilder.Build(tuple.enemyEnum, tuple.spawnedPos, Quaternion.identity);
+            var spawnPosition = new Vector3 { x = tuple.spawnedPos.x, y = tuple.spawnedPos.y + Random.Range(-_spawnRandomPositionY, _spawnRandomPositionY) };
+            var enemyObject = _enemyMonoBuilder.Build(tuple.enemyEnum, spawnPosition, Quaternion.identity);
             _enemyCluster.Add(enemyObject);
         }
 
