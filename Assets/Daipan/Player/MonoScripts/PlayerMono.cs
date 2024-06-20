@@ -70,21 +70,9 @@ namespace Daipan.Player.MonoScripts
             var spawnPosition = new Vector3(sameColorPlayerViewMono.transform.position.x, spawnPositionY, 0);
 
             var effect = _playerAttackEffectSpawner.SpawnEffect(spawnPosition, Quaternion.identity);
-            effect.SetUp(_playerParamDataContainer.GetPlayerParamData(playerColor), targetEnemy);
+            effect.SetUp(_playerParamDataContainer.GetPlayerParamData(playerColor), () => _enemyCluster.NearestEnemy(transform.position));
             effect.OnHit += (sender, args) =>
                 OnAttackEnemy(_playerParamDataContainer, playerViewMonos, playerColor, args.EnemyMono);
-        }
-
-
-        static EnemyEnum GetTargetEnemyEnum(PlayerColor playerColor)
-        {
-            return playerColor switch
-            {
-                PlayerColor.Red => EnemyEnum.Red,
-                PlayerColor.Blue => EnemyEnum.Blue,
-                PlayerColor.Yellow => EnemyEnum.Yellow,
-                _ => throw new ArgumentOutOfRangeException()
-            };
         }
 
         static void OnAttackEnemy(PlayerParamDataContainer playerParamDataContainer,
@@ -93,7 +81,7 @@ namespace Daipan.Player.MonoScripts
         {
             Debug.Log($"Attack enemyMono: {enemyMono}");
             if (enemyMono == null) return;
-            var targetEnemyEnum = GetTargetEnemyEnum(playerColor);
+            var targetEnemyEnum = PlayerAttackModule.GetTargetEnemyEnum(playerColor);
 
             if (enemyMono.EnemyEnum == targetEnemyEnum || enemyMono.EnemyEnum == EnemyEnum.RedBoss)
             {
@@ -104,7 +92,7 @@ namespace Daipan.Player.MonoScripts
                 foreach (var playerViewMono in playerViewMonos)
                 {
                     if (playerViewMono == null) continue;
-                    if (GetTargetEnemyEnum(playerViewMono.playerColor) == targetEnemyEnum) playerViewMono.Attack();
+                    if (PlayerAttackModule.GetTargetEnemyEnum(playerViewMono.playerColor) == targetEnemyEnum) playerViewMono.Attack();
                 }
             }
             else
@@ -136,7 +124,7 @@ namespace Daipan.Player.MonoScripts
                 foreach (var playerViewMono in playerViewMonos)
                 {
                     if (playerViewMono == null) continue;
-                    if (GetTargetEnemyEnum(playerViewMono.playerColor) == args.enemyEnum) playerViewMono.Damage();
+                    if (PlayerAttackModule.GetTargetEnemyEnum(playerViewMono.playerColor) == args.enemyEnum) playerViewMono.Damage();
                 }
             };
 

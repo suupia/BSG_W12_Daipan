@@ -1,6 +1,7 @@
 #nullable enable
 using System;
 using Daipan.Enemy.MonoScripts;
+using Daipan.Enemy.Scripts;
 using Daipan.LevelDesign.Player.Scripts;
 using Daipan.Player.Scripts;
 using UnityEngine;
@@ -11,18 +12,21 @@ namespace Daipan.Player.MonoScripts
     {
         [SerializeField] PlayerAttackEffectViewMono? viewMono;
         readonly double _speed = 10;
+        readonly double _hitDistance = 0.1;
         public event EventHandler<OnHitEventArgs>? OnHit;
+        PlayerParamData _playerParamData;
 
-        EnemyMono? _targetEnemyMono;
+        Func<EnemyMono?> _getNearestEnemyMono = () => null; 
 
         void Update()
         {
             var direction = Vector3.right;
             transform.position += direction * (float)(_speed * Time.deltaTime);
-            if (_targetEnemyMono != null)
+            var enemyMono = _getNearestEnemyMono();
+            if (enemyMono != null)
             {
-                var enemyMono = _targetEnemyMono;
-                if (enemyMono.transform.position.x - transform.position.x < float.Epsilon)
+                if (enemyMono.transform.position.x - transform.position.x < _hitDistance
+                    && PlayerAttackModule.GetTargetEnemyEnum(_playerParamData.PlayerEnum()) == enemyMono.EnemyEnum)
                 {
                     OnHit?.Invoke(this, new OnHitEventArgs(enemyMono));
                     Destroy(gameObject);
@@ -35,13 +39,29 @@ namespace Daipan.Player.MonoScripts
             }
         }
 
-        public void SetUp(PlayerParamData playerParamData, EnemyMono? targetEnemyMono)
+        public void SetUp(PlayerParamData playerParamData, Func<EnemyMono?> getTargetEnemyMono)
         {
             Debug.Log($"PlayerAttackEffectMono data.Enum = {playerParamData.PlayerEnum()}");
+            _playerParamData = playerParamData;
             viewMono?.SetDomain(playerParamData);
-            _targetEnemyMono = targetEnemyMono;
+            _getNearestEnemyMono = getTargetEnemyMono;
         }
     }
 
     public record OnHitEventArgs(EnemyMono? EnemyMono);
+    
+    public static class PlayerAttackModule
+    {
+        public static EnemyEnum GetTargetEnemyEnum(PlayerColor playerColor)
+        {
+            return playerColor switch
+            {
+                PlayerColor.Red => EnemyEnum.Red,
+                PlayerColor.Blue => EnemyEnum.Blue,
+                PlayerColor.Yellow => EnemyEnum.Yellow,
+                _ => throw new ArgumentOutOfRangeException()
+            };
+        }
+
+    }
 }
