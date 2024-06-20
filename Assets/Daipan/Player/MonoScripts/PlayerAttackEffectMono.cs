@@ -1,6 +1,7 @@
 #nullable enable
 using System;
 using Daipan.Enemy.MonoScripts;
+using Daipan.Enemy.Scripts;
 using Daipan.LevelDesign.Player.Scripts;
 using Daipan.Player.Scripts;
 using UnityEngine;
@@ -10,38 +11,58 @@ namespace Daipan.Player.MonoScripts
     public class PlayerAttackEffectMono : MonoBehaviour
     {
         [SerializeField] PlayerAttackEffectViewMono? viewMono;
-        public Func<EnemyMono?> TargetEnemyMono = () => null;
         readonly double _speed = 10;
-        Vector3 TargetPositionCached { get; set; }
+        readonly double _hitDistance = 0.1;
         public event EventHandler<OnHitEventArgs>? OnHit;
-            
+        PlayerParamData _playerParamData;
+
+        Func<EnemyMono?> _getNearestEnemyMono = () => null; 
+
         void Update()
         {
-            if (TargetEnemyMono() is {} enemyMono)
+            var direction = Vector3.right;
+            transform.position += direction * (float)(_speed * Time.deltaTime);
+            var enemyMono = _getNearestEnemyMono();
+            if (enemyMono != null)
             {
-                TargetPositionCached = enemyMono.transform.position;
+                if (enemyMono.transform.position.x - transform.position.x < _hitDistance)
+                {
+                    var isTargetEnemy = PlayerAttackModule.GetTargetEnemyEnum(_playerParamData.PlayerEnum()) == enemyMono.EnemyEnum;
+                    OnHit?.Invoke(this, new OnHitEventArgs(enemyMono, isTargetEnemy));
+                    Destroy(gameObject);
+ 
+                }
             }
             else
             {
-                Debug.Log("TargetEnemyMono is null");
-            }
-            var direction = Vector3.Project((TargetPositionCached - transform.position), Vector3.right).normalized;
-            transform.position += direction * (float)(_speed * Time.deltaTime);
-            
-            if (Mathf.Abs(transform.position.x - TargetPositionCached.x) < 0.1f) 
-            {
-                OnHit?.Invoke(this, new OnHitEventArgs(TargetEnemyMono()));
-                Destroy(gameObject);
+                if (transform.position.x > 10) // todo: parameterからもらう
+                    Destroy(gameObject);
             }
         }
 
-        public void SetDomain(PlayerParamData playerParamData)
-        { 
+        public void SetUp(PlayerParamData playerParamData, Func<EnemyMono?> getTargetEnemyMono)
+        {
             Debug.Log($"PlayerAttackEffectMono data.Enum = {playerParamData.PlayerEnum()}");
-           viewMono?.SetDomain(playerParamData);
+            _playerParamData = playerParamData;
+            viewMono?.SetDomain(playerParamData);
+            _getNearestEnemyMono = getTargetEnemyMono;
         }
-        
     }
+
+    public record OnHitEventArgs(EnemyMono? EnemyMono, bool IsTargetEnemy);
     
-    public record OnHitEventArgs(EnemyMono? EnemyMono);
+    public static class PlayerAttackModule
+    {
+        public static EnemyEnum GetTargetEnemyEnum(PlayerColor playerColor)
+        {
+            return playerColor switch
+            {
+                PlayerColor.Red => EnemyEnum.Red,
+                PlayerColor.Blue => EnemyEnum.Blue,
+                PlayerColor.Yellow => EnemyEnum.Yellow,
+                _ => throw new ArgumentOutOfRangeException()
+            };
+        }
+
+    }
 }

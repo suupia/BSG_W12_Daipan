@@ -5,6 +5,6 @@ namespace Daipan.Enemy.Interfaces
 {
     public interface IEnemyParamContainer
     {
-        EnemyParamWarp GetEnemyParamData(EnemyEnum enemyEnum);
+        EnemyParamData GetEnemyParamData(EnemyEnum enemyEnum);
     }
 }

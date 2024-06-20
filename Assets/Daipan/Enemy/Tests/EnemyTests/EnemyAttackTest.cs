@@ -12,7 +12,7 @@ public class EnemyAttackTest
     {
         // Arrange
         var player = new DummyPlayer();
-        var enemyParamData = new EnemyParamWarp()
+        var enemyParamData = new EnemyParamData()
         {
             GetEnemyEnum = () => EnemyEnum.None,
             GetAttackAmount = () => 10

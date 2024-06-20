@@ -23,16 +23,16 @@ namespace Daipan.Enemy.LevelDesign.Scripts
             }
 
 
-            var enemyTimeLineParams = new List<EnemyTimeLineParamWarp>();
+            var enemyTimeLineParams = new List<EnemyTimeLineParamData>();
             foreach (var enemyTimeLineParam in enemyParamManager.enemyTimeLineParams)
-                enemyTimeLineParams.Add(new EnemyTimeLineParamWarp()
+                enemyTimeLineParams.Add(new EnemyTimeLineParamData()
                 {
                     GetStartTime = () => enemyTimeLineParam.startTime,
                     GetSpawnIntervalSec = () => enemyTimeLineParam.spawnIntervalSec,
                     GetMoveSpeedRate = () => enemyTimeLineParam.moveSpeedRate,
                     GetSpawnBossPercent = () => enemyTimeLineParam.spawnBossPercent
                 });
-            var enemyTimeLineParamContainer = new EnemyTimeLineParamWrapContainer(enemyTimeLineParams);
+            var enemyTimeLineParamContainer = new EnemyTimeLineParamDataContainer(enemyTimeLineParams);
             builder.RegisterInstance(enemyTimeLineParamContainer);
         }
     }

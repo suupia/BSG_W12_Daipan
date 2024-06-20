@@ -109,8 +109,8 @@ namespace Daipan.Daipan
             /*enemy*/
             builder.RegisterInstance(enemyParamManager);
             builder.RegisterInstance(enemyParamManager.enemyLevelDesignParam);
-            builder.Register<EnemyTimeLineParamWrapContainer>(Lifetime.Scoped);
-            builder.Register<EnemyParamWarpContainer>(Lifetime.Scoped);
+            builder.Register<EnemyTimeLineParamDataContainer>(Lifetime.Scoped);
+            builder.Register<EnemyParamDataContainer>(Lifetime.Scoped);
             builder.RegisterInstance(
                 new EnemyLevelDesignParamDataBuilder(builder, enemyParamManager.enemyLevelDesignParam));
             builder.RegisterInstance(new EnemyTimeLineParamDataBuilder(builder, enemyParamManager));

@@ -10,31 +10,31 @@ using VContainer;
 
 namespace Daipan.Enemy.Scripts
 {
-    public class EnemyParamWarpContainer : IEnemyParamContainer
+    public class EnemyParamDataContainer : IEnemyParamContainer
     {
-        public IEnumerable<EnemyParamWarp> EnemyParamWarps => _enemyParamWarps;
-        readonly IEnumerable<EnemyParamWarp> _enemyParamWarps;
+        public IEnumerable<EnemyParamData> EnemyParamDatas => _enemyParamDatas;
+        readonly IEnumerable<EnemyParamData> _enemyParamDatas;
 
         [Inject]
-        public EnemyParamWarpContainer(
+        public EnemyParamDataContainer(
             EnemyParamManager enemyParamManager,
-            EnemyTimeLineParamWrapContainer enemyTimeLineParamWrapContainer,
+            EnemyTimeLineParamDataContainer enemyTimeLineParamDataContainer,
             StreamTimer streamTimer)
         {
-            _enemyParamWarps = CreateEnemyParamWarp(enemyParamManager, enemyTimeLineParamWrapContainer, streamTimer);
+            _enemyParamDatas = CreateEnemyParamData(enemyParamManager, enemyTimeLineParamDataContainer, streamTimer);
         }
 
-        public EnemyParamWarp GetEnemyParamData(EnemyEnum enemyEnum)
+        public EnemyParamData GetEnemyParamData(EnemyEnum enemyEnum)
         {
-            return _enemyParamWarps.First(x => x.GetEnemyEnum() == enemyEnum);
+            return _enemyParamDatas.First(x => x.GetEnemyEnum() == enemyEnum);
         }
 
-        static List<EnemyParamWarp> CreateEnemyParamWarp(EnemyParamManager enemyParamManager,
-            EnemyTimeLineParamWrapContainer enemyTimeLineParamWrapContainer, StreamTimer streamTimer)
+        static List<EnemyParamData> CreateEnemyParamData(EnemyParamManager enemyParamManager,
+            EnemyTimeLineParamDataContainer enemyTimeLineParamDataContainer, StreamTimer streamTimer)
         {
-            var enemyParams = new List<EnemyParamWarp>();
+            var enemyParams = new List<EnemyParamData>();
             foreach (var enemyParam in enemyParamManager.enemyParams)
-                enemyParams.Add(new EnemyParamWarp()
+                enemyParams.Add(new EnemyParamData()
                 {
                     GetEnemyEnum = () => enemyParam.enemyEnum,
                     GetAttackAmount = () => enemyParam.enemyAttackParam.attackAmount,
@@ -43,7 +43,7 @@ namespace Daipan.Enemy.Scripts
                     GetCurrentHp = () => enemyParam.enemyHpParam.hpAmount,
                     GetMoveSpeedPreSec = () =>
                         enemyParam.enemyMoveParam.moveSpeedPerSec *
-                        GetEnemyTimeLineParam(enemyTimeLineParamWrapContainer, streamTimer).GetMoveSpeedRate(),
+                        GetEnemyTimeLineParam(enemyTimeLineParamDataContainer, streamTimer).GetMoveSpeedRate(),
                     GetSpawnRatio = () => enemyParam.enemySpawnParam.spawnRatio,
                     GetIrritationAfterKill = () => enemyParam.enemyRewardParam.irritationAfterKill,
                     // Animator
@@ -55,10 +55,10 @@ namespace Daipan.Enemy.Scripts
             return enemyParams;
         }
 
-        static EnemyTimeLineParamWarp GetEnemyTimeLineParam(
-            EnemyTimeLineParamWrapContainer enemyTimeLineParamWrapContainer, StreamTimer streamTimer)
+        static EnemyTimeLineParamData GetEnemyTimeLineParam(
+            EnemyTimeLineParamDataContainer enemyTimeLineParamDataContainer, StreamTimer streamTimer)
         {
-            return enemyTimeLineParamWrapContainer.GetEnemyTimeLineParamData(streamTimer);
+            return enemyTimeLineParamDataContainer.GetEnemyTimeLineParamData(streamTimer);
         }
     }
 }
