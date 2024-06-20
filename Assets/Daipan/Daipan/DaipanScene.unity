@@ -3545,39 +3545,39 @@ MonoBehaviour:
       enemySpawnedPosition:
         enemySpawnTransformX: {fileID: 2139454379639670455}
         enemySpawnTransformY: {fileID: 2139454379639670455}
-        enemySpawnRatio: 0
+        enemySpawnRatio: 100
         enemyEnum: 0
   - lanePositions:
     - laneYTransform: {fileID: 1556018666}
       enemySpawnedPosition:
         enemySpawnTransformX: {fileID: 2139454379681994179}
         enemySpawnTransformY: {fileID: 2139454379681994179}
-        enemySpawnRatio: 0
+        enemySpawnRatio: 100
         enemyEnum: 0
     - laneYTransform: {fileID: 788730769}
       enemySpawnedPosition:
         enemySpawnTransformX: {fileID: 2139454380265612660}
         enemySpawnTransformY: {fileID: 2139454380265612660}
-        enemySpawnRatio: 0
+        enemySpawnRatio: 100
         enemyEnum: 0
   - lanePositions:
     - laneYTransform: {fileID: 18180024}
       enemySpawnedPosition:
         enemySpawnTransformX: {fileID: 889128396}
         enemySpawnTransformY: {fileID: 889128396}
-        enemySpawnRatio: 0
+        enemySpawnRatio: 100
         enemyEnum: 0
     - laneYTransform: {fileID: 2118536850}
       enemySpawnedPosition:
         enemySpawnTransformX: {fileID: 1583512317}
         enemySpawnTransformY: {fileID: 1583512317}
-        enemySpawnRatio: 0
+        enemySpawnRatio: 100
         enemyEnum: 0
     - laneYTransform: {fileID: 444984137}
       enemySpawnedPosition:
         enemySpawnTransformX: {fileID: 445255478}
         enemySpawnTransformY: {fileID: 445255478}
-        enemySpawnRatio: 0
+        enemySpawnRatio: 100
         enemyEnum: 0
   playerSpawnedPosition:
     playerSpawnTransformX: {fileID: 626149471}
