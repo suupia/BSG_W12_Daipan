@@ -21,10 +21,6 @@ namespace Daipan.LevelDesign.Enemy.Scripts
             _enemyParamWarps = CreateEnemyParamWarp(enemyParamManager, enemyTimeLineParamWrapContainer, streamTimer);
         }
         
-        public EnemyParamWarpContainer(IEnumerable<EnemyParamWarp> enemyParamWarps)
-        {
-            _enemyParamWarps = enemyParamWarps;
-        }
         public EnemyParamWarp GetEnemyParamData(EnemyEnum enemyEnum)
         {
             return _enemyParamWarps.First(x => x.GetEnemyEnum() == enemyEnum);

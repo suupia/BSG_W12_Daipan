@@ -10,25 +10,25 @@ namespace Daipan.LevelDesign.Enemy.Scripts
 {
     public class EnemyTimeLineParamWrapContainer
     {
-        readonly IList<EnemyTimeLineParamWarp> _enemyTimeLineParamDatas;
+        readonly IList<EnemyTimeLineParamWarp> _enemyTimeLineParamWarps;
 
         [Inject]
         public EnemyTimeLineParamWrapContainer(EnemyParamManager enemyParamManager)
         {
-            _enemyTimeLineParamDatas = CreateEnemyTimeLineParamWarp(enemyParamManager);
+            _enemyTimeLineParamWarps = CreateEnemyTimeLineParamWarp(enemyParamManager);
         }
         
         public EnemyTimeLineParamWrapContainer(
-            IList<EnemyTimeLineParamWarp> enemyTimeLineParamDatas
+            IList<EnemyTimeLineParamWarp> enemyTimeLineParamWarps
             )
         {
-            _enemyTimeLineParamDatas = enemyTimeLineParamDatas;
+            _enemyTimeLineParamWarps = enemyTimeLineParamWarps;
           
         }
 
         public EnemyTimeLineParamWarp GetEnemyTimeLineParamData(StreamTimer streamTimer)
         {
-            return _enemyTimeLineParamDatas
+            return _enemyTimeLineParamWarps
                 .Where(e => e.GetStartTime() <= streamTimer.CurrentTime)
                 .OrderByDescending(e => e.GetStartTime()).First();
         }
