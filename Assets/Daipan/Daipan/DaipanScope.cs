@@ -130,8 +130,6 @@ namespace Daipan.Daipan
                 }
 
                 enemyPositionMono.enemyDespawnedPoint = lanePositionMono.enemyDespawnedPoint;
-                Debug.Log(
-                    $"enemySpawnedPoints : {string.Join(",", enemyPositionMono.enemySpawnedPositionContainers.Select(x => x.enemySpawnedPoints.Count))}");
                 return enemyPositionMono;
             }
 
