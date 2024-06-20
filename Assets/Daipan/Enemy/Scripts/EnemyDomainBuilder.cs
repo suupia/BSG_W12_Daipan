@@ -22,8 +22,7 @@ namespace Daipan.Enemy.Scripts
         readonly IrritatedValue _irritatedValue;
         readonly EnemyCluster _enemyCluster;
         readonly EnemyLevelDesignParamData _enemyLevelDesignParamData;
-        readonly EnemyTimeLineParamDataContainer _enemyTimeLineParamDataContainer;
-        readonly StreamTimer _streamTimer;
+        readonly IEnemyTimeLineParamContainer _enemyTimeLineParamContainer;
         public EnemyDomainBuilder(
             EnemyParamDataContainer enemyParamDataContainer,
             CommentSpawner commentSpawner,
@@ -32,8 +31,7 @@ namespace Daipan.Enemy.Scripts
             EnemyParamManager enemyParamManager,
             EnemyCluster enemyCluster,
             EnemyLevelDesignParamData enemyLevelDesignParamData,
-            EnemyTimeLineParamDataContainer enemyTimeLineParamDataContainer,
-            StreamTimer streamTimer
+            IEnemyTimeLineParamContainer enemyTimeLineParamContainer
         )
         {
             _enemyParamDataContainer = enemyParamDataContainer;
@@ -43,8 +41,7 @@ namespace Daipan.Enemy.Scripts
             _enemyParamManager = enemyParamManager;
             _enemyCluster = enemyCluster;
             _enemyLevelDesignParamData = enemyLevelDesignParamData;
-            _enemyTimeLineParamDataContainer = enemyTimeLineParamDataContainer;
-            _streamTimer = streamTimer;
+            _enemyTimeLineParamContainer = enemyTimeLineParamContainer;
         }
 
         public EnemyMono SetDomain(EnemyEnum enemyEnum, EnemyMono enemyMono)
@@ -96,7 +93,7 @@ namespace Daipan.Enemy.Scripts
             }
 
             // ボスが出現する条件2
-            if (Random.value < _enemyTimeLineParamDataContainer.GetEnemyTimeLineParamData(_streamTimer).GetSpawnBossPercent() / 100.0) return true;
+            if (Random.value < _enemyTimeLineParamContainer.GetEnemyTimeLineParamData().GetSpawnBossPercent() / 100.0) return true;
 
             return false;
         }
@@ -105,7 +102,7 @@ namespace Daipan.Enemy.Scripts
         EnemyEnum DecideRandomEnemyType()
         {
             // BOSSをスポーンするかどうかの判定
-            if (Random.value < _enemyTimeLineParamDataContainer.GetEnemyTimeLineParamData(_streamTimer).GetSpawnBossPercent() / 100.0) return EnemyEnum.RedBoss;
+            if (Random.value < _enemyTimeLineParamContainer.GetEnemyTimeLineParamData().GetSpawnBossPercent() / 100.0) return EnemyEnum.RedBoss;
 
             // 通常敵のType決め
             List<double> ratio = new();
@@ -117,7 +114,7 @@ namespace Daipan.Enemy.Scripts
 
             // ここで100%に正規化
             ratio = EnemySpawnCalculator.NormalizeEnemySpawnRatioWithBoss(ratio,
-                _enemyTimeLineParamDataContainer.GetEnemyTimeLineParamData(_streamTimer).GetSpawnBossPercent());
+                _enemyTimeLineParamContainer.GetEnemyTimeLineParamData().GetSpawnBossPercent());
             Debug.Log($"enemyPrams.Length : {_enemyParamManager.enemyParams.Count}");
             var enemyEnum = _enemyParamManager.enemyParams[Randoms.RandomByRatios(ratio, Random.value)].enemyEnum;
             if (enemyEnum == EnemyEnum.RedBoss) _enemyLevelDesignParamData.SetCurrentKillAmount(0);

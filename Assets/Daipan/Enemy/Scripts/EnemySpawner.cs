@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Daipan.Core.Interfaces;
 using Daipan.Enemy.Interfaces;
+using Daipan.Enemy.LevelDesign.Interfaces;
 using Daipan.Enemy.LevelDesign.Scripts;
 using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.Stream.Scripts;
@@ -20,9 +21,8 @@ namespace Daipan.Enemy.Scripts
     {
         readonly IEnemyMonoBuilder _enemyMonoBuilder;
         readonly EnemyCluster _enemyCluster;
-        readonly EnemySpawnPointData _enemySpawnPointData;
-        readonly EnemyTimeLineParamDataContainer _enemyTimeLInePramDataContainer;
-        readonly StreamTimer _streamTimer;
+        readonly IEnemySpawnPoint _enemySpawnPoint;
+        readonly IEnemyTimeLineParamContainer _enemyTimeLInePramContainer;
         readonly float _spawnRandomPositionY = 0.2f;
         float _timer;
 
@@ -31,16 +31,14 @@ namespace Daipan.Enemy.Scripts
             IObjectResolver container,
             EnemyCluster enemyCluster,
             IEnemyMonoBuilder enemyMonoBuilder,
-            EnemySpawnPointData enemySpawnPointData,
-            EnemyTimeLineParamDataContainer enemyTimeLInePramDataContainer,
-            StreamTimer streamTimer
+            IEnemySpawnPoint enemySpawnPoint,
+            IEnemyTimeLineParamContainer enemyTimeLInePramContainer
         )
         {
             _enemyCluster = enemyCluster;
             _enemyMonoBuilder = enemyMonoBuilder;
-            _enemySpawnPointData = enemySpawnPointData;
-            _enemyTimeLInePramDataContainer = enemyTimeLInePramDataContainer;
-            _streamTimer = streamTimer;
+            _enemySpawnPoint = enemySpawnPoint;
+            _enemyTimeLInePramContainer = enemyTimeLInePramContainer;
         }
 
         void IStart.Start()
@@ -51,7 +49,7 @@ namespace Daipan.Enemy.Scripts
         void IUpdate.Update()
         {
             _timer += Time.deltaTime;
-            if (_timer > _enemyTimeLInePramDataContainer.GetEnemyTimeLineParamData(_streamTimer).GetSpawnIntervalSec())
+            if (_timer > _enemyTimeLInePramContainer.GetEnemyTimeLineParamData().GetSpawnIntervalSec())
             {
                 SpawnEnemy();
                 _timer = 0;
@@ -68,11 +66,11 @@ namespace Daipan.Enemy.Scripts
 
         (Vector3 spawnedPos, EnemyEnum enemyEnum) GetSpawnedPositionRandom()
         {
-            var positions = _enemySpawnPointData.GetEnemySpawnedPointXs()
-                .Zip(_enemySpawnPointData.GetEnemySpawnedPointYs(), (x, y) => new Vector3(x.x, y.y))
+            var positions = _enemySpawnPoint.GetEnemySpawnedPointXs()
+                .Zip(_enemySpawnPoint.GetEnemySpawnedPointYs(), (x, y) => new Vector3(x.x, y.y))
                 .ToList();
-            var enums = _enemySpawnPointData.GetEnemySpawnedEnemyEnums();
-            var randomIndex = Randoms.RandomByRatios(_enemySpawnPointData.GetEnemySpawnRatios(), Random.value);
+            var enums = _enemySpawnPoint.GetEnemySpawnedEnemyEnums();
+            var randomIndex = Randoms.RandomByRatios(_enemySpawnPoint.GetEnemySpawnRatios(), Random.value);
             return (positions[randomIndex], enums[randomIndex]);
         }
     }

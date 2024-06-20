@@ -2,6 +2,7 @@
 using System;
 using Daipan.Battle.interfaces;
 using Daipan.Enemy.Interfaces;
+using Daipan.Enemy.LevelDesign.Interfaces;
 using Daipan.Enemy.LevelDesign.Scripts;
 using Daipan.Enemy.Scripts;
 using Daipan.LevelDesign.Enemy.Scripts;
@@ -18,7 +19,7 @@ namespace Daipan.Enemy.MonoScripts
         EnemyAttackDecider _enemyAttackDecider = null!;
         EnemyCluster _enemyCluster = null!;
         EnemyHp _enemyHp = null!;
-        EnemySpawnPointData _enemySpawnPointData = null!;
+        IEnemySpawnPoint _enemySpawnPoint = null!;
         EnemyParamDataContainer _enemyParamDataContainer = null!;
         PlayerHolder _playerHolder = null!;
         public EnemyEnum EnemyEnum { get; private set; } = EnemyEnum.None;
@@ -35,7 +36,7 @@ namespace Daipan.Enemy.MonoScripts
                 transform.position += Time.deltaTime * moveSpeed * Vector3.left;
             }
 
-            if (transform.position.x < _enemySpawnPointData.GetEnemyDespawnedPoint().x)
+            if (transform.position.x < _enemySpawnPoint.GetEnemyDespawnedPoint().x)
                 _enemyCluster.Remove(this, false); // Destroy when out of screen
 
             enemyViewMono?.SetHpGauge(CurrentHp, _enemyParamDataContainer.GetEnemyParamData(EnemyEnum).GetCurrentHp());
@@ -54,13 +55,13 @@ namespace Daipan.Enemy.MonoScripts
         public void Initialize(
             EnemyCluster enemyCluster,
             PlayerHolder playerHolder,
-            EnemySpawnPointData enemySpawnPointData,
+            IEnemySpawnPoint enemySpawnPointData,
             EnemyParamDataContainer enemyParamDataContainer
         )
         {
             _enemyCluster = enemyCluster;
             _playerHolder = playerHolder;
-            _enemySpawnPointData = enemySpawnPointData;
+            _enemySpawnPoint = enemySpawnPointData;
             _enemyParamDataContainer = enemyParamDataContainer;
         }
 

@@ -6,6 +6,7 @@ namespace Daipan.Enemy.Interfaces
 {
     public interface IEnemyTimeLineParamContainer
     {
-        EnemyTimeLineParamData GetEnemyTimeLineParamData(StreamTimer streamTimer);
+        EnemyTimeLineParamData GetEnemyTimeLineParamData();
+        int GetEnemyTimeLineParamDataIndex();
     }
 }

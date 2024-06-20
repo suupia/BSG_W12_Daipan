@@ -11,22 +11,36 @@ using VContainer;
 
 namespace Daipan.Enemy.Scripts
 {
-    public class EnemyTimeLineParamDataContainer : IEnemyTimeLineParamContainer
+    public class EnemyTimeLineParamContainer : IEnemyTimeLineParamContainer
     {
         readonly IList<EnemyTimeLineParamData> _enemyTimeLineParamDatas;
-
+        readonly StreamTimer _streamTimer;
         [Inject]
-        public EnemyTimeLineParamDataContainer(EnemyParamManager enemyParamManager)
+        public EnemyTimeLineParamContainer(
+            EnemyParamManager enemyParamManager,
+            StreamTimer streamTimer)
         {
             _enemyTimeLineParamDatas = CreateEnemyTimeLineParamData(enemyParamManager);
+            _streamTimer = streamTimer;
         }
 
-        public EnemyTimeLineParamData GetEnemyTimeLineParamData(StreamTimer streamTimer)
+        public EnemyTimeLineParamData GetEnemyTimeLineParamData()
         {
-            return _enemyTimeLineParamDatas
-                .Where(e => e.GetStartTime() <= streamTimer.CurrentTime)
-                .OrderByDescending(e => e.GetStartTime()).First();
+            return GetEnemyTimeLineParamData(_streamTimer, _enemyTimeLineParamDatas).data; 
         }
+        
+        public int GetEnemyTimeLineParamDataIndex()
+        {
+            return GetEnemyTimeLineParamData(_streamTimer, _enemyTimeLineParamDatas).index;
+        }
+        
+        static (EnemyTimeLineParamData data, int index) GetEnemyTimeLineParamData(StreamTimer streamTimer, IList<EnemyTimeLineParamData> enemyTimeLineParamDatas)
+        {
+            return enemyTimeLineParamDatas
+                .Select((e, i) =>  (e, i))
+                .Where(e => e.e.GetStartTime() <= streamTimer.CurrentTime)
+                .OrderByDescending(e => e.e.GetStartTime()).First();
+        } 
 
         static List<EnemyTimeLineParamData> CreateEnemyTimeLineParamData(EnemyParamManager enemyParamManager)
         {
