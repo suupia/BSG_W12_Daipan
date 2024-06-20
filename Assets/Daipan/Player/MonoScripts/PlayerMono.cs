@@ -25,7 +25,6 @@ namespace Daipan.Player.MonoScripts
 {
     [SerializeField] List<AbstractPlayerViewMono?> playerViewMonos = new();
     EnemyCluster _enemyCluster = null!;
-    readonly Dictionary<PlayerColor, PlayerAttack> _playerAttacks = new();
     PlayerHp _playerHp = null!;
     InputSerialManager _inputSerialManager = null!;
     PlayerAttackEffectSpawner _playerAttackEffectSpawner = null!;
@@ -77,7 +76,7 @@ namespace Daipan.Player.MonoScripts
         var effect = _playerAttackEffectSpawner.SpawnEffect(spawnPosition , Quaternion.identity);
         effect.SetDomain(_playerParamDataContainer.GetPlayerParamData(playerColor));
         effect.SetTargetEnemyMono(targetEnemy);
-        effect.OnHit += (sender, args) => AttackEnemy(_playerAttacks, playerViewMonos, playerColor, args.EnemyMono);
+        effect.OnHit += (sender, args) => AttackEnemy(_playerParamDataContainer, playerViewMonos, playerColor, args.EnemyMono);
         
     }
     
@@ -93,7 +92,7 @@ namespace Daipan.Player.MonoScripts
         };
     }
     
-    static void AttackEnemy(Dictionary<PlayerColor, PlayerAttack> attacks, List<AbstractPlayerViewMono?> playerViewMonos, 
+    static void AttackEnemy(PlayerParamDataContainer playerParamDataContainer, List<AbstractPlayerViewMono?> playerViewMonos, 
         PlayerColor playerColor, EnemyMono? enemyMono)
     {
         Debug.Log($"Attack enemyMono: {enemyMono}");
@@ -103,7 +102,7 @@ namespace Daipan.Player.MonoScripts
         if (enemyMono.EnemyEnum == targetEnemyEnum || enemyMono.EnemyEnum == EnemyEnum.RedBoss)
         {
             Debug.Log($"EnemyType: {enemyMono.EnemyEnum}を攻撃");
-            attacks[playerColor].Attack(enemyMono);
+            enemyMono.CurrentHp -= playerParamDataContainer.GetPlayerParamData(playerColor).GetAttack();
             
             // Animation
             foreach (var playerViewMono in playerViewMonos)
@@ -130,11 +129,6 @@ namespace Daipan.Player.MonoScripts
     )
     {
         _playerParamDataContainer = playerParamDataContainer;
-        foreach(PlayerColor playerColor in Enum.GetValues(typeof(PlayerColor)))
-        {
-            if(playerColor == PlayerColor.None) continue;
-            _playerAttacks[playerColor] = new PlayerAttack(playerParamDataContainer.GetPlayerParamData(playerColor));
-        }
         _enemyCluster = enemyCluster;
 
         _playerHp = new PlayerHp(playerHpParamData.GetCurrentHp());
