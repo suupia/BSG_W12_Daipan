@@ -72,7 +72,17 @@ namespace Daipan.Player.MonoScripts
             var effect = _playerAttackEffectSpawner.SpawnEffect(spawnPosition, Quaternion.identity);
             effect.SetUp(_playerParamDataContainer.GetPlayerParamData(playerColor), () => _enemyCluster.NearestEnemy(transform.position));
             effect.OnHit += (sender, args) =>
-                OnAttackEnemy(_playerParamDataContainer, playerViewMonos, playerColor, args.EnemyMono);
+            {
+                if (args.IsTargetEnemy)
+                {
+                    OnAttackEnemy(_playerParamDataContainer, playerViewMonos, playerColor, args.EnemyMono);
+                }
+                else
+                {
+                    Debug.Log($"攻撃対象が{PlayerAttackModule.GetTargetEnemyEnum(playerColor)}ではないです”");
+                    // todo : 特攻処理を書く
+                }
+            };
         }
 
         static void OnAttackEnemy(PlayerParamDataContainer playerParamDataContainer,

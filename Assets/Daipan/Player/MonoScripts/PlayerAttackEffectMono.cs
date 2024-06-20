@@ -25,11 +25,12 @@ namespace Daipan.Player.MonoScripts
             var enemyMono = _getNearestEnemyMono();
             if (enemyMono != null)
             {
-                if (enemyMono.transform.position.x - transform.position.x < _hitDistance
-                    && PlayerAttackModule.GetTargetEnemyEnum(_playerParamData.PlayerEnum()) == enemyMono.EnemyEnum)
+                if (enemyMono.transform.position.x - transform.position.x < _hitDistance)
                 {
-                    OnHit?.Invoke(this, new OnHitEventArgs(enemyMono));
+                    var isTargetEnemy = PlayerAttackModule.GetTargetEnemyEnum(_playerParamData.PlayerEnum()) == enemyMono.EnemyEnum;
+                    OnHit?.Invoke(this, new OnHitEventArgs(enemyMono, isTargetEnemy));
                     Destroy(gameObject);
+ 
                 }
             }
             else
@@ -48,7 +49,7 @@ namespace Daipan.Player.MonoScripts
         }
     }
 
-    public record OnHitEventArgs(EnemyMono? EnemyMono);
+    public record OnHitEventArgs(EnemyMono? EnemyMono, bool IsTargetEnemy);
     
     public static class PlayerAttackModule
     {
