@@ -20,12 +20,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 30
-    width: 2560
-    height: 1337
+    width: 1728
+    height: 1001
   m_MinSize: {x: 400, y: 100}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 1522
+  controlID: 124
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -42,14 +42,14 @@ MonoBehaviour:
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
     m_Text: Game
-    m_Image: {fileID: -6423792434712278376, guid: 0000000000000000d000000000000000, type: 0}
+    m_Image: {fileID: 4621777727084837110, guid: 0000000000000000d000000000000000, type: 0}
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: -2110
-    y: -240
-    width: 909
-    height: 677
+    x: 303
+    y: 96
+    width: 613.5
+    height: 501.5
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -81,10 +81,10 @@ MonoBehaviour:
     m_VRangeLocked: 0
     hZoomLockedByDefault: 0
     vZoomLockedByDefault: 0
-    m_HBaseRangeMin: -960
-    m_HBaseRangeMax: 960
-    m_VBaseRangeMin: -540
-    m_VBaseRangeMax: 540
+    m_HBaseRangeMin: -480
+    m_HBaseRangeMax: 480
+    m_VBaseRangeMin: -270
+    m_VBaseRangeMax: 270
     m_HAllowExceedBaseRangeMin: 1
     m_HAllowExceedBaseRangeMax: 1
     m_VAllowExceedBaseRangeMin: 1
@@ -102,23 +102,23 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 21
-      width: 909
-      height: 656
-    m_Scale: {x: 0.4734375, y: 0.4734375}
-    m_Translation: {x: 454.5, y: 328}
+      width: 613.5
+      height: 480.5
+    m_Scale: {x: 0.6390625, y: 0.6390625}
+    m_Translation: {x: 306.74997, y: 240.25}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -960
-      y: -692.8053
-      width: 1920
-      height: 1385.6106
+      x: -479.99994
+      y: -375.9413
+      width: 959.99994
+      height: 751.8826
     m_MinimalGUI: 1
-  m_defaultScale: 0.4734375
-  m_LastWindowPixelSize: {x: 909, y: 677}
+  m_defaultScale: 0.6390625
+  m_LastWindowPixelSize: {x: 1227, y: 1003}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000000000000
@@ -143,12 +143,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1361
-    height: 1337
+    width: 918.5
+    height: 1001
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 1523
+  controlID: 125
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -168,12 +168,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1361
-    height: 698
+    width: 918.5
+    height: 522.5
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 1524
+  controlID: 126
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -191,10 +191,10 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 450
-    height: 698
-  m_MinSize: {x: 101, y: 121}
-  m_MaxSize: {x: 4001, y: 4021}
+    width: 303
+    height: 522.5
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 6}
   m_Panes:
   - {fileID: 6}
@@ -216,14 +216,14 @@ MonoBehaviour:
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
     m_Text: Scene
-    m_Image: {fileID: 2593428753322112591, guid: 0000000000000000d000000000000000, type: 0}
+    m_Image: {fileID: 8634526014445323508, guid: 0000000000000000d000000000000000, type: 0}
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: -2560
-    y: -240
-    width: 449
-    height: 677
+    x: 0
+    y: 96
+    width: 302
+    height: 501.5
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -582,9 +582,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 10, y: 0, z: 0}
+    m_Target: {x: -7, y: -1.02, z: 0}
     speed: 2
-    m_Value: {x: 10, y: 0, z: 0}
+    m_Value: {x: -7, y: -1.02, z: 0}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -676,10 +676,10 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 450
+    x: 303
     y: 0
-    width: 911
-    height: 698
+    width: 615.5
+    height: 522.5
   m_MinSize: {x: 202, y: 221}
   m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 2}
@@ -706,14 +706,14 @@ MonoBehaviour:
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
     m_Text: Animation
-    m_Image: {fileID: -8166618308981325432, guid: 0000000000000000d000000000000000, type: 0}
+    m_Image: {fileID: -3237396543322336831, guid: 0000000000000000d000000000000000, type: 0}
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1981.5
-    y: 83
-    width: 804.5
-    height: 488.5
+    x: -2111
+    y: -240
+    width: 910
+    height: 677
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -726,7 +726,7 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: -114896
+  m_LastSelectedObjectID: -212966
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -743,14 +743,14 @@ MonoBehaviour:
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
     m_Text: Animator
-    m_Image: {fileID: -1673928668082335149, guid: 0000000000000000d000000000000000, type: 0}
+    m_Image: {fileID: 1711060831702674872, guid: 0000000000000000d000000000000000, type: 0}
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 2065.5
-    y: 83
-    width: 681.5
-    height: 488.5
+    x: -2111
+    y: -240
+    width: 910
+    height: 677
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -1072,10 +1072,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: -2110
-    y: -240
-    width: 909
-    height: 677
+    x: 303
+    y: 96
+    width: 613.5
+    height: 501.5
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -1087,12 +1087,12 @@ MonoBehaviour:
     m_SaveData: []
     m_OverlaysVisible: 1
   m_Spl:
-    ID: 13325
+    ID: 282
     splitterInitialOffset: 0
     currentActiveSplitter: -1
     realSizes:
-    - 455
-    - 152
+    - 324
+    - 108
     relativeSizes:
     - 0.75
     - 0.25
@@ -1102,7 +1102,7 @@ MonoBehaviour:
     maxSizes:
     - 0
     - 0
-    lastTotalSize: 607
+    lastTotalSize: 432
     splitSize: 6
     xOffset: 0
     m_Version: 1
@@ -1153,9 +1153,9 @@ MonoBehaviour:
       uniqueId: '[BSG_W12_Daipan][suite]'
       name: BSG_W12_Daipan
       fullName: BSG_W12_Daipan
-      resultStatus: 2
-      duration: 0.0351275
-      messages: One or more child tests had errors
+      resultStatus: 1
+      duration: 0.1115166
+      messages: 
       output: 
       stacktrace: 
       notRunnable: 0
@@ -1165,12 +1165,142 @@ MonoBehaviour:
       categories: []
       parentId: 
       parentUniqueId: 
+    - id: 1004
+      uniqueId: '[ComboTests.dll][suite]'
+      name: ComboTests.dll
+      fullName: /Users/koki/Unity/UnityProjects/BSG_W12_Daipan/Library/ScriptAssemblies/ComboTests.dll
+      resultStatus: 1
+      duration: 0.0911562
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1000
+      parentUniqueId: '[BSG_W12_Daipan][suite]'
+    - id: 1005
+      uniqueId: ComboTests.dll/[Daipan][suite]
+      name: Daipan
+      fullName: Daipan
+      resultStatus: 1
+      duration: 0.0907771
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1004
+      parentUniqueId: '[ComboTests.dll][suite]'
+    - id: 1006
+      uniqueId: ComboTests.dll/Daipan/[Player][suite]
+      name: Player
+      fullName: Daipan.Player
+      resultStatus: 1
+      duration: 0.0872639
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1005
+      parentUniqueId: ComboTests.dll/[Daipan][suite]
+    - id: 1007
+      uniqueId: ComboTests.dll/Daipan/Player/[Tests][suite]
+      name: Tests
+      fullName: Daipan.Player.Tests
+      resultStatus: 1
+      duration: 0.0838042
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1006
+      parentUniqueId: ComboTests.dll/Daipan/[Player][suite]
+    - id: 1008
+      uniqueId: ComboTests.dll/Daipan/Player/Tests/[ComboTests][suite]
+      name: ComboTests
+      fullName: Daipan.Player.Tests.ComboTests
+      resultStatus: 1
+      duration: 0.0801542
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1007
+      parentUniqueId: ComboTests.dll/Daipan/Player/[Tests][suite]
+    - id: 1001
+      uniqueId: ComboTests.dll/Daipan/Player/Tests/ComboTests/[ComboTests][suite]
+      name: ComboTests
+      fullName: Daipan.Player.Tests.ComboTests.ComboTests
+      resultStatus: 1
+      duration: 0.0759131
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1008
+      parentUniqueId: ComboTests.dll/Daipan/Player/Tests/[ComboTests][suite]
+    - id: 1002
+      uniqueId: ComboTests.dll/Daipan/Player/Tests/ComboTests/ComboTests/[ComboTests][Daipan.Player.Tests.ComboTests.ComboTests.IncreaseComboTest]
+      name: IncreaseComboTest
+      fullName: Daipan.Player.Tests.ComboTests.ComboTests.IncreaseComboTest
+      resultStatus: 1
+      duration: 0.0380388
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: ComboTests.dll/Daipan/Player/Tests/ComboTests/[ComboTests][suite]
+    - id: 1003
+      uniqueId: ComboTests.dll/Daipan/Player/Tests/ComboTests/ComboTests/[ComboTests][Daipan.Player.Tests.ComboTests.ComboTests.ResetComboTest]
+      name: ResetComboTest
+      fullName: Daipan.Player.Tests.ComboTests.ComboTests.ResetComboTest
+      resultStatus: 1
+      duration: 0.0001487
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: ComboTests.dll/Daipan/Player/Tests/ComboTests/[ComboTests][suite]
     - id: 1006
       uniqueId: '[EnemyTests][/Users/koki/Unity/UnityProjects/BSG_W12_Daipan/Library/ScriptAssemblies/EnemyTests.dll][suite]'
       name: EnemyTests.dll
       fullName: /Users/koki/Unity/UnityProjects/BSG_W12_Daipan/Library/ScriptAssemblies/EnemyTests.dll
       resultStatus: 1
-      duration: 0.0839547
+      duration: 0.0802063
       messages: 
       output: 
       stacktrace: 
@@ -1186,7 +1316,7 @@ MonoBehaviour:
       name: EnemyAttackTest
       fullName: EnemyAttackTest
       resultStatus: 1
-      duration: 0.0325022
+      duration: 0.0421063
       messages: 
       output: 
       stacktrace: 
@@ -1202,7 +1332,7 @@ MonoBehaviour:
       name: IHpSetterShouldDecrease10WithAttack
       fullName: EnemyAttackTest.IHpSetterShouldDecrease10WithAttack
       resultStatus: 1
-      duration: 0.0162594
+      duration: 0.0209699
       messages: 
       output: 
       stacktrace: 
@@ -1219,7 +1349,7 @@ MonoBehaviour:
       name: EnemySpawnerCalculatorTest
       fullName: EnemySpawnerCalculatorTest
       resultStatus: 1
-      duration: 0.0505789
+      duration: 0.0368157
       messages: 
       output: 
       stacktrace: 
@@ -1235,7 +1365,7 @@ MonoBehaviour:
       name: NormalizeEnemySpawnRatioWithBossTest
       fullName: EnemySpawnerCalculatorTest.NormalizeEnemySpawnRatioWithBossTest
       resultStatus: 1
-      duration: 0.0019389
+      duration: 0.0021355
       messages: 
       output: 
       stacktrace: 
@@ -1252,7 +1382,7 @@ MonoBehaviour:
       name: NormalizeEnemySpawnRatioWithBossTest2
       fullName: EnemySpawnerCalculatorTest.NormalizeEnemySpawnRatioWithBossTest2
       resultStatus: 1
-      duration: 0.0001978
+      duration: 0.0002415
       messages: 
       output: 
       stacktrace: 
@@ -1269,7 +1399,7 @@ MonoBehaviour:
       name: PlayerTests.dll
       fullName: /Users/koki/Unity/UnityProjects/BSG_W12_Daipan/Library/ScriptAssemblies/PlayerTests.dll
       resultStatus: 1
-      duration: 0.0137369
+      duration: 0.0158273
       messages: 
       output: 
       stacktrace: 
@@ -1285,7 +1415,7 @@ MonoBehaviour:
       name: PlayerAttackTest
       fullName: PlayerAttackTest
       resultStatus: 1
-      duration: 0.0062495
+      duration: 0.0064071
       messages: 
       output: 
       stacktrace: 
@@ -1301,7 +1431,7 @@ MonoBehaviour:
       name: IHpSetterShouldDecrease10WithAttack
       fullName: PlayerAttackTest.IHpSetterShouldDecrease10WithAttack
       resultStatus: 1
-      duration: 0.0023379
+      duration: 0.002325
       messages: 
       output: 'Attack Enemy
 
@@ -1322,7 +1452,7 @@ MonoBehaviour:
       name: StreamTests.dll
       fullName: /Users/koki/Unity/UnityProjects/BSG_W12_Daipan/Library/ScriptAssemblies/StreamTests.dll
       resultStatus: 1
-      duration: 0.0256567
+      duration: 0.0271661
       messages: 
       output: 
       stacktrace: 
@@ -1338,7 +1468,7 @@ MonoBehaviour:
       name: Daipan
       fullName: Daipan
       resultStatus: 1
-      duration: 0.0131798
+      duration: 0.0137213
       messages: 
       output: 
       stacktrace: 
@@ -1354,7 +1484,7 @@ MonoBehaviour:
       name: Stream
       fullName: Daipan.Stream
       resultStatus: 1
-      duration: 0.0129978
+      duration: 0.0135369
       messages: 
       output: 
       stacktrace: 
@@ -1370,7 +1500,7 @@ MonoBehaviour:
       name: StreamTests
       fullName: Daipan.Stream.StreamTests
       resultStatus: 1
-      duration: 0.009481
+      duration: 0.0098469
       messages: 
       output: 
       stacktrace: 
@@ -1386,7 +1516,7 @@ MonoBehaviour:
       name: IrritatedValueTest
       fullName: Daipan.Stream.StreamTests.IrritatedValueTest
       resultStatus: 1
-      duration: 0.0059525
+      duration: 0.0062499
       messages: 
       output: 
       stacktrace: 
@@ -1402,7 +1532,7 @@ MonoBehaviour:
       name: DecrementTest
       fullName: Daipan.Stream.StreamTests.IrritatedValueTest.DecrementTest
       resultStatus: 1
-      duration: 0.0013764
+      duration: 0.0013748
       messages: 
       output: 'Daipan.Stream.Scripts.IrritatedParams must be instantiated using the
         ScriptableObject.CreateInstance method instead of new IrritatedParams.
@@ -1425,7 +1555,7 @@ MonoBehaviour:
       name: IncrementTest
       fullName: Daipan.Stream.StreamTests.IrritatedValueTest.IncrementTest
       resultStatus: 1
-      duration: 0.0008286
+      duration: 0.0008583
       messages: 
       output: 'Daipan.Stream.Scripts.IrritatedParams must be instantiated using the
         ScriptableObject.CreateInstance method instead of new IrritatedParams.
@@ -1450,9 +1580,9 @@ MonoBehaviour:
       uniqueId: '[UtilityTests.dll][suite]'
       name: UtilityTests.dll
       fullName: /Users/koki/Unity/UnityProjects/BSG_W12_Daipan/Library/ScriptAssemblies/UtilityTests.dll
-      resultStatus: 2
-      duration: 0.0182246
-      messages: One or more child tests had errors
+      resultStatus: 1
+      duration: 0.0476482
+      messages: 
       output: 
       stacktrace: 
       notRunnable: 0
@@ -1466,9 +1596,9 @@ MonoBehaviour:
       uniqueId: UtilityTests.dll/[Daipan][suite]
       name: Daipan
       fullName: Daipan
-      resultStatus: 2
-      duration: 0.0156159
-      messages: One or more child tests had errors
+      resultStatus: 1
+      duration: 0.0179806
+      messages: 
       output: 
       stacktrace: 
       notRunnable: 0
@@ -1482,9 +1612,9 @@ MonoBehaviour:
       uniqueId: UtilityTests.dll/Daipan/[Utility][suite]
       name: Utility
       fullName: Daipan.Utility
-      resultStatus: 2
-      duration: 0.0119368
-      messages: One or more child tests had errors
+      resultStatus: 1
+      duration: 0.0145328
+      messages: 
       output: 
       stacktrace: 
       notRunnable: 0
@@ -1498,9 +1628,9 @@ MonoBehaviour:
       uniqueId: UtilityTests.dll/Daipan/Utility/[UtilityTests][Daipan.Utility.Tests][suite]
       name: Tests
       fullName: Daipan.Utility.Tests
-      resultStatus: 2
-      duration: 0.0083026
-      messages: One or more child tests had errors
+      resultStatus: 1
+      duration: 0.0110745
+      messages: 
       output: 
       stacktrace: 
       notRunnable: 0
@@ -1514,9 +1644,9 @@ MonoBehaviour:
       uniqueId: UtilityTests.dll/Daipan/Utility/Tests/[UtilityTests][Daipan.Utility.Tests.RandomByRatiosTest][suite]
       name: RandomByRatiosTest
       fullName: Daipan.Utility.Tests.RandomByRatiosTest
-      resultStatus: 2
-      duration: 0.0046637
-      messages: One or more child tests had errors
+      resultStatus: 1
+      duration: 0.0074225
+      messages: 
       output: 
       stacktrace: 
       notRunnable: 0
@@ -1531,7 +1661,7 @@ MonoBehaviour:
       name: AccumulateRatiosTest1
       fullName: Daipan.Utility.Tests.RandomByRatiosTest.AccumulateRatiosTest1
       resultStatus: 1
-      duration: 0.0010254
+      duration: 0.0020394
       messages: 
       output: 'accumulatedRatios: 0,1,3,6
 
@@ -1549,20 +1679,13 @@ MonoBehaviour:
       uniqueId: UtilityTests.dll/Daipan/Utility/Tests/RandomByRatiosTest/[UtilityTests][Daipan.Utility.Tests.RandomByRatiosTest.RandomByRatiosTest1]
       name: RandomByRatiosTest1
       fullName: Daipan.Utility.Tests.RandomByRatiosTest.RandomByRatiosTest1
-      resultStatus: 2
-      duration: 0.0008579
-      messages: "  Expected: 1\n  But was:  2\n"
-      output: 'normalizedAccumulatedRatios: 0,0.2,0.4,1, random: 0, result: { ratio
-        = 0.2, index = 1 }
-
-        normalizedAccumulatedRatios: 0,0.2,0.4,1, random:
-        0.4, result: { ratio = 1, index = 3 }
+      resultStatus: 1
+      duration: 0.0014226
+      messages: 
+      output: 'rand must be between 0 and 1.
 
 '
-      stacktrace: 'at Daipan.Utility.Tests.RandomByRatiosTest.RandomByRatiosTest1
-        () [0x00063] in /Users/koki/Unity/UnityProjects/BSG_W12_Daipan/Assets/Daipan/Utility/Tests/RandomByRatiosTest.cs:34
-
-'
+      stacktrace: 
       notRunnable: 0
       ignoredOrSkipped: 0
       description: 
@@ -1576,7 +1699,7 @@ MonoBehaviour:
       name: EnumEnumerationCheckerTest
       fullName: EnumEnumerationCheckerTest
       resultStatus: 1
-      duration: 0.061767
+      duration: 0.0261159
       messages: 
       output: 
       stacktrace: 
@@ -1592,7 +1715,7 @@ MonoBehaviour:
       name: CheckEnumType1
       fullName: EnumEnumerationCheckerTest.CheckEnumType1
       resultStatus: 1
-      duration: 0.0246815
+      duration: 0.0156642
       messages: 
       output: 
       stacktrace: 
@@ -1609,7 +1732,7 @@ MonoBehaviour:
       name: CheckEnumType2
       fullName: EnumEnumerationCheckerTest.CheckEnumType2
       resultStatus: 1
-      duration: 0.0011272
+      duration: 0.0006809
       messages: 
       output: 'The number of EnumEnumerationCheckerTest+EnumType2 and EnumEnumerationCheckerTest+TestEnum
         is different.
@@ -1629,7 +1752,7 @@ MonoBehaviour:
       name: CheckEnumType3
       fullName: EnumEnumerationCheckerTest.CheckEnumType3
       resultStatus: 1
-      duration: 0.0004816
+      duration: 0.0004065
       messages: 
       output: 'The number of EnumEnumerationCheckerTest+EnumType3 and EnumEnumerationCheckerTest+TestEnum
         is different.
@@ -1649,7 +1772,7 @@ MonoBehaviour:
       name: CheckEnumType4
       fullName: EnumEnumerationCheckerTest.CheckEnumType4
       resultStatus: 1
-      duration: 0.0007885
+      duration: 0.000617
       messages: 
       output: 'EnumEnumerationCheckerTest+TestEnum with name X not found.
 
@@ -1663,19 +1786,12 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1021
       parentUniqueId: UtilityTests.dll/[UtilityTests][EnumEnumerationCheckerTest][suite]
-    m_ResultText: "RandomByRatiosTest1 (0.001s)\n---\nExpected: 1\n  But was:  2\n---\nat
-      Daipan.Utility.Tests.RandomByRatiosTest.RandomByRatiosTest1 () [0x00063] in
-      /Users/koki/Unity/UnityProjects/BSG_W12_Daipan/Assets/Daipan/Utility/Tests/RandomByRatiosTest.cs:34\n---\nnormalizedAccumulatedRatios:
-      0,0.2,0.4,1, random: 0, result: { ratio = 0.2, index = 1 }\nnormalizedAccumulatedRatios:
-      0,0.2,0.4,1, random: 0.4, result: { ratio = 1, index = 3 }"
-    m_ResultStacktrace: 'at Daipan.Utility.Tests.RandomByRatiosTest.RandomByRatiosTest1
-      () [0x00063] in /Users/koki/Unity/UnityProjects/BSG_W12_Daipan/Assets/Daipan/Utility/Tests/RandomByRatiosTest.cs:34
-
-'
+    m_ResultText: IHpSetterShouldDecrease10WithAttack (0.021s)
+    m_ResultStacktrace: 
     m_TestListState:
-      scrollPos: {x: 0, y: 13}
-      m_SelectedIDs: 0019b16b
-      m_LastClickedID: 1806768384
+      scrollPos: {x: 0, y: 0}
+      m_SelectedIDs: ea8d602f
+      m_LastClickedID: 794856938
       m_ExpandedIDs: 5567d180e953d688cc4edb8db5613b8e356acc9f75befeae6dbf46bbba882ec0716255c430ae7cd7507ce3f0fcf507f2fb0dce0861471d41e9f0684fde986858c9dc8a75385db376ffffff7f
       m_RenameOverlay:
         m_UserAcceptedRename: 0
@@ -1718,11 +1834,11 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
-    y: 698
-    width: 1361
-    height: 639
-  m_MinSize: {x: 101, y: 121}
-  m_MaxSize: {x: 4001, y: 4021}
+    y: 522.5
+    width: 918.5
+    height: 478.5
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 12}
   m_Panes:
   - {fileID: 12}
@@ -1744,14 +1860,14 @@ MonoBehaviour:
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
     m_Text: Console
-    m_Image: {fileID: -4327648978806127646, guid: 0000000000000000d000000000000000, type: 0}
+    m_Image: {fileID: -4950941429401207979, guid: 0000000000000000d000000000000000, type: 0}
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: -2560
-    y: 458
-    width: 1360
-    height: 618
+    x: 0
+    y: 618.5
+    width: 917.5
+    height: 457.5
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -1779,14 +1895,14 @@ MonoBehaviour:
   - {fileID: 16}
   m_Position:
     serializedVersion: 2
-    x: 1361
+    x: 918.5
     y: 0
-    width: 625
-    height: 1337
+    width: 422
+    height: 1001
   m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 1461
+  controlID: 188
 --- !u!114 &14
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1804,10 +1920,10 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 625
-    height: 744
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+    width: 422
+    height: 557
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 15}
   m_Panes:
   - {fileID: 15}
@@ -1829,14 +1945,14 @@ MonoBehaviour:
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
     m_Text: Hierarchy
-    m_Image: {fileID: 7966133145522015247, guid: 0000000000000000d000000000000000, type: 0}
+    m_Image: {fileID: -3734745235275155857, guid: 0000000000000000d000000000000000, type: 0}
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: -1199
-    y: -240
-    width: 623
-    height: 723
+    x: 918.5
+    y: 96
+    width: 420
+    height: 536
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -1850,23 +1966,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 303ffeff
+      m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 3c58fdffd459fdff7a5bfdff7a5efdff1e60fdffca61fdff7463fdff1a65fdff3668fdffde69fdff066dfdffa26efdff4670fdfff071fdff1675fdffae76fdff5078fdfff679fdff2e7dfdff6680fdffee84fdff4e88fdff748bfdff248dfdffa291fdff5c93fdff8c96fdff7e99fdff3a9bfdff469efdffec9ffdff56a6fdff5ca9fdff82acfdff3eaefdffbc4fffffd84fffff16fbffff86720000
+      m_ExpandedIDs: 04fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: EnemyDespawnPoint
-        m_OriginalName: EnemyDespawnPoint
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 29488
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 14}
       m_SearchString: 
@@ -1892,9 +2008,9 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
-    y: 744
-    width: 625
-    height: 593
+    y: 557
+    width: 422
+    height: 444
   m_MinSize: {x: 232, y: 271}
   m_MaxSize: {x: 10002, y: 10021}
   m_ActualView: {fileID: 17}
@@ -1918,14 +2034,14 @@ MonoBehaviour:
   m_MaxSize: {x: 10000, y: 10000}
   m_TitleContent:
     m_Text: Project
-    m_Image: {fileID: -5467254957812901981, guid: 0000000000000000d000000000000000, type: 0}
+    m_Image: {fileID: -5179483145760003458, guid: 0000000000000000d000000000000000, type: 0}
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: -1199
-    y: 504
-    width: 623
-    height: 572
+    x: 918.5
+    y: 653
+    width: 420
+    height: 423
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -1947,7 +2063,7 @@ MonoBehaviour:
     m_SkipHidden: 1
     m_SearchArea: 1
     m_Folders:
-    - Assets/Daipan/Enemy/Scripts
+    - Assets/Daipan/Player/Tests/ComboTests
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -1955,16 +2071,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Daipan/Enemy/Scripts
+  - Assets/Daipan/Player/Tests/ComboTests
   m_LastFoldersGridSize: -1
   m_LastProjectPath: /Users/koki/Unity/UnityProjects/BSG_W12_Daipan
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 224.5}
-    m_SelectedIDs: 727a0000
-    m_LastClickedID: 31346
-    m_ExpandedIDs: 00000000147a0000167a0000187a00001a7a00001c7a00001e7a0000207a0000227a0000247a0000267a0000287a00002a7a00002c7a00002e7a0000307a0000327a0000347a0000367a0000387a00003a7a00003c7a00003e7a0000847a000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 131.0022}
+    m_SelectedIDs: 287a0000
+    m_LastClickedID: 31272
+    m_ExpandedIDs: 0000000090790000927900009479000096790000987900009a7900009c7900009e790000a0790000a2790000a4790000a6790000a8790000aa790000ac790000ae790000b0790000b2790000b4790000b6790000b8790000f079000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1992,7 +2108,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000147a0000167a0000187a00001a7a00001c7a00001e7a0000207a0000227a0000247a0000267a0000287a00002a7a00002c7a00002e7a0000307a0000327a0000347a0000367a0000387a00003a7a00003c7a00003e7a0000847a000000ca9a3bffffff7f
+    m_ExpandedIDs: 0000000090790000927900009479000096790000987900009a7900009c7900009e790000a0790000a2790000a4790000a6790000a8790000aa790000ac790000ae790000b0790000b2790000b4790000b6790000b8790000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -2017,9 +2133,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 303ffeff
-    m_LastClickedInstanceID: -114896
-    m_HadKeyboardFocusLastEvent: 1
+    m_SelectedInstanceIDs: 
+    m_LastClickedInstanceID: 0
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c62300002471000032710000868a000096710000c6cdf7ff2a89000010760000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -2063,10 +2179,10 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 1986
+    x: 1340.5
     y: 0
-    width: 574
-    height: 1337
+    width: 387.5
+    height: 1001
   m_MinSize: {x: 275, y: 50}
   m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 19}
@@ -2090,14 +2206,14 @@ MonoBehaviour:
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
     m_Text: Inspector
-    m_Image: {fileID: -2667387946076563598, guid: 0000000000000000d000000000000000, type: 0}
+    m_Image: {fileID: -440750813802333266, guid: 0000000000000000d000000000000000, type: 0}
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: -574
-    y: -240
-    width: 573
-    height: 1316
+    x: 1340.5
+    y: 96
+    width: 386.5
+    height: 980
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0

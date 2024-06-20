@@ -26,7 +26,6 @@ namespace Daipan.Player.MonoScripts
     EnemyCluster _enemyCluster = null!;
     readonly Dictionary<PlayerColor, PlayerAttack> _playerAttacks = new();
     PlayerHp _playerHp = null!;
-    PlayerParamData _playerParamData = null!;
     InputSerialManager _inputSerialManager = null!;
     PlayerAttackEffectSpawner _playerAttackEffectSpawner = null!;
     PlayerParamDataContainer _playerParamDataContainer = null!;

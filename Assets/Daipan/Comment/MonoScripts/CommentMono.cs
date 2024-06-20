@@ -11,7 +11,6 @@ namespace Daipan.Comment.MonoScripts
 {
     public sealed class CommentMono : MonoBehaviour
     {
-        [SerializeField] SpriteRenderer spriteRenderer = null!;
         [SerializeField] TextMeshPro commentText = null!;
         CommentCluster _commentCluster = null!;
         CommentParamsServer _commentParamsServer = null!;
