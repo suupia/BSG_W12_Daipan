@@ -35,7 +35,7 @@ namespace Daipan.Enemy.LevelDesign.Scripts
                    GetEnemyTimeLineParam().GetMoveSpeedRate();
         }
 
-        public double GetSpawnDelaySec()
+        public double GetSpawnIntervalSec()
         {
             return GetEnemyTimeLineParam().GetSpawnIntervalSec();
         }
