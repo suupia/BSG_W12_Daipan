@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using Daipan.Enemy.Scripts;
+using Daipan.LevelDesign.Enemy.Interfaces;
 using Daipan.Stream.Scripts;
 using VContainer;
 
 namespace Daipan.LevelDesign.Enemy.Scripts
 {
-    public class EnemyParamWarpContainer
+    public class EnemyParamWarpContainer : IEnemyParamContainer
     {
         public IEnumerable<EnemyParamWarp> EnemyParamWarps => _enemyParamWarps;
         readonly IEnumerable<EnemyParamWarp> _enemyParamWarps;
