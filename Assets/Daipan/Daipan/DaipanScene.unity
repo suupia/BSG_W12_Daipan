@@ -802,6 +802,7 @@ MonoBehaviour:
   commentParamsManager: {fileID: 11400000, guid: b83c7fae0686b214fb53fc224da8567a, type: 2}
   irritatedParams: {fileID: 11400000, guid: 3f5d33a9375f2154fb5cc4220a5c60f0, type: 2}
   towerParams: {fileID: 11400000, guid: a3fb232ddade9e043b16e8c587a459ff, type: 2}
+  comboParamManager: {fileID: 11400000, guid: b27dc473148d44553bb8e9accb9ad02e, type: 2}
 --- !u!4 &309620969
 Transform:
   m_ObjectHideFlags: 0

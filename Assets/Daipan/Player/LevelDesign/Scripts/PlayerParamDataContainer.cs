@@ -6,7 +6,7 @@ using Daipan.Player.MonoScripts;
 using Daipan.Player.Scripts;
 using UnityEngine;
 
-namespace Daipan.LevelDesign.Player.Scripts
+namespace Daipan.Player.LevelDesign.Scripts
 {
     public class PlayerParamDataContainer
     {

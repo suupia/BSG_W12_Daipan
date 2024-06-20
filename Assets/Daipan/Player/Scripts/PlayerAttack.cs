@@ -1,6 +1,6 @@
 #nullable enable
 using Daipan.Battle.interfaces;
-using Daipan.LevelDesign.Player.Scripts;
+using Daipan.Player.LevelDesign.Scripts;
 using UnityEngine;
 using VContainer;
 
