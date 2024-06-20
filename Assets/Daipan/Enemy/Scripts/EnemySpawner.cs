@@ -6,12 +6,15 @@ using Daipan.Core.Interfaces;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.LevelDesign.Interfaces;
 using Daipan.Enemy.LevelDesign.Scripts;
+using Daipan.Enemy.MonoScripts;
 using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.Stream.Scripts;
+using Daipan.Stream.Scripts.Utility;
 using Daipan.Utility.Scripts;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
+using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
 
@@ -19,26 +22,31 @@ namespace Daipan.Enemy.Scripts
 {
     public sealed class EnemySpawner : IStart, IUpdate
     {
-        readonly IEnemyMonoBuilder _enemyMonoBuilder;
+        readonly IObjectResolver _container;
+        readonly IPrefabLoader<EnemyMono> _enemyMonoLoader;
         readonly EnemyCluster _enemyCluster;
         readonly IEnemySpawnPoint _enemySpawnPoint;
         readonly IEnemyTimeLineParamContainer _enemyTimeLInePramContainer;
         readonly float _spawnRandomPositionY = 0.2f;
+        readonly IEnemyDomainBuilder _enemyDomainBuilder;
         float _timer;
 
         [Inject]
         public EnemySpawner(
             IObjectResolver container,
+            IPrefabLoader<EnemyMono> enemyMonoLoader, 
             EnemyCluster enemyCluster,
-            IEnemyMonoBuilder enemyMonoBuilder,
             IEnemySpawnPoint enemySpawnPoint,
-            IEnemyTimeLineParamContainer enemyTimeLInePramContainer
+            IEnemyTimeLineParamContainer enemyTimeLInePramContainer,
+            IEnemyDomainBuilder enemyDomainBuilder
         )
         {
+            _container = container;
+            _enemyMonoLoader = enemyMonoLoader;
             _enemyCluster = enemyCluster;
-            _enemyMonoBuilder = enemyMonoBuilder;
             _enemySpawnPoint = enemySpawnPoint;
             _enemyTimeLInePramContainer = enemyTimeLInePramContainer;
+            _enemyDomainBuilder = enemyDomainBuilder;
         }
 
         void IStart.Start()
@@ -60,8 +68,10 @@ namespace Daipan.Enemy.Scripts
         {
             var tuple = GetSpawnedPositionRandom();
             var spawnPosition = new Vector3 { x = tuple.spawnedPos.x, y = tuple.spawnedPos.y + Random.Range(-_spawnRandomPositionY, _spawnRandomPositionY) };
-            var enemyObject = _enemyMonoBuilder.Build(tuple.enemyEnum, spawnPosition, Quaternion.identity);
-            _enemyCluster.Add(enemyObject);
+            var enemyMonoPrefab = _enemyMonoLoader.Load();
+            var enemyMono = _container.Instantiate(enemyMonoPrefab, spawnPosition, Quaternion.identity);
+            _enemyDomainBuilder.SetDomain(tuple.enemyEnum,enemyMono);
+            _enemyCluster.Add(enemyMono);
         }
 
         (Vector3 spawnedPos, EnemyEnum enemyEnum) GetSpawnedPositionRandom()
