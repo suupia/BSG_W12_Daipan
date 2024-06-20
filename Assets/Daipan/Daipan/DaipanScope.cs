@@ -103,7 +103,7 @@ namespace Daipan.Daipan
             builder.RegisterInstance(enemyParamManager);
             builder.RegisterInstance(enemyParamManager.enemyLevelDesignParam);
             builder.Register<EnemyParamModifyWithTimer>(Lifetime.Scoped);
-            builder.Register<EnemyTimeLineParamDataContainer>(Lifetime.Scoped);
+            builder.Register<EnemyTimeLineParamWrapContainer>(Lifetime.Scoped);
             builder.Register<EnemyParamWarpContainer>(Lifetime.Scoped);
             builder.RegisterInstance(new EnemyLevelDesignParamDataBuilder(builder, enemyParamManager.enemyLevelDesignParam));
             builder.RegisterInstance(new EnemyTimeLineParamDataBuilder(builder, enemyParamManager));

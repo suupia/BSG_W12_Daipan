@@ -14,17 +14,17 @@ namespace Daipan.LevelDesign.Enemy.Scripts
     {
         readonly StreamTimer _streamTimer;
         readonly EnemyParamWarpContainer _enemyParamWarpContainer;
-        readonly EnemyTimeLineParamDataContainer _enemyTimeLineParamDataContainer;
+        readonly EnemyTimeLineParamWrapContainer _enemyTimeLineParamWrapContainer;
 
         [Inject]
         EnemyParamModifyWithTimer(
             StreamTimer streamTimer,
             EnemyParamWarpContainer enemyParamWarpContainer,
-            EnemyTimeLineParamDataContainer enemyTimeLineParamDataContainer)
+            EnemyTimeLineParamWrapContainer enemyTimeLineParamWrapContainer)
         {
             _streamTimer = streamTimer;
             _enemyParamWarpContainer = enemyParamWarpContainer;
-            _enemyTimeLineParamDataContainer = enemyTimeLineParamDataContainer;
+            _enemyTimeLineParamWrapContainer = enemyTimeLineParamWrapContainer;
 
         }
 
@@ -47,7 +47,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
 
         EnemyTimeLineParamWarp GetEnemyTimeLineParam()
         {
-            return _enemyTimeLineParamDataContainer.GetEnemyTimeLineParamData(_streamTimer); 
+            return _enemyTimeLineParamWrapContainer.GetEnemyTimeLineParamData(_streamTimer); 
         }
 
     }

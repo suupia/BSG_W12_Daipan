@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Daipan.Enemy.Scripts;
 using Daipan.Stream.Scripts;
+using VContainer;
 
 namespace Daipan.LevelDesign.Enemy.Scripts
 {
@@ -11,12 +12,13 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         public IEnumerable<EnemyParamWarp> EnemyParamWarps => _enemyParamWarps;
         readonly IEnumerable<EnemyParamWarp> _enemyParamWarps;
 
+        [Inject]
         public EnemyParamWarpContainer(
             EnemyParamManager enemyParamManager,
-            EnemyTimeLineParamDataContainer enemyTimeLineParamDataContainer,
+            EnemyTimeLineParamWrapContainer enemyTimeLineParamWrapContainer,
             StreamTimer streamTimer)
         {
-            _enemyParamWarps = CreateEnemyParamWarp(enemyParamManager, enemyTimeLineParamDataContainer, streamTimer);
+            _enemyParamWarps = CreateEnemyParamWarp(enemyParamManager, enemyTimeLineParamWrapContainer, streamTimer);
         }
         
         public EnemyParamWarpContainer(IEnumerable<EnemyParamWarp> enemyParamWarps)
@@ -28,7 +30,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
             return _enemyParamWarps.First(x => x.GetEnemyEnum() == enemyEnum);
         }
                 
-        static List<EnemyParamWarp> CreateEnemyParamWarp(EnemyParamManager enemyParamManager, EnemyTimeLineParamDataContainer enemyTimeLineParamDataContainer, StreamTimer streamTimer)
+        static List<EnemyParamWarp> CreateEnemyParamWarp(EnemyParamManager enemyParamManager, EnemyTimeLineParamWrapContainer enemyTimeLineParamWrapContainer, StreamTimer streamTimer)
         {
             var enemyParams = new List<EnemyParamWarp>();
             foreach (var enemyParam in enemyParamManager.enemyParams)
@@ -40,7 +42,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
                     GetAttackDelayDec = () => enemyParam.enemyAttackParam.attackDelaySec,
                     GetAttackRange = () => enemyParam.enemyAttackParam.attackRange,
                     GetCurrentHp = () => enemyParam.enemyHpParam.hpAmount,
-                    GetMoveSpeedPreSec = () => enemyParam.enemyMoveParam.moveSpeedPerSec * GetEnemyTimeLineParam(enemyTimeLineParamDataContainer, streamTimer).GetMoveSpeedRate(), 
+                    GetMoveSpeedPreSec = () => enemyParam.enemyMoveParam.moveSpeedPerSec * GetEnemyTimeLineParam(enemyTimeLineParamWrapContainer, streamTimer).GetMoveSpeedRate(), 
                     GetSpawnRatio = () => enemyParam.enemySpawnParam.spawnRatio,
                     GetIrritationAfterKill = () => enemyParam.enemyRewardParam.irritationAfterKill,
                     
@@ -55,9 +57,9 @@ namespace Daipan.LevelDesign.Enemy.Scripts
             return enemyParams;
         }
         
-        static EnemyTimeLineParamWarp GetEnemyTimeLineParam(EnemyTimeLineParamDataContainer enemyTimeLineParamDataContainer, StreamTimer streamTimer)
+        static EnemyTimeLineParamWarp GetEnemyTimeLineParam(EnemyTimeLineParamWrapContainer enemyTimeLineParamWrapContainer, StreamTimer streamTimer)
         {
-            return enemyTimeLineParamDataContainer.GetEnemyTimeLineParamData(streamTimer); 
+            return enemyTimeLineParamWrapContainer.GetEnemyTimeLineParamData(streamTimer); 
         }
 
     } 

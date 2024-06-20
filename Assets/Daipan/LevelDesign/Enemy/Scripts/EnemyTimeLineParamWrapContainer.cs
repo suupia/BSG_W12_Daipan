@@ -4,19 +4,21 @@ using System.Linq;
 using Daipan.Enemy.Scripts;
 using Daipan.Stream.Scripts;
 using UnityEngine;
+using VContainer;
 
 namespace Daipan.LevelDesign.Enemy.Scripts
 {
-    public class EnemyTimeLineParamDataContainer
+    public class EnemyTimeLineParamWrapContainer
     {
         readonly IList<EnemyTimeLineParamWarp> _enemyTimeLineParamDatas;
 
-        public EnemyTimeLineParamDataContainer(EnemyParamManager enemyParamManager)
+        [Inject]
+        public EnemyTimeLineParamWrapContainer(EnemyParamManager enemyParamManager)
         {
             _enemyTimeLineParamDatas = CreateEnemyTimeLineParamWarp(enemyParamManager);
         }
         
-        public EnemyTimeLineParamDataContainer(
+        public EnemyTimeLineParamWrapContainer(
             IList<EnemyTimeLineParamWarp> enemyTimeLineParamDatas
             )
         {

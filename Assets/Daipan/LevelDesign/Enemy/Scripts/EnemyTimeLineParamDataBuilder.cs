@@ -33,7 +33,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
                     GetSpawnBossPercent = () => enemyTimeLineParam.spawnBossPercent
                 });
             }
-            var enemyTimeLineParamContainer = new EnemyTimeLineParamDataContainer(enemyTimeLineParams);
+            var enemyTimeLineParamContainer = new EnemyTimeLineParamWrapContainer(enemyTimeLineParams);
             builder.RegisterInstance(enemyTimeLineParamContainer);
         }
     
