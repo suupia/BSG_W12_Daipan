@@ -14,24 +14,28 @@ namespace Daipan.Player.MonoScripts
         readonly double _speed = 10;
         Vector3 TargetPositionCached { get; set; }
         public event EventHandler<OnHitEventArgs>? OnHit;
+
+        EnemyMono? _targetEnemyMono; 
             
         void Update()
         {
-            if (TargetEnemyMono() is {} enemyMono)
+            var direction = Vector3.right;
+            transform.position += direction * (float)(_speed * Time.deltaTime);
+            if (_targetEnemyMono != null)
             {
-                TargetPositionCached = enemyMono.transform.position;
+                var enemyMono = _targetEnemyMono;
+                if(enemyMono.transform.position.x - transform.position.x < float.Epsilon) 
+                {
+                    OnHit?.Invoke(this, new OnHitEventArgs(enemyMono));
+                    Destroy(gameObject);
+                }
             }
             else
             {
-                Debug.Log("TargetEnemyMono is null");
-            }
-            var direction = Vector3.Project((TargetPositionCached - transform.position), Vector3.right).normalized;
-            transform.position += direction * (float)(_speed * Time.deltaTime);
-            
-            if (Mathf.Abs(transform.position.x - TargetPositionCached.x) < 0.1f) 
-            {
-                OnHit?.Invoke(this, new OnHitEventArgs(TargetEnemyMono()));
-                Destroy(gameObject);
+                if(transform.position.x > 10)  // todo: parameterからもらう
+                {
+                    Destroy(gameObject);
+                }
             }
         }
 
@@ -39,6 +43,11 @@ namespace Daipan.Player.MonoScripts
         { 
             Debug.Log($"PlayerAttackEffectMono data.Enum = {playerParamData.PlayerEnum()}");
            viewMono?.SetDomain(playerParamData);
+        }
+        
+        public void SetTargetEnemyMono(EnemyMono? enemyMono)
+        {
+            _targetEnemyMono = enemyMono;
         }
         
     }

@@ -57,9 +57,10 @@ namespace Daipan.Player.MonoScripts
 
     void FireAttackEffect(PlayerColor playerColor)
     {
-        var targetEnemy = GetNearestEnemy(GetTargetEnemyEnum(playerColor));
+        // 一番近い敵を取得し、そこに向かってAttackEffectを発射する
+        var targetEnemy = _enemyCluster.NearestEnemy(GetTargetEnemyEnum(playerColor), transform.position); 
         if (targetEnemy == null) return; // 攻撃対象がいない場合はAttackEffectを生成しない
-            
+        
         // todo : AttackEffectの生成位置は仕様によって変更する。
         // とりあえずは、x座標は同じ色のプレイヤーのx座標、y座標はtargetEnemyのy座標に生成する
         var sameColorPlayerViewMono = playerViewMonos
@@ -70,11 +71,17 @@ namespace Daipan.Player.MonoScripts
             return;
         }
         var spawnPosition = new Vector3(sameColorPlayerViewMono.transform.position.x, targetEnemy.transform.position.y, 0);
-
+        
         var effect = _playerAttackEffectSpawner.SpawnEffect(spawnPosition , Quaternion.identity);
         effect.SetDomain(_playerParamDataContainer.GetPlayerParamData(playerColor));
-        effect.TargetEnemyMono = () => GetNearestEnemy(GetTargetEnemyEnum(playerColor));
+        effect.SetTargetEnemyMono(targetEnemy);
         effect.OnHit += (sender, args) => AttackEnemy(playerColor, args.EnemyMono);
+        
+        // Old
+        // var effect = _playerAttackEffectSpawner.SpawnEffect(spawnPosition , Quaternion.identity);
+        // effect.SetDomain(_playerParamDataContainer.GetPlayerParamData(playerColor));
+        // effect.TargetEnemyMono = () => GetNearestEnemy(GetTargetEnemyEnum(playerColor));
+        // effect.OnHit += (sender, args) => AttackEnemy(playerColor, args.EnemyMono);
     }
     
     EnemyEnum GetTargetEnemyEnum(PlayerColor playerColor)

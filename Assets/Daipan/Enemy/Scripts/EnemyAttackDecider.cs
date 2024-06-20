@@ -45,8 +45,6 @@ namespace Daipan.Enemy.Scripts
         bool CanAttack(EnemyMono enemyMono, PlayerMono playerMono)
         {
             if (playerMono.CurrentHp <= 0) return false;
-            Debug.Log($"enemy.transform.position : {enemyMono.transform.position}, player.transform.position : {playerMono.transform.position}");
-            Debug.Log($"distance : {(playerMono.transform.position - enemyMono.transform.position).magnitude}");
             if (enemyMono.transform.position.x - playerMono.transform.position.x > _enemyParamData.GetAttackRange()) return false;
             return true;
         }
