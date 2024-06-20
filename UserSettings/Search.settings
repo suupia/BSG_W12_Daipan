@@ -11,6 +11,12 @@ scopes = {
 	"last_search.FD7A1EDD" = "ref=\"Assets/Daipan/Enemy/Sprites/Stream/Sprites/white.png\""
 	"OpenInspectorPreview.FD7A1EDD" = "0"
 	"currentGroup.FD7A1EDD" = "all"
+	"last_search.E8DA15E5" = "Enemypara"
+	"OpenInspectorPreview.E8DA15E5" = "0"
+	"currentGroup.E8DA15E5" = "asset"
+	"last_search.110DEAF1" = "Enemypara"
+	"OpenInspectorPreview.110DEAF1" = "0"
+	"currentGroup.110DEAF1" = "asset"
 }
 providers = {
 	adb = {
