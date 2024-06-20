@@ -13,7 +13,7 @@ namespace Daipan.Enemy.Scripts
 {
     public class EnemyTimeLineParamContainer : IEnemyTimeLineParamContainer
     {
-        readonly IList<EnemyTimeLineParamDataTemp> _enemyTimeLineParamDatas;
+        readonly IList<EnemyTimeLineParamData> _enemyTimeLineParamDatas;
         readonly StreamTimer _streamTimer;
         [Inject]
         public EnemyTimeLineParamContainer(
@@ -24,7 +24,7 @@ namespace Daipan.Enemy.Scripts
             _streamTimer = streamTimer;
         }
 
-        public EnemyTimeLineParamDataTemp GetEnemyTimeLineParamData()
+        public EnemyTimeLineParamData GetEnemyTimeLineParamData()
         {
             return GetEnemyTimeLineParamData(_streamTimer, _enemyTimeLineParamDatas).data; 
         }
@@ -34,7 +34,7 @@ namespace Daipan.Enemy.Scripts
             return GetEnemyTimeLineParamData(_streamTimer, _enemyTimeLineParamDatas).index;
         }
         
-        static (EnemyTimeLineParamDataTemp data, int index) GetEnemyTimeLineParamData(StreamTimer streamTimer, IList<EnemyTimeLineParamDataTemp> enemyTimeLineParamDatas)
+        static (EnemyTimeLineParamData data, int index) GetEnemyTimeLineParamData(StreamTimer streamTimer, IList<EnemyTimeLineParamData> enemyTimeLineParamDatas)
         {
             return enemyTimeLineParamDatas
                 .Select((e, i) =>  (e, i))
@@ -42,7 +42,7 @@ namespace Daipan.Enemy.Scripts
                 .OrderByDescending(e => e.e.GetStartTime()).First();
         } 
 
-        static List<EnemyTimeLineParamDataTemp> CreateEnemyTimeLineParamData(EnemyParamManager enemyParamManager)
+        static List<EnemyTimeLineParamData> CreateEnemyTimeLineParamData(EnemyParamManager enemyParamManager)
         {
             // [Precondition]
             if (enemyParamManager.enemyTimeLineParams.Count == 0)
@@ -52,9 +52,9 @@ namespace Daipan.Enemy.Scripts
             }
 
 
-            var enemyTimeLineParams = new List<EnemyTimeLineParamDataTemp>();
+            var enemyTimeLineParams = new List<EnemyTimeLineParamData>();
             foreach (var enemyTimeLineParam in enemyParamManager.enemyTimeLineParams)
-                enemyTimeLineParams.Add(new EnemyTimeLineParamDataTemp(enemyTimeLineParam));
+                enemyTimeLineParams.Add(new EnemyTimeLineParamData(enemyTimeLineParam));
             return enemyTimeLineParams;
         }
     }

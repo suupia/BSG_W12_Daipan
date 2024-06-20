@@ -55,7 +55,7 @@ namespace Daipan.Enemy.Scripts
             return enemyParams;
         }
 
-        static EnemyTimeLineParamDataTemp GetEnemyTimeLineParam(
+        static EnemyTimeLineParamData GetEnemyTimeLineParam(
             IEnemyTimeLineParamContainer enemyTimeLineParamDataContainer)
         {
             return enemyTimeLineParamDataContainer.GetEnemyTimeLineParamData();

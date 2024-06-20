@@ -5,11 +5,11 @@ using Daipan.LevelDesign.Enemy.Scripts;
 
 namespace Daipan.Enemy.Scripts
 {
-    public class EnemyTimeLineParamDataTemp : IEnemyTimeLineParamData
+    public class EnemyTimeLineParamData : IEnemyTimeLineParamData
     {
         readonly EnemyTimeLineParam _enemyTimeLineParam;
 
-        public EnemyTimeLineParamDataTemp(EnemyTimeLineParam enemyTimeLineParam)
+        public EnemyTimeLineParamData(EnemyTimeLineParam enemyTimeLineParam)
         {
             _enemyTimeLineParam = enemyTimeLineParam;
         }
