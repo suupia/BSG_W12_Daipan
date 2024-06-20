@@ -36,17 +36,17 @@ namespace Daipan.LevelDesign.Comment.Scripts
     public sealed class CommentParamDependOnViewer
     {
         [Header("視聴者がこの数より多い時に、")]
-        [Min(0)] public int viewerAmount;
+        [Min(0)] public int viewerAmount = 500;
         [Header("これだけコメントを生成する")]
-        [Min(0)] public int commentAmount;
+        [Min(0)] public int commentAmount = 5;
     }
     
     [Serializable]
     public sealed class AntiCommentParamDependOnViewer
     {
         [Header("視聴者がこの数より多い時に、")]
-        [Min(0)] public int viewerAmount;
+        [Min(0)] public int viewerAmount = 500;
         [Header("これだけアンチコメントを生成する")]
-        [Min(0)] public int commentAmount;
+        [Min(0)] public int commentAmount = 10;
     }
 }
