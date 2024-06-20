@@ -1,13 +1,15 @@
 #nullable enable
+using Daipan.Player.LevelDesign.Scripts;
 using Daipan.Player.MonoScripts;
 using Daipan.Stream.Scripts.Utility;
 using UnityEngine;
 
 namespace Daipan.Player.Scripts
 {
-    public class PlayerAttackEffectSpawner
+    public sealed class PlayerAttackEffectSpawner
     {
         readonly IPrefabLoader<PlayerAttackEffectMono> _effectLoader;
+
         
         public PlayerAttackEffectSpawner(IPrefabLoader<PlayerAttackEffectMono> effectLoader)
         {
