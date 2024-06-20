@@ -17,7 +17,6 @@ namespace Daipan.Player.MonoScripts
         readonly double _hitDistance = 0.1;
         public event EventHandler<OnHitEventArgs>? OnHit;
         PlayerParamData? _playerParamData;
-
         Func<EnemyMono?> _getNearestEnemyMono = () => null; 
 
         void Update()

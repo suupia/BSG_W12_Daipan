@@ -5,6 +5,7 @@ using Daipan.Comment.Scripts;
 using Daipan.Core.Interfaces;
 using Daipan.Core.Scripts;
 using Daipan.Enemy.Interfaces;
+using Daipan.Enemy.LevelDesign.Interfaces;
 using Daipan.Enemy.LevelDesign.Scripts;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Enemy.Scripts;
@@ -111,7 +112,7 @@ namespace Daipan.Daipan
             /*enemy*/
             builder.RegisterInstance(enemyParamManager);
             builder.RegisterInstance(enemyParamManager.enemyLevelDesignParam);
-            builder.Register<EnemyTimeLineParamDataContainer>(Lifetime.Scoped);
+            builder.Register<EnemyTimeLineParamDataContainer>(Lifetime.Scoped).As<IEnemyTimeLineParamContainer>();
             builder.Register<EnemyParamDataContainer>(Lifetime.Scoped);
             builder.RegisterInstance(
                 new EnemyLevelDesignParamDataBuilder(builder, enemyParamManager.enemyLevelDesignParam));
@@ -133,8 +134,9 @@ namespace Daipan.Daipan
                 return enemyPositionMono;
             }
 
-            // builder.Register<WaveState>(Lifetime.Scoped); // todo:追加する
-            builder.RegisterInstance(new EnemyPositionMonoBuilder(builder, SetUpEnemyPositionMono(), new WaveState()));
+            builder.RegisterComponent(SetUpEnemyPositionMono());
+            builder.Register<WaveState>(Lifetime.Scoped); // todo:追加する
+            builder.Register<EnemySpawnPoint>(Lifetime.Scoped).As<IEnemySpawnPoint>();
 
 
             /*stream*/

@@ -18,10 +18,10 @@ namespace Daipan.Enemy.Scripts
         [Inject]
         public EnemyParamDataContainer(
             EnemyParamManager enemyParamManager,
-            EnemyTimeLineParamDataContainer enemyTimeLineParamDataContainer,
-            StreamTimer streamTimer)
+            IEnemyTimeLineParamContainer enemyTimeLineParamContainer
+            )
         {
-            _enemyParamDatas = CreateEnemyParamData(enemyParamManager, enemyTimeLineParamDataContainer, streamTimer);
+            _enemyParamDatas = CreateEnemyParamData(enemyParamManager, enemyTimeLineParamContainer);
         }
 
         public EnemyParamData GetEnemyParamData(EnemyEnum enemyEnum)
@@ -30,7 +30,7 @@ namespace Daipan.Enemy.Scripts
         }
 
         static List<EnemyParamData> CreateEnemyParamData(EnemyParamManager enemyParamManager,
-            EnemyTimeLineParamDataContainer enemyTimeLineParamDataContainer, StreamTimer streamTimer)
+            IEnemyTimeLineParamContainer enemyTimeLineParamDataContainer)
         {
             var enemyParams = new List<EnemyParamData>();
             foreach (var enemyParam in enemyParamManager.enemyParams)
@@ -43,7 +43,7 @@ namespace Daipan.Enemy.Scripts
                     GetCurrentHp = () => enemyParam.enemyHpParam.hpAmount,
                     GetMoveSpeedPreSec = () =>
                         enemyParam.enemyMoveParam.moveSpeedPerSec *
-                        GetEnemyTimeLineParam(enemyTimeLineParamDataContainer, streamTimer).GetMoveSpeedRate(),
+                        GetEnemyTimeLineParam(enemyTimeLineParamDataContainer).GetMoveSpeedRate(),
                     GetSpawnRatio = () => enemyParam.enemySpawnParam.spawnRatio,
                     GetIrritationAfterKill = () => enemyParam.enemyRewardParam.irritationAfterKill,
                     // Animator
@@ -56,9 +56,9 @@ namespace Daipan.Enemy.Scripts
         }
 
         static EnemyTimeLineParamData GetEnemyTimeLineParam(
-            EnemyTimeLineParamDataContainer enemyTimeLineParamDataContainer, StreamTimer streamTimer)
+            IEnemyTimeLineParamContainer enemyTimeLineParamDataContainer)
         {
-            return enemyTimeLineParamDataContainer.GetEnemyTimeLineParamData(streamTimer);
+            return enemyTimeLineParamDataContainer.GetEnemyTimeLineParamData();
         }
     }
 }
