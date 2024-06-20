@@ -77,6 +77,8 @@ namespace Daipan.Daipan
             builder.Register<PlayerAttack>(Lifetime.Scoped);
             builder.Register<PlayerHolder>(Lifetime.Scoped);
             builder.Register<IStart, PlayerSpawner>(Lifetime.Scoped);
+            builder.Register<ComboCounter>(Lifetime.Scoped);
+            builder.RegisterComponentInHierarchy<ComboViewMono>();
 
             // Tower
             builder.Register<TowerPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<TowerMono>>();

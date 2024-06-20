@@ -23,6 +23,7 @@ namespace Daipan.Player.MonoScripts
         InputSerialManager _inputSerialManager = null!;
         PlayerAttackEffectSpawner _playerAttackEffectSpawner = null!;
         PlayerParamDataContainer _playerParamDataContainer = null!;
+        ComboCounter _comboCounter = null!; 
 
         public void Update()
         {
@@ -76,10 +77,12 @@ namespace Daipan.Player.MonoScripts
                 if (args.IsTargetEnemy)
                 {
                     OnAttackEnemy(_playerParamDataContainer, playerViewMonos, playerColor, args.EnemyMono);
+                    _comboCounter.IncreaseCombo();
                 }
                 else
                 {
                     Debug.Log($"攻撃対象が{PlayerAttackModule.GetTargetEnemyEnum(playerColor)}ではないです”");
+                    _comboCounter.ResetCombo();
                     // todo : 特攻処理を書く
                 }
             };
@@ -118,7 +121,8 @@ namespace Daipan.Player.MonoScripts
             PlayerHpParamData playerHpParamData,
             InputSerialManager inputSerialManager,
             PlayerAttackEffectSpawner playerAttackEffectSpawner,
-            IrritatedValue irritatedValue
+            IrritatedValue irritatedValue,
+            ComboCounter comboCounter
         )
         {
             _playerParamDataContainer = playerParamDataContainer;
@@ -140,6 +144,7 @@ namespace Daipan.Player.MonoScripts
 
             _inputSerialManager = inputSerialManager;
             _playerAttackEffectSpawner = playerAttackEffectSpawner;
+            _comboCounter = comboCounter;
         }
 
         public int CurrentHp => _playerHp.CurrentHp;
