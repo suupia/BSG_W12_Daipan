@@ -31,8 +31,10 @@ namespace Daipan.Enemy.MonoScripts
             // 攻撃範囲よりプレイヤーとの距離が大きいときだけ動く
             if (transform.position.x - _playerHolder.PlayerMono.transform.position.x >=
                 _enemyParamWarpContainer.GetEnemyParamData(EnemyEnum).GetAttackRange())
-                transform.position += Vector3.left * (float)_enemyParamModifyWithTimer.GetSpeedRate(EnemyEnum) *
-                                      Time.deltaTime;
+            {
+                float moveSpeed = (float)_enemyParamWarpContainer.GetEnemyParamData(EnemyEnum).GetMoveSpeedPreSec();
+                transform.position += Time.deltaTime * moveSpeed * Vector3.left;
+            }
 
             if (transform.position.x < _enemySpawnPointData.GetEnemyDespawnedPoint().x)
                 _enemyCluster.Remove(this, false); // Destroy when out of screen

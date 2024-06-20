@@ -27,14 +27,6 @@ namespace Daipan.Enemy.LevelDesign.Scripts
             _enemyTimeLineParamWrapContainer = enemyTimeLineParamWrapContainer;
         }
 
-        // EnemyParamDataの一部をデコレートしている
-
-        public double GetSpeedRate(EnemyEnum enemyEnum)
-        {
-            return _enemyParamWarpContainer.GetEnemyParamData(enemyEnum).GetMoveSpeedPreSec() *
-                   GetEnemyTimeLineParam().GetMoveSpeedRate();
-        }
-
         public double GetSpawnIntervalSec()
         {
             return GetEnemyTimeLineParam().GetSpawnIntervalSec();
