@@ -51,7 +51,7 @@ namespace Daipan.Player.MonoScripts
         void FireAttackEffect(PlayerColor playerColor)
         {
             // 一番近い敵を取得し、そこに向かってAttackEffectを発射する（敵がいなくても生成する）
-            var targetEnemy = _enemyCluster.NearestEnemy(GetTargetEnemyEnum(playerColor), transform.position);
+            var targetEnemy = _enemyCluster.NearestEnemy(transform.position);
 
             // todo : AttackEffectの生成位置は仕様によって変更する。
             // とりあえずは、x座標は同じ色のプレイヤーのx座標、y座標はtargetEnemyのy座標に生成する
