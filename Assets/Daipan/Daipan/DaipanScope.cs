@@ -4,6 +4,7 @@ using Daipan.Comment.MonoScripts;
 using Daipan.Comment.Scripts;
 using Daipan.Core.Interfaces;
 using Daipan.Core.Scripts;
+using Daipan.DebugInput.MonoScripts;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.LevelDesign.Interfaces;
 using Daipan.Enemy.LevelDesign.Scripts;
@@ -112,7 +113,7 @@ namespace Daipan.Daipan
             /*enemy*/
             builder.RegisterInstance(enemyParamManager);
             builder.RegisterInstance(enemyParamManager.enemyLevelDesignParam);
-            builder.Register<EnemyTimeLineParamDataContainer>(Lifetime.Scoped).As<IEnemyTimeLineParamContainer>();
+            builder.Register<EnemyTimeLineParamContainer>(Lifetime.Scoped).As<IEnemyTimeLineParamContainer>();
             builder.Register<EnemyParamDataContainer>(Lifetime.Scoped);
             builder.RegisterInstance(
                 new EnemyLevelDesignParamDataBuilder(builder, enemyParamManager.enemyLevelDesignParam));
@@ -135,7 +136,7 @@ namespace Daipan.Daipan
             }
 
             builder.RegisterComponent(SetUpEnemyPositionMono());
-            builder.Register<WaveState>(Lifetime.Scoped); // todo:追加する
+            builder.Register<WaveState>(Lifetime.Scoped); 
             builder.Register<EnemySpawnPoint>(Lifetime.Scoped).As<IEnemySpawnPoint>();
 
 
@@ -173,6 +174,16 @@ namespace Daipan.Daipan
 
             // Updater
             builder.UseEntryPoints(Lifetime.Scoped, entryPoints => { entryPoints.Add<Updater>(); });
+            
+            
+            // Debug
+            RegisterDebugInput(builder);
         }
+
+        static void RegisterDebugInput(IContainerBuilder builder)
+        {
+            var waveDebugInput = new GameObject().AddComponent<WaveDebugInputMono>();
+            builder.RegisterComponent(waveDebugInput);
+        } 
     }
 }

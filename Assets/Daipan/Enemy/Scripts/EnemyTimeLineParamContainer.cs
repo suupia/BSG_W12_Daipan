@@ -11,12 +11,12 @@ using VContainer;
 
 namespace Daipan.Enemy.Scripts
 {
-    public class EnemyTimeLineParamDataContainer : IEnemyTimeLineParamContainer
+    public class EnemyTimeLineParamContainer : IEnemyTimeLineParamContainer
     {
         readonly IList<EnemyTimeLineParamData> _enemyTimeLineParamDatas;
         readonly StreamTimer _streamTimer;
         [Inject]
-        public EnemyTimeLineParamDataContainer(
+        public EnemyTimeLineParamContainer(
             EnemyParamManager enemyParamManager,
             StreamTimer streamTimer)
         {

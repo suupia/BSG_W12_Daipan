@@ -51,6 +51,9 @@ namespace Daipan.Stream.Scripts
         {
             IsTicking = true;
         }
-
+        public void SetTime(double time)
+        {
+            CurrentTime = time;
+        }
     }
 }
