@@ -14,12 +14,19 @@ namespace Daipan.Player.MonoScripts
         readonly double _speed = 10;
         readonly double _hitDistance = 0.1;
         public event EventHandler<OnHitEventArgs>? OnHit;
-        PlayerParamData _playerParamData;
+        PlayerParamData? _playerParamData;
 
         Func<EnemyMono?> _getNearestEnemyMono = () => null; 
 
         void Update()
         {
+            // [Precondition]
+            if (_playerParamData == null)
+            {
+                Debug.LogWarning("PlayerAttackEffectMono: PlayerParamData is null");
+                return;
+            }
+            
             var direction = Vector3.right;
             transform.position += direction * (float)(_speed * Time.deltaTime);
             var enemyMono = _getNearestEnemyMono();
