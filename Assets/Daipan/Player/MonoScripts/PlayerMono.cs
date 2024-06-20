@@ -59,14 +59,19 @@ namespace Daipan.Player.MonoScripts
     {
         var targetEnemy = GetNearestEnemy(GetTargetEnemyEnum(playerColor));
         if (targetEnemy == null) return; // 攻撃対象がいない場合はAttackEffectを生成しない
-        
-        
-        
-        var spawnPosition = playerViewMonos
-            .Where(playerViewMono => playerViewMono?.playerColor == playerColor)
-            .Select(playerViewMono => playerViewMono?.transform.position)
-            .FirstOrDefault(); 
-        var effect = _playerAttackEffectSpawner.SpawnEffect(spawnPosition ?? transform.position, Quaternion.identity);
+            
+        // todo : AttackEffectの生成位置は仕様によって変更する。
+        // とりあえずは、x座標は同じ色のプレイヤーのx座標、y座標はtargetEnemyのy座標に生成する
+        var sameColorPlayerViewMono = playerViewMonos
+            .FirstOrDefault(playerViewMono => playerViewMono?.playerColor == playerColor);
+        if (sameColorPlayerViewMono == null)
+        {
+            Debug.LogWarning($"同じ色のプレイヤーがいません");
+            return;
+        }
+        var spawnPosition = new Vector3(sameColorPlayerViewMono.transform.position.x, targetEnemy.transform.position.y, 0);
+
+        var effect = _playerAttackEffectSpawner.SpawnEffect(spawnPosition , Quaternion.identity);
         effect.SetDomain(_playerParamDataContainer.GetPlayerParamData(playerColor));
         effect.TargetEnemyMono = () => GetNearestEnemy(GetTargetEnemyEnum(playerColor));
         effect.OnHit += (sender, args) => AttackEnemy(playerColor, args.EnemyMono);
@@ -128,7 +133,6 @@ namespace Daipan.Player.MonoScripts
         PlayerParamDataContainer playerParamDataContainer, 
         EnemyCluster enemyCluster,
         PlayerHpParamData playerHpParamData,
-        CommentSpawner commentSpawner,
         InputSerialManager inputSerialManager,
         PlayerAttackEffectSpawner playerAttackEffectSpawner,
         IrritatedValue irritatedValue
