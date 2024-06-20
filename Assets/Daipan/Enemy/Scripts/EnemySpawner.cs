@@ -67,10 +67,13 @@ namespace Daipan.Enemy.Scripts
                 .Zip(_enemySpawnPointData.GetEnemySpawnedPointYs(), (x, y) => new Vector3(x.x, y.y))
                 .ToList();
             var enums = _enemySpawnPointData.GetEnemySpawnedEnemyEnums();
-            
+
+            Debug.Log(
+                $"_enemySpawnPointData.GetEnemySpawnRatios(): {string.Join(",", _enemySpawnPointData.GetEnemySpawnRatios())} ");
             var randomIndex = Randoms.RandomByRatios(_enemySpawnPointData.GetEnemySpawnRatios(), Random.value);
+            Debug.Log(
+                $"randomIndex: {randomIndex}, positions : {string.Join(",", positions.Select(x => x.ToString()))}");
             return (positions[randomIndex], enums[randomIndex]);
         }
-        
     }
 }

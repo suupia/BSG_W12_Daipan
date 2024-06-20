@@ -34,9 +34,14 @@ namespace Daipan.Daipan
 {
     public sealed class DaipanScope : LifetimeScope
     {
-        [FormerlySerializedAs("streamParameter")][SerializeField] StreamParam streamParam = null!;
+        [FormerlySerializedAs("streamParameter")] [SerializeField]
+        StreamParam streamParam = null!;
+
         [SerializeField] PlayerParamManager playerParamManager = null!;
-        [FormerlySerializedAs("enemyParamsManager")][SerializeField] EnemyParamManager enemyParamManager = null!;
+
+        [FormerlySerializedAs("enemyParamsManager")] [SerializeField]
+        EnemyParamManager enemyParamManager = null!;
+
         [SerializeField] CommentParamsManager commentParamsManager = null!;
         [SerializeField] IrritatedParams irritatedParams = null!;
         [SerializeField] TowerParams towerParams = null!;
@@ -66,7 +71,8 @@ namespace Daipan.Daipan
 
             // Player
             builder.Register<PlayerPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<PlayerMono>>();
-            builder.Register<PlayerAttackEffectPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<PlayerAttackEffectMono>>();
+            builder.Register<PlayerAttackEffectPrefabLoader>(Lifetime.Scoped)
+                .As<IPrefabLoader<PlayerAttackEffectMono>>();
             builder.Register<PlayerAttackEffectSpawner>(Lifetime.Scoped);
             builder.Register<PlayerAttack>(Lifetime.Scoped);
             builder.Register<PlayerHolder>(Lifetime.Scoped);
@@ -106,20 +112,29 @@ namespace Daipan.Daipan
             builder.Register<EnemyParamModifyWithTimer>(Lifetime.Scoped);
             builder.Register<EnemyTimeLineParamWrapContainer>(Lifetime.Scoped);
             builder.Register<EnemyParamWarpContainer>(Lifetime.Scoped);
-            builder.RegisterInstance(new EnemyLevelDesignParamDataBuilder(builder, enemyParamManager.enemyLevelDesignParam));
+            builder.RegisterInstance(
+                new EnemyLevelDesignParamDataBuilder(builder, enemyParamManager.enemyLevelDesignParam));
             builder.RegisterInstance(new EnemyTimeLineParamDataBuilder(builder, enemyParamManager));
 
             EnemyPositionMono SetUpEnemyPositionMono()
             {
-                var lanePositionMono = Object.FindObjectOfType<LanePositionMono>();
+                var lanePositionMono = FindObjectOfType<LanePositionMono>();
                 var enemyPositionMono = new GameObject().AddComponent<EnemyPositionMono>();
-                enemyPositionMono.enemySpawnedPositionContainers[0].enemySpawnedPoints =
-                    lanePositionMono.lanePositions.Select(x => x.enemySpawnedPosition).ToList();
+
+                foreach (var laneContainer in lanePositionMono.lanePositionContainers)
+                {
+                    var enemyContainer = new EnemySpawnedPositionContainer();
+                    foreach (var lanePosition in laneContainer.lanePositions)
+                        enemyContainer.enemySpawnedPoints.Add(lanePosition.enemySpawnedPosition);
+                    enemyPositionMono.enemySpawnedPositionContainers.Add(enemyContainer);
+                }
+
                 enemyPositionMono.enemyDespawnedPoint = lanePositionMono.enemyDespawnedPoint;
-                // Debug.Log($"enemySpawnedPoints : {string.Join(",", enemyPositionMono.enemySpawnedPoints
-                //     .Select(x => x.enemySpawnTransformY.position).ToArray())}");
+                Debug.Log(
+                    $"enemySpawnedPoints : {string.Join(",", enemyPositionMono.enemySpawnedPositionContainers.Select(x => x.enemySpawnedPoints.Count))}");
                 return enemyPositionMono;
             }
+
             // builder.Register<WaveState>(Lifetime.Scoped); // todo:追加する
             builder.RegisterInstance(new EnemyPositionMonoBuilder(builder, SetUpEnemyPositionMono(), new WaveState()));
 
@@ -130,14 +145,15 @@ namespace Daipan.Daipan
             /*player*/
             PlayerPositionMono SetUpPlayerPositionMono()
             {
-                var lanePositionMono = Object.FindObjectOfType<LanePositionMono>();
+                var lanePositionMono = FindObjectOfType<LanePositionMono>();
                 var playerPositionMono = new GameObject().AddComponent<PlayerPositionMono>();
-                playerPositionMono.playerSpawnedPoint =lanePositionMono.playerSpawnedPosition;
+                playerPositionMono.playerSpawnedPoint = lanePositionMono.playerSpawnedPosition;
                 playerPositionMono.attackEffectDespawnedPoint = lanePositionMono.attackEffectDespawnedPoint;
                 return playerPositionMono;
             }
+
             builder.RegisterInstance(new PlayerPositionMonoBuilder(builder, SetUpPlayerPositionMono()));
-            
+
             builder.RegisterInstance(new PlayerParamDataBuilder(builder, playerParamManager));
 
             /*tower*/
