@@ -83,5 +83,16 @@ namespace Daipan.LevelDesign.Comment.Scripts
             return _commentPosition.AntiCommentSpawnArea.gameObject.transform.position + band;
 
         }
+        
+        
+        public CommentParamDependOnViewer GetCommentParamDependOnViewer()
+        {
+            return _commentParamManager.commentParamDependOnViewer;
+        }
+
+        public AntiCommentParamDependOnViewer GetAntiCommentParamDependOnViewer()
+        {
+            return _commentParamManager.antiCommentParamDependOnViewer;
+        }
     }
 }

@@ -1,11 +1,14 @@
 #nullable enable
 using System.Collections.Generic;
 using System.Linq;
+using Daipan.Comment.Scripts;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Enemy.Scripts;
+using Daipan.LevelDesign.Comment.Scripts;
 using Daipan.Player.Interfaces;
 using Daipan.Player.LevelDesign.Scripts;
 using Daipan.Player.MonoScripts;
+using Daipan.Stream.Scripts;
 using UnityEngine;
 
 namespace Daipan.Player.Scripts
@@ -15,12 +18,25 @@ namespace Daipan.Player.Scripts
         readonly PlayerParamDataContainer _playerParamDataContainer;
         readonly ComboCounter _comboCounter;
         readonly EnemyCluster _enemyCluster;
+        readonly ViewerNumber _viewerNumber;
+        readonly CommentSpawner _commentSpawner;
+        readonly CommentParamsServer _commentParamsServer;
         
-        public PlayerAttackEffectBuilder(PlayerParamDataContainer playerParamDataContainer, ComboCounter comboCounter, EnemyCluster enemyCluster)
+        public PlayerAttackEffectBuilder(
+            PlayerParamDataContainer playerParamDataContainer,
+            ComboCounter comboCounter,
+            EnemyCluster enemyCluster,
+            ViewerNumber viewerNumber,
+            CommentSpawner commentSpawner,
+            CommentParamsServer commentParamsServer
+            )
         {
             _playerParamDataContainer = playerParamDataContainer;
             _comboCounter = comboCounter;
             _enemyCluster = enemyCluster;
+            _viewerNumber = viewerNumber;
+            _commentSpawner = commentSpawner;
+            _commentParamsServer = commentParamsServer;
         }
 
         public PlayerAttackEffectMono Build(PlayerAttackEffectMono effect, PlayerMono playerMono ,List<AbstractPlayerViewMono?> playerViewMonos, PlayerColor playerColor)
@@ -33,12 +49,32 @@ namespace Daipan.Player.Scripts
                 {
                     OnAttackEnemy(_playerParamDataContainer, playerViewMonos, playerColor, args.EnemyMono);
                     _comboCounter.IncreaseCombo();
+                    
+                    // 視聴者数が一定数以上の時、コメントを生成する
+                    var commentParam = _commentParamsServer.GetCommentParamDependOnViewer();
+                    if (commentParam.viewerAmount < _viewerNumber.Number)
+                    {
+                        for (int i = 0; i < commentParam.commentAmount; i++)
+                        {
+                            _commentSpawner.SpawnCommentByType(CommentEnum.Normal);
+                        }
+                    }
                 }
                 else
                 {
                     Debug.Log($"攻撃対象が{PlayerAttackModule.GetTargetEnemyEnum(playerColor)}ではないです args.EnemyMono?.EnemyEnum: {args.EnemyMono?.EnemyEnum}");
                     _comboCounter.ResetCombo();
                     // todo : 特攻処理を書く
+                    
+                    // 視聴者数が一定数以上の時、アンチコメントを生成する
+                    var commentParam = _commentParamsServer.GetCommentParamDependOnViewer();
+                    if (commentParam.viewerAmount < _viewerNumber.Number)
+                    {
+                        for (int i = 0; i < commentParam.commentAmount; i++)
+                        {
+                            _commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
+                        }
+                    }
                 }
             };
             return effect;
