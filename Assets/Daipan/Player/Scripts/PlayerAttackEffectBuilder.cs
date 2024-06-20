@@ -23,7 +23,7 @@ namespace Daipan.Player.Scripts
             _enemyCluster = enemyCluster;
         }
 
-        public PlayerAttackEffectMono Build(PlayerAttackEffectMono effect, PlayerMono playerMono ,List<AbstractPlayerViewMono> playerViewMonos, PlayerColor playerColor)
+        public PlayerAttackEffectMono Build(PlayerAttackEffectMono effect, PlayerMono playerMono ,List<AbstractPlayerViewMono?> playerViewMonos, PlayerColor playerColor)
         {
             effect.SetUp(_playerParamDataContainer.GetPlayerParamData(playerColor),
                 () => _enemyCluster.NearestEnemy(playerMono.transform.position));

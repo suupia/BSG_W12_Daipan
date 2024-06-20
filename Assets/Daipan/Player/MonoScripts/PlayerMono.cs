@@ -70,7 +70,7 @@ namespace Daipan.Player.MonoScripts
                 : sameColorPlayerViewMono.transform.position.y;
             var spawnPosition = new Vector3(sameColorPlayerViewMono.transform.position.x, spawnPositionY, 0);
 
-            var effect = _playerAttackEffectSpawner.SpawnEffect(spawnPosition, Quaternion.identity);
+            var effect = _playerAttackEffectSpawner.SpawnEffect(this, playerViewMonos,playerColor, spawnPosition, Quaternion.identity);
             effect.SetUp(_playerParamDataContainer.GetPlayerParamData(playerColor),
                 () => _enemyCluster.NearestEnemy(transform.position));
             effect.OnHit += (sender, args) =>
