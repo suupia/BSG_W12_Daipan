@@ -18,7 +18,6 @@ namespace Daipan.Enemy.MonoScripts
         EnemyAttackDecider _enemyAttackDecider = null!;
         EnemyCluster _enemyCluster = null!;
         EnemyHp _enemyHp = null!;
-        EnemyParamModifyWithTimer _enemyParamModifyWithTimer = null!;
         EnemySpawnPointData _enemySpawnPointData = null!;
         EnemyParamWarpContainer _enemyParamWarpContainer = null!;
         PlayerHolder _playerHolder = null!;
@@ -31,8 +30,10 @@ namespace Daipan.Enemy.MonoScripts
             // 攻撃範囲よりプレイヤーとの距離が大きいときだけ動く
             if (transform.position.x - _playerHolder.PlayerMono.transform.position.x >=
                 _enemyParamWarpContainer.GetEnemyParamData(EnemyEnum).GetAttackRange())
-                transform.position += Vector3.left * (float)_enemyParamModifyWithTimer.GetSpeedRate(EnemyEnum) *
-                                      Time.deltaTime;
+            {
+                float moveSpeed = (float)_enemyParamWarpContainer.GetEnemyParamData(EnemyEnum).GetMoveSpeedPreSec();
+                transform.position += Time.deltaTime * moveSpeed * Vector3.left;
+            }
 
             if (transform.position.x < _enemySpawnPointData.GetEnemyDespawnedPoint().x)
                 _enemyCluster.Remove(this, false); // Destroy when out of screen
@@ -53,14 +54,12 @@ namespace Daipan.Enemy.MonoScripts
         public void Initialize(
             EnemyCluster enemyCluster,
             PlayerHolder playerHolder,
-            EnemyParamModifyWithTimer enemyParamModifyWithTimer,
             EnemySpawnPointData enemySpawnPointData,
             EnemyParamWarpContainer enemyParamWarpContainer
         )
         {
             _enemyCluster = enemyCluster;
             _playerHolder = playerHolder;
-            _enemyParamModifyWithTimer = enemyParamModifyWithTimer;
             _enemySpawnPointData = enemySpawnPointData;
             _enemyParamWarpContainer = enemyParamWarpContainer;
         }

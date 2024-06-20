@@ -25,12 +25,16 @@ namespace Daipan.Enemy.LevelDesign.Scripts
                 GetEnemySpawnedEnemyEnums = () => GetEnemyPositionContainer(enemyPositionMono, waveState)
                     .enemySpawnedPoints.Select(x => x.enemyEnum).ToList(),
                 GetEnemyDespawnedPoint = () => enemyPositionMono.enemyDespawnedPoint.transform.position,
+                GetEnemySpawnRatios = () => GetEnemyPositionContainer(enemyPositionMono, waveState)
+                    .enemySpawnedPoints.Select(x => (double)x.enemySpawnRatio).ToList()
             };
             builder.RegisterInstance(data);
         }
-        
+
         static EnemySpawnedPositionContainer GetEnemyPositionContainer
-            (EnemyPositionMono enemyPositionMono, WaveState waveState) 
-            => enemyPositionMono.enemySpawnedPositionContainers[waveState.CurrentWave];
+            (EnemyPositionMono enemyPositionMono, WaveState waveState)
+        {
+            return enemyPositionMono.enemySpawnedPositionContainers[waveState.CurrentWave];
+        }
     }
 }
