@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Daipan.LevelDesign.Player.Scripts
+namespace Daipan.Player.LevelDesign.Scripts
 {
     [CreateAssetMenu(fileName = "PlayerParamManager", menuName = "ScriptableObjects/Player/PlayerParamManager",
         order = 1)]

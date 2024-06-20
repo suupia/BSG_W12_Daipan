@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Daipan.Battle.interfaces;
-using Daipan.LevelDesign.Player.Scripts;
+using Daipan.Player.LevelDesign.Scripts;
 using Daipan.Player.Scripts;
 using NUnit.Framework;
 using UnityEngine;

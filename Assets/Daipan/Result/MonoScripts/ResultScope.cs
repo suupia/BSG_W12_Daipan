@@ -8,7 +8,7 @@ using Daipan.Enemy.MonoScripts;
 using Daipan.Enemy.Scripts;
 using Daipan.LevelDesign.Comment.Scripts;
 using Daipan.LevelDesign.Enemy.Scripts;
-using Daipan.LevelDesign.Player.Scripts;
+using Daipan.Player.LevelDesign.Scripts;
 using Daipan.LevelDesign.Tower.Scripts;
 using Daipan.Player.Scripts;
 using Daipan.Stream.MonoScripts;

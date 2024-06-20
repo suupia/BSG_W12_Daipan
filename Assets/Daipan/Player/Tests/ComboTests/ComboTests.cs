@@ -30,5 +30,12 @@ namespace Daipan.Player.Tests.ComboTests
             Assert.AreEqual(0, comboCounter.ComboCount);
             
         }
+
+        [Test]
+        public void MultiplyViewersWithSequentialCombo()
+        {
+            var comboCounter = new ComboCounter();
+            
+        }
     }
 }

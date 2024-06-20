@@ -8,7 +8,7 @@ using UnityEngine;
 using VContainer;
 
 
-namespace Daipan.LevelDesign.Player.Scripts
+namespace Daipan.Player.LevelDesign.Scripts
 {
     public class PlayerParamDataBuilder
     {

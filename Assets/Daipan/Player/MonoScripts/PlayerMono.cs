@@ -6,7 +6,7 @@ using Daipan.Battle.interfaces;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Enemy.Scripts;
 using Daipan.InputSerial.Scripts;
-using Daipan.LevelDesign.Player.Scripts;
+using Daipan.Player.LevelDesign.Scripts;
 using Daipan.Player.Interfaces;
 using Daipan.Player.Scripts;
 using Daipan.Stream.Scripts;

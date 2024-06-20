@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Enemy.Scripts;
-using Daipan.LevelDesign.Player.Scripts;
+using Daipan.Player.LevelDesign.Scripts;
 using Daipan.Player.Scripts;
 using UnityEngine;
 

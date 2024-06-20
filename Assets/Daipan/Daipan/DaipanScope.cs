@@ -14,7 +14,7 @@ using Daipan.InputSerial.Scripts;
 using Daipan.LevelDesign.Battle.Scripts;
 using Daipan.LevelDesign.Comment.Scripts;
 using Daipan.LevelDesign.Enemy.Scripts;
-using Daipan.LevelDesign.Player.Scripts;
+using Daipan.Player.LevelDesign.Scripts;
 using Daipan.LevelDesign.Stream;
 using Daipan.LevelDesign.Tower.Scripts;
 using Daipan.Player.MonoScripts;

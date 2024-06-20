@@ -7,10 +7,8 @@ using UnityEngine;
 using UnityEngine.Networking.PlayerConnection;
 using UnityEngine.Serialization;
 
-namespace Daipan.LevelDesign.Player.Scripts
+namespace Daipan.Player.LevelDesign.Scripts
 {
-
-
 
     [Serializable]
     public sealed class PlayerParam
