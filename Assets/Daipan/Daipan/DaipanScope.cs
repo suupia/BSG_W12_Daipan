@@ -1,10 +1,11 @@
 using System.Linq;
+using Daipan.Battle.scripts;
 using Daipan.Comment.MonoScripts;
 using Daipan.Comment.Scripts;
-using Daipan.Core;
 using Daipan.Core.Interfaces;
 using Daipan.Core.Scripts;
 using Daipan.Enemy.Interfaces;
+using Daipan.Enemy.LevelDesign.Scripts;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Enemy.Scripts;
 using Daipan.InputSerial.Scripts;
@@ -103,7 +104,8 @@ namespace Daipan.Daipan
             builder.RegisterInstance(enemyParamManager);
             builder.RegisterInstance(enemyParamManager.enemyLevelDesignParam);
             builder.Register<EnemyParamModifyWithTimer>(Lifetime.Scoped);
-            builder.RegisterInstance(new EnemyParamDataBuilder(builder, enemyParamManager));
+            builder.Register<EnemyTimeLineParamWrapContainer>(Lifetime.Scoped);
+            builder.Register<EnemyParamWarpContainer>(Lifetime.Scoped);
             builder.RegisterInstance(new EnemyLevelDesignParamDataBuilder(builder, enemyParamManager.enemyLevelDesignParam));
             builder.RegisterInstance(new EnemyTimeLineParamDataBuilder(builder, enemyParamManager));
 
@@ -111,14 +113,15 @@ namespace Daipan.Daipan
             {
                 var lanePositionMono = Object.FindObjectOfType<LanePositionMono>();
                 var enemyPositionMono = new GameObject().AddComponent<EnemyPositionMono>();
-                enemyPositionMono.enemySpawnedPoints =
+                enemyPositionMono.enemySpawnedPositionContainers[0].enemySpawnedPoints =
                     lanePositionMono.lanePositions.Select(x => x.enemySpawnedPosition).ToList();
                 enemyPositionMono.enemyDespawnedPoint = lanePositionMono.enemyDespawnedPoint;
                 // Debug.Log($"enemySpawnedPoints : {string.Join(",", enemyPositionMono.enemySpawnedPoints
                 //     .Select(x => x.enemySpawnTransformY.position).ToArray())}");
                 return enemyPositionMono;
             }
-            builder.RegisterInstance(new EnemyPositionMonoBuilder(builder, SetUpEnemyPositionMono()));
+            // builder.Register<WaveState>(Lifetime.Scoped); // todo:追加する
+            builder.RegisterInstance(new EnemyPositionMonoBuilder(builder, SetUpEnemyPositionMono(), new WaveState()));
 
 
             /*stream*/

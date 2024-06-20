@@ -2,7 +2,7 @@
 using System;
 using System.Reflection;
 
-namespace Daipan.LevelDesign.Enemy.Scripts
+namespace Daipan.Enemy.Scripts
 {
     public enum EnemyEnum
     {
@@ -13,16 +13,17 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         [IsBoss(true)] RedBoss,
         [IsBoss(true)] BlueBoss,
         [IsBoss(true)] YellowBoss,
-        [IsSpecial(true)] Special,
+        [IsSpecial(true)] Special
     }
-    
-    public static class AnyTypesExtensions{
+
+    public static class AnyTypesExtensions
+    {
         public static bool? IsBoss(this EnemyEnum self)
         {
             var fieldInfo = self.GetType().GetField(self.ToString());
             return fieldInfo?.GetCustomAttribute<IsBossAttribute>()?.IsBoss;
         }
-        
+
         public static bool? IsSpecial(this EnemyEnum self)
         {
             var fieldInfo = self.GetType().GetField(self.ToString());
@@ -31,18 +32,25 @@ namespace Daipan.LevelDesign.Enemy.Scripts
     }
 
     [AttributeUsage(AttributeTargets.Field, Inherited = false, AllowMultiple = false)]
-    class IsBossAttribute : Attribute
+    internal class IsBossAttribute : Attribute
     {
-        public bool IsBoss {get;}
-        public IsBossAttribute(bool isBoss) : base() => this.IsBoss = isBoss;
+        public bool IsBoss { get; }
+
+        public IsBossAttribute(bool isBoss) : base()
+        {
+            IsBoss = isBoss;
+        }
     }
 
 
     [AttributeUsage(AttributeTargets.Field, Inherited = false, AllowMultiple = false)]
-    class IsSpecialAttribute : Attribute
+    internal class IsSpecialAttribute : Attribute
     {
-        public bool IsSpecial {get;}
-        public IsSpecialAttribute(bool isSpecial) : base() => this.IsSpecial = isSpecial;
-    }
+        public bool IsSpecial { get; }
 
+        public IsSpecialAttribute(bool isSpecial) : base()
+        {
+            IsSpecial = isSpecial;
+        }
+    }
 }

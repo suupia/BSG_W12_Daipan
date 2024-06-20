@@ -1,6 +1,7 @@
 #nullable enable
 using System;
 using System.Collections.Generic;
+using Daipan.Enemy.LevelDesign.Scripts;
 using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.Player.MonoScripts;
 using UnityEngine;

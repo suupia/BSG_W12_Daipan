@@ -1,8 +1,10 @@
 #nullable enable
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Daipan.Core.Interfaces;
 using Daipan.Enemy.Interfaces;
+using Daipan.Enemy.LevelDesign.Scripts;
 using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.Stream.Scripts;
 using Daipan.Utility.Scripts;
@@ -18,29 +20,23 @@ namespace Daipan.Enemy.Scripts
     {
         readonly IEnemyMonoBuilder _enemyMonoBuilder;
         readonly EnemyCluster _enemyCluster;
-        readonly IrritatedValue _irritatedValue;
         readonly EnemyParamModifyWithTimer _enemyParamModifyWithTimer;
         readonly EnemySpawnPointData _enemySpawnPointData;
-        readonly EnemyLevelDesignParamData _enemyLevelDesignParamData;
         float _timer;
 
         [Inject]
         public EnemySpawner(
             IObjectResolver container,
             EnemyCluster enemyCluster,
-            IrritatedValue irritatedValue,
             IEnemyMonoBuilder enemyMonoBuilder,
             EnemyParamModifyWithTimer enemyParamModifyWithTimer,
-            EnemySpawnPointData enemySpawnPointData,
-            EnemyLevelDesignParamData enemyLevelDesignParamData
-            )
+            EnemySpawnPointData enemySpawnPointData
+        )
         {
             _enemyCluster = enemyCluster;
             _enemyMonoBuilder = enemyMonoBuilder;
-            _irritatedValue = irritatedValue;
             _enemyParamModifyWithTimer = enemyParamModifyWithTimer;
             _enemySpawnPointData = enemySpawnPointData;
-            _enemyLevelDesignParamData = enemyLevelDesignParamData;
         }
 
         void IStart.Start()
@@ -51,7 +47,7 @@ namespace Daipan.Enemy.Scripts
         void IUpdate.Update()
         {
             _timer += Time.deltaTime;
-            if (_timer > _enemyParamModifyWithTimer.GetSpawnDelaySec())
+            if (_timer > _enemyParamModifyWithTimer.GetSpawnIntervalSec())
             {
                 SpawnEnemy();
                 _timer = 0;
@@ -61,31 +57,20 @@ namespace Daipan.Enemy.Scripts
         void SpawnEnemy()
         {
             var tuple = GetSpawnedPositionRandom();
-            var enemyObject = _enemyMonoBuilder.Build(tuple.enemyEnum, tuple.spawnedPos , Quaternion.identity);
+            var enemyObject = _enemyMonoBuilder.Build(tuple.enemyEnum, tuple.spawnedPos, Quaternion.identity);
             _enemyCluster.Add(enemyObject);
         }
 
-        // Todo : タプル返す、これでいいのか？
         (Vector3 spawnedPos, EnemyEnum enemyEnum) GetSpawnedPositionRandom()
         {
-            List<Vector3> position = new();
-            List<EnemyEnum> enums = new();
-            List<double> ratio = new();
+            var positions = _enemySpawnPointData.GetEnemySpawnedPointXs()
+                .Zip(_enemySpawnPointData.GetEnemySpawnedPointYs(), (x, y) => new Vector3(x.x, y.y))
+                .ToList();
+            var enums = _enemySpawnPointData.GetEnemySpawnedEnemyEnums();
             
-            for(int i=0; i<_enemySpawnPointData.GetEnemySpawnedPointXs().Count; i++)
-            {
-                var spawnPoint = new Vector3(_enemySpawnPointData.GetEnemySpawnedPointXs()[i].x, _enemySpawnPointData.GetEnemySpawnedPointYs()[i].y);
-                position.Add(spawnPoint);
-                enums.Add(_enemySpawnPointData.GetEnemySpawnedEnemyEnums()[i]);
-                ratio.Add(_enemySpawnPointData.GetEnemySpawnRatios()[i]);
-            }
-
-            Debug.Log($"ratio.Count : {ratio.Count}");
-            var rand = Randoms.RandomByRatios(ratio,Random.value);
-            Debug.Log($"position.Count : {position.Count}, rand : {rand}");
-            return (position[rand], enums[rand]);
+            var randomIndex = Randoms.RandomByRatios(_enemySpawnPointData.GetEnemySpawnRatios(), Random.value);
+            return (positions[randomIndex], enums[randomIndex]);
         }
-
-
+        
     }
 }

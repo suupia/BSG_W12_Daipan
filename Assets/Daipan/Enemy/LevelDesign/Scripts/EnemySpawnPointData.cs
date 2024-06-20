@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using Daipan.Enemy.Scripts;
 
-namespace Daipan.LevelDesign.Enemy.Scripts
+namespace Daipan.Enemy.LevelDesign.Scripts
 {
    
     public class EnemySpawnPointData

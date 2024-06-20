@@ -8,17 +8,17 @@ namespace Daipan.Enemy.Scripts
 {
     public class EnemyAttack
     {
-        readonly EnemyParamData _enemyParamData;
-        public EnemyAttack(EnemyParamData enemyParamData)
+        readonly EnemyParamWarp _enemyParamWarp;
+        public EnemyAttack(EnemyParamWarp enemyParamWarp)
         {
-            _enemyParamData = enemyParamData;
+            _enemyParamWarp = enemyParamWarp;
         }
         
         public void Attack(IPlayerHp playerHp)
         {
             playerHp.SetHp(
-                new DamageArgs(_enemyParamData.GetAttackAmount(),
-                _enemyParamData.GetEnemyEnum())
+                new DamageArgs(_enemyParamWarp.GetAttackAmount(),
+                _enemyParamWarp.GetEnemyEnum())
                 );
         }
     } 
