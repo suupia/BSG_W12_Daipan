@@ -45,7 +45,7 @@ namespace Daipan.Daipan
         [FormerlySerializedAs("enemyParamsManager")] [SerializeField]
         EnemyParamManager enemyParamManager = null!;
 
-        [SerializeField] CommentParamsManager commentParamsManager = null!;
+        [FormerlySerializedAs("commentParamsManager")] [SerializeField] CommentParamManager commentParamManager = null!;
         [SerializeField] IrritatedParams irritatedParams = null!;
         [SerializeField] TowerParams towerParams = null!;
         [SerializeField] ComboParamManager comboParamManager = null!;
@@ -91,7 +91,7 @@ namespace Daipan.Daipan
             // Tower
             builder.Register<TowerPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<TowerMono>>();
             builder.Register<IStart, TowerSpawner>(Lifetime.Scoped);
-
+ 
             // Enemy
             builder.Register<EnemyPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<EnemyMono>>();
             builder.Register<EnemyDomainBuilder>(Lifetime.Scoped).As<IEnemyDomainBuilder>();
@@ -114,7 +114,7 @@ namespace Daipan.Daipan
             /*comment*/
             builder.Register<CommentParamsServer>(Lifetime.Scoped);
             builder.RegisterComponentInHierarchy<CommentPosition>();
-            builder.RegisterInstance(commentParamsManager);
+            builder.RegisterInstance(commentParamManager);
 
             /*enemy*/
             builder.RegisterInstance(enemyParamManager);

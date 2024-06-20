@@ -14,14 +14,14 @@ namespace Daipan.LevelDesign.Comment.Scripts
 {
     public class CommentParamsServer
     {
-        readonly CommentParamsManager _commentParamsManager;
+        readonly CommentParamManager _commentParamManager;
         readonly CommentPosition _commentPosition;
         
 
         [Inject]
-        CommentParamsServer (CommentParamsManager commentParamsManager, CommentPosition commentPosition)
+        CommentParamsServer (CommentParamManager commentParamManager, CommentPosition commentPosition)
         {
-            _commentParamsManager = commentParamsManager;
+            _commentParamManager = commentParamManager;
             _commentPosition = commentPosition;
         }
 
@@ -30,27 +30,27 @@ namespace Daipan.LevelDesign.Comment.Scripts
 
         public float GetSpeed()
         {
-            return _commentParamsManager.commentSpeed;
+            return _commentParamManager.commentSpeed;
         }
 
         public int GetViewerDiffCommentNumber()
         {
-            return _commentParamsManager.diffCommentViewer;
+            return _commentParamManager.diffCommentViewer;
         }
         public int GetViewerDiffAntiCommentNumber()
         {
-            return _commentParamsManager.diffAntiCommentViewer;
+            return _commentParamManager.diffAntiCommentViewer;
         }
 
         public string GetRandomCommentWord()
         {
-            int index = (int)(Random.value * _commentParamsManager.CommentWords.Count);
-            return _commentParamsManager.CommentWords[index];
+            int index = (int)(Random.value * _commentParamManager.CommentWords.Count);
+            return _commentParamManager.CommentWords[index];
         }
         public string GetRandomAntiCommentWord()
         {
-            int index = (int)(Random.value * _commentParamsManager.AntiCommentWords.Count);
-            return _commentParamsManager.AntiCommentWords[index];
+            int index = (int)(Random.value * _commentParamManager.AntiCommentWords.Count);
+            return _commentParamManager.AntiCommentWords[index];
         }
 
 
