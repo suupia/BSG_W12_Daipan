@@ -1,6 +1,7 @@
 #nullable enable
 using Daipan.Comment.Scripts;
 using Daipan.Enemy.Scripts;
+using Daipan.Streamer.Scripts;
 using Daipan.LevelDesign.Enemy.Scripts;
 using UnityEngine;
 
@@ -15,6 +16,7 @@ namespace Daipan.Stream.Scripts
         readonly IrritatedValue _irritatedValue;
         readonly StreamStatus _streamStatus;
         readonly ViewerNumber _viewerNumber;
+        readonly StreamerViewMono _streamerViewMono;
 
         public DaipanExecutor(
             DaipanParam daipanParam,
@@ -23,7 +25,8 @@ namespace Daipan.Stream.Scripts
             IrritatedValue irritatedValue,
             EnemyCluster enemyCluster,
             CommentCluster commentCluster,
-            AntiCommentCluster antiCommentCluster
+            AntiCommentCluster antiCommentCluster,
+            StreamerViewMono streamerViewMono
         )
         {
             _daipanParam = daipanParam;
@@ -33,6 +36,7 @@ namespace Daipan.Stream.Scripts
             _enemyCluster = enemyCluster;
             _commentCluster = commentCluster;
             _antiCommentCluster = antiCommentCluster;
+            _streamerViewMono = streamerViewMono;
         }
         public void DaiPan()
         {
@@ -42,6 +46,7 @@ namespace Daipan.Stream.Scripts
                 Debug.Log($"Daipan!");
                 _enemyCluster.Daipaned();
                 _antiCommentCluster.BlownAway();
+                _streamerViewMono.Daipan();
                 
                 // 台パンしたら怒りゲージは0になる
                 _irritatedValue.DecreaseValue(_irritatedValue.Value);

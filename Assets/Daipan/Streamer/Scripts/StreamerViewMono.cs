@@ -25,7 +25,7 @@ namespace Daipan.Streamer.Scripts
 
         public void Daipan()
         {
-            
+            animator.SetBool("IsDaipan", true);
         }
     }
 }
