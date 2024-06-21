@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Character_Normal_Motion
+  m_Name: Streamer_Normal_Motion
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
