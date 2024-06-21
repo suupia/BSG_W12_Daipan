@@ -19,7 +19,13 @@ namespace Daipan.Streamer.Scripts
 
         void Update()
         {
-            animator.SetBool("IsAngry", _irritatedValue.IsFull);
+            animator.SetInteger("IrritatedStage", _irritatedValue.CurrentIrritatedStage);
+            Debug.Log($"CurrentIrritatedStage : {_irritatedValue.CurrentIrritatedStage}");
+        }
+
+        public void Daipan()
+        {
+            animator.SetBool("IsDaipan", true);
         }
     }
 }
