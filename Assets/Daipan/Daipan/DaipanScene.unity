@@ -799,7 +799,7 @@ MonoBehaviour:
   streamParam: {fileID: 11400000, guid: 1b8bd700307d7c748a87d7ab4b98611c, type: 2}
   playerParamManager: {fileID: 11400000, guid: 651f7884d93c0421cb78640c6965c64a, type: 2}
   enemyParamManager: {fileID: 11400000, guid: d5c28246bf0490340a52cc25d5aafc71, type: 2}
-  commentParamsManager: {fileID: 11400000, guid: b83c7fae0686b214fb53fc224da8567a, type: 2}
+  commentParamManager: {fileID: 11400000, guid: b83c7fae0686b214fb53fc224da8567a, type: 2}
   irritatedParams: {fileID: 11400000, guid: 3f5d33a9375f2154fb5cc4220a5c60f0, type: 2}
   towerParams: {fileID: 11400000, guid: a3fb232ddade9e043b16e8c587a459ff, type: 2}
   comboParamManager: {fileID: 11400000, guid: b27dc473148d44553bb8e9accb9ad02e, type: 2}
@@ -4590,18 +4590,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5698833056402606121, guid: 30e91696e7cda4ce7b49b5cd15e11759, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5698833056402606121, guid: 30e91696e7cda4ce7b49b5cd15e11759, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5698833056402606121, guid: 30e91696e7cda4ce7b49b5cd15e11759, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5698833056402606121, guid: 30e91696e7cda4ce7b49b5cd15e11759, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.5
       objectReference: {fileID: 0}
@@ -4644,10 +4632,6 @@ PrefabInstance:
     - target: {fileID: 7019384296459631377, guid: 30e91696e7cda4ce7b49b5cd15e11759, type: 3}
       propertyPath: m_Name
       value: Streamer
-      objectReference: {fileID: 0}
-    - target: {fileID: 7019384296459631377, guid: 30e91696e7cda4ce7b49b5cd15e11759, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
