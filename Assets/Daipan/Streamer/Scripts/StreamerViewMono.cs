@@ -20,7 +20,7 @@ namespace Daipan.Streamer.Scripts
         void Update()
         {
             animator.SetInteger("IrritatedStage", _irritatedValue.CurrentIrritatedStage);
-            Debug.Log($"CurrentIrritatedStage : {_irritatedValue.CurrentIrritatedStage}");
+            //Debug.Log($"CurrentIrritatedStage : {_irritatedValue.CurrentIrritatedStage}");
         }
 
         public void Daipan()
