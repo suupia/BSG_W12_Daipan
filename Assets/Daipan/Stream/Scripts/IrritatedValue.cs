@@ -22,16 +22,16 @@ namespace Daipan.Stream.Scripts
         float DecreasedValue { get; set; }
         float IncreasedValue { get; set; }
         public IReadOnlyList<float> RatioTable => _irritatedParams.RatioTable;
-        public float CurrentIrritatedStage
+        public int CurrentIrritatedStage
         {
             get
             {
                 for(int i = 0; i < RatioTable.Count; i++)
                 {
-                    if (Ratio >= RatioTable[i]) continue;
+                    if (Ratio > RatioTable[i]) continue;
                     return i;
                 }
-                return RatioTable.Count;
+                return RatioTable.Count - 1;
             }
         }
             
