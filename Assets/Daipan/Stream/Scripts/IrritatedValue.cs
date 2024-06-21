@@ -1,5 +1,6 @@
 #nullable enable
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Daipan.Stream.Scripts
@@ -21,6 +22,19 @@ namespace Daipan.Stream.Scripts
         float DecreasedValue { get; set; }
         float IncreasedValue { get; set; }
         public IReadOnlyList<float> RatioTable => _irritatedParams.RatioTable;
+        public float CurrentIrritatedStage
+        {
+            get
+            {
+                for(int i = 0; i < RatioTable.Count; i++)
+                {
+                    if (Ratio >= RatioTable[i]) continue;
+                    return i;
+                }
+                return RatioTable.Count;
+            }
+        }
+            
 
         public void IncreaseValue(float amount)
         {
