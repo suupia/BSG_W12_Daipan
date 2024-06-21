@@ -14,18 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Children:
   - {fileID: 3}
+  - {fileID: 10}
   - {fileID: 14}
-  - {fileID: 18}
   m_Position:
     serializedVersion: 2
     x: 0
     y: 30
     width: 1440
     height: 850
-  m_MinSize: {x: 400, y: 100}
-  m_MaxSize: {x: 32384, y: 16192}
+  m_MinSize: {x: 300, y: 100}
+  m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 799
+  controlID: 4338
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -71,7 +71,7 @@ MonoBehaviour:
     m_SkipHidden: 1
     m_SearchArea: 1
     m_Folders:
-    - Assets
+    - Assets/Daipan/Streamer/Sprites/Streamer
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -79,16 +79,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets
+  - Assets/Daipan/Streamer/Sprites/Streamer
   m_LastFoldersGridSize: -1
   m_LastProjectPath: /Users/ayase/Documents/Unity/BSG_W12_Daipan
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 4e780000
-    m_LastClickedID: 30798
-    m_ExpandedIDs: 000000004e78000050780000527800005478000056780000587800005a7800005c780000
+    scrollPos: {x: 0, y: 32}
+    m_SelectedIDs: 58780000
+    m_LastClickedID: 30808
+    m_ExpandedIDs: 000000004e78000050780000527800005478000056780000587800005a7800005c78000086780000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -104,7 +104,7 @@ MonoBehaviour:
       m_IsRenaming: 0
       m_OriginalEventType: 11
       m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 17}
+      m_ClientGUIView: {fileID: 0}
     m_SearchString: 
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
@@ -141,8 +141,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: ae750000
-    m_LastClickedInstanceID: 30126
+    m_SelectedInstanceIDs: 
+    m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c62300002471000032710000868a000096710000c6cdf7ff2a8900001076000052710000
     m_RenameOverlay:
@@ -168,7 +168,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 0}
+    m_ScrollPosition: {x: 0, y: 456}
     m_GridSize: 64
   m_SkipHiddenPackages: 1
   m_DirectoriesAreaWidth: 189
@@ -186,17 +186,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Children:
   - {fileID: 4}
-  - {fileID: 12}
+  - {fileID: 8}
   m_Position:
     serializedVersion: 2
     x: 0
     y: 0
     width: 765.5
     height: 850
-  m_MinSize: {x: 200, y: 100}
-  m_MaxSize: {x: 16192, y: 16192}
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 915
+  controlID: 4435
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -206,49 +206,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 12010, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Children:
-  - {fileID: 5}
-  - {fileID: 7}
-  m_Position:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 765.5
-    height: 443.5
-  m_MinSize: {x: 200, y: 50}
-  m_MaxSize: {x: 16192, y: 8096}
-  vertical: 0
-  controlID: 916
---- !u!114 &5
-MonoBehaviour:
-  m_ObjectHideFlags: 52
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: SceneView
+  m_Name: GameView
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 252.5
-    height: 443.5
+    width: 765.5
+    height: 407
   m_MinSize: {x: 101, y: 121}
   m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 6}
   m_Panes:
+  - {fileID: 5}
   - {fileID: 6}
-  m_Selected: 0
-  m_LastSelected: 0
---- !u!114 &6
+  - {fileID: 7}
+  m_Selected: 1
+  m_LastSelected: 2
+--- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -270,7 +247,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 30
-    width: 251.5
+    width: 764.5
     height: 422.5
   m_SerializedDataModeController:
     m_DataMode: 0
@@ -630,9 +607,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0, y: 0, z: 0}
+    m_Target: {x: 1.1218413, y: -0.59125304, z: 0.007180144}
     speed: 2
-    m_Value: {x: -7, y: -1.02, z: 0}
+    m_Value: {x: 1.1218413, y: -0.59125304, z: 0.007180144}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -682,9 +659,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 10
+    m_Target: 9.281985
     speed: 2
-    m_Value: 10
+    m_Value: 9.281985
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -709,7 +686,7 @@ MonoBehaviour:
   m_SceneVisActive: 1
   m_LastLockedObject: {fileID: 0}
   m_ViewIsLockedToObject: 0
---- !u!114 &7
+--- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -718,27 +695,96 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: AnimatorControllerTool
+  m_Script: {fileID: 12015, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
   m_EditorClassIdentifier: 
-  m_Children: []
-  m_Position:
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_TitleContent:
+    m_Text: Game
+    m_Image: {fileID: 4621777727084837110, guid: 0000000000000000d000000000000000, type: 0}
+    m_Tooltip: 
+  m_Pos:
     serializedVersion: 2
-    x: 252.5
-    y: 0
-    width: 513
-    height: 443.5
-  m_MinSize: {x: 102, y: 121}
-  m_MaxSize: {x: 4002, y: 4021}
-  m_ActualView: {fileID: 8}
-  m_Panes:
-  - {fileID: 8}
-  - {fileID: 9}
-  - {fileID: 10}
-  - {fileID: 11}
-  m_Selected: 0
-  m_LastSelected: 2
---- !u!114 &8
+    x: 0
+    y: 30
+    width: 764.5
+    height: 386
+  m_SerializedDataModeController:
+    m_DataMode: 0
+    m_PreferredDataMode: 0
+    m_SupportedDataModes: 
+    isAutomatic: 1
+  m_ViewDataDictionary: {fileID: 0}
+  m_OverlayCanvas:
+    m_LastAppliedPresetName: Default
+    m_SaveData: []
+    m_OverlaysVisible: 1
+  m_SerializedViewNames: []
+  m_SerializedViewValues: []
+  m_PlayModeViewName: GameView
+  m_ShowGizmos: 0
+  m_TargetDisplay: 0
+  m_ClearColor: {r: 0, g: 0, b: 0, a: 0}
+  m_TargetSize: {x: 1298, y: 730}
+  m_TextureFilterMode: 0
+  m_TextureHideFlags: 61
+  m_RenderIMGUI: 1
+  m_EnterPlayModeBehavior: 0
+  m_UseMipMap: 0
+  m_VSyncEnabled: 0
+  m_Gizmos: 0
+  m_Stats: 0
+  m_SelectedSizes: 01000000000000000000000000000000000000000000000000000000000000000000000000000000
+  m_ZoomArea:
+    m_HRangeLocked: 0
+    m_VRangeLocked: 0
+    hZoomLockedByDefault: 0
+    vZoomLockedByDefault: 0
+    m_HBaseRangeMin: -324.5
+    m_HBaseRangeMax: 324.5
+    m_VBaseRangeMin: -182.5
+    m_VBaseRangeMax: 182.5
+    m_HAllowExceedBaseRangeMin: 1
+    m_HAllowExceedBaseRangeMax: 1
+    m_VAllowExceedBaseRangeMin: 1
+    m_VAllowExceedBaseRangeMax: 1
+    m_ScaleWithWindow: 0
+    m_HSlider: 0
+    m_VSlider: 0
+    m_IgnoreScrollWheelUntilClicked: 0
+    m_EnableMouseInput: 1
+    m_EnableSliderZoomHorizontal: 0
+    m_EnableSliderZoomVertical: 0
+    m_UniformScale: 1
+    m_UpDirection: 1
+    m_DrawArea:
+      serializedVersion: 2
+      x: 0
+      y: 21
+      width: 764.5
+      height: 365
+    m_Scale: {x: 1, y: 1}
+    m_Translation: {x: 382.25, y: 182.5}
+    m_MarginLeft: 0
+    m_MarginRight: 0
+    m_MarginTop: 0
+    m_MarginBottom: 0
+    m_LastShownAreaInsideMargins:
+      serializedVersion: 2
+      x: -382.25
+      y: -182.5
+      width: 764.5
+      height: 365
+    m_MinimalGUI: 1
+  m_defaultScale: 1
+  m_LastWindowPixelSize: {x: 1529, y: 772}
+  m_ClearInEditMode: 1
+  m_NoCameraWarning: 1
+  m_LowResolutionForAspectRatios: 00000000000000000000
+  m_XRRenderMode: 0
+  m_RenderTexture: {fileID: 0}
+--- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -758,9 +804,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 252.5
+    x: 0
     y: 30
-    width: 511
+    width: 764.5
     height: 422.5
   m_SerializedDataModeController:
     m_DataMode: 0
@@ -775,15 +821,32 @@ MonoBehaviour:
   m_ViewTransforms:
     m_KeySerializationHelper:
     - {fileID: -4839855751223980620, guid: 7367c03104935465683cdfc2f561d183, type: 2}
+    - {fileID: 1781664801395075809, guid: fdf3d7884d1e94516952df639a7285bc, type: 2}
     m_ValueSerializationHelper:
-    - e00: 0.6669861
+    - e00: 0.30556095
       e01: 0
       e02: 0
-      e03: -13.119904
+      e03: 89.15863
       e10: 0
-      e11: 0.6669861
+      e11: 0.30556095
       e12: 0
-      e13: 109.3201
+      e13: 160.14194
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    - e00: 0.4536842
+      e01: 0
+      e02: 0
+      e03: -7.684204
+      e10: 0
+      e11: 0.4536842
+      e12: 0
+      e13: 153.18684
       e20: 0
       e21: 0
       e22: 1
@@ -793,9 +856,9 @@ MonoBehaviour:
       e32: 0
       e33: 1
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: 7367c03104935465683cdfc2f561d183, type: 2}
+  m_AnimatorController: {fileID: 9100000, guid: fdf3d7884d1e94516952df639a7285bc, type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: -4839855751223980620, guid: 7367c03104935465683cdfc2f561d183, type: 2}
+  - m_Target: {fileID: 1781664801395075809, guid: fdf3d7884d1e94516952df639a7285bc, type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
   stateMachineGraphGUI: {fileID: 0}
@@ -808,1135 +871,7 @@ MonoBehaviour:
   m_CurrentEditor: 0
   m_LayerEditor:
     m_SelectedLayerIndex: 0
---- !u!114 &9
-MonoBehaviour:
-  m_ObjectHideFlags: 52
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 12071, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_TitleContent:
-    m_Text: Animation
-    m_Image: {fileID: -3237396543322336831, guid: 0000000000000000d000000000000000, type: 0}
-    m_Tooltip: 
-  m_Pos:
-    serializedVersion: 2
-    x: -2111
-    y: -240
-    width: 910
-    height: 677
-  m_SerializedDataModeController:
-    m_DataMode: 0
-    m_PreferredDataMode: 0
-    m_SupportedDataModes: 
-    isAutomatic: 1
-  m_ViewDataDictionary: {fileID: 0}
-  m_OverlayCanvas:
-    m_LastAppliedPresetName: Default
-    m_SaveData: []
-    m_OverlaysVisible: 1
-  m_LockTracker:
-    m_IsLocked: 0
-  m_LastSelectedObjectID: -212966
---- !u!114 &10
-MonoBehaviour:
-  m_ObjectHideFlags: 52
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 12914, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_TitleContent:
-    m_Text: Animator
-    m_Image: {fileID: 1711060831702674872, guid: 0000000000000000d000000000000000, type: 0}
-    m_Tooltip: 
-  m_Pos:
-    serializedVersion: 2
-    x: -2111
-    y: -240
-    width: 910
-    height: 677
-  m_SerializedDataModeController:
-    m_DataMode: 0
-    m_PreferredDataMode: 0
-    m_SupportedDataModes: 
-    isAutomatic: 1
-  m_ViewDataDictionary: {fileID: 0}
-  m_OverlayCanvas:
-    m_LastAppliedPresetName: Default
-    m_SaveData: []
-    m_OverlaysVisible: 1
-  m_ViewTransforms:
-    m_KeySerializationHelper:
-    - {fileID: 2169789383934712858, guid: 012782c4ab07a471e90184d07624d365, type: 2}
-    - {fileID: 5251806468912063749, guid: 4940888e47d3047739df2882aa2ba248, type: 2}
-    - {fileID: -6809296529708534003, guid: f2eb1916e1af6424a8d4661c0686c047, type: 2}
-    - {fileID: -6888241071226555630, guid: 4468fd2fb11aa411687c5362afe124cd, type: 2}
-    - {fileID: -7684948700404153162, guid: 94d45951fc7574d81ba40a5c5d092100, type: 2}
-    - {fileID: -5677961451353378042, guid: 32b17751352774a079d0d608b5dc0b56, type: 2}
-    - {fileID: 2392157859902970044, guid: 2e1f45c120b0c45acada80102a182cfc, type: 2}
-    - {fileID: -4556366846336342083, guid: 83f80b89b841947eab74e1dbfe0ca43c, type: 2}
-    - {fileID: 1641543118319400922, guid: 52f82eb8cb337453eb78bd1a2fedc13b, type: 2}
-    - {fileID: 3862347182040762624, guid: cc415a37616674b73999c43d38c84e6e, type: 2}
-    - {fileID: 2924820367441541354, guid: f70a2f7d5178440eb8f325ca8d1a3176, type: 2}
-    - {fileID: -2234072855413917515, guid: 2c905b92aa26f4a9b90f92701cb32dcb, type: 2}
-    - {fileID: -8961858958162411611, guid: 862ba9238d1074abc8a2052e4fd002c0, type: 2}
-    - {fileID: -6030272443333359595, guid: d38d63db1327444b6ab08a053e605394, type: 2}
-    - {fileID: -4839855751223980620, guid: 7367c03104935465683cdfc2f561d183, type: 2}
-    - {fileID: 5251806468912063749, guid: ef14e8f6d9f014e73a16531da38cc1af, type: 2}
-    m_ValueSerializationHelper:
-    - e00: 0.24505495
-      e01: 0
-      e02: 0
-      e03: 2.7472534
-      e10: 0
-      e11: 0.24505495
-      e12: 0
-      e13: 359.7434
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    - e00: 0.4559091
-      e01: 0
-      e02: 0
-      e03: -7.795471
-      e10: 0
-      e11: 0.4559091
-      e12: 0
-      e13: 147.24545
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    - e00: 0.1363158
-      e01: 0
-      e02: 0
-      e03: 8.184212
-      e10: 0
-      e11: 0.1363158
-      e12: 0
-      e13: 235.41316
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    - e00: 0.1
-      e01: 0
-      e02: 0
-      e03: -52.5
-      e10: 0
-      e11: 0.1
-      e12: 0
-      e13: 238.5
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    - e00: 0.1
-      e01: 0
-      e02: 0
-      e03: -52.5
-      e10: 0
-      e11: 0.1
-      e12: 0
-      e13: 238.5
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    - e00: 0.1363158
-      e01: 0
-      e02: 0
-      e03: 8.184212
-      e10: 0
-      e11: 0.1363158
-      e12: 0
-      e13: 235.41316
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    - e00: 0.1
-      e01: 0
-      e02: 0
-      e03: -5.75
-      e10: 0
-      e11: 0.1
-      e12: 0
-      e13: 234
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    - e00: 0.1
-      e01: 0
-      e02: 0
-      e03: -8.75
-      e10: 0
-      e11: 0.1
-      e12: 0
-      e13: 232.5
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    - e00: 0.21210526
-      e01: 0
-      e02: 0
-      e03: 4.3947372
-      e10: 0
-      e11: 0.21210526
-      e12: 0
-      e13: 228.97105
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    - e00: 0.29157895
-      e01: 0
-      e02: 0
-      e03: 0.42105103
-      e10: 0
-      e11: 0.29157895
-      e12: 0
-      e13: 222.21579
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    - e00: 0.21210526
-      e01: 0
-      e02: 0
-      e03: 4.3947372
-      e10: 0
-      e11: 0.21210526
-      e12: 0
-      e13: 228.97105
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    - e00: 0.21210526
-      e01: 0
-      e02: 0
-      e03: 4.3947372
-      e10: 0
-      e11: 0.21210526
-      e12: 0
-      e13: 228.97105
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    - e00: 0.21210526
-      e01: 0
-      e02: 0
-      e03: 4.3947372
-      e10: 0
-      e11: 0.21210526
-      e12: 0
-      e13: 228.97105
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    - e00: 0.21210526
-      e01: 0
-      e02: 0
-      e03: 4.3947372
-      e10: 0
-      e11: 0.21210526
-      e12: 0
-      e13: 228.97105
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    - e00: 0.9079366
-      e01: 0
-      e02: 0
-      e03: -3.128286
-      e10: 0
-      e11: 0.9079366
-      e12: 0
-      e13: 49.69356
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    - e00: 0.9060548
-      e01: 0
-      e02: 0
-      e03: -211.95396
-      e10: 0
-      e11: 0.9060548
-      e12: 0
-      e13: 44.384254
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-  m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: 4940888e47d3047739df2882aa2ba248, type: 2}
-  m_BreadCrumbs:
-  - m_Target: {fileID: 5251806468912063749, guid: 4940888e47d3047739df2882aa2ba248, type: 2}
-    m_ScrollPosition: {x: 0, y: 0}
-  stateMachineGraph: {fileID: 0}
-  stateMachineGraphGUI: {fileID: 0}
-  blendTreeGraph: {fileID: 0}
-  blendTreeGraphGUI: {fileID: 0}
-  m_AutoLiveLink: 1
-  m_MiniTool: 0
-  m_LockTracker:
-    m_IsLocked: 0
-  m_CurrentEditor: 1
-  m_LayerEditor:
-    m_SelectedLayerIndex: 0
---- !u!114 &11
-MonoBehaviour:
-  m_ObjectHideFlags: 52
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 13401, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_TitleContent:
-    m_Text: Test Runner
-    m_Image: {fileID: 0}
-    m_Tooltip: 
-  m_Pos:
-    serializedVersion: 2
-    x: 303
-    y: 96
-    width: 613.5
-    height: 501.5
-  m_SerializedDataModeController:
-    m_DataMode: 0
-    m_PreferredDataMode: 0
-    m_SupportedDataModes: 
-    isAutomatic: 1
-  m_ViewDataDictionary: {fileID: 0}
-  m_OverlayCanvas:
-    m_LastAppliedPresetName: Default
-    m_SaveData: []
-    m_OverlaysVisible: 1
-  m_Spl:
-    ID: 282
-    splitterInitialOffset: 0
-    currentActiveSplitter: -1
-    realSizes:
-    - 324
-    - 108
-    relativeSizes:
-    - 0.75
-    - 0.25
-    minSizes:
-    - 32
-    - 32
-    maxSizes:
-    - 0
-    - 0
-    lastTotalSize: 432
-    splitSize: 6
-    xOffset: 0
-    m_Version: 1
-    oldRealSizes: 
-    oldMinSizes: 
-    oldMaxSizes: 
-    oldSplitSize: 0
-  m_TestTypeToolbarIndex: 1
-  m_PlayModeTestListGUI:
-    m_Window: {fileID: 0}
-    m_NewResultList: []
-    m_ResultText: 
-    m_ResultStacktrace: 
-    m_TestListState:
-      scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: 
-      m_RenameOverlay:
-        m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
-        m_EditFieldRect:
-          serializedVersion: 2
-          x: 0
-          y: 0
-          width: 0
-          height: 0
-        m_UserData: 0
-        m_IsWaitingForDelay: 0
-        m_IsRenaming: 0
-        m_OriginalEventType: 11
-        m_IsRenamingFilename: 0
-        m_ClientGUIView: {fileID: 0}
-      m_SearchString: 
-    m_TestRunnerUIFilter:
-      PassedHidden: 0
-      FailedHidden: 0
-      NotRunHidden: 0
-      m_SearchString: 
-      selectedCategoryMask: 0
-      availableCategories: []
-    m_SelectedOption: 0
-  m_EditModeTestListGUI:
-    m_Window: {fileID: 11}
-    m_NewResultList:
-    - id: 1000
-      uniqueId: '[BSG_W12_Daipan][suite]'
-      name: BSG_W12_Daipan
-      fullName: BSG_W12_Daipan
-      resultStatus: 1
-      duration: 0.1115166
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 1
-      categories: []
-      parentId: 
-      parentUniqueId: 
-    - id: 1004
-      uniqueId: '[ComboTests.dll][suite]'
-      name: ComboTests.dll
-      fullName: /Users/koki/Unity/UnityProjects/BSG_W12_Daipan/Library/ScriptAssemblies/ComboTests.dll
-      resultStatus: 1
-      duration: 0.0911562
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 1
-      categories: []
-      parentId: 1000
-      parentUniqueId: '[BSG_W12_Daipan][suite]'
-    - id: 1005
-      uniqueId: ComboTests.dll/[Daipan][suite]
-      name: Daipan
-      fullName: Daipan
-      resultStatus: 1
-      duration: 0.0907771
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 1
-      categories: []
-      parentId: 1004
-      parentUniqueId: '[ComboTests.dll][suite]'
-    - id: 1006
-      uniqueId: ComboTests.dll/Daipan/[Player][suite]
-      name: Player
-      fullName: Daipan.Player
-      resultStatus: 1
-      duration: 0.0872639
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 1
-      categories: []
-      parentId: 1005
-      parentUniqueId: ComboTests.dll/[Daipan][suite]
-    - id: 1007
-      uniqueId: ComboTests.dll/Daipan/Player/[Tests][suite]
-      name: Tests
-      fullName: Daipan.Player.Tests
-      resultStatus: 1
-      duration: 0.0838042
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 1
-      categories: []
-      parentId: 1006
-      parentUniqueId: ComboTests.dll/Daipan/[Player][suite]
-    - id: 1008
-      uniqueId: ComboTests.dll/Daipan/Player/Tests/[ComboTests][suite]
-      name: ComboTests
-      fullName: Daipan.Player.Tests.ComboTests
-      resultStatus: 1
-      duration: 0.0801542
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 1
-      categories: []
-      parentId: 1007
-      parentUniqueId: ComboTests.dll/Daipan/Player/[Tests][suite]
-    - id: 1001
-      uniqueId: ComboTests.dll/Daipan/Player/Tests/ComboTests/[ComboTests][suite]
-      name: ComboTests
-      fullName: Daipan.Player.Tests.ComboTests.ComboTests
-      resultStatus: 1
-      duration: 0.0759131
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 1
-      categories: []
-      parentId: 1008
-      parentUniqueId: ComboTests.dll/Daipan/Player/Tests/[ComboTests][suite]
-    - id: 1002
-      uniqueId: ComboTests.dll/Daipan/Player/Tests/ComboTests/ComboTests/[ComboTests][Daipan.Player.Tests.ComboTests.ComboTests.IncreaseComboTest]
-      name: IncreaseComboTest
-      fullName: Daipan.Player.Tests.ComboTests.ComboTests.IncreaseComboTest
-      resultStatus: 1
-      duration: 0.0380388
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 0
-      categories:
-      - Uncategorized
-      parentId: 1001
-      parentUniqueId: ComboTests.dll/Daipan/Player/Tests/ComboTests/[ComboTests][suite]
-    - id: 1003
-      uniqueId: ComboTests.dll/Daipan/Player/Tests/ComboTests/ComboTests/[ComboTests][Daipan.Player.Tests.ComboTests.ComboTests.ResetComboTest]
-      name: ResetComboTest
-      fullName: Daipan.Player.Tests.ComboTests.ComboTests.ResetComboTest
-      resultStatus: 1
-      duration: 0.0001487
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 0
-      categories:
-      - Uncategorized
-      parentId: 1001
-      parentUniqueId: ComboTests.dll/Daipan/Player/Tests/ComboTests/[ComboTests][suite]
-    - id: 1006
-      uniqueId: '[EnemyTests][/Users/koki/Unity/UnityProjects/BSG_W12_Daipan/Library/ScriptAssemblies/EnemyTests.dll][suite]'
-      name: EnemyTests.dll
-      fullName: /Users/koki/Unity/UnityProjects/BSG_W12_Daipan/Library/ScriptAssemblies/EnemyTests.dll
-      resultStatus: 1
-      duration: 0.0802063
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 1
-      categories: []
-      parentId: 1000
-      parentUniqueId: '[BSG_W12_Daipan][suite]'
-    - id: 1001
-      uniqueId: EnemyTests.dll/[EnemyTests][EnemyAttackTest][suite]
-      name: EnemyAttackTest
-      fullName: EnemyAttackTest
-      resultStatus: 1
-      duration: 0.0421063
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 1
-      categories: []
-      parentId: 1006
-      parentUniqueId: '[EnemyTests][/Users/koki/Unity/UnityProjects/BSG_W12_Daipan/Library/ScriptAssemblies/EnemyTests.dll][suite]'
-    - id: 1002
-      uniqueId: EnemyTests.dll/EnemyAttackTest/[EnemyTests][EnemyAttackTest.IHpSetterShouldDecrease10WithAttack]
-      name: IHpSetterShouldDecrease10WithAttack
-      fullName: EnemyAttackTest.IHpSetterShouldDecrease10WithAttack
-      resultStatus: 1
-      duration: 0.0209699
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 0
-      categories:
-      - Uncategorized
-      parentId: 1001
-      parentUniqueId: EnemyTests.dll/[EnemyTests][EnemyAttackTest][suite]
-    - id: 1003
-      uniqueId: EnemyTests.dll/[EnemyTests][EnemySpawnerCalculatorTest][suite]
-      name: EnemySpawnerCalculatorTest
-      fullName: EnemySpawnerCalculatorTest
-      resultStatus: 1
-      duration: 0.0368157
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 1
-      categories: []
-      parentId: 1006
-      parentUniqueId: '[EnemyTests][/Users/koki/Unity/UnityProjects/BSG_W12_Daipan/Library/ScriptAssemblies/EnemyTests.dll][suite]'
-    - id: 1004
-      uniqueId: EnemyTests.dll/EnemySpawnerCalculatorTest/[EnemyTests][EnemySpawnerCalculatorTest.NormalizeEnemySpawnRatioWithBossTest]
-      name: NormalizeEnemySpawnRatioWithBossTest
-      fullName: EnemySpawnerCalculatorTest.NormalizeEnemySpawnRatioWithBossTest
-      resultStatus: 1
-      duration: 0.0021355
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 0
-      categories:
-      - Uncategorized
-      parentId: 1003
-      parentUniqueId: EnemyTests.dll/[EnemyTests][EnemySpawnerCalculatorTest][suite]
-    - id: 1005
-      uniqueId: EnemyTests.dll/EnemySpawnerCalculatorTest/[EnemyTests][EnemySpawnerCalculatorTest.NormalizeEnemySpawnRatioWithBossTest2]
-      name: NormalizeEnemySpawnRatioWithBossTest2
-      fullName: EnemySpawnerCalculatorTest.NormalizeEnemySpawnRatioWithBossTest2
-      resultStatus: 1
-      duration: 0.0002415
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 0
-      categories:
-      - Uncategorized
-      parentId: 1003
-      parentUniqueId: EnemyTests.dll/[EnemyTests][EnemySpawnerCalculatorTest][suite]
-    - id: 1009
-      uniqueId: '[PlayerTests][/Users/koki/Unity/UnityProjects/BSG_W12_Daipan/Library/ScriptAssemblies/PlayerTests.dll][suite]'
-      name: PlayerTests.dll
-      fullName: /Users/koki/Unity/UnityProjects/BSG_W12_Daipan/Library/ScriptAssemblies/PlayerTests.dll
-      resultStatus: 1
-      duration: 0.0158273
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 1
-      categories: []
-      parentId: 1000
-      parentUniqueId: '[BSG_W12_Daipan][suite]'
-    - id: 1007
-      uniqueId: PlayerTests.dll/[PlayerTests][PlayerAttackTest][suite]
-      name: PlayerAttackTest
-      fullName: PlayerAttackTest
-      resultStatus: 1
-      duration: 0.0064071
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 1
-      categories: []
-      parentId: 1009
-      parentUniqueId: '[PlayerTests][/Users/koki/Unity/UnityProjects/BSG_W12_Daipan/Library/ScriptAssemblies/PlayerTests.dll][suite]'
-    - id: 1008
-      uniqueId: PlayerTests.dll/PlayerAttackTest/[PlayerTests][PlayerAttackTest.IHpSetterShouldDecrease10WithAttack]
-      name: IHpSetterShouldDecrease10WithAttack
-      fullName: PlayerAttackTest.IHpSetterShouldDecrease10WithAttack
-      resultStatus: 1
-      duration: 0.002325
-      messages: 
-      output: 'Attack Enemy
-
-        _playerParamData.GetAttack() = 10
-
-'
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 0
-      categories:
-      - Uncategorized
-      parentId: 1007
-      parentUniqueId: PlayerTests.dll/[PlayerTests][PlayerAttackTest][suite]
-    - id: 1013
-      uniqueId: '[StreamTests.dll][suite]'
-      name: StreamTests.dll
-      fullName: /Users/koki/Unity/UnityProjects/BSG_W12_Daipan/Library/ScriptAssemblies/StreamTests.dll
-      resultStatus: 1
-      duration: 0.0271661
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 1
-      categories: []
-      parentId: 1000
-      parentUniqueId: '[BSG_W12_Daipan][suite]'
-    - id: 1014
-      uniqueId: StreamTests.dll/[Daipan][suite]
-      name: Daipan
-      fullName: Daipan
-      resultStatus: 1
-      duration: 0.0137213
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 1
-      categories: []
-      parentId: 1013
-      parentUniqueId: '[StreamTests.dll][suite]'
-    - id: 1015
-      uniqueId: StreamTests.dll/Daipan/[Stream][suite]
-      name: Stream
-      fullName: Daipan.Stream
-      resultStatus: 1
-      duration: 0.0135369
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 1
-      categories: []
-      parentId: 1014
-      parentUniqueId: StreamTests.dll/[Daipan][suite]
-    - id: 1016
-      uniqueId: StreamTests.dll/Daipan/Stream/[StreamTests][suite]
-      name: StreamTests
-      fullName: Daipan.Stream.StreamTests
-      resultStatus: 1
-      duration: 0.0098469
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 1
-      categories: []
-      parentId: 1015
-      parentUniqueId: StreamTests.dll/Daipan/[Stream][suite]
-    - id: 1010
-      uniqueId: StreamTests.dll/Daipan/Stream/StreamTests/[StreamTests][Daipan.Stream.StreamTests.IrritatedValueTest][suite]
-      name: IrritatedValueTest
-      fullName: Daipan.Stream.StreamTests.IrritatedValueTest
-      resultStatus: 1
-      duration: 0.0062499
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 1
-      categories: []
-      parentId: 1016
-      parentUniqueId: StreamTests.dll/Daipan/Stream/[StreamTests][suite]
-    - id: 1012
-      uniqueId: StreamTests.dll/Daipan/Stream/StreamTests/IrritatedValueTest/[StreamTests][Daipan.Stream.StreamTests.IrritatedValueTest.DecrementTest]
-      name: DecrementTest
-      fullName: Daipan.Stream.StreamTests.IrritatedValueTest.DecrementTest
-      resultStatus: 1
-      duration: 0.0013748
-      messages: 
-      output: 'Daipan.Stream.Scripts.IrritatedParams must be instantiated using the
-        ScriptableObject.CreateInstance method instead of new IrritatedParams.
-
-        IncreaseValue(amount:
-        100) IrritatedValue : 100
-
-'
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 0
-      categories:
-      - Uncategorized
-      parentId: 1010
-      parentUniqueId: StreamTests.dll/Daipan/Stream/StreamTests/[StreamTests][Daipan.Stream.StreamTests.IrritatedValueTest][suite]
-    - id: 1011
-      uniqueId: StreamTests.dll/Daipan/Stream/StreamTests/IrritatedValueTest/[StreamTests][Daipan.Stream.StreamTests.IrritatedValueTest.IncrementTest]
-      name: IncrementTest
-      fullName: Daipan.Stream.StreamTests.IrritatedValueTest.IncrementTest
-      resultStatus: 1
-      duration: 0.0008583
-      messages: 
-      output: 'Daipan.Stream.Scripts.IrritatedParams must be instantiated using the
-        ScriptableObject.CreateInstance method instead of new IrritatedParams.
-
-        IncreaseValue(amount:
-        10) IrritatedValue : 10
-
-        IncreaseValue(amount: 100) IrritatedValue
-        : 100
-
-'
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 0
-      categories:
-      - Uncategorized
-      parentId: 1010
-      parentUniqueId: StreamTests.dll/Daipan/Stream/StreamTests/[StreamTests][Daipan.Stream.StreamTests.IrritatedValueTest][suite]
-    - id: 1029
-      uniqueId: '[UtilityTests.dll][suite]'
-      name: UtilityTests.dll
-      fullName: /Users/koki/Unity/UnityProjects/BSG_W12_Daipan/Library/ScriptAssemblies/UtilityTests.dll
-      resultStatus: 1
-      duration: 0.0476482
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 1
-      categories: []
-      parentId: 1000
-      parentUniqueId: '[BSG_W12_Daipan][suite]'
-    - id: 1030
-      uniqueId: UtilityTests.dll/[Daipan][suite]
-      name: Daipan
-      fullName: Daipan
-      resultStatus: 1
-      duration: 0.0179806
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 1
-      categories: []
-      parentId: 1029
-      parentUniqueId: '[UtilityTests.dll][suite]'
-    - id: 1031
-      uniqueId: UtilityTests.dll/Daipan/[Utility][suite]
-      name: Utility
-      fullName: Daipan.Utility
-      resultStatus: 1
-      duration: 0.0145328
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 1
-      categories: []
-      parentId: 1030
-      parentUniqueId: UtilityTests.dll/[Daipan][suite]
-    - id: 1032
-      uniqueId: UtilityTests.dll/Daipan/Utility/[UtilityTests][Daipan.Utility.Tests][suite]
-      name: Tests
-      fullName: Daipan.Utility.Tests
-      resultStatus: 1
-      duration: 0.0110745
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 1
-      categories: []
-      parentId: 1031
-      parentUniqueId: UtilityTests.dll/Daipan/[Utility][suite]
-    - id: 1026
-      uniqueId: UtilityTests.dll/Daipan/Utility/Tests/[UtilityTests][Daipan.Utility.Tests.RandomByRatiosTest][suite]
-      name: RandomByRatiosTest
-      fullName: Daipan.Utility.Tests.RandomByRatiosTest
-      resultStatus: 1
-      duration: 0.0074225
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 1
-      categories: []
-      parentId: 1032
-      parentUniqueId: UtilityTests.dll/Daipan/Utility/[UtilityTests][Daipan.Utility.Tests][suite]
-    - id: 1027
-      uniqueId: UtilityTests.dll/Daipan/Utility/Tests/RandomByRatiosTest/[UtilityTests][Daipan.Utility.Tests.RandomByRatiosTest.AccumulateRatiosTest1]
-      name: AccumulateRatiosTest1
-      fullName: Daipan.Utility.Tests.RandomByRatiosTest.AccumulateRatiosTest1
-      resultStatus: 1
-      duration: 0.0020394
-      messages: 
-      output: 'accumulatedRatios: 0,1,3,6
-
-'
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 0
-      categories:
-      - Uncategorized
-      parentId: 1026
-      parentUniqueId: UtilityTests.dll/Daipan/Utility/Tests/[UtilityTests][Daipan.Utility.Tests.RandomByRatiosTest][suite]
-    - id: 1028
-      uniqueId: UtilityTests.dll/Daipan/Utility/Tests/RandomByRatiosTest/[UtilityTests][Daipan.Utility.Tests.RandomByRatiosTest.RandomByRatiosTest1]
-      name: RandomByRatiosTest1
-      fullName: Daipan.Utility.Tests.RandomByRatiosTest.RandomByRatiosTest1
-      resultStatus: 1
-      duration: 0.0014226
-      messages: 
-      output: 'rand must be between 0 and 1.
-
-'
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 0
-      categories:
-      - Uncategorized
-      parentId: 1026
-      parentUniqueId: UtilityTests.dll/Daipan/Utility/Tests/[UtilityTests][Daipan.Utility.Tests.RandomByRatiosTest][suite]
-    - id: 1021
-      uniqueId: UtilityTests.dll/[UtilityTests][EnumEnumerationCheckerTest][suite]
-      name: EnumEnumerationCheckerTest
-      fullName: EnumEnumerationCheckerTest
-      resultStatus: 1
-      duration: 0.0261159
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 1
-      categories: []
-      parentId: 1026
-      parentUniqueId: '[UtilityTests][/Users/koki/Unity/UnityProjects/BSG_W12_Daipan/Library/ScriptAssemblies/UtilityTests.dll][suite]'
-    - id: 1022
-      uniqueId: UtilityTests.dll/EnumEnumerationCheckerTest/[UtilityTests][EnumEnumerationCheckerTest.CheckEnumType1]
-      name: CheckEnumType1
-      fullName: EnumEnumerationCheckerTest.CheckEnumType1
-      resultStatus: 1
-      duration: 0.0156642
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 0
-      categories:
-      - Uncategorized
-      parentId: 1021
-      parentUniqueId: UtilityTests.dll/[UtilityTests][EnumEnumerationCheckerTest][suite]
-    - id: 1023
-      uniqueId: UtilityTests.dll/EnumEnumerationCheckerTest/[UtilityTests][EnumEnumerationCheckerTest.CheckEnumType2]
-      name: CheckEnumType2
-      fullName: EnumEnumerationCheckerTest.CheckEnumType2
-      resultStatus: 1
-      duration: 0.0006809
-      messages: 
-      output: 'The number of EnumEnumerationCheckerTest+EnumType2 and EnumEnumerationCheckerTest+TestEnum
-        is different.
-
-'
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 0
-      categories:
-      - Uncategorized
-      parentId: 1021
-      parentUniqueId: UtilityTests.dll/[UtilityTests][EnumEnumerationCheckerTest][suite]
-    - id: 1024
-      uniqueId: UtilityTests.dll/EnumEnumerationCheckerTest/[UtilityTests][EnumEnumerationCheckerTest.CheckEnumType3]
-      name: CheckEnumType3
-      fullName: EnumEnumerationCheckerTest.CheckEnumType3
-      resultStatus: 1
-      duration: 0.0004065
-      messages: 
-      output: 'The number of EnumEnumerationCheckerTest+EnumType3 and EnumEnumerationCheckerTest+TestEnum
-        is different.
-
-'
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 0
-      categories:
-      - Uncategorized
-      parentId: 1021
-      parentUniqueId: UtilityTests.dll/[UtilityTests][EnumEnumerationCheckerTest][suite]
-    - id: 1025
-      uniqueId: UtilityTests.dll/EnumEnumerationCheckerTest/[UtilityTests][EnumEnumerationCheckerTest.CheckEnumType4]
-      name: CheckEnumType4
-      fullName: EnumEnumerationCheckerTest.CheckEnumType4
-      resultStatus: 1
-      duration: 0.000617
-      messages: 
-      output: 'EnumEnumerationCheckerTest+TestEnum with name X not found.
-
-'
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 0
-      categories:
-      - Uncategorized
-      parentId: 1021
-      parentUniqueId: UtilityTests.dll/[UtilityTests][EnumEnumerationCheckerTest][suite]
-    m_ResultText: IHpSetterShouldDecrease10WithAttack (0.021s)
-    m_ResultStacktrace: 
-    m_TestListState:
-      scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: ea8d602f
-      m_LastClickedID: 794856938
-      m_ExpandedIDs: 5567d180e953d688cc4edb8db5613b8e356acc9f75befeae6dbf46bbba882ec0716255c430ae7cd7507ce3f0fcf507f2fb0dce0861471d41e9f0684fde986858c9dc8a75385db376ffffff7f
-      m_RenameOverlay:
-        m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
-        m_EditFieldRect:
-          serializedVersion: 2
-          x: 0
-          y: 0
-          width: 0
-          height: 0
-        m_UserData: 0
-        m_IsWaitingForDelay: 0
-        m_IsRenaming: 0
-        m_OriginalEventType: 11
-        m_IsRenamingFilename: 0
-        m_ClientGUIView: {fileID: 0}
-      m_SearchString: 
-    m_TestRunnerUIFilter:
-      PassedHidden: 0
-      FailedHidden: 0
-      NotRunHidden: 0
-      m_SearchString: 
-      selectedCategoryMask: 0
-      availableCategories:
-      - Uncategorized
---- !u!114 &12
+--- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1952,17 +887,17 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
-    y: 443.5
+    y: 407
     width: 765.5
-    height: 406.5
+    height: 443
   m_MinSize: {x: 101, y: 121}
   m_MaxSize: {x: 4001, y: 4021}
-  m_ActualView: {fileID: 13}
+  m_ActualView: {fileID: 9}
   m_Panes:
-  - {fileID: 13}
+  - {fileID: 9}
   m_Selected: 0
   m_LastSelected: 0
---- !u!114 &13
+--- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1983,9 +918,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 473.5
+    y: 437
     width: 764.5
-    height: 385.5
+    height: 422
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -1996,7 +931,7 @@ MonoBehaviour:
     m_LastAppliedPresetName: Default
     m_SaveData: []
     m_OverlaysVisible: 1
---- !u!114 &14
+--- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2009,8 +944,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Children:
-  - {fileID: 15}
-  - {fileID: 17}
+  - {fileID: 11}
+  - {fileID: 13}
   m_Position:
     serializedVersion: 2
     x: 765.5
@@ -2020,8 +955,8 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 800
---- !u!114 &15
+  controlID: 4339
+--- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2040,14 +975,14 @@ MonoBehaviour:
     y: 0
     width: 351.5
     height: 473
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
-  m_ActualView: {fileID: 16}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_ActualView: {fileID: 12}
   m_Panes:
-  - {fileID: 16}
+  - {fileID: 12}
   m_Selected: 0
   m_LastSelected: 0
---- !u!114 &16
+--- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2084,9 +1019,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: ae750000
+      m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 04fbffff
+      m_ExpandedIDs: 04fbffff12fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -2102,7 +1037,7 @@ MonoBehaviour:
         m_IsRenaming: 0
         m_OriginalEventType: 11
         m_IsRenamingFilename: 0
-        m_ClientGUIView: {fileID: 15}
+        m_ClientGUIView: {fileID: 11}
       m_SearchString: 
     m_ExpandedScenes: []
     m_CurrenRootInstanceID: 0
@@ -2110,7 +1045,7 @@ MonoBehaviour:
       m_IsLocked: 0
     m_CurrentSortingName: TransformSorting
   m_WindowGUID: 8f3e5170efd44a64986b33fd586cfd3a
---- !u!114 &17
+--- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2120,7 +1055,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
+  m_Name: ProjectBrowser
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -2136,7 +1071,7 @@ MonoBehaviour:
   - {fileID: 2}
   m_Selected: 0
   m_LastSelected: 0
---- !u!114 &18
+--- !u!114 &14
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2157,12 +1092,12 @@ MonoBehaviour:
     height: 850
   m_MinSize: {x: 276, y: 71}
   m_MaxSize: {x: 4001, y: 4021}
-  m_ActualView: {fileID: 19}
+  m_ActualView: {fileID: 15}
   m_Panes:
-  - {fileID: 19}
+  - {fileID: 15}
   m_Selected: 0
   m_LastSelected: 0
---- !u!114 &19
+--- !u!114 &15
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
