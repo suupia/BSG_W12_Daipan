@@ -19,6 +19,7 @@ namespace Daipan.Enemy.MonoScripts
         [SerializeField] AbstractEnemyViewMono? enemyViewMono;
         EnemyAttackDecider _enemyAttackDecider = null!;
         EnemySuicideAttack _enemySuicideAttack = null!;
+        EnemyDied _enemyDied = null!;
         EnemyCluster _enemyCluster = null!;
         EnemyHp _enemyHp = null!;
         IEnemySpawnPoint _enemySpawnPoint = null!;
@@ -39,7 +40,7 @@ namespace Daipan.Enemy.MonoScripts
             }
 
             if (transform.position.x < _enemySpawnPoint.GetEnemyDespawnedPoint().x)
-                Died(isDaipaned:false); // Destroy when out of screen
+               Died(isDaipaned:false); // Destroy when out of screen
 
             enemyViewMono?.SetHpGauge(CurrentHp, _enemyParamDataContainer.GetEnemyParamData(EnemyEnum).GetCurrentHp());
         }
@@ -49,8 +50,6 @@ namespace Daipan.Enemy.MonoScripts
             set => _enemyHp.CurrentHp = value;
             get => _enemyHp.CurrentHp;
         }
-
-        public event EventHandler<DiedEventArgs>? OnDied;
 
 
         [Inject]
@@ -71,50 +70,34 @@ namespace Daipan.Enemy.MonoScripts
             EnemyEnum enemyEnum,
             EnemyHp enemyHp,
             EnemyAttackDecider enemyAttackDecider,
-            EnemySuicideAttack enemySuicideAttack
+            EnemySuicideAttack enemySuicideAttack,
+            EnemyDied enemyDied
         )
         {
             EnemyEnum = enemyEnum;
             _enemyHp = enemyHp;
             _enemyAttackDecider = enemyAttackDecider;
             _enemySuicideAttack = enemySuicideAttack;
+            _enemyDied = enemyDied;
 
             enemyViewMono?.SetDomain(_enemyParamDataContainer);
             enemyViewMono?.SetView(enemyEnum);
         }
 
-        public void Died(bool isDaipaned = false, bool isTriggerCallback = true)
-        {
-            // Callback
-            if (isTriggerCallback)
-            {
-                var args = new DiedEventArgs(EnemyEnum);
-                OnDied?.Invoke(this, args);
-            }
-
-            OnDiedProcess(this,_enemyCluster, isDaipaned, enemyViewMono);
-        }
-
-        static void OnDiedProcess(EnemyMono enemyMono, EnemyCluster enemyCluster, bool isDaipaned, AbstractEnemyViewMono? enemyViewMono)
-        {
-            if (enemyViewMono == null)
-            {
-                enemyCluster.Remove(enemyMono);
-                return;
-            }
-
-            if (isDaipaned)
-                enemyMono.transform
-                    .DOMoveY(-1.7f, 0.3f)
-                    .SetEase(Ease.InQuint)
-                    .OnStart(() => { enemyViewMono.Daipaned(() => enemyCluster.Remove(enemyMono)); });
-            else
-                enemyViewMono.Died(() => enemyCluster.Remove(enemyMono));
-        }
-
         public void SuicideAttack(PlayerMono playerMono)
         {
             _enemySuicideAttack.SuicideAttack(playerMono);
+        }
+        
+        public event EventHandler<DiedEventArgs>? OnDied
+        {
+            add => _enemyDied.OnDied += value;
+            remove => _enemyDied.OnDied -= value;
+        }
+        
+        public void Died(bool isDaipaned = false)
+        {
+            _enemyDied.Died(enemyViewMono, isDaipaned);
         }
     }
 
