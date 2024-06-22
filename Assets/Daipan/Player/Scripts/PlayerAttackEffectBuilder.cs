@@ -46,31 +46,13 @@ namespace Daipan.Player.Scripts
             effect.OnHit += (sender, args) =>
             {
                 Debug.Log($"OnHit");
-                OnProcessAttack(_playerParamDataContainer, playerViewMonos, playerColor, args);
+                OnAttackEnemy(_playerParamDataContainer, playerViewMonos, playerColor, args.EnemyMono);
                 OnProcessCombo(_comboCounter, playerColor, args);
                 OnSpawnComment(_commentParamsServer, _commentSpawner, _viewerNumber, args);
             };
             return effect;
         }
 
-        static void OnProcessAttack(
-            PlayerParamDataContainer playerParamDataContainer,
-            List<AbstractPlayerViewMono?> playerViewMonos,
-            PlayerColor playerColor,
-            OnHitEventArgs args
-            )
-        {
-            if (args.IsTargetEnemy)
-            {
-                OnAttackEnemy(playerParamDataContainer, playerViewMonos, playerColor, args.EnemyMono);
-
-            }
-            else
-            {
-                // suicide attack
-            }
-        }
-        
         static void OnProcessCombo(
             ComboCounter comboCounter,
             PlayerColor playerColor,
@@ -126,25 +108,28 @@ namespace Daipan.Player.Scripts
             PlayerColor playerColor, EnemyMono? enemyMono)
         {
             Debug.Log($"Attack enemyMono?.EnemyEnum: {enemyMono?.EnemyEnum}");
+            // [Precondition]
             if (enemyMono == null) return;
-            var targetEnemies = PlayerAttackModule.GetTargetEnemyEnum(playerColor);
 
-            if (targetEnemies.Contains(enemyMono.EnemyEnum))
+            // [Main]
+            Debug.Log($"EnemyType: {enemyMono.EnemyEnum}を攻撃");
+            if (PlayerAttackModule.GetTargetEnemyEnum(playerColor).Contains(enemyMono.EnemyEnum))
             {
-                Debug.Log($"EnemyType: {enemyMono.EnemyEnum}を攻撃");
+                // 敵を攻撃
                 enemyMono.CurrentHp -= playerParamDataContainer.GetPlayerParamData(playerColor).GetAttack();
-
-                // Animation
-                foreach (var playerViewMono in playerViewMonos)
-                {
-                    if (playerViewMono == null) continue;
-                    if(playerViewMono.playerColor == playerColor)
-                        playerViewMono.Attack();
-                }
             }
             else
             {
-                Debug.Log($"攻撃対象が{enemyMono.EnemyEnum}ではないよ");
+                // 敵が特攻攻撃をしてくる
+                
+            }
+
+            // Animation
+            foreach (var playerViewMono in playerViewMonos)
+            {
+                if (playerViewMono == null) continue;
+                if(playerViewMono.playerColor == playerColor)
+                    playerViewMono.Attack();
             }
         }
     }
