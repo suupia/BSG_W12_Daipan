@@ -79,6 +79,59 @@ namespace Daipan.Player.Scripts
             };
             return effect;
         }
+        
+        static void OnProcessCombo(
+            ComboCounter comboCounter,
+            PlayerParamDataContainer playerParamDataContainer,
+            List<AbstractPlayerViewMono?> playerViewMonos,
+            PlayerColor playerColor,
+            OnHitEventArgs args
+            )
+        {
+            if (args.IsTargetEnemy)
+            {
+                OnAttackEnemy(playerParamDataContainer, playerViewMonos, playerColor, args.EnemyMono);
+                comboCounter.IncreaseCombo();
+            }
+            else
+            {
+                Debug.Log(
+                    $"攻撃対象が{PlayerAttackModule.GetTargetEnemyEnum(playerColor)}ではないです args.EnemyMono?.EnemyEnum: {args.EnemyMono?.EnemyEnum}");
+                comboCounter.ResetCombo();
+            }
+        }
+        
+        static void OnSpawnComment(
+            CommentParamsServer commentParamsServer,
+            CommentSpawner commentSpawner,
+            ViewerNumber viewerNumber,
+            OnHitEventArgs args
+            )
+        {
+            if (args.IsTargetEnemy)
+            {
+                // 視聴者数が一定数以上の時、コメントを生成する
+                var commentParam = commentParamsServer.GetCommentParamDependOnViewer();
+                if (commentParam.viewerAmount < viewerNumber.Number)
+                {
+                    for (int i = 0; i < commentParam.commentAmount; i++)
+                    {
+                        commentSpawner.SpawnCommentByType(CommentEnum.Normal);
+                    }
+                }            }
+            else
+            {
+                // 視聴者数が一定数以上の時、アンチコメントを生成する
+                var commentParam = commentParamsServer.GetCommentParamDependOnViewer();
+                if (commentParam.viewerAmount < viewerNumber.Number)
+                {
+                    for (int i = 0; i < commentParam.commentAmount; i++)
+                    {
+                        commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
+                    }
+                } 
+            }
+        }
 
         static void OnAttackEnemy(PlayerParamDataContainer playerParamDataContainer,
             List<AbstractPlayerViewMono?> playerViewMonos,
