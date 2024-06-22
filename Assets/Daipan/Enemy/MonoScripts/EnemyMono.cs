@@ -20,7 +20,6 @@ namespace Daipan.Enemy.MonoScripts
         EnemyAttackDecider _enemyAttackDecider = null!;
         EnemySuicideAttack _enemySuicideAttack = null!;
         EnemyDied _enemyDied = null!;
-        EnemyCluster _enemyCluster = null!;
         EnemyHp _enemyHp = null!;
         IEnemySpawnPoint _enemySpawnPoint = null!;
         EnemyParamDataContainer _enemyParamDataContainer = null!;
@@ -54,13 +53,11 @@ namespace Daipan.Enemy.MonoScripts
 
         [Inject]
         public void Initialize(
-            EnemyCluster enemyCluster,
             PlayerHolder playerHolder,
             IEnemySpawnPoint enemySpawnPointData,
             EnemyParamDataContainer enemyParamDataContainer
         )
         {
-            _enemyCluster = enemyCluster;
             _playerHolder = playerHolder;
             _enemySpawnPoint = enemySpawnPointData;
             _enemyParamDataContainer = enemyParamDataContainer;
