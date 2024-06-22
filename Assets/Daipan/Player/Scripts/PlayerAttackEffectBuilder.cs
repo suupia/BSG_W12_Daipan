@@ -45,43 +45,15 @@ namespace Daipan.Player.Scripts
                 () => _enemyCluster.NearestEnemy(playerMono.transform.position));
             effect.OnHit += (sender, args) =>
             {
-                if (args.IsTargetEnemy)
-                {
-                    OnAttackEnemy(_playerParamDataContainer, playerViewMonos, playerColor, args.EnemyMono);
-                    _comboCounter.IncreaseCombo();
-                    
-                    // 視聴者数が一定数以上の時、コメントを生成する
-                    var commentParam = _commentParamsServer.GetCommentParamDependOnViewer();
-                    if (commentParam.viewerAmount < _viewerNumber.Number)
-                    {
-                        for (int i = 0; i < commentParam.commentAmount; i++)
-                        {
-                            _commentSpawner.SpawnCommentByType(CommentEnum.Normal);
-                        }
-                    }
-                }
-                else
-                {
-                    Debug.Log($"攻撃対象が{PlayerAttackModule.GetTargetEnemyEnum(playerColor)}ではないです args.EnemyMono?.EnemyEnum: {args.EnemyMono?.EnemyEnum}");
-                    _comboCounter.ResetCombo();
-                    // todo : 特攻処理を書く
-                    
-                    // 視聴者数が一定数以上の時、アンチコメントを生成する
-                    var commentParam = _commentParamsServer.GetCommentParamDependOnViewer();
-                    if (commentParam.viewerAmount < _viewerNumber.Number)
-                    {
-                        for (int i = 0; i < commentParam.commentAmount; i++)
-                        {
-                            _commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
-                        }
-                    }
-                }
+                Debug.Log($"OnHit");
+                OnProcessAttack(_playerParamDataContainer, playerViewMonos, playerColor, args);
+                OnProcessCombo(_comboCounter, playerColor, args);
+                OnSpawnComment(_commentParamsServer, _commentSpawner, _viewerNumber, args);
             };
             return effect;
         }
-        
-        static void OnProcessCombo(
-            ComboCounter comboCounter,
+
+        static void OnProcessAttack(
             PlayerParamDataContainer playerParamDataContainer,
             List<AbstractPlayerViewMono?> playerViewMonos,
             PlayerColor playerColor,
@@ -91,6 +63,22 @@ namespace Daipan.Player.Scripts
             if (args.IsTargetEnemy)
             {
                 OnAttackEnemy(playerParamDataContainer, playerViewMonos, playerColor, args.EnemyMono);
+
+            }
+            else
+            {
+                // suicide attack
+            }
+        }
+        
+        static void OnProcessCombo(
+            ComboCounter comboCounter,
+            PlayerColor playerColor,
+            OnHitEventArgs args
+            )
+        {
+            if (args.IsTargetEnemy)
+            {
                 comboCounter.IncreaseCombo();
             }
             else
