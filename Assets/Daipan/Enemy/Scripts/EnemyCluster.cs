@@ -5,6 +5,7 @@ using System.Linq;
 using Daipan.Enemy.MonoScripts;
 using Daipan.LevelDesign.Enemy.Scripts;
 using UnityEngine;
+using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
 namespace Daipan.Enemy.Scripts
@@ -20,10 +21,10 @@ namespace Daipan.Enemy.Scripts
             _enemies.Add(enemy);
         }
 
-        public void Remove(EnemyMono enemy, bool isDaipaned = false, bool isTriggerCallback = true)
+        public void Remove(EnemyMono enemy)
         {
             _enemies.Remove(enemy);
-            enemy.Died(isDaipaned, isTriggerCallback);
+            Object.Destroy(enemy.gameObject);
         }
 
         public EnemyMono? NearestEnemy(EnemyEnum enemyEnum, Vector3 position)
@@ -57,7 +58,7 @@ namespace Daipan.Enemy.Scripts
         {
             var enemies = _enemies.ToArray();
             foreach (var enemy in enemies)
-                    Remove(enemy, isDaipaned:true);
+                    enemy.Died(isDaipaned:true); 
         }
 
         public void Daipaned(Func<EnemyEnum, bool> blowAwayCondition)
@@ -65,7 +66,7 @@ namespace Daipan.Enemy.Scripts
             var enemies = _enemies.ToArray();
             foreach (var enemy in enemies)
                 if (blowAwayCondition(enemy.EnemyEnum))
-                    Remove(enemy, isDaipaned:true);
+                    enemy.Died(isDaipaned:true); 
         }
     }
 }

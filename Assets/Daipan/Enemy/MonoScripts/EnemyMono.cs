@@ -39,7 +39,7 @@ namespace Daipan.Enemy.MonoScripts
             }
 
             if (transform.position.x < _enemySpawnPoint.GetEnemyDespawnedPoint().x)
-                _enemyCluster.Remove(this, false); // Destroy when out of screen
+                Died(isDaipaned:false); // Destroy when out of screen
 
             enemyViewMono?.SetHpGauge(CurrentHp, _enemyParamDataContainer.GetEnemyParamData(EnemyEnum).GetCurrentHp());
         }
@@ -83,7 +83,7 @@ namespace Daipan.Enemy.MonoScripts
             enemyViewMono?.SetView(enemyEnum);
         }
 
-        public void Died(bool isDaipaned, bool isTriggerCallback)
+        public void Died(bool isDaipaned = false, bool isTriggerCallback = true)
         {
             // Callback
             if (isTriggerCallback)
@@ -92,14 +92,14 @@ namespace Daipan.Enemy.MonoScripts
                 OnDied?.Invoke(this, args);
             }
 
-            OnDiedProcess(this, isDaipaned, enemyViewMono);
+            OnDiedProcess(this,_enemyCluster, isDaipaned, enemyViewMono);
         }
 
-        static void OnDiedProcess(EnemyMono enemyMono, bool isDaipaned, AbstractEnemyViewMono? enemyViewMono)
+        static void OnDiedProcess(EnemyMono enemyMono, EnemyCluster enemyCluster, bool isDaipaned, AbstractEnemyViewMono? enemyViewMono)
         {
             if (enemyViewMono == null)
             {
-                Destroy(enemyMono.gameObject);
+                enemyCluster.Remove(enemyMono);
                 return;
             }
 
@@ -107,9 +107,9 @@ namespace Daipan.Enemy.MonoScripts
                 enemyMono.transform
                     .DOMoveY(-1.7f, 0.3f)
                     .SetEase(Ease.InQuint)
-                    .OnStart(() => { enemyViewMono.Daipaned(() => Destroy(enemyMono.gameObject)); });
+                    .OnStart(() => { enemyViewMono.Daipaned(() => enemyCluster.Remove(enemyMono)); });
             else
-                enemyViewMono.Died(() => Destroy(enemyMono.gameObject));
+                enemyViewMono.Died(() => enemyCluster.Remove(enemyMono));
         }
 
         public void SuicideAttack(PlayerMono playerMono)

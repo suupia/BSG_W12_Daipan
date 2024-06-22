@@ -1,4 +1,5 @@
 #nullable enable
+using UnityEngine;
 using Daipan.Battle.interfaces;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Player.MonoScripts;
@@ -10,10 +11,11 @@ namespace Daipan.Enemy.Scripts
     {
         readonly EnemyMono _enemyMono;
         readonly EnemyParamData _enemyParamData;
+
         public EnemySuicideAttack(
             EnemyMono enemyMono,
             EnemyParamData enemyParamData
-            )
+        )
         {
             _enemyMono = enemyMono;
             _enemyParamData = enemyParamData;
@@ -31,7 +33,7 @@ namespace Daipan.Enemy.Scripts
                 );
 
                 // Optionally, you can destroy the enemy after the attack if required
-                // Object.Destroy(_enemyMono.gameObject);
+                _enemyMono.Died();
             });
         }
     }
