@@ -55,7 +55,9 @@ namespace Daipan.Enemy.Scripts
             enemyMono.SetDomain(
                 enemyEnum,
                 new EnemyHp(enemyParamData.GetCurrentHp(), enemyMono, _enemyCluster),
-                new EnemyAttackDecider(enemyMono, enemyParamData, new EnemyAttack(enemyParamData))
+                new EnemyAttackDecider(enemyMono, enemyParamData, new EnemyAttack(enemyParamData)),
+                new EnemySuicideAttack(enemyMono,enemyParamData),
+                new EnemyDied(_enemyCluster, enemyMono)
             );
             enemyMono.OnDied += (sender, args) =>
             {
