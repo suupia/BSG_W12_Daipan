@@ -113,7 +113,8 @@ namespace Daipan.Player.Scripts
                 enemyMono.CurrentHp -= playerParamDataContainer.GetPlayerParamData(playerColor).GetAttack();
             else
                 // 敵が特攻攻撃をしてくる
-                enemyMono.SuicideAttack(playerMono);
+                // todo: 一旦はなし
+                // enemyMono.SuicideAttack(playerMono);
 
             // Animation
             foreach (var playerViewMono in playerViewMonos)
