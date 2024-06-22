@@ -21,7 +21,7 @@ namespace Daipan.Player.Scripts
         readonly ViewerNumber _viewerNumber;
         readonly CommentSpawner _commentSpawner;
         readonly CommentParamsServer _commentParamsServer;
-        
+
         public PlayerAttackEffectBuilder(
             PlayerParamDataContainer playerParamDataContainer,
             ComboCounter comboCounter,
@@ -29,7 +29,7 @@ namespace Daipan.Player.Scripts
             ViewerNumber viewerNumber,
             CommentSpawner commentSpawner,
             CommentParamsServer commentParamsServer
-            )
+        )
         {
             _playerParamDataContainer = playerParamDataContainer;
             _comboCounter = comboCounter;
@@ -39,14 +39,15 @@ namespace Daipan.Player.Scripts
             _commentParamsServer = commentParamsServer;
         }
 
-        public PlayerAttackEffectMono Build(PlayerAttackEffectMono effect, PlayerMono playerMono ,List<AbstractPlayerViewMono?> playerViewMonos, PlayerColor playerColor)
+        public PlayerAttackEffectMono Build(PlayerAttackEffectMono effect, PlayerMono playerMono,
+            List<AbstractPlayerViewMono?> playerViewMonos, PlayerColor playerColor)
         {
             effect.SetUp(_playerParamDataContainer.GetPlayerParamData(playerColor),
                 () => _enemyCluster.NearestEnemy(playerMono.transform.position));
             effect.OnHit += (sender, args) =>
             {
                 Debug.Log($"OnHit");
-                OnAttackEnemy(_playerParamDataContainer, playerViewMonos, playerColor, args.EnemyMono);
+                OnAttackEnemy(_playerParamDataContainer, playerMono, playerViewMonos, playerColor, args.EnemyMono);
                 OnProcessCombo(_comboCounter, playerColor, args);
                 OnSpawnComment(_commentParamsServer, _commentSpawner, _viewerNumber, args);
             };
@@ -57,7 +58,7 @@ namespace Daipan.Player.Scripts
             ComboCounter comboCounter,
             PlayerColor playerColor,
             OnHitEventArgs args
-            )
+        )
         {
             if (args.IsTargetEnemy)
             {
@@ -70,40 +71,34 @@ namespace Daipan.Player.Scripts
                 comboCounter.ResetCombo();
             }
         }
-        
+
         static void OnSpawnComment(
             CommentParamsServer commentParamsServer,
             CommentSpawner commentSpawner,
             ViewerNumber viewerNumber,
             OnHitEventArgs args
-            )
+        )
         {
             if (args.IsTargetEnemy)
             {
                 // 視聴者数が一定数以上の時、コメントを生成する
                 var commentParam = commentParamsServer.GetCommentParamDependOnViewer();
                 if (commentParam.viewerAmount < viewerNumber.Number)
-                {
-                    for (int i = 0; i < commentParam.commentAmount; i++)
-                    {
+                    for (var i = 0; i < commentParam.commentAmount; i++)
                         commentSpawner.SpawnCommentByType(CommentEnum.Normal);
-                    }
-                }            }
+            }
             else
             {
                 // 視聴者数が一定数以上の時、アンチコメントを生成する
                 var commentParam = commentParamsServer.GetCommentParamDependOnViewer();
                 if (commentParam.viewerAmount < viewerNumber.Number)
-                {
-                    for (int i = 0; i < commentParam.commentAmount; i++)
-                    {
+                    for (var i = 0; i < commentParam.commentAmount; i++)
                         commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
-                    }
-                } 
             }
         }
 
         static void OnAttackEnemy(PlayerParamDataContainer playerParamDataContainer,
+            PlayerMono playerMono,
             List<AbstractPlayerViewMono?> playerViewMonos,
             PlayerColor playerColor, EnemyMono? enemyMono)
         {
@@ -114,21 +109,17 @@ namespace Daipan.Player.Scripts
             // [Main]
             Debug.Log($"EnemyType: {enemyMono.EnemyEnum}を攻撃");
             if (PlayerAttackModule.GetTargetEnemyEnum(playerColor).Contains(enemyMono.EnemyEnum))
-            {
                 // 敵を攻撃
                 enemyMono.CurrentHp -= playerParamDataContainer.GetPlayerParamData(playerColor).GetAttack();
-            }
             else
-            {
                 // 敵が特攻攻撃をしてくる
-                
-            }
+                enemyMono.SuicideAttack(playerMono);
 
             // Animation
             foreach (var playerViewMono in playerViewMonos)
             {
                 if (playerViewMono == null) continue;
-                if(playerViewMono.playerColor == playerColor)
+                if (playerViewMono.playerColor == playerColor)
                     playerViewMono.Attack();
             }
         }

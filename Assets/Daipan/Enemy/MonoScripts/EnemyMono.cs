@@ -6,6 +6,7 @@ using Daipan.Enemy.LevelDesign.Interfaces;
 using Daipan.Enemy.LevelDesign.Scripts;
 using Daipan.Enemy.Scripts;
 using Daipan.LevelDesign.Enemy.Scripts;
+using Daipan.Player.MonoScripts;
 using Daipan.Player.Scripts;
 using DG.Tweening;
 using UnityEngine;
@@ -33,7 +34,7 @@ namespace Daipan.Enemy.MonoScripts
             if (transform.position.x - _playerHolder.PlayerMono.transform.position.x >=
                 _enemyParamDataContainer.GetEnemyParamData(EnemyEnum).GetAttackRange())
             {
-                float moveSpeed = (float)_enemyParamDataContainer.GetEnemyParamData(EnemyEnum).GetMoveSpeedPreSec();
+                var moveSpeed = (float)_enemyParamDataContainer.GetEnemyParamData(EnemyEnum).GetMoveSpeedPreSec();
                 transform.position += Time.deltaTime * moveSpeed * Vector3.left;
             }
 
@@ -109,6 +110,11 @@ namespace Daipan.Enemy.MonoScripts
                     .OnStart(() => { enemyViewMono.Daipaned(() => Destroy(enemyMono.gameObject)); });
             else
                 enemyViewMono.Died(() => Destroy(enemyMono.gameObject));
+        }
+
+        public void SuicideAttack(PlayerMono playerMono)
+        {
+            _enemySuicideAttack.SuicideAttack(playerMono);
         }
     }
 
