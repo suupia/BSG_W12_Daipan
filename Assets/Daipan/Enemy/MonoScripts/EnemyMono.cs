@@ -17,6 +17,7 @@ namespace Daipan.Enemy.MonoScripts
     {
         [SerializeField] AbstractEnemyViewMono? enemyViewMono;
         EnemyAttackDecider _enemyAttackDecider = null!;
+        EnemySuicideAttack _enemySuicideAttack = null!;
         EnemyCluster _enemyCluster = null!;
         EnemyHp _enemyHp = null!;
         IEnemySpawnPoint _enemySpawnPoint = null!;
@@ -68,12 +69,14 @@ namespace Daipan.Enemy.MonoScripts
         public void SetDomain(
             EnemyEnum enemyEnum,
             EnemyHp enemyHp,
-            EnemyAttackDecider enemyAttackDecider
+            EnemyAttackDecider enemyAttackDecider,
+            EnemySuicideAttack enemySuicideAttack
         )
         {
             EnemyEnum = enemyEnum;
             _enemyHp = enemyHp;
             _enemyAttackDecider = enemyAttackDecider;
+            _enemySuicideAttack = enemySuicideAttack;
 
             enemyViewMono?.SetDomain(_enemyParamDataContainer);
             enemyViewMono?.SetView(enemyEnum);
