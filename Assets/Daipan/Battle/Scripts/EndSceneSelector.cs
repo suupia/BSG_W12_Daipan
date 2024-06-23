@@ -11,8 +11,8 @@ namespace Daipan.Battle.scripts
     public class EndSceneSelector : IStart, IDisposable
     {
         readonly ViewerNumber _viewerNumber;
-        
-        readonly IList<IDisposable> _disposables = new List<IDisposable>(); 
+
+        IDisposable? _disposable; 
         
         public EndSceneSelector(
             ViewerNumber viewerNumber
@@ -28,12 +28,12 @@ namespace Daipan.Battle.scripts
 
         void SetUp()
         {
-            _disposables.Add( Observable.EveryUpdate()
+            _disposable = Observable.EveryUpdate()
                 .Subscribe(_ =>
                 {
                     ChangeToInsideTheBox(_viewerNumber);
                     ChangeToThanksgiving(_viewerNumber);
-                })   );
+                });
         }
 
         static void ChangeToInsideTheBox(ViewerNumber viewerNumber)
@@ -63,10 +63,7 @@ namespace Daipan.Battle.scripts
         
         public void Dispose()
         {
-            foreach (var disposable in _disposables)
-            {
-                disposable.Dispose();
-            }
+            _disposable?.Dispose();
         }
         
         ~EndSceneSelector()
