@@ -43,7 +43,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         public float daipanProbability;
     }
 
-    [SerializeField]
+    [Serializable]
     public sealed class EnemyRewardParam
     {
         [Header("敵を倒したときに獲得するイライラゲージの量")] [Min(0)]
