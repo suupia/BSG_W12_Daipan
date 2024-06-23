@@ -27,7 +27,11 @@ namespace Daipan.Battle.scripts
         void SetUp()
         {
             _disposables.Add( Observable.EveryUpdate()
-                .Subscribe(_ => ChangeToInsideTheBox(_viewerNumber))   );
+                .Subscribe(_ =>
+                {
+                    ChangeToInsideTheBox(_viewerNumber);
+                    ChangeToThanksgiving(_viewerNumber);
+                })   );
         }
 
         static void ChangeToInsideTheBox(ViewerNumber viewerNumber)
@@ -40,6 +44,18 @@ namespace Daipan.Battle.scripts
             }
         }
        
+        static void ChangeToThanksgiving(ViewerNumber viewerNumber)
+        {
+            Debug.Log("Check ChangeToThanksgiving");
+            if(viewerNumber.Number >= 1000)  // todo : receive parameter from inspector
+            {
+                Debug.Log("Change to Thanksgiving");
+                SceneTransition.TransitioningScene(SceneName.Thanksgiving);
+            }
+        }
+        
+        // todo: 対応する遷移の処理を追加する
+        // その時必要な依存関係は注入するようにする。
         
         
         
