@@ -39,13 +39,11 @@ namespace Daipan.Player.MonoScripts
             // comboCountが0ならフェードアウト
             if(comboCount == 0)
             {
-                Debug.Log("DOScale : 0に縮小");
                 _transform.DOScale(Vector3.zero, fadeoutDuration);
                 return;
             }
 
             // 増える時にアニメーション
-            Debug.Log($"DOScale : 増加アニメーション {_originalScale}");
             // 拡大
             _transform.DOScale(_originalScale * scaleRatio, scaleUpDuration)
                 .SetEase(Ease.InOutCubic);
