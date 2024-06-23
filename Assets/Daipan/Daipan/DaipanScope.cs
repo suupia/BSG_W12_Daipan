@@ -105,6 +105,9 @@ namespace Daipan.Daipan
             builder.RegisterComponentInHierarchy<StreamViewMono>();
             builder.RegisterComponentInHierarchy<TimerViewMono>();
             builder.RegisterComponentInHierarchy<StreamerViewMono>();
+            
+            // Battle
+            builder.Register<EndSceneSelector>(Lifetime.Scoped).As<IStart>().AsSelf();
 
             // Test
             builder.RegisterComponentInHierarchy<PlayerTestInput>();
