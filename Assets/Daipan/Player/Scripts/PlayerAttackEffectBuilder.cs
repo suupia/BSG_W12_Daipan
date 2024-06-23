@@ -21,7 +21,7 @@ namespace Daipan.Player.Scripts
         readonly ViewerNumber _viewerNumber;
         readonly CommentSpawner _commentSpawner;
         readonly CommentParamsServer _commentParamsServer;
-        
+
         public PlayerAttackEffectBuilder(
             PlayerParamDataContainer playerParamDataContainer,
             ComboCounter comboCounter,
@@ -29,7 +29,7 @@ namespace Daipan.Player.Scripts
             ViewerNumber viewerNumber,
             CommentSpawner commentSpawner,
             CommentParamsServer commentParamsServer
-            )
+        )
         {
             _playerParamDataContainer = playerParamDataContainer;
             _comboCounter = comboCounter;
@@ -39,71 +39,89 @@ namespace Daipan.Player.Scripts
             _commentParamsServer = commentParamsServer;
         }
 
-        public PlayerAttackEffectMono Build(PlayerAttackEffectMono effect, PlayerMono playerMono ,List<AbstractPlayerViewMono?> playerViewMonos, PlayerColor playerColor)
+        public PlayerAttackEffectMono Build(PlayerAttackEffectMono effect, PlayerMono playerMono,
+            List<AbstractPlayerViewMono?> playerViewMonos, PlayerColor playerColor)
         {
             effect.SetUp(_playerParamDataContainer.GetPlayerParamData(playerColor),
                 () => _enemyCluster.NearestEnemy(playerMono.transform.position));
             effect.OnHit += (sender, args) =>
             {
-                if (args.IsTargetEnemy)
-                {
-                    OnAttackEnemy(_playerParamDataContainer, playerViewMonos, playerColor, args.EnemyMono);
-                    _comboCounter.IncreaseCombo();
-                    
-                    // 視聴者数が一定数以上の時、コメントを生成する
-                    var commentParam = _commentParamsServer.GetCommentParamDependOnViewer();
-                    if (commentParam.viewerAmount < _viewerNumber.Number)
-                    {
-                        for (int i = 0; i < commentParam.commentAmount; i++)
-                        {
-                            _commentSpawner.SpawnCommentByType(CommentEnum.Normal);
-                        }
-                    }
-                }
-                else
-                {
-                    Debug.Log($"攻撃対象が{PlayerAttackModule.GetTargetEnemyEnum(playerColor)}ではないです args.EnemyMono?.EnemyEnum: {args.EnemyMono?.EnemyEnum}");
-                    _comboCounter.ResetCombo();
-                    // todo : 特攻処理を書く
-                    
-                    // 視聴者数が一定数以上の時、アンチコメントを生成する
-                    var commentParam = _commentParamsServer.GetCommentParamDependOnViewer();
-                    if (commentParam.viewerAmount < _viewerNumber.Number)
-                    {
-                        for (int i = 0; i < commentParam.commentAmount; i++)
-                        {
-                            _commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
-                        }
-                    }
-                }
+                Debug.Log($"OnHit");
+                OnAttackEnemy(_playerParamDataContainer, playerMono, playerViewMonos, playerColor, args.EnemyMono);
+                OnProcessCombo(_comboCounter, playerColor, args);
+                OnSpawnComment(_commentParamsServer, _commentSpawner, _viewerNumber, args);
             };
             return effect;
         }
 
+        static void OnProcessCombo(
+            ComboCounter comboCounter,
+            PlayerColor playerColor,
+            OnHitEventArgs args
+        )
+        {
+            if (args.IsTargetEnemy)
+            {
+                comboCounter.IncreaseCombo();
+            }
+            else
+            {
+                Debug.Log(
+                    $"攻撃対象が{PlayerAttackModule.GetTargetEnemyEnum(playerColor)}ではないです args.EnemyMono?.EnemyEnum: {args.EnemyMono?.EnemyEnum}");
+                comboCounter.ResetCombo();
+            }
+        }
+
+        static void OnSpawnComment(
+            CommentParamsServer commentParamsServer,
+            CommentSpawner commentSpawner,
+            ViewerNumber viewerNumber,
+            OnHitEventArgs args
+        )
+        {
+            if (args.IsTargetEnemy)
+            {
+                // 視聴者数が一定数以上の時、コメントを生成する
+                var commentParam = commentParamsServer.GetCommentParamDependOnViewer();
+                if (commentParam.viewerAmount < viewerNumber.Number)
+                    for (var i = 0; i < commentParam.commentAmount; i++)
+                        commentSpawner.SpawnCommentByType(CommentEnum.Normal);
+            }
+            else
+            {
+                // 視聴者数が一定数以上の時、アンチコメントを生成する
+                var commentParam = commentParamsServer.GetCommentParamDependOnViewer();
+                if (commentParam.viewerAmount < viewerNumber.Number)
+                    for (var i = 0; i < commentParam.commentAmount; i++)
+                        commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
+            }
+        }
+
         static void OnAttackEnemy(PlayerParamDataContainer playerParamDataContainer,
+            PlayerMono playerMono,
             List<AbstractPlayerViewMono?> playerViewMonos,
             PlayerColor playerColor, EnemyMono? enemyMono)
         {
             Debug.Log($"Attack enemyMono?.EnemyEnum: {enemyMono?.EnemyEnum}");
+            // [Precondition]
             if (enemyMono == null) return;
-            var targetEnemies = PlayerAttackModule.GetTargetEnemyEnum(playerColor);
 
-            if (targetEnemies.Contains(enemyMono.EnemyEnum))
-            {
-                Debug.Log($"EnemyType: {enemyMono.EnemyEnum}を攻撃");
+            // [Main]
+            Debug.Log($"EnemyType: {enemyMono.EnemyEnum}を攻撃");
+            if (PlayerAttackModule.GetTargetEnemyEnum(playerColor).Contains(enemyMono.EnemyEnum))
+                // 敵を攻撃
                 enemyMono.CurrentHp -= playerParamDataContainer.GetPlayerParamData(playerColor).GetAttack();
-
-                // Animation
-                foreach (var playerViewMono in playerViewMonos)
-                {
-                    if (playerViewMono == null) continue;
-                    if(playerViewMono.playerColor == playerColor)
-                        playerViewMono.Attack();
-                }
-            }
             else
+                // 敵が特攻攻撃をしてくる
+                // todo: 一旦はなし
+                // enemyMono.SuicideAttack(playerMono);
+
+            // Animation
+            foreach (var playerViewMono in playerViewMonos)
             {
-                Debug.Log($"攻撃対象が{enemyMono.EnemyEnum}ではないよ");
+                if (playerViewMono == null) continue;
+                if (playerViewMono.playerColor == playerColor)
+                    playerViewMono.Attack();
             }
         }
     }
