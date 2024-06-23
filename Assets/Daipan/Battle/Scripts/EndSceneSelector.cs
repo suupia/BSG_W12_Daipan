@@ -39,6 +39,7 @@ namespace Daipan.Battle.scripts
                 SceneTransition.TransitioningScene(SceneName.InsideTheBox);
             }
         }
+       
         
         
         

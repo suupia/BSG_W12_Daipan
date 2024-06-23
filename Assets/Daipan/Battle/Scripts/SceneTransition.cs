@@ -37,6 +37,17 @@ namespace Daipan.Battle.scripts
         TitleScene,
         DaipanScene,
         ResultScene,
-        InsideTheBox
+        
+        // End Scene
+        InsideTheBox,
+        Thanksgiving,
+        BottomYoutuber,
+        TopYoutuber,
+        ProGamer,
+        SacredLady,
+        Flame,
+        Ordinary1,
+        Ordinary2,
+        Ordinary3,
     }
 }
