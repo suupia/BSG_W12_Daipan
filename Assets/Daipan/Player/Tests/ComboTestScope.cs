@@ -1,7 +1,10 @@
 #nullable enable
 using Daipan.Enemy.Scripts;
+using Daipan.Player.LevelDesign.Interfaces;
+using Daipan.Player.LevelDesign.Scripts;
 using Daipan.Player.MonoScripts;
 using Daipan.Player.Scripts;
+using Daipan.Stream.Scripts;
 using Daipan.Stream.Scripts.Utility;
 using UnityEngine;
 using VContainer;
@@ -12,11 +15,16 @@ using VContainer.Unity;
 public class ComboTestScope : LifetimeScope
 {
 
+    [SerializeField] ComboParamManager comboParamManager = null!;
 
     protected override void Configure(IContainerBuilder builder)
     {
-        builder.RegisterComponentInHierarchy<ComboViewMono>();
+        builder.Register<ViewerNumber>(Lifetime.Scoped);
+
+        builder.RegisterInstance(comboParamManager);
+        builder.Register<ComboParamContainer>(Lifetime.Scoped).As<IComboParamContainer>();
         builder.Register<ComboCounter>(Lifetime.Scoped);
+        builder.RegisterComponentInHierarchy<ComboViewMono>();
         builder.RegisterComponentInHierarchy<ComboTestMono>();
     }
 }

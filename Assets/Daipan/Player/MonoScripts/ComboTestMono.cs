@@ -16,7 +16,7 @@ public class ComboTestMono : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return)) _comboCounter.IncreaseCombo();
-        if (Input.GetKeyDown(KeyCode.RightShift)) _comboCounter.IncreaseCombo();
+        if (Input.GetKeyDown(KeyCode.UpArrow)) _comboCounter.IncreaseCombo();
+        if (Input.GetKeyDown(KeyCode.DownArrow)) _comboCounter.ResetCombo();
     }
 }

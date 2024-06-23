@@ -13,6 +13,7 @@ namespace Daipan.Player.Scripts
         readonly IEnumerator<ComboParam> _comboParamsEnumerator;
         ComboParam _currentComboParam;
 
+
         public ComboCounter(
             IComboParamContainer comboParamContainer,
             ViewerNumber viewerNumber)
