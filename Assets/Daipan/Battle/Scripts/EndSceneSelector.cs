@@ -33,6 +33,9 @@ namespace Daipan.Battle.scripts
                 {
                     ChangeToInsideTheBox(_viewerNumber);
                     ChangeToThanksgiving(_viewerNumber);
+                    ChangeToOrdinary1(_viewerNumber);
+                    ChangeToOrdinary2(_viewerNumber);
+                    ChangeToOrdinary3(_viewerNumber);
                 });
         }
 

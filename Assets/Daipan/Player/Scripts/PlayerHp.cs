@@ -28,7 +28,7 @@ namespace Daipan.Player.Scripts
             {
                 Debug.Log($"Player died");
                 // todo: コールバックで次のシーンへの遷移を挟みたい
-                SceneTransition.TransitioningScene(SceneName.ResultScene);
+                //SceneTransition.TransitioningScene(SceneName.ResultScene);
             }
         }
 
