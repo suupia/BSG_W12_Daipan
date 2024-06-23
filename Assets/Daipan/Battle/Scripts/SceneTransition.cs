@@ -14,6 +14,7 @@ namespace Daipan.Battle.scripts
         {SceneName.TitleScene,"TitleScene" },
         {SceneName.DaipanScene,"DaipanScene" },
         {SceneName.ResultScene,"ResultScene" },
+        {SceneName.InsideTheBox,"InsideTheBox"}
 
         };
 
@@ -35,6 +36,7 @@ namespace Daipan.Battle.scripts
     {
         TitleScene,
         DaipanScene,
-        ResultScene
+        ResultScene,
+        InsideTheBox
     }
 }
