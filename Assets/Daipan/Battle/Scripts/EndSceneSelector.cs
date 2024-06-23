@@ -39,7 +39,7 @@ namespace Daipan.Battle.scripts
         static void ChangeToInsideTheBox(ViewerNumber viewerNumber)
         {
             Debug.Log("Check ChangeToInsideTheBox");
-            if(viewerNumber.Number >= 500)  // todo : receive parameter from inspector
+            if(viewerNumber.Number <= 500)  // todo : receive parameter from inspector
             {
                 Debug.Log("Change to InsideTheBox");
                 ResultShower.ShowResult(SceneName.InsideTheBox);
