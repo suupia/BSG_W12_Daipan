@@ -87,6 +87,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   comboText: {fileID: 3323682389863025022}
+  scaleRatio: 1.3
+  fadeoutDuration: 0.1
+  scaleUpDuration: 0.3
+  scaleDownDuration: 0.2
 --- !u!1 &5754029469455015177
 GameObject:
   m_ObjectHideFlags: 0
