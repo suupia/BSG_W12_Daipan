@@ -14,7 +14,9 @@ namespace Daipan.Battle.scripts
         
         readonly IList<IDisposable> _disposables = new List<IDisposable>(); 
         
-        public EndSceneSelector(ViewerNumber viewerNumber)
+        public EndSceneSelector(
+            ViewerNumber viewerNumber
+            )
         {
             _viewerNumber = viewerNumber;
         }
@@ -40,7 +42,7 @@ namespace Daipan.Battle.scripts
             if(viewerNumber.Number >= 500)  // todo : receive parameter from inspector
             {
                 Debug.Log("Change to InsideTheBox");
-                SceneTransition.TransitioningScene(SceneName.InsideTheBox);
+                ResultShower.ShowResult(SceneName.InsideTheBox);
             }
         }
        
@@ -50,7 +52,7 @@ namespace Daipan.Battle.scripts
             if(viewerNumber.Number >= 1000)  // todo : receive parameter from inspector
             {
                 Debug.Log("Change to Thanksgiving");
-                SceneTransition.TransitioningScene(SceneName.Thanksgiving);
+                ResultShower.ShowResult(SceneName.Thanksgiving);
             }
         }
         
