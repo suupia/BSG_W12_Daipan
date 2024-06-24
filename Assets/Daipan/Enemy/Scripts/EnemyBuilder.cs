@@ -61,6 +61,7 @@ namespace Daipan.Enemy.Scripts
                 new EnemySuicideAttack(enemyMono,enemyParamData),
                 new EnemyDied(_enemyCluster, enemyMono)
             );
+            
             enemyMono.OnDied += (sender, args) =>
             {
                 // ボスを倒したときも含む
@@ -87,7 +88,6 @@ namespace Daipan.Enemy.Scripts
 
         static void SpawnComment(DiedEventArgs args, CommentSpawner commentSpawner)
         {
-            
             if (args.enemyEnum.IsBoss() == true)
             {
                 // 3倍出現
