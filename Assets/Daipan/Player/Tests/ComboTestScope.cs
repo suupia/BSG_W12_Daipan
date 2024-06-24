@@ -22,7 +22,7 @@ public class ComboTestScope : LifetimeScope
         builder.Register<ViewerNumber>(Lifetime.Scoped);
 
         builder.RegisterInstance(comboParamManager);
-        builder.Register<ComboParamContainer>(Lifetime.Scoped).As<IComboParamContainer>();
+        builder.Register<ComboMultiplier>(Lifetime.Scoped).As<IComboMultiplier>();
         builder.Register<ComboCounter>(Lifetime.Scoped);
         builder.RegisterComponentInHierarchy<ComboViewMono>();
         builder.RegisterComponentInHierarchy<ComboTestMono>();

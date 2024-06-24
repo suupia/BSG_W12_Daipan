@@ -1,4 +1,6 @@
 ﻿#nullable enable
+using Daipan.Player.LevelDesign.Interfaces;
+using Daipan.Player.Scripts;
 using UnityEngine;
 
 namespace Daipan.Stream.Scripts
@@ -11,10 +13,12 @@ namespace Daipan.Stream.Scripts
         int IncreasedNumber { get; set; }
         int MaxNumber => 10_000;
 
+
         public void IncreaseViewer(int amount)
         {
             // [Prerequisite]
             if (amount < 0) Debug.LogWarning($"ViewerNumber.IncreaseViewer() amount is negative : {amount}");
+            
             IncreasedNumber += amount;
         }
 
