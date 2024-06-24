@@ -51,7 +51,9 @@ namespace Daipan.Comment.Scripts
 
         void IUpdate.Update()
         {
+#if UNITY_EDITOR
             if (Input.GetKeyDown(KeyCode.Space)) SpawnComment();
+#endif
         }
 
 
@@ -68,8 +70,8 @@ namespace Daipan.Comment.Scripts
             var comment = _container.Instantiate(commentPrefab, _commentParamsServer.GetSpawnedPosition(),
                 Quaternion.identity, _commentParamsServer.GetCommentParent());
             comment.SetParameter(_commentParamsServer.GetRandomCommentWord()); // コメントの文章を抽選する
-            _commentCluster.Add(comment); 
-            
+            _commentCluster.Add(comment);
+
             // 視聴者を増やす
             var amount = _commentParamsServer.GetViewerDiffCommentNumber();
             var multipliedAmount = (int)(amount * _comboMultiplier.CalculateComboMultiplier(_comboCounter.ComboCount));
@@ -85,7 +87,7 @@ namespace Daipan.Comment.Scripts
                 Quaternion.identity, _commentParamsServer.GetCommentParent());
             comment.SetParameter(_commentParamsServer.GetRandomAntiCommentWord());　// コメントの文章を抽選する 
             _antiCommentCluster.Add(comment);
-            
+
             // 視聴者を減らす
             var amount = _commentParamsServer.GetViewerDiffAntiCommentNumber();
             var multipliedAmount = (int)(amount * _comboMultiplier.CalculateComboMultiplier(_comboCounter.ComboCount));
