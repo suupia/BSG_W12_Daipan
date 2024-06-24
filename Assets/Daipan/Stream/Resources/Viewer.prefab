@@ -355,3 +355,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   viewerText: {fileID: 16766080161484126}
+  ZoomingViewerThreshold: 100000
+  scaleRatio: 1.3
+  zoomingDuration: 1
