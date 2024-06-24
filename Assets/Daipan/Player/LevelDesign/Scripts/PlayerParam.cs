@@ -25,6 +25,9 @@ namespace Daipan.Player.LevelDesign.Scripts
         [Header("プレイヤーのHP")]
         [Min(0)]
         public int hpAmount;
+        [Header("n回攻撃されたらアンチコメント")]
+        [Min(0)]
+        public int antiCommentThreshold;
     }
 
     [Serializable]
