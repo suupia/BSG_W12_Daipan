@@ -13,26 +13,13 @@ namespace Daipan.Stream.Scripts
         int IncreasedNumber { get; set; }
         int MaxNumber => 10_000;
 
-        readonly ComboCounter _comboCounter;
-        readonly IComboMultiplier _comboMultiplier;
-
-        public ViewerNumber(
-            ComboCounter comboCounter,
-            IComboMultiplier comboMultiplier
-            )
-        {
-            _comboCounter = comboCounter;
-            _comboMultiplier = comboMultiplier;
-        }
 
         public void IncreaseViewer(int amount)
         {
             // [Prerequisite]
             if (amount < 0) Debug.LogWarning($"ViewerNumber.IncreaseViewer() amount is negative : {amount}");
             
-            var multipliedAmount = (int)(amount * _comboMultiplier.CalculateComboMultiplier(_comboCounter.ComboCount));
-            
-            IncreasedNumber += multipliedAmount;
+            IncreasedNumber += amount;
         }
 
         public void DecreaseViewer(int amount)

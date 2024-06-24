@@ -61,12 +61,12 @@ public sealed class ComboTests
     }
 
     [Test]
-    public void MultiplyViewersWithComboTest()
+    public void ComboMultiplierWithIncreaseViewersTest()
     {
         // Arrange
         var comboCounter = new ComboCounter();
         var comboMultiplier = new ComboMultiplier();
-        var viewerNumber = new ViewerNumber(comboCounter, comboMultiplier);
+        var viewerNumber = new ViewerNumber();
         
         // Act 1
         viewerNumber.IncreaseViewer(100);
@@ -78,6 +78,27 @@ public sealed class ComboTests
         viewerNumber.IncreaseViewer(100);
         // Assert 2
         Assert.AreEqual(210, viewerNumber.Number);
+    }
+    
+    [Test]
+    public void ComboMultiplierWithDecreaseViewersTest()
+    {
+        // Arrange
+        var comboCounter = new ComboCounter();
+        var comboMultiplier = new ComboMultiplier();
+        var viewerNumber = new ViewerNumber();
+        
+        // Act 1
+        viewerNumber.IncreaseViewer(150);
+        viewerNumber.DecreaseViewer(50);
+        // Assert 1
+        Assert.AreEqual(100, viewerNumber.Number);
+        
+        // Act 2
+        for (var i = 0; i < 10; i++) comboCounter.IncreaseCombo();
+        viewerNumber.DecreaseViewer(50);
+        // Assert 2
+        Assert.AreEqual(150, viewerNumber.Number);
     }
 
 }

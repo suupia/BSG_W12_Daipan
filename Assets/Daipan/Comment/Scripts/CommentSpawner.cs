@@ -74,9 +74,14 @@ namespace Daipan.Comment.Scripts
 
             // 視聴者を増やす
             var amount = _commentParamsServer.GetViewerDiffCommentNumber();
-            var multipliedAmount = (int)(amount * _comboMultiplier.CalculateComboMultiplier(_comboCounter.ComboCount));
-            if (multipliedAmount > 0) _viewerNumber.IncreaseViewer(multipliedAmount);
-            else _viewerNumber.DecreaseViewer(-multipliedAmount);
+            IncreaseViewer(_viewerNumber, amount, _comboCounter, _comboMultiplier);
+        }
+
+        static void IncreaseViewer(ViewerNumber viewerNumber, int baseIncrementAmount,ComboCounter comboCounter, IComboMultiplier comboMultiplier)
+        {
+            var multipliedAmount = (int)(baseIncrementAmount * comboMultiplier.CalculateComboMultiplier(comboCounter.ComboCount));
+            if (multipliedAmount > 0) viewerNumber.IncreaseViewer(multipliedAmount);
+            else viewerNumber.IncreaseViewer(multipliedAmount);
         }
 
         void SpawnAntiComment()
@@ -90,9 +95,14 @@ namespace Daipan.Comment.Scripts
 
             // 視聴者を減らす
             var amount = _commentParamsServer.GetViewerDiffAntiCommentNumber();
-            var multipliedAmount = (int)(amount * _comboMultiplier.CalculateComboMultiplier(_comboCounter.ComboCount));
-            if (multipliedAmount > 0) _viewerNumber.DecreaseViewer(multipliedAmount);
-            else _viewerNumber.IncreaseViewer(-multipliedAmount);
+            DecreaseViewer(_viewerNumber, amount, _comboCounter, _comboMultiplier);
+        }
+        
+        static void DecreaseViewer(ViewerNumber viewerNumber, int baseDecrementAmount, ComboCounter comboCounter, IComboMultiplier comboMultiplier)
+        {
+            var multipliedAmount = (int)(baseDecrementAmount * comboMultiplier.CalculateComboMultiplier(comboCounter.ComboCount));
+            if (multipliedAmount > 0) viewerNumber.DecreaseViewer(multipliedAmount);
+            else viewerNumber.DecreaseViewer(multipliedAmount);
         }
     }
 }
