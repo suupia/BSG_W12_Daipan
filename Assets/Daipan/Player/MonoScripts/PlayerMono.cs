@@ -22,6 +22,7 @@ namespace Daipan.Player.MonoScripts
         PlayerHp _playerHp = null!;
         InputSerialManager _inputSerialManager = null!;
         PlayerAttackEffectSpawner _playerAttackEffectSpawner = null!;
+        PlayerAttackedCounter _attackedCounterForAntiComment = null!;
 
         public void Update()
         {
@@ -83,10 +84,15 @@ namespace Daipan.Player.MonoScripts
             _enemyCluster = enemyCluster;
 
             _playerHp = new PlayerHp(playerHpParamData.GetCurrentHp());
+            _attackedCounterForAntiComment = new PlayerAttackedCounter(10); // todo マジックナンバーをなくす
             _playerHp.OnDamage += (sender, args) =>
             {
                 // Domain
                 irritatedValue.IncreaseValue(args.DamageValue);
+
+                // AntiComment
+                _attackedCounterForAntiComment.CountUp();
+                Debug.Log($"isThreshold{_attackedCounterForAntiComment.isOverThreshold}");
 
                 // View
                 foreach (var playerViewMono in playerViewMonos)
