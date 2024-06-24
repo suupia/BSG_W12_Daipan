@@ -17,6 +17,7 @@ namespace Daipan.Stream.Scripts
         readonly StreamStatus _streamStatus;
         readonly ViewerNumber _viewerNumber;
         readonly StreamerViewMono _streamerViewMono;
+        public int DaipanNum = 0;
 
         public DaipanExecutor(
             DaipanParam daipanParam,
@@ -47,6 +48,7 @@ namespace Daipan.Stream.Scripts
                 _enemyCluster.Daipaned();
                 _antiCommentCluster.BlownAway();
                 _streamerViewMono.Daipan();
+                DaipanNum++;
                 
                 // 台パンしたら怒りゲージは0になる
                 _irritatedValue.DecreaseValue(_irritatedValue.Value);

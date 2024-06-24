@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Daipan.Core.Interfaces;
 using Daipan.Stream.Scripts;
+using Daipan.Stream.Tests;
 using R3;
 using UnityEngine;
 
@@ -11,19 +12,22 @@ namespace Daipan.Battle.scripts
     public class EndSceneSelector : IStart, IDisposable
     {
         readonly ViewerNumber _viewerNumber;
+        readonly DaipanExecutor _daipanExecutor;
 
         IDisposable? _disposable; 
         
         public EndSceneSelector(
             ViewerNumber viewerNumber
+            , DaipanExecutor daipanExecutor
             )
         {
             _viewerNumber = viewerNumber;
+            _daipanExecutor = daipanExecutor;
         }
 
         void IStart.Start()
         {
-            SetUp();
+            //SetUp();
         }
 
         void SetUp()
@@ -36,6 +40,8 @@ namespace Daipan.Battle.scripts
                     ChangeToOrdinary1(_viewerNumber);
                     ChangeToOrdinary2(_viewerNumber);
                     ChangeToOrdinary3(_viewerNumber);
+                    ChangeToSacredLady(_daipanExecutor);
+                    ChangeToFlame(_daipanExecutor);
                 });
         }
 
@@ -57,6 +63,27 @@ namespace Daipan.Battle.scripts
                 Debug.Log("Change to Thanksgiving");
                 ResultShower.ShowResult(SceneName.Thanksgiving);
             }
+        }
+
+        static void ChangeToSacredLady(DaipanExecutor daipanExecutor)
+        {
+            Debug.Log("Check ChangeToSacredLady");
+            if (daipanExecutor.DaipanNum<=10)
+            {
+                Debug.Log("Change to SacredLady");
+                ResultShower.ShowResult(SceneName.SacredLady);
+            }
+        }
+
+        static void ChangeToFlame(DaipanExecutor dipanExecutor)
+        {
+            Debug.Log("Check ChangeToFlame");
+            if (dipanExecutor.DaipanNum >= 10)
+            {
+                Debug.Log("Change to Flame");
+                ResultShower.ShowResult(SceneName.Flame);
+            }
+            
         }
 
         static void ChangeToOrdinary1(ViewerNumber viewerNumber)
