@@ -4589,18 +4589,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1211199338236570981, guid: 30e91696e7cda4ce7b49b5cd15e11759, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1211199338236570981, guid: 30e91696e7cda4ce7b49b5cd15e11759, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2219642563634189624, guid: 30e91696e7cda4ce7b49b5cd15e11759, type: 3}
-      propertyPath: m_SpriteSortPoint
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5698833056402606121, guid: 30e91696e7cda4ce7b49b5cd15e11759, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.5
@@ -4641,37 +4629,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6718282394163543922, guid: 30e91696e7cda4ce7b49b5cd15e11759, type: 3}
-      propertyPath: scaleRatio
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6718282394163543922, guid: 30e91696e7cda4ce7b49b5cd15e11759, type: 3}
-      propertyPath: zoomDuration
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6718282394163543922, guid: 30e91696e7cda4ce7b49b5cd15e11759, type: 3}
-      propertyPath: moveAmountByAngerZoom.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6718282394163543922, guid: 30e91696e7cda4ce7b49b5cd15e11759, type: 3}
-      propertyPath: moveAmountByAngerZoom.y
-      value: 0.4
-      objectReference: {fileID: 0}
     - target: {fileID: 7019384296459631377, guid: 30e91696e7cda4ce7b49b5cd15e11759, type: 3}
       propertyPath: m_Name
       value: Streamer
-      objectReference: {fileID: 0}
-    - target: {fileID: 8390229693240294164, guid: 30e91696e7cda4ce7b49b5cd15e11759, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8390229693240294164, guid: 30e91696e7cda4ce7b49b5cd15e11759, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8390229693240294164, guid: 30e91696e7cda4ce7b49b5cd15e11759, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

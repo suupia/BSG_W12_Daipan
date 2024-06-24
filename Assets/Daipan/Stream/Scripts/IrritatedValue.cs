@@ -28,10 +28,10 @@ namespace Daipan.Stream.Scripts
             {
                 for(int i = 0; i < RatioTable.Count; i++)
                 {
-                    if (Ratio > RatioTable[i]) continue;
+                    if (Ratio >= RatioTable[i]) continue;
                     return i;
                 }
-                return RatioTable.Count - 1;
+                return RatioTable.Count;
             }
         }
             
