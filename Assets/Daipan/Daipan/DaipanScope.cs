@@ -104,6 +104,9 @@ namespace Daipan.Daipan
             // Viewer
             builder.RegisterComponentInHierarchy<ViewerViewMono>();
 
+            // IrritatedGuage
+            builder.RegisterComponentInHierarchy<IrritatedViewMono>();
+
             // View
             builder.RegisterComponentInHierarchy<StreamViewMono>();
             builder.RegisterComponentInHierarchy<TimerViewMono>();
