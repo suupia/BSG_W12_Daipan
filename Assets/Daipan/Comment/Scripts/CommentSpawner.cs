@@ -8,6 +8,8 @@ using Daipan.Stream.Scripts.Utility;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
+using R3;
+using Daipan.Player.MonoScripts;
 
 namespace Daipan.Comment.Scripts
 {
@@ -26,6 +28,7 @@ namespace Daipan.Comment.Scripts
         readonly ComboCounter _comboCounter;
         readonly IComboMultiplier _comboMultiplier;
 
+        
         public CommentSpawner(
             IObjectResolver container,
             CommentParamsServer commentParamsServer,
@@ -64,6 +67,12 @@ namespace Daipan.Comment.Scripts
             else if (commentEnum == CommentEnum.Spiky) SpawnAntiComment();
         }
 
+        public void SpawnAntiCommentByAttackTower(bool isSpawn)
+        {
+            if (!isSpawn) return;
+            SpawnAntiComment();
+        }
+
         void SpawnComment()
         {
             var commentPrefab = _commentLoader.Load();
@@ -90,7 +99,5 @@ namespace Daipan.Comment.Scripts
             var multipliedAmount = (int)(_commentParamsServer.GetViewerDiffAntiCommentNumber() * _comboMultiplier.CalculateComboMultiplier(_comboCounter.ComboCount));
             _viewerNumber.DecreaseViewer(multipliedAmount);
         }
-        
-
     }
 }

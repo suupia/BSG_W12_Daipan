@@ -18,5 +18,6 @@ namespace Daipan.Player.Scripts
     {
         public Func<int> GetCurrentHp { get; init; } = () => 0;
         public Action<int> SetCurrentHp { get; init; } = (value) => { };
+        public Func<int> GetAntiCommentThreshold { get; init; } = () => 0;
     }
 }
