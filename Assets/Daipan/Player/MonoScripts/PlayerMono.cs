@@ -96,8 +96,8 @@ namespace Daipan.Player.MonoScripts
 
                 // AntiComment
                 _attackedCounterForAntiComment.CountUp();
-                _commentSpawner.SpawnAntiCommentByAttackTower(_attackedCounterForAntiComment.isOverThreshold);
-                Debug.Log($"isThreshold{_attackedCounterForAntiComment.isOverThreshold}");
+                _commentSpawner.SpawnAntiCommentByAttackTower(_attackedCounterForAntiComment.IsOverThreshold);
+                Debug.Log($"isThreshold{_attackedCounterForAntiComment.IsOverThreshold}");
 
                 // View
                 foreach (var playerViewMono in playerViewMonos)

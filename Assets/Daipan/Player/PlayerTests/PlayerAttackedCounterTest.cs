@@ -19,12 +19,12 @@ public class PlayerAttackedCounterTest
         }
 
         // Assert
-        Assert.IsTrue(counter.isOverThreshold);
+        Assert.IsTrue(counter.IsOverThreshold);
 
         // Act
         counter.CountUp();
 
         // Assert
-        Assert.IsFalse(counter.isOverThreshold);
+        Assert.IsFalse(counter.IsOverThreshold);
     }
 }

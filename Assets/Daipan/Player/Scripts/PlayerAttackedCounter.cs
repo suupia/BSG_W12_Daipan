@@ -5,15 +5,15 @@ namespace Daipan.Player.Scripts
     public class PlayerAttackedCounter
     {
         public int AttackedNumber;
-        public bool isOverThreshold;
+        public bool IsOverThreshold;
 
         int _currentTermStartNumber;
-        int _threshold;
+        readonly int _threshold;
 
         public PlayerAttackedCounter(int threshold)
         {
             _threshold = threshold;
-            CoutnReset();
+            CountReset();
         }
 
         public void CountUp()
@@ -22,20 +22,20 @@ namespace Daipan.Player.Scripts
 
             if (AttackedNumber - _currentTermStartNumber >= _threshold)
             {
-                isOverThreshold = true;
+                IsOverThreshold = true;
                 _currentTermStartNumber = AttackedNumber;
             }
             else
             {
-                isOverThreshold = false;
+                IsOverThreshold = false;
             }
         }
 
-        public void CoutnReset()
+        public void CountReset()
         {
             AttackedNumber = 0;
             _currentTermStartNumber = 0;
-            isOverThreshold = false;
+            IsOverThreshold = false;
         } 
     }
 }
