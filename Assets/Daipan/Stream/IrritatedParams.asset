@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: IrritatedParams
   m_EditorClassIdentifier: 
   RatioTable:
-  - 0.2
-  - 0.4
+  - 0.3
   - 0.6
   - 0.8
   - 1
