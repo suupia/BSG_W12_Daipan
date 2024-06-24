@@ -46,8 +46,8 @@ namespace Daipan.LevelDesign.Enemy.Scripts
     [Serializable]
     public sealed class EnemyRewardParam
     {
-        [Header("敵を倒したときに獲得するイライラゲージの量")] [Min(0)]
-        public int irritationAfterKill;
+        [Header("Special敵を倒したときに獲得するイライラゲージの量")] [Min(0)]
+        public int irritationAfterKill = 30;
     }
 
     [Serializable]

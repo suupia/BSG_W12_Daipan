@@ -13,8 +13,8 @@ namespace Daipan.Player.MonoScripts
     public class PlayerAttackEffectMono : MonoBehaviour
     {
         [SerializeField] PlayerAttackEffectViewMono? viewMono;
-        readonly double _speed = 10;
-        readonly double _hitDistance = 0.1;
+        readonly double _speed = 20;
+        readonly double _hitDistance = 1.0;
         public event EventHandler<OnHitEventArgs>? OnHit;
         PlayerParamData? _playerParamData;
         Func<EnemyMono?> _getNearestEnemyMono = () => null; 
