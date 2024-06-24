@@ -85,7 +85,7 @@ namespace Daipan.Daipan
             
             // Combo
             builder.RegisterInstance(comboParamManager);
-            builder.Register<ComboParamContainer>(Lifetime.Scoped).As<IComboParamContainer>();
+            builder.Register<ComboMultiplier>(Lifetime.Scoped).As<IComboMultiplier>();
             builder.Register<ComboCounter>(Lifetime.Scoped);
             builder.RegisterComponentInHierarchy<ComboViewMono>();
 

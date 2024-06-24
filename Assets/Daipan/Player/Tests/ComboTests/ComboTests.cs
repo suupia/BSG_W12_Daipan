@@ -12,7 +12,7 @@ public sealed class ComboTests
     [Test]
     public void IncreaseComboTest()
     {
-        var comboCounter = new ComboCounter(new ComboParamContainerMock(), new ViewerNumber());
+        var comboCounter = new ComboCounter();
         comboCounter.IncreaseCombo();
         Assert.AreEqual(1, comboCounter.ComboCount);
         comboCounter.IncreaseCombo();
@@ -22,7 +22,7 @@ public sealed class ComboTests
     [Test]
     public void ResetComboTest()
     {
-        var comboCounter = new ComboCounter(new ComboParamContainerMock(), new ViewerNumber());
+        var comboCounter = new ComboCounter();
         comboCounter.IncreaseCombo();
         comboCounter.ResetCombo();
         Assert.AreEqual(0, comboCounter.ComboCount);
@@ -37,47 +37,28 @@ public sealed class ComboTests
     public void MultiplyViewersWithSequentialCombo()
     {
         // Arrange
-        var viewerNumber = new ViewerNumber();
-        var comboCounter = new ComboCounter(new ComboParamContainerMock(), viewerNumber);
-        viewerNumber.IncreaseViewer(1000);
+        var comboCounter = new ComboCounter();
+        var comboMultiplier = new ComboMultiplier();
 
         // Act 1
         for (var i = 0; i < 10; i++) comboCounter.IncreaseCombo();
         // Assert 1
         Assert.AreEqual(10, comboCounter.ComboCount);
-        Assert.AreEqual(1100, viewerNumber.Number);
+        Assert.AreEqual(1.10, comboMultiplier.CalculateComboMultiplier(comboCounter.ComboCount));
 
         // Act 2
         for (var i = 0; i < 10; i++) comboCounter.IncreaseCombo();
         // Assert 2
         Assert.AreEqual(20, comboCounter.ComboCount);
-        Assert.AreEqual(1650, viewerNumber.Number);
+        Assert.AreEqual(1.20, comboMultiplier.CalculateComboMultiplier(comboCounter.ComboCount));
 
         // Act 3
         comboCounter.ResetCombo();
         for (var i = 0; i < 10; i++) comboCounter.IncreaseCombo();
         // Assert 3
         Assert.AreEqual(10, comboCounter.ComboCount);
-        Assert.AreEqual(1815, viewerNumber.Number);
+        Assert.AreEqual(1.10, comboMultiplier.CalculateComboMultiplier(comboCounter.ComboCount));
     }
 
-    sealed class ComboParamContainerMock : IComboParamContainer
-    {
-        public IEnumerable<ComboParam> GetComboParams()
-        {
-            return new List<ComboParam>
-            {
-                new()
-                {
-                    comboThreshold = 10,
-                    comboMultiplier = 1.1
-                },
-                new()
-                {
-                    comboThreshold = 20,
-                    comboMultiplier = 1.5
-                }
-            };
-        }
-    }
+
 }
