@@ -34,7 +34,7 @@ public sealed class ComboTests
     }
 
     [Test]
-    public void MultiplyViewersWithSequentialCombo()
+    public void MultiplyComboTest()
     {
         // Arrange
         var comboCounter = new ComboCounter();
@@ -60,5 +60,24 @@ public sealed class ComboTests
         Assert.AreEqual(1.10, comboMultiplier.CalculateComboMultiplier(comboCounter.ComboCount));
     }
 
+    [Test]
+    public void MultiplyViewersWithComboTest()
+    {
+        // Arrange
+        var comboCounter = new ComboCounter();
+        var comboMultiplier = new ComboMultiplier();
+        var viewerNumber = new ViewerNumber(comboCounter, comboMultiplier);
+        
+        // Act 1
+        viewerNumber.IncreaseViewer(100);
+        // Assert 1
+        Assert.AreEqual(100, viewerNumber.Number);
+        
+        // Act 2
+        for (var i = 0; i < 10; i++) comboCounter.IncreaseCombo();
+        viewerNumber.IncreaseViewer(100);
+        // Assert 2
+        Assert.AreEqual(210, viewerNumber.Number);
+    }
 
 }
