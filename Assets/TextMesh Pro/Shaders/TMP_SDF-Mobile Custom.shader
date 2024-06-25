@@ -136,15 +136,16 @@ SubShader {
 			// bold = _SinTime.w;
 			// bold = sin(4 * _Time.y);
 			// bold = clamp(input.vertex.x, -1,1) * sin(_Time.y);
-		    bold = clamp(sin(3 * input.vertex.x ), -1,2) * sin(_Time.y);
+			float waveFrequency = 5.0;
+		    bold = 2 * sin(waveFrequency * input.vertex.x ) * sin(waveFrequency * input.vertex.y) * sin(_Time.w);
 			// bold = clamp (input .normal.z , -1 , 1 ) * sin(_Time.y);
 
 
 			float4 vert = input.vertex;
 			 // 波を生成するためのsin関数を追加
-            float waveFrequency = 10.0; // 周波数
-            float waveAmplitude = 0.05; // 振幅
-            float waveSpeed = _Time.y * 2.0; // 速度
+            // float waveFrequency = 10.0; // 周波数
+            // float waveAmplitude = 0.05; // 振幅
+            // float waveSpeed = _Time.y * 2.0; // 速度
 
             // vert.xyz += input.normal * sin(vert.x * waveFrequency + waveSpeed) * waveAmplitude;
 			// vert.x += input.normal.x * sin(vert.x * waveFrequency + waveSpeed) * waveAmplitude;
