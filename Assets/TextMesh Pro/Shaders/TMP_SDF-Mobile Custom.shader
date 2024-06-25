@@ -136,8 +136,9 @@ SubShader {
 			// bold = _SinTime.w;
 			// bold = sin(4 * _Time.y);
 			// bold = clamp(input.vertex.x, -1,1) * sin(_Time.y);
-			float waveFrequency = 5.0;
-		    bold = 2 * sin(waveFrequency * input.vertex.x ) * sin(waveFrequency * input.vertex.y) * sin(_Time.w);
+			float waveFrequency = 10.0;
+		    bold += sin(waveFrequency * input.vertex.x ) * sin(_Time.w);
+			bold += sin(waveFrequency * input.vertex.y ) * cos(_Time.w);
 			// bold = clamp (input .normal.z , -1 , 1 ) * sin(_Time.y);
 
 

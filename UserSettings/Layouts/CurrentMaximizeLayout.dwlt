@@ -14,18 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Children:
   - {fileID: 3}
-  - {fileID: 10}
-  - {fileID: 15}
+  - {fileID: 13}
+  - {fileID: 18}
   m_Position:
     serializedVersion: 2
     x: 0
     y: 30
-    width: 1440
-    height: 850
-  m_MinSize: {x: 300, y: 100}
-  m_MaxSize: {x: 24288, y: 16192}
+    width: 2560
+    height: 1337
+  m_MinSize: {x: 400, y: 100}
+  m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 19862
+  controlID: 124
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -34,22 +34,22 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 12914, guid: 0000000000000000e000000000000000, type: 0}
+  m_EditorHideFlags: 1
+  m_Script: {fileID: 12015, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MinSize: {x: 100, y: 100}
+  m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
-    m_Text: Animator
-    m_Image: {fileID: 1711060831702674872, guid: 0000000000000000d000000000000000, type: 0}
+    m_Text: Game
+    m_Image: {fileID: -6423792434712278376, guid: 0000000000000000d000000000000000, type: 0}
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 0
-    y: 30
-    width: 764.5
-    height: 386
+    x: -2282
+    y: -240
+    width: 1167
+    height: 679
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -60,144 +60,70 @@ MonoBehaviour:
     m_LastAppliedPresetName: Default
     m_SaveData: []
     m_OverlaysVisible: 1
-  m_ViewTransforms:
-    m_KeySerializationHelper:
-    - {fileID: -4839855751223980620, guid: 7367c03104935465683cdfc2f561d183, type: 2}
-    - {fileID: 1781664801395075809, guid: fdf3d7884d1e94516952df639a7285bc, type: 2}
-    - {fileID: 2114939331538020750, guid: d5ebfcdc0ace8461fafb871fc2c43c77, type: 2}
-    - {fileID: 6603258756916371369, guid: 9d0f5069491a849e29c5ee1329e8cb99, type: 2}
-    - {fileID: -1762927328864935564, guid: d8dfe80f875b140cfb6ff2b26955f729, type: 2}
-    - {fileID: -8454865383288489436, guid: b1b29afd160934ee2b86d928330cf522, type: 2}
-    - {fileID: -834223221656796396, guid: 096932b7090194486868b3d99cc569c8, type: 2}
-    m_ValueSerializationHelper:
-    - e00: 0.81
-      e01: 0
-      e02: 0
-      e03: -25.5
-      e10: 0
-      e11: 0.81
-      e12: 0
-      e13: 39.850006
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    - e00: 0.4536842
-      e01: 0
-      e02: 0
-      e03: -7.684204
-      e10: 0
-      e11: 0.4536842
-      e12: 0
-      e13: 153.18684
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    - e00: 1
-      e01: 0
-      e02: 0
-      e03: 0
-      e10: 0
-      e11: 1
-      e12: 0
-      e13: 0
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    - e00: 1
-      e01: 0
-      e02: 0
-      e03: 0
-      e10: 0
-      e11: 1
-      e12: 0
-      e13: 0
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    - e00: 1
-      e01: 0
-      e02: 0
-      e03: 0
-      e10: 0
-      e11: 1
-      e12: 0
-      e13: 0
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    - e00: 0.4536842
-      e01: 0
-      e02: 0
-      e03: -7.684204
-      e10: 0
-      e11: 0.4536842
-      e12: 0
-      e13: 134.93684
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    - e00: 0.66639626
-      e01: 0
-      e02: 0
-      e03: 4.0539255
-      e10: 0
-      e11: 0.66639626
-      e12: 0
-      e13: 85.107376
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-  m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: 7367c03104935465683cdfc2f561d183, type: 2}
-  m_BreadCrumbs:
-  - m_Target: {fileID: -4839855751223980620, guid: 7367c03104935465683cdfc2f561d183, type: 2}
-    m_ScrollPosition: {x: 0, y: 0}
-  stateMachineGraph: {fileID: 0}
-  stateMachineGraphGUI: {fileID: 0}
-  blendTreeGraph: {fileID: 0}
-  blendTreeGraphGUI: {fileID: 0}
-  m_AutoLiveLink: 1
-  m_MiniTool: 0
-  m_LockTracker:
-    m_IsLocked: 0
-  m_CurrentEditor: 1
-  m_LayerEditor:
-    m_SelectedLayerIndex: 0
+  m_SerializedViewNames: []
+  m_SerializedViewValues: []
+  m_PlayModeViewName: GameView
+  m_ShowGizmos: 0
+  m_TargetDisplay: 0
+  m_ClearColor: {r: 0, g: 0, b: 0, a: 0}
+  m_TargetSize: {x: 1920, y: 1080}
+  m_TextureFilterMode: 0
+  m_TextureHideFlags: 61
+  m_RenderIMGUI: 1
+  m_EnterPlayModeBehavior: 0
+  m_UseMipMap: 0
+  m_VSyncEnabled: 0
+  m_Gizmos: 0
+  m_Stats: 0
+  m_SelectedSizes: 03000000000000000000000000000000000000000000000000000000000000000000000000000000
+  m_ZoomArea:
+    m_HRangeLocked: 0
+    m_VRangeLocked: 0
+    hZoomLockedByDefault: 0
+    vZoomLockedByDefault: 0
+    m_HBaseRangeMin: -960
+    m_HBaseRangeMax: 960
+    m_VBaseRangeMin: -540
+    m_VBaseRangeMax: 540
+    m_HAllowExceedBaseRangeMin: 1
+    m_HAllowExceedBaseRangeMax: 1
+    m_VAllowExceedBaseRangeMin: 1
+    m_VAllowExceedBaseRangeMax: 1
+    m_ScaleWithWindow: 0
+    m_HSlider: 0
+    m_VSlider: 0
+    m_IgnoreScrollWheelUntilClicked: 0
+    m_EnableMouseInput: 0
+    m_EnableSliderZoomHorizontal: 0
+    m_EnableSliderZoomVertical: 0
+    m_UniformScale: 1
+    m_UpDirection: 1
+    m_DrawArea:
+      serializedVersion: 2
+      x: 0
+      y: 21
+      width: 1167
+      height: 658
+    m_Scale: {x: 1.0640346, y: 1.0640346}
+    m_Translation: {x: 583.5001, y: 329}
+    m_MarginLeft: 0
+    m_MarginRight: 0
+    m_MarginTop: 0
+    m_MarginBottom: 0
+    m_LastShownAreaInsideMargins:
+      serializedVersion: 2
+      x: -548.3845
+      y: -309.20047
+      width: 1096.7689
+      height: 618.40094
+    m_MinimalGUI: 1
+  m_defaultScale: 0.6078125
+  m_LastWindowPixelSize: {x: 1167, y: 679}
+  m_ClearInEditMode: 1
+  m_NoCameraWarning: 1
+  m_LowResolutionForAspectRatios: 01000000000000000000
+  m_XRRenderMode: 0
+  m_RenderTexture: {fileID: 0}
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -212,17 +138,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Children:
   - {fileID: 4}
-  - {fileID: 8}
+  - {fileID: 11}
   m_Position:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 765.5
-    height: 850
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 8096, y: 16192}
+    width: 1447
+    height: 1337
+  m_MinSize: {x: 200, y: 100}
+  m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 19863
+  controlID: 125
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -232,27 +158,49 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 12010, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Children:
+  - {fileID: 5}
+  - {fileID: 7}
+  m_Position:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1447
+    height: 700
+  m_MinSize: {x: 200, y: 50}
+  m_MaxSize: {x: 16192, y: 8096}
+  vertical: 0
+  controlID: 126
+--- !u!114 &5
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: AnimatorControllerTool
+  m_Name: SceneView
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 765.5
-    height: 407
-  m_MinSize: {x: 101, y: 121}
-  m_MaxSize: {x: 4001, y: 4021}
-  m_ActualView: {fileID: 2}
+    width: 278
+    height: 700
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_ActualView: {fileID: 6}
   m_Panes:
-  - {fileID: 5}
   - {fileID: 6}
-  - {fileID: 2}
-  - {fileID: 7}
-  m_Selected: 2
-  m_LastSelected: 1
---- !u!114 &5
+  m_Selected: 0
+  m_LastSelected: 0
+--- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -268,14 +216,14 @@ MonoBehaviour:
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
     m_Text: Scene
-    m_Image: {fileID: 8634526014445323508, guid: 0000000000000000d000000000000000, type: 0}
+    m_Image: {fileID: 2593428753322112591, guid: 0000000000000000d000000000000000, type: 0}
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 0
-    y: 30
-    width: 764.5
-    height: 422.5
+    x: -2560
+    y: -240
+    width: 277
+    height: 679
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -290,7 +238,7 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 1
-      snapOffset: {x: -171, y: -26}
+      snapOffset: {x: -169, y: -26}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 3
       id: Tool Settings
@@ -615,7 +563,7 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 1
-      snapOffset: {x: 48, y: 48}
+      snapOffset: {x: 0, y: 48}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
       id: UnityEditor.SceneViewCameraOverlay
@@ -634,9 +582,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 1.1218413, y: -0.59125304, z: 0.007180144}
+    m_Target: {x: 871.8572, y: 565.44574, z: -2.3427389}
     speed: 2
-    m_Value: {x: 1.1218413, y: -0.59125304, z: 0.007180144}
+    m_Value: {x: 871.8572, y: 565.44574, z: -2.3427389}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -686,9 +634,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 9.281985
+    m_Target: 337.3515
     speed: 2
-    m_Value: 9.281985
+    m_Value: 337.3515
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -713,104 +661,6 @@ MonoBehaviour:
   m_SceneVisActive: 1
   m_LastLockedObject: {fileID: 0}
   m_ViewIsLockedToObject: 0
---- !u!114 &6
-MonoBehaviour:
-  m_ObjectHideFlags: 52
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 12015, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_TitleContent:
-    m_Text: Game
-    m_Image: {fileID: 4621777727084837110, guid: 0000000000000000d000000000000000, type: 0}
-    m_Tooltip: 
-  m_Pos:
-    serializedVersion: 2
-    x: 0
-    y: 30
-    width: 764.5
-    height: 386
-  m_SerializedDataModeController:
-    m_DataMode: 0
-    m_PreferredDataMode: 0
-    m_SupportedDataModes: 
-    isAutomatic: 1
-  m_ViewDataDictionary: {fileID: 0}
-  m_OverlayCanvas:
-    m_LastAppliedPresetName: Default
-    m_SaveData: []
-    m_OverlaysVisible: 1
-  m_SerializedViewNames: []
-  m_SerializedViewValues: []
-  m_PlayModeViewName: GameView
-  m_ShowGizmos: 0
-  m_TargetDisplay: 0
-  m_ClearColor: {r: 0, g: 0, b: 0, a: 0}
-  m_TargetSize: {x: 1298, y: 730}
-  m_TextureFilterMode: 0
-  m_TextureHideFlags: 61
-  m_RenderIMGUI: 1
-  m_EnterPlayModeBehavior: 0
-  m_UseMipMap: 0
-  m_VSyncEnabled: 0
-  m_Gizmos: 0
-  m_Stats: 0
-  m_SelectedSizes: 01000000000000000000000000000000000000000000000000000000000000000000000000000000
-  m_ZoomArea:
-    m_HRangeLocked: 0
-    m_VRangeLocked: 0
-    hZoomLockedByDefault: 0
-    vZoomLockedByDefault: 0
-    m_HBaseRangeMin: -324.5
-    m_HBaseRangeMax: 324.5
-    m_VBaseRangeMin: -182.5
-    m_VBaseRangeMax: 182.5
-    m_HAllowExceedBaseRangeMin: 1
-    m_HAllowExceedBaseRangeMax: 1
-    m_VAllowExceedBaseRangeMin: 1
-    m_VAllowExceedBaseRangeMax: 1
-    m_ScaleWithWindow: 0
-    m_HSlider: 0
-    m_VSlider: 0
-    m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 1
-    m_EnableSliderZoomHorizontal: 0
-    m_EnableSliderZoomVertical: 0
-    m_UniformScale: 1
-    m_UpDirection: 1
-    m_DrawArea:
-      serializedVersion: 2
-      x: 0
-      y: 21
-      width: 764.5
-      height: 365
-    m_Scale: {x: 1, y: 1}
-    m_Translation: {x: 382.25, y: 182.5}
-    m_MarginLeft: 0
-    m_MarginRight: 0
-    m_MarginTop: 0
-    m_MarginBottom: 0
-    m_LastShownAreaInsideMargins:
-      serializedVersion: 2
-      x: -382.25
-      y: -182.5
-      width: 764.5
-      height: 365
-    m_MinimalGUI: 1
-  m_defaultScale: 1
-  m_LastWindowPixelSize: {x: 1529, y: 772}
-  m_ClearInEditMode: 1
-  m_NoCameraWarning: 1
-  m_LowResolutionForAspectRatios: 00000000000000000000
-  m_XRRenderMode: 0
-  m_RenderTexture: {fileID: 0}
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -820,143 +670,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 12014, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
+  m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: GameView
   m_EditorClassIdentifier: 
-  m_MinSize: {x: 230, y: 250}
-  m_MaxSize: {x: 10000, y: 10000}
-  m_TitleContent:
-    m_Text: Project
-    m_Image: {fileID: -5179483145760003458, guid: 0000000000000000d000000000000000, type: 0}
-    m_Tooltip: 
-  m_Pos:
+  m_Children: []
+  m_Position:
     serializedVersion: 2
-    x: 0
-    y: 30
-    width: 764.5
-    height: 386
-  m_SerializedDataModeController:
-    m_DataMode: 0
-    m_PreferredDataMode: 0
-    m_SupportedDataModes: 
-    isAutomatic: 1
-  m_ViewDataDictionary: {fileID: 0}
-  m_OverlayCanvas:
-    m_LastAppliedPresetName: Default
-    m_SaveData: []
-    m_OverlaysVisible: 1
-  m_SearchFilter:
-    m_NameFilter: 
-    m_ClassNames: []
-    m_AssetLabels: []
-    m_AssetBundleNames: []
-    m_ReferencingInstanceIDs: 
-    m_SceneHandles: 
-    m_ShowAllHits: 0
-    m_SkipHidden: 0
-    m_SearchArea: 1
-    m_Folders:
-    - Assets/Daipan/Stream
-    m_Globs: []
-    m_OriginalText: 
-    m_ImportLogFlags: 0
-    m_FilterByTypeIntersection: 0
-  m_ViewMode: 1
-  m_StartGridSize: 16
-  m_LastFolders:
-  - Assets/Daipan/Stream
-  m_LastFoldersGridSize: -1
-  m_LastProjectPath: /Users/ayase/Documents/Unity/BSG_W12_Daipan
-  m_LockTracker:
-    m_IsLocked: 0
-  m_FolderTreeState:
-    scrollPos: {x: 0, y: 98}
-    m_SelectedIDs: 80780000
-    m_LastClickedID: 30848
-    m_ExpandedIDs: 000000004e780000
-    m_RenameOverlay:
-      m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
-      m_EditFieldRect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 0
-        height: 0
-      m_UserData: 0
-      m_IsWaitingForDelay: 0
-      m_IsRenaming: 0
-      m_OriginalEventType: 11
-      m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 0}
-    m_SearchString: 
-    m_CreateAssetUtility:
-      m_EndAction: {fileID: 0}
-      m_InstanceID: 0
-      m_Path: 
-      m_Icon: {fileID: 0}
-      m_ResourceFile: 
-  m_AssetTreeState:
-    scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 
-    m_LastClickedID: 0
-    m_ExpandedIDs: 000000004e780000
-    m_RenameOverlay:
-      m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
-      m_EditFieldRect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 0
-        height: 0
-      m_UserData: 0
-      m_IsWaitingForDelay: 0
-      m_IsRenaming: 0
-      m_OriginalEventType: 11
-      m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 0}
-    m_SearchString: 
-    m_CreateAssetUtility:
-      m_EndAction: {fileID: 0}
-      m_InstanceID: 0
-      m_Path: 
-      m_Icon: {fileID: 0}
-      m_ResourceFile: 
-  m_ListAreaState:
-    m_SelectedInstanceIDs: c8720000
-    m_LastClickedInstanceID: 29384
-    m_HadKeyboardFocusLastEvent: 0
-    m_ExpandedInstanceIDs: 
-    m_RenameOverlay:
-      m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
-      m_EditFieldRect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 0
-        height: 0
-      m_UserData: 0
-      m_IsWaitingForDelay: 0
-      m_IsRenaming: 0
-      m_OriginalEventType: 11
-      m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 4}
-    m_CreateAssetUtility:
-      m_EndAction: {fileID: 0}
-      m_InstanceID: 0
-      m_Path: 
-      m_Icon: {fileID: 0}
-      m_ResourceFile: 
-    m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 0}
-    m_GridSize: 16
-  m_SkipHiddenPackages: 0
-  m_DirectoriesAreaWidth: 200
+    x: 278
+    y: 0
+    width: 1169
+    height: 700
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_ActualView: {fileID: 2}
+  m_Panes:
+  - {fileID: 2}
+  - {fileID: 8}
+  - {fileID: 9}
+  - {fileID: 10}
+  m_Selected: 0
+  m_LastSelected: 3
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -966,23 +699,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ConsoleWindow
+  m_Script: {fileID: 12071, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
   m_EditorClassIdentifier: 
-  m_Children: []
-  m_Position:
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_TitleContent:
+    m_Text: Animation
+    m_Image: {fileID: -8166618308981325432, guid: 0000000000000000d000000000000000, type: 0}
+    m_Tooltip: 
+  m_Pos:
     serializedVersion: 2
-    x: 0
-    y: 407
-    width: 765.5
-    height: 443
-  m_MinSize: {x: 101, y: 121}
-  m_MaxSize: {x: 4001, y: 4021}
-  m_ActualView: {fileID: 9}
-  m_Panes:
-  - {fileID: 9}
-  m_Selected: 0
-  m_LastSelected: 0
+    x: 303
+    y: 96
+    width: 613.5
+    height: 501.5
+  m_SerializedDataModeController:
+    m_DataMode: 0
+    m_PreferredDataMode: 0
+    m_SupportedDataModes: 
+    isAutomatic: 1
+  m_ViewDataDictionary: {fileID: 0}
+  m_OverlayCanvas:
+    m_LastAppliedPresetName: Default
+    m_SaveData: []
+    m_OverlaysVisible: 1
+  m_LockTracker:
+    m_IsLocked: 0
+  m_LastSelectedObjectID: 35234
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -992,21 +736,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 12003, guid: 0000000000000000e000000000000000, type: 0}
+  m_Script: {fileID: 12914, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: 
   m_EditorClassIdentifier: 
   m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
-    m_Text: Console
-    m_Image: {fileID: -4950941429401207979, guid: 0000000000000000d000000000000000, type: 0}
+    m_Text: Animator
+    m_Image: {fileID: -1673928668082335149, guid: 0000000000000000d000000000000000, type: 0}
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 0
-    y: 437
-    width: 764.5
-    height: 422
+    x: 224.5
+    y: 96
+    width: 407
+    height: 501.5
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -1017,6 +761,297 @@ MonoBehaviour:
     m_LastAppliedPresetName: Default
     m_SaveData: []
     m_OverlaysVisible: 1
+  m_ViewTransforms:
+    m_KeySerializationHelper:
+    - {fileID: 2169789383934712858, guid: 012782c4ab07a471e90184d07624d365, type: 2}
+    - {fileID: 5251806468912063749, guid: 4940888e47d3047739df2882aa2ba248, type: 2}
+    - {fileID: -6809296529708534003, guid: f2eb1916e1af6424a8d4661c0686c047, type: 2}
+    - {fileID: -6888241071226555630, guid: 4468fd2fb11aa411687c5362afe124cd, type: 2}
+    - {fileID: -7684948700404153162, guid: 94d45951fc7574d81ba40a5c5d092100, type: 2}
+    - {fileID: -5677961451353378042, guid: 32b17751352774a079d0d608b5dc0b56, type: 2}
+    - {fileID: 2392157859902970044, guid: 2e1f45c120b0c45acada80102a182cfc, type: 2}
+    - {fileID: -4556366846336342083, guid: 83f80b89b841947eab74e1dbfe0ca43c, type: 2}
+    - {fileID: 1641543118319400922, guid: 52f82eb8cb337453eb78bd1a2fedc13b, type: 2}
+    - {fileID: 3862347182040762624, guid: cc415a37616674b73999c43d38c84e6e, type: 2}
+    - {fileID: 2924820367441541354, guid: f70a2f7d5178440eb8f325ca8d1a3176, type: 2}
+    - {fileID: -2234072855413917515, guid: 2c905b92aa26f4a9b90f92701cb32dcb, type: 2}
+    - {fileID: -8961858958162411611, guid: 862ba9238d1074abc8a2052e4fd002c0, type: 2}
+    - {fileID: -6030272443333359595, guid: d38d63db1327444b6ab08a053e605394, type: 2}
+    - {fileID: -4839855751223980620, guid: 7367c03104935465683cdfc2f561d183, type: 2}
+    - {fileID: 5251806468912063749, guid: ef14e8f6d9f014e73a16531da38cc1af, type: 2}
+    m_ValueSerializationHelper:
+    - e00: 0.24505495
+      e01: 0
+      e02: 0
+      e03: 2.7472534
+      e10: 0
+      e11: 0.24505495
+      e12: 0
+      e13: 359.7434
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    - e00: 0.4559091
+      e01: 0
+      e02: 0
+      e03: -7.795471
+      e10: 0
+      e11: 0.4559091
+      e12: 0
+      e13: 147.24545
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    - e00: 0.1363158
+      e01: 0
+      e02: 0
+      e03: 8.184212
+      e10: 0
+      e11: 0.1363158
+      e12: 0
+      e13: 235.41316
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    - e00: 0.1
+      e01: 0
+      e02: 0
+      e03: -52.5
+      e10: 0
+      e11: 0.1
+      e12: 0
+      e13: 238.5
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    - e00: 0.1
+      e01: 0
+      e02: 0
+      e03: -52.5
+      e10: 0
+      e11: 0.1
+      e12: 0
+      e13: 238.5
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    - e00: 0.1363158
+      e01: 0
+      e02: 0
+      e03: 8.184212
+      e10: 0
+      e11: 0.1363158
+      e12: 0
+      e13: 235.41316
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    - e00: 0.1
+      e01: 0
+      e02: 0
+      e03: -5.75
+      e10: 0
+      e11: 0.1
+      e12: 0
+      e13: 234
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    - e00: 0.1
+      e01: 0
+      e02: 0
+      e03: -8.75
+      e10: 0
+      e11: 0.1
+      e12: 0
+      e13: 232.5
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    - e00: 0.21210526
+      e01: 0
+      e02: 0
+      e03: 4.3947372
+      e10: 0
+      e11: 0.21210526
+      e12: 0
+      e13: 228.97105
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    - e00: 0.29157895
+      e01: 0
+      e02: 0
+      e03: 0.42105103
+      e10: 0
+      e11: 0.29157895
+      e12: 0
+      e13: 222.21579
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    - e00: 0.21210526
+      e01: 0
+      e02: 0
+      e03: 4.3947372
+      e10: 0
+      e11: 0.21210526
+      e12: 0
+      e13: 228.97105
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    - e00: 0.21210526
+      e01: 0
+      e02: 0
+      e03: 4.3947372
+      e10: 0
+      e11: 0.21210526
+      e12: 0
+      e13: 228.97105
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    - e00: 0.21210526
+      e01: 0
+      e02: 0
+      e03: 4.3947372
+      e10: 0
+      e11: 0.21210526
+      e12: 0
+      e13: 228.97105
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    - e00: 0.21210526
+      e01: 0
+      e02: 0
+      e03: 4.3947372
+      e10: 0
+      e11: 0.21210526
+      e12: 0
+      e13: 228.97105
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    - e00: 1.0622226
+      e01: 0
+      e02: 0
+      e03: -14.535423
+      e10: 0
+      e11: 1.0622226
+      e12: 0
+      e13: 38.850906
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    - e00: 0.9060548
+      e01: 0
+      e02: 0
+      e03: -211.95396
+      e10: 0
+      e11: 0.9060548
+      e12: 0
+      e13: 44.384254
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+  m_PreviewAnimator: {fileID: 0}
+  m_AnimatorController: {fileID: 9100000, guid: 7367c03104935465683cdfc2f561d183, type: 2}
+  m_BreadCrumbs:
+  - m_Target: {fileID: -4839855751223980620, guid: 7367c03104935465683cdfc2f561d183, type: 2}
+    m_ScrollPosition: {x: 0, y: 0}
+  stateMachineGraph: {fileID: 0}
+  stateMachineGraphGUI: {fileID: 0}
+  blendTreeGraph: {fileID: 0}
+  blendTreeGraphGUI: {fileID: 0}
+  m_AutoLiveLink: 1
+  m_MiniTool: 0
+  m_LockTracker:
+    m_IsLocked: 0
+  m_CurrentEditor: 1
+  m_LayerEditor:
+    m_SelectedLayerIndex: 0
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1025,73 +1060,22 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
-  m_EditorHideFlags: 1
-  m_Script: {fileID: 12010, guid: 0000000000000000e000000000000000, type: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 13401, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Children:
-  - {fileID: 11}
-  - {fileID: 13}
-  m_Position:
-    serializedVersion: 2
-    x: 765.5
-    y: 0
-    width: 351.5
-    height: 850
   m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 8096, y: 16192}
-  vertical: 1
-  controlID: 19757
---- !u!114 &11
-MonoBehaviour:
-  m_ObjectHideFlags: 52
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 1
-  m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Children: []
-  m_Position:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 351.5
-    height: 473
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
-  m_ActualView: {fileID: 12}
-  m_Panes:
-  - {fileID: 12}
-  m_Selected: 0
-  m_LastSelected: 0
---- !u!114 &12
-MonoBehaviour:
-  m_ObjectHideFlags: 52
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 1
-  m_Script: {fileID: 12061, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
-    m_Text: Hierarchy
-    m_Image: {fileID: -3734745235275155857, guid: 0000000000000000d000000000000000, type: 0}
+    m_Text: Test Runner
+    m_Image: {fileID: 0}
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 765.5
-    y: 30
-    width: 349.5
-    height: 452
+    x: 170
+    y: 96
+    width: 694
+    height: 503
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -1102,12 +1086,41 @@ MonoBehaviour:
     m_LastAppliedPresetName: Default
     m_SaveData: []
     m_OverlaysVisible: 1
-  m_SceneHierarchy:
-    m_TreeViewState:
+  m_Spl:
+    ID: 416
+    splitterInitialOffset: 0
+    currentActiveSplitter: -1
+    realSizes:
+    - 324.5
+    - 108.5
+    relativeSizes:
+    - 0.75
+    - 0.25
+    minSizes:
+    - 32
+    - 32
+    maxSizes:
+    - 0
+    - 0
+    lastTotalSize: 433
+    splitSize: 6
+    xOffset: 0
+    m_Version: 1
+    oldRealSizes: 
+    oldMinSizes: 
+    oldMaxSizes: 
+    oldSplitSize: 0
+  m_TestTypeToolbarIndex: 1
+  m_PlayModeTestListGUI:
+    m_Window: {fileID: 0}
+    m_NewResultList: []
+    m_ResultText: 
+    m_ResultStacktrace: 
+    m_TestListState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: ac750000
+      m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 04fbffff10fbffff12fbffff
+      m_ExpandedIDs: 
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1123,14 +1136,759 @@ MonoBehaviour:
         m_IsRenaming: 0
         m_OriginalEventType: 11
         m_IsRenamingFilename: 0
-        m_ClientGUIView: {fileID: 11}
+        m_ClientGUIView: {fileID: 0}
       m_SearchString: 
-    m_ExpandedScenes: []
-    m_CurrenRootInstanceID: 0
-    m_LockTracker:
-      m_IsLocked: 0
-    m_CurrentSortingName: TransformSorting
-  m_WindowGUID: 8f3e5170efd44a64986b33fd586cfd3a
+    m_TestRunnerUIFilter:
+      PassedHidden: 0
+      FailedHidden: 0
+      NotRunHidden: 0
+      m_SearchString: 
+      selectedCategoryMask: 0
+      availableCategories: []
+    m_SelectedOption: 0
+  m_EditModeTestListGUI:
+    m_Window: {fileID: 10}
+    m_NewResultList:
+    - id: 1000
+      uniqueId: '[BSG_W12_Daipan][suite]'
+      name: BSG_W12_Daipan
+      fullName: BSG_W12_Daipan
+      resultStatus: 1
+      duration: 0.1633909
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 
+      parentUniqueId: 
+    - id: 1005
+      uniqueId: '[ComboTests][/Users/koki/Unity/UnityProjects/BSG_W12_Daipan/Library/ScriptAssemblies/ComboTests.dll][suite]'
+      name: ComboTests.dll
+      fullName: /Users/koki/Unity/UnityProjects/BSG_W12_Daipan/Library/ScriptAssemblies/ComboTests.dll
+      resultStatus: 1
+      duration: 0.0066762
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1000
+      parentUniqueId: '[BSG_W12_Daipan][suite]'
+    - id: 1001
+      uniqueId: ComboTests.dll/[ComboTests][suite]
+      name: ComboTests
+      fullName: ComboTests
+      resultStatus: 1
+      duration: 0.0042169
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1005
+      parentUniqueId: '[ComboTests][/Users/koki/Unity/UnityProjects/BSG_W12_Daipan/Library/ScriptAssemblies/ComboTests.dll][suite]'
+    - id: 1006
+      uniqueId: ComboTests.dll/ComboTests/[ComboTests][ComboTests.ComboMultiplierWithDecreaseViewersTest]
+      name: ComboMultiplierWithDecreaseViewersTest
+      fullName: ComboTests.ComboMultiplierWithDecreaseViewersTest
+      resultStatus: 1
+      duration: 0.0001058
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: ComboTests.dll/[ComboTests][suite]
+    - id: 1005
+      uniqueId: ComboTests.dll/ComboTests/[ComboTests][ComboTests.ComboMultiplierWithIncreaseViewersTest]
+      name: ComboMultiplierWithIncreaseViewersTest
+      fullName: ComboTests.ComboMultiplierWithIncreaseViewersTest
+      resultStatus: 1
+      duration: 0.0000352
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: ComboTests.dll/[ComboTests][suite]
+    - id: 1002
+      uniqueId: ComboTests.dll/ComboTests/[ComboTests][ComboTests.IncreaseComboTest]
+      name: IncreaseComboTest
+      fullName: ComboTests.IncreaseComboTest
+      resultStatus: 1
+      duration: 0.0000213
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: ComboTests.dll/[ComboTests][suite]
+    - id: 1004
+      uniqueId: ComboTests.dll/ComboTests/[ComboTests][ComboTests.MultiplyComboTest]
+      name: MultiplyComboTest
+      fullName: ComboTests.MultiplyComboTest
+      resultStatus: 1
+      duration: 0.0000281
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: ComboTests.dll/[ComboTests][suite]
+    - id: 1003
+      uniqueId: ComboTests.dll/ComboTests/[ComboTests][ComboTests.ResetComboTest]
+      name: ResetComboTest
+      fullName: ComboTests.ResetComboTest
+      resultStatus: 1
+      duration: 0.0000214
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: ComboTests.dll/[ComboTests][suite]
+    - id: 1006
+      uniqueId: '[EnemyTests][/Users/koki/Unity/UnityProjects/BSG_W12_Daipan/Library/ScriptAssemblies/EnemyTests.dll][suite]'
+      name: EnemyTests.dll
+      fullName: /Users/koki/Unity/UnityProjects/BSG_W12_Daipan/Library/ScriptAssemblies/EnemyTests.dll
+      resultStatus: 1
+      duration: 0.0339707
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1000
+      parentUniqueId: '[BSG_W12_Daipan][suite]'
+    - id: 1001
+      uniqueId: EnemyTests.dll/[EnemyTests][EnemyAttackTest][suite]
+      name: EnemyAttackTest
+      fullName: EnemyAttackTest
+      resultStatus: 1
+      duration: 0.0129416
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1006
+      parentUniqueId: '[EnemyTests][/Users/koki/Unity/UnityProjects/BSG_W12_Daipan/Library/ScriptAssemblies/EnemyTests.dll][suite]'
+    - id: 1002
+      uniqueId: EnemyTests.dll/EnemyAttackTest/[EnemyTests][EnemyAttackTest.IHpSetterShouldDecrease10WithAttack]
+      name: IHpSetterShouldDecrease10WithAttack
+      fullName: EnemyAttackTest.IHpSetterShouldDecrease10WithAttack
+      resultStatus: 1
+      duration: 0.0008014
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: EnemyTests.dll/[EnemyTests][EnemyAttackTest][suite]
+    - id: 1003
+      uniqueId: EnemyTests.dll/[EnemyTests][EnemySpawnerCalculatorTest][suite]
+      name: EnemySpawnerCalculatorTest
+      fullName: EnemySpawnerCalculatorTest
+      resultStatus: 1
+      duration: 0.0063966
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1006
+      parentUniqueId: '[EnemyTests][/Users/koki/Unity/UnityProjects/BSG_W12_Daipan/Library/ScriptAssemblies/EnemyTests.dll][suite]'
+    - id: 1004
+      uniqueId: EnemyTests.dll/EnemySpawnerCalculatorTest/[EnemyTests][EnemySpawnerCalculatorTest.NormalizeEnemySpawnRatioWithBossTest]
+      name: NormalizeEnemySpawnRatioWithBossTest
+      fullName: EnemySpawnerCalculatorTest.NormalizeEnemySpawnRatioWithBossTest
+      resultStatus: 1
+      duration: 0.0015894
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1003
+      parentUniqueId: EnemyTests.dll/[EnemyTests][EnemySpawnerCalculatorTest][suite]
+    - id: 1005
+      uniqueId: EnemyTests.dll/EnemySpawnerCalculatorTest/[EnemyTests][EnemySpawnerCalculatorTest.NormalizeEnemySpawnRatioWithBossTest2]
+      name: NormalizeEnemySpawnRatioWithBossTest2
+      fullName: EnemySpawnerCalculatorTest.NormalizeEnemySpawnRatioWithBossTest2
+      resultStatus: 1
+      duration: 0.000188
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1003
+      parentUniqueId: EnemyTests.dll/[EnemyTests][EnemySpawnerCalculatorTest][suite]
+    - id: 1009
+      uniqueId: '[PlayerTests][/Users/koki/Unity/UnityProjects/BSG_W12_Daipan/Library/ScriptAssemblies/PlayerTests.dll][suite]'
+      name: PlayerTests.dll
+      fullName: /Users/koki/Unity/UnityProjects/BSG_W12_Daipan/Library/ScriptAssemblies/PlayerTests.dll
+      resultStatus: 1
+      duration: 0.0114192
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1000
+      parentUniqueId: '[BSG_W12_Daipan][suite]'
+    - id: 1014
+      uniqueId: PlayerTests.dll/[PlayerTests][PlayerAttackedCounterTest][suite]
+      name: PlayerAttackedCounterTest
+      fullName: PlayerAttackedCounterTest
+      resultStatus: 1
+      duration: 0.0043164
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1018
+      parentUniqueId: '[PlayerTests][/Users/koki/Unity/UnityProjects/BSG_W12_Daipan/Library/ScriptAssemblies/PlayerTests.dll][suite]'
+    - id: 1015
+      uniqueId: PlayerTests.dll/PlayerAttackedCounterTest/[PlayerTests][PlayerAttackedCounterTest.PlayerAttackedCounterTestWith10]
+      name: PlayerAttackedCounterTestWith10
+      fullName: PlayerAttackedCounterTest.PlayerAttackedCounterTestWith10
+      resultStatus: 1
+      duration: 0.0003926
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1014
+      parentUniqueId: PlayerTests.dll/[PlayerTests][PlayerAttackedCounterTest][suite]
+    - id: 1007
+      uniqueId: PlayerTests.dll/[PlayerTests][PlayerAttackTest][suite]
+      name: PlayerAttackTest
+      fullName: PlayerAttackTest
+      resultStatus: 1
+      duration: 0.0041812
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1009
+      parentUniqueId: '[PlayerTests][/Users/koki/Unity/UnityProjects/BSG_W12_Daipan/Library/ScriptAssemblies/PlayerTests.dll][suite]'
+    - id: 1008
+      uniqueId: PlayerTests.dll/PlayerAttackTest/[PlayerTests][PlayerAttackTest.IHpSetterShouldDecrease10WithAttack]
+      name: IHpSetterShouldDecrease10WithAttack
+      fullName: PlayerAttackTest.IHpSetterShouldDecrease10WithAttack
+      resultStatus: 1
+      duration: 0.0013882
+      messages: 
+      output: 'Attack Enemy
+
+        _playerParamData.GetAttack() = 10
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1007
+      parentUniqueId: PlayerTests.dll/[PlayerTests][PlayerAttackTest][suite]
+    - id: 1013
+      uniqueId: '[StreamTests.dll][suite]'
+      name: StreamTests.dll
+      fullName: /Users/koki/Unity/UnityProjects/BSG_W12_Daipan/Library/ScriptAssemblies/StreamTests.dll
+      resultStatus: 1
+      duration: 0.0193751
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1000
+      parentUniqueId: '[BSG_W12_Daipan][suite]'
+    - id: 1014
+      uniqueId: StreamTests.dll/[Daipan][suite]
+      name: Daipan
+      fullName: Daipan
+      resultStatus: 1
+      duration: 0.0161693
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1013
+      parentUniqueId: '[StreamTests.dll][suite]'
+    - id: 1015
+      uniqueId: StreamTests.dll/Daipan/[Stream][suite]
+      name: Stream
+      fullName: Daipan.Stream
+      resultStatus: 1
+      duration: 0.0125703
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1014
+      parentUniqueId: StreamTests.dll/[Daipan][suite]
+    - id: 1016
+      uniqueId: StreamTests.dll/Daipan/Stream/[StreamTests][suite]
+      name: StreamTests
+      fullName: Daipan.Stream.StreamTests
+      resultStatus: 1
+      duration: 0.0089443
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1015
+      parentUniqueId: StreamTests.dll/Daipan/[Stream][suite]
+    - id: 1010
+      uniqueId: StreamTests.dll/Daipan/Stream/StreamTests/[StreamTests][Daipan.Stream.StreamTests.IrritatedValueTest][suite]
+      name: IrritatedValueTest
+      fullName: Daipan.Stream.StreamTests.IrritatedValueTest
+      resultStatus: 1
+      duration: 0.00535
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1016
+      parentUniqueId: StreamTests.dll/Daipan/Stream/[StreamTests][suite]
+    - id: 1012
+      uniqueId: StreamTests.dll/Daipan/Stream/StreamTests/IrritatedValueTest/[StreamTests][Daipan.Stream.StreamTests.IrritatedValueTest.DecrementTest]
+      name: DecrementTest
+      fullName: Daipan.Stream.StreamTests.IrritatedValueTest.DecrementTest
+      resultStatus: 1
+      duration: 0.0010376
+      messages: 
+      output: 'Daipan.Stream.Scripts.IrritatedParams must be instantiated using the
+        ScriptableObject.CreateInstance method instead of new IrritatedParams.
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1010
+      parentUniqueId: StreamTests.dll/Daipan/Stream/StreamTests/[StreamTests][Daipan.Stream.StreamTests.IrritatedValueTest][suite]
+    - id: 1011
+      uniqueId: StreamTests.dll/Daipan/Stream/StreamTests/IrritatedValueTest/[StreamTests][Daipan.Stream.StreamTests.IrritatedValueTest.IncrementTest]
+      name: IncrementTest
+      fullName: Daipan.Stream.StreamTests.IrritatedValueTest.IncrementTest
+      resultStatus: 1
+      duration: 0.0003509
+      messages: 
+      output: 'Daipan.Stream.Scripts.IrritatedParams must be instantiated using the
+        ScriptableObject.CreateInstance method instead of new IrritatedParams.
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1010
+      parentUniqueId: StreamTests.dll/Daipan/Stream/StreamTests/[StreamTests][Daipan.Stream.StreamTests.IrritatedValueTest][suite]
+    - id: 1029
+      uniqueId: '[UtilityTests.dll][suite]'
+      name: UtilityTests.dll
+      fullName: /Users/koki/Unity/UnityProjects/BSG_W12_Daipan/Library/ScriptAssemblies/UtilityTests.dll
+      resultStatus: 1
+      duration: 0.0748838
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1000
+      parentUniqueId: '[BSG_W12_Daipan][suite]'
+    - id: 1030
+      uniqueId: UtilityTests.dll/[Daipan][suite]
+      name: Daipan
+      fullName: Daipan
+      resultStatus: 1
+      duration: 0.0181399
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1029
+      parentUniqueId: '[UtilityTests.dll][suite]'
+    - id: 1031
+      uniqueId: UtilityTests.dll/Daipan/[Utility][suite]
+      name: Utility
+      fullName: Daipan.Utility
+      resultStatus: 1
+      duration: 0.0145806
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1030
+      parentUniqueId: UtilityTests.dll/[Daipan][suite]
+    - id: 1032
+      uniqueId: UtilityTests.dll/Daipan/Utility/[UtilityTests][Daipan.Utility.Tests][suite]
+      name: Tests
+      fullName: Daipan.Utility.Tests
+      resultStatus: 1
+      duration: 0.0109816
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1031
+      parentUniqueId: UtilityTests.dll/Daipan/[Utility][suite]
+    - id: 1026
+      uniqueId: UtilityTests.dll/Daipan/Utility/Tests/[UtilityTests][Daipan.Utility.Tests.RandomByRatiosTest][suite]
+      name: RandomByRatiosTest
+      fullName: Daipan.Utility.Tests.RandomByRatiosTest
+      resultStatus: 1
+      duration: 0.007411
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1032
+      parentUniqueId: UtilityTests.dll/Daipan/Utility/[UtilityTests][Daipan.Utility.Tests][suite]
+    - id: 1027
+      uniqueId: UtilityTests.dll/Daipan/Utility/Tests/RandomByRatiosTest/[UtilityTests][Daipan.Utility.Tests.RandomByRatiosTest.AccumulateRatiosTest1]
+      name: AccumulateRatiosTest1
+      fullName: Daipan.Utility.Tests.RandomByRatiosTest.AccumulateRatiosTest1
+      resultStatus: 1
+      duration: 0.0020481
+      messages: 
+      output: 'accumulatedRatios: 0,1,3,6
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1026
+      parentUniqueId: UtilityTests.dll/Daipan/Utility/Tests/[UtilityTests][Daipan.Utility.Tests.RandomByRatiosTest][suite]
+    - id: 1028
+      uniqueId: UtilityTests.dll/Daipan/Utility/Tests/RandomByRatiosTest/[UtilityTests][Daipan.Utility.Tests.RandomByRatiosTest.RandomByRatiosTest1]
+      name: RandomByRatiosTest1
+      fullName: Daipan.Utility.Tests.RandomByRatiosTest.RandomByRatiosTest1
+      resultStatus: 1
+      duration: 0.0013367
+      messages: 
+      output: 'rand must be between 0 and 1.
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1026
+      parentUniqueId: UtilityTests.dll/Daipan/Utility/Tests/[UtilityTests][Daipan.Utility.Tests.RandomByRatiosTest][suite]
+    - id: 1021
+      uniqueId: UtilityTests.dll/[UtilityTests][EnumEnumerationCheckerTest][suite]
+      name: EnumEnumerationCheckerTest
+      fullName: EnumEnumerationCheckerTest
+      resultStatus: 1
+      duration: 0.0535517
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1026
+      parentUniqueId: '[UtilityTests][/Users/koki/Unity/UnityProjects/BSG_W12_Daipan/Library/ScriptAssemblies/UtilityTests.dll][suite]'
+    - id: 1022
+      uniqueId: UtilityTests.dll/EnumEnumerationCheckerTest/[UtilityTests][EnumEnumerationCheckerTest.CheckEnumType1]
+      name: CheckEnumType1
+      fullName: EnumEnumerationCheckerTest.CheckEnumType1
+      resultStatus: 1
+      duration: 0.0465576
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1021
+      parentUniqueId: UtilityTests.dll/[UtilityTests][EnumEnumerationCheckerTest][suite]
+    - id: 1023
+      uniqueId: UtilityTests.dll/EnumEnumerationCheckerTest/[UtilityTests][EnumEnumerationCheckerTest.CheckEnumType2]
+      name: CheckEnumType2
+      fullName: EnumEnumerationCheckerTest.CheckEnumType2
+      resultStatus: 1
+      duration: 0.0004795
+      messages: 
+      output: 'The number of EnumEnumerationCheckerTest+EnumType2 and EnumEnumerationCheckerTest+TestEnum
+        is different.
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1021
+      parentUniqueId: UtilityTests.dll/[UtilityTests][EnumEnumerationCheckerTest][suite]
+    - id: 1024
+      uniqueId: UtilityTests.dll/EnumEnumerationCheckerTest/[UtilityTests][EnumEnumerationCheckerTest.CheckEnumType3]
+      name: CheckEnumType3
+      fullName: EnumEnumerationCheckerTest.CheckEnumType3
+      resultStatus: 1
+      duration: 0.0003676
+      messages: 
+      output: 'The number of EnumEnumerationCheckerTest+EnumType3 and EnumEnumerationCheckerTest+TestEnum
+        is different.
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1021
+      parentUniqueId: UtilityTests.dll/[UtilityTests][EnumEnumerationCheckerTest][suite]
+    - id: 1025
+      uniqueId: UtilityTests.dll/EnumEnumerationCheckerTest/[UtilityTests][EnumEnumerationCheckerTest.CheckEnumType4]
+      name: CheckEnumType4
+      fullName: EnumEnumerationCheckerTest.CheckEnumType4
+      resultStatus: 1
+      duration: 0.0006092
+      messages: 
+      output: 'EnumEnumerationCheckerTest+TestEnum with name X not found.
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1021
+      parentUniqueId: UtilityTests.dll/[UtilityTests][EnumEnumerationCheckerTest][suite]
+    m_ResultText: BSG_W12_Daipan (0.163s)
+    m_ResultStacktrace: 
+    m_TestListState:
+      scrollPos: {x: 0, y: 0}
+      m_SelectedIDs: fb0dce08
+      m_LastClickedID: 147721723
+      m_ExpandedIDs: 5567d180e953d688cc4edb8db5613b8e2717748e356acc9f75befeae29b232b5e1d082b96dbf46bbba882ec0716255c430ae7cd75fea97db507ce3f0fcf507f2fb0dce0861471d41e9f0684f35c4ac56de98685831a6d073c9dc8a75385db376ffffff7f
+      m_RenameOverlay:
+        m_UserAcceptedRename: 0
+        m_Name: 
+        m_OriginalName: 
+        m_EditFieldRect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        m_UserData: 0
+        m_IsWaitingForDelay: 0
+        m_IsRenaming: 0
+        m_OriginalEventType: 11
+        m_IsRenamingFilename: 0
+        m_ClientGUIView: {fileID: 0}
+      m_SearchString: 
+    m_TestRunnerUIFilter:
+      PassedHidden: 0
+      FailedHidden: 0
+      NotRunHidden: 0
+      m_SearchString: 
+      selectedCategoryMask: 0
+      availableCategories:
+      - Uncategorized
+--- !u!114 &11
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: ConsoleWindow
+  m_EditorClassIdentifier: 
+  m_Children: []
+  m_Position:
+    serializedVersion: 2
+    x: 0
+    y: 700
+    width: 1447
+    height: 637
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_ActualView: {fileID: 12}
+  m_Panes:
+  - {fileID: 12}
+  m_Selected: 0
+  m_LastSelected: 0
+--- !u!114 &12
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 12003, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_TitleContent:
+    m_Text: Console
+    m_Image: {fileID: -4327648978806127646, guid: 0000000000000000d000000000000000, type: 0}
+    m_Tooltip: 
+  m_Pos:
+    serializedVersion: 2
+    x: -2560
+    y: 460
+    width: 1446
+    height: 616
+  m_SerializedDataModeController:
+    m_DataMode: 0
+    m_PreferredDataMode: 0
+    m_SupportedDataModes: 
+    isAutomatic: 1
+  m_ViewDataDictionary: {fileID: 0}
+  m_OverlayCanvas:
+    m_LastAppliedPresetName: Default
+    m_SaveData: []
+    m_OverlaysVisible: 1
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1140,24 +1898,138 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 1
+  m_Script: {fileID: 12010, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Children:
+  - {fileID: 14}
+  - {fileID: 16}
+  m_Position:
+    serializedVersion: 2
+    x: 1447
+    y: 0
+    width: 364
+    height: 1337
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 8096, y: 16192}
+  vertical: 1
+  controlID: 213
+--- !u!114 &14
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ProjectBrowser
+  m_Name: 
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
     serializedVersion: 2
     x: 0
-    y: 473
-    width: 351.5
-    height: 377
-  m_MinSize: {x: 232, y: 271}
-  m_MaxSize: {x: 10002, y: 10021}
-  m_ActualView: {fileID: 14}
+    y: 0
+    width: 364
+    height: 744
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_ActualView: {fileID: 15}
   m_Panes:
-  - {fileID: 14}
+  - {fileID: 15}
   m_Selected: 0
   m_LastSelected: 0
---- !u!114 &14
+--- !u!114 &15
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 1
+  m_Script: {fileID: 12061, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_TitleContent:
+    m_Text: Hierarchy
+    m_Image: {fileID: 7966133145522015247, guid: 0000000000000000d000000000000000, type: 0}
+    m_Tooltip: 
+  m_Pos:
+    serializedVersion: 2
+    x: -1113
+    y: -240
+    width: 362
+    height: 723
+  m_SerializedDataModeController:
+    m_DataMode: 0
+    m_PreferredDataMode: 0
+    m_SupportedDataModes: 
+    isAutomatic: 1
+  m_ViewDataDictionary: {fileID: 0}
+  m_OverlayCanvas:
+    m_LastAppliedPresetName: Default
+    m_SaveData: []
+    m_OverlaysVisible: 1
+  m_SceneHierarchy:
+    m_TreeViewState:
+      scrollPos: {x: 0, y: 0}
+      m_SelectedIDs: 6607faff
+      m_LastClickedID: -391322
+      m_ExpandedIDs: 5407faff0c08faff900efaff0e10faffee16faff5a1afaff221dfaff8a23faffaa28faffea5cfbff5860fbff7863fbff5c65fbff5c73fbff6876fbffea42fcffd847fcffde4afcff884cfcff284efcffd24ffcff2654fcffd055fcff9e59fcff405bfcffe45cfcffc25efcff7847fdff8e0ffffff8deffff1cdfffffc0e0ffff62e2ffff78e5ffff1ae7ffff16eaffffbcebffffceeeffffacf0ffff0af4ffffe0faffff16f30000
+      m_RenameOverlay:
+        m_UserAcceptedRename: 0
+        m_Name: Text (TMP)
+        m_OriginalName: Text (TMP)
+        m_EditFieldRect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        m_UserData: -391322
+        m_IsWaitingForDelay: 0
+        m_IsRenaming: 0
+        m_OriginalEventType: 0
+        m_IsRenamingFilename: 0
+        m_ClientGUIView: {fileID: 14}
+      m_SearchString: 
+    m_ExpandedScenes: []
+    m_CurrenRootInstanceID: 0
+    m_LockTracker:
+      m_IsLocked: 0
+    m_CurrentSortingName: TransformSorting
+  m_WindowGUID: 8f3e5170efd44a64986b33fd586cfd3a
+--- !u!114 &16
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 1
+  m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Children: []
+  m_Position:
+    serializedVersion: 2
+    x: 0
+    y: 744
+    width: 364
+    height: 593
+  m_MinSize: {x: 232, y: 271}
+  m_MaxSize: {x: 10002, y: 10021}
+  m_ActualView: {fileID: 17}
+  m_Panes:
+  - {fileID: 17}
+  m_Selected: 0
+  m_LastSelected: 0
+--- !u!114 &17
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1173,14 +2045,14 @@ MonoBehaviour:
   m_MaxSize: {x: 10000, y: 10000}
   m_TitleContent:
     m_Text: Project
-    m_Image: {fileID: -5179483145760003458, guid: 0000000000000000d000000000000000, type: 0}
+    m_Image: {fileID: -5467254957812901981, guid: 0000000000000000d000000000000000, type: 0}
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 765.5
-    y: 503
-    width: 349.5
-    height: 356
+    x: -1113
+    y: 504
+    width: 362
+    height: 572
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -1202,7 +2074,7 @@ MonoBehaviour:
     m_SkipHidden: 1
     m_SearchArea: 1
     m_Folders:
-    - Assets/Daipan/Streamer/Sprites
+    - Assets/TextMesh Pro/Shaders
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -1210,16 +2082,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Daipan/Streamer/Sprites
+  - Assets/TextMesh Pro/Shaders
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: /Users/ayase/Documents/Unity/BSG_W12_Daipan
+  m_LastProjectPath: /Users/koki/Unity/UnityProjects/BSG_W12_Daipan
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 128}
-    m_SelectedIDs: 86780000
-    m_LastClickedID: 30854
-    m_ExpandedIDs: 000000004e780000507800005c780000
+    scrollPos: {x: 0, y: 236}
+    m_SelectedIDs: 04140100
+    m_LastClickedID: 70660
+    m_ExpandedIDs: 00000000f2790000f4790000f6790000f8790000fa790000fc790000fe790000007a0000027a0000047a0000087a00000a7a00000c7a0000127a0000147a0000187a0000327a00008e7a0000c88e000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1235,7 +2107,7 @@ MonoBehaviour:
       m_IsRenaming: 0
       m_OriginalEventType: 11
       m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 0}
+      m_ClientGUIView: {fileID: 16}
     m_SearchString: 
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
@@ -1247,7 +2119,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000004e780000
+    m_ExpandedIDs: 00000000f2790000f4790000f6790000f8790000fa790000fc790000fe790000007a0000027a0000047a0000067a0000087a00000a7a00000c7a00000e7a0000107a0000127a0000147a0000167a0000187a00001a7a0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1272,10 +2144,10 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: ac750000
-    m_LastClickedInstanceID: 30124
-    m_HadKeyboardFocusLastEvent: 0
-    m_ExpandedInstanceIDs: c62300002471000032710000868a000096710000c6cdf7ff2a8900001076000052710000
+    m_SelectedInstanceIDs: 6607faff
+    m_LastClickedInstanceID: -391322
+    m_HadKeyboardFocusLastEvent: 1
+    m_ExpandedInstanceIDs: c62300002471000032710000868a000096710000c6cdf7ff2a89000010760000f6710000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1299,11 +2171,11 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 0}
+    m_ScrollPosition: {x: 0, y: 73.5}
     m_GridSize: 64
   m_SkipHiddenPackages: 1
-  m_DirectoriesAreaWidth: 189
---- !u!114 &15
+  m_DirectoriesAreaWidth: 143
+--- !u!114 &18
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1318,18 +2190,18 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 1117
+    x: 1811
     y: 0
-    width: 323
-    height: 850
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
-  m_ActualView: {fileID: 16}
+    width: 749
+    height: 1337
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_ActualView: {fileID: 19}
   m_Panes:
-  - {fileID: 16}
+  - {fileID: 19}
   m_Selected: 0
   m_LastSelected: 0
---- !u!114 &16
+--- !u!114 &19
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1345,14 +2217,14 @@ MonoBehaviour:
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
     m_Text: Inspector
-    m_Image: {fileID: -440750813802333266, guid: 0000000000000000d000000000000000, type: 0}
+    m_Image: {fileID: -2667387946076563598, guid: 0000000000000000d000000000000000, type: 0}
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1117
-    y: 30
-    width: 322
-    height: 829
+    x: -749
+    y: -240
+    width: 748
+    height: 1316
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
