@@ -6,6 +6,10 @@
 Shader "TextMeshPro/Mobile/Distance Field - Custom" {
 
 Properties {
+	// 追加
+	[Header(Custom Properties)]
+	_Param("param", float) = 1
+	
 	[HDR]_FaceColor     ("Face Color", Color) = (1,1,1,1)
 	_FaceDilate			("Face Dilate", Range(-1,1)) = 0
 
@@ -110,7 +114,8 @@ SubShader {
 			fixed4	outlineColor	: COLOR1;
 			float4	texcoord0		: TEXCOORD0;			// Texture UV, Mask UV
 			half4	param			: TEXCOORD1;			// Scale(x), BiasIn(y), BiasOut(z), Bias(w)
-			half4	mask			: TEXCOORD2;			// Position in clip space(xy), Softness(zw)
+			half4	spos			: TEXCOORD2;			// Position in clip space(xy), Softness(zw)
+			float3 normal : NORMAL;
 			#if (UNDERLAY_ON | UNDERLAY_INNER)
 			float4	texcoord1		: TEXCOORD3;			// Texture UV, alpha, reserved
 			half2	underlayParam	: TEXCOORD4;			// Scale(x), Bias(y)
@@ -128,8 +133,24 @@ SubShader {
 			UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(output);
 
 			float bold = step(input.texcoord1.y, 0);
+			// bold = _SinTime.w;
+			// bold = sin(4 * _Time.y);
+			// bold = clamp(input.vertex.x, -1,1) * sin(_Time.y);
+		    bold = clamp(sin(3 * input.vertex.x ), -1,2) * sin(_Time.y);
+			// bold = clamp (input .normal.z , -1 , 1 ) * sin(_Time.y);
+
 
 			float4 vert = input.vertex;
+			 // 波を生成するためのsin関数を追加
+            float waveFrequency = 10.0; // 周波数
+            float waveAmplitude = 0.05; // 振幅
+            float waveSpeed = _Time.y * 2.0; // 速度
+
+            // vert.xyz += input.normal * sin(vert.x * waveFrequency + waveSpeed) * waveAmplitude;
+			// vert.x += input.normal.x * sin(vert.x * waveFrequency + waveSpeed) * waveAmplitude;
+			// vert.y += input.normal.y * sin(vert.y * waveFrequency + waveSpeed) * waveAmplitude;
+		// 	vert.x *= clamp( input.normal.z, -1, 1) * sin(_Time.y);
+				
 			vert.x += _VertexOffsetX;
 			vert.y += _VertexOffsetY;
 			float4 vPosition = UnityObjectToClipPos(vert);
@@ -148,6 +169,7 @@ SubShader {
 
 			scale /= 1 + (_OutlineSoftness * _ScaleRatioA * scale);
 			float bias = (0.5 - weight) * scale - 0.5;
+			// bias *= sin(_Time.y);
 			float outline = _OutlineWidth * _ScaleRatioA * 0.5 * scale;
 
 			float opacity = input.color.a;
@@ -182,7 +204,8 @@ SubShader {
 			output.outlineColor = outlineColor;
 			output.texcoord0 = float4(input.texcoord0.x, input.texcoord0.y, maskUV.x, maskUV.y);
 			output.param = half4(scale, bias - outline, bias + outline, bias);
-			output.mask = half4(vert.xy * 2 - clampedRect.xy - clampedRect.zw, 0.25 / (0.25 * half2(_MaskSoftnessX, _MaskSoftnessY) + pixelSize.xy));
+			output.spos = half4(vert.xy * 2 - clampedRect.xy - clampedRect.zw, 0.25 / (0.25 * half2(_MaskSoftnessX, _MaskSoftnessY) + pixelSize.xy));
+			output.normal = input.normal;
 			#if (UNDERLAY_ON || UNDERLAY_INNER)
 			output.texcoord1 = float4(input.texcoord0 + layerOffset, input.color.a, 0);
 			output.underlayParam = half2(layerScale, layerBias);
@@ -191,6 +214,9 @@ SubShader {
 			return output;
 		}
 
+		//追加
+		float _Param;
+		half4 _MainTex_TexelSize;
 
 		// PIXEL SHADER
 		fixed4 PixShader(pixel_t input) : SV_Target
@@ -198,6 +224,30 @@ SubShader {
 			UNITY_SETUP_INSTANCE_ID(input);
 
 			half d = tex2D(_MainTex, input.texcoord0.xy).a * input.param.x;
+			
+			// half d = tex2D(_MainTex, input.texcoord0.xy + exp(-_Time.y) * float2(0.02 * sin(_Time.y * 100.0), 0.002 * sin(input.spos.y * 100.0))).a * input.param.x;
+
+			// ex:スタイリッシュに消す
+			// half2 uv = input.texcoord0.xy;
+			// uv.y = clamp(uv.y, 0.0, 0.5 + 0.5 * sin(_Time.y));
+			// half d = tex2D(_MainTex, uv).a * input.param.x;
+
+			//ex：UVを階調化してみる場合
+			// int2 LimMin = int2(2, 10);
+			// int2 LimMax = 1 / _MainTex_TexelSize.xy;
+			// half2 lp = lerp(LimMin, LimMax, pow(saturate(sin(_Time.y * _Param) * 0.6 + 0.6), 2));
+			// half2 uv = floor(input.texcoord0.xy * lp) / lp;
+			// half d = tex2D(_MainTex, uv).a * input.param.x;
+
+			// ex:文字を拡大して太字にする
+			// half2 uv = input.texcoord0.xy;
+			// // uv = uv * 1.02;
+			// float amount = 1.02;
+			// uv.x = uv.x *  amount * sin(_Time).x;
+			// half d = tex2D(_MainTex, uv).a * input.param.x;
+
+
+			
 			half4 c = input.faceColor * saturate(d - input.param.w);
 
 			#ifdef OUTLINE_ON
