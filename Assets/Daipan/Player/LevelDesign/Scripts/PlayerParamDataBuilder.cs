@@ -32,7 +32,8 @@ namespace Daipan.Player.LevelDesign.Scripts
             builder.RegisterInstance(new PlayerHpParamData()
             {
                 GetCurrentHp  = () => playerParamManager.playerHpParam.hpAmount,
-                SetCurrentHp = value => playerParamManager.playerHpParam.hpAmount = value
+                SetCurrentHp = value => playerParamManager.playerHpParam.hpAmount = value,
+                GetAntiCommentThreshold = () => playerParamManager.playerHpParam.antiCommentThreshold
             });
         }
 

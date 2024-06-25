@@ -49,7 +49,6 @@ namespace Daipan.Player.Scripts
                 Debug.Log($"OnHit");
                 OnAttackEnemy(_playerParamDataContainer, playerMono, playerViewMonos, playerColor, args.EnemyMono);
                 OnProcessCombo(_comboCounter, playerColor, args);
-                OnSpawnComment(_commentParamsServer, _commentSpawner, _viewerNumber, args);
             };
             return effect;
         }
@@ -69,31 +68,6 @@ namespace Daipan.Player.Scripts
                 Debug.Log(
                     $"攻撃対象が{PlayerAttackModule.GetTargetEnemyEnum(playerColor)}ではないです args.EnemyMono?.EnemyEnum: {args.EnemyMono?.EnemyEnum}");
                 comboCounter.ResetCombo();
-            }
-        }
-
-        static void OnSpawnComment(
-            CommentParamsServer commentParamsServer,
-            CommentSpawner commentSpawner,
-            ViewerNumber viewerNumber,
-            OnHitEventArgs args
-        )
-        {
-            if (args.IsTargetEnemy)
-            {
-                // 視聴者数が一定数以上の時、コメントを生成する
-                var commentParam = commentParamsServer.GetCommentParamDependOnViewer();
-                if (commentParam.viewerAmount < viewerNumber.Number)
-                    for (var i = 0; i < commentParam.commentAmount; i++)
-                        commentSpawner.SpawnCommentByType(CommentEnum.Normal);
-            }
-            else
-            {
-                // 視聴者数が一定数以上の時、アンチコメントを生成する
-                var commentParam = commentParamsServer.GetCommentParamDependOnViewer();
-                if (commentParam.viewerAmount < viewerNumber.Number)
-                    for (var i = 0; i < commentParam.commentAmount; i++)
-                        commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
             }
         }
 

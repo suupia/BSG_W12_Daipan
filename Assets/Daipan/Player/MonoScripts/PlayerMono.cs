@@ -12,6 +12,7 @@ using Daipan.Player.Scripts;
 using Daipan.Stream.Scripts;
 using UnityEngine;
 using VContainer;
+using Daipan.Comment.Scripts;
 
 namespace Daipan.Player.MonoScripts
 {
@@ -22,6 +23,8 @@ namespace Daipan.Player.MonoScripts
         PlayerHp _playerHp = null!;
         InputSerialManager _inputSerialManager = null!;
         PlayerAttackEffectSpawner _playerAttackEffectSpawner = null!;
+        CommentSpawner _commentSpawner = null!;
+        PlayerAttackedCounter _attackedCounterForAntiComment = null!;
 
         public void Update()
         {
@@ -77,16 +80,24 @@ namespace Daipan.Player.MonoScripts
             PlayerHpParamData playerHpParamData,
             InputSerialManager inputSerialManager,
             PlayerAttackEffectSpawner playerAttackEffectSpawner,
-            IrritatedValue irritatedValue
+            IrritatedValue irritatedValue,
+            CommentSpawner commentSpawner
         )
         {
             _enemyCluster = enemyCluster;
+            _commentSpawner = commentSpawner;
 
             _playerHp = new PlayerHp(playerHpParamData.GetCurrentHp());
+            _attackedCounterForAntiComment = new PlayerAttackedCounter(playerHpParamData.GetAntiCommentThreshold());
             _playerHp.OnDamage += (sender, args) =>
             {
                 // Domain
                 irritatedValue.IncreaseValue(args.DamageValue);
+
+                // AntiComment
+                _attackedCounterForAntiComment.CountUp();
+                _commentSpawner.SpawnAntiCommentByAttackTower(_attackedCounterForAntiComment.isOverThreshold);
+                Debug.Log($"isThreshold{_attackedCounterForAntiComment.isOverThreshold}");
 
                 // View
                 foreach (var playerViewMono in playerViewMonos)

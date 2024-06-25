@@ -32,11 +32,14 @@ namespace Daipan.LevelDesign.Comment.Scripts
         {
             return _commentParamManager.commentSpeed;
         }
-
+        
+        /// <returns>0 or more</returns>
         public int GetViewerDiffCommentNumber()
         {
             return _commentParamManager.diffCommentViewer;
         }
+        
+        /// <returns>0 or more</returns>
         public int GetViewerDiffAntiCommentNumber()
         {
             return _commentParamManager.diffAntiCommentViewer;

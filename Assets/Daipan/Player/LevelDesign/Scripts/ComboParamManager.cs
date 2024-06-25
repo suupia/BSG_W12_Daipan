@@ -7,6 +7,6 @@ namespace Daipan.Player.LevelDesign.Scripts
     [CreateAssetMenu(fileName = "ComboParamManager", menuName = "ScriptableObjects/Player/ComboParamManager", order = 1)]
     public class ComboParamManager : ScriptableObject
     {
-       public List<ComboParam> comboParams = null!; 
+       public List<ComboMultiplier> comboParams = null!; 
     }
 }

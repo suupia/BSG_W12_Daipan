@@ -5,6 +5,7 @@ using Daipan.Comment.Scripts;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.LevelDesign.Scripts;
 using Daipan.Enemy.MonoScripts;
+using Daipan.LevelDesign.Comment.Scripts;
 using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.Stream.Scripts;
 using Daipan.Utility.Scripts;
@@ -23,6 +24,7 @@ namespace Daipan.Enemy.Scripts
         readonly EnemyCluster _enemyCluster;
         readonly EnemyLevelDesignParamData _enemyLevelDesignParamData;
         readonly IEnemyTimeLineParamContainer _enemyTimeLineParamContainer;
+        
         public EnemyBuilder(
             EnemyParamDataContainer enemyParamDataContainer,
             CommentSpawner commentSpawner,
@@ -59,22 +61,44 @@ namespace Daipan.Enemy.Scripts
                 new EnemySuicideAttack(enemyMono,enemyParamData),
                 new EnemyDied(_enemyCluster, enemyMono)
             );
+            
             enemyMono.OnDied += (sender, args) =>
             {
                 // ボスを倒したときも含む
                 _enemyLevelDesignParamData.SetCurrentKillAmount(_enemyLevelDesignParamData.GetCurrentKillAmount() + 1);
-
-                if (args.enemyEnum.IsSpecial() == true)
-                    _irritatedValue.IncreaseValue(enemyParamData.GetIrritationAfterKill());
-
-                if (args.enemyEnum.IsBoss() == false)
-                    _viewerNumber.IncreaseViewer(_enemyLevelDesignParamData
-                        .GetIncreaseViewerOnEnemyKill()); // todo :パラメータを設定できるようにする
-
-                if (args.enemyEnum.IsBoss() == true) _commentSpawner.SpawnCommentByType(CommentEnum.Normal);
+               
+                IncreaseIrritatedValue(args, _irritatedValue, enemyParamData);
+                IncreaseViewerNumber(args, _viewerNumber, _enemyLevelDesignParamData);
+                SpawnComment(args, _commentSpawner);
             };
             return enemyMono;
         }
+        
+        static void IncreaseIrritatedValue(DiedEventArgs args, IrritatedValue irritatedValue, EnemyParamData enemyParamData)
+        {
+            if (args.enemyEnum.IsSpecial() == true)
+                irritatedValue.IncreaseValue(enemyParamData.GetIrritationAfterKill());
+        }
+        
+        static void IncreaseViewerNumber(DiedEventArgs args, ViewerNumber viewerNumber, EnemyLevelDesignParamData enemyLevelDesignParamData)
+        {
+            if (args.enemyEnum.IsBoss() == false)
+                viewerNumber.IncreaseViewer(enemyLevelDesignParamData.GetIncreaseViewerOnEnemyKill());
+        }
+
+        static void SpawnComment(DiedEventArgs args, CommentSpawner commentSpawner)
+        {
+            if (args.enemyEnum.IsBoss() == true)
+            {
+                // 3倍出現
+                for (var i = 0; i < 3; i++) commentSpawner.SpawnCommentByType(CommentEnum.Normal);
+            }
+            else
+            {
+                commentSpawner.SpawnCommentByType(CommentEnum.Normal);
+            }
+        }
+
 
         // 本来はScriptableObjectで制御するのでこれは後でパラメータをもらうようにして消す
         // 今はスクリプトで制御するために書いておく

@@ -28,10 +28,10 @@ namespace Daipan.Stream.Scripts
             {
                 for(int i = 0; i < RatioTable.Count; i++)
                 {
-                    if (Ratio > RatioTable[i]) continue;
+                    if (Ratio >= RatioTable[i]) continue;
                     return i;
                 }
-                return RatioTable.Count - 1;
+                return RatioTable.Count;
             }
         }
             
@@ -43,8 +43,6 @@ namespace Daipan.Stream.Scripts
 
             IncreasedValue += amount;
             if (Value >= MaxValue) IncreasedValue = MaxValue;
-
-            Debug.Log($"IncreaseValue(amount: {amount}) IrritatedValue : {Value}");
         }
 
         public void DecreaseValue(float amount)

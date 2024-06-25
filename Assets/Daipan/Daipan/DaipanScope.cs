@@ -85,7 +85,7 @@ namespace Daipan.Daipan
             
             // Combo
             builder.RegisterInstance(comboParamManager);
-            builder.Register<ComboParamContainer>(Lifetime.Scoped).As<IComboParamContainer>();
+            builder.Register<ComboMultiplier>(Lifetime.Scoped).As<IComboMultiplier>();
             builder.Register<ComboCounter>(Lifetime.Scoped);
             builder.RegisterComponentInHierarchy<ComboViewMono>();
 
@@ -100,6 +100,12 @@ namespace Daipan.Daipan
             builder.Register<EnemyAttackDecider>(Lifetime.Scoped);
             builder.Register<EnemySpawner>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
             builder.Register<EnemyCluster>(Lifetime.Scoped);
+
+            // Viewer
+            builder.RegisterComponentInHierarchy<ViewerViewMono>();
+
+            // IrritatedGuage
+            builder.RegisterComponentInHierarchy<IrritatedViewMono>();
 
             // View
             builder.RegisterComponentInHierarchy<StreamViewMono>();

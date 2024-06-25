@@ -15,10 +15,10 @@ namespace Daipan.LevelDesign.Comment.Scripts
         [Header("コメントの流れる速度")]
         [Min(0)] public float commentSpeed;
 
-        [Header("コメントが流れ切ったときのViewer(高評価)の変化量")]
+        [Header("コメントが生成されたときの視聴者の増加量")][Min(0)]
         public int diffCommentViewer;
 
-        [Header("アンチコメントが時間あたりのViewer(高評価)の変化量")]
+        [Header("アンチコメントが生成された時の視聴者の減少量")][Min(0)]
         public int diffAntiCommentViewer;
 
         [Header("コメント集")]
