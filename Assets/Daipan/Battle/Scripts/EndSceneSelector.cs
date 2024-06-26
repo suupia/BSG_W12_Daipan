@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using Daipan.Core.Interfaces;
+using Daipan.Player.Scripts;
 using Daipan.Stream.Scripts;
 using Daipan.Stream.Tests;
 using R3;
@@ -13,16 +14,19 @@ namespace Daipan.Battle.scripts
     {
         readonly ViewerNumber _viewerNumber;
         readonly DaipanExecutor _daipanExecutor;
+        readonly PlayerHp _playerHp;
 
         IDisposable? _disposable; 
         
         public EndSceneSelector(
             ViewerNumber viewerNumber
             , DaipanExecutor daipanExecutor
+            , PlayerHp playerHp
             )
         {
             _viewerNumber = viewerNumber;
             _daipanExecutor = daipanExecutor;
+            _playerHp = playerHp;
         }
 
         void IStart.Start()
@@ -37,11 +41,14 @@ namespace Daipan.Battle.scripts
                 {
                     ChangeToInsideTheBox(_viewerNumber);
                     ChangeToThanksgiving(_viewerNumber);
+                    ChangeToBottomYoutuber(_playerHp);
+                    ChangeToProGamer(_playerHp);
+                    ChangeToSacredLady(_daipanExecutor);
+                    ChangeToFlame(_daipanExecutor);
                     ChangeToOrdinary1(_viewerNumber);
                     ChangeToOrdinary2(_viewerNumber);
                     ChangeToOrdinary3(_viewerNumber);
-                    ChangeToSacredLady(_daipanExecutor);
-                    ChangeToFlame(_daipanExecutor);
+                    
                 });
         }
 
@@ -62,6 +69,27 @@ namespace Daipan.Battle.scripts
             {
                 Debug.Log("Change to Thanksgiving");
                 ResultShower.ShowResult(SceneName.Thanksgiving);
+            }
+        }
+
+        static void ChangeToBottomYoutuber(PlayerHp playerHp)
+        {
+            Debug.Log("Check ChangeToBottomYoutuber");
+            if (playerHp.CurrentHp <= 0)
+            {
+                Debug.Log("Change to BottomYoutuber");
+                ResultShower.ShowResult(SceneName.BottomYoutuber);
+            }
+        }
+
+        static void ChangeToProGamer(PlayerHp playerHp)
+        {
+            Debug.Log("Check ChangeToProGamer");
+            if(playerHp.CurrentHp <= 0)
+            {
+                Debug.Log("Change To ProGamer");
+                ResultShower.ShowResult(SceneName.ProGamer);
+
             }
         }
 
