@@ -2,20 +2,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Player.MonoScripts;
 using Daipan.Player.Scripts;
 using UnityEngine;
 
 namespace Daipan.Player.LevelDesign.Scripts
 {
-    public class PlayerParamDataContainer
+    public class PlayerParamDataContainer : IPlayerParamDataContainer
     {
         readonly IEnumerable<PlayerParamData> _playerParamDataList;
-        public PlayerParamDataContainer(IEnumerable<PlayerParamData> playerParamDataList)
+        public PlayerParamDataContainer(PlayerParamManager playerParamManager)
         {
-            _playerParamDataList = playerParamDataList;
+            _playerParamDataList = playerParamManager.playerParams
+                .Select(playerParam => new PlayerParamData(playerParam));
         }
-        public PlayerParamData GetPlayerParamData(PlayerColor playerEnum)
+        public IPlayerParamData GetPlayerParamData(PlayerColor playerEnum)
         { 
             // debug
             foreach (var playerParamData in _playerParamDataList)

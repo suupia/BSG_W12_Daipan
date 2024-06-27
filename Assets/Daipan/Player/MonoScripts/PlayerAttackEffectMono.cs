@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Enemy.Scripts;
+using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Player.LevelDesign.Scripts;
 using Daipan.Player.Scripts;
 using UnityEngine;
@@ -16,7 +17,7 @@ namespace Daipan.Player.MonoScripts
         readonly double _speed = 20;
         readonly double _hitDistance = 1.0;
         public event EventHandler<OnHitEventArgs>? OnHit;
-        PlayerParamData? _playerParamData;
+        IPlayerParamData? _playerParamData;
         Func<EnemyMono?> _getNearestEnemyMono = () => null; 
 
         void Update()
@@ -49,7 +50,7 @@ namespace Daipan.Player.MonoScripts
             }
         }
 
-        public void SetUp(PlayerParamData playerParamData, Func<EnemyMono?> getTargetEnemyMono)
+        public void SetUp(IPlayerParamData playerParamData, Func<EnemyMono?> getTargetEnemyMono)
         {
             Debug.Log($"PlayerAttackEffectMono data.Enum = {playerParamData.PlayerEnum()}");
             _playerParamData = playerParamData;

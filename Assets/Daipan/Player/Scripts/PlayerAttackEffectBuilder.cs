@@ -6,6 +6,7 @@ using Daipan.Enemy.MonoScripts;
 using Daipan.Enemy.Scripts;
 using Daipan.LevelDesign.Comment.Scripts;
 using Daipan.Player.Interfaces;
+using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Player.LevelDesign.Scripts;
 using Daipan.Player.MonoScripts;
 using Daipan.Stream.Scripts;
@@ -15,7 +16,7 @@ namespace Daipan.Player.Scripts
 {
     public class PlayerAttackEffectBuilder
     {
-        readonly PlayerParamDataContainer _playerParamDataContainer;
+        readonly IPlayerParamDataContainer _playerParamDataContainer;
         readonly ComboCounter _comboCounter;
         readonly EnemyCluster _enemyCluster;
         readonly ViewerNumber _viewerNumber;
@@ -23,7 +24,7 @@ namespace Daipan.Player.Scripts
         readonly CommentParamsServer _commentParamsServer;
 
         public PlayerAttackEffectBuilder(
-            PlayerParamDataContainer playerParamDataContainer,
+            IPlayerParamDataContainer playerParamDataContainer,
             ComboCounter comboCounter,
             EnemyCluster enemyCluster,
             ViewerNumber viewerNumber,
@@ -71,7 +72,7 @@ namespace Daipan.Player.Scripts
             }
         }
 
-        static void OnAttackEnemy(PlayerParamDataContainer playerParamDataContainer,
+        static void OnAttackEnemy(IPlayerParamDataContainer playerParamDataContainer,
             PlayerMono playerMono,
             List<AbstractPlayerViewMono?> playerViewMonos,
             PlayerColor playerColor, EnemyMono? enemyMono)

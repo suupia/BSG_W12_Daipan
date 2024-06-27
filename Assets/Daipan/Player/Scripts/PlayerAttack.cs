@@ -1,5 +1,6 @@
 #nullable enable
 using Daipan.Battle.interfaces;
+using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Player.LevelDesign.Scripts;
 using UnityEngine;
 using VContainer;
@@ -8,9 +9,9 @@ namespace Daipan.Player.Scripts
 {
     public sealed class PlayerAttack
     {
-        readonly PlayerParamData _playerParamData;
+        readonly IPlayerParamData _playerParamData;
 
-        public PlayerAttack(PlayerParamData playerParamData)
+        public PlayerAttack(IPlayerParamData playerParamData)
         {
             _playerParamData = playerParamData;
         }
