@@ -132,14 +132,21 @@ SubShader {
 			UNITY_TRANSFER_INSTANCE_ID(input, output);
 			UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(output);
 
-			float bold = step(input.texcoord1.y, 0);
-			// bold = _SinTime.w;
-			// bold = sin(4 * _Time.y);
-			// bold = clamp(input.vertex.x, -1,1) * sin(_Time.y);
-			float waveFrequency = 10.0;
-		    bold += sin(waveFrequency * input.vertex.x ) * sin(_Time.w);
-			bold += sin(waveFrequency * input.vertex.y ) * cos(_Time.w);
-			// bold = clamp (input .normal.z , -1 , 1 ) * sin(_Time.y);
+		float bold = step(input.texcoord1.y, 0);
+
+// 波の周波数と振幅を設定
+float waveFrequencyX = 10.0;
+float waveFrequencyY = 15.0;
+float waveAmplitude = 0.5;
+
+// 時間を元にした波の移動速度
+float time = _Time.y;
+
+// X軸方向の波の変動を追加
+bold += waveAmplitude * sin(waveFrequencyX * input.vertex.x + time);
+
+// Y軸方向の波の変動を追加
+bold += waveAmplitude * cos(waveFrequencyY * input.vertex.y + time);
 
 
 			float4 vert = input.vertex;
