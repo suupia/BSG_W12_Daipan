@@ -1,4 +1,5 @@
 using System.Linq;
+using Daipan.Battle.interfaces;
 using Daipan.Battle.scripts;
 using Daipan.Comment.MonoScripts;
 using Daipan.Comment.Scripts;
@@ -169,8 +170,13 @@ namespace Daipan.Daipan
 
             builder.RegisterInstance(new PlayerPositionMonoBuilder(builder, SetUpPlayerPositionMono()));
 
-            builder.RegisterInstance(new PlayerParamDataBuilder(builder, playerParamManager));
-
+            // builder.RegisterInstance(new PlayerParamDataBuilder(builder, playerParamManager));
+            builder.RegisterInstance(playerParamManager);
+            builder.Register<PlayerParamDataContainer>(Lifetime.Scoped).As<IPlayerParamDataContainer>();
+            builder.Register<PlayerHpParamData>(Lifetime.Scoped).As<IPlayerHpParamData>();
+            builder.Register<PlayerHp>(Lifetime.Scoped).AsSelf().As<IPlayerHp>();
+            builder.Register<PlayerAttackedCounter>(Lifetime.Scoped);
+            
 
             /*tower*/
             builder.Register<TowerParamsConfig>(Lifetime.Scoped);

@@ -1,23 +1,35 @@
 #nullable enable
 using System;
+using Daipan.Player.LevelDesign.Interfaces;
+using Daipan.Player.LevelDesign.Scripts;
 using Daipan.Player.MonoScripts;
 
 namespace Daipan.Player.Scripts 
 {
-    public class PlayerParamData
+    public class PlayerParamData : IPlayerParamData
     {
-        // Animator
-        public Func<UnityEngine.RuntimeAnimatorController?> GetAnimator { get; init; } = () => null;
-        // Enum
-        public Func<PlayerColor> PlayerEnum { get; init; } = () => PlayerColor.None;
-        // Attack
-        public  Func<int> GetAttack { get; init; } = () => 10;
+        readonly PlayerParam _playerParam;
+        public PlayerParamData(PlayerParam playerParam)
+        {
+            _playerParam = playerParam; 
+        }
+        
+        public UnityEngine.RuntimeAnimatorController? GetAnimator() => _playerParam.attackEffectAnimatorController;
+        public PlayerColor PlayerEnum() => _playerParam.playerColor;
+        public int GetAttack() => _playerParam.playerAttackParam.attackAmount;
+
     }
 
-    public class PlayerHpParamData
+    public class PlayerHpParamData : IPlayerHpParamData
     {
-        public Func<int> GetCurrentHp { get; init; } = () => 0;
-        public Action<int> SetCurrentHp { get; init; } = (value) => { };
-        public Func<int> GetAntiCommentThreshold { get; init; } = () => 0;
+       readonly PlayerParamManager _playerParamManager;
+       public PlayerHpParamData(PlayerParamManager playerParamManager)
+       {
+           _playerParamManager = playerParamManager;
+       }
+       public int GetCurrentHp() => _playerParamManager.playerHpParam.hpAmount;
+       public int SetCurrentHp(int value) => _playerParamManager.playerHpParam.hpAmount = value;
+       public int GetAntiCommentThreshold() => _playerParamManager.playerHpParam.antiCommentThreshold;
+       
     }
 }

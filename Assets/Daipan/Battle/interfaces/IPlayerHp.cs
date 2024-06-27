@@ -1,4 +1,5 @@
 #nullable enable
+using System;
 using Daipan.Enemy.Scripts;
 
 namespace Daipan.Battle.interfaces

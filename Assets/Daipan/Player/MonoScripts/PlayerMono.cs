@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using Daipan.Battle.interfaces;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Enemy.Scripts;
@@ -13,6 +14,7 @@ using Daipan.Stream.Scripts;
 using UnityEngine;
 using VContainer;
 using Daipan.Comment.Scripts;
+using Daipan.Player.LevelDesign.Interfaces;
 
 namespace Daipan.Player.MonoScripts
 {
@@ -77,7 +79,8 @@ namespace Daipan.Player.MonoScripts
         [Inject]
         public void Initialize(
             EnemyCluster enemyCluster,
-            PlayerHpParamData playerHpParamData,
+            PlayerHp playerHp,
+            PlayerAttackedCounter playerAttackedCounter,
             InputSerialManager inputSerialManager,
             PlayerAttackEffectSpawner playerAttackEffectSpawner,
             IrritatedValue irritatedValue,
@@ -87,8 +90,8 @@ namespace Daipan.Player.MonoScripts
             _enemyCluster = enemyCluster;
             _commentSpawner = commentSpawner;
 
-            _playerHp = new PlayerHp(playerHpParamData.GetCurrentHp());
-            _attackedCounterForAntiComment = new PlayerAttackedCounter(playerHpParamData.GetAntiCommentThreshold());
+            _playerHp = playerHp;
+            _attackedCounterForAntiComment = playerAttackedCounter; 
             _playerHp.OnDamage += (sender, args) =>
             {
                 // Domain
@@ -96,8 +99,8 @@ namespace Daipan.Player.MonoScripts
 
                 // AntiComment
                 _attackedCounterForAntiComment.CountUp();
-                _commentSpawner.SpawnAntiCommentByAttackTower(_attackedCounterForAntiComment.isOverThreshold);
-                Debug.Log($"isThreshold{_attackedCounterForAntiComment.isOverThreshold}");
+                _commentSpawner.SpawnAntiCommentByAttackTower(_attackedCounterForAntiComment.IsOverThreshold);
+                Debug.Log($"isThreshold{_attackedCounterForAntiComment.IsOverThreshold}");
 
                 // View
                 foreach (var playerViewMono in playerViewMonos)
