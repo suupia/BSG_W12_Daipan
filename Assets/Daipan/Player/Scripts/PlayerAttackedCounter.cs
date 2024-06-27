@@ -1,18 +1,20 @@
 #nullable enable
 
+using Daipan.Player.LevelDesign.Interfaces;
+
 namespace Daipan.Player.Scripts
 {
     public class PlayerAttackedCounter
     {
         public int AttackedNumber;
-        public bool isOverThreshold;
+        public bool IsOverThreshold;
 
         int _currentTermStartNumber;
-        int _threshold;
+        readonly int _threshold;
 
-        public PlayerAttackedCounter(int threshold)
+        public PlayerAttackedCounter(IPlayerHpParamData playerHpParamData)
         {
-            _threshold = threshold;
+            _threshold = playerHpParamData.GetAntiCommentThreshold();
             CoutnReset();
         }
 
@@ -22,12 +24,12 @@ namespace Daipan.Player.Scripts
 
             if (AttackedNumber - _currentTermStartNumber >= _threshold)
             {
-                isOverThreshold = true;
+                IsOverThreshold = true;
                 _currentTermStartNumber = AttackedNumber;
             }
             else
             {
-                isOverThreshold = false;
+                IsOverThreshold = false;
             }
         }
 
@@ -35,7 +37,7 @@ namespace Daipan.Player.Scripts
         {
             AttackedNumber = 0;
             _currentTermStartNumber = 0;
-            isOverThreshold = false;
+            IsOverThreshold = false;
         } 
     }
 }
