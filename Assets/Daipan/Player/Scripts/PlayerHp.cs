@@ -1,6 +1,7 @@
 #nullable enable
 using System;
 using Daipan.Battle.interfaces;
+using Daipan.Battle.scripts;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -27,6 +28,7 @@ namespace Daipan.Player.Scripts
             {
                 Debug.Log($"Player died");
                 // todo: コールバックで次のシーンへの遷移を挟みたい
+                //SceneTransition.TransitioningScene(SceneName.ResultScene);
             }
         }
 

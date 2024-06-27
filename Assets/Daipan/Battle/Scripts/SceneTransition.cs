@@ -14,7 +14,16 @@ namespace Daipan.Battle.scripts
         {SceneName.TitleScene,"TitleScene" },
         {SceneName.DaipanScene,"DaipanScene" },
         {SceneName.ResultScene,"ResultScene" },
-
+        {SceneName.InsideTheBox,"InsideTheBox"},
+        {SceneName.Thanksgiving,"Thanksgiving" },
+        {SceneName.BottomYoutuber,"BottomYoutuber" },
+        {SceneName.TopYoutuber,"TopYoutuber" },
+        {SceneName.ProGamer,"ProGamer" },
+        {SceneName.SacredLady,"SacredLady" },
+        {SceneName.Flame,"Flame" },
+        {SceneName.Ordinary1,"Ordinary1" },
+        {SceneName.Ordinary2,"Ordinary2" },
+        {SceneName.Ordinary3,"Ordinary3" },
         };
 
         public static void TransitioningScene(SceneName nextScene)
@@ -35,6 +44,18 @@ namespace Daipan.Battle.scripts
     {
         TitleScene,
         DaipanScene,
-        ResultScene
+        ResultScene,
+        
+        // End Scene
+        InsideTheBox,
+        Thanksgiving,
+        BottomYoutuber,
+        TopYoutuber,
+        ProGamer,
+        SacredLady,
+        Flame,
+        Ordinary1,
+        Ordinary2,
+        Ordinary3,
     }
 }
