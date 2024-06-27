@@ -175,6 +175,7 @@ namespace Daipan.Daipan
             builder.Register<PlayerParamDataContainer>(Lifetime.Scoped).As<IPlayerParamDataContainer>();
             builder.Register<PlayerHpParamData>(Lifetime.Scoped).As<IPlayerHpParamData>();
             builder.Register<PlayerHp>(Lifetime.Scoped).AsSelf().As<IPlayerHp>();
+            builder.Register<PlayerAttackedCounter>(Lifetime.Scoped);
             
 
             /*tower*/

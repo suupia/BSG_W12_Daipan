@@ -79,8 +79,8 @@ namespace Daipan.Player.MonoScripts
         [Inject]
         public void Initialize(
             EnemyCluster enemyCluster,
-            IPlayerHpParamData playerHpParamData,
             PlayerHp playerHp,
+            PlayerAttackedCounter playerAttackedCounter,
             InputSerialManager inputSerialManager,
             PlayerAttackEffectSpawner playerAttackEffectSpawner,
             IrritatedValue irritatedValue,
@@ -90,8 +90,8 @@ namespace Daipan.Player.MonoScripts
             _enemyCluster = enemyCluster;
             _commentSpawner = commentSpawner;
 
-            _playerHp = playerHp; 
-            _attackedCounterForAntiComment = new PlayerAttackedCounter(playerHpParamData);
+            _playerHp = playerHp;
+            _attackedCounterForAntiComment = playerAttackedCounter; 
             _playerHp.OnDamage += (sender, args) =>
             {
                 // Domain
