@@ -2,6 +2,7 @@
 using System;
 using Daipan.Battle.interfaces;
 using Daipan.Battle.scripts;
+using Daipan.Player.LevelDesign.Interfaces;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -12,13 +13,13 @@ namespace Daipan.Player.Scripts
         public int MaxHp { get; }
         public event EventHandler<DamageArgs>? OnDamage;
 
-        public PlayerHp(int maxHp)
+        public PlayerHp(IPlayerHpParamData paramData)
         {
-            MaxHp = maxHp;
-            CurrentHp = maxHp;
+            MaxHp = paramData.GetCurrentHp();
+            CurrentHp = MaxHp; 
         }
 
-        public int CurrentHp { get; set; }
+        public int CurrentHp { get; private set; }
 
         public void SetHp(DamageArgs damageArgs)
         {

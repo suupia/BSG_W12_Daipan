@@ -1,4 +1,5 @@
 using System.Linq;
+using Daipan.Battle.interfaces;
 using Daipan.Battle.scripts;
 using Daipan.Comment.MonoScripts;
 using Daipan.Comment.Scripts;
@@ -172,6 +173,9 @@ namespace Daipan.Daipan
             // builder.RegisterInstance(new PlayerParamDataBuilder(builder, playerParamManager));
             builder.RegisterInstance(playerParamManager);
             builder.Register<PlayerParamDataContainer>(Lifetime.Scoped).As<IPlayerParamDataContainer>();
+            builder.Register<PlayerHpParamData>(Lifetime.Scoped).As<IPlayerHpParamData>();
+            builder.Register<PlayerHp>(Lifetime.Scoped).AsSelf().As<IPlayerHp>();
+            
 
             /*tower*/
             builder.Register<TowerParamsConfig>(Lifetime.Scoped);

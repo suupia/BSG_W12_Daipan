@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using Daipan.Battle.interfaces;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Enemy.Scripts;
@@ -13,6 +14,7 @@ using Daipan.Stream.Scripts;
 using UnityEngine;
 using VContainer;
 using Daipan.Comment.Scripts;
+using Daipan.Player.LevelDesign.Interfaces;
 
 namespace Daipan.Player.MonoScripts
 {
@@ -77,7 +79,8 @@ namespace Daipan.Player.MonoScripts
         [Inject]
         public void Initialize(
             EnemyCluster enemyCluster,
-            PlayerHpParamData playerHpParamData,
+            IPlayerHpParamData playerHpParamData,
+            PlayerHp playerHp,
             InputSerialManager inputSerialManager,
             PlayerAttackEffectSpawner playerAttackEffectSpawner,
             IrritatedValue irritatedValue,
@@ -87,7 +90,7 @@ namespace Daipan.Player.MonoScripts
             _enemyCluster = enemyCluster;
             _commentSpawner = commentSpawner;
 
-            _playerHp = new PlayerHp(playerHpParamData.GetCurrentHp());
+            _playerHp = playerHp; 
             _attackedCounterForAntiComment = new PlayerAttackedCounter(playerHpParamData.GetAntiCommentThreshold());
             _playerHp.OnDamage += (sender, args) =>
             {

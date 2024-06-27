@@ -1,4 +1,5 @@
 #nullable enable
+using System;
 using Daipan.Battle.interfaces;
 using Daipan.Enemy.Scripts;
 using Daipan.LevelDesign.Enemy.Scripts;
@@ -27,6 +28,7 @@ public class EnemyAttackTest
     }
     class DummyPlayer : IPlayerHp
     {
+        public event EventHandler<DamageArgs>? OnDamage;
         public DummyPlayer()
         {
             MaxHp = 100;
