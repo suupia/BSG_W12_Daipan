@@ -85,7 +85,7 @@ namespace Daipan.Battle.scripts
         static void ChangeToProGamer(PlayerHp playerHp)
         {
             Debug.Log("Check ChangeToProGamer");
-            if(playerHp.CurrentHp <= 0)
+            if(playerHp.CurrentHp >= 50)
             {
                 Debug.Log("Change To ProGamer");
                 ResultShower.ShowResult(SceneName.ProGamer);
