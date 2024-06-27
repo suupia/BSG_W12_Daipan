@@ -16,7 +16,7 @@ namespace Daipan.Stream.MonoScripts
         [SerializeField] float zoomingDuration;
 
         Vector3 _originalScale;
-        Transform _transform;
+        Transform _transform = null!;
 
         [Inject]
         public void Initialize(ViewerNumber viewerNumber)

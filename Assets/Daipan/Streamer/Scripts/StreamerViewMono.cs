@@ -18,7 +18,7 @@ namespace Daipan.Streamer.Scripts
         IrritatedValue _irritatedValue = null!;
         Vector3 _originalScale;
         Vector3 _originalPosition;
-        Transform _transform;
+        Transform _transform = null!;
 
         [Inject]
         void Initialize(IrritatedValue irritatedValue)
