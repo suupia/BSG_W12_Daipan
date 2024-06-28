@@ -8,9 +8,6 @@ namespace Daipan.Enemy.Scripts
 {
     public class EnemyParamData
     {
-        // Animator
-        public Func<RuntimeAnimatorController?> GetAnimator { get; init; } = () => null;
-
         // Enum
         public Func<EnemyEnum> GetEnemyEnum { get; init; } = () => EnemyEnum.None;
 
