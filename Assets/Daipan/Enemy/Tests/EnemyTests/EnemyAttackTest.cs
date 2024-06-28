@@ -25,7 +25,6 @@ public class EnemyAttackTest
     }
     class DummyPlayer : IPlayerHp
     {
-        public event EventHandler<DamageArgs>? OnDamage;
         public DummyPlayer()
         {
             MaxHp = 100;
