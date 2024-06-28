@@ -15,11 +15,11 @@ namespace Daipan.Stream.MonoScripts
         public void Initialize(IrritatedValue irritatedValue)
         {
             Observable.EveryValueChanged(irritatedValue, x => irritatedValue.Ratio)
-                .Subscribe(_ => UpdateIrritatedGuage(irritatedValue.Ratio))
+                .Subscribe(_ => UpdateIrritatedGauge(irritatedValue.Ratio))
                 .AddTo(this);
         }
 
-        void UpdateIrritatedGuage(float ratio)
+        void UpdateIrritatedGauge(float ratio)
         {
             IrritatedGuage.fillAmount = ratio;
         }
