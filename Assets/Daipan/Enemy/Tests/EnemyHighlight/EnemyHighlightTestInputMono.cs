@@ -12,7 +12,7 @@ public class EnemyHighlightTestInputMono : MonoBehaviour
 
     void Start()
     {
-       enemyViewMono.SetDomain( new EnemyViewParamRed());
+       enemyViewMono.SetDomain(new EnemyViewParamRed());
     }
 
     class EnemyViewParamRed : IEnemyViewParamData
