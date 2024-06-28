@@ -74,7 +74,7 @@ namespace Daipan.Enemy.Scripts
             return enemyMono;
         }
         
-        static void IncreaseIrritatedValue(DiedEventArgs args, IrritatedValue irritatedValue, EnemyParamData enemyParamData)
+        static void IncreaseIrritatedValue(DiedEventArgs args, IrritatedValue irritatedValue, IEnemyParamData enemyParamData)
         {
             if (args.enemyEnum.IsSpecial() == true)
                 irritatedValue.IncreaseValue(enemyParamData.GetIrritationAfterKill());

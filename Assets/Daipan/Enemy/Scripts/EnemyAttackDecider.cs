@@ -10,14 +10,14 @@ namespace Daipan.Enemy.Scripts
 {
     public sealed class EnemyAttackDecider
     {
-        readonly EnemyParamData _enemyParamData;
+        readonly IEnemyParamData _enemyParamData;
         readonly EnemyAttack _enemyAttack;
         readonly EnemyMono _enemyMono;
         float Timer { get; set; }
 
         public EnemyAttackDecider(
             EnemyMono enemyMono,
-            EnemyParamData enemyParamData,
+            IEnemyParamData enemyParamData,
             EnemyAttack enemyAttack
             )
         {

@@ -25,7 +25,7 @@ namespace Daipan.Enemy.MonoScripts
 
         }
 
-        public override void SetDomain(EnemyParamData enemyParamData)
+        public override void SetDomain(IEnemyParamData enemyParamData)
         {
             animatorBody.GetComponent<SpriteRenderer>().color = enemyParamData.GetBodyColor();
             animatorEye.GetComponent<SpriteRenderer>().color = enemyParamData.GetEyeColor();
