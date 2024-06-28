@@ -12,9 +12,7 @@ namespace Daipan.Enemy.Scripts
 {
     public sealed class EnemyCluster
     {
-        readonly List<EnemyMono> _enemies = new();
-
-        public IEnumerable<EnemyMono> EnemyMonos => _enemies;
+        readonly List<EnemyMono?> _enemies = new();
 
         public void Add(EnemyMono enemy)
         {
@@ -36,8 +34,8 @@ namespace Daipan.Enemy.Scripts
             }
 
             return _enemies
-                .Where(e => e.EnemyEnum == enemyEnum)
-                .OrderBy(e => (position - e.transform.position).sqrMagnitude)
+                .Where(e => e?.EnemyEnum == enemyEnum)
+                .OrderBy(e => (position - e?.transform.position)?.sqrMagnitude)
                 .FirstOrDefault();
         }
         
@@ -50,7 +48,7 @@ namespace Daipan.Enemy.Scripts
             }
             
             return _enemies
-                .OrderBy(e => (position - e.transform.position).sqrMagnitude)
+                .OrderBy(e => (position - e?.transform.position)?.sqrMagnitude)
                 .FirstOrDefault();
             
         }
@@ -64,12 +62,13 @@ namespace Daipan.Enemy.Scripts
             }
             
             var orderedEnemies = _enemies
-                .OrderBy(e => (position - e.transform.position).sqrMagnitude)
+                .OrderBy(e => (position - e?.transform.position)?.sqrMagnitude)
                 .ToArray();
             
             // 先頭のenemyはハイライトしそうでないenemyはハイライトしない
             foreach (var enemy in orderedEnemies)
             {
+                if(enemy == null) continue;
                 if (enemy == orderedEnemies.First())
                 {
                     SwitchHighlight(enemy, isHighlighted: true);
@@ -102,5 +101,6 @@ namespace Daipan.Enemy.Scripts
             if (enemyViewMono == null) return;
             enemyViewMono.Highlight(isHighlighted);
         }
+        
     }
 }
