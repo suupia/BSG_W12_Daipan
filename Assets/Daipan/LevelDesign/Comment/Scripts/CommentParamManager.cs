@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Daipan.LevelDesign.Comment.Scripts
 {
@@ -22,10 +23,10 @@ namespace Daipan.LevelDesign.Comment.Scripts
         public int diffAntiCommentViewer;
 
         [Header("コメント集")]
-        public List<string> CommentWords = new ();
+        public List<string> commentWords = new ();
 
         [Header("アンチコメント集")]
-        public List<string> AntiCommentWords = new ();
+        public List<string> antiCommentWords = new ();
         
         public CommentParamDependOnViewer commentParamDependOnViewer = null!;
         public AntiCommentParamDependOnViewer antiCommentParamDependOnViewer = null!;
