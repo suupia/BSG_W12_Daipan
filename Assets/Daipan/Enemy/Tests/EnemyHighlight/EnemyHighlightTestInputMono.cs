@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class EnemyHighlightTestInputMono : MonoBehaviour
 {
-    [SerializeField] EnemyViewMono enemyViewMono = null!;
+    [SerializeField] AbstractEnemyViewMono enemyViewMono = null!;
 
     void Start()
     {
