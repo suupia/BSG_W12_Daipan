@@ -19,25 +19,19 @@ namespace Daipan.Player.Scripts
         readonly IPlayerParamDataContainer _playerParamDataContainer;
         readonly ComboCounter _comboCounter;
         readonly EnemyCluster _enemyCluster;
-        readonly ViewerNumber _viewerNumber;
         readonly CommentSpawner _commentSpawner;
-        readonly CommentParamsServer _commentParamsServer;
 
         public PlayerAttackEffectBuilder(
             IPlayerParamDataContainer playerParamDataContainer,
             ComboCounter comboCounter,
             EnemyCluster enemyCluster,
-            ViewerNumber viewerNumber,
-            CommentSpawner commentSpawner,
-            CommentParamsServer commentParamsServer
+            CommentSpawner commentSpawner
         )
         {
             _playerParamDataContainer = playerParamDataContainer;
             _comboCounter = comboCounter;
             _enemyCluster = enemyCluster;
-            _viewerNumber = viewerNumber;
             _commentSpawner = commentSpawner;
-            _commentParamsServer = commentParamsServer;
         }
 
         public PlayerAttackEffectMono Build(PlayerAttackEffectMono effect, PlayerMono playerMono,
@@ -48,13 +42,14 @@ namespace Daipan.Player.Scripts
             effect.OnHit += (sender, args) =>
             {
                 Debug.Log($"OnHit");
-                OnAttackEnemy(_playerParamDataContainer, playerMono, playerViewMonos, playerColor, args.EnemyMono);
-                OnProcessCombo(_comboCounter, playerColor, args);
+                AttackEnemy(_playerParamDataContainer, playerViewMonos, playerColor, args.EnemyMono);
+                UpdateCombo(_comboCounter, playerColor, args);
+                SpawnAntiComment(args, _commentSpawner);
             };
             return effect;
         }
 
-        static void OnProcessCombo(
+        static void UpdateCombo(
             ComboCounter comboCounter,
             PlayerColor playerColor,
             OnHitEventArgs args
@@ -72,8 +67,7 @@ namespace Daipan.Player.Scripts
             }
         }
 
-        static void OnAttackEnemy(IPlayerParamDataContainer playerParamDataContainer,
-            PlayerMono playerMono,
+        static void AttackEnemy(IPlayerParamDataContainer playerParamDataContainer,
             List<AbstractPlayerViewMono?> playerViewMonos,
             PlayerColor playerColor, EnemyMono? enemyMono)
         {
@@ -98,6 +92,15 @@ namespace Daipan.Player.Scripts
                 if (playerViewMono.playerColor == playerColor)
                     playerViewMono.Attack();
             }
+        }
+        
+        static void SpawnAntiComment(
+            OnHitEventArgs args,
+            CommentSpawner commentSpawner)
+        {
+            if (args.IsTargetEnemy) return;
+            
+            commentSpawner.SpawnCommentByType(CommentEnum.Spiky); 
         }
     }
 }
