@@ -35,7 +35,7 @@ namespace Daipan.Enemy.Scripts
 
             return _enemies
                 .Where(e => e?.EnemyEnum == enemyEnum)
-                .OrderBy(e => (position - e?.transform.position)?.sqrMagnitude)
+                .OrderBy(e => Distance(e, position))
                 .FirstOrDefault();
         }
         
@@ -48,7 +48,7 @@ namespace Daipan.Enemy.Scripts
             }
             
             return _enemies
-                .OrderBy(e => (position - e?.transform.position)?.sqrMagnitude)
+                .OrderBy(e => Distance(e, position))
                 .FirstOrDefault();
             
         }
@@ -62,7 +62,7 @@ namespace Daipan.Enemy.Scripts
             }
             
             var orderedEnemies = _enemies
-                .OrderBy(e => (position - e?.transform.position)?.sqrMagnitude)
+                .OrderBy(e => Distance(e, position))
                 .ToArray();
             
             // 先頭のenemyはハイライトしそうでないenemyはハイライトしない
@@ -78,21 +78,29 @@ namespace Daipan.Enemy.Scripts
                     SwitchHighlight(enemy, isHighlighted: false);
                 }
             }
+
         }
 
         public void Daipaned()
         {
             var enemies = _enemies.ToArray();
             foreach (var enemy in enemies)
-                    enemy.Died(isDaipaned:true); 
+            {
+                if(enemy == null) continue;
+                enemy.Died(isDaipaned:true); 
+            }
         }
 
         public void Daipaned(Func<EnemyEnum, bool> blowAwayCondition)
         {
             var enemies = _enemies.ToArray();
             foreach (var enemy in enemies)
+            {
+                if (enemy == null) continue;
                 if (blowAwayCondition(enemy.EnemyEnum))
-                    enemy.Died(isDaipaned:true); 
+                    enemy.Died(isDaipaned:true);  
+            }
+
         }
         
         static void SwitchHighlight(EnemyMono enemyMono, bool isHighlighted)
@@ -100,7 +108,9 @@ namespace Daipan.Enemy.Scripts
             var enemyViewMono = enemyMono.EnemyViewMono;
             if (enemyViewMono == null) return;
             enemyViewMono.Highlight(isHighlighted);
-        }
+        }     
+        
+        static float Distance(EnemyMono? enemyMono, Vector3 position) => enemyMono == null ? float.MaxValue : (position - enemyMono.transform.position).sqrMagnitude;
         
     }
 }
