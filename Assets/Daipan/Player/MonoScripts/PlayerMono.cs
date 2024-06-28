@@ -99,7 +99,10 @@ namespace Daipan.Player.MonoScripts
 
                 // AntiComment
                 _attackedCounterForAntiComment.CountUp();
-                _commentSpawner.SpawnAntiCommentByAttackTower(_attackedCounterForAntiComment.IsOverThreshold);
+                if (_attackedCounterForAntiComment.IsOverThreshold)
+                {
+                    _commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
+                }
                 Debug.Log($"isThreshold{_attackedCounterForAntiComment.IsOverThreshold}");
 
                 // View

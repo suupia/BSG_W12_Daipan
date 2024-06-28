@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   commentSpeed: 8
   diffCommentViewer: 10000
-  diffAntiCommentViewer: -10000
+  diffAntiCommentViewer: 10000
   CommentWords:
   - Grate!!
   - Wonderfulll!!
@@ -23,3 +23,9 @@ MonoBehaviour:
   - '***'
   - Loser
   - lol
+  commentParamDependOnViewer:
+    viewerAmount: 500
+    commentAmount: 5
+  antiCommentParamDependOnViewer:
+    viewerAmount: 500
+    commentAmount: 10
