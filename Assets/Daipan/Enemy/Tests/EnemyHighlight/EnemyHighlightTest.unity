@@ -224,6 +224,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 704044528}
+  - component: {fileID: 704044529}
   m_Layer: 0
   m_Name: EnemyHightlightTestInput
   m_TagString: Untagged
@@ -246,6 +247,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &704044529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704044526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e55ae929c10d2422a8fae5b08f966d43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyViewMono: {fileID: 1744606552}
 --- !u!1001 &1691094465
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -303,6 +317,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0707a4c3debc043edbaa849a7068eef3, type: 3}
+--- !u!114 &1744606552 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2062877762931384077, guid: 0707a4c3debc043edbaa849a7068eef3, type: 3}
+  m_PrefabInstance: {fileID: 1691094465}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d84b1177837749e683b90e03bf08e491, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
