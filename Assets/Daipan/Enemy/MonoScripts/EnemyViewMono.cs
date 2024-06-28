@@ -85,7 +85,7 @@ namespace Daipan.Enemy.MonoScripts
                 .Subscribe(_ => onDied())
                 .AddTo(this);
         }
-        public override void IsHighlighted(bool isHighlighted)
+        public override void Highlight(bool isHighlighted)
         {
             animatorHighlight.SetActive(isHighlighted); 
         }

@@ -75,7 +75,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _EnableExternalAlpha: 0
-    - _OutlineThickness: 4.3
+    - _OutlineThickness: 4.2
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Ratio: 0.7
@@ -84,6 +84,6 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
-    - _OutlineColor: {r: 1, g: 0.4529095, b: 0, a: 0}
+    - _OutlineColor: {r: 1, g: 0.5001359, b: 0, a: 0}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

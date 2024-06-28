@@ -16,6 +16,7 @@ namespace Daipan.Enemy.MonoScripts
 {
     public sealed class EnemyMono : MonoBehaviour, IHpSetter
     {
+        public AbstractEnemyViewMono?  EnemyViewMono => enemyViewMono;
         [SerializeField] AbstractEnemyViewMono? enemyViewMono;
         EnemyAttackDecider _enemyAttackDecider = null!;
         EnemySuicideAttack _enemySuicideAttack = null!;

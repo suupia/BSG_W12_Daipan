@@ -16,7 +16,7 @@ namespace Daipan.Enemy.Interfaces
         public abstract void Died(Action onDied);
         public abstract void Daipaned(Action onDaipaned);
         
-        public abstract void IsHighlighted(bool isHighlighted);
+        public abstract void Highlight(bool isHighlighted);
 
     }
 }

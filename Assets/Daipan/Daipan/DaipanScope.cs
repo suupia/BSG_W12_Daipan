@@ -102,6 +102,8 @@ namespace Daipan.Daipan
             builder.Register<EnemySpawner>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
             builder.Register<EnemyCluster>(Lifetime.Scoped);
 
+            builder.Register<EnemyHighlightUpdater>(Lifetime.Scoped).AsImplementedInterfaces();
+
             // Viewer
             builder.RegisterComponentInHierarchy<ViewerViewMono>();
 
