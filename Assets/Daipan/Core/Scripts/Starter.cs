@@ -4,9 +4,9 @@ using Daipan.Core.Interfaces;
 using VContainer;
 using VContainer.Unity;
 
-namespace Daipan.Daipan
+namespace Daipan.Core.Scripts
 {
-    public sealed class DaipanInitializer : IInitializable
+    public sealed class Starter : IInitializable
     {
         IEnumerable<IStart> _starts = null!;
 
@@ -21,7 +21,6 @@ namespace Daipan.Daipan
         )
         {
             _starts = starts;
-            // Initialize Daipan here
         }
     }
 }

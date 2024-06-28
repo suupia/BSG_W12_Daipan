@@ -189,14 +189,15 @@ namespace Daipan.Daipan
             builder.Register<SerialInput>(Lifetime.Scoped);
             builder.Register<InputSerialManager>(Lifetime.Scoped);
 
-            // Initializer
-            builder.RegisterEntryPoint<DaipanInitializer>();
-
             // Timer
             builder.Register<StreamTimer>(Lifetime.Scoped).AsSelf().As<IStart>().As<IUpdate>();
 
             // Updater
-            builder.UseEntryPoints(Lifetime.Scoped, entryPoints => { entryPoints.Add<Updater>(); });
+            builder.UseEntryPoints(Lifetime.Scoped, entryPoints =>
+            {
+                entryPoints.Add<Starter>();
+                entryPoints.Add<Updater>();
+            });
             
             
             // Debug
