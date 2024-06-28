@@ -538,6 +538,7 @@ MonoBehaviour:
   animatorEye: {fileID: 1337539842161110902}
   animatorEyeBall: {fileID: 2019943362437910544}
   animatorLine: {fileID: 4458930164941286512}
+  animatorHighlight: {fileID: 2406030447176802286}
 --- !u!1 &6873557749348861119
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,12 +17,13 @@ namespace Daipan.Enemy.MonoScripts
         [SerializeField] Animator animatorEye = null!;
         [SerializeField] Animator animatorEyeBall = null!;
         [SerializeField] Animator animatorLine = null!;
+        [SerializeField] GameObject animatorHighlight = null!;
 
         void Awake()
         {
             if (hpGaugeMono == null) Debug.LogWarning("hpGaugeMono is null");
             if (tempSpriteRenderer == null) Debug.LogWarning("tempSpriteRenderer is null");
-
+            animatorHighlight.SetActive(false);
         }
 
         public override void SetDomain(IEnemyViewParamData enemyViewParamData)
@@ -83,6 +84,10 @@ namespace Daipan.Enemy.MonoScripts
                 .Where(isEnd => isEnd)
                 .Subscribe(_ => onDied())
                 .AddTo(this);
+        }
+        public override void IsHighlighted(bool isHighlighted)
+        {
+            animatorHighlight.SetActive(isHighlighted); 
         }
 
         void SetTriggerAll(string paramName)
