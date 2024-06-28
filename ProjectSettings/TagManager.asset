@@ -41,9 +41,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Comment
-    uniqueID: 2838269711
-    locked: 0
   - name: Player_Yellow
     uniqueID: 1134426891
     locked: 0
@@ -70,4 +67,7 @@ TagManager:
     locked: 0
   - name: Enemy_Line
     uniqueID: 651323995
+    locked: 0
+  - name: Comment
+    uniqueID: 2838269711
     locked: 0
