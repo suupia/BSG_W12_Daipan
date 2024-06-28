@@ -1,6 +1,5 @@
 #nullable enable
 using Daipan.Enemy.Scripts;
-using UnityEngine;
 
 namespace Daipan.Enemy.Interfaces
 {
@@ -26,11 +25,6 @@ namespace Daipan.Enemy.Interfaces
         // Irritated value
         int GetIrritationAfterKill() => 0;
 
-        // Colors
-        Color GetBodyColor() => Color.white;
-        Color GetEyeColor() => Color.white;
-        Color GetEyeBallColor() => Color.white;
-        Color GetLineColor() => Color.white;
     } 
 }
 

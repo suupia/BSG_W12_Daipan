@@ -25,15 +25,15 @@ namespace Daipan.Enemy.MonoScripts
 
         }
 
-        public override void SetDomain(IEnemyParamData enemyParamData)
+        public override void SetDomain(IEnemyViewParamData enemyViewParamData)
         {
-            animatorBody.GetComponent<SpriteRenderer>().color = enemyParamData.GetBodyColor();
-            animatorEye.GetComponent<SpriteRenderer>().color = enemyParamData.GetEyeColor();
-            animatorEyeBall.GetComponent<SpriteRenderer>().color = enemyParamData.GetEyeBallColor();
-            animatorLine.GetComponent<SpriteRenderer>().color = enemyParamData.GetLineColor();
+            animatorBody.GetComponent<SpriteRenderer>().color = enemyViewParamData.GetBodyColor();
+            animatorEye.GetComponent<SpriteRenderer>().color = enemyViewParamData.GetEyeColor();
+            animatorEyeBall.GetComponent<SpriteRenderer>().color = enemyViewParamData.GetEyeBallColor();
+            animatorLine.GetComponent<SpriteRenderer>().color = enemyViewParamData.GetLineColor();
             
             // temp
-            tempSpriteRenderer.color = enemyParamData.GetEnemyEnum() switch
+            tempSpriteRenderer.color = enemyViewParamData.GetEnemyEnum() switch
             {
                 EnemyEnum.Red => Color.red,
                 EnemyEnum.Blue => Color.blue,

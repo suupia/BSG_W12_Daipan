@@ -6,5 +6,6 @@ namespace Daipan.Enemy.Interfaces
     public interface IEnemyParamContainer
     {
         IEnemyParamData GetEnemyParamData(EnemyEnum enemyEnum);
+        IEnemyViewParamData GetEnemyViewParamData(EnemyEnum enemyEnum);
     }
 }
