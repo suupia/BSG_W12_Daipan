@@ -67,12 +67,6 @@ namespace Daipan.Comment.Scripts
             else if (commentEnum == CommentEnum.Spiky) SpawnAntiComment();
         }
 
-        public void SpawnAntiCommentByAttackTower(bool isSpawn)
-        {
-            if (!isSpawn) return;
-            SpawnAntiComment();
-        }
-
         void SpawnComment()
         {
             var commentPrefab = _commentLoader.Load();
