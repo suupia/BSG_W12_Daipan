@@ -47,13 +47,13 @@ namespace Daipan.LevelDesign.Comment.Scripts
 
         public string GetRandomCommentWord()
         {
-            int index = (int)(Random.value * _commentParamManager.CommentWords.Count);
-            return _commentParamManager.CommentWords[index];
+            int index = (int)(Random.value * _commentParamManager.commentWords.Count);
+            return _commentParamManager.commentWords[index];
         }
         public string GetRandomAntiCommentWord()
         {
-            int index = (int)(Random.value * _commentParamManager.AntiCommentWords.Count);
-            return _commentParamManager.AntiCommentWords[index];
+            int index = (int)(Random.value * _commentParamManager.antiCommentWords.Count);
+            return _commentParamManager.antiCommentWords[index];
         }
 
 
