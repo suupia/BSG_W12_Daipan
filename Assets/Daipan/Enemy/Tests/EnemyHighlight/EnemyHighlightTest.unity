@@ -226,7 +226,7 @@ GameObject:
   - component: {fileID: 704044528}
   - component: {fileID: 704044529}
   m_Layer: 0
-  m_Name: EnemyHightlightTestInput
+  m_Name: EnemyHighlightTestInput
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -77,8 +77,7 @@ namespace Daipan.Enemy.MonoScripts
             _enemySuicideAttack = enemySuicideAttack;
             _enemyDied = enemyDied;
 
-            enemyViewMono?.SetDomain(_enemyParamDataContainer);
-            enemyViewMono?.SetView(enemyEnum);
+            enemyViewMono?.SetDomain(_enemyParamDataContainer.GetEnemyParamData(enemyEnum));
         }
 
         public void SuicideAttack(PlayerMono playerMono)

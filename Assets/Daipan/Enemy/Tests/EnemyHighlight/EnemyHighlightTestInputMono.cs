@@ -11,6 +11,6 @@ public class EnemyHighlightTestInputMono : MonoBehaviour
 
     void Start()
     {
-        enemyViewMono.SetView(EnemyEnum.Red);
+       // enemyViewMono.SetView(EnemyEnum.Red);
     }
 }

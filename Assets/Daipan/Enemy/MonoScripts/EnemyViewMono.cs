@@ -18,8 +18,6 @@ namespace Daipan.Enemy.MonoScripts
         [SerializeField] Animator animatorEyeBall = null!;
         [SerializeField] Animator animatorLine = null!;
 
-        EnemyParamDataContainer _enemyParamDataContainer = null!;
-
         void Awake()
         {
             if (hpGaugeMono == null) Debug.LogWarning("hpGaugeMono is null");
@@ -27,15 +25,15 @@ namespace Daipan.Enemy.MonoScripts
 
         }
 
-        public override void SetDomain(EnemyParamDataContainer enemyParamDataContainer)
+        public override void SetDomain(EnemyParamData enemyParamData)
         {
-            _enemyParamDataContainer = enemyParamDataContainer;
-        }
-
-        public override void SetView(EnemyEnum enemyEnum)
-        {
+            animatorBody.GetComponent<SpriteRenderer>().color = enemyParamData.GetBodyColor();
+            animatorEye.GetComponent<SpriteRenderer>().color = enemyParamData.GetEyeColor();
+            animatorEyeBall.GetComponent<SpriteRenderer>().color = enemyParamData.GetEyeBallColor();
+            animatorLine.GetComponent<SpriteRenderer>().color = enemyParamData.GetLineColor();
+            
             // temp
-            tempSpriteRenderer.color = enemyEnum switch
+            tempSpriteRenderer.color = enemyParamData.GetEnemyEnum() switch
             {
                 EnemyEnum.Red => Color.red,
                 EnemyEnum.Blue => Color.blue,
@@ -44,12 +42,6 @@ namespace Daipan.Enemy.MonoScripts
                 EnemyEnum.Special => Color.Lerp(Color.red, Color.yellow, 0.5f), // 赤と黄色の中間色
                 _ => Color.white
             };
-            var enemyParamData = _enemyParamDataContainer.GetEnemyParamData(enemyEnum);
-            animatorBody.GetComponent<SpriteRenderer>().color = enemyParamData.GetBodyColor();
-            animatorEye.GetComponent<SpriteRenderer>().color = enemyParamData.GetEyeColor();
-            animatorEyeBall.GetComponent<SpriteRenderer>().color = enemyParamData.GetEyeBallColor();
-            animatorLine.GetComponent<SpriteRenderer>().color = enemyParamData.GetLineColor();
-
         }
 
         public override void SetHpGauge(int currentHp, int maxHp)
