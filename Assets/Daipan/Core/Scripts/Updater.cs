@@ -19,10 +19,10 @@ namespace Daipan.Core.Scripts
 
         [Inject]
         public void Initialize(
-            IEnumerable<IUpdate> うpdates
+            IEnumerable<IUpdate> updates 
         )
         {
-            _updates = うpdates;
+            _updates = updates;
         }
     }
 }
