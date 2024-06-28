@@ -22,7 +22,7 @@ namespace Daipan.Enemy.MonoScripts
         EnemyDied _enemyDied = null!;
         EnemyHp _enemyHp = null!;
         IEnemySpawnPoint _enemySpawnPoint = null!;
-        EnemyParamDataContainer _enemyParamDataContainer = null!;
+        IEnemyParamContainer _enemyParamDataContainer = null!;
         PlayerHolder _playerHolder = null!;
         public EnemyEnum EnemyEnum { get; private set; } = EnemyEnum.None;
 
@@ -55,12 +55,12 @@ namespace Daipan.Enemy.MonoScripts
         public void Initialize(
             PlayerHolder playerHolder,
             IEnemySpawnPoint enemySpawnPointData,
-            EnemyParamDataContainer enemyParamDataContainer
+            IEnemyParamContainer enemyParamContainer
         )
         {
             _playerHolder = playerHolder;
             _enemySpawnPoint = enemySpawnPointData;
-            _enemyParamDataContainer = enemyParamDataContainer;
+            _enemyParamDataContainer = enemyParamContainer;
         }
 
         public void SetDomain(
