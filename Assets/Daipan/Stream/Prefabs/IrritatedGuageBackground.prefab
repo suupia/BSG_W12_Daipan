@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7213214047827873791}
   - component: {fileID: 3260427872570691978}
-  - component: {fileID: 4761463552853388925}
+  - component: {fileID: 3538632984966549088}
   m_Layer: 5
   m_Name: IrritatedGuageBackground
   m_TagString: Untagged
@@ -47,7 +47,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 507190757371268487}
   m_CullTransparentMesh: 1
---- !u!114 &4761463552853388925
+--- !u!114 &3538632984966549088
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -56,7 +56,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 507190757371268487}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 775c47fb52df847ccb89f4df2b50c2a5, type: 3}
+  m_Script: {fileID: 11500000, guid: 935e203b63c84df7b398987c3f0c3438, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   IrritatedGuage: {fileID: 4111845955252074085}
