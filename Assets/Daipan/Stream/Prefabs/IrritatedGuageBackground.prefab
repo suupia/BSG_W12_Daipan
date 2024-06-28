@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3260427872570691978}
   - component: {fileID: 4761463552853388925}
   m_Layer: 5
-  m_Name: IrritatedGuage
+  m_Name: IrritatedGuageBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -205,7 +205,7 @@ MonoBehaviour:
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 1
-  m_FillAmount: 0
+  m_FillAmount: 0.3
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
