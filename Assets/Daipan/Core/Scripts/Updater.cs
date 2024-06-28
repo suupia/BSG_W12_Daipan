@@ -25,4 +25,4 @@ namespace Daipan.Core.Scripts
             _updates = updates;
         }
     }
-}
+}   
