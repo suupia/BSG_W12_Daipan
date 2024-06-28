@@ -4782,18 +4782,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 262770952}
     m_Modifications:
-    - target: {fileID: 1943645445701601203, guid: 9bd43fad0e9f84957b9a3ed958868a2b, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1943645445701601203, guid: 9bd43fad0e9f84957b9a3ed958868a2b, type: 3}
-      propertyPath: viewerGauge
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1943645445701601203, guid: 9bd43fad0e9f84957b9a3ed958868a2b, type: 3}
-      propertyPath: viewerNumberText
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 4293926496036039153, guid: 9bd43fad0e9f84957b9a3ed958868a2b, type: 3}
       propertyPath: m_Name
       value: StreamView
