@@ -1,6 +1,7 @@
 #nullable enable
 using System;
 using Daipan.Battle.interfaces;
+using Daipan.Enemy.Interfaces;
 using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.Player.MonoScripts;
 
@@ -8,8 +9,8 @@ namespace Daipan.Enemy.Scripts
 {
     public class EnemyAttack
     {
-        readonly EnemyParamData _enemyParamData;
-        public EnemyAttack(EnemyParamData enemyParamData)
+        readonly IEnemyParamData _enemyParamData;
+        public EnemyAttack(IEnemyParamData enemyParamData)
         {
             _enemyParamData = enemyParamData;
         }

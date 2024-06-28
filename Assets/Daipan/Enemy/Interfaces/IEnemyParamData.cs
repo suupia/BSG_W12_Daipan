@@ -7,30 +7,30 @@ namespace Daipan.Enemy.Interfaces
     public interface IEnemyParamData
     {
         // Enum
-        EnemyEnum GetEnemyEnum();
+        EnemyEnum GetEnemyEnum() => EnemyEnum.None;
 
         // Attack
-        int GetAttackAmount();
-        double GetAttackDelayDec();
-        double GetAttackRange();
+        int GetAttackAmount() => 0;
+        double GetAttackDelayDec() => 0;
+        double GetAttackRange() => 0;
 
         // Hp
-        int GetCurrentHp();
+        int GetCurrentHp() => 0;
 
         // Move
-        double GetMoveSpeedPerSec();
+        double GetMoveSpeedPerSec() => 0;
 
         // Spawn
-        double GetSpawnRatio();
+        double GetSpawnRatio() => 0;
 
         // Irritated value
-        int GetIrritationAfterKill();
+        int GetIrritationAfterKill() => 0;
 
         // Colors
-        Color GetBodyColor();
-        Color GetEyeColor();
-        Color GetEyeBallColor();
-        Color GetLineColor(); 
+        Color GetBodyColor() => Color.white;
+        Color GetEyeColor() => Color.white;
+        Color GetEyeBallColor() => Color.white;
+        Color GetLineColor() => Color.white;
     } 
 }
 

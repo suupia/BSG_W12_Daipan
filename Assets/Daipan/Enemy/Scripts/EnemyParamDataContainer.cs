@@ -34,24 +34,7 @@ namespace Daipan.Enemy.Scripts
         {
             var enemyParams = new List<EnemyParamData>();
             foreach (var enemyParam in enemyParamManager.enemyParams)
-                enemyParams.Add(new EnemyParamData()
-                {
-                    GetEnemyEnum = () => enemyParam.enemyEnum,
-                    GetAttackAmount = () => enemyParam.enemyAttackParam.attackAmount,
-                    GetAttackDelayDec = () => enemyParam.enemyAttackParam.attackDelaySec,
-                    GetAttackRange = () => enemyParam.enemyAttackParam.attackRange,
-                    GetCurrentHp = () => enemyParam.enemyHpParam.hpAmount,
-                    GetMoveSpeedPreSec = () =>
-                        enemyParam.enemyMoveParam.moveSpeedPerSec *
-                        GetEnemyTimeLineParam(enemyTimeLineParamDataContainer).GetMoveSpeedRate(),
-                    GetSpawnRatio = () => enemyParam.enemySpawnParam.spawnRatio,
-                    GetIrritationAfterKill = () => enemyParam.enemyRewardParam.irritationAfterKill,
-                    // Animator
-                    GetBodyColor = () => enemyParam.enemyAnimatorParam.bodyColor,
-                    GetEyeColor = () => enemyParam.enemyAnimatorParam.eyeColor,
-                    GetEyeBallColor = () => enemyParam.enemyAnimatorParam.eyeBallColor,
-                    GetLineColor = () => enemyParam.enemyAnimatorParam.lineColor
-                });
+                enemyParams.Add(new EnemyParamData(enemyParam));
             return enemyParams;
         }
 
