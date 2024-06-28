@@ -16,13 +16,14 @@ namespace Daipan.Enemy.MonoScripts
 {
     public sealed class EnemyMono : MonoBehaviour, IHpSetter
     {
+        public AbstractEnemyViewMono?  EnemyViewMono => enemyViewMono;
         [SerializeField] AbstractEnemyViewMono? enemyViewMono;
         EnemyAttackDecider _enemyAttackDecider = null!;
         EnemySuicideAttack _enemySuicideAttack = null!;
         EnemyDied _enemyDied = null!;
         EnemyHp _enemyHp = null!;
         IEnemySpawnPoint _enemySpawnPoint = null!;
-        EnemyParamDataContainer _enemyParamDataContainer = null!;
+        IEnemyParamContainer _enemyParamDataContainer = null!;
         PlayerHolder _playerHolder = null!;
         public EnemyEnum EnemyEnum { get; private set; } = EnemyEnum.None;
 
@@ -34,7 +35,7 @@ namespace Daipan.Enemy.MonoScripts
             if (transform.position.x - _playerHolder.PlayerMono.transform.position.x >=
                 _enemyParamDataContainer.GetEnemyParamData(EnemyEnum).GetAttackRange())
             {
-                var moveSpeed = (float)_enemyParamDataContainer.GetEnemyParamData(EnemyEnum).GetMoveSpeedPreSec();
+                var moveSpeed = (float)_enemyParamDataContainer.GetEnemyParamData(EnemyEnum).GetMoveSpeedPerSec();
                 transform.position += Time.deltaTime * moveSpeed * Vector3.left;
             }
 
@@ -55,12 +56,12 @@ namespace Daipan.Enemy.MonoScripts
         public void Initialize(
             PlayerHolder playerHolder,
             IEnemySpawnPoint enemySpawnPointData,
-            EnemyParamDataContainer enemyParamDataContainer
+            IEnemyParamContainer enemyParamContainer
         )
         {
             _playerHolder = playerHolder;
             _enemySpawnPoint = enemySpawnPointData;
-            _enemyParamDataContainer = enemyParamDataContainer;
+            _enemyParamDataContainer = enemyParamContainer;
         }
 
         public void SetDomain(
@@ -77,8 +78,7 @@ namespace Daipan.Enemy.MonoScripts
             _enemySuicideAttack = enemySuicideAttack;
             _enemyDied = enemyDied;
 
-            enemyViewMono?.SetDomain(_enemyParamDataContainer);
-            enemyViewMono?.SetView(enemyEnum);
+            enemyViewMono?.SetDomain(_enemyParamDataContainer.GetEnemyViewParamData(enemyEnum));
         }
 
         public void SuicideAttack(PlayerMono playerMono)

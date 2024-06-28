@@ -48,10 +48,37 @@ namespace Daipan.Enemy.Scripts
                 // Debug.LogWarning("No enemies found");
                 return null;
             }
-
+            
             return _enemies
                 .OrderBy(e => (position - e.transform.position).sqrMagnitude)
                 .FirstOrDefault();
+            
+        }
+        
+        public void UpdateHighlight(Vector3 position)
+        {
+            if (!_enemies.Any())
+            {
+                // Debug.LogWarning("No enemies found");
+                return;
+            }
+            
+            var orderedEnemies = _enemies
+                .OrderBy(e => (position - e.transform.position).sqrMagnitude)
+                .ToArray();
+            
+            // 先頭のenemyはハイライトしそうでないenemyはハイライトしない
+            foreach (var enemy in orderedEnemies)
+            {
+                if (enemy == orderedEnemies.First())
+                {
+                    SwitchHighlight(enemy, isHighlighted: true);
+                }
+                else
+                {
+                    SwitchHighlight(enemy, isHighlighted: false);
+                }
+            }
         }
 
         public void Daipaned()
@@ -67,6 +94,13 @@ namespace Daipan.Enemy.Scripts
             foreach (var enemy in enemies)
                 if (blowAwayCondition(enemy.EnemyEnum))
                     enemy.Died(isDaipaned:true); 
+        }
+        
+        static void SwitchHighlight(EnemyMono enemyMono, bool isHighlighted)
+        {
+            var enemyViewMono = enemyMono.EnemyViewMono;
+            if (enemyViewMono == null) return;
+            enemyViewMono.Highlight(isHighlighted);
         }
     }
 }

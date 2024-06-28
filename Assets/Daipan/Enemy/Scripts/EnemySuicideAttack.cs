@@ -1,6 +1,7 @@
 #nullable enable
 using UnityEngine;
 using Daipan.Battle.interfaces;
+using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Player.MonoScripts;
 using DG.Tweening;
@@ -10,11 +11,11 @@ namespace Daipan.Enemy.Scripts
     public class EnemySuicideAttack
     {
         readonly EnemyMono _enemyMono;
-        readonly EnemyParamData _enemyParamData;
+        readonly IEnemyParamData _enemyParamData;
 
         public EnemySuicideAttack(
             EnemyMono enemyMono,
-            EnemyParamData enemyParamData
+            IEnemyParamData enemyParamData
         )
         {
             _enemyMono = enemyMono;

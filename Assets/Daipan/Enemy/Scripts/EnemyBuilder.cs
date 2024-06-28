@@ -16,7 +16,7 @@ namespace Daipan.Enemy.Scripts
 {
     public class EnemyBuilder : IEnemyBuilder
     {
-        readonly EnemyParamDataContainer _enemyParamDataContainer;
+        readonly IEnemyParamContainer _enemyParamContainer;
         readonly CommentSpawner _commentSpawner;
         readonly EnemyParamManager _enemyParamManager;
         readonly ViewerNumber _viewerNumber;
@@ -26,7 +26,7 @@ namespace Daipan.Enemy.Scripts
         readonly IEnemyTimeLineParamContainer _enemyTimeLineParamContainer;
         
         public EnemyBuilder(
-            EnemyParamDataContainer enemyParamDataContainer,
+            IEnemyParamContainer enemyParamContainer,
             CommentSpawner commentSpawner,
             ViewerNumber viewerNumber,
             IrritatedValue irritatedValue,
@@ -36,7 +36,7 @@ namespace Daipan.Enemy.Scripts
             IEnemyTimeLineParamContainer enemyTimeLineParamContainer
         )
         {
-            _enemyParamDataContainer = enemyParamDataContainer;
+            _enemyParamContainer = enemyParamContainer;
             _commentSpawner = commentSpawner;
             _viewerNumber = viewerNumber;
             _irritatedValue = irritatedValue;
@@ -53,7 +53,7 @@ namespace Daipan.Enemy.Scripts
             if (IsSpawnBoss()) enemyEnum = EnemyEnum.RedBoss;
 
             Debug.Log($"enemyEnum: {enemyEnum}");
-            var enemyParamData = _enemyParamDataContainer.GetEnemyParamData(enemyEnum);
+            var enemyParamData = _enemyParamContainer.GetEnemyParamData(enemyEnum);
             enemyMono.SetDomain(
                 enemyEnum,
                 new EnemyHp(enemyParamData.GetCurrentHp(), enemyMono, _enemyCluster),
@@ -74,7 +74,7 @@ namespace Daipan.Enemy.Scripts
             return enemyMono;
         }
         
-        static void IncreaseIrritatedValue(DiedEventArgs args, IrritatedValue irritatedValue, EnemyParamData enemyParamData)
+        static void IncreaseIrritatedValue(DiedEventArgs args, IrritatedValue irritatedValue, IEnemyParamData enemyParamData)
         {
             if (args.enemyEnum.IsSpecial() == true)
                 irritatedValue.IncreaseValue(enemyParamData.GetIrritationAfterKill());

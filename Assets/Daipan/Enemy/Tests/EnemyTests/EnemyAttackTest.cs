@@ -1,6 +1,7 @@
 #nullable enable
 using System;
 using Daipan.Battle.interfaces;
+using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.Scripts;
 using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.Player.Scripts;
@@ -13,11 +14,7 @@ public class EnemyAttackTest
     {
         // Arrange
         var player = new DummyPlayer();
-        var enemyParamData = new EnemyParamData()
-        {
-            GetEnemyEnum = () => EnemyEnum.None,
-            GetAttackAmount = () => 10
-        };
+        var enemyParamData = new MockEnemyParamData(); 
         var enemyAttack = new EnemyAttack(enemyParamData);
 
         // Act
@@ -40,6 +37,11 @@ public class EnemyAttackTest
         {
             CurrentHp -= damageArgs.DamageValue;
         } 
-
+    }
+    
+    class MockEnemyParamData : IEnemyParamData
+    {
+        public EnemyEnum GetEnemyEnum() => EnemyEnum.None;
+        public int GetAttackAmount() => 10;
     }
 }

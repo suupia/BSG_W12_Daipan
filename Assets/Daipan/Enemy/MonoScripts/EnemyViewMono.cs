@@ -17,25 +17,24 @@ namespace Daipan.Enemy.MonoScripts
         [SerializeField] Animator animatorEye = null!;
         [SerializeField] Animator animatorEyeBall = null!;
         [SerializeField] Animator animatorLine = null!;
-
-        EnemyParamDataContainer _enemyParamDataContainer = null!;
+        [SerializeField] SpriteRenderer highlightSpriteRenderer = null!; 
 
         void Awake()
         {
             if (hpGaugeMono == null) Debug.LogWarning("hpGaugeMono is null");
             if (tempSpriteRenderer == null) Debug.LogWarning("tempSpriteRenderer is null");
-
+            highlightSpriteRenderer.enabled = false;
         }
 
-        public override void SetDomain(EnemyParamDataContainer enemyParamDataContainer)
+        public override void SetDomain(IEnemyViewParamData enemyViewParamData)
         {
-            _enemyParamDataContainer = enemyParamDataContainer;
-        }
-
-        public override void SetView(EnemyEnum enemyEnum)
-        {
+            animatorBody.GetComponent<SpriteRenderer>().color = enemyViewParamData.GetBodyColor();
+            animatorEye.GetComponent<SpriteRenderer>().color = enemyViewParamData.GetEyeColor();
+            animatorEyeBall.GetComponent<SpriteRenderer>().color = enemyViewParamData.GetEyeBallColor();
+            animatorLine.GetComponent<SpriteRenderer>().color = enemyViewParamData.GetLineColor();
+            
             // temp
-            tempSpriteRenderer.color = enemyEnum switch
+            tempSpriteRenderer.color = enemyViewParamData.GetEnemyEnum() switch
             {
                 EnemyEnum.Red => Color.red,
                 EnemyEnum.Blue => Color.blue,
@@ -44,12 +43,6 @@ namespace Daipan.Enemy.MonoScripts
                 EnemyEnum.Special => Color.Lerp(Color.red, Color.yellow, 0.5f), // 赤と黄色の中間色
                 _ => Color.white
             };
-            var enemyParamData = _enemyParamDataContainer.GetEnemyParamData(enemyEnum);
-            animatorBody.GetComponent<SpriteRenderer>().color = enemyParamData.GetBodyColor();
-            animatorEye.GetComponent<SpriteRenderer>().color = enemyParamData.GetEyeColor();
-            animatorEyeBall.GetComponent<SpriteRenderer>().color = enemyParamData.GetEyeBallColor();
-            animatorLine.GetComponent<SpriteRenderer>().color = enemyParamData.GetLineColor();
-
         }
 
         public override void SetHpGauge(int currentHp, int maxHp)
@@ -91,6 +84,10 @@ namespace Daipan.Enemy.MonoScripts
                 .Where(isEnd => isEnd)
                 .Subscribe(_ => onDied())
                 .AddTo(this);
+        }
+        public override void Highlight(bool isHighlighted)
+        {
+            highlightSpriteRenderer.enabled = isHighlighted; 
         }
 
         void SetTriggerAll(string paramName)

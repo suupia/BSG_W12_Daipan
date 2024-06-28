@@ -1,40 +1,45 @@
 #nullable enable
 using System;
+using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.Scripts;
 using Daipan.LevelDesign.Enemy.Scripts;
 using UnityEngine;
 
 namespace Daipan.Enemy.Scripts
 {
-    public class EnemyParamData
+    public class EnemyParamData : IEnemyParamData, IEnemyViewParamData
     {
-        // Animator
-        public Func<RuntimeAnimatorController?> GetAnimator { get; init; } = () => null;
+        readonly EnemyParam _enemyParam;
+
+        public EnemyParamData(EnemyParam enemyParam)
+        {
+            _enemyParam = enemyParam ?? throw new ArgumentNullException(nameof(enemyParam));
+        }
 
         // Enum
-        public Func<EnemyEnum> GetEnemyEnum { get; init; } = () => EnemyEnum.None;
+        public EnemyEnum GetEnemyEnum() => _enemyParam.enemyEnum;
 
         // Attack
-        public Func<int> GetAttackAmount { get; init; } = () => 10;
-        public Func<double> GetAttackDelayDec { get; init; } = () => 1.0;
-        public Func<double> GetAttackRange { get; init; } = () => 5.0;
+        public int GetAttackAmount() => _enemyParam.enemyAttackParam.attackAmount;
+        public double GetAttackDelayDec() => _enemyParam.enemyAttackParam.attackDelaySec;
+        public double GetAttackRange() => _enemyParam.enemyAttackParam.attackRange;
 
         // Hp
-        public Func<int> GetCurrentHp { get; init; } = () => 100;
+        public int GetCurrentHp() => _enemyParam.enemyHpParam.hpAmount;
 
         // Move
-        public Func<double> GetMoveSpeedPreSec { get; init; } = () => 1.0;
+        public double GetMoveSpeedPerSec() => _enemyParam.enemyMoveParam.moveSpeedPerSec;
 
         // Spawn
-        public Func<double> GetSpawnRatio { get; init; } = () => 1.0;
+        public double GetSpawnRatio() => _enemyParam.enemySpawnParam.spawnRatio;
 
         // Irritated value
-        public Func<int> GetIrritationAfterKill { get; init; } = () => 10;
+        public int GetIrritationAfterKill() => _enemyParam.enemyRewardParam.irritationAfterKill;
 
-        // Animator 
-        public Func<Color> GetBodyColor { get; init; } = () => Color.white;
-        public Func<Color> GetEyeColor { get; init; } = () => Color.white;
-        public Func<Color> GetEyeBallColor { get; init; } = () => Color.white;
-        public Func<Color> GetLineColor { get; init; } = () => Color.white;
+        // Colors
+        public Color GetBodyColor() => _enemyParam.enemyAnimatorParam.bodyColor;
+        public Color GetEyeColor() => _enemyParam.enemyAnimatorParam.eyeColor;
+        public Color GetEyeBallColor() => _enemyParam.enemyAnimatorParam.eyeBallColor;
+        public Color GetLineColor() => _enemyParam.enemyAnimatorParam.lineColor;
     }
 }

@@ -102,6 +102,8 @@ namespace Daipan.Daipan
             builder.Register<EnemySpawner>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
             builder.Register<EnemyCluster>(Lifetime.Scoped);
 
+            builder.Register<EnemyHighlightUpdater>(Lifetime.Scoped).AsImplementedInterfaces();
+
             // Viewer
             builder.RegisterComponentInHierarchy<ViewerViewMono>();
 
@@ -129,7 +131,7 @@ namespace Daipan.Daipan
             builder.RegisterInstance(enemyParamManager);
             builder.RegisterInstance(enemyParamManager.enemyLevelDesignParam);
             builder.Register<EnemyTimeLineParamContainer>(Lifetime.Scoped).As<IEnemyTimeLineParamContainer>();
-            builder.Register<EnemyParamDataContainer>(Lifetime.Scoped);
+            builder.Register<EnemyParamDataContainer>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.RegisterInstance(
                 new EnemyLevelDesignParamDataBuilder(builder, enemyParamManager.enemyLevelDesignParam));
 

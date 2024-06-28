@@ -56,6 +56,9 @@ TagManager:
   - name: Tower_Light
     uniqueID: 764982475
     locked: 0
+  - name: Enemy_Highlight
+    uniqueID: 1629249611
+    locked: 0
   - name: Enemy_Body
     uniqueID: 2461177809
     locked: 0
