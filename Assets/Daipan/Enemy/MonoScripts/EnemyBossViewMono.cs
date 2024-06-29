@@ -17,6 +17,7 @@ namespace Daipan.Enemy.MonoScripts
         [SerializeField] Animator animatorEye = null!;
         [SerializeField] Animator animatorEyeBall = null!;
         [SerializeField] Animator animatorLine = null!;
+        [SerializeField] Animator animatorTank = null!;
         [SerializeField] SpriteRenderer highlightSpriteRenderer = null!; 
 
         void Awake()
@@ -32,6 +33,7 @@ namespace Daipan.Enemy.MonoScripts
             animatorEye.GetComponent<SpriteRenderer>().color = enemyViewParamData.GetEyeColor();
             animatorEyeBall.GetComponent<SpriteRenderer>().color = enemyViewParamData.GetEyeBallColor();
             animatorLine.GetComponent<SpriteRenderer>().color = enemyViewParamData.GetLineColor();
+            animatorTank.GetComponent<SpriteRenderer>().color = enemyViewParamData.GetEyeColor();
             
             // temp
             tempSpriteRenderer.color = enemyViewParamData.GetEnemyEnum() switch
@@ -96,6 +98,7 @@ namespace Daipan.Enemy.MonoScripts
             animatorEye.SetTrigger(paramName);
             animatorEyeBall.SetTrigger(paramName);
             animatorLine.SetTrigger(paramName);
+            animatorTank.SetTrigger(paramName);
         }
         
         void SetBoolAll(string paramName, bool value)
@@ -104,6 +107,7 @@ namespace Daipan.Enemy.MonoScripts
             animatorEye.SetBool(paramName, value);
             animatorEyeBall.SetBool(paramName, value);
             animatorLine.SetBool(paramName, value);
+            animatorTank.SetBool(paramName, value);
         }
         
 
