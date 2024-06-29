@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Daipan.Enemy.Scripts
 {
-    public sealed class EnemyHp : IEnemyHp
+    public class EnemyHp : IEnemyHp
     {
         public int MaxHp { get; }
         public int CurrentHp { get; private set; }
@@ -23,7 +23,7 @@ namespace Daipan.Enemy.Scripts
             _enemyCluster = enemyCluster;
         }
 
-        public void DecreaseHp(EnemyDamageArgs enemyDamageArgs)
+        public virtual void DecreaseHp(EnemyDamageArgs enemyDamageArgs)
         {
             CurrentHp -= enemyDamageArgs.DamageValue;
             Debug.Log($"Enemy CurrentHp : {CurrentHp}");
