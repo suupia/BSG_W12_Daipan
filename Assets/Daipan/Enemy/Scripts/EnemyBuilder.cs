@@ -54,9 +54,20 @@ namespace Daipan.Enemy.Scripts
 
             Debug.Log($"enemyEnum: {enemyEnum}");
             var enemyParamData = _enemyParamContainer.GetEnemyParamData(enemyEnum);
+
+            EnemyHp enemyHp;
+            if(enemyEnum == EnemyEnum.Totem)
+            {
+                enemyHp = new TotemEnemyHp(enemyParamData.GetCurrentHp(), enemyMono, _enemyCluster);
+            }
+            else
+            {
+                enemyHp = new EnemyHp(enemyParamData.GetCurrentHp(), enemyMono, _enemyCluster);
+            }
+
             enemyMono.SetDomain(
                 enemyEnum,
-                new EnemyHp(enemyParamData.GetCurrentHp(), enemyMono, _enemyCluster),
+                enemyHp,
                 new EnemyAttackDecider(enemyMono, enemyParamData, new EnemyAttack(enemyParamData)),
                 new EnemySuicideAttack(enemyMono,enemyParamData),
                 new EnemyDied(enemyMono)
