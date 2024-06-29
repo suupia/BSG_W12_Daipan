@@ -22,7 +22,6 @@ public class PlayerTestScope : LifetimeScope
         builder.Register<PlayerPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<PlayerMono>>();
 
         // Playerの生成を行うクラスを登録（今後様々なPlayerを作れるようにFactoryパターンを採用）
-        builder.Register<PlayerAttack>(Lifetime.Scoped);
         builder.Register<PlayerSpawner>(Lifetime.Scoped);
 
         builder.Register<EnemyCluster>(Lifetime.Scoped);

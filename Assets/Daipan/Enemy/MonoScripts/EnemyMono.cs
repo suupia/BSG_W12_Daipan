@@ -14,14 +14,14 @@ using VContainer;
 
 namespace Daipan.Enemy.MonoScripts
 {
-    public sealed class EnemyMono : MonoBehaviour, IHpSetter
+    public sealed class EnemyMono : MonoBehaviour
     {
         public AbstractEnemyViewMono?  EnemyViewMono => enemyViewMono;
         [SerializeField] AbstractEnemyViewMono? enemyViewMono;
         EnemyAttackDecider _enemyAttackDecider = null!;
         EnemySuicideAttack _enemySuicideAttack = null!;
         EnemyDied _enemyDied = null!;
-        EnemyHp _enemyHp = null!;
+        IEnemyHp _enemyHp = null!;
         IEnemySpawnPoint _enemySpawnPoint = null!;
         IEnemyParamContainer _enemyParamDataContainer = null!;
         PlayerHolder _playerHolder = null!;
@@ -47,8 +47,12 @@ namespace Daipan.Enemy.MonoScripts
 
         public int CurrentHp
         {
-            set => _enemyHp.CurrentHp = value;
             get => _enemyHp.CurrentHp;
+        }
+
+        public void GetDamage(EnemyDamageArgs enemyDamageArgs)
+        {
+            _enemyHp.DecreaseHp(enemyDamageArgs);
         }
 
 
@@ -66,7 +70,7 @@ namespace Daipan.Enemy.MonoScripts
 
         public void SetDomain(
             EnemyEnum enemyEnum,
-            EnemyHp enemyHp,
+            IEnemyHp enemyHp,
             EnemyAttackDecider enemyAttackDecider,
             EnemySuicideAttack enemySuicideAttack,
             EnemyDied enemyDied

@@ -5,28 +5,29 @@ using UnityEngine;
 
 namespace Daipan.Enemy.Scripts
 {
-    public sealed class EnemyHp : IHpSetter
+    public class EnemyHp : IEnemyHp
     {
+        public int MaxHp { get; }
+        public int CurrentHp { get; private set; }
+
         readonly EnemyCluster _enemyCluster;
         readonly EnemyMono _enemyMono;
-        int _currentHp;
+
 
         public EnemyHp(int maxHp, EnemyMono enemyMono, EnemyCluster enemyCluster)
         {
-            CurrentHp = maxHp;
+            MaxHp = maxHp;
+            CurrentHp = MaxHp;
+
             _enemyMono = enemyMono;
             _enemyCluster = enemyCluster;
         }
 
-        public int CurrentHp
+        public virtual void DecreaseHp(EnemyDamageArgs enemyDamageArgs)
         {
-            get => _currentHp;
-            set
-            {
-                _currentHp = value;
-                Debug.Log($"Enemy CurrentHp : {_currentHp}");
-                if (_currentHp <= 0) _enemyMono.Died(); 
-            }
+            CurrentHp -= enemyDamageArgs.DamageValue;
+            Debug.Log($"Enemy CurrentHp : {CurrentHp}");
+            if (CurrentHp <= 0) _enemyMono.Died(); 
         }
     }
 }
