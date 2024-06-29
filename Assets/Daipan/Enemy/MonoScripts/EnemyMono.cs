@@ -47,8 +47,12 @@ namespace Daipan.Enemy.MonoScripts
 
         public int CurrentHp
         {
-            set => _enemyHp.DecreaseHp(_enemyHp.CurrentHp - value);
             get => _enemyHp.CurrentHp;
+        }
+
+        public void GetDamage(EnemyDamageArgs enemyDamageArgs)
+        {
+            _enemyHp.DecreaseHp(enemyDamageArgs);
         }
 
 

@@ -23,9 +23,9 @@ namespace Daipan.Enemy.Scripts
             _enemyCluster = enemyCluster;
         }
 
-        public void DecreaseHp(int DamageValue)
+        public void DecreaseHp(EnemyDamageArgs enemyDamageArgs)
         {
-            CurrentHp -= DamageValue;
+            CurrentHp -= enemyDamageArgs.DamageValue;
             Debug.Log($"Enemy CurrentHp : {CurrentHp}");
             if (CurrentHp <= 0) _enemyMono.Died(); 
         }
