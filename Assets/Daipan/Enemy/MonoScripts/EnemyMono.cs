@@ -21,7 +21,7 @@ namespace Daipan.Enemy.MonoScripts
         EnemyAttackDecider _enemyAttackDecider = null!;
         EnemySuicideAttack _enemySuicideAttack = null!;
         EnemyDied _enemyDied = null!;
-        EnemyHp _enemyHp = null!;
+        IEnemyHp _enemyHp = null!;
         IEnemySpawnPoint _enemySpawnPoint = null!;
         IEnemyParamContainer _enemyParamDataContainer = null!;
         PlayerHolder _playerHolder = null!;
@@ -47,7 +47,7 @@ namespace Daipan.Enemy.MonoScripts
 
         public int CurrentHp
         {
-            set => _enemyHp.CurrentHp = value;
+            set => _enemyHp.DecreaseHp(_enemyHp.CurrentHp - value);
             get => _enemyHp.CurrentHp;
         }
 
@@ -66,7 +66,7 @@ namespace Daipan.Enemy.MonoScripts
 
         public void SetDomain(
             EnemyEnum enemyEnum,
-            EnemyHp enemyHp,
+            IEnemyHp enemyHp,
             EnemyAttackDecider enemyAttackDecider,
             EnemySuicideAttack enemySuicideAttack,
             EnemyDied enemyDied
