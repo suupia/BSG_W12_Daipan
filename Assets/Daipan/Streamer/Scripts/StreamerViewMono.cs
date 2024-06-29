@@ -39,8 +39,6 @@ namespace Daipan.Streamer.Scripts
         void Update()
         {
             animator.SetInteger("IrritatedStage", _irritatedValue.CurrentIrritatedStage);
-            Debug.Log($"CurrentIrritatedStage : {_irritatedValue.CurrentIrritatedStage} Ratio : {_irritatedValue.Ratio}");
-
         }
 
         public void Daipan()

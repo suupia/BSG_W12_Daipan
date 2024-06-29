@@ -33,7 +33,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Enemy_Red_Attack_Motion
+  m_Name: Enemy_Attack_Motion
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -133,7 +133,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Enemy_Red_Died_Motion
+  m_Name: Enemy_Died_Motion
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -159,7 +159,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Enemy_Red_Move_Motion
+  m_Name: Enemy_Move_Motion
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
