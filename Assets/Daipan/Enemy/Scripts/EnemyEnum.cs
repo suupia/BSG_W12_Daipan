@@ -13,7 +13,8 @@ namespace Daipan.Enemy.Scripts
         [IsBoss(true)] RedBoss,
         [IsBoss(true)] BlueBoss,
         [IsBoss(true)] YellowBoss,
-        [IsSpecial(true)] Special
+        [IsSpecial(true)] Special,
+        Totem
     }
 
     public static class AnyTypesExtensions
