@@ -17,6 +17,10 @@ public class EnemyViewTestInputMono : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            enemyViewMono.Move();
+        }
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             enemyViewMono.Died( () => Debug.Log("Do something when died"));

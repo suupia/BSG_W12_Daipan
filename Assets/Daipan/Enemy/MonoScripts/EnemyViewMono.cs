@@ -64,7 +64,7 @@ namespace Daipan.Enemy.MonoScripts
 
         public override void Died(Action onDied)
         {
-            Debug.Log($"OnDied");
+            Debug.LogWarning($"OnDied");
             SetTriggerAll("OnDied");
             // animatorLineを代表とする
             var preState = animatorLine.GetCurrentAnimatorStateInfo(0).fullPathHash;
