@@ -59,7 +59,7 @@ namespace Daipan.Enemy.Scripts
                 new EnemyHp(enemyParamData.GetCurrentHp(), enemyMono, _enemyCluster),
                 new EnemyAttackDecider(enemyMono, enemyParamData, new EnemyAttack(enemyParamData)),
                 new EnemySuicideAttack(enemyMono,enemyParamData),
-                new EnemyDied(_enemyCluster, enemyMono)
+                new EnemyDied(enemyMono)
             );
             
             enemyMono.OnDied += (sender, args) =>

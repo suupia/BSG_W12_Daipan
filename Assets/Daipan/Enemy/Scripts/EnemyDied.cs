@@ -4,17 +4,16 @@ using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.MonoScripts;
 using DG.Tweening;
 
+
 namespace Daipan.Enemy.Scripts
 {
     public class EnemyDied
     {
         public event EventHandler<DiedEventArgs>? OnDied;
-        readonly EnemyCluster _enemyCluster;
         readonly EnemyMono _enemyMono;
         
-        public EnemyDied(EnemyCluster enemyCluster, EnemyMono enemyMono)
+        public EnemyDied(EnemyMono enemyMono)
         {
-            _enemyCluster = enemyCluster;
             _enemyMono = enemyMono;
         }
 
@@ -27,15 +26,18 @@ namespace Daipan.Enemy.Scripts
                 OnDied?.Invoke(_enemyMono, args);
             }
 
-            OnDiedProcess(_enemyMono, _enemyCluster, isDaipaned, enemyViewMono);
+            OnDiedProcess(_enemyMono, isDaipaned, enemyViewMono);
         }
 
-        static void OnDiedProcess(EnemyMono enemyMono, EnemyCluster enemyCluster, bool isDaipaned,
-            AbstractEnemyViewMono? enemyViewMono)
+        static void OnDiedProcess(
+            EnemyMono enemyMono, 
+            bool isDaipaned,
+            AbstractEnemyViewMono? enemyViewMono
+            )
         {
             if (enemyViewMono == null)
             {
-                enemyCluster.Remove(enemyMono);
+                UnityEngine.Object.Destroy(enemyMono.gameObject); 
                 return;
             }
 
@@ -43,9 +45,9 @@ namespace Daipan.Enemy.Scripts
                 enemyMono.transform
                     .DOMoveY(-1.7f, 0.3f)
                     .SetEase(Ease.InQuint)
-                    .OnStart(() => { enemyViewMono.Daipaned(() => enemyCluster.Remove(enemyMono)); });
+                    .OnStart(() => { enemyViewMono.Daipaned(() =>  UnityEngine.Object.Destroy(enemyMono.gameObject)); });
             else
-                enemyViewMono.Died(() => enemyCluster.Remove(enemyMono));
+                enemyViewMono.Died(() =>  UnityEngine.Object.Destroy(enemyMono.gameObject));
         }
     }
 }
