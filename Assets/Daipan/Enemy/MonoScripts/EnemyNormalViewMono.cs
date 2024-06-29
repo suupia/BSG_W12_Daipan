@@ -17,7 +17,9 @@ namespace Daipan.Enemy.MonoScripts
         [SerializeField] Animator animatorEye = null!;
         [SerializeField] Animator animatorEyeBall = null!;
         [SerializeField] Animator animatorLine = null!;
-        [SerializeField] SpriteRenderer highlightSpriteRenderer = null!; 
+        [SerializeField] SpriteRenderer highlightSpriteRenderer = null!;
+        
+        bool _canHighlight = true;
 
         void Awake()
         {
@@ -65,6 +67,8 @@ namespace Daipan.Enemy.MonoScripts
         public override void Died(Action onDied)
         {
             SetTriggerAll("OnDied");
+            highlightSpriteRenderer.enabled = false;
+            _canHighlight = false;
             // animatorLineを代表とする
             var preState = animatorLine.GetCurrentAnimatorStateInfo(0).fullPathHash;
             Observable.EveryValueChanged(animatorLine, a => a.IsEnd())
@@ -77,6 +81,8 @@ namespace Daipan.Enemy.MonoScripts
         public override void Daipaned(Action onDied)
         {
             SetTriggerAll("OnDaipaned");
+            highlightSpriteRenderer.enabled = false;
+            _canHighlight = false;
             // animatorLineを代表とする
             var preState = animatorLine.GetCurrentAnimatorStateInfo(0).fullPathHash;
             Observable.EveryValueChanged(animatorLine, a => a.IsEnd())
@@ -87,7 +93,7 @@ namespace Daipan.Enemy.MonoScripts
         }
         public override void Highlight(bool isHighlighted)
         {
-            if(animatorLine.GetCurrentAnimatorClipInfo(0)[0].clip.name is "OnDied" or "OnDaipaned") return;
+            if(!_canHighlight) return;
             highlightSpriteRenderer.enabled = isHighlighted; 
         }
 
