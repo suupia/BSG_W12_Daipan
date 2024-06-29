@@ -4,6 +4,7 @@ using Daipan.Enemy.Scripts;
 using Daipan.Streamer.Scripts;
 using Daipan.LevelDesign.Enemy.Scripts;
 using UnityEngine;
+using Daipan.Stream.MonoScripts;
 
 namespace Daipan.Stream.Scripts
 {
@@ -17,6 +18,7 @@ namespace Daipan.Stream.Scripts
         readonly StreamStatus _streamStatus;
         readonly ViewerNumber _viewerNumber;
         readonly StreamerViewMono _streamerViewMono;
+        readonly ShakeDisplayMono _shakeDisplayMono;
         public int DaipanNum = 0;
 
         public DaipanExecutor(
@@ -27,7 +29,8 @@ namespace Daipan.Stream.Scripts
             EnemyCluster enemyCluster,
             CommentCluster commentCluster,
             AntiCommentCluster antiCommentCluster,
-            StreamerViewMono streamerViewMono
+            StreamerViewMono streamerViewMono,
+            ShakeDisplayMono shakeDisplayMono
         )
         {
             _daipanParam = daipanParam;
@@ -38,6 +41,7 @@ namespace Daipan.Stream.Scripts
             _commentCluster = commentCluster;
             _antiCommentCluster = antiCommentCluster;
             _streamerViewMono = streamerViewMono;
+            _shakeDisplayMono = shakeDisplayMono;
         }
         public void DaiPan()
         {
@@ -48,6 +52,7 @@ namespace Daipan.Stream.Scripts
                 _enemyCluster.Daipaned();
                 _antiCommentCluster.BlownAway();
                 _streamerViewMono.Daipan();
+                _shakeDisplayMono.Daipan();
                 DaipanNum++;
                 
                 // 台パンしたら怒りゲージは0になる
