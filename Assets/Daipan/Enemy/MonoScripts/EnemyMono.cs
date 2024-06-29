@@ -95,7 +95,6 @@ namespace Daipan.Enemy.MonoScripts
         public void Died(bool isDaipaned = false)
         {
             _enemyDied.Died(enemyViewMono, isDaipaned);
-            Destroy(gameObject);
         }
     }
 

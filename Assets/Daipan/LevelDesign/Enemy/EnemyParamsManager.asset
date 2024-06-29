@@ -31,6 +31,8 @@ MonoBehaviour:
       spawnRatio: 60
       daipanThreshold: 0
       daipanProbability: 0
+    enemyRewardParam:
+      irritationAfterKill: 30
     enemyAnimatorParam:
       animatorController: {fileID: 0}
       bodyColor: {r: 1, g: 0.3529412, b: 0.54901963, a: 1}
@@ -50,6 +52,8 @@ MonoBehaviour:
       spawnRatio: 20
       daipanThreshold: 0
       daipanProbability: 0
+    enemyRewardParam:
+      irritationAfterKill: 30
     enemyAnimatorParam:
       animatorController: {fileID: 0}
       bodyColor: {r: 0.41568628, g: 0.6862745, b: 0.80784315, a: 1}
@@ -69,6 +73,8 @@ MonoBehaviour:
       spawnRatio: 20
       daipanThreshold: 0
       daipanProbability: 0
+    enemyRewardParam:
+      irritationAfterKill: 30
     enemyAnimatorParam:
       animatorController: {fileID: 0}
       bodyColor: {r: 0.972549, g: 0.6784314, b: 0.3882353, a: 1}
@@ -81,13 +87,15 @@ MonoBehaviour:
       attackDelaySec: 1
       attackRange: 5
     enemyHpParam:
-      hpAmount: 200
+      hpAmount: 10
     enemyMoveParam:
       moveSpeedPerSec: 1.5
     enemySpawnParam:
       spawnRatio: 20
       daipanThreshold: 0
       daipanProbability: 0
+    enemyRewardParam:
+      irritationAfterKill: 30
     enemyAnimatorParam:
       animatorController: {fileID: 0}
       bodyColor: {r: 1, g: 1, b: 1, a: 1}
@@ -107,6 +115,8 @@ MonoBehaviour:
       spawnRatio: 20
       daipanThreshold: 0
       daipanProbability: 0
+    enemyRewardParam:
+      irritationAfterKill: 30
     enemyAnimatorParam:
       animatorController: {fileID: 0}
       bodyColor: {r: 1, g: 0.8135679, b: 0, a: 1}

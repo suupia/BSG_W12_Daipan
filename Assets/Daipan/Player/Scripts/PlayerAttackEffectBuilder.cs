@@ -100,7 +100,7 @@ namespace Daipan.Player.Scripts
         {
             if (args.IsTargetEnemy) return;
             
-            commentSpawner.SpawnCommentByType(CommentEnum.Spiky); 
+           //  commentSpawner.SpawnCommentByType(CommentEnum.Spiky); 
         }
     }
 }
