@@ -87,6 +87,7 @@ namespace Daipan.Enemy.MonoScripts
         }
         public override void Highlight(bool isHighlighted)
         {
+            if(animatorLine.GetCurrentAnimatorClipInfo(0)[0].clip.name is "OnDied" or "OnDaipaned") return;
             highlightSpriteRenderer.enabled = isHighlighted; 
         }
 
