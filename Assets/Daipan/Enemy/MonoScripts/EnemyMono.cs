@@ -14,7 +14,7 @@ using VContainer;
 
 namespace Daipan.Enemy.MonoScripts
 {
-    public sealed class EnemyMono : MonoBehaviour, IHpSetter
+    public sealed class EnemyMono : MonoBehaviour
     {
         public AbstractEnemyViewMono?  EnemyViewMono => enemyViewMono;
         [SerializeField] AbstractEnemyViewMono? enemyViewMono;

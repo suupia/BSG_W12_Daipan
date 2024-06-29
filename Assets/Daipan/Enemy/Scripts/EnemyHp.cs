@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Daipan.Enemy.Scripts
 {
-    public sealed class EnemyHp : IHpSetter
+    public sealed class EnemyHp
     {
         readonly EnemyCluster _enemyCluster;
         readonly EnemyMono _enemyMono;
