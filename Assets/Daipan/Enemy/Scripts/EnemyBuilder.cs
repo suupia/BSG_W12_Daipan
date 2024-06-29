@@ -24,6 +24,7 @@ namespace Daipan.Enemy.Scripts
         readonly EnemyCluster _enemyCluster;
         readonly EnemyLevelDesignParamData _enemyLevelDesignParamData;
         readonly IEnemyTimeLineParamContainer _enemyTimeLineParamContainer;
+        readonly StreamTimer _streamTimer;
         
         public EnemyBuilder(
             IEnemyParamContainer enemyParamContainer,
@@ -33,7 +34,8 @@ namespace Daipan.Enemy.Scripts
             EnemyParamManager enemyParamManager,
             EnemyCluster enemyCluster,
             EnemyLevelDesignParamData enemyLevelDesignParamData,
-            IEnemyTimeLineParamContainer enemyTimeLineParamContainer
+            IEnemyTimeLineParamContainer enemyTimeLineParamContainer,
+            StreamTimer streamTimer
         )
         {
             _enemyParamContainer = enemyParamContainer;
@@ -44,6 +46,7 @@ namespace Daipan.Enemy.Scripts
             _enemyCluster = enemyCluster;
             _enemyLevelDesignParamData = enemyLevelDesignParamData;
             _enemyTimeLineParamContainer = enemyTimeLineParamContainer;
+            _streamTimer = streamTimer;
         }
 
         public EnemyMono Build(EnemyEnum enemyEnum, EnemyMono enemyMono)
@@ -58,7 +61,7 @@ namespace Daipan.Enemy.Scripts
             EnemyHp enemyHp;
             if(enemyEnum == EnemyEnum.Totem)
             {
-                enemyHp = new TotemEnemyHp(enemyParamData.GetCurrentHp(), enemyMono, _enemyCluster);
+                enemyHp = new TotemEnemyHp(enemyParamData.GetCurrentHp(), enemyMono, _enemyCluster, _streamTimer);
             }
             else
             {
