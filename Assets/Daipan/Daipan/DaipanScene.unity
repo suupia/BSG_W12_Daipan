@@ -4480,6 +4480,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: StreamTimerView
       objectReference: {fileID: 0}
+    - target: {fileID: 539550700685783175, guid: dfff351a7e8284e4aa8df9c9d1467282, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4206957047553217799, guid: dfff351a7e8284e4aa8df9c9d1467282, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 21.800049
@@ -4597,18 +4601,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1567949595}
     m_Modifications:
-    - target: {fileID: 16766080161484126, guid: 8fd1516ac49ff4d69b423e0143b3d746, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 6369b6958b1704346bc22b5495a80a95, type: 2}
-    - target: {fileID: 16766080161484126, guid: 8fd1516ac49ff4d69b423e0143b3d746, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -6980679762504626844, guid: 6369b6958b1704346bc22b5495a80a95, type: 2}
-    - target: {fileID: 16766080161484126, guid: 8fd1516ac49ff4d69b423e0143b3d746, type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3404404747790042538, guid: 8fd1516ac49ff4d69b423e0143b3d746, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4671,11 +4663,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3404404747790042538, guid: 8fd1516ac49ff4d69b423e0143b3d746, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 300
+      value: 351.53
       objectReference: {fileID: 0}
     - target: {fileID: 3404404747790042538, guid: 8fd1516ac49ff4d69b423e0143b3d746, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -100
+      value: -94.5
       objectReference: {fileID: 0}
     - target: {fileID: 3404404747790042538, guid: 8fd1516ac49ff4d69b423e0143b3d746, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4687,18 +4679,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3404404747790042538, guid: 8fd1516ac49ff4d69b423e0143b3d746, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4588792125512653654, guid: 8fd1516ac49ff4d69b423e0143b3d746, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 6369b6958b1704346bc22b5495a80a95, type: 2}
-    - target: {fileID: 4588792125512653654, guid: 8fd1516ac49ff4d69b423e0143b3d746, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -6980679762504626844, guid: 6369b6958b1704346bc22b5495a80a95, type: 2}
-    - target: {fileID: 4588792125512653654, guid: 8fd1516ac49ff4d69b423e0143b3d746, type: 3}
-      propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5208535946686048856, guid: 8fd1516ac49ff4d69b423e0143b3d746, type: 3}
@@ -4761,6 +4741,10 @@ PrefabInstance:
     - target: {fileID: 7019384296459631377, guid: 30e91696e7cda4ce7b49b5cd15e11759, type: 3}
       propertyPath: m_Name
       value: Streamer
+      objectReference: {fileID: 0}
+    - target: {fileID: 7019384296459631377, guid: 30e91696e7cda4ce7b49b5cd15e11759, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4829,6 +4813,10 @@ PrefabInstance:
     - target: {fileID: 4293926496036039153, guid: 9bd43fad0e9f84957b9a3ed958868a2b, type: 3}
       propertyPath: m_Name
       value: StreamView
+      objectReference: {fileID: 0}
+    - target: {fileID: 4293926496036039153, guid: 9bd43fad0e9f84957b9a3ed958868a2b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4862185790217004892, guid: 9bd43fad0e9f84957b9a3ed958868a2b, type: 3}
       propertyPath: m_Pivot.x
