@@ -815,6 +815,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpGaugeMono: {fileID: 513392601257198620}
   tempSpriteRenderer: {fileID: 9203547594920981550}
+  animatorHighlight: {fileID: 3206175669543632577}
   animatorBody: {fileID: 7430879358509082123}
   animatorEye: {fileID: 6594542187788344235}
   animatorEyeBall: {fileID: 4205313984872671269}
@@ -1462,6 +1463,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpGaugeMono: {fileID: 4929758937500842701}
   tempSpriteRenderer: {fileID: 7702813003098383304}
+  animatorHighlight: {fileID: 6991727084755205900}
   animatorBody: {fileID: 4539626319711533369}
   animatorEye: {fileID: 1337539842161110902}
   animatorEyeBall: {fileID: 2019943362437910544}
