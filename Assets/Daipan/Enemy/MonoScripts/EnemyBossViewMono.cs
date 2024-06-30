@@ -20,13 +20,28 @@ namespace Daipan.Enemy.MonoScripts
         [SerializeField] Animator animatorTank = null!;
         [SerializeField] SpriteRenderer highlightSpriteRenderer = null!; 
         
-        bool _canHighlight = true;
+        EnemyViewAnimatorSwitcher _animatorSwitcher = null!;
 
         void Awake()
         {
-            if (hpGaugeMono == null) Debug.LogWarning("hpGaugeMono is null");
-            if (tempSpriteRenderer == null) Debug.LogWarning("tempSpriteRenderer is null");
-            highlightSpriteRenderer.enabled = false;
+            if (hpGaugeMono == null)
+            {
+                Debug.LogWarning("hpGaugeMono is null");
+                return;
+            }
+
+            if (tempSpriteRenderer == null)
+            {
+                Debug.LogWarning("tempSpriteRenderer is null");
+                return;
+            }
+            
+            _animatorSwitcher = new EnemyViewAnimatorSwitcher(
+                new [] {animatorBody, animatorEye, animatorEyeBall, animatorLine, animatorTank},
+                animatorLine,
+                hpGaugeMono,
+                highlightSpriteRenderer
+            );
         }
 
         public override void SetDomain(IEnemyViewParamData enemyViewParamData)
@@ -49,73 +64,20 @@ namespace Daipan.Enemy.MonoScripts
             };
         }
 
-        public override void SetHpGauge(int currentHp, int maxHp)
-        {
-            hpGaugeMono.SetRatio(currentHp / (float)maxHp);
-        }
+        public override void SetHpGauge(int currentHp, int maxHp) => _animatorSwitcher.SetHpGauge(currentHp, maxHp);
 
-        public override void Move()
-        {
-            SetBoolAll("IsMoving", true);
-            SetBoolAll("IsAttacking", false);
-        }
+        public override void Move() => _animatorSwitcher.Move();
 
-        public override void Attack()
-        {
-            SetBoolAll("IsMoving", false);
-            SetBoolAll("IsAttacking", true);
-        }
+        public override void Attack() => _animatorSwitcher.Attack();
 
-        public override void Died(Action onDied)
-        {
-            SetTriggerAll("OnDied");
-            highlightSpriteRenderer.enabled = false;
-            _canHighlight = false; 
-            // animatorLineを代表とする
-            var preState = animatorLine.GetCurrentAnimatorStateInfo(0).fullPathHash;
-            Observable.EveryValueChanged(animatorLine, a => a.IsEnd())
-                .Where(_ => preState != animatorLine.GetCurrentAnimatorStateInfo(0).fullPathHash) 
-                .Where(isEnd => isEnd)
-                .Subscribe(_ => onDied())
-                .AddTo(this);
-        }
+        public override void Died(Action onDied) => _animatorSwitcher.Died(onDied);
 
-        public override void Daipaned(Action onDied)
-        {
-            SetTriggerAll("OnDaipaned");
-            highlightSpriteRenderer.enabled = false;
-            _canHighlight = false;
-            // animatorLineを代表とする
-            var preState = animatorLine.GetCurrentAnimatorStateInfo(0).fullPathHash;
-            Observable.EveryValueChanged(animatorLine, a => a.IsEnd())
-                .Where(_ => preState != animatorLine.GetCurrentAnimatorStateInfo(0).fullPathHash) 
-                .Where(isEnd => isEnd)
-                .Subscribe(_ => onDied())
-                .AddTo(this);
-        }
-        public override void Highlight(bool isHighlighted)
-        {
-            if(!_canHighlight) return;
-            highlightSpriteRenderer.enabled = isHighlighted; 
-        }
+        public override void Daipaned(Action onDied) => _animatorSwitcher.Daipaned(onDied);
+        public override void Highlight(bool isHighlighted) => _animatorSwitcher.Highlight(isHighlighted);
 
-        void SetTriggerAll(string paramName)
-        {
-            animatorBody.SetTrigger(paramName);
-            animatorEye.SetTrigger(paramName);
-            animatorEyeBall.SetTrigger(paramName);
-            animatorLine.SetTrigger(paramName);
-            animatorTank.SetTrigger(paramName);
-        }
+        void SetTriggerAll(string paramName) => _animatorSwitcher.SetTriggerAll(paramName);
         
-        void SetBoolAll(string paramName, bool value)
-        {
-            animatorBody.SetBool(paramName, value);
-            animatorEye.SetBool(paramName, value);
-            animatorEyeBall.SetBool(paramName, value);
-            animatorLine.SetBool(paramName, value);
-            animatorTank.SetBool(paramName, value);
-        }
+        void SetBoolAll(string paramName, bool value) => _animatorSwitcher.SetBoolAll(paramName, value);
         
 
     }
