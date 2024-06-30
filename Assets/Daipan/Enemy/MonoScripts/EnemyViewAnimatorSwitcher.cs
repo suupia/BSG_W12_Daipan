@@ -88,12 +88,12 @@ namespace Daipan.Enemy.MonoScripts
             _highlightSpriteRenderer.enabled = isHighlighted;
         }
 
-        public void SetTriggerAll(string paramName)
+        void SetTriggerAll(string paramName)
         {
             foreach (var animator in _animators) animator.SetTrigger(paramName);
         }
 
-        public void SetBoolAll(string paramName, bool value)
+        void SetBoolAll(string paramName, bool value)
         {
             foreach (var animator in _animators) animator.SetBool(paramName, value);
         }
