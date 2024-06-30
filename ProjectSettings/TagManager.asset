@@ -50,24 +50,15 @@ TagManager:
   - name: Player_Red
     uniqueID: 1124539877
     locked: 0
+  - name: Enemy
+    uniqueID: 594514123
+    locked: 0
   - name: Tower_Light
     uniqueID: 764982475
     locked: 0
-  - name: Enemy_Highlight
-    uniqueID: 1629249611
-    locked: 0
-  - name: Enemy_Body
-    uniqueID: 2461177809
-    locked: 0
-  - name: Enemy_Eye
-    uniqueID: 1845780385
-    locked: 0
-  - name: Enemy_EyeBall
-    uniqueID: 1848816841
-    locked: 0
-  - name: Enemy_Line
-    uniqueID: 651323995
-    locked: 0
   - name: Comment
     uniqueID: 2838269711
+    locked: 0
+  - name: Streamer
+    uniqueID: 1661063009
     locked: 0
