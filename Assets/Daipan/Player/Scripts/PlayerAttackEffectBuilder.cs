@@ -20,18 +20,21 @@ namespace Daipan.Player.Scripts
         readonly ComboCounter _comboCounter;
         readonly EnemyCluster _enemyCluster;
         readonly CommentSpawner _commentSpawner;
+        readonly EnemyTotemOnAttack _enemyTotemOnAttack;
 
         public PlayerAttackEffectBuilder(
-            IPlayerParamDataContainer playerParamDataContainer,
-            ComboCounter comboCounter,
-            EnemyCluster enemyCluster,
-            CommentSpawner commentSpawner
+            IPlayerParamDataContainer playerParamDataContainer
+            ,ComboCounter comboCounter
+            ,EnemyCluster enemyCluster
+            ,CommentSpawner commentSpawner
+            ,EnemyTotemOnAttack enemyTotemOnAttack
         )
         {
             _playerParamDataContainer = playerParamDataContainer;
             _comboCounter = comboCounter;
             _enemyCluster = enemyCluster;
             _commentSpawner = commentSpawner;
+            _enemyTotemOnAttack = enemyTotemOnAttack;
         }
 
         public PlayerAttackEffectMono Build(PlayerAttackEffectMono effect, PlayerMono playerMono,
@@ -42,7 +45,7 @@ namespace Daipan.Player.Scripts
             effect.OnHit += (sender, args) =>
             {
                 Debug.Log($"OnHit");
-                AttackEnemy(_playerParamDataContainer, playerViewMonos, playerColor, args.EnemyMono);
+                AttackEnemy(_playerParamDataContainer, playerViewMonos, playerColor, args.EnemyMono,_enemyTotemOnAttack );
                 UpdateCombo(_comboCounter, playerColor, args);
                 SpawnAntiComment(args, _commentSpawner);
             };
@@ -50,9 +53,9 @@ namespace Daipan.Player.Scripts
         }
 
         static void UpdateCombo(
-            ComboCounter comboCounter,
-            PlayerColor playerColor,
-            OnHitEventArgs args
+            ComboCounter comboCounter
+            ,PlayerColor playerColor
+            ,OnHitEventArgs args
         )
         {
             if (args.IsTargetEnemy)
@@ -67,25 +70,33 @@ namespace Daipan.Player.Scripts
             }
         }
 
-        static void AttackEnemy(IPlayerParamDataContainer playerParamDataContainer,
-            List<AbstractPlayerViewMono?> playerViewMonos,
-            PlayerColor playerColor, EnemyMono? enemyMono)
+        static void AttackEnemy(IPlayerParamDataContainer playerParamDataContainer
+            ,List<AbstractPlayerViewMono?> playerViewMonos
+            ,PlayerColor playerColor
+            ,EnemyMono? enemyMono
+            ,EnemyTotemOnAttack totemOnAttack
+            )
         {
             Debug.Log($"Attack enemyMono?.EnemyEnum: {enemyMono?.EnemyEnum}");
-            // [Precondition]
             if (enemyMono == null) return;
 
-            // [Main]
+
             Debug.Log($"EnemyType: {enemyMono.EnemyEnum}を攻撃");
             if (PlayerAttackModule.GetTargetEnemyEnum(playerColor).Contains(enemyMono.EnemyEnum))
+            {
                 // 敵を攻撃
-                enemyMono.GetDamage(new Battle.interfaces.EnemyDamageArgs(
-                    playerParamDataContainer.GetPlayerParamData(playerColor).GetAttack(),
-                    playerColor));
-            else
-                // 敵が特攻攻撃をしてくる
-                // todo: 一旦はなし
-                // enemyMono.SuicideAttack(playerMono);
+                var playerParamData = playerParamDataContainer.GetPlayerParamData(playerColor);
+                enemyMono.Hp = enemyMono.EnemyEnum switch 
+                {
+                    EnemyEnum.Totem => totemOnAttack.OnAttacked(enemyMono.Hp, playerParamData),
+                    _ => PlayerAttackModule.Attack(enemyMono.Hp,playerParamData)
+                    // 敵が特攻攻撃をしてくる
+                    // todo: 一旦はなし
+                    // enemyMono.SuicideAttack(playerMono); 
+                };
+
+            }
+
 
             // Animation
             foreach (var playerViewMono in playerViewMonos)
@@ -97,8 +108,9 @@ namespace Daipan.Player.Scripts
         }
         
         static void SpawnAntiComment(
-            OnHitEventArgs args,
-            CommentSpawner commentSpawner)
+            OnHitEventArgs args
+            ,CommentSpawner commentSpawner
+            )
         {
             if (args.IsTargetEnemy) return;
             

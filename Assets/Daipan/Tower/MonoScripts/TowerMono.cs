@@ -1,6 +1,7 @@
 #nullable enable
 using System.Collections.Generic;
 using Daipan.LevelDesign.Enemy.Scripts;
+using Daipan.Player.MonoScripts;
 using Daipan.Player.Scripts;
 using Daipan.Tower.MonoScripts;
 using JetBrains.Annotations;
@@ -14,21 +15,26 @@ namespace Daipan.Tower.MonoScripts
     {
         [SerializeField] TowerViewMono? towerViewMono;
         TowerParamsConfig _towerParamsConfig = null!;
-        PlayerHolder _playerHolder = null!;
+        PlayerMono? _playerMono;
 
         [Inject]
         public void Initialize(
-            TowerParamsConfig towerParamsConfig,
-            PlayerHolder playerHolder)
+            TowerParamsConfig towerParamsConfig
+            )
         {
             _towerParamsConfig = towerParamsConfig;
-            _playerHolder = playerHolder;
         }
 
         void Update()
         {
+            if (_playerMono == null)
+            {
+                _playerMono = FindObjectOfType<PlayerMono>();
+                if (_playerMono == null) return;
+            }
+            
             // Update tower gauge
-            var playerHpRatio = _playerHolder.PlayerMono.CurrentHp / (float)_playerHolder.PlayerMono.MaxHp;
+            var playerHpRatio = _playerMono.Hp.Value / (float)_playerMono.MaxHp;
             towerViewMono?.SetRatio(playerHpRatio);
             towerViewMono?.SwitchLight(playerHpRatio < _towerParamsConfig.GetLightIsOnRatio());
              

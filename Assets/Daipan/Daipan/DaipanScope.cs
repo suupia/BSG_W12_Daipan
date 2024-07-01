@@ -1,5 +1,4 @@
 using System.Linq;
-using Daipan.Battle.interfaces;
 using Daipan.Battle.scripts;
 using Daipan.Comment.MonoScripts;
 using Daipan.Comment.Scripts;
@@ -100,6 +99,7 @@ namespace Daipan.Daipan
             builder.Register<EnemyAttackDecider>(Lifetime.Scoped);
             builder.Register<EnemySpawner>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
             builder.Register<EnemyCluster>(Lifetime.Scoped);
+            builder.Register<EnemyTotemOnAttack>(Lifetime.Scoped);
 
             builder.Register<EnemyHighlightUpdater>(Lifetime.Scoped).AsImplementedInterfaces();
 
@@ -179,7 +179,7 @@ namespace Daipan.Daipan
             builder.RegisterInstance(playerParamManager);
             builder.Register<PlayerParamDataContainer>(Lifetime.Scoped).As<IPlayerParamDataContainer>();
             builder.Register<PlayerHpParamData>(Lifetime.Scoped).As<IPlayerHpParamData>();
-            builder.Register<PlayerHp>(Lifetime.Scoped).AsSelf().As<IPlayerHp>();
+            // builder.Register<PlayerHp>(Lifetime.Scoped).AsSelf().As<IPlayerHp>();
             builder.Register<PlayerAttackedCounter>(Lifetime.Scoped);
             
 

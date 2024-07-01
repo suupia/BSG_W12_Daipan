@@ -14,6 +14,7 @@ namespace Daipan.Enemy.Interfaces
         double GetAttackRange() => 0;
 
         // Hp
+        int GetMaxHp() => 0;
         int GetCurrentHp() => 0;
 
         // Move

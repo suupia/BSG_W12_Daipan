@@ -31,6 +31,7 @@ public class PlayerAttackedCounterTest
     
     class MockPlayerHpParamData : IPlayerHpParamData 
     {
+        public int GetMaxHp() => 100;
         public int GetCurrentHp() => 100;
         public int SetCurrentHp(int value) => 100;
         public int GetAntiCommentThreshold() => 10;

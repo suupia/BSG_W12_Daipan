@@ -1,11 +1,11 @@
 #nullable enable
-using Daipan.Battle.interfaces;
-using Daipan.Enemy.MonoScripts;
+using Daipan.Player.LevelDesign.Interfaces;
+using Daipan.Player.Scripts;
 using Daipan.Stream.Scripts;
 
 namespace Daipan.Enemy.Scripts
 {
-    public class TotemEnemyHp : EnemyHp
+    public class EnemyTotemOnAttack
     {
         // todo パラメータ化する？
         double _allowableSec = 0.1f;
@@ -14,16 +14,15 @@ namespace Daipan.Enemy.Scripts
         double _yellowLatestAttackedTime;
         readonly StreamTimer _streamTimer;
 
-        public TotemEnemyHp(int maxHp, EnemyMono enemyMono, EnemyCluster enemyCluster , StreamTimer streamTimer)
-            : base(maxHp, enemyMono, enemyCluster)
+        public EnemyTotemOnAttack(StreamTimer streamTimer)
         {
             _streamTimer = streamTimer; 
         }
+        
 
-
-        public override void DecreaseHp(EnemyDamageArgs enemyDamageArgs)
+        public Hp OnAttacked(Hp hp, IPlayerParamData playerParamData )
         {
-            switch (enemyDamageArgs.playerColor)
+            switch (playerParamData.PlayerEnum())
             {
                 case Player.MonoScripts.PlayerColor.Red:
                     _redLatestAttackedTime = _streamTimer.CurrentTime;
@@ -38,15 +37,15 @@ namespace Daipan.Enemy.Scripts
                     break;
             }
 
-            if (!isAttackable()) return;
-            base.DecreaseHp(enemyDamageArgs);
+            if (!IsAttackable()) return hp;
+            return PlayerAttackModule.Attack(hp, playerParamData); 
         }
 
-        bool isAttackable()
+        bool IsAttackable()
         {
             return (_streamTimer.CurrentTime - _redLatestAttackedTime < _allowableSec)
-                & (_streamTimer.CurrentTime - _blueLatestAttackedTime < _allowableSec)
-                & (_streamTimer.CurrentTime - _yellowLatestAttackedTime < _allowableSec);
-        }
+                   & (_streamTimer.CurrentTime - _blueLatestAttackedTime < _allowableSec)
+                   & (_streamTimer.CurrentTime - _yellowLatestAttackedTime < _allowableSec);
+        } 
     }
 }

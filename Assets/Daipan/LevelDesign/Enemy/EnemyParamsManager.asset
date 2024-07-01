@@ -16,7 +16,7 @@ MonoBehaviour:
     spawnBossAmount: 20
     increaseIrritatedValueByBoss: 18
     increaseViewerOnEnemyKill: 5
-    currentKillAmount: 14
+    currentKillAmount: 0
   enemyParams:
   - enemyEnum: 1
     enemyAttackParam:
@@ -24,6 +24,7 @@ MonoBehaviour:
       attackDelaySec: 1
       attackRange: 5
     enemyHpParam:
+      maxHp: 10
       hpAmount: 10
     enemyMoveParam:
       moveSpeedPerSec: 2
@@ -45,6 +46,7 @@ MonoBehaviour:
       attackDelaySec: 1
       attackRange: 5
     enemyHpParam:
+      maxHp: 10
       hpAmount: 10
     enemyMoveParam:
       moveSpeedPerSec: 2
@@ -66,6 +68,7 @@ MonoBehaviour:
       attackDelaySec: 1
       attackRange: 5
     enemyHpParam:
+      maxHp: 10
       hpAmount: 10
     enemyMoveParam:
       moveSpeedPerSec: 2
@@ -87,6 +90,7 @@ MonoBehaviour:
       attackDelaySec: 1
       attackRange: 5
     enemyHpParam:
+      maxHp: 10
       hpAmount: 10
     enemyMoveParam:
       moveSpeedPerSec: 1.5
@@ -108,6 +112,7 @@ MonoBehaviour:
       attackDelaySec: 1
       attackRange: 5
     enemyHpParam:
+      maxHp: 200
       hpAmount: 200
     enemyMoveParam:
       moveSpeedPerSec: 1.5

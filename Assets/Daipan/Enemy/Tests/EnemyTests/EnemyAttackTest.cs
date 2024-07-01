@@ -1,6 +1,5 @@
 #nullable enable
 using System;
-using Daipan.Battle.interfaces;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.Scripts;
 using Daipan.LevelDesign.Enemy.Scripts;
@@ -10,32 +9,16 @@ using NUnit.Framework;
 public class EnemyAttackTest
 {
     [Test]
-    public void IHpSetterShouldDecrease10WithAttack()
+    public void PlayerHpShouldDecrease10WithAttack()
     {
         // Arrange
-        var player = new DummyPlayer();
-        var enemyParamData = new MockEnemyParamData(); 
-        var enemyAttack = new EnemyAttack(enemyParamData);
+        var playerHp = new Hp(100); 
 
         // Act
-        enemyAttack.Attack(player);
+        var postAttackPlayerHp = EnemyAttackModule.Attack(new MockEnemyParamData(), playerHp);
 
         // Assert
-        Assert.AreEqual(90, player.CurrentHp);
-    }
-    class DummyPlayer : IPlayerHp
-    {
-        public DummyPlayer()
-        {
-            MaxHp = 100;
-            CurrentHp = 100;
-        }
-        public int MaxHp { get; }
-        public int CurrentHp { get; set; }
-        public void SetHp(DamageArgs damageArgs)
-        {
-            CurrentHp -= damageArgs.DamageValue;
-        } 
+        Assert.AreEqual(90, postAttackPlayerHp.Value); 
     }
     
     class MockEnemyParamData : IEnemyParamData
