@@ -96,7 +96,7 @@ namespace Daipan.Player.MonoScripts
             _playerHp = new PlayerHpNew(playerHpParamData.GetMaxHp());
 
             _attackedCounterForAntiComment = playerAttackedCounter; 
-            EnemyAttackNew.AttackEvent += (sender, args) =>
+            EnemyAttackModule.AttackEvent += (sender, args) =>
             {
                 // Domain
                 irritatedValue.IncreaseValue(args.DamageValue);

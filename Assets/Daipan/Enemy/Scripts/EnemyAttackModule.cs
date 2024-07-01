@@ -7,13 +7,13 @@ using UnityEngine.EventSystems;
 
 namespace Daipan.Enemy.Scripts
 {
-    public class EnemyAttackNew
+    public static class EnemyAttackModule
     {
         public static event EventHandler<DamageArgs>? AttackEvent;
         
         public static PlayerHpNew Attack(IEnemyParamData enemyParamData, PlayerHpNew hp)
         {
-            AttackEvent?.Invoke( typeof(EnemyAttackNew) ,  new DamageArgs(enemyParamData.GetAttackAmount(), enemyParamData.GetEnemyEnum()));
+            AttackEvent?.Invoke( typeof(EnemyAttackModule) ,  new DamageArgs(enemyParamData.GetAttackAmount(), enemyParamData.GetEnemyEnum()));
             return new PlayerHpNew(hp.Hp - enemyParamData.GetAttackAmount()); 
         
         } 
