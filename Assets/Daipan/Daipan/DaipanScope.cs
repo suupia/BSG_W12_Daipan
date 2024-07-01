@@ -100,6 +100,7 @@ namespace Daipan.Daipan
             builder.Register<EnemyAttackDecider>(Lifetime.Scoped);
             builder.Register<EnemySpawner>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
             builder.Register<EnemyCluster>(Lifetime.Scoped);
+            builder.Register<EnemyTotemOnAttack>(Lifetime.Scoped);
 
             builder.Register<EnemyHighlightUpdater>(Lifetime.Scoped).AsImplementedInterfaces();
 

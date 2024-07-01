@@ -23,7 +23,6 @@ namespace Daipan.Player.MonoScripts
     {
         [SerializeField] List<AbstractPlayerViewMono?> playerViewMonos = new();
         EnemyCluster _enemyCluster = null!;
-        Hp _hp = null!;
         InputSerialManager _inputSerialManager = null!;
         PlayerAttackEffectSpawner _playerAttackEffectSpawner = null!;
         CommentSpawner _commentSpawner = null!;
@@ -93,7 +92,7 @@ namespace Daipan.Player.MonoScripts
             _enemyCluster = enemyCluster;
             _commentSpawner = commentSpawner;
             _playerHpParamData = playerHpParamData;
-            _hp = new Hp(playerHpParamData.GetMaxHp());
+            Hp = new Hp(playerHpParamData.GetMaxHp());
 
             _attackedCounterForAntiComment = playerAttackedCounter; 
             EnemyAttackModule.AttackEvent += (sender, args) =>
@@ -122,7 +121,7 @@ namespace Daipan.Player.MonoScripts
             _playerAttackEffectSpawner = playerAttackEffectSpawner;
         }
 
-        public int CurrentHp => _hp.Value;
+        public int CurrentHp => Hp.Value;
 
         public int MaxHp => _playerHpParamData.GetMaxHp();
     }

@@ -20,18 +20,21 @@ namespace Daipan.Player.Scripts
         readonly ComboCounter _comboCounter;
         readonly EnemyCluster _enemyCluster;
         readonly CommentSpawner _commentSpawner;
+        readonly EnemyTotemOnAttack _enemyTotemOnAttack;
 
         public PlayerAttackEffectBuilder(
             IPlayerParamDataContainer playerParamDataContainer,
             ComboCounter comboCounter,
             EnemyCluster enemyCluster,
-            CommentSpawner commentSpawner
+            CommentSpawner commentSpawner,
+            EnemyTotemOnAttack enemyTotemOnAttack
         )
         {
             _playerParamDataContainer = playerParamDataContainer;
             _comboCounter = comboCounter;
             _enemyCluster = enemyCluster;
             _commentSpawner = commentSpawner;
+            _enemyTotemOnAttack = enemyTotemOnAttack;
         }
 
         public PlayerAttackEffectMono Build(PlayerAttackEffectMono effect, PlayerMono playerMono,
@@ -42,7 +45,7 @@ namespace Daipan.Player.Scripts
             effect.OnHit += (sender, args) =>
             {
                 Debug.Log($"OnHit");
-                AttackEnemy(_playerParamDataContainer, playerViewMonos, playerColor, args.EnemyMono);
+                AttackEnemy(_playerParamDataContainer, playerViewMonos, playerColor, args.EnemyMono,_enemyTotemOnAttack );
                 UpdateCombo(_comboCounter, playerColor, args);
                 SpawnAntiComment(args, _commentSpawner);
             };
@@ -69,7 +72,10 @@ namespace Daipan.Player.Scripts
 
         static void AttackEnemy(IPlayerParamDataContainer playerParamDataContainer,
             List<AbstractPlayerViewMono?> playerViewMonos,
-            PlayerColor playerColor, EnemyMono? enemyMono)
+            PlayerColor playerColor, 
+            EnemyMono? enemyMono
+            , EnemyTotemOnAttack totemOnAttack
+            )
         {
             Debug.Log($"Attack enemyMono?.EnemyEnum: {enemyMono?.EnemyEnum}");
             // [Precondition]
@@ -80,10 +86,11 @@ namespace Daipan.Player.Scripts
             if (PlayerAttackModule.GetTargetEnemyEnum(playerColor).Contains(enemyMono.EnemyEnum))
             {
                 // 敵を攻撃
+                var playerParamData = playerParamDataContainer.GetPlayerParamData(playerColor);
                 enemyMono.Hp = enemyMono.EnemyEnum switch 
                 {
-                    EnemyEnum.Totem => TotemEnemyAttack(playerParamDataContainer, playerColor, enemyMono),
-                    _ => PlayerAttackModule.Attack(playerParamDataContainer.GetPlayerParamData(playerColor), enemyMono.Hp)
+                    EnemyEnum.Totem => totemOnAttack.OnAttacked(enemyMono.Hp, playerParamData),
+                    _ => PlayerAttackModule.Attack(enemyMono.Hp,playerParamData)
                     // 敵が特攻攻撃をしてくる
                     // todo: 一旦はなし
                     // enemyMono.SuicideAttack(playerMono); 
