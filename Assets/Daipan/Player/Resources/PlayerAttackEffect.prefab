@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1839528516076584320}
   - component: {fileID: 454980716412959894}
   - component: {fileID: 152908723709566873}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerAttackEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 4951163859082023231}
   - component: {fileID: 6665741849164830164}
   - component: {fileID: 3961047457715094365}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Animator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -192,7 +192,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1124539877
-  m_SortingLayer: 4
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -215,7 +215,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6716761675388850161}
   - component: {fileID: 7974532547577645167}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerAttackEffectView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
