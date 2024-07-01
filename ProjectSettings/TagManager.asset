@@ -56,11 +56,11 @@ TagManager:
   - name: Tower_Light
     uniqueID: 764982475
     locked: 0
-  - name: Comment
-    uniqueID: 2838269711
-    locked: 0
   - name: Stream_UI
     uniqueID: 1807422053
+    locked: 0
+  - name: Comment
+    uniqueID: 2838269711
     locked: 0
   - name: Streamer
     uniqueID: 1661063009
