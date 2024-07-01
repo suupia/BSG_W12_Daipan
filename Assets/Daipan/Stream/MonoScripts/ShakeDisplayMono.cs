@@ -20,7 +20,9 @@ namespace Daipan.Stream.MonoScripts
 
         private void Update()
         {
+#if UNITY_EDITOR
             if (Input.GetKeyDown(KeyCode.Backspace)) Daipan();
+#endif
         }
 
         public void Daipan()
