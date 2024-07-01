@@ -46,6 +46,8 @@ namespace Daipan.Enemy.MonoScripts
                Died(isDaipaned:false); // Destroy when out of screen
 
             enemyViewMono?.SetHpGauge(CurrentHp, _enemyParamContainer.GetEnemyParamData(EnemyEnum).GetCurrentHp());
+            
+            Debug.Log($"Enemy EnemyEnum = {EnemyEnum} CurrentHp = {CurrentHp}");
         }
 
         [Inject]

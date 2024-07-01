@@ -59,12 +59,6 @@ namespace Daipan.Enemy.Scripts
             Debug.Log($"enemyEnum: {enemyEnum}");
             var enemyParamData = _enemyParamContainer.GetEnemyParamData(enemyEnum);
 
-            IEnemyHp enemyHp = enemyEnum switch 
-            {
-                EnemyEnum.Totem => new TotemEnemyHp(new EnemyHp(enemyParamData.GetCurrentHp(), enemyMono), _streamTimer),
-                _ => new EnemyHp(enemyParamData.GetCurrentHp(), enemyMono)
-            };
-
             enemyMono.SetDomain(
                 enemyEnum,
                 new EnemyAttackDecider(),
