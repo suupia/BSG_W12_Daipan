@@ -37,21 +37,6 @@ public class EnemyAttackTest
         Assert.AreEqual(90, postAttackPlayerHp.Hp); 
     }
     
-    class DummyPlayer : IPlayerHp
-    {
-        public DummyPlayer()
-        {
-            MaxHp = 100;
-            CurrentHp = 100;
-        }
-        public int MaxHp { get; }
-        public int CurrentHp { get; set; }
-        public void SetHp(DamageArgs damageArgs)
-        {
-            CurrentHp -= damageArgs.DamageValue;
-        } 
-    }
-    
     class MockEnemyParamData : IEnemyParamData
     {
         public EnemyEnum GetEnemyEnum() => EnemyEnum.None;

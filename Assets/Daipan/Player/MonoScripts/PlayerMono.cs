@@ -14,11 +14,12 @@ using Daipan.Stream.Scripts;
 using UnityEngine;
 using VContainer;
 using Daipan.Comment.Scripts;
+using Daipan.Enemy.Interfaces;
 using Daipan.Player.LevelDesign.Interfaces;
 
 namespace Daipan.Player.MonoScripts
 {
-    public class PlayerMono : MonoBehaviour, IPlayerHp
+    public class PlayerMono : MonoBehaviour 
     {
         [SerializeField] List<AbstractPlayerViewMono?> playerViewMonos = new();
         EnemyCluster _enemyCluster = null!;
@@ -27,6 +28,7 @@ namespace Daipan.Player.MonoScripts
         PlayerAttackEffectSpawner _playerAttackEffectSpawner = null!;
         CommentSpawner _commentSpawner = null!;
         PlayerAttackedCounter _attackedCounterForAntiComment = null!;
+        IPlayerHpParamData _playerHpParamData = null!;
 
         public PlayerHpNew PlayerHpNew { get; set; } = null!;
         public void Update()
@@ -84,14 +86,16 @@ namespace Daipan.Player.MonoScripts
             InputSerialManager inputSerialManager,
             PlayerAttackEffectSpawner playerAttackEffectSpawner,
             IrritatedValue irritatedValue,
-            CommentSpawner commentSpawner
+            CommentSpawner commentSpawner,
+            IPlayerHpParamData playerHpParamData
         )
         {
             _enemyCluster = enemyCluster;
             _commentSpawner = commentSpawner;
+            _playerHpParamData = playerHpParamData;
 
             _attackedCounterForAntiComment = playerAttackedCounter; 
-            _playerHp.OnDamage += (sender, args) =>
+            EnemyAttackNew.AttackEvent += (sender, args) =>
             {
                 // Domain
                 irritatedValue.IncreaseValue(args.DamageValue);
@@ -117,13 +121,8 @@ namespace Daipan.Player.MonoScripts
             _playerAttackEffectSpawner = playerAttackEffectSpawner;
         }
 
-        public int CurrentHp => _playerHp.CurrentHp;
+        public int CurrentHp => _playerHp.Hp;
 
-        public void SetHp(DamageArgs damageArgs)
-        {
-            _playerHp.SetHp(damageArgs);
-        }
-
-        public int MaxHp => _playerHp.MaxHp;
+        public int MaxHp => _playerHpParamData.GetMaxHp();
     }
 }
