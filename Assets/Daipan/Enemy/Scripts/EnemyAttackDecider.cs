@@ -12,7 +12,7 @@ namespace Daipan.Enemy.Scripts
     {
         float Timer { get; set; }
 
-        public Hp AttackUpdate(EnemyMono enemyMono,IEnemyParamData enemyParamData, PlayerMono playerMono, AbstractEnemyViewMono? enemyViewMono)
+        public Hp AttackUpdate(EnemyMono enemyMono, IEnemyParamData enemyParamData, PlayerMono playerMono, AbstractEnemyViewMono? enemyViewMono)
         {
             Timer += Time.deltaTime;
             if (Timer >= enemyParamData.GetAttackDelayDec())
@@ -23,16 +23,16 @@ namespace Daipan.Enemy.Scripts
             return playerMono.Hp;
         }
 
-        static Hp  Attack(EnemyMono enemyMono,IEnemyParamData enemyParamData, PlayerMono playerMono, AbstractEnemyViewMono? enemyViewMono)
+        static Hp Attack(EnemyMono enemyMono, IEnemyParamData enemyParamData, PlayerMono playerMono, AbstractEnemyViewMono? enemyViewMono)
         {
             if (!CanAttack(enemyMono,enemyParamData, playerMono)) return playerMono.Hp;
             if (enemyViewMono != null) enemyViewMono.Attack();
             return EnemyAttackModule.Attack(enemyParamData,playerMono.Hp);
         }
         
-        static bool CanAttack(EnemyMono enemyMono,IEnemyParamData enemyParamData,  PlayerMono playerMono)
+        static bool CanAttack(EnemyMono enemyMono, IEnemyParamData enemyParamData,  PlayerMono playerMono)
         {
-            if (playerMono.CurrentHp <= 0) return false;
+            if (playerMono.Hp.Value <= 0) return false;
             if (enemyMono.transform.position.x - playerMono.transform.position.x > enemyParamData.GetAttackRange()) return false;
             return true;
         }

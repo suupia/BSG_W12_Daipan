@@ -1,19 +1,14 @@
 #nullable enable
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.NetworkInformation;
-using Daipan.Enemy.MonoScripts;
 using Daipan.Enemy.Scripts;
 using Daipan.InputSerial.Scripts;
-using Daipan.Player.LevelDesign.Scripts;
 using Daipan.Player.Interfaces;
 using Daipan.Player.Scripts;
 using Daipan.Stream.Scripts;
 using UnityEngine;
 using VContainer;
 using Daipan.Comment.Scripts;
-using Daipan.Enemy.Interfaces;
 using Daipan.Player.LevelDesign.Interfaces;
 
 namespace Daipan.Player.MonoScripts
@@ -27,7 +22,6 @@ namespace Daipan.Player.MonoScripts
         CommentSpawner _commentSpawner = null!;
         PlayerAttackedCounter _attackedCounterForAntiComment = null!;
         IPlayerHpParamData _playerHpParamData = null!;
-
         public Hp Hp { get; set; } = null!;
         public void Update()
         {
@@ -119,8 +113,6 @@ namespace Daipan.Player.MonoScripts
             _inputSerialManager = inputSerialManager;
             _playerAttackEffectSpawner = playerAttackEffectSpawner;
         }
-
-        public int CurrentHp => Hp.Value;
 
         public int MaxHp => _playerHpParamData.GetMaxHp();
     }

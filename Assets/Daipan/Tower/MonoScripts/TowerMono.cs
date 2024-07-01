@@ -34,7 +34,7 @@ namespace Daipan.Tower.MonoScripts
             }
             
             // Update tower gauge
-            var playerHpRatio = _playerMono.CurrentHp / (float)_playerMono.MaxHp;
+            var playerHpRatio = _playerMono.Hp.Value / (float)_playerMono.MaxHp;
             towerViewMono?.SetRatio(playerHpRatio);
             towerViewMono?.SwitchLight(playerHpRatio < _towerParamsConfig.GetLightIsOnRatio());
              

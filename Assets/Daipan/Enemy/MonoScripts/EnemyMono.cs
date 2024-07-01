@@ -38,13 +38,10 @@ namespace Daipan.Enemy.MonoScripts
                 _hp = value;
             }
         }
-        public int CurrentHp => Hp.Value;
-        public int MaxHp => _enemyParamContainer.GetEnemyParamData(EnemyEnum).GetMaxHp();
 
         void Update()
         {
-            var newPlayerHp = _enemyAttackDecider.AttackUpdate(this,_enemyParamContainer.GetEnemyParamData(EnemyEnum), _playerHolder.PlayerMono, enemyViewMono);
-            _playerHolder.PlayerMono.Hp = newPlayerHp;
+            _playerHolder.PlayerMono.Hp = _enemyAttackDecider.AttackUpdate(this,_enemyParamContainer.GetEnemyParamData(EnemyEnum), _playerHolder.PlayerMono, enemyViewMono);
 
             // 攻撃範囲よりプレイヤーとの距離が大きいときだけ動く
             if (transform.position.x - _playerHolder.PlayerMono.transform.position.x >=
@@ -57,9 +54,8 @@ namespace Daipan.Enemy.MonoScripts
             if (transform.position.x < _enemySpawnPoint.GetEnemyDespawnedPoint().x)
                Died(isDaipaned:false); // Destroy when out of screen
 
-            enemyViewMono?.SetHpGauge(CurrentHp, _enemyParamContainer.GetEnemyParamData(EnemyEnum).GetCurrentHp());
+            enemyViewMono?.SetHpGauge(Hp.Value, _enemyParamContainer.GetEnemyParamData(EnemyEnum).GetCurrentHp());
             
-            Debug.Log($"Enemy EnemyEnum = {EnemyEnum} CurrentHp = {CurrentHp}");
         }
 
         [Inject]
