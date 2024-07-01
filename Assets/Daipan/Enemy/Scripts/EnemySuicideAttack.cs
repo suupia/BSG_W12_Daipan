@@ -30,7 +30,7 @@ namespace Daipan.Enemy.Scripts
             _enemyMono.transform.DOMove(playerMono.transform.position, 1f).OnComplete(() =>
             {
                 // After reaching the player, apply damage
-                playerMono.PlayerHpNew = new PlayerHpNew(playerMono.PlayerHpNew.Hp - _enemyParamData.GetAttackAmount());
+                playerMono.Hp = new Hp(playerMono.Hp.Value - _enemyParamData.GetAttackAmount());
 
                 // Optionally, you can destroy the enemy after the attack if required
                 _enemyMono.Died();

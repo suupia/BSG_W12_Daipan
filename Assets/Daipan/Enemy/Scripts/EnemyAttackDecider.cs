@@ -13,7 +13,7 @@ namespace Daipan.Enemy.Scripts
     {
         float Timer { get; set; }
 
-        public PlayerHpNew AttackUpdate(EnemyMono enemyMono,IEnemyParamData enemyParamData, PlayerMono playerMono, AbstractEnemyViewMono? enemyViewMono)
+        public Hp AttackUpdate(EnemyMono enemyMono,IEnemyParamData enemyParamData, PlayerMono playerMono, AbstractEnemyViewMono? enemyViewMono)
         {
             Timer += Time.deltaTime;
             if (Timer >= enemyParamData.GetAttackDelayDec())
@@ -21,14 +21,14 @@ namespace Daipan.Enemy.Scripts
                 Timer = 0;
                 return Attack(enemyMono, enemyParamData,  playerMono, enemyViewMono);
             }
-            return playerMono.PlayerHpNew;
+            return playerMono.Hp;
         }
 
-        static PlayerHpNew  Attack(EnemyMono enemyMono,IEnemyParamData enemyParamData, PlayerMono playerMono, AbstractEnemyViewMono? enemyViewMono)
+        static Hp  Attack(EnemyMono enemyMono,IEnemyParamData enemyParamData, PlayerMono playerMono, AbstractEnemyViewMono? enemyViewMono)
         {
-            if (!CanAttack(enemyMono,enemyParamData, playerMono)) return playerMono.PlayerHpNew;
+            if (!CanAttack(enemyMono,enemyParamData, playerMono)) return playerMono.Hp;
             if (enemyViewMono != null) enemyViewMono.Attack();
-            return EnemyAttackModule.Attack(enemyParamData,playerMono.PlayerHpNew);
+            return EnemyAttackModule.Attack(enemyParamData,playerMono.Hp);
         }
         
         static bool CanAttack(EnemyMono enemyMono,IEnemyParamData enemyParamData,  PlayerMono playerMono)

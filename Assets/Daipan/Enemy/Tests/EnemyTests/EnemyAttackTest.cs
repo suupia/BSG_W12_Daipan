@@ -28,13 +28,13 @@ public class EnemyAttackTest
     public void PlayerHpShouldDecrease10WithAttack()
     {
         // Arrange
-        var playerHp = new PlayerHpNew(100); 
+        var playerHp = new Hp(100); 
 
         // Act
         var postAttackPlayerHp = EnemyAttackModule.Attack(new MockEnemyParamData(), playerHp);
 
         // Assert
-        Assert.AreEqual(90, postAttackPlayerHp.Hp); 
+        Assert.AreEqual(90, postAttackPlayerHp.Value); 
     }
     
     class MockEnemyParamData : IEnemyParamData

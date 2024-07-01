@@ -46,8 +46,8 @@ namespace Daipan.Battle.scripts
                     
                     ChangeToInsideTheBox(_viewerNumber);
                     ChangeToThanksgiving(_viewerNumber);
-                    ChangeToBottomYoutuber(_playerMono.PlayerHpNew);
-                    ChangeToProGamer(_playerMono.PlayerHpNew);
+                    ChangeToBottomYoutuber(_playerMono.Hp);
+                    ChangeToProGamer(_playerMono.Hp);
                     ChangeToSacredLady(_daipanExecutor);
                     ChangeToFlame(_daipanExecutor);
                     ChangeToOrdinary1(_viewerNumber);
@@ -77,20 +77,20 @@ namespace Daipan.Battle.scripts
             }
         }
 
-        static void ChangeToBottomYoutuber(PlayerHpNew playerHp)
+        static void ChangeToBottomYoutuber(Hp hp)
         {
             Debug.Log("Check ChangeToBottomYoutuber");
-            if (playerHp.Hp <= 0)
+            if (hp.Value <= 0)
             {
                 Debug.Log("Change to BottomYoutuber");
                 ResultShower.ShowResult(SceneName.BottomYoutuber);
             }
         }
 
-        static void ChangeToProGamer(PlayerHpNew playerHp)
+        static void ChangeToProGamer(Hp hp)
         {
             Debug.Log("Check ChangeToProGamer");
-            if(playerHp.Hp >= 50)
+            if(hp.Value >= 50)
             {
                 Debug.Log("Change To ProGamer");
                 ResultShower.ShowResult(SceneName.ProGamer);

@@ -11,10 +11,10 @@ namespace Daipan.Enemy.Scripts
     {
         public static event EventHandler<DamageArgs>? AttackEvent;
         
-        public static PlayerHpNew Attack(IEnemyParamData enemyParamData, PlayerHpNew hp)
+        public static Hp Attack(IEnemyParamData enemyParamData, Hp hp)
         {
             AttackEvent?.Invoke( typeof(EnemyAttackModule) ,  new DamageArgs(enemyParamData.GetAttackAmount(), enemyParamData.GetEnemyEnum()));
-            return new PlayerHpNew(hp.Hp - enemyParamData.GetAttackAmount()); 
+            return new Hp(hp.Value - enemyParamData.GetAttackAmount()); 
         
         } 
     } 
