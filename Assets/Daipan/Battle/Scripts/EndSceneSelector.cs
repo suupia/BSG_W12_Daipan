@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using Daipan.Core.Interfaces;
+using Daipan.Player.MonoScripts;
 using Daipan.Player.Scripts;
 using Daipan.Stream.Scripts;
 using Daipan.Stream.Tests;
@@ -14,19 +15,17 @@ namespace Daipan.Battle.scripts
     {
         readonly ViewerNumber _viewerNumber;
         readonly DaipanExecutor _daipanExecutor;
-        readonly PlayerHp _playerHp;
 
+        PlayerMono? _playerMono;
         IDisposable? _disposable; 
         
         public EndSceneSelector(
             ViewerNumber viewerNumber
             , DaipanExecutor daipanExecutor
-            , PlayerHp playerHp
             )
         {
             _viewerNumber = viewerNumber;
             _daipanExecutor = daipanExecutor;
-            _playerHp = playerHp;
         }
 
         void IStart.Start()
@@ -39,10 +38,16 @@ namespace Daipan.Battle.scripts
             _disposable = Observable.EveryUpdate()
                 .Subscribe(_ =>
                 {
+                    if (_playerMono == null)
+                    {
+                        _playerMono = UnityEngine.Object.FindObjectOfType<PlayerMono>();
+                        if (_playerMono == null) return;
+                    }
+                    
                     ChangeToInsideTheBox(_viewerNumber);
                     ChangeToThanksgiving(_viewerNumber);
-                    ChangeToBottomYoutuber(_playerHp);
-                    ChangeToProGamer(_playerHp);
+                    ChangeToBottomYoutuber(_playerMono.PlayerHpNew);
+                    ChangeToProGamer(_playerMono.PlayerHpNew);
                     ChangeToSacredLady(_daipanExecutor);
                     ChangeToFlame(_daipanExecutor);
                     ChangeToOrdinary1(_viewerNumber);
@@ -72,20 +77,20 @@ namespace Daipan.Battle.scripts
             }
         }
 
-        static void ChangeToBottomYoutuber(PlayerHp playerHp)
+        static void ChangeToBottomYoutuber(PlayerHpNew playerHp)
         {
             Debug.Log("Check ChangeToBottomYoutuber");
-            if (playerHp.CurrentHp <= 0)
+            if (playerHp.Hp <= 0)
             {
                 Debug.Log("Change to BottomYoutuber");
                 ResultShower.ShowResult(SceneName.BottomYoutuber);
             }
         }
 
-        static void ChangeToProGamer(PlayerHp playerHp)
+        static void ChangeToProGamer(PlayerHpNew playerHp)
         {
             Debug.Log("Check ChangeToProGamer");
-            if(playerHp.CurrentHp >= 50)
+            if(playerHp.Hp >= 50)
             {
                 Debug.Log("Change To ProGamer");
                 ResultShower.ShowResult(SceneName.ProGamer);

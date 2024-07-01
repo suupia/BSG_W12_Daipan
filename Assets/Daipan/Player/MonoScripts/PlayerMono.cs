@@ -22,7 +22,7 @@ namespace Daipan.Player.MonoScripts
     {
         [SerializeField] List<AbstractPlayerViewMono?> playerViewMonos = new();
         EnemyCluster _enemyCluster = null!;
-        PlayerHp _playerHp = null!;
+        PlayerHpNew _playerHp = null!;
         InputSerialManager _inputSerialManager = null!;
         PlayerAttackEffectSpawner _playerAttackEffectSpawner = null!;
         CommentSpawner _commentSpawner = null!;
@@ -80,7 +80,6 @@ namespace Daipan.Player.MonoScripts
         [Inject]
         public void Initialize(
             EnemyCluster enemyCluster,
-            PlayerHp playerHp,
             PlayerAttackedCounter playerAttackedCounter,
             InputSerialManager inputSerialManager,
             PlayerAttackEffectSpawner playerAttackEffectSpawner,
@@ -91,7 +90,6 @@ namespace Daipan.Player.MonoScripts
             _enemyCluster = enemyCluster;
             _commentSpawner = commentSpawner;
 
-            _playerHp = playerHp;
             _attackedCounterForAntiComment = playerAttackedCounter; 
             _playerHp.OnDamage += (sender, args) =>
             {
