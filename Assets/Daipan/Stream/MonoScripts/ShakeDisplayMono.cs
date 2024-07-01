@@ -12,7 +12,7 @@ namespace Daipan.Stream.MonoScripts
         
         [SerializeField] float duration;
         [SerializeField] float shakePower;
-        [SerializeField] int ShakeNum;
+        [SerializeField] int shakeNum;
 
         Vector3 _originalPosition;
 
@@ -30,7 +30,7 @@ namespace Daipan.Stream.MonoScripts
 
         public void Daipan()
         {
-            shakedObject.transform.DOShakePosition(duration, shakePower, ShakeNum, 1, false, true)
+            shakedObject.transform.DOShakePosition(duration, shakePower, shakeNum, 1, false, true)
                 .OnComplete(() =>
                 {
                     shakedObject.transform.position = _originalPosition;
