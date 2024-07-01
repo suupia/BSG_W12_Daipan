@@ -10,17 +10,15 @@ namespace Daipan.Enemy.Scripts
         public int MaxHp { get; }
         public int CurrentHp { get; private set; }
 
-        readonly EnemyCluster _enemyCluster;
         readonly EnemyMono _enemyMono;
 
 
-        public EnemyHp(int maxHp, EnemyMono enemyMono, EnemyCluster enemyCluster)
+        public EnemyHp(int maxHp, EnemyMono enemyMono)
         {
             MaxHp = maxHp;
             CurrentHp = MaxHp;
 
             _enemyMono = enemyMono;
-            _enemyCluster = enemyCluster;
         }
 
         public virtual void DecreaseHp(EnemyDamageArgs enemyDamageArgs)

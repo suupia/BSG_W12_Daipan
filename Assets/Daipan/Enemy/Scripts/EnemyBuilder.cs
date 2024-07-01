@@ -1,6 +1,7 @@
 #nullable enable
 using System.Collections.Generic;
 using System.Linq;
+using Daipan.Battle.interfaces;
 using Daipan.Comment.Scripts;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.LevelDesign.Scripts;
@@ -58,15 +59,11 @@ namespace Daipan.Enemy.Scripts
             Debug.Log($"enemyEnum: {enemyEnum}");
             var enemyParamData = _enemyParamContainer.GetEnemyParamData(enemyEnum);
 
-            EnemyHp enemyHp;
-            if(enemyEnum == EnemyEnum.Totem)
+            IEnemyHp enemyHp = enemyEnum switch 
             {
-                enemyHp = new TotemEnemyHp(enemyParamData.GetCurrentHp(), enemyMono, _enemyCluster, _streamTimer);
-            }
-            else
-            {
-                enemyHp = new EnemyHp(enemyParamData.GetCurrentHp(), enemyMono, _enemyCluster);
-            }
+                EnemyEnum.Totem => new TotemEnemyHp(new EnemyHp(enemyParamData.GetCurrentHp(), enemyMono), _streamTimer),
+                _ => new EnemyHp(enemyParamData.GetCurrentHp(), enemyMono)
+            };
 
             enemyMono.SetDomain(
                 enemyEnum,

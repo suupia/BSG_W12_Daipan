@@ -5,25 +5,27 @@ using Daipan.Stream.Scripts;
 
 namespace Daipan.Enemy.Scripts
 {
-    public class TotemEnemyHp : EnemyHp
+    public class TotemEnemyHp : IEnemyHp
     {
         // todo パラメータ化する？
         double _allowableSec = 0.1f;
         double _redLatestAttackedTime;
         double _blueLatestAttackedTime;
         double _yellowLatestAttackedTime;
+        readonly IEnemyHp _enemyHp;
         readonly StreamTimer _streamTimer;
 
-        public TotemEnemyHp(int maxHp, EnemyMono enemyMono, EnemyCluster enemyCluster , StreamTimer streamTimer)
-            : base(maxHp, enemyMono, enemyCluster)
+        public TotemEnemyHp(IEnemyHp enemyHp , StreamTimer streamTimer)
         {
+            _enemyHp = enemyHp;
             _streamTimer = streamTimer; 
         }
+        
+        public int CurrentHp => _enemyHp.CurrentHp;
 
-
-        public override void DecreaseHp(EnemyDamageArgs enemyDamageArgs)
+        public  void DecreaseHp(EnemyDamageArgs enemyDamageArgs)
         {
-            switch (enemyDamageArgs.playerColor)
+            switch (enemyDamageArgs.PlayerColor)
             {
                 case Player.MonoScripts.PlayerColor.Red:
                     _redLatestAttackedTime = _streamTimer.CurrentTime;
@@ -38,11 +40,11 @@ namespace Daipan.Enemy.Scripts
                     break;
             }
 
-            if (!isAttackable()) return;
-            base.DecreaseHp(enemyDamageArgs);
+            if (!IsAttackable()) return;
+            _enemyHp.DecreaseHp(enemyDamageArgs);
         }
 
-        bool isAttackable()
+        bool IsAttackable()
         {
             return (_streamTimer.CurrentTime - _redLatestAttackedTime < _allowableSec)
                 & (_streamTimer.CurrentTime - _blueLatestAttackedTime < _allowableSec)
