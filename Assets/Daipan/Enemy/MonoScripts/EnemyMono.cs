@@ -25,7 +25,20 @@ namespace Daipan.Enemy.MonoScripts
         IEnemyParamContainer _enemyParamContainer = null!;
         PlayerHolder _playerHolder = null!;
         public EnemyEnum EnemyEnum { get; private set; } = EnemyEnum.None;
-        public Hp Hp { get; set; } = null!;
+
+        Hp _hp = null!;
+        public Hp Hp
+        {
+            get => _hp;
+            set
+            {
+                if (value.Value <= 0)
+                {
+                    Died();
+                }
+                _hp = value;
+            }
+        }
         public int CurrentHp => Hp.Value;
         public int MaxHp => _enemyParamContainer.GetEnemyParamData(EnemyEnum).GetMaxHp();
 
