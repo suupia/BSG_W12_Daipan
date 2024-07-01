@@ -28,6 +28,7 @@ namespace Daipan.Player.MonoScripts
         CommentSpawner _commentSpawner = null!;
         PlayerAttackedCounter _attackedCounterForAntiComment = null!;
 
+        public PlayerHpNew PlayerHpNew { get; set; } = null!;
         public void Update()
         {
             if (_inputSerialManager.GetButtonRed())
@@ -109,7 +110,7 @@ namespace Daipan.Player.MonoScripts
                 foreach (var playerViewMono in playerViewMonos)
                 {
                     if (playerViewMono == null) continue;
-                    if (PlayerAttackModule.GetTargetEnemyEnum(playerViewMono.playerColor).Contains(args.enemyEnum))
+                    if (PlayerAttackModule.GetTargetEnemyEnum(playerViewMono.playerColor).Contains(args.EnemyEnum))
                         playerViewMono.Damage();
                 }
             };
