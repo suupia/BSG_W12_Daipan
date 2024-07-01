@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 8832612355903660365}
   - component: {fileID: 1816191004012648433}
   m_Layer: 5
-  m_Name: StreamTimerView
+  m_Name: WaveProgressView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

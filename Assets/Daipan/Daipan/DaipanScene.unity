@@ -218,7 +218,7 @@ GameObject:
   m_Component:
   - component: {fileID: 78711180}
   m_Layer: 5
-  m_Name: UIView
+  m_Name: StreamFrameView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -596,7 +596,7 @@ GameObject:
   - component: {fileID: 262770950}
   - component: {fileID: 262770949}
   m_Layer: 5
-  m_Name: StreamCanvas
+  m_Name: StreamUICanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4655,7 +4655,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 539550700685783175, guid: dfff351a7e8284e4aa8df9c9d1467282, type: 3}
       propertyPath: m_Name
-      value: StreamTimerView
+      value: WaveProgressView
       objectReference: {fileID: 0}
     - target: {fileID: 5322341746803176733, guid: dfff351a7e8284e4aa8df9c9d1467282, type: 3}
       propertyPath: m_AnchorMax.x
@@ -4977,7 +4977,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4293926496036039153, guid: 9bd43fad0e9f84957b9a3ed958868a2b, type: 3}
       propertyPath: m_Name
-      value: StreamView
+      value: IrritatedView
       objectReference: {fileID: 0}
     - target: {fileID: 4862185790217004892, guid: 9bd43fad0e9f84957b9a3ed958868a2b, type: 3}
       propertyPath: m_Pivot.x
