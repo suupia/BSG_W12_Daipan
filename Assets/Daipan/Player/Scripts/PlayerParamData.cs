@@ -27,6 +27,7 @@ namespace Daipan.Player.Scripts
        {
            _playerParamManager = playerParamManager;
        }
+       public int GetMaxHp() => _playerParamManager.playerHpParam.maxHpAmount;
        public int GetCurrentHp() => _playerParamManager.playerHpParam.hpAmount;
        public int SetCurrentHp(int value) => _playerParamManager.playerHpParam.hpAmount = value;
        public int GetAntiCommentThreshold() => _playerParamManager.playerHpParam.antiCommentThreshold;

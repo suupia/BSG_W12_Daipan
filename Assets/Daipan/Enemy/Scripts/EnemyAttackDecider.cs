@@ -4,48 +4,37 @@ using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.MonoScripts;
 using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.Player.MonoScripts;
+using Daipan.Player.Scripts;
 using UnityEngine;
 
 namespace Daipan.Enemy.Scripts
 {
     public sealed class EnemyAttackDecider
     {
-        readonly IEnemyParamData _enemyParamData;
-        readonly EnemyAttack _enemyAttack;
-        readonly EnemyMono _enemyMono;
         float Timer { get; set; }
 
-        public EnemyAttackDecider(
-            EnemyMono enemyMono,
-            IEnemyParamData enemyParamData,
-            EnemyAttack enemyAttack
-            )
-        {
-            _enemyParamData = enemyParamData;
-            _enemyMono = enemyMono;
-            _enemyAttack = enemyAttack;
-        }
-        public void AttackUpdate(PlayerMono playerMono, AbstractEnemyViewMono? enemyViewMono)
+        public Hp AttackUpdate(EnemyMono enemyMono,IEnemyParamData enemyParamData, PlayerMono playerMono, AbstractEnemyViewMono? enemyViewMono)
         {
             Timer += Time.deltaTime;
-            if (Timer >= _enemyParamData.GetAttackDelayDec())
+            if (Timer >= enemyParamData.GetAttackDelayDec())
             {
-                Attack(playerMono, enemyViewMono);
                 Timer = 0;
+                return Attack(enemyMono, enemyParamData,  playerMono, enemyViewMono);
             }
+            return playerMono.Hp;
         }
 
-        void Attack(PlayerMono playerMono, AbstractEnemyViewMono? enemyViewMono)
+        static Hp  Attack(EnemyMono enemyMono,IEnemyParamData enemyParamData, PlayerMono playerMono, AbstractEnemyViewMono? enemyViewMono)
         {
-            if (!CanAttack(_enemyMono, playerMono)) return;
+            if (!CanAttack(enemyMono,enemyParamData, playerMono)) return playerMono.Hp;
             if (enemyViewMono != null) enemyViewMono.Attack();
-            _enemyAttack.Attack(playerMono);
+            return EnemyAttackModule.Attack(enemyParamData,playerMono.Hp);
         }
         
-        bool CanAttack(EnemyMono enemyMono, PlayerMono playerMono)
+        static bool CanAttack(EnemyMono enemyMono,IEnemyParamData enemyParamData,  PlayerMono playerMono)
         {
             if (playerMono.CurrentHp <= 0) return false;
-            if (enemyMono.transform.position.x - playerMono.transform.position.x > _enemyParamData.GetAttackRange()) return false;
+            if (enemyMono.transform.position.x - playerMono.transform.position.x > enemyParamData.GetAttackRange()) return false;
             return true;
         }
         

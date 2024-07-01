@@ -1,9 +1,11 @@
 #nullable enable
+using System.Net.NetworkInformation;
 using UnityEngine;
 using Daipan.Battle.interfaces;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Player.MonoScripts;
+using Daipan.Player.Scripts;
 using DG.Tweening;
 
 namespace Daipan.Enemy.Scripts
@@ -28,10 +30,7 @@ namespace Daipan.Enemy.Scripts
             _enemyMono.transform.DOMove(playerMono.transform.position, 1f).OnComplete(() =>
             {
                 // After reaching the player, apply damage
-                playerMono.SetHp(
-                    new DamageArgs(_enemyParamData.GetAttackAmount(),
-                        _enemyParamData.GetEnemyEnum())
-                );
+                playerMono.Hp = new Hp(playerMono.Hp.Value - _enemyParamData.GetAttackAmount());
 
                 // Optionally, you can destroy the enemy after the attack if required
                 _enemyMono.Died();
