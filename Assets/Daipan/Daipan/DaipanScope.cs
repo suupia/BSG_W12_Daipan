@@ -112,7 +112,7 @@ namespace Daipan.Daipan
             
             // View
             builder.RegisterComponentInHierarchy<StreamViewMono>();
-            builder.RegisterComponentInHierarchy<TimerViewMono>();
+            builder.RegisterComponentInHierarchy<WaveProgressViewMono>();
             builder.RegisterComponentInHierarchy<StreamerViewMono>();
 
             // ShakeDisplay
