@@ -32,10 +32,10 @@ RectTransform:
   - {fileID: 5915417344567125706}
   m_Father: {fileID: 7619624251201827100}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -150, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: -672, y: 272}
+  m_SizeDelta: {x: 300, y: 132.63}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &3423613978251113706
 GameObject:
@@ -118,15 +118,15 @@ RectTransform:
   m_GameObject: {fileID: 5754029469455015177}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3137845242619598075}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: -100}
-  m_SizeDelta: {x: 100, y: 30}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: -30.435}
+  m_SizeDelta: {x: 0, y: -60.87}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5550641814054002030
 CanvasRenderer:
@@ -190,8 +190,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 4
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -257,10 +257,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 3137845242619598075}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 22.66}
-  m_SizeDelta: {x: 150, y: -45.32}
+  m_AnchoredPosition: {x: 0, y: -30.435001}
+  m_SizeDelta: {x: 0, y: 60.870003}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5464493544750077327
 CanvasRenderer:
@@ -324,7 +324,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0

@@ -59,6 +59,12 @@ TagManager:
   - name: Comment
     uniqueID: 2838269711
     locked: 0
+  - name: Stream_UI
+    uniqueID: 1807422053
+    locked: 0
   - name: Streamer
     uniqueID: 1661063009
+    locked: 0
+  - name: UI
+    uniqueID: 3637853659
     locked: 0
