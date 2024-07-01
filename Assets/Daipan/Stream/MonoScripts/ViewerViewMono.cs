@@ -5,13 +5,15 @@ using Daipan.Stream.Scripts;
 using R3;
 using TMPro;
 using DG.Tweening;
+using UnityEngine.Serialization;
 
 namespace Daipan.Stream.MonoScripts
 {
     public class ViewerViewMono : MonoBehaviour
     {
         [SerializeField] TextMeshProUGUI viewerText = null!;
-        [SerializeField] int ZoomingViewerThreshold;
+        [FormerlySerializedAs("digitSplitterMono")] [SerializeField] DigitSplitViewMono digitSplitViewMono = null!;
+        [SerializeField] int zoomingViewerThreshold;
         [SerializeField] float scaleRatio;
         [SerializeField] float zoomingDuration;
 
@@ -42,6 +44,7 @@ namespace Daipan.Stream.MonoScripts
             //     sequence.Append(_transform.DOScale(_originalScale, zoomingDuration));
             // }
             viewerText.text = $"{viewerNumber}";
+            digitSplitViewMono.SetDigit(viewerNumber);
         }
     }
 }
