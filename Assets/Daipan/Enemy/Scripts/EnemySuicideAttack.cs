@@ -1,7 +1,6 @@
 #nullable enable
 using System.Net.NetworkInformation;
 using UnityEngine;
-using Daipan.Battle.interfaces;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Player.MonoScripts;

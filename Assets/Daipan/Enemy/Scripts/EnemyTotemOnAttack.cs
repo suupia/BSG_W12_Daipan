@@ -1,5 +1,4 @@
 #nullable enable
-using Daipan.Battle.interfaces;
 using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Player.Scripts;
 using Daipan.Stream.Scripts;

@@ -8,7 +8,7 @@ namespace Daipan.Stream.MonoScripts
     public class ShakeDisplayMono : MonoBehaviour
     {
         [Header("揺らしたいオブジェクト")]
-        [SerializeField] GameObject shakedObject;
+        [SerializeField] GameObject shakedObject = null!;
         
         [SerializeField] float duration;
         [SerializeField] float shakePower;
@@ -17,13 +17,13 @@ namespace Daipan.Stream.MonoScripts
         Vector3 _originalPosition;
         Quaternion _originalRotation;
 
-        private void Start()
+        void Start()
         {
             _originalPosition = shakedObject.transform.position;
             _originalRotation = shakedObject.transform.rotation;
         }
 
-        private void Update()
+        void Update()
         {
 #if UNITY_EDITOR
             if (Input.GetKeyDown(KeyCode.Backspace)) Daipan();

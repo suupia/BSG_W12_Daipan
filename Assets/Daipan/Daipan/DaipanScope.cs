@@ -1,5 +1,4 @@
 using System.Linq;
-using Daipan.Battle.interfaces;
 using Daipan.Battle.scripts;
 using Daipan.Comment.MonoScripts;
 using Daipan.Comment.Scripts;

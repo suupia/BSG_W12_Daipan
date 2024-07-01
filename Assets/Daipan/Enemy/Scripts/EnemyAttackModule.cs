@@ -1,6 +1,6 @@
 #nullable enable
 using System;
-using Daipan.Battle.interfaces;
+using Daipan.Battle.Scripts;
 using Daipan.Enemy.Interfaces;
 using Daipan.Player.Scripts;
 using UnityEngine.EventSystems;
