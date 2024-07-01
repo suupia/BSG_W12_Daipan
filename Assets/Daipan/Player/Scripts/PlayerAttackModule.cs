@@ -10,13 +10,9 @@ namespace Daipan.Player.Scripts
 {
     public static class PlayerAttackModule
     {
-        public static event EventHandler<EnemyDamageArgs>? AttackEvent;
         public static Hp Attack(Hp hp, IPlayerParamData playerParamData)
-        {
-            AttackEvent?.Invoke( typeof(EnemyAttackModule) ,  new EnemyDamageArgs(playerParamData.GetAttack(), playerParamData.PlayerEnum()));
-            return new Hp(hp.Value - playerParamData.GetAttack()); 
+            => new Hp(hp.Value - playerParamData.GetAttack()); 
         
-        } 
         
         public static IEnumerable<EnemyEnum> GetTargetEnemyEnum(PlayerColor playerColor)
         {

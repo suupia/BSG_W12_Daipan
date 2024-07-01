@@ -9,11 +9,11 @@ namespace Daipan.Enemy.Scripts
 {
     public static class EnemyAttackModule
     {
-        public static event EventHandler<DamageArgs>? AttackEvent;
+        public static event EventHandler<EnemyDamageArgs>? AttackEvent;
         
         public static Hp Attack(IEnemyParamData enemyParamData, Hp hp)
         {
-            AttackEvent?.Invoke( typeof(EnemyAttackModule) ,  new DamageArgs(enemyParamData.GetAttackAmount(), enemyParamData.GetEnemyEnum()));
+            AttackEvent?.Invoke( typeof(EnemyAttackModule) ,  new EnemyDamageArgs(enemyParamData.GetAttackAmount(), enemyParamData.GetEnemyEnum()));
             return new Hp(hp.Value - enemyParamData.GetAttackAmount()); 
         
         } 
