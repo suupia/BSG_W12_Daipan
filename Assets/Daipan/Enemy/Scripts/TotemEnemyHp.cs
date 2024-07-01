@@ -39,6 +39,7 @@ namespace Daipan.Enemy.Scripts
                 default:
                     break;
             }
+            
 
             if (!IsAttackable()) return;
             _enemyHp.DecreaseHp(enemyDamageArgs);

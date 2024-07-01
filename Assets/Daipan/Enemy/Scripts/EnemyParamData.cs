@@ -25,6 +25,7 @@ namespace Daipan.Enemy.Scripts
         public double GetAttackRange() => _enemyParam.enemyAttackParam.attackRange;
 
         // Hp
+        public int GetMaxHp() => _enemyParam.enemyHpParam.maxHp;
         public int GetCurrentHp() => _enemyParam.enemyHpParam.hpAmount;
 
         // Move

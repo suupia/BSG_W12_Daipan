@@ -21,11 +21,13 @@ namespace Daipan.Enemy.MonoScripts
         EnemyAttackDecider _enemyAttackDecider = null!;
         EnemySuicideAttack _enemySuicideAttack = null!;
         EnemyDied _enemyDied = null!;
-        IEnemyHp _enemyHp = null!;
         IEnemySpawnPoint _enemySpawnPoint = null!;
         IEnemyParamContainer _enemyParamContainer = null!;
         PlayerHolder _playerHolder = null!;
         public EnemyEnum EnemyEnum { get; private set; } = EnemyEnum.None;
+        public Hp Hp { get; set; } = null!;
+        public int CurrentHp => Hp.Value;
+        public int MaxHp => _enemyParamContainer.GetEnemyParamData(EnemyEnum).GetMaxHp();
 
         void Update()
         {
@@ -46,17 +48,6 @@ namespace Daipan.Enemy.MonoScripts
             enemyViewMono?.SetHpGauge(CurrentHp, _enemyParamContainer.GetEnemyParamData(EnemyEnum).GetCurrentHp());
         }
 
-        public int CurrentHp
-        {
-            get => _enemyHp.CurrentHp;
-        }
-
-        public void GetDamage(EnemyDamageArgs enemyDamageArgs)
-        {
-            _enemyHp.DecreaseHp(enemyDamageArgs);
-        }
-
-
         [Inject]
         public void Initialize(
             PlayerHolder playerHolder,
@@ -71,18 +62,17 @@ namespace Daipan.Enemy.MonoScripts
 
         public void SetDomain(
             EnemyEnum enemyEnum,
-            IEnemyHp enemyHp,
             EnemyAttackDecider enemyAttackDecider,
             EnemySuicideAttack enemySuicideAttack,
             EnemyDied enemyDied
         )
         {
             EnemyEnum = enemyEnum;
-            _enemyHp = enemyHp;
             _enemyAttackDecider = enemyAttackDecider;
             _enemySuicideAttack = enemySuicideAttack;
             _enemyDied = enemyDied;
             enemyViewMono?.SetDomain(_enemyParamContainer.GetEnemyViewParamData(EnemyEnum));
+            Hp = new Hp(_enemyParamContainer.GetEnemyParamData(EnemyEnum).GetMaxHp());
         }
 
         public void SuicideAttack(PlayerMono playerMono)

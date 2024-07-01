@@ -22,7 +22,8 @@ namespace Daipan.LevelDesign.Enemy.Scripts
     [Serializable]
     public sealed class EnemyHpParam
     {
-        [Header("敵のHP")] [Min(0)] public int hpAmount;
+        [Header("敵の最大HP")] [Min(0)] public int maxHp;
+        [Header("敵の現在のHP")] [Min(0)] public int hpAmount;
     }
 
     [Serializable]

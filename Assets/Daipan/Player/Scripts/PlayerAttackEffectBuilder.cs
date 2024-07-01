@@ -79,10 +79,7 @@ namespace Daipan.Player.Scripts
             Debug.Log($"EnemyType: {enemyMono.EnemyEnum}を攻撃");
             if (PlayerAttackModule.GetTargetEnemyEnum(playerColor).Contains(enemyMono.EnemyEnum))
                 // 敵を攻撃
-                enemyMono.GetDamage(new Battle.interfaces.EnemyDamageArgs(
-                    playerParamDataContainer.GetPlayerParamData(playerColor).GetAttack(),
-                    playerColor));
-            else
+                enemyMono.Hp = PlayerAttackModule.Attack( playerParamDataContainer.GetPlayerParamData(playerColor), enemyMono.Hp); 
                 // 敵が特攻攻撃をしてくる
                 // todo: 一旦はなし
                 // enemyMono.SuicideAttack(playerMono);
