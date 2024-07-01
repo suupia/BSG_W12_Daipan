@@ -23,27 +23,27 @@ namespace Daipan.Enemy.MonoScripts
         EnemyDied _enemyDied = null!;
         IEnemyHp _enemyHp = null!;
         IEnemySpawnPoint _enemySpawnPoint = null!;
-        IEnemyParamData _enemyParamData = null!;
+        IEnemyParamContainer _enemyParamContainer = null!;
         PlayerHolder _playerHolder = null!;
         public EnemyEnum EnemyEnum { get; private set; } = EnemyEnum.None;
 
         void Update()
         {
-            var newPlayerHp = _enemyAttackDecider.AttackUpdate(this,_enemyParamData, _playerHolder.PlayerMono, enemyViewMono);
+            var newPlayerHp = _enemyAttackDecider.AttackUpdate(this,_enemyParamContainer.GetEnemyParamData(EnemyEnum), _playerHolder.PlayerMono, enemyViewMono);
             _playerHolder.PlayerMono.PlayerHpNew = newPlayerHp;
 
             // 攻撃範囲よりプレイヤーとの距離が大きいときだけ動く
             if (transform.position.x - _playerHolder.PlayerMono.transform.position.x >=
-                _enemyParamData.GetAttackRange())
+                _enemyParamContainer.GetEnemyParamData(EnemyEnum).GetAttackRange())
             {
-                var moveSpeed = (float)_enemyParamData.GetMoveSpeedPerSec();
+                var moveSpeed = (float)_enemyParamContainer.GetEnemyParamData(EnemyEnum).GetMoveSpeedPerSec();
                 transform.position += Time.deltaTime * moveSpeed * Vector3.left;
             }
 
             if (transform.position.x < _enemySpawnPoint.GetEnemyDespawnedPoint().x)
                Died(isDaipaned:false); // Destroy when out of screen
 
-            enemyViewMono?.SetHpGauge(CurrentHp, _enemyParamData.GetCurrentHp());
+            enemyViewMono?.SetHpGauge(CurrentHp, _enemyParamContainer.GetEnemyParamData(EnemyEnum).GetCurrentHp());
         }
 
         public int CurrentHp
@@ -66,8 +66,7 @@ namespace Daipan.Enemy.MonoScripts
         {
             _playerHolder = playerHolder;
             _enemySpawnPoint = enemySpawnPointData;
-            _enemyParamData = enemyParamContainer.GetEnemyParamData(EnemyEnum);
-            enemyViewMono?.SetDomain(enemyParamContainer.GetEnemyViewParamData(EnemyEnum));
+            _enemyParamContainer = enemyParamContainer;
         }
 
         public void SetDomain(
@@ -83,6 +82,7 @@ namespace Daipan.Enemy.MonoScripts
             _enemyAttackDecider = enemyAttackDecider;
             _enemySuicideAttack = enemySuicideAttack;
             _enemyDied = enemyDied;
+            enemyViewMono?.SetDomain(_enemyParamContainer.GetEnemyViewParamData(EnemyEnum));
         }
 
         public void SuicideAttack(PlayerMono playerMono)
@@ -102,5 +102,5 @@ namespace Daipan.Enemy.MonoScripts
         }
     }
 
-    public record DiedEventArgs(EnemyEnum enemyEnum, bool IsTrigger = false);
+    public record DiedEventArgs(EnemyEnum EnemyEnum, bool IsTrigger = false);
 }

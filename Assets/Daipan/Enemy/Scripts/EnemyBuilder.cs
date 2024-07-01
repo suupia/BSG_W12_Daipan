@@ -90,19 +90,19 @@ namespace Daipan.Enemy.Scripts
         
         static void IncreaseIrritatedValue(DiedEventArgs args, IrritatedValue irritatedValue, IEnemyParamData enemyParamData)
         {
-            if (args.enemyEnum.IsSpecial() == true)
+            if (args.EnemyEnum.IsSpecial() == true)
                 irritatedValue.IncreaseValue(enemyParamData.GetIrritationAfterKill());
         }
         
         static void IncreaseViewerNumber(DiedEventArgs args, ViewerNumber viewerNumber, EnemyLevelDesignParamData enemyLevelDesignParamData)
         {
-            if (args.enemyEnum.IsBoss() == false)
+            if (args.EnemyEnum.IsBoss() == false)
                 viewerNumber.IncreaseViewer(enemyLevelDesignParamData.GetIncreaseViewerOnEnemyKill());
         }
 
         static void SpawnComment(DiedEventArgs args, CommentSpawner commentSpawner)
         {
-            if (args.enemyEnum.IsBoss() == true)
+            if (args.EnemyEnum.IsBoss() == true)
             {
                 // 3倍出現
                 for (var i = 0; i < 3; i++) commentSpawner.SpawnCommentByType(CommentEnum.Normal);
