@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1839528516076584320}
   - component: {fileID: 454980716412959894}
   - component: {fileID: 3377031876017952511}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,7 +114,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7248954515955026684}
   - component: {fileID: 8456318378087204844}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RedView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -161,7 +161,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4112909349199477195}
   - component: {fileID: 1591117210914365954}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BuleView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -208,7 +208,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3033563943980852404}
   - component: {fileID: 3855746568922619064}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -293,7 +293,7 @@ GameObject:
   - component: {fileID: 3201625557084469175}
   - component: {fileID: 5389952782173966473}
   - component: {fileID: 6233520012552750404}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TmpText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -464,7 +464,7 @@ GameObject:
   - component: {fileID: 6200186053260323287}
   - component: {fileID: 6019039635231306478}
   - component: {fileID: 6435310325773905390}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Animator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -570,7 +570,7 @@ GameObject:
   - component: {fileID: 4951163859082023231}
   - component: {fileID: 6665741849164830164}
   - component: {fileID: 3961047457715094365}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Animator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -676,7 +676,7 @@ GameObject:
   - component: {fileID: 4097437201135874524}
   - component: {fileID: 2771418761982781436}
   - component: {fileID: 580560808571582657}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Animator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -781,7 +781,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2988956120179870649}
   - component: {fileID: 1779984055153608402}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: YellowView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -827,7 +827,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6716761675388850161}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayersView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
