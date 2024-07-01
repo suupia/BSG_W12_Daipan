@@ -11,6 +11,13 @@ namespace Daipan.Player.Scripts
     public static class PlayerAttackModule
     {
         public static event EventHandler<EnemyDamageArgs>? AttackEvent;
+        public static Hp Attack(IPlayerParamData playerParamData, Hp hp)
+        {
+            AttackEvent?.Invoke( typeof(EnemyAttackModule) ,  new EnemyDamageArgs(playerParamData.GetAttack(), playerParamData.PlayerEnum()));
+            return new Hp(hp.Value - playerParamData.GetAttack()); 
+        
+        } 
+        
         public static IEnumerable<EnemyEnum> GetTargetEnemyEnum(PlayerColor playerColor)
         {
             return playerColor switch
@@ -21,12 +28,7 @@ namespace Daipan.Player.Scripts
                 _ => throw new ArgumentOutOfRangeException()
             };
         } 
-        public static Hp Attack(IPlayerParamData playerParamData, Hp hp)
-        {
-            AttackEvent?.Invoke( typeof(EnemyAttackModule) ,  new EnemyDamageArgs(playerParamData.GetAttack(), playerParamData.PlayerEnum()));
-            return new Hp(hp.Value - playerParamData.GetAttack()); 
-        
-        } 
+
     }  
 }
 

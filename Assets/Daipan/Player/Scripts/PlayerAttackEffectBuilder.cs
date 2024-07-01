@@ -78,11 +78,19 @@ namespace Daipan.Player.Scripts
             // [Main]
             Debug.Log($"EnemyType: {enemyMono.EnemyEnum}を攻撃");
             if (PlayerAttackModule.GetTargetEnemyEnum(playerColor).Contains(enemyMono.EnemyEnum))
+            {
                 // 敵を攻撃
-                enemyMono.Hp = PlayerAttackModule.Attack( playerParamDataContainer.GetPlayerParamData(playerColor), enemyMono.Hp); 
-                // 敵が特攻攻撃をしてくる
-                // todo: 一旦はなし
-                // enemyMono.SuicideAttack(playerMono);
+                enemyMono.Hp = enemyMono.EnemyEnum switch 
+                {
+                    EnemyEnum.Totem => TotemEnemyAttack(playerParamDataContainer, playerColor, enemyMono),
+                    _ => PlayerAttackModule.Attack(playerParamDataContainer.GetPlayerParamData(playerColor), enemyMono.Hp)
+                    // 敵が特攻攻撃をしてくる
+                    // todo: 一旦はなし
+                    // enemyMono.SuicideAttack(playerMono); 
+                };
+
+            }
+
 
             // Animation
             foreach (var playerViewMono in playerViewMonos)
