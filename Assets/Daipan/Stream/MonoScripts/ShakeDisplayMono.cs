@@ -15,10 +15,12 @@ namespace Daipan.Stream.MonoScripts
         [SerializeField] int shakeNum;
 
         Vector3 _originalPosition;
+        Quaternion _originalRotation;
 
         private void Start()
         {
             _originalPosition = shakedObject.transform.position;
+            _originalRotation = shakedObject.transform.rotation;
         }
 
         private void Update()
@@ -30,11 +32,17 @@ namespace Daipan.Stream.MonoScripts
 
         public void Daipan()
         {
-            shakedObject.transform.DOShakePosition(duration, shakePower, shakeNum, 1, false, true)
+            var senquence = DOTween.Sequence();
+            senquence.Append(shakedObject.transform.DOShakePosition(duration, shakePower, shakeNum, 1, false, true)
                 .OnComplete(() =>
                 {
                     shakedObject.transform.position = _originalPosition;
-                });
+                }));
+            senquence.Join(shakedObject.transform.DOPunchRotation(new Vector3(0, 0, 1f), duration, shakeNum, 1f)
+                .OnComplete(() =>
+                {
+                    shakedObject.transform.rotation = _originalRotation;
+                }));
         }
     }
 }
