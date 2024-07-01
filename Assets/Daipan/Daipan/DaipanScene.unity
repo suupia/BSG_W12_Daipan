@@ -217,7 +217,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 78711180}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: StreamFrameView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -345,7 +345,7 @@ GameObject:
   - component: {fileID: 113820210}
   - component: {fileID: 113820209}
   - component: {fileID: 113820208}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: InGameCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -699,7 +699,7 @@ GameObject:
   - component: {fileID: 285119754}
   - component: {fileID: 285119756}
   - component: {fileID: 285119755}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: BackGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1637,7 +1637,7 @@ GameObject:
   - component: {fileID: 1090810197}
   - component: {fileID: 1090810199}
   - component: {fileID: 1090810198}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2799,7 +2799,7 @@ GameObject:
   - component: {fileID: 1490424251}
   - component: {fileID: 1490424253}
   - component: {fileID: 1490424252}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: BackGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3442,7 +3442,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1611022807}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: BackGroundView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
