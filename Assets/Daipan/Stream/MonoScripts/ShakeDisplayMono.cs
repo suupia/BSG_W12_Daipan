@@ -7,6 +7,9 @@ namespace Daipan.Stream.MonoScripts
 {
     public class ShakeDisplayMono : MonoBehaviour
     {
+        [Header("揺らしたいオブジェクト")]
+        [SerializeField] GameObject shakedObject;
+        
         [SerializeField] float duration;
         [SerializeField] float shakePower;
         [SerializeField] int ShakeNum;
@@ -15,7 +18,7 @@ namespace Daipan.Stream.MonoScripts
 
         private void Start()
         {
-            _originalPosition = Camera.main.transform.position;
+            _originalPosition = shakedObject.transform.position;
         }
 
         private void Update()
@@ -27,10 +30,10 @@ namespace Daipan.Stream.MonoScripts
 
         public void Daipan()
         {
-            Camera.main.transform.DOShakePosition(duration, shakePower, ShakeNum, 1, false, true)
+            shakedObject.transform.DOShakePosition(duration, shakePower, ShakeNum, 1, false, true)
                 .OnComplete(() =>
                 {
-                    transform.position = _originalPosition;
+                    shakedObject.transform.position = _originalPosition;
                 });
         }
     }
