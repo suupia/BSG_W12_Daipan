@@ -31,17 +31,16 @@ namespace Daipan.Stream.MonoScripts
 
         void UpdateViewerText(int viewerNumber)
         {
-            var senquence = DOTween.Sequence();
-
-            if (viewerNumber >= ZoomingViewerThreshold)
-            {
-                senquence.Append(_transform.DOScale(_originalScale * scaleRatio, zoomingDuration))
-                   .SetEase(Ease.OutBounce);
-            }
-            else
-            {
-                senquence.Append(_transform.DOScale(_originalScale, zoomingDuration));
-            }
+            // var sequence = DOTween.Sequence();
+            // if (viewerNumber >= ZoomingViewerThreshold)
+            // {
+            //     sequence.Append(_transform.DOScale(_originalScale * scaleRatio, zoomingDuration))
+            //        .SetEase(Ease.OutBounce);
+            // }
+            // else
+            // {
+            //     sequence.Append(_transform.DOScale(_originalScale, zoomingDuration));
+            // }
             viewerText.text = $"{viewerNumber}";
         }
     }
