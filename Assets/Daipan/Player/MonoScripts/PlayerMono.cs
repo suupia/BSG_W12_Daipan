@@ -93,6 +93,7 @@ namespace Daipan.Player.MonoScripts
             _enemyCluster = enemyCluster;
             _commentSpawner = commentSpawner;
             _playerHpParamData = playerHpParamData;
+            _playerHp = new PlayerHpNew(playerHpParamData.GetMaxHp());
 
             _attackedCounterForAntiComment = playerAttackedCounter; 
             EnemyAttackNew.AttackEvent += (sender, args) =>
