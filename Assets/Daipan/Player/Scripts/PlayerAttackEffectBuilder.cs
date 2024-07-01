@@ -23,11 +23,11 @@ namespace Daipan.Player.Scripts
         readonly EnemyTotemOnAttack _enemyTotemOnAttack;
 
         public PlayerAttackEffectBuilder(
-            IPlayerParamDataContainer playerParamDataContainer,
-            ComboCounter comboCounter,
-            EnemyCluster enemyCluster,
-            CommentSpawner commentSpawner,
-            EnemyTotemOnAttack enemyTotemOnAttack
+            IPlayerParamDataContainer playerParamDataContainer
+            ,ComboCounter comboCounter
+            ,EnemyCluster enemyCluster
+            ,CommentSpawner commentSpawner
+            ,EnemyTotemOnAttack enemyTotemOnAttack
         )
         {
             _playerParamDataContainer = playerParamDataContainer;
@@ -53,9 +53,9 @@ namespace Daipan.Player.Scripts
         }
 
         static void UpdateCombo(
-            ComboCounter comboCounter,
-            PlayerColor playerColor,
-            OnHitEventArgs args
+            ComboCounter comboCounter
+            ,PlayerColor playerColor
+            ,OnHitEventArgs args
         )
         {
             if (args.IsTargetEnemy)
@@ -70,18 +70,17 @@ namespace Daipan.Player.Scripts
             }
         }
 
-        static void AttackEnemy(IPlayerParamDataContainer playerParamDataContainer,
-            List<AbstractPlayerViewMono?> playerViewMonos,
-            PlayerColor playerColor, 
-            EnemyMono? enemyMono
-            , EnemyTotemOnAttack totemOnAttack
+        static void AttackEnemy(IPlayerParamDataContainer playerParamDataContainer
+            ,List<AbstractPlayerViewMono?> playerViewMonos
+            ,PlayerColor playerColor
+            ,EnemyMono? enemyMono
+            ,EnemyTotemOnAttack totemOnAttack
             )
         {
             Debug.Log($"Attack enemyMono?.EnemyEnum: {enemyMono?.EnemyEnum}");
-            // [Precondition]
             if (enemyMono == null) return;
 
-            // [Main]
+
             Debug.Log($"EnemyType: {enemyMono.EnemyEnum}を攻撃");
             if (PlayerAttackModule.GetTargetEnemyEnum(playerColor).Contains(enemyMono.EnemyEnum))
             {
@@ -109,8 +108,9 @@ namespace Daipan.Player.Scripts
         }
         
         static void SpawnAntiComment(
-            OnHitEventArgs args,
-            CommentSpawner commentSpawner)
+            OnHitEventArgs args
+            ,CommentSpawner commentSpawner
+            )
         {
             if (args.IsTargetEnemy) return;
             
