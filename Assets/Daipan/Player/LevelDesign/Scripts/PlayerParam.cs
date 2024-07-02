@@ -24,7 +24,7 @@ namespace Daipan.Player.LevelDesign.Scripts
     {
         [Header("プレイヤーの最大HP")]
         [Min(0)]
-        public int maxHpAmount;
+        public int maxHpAmount = 100;
         [Header("プレイヤーの現在のHP")]
         [Min(0)]
         public int hpAmount;
