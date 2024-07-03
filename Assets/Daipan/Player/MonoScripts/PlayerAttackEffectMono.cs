@@ -14,7 +14,7 @@ namespace Daipan.Player.MonoScripts
     public class PlayerAttackEffectMono : MonoBehaviour
     {
         [SerializeField] PlayerAttackEffectViewMono? viewMono;
-        readonly double _speed = 20;
+        readonly double _speed = 30;
         readonly double _hitDistance = 1.0;
         public event EventHandler<OnHitEventArgs>? OnHit;
         IPlayerParamData? _playerParamData;
@@ -32,7 +32,7 @@ namespace Daipan.Player.MonoScripts
             }
 
             var enemyMono = _getNearestEnemyMono();
-            Direction = enemyMono?.transform.position - transform.position ?? Direction;
+            Direction = (enemyMono?.transform.position - transform.position)?.normalized ?? Direction;
             transform.position += Direction * (float)(_speed * Time.deltaTime);
             if (enemyMono != null)
             {

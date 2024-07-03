@@ -176,7 +176,6 @@ namespace Daipan.Daipan
             }
 
             builder.RegisterInstance(new PlayerPositionMonoBuilder(builder, SetUpPlayerPositionMono())); 
-            builder.Register<PlayerAttackEffectPointData>(Lifetime.Transient);
 
             // builder.RegisterInstance(new PlayerParamDataBuilder(builder, playerParamManager));
             builder.RegisterInstance(playerParamManager);
