@@ -12,10 +12,10 @@ namespace Daipan.Player.Scripts
         int _currentTermStartNumber;
         readonly int _threshold;
 
-        public PlayerAttackedCounter(IPlayerHpParamData playerHpParamData)
+        public PlayerAttackedCounter(IPlayerAntiCommentParamData playerAntiCommentParamData)
         {
-            _threshold = playerHpParamData.GetAntiCommentThreshold();
-            CoutnReset();
+            _threshold = playerAntiCommentParamData.GetAntiCommentThreshold();
+            CountReset();
         }
 
         public void CountUp()
@@ -33,7 +33,7 @@ namespace Daipan.Player.Scripts
             }
         }
 
-        public void CoutnReset()
+        public void CountReset()
         {
             AttackedNumber = 0;
             _currentTermStartNumber = 0;

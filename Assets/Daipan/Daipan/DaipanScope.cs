@@ -181,7 +181,7 @@ namespace Daipan.Daipan
             builder.RegisterInstance(playerParamManager);
             builder.Register<PlayerParamDataContainer>(Lifetime.Scoped).As<IPlayerParamDataContainer>();
             builder.Register<PlayerHpParamData>(Lifetime.Scoped).As<IPlayerHpParamData>();
-            // builder.Register<PlayerHp>(Lifetime.Scoped).AsSelf().As<IPlayerHp>();
+            builder.Register<PlayerAntiCommentParamData>(Lifetime.Scoped).As<IPlayerAntiCommentParamData>();
             builder.Register<PlayerAttackedCounter>(Lifetime.Scoped);
             
 

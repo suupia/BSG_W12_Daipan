@@ -9,6 +9,7 @@ namespace Daipan.Player.LevelDesign.Scripts
     public sealed class PlayerParamManager : ScriptableObject
     {
         public PlayerHpParam playerHpParam = null!;
+        public PlayerAntiCommentParam playerAntiCommentParam = null!;
         public List<PlayerParam> playerParams = null!;
     }
 }
