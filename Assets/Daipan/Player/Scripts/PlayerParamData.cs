@@ -3,6 +3,7 @@ using System;
 using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Player.LevelDesign.Scripts;
 using Daipan.Player.MonoScripts;
+using UnityEngine;
 
 namespace Daipan.Player.Scripts 
 {
@@ -40,6 +41,13 @@ namespace Daipan.Player.Scripts
             _playerParamManager = playerParamManager;
         }
         public int GetAntiCommentThreshold() => _playerParamManager.playerAntiCommentParam.antiCommentThreshold;
-        public double GetAntiCommentPercentOnMissAttacks(int index) => _playerParamManager.playerAntiCommentParam.antiCommentPercentOnMissAttacks[index];
+        public double GetAntiCommentPercentOnMissAttacks(int index)
+        {
+            if (index < 0 || index >= _playerParamManager.playerAntiCommentParam.antiCommentPercentOnMissAttacks.Count)
+            {
+                Debug.LogWarning($"index out of range. index : {index}");
+            }
+            return _playerParamManager.playerAntiCommentParam.antiCommentPercentOnMissAttacks[index];
+        }
     }
 }
