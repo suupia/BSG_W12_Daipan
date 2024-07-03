@@ -15,13 +15,12 @@ namespace Daipan.Enemy.MonoScripts
 
         Material _tankGaugeMaterial = null!;
         [SerializeField] Animator animator = null!;
+        [SerializeField] public double ratio; // デバッグ用にSerializeFieldにしている
 
         // Tankの画像が全体の画像のサイズに合わせられているため、FillMin, FillMaxで調整
         // FinMinで0を、FillMaxで1を取るようにする
         const double FillMin = 0.1;
-        const double FillMax = 0.6;
-
-        public double Ratio { get; set; }
+        const double FillMax = 0.45;
 
         public double CurrentOffsetRatioMove { get; private set; }
         public double CurrentOffsetRatioAttack { get; private set; }
@@ -95,13 +94,13 @@ namespace Daipan.Enemy.MonoScripts
             if (clipName == "Boss1_AttackMotion_Tank")
             {
                 _tankGaugeMaterial.SetFloat("_Ratio",
-                    (float)((Ratio + CurrentOffsetRatioAttack) * (FillMax - FillMin) + FillMin));
+                    (float)((ratio + CurrentOffsetRatioAttack) * (FillMax - FillMin) + FillMin));
                 _tankGaugeMaterial.SetFloat("_RotationAngle", attackAngle);
             }
             else
             {
                 _tankGaugeMaterial.SetFloat("_Ratio",
-                    (float)((Ratio + CurrentOffsetRatioMove) * (FillMax - FillMin) + FillMin));
+                    (float)((ratio + CurrentOffsetRatioMove) * (FillMax - FillMin) + FillMin));
                 _tankGaugeMaterial.SetFloat("_RotationAngle", 0);
             }
         }

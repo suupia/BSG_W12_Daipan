@@ -71,7 +71,7 @@ namespace Daipan.Enemy.MonoScripts
             
             _animatorSwitcher.SetHpGauge(currentHp, maxHp);
             
-            enemyTankOffsetEventMono.Ratio = currentHp / maxHp;
+            enemyTankOffsetEventMono.ratio = currentHp / maxHp;
         }
 
         public override void Move()
