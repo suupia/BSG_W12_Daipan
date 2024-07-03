@@ -1964,13 +1964,14 @@ MonoBehaviour:
   - 0.17
   offsetRatioAttack:
   - 0
+  - 0.02
+  - 0.12
+  - 0.12
+  - 0.06
+  - 0.02
+  - 0.02
   - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
+  attackAngle: 25
   animator: {fileID: 6176444364704098556}
 --- !u!1 &9030056980886445914
 GameObject:

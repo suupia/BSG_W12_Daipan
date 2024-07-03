@@ -9,7 +9,10 @@ namespace Daipan.Enemy.MonoScripts
     {
         [SerializeField] double[] offsetRatioMove = { 0, 0, 0, 0, 0, 0, 0, 0 };
         [SerializeField] double[] offsetRatioAttack = { 0, 0, 0, 0, 0, 0, 0, 0 };
-
+        
+        [Header("Attackの時の傾ける角度（弧度法）")]
+        [SerializeField] float attackAngle = 0;
+        
         Material _tankGaugeMaterial = null!;
         [SerializeField] Animator animator = null!;
            
@@ -81,9 +84,17 @@ namespace Daipan.Enemy.MonoScripts
             var clipName = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
             Debug.Log($"clipName:{clipName}");
             
-            // todo: clipNameで分岐
-            Debug.Log($" Ratio: {Ratio} CurrentOffsetRatioMove: {CurrentOffsetRatioMove} FillMax: {FillMax}");
-            _tankGaugeMaterial.SetFloat("_Ratio", (float)((Ratio + CurrentOffsetRatioMove) * FillMax));
+            // あまりよくないが、clipNameで分岐
+            if (clipName == "Boss1_AttackMotion_Tank")
+            {
+                _tankGaugeMaterial.SetFloat("_Ratio", (float)((Ratio + CurrentOffsetRatioAttack) * FillMax));
+                _tankGaugeMaterial.SetFloat("_RotationAngle", attackAngle);
+            }
+            else
+            {
+                _tankGaugeMaterial.SetFloat("_Ratio", (float)((Ratio + CurrentOffsetRatioMove) * FillMax));
+                _tankGaugeMaterial.SetFloat("_RotationAngle", 0);
+            }
         }
     }
 }
