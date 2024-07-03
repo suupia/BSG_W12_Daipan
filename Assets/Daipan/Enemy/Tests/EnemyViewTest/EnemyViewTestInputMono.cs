@@ -35,18 +35,25 @@ public class EnemyViewTestInputMono : MonoBehaviour
             enemyViewMono.Move();
             enemyBossViewMono.Move();
         }
+
         if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            enemyViewMono.Attack();
+            enemyBossViewMono.Attack();
+        }
+        
+        if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             enemyViewMono.Died( () => Debug.Log("Do something when died"));
               enemyBossViewMono.Died( () => Debug.Log("Do something when died"));
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             enemyViewMono.Daipaned( () => Debug.Log("Do something when daipaned"));
             enemyBossViewMono.Daipaned( () => Debug.Log("Do something when daipaned"));
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha3))
+        if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             enemyViewMono.Daipaned(() =>
             {

@@ -459,7 +459,7 @@ SortingGroup:
   m_GameObject: {fileID: 1939891955781315448}
   m_Enabled: 1
   m_SortingLayerID: 594514123
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_SortAtRoot: 0
 --- !u!1 &2006523647580328170
@@ -822,6 +822,16 @@ MonoBehaviour:
   animatorLine: {fileID: 1646048345968158825}
   animatorTank: {fileID: 6176444364704098556}
   highlightSpriteRenderer: {fileID: 8202944516709086256}
+  offsetRatio:
+  - 0
+  - 0
+  - 0.3
+  - 0.3
+  - 0.05
+  - 0
+  - 0
+  - 0
+  enemyTankOffsetEventMono: {fileID: 3462630145309376206}
 --- !u!1 &4125510455013595437
 GameObject:
   m_ObjectHideFlags: 0
@@ -1835,6 +1845,7 @@ GameObject:
   - component: {fileID: 8869610159797291038}
   - component: {fileID: 6794330884735103554}
   - component: {fileID: 6176444364704098556}
+  - component: {fileID: 3462630145309376206}
   m_Layer: 7
   m_Name: AnimatorTank
   m_TagString: Untagged
@@ -1903,7 +1914,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.46, y: 2.65}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -1930,6 +1941,37 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3462630145309376206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8978631952638418134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf8dccbaafc04a01a89641ba60879daa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offsetRatioMove:
+  - 0.17
+  - 0.1
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0.1
+  - 0.17
+  offsetRatioAttack:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  animator: {fileID: 6176444364704098556}
 --- !u!1 &9030056980886445914
 GameObject:
   m_ObjectHideFlags: 0
@@ -1977,7 +2019,7 @@ SortingGroup:
   m_GameObject: {fileID: 9030056980886445914}
   m_Enabled: 1
   m_SortingLayerID: 594514123
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_SortAtRoot: 0
 --- !u!1 &9062926216580706414

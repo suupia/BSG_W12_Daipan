@@ -171,6 +171,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6195893377392259814, guid: 0707a4c3debc043edbaa849a7068eef3, type: 3}
+      propertyPath: offsetRatio.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6195893377392259814, guid: 0707a4c3debc043edbaa849a7068eef3, type: 3}
+      propertyPath: offsetRatio.Array.data[2]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6195893377392259814, guid: 0707a4c3debc043edbaa849a7068eef3, type: 3}
+      propertyPath: offsetRatio.Array.data[3]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6195893377392259814, guid: 0707a4c3debc043edbaa849a7068eef3, type: 3}
+      propertyPath: offsetRatio.Array.data[4]
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6468134243358874785, guid: 0707a4c3debc043edbaa849a7068eef3, type: 3}
       propertyPath: m_Name
       value: BossView

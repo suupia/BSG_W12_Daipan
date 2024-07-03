@@ -1,0 +1,90 @@
+#nullable enable
+using System;
+using UnityEngine;
+using UnityEngine.Serialization;
+
+namespace Daipan.Enemy.MonoScripts
+{
+    public class EnemyTankOffsetEventMono : MonoBehaviour
+    {
+        [SerializeField] double[] offsetRatioMove = { 0, 0, 0, 0, 0, 0, 0, 0 };
+        [SerializeField] double[] offsetRatioAttack = { 0, 0, 0, 0, 0, 0, 0, 0 };
+
+        Material _tankGaugeMaterial = null!;
+        [SerializeField] Animator animator = null!;
+           
+        // Tankの画像が全体の画像のサイズに合わせられているため、0.47でマックスになることに注意
+        const double FillMax = 0.6;
+        
+        public double Ratio { get;  set; }
+        
+        public double CurrentOffsetRatioMove { get; private set; } 
+        public double CurrentOffsetRatioAttack { get; private set; }
+        
+        void Awake()
+        {
+            _tankGaugeMaterial = animator.GetComponent<SpriteRenderer>().material; 
+        }
+        
+        void Frame0()
+        {
+            CurrentOffsetRatioMove = offsetRatioMove[0]; 
+            CurrentOffsetRatioAttack = offsetRatioAttack[0];
+            Update();
+        }
+
+        void Frame1()
+        {
+            CurrentOffsetRatioMove = offsetRatioMove[1]; 
+            CurrentOffsetRatioAttack = offsetRatioAttack[1];
+            Update();
+        } 
+        void Frame2()
+        {
+            CurrentOffsetRatioMove = offsetRatioMove[2];
+            CurrentOffsetRatioAttack = offsetRatioAttack[2];
+            Update();
+        }
+        void Frame3()
+        {
+            CurrentOffsetRatioMove = offsetRatioMove[3]; 
+            CurrentOffsetRatioAttack = offsetRatioAttack[3];
+            Update();
+        }
+        void Frame4()
+        {
+            CurrentOffsetRatioMove = offsetRatioMove[4]; 
+            CurrentOffsetRatioAttack = offsetRatioAttack[4];
+            Update();
+        }
+        void Frame5()
+        {
+            CurrentOffsetRatioMove = offsetRatioMove[5]; 
+            CurrentOffsetRatioAttack = offsetRatioAttack[5];
+            Update();
+        }
+        void Frame6()
+        {
+            CurrentOffsetRatioMove = offsetRatioMove[6]; 
+            CurrentOffsetRatioAttack = offsetRatioAttack[6];
+            Update();
+        }
+        void Frame7()
+        {
+            CurrentOffsetRatioMove = offsetRatioMove[7]; 
+            CurrentOffsetRatioAttack = offsetRatioAttack[7];
+            Update();
+        }
+
+        void Update()
+        {
+            var clipName = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
+            Debug.Log($"clipName:{clipName}");
+            
+            // todo: clipNameで分岐
+            Debug.Log($" Ratio: {Ratio} CurrentOffsetRatioMove: {CurrentOffsetRatioMove} FillMax: {FillMax}");
+            _tankGaugeMaterial.SetFloat("_Ratio", (float)((Ratio + CurrentOffsetRatioMove) * FillMax));
+        }
+    }
+}
+
