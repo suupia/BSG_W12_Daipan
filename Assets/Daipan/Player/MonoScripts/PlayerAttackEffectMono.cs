@@ -14,7 +14,7 @@ namespace Daipan.Player.MonoScripts
     public class PlayerAttackEffectMono : MonoBehaviour
     {
         [SerializeField] PlayerAttackEffectViewMono? viewMono;
-        readonly double _speed = 20;
+        readonly double _speed = 50;
         readonly double _hitDistance = 1.0;
         public event EventHandler<OnHitEventArgs>? OnHit;
         IPlayerParamData? _playerParamData;
