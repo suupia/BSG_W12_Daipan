@@ -14,11 +14,13 @@ namespace Daipan.Player.MonoScripts
     public class PlayerAttackEffectMono : MonoBehaviour
     {
         [SerializeField] PlayerAttackEffectViewMono? viewMono;
-        readonly double _speed = 20;
+        readonly double _speed = 30;
         readonly double _hitDistance = 1.0;
         public event EventHandler<OnHitEventArgs>? OnHit;
         IPlayerParamData? _playerParamData;
-        Func<EnemyMono?> _getNearestEnemyMono = () => null; 
+        Func<EnemyMono?> _getNearestEnemyMono = () => null;
+
+        Vector3 Direction { get; set; } = Vector3.right;
 
         void Update()
         {
@@ -28,10 +30,10 @@ namespace Daipan.Player.MonoScripts
                 Debug.LogWarning("PlayerAttackEffectMono: PlayerParamData is null");
                 return;
             }
-            
-            var direction = Vector3.right;
-            transform.position += direction * (float)(_speed * Time.deltaTime);
+
             var enemyMono = _getNearestEnemyMono();
+            Direction = (enemyMono?.transform.position - transform.position)?.normalized ?? Direction;
+            transform.position += Direction * (float)(_speed * Time.deltaTime);
             if (enemyMono != null)
             {
                 if (enemyMono.transform.position.x - transform.position.x < _hitDistance)

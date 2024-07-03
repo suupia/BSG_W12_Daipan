@@ -607,6 +607,7 @@ Transform:
   - {fileID: 444984137}
   - {fileID: 626149471}
   - {fileID: 1495197751}
+  - {fileID: 259128153}
   - {fileID: 1242288914}
   - {fileID: 1267885127}
   m_Father: {fileID: 0}
@@ -938,6 +939,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &259128152
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 259128153}
+  m_Layer: 0
+  m_Name: AttackEffectSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &259128153
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 259128152}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.29, y: 2.48, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 141214692}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &262770948
 GameObject:
   m_ObjectHideFlags: 0
@@ -4432,6 +4464,7 @@ MonoBehaviour:
   playerSpawnedPosition:
     playerSpawnTransformX: {fileID: 626149471}
   enemyDespawnedPoint: {fileID: 1495197751}
+  attackEffectSpawnedPoint: {fileID: 259128153}
   attackEffectDespawnedPoint: {fileID: 1242288914}
 --- !u!4 &1916099520
 Transform:

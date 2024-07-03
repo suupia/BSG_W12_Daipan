@@ -11,12 +11,13 @@ namespace Daipan.Player.Scripts
             PlayerPositionMono playerPositionMono
         )
         {
-            var data = new PlayerSpawnPointData()
+            var playerSpawnPointData = new PlayerSpawnPointData()
             {
                 GetPlayerSpawnedPointX = () => playerPositionMono.playerSpawnedPoint,
-                GetAttackEffectDespawnedPoint = () => playerPositionMono.attackEffectDespawnedPoint.position,
             };
-            builder.RegisterInstance(data);
+            builder.RegisterInstance(playerSpawnPointData);
+            var playerAttackEffectPointData = new PlayerAttackEffectPointData(playerPositionMono);
+            builder.RegisterInstance(playerAttackEffectPointData);
         }
     }
 }

@@ -167,13 +167,15 @@ namespace Daipan.Daipan
             PlayerPositionMono SetUpPlayerPositionMono()
             {
                 var lanePositionMono = FindObjectOfType<LanePositionMono>();
-                var playerPositionMono = new GameObject().AddComponent<PlayerPositionMono>();
+                var playerPositionMono = new GameObject($"PlayerPositionMono(Runtime)").AddComponent<PlayerPositionMono>();
                 playerPositionMono.playerSpawnedPoint = lanePositionMono.playerSpawnedPosition;
-                playerPositionMono.attackEffectDespawnedPoint = lanePositionMono.attackEffectDespawnedPoint;
+                playerPositionMono.playerAttackEffectPosition = new PlayerAttackEffectPosition();
+                playerPositionMono.playerAttackEffectPosition.attackEffectSpawnedPoint = lanePositionMono.attackEffectSpawnedPoint;
+                playerPositionMono.playerAttackEffectPosition.attackEffectDespawnedPoint = lanePositionMono.attackEffectDespawnedPoint;
                 return playerPositionMono;
             }
 
-            builder.RegisterInstance(new PlayerPositionMonoBuilder(builder, SetUpPlayerPositionMono()));
+            builder.RegisterInstance(new PlayerPositionMonoBuilder(builder, SetUpPlayerPositionMono())); 
 
             // builder.RegisterInstance(new PlayerParamDataBuilder(builder, playerParamManager));
             builder.RegisterInstance(playerParamManager);

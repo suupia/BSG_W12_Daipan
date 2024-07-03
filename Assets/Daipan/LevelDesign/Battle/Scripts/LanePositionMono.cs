@@ -18,6 +18,7 @@ namespace Daipan.LevelDesign.Battle.Scripts
 
         [Header("敵の消滅位置")] public Transform enemyDespawnedPoint = null!;
 
+        [Header("攻撃エフェクトの生成位置")] public Transform attackEffectSpawnedPoint = null!;
         [Header("攻撃エフェクトの消滅位置")] public Transform attackEffectDespawnedPoint = null!;
     }
 

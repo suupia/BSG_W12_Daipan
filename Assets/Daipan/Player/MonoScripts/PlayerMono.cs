@@ -21,6 +21,7 @@ namespace Daipan.Player.MonoScripts
         PlayerAttackEffectSpawner _playerAttackEffectSpawner = null!;
         CommentSpawner _commentSpawner = null!;
         PlayerAttackedCounter _attackedCounterForAntiComment = null!;
+        PlayerAttackEffectPointData _playerAttackEffectPointData = null!;
         IPlayerHpParamData _playerHpParamData = null!;
         public Hp Hp { get; set; } = null!;
         public void Update()
@@ -62,28 +63,25 @@ namespace Daipan.Player.MonoScripts
                 return;
             }
 
-            // todo : y座標はレーンの座標を使用したい
-            var spawnPositionY = targetEnemy != null
-                ? targetEnemy.transform.position.y
-                : sameColorPlayerViewMono.transform.position.y;
-            var spawnPosition = new Vector3(sameColorPlayerViewMono.transform.position.x, spawnPositionY, 0);
-
+            var spawnPosition = _playerAttackEffectPointData.GetAttackEffectSpawnedPoint();
             _playerAttackEffectSpawner.SpawnEffect(this, playerViewMonos,playerColor, spawnPosition, Quaternion.identity);
         }
 
         [Inject]
         public void Initialize(
-            EnemyCluster enemyCluster,
-            PlayerAttackedCounter playerAttackedCounter,
-            InputSerialManager inputSerialManager,
-            PlayerAttackEffectSpawner playerAttackEffectSpawner,
-            IrritatedValue irritatedValue,
-            CommentSpawner commentSpawner,
-            IPlayerHpParamData playerHpParamData
+            EnemyCluster enemyCluster
+            ,PlayerAttackedCounter playerAttackedCounter
+            ,InputSerialManager inputSerialManager
+            ,PlayerAttackEffectSpawner playerAttackEffectSpawner
+            ,IrritatedValue irritatedValue
+            ,CommentSpawner commentSpawner
+            ,PlayerAttackEffectPointData playerAttackEffectPointData
+            ,IPlayerHpParamData playerHpParamData
         )
         {
             _enemyCluster = enemyCluster;
             _commentSpawner = commentSpawner;
+            _playerAttackEffectPointData = playerAttackEffectPointData;
             _playerHpParamData = playerHpParamData;
             Hp = new Hp(playerHpParamData.GetMaxHp());
 
