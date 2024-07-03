@@ -15,7 +15,7 @@ namespace Daipan.Player.Scripts
         public PlayerAttackedCounter(IPlayerHpParamData playerHpParamData)
         {
             _threshold = playerHpParamData.GetAntiCommentThreshold();
-            CoutnReset();
+            CountReset();
         }
 
         public void CountUp()
@@ -33,7 +33,7 @@ namespace Daipan.Player.Scripts
             }
         }
 
-        public void CoutnReset()
+        public void CountReset()
         {
             AttackedNumber = 0;
             _currentTermStartNumber = 0;
