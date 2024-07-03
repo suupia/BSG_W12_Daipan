@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: TowerLight
-  m_Shader: {fileID: -6465566751694194690, guid: d4c9872b0f92b43d9a87b6a96dc67d4b, type: 3}
+  m_Name: EnemyTankGauge
+  m_Shader: {fileID: -6465566751694194690, guid: 5a1aa08033ead421bb0714c56e43fed6, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -77,7 +77,7 @@ Material:
     - _EnableExternalAlpha: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Ratio: 0.7
+    - _Ratio: 0.1686
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}

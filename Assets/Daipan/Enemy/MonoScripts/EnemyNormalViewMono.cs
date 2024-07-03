@@ -63,7 +63,7 @@ namespace Daipan.Enemy.MonoScripts
             };
         }
 
-        public override void SetHpGauge(int currentHp, int maxHp) => _animatorSwitcher.SetHpGauge(currentHp, maxHp);
+        public override void SetHpGauge(double currentHp, int maxHp) => _animatorSwitcher.SetHpGauge(currentHp, maxHp);
 
         public override void Move() => _animatorSwitcher.Move();
 

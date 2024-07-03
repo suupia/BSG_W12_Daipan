@@ -19,10 +19,10 @@ namespace Daipan.Enemy.MonoScripts
         [SerializeField] Animator animatorEyeBall = null!;
         [SerializeField] Animator animatorLine = null!;
         [SerializeField] Animator animatorTank = null!;
-        [SerializeField] SpriteRenderer highlightSpriteRenderer = null!; 
-        
-        EnemyViewAnimatorSwitcher _animatorSwitcher = null!;
+        [SerializeField] SpriteRenderer highlightSpriteRenderer = null!;
 
+        EnemyViewAnimatorSwitcher _animatorSwitcher = null!;
+        [SerializeField] EnemyTankOffsetEventMono enemyTankOffsetEventMono = null!;
         void Awake()
         {
             if (hpGaugeMono == null)
@@ -45,6 +45,7 @@ namespace Daipan.Enemy.MonoScripts
             );
         }
 
+
         public override void SetDomain(IEnemyViewParamData enemyViewParamData)
         {
             animatorBody.GetComponent<SpriteRenderer>().color = enemyViewParamData.GetBodyColor();
@@ -65,17 +66,36 @@ namespace Daipan.Enemy.MonoScripts
             };
         }
 
-        public override void SetHpGauge(int currentHp, int maxHp) => _animatorSwitcher.SetHpGauge(currentHp, maxHp);
+        public override void SetHpGauge(double currentHp, int maxHp)
+        {
+            
+            _animatorSwitcher.SetHpGauge(currentHp, maxHp);
+            
+            enemyTankOffsetEventMono.ratio = currentHp / maxHp;
+        }
 
-        public override void Move() => _animatorSwitcher.Move();
+        public override void Move()
+        {
+            _animatorSwitcher.Move();
+        }
 
-        public override void Attack() => _animatorSwitcher.Attack();
+        public override void Attack()
+        {
+            _animatorSwitcher.Attack();
+        }
 
-        public override void Died(Action onDied) => _animatorSwitcher.Died(onDied);
+        public override void Died(Action onDied)
+        {
+            _animatorSwitcher.Died(onDied);
+        }
 
-        public override void Daipaned(Action onDied) => _animatorSwitcher.Daipaned(onDied);
+        public override void Daipaned(Action onDied)
+        {
+            _animatorSwitcher.Daipaned(onDied);
+        }
+
         public override void Highlight(bool isHighlighted) => _animatorSwitcher.Highlight(isHighlighted);
-        
+
 
     }
 }

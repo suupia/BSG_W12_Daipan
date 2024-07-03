@@ -29,7 +29,7 @@ namespace Daipan.Enemy.MonoScripts
             }
         }
         
-        public override void SetHpGauge(int currentHp, int maxHp)
+        public override void SetHpGauge(double currentHp, int maxHp)
         {
             _selectedEnemyViewMono.SetHpGauge(currentHp, maxHp);
         }
