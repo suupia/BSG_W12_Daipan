@@ -15,7 +15,7 @@ public class EnemyViewTestInputMono : MonoBehaviour
     
     [SerializeField] bool isHighlighted = false;
     [SerializeField, Range(0f, 1f)]
-    float hpRatio = 1f;
+    float hpRatio = 0.5f;
 
     void Start()
     {

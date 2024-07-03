@@ -382,7 +382,7 @@ MonoBehaviour:
   activeFalseObjects:
   - {fileID: 23108546}
   isHighlighted: 0
-  hpRatio: 1
+  hpRatio: 0.5
 --- !u!1001 &1691094465
 PrefabInstance:
   m_ObjectHideFlags: 0

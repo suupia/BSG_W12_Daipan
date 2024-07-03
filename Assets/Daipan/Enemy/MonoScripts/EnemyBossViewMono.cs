@@ -23,7 +23,9 @@ namespace Daipan.Enemy.MonoScripts
 
         EnemyViewAnimatorSwitcher _animatorSwitcher = null!;
         Material? _tankGaugeMaterial;
-        TankSpriteFitter _tankSpriteFitter = new TankSpriteFitter();
+        readonly TankSpriteFitter _tankSpriteFitter = new TankSpriteFitter();
+        [SerializeField] double[] offsetRatio ={ 0, 0, 0.3, 0.3, 0.05, 0, 0, 0 };
+        [SerializeField] int currentAnimationIndex = 0;
 
         void Awake()
         {
@@ -50,7 +52,7 @@ namespace Daipan.Enemy.MonoScripts
 
         void Update()
         {
-            _tankSpriteFitter.Update(); 
+            _tankSpriteFitter.Update(offsetRatio); 
         }
 
         public override void SetDomain(IEnemyViewParamData enemyViewParamData)
@@ -83,7 +85,7 @@ namespace Daipan.Enemy.MonoScripts
                 Debug.LogWarning("_tankGaugeMaterial is null");
                 return;
             }
-            _tankSpriteFitter.SetRatio(_tankGaugeMaterial, (double)currentHp / maxHp);
+            _tankSpriteFitter.SetRatioNew(animatorLine, _tankGaugeMaterial, (double)currentHp / maxHp, out currentAnimationIndex);
         }
 
         public override void Move()
@@ -126,20 +128,21 @@ namespace Daipan.Enemy.MonoScripts
     {
         // 全部で画像は6枚なのでそれに対応するように作る
         readonly double[] _animationTime = { 0.00, 0.01, 0.02, 0.04, 0.05, 0.07 };
-        readonly double[] _offsetRatio = { 0, 0, 0.3, 0.05, 0, 0 };
+         double[] _offsetRatio = { 0, 0, 0.3, 0.3, 0.05, 0, 0, 0 };
 
         double Timer { get; set; }
         int CurrentIndex { get; set; }
         double CurrentOffsetRatio => _offsetRatio[CurrentIndex];
        
         // Tankの画像が全体の画像のサイズに合わせられているため、0.47でマックスになることに注意
-        const double FillMax = 0.47;
+        const double FillMax = 0.6;
 
         /// <summary>
         /// Please call this method in Update()
         /// </summary>
-        public void Update()
+        public void Update(double[] offsetRatio)
         {
+            _offsetRatio = offsetRatio;
             Timer += Time.deltaTime;
             if (Timer > _animationTime[CurrentIndex])
             {
@@ -156,6 +159,17 @@ namespace Daipan.Enemy.MonoScripts
         {
           
             gaugeMaterial.SetFloat("_Ratio", (float)((ratio + CurrentOffsetRatio) * FillMax));
+        }
+
+        public void SetRatioNew(Animator animator, Material gaugeMaterial, double ratio, out int animationIndex)
+        {
+            var normalizedTime = animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
+            
+            // アニメーションの長さを8分割する
+            animationIndex = Mathf.FloorToInt(normalizedTime * 8) % 8;
+            Debug.Log($"animationIndex: {animationIndex}");
+            
+            gaugeMaterial.SetFloat("_Ratio", (float)((ratio + _offsetRatio[animationIndex]) * FillMax));
         }
 
 
