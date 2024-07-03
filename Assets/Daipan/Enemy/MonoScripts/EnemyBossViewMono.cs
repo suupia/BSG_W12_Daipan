@@ -23,6 +23,7 @@ namespace Daipan.Enemy.MonoScripts
 
         EnemyViewAnimatorSwitcher _animatorSwitcher = null!;
         Material? _tankGaugeMaterial;
+        TankSpriteFitter _tankSpriteFitter = new TankSpriteFitter();
 
         void Awake()
         {
@@ -45,6 +46,11 @@ namespace Daipan.Enemy.MonoScripts
                 highlightSpriteRenderer
             );
             _tankGaugeMaterial = animatorTank.GetComponent<SpriteRenderer>().material;
+        }
+
+        void Update()
+        {
+            _tankSpriteFitter.Update(); 
         }
 
         public override void SetDomain(IEnemyViewParamData enemyViewParamData)
@@ -77,19 +83,85 @@ namespace Daipan.Enemy.MonoScripts
                 Debug.LogWarning("_tankGaugeMaterial is null");
                 return;
             }
-            // Tankの画像が全体の画像のサイズに合わせられているため、0.47でマックスになることに注意
-            _tankGaugeMaterial.SetFloat("_Ratio", (float)currentHp / maxHp * 0.47f);
+            _tankSpriteFitter.SetRatio(_tankGaugeMaterial, (double)currentHp / maxHp);
         }
 
-        public override void Move() => _animatorSwitcher.Move();
+        public override void Move()
+        {
+            _tankSpriteFitter.Reset();
+            _animatorSwitcher.Move();
+        }
 
-        public override void Attack() => _animatorSwitcher.Attack();
+        public override void Attack()
+        {
+            _tankSpriteFitter.Reset();
+            _animatorSwitcher.Attack();
+        }
 
-        public override void Died(Action onDied) => _animatorSwitcher.Died(onDied);
+        public override void Died(Action onDied)
+        {
+            _tankSpriteFitter.Reset();
+            _animatorSwitcher.Died(onDied);
+        }
 
-        public override void Daipaned(Action onDied) => _animatorSwitcher.Daipaned(onDied);
+        public override void Daipaned(Action onDied)
+        {
+            _tankSpriteFitter.Reset();
+            _animatorSwitcher.Daipaned(onDied);
+        }
+
         public override void Highlight(bool isHighlighted) => _animatorSwitcher.Highlight(isHighlighted);
-        
 
+        void TankSpriteOffset()
+        {
+            // 全部で画像は6枚なのでそれに対応するように作る
+            var animationTime = new[] { 0.00, 0.01, 0.02, 0.04, 0.05, 0.07 };
+            var offsetRatio = new[] { 0, 0, 0.1, 0.05, 0, 0 };
+        }
+
+    }
+
+    // Tankのアニメーションが上下するので、それに合わせて画像を切る位置を変更する
+    class TankSpriteFitter
+    {
+        // 全部で画像は6枚なのでそれに対応するように作る
+        readonly double[] _animationTime = { 0.00, 0.01, 0.02, 0.04, 0.05, 0.07 };
+        readonly double[] _offsetRatio = { 0, 0, 0.3, 0.05, 0, 0 };
+
+        double Timer { get; set; }
+        int CurrentIndex { get; set; }
+        double CurrentOffsetRatio => _offsetRatio[CurrentIndex];
+
+        /// <summary>
+        /// Please call this method in Update()
+        /// </summary>
+        public void Update()
+        {
+            Timer += Time.deltaTime;
+            if (Timer > _animationTime[CurrentIndex])
+            {
+                CurrentIndex++;
+                if (CurrentIndex >= _animationTime.Length)
+                {
+                    CurrentIndex = 0;
+                    Timer = 0;
+                }
+            }
+        }
+        
+        public void SetRatio(Material gaugeMaterial, double ratio)
+        {
+            // Tankの画像が全体の画像のサイズに合わせられているため、0.47でマックスになることに注意
+            gaugeMaterial.SetFloat("_Ratio", (float)(ratio + CurrentOffsetRatio * 0.47));
+        }
+
+
+        public void Reset()
+        {
+            Timer = 0;
+            CurrentIndex = 0;
+        }
+        
+        
     }
 }
