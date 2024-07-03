@@ -10,6 +10,5 @@ namespace Daipan.Player.Scripts
     {
         public Func<PlayerSpawnedPosition> GetPlayerSpawnedPointX { get; init; } =
             () => new PlayerSpawnedPosition(); 
-        public Func<UnityEngine.Vector3> GetAttackEffectDespawnedPoint { get; init; } = () => UnityEngine.Vector3.zero;
     }
 }

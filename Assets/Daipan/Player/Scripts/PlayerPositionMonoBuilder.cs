@@ -14,7 +14,6 @@ namespace Daipan.Player.Scripts
             var data = new PlayerSpawnPointData()
             {
                 GetPlayerSpawnedPointX = () => playerPositionMono.playerSpawnedPoint,
-                GetAttackEffectDespawnedPoint = () => playerPositionMono.attackEffectDespawnedPoint.position,
             };
             builder.RegisterInstance(data);
         }

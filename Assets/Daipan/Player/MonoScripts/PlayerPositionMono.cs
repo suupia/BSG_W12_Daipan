@@ -12,10 +12,16 @@ namespace Daipan.Player.MonoScripts
         [Header("プレイヤーの座標に関する設定はここです")]
         [Space]
         public PlayerSpawnedPosition playerSpawnedPoint = null!;
-        
-        [Header("攻撃エフェクトの消滅位置")]
-        public Transform attackEffectDespawnedPoint = null!;
+        public PlayerAttackEffectPosition  playerAttackEffectPosition = null!;
+    }
 
+    [Serializable]
+    public class PlayerAttackEffectPosition
+    {
+        [Header("攻撃エフェクトの生成位置")]
+        public Transform attackEffectSpawnedPoint = null!;
+        [Header("攻撃エフェクトの消滅位置")]
+        public Transform attackEffectDespawnedPoint = null!; 
     }
     
     [Serializable]
