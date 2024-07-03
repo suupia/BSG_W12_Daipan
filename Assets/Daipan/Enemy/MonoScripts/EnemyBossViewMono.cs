@@ -22,8 +22,6 @@ namespace Daipan.Enemy.MonoScripts
         [SerializeField] SpriteRenderer highlightSpriteRenderer = null!;
 
         EnemyViewAnimatorSwitcher _animatorSwitcher = null!;
-        Material? _tankGaugeMaterial;
-        [SerializeField] double[] offsetRatio ={ 0, 0, 0.3, 0.3, 0.05, 0, 0, 0 };
         [SerializeField] EnemyTankOffsetEventMono enemyTankOffsetEventMono = null!;
         void Awake()
         {
@@ -45,7 +43,6 @@ namespace Daipan.Enemy.MonoScripts
                 hpGaugeMono,
                 highlightSpriteRenderer
             );
-            _tankGaugeMaterial = animatorTank.GetComponent<SpriteRenderer>().material;
         }
 
 
@@ -74,12 +71,6 @@ namespace Daipan.Enemy.MonoScripts
             
             _animatorSwitcher.SetHpGauge(currentHp, maxHp);
             
-            if (_tankGaugeMaterial == null)
-            {
-                Debug.LogWarning("_tankGaugeMaterial is null");
-                return;
-            }
-
             enemyTankOffsetEventMono.Ratio = currentHp / maxHp;
         }
 
@@ -105,57 +96,6 @@ namespace Daipan.Enemy.MonoScripts
 
         public override void Highlight(bool isHighlighted) => _animatorSwitcher.Highlight(isHighlighted);
 
-        void TankSpriteOffset()
-        {
-            // 全部で画像は6枚なのでそれに対応するように作る
-            var animationTime = new[] { 0.00, 0.01, 0.02, 0.04, 0.05, 0.07 };
-            var offsetRatio = new[] { 0, 0, 0.1, 0.05, 0, 0 };
-        }
 
-    }
-
-    // Tankのアニメーションが上下するので、それに合わせて画像を切る位置を変更する
-    class TankSpriteFitter
-    {
-        // 全部で画像は6枚なのでそれに対応するように作る
-         double[] _offsetRatio = { 0, 0, 0.3, 0.3, 0.05, 0, 0, 0 };
-
-        double Timer { get; set; }
-        int CurrentIndex { get; set; }
-        double CurrentOffsetRatio => _offsetRatio[CurrentIndex];
-       
-        // Tankの画像が全体の画像のサイズに合わせられているため、0.47でマックスになることに注意
-        const double FillMax = 0.6;
-
-        double Ratio { get; set; }
-        public void Update(Animator animator, Material gaugeMaterial,double[] offsetRatio, out int animationIndex)
-        {
-            _offsetRatio = offsetRatio; // デバッグ
-            
-            var normalizedTime = animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
-            
-            // アニメーションの長さを8分割する
-            animationIndex = Mathf.FloorToInt(normalizedTime * 8) % 8;
-            Debug.Log($"animationIndex: {animationIndex}");
-            
-            gaugeMaterial.SetFloat("_Ratio", (float)((Ratio + _offsetRatio[animationIndex]) * FillMax));
-        }
-        
-   
-
-        public void SetRatioNew( double ratio)
-        {
-            Ratio = ratio;
-         
-        }
-
-
-        public void Reset()
-        {
-            Timer = 0;
-            CurrentIndex = 0;
-        }
-        
-        
     }
 }
