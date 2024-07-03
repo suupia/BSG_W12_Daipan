@@ -19,9 +19,10 @@ namespace Daipan.Enemy.MonoScripts
         [SerializeField] Animator animatorEyeBall = null!;
         [SerializeField] Animator animatorLine = null!;
         [SerializeField] Animator animatorTank = null!;
-        [SerializeField] SpriteRenderer highlightSpriteRenderer = null!; 
-        
+        [SerializeField] SpriteRenderer highlightSpriteRenderer = null!;
+
         EnemyViewAnimatorSwitcher _animatorSwitcher = null!;
+        Material? _tankGaugeMaterial;
 
         void Awake()
         {
@@ -43,6 +44,7 @@ namespace Daipan.Enemy.MonoScripts
                 hpGaugeMono,
                 highlightSpriteRenderer
             );
+            _tankGaugeMaterial = animatorTank.GetComponent<SpriteRenderer>().material;
         }
 
         public override void SetDomain(IEnemyViewParamData enemyViewParamData)
@@ -65,7 +67,19 @@ namespace Daipan.Enemy.MonoScripts
             };
         }
 
-        public override void SetHpGauge(int currentHp, int maxHp) => _animatorSwitcher.SetHpGauge(currentHp, maxHp);
+        public override void SetHpGauge(int currentHp, int maxHp)
+        {
+            
+            _animatorSwitcher.SetHpGauge(currentHp, maxHp);
+            
+            if (_tankGaugeMaterial == null)
+            {
+                Debug.LogWarning("_tankGaugeMaterial is null");
+                return;
+            }
+            // Tankの画像が全体の画像のサイズに合わせられているため、0.47でマックスになることに注意
+            _tankGaugeMaterial.SetFloat("_Ratio", (float)currentHp / maxHp * 0.47f);
+        }
 
         public override void Move() => _animatorSwitcher.Move();
 
