@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9069679158339806970}
   - component: {fileID: 6750326614452677960}
   - component: {fileID: 1646048345968158825}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AnimatorLine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 832485066713018503}
   - component: {fileID: 9040580992553938480}
   - component: {fileID: 7430879358509082123}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AnimatorBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -222,7 +222,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8211718779254400817}
   - component: {fileID: 2446297469903332641}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -305,7 +305,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3128705943370877743}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: View
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -339,7 +339,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2766204808554065998}
   - component: {fileID: 8684870962319229844}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Outline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -423,7 +423,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8890553289560480573}
   - component: {fileID: 36191672775152021}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SortingGroups
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -459,7 +459,7 @@ SortingGroup:
   m_GameObject: {fileID: 1939891955781315448}
   m_Enabled: 1
   m_SortingLayerID: 594514123
-  m_SortingLayer: 4
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_SortAtRoot: 0
 --- !u!1 &2006523647580328170
@@ -473,7 +473,7 @@ GameObject:
   - component: {fileID: 4344793054681556327}
   - component: {fileID: 2682917076593399257}
   - component: {fileID: 4539626319711533369}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AnimatorBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -578,7 +578,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2299214105700761563}
   - component: {fileID: 513392601257198620}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: HpGauge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -625,7 +625,7 @@ GameObject:
   - component: {fileID: 902817364175195581}
   - component: {fileID: 3646834199008303034}
   - component: {fileID: 6991727084755205900}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AnimatorHighlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -642,8 +642,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.13, y: 1.13, z: 1.13}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 8890553289560480573}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -730,7 +730,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2041999806951680291}
   - component: {fileID: 4929758937500842701}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: HpGauge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -776,7 +776,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5020758794593989439}
   - component: {fileID: 6195893377392259814}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -833,7 +833,7 @@ GameObject:
   - component: {fileID: 6623833466279682916}
   - component: {fileID: 6269380587600219153}
   - component: {fileID: 4205313984872671269}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AnimatorEyeBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -939,7 +939,7 @@ GameObject:
   - component: {fileID: 2684352460177317356}
   - component: {fileID: 4702849949233260998}
   - component: {fileID: 2019943362437910544}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AnimatorEyeBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1045,7 +1045,7 @@ GameObject:
   - component: {fileID: 4555426971708853859}
   - component: {fileID: 3402243401968981135}
   - component: {fileID: 6594542187788344235}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AnimatorEye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1150,7 +1150,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2954116479085241527}
   - component: {fileID: 7702813003098383304}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TempSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1234,7 +1234,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1444774139761719929}
   - component: {fileID: 9203547594920981550}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TempSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1319,7 +1319,7 @@ GameObject:
   - component: {fileID: 1401222022357812699}
   - component: {fileID: 8202944516709086256}
   - component: {fileID: 3206175669543632577}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AnimatorHighlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1335,9 +1335,9 @@ Transform:
   m_GameObject: {fileID: 5646447802595441522}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0.01, y: 0.02, z: 0}
+  m_LocalScale: {x: 1.06, y: 1.06, z: 1.06}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 6400987091300322018}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1424,7 +1424,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6021291937121101092}
   - component: {fileID: 8217270242501461178}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Normal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1478,7 +1478,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 595611206869899243}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: View
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1512,7 +1512,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6041840387122220431}
   - component: {fileID: 6127506084937510723}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemyView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1560,7 +1560,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5888314986079452442}
   - component: {fileID: 9169262336213882791}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Outline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1645,7 +1645,7 @@ GameObject:
   - component: {fileID: 2131031809250015280}
   - component: {fileID: 2660072698588151922}
   - component: {fileID: 1337539842161110902}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AnimatorEye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1750,7 +1750,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4041432889839087047}
   - component: {fileID: 7593355405118296679}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1835,7 +1835,7 @@ GameObject:
   - component: {fileID: 8869610159797291038}
   - component: {fileID: 6794330884735103554}
   - component: {fileID: 6176444364704098556}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AnimatorTank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1940,7 +1940,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6400987091300322018}
   - component: {fileID: 5943131544250096423}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SortingGroups
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1977,7 +1977,7 @@ SortingGroup:
   m_GameObject: {fileID: 9030056980886445914}
   m_Enabled: 1
   m_SortingLayerID: 594514123
-  m_SortingLayer: 4
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_SortAtRoot: 0
 --- !u!1 &9062926216580706414
@@ -1991,7 +1991,7 @@ GameObject:
   - component: {fileID: 8792667193465341173}
   - component: {fileID: 5259850207756566429}
   - component: {fileID: 4458930164941286512}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AnimatorLine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
