@@ -73,7 +73,7 @@ namespace Daipan.Enemy.MonoScripts
             };
         }
 
-        public override void SetHpGauge(int currentHp, int maxHp)
+        public override void SetHpGauge(double currentHp, int maxHp)
         {
             
             _animatorSwitcher.SetHpGauge(currentHp, maxHp);
@@ -131,6 +131,9 @@ namespace Daipan.Enemy.MonoScripts
         double Timer { get; set; }
         int CurrentIndex { get; set; }
         double CurrentOffsetRatio => _offsetRatio[CurrentIndex];
+       
+        // Tankの画像が全体の画像のサイズに合わせられているため、0.47でマックスになることに注意
+        const double FillMax = 0.47;
 
         /// <summary>
         /// Please call this method in Update()
@@ -151,8 +154,8 @@ namespace Daipan.Enemy.MonoScripts
         
         public void SetRatio(Material gaugeMaterial, double ratio)
         {
-            // Tankの画像が全体の画像のサイズに合わせられているため、0.47でマックスになることに注意
-            gaugeMaterial.SetFloat("_Ratio", (float)(ratio + CurrentOffsetRatio * 0.47));
+          
+            gaugeMaterial.SetFloat("_Ratio", (float)((ratio + CurrentOffsetRatio) * FillMax));
         }
 
 
