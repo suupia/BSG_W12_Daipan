@@ -56,6 +56,9 @@ TagManager:
   - name: Player_Red
     uniqueID: 1124539877
     locked: 0
+  - name: Comment
+    uniqueID: 2838269711
+    locked: 0
   - name: Enemy
     uniqueID: 594514123
     locked: 0
@@ -64,9 +67,6 @@ TagManager:
     locked: 0
   - name: Stream_UI
     uniqueID: 1807422053
-    locked: 0
-  - name: Comment
-    uniqueID: 2838269711
     locked: 0
   - name: Streamer
     uniqueID: 1661063009
