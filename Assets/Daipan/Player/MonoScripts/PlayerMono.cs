@@ -1,6 +1,7 @@
 #nullable enable
 using System.Collections.Generic;
 using System.Linq;
+using Daipan.Battle.scripts;
 using Daipan.Enemy.Scripts;
 using Daipan.InputSerial.Scripts;
 using Daipan.Player.Interfaces;
@@ -10,6 +11,7 @@ using UnityEngine;
 using VContainer;
 using Daipan.Comment.Scripts;
 using Daipan.Player.LevelDesign.Interfaces;
+using R3;
 
 namespace Daipan.Player.MonoScripts
 {
@@ -76,6 +78,7 @@ namespace Daipan.Player.MonoScripts
             ,IrritatedValue irritatedValue
             ,CommentSpawner commentSpawner
             ,PlayerAttackEffectPointData playerAttackEffectPointData
+            ,WaveState waveState
             ,IPlayerHpParamData playerHpParamData
         )
         {
@@ -83,9 +86,12 @@ namespace Daipan.Player.MonoScripts
             _commentSpawner = commentSpawner;
             _playerAttackEffectPointData = playerAttackEffectPointData;
             _playerHpParamData = playerHpParamData;
-            Hp = new Hp(playerHpParamData.GetMaxHp());
-
-            _attackedCounterForAntiComment = playerAttackedCounter; 
+            Observable.EveryValueChanged(waveState, x => x.CurrentWave)
+                .Subscribe(_ => Hp = new Hp(playerHpParamData.GetMaxHp()))
+                .AddTo(this);
+            
+            _attackedCounterForAntiComment = playerAttackedCounter;
+            
             EnemyAttackModule.AttackEvent += (sender, args) =>
             {
                 // Domain
