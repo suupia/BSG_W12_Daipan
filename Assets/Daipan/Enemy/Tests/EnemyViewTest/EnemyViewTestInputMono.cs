@@ -1,4 +1,5 @@
 #nullable enable
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Daipan.Enemy.Interfaces;
@@ -9,6 +10,8 @@ using UnityEngine;
 public class EnemyViewTestInputMono : MonoBehaviour
 {
     [SerializeField] AbstractEnemyViewMono enemyViewMono = null!;
+    
+    [SerializeField] bool isHighlighted = false;
 
     void Start()
     {
@@ -38,6 +41,9 @@ public class EnemyViewTestInputMono : MonoBehaviour
                 Destroy(enemyViewMono.gameObject);
             });
         }
+        
+        enemyViewMono.Highlight(isHighlighted);
+        
     }
 
     class EnemyViewParamRed : IEnemyViewParamData

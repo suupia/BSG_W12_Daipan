@@ -259,7 +259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30ea3599a91ae467fabaf4f9c8edaa2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyViewMono: {fileID: 1744606552}
+  enemyViewMono: {fileID: 1691094466}
 --- !u!1001 &1691094465
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -317,15 +317,15 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0707a4c3debc043edbaa849a7068eef3, type: 3}
---- !u!114 &1744606552 stripped
+--- !u!114 &1691094466 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2062877762931384077, guid: 0707a4c3debc043edbaa849a7068eef3, type: 3}
+  m_CorrespondingSourceObject: {fileID: 6127506084937510723, guid: 0707a4c3debc043edbaa849a7068eef3, type: 3}
   m_PrefabInstance: {fileID: 1691094465}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d84b1177837749e683b90e03bf08e491, type: 3}
+  m_Script: {fileID: 11500000, guid: efacb2e15e05490a836ef6e2654f4d24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
