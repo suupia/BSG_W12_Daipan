@@ -59,6 +59,9 @@ TagManager:
   - name: Enemy
     uniqueID: 594514123
     locked: 0
+  - name: UICat_Body
+    uniqueID: 3516410557
+    locked: 0
   - name: Stream_UI
     uniqueID: 1807422053
     locked: 0
@@ -67,6 +70,9 @@ TagManager:
     locked: 0
   - name: Streamer
     uniqueID: 1661063009
+    locked: 0
+  - name: UICat_Arm
+    uniqueID: 2730710915
     locked: 0
   - name: UI
     uniqueID: 3637853659
