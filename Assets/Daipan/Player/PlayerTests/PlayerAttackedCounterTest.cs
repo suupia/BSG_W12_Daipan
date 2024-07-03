@@ -11,7 +11,7 @@ public class PlayerAttackedCounterTest
     public void PlayerAttackedCounterTestWith10()
     {
         // Arrange
-        var counter = new PlayerAttackedCounter(new MockPlayerHpParamData());
+        var counter = new PlayerAttackedCounter(new MockPlayerAntiCommentParamData());
 
         // Act
         for(int i = 0; i < 10; i++)
@@ -29,11 +29,9 @@ public class PlayerAttackedCounterTest
         Assert.IsFalse(counter.IsOverThreshold);
     }
     
-    class MockPlayerHpParamData : IPlayerHpParamData 
+    class  MockPlayerAntiCommentParamData : IPlayerAntiCommentParamData 
     {
-        public int GetMaxHp() => 100;
-        public int GetCurrentHp() => 100;
-        public int SetCurrentHp(int value) => 100;
         public int GetAntiCommentThreshold() => 10;
+        public double GetAntiCommentPercentOnMissAttacks(int index) => 0.0;
     }
 }

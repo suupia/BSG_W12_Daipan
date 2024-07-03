@@ -12,9 +12,9 @@ namespace Daipan.Player.Scripts
         int _currentTermStartNumber;
         readonly int _threshold;
 
-        public PlayerAttackedCounter(IPlayerHpParamData playerHpParamData)
+        public PlayerAttackedCounter(IPlayerAntiCommentParamData playerAntiCommentParamData)
         {
-            _threshold = playerHpParamData.GetAntiCommentThreshold();
+            _threshold = playerAntiCommentParamData.GetAntiCommentThreshold();
             CountReset();
         }
 

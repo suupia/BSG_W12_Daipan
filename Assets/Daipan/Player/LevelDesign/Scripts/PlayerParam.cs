@@ -28,9 +28,16 @@ namespace Daipan.Player.LevelDesign.Scripts
         [Header("プレイヤーの現在のHP")]
         [Min(0)]
         public int hpAmount;
+    }
+
+    [Serializable]
+    public sealed class PlayerAntiCommentParam
+    {
         [Header("n回攻撃されたらアンチコメント")]
         [Min(0)]
         public int antiCommentThreshold;
+        [Header("Waveごとの、異なる敵に攻撃をしてしまった時にアンチコメントが生成される確率")]
+        public List<double> antiCommentPercentOnMissAttacks = null!;
     }
 
     [Serializable]
