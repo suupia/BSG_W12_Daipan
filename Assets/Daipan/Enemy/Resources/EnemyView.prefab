@@ -2493,7 +2493,6 @@ MonoBehaviour:
   animatorEye: {fileID: 6777638829380305615}
   animatorLine: {fileID: 7461875806638848930}
   highlightSpriteRenderer: {fileID: 6035515939160888944}
-  enemyTankOffsetEventMono: {fileID: 0}
 --- !u!1 &8685584374153728437
 GameObject:
   m_ObjectHideFlags: 0
@@ -2589,7 +2588,7 @@ Animator:
   m_GameObject: {fileID: 8685584374153728437}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: 2c18cfc2885384f8bb69b96d60cb7d14, type: 2}
+  m_Controller: {fileID: 22100000, guid: d8e30a8aa5d914500a6b151e475a250f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
