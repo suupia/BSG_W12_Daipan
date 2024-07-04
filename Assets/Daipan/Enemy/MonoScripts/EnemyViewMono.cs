@@ -11,6 +11,7 @@ namespace Daipan.Enemy.MonoScripts
         [SerializeField] EnemyNormalViewMono enemyNormalViewMono = null!;
         [SerializeField] EnemyBoss1ViewMono enemyBoss1ViewMono = null!;
         [SerializeField] EnemyBoss2ViewMono enemyBoss2ViewMono = null!;
+        [SerializeField] EnemyBoss3ViewMono enemyBoss3ViewMono = null!;
         AbstractEnemyViewMono _selectedEnemyViewMono = null!;
 
         public override void SetDomain(IEnemyViewParamData enemyParamData)
@@ -21,6 +22,7 @@ namespace Daipan.Enemy.MonoScripts
                 enemyNormalViewMono.gameObject.SetActive(false);
                 enemyBoss1ViewMono.gameObject.SetActive(true);
                 enemyBoss2ViewMono.gameObject.SetActive(false);
+                enemyBoss3ViewMono.gameObject.SetActive(false);
                 _selectedEnemyViewMono = enemyBoss1ViewMono;
                 _selectedEnemyViewMono.SetDomain(enemyParamData);
             }
@@ -29,14 +31,25 @@ namespace Daipan.Enemy.MonoScripts
                 enemyNormalViewMono.gameObject.SetActive(false);
                 enemyBoss1ViewMono.gameObject.SetActive(false);
                 enemyBoss2ViewMono.gameObject.SetActive(true);
+                enemyBoss3ViewMono.gameObject.SetActive(false);
                 _selectedEnemyViewMono = enemyBoss2ViewMono;
                 _selectedEnemyViewMono.SetDomain(enemyParamData);
             }
-            else
+            else if (enemyParamData.GetEnemyEnum() == EnemyEnum.BlueBoss)
+            {
+                enemyNormalViewMono.gameObject.SetActive(false);
+                enemyBoss1ViewMono.gameObject.SetActive(false);
+                enemyBoss2ViewMono.gameObject.SetActive(false);
+                enemyBoss3ViewMono.gameObject.SetActive(true);
+                _selectedEnemyViewMono = enemyBoss3ViewMono;
+                _selectedEnemyViewMono.SetDomain(enemyParamData);
+            }
+            else 
             {
                 enemyNormalViewMono.gameObject.SetActive(true);
                 enemyBoss1ViewMono.gameObject.SetActive(false);
                 enemyBoss2ViewMono.gameObject.SetActive(false);
+                enemyBoss3ViewMono.gameObject.SetActive(false);
                 _selectedEnemyViewMono = enemyNormalViewMono;
                 _selectedEnemyViewMono.SetDomain(enemyParamData);
             }

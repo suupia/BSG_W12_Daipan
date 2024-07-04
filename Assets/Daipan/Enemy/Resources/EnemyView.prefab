@@ -965,7 +965,7 @@ Animator:
   m_GameObject: {fileID: 2228278038083883665}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: d8e30a8aa5d914500a6b151e475a250f, type: 2}
+  m_Controller: {fileID: 22100000, guid: abab31f3875634b54ae715c45756172c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1071,7 +1071,7 @@ Animator:
   m_GameObject: {fileID: 2321902776717415749}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: 3e201b9f7564f45eaa316e3bca579c22, type: 2}
+  m_Controller: {fileID: 22100000, guid: a3fc6cd0066084825b49a333e4fcf6bd, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1386,7 +1386,7 @@ Animator:
   m_GameObject: {fileID: 3151550722900449171}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: b48864f03a52342df984be09cecc6f84, type: 2}
+  m_Controller: {fileID: 22100000, guid: 3eff573f6cf79479ca101d8aad217010, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2628,6 +2628,7 @@ MonoBehaviour:
   enemyNormalViewMono: {fileID: 8217270242501461178}
   enemyBoss1ViewMono: {fileID: 6195893377392259814}
   enemyBoss2ViewMono: {fileID: 994343671160577674}
+  enemyBoss3ViewMono: {fileID: 4514046204393585722}
 --- !u!1 &6478648922457021855
 GameObject:
   m_ObjectHideFlags: 0
@@ -3313,7 +3314,7 @@ Animator:
   m_GameObject: {fileID: 8023633729269181132}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: 61986f51527514b159abc790fe077e66, type: 2}
+  m_Controller: {fileID: 22100000, guid: fc07ca56f6bf0468491806f55ac961d7, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -3749,7 +3750,7 @@ Animator:
   m_GameObject: {fileID: 8805241276405075155}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: d8e30a8aa5d914500a6b151e475a250f, type: 2}
+  m_Controller: {fileID: 22100000, guid: abab31f3875634b54ae715c45756172c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
