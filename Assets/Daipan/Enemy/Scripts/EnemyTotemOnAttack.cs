@@ -7,8 +7,7 @@ namespace Daipan.Enemy.Scripts
 {
     public sealed class EnemyTotemOnAttack
     {
-        // todo パラメータ化する？
-        double _allowableSec = 0.1f;
+        const double AllowableSec = 0.1f;
         double _redLatestAttackedTime;
         double _blueLatestAttackedTime;
         double _yellowLatestAttackedTime;
@@ -43,9 +42,9 @@ namespace Daipan.Enemy.Scripts
 
         bool IsAttackable()
         {
-            return (_streamTimer.CurrentTime - _redLatestAttackedTime < _allowableSec)
-                   & (_streamTimer.CurrentTime - _blueLatestAttackedTime < _allowableSec)
-                   & (_streamTimer.CurrentTime - _yellowLatestAttackedTime < _allowableSec);
+            return (_streamTimer.CurrentTime - _redLatestAttackedTime < AllowableSec)
+                   & (_streamTimer.CurrentTime - _blueLatestAttackedTime < AllowableSec)
+                   & (_streamTimer.CurrentTime - _yellowLatestAttackedTime < AllowableSec);
         } 
     }
 }
