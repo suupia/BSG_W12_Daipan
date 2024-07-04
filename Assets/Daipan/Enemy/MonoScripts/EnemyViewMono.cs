@@ -9,7 +9,7 @@ namespace Daipan.Enemy.MonoScripts
     public sealed class EnemyViewMono : AbstractEnemyViewMono
     {
         [SerializeField] EnemyNormalViewMono enemyNormalViewMono = null!;
-        [FormerlySerializedAs("enemyBossViewMono")] [SerializeField] EnemyBoss1ViewMono enemyBoss1ViewMono = null!;
+        [SerializeField] EnemyBoss1ViewMono enemyBoss1ViewMono = null!;
         AbstractEnemyViewMono _selectedEnemyViewMono = null!;
         public override void SetDomain(IEnemyViewParamData enemyParamData)
         {

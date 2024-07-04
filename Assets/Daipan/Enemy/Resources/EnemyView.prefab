@@ -2448,14 +2448,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1827761873639071129}
-  - component: {fileID: 2818228072706574218}
+  - component: {fileID: 994343671160577674}
   m_Layer: 7
   m_Name: Boss_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1827761873639071129
 Transform:
   m_ObjectHideFlags: 0
@@ -2474,7 +2474,7 @@ Transform:
   - {fileID: 3590097308333022802}
   m_Father: {fileID: 6041840387122220431}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2818228072706574218
+--- !u!114 &994343671160577674
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2483,7 +2483,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8117003980105029390}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3439651d0b1941919d0c12df906fb9c4, type: 3}
+  m_Script: {fileID: 11500000, guid: 6104ecba272f453a9f15c7dd10363e6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   hpGaugeMono: {fileID: 1405292533086128608}
@@ -2491,9 +2491,7 @@ MonoBehaviour:
   animatorHighlight: {fileID: 42886382787519643}
   animatorBody: {fileID: 6236413560081184300}
   animatorEye: {fileID: 6777638829380305615}
-  animatorEyeBall: {fileID: 0}
   animatorLine: {fileID: 7461875806638848930}
-  animatorTank: {fileID: 0}
   highlightSpriteRenderer: {fileID: 6035515939160888944}
   enemyTankOffsetEventMono: {fileID: 0}
 --- !u!1 &8685584374153728437
