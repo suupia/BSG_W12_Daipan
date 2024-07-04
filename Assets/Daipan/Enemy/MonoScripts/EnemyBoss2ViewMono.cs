@@ -16,6 +16,8 @@ namespace Daipan.Enemy.MonoScripts
         [SerializeField] Animator animatorHighlight = null!;
         [SerializeField] Animator animatorBody = null!;
         [SerializeField] Animator animatorEye = null!;
+        [SerializeField] Animator animatorEyeBall = null!;
+        [SerializeField] Animator animatorHand = null!;
         [SerializeField] Animator animatorLine = null!;
         [SerializeField] SpriteRenderer highlightSpriteRenderer = null!;
 
@@ -35,7 +37,7 @@ namespace Daipan.Enemy.MonoScripts
             }
             
             _animatorSwitcher = new EnemyViewAnimatorSwitcher(
-                new [] {animatorHighlight, animatorBody, animatorEye, animatorLine, },
+                new [] {animatorHighlight, animatorBody, animatorEye, animatorEyeBall, animatorHand, animatorLine, },
                 animatorLine,
                 hpGaugeMono,
                 highlightSpriteRenderer
@@ -47,6 +49,8 @@ namespace Daipan.Enemy.MonoScripts
         {
             animatorBody.GetComponent<SpriteRenderer>().color = enemyViewParamData.GetBodyColor();
             animatorEye.GetComponent<SpriteRenderer>().color = enemyViewParamData.GetEyeColor();
+            animatorEyeBall.GetComponent<SpriteRenderer>().color = enemyViewParamData.GetEyeBallColor();
+            animatorHand.GetComponent<SpriteRenderer>().color = enemyViewParamData.GetBodyColor();
             animatorLine.GetComponent<SpriteRenderer>().color = enemyViewParamData.GetLineColor();
             
             // temp

@@ -2145,6 +2145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyNormalViewMono: {fileID: 8217270242501461178}
   enemyBoss1ViewMono: {fileID: 6195893377392259814}
+  enemyBoss2ViewMono: {fileID: 994343671160577674}
 --- !u!1 &6478648922457021855
 GameObject:
   m_ObjectHideFlags: 0
@@ -2599,6 +2600,8 @@ MonoBehaviour:
   animatorHighlight: {fileID: 42886382787519643}
   animatorBody: {fileID: 6236413560081184300}
   animatorEye: {fileID: 6777638829380305615}
+  animatorEyeBall: {fileID: 1935187629966172484}
+  animatorHand: {fileID: 4941978302439717811}
   animatorLine: {fileID: 7461875806638848930}
   highlightSpriteRenderer: {fileID: 6035515939160888944}
 --- !u!1 &8685584374153728437
