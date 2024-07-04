@@ -17,6 +17,7 @@ namespace Daipan.Enemy.MonoScripts
     {
         public AbstractEnemyViewMono?  EnemyViewMono => enemyViewMono;
         [SerializeField] AbstractEnemyViewMono? enemyViewMono;
+        EnemyCluster _enemyCluster = null!;
         EnemyAttackDecider _enemyAttackDecider = null!;
         EnemySuicideAttack _enemySuicideAttack = null!;
         EnemyDied _enemyDied = null!;
@@ -34,7 +35,7 @@ namespace Daipan.Enemy.MonoScripts
             {
                 if (value.Value <= 0)
                 {
-                    Died();
+                    Remove(this); 
                 }
                 _hp = value;
             }
@@ -58,7 +59,7 @@ namespace Daipan.Enemy.MonoScripts
             }
 
             if (transform.position.x < _enemySpawnPoint.GetEnemyDespawnedPoint().x)
-               Died(isDaipaned:false); // Destroy when out of screen
+               Remove(this,isDaipaned:false);
 
             enemyViewMono?.SetHpGauge(Hp.Value, _enemyParamContainer.GetEnemyParamData(EnemyEnum).GetCurrentHp());
             
@@ -77,13 +78,15 @@ namespace Daipan.Enemy.MonoScripts
         }
 
         public void SetDomain(
-            EnemyEnum enemyEnum,
-            EnemyAttackDecider enemyAttackDecider,
-            EnemySuicideAttack enemySuicideAttack,
-            EnemyDied enemyDied
+            EnemyEnum enemyEnum
+            ,EnemyCluster enemyCluster
+            ,EnemyAttackDecider enemyAttackDecider
+            ,EnemySuicideAttack enemySuicideAttack
+            ,EnemyDied enemyDied
         )
         {
             EnemyEnum = enemyEnum;
+            _enemyCluster = enemyCluster;
             _enemyAttackDecider = enemyAttackDecider;
             _enemySuicideAttack = enemySuicideAttack;
             _enemyDied = enemyDied;
@@ -101,7 +104,16 @@ namespace Daipan.Enemy.MonoScripts
             add => _enemyDied.OnDied += value;
             remove => _enemyDied.OnDied -= value;
         }
+
+        public void Remove(EnemyMono thisEnemyMono, bool isDaipaned = false)
+        {
+            _enemyCluster.Remove(thisEnemyMono, isDaipaned);
+        }
         
+        /// <summary>
+        /// EnemyClusterからしか呼ばれない想定
+        /// </summary>
+        /// <param name="isDaipaned"></param>
         public void Died(bool isDaipaned = false)
         {
             _enemyDied.Died(enemyViewMono, isDaipaned);

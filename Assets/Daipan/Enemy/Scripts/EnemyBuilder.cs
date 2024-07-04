@@ -60,6 +60,7 @@ namespace Daipan.Enemy.Scripts
 
             enemyMono.SetDomain(
                 enemyEnum,
+                _enemyCluster,
                 new EnemyAttackDecider(),
                 new EnemySuicideAttack(enemyMono,enemyParamData),
                 new EnemyDied(enemyMono)
