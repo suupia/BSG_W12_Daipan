@@ -777,7 +777,7 @@ GameObject:
   - component: {fileID: 5020758794593989439}
   - component: {fileID: 6195893377392259814}
   m_Layer: 7
-  m_Name: Boss
+  m_Name: Boss1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -822,15 +822,6 @@ MonoBehaviour:
   animatorLine: {fileID: 1646048345968158825}
   animatorTank: {fileID: 6176444364704098556}
   highlightSpriteRenderer: {fileID: 8202944516709086256}
-  offsetRatio:
-  - 0
-  - 0
-  - 0.3
-  - 0.3
-  - 0.05
-  - 0
-  - 0
-  - 0
   enemyTankOffsetEventMono: {fileID: 3462630145309376206}
 --- !u!1 &4125510455013595437
 GameObject:
@@ -1973,6 +1964,7 @@ MonoBehaviour:
   - 0
   attackAngle: 25
   animator: {fileID: 6176444364704098556}
+  ratio: 0
 --- !u!1 &9030056980886445914
 GameObject:
   m_ObjectHideFlags: 0
