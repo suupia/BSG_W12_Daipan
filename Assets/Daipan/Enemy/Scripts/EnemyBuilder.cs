@@ -53,7 +53,7 @@ namespace Daipan.Enemy.Scripts
         {
             if (enemyEnum == EnemyEnum.None) enemyEnum = DecideRandomEnemyType(); // EnemyEnum.Noneが設定されていない時の処理
 
-            if (IsSpawnBoss()) enemyEnum = EnemyEnum.YellowBoss;
+            if (IsSpawnBoss()) enemyEnum = EnemyEnum.RedBoss;
 
             Debug.Log($"enemyEnum: {enemyEnum}");
             var enemyParamData = _enemyParamContainer.GetEnemyParamData(enemyEnum);
