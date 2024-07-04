@@ -6,11 +6,12 @@ using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Enemy.Scripts;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public sealed class EnemyViewTestInputMono : MonoBehaviour
 {
     [SerializeField] AbstractEnemyViewMono enemyViewMono = null!;
-    [SerializeField] EnemyBossViewMono enemyBossViewMono = null!;
+    [FormerlySerializedAs("enemyBossViewMono")] [SerializeField] EnemyBoss1ViewMono enemyBoss1ViewMono = null!;
     [SerializeField] List<GameObject> activeFalseObjects = new();  // プレハブをオーバーロードしないようにするため
     
     [SerializeField] bool isHighlighted = false;
@@ -20,7 +21,7 @@ public sealed class EnemyViewTestInputMono : MonoBehaviour
     void Start()
     {
        enemyViewMono.SetDomain(new EnemyViewParamRed());
-       enemyBossViewMono.SetDomain(new EnemyBossViewParam());
+       enemyBoss1ViewMono.SetDomain(new EnemyBossViewParam());
 
        foreach (var activeFalseObject in activeFalseObjects)
        {
@@ -33,24 +34,24 @@ public sealed class EnemyViewTestInputMono : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
             enemyViewMono.Move();
-            enemyBossViewMono.Move();
+            enemyBoss1ViewMono.Move();
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             enemyViewMono.Attack();
-            enemyBossViewMono.Attack();
+            enemyBoss1ViewMono.Attack();
         }
         
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             enemyViewMono.Died( () => Debug.Log("Do something when died"));
-              enemyBossViewMono.Died( () => Debug.Log("Do something when died"));
+              enemyBoss1ViewMono.Died( () => Debug.Log("Do something when died"));
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             enemyViewMono.Daipaned( () => Debug.Log("Do something when daipaned"));
-            enemyBossViewMono.Daipaned( () => Debug.Log("Do something when daipaned"));
+            enemyBoss1ViewMono.Daipaned( () => Debug.Log("Do something when daipaned"));
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha4))
@@ -61,15 +62,15 @@ public sealed class EnemyViewTestInputMono : MonoBehaviour
                 Destroy(enemyViewMono.gameObject);
             });
             
-            enemyBossViewMono.Daipaned(() =>
+            enemyBoss1ViewMono.Daipaned(() =>
             {
                 Debug.Log("Destroy enemy with daipan");
-                Destroy(enemyBossViewMono.gameObject);
+                Destroy(enemyBoss1ViewMono.gameObject);
             });
         }
         
         enemyViewMono.SetHpGauge(hpRatio, 1);
-        enemyBossViewMono.SetHpGauge(hpRatio, 1);
+        enemyBoss1ViewMono.SetHpGauge(hpRatio, 1);
         enemyViewMono.Highlight(isHighlighted);
         
         

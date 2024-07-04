@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Daipan.Enemy.MonoScripts
 {
-    public sealed class EnemyBossViewMono : AbstractEnemyViewMono
+    public sealed class EnemyBoss2ViewMono : AbstractEnemyViewMono
     {
         [SerializeField] HpGaugeMono hpGaugeMono = null!;
         [SerializeField] SpriteRenderer tempSpriteRenderer = null!; // todo: 完成時には削除する
@@ -17,13 +17,12 @@ namespace Daipan.Enemy.MonoScripts
         [SerializeField] Animator animatorBody = null!;
         [SerializeField] Animator animatorEye = null!;
         [SerializeField] Animator animatorEyeBall = null!;
+        [SerializeField] Animator animatorHand = null!;
         [SerializeField] Animator animatorLine = null!;
-        [SerializeField] Animator animatorTank = null!;
         [SerializeField] SpriteRenderer highlightSpriteRenderer = null!;
 
         EnemyViewAnimatorSwitcher _animatorSwitcher = null!;
-        [SerializeField] EnemyTankOffsetEventMono enemyTankOffsetEventMono = null!;
-        void Awake()
+        void Awake()    
         {
             if (hpGaugeMono == null)
             {
@@ -38,7 +37,7 @@ namespace Daipan.Enemy.MonoScripts
             }
             
             _animatorSwitcher = new EnemyViewAnimatorSwitcher(
-                new [] {animatorHighlight, animatorBody, animatorEye, animatorEyeBall, animatorLine, animatorTank},
+                new [] {animatorHighlight, animatorBody, animatorEye, animatorEyeBall, animatorHand, animatorLine, },
                 animatorLine,
                 hpGaugeMono,
                 highlightSpriteRenderer
@@ -51,8 +50,8 @@ namespace Daipan.Enemy.MonoScripts
             animatorBody.GetComponent<SpriteRenderer>().color = enemyViewParamData.GetBodyColor();
             animatorEye.GetComponent<SpriteRenderer>().color = enemyViewParamData.GetEyeColor();
             animatorEyeBall.GetComponent<SpriteRenderer>().color = enemyViewParamData.GetEyeBallColor();
+            animatorHand.GetComponent<SpriteRenderer>().color = enemyViewParamData.GetBodyColor();
             animatorLine.GetComponent<SpriteRenderer>().color = enemyViewParamData.GetLineColor();
-            animatorTank.GetComponent<SpriteRenderer>().color = enemyViewParamData.GetEyeColor();
             
             // temp
             tempSpriteRenderer.color = enemyViewParamData.GetEnemyEnum() switch
@@ -68,10 +67,8 @@ namespace Daipan.Enemy.MonoScripts
 
         public override void SetHpGauge(double currentHp, int maxHp)
         {
-            
             _animatorSwitcher.SetHpGauge(currentHp, maxHp);
             
-            enemyTankOffsetEventMono.ratio = currentHp / maxHp;
         }
 
         public override void Move()
