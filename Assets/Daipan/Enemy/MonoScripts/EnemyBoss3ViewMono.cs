@@ -49,7 +49,7 @@ namespace Daipan.Enemy.MonoScripts
         {
             animatorBody.GetComponent<SpriteRenderer>().color = enemyViewParamData.GetBodyColor();
             animatorEye.GetComponent<SpriteRenderer>().color = enemyViewParamData.GetEyeColor();
-            animatorFoot.GetComponent<SpriteRenderer>().color = enemyViewParamData.GetBodyColor();
+            animatorFoot.GetComponent<SpriteRenderer>().color = enemyViewParamData.GetEyeColor();
             animatorLine.GetComponent<SpriteRenderer>().color = enemyViewParamData.GetLineColor();
             
             // temp
