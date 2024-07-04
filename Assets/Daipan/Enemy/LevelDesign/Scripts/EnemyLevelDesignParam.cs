@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Daipan.Enemy.LevelDesign.Scripts
 {
     [Serializable]
-    public class EnemyLevelDesignParam
+    public sealed class EnemyLevelDesignParam
     {
         [Header("BOSSの生成周期 (n回雑魚敵を倒したら生成)")] [Min(0)]
         public int spawnBossAmount;

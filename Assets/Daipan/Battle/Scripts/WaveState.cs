@@ -4,7 +4,7 @@ using Daipan.Enemy.Interfaces;
 
 namespace Daipan.Battle.scripts
 {
-    public class WaveState
+    public sealed class WaveState
     {
         public int CurrentWave => _enemyTimeLineParamContainer.GetEnemyTimeLineParamDataIndex();
 

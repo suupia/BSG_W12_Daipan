@@ -3,7 +3,7 @@ using VContainer;
 
 namespace Daipan.Enemy.LevelDesign.Scripts
 {
-    public class EnemyLevelDesignParamDataBuilder
+    public sealed class EnemyLevelDesignParamDataBuilder
     {
         public EnemyLevelDesignParamDataBuilder(
             IContainerBuilder builder,

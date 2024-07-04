@@ -11,7 +11,7 @@ using VContainer;
 
 namespace Daipan.Tower.MonoScripts
 {
-    public class TowerMono : MonoBehaviour
+    public sealed class TowerMono : MonoBehaviour
     {
         [SerializeField] TowerViewMono? towerViewMono;
         TowerParamsConfig _towerParamsConfig = null!;

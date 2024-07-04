@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Daipan.Enemy.LevelDesign.Scripts
 {
-    public class EnemySpawnPoint : IEnemySpawnPoint
+    public sealed class EnemySpawnPoint : IEnemySpawnPoint
     {
         readonly EnemyPositionMono _enemyPositionMono;
         readonly WaveState _waveState; 

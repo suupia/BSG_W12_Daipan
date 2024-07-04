@@ -6,7 +6,7 @@ using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.Player.Scripts;
 using NUnit.Framework;
 
-public class EnemyAttackTest
+public sealed class EnemyAttackTest
 {
     [Test]
     public void PlayerHpShouldDecrease10WithAttack()
@@ -21,7 +21,7 @@ public class EnemyAttackTest
         Assert.AreEqual(90, postAttackPlayerHp.Value); 
     }
     
-    class MockEnemyParamData : IEnemyParamData
+    sealed class MockEnemyParamData : IEnemyParamData
     {
         public EnemyEnum GetEnemyEnum() => EnemyEnum.None;
         public int GetAttackAmount() => 10;

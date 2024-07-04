@@ -11,7 +11,7 @@ using VContainer;
 
 namespace Daipan.Enemy.Scripts
 {
-    public class EnemyTimeLineParamContainer : IEnemyTimeLineParamContainer
+    public sealed class EnemyTimeLineParamContainer : IEnemyTimeLineParamContainer
     {
         readonly IList<EnemyTimeLineParamData> _enemyTimeLineParamDatas;
         readonly StreamTimer _streamTimer;

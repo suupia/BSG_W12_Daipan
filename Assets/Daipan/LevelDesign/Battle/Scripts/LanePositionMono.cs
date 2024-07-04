@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Daipan.LevelDesign.Battle.Scripts
 {
-    public class LanePositionMono : MonoBehaviour
+    public sealed class LanePositionMono : MonoBehaviour
     {
         [Header("レーンの座標に関する設定はここです")] [Space] [Header("各Waveごとに使用するレーンの設定")]
         public List<LanePositionContainer> lanePositionContainers = null!;
@@ -23,13 +23,13 @@ namespace Daipan.LevelDesign.Battle.Scripts
     }
 
     [Serializable]
-    public class LanePositionContainer
+    public sealed class LanePositionContainer
     {
         public List<LanePosition> lanePositions = new();
     }
 
     [Serializable]
-    public class LanePosition
+    public sealed class LanePosition
     {
         [Header("レーンのy座標を決めるゲームオブジェクト")] public Transform laneYTransform = null!;
 

@@ -9,7 +9,7 @@ using DG.Tweening;
 
 namespace Daipan.Enemy.Scripts
 {
-    public class EnemySuicideAttack
+    public sealed class EnemySuicideAttack
     {
         readonly EnemyMono _enemyMono;
         readonly IEnemyParamData _enemyParamData;
@@ -32,7 +32,7 @@ namespace Daipan.Enemy.Scripts
                 playerMono.Hp = new Hp(playerMono.Hp.Value - _enemyParamData.GetAttackAmount());
 
                 // Optionally, you can destroy the enemy after the attack if required
-                _enemyMono.Died();
+                _enemyMono.Remove(_enemyMono);
             });
         }
     }

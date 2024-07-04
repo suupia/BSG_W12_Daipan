@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace Daipan.Battle.scripts
 {
-    public class EndSceneSelector : IStart, IDisposable
+    public sealed class EndSceneSelector : IStart, IDisposable
     {
         readonly ViewerNumber _viewerNumber;
         readonly DaipanExecutor _daipanExecutor;

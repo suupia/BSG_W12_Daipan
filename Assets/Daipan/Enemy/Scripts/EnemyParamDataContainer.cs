@@ -10,7 +10,7 @@ using VContainer;
 
 namespace Daipan.Enemy.Scripts
 {
-    public class EnemyParamDataContainer : IEnemyParamContainer
+    public sealed class EnemyParamDataContainer : IEnemyParamContainer
     {
         readonly IEnumerable<EnemyParamData> _enemyParamDatas;
 

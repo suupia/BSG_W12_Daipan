@@ -4,7 +4,7 @@ using Daipan.Player.LevelDesign.Interfaces;
 
 namespace Daipan.Player.LevelDesign.Scripts
 {
-    public class ComboMultiplier : IComboMultiplier
+    public sealed class ComboMultiplier : IComboMultiplier
     {
         public double CalculateComboMultiplier(int comboCount)
         {

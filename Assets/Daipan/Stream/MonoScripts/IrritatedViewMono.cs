@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Daipan.Stream.MonoScripts
 {
-    public class IrritatedViewMono : MonoBehaviour
+    public sealed class IrritatedViewMono : MonoBehaviour
     {
         [SerializeField] Image IrritatedGuage = null!;
 

@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace Daipan.Enemy.MonoScripts
 {
-    public class EnemyViewAnimatorSwitcher
+    public sealed class EnemyViewAnimatorSwitcher
     {
         readonly IEnumerable<Animator> _animators;
         readonly Animator _leaderAnimator;

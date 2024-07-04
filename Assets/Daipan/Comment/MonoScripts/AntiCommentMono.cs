@@ -7,7 +7,7 @@ using TMPro;
 
 namespace Daipan.Comment.MonoScripts
 {
-    public  class AntiCommentMono : MonoBehaviour
+    public sealed class AntiCommentMono : MonoBehaviour
     {
         [SerializeField] TextMeshPro commentText = null!;
 

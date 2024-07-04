@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Daipan.Enemy.Scripts
 {
-    public class EnemyParamData : IEnemyParamData, IEnemyViewParamData
+    public sealed class EnemyParamData : IEnemyParamData, IEnemyViewParamData
     {
         readonly EnemyParam _enemyParam;
 

@@ -1,24 +1,27 @@
 #nullable enable
 using UnityEngine;
 
-public sealed class HpGaugeMono : MonoBehaviour
+namespace Daipan.Enemy.MonoScripts
 {
-    [SerializeField] SpriteRenderer hpGaugeSpriteRenderer = null!;
-    Material? _hpGaugeMaterial;
-
-    void Awake()
+    public sealed class HpGaugeMono : MonoBehaviour
     {
-        _hpGaugeMaterial = hpGaugeSpriteRenderer.material;
-    }
+        [SerializeField] SpriteRenderer hpGaugeSpriteRenderer = null!;
+        Material? _hpGaugeMaterial;
 
-    public void SetRatio(float ratio)
-    {
-        if (_hpGaugeMaterial == null)
+        void Awake()
         {
-            Debug.LogWarning("_hpGaugeMaterial is null");
-            return;
+            _hpGaugeMaterial = hpGaugeSpriteRenderer.material;
         }
 
-        _hpGaugeMaterial.SetFloat("_Ratio", ratio);
-    }
+        public void SetRatio(float ratio)
+        {
+            if (_hpGaugeMaterial == null)
+            {
+                Debug.LogWarning("_hpGaugeMaterial is null");
+                return;
+            }
+
+            _hpGaugeMaterial.SetFloat("_Ratio", ratio);
+        }
+    } 
 }

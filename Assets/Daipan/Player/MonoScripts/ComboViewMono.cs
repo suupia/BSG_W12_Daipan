@@ -8,7 +8,7 @@ using DG.Tweening;
 
 namespace Daipan.Player.MonoScripts
 {
-    public class ComboViewMono : MonoBehaviour
+    public sealed class ComboViewMono : MonoBehaviour
     {
         [SerializeField] TextMeshProUGUI comboText = null!;
 

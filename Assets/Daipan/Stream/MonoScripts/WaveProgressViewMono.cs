@@ -8,7 +8,7 @@ using VContainer;
 
 namespace Daipan.Stream.MonoScripts
 {
-    public class WaveProgressViewMono : MonoBehaviour
+    public sealed class WaveProgressViewMono : MonoBehaviour
     {
         [SerializeField] Slider waveProgressSlider = null!;
         

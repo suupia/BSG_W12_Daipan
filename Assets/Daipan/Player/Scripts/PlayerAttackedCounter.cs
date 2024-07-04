@@ -4,7 +4,7 @@ using Daipan.Player.LevelDesign.Interfaces;
 
 namespace Daipan.Player.Scripts
 {
-    public class PlayerAttackedCounter
+    public sealed class PlayerAttackedCounter
     {
         public int AttackedNumber;
         public bool IsOverThreshold;

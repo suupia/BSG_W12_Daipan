@@ -6,7 +6,7 @@ using Daipan.Player.MonoScripts;
 
 namespace Daipan.Player.Scripts
 {
-    public class PlayerSpawnPointData
+    public sealed class PlayerSpawnPointData
     {
         public Func<PlayerSpawnedPosition> GetPlayerSpawnedPointX { get; init; } =
             () => new PlayerSpawnedPosition(); 

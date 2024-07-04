@@ -5,7 +5,7 @@ using DG.Tweening;
 
 namespace Daipan.Stream.MonoScripts
 {
-    public class ShakeDisplayMono : MonoBehaviour
+    public sealed class ShakeDisplayMono : MonoBehaviour
     {
         [Header("揺らしたいオブジェクト")]
         [SerializeField] GameObject shakedObject = null!;

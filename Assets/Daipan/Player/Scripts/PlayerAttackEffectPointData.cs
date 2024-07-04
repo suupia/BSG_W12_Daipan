@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Daipan.Player.Scripts
 {
-    public class PlayerAttackEffectPointData
+    public sealed class PlayerAttackEffectPointData
     {
         readonly PlayerPositionMono _playerPositionMono;
         public PlayerAttackEffectPointData(PlayerPositionMono playerPositionMono)

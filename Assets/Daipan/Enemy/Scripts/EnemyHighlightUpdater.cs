@@ -4,7 +4,7 @@ using Daipan.LevelDesign.Enemy.Scripts;
 
 namespace Daipan.Enemy.Scripts
 {
-    public class EnemyHighlightUpdater : IUpdate
+    public sealed class EnemyHighlightUpdater : IUpdate
     {
         readonly TowerParamsConfig _towerParamsConfig;
         readonly EnemyCluster _enemyCluster;

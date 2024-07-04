@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Daipan.Player.Scripts
 {
-    public class PlayerHolder
+    public sealed class PlayerHolder
     {
         PlayerMono? _player;
 

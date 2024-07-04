@@ -5,7 +5,7 @@ using Daipan.Stream.Scripts;
 
 namespace Daipan.Enemy.Scripts
 {
-    public class EnemyTotemOnAttack
+    public sealed class EnemyTotemOnAttack
     {
         // todo パラメータ化する？
         double _allowableSec = 0.1f;

@@ -5,7 +5,7 @@ using UnityEngine.Serialization;
 
 namespace Daipan.Enemy.MonoScripts
 {
-    public class EnemyTankOffsetEventMono : MonoBehaviour
+    public sealed class EnemyTankOffsetEventMono : MonoBehaviour
     {
         [SerializeField] double[] offsetRatioMove = { 0, 0, 0, 0, 0, 0, 0, 0 };
         [SerializeField] double[] offsetRatioAttack = { 0, 0, 0, 0, 0, 0, 0, 0 };

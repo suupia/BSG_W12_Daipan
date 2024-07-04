@@ -15,7 +15,7 @@ using UnityEngine;
 
 namespace Daipan.Player.Scripts
 {
-    public class PlayerAttackEffectBuilder
+    public sealed class PlayerAttackEffectBuilder
     {
         readonly IPlayerParamDataContainer _playerParamDataContainer;
         readonly ComboCounter _comboCounter;

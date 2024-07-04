@@ -4,7 +4,7 @@ using Daipan.Player.Scripts;
 using UnityEngine;
 using VContainer;
 
-public class ComboTestMono : MonoBehaviour
+public sealed class ComboTestMono : MonoBehaviour
 {
     ComboCounter _comboCounter;
 
