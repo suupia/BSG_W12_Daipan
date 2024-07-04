@@ -32,7 +32,7 @@ namespace Daipan.Player.MonoScripts
             }
 
             var enemyMono = _getNearestEnemyMono();
-            Direction = (enemyMono?.transform.position - transform.position)?.normalized ?? Direction;
+            Direction = enemyMono != null ? (enemyMono.transform.position - transform.position).normalized : Direction;
             transform.position += Direction * (float)(_speed * Time.deltaTime);
             if (enemyMono != null)
             {

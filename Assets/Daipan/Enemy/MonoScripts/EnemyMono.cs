@@ -24,6 +24,7 @@ namespace Daipan.Enemy.MonoScripts
         IEnemyParamContainer _enemyParamContainer = null!;
         PlayerHolder _playerHolder = null!;
         public EnemyEnum EnemyEnum { get; private set; } = EnemyEnum.None;
+        public bool IsReachedPlayer { get; private set; }
 
         Hp _hp = null!;
         public Hp Hp
@@ -49,6 +50,11 @@ namespace Daipan.Enemy.MonoScripts
             {
                 var moveSpeed = (float)_enemyParamContainer.GetEnemyParamData(EnemyEnum).GetMoveSpeedPerSec();
                 transform.position += Time.deltaTime * moveSpeed * Vector3.left;
+                IsReachedPlayer = false;
+            }
+            else
+            {
+                IsReachedPlayer = true;
             }
 
             if (transform.position.x < _enemySpawnPoint.GetEnemyDespawnedPoint().x)
