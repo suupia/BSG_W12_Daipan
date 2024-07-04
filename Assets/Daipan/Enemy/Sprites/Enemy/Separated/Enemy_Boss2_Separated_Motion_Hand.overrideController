@@ -6,8 +6,8 @@ AnimatorOverrideController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Enemy_Boss2_Separated_Motion_EyeBall
+  m_Name: Enemy_Boss2_Separated_Motion_Hand
   m_Controller: {fileID: 9100000, guid: 4940888e47d3047739df2882aa2ba248, type: 2}
   m_Clips:
   - m_OriginalClip: {fileID: 7400000, guid: 9aa6d4a6daf76459b9a55bf92d0b9e41, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: 4630351c0bb1e4a49a3119f4b0928e58, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: d90457564f6704883a78097553809c95, type: 2}
