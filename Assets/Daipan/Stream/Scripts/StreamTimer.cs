@@ -9,7 +9,7 @@ using VContainer.Unity;
 
 namespace Daipan.Stream.Scripts
 {
-    public class StreamTimer : IStart, IUpdate
+    public sealed class StreamTimer : IStart, IUpdate
     {
         public double CurrentTime { get; private set; }
 

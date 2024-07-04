@@ -7,7 +7,7 @@ using UnityEngine.Serialization;
 
 namespace Daipan.Player.MonoScripts
 {
-    public class PlayerPositionMono : MonoBehaviour
+    public sealed class PlayerPositionMono : MonoBehaviour
     {
         [Header("プレイヤーの座標に関する設定はここです")]
         [Space]
@@ -16,7 +16,7 @@ namespace Daipan.Player.MonoScripts
     }
 
     [Serializable]
-    public class PlayerAttackEffectPosition
+    public sealed class PlayerAttackEffectPosition
     {
         [Header("攻撃エフェクトの生成位置")]
         public Transform attackEffectSpawnedPoint = null!;
@@ -25,7 +25,7 @@ namespace Daipan.Player.MonoScripts
     }
     
     [Serializable]
-    public class PlayerSpawnedPosition
+    public sealed class PlayerSpawnedPosition
     {
         [Header("プレイヤーの生成位置")]
         

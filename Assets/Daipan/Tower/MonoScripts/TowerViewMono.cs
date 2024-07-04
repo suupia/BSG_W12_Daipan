@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Daipan.Tower.MonoScripts
 {
-    public class TowerViewMono : MonoBehaviour
+    public sealed class TowerViewMono : MonoBehaviour
     {
         [SerializeField] Animator animator = null!;
         [SerializeField] SpriteRenderer towerFullRender = null!;

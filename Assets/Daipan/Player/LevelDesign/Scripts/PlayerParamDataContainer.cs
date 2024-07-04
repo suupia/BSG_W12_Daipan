@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Daipan.Player.LevelDesign.Scripts
 {
-    public class PlayerParamDataContainer : IPlayerParamDataContainer
+    public sealed class PlayerParamDataContainer : IPlayerParamDataContainer
     {
         readonly IEnumerable<PlayerParamData> _playerParamDataList;
         public PlayerParamDataContainer(PlayerParamManager playerParamManager)

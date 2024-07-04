@@ -14,7 +14,7 @@ using Random = UnityEngine.Random;
 
 namespace Daipan.Enemy.Scripts
 {
-    public class EnemyBuilder : IEnemyBuilder
+    public sealed class EnemyBuilder : IEnemyBuilder
     {
         readonly IEnemyParamContainer _enemyParamContainer;
         readonly CommentSpawner _commentSpawner;

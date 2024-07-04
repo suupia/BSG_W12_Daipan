@@ -6,7 +6,7 @@ using UnityEngine.Serialization;
 
 namespace Daipan.Player.MonoScripts
 {
-    public class PlayerViewMono : AbstractPlayerViewMono
+    public sealed class PlayerViewMono : AbstractPlayerViewMono
     {
         [SerializeField] Animator animator = null!;
 

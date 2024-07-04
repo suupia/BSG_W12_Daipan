@@ -9,7 +9,7 @@ using DG.Tweening;
 
 namespace Daipan.Enemy.Scripts
 {
-    public class EnemySuicideAttack
+    public sealed class EnemySuicideAttack
     {
         readonly EnemyMono _enemyMono;
         readonly IEnemyParamData _enemyParamData;

@@ -15,7 +15,7 @@ using R3;
 
 namespace Daipan.Player.MonoScripts
 {
-    public class PlayerMono : MonoBehaviour 
+    public sealed class PlayerMono : MonoBehaviour 
     {
         [SerializeField] List<AbstractPlayerViewMono?> playerViewMonos = new();
         EnemyCluster _enemyCluster = null!;

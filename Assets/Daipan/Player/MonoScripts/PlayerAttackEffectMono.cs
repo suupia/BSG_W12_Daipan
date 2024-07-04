@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace Daipan.Player.MonoScripts
 {
-    public class PlayerAttackEffectMono : MonoBehaviour
+    public sealed class PlayerAttackEffectMono : MonoBehaviour
     {
         [SerializeField] PlayerAttackEffectViewMono? viewMono;
         readonly double _speed = 30;

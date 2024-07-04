@@ -9,7 +9,7 @@ using UnityEngine.Serialization;
 
 namespace Daipan.Stream.MonoScripts
 {
-    public class ViewerViewMono : MonoBehaviour
+    public sealed class ViewerViewMono : MonoBehaviour
     {
         [SerializeField] TextMeshProUGUI viewerText = null!;
         [FormerlySerializedAs("digitSplitterMono")] [SerializeField] DigitSplitViewMono digitSplitViewMono = null!;

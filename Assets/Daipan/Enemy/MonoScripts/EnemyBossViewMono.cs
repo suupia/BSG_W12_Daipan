@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Daipan.Enemy.MonoScripts
 {
-    public class EnemyBossViewMono : AbstractEnemyViewMono
+    public sealed class EnemyBossViewMono : AbstractEnemyViewMono
     {
         [SerializeField] HpGaugeMono hpGaugeMono = null!;
         [SerializeField] SpriteRenderer tempSpriteRenderer = null!; // todo: 完成時には削除する

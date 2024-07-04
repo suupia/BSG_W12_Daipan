@@ -5,7 +5,7 @@ using Daipan.Stream.Scripts.Utility.Scripts;
 
 namespace Daipan.Player.Scripts
 {
-    public class PlayerAttackEffectPrefabLoader : IPrefabLoader<PlayerAttackEffectMono>
+    public sealed class PlayerAttackEffectPrefabLoader : IPrefabLoader<PlayerAttackEffectMono>
     {
         readonly PrefabLoaderFromResources<PlayerAttackEffectMono> _loader;
 

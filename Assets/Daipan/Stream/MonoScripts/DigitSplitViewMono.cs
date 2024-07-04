@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Daipan.Stream.MonoScripts
 {
-    public class DigitSplitViewMono : MonoBehaviour
+    public sealed class DigitSplitViewMono : MonoBehaviour
     {
         [SerializeField] List<TextMeshProUGUI> digitTexts = new();
 

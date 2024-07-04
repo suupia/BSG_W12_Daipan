@@ -7,7 +7,7 @@ using Daipan.Enemy.MonoScripts;
 using Daipan.Enemy.Scripts;
 using UnityEngine;
 
-public class EnemyViewTestInputMono : MonoBehaviour
+public sealed class EnemyViewTestInputMono : MonoBehaviour
 {
     [SerializeField] AbstractEnemyViewMono enemyViewMono = null!;
     [SerializeField] EnemyBossViewMono enemyBossViewMono = null!;

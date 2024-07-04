@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Daipan.Player.MonoScripts
 {
-    public class PlayerAttackEffectViewMono : AbstractAttackEffectViewMono
+    public sealed class PlayerAttackEffectViewMono : AbstractAttackEffectViewMono
     {
         [SerializeField] Animator animator = null!;
         void Awake()

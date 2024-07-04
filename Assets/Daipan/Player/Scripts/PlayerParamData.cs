@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Daipan.Player.Scripts 
 {
-    public class PlayerParamData : IPlayerParamData
+    public sealed class PlayerParamData : IPlayerParamData
     {
         readonly PlayerParam _playerParam;
         public PlayerParamData(PlayerParam playerParam)
@@ -21,7 +21,7 @@ namespace Daipan.Player.Scripts
 
     }
 
-    public class PlayerHpParamData : IPlayerHpParamData
+    public sealed class PlayerHpParamData : IPlayerHpParamData
     {
        readonly PlayerParamManager _playerParamManager;
        public PlayerHpParamData(PlayerParamManager playerParamManager)
@@ -33,7 +33,7 @@ namespace Daipan.Player.Scripts
        public int SetCurrentHp(int value) => _playerParamManager.playerHpParam.hpAmount = value;
        
     }
-    public class PlayerAntiCommentParamData  : IPlayerAntiCommentParamData
+    public sealed class PlayerAntiCommentParamData  : IPlayerAntiCommentParamData
     {
         readonly PlayerParamManager _playerParamManager;
         public PlayerAntiCommentParamData(PlayerParamManager playerParamManager)

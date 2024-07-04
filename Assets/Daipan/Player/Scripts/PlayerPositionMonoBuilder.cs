@@ -4,7 +4,7 @@ using VContainer;
 
 namespace Daipan.Player.Scripts
 {
-    public class PlayerPositionMonoBuilder
+    public sealed class PlayerPositionMonoBuilder
     {
         public PlayerPositionMonoBuilder(
             IContainerBuilder builder,

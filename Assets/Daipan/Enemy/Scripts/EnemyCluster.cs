@@ -129,15 +129,6 @@ namespace Daipan.Enemy.Scripts
             // enemiesリストをソートし、orderedEnemiesリストに追加
             orderedEnemies.AddRange(enemies.OrderBy(e => Distance(e, position)));
             
-            
-            // Debug
-            Debug.Log ("Ordered Enemies");  
-            foreach (var enemy in orderedEnemies)
-            {
-                if(enemy == null) continue;
-                Debug.Log($"enemy: {enemy.EnemyEnum} distance: {Distance(enemy, position)}");
-            }
-
             return orderedEnemies;
         }
         static float Distance(EnemyMono? enemyMono, Vector3 position) => enemyMono == null ? float.MaxValue : (position - enemyMono.transform.position).sqrMagnitude;

@@ -12,7 +12,7 @@ using UnityEngine.Serialization;
 namespace Daipan.Enemy.LevelDesign.Scripts
 {
     // 現在シーンでは直接使用していない
-    public class EnemyPositionMono : MonoBehaviour
+    public sealed class EnemyPositionMono : MonoBehaviour
     {
         [Header("各Waveごとの敵の生成位置の候補")] public List<EnemySpawnedPositionContainer> enemySpawnedPositionContainers = new();
 
@@ -22,13 +22,13 @@ namespace Daipan.Enemy.LevelDesign.Scripts
     }
 
     [Serializable]
-    public class EnemySpawnedPositionContainer
+    public sealed class EnemySpawnedPositionContainer
     {
         public List<EnemySpawnedPosition> enemySpawnedPoints = new();
     }
 
     [Serializable]
-    public class EnemySpawnedPosition
+    public sealed class EnemySpawnedPosition
     {
         [Header("敵の生成位置")] [Tooltip("敵の生成位置のx座標を決めるゲームオブジェクト")]
         public Transform enemySpawnTransformX = null!;
