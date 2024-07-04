@@ -9,21 +9,21 @@ namespace Daipan.Enemy.MonoScripts
     public sealed class EnemyViewMono : AbstractEnemyViewMono
     {
         [SerializeField] EnemyNormalViewMono enemyNormalViewMono = null!;
-        [SerializeField] EnemyBossViewMono enemyBossViewMono = null!;
+        [FormerlySerializedAs("enemyBossViewMono")] [SerializeField] EnemyBoss1ViewMono enemyBoss1ViewMono = null!;
         AbstractEnemyViewMono _selectedEnemyViewMono = null!;
         public override void SetDomain(IEnemyViewParamData enemyParamData)
         {
             if (enemyParamData.GetEnemyEnum().IsBoss() == true)
             {
                    enemyNormalViewMono.gameObject.SetActive(false);
-                   enemyBossViewMono.gameObject.SetActive(true);
-                   _selectedEnemyViewMono = enemyBossViewMono;
+                   enemyBoss1ViewMono.gameObject.SetActive(true);
+                   _selectedEnemyViewMono = enemyBoss1ViewMono;
                    _selectedEnemyViewMono.SetDomain(enemyParamData);
             }
             else
             {
                 enemyNormalViewMono.gameObject.SetActive(true);
-                enemyBossViewMono.gameObject.SetActive(false);
+                enemyBoss1ViewMono.gameObject.SetActive(false);
                 _selectedEnemyViewMono = enemyNormalViewMono;
                 _selectedEnemyViewMono.SetDomain(enemyParamData);
             }

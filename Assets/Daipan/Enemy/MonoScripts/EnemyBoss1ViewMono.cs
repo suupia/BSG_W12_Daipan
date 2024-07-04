@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Daipan.Enemy.MonoScripts
 {
-    public sealed class EnemyBossViewMono : AbstractEnemyViewMono
+    public sealed class EnemyBoss1ViewMono : AbstractEnemyViewMono
     {
         [SerializeField] HpGaugeMono hpGaugeMono = null!;
         [SerializeField] SpriteRenderer tempSpriteRenderer = null!; // todo: 完成時には削除する
@@ -23,7 +23,7 @@ namespace Daipan.Enemy.MonoScripts
 
         EnemyViewAnimatorSwitcher _animatorSwitcher = null!;
         [SerializeField] EnemyTankOffsetEventMono enemyTankOffsetEventMono = null!;
-        void Awake()
+        void Awake()    
         {
             if (hpGaugeMono == null)
             {
