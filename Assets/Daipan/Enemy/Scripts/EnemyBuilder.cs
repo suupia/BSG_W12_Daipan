@@ -53,7 +53,12 @@ namespace Daipan.Enemy.Scripts
         {
             if (enemyEnum == EnemyEnum.None) enemyEnum = DecideRandomEnemyType(); // EnemyEnum.Noneが設定されていない時の処理
 
-            if (IsSpawnBoss()) enemyEnum = EnemyEnum.BlueBoss;  // todo : Bossの抽選を行う
+            if (IsSpawnBoss())
+            {
+                var rand = System.Random.value;
+                var bosss = new { EnemyEnum.RedBoss, EnemyEnum.BlueBoss, EnemyEnum.YellowBoss };
+                return bosss[rand];
+            } 
 
             Debug.Log($"enemyEnum: {enemyEnum}");
             var enemyParamData = _enemyParamContainer.GetEnemyParamData(enemyEnum);
@@ -148,6 +153,7 @@ namespace Daipan.Enemy.Scripts
             Debug.Log($"enemyPrams.Length : {_enemyParamManager.enemyParams.Count}");
             var enemyEnum = _enemyParamManager.enemyParams[Randoms.RandomByRatios(ratio, Random.value)].enemyEnum;
             if (enemyEnum == EnemyEnum.RedBoss) _enemyLevelDesignParamData.SetCurrentKillAmount(0);
+            if (enemyEnum == EnemyEnum.Totem) return EnemyEnum.Red; // todo : トレーラー用
             return enemyEnum;
         }
     }
