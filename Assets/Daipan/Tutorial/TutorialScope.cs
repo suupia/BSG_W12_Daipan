@@ -121,7 +121,7 @@ namespace Daipan.Tutorial
             builder.Register<EndSceneSelector>(Lifetime.Scoped).As<IStart>().AsSelf();
 
             // Test
-            builder.RegisterComponentInHierarchy<PlayerTestInput>();
+            // builder.RegisterComponentInHierarchy<PlayerTestInput>();
 
             // Parameters
             /*comment*/
