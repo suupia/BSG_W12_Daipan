@@ -55,10 +55,12 @@ namespace Daipan.Enemy.Scripts
 
             if (IsSpawnBoss())
             {
-                var rand = System.Random.value;
-                var bosss = new { EnemyEnum.RedBoss, EnemyEnum.BlueBoss, EnemyEnum.YellowBoss };
-                return bosss[rand];
-            } 
+                var random = new System.Random();
+                var bosses = new[] { EnemyEnum.RedBoss, EnemyEnum.BlueBoss, EnemyEnum.YellowBoss };
+                int index = random.Next(bosses.Length);
+                enemyEnum = bosses[index];
+            }
+
 
             Debug.Log($"enemyEnum: {enemyEnum}");
             var enemyParamData = _enemyParamContainer.GetEnemyParamData(enemyEnum);
