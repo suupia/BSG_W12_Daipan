@@ -45,9 +45,8 @@ namespace Daipan.Tutorial.Scripts
         float _fadeDuration = 1.0f; // フェードインの時間を秒単位で指定
         float _fadeTime = 0f;
 
-        public FadeInTutorialStart(CanvasGroup canvasGroup)
+        public FadeInTutorialStart()
         {
-            _canvasGroup = canvasGroup;
             _canvasGroup.alpha = 0f; // 初期状態で透明
         }
 
