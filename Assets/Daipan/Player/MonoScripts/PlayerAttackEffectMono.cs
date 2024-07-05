@@ -32,6 +32,16 @@ namespace Daipan.Player.MonoScripts
             }
 
             var enemyMono = _getNearestEnemyMono();
+
+            if(enemyMono != null)
+            {
+                if (!PlayerAttackModule.IsInScreenEnemy(enemyMono))
+                {
+                    enemyMono = null;
+                }
+                
+            }
+
             Direction = enemyMono != null ? (enemyMono.transform.position - transform.position).normalized : Direction;
             transform.position += Direction * (float)(_speed * Time.deltaTime);
             if (enemyMono != null)
@@ -76,5 +86,11 @@ namespace Daipan.Player.MonoScripts
             };
         }
 
+        public static bool IsInScreenEnemy(EnemyMono enemyMono)
+        {
+            var worldPos = Camera.main.ViewportToWorldPoint(new Vector2(1, 1));
+            return enemyMono.gameObject.transform.position.x < worldPos.x;
+        }
     }
+
 }
