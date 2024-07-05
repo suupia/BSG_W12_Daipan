@@ -111,7 +111,6 @@ namespace Daipan.Enemy.MonoScripts
             _enemyDied.Died(enemyViewMono, isDaipaned);
 
         }
-      
     }
 
     public record DiedEventArgs(EnemyEnum EnemyEnum, bool IsTrigger = false);
