@@ -32,8 +32,7 @@ using UnityEngine.Serialization;
 using VContainer;
 using VContainer.Unity;
 
-namespace Daipan.Daipan
-
+namespace Daipan.Tutorial
 {
     public sealed class TutorialScope : LifetimeScope
     {
