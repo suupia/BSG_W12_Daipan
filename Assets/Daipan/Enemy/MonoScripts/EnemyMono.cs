@@ -35,7 +35,7 @@ namespace Daipan.Enemy.MonoScripts
             {
                 if (value.Value <= 0)
                 {
-                    Remove(this); 
+                    Die(this); 
                 }
                 _hp = value;
             }
@@ -59,7 +59,7 @@ namespace Daipan.Enemy.MonoScripts
             }
 
             if (transform.position.x < _enemySpawnPoint.GetEnemyDespawnedPoint().x)
-               Remove(this,isDaipaned:false);
+               Die(this,isDaipaned:false);
 
             enemyViewMono?.SetHpGauge(Hp.Value, _enemyParamContainer.GetEnemyParamData(EnemyEnum).GetCurrentHp());
             
@@ -105,19 +105,13 @@ namespace Daipan.Enemy.MonoScripts
             remove => _enemyDied.OnDied -= value;
         }
 
-        public void Remove(EnemyMono thisEnemyMono, bool isDaipaned = false)
+        public void Die(EnemyMono thisEnemyMono, bool isDaipaned = false)
         {
-            _enemyCluster.Remove(thisEnemyMono, isDaipaned);
-        }
-        
-        /// <summary>
-        /// EnemyClusterからしか呼ばれない想定
-        /// </summary>
-        /// <param name="isDaipaned"></param>
-        public void Died(bool isDaipaned = false)
-        {
+            _enemyCluster.Remove(thisEnemyMono);
             _enemyDied.Died(enemyViewMono, isDaipaned);
+
         }
+      
     }
 
     public record DiedEventArgs(EnemyEnum EnemyEnum, bool IsTrigger = false);

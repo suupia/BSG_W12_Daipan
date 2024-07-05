@@ -20,7 +20,7 @@ namespace Daipan.Enemy.Scripts
             _enemies.Add(enemy);
         }
 
-        public void Remove(EnemyMono enemy, bool isDaipaned = false)
+        public void Remove(EnemyMono enemy)
         {
             // _enemiesリストからenemyを削除
             _enemies.Remove(enemy);
@@ -41,7 +41,6 @@ namespace Daipan.Enemy.Scripts
                 _reachedPlayer.Enqueue(newQueue.Dequeue());
             }
             
-            enemy.Died(isDaipaned);
         }
 
         
@@ -77,7 +76,7 @@ namespace Daipan.Enemy.Scripts
             foreach (var enemy in enemies)
             {
                 if(enemy == null) continue;
-                enemy.Remove(enemy,isDaipaned:true); 
+                enemy.Die(enemy,isDaipaned:true); 
             }
         }
 
@@ -88,7 +87,7 @@ namespace Daipan.Enemy.Scripts
             {
                 if (enemy == null) continue;
                 if (blowAwayCondition(enemy.EnemyEnum))
-                    enemy.Remove(enemy, true);
+                    enemy.Die(enemy, true);
             }
 
         }
