@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2501272673469683439}
   - component: {fileID: 8498270373437524366}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: AntiComment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,7 +57,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7924591462949176461}
   - component: {fileID: 8202679621555953744}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,7 +142,7 @@ GameObject:
   - component: {fileID: 2065785709832557957}
   - component: {fileID: 8637238253740727770}
   - component: {fileID: 8977289515075342155}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
