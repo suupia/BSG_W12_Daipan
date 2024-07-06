@@ -158,11 +158,6 @@ namespace Daipan.Tutorial.Scripts
             Debug.Log("Streamer wakes up...");
             Debug.Log("Cat speaks...");
             _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildUICatIntroduce()); 
-            Debug.Log($"GetSpeechEventEnum = {_speechEventManager.GetSpeechEventEnum()}");
-            
-           // 最初のメッセージを表示（これだけ特別）
-           // メッセージに閉じる処理を入れればここは変わりうる
-            _speechEventManager.MoveNext(); 
 
         }
 
@@ -174,16 +169,13 @@ namespace Daipan.Tutorial.Scripts
 
     public class RedEnemyTutorial : AbstractTutorialContent
     {
-        readonly SpeechBubbleMono _speechBubbleMono;
         readonly SpeechEventManager _speechEventManager;
         readonly EnemySpawnerTutorial _enemySpawnerTutorial;
         public RedEnemyTutorial(
-            SpeechBubbleMono speechBubbleMono
-            ,SpeechEventManager speechEventManager
+            SpeechEventManager speechEventManager
             ,EnemySpawnerTutorial enemySpawnerTutorial
         )
         {
-            _speechBubbleMono = speechBubbleMono;
             _speechEventManager = speechEventManager;
             _enemySpawnerTutorial = enemySpawnerTutorial;
         }
@@ -191,9 +183,7 @@ namespace Daipan.Tutorial.Scripts
         public override void Execute()
         {
             Debug.Log("Tutorial: Defeat the red enemy...");
-            _speechEventManager.SetSpeechEvent(
-                SpeechEventBuilder.BuildRedEnemyTutorial(this)
-                );
+            _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildRedEnemyTutorial(this));
 
             _enemySpawnerTutorial.SpawnRedEnemy();
 
@@ -209,7 +199,6 @@ namespace Daipan.Tutorial.Scripts
         public void SetIsSuccess(bool isSuccess)
         {
             IsSuccess = isSuccess;
-            _speechBubbleMono.EnqueueSpeechMessage(_speechEventManager.CurrentEvent.Message);
             _speechEventManager.MoveNext();
         }
 
