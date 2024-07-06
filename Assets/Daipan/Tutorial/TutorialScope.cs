@@ -213,6 +213,8 @@ namespace Daipan.Tutorial
             builder.Register<LanguageConfig>(Lifetime.Scoped);
             builder.RegisterComponentInHierarchy<LanguageSelectionPopupMono>();
             builder.RegisterComponentInHierarchy<BlackScreenViewMono>();
+            builder.RegisterComponentInHierarchy<SpeechBubbleMono>();
+            builder.Register<UICatMessage>(Lifetime.Scoped);
             
             // Updater
             builder.UseEntryPoints(Lifetime.Scoped, entryPoints =>
@@ -228,10 +230,10 @@ namespace Daipan.Tutorial
 
         static void RegisterTutorialContents(IContainerBuilder builder)
         {
-            builder.Register<DisplayBlackScreenWithProgress>(Lifetime.Scoped).As<ITutorialContent>();
-            builder.Register<LanguageSelection>(Lifetime.Scoped).As<ITutorialContent>();
-            builder.Register<FadeInTutorialStart>(Lifetime.Scoped).As<ITutorialContent>();
-            builder.Register<CatSpeaks>(Lifetime.Scoped).As<ITutorialContent>();
+            // builder.Register<DisplayBlackScreenWithProgress>(Lifetime.Scoped).As<ITutorialContent>();
+            // builder.Register<LanguageSelection>(Lifetime.Scoped).As<ITutorialContent>();
+            // builder.Register<FadeInTutorialStart>(Lifetime.Scoped).As<ITutorialContent>();
+            builder.Register<UICatSpeaks>(Lifetime.Scoped).As<ITutorialContent>();
             builder.Register<RedEnemyTutorial>(Lifetime.Scoped).As<ITutorialContent>();
             builder.Register<SequentialEnemyTutorial>(Lifetime.Scoped).As<ITutorialContent>();
             builder.Register<ShowWhiteComments>(Lifetime.Scoped).As<ITutorialContent>();

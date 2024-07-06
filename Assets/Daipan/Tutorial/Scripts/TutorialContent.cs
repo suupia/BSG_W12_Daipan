@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Daipan.InputSerial.Scripts;
 using Daipan.Option.Scripts;
+using Daipan.Streamer.Scripts;
 using Daipan.Tutorial.Interfaces;
 using Daipan.Tutorial.MonoScripts;
 using R3;
@@ -142,21 +143,36 @@ namespace Daipan.Tutorial.Scripts
         }
     }
 
-    internal class CatSpeaks : ITutorialContent
+    internal class UICatSpeaks : AbstractTutorialContent 
     {
-        bool _completed = false;
-
-        public void Execute()
+        readonly SpeechBubbleMono _speechBubbleMono;
+        readonly UICatMessage _uiCatMessage;
+        readonly InputSerialManager _inputSerialManager;
+        public UICatSpeaks(
+            SpeechBubbleMono speechBubbleMono
+            ,UICatMessage uiCatMessage
+            ,InputSerialManager inputSerialManager
+            )
+        {
+            _speechBubbleMono = speechBubbleMono;
+            _uiCatMessage = uiCatMessage;
+            _inputSerialManager = inputSerialManager;
+        }
+        public override void Execute()
         {
             Debug.Log("Streamer wakes up...");
             Debug.Log("Cat speaks...");
-            // Logic for this step
-            if (Input.GetKeyDown(KeyCode.T)) _completed = true;
+            Disposables.Add(Observable.EveryUpdate()
+                .Where(_ => !Completed)
+                .Subscribe(_ =>
+                {
+                    if(_inputSerialManager.GetButtonAny()) _speechBubbleMono.ShowSpeechBubble(_uiCatMessage.GetNextMessage());
+                }));
         }
 
-        public bool IsCompleted()
+        public override bool IsCompleted()
         {
-            return _completed;
+            return Completed;
         }
     }
 
