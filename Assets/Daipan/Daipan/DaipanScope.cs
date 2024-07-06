@@ -17,6 +17,7 @@ using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.Player.LevelDesign.Scripts;
 using Daipan.LevelDesign.Stream;
 using Daipan.LevelDesign.Tower.Scripts;
+using Daipan.Player.Interfaces;
 using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Player.MonoScripts;
 using Daipan.Player.Scripts;
@@ -79,7 +80,7 @@ namespace Daipan.Daipan
                 .As<IPrefabLoader<PlayerAttackEffectMono>>();
             builder.Register<PlayerAttackEffectSpawner>(Lifetime.Scoped);
             builder.Register<PlayerAttackEffectBuilder>(Lifetime.Scoped);
-            builder.Register<AttackExecutor>(Lifetime.Transient); 
+            builder.Register<AttackExecutor>(Lifetime.Transient).As<IAttackExecutor>();
             builder.Register<PlayerHolder>(Lifetime.Scoped);
             builder.Register<IStart, PlayerSpawner>(Lifetime.Scoped);
             

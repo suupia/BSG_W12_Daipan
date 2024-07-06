@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Daipan.Player.Scripts
 {
-    public class AttackExecutor
+    public class AttackExecutor : IAttackExecutor
     {
         readonly PlayerAttackEffectPointData _playerAttackEffectPointData;
         readonly PlayerAttackEffectSpawner _playerAttackEffectSpawner;
