@@ -214,7 +214,6 @@ namespace Daipan.Tutorial
             builder.RegisterComponentInHierarchy<LanguageSelectionPopupMono>();
             builder.RegisterComponentInHierarchy<BlackScreenViewMono>();
             builder.RegisterComponentInHierarchy<SpeechBubbleMono>();
-            builder.Register<UICatMessage>(Lifetime.Scoped);
             builder.Register<SpeechEventManager>(Lifetime.Transient);
             builder.Register<SpeechEventBuilder>(Lifetime.Transient);
             

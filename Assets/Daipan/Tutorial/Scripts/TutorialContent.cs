@@ -146,18 +146,15 @@ namespace Daipan.Tutorial.Scripts
     internal class UICatSpeaks : AbstractTutorialContent 
     {
         readonly SpeechBubbleMono _speechBubbleMono;
-        readonly UICatMessage _uiCatMessage;
         readonly InputSerialManager _inputSerialManager;
         readonly SpeechEventManager _speechEventManager;
         public UICatSpeaks(
             SpeechBubbleMono speechBubbleMono
-            ,UICatMessage uiCatMessage
             ,InputSerialManager inputSerialManager
             ,SpeechEventManager speechEventManager
             )
         {
             _speechBubbleMono = speechBubbleMono;
-            _uiCatMessage = uiCatMessage;
             _inputSerialManager = inputSerialManager;
             _speechEventManager = speechEventManager;
         }
