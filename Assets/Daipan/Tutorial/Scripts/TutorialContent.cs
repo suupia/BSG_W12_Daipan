@@ -29,7 +29,7 @@ namespace Daipan.Tutorial.Scripts
         }
     }
     
-    internal sealed class DisplayBlackScreenWithProgress : AbstractTutorialContent, IDisposable
+    internal sealed class DisplayBlackScreenWithProgress : AbstractTutorialContent 
     {
         readonly DownloadGaugeViewMono _gaugeViewMono;
         double _fillAmount;
