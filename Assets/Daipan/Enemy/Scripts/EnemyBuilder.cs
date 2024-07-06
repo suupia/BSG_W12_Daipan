@@ -155,7 +155,6 @@ namespace Daipan.Enemy.Scripts
             Debug.Log($"enemyPrams.Length : {_enemyParamManager.enemyParams.Count}");
             var enemyEnum = _enemyParamManager.enemyParams[Randoms.RandomByRatios(ratio, Random.value)].enemyEnum;
             if (enemyEnum == EnemyEnum.RedBoss) _enemyLevelDesignParamData.SetCurrentKillAmount(0);
-            if (enemyEnum == EnemyEnum.Totem) return EnemyEnum.Red; // todo : トレーラー用
             return enemyEnum;
         }
     }

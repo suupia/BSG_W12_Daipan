@@ -23,6 +23,7 @@ namespace Daipan.Player.MonoScripts
         PlayerAttackedCounter _attackedCounterForAntiComment = null!;
         IPlayerHpParamData _playerHpParamData = null!;
         IAttackExecutor _attackExecutor = null!;
+        DaipanExecutor _daipanExecutor = null!;
         public Hp Hp { get; set; } = null!;
 
         public void Update()
@@ -43,6 +44,10 @@ namespace Daipan.Player.MonoScripts
             {
                 Debug.Log("Sが押されたよ");
                 _attackExecutor.FireAttackEffect(this,PlayerColor.Yellow);
+            }
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                _daipanExecutor.DaiPan();
             }
 
             // todo : 攻撃やHPの状況に応じて、AbstractPlayerViewMonoのメソッドを呼ぶ
@@ -74,6 +79,7 @@ namespace Daipan.Player.MonoScripts
             , CommentSpawner commentSpawner
             , WaveState waveState
             , IAttackExecutor attackExecutor
+            , DaipanExecutor daipanExecutor
             , IPlayerHpParamData playerHpParamData
         )
         {
@@ -106,6 +112,7 @@ namespace Daipan.Player.MonoScripts
             
             attackExecutor.SetPlayerViewMonos(playerViewMonos);
             _attackExecutor = attackExecutor;
+            _daipanExecutor = daipanExecutor;
             
             _inputSerialManager = inputSerialManager;
             

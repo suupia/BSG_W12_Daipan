@@ -11,7 +11,7 @@ scopes = {
 	"last_search.FD7A1EDD" = "ref=\"Assets/Daipan/Enemy/Sprites/Stream/Sprites/white.png\""
 	"OpenInspectorPreview.FD7A1EDD" = "0"
 	"currentGroup.FD7A1EDD" = "all"
-	"last_search.E8DA15E5" = ""
+	"last_search.E8DA15E5" = "enemyp"
 	"OpenInspectorPreview.E8DA15E5" = "0"
 	"currentGroup.E8DA15E5" = "asset"
 	"last_search.110DEAF1" = "Enemypara"
@@ -68,6 +68,7 @@ providers = {
 objectSelectors = {
 }
 recentSearches = [
+	"enemyp"
 	""
 ]
 searchItemFavorites = [
