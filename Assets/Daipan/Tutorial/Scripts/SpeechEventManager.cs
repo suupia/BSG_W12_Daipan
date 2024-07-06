@@ -21,7 +21,7 @@ namespace Daipan.Tutorial.Scripts
     {
         public int Id { get; }
         public string Message { get; }
-        Action Action { get; }
+        Func<bool> ExecuteAction { get; }
         ISpeechEvent? NextEvent { get; set; }
 
         bool IsCompleted { get; set; }
@@ -29,21 +29,20 @@ namespace Daipan.Tutorial.Scripts
         {
             Id = id;
             Message = message;
-            Action = () => { };
+            ExecuteAction = () => true;
         }
         
-        public SequentialEvent(int id,string message, Action action)
+        public SequentialEvent(int id,string message, Func<bool> executeAction)
         {
             Id = id;
             Message = message;
-            Action = action;
+            ExecuteAction = executeAction;
         }
 
         public void Execute()
         {
            Debug.Log($"Id: {Id} Message: {Message}");
-           Action();
-           IsCompleted = true;
+           IsCompleted = ExecuteAction();
         }
 
         public (bool, ISpeechEvent) MoveNext()
@@ -102,10 +101,14 @@ namespace Daipan.Tutorial.Scripts
     public class SpeechEventBuilder
     {
         readonly EnemySpawnerTutorial _enemySpawnerTutorial;
-        
-        public SpeechEventBuilder(EnemySpawnerTutorial enemySpawnerTutorial)
+        readonly RedEnemyTutorial _redEnemyTutorial; 
+        public SpeechEventBuilder(
+            EnemySpawnerTutorial enemySpawnerTutorial
+            ,RedEnemyTutorial redEnemyTutorial
+            )
         {
             _enemySpawnerTutorial = enemySpawnerTutorial;
+            _redEnemyTutorial = redEnemyTutorial;
         }
         
         public ISpeechEvent Build()
@@ -116,8 +119,12 @@ namespace Daipan.Tutorial.Scripts
                     new SequentialEvent(0, "やぁ、初めまして！僕はネコ！"),
                     new SequentialEvent(1, "君の配信をサポートするよ！"),
                     new SequentialEvent(2, "じゃあ、まずこのゲームの説明...！"),
-                    new SequentialEvent(3, "赤い敵が来たね！", () => _enemySpawnerTutorial.SpawnRedEnemy()),
-                    new ConditionalEvent(4, "赤色のボタンを押そう！", () => true),
+                    new SequentialEvent(3, "赤い敵が来たね！", () =>
+                    {
+                        _enemySpawnerTutorial.SpawnRedEnemy();
+                        return true;
+                    }),
+                    new ConditionalEvent(4, "赤色のボタンを押そう！", () => _redEnemyTutorial.IsSuccess),
                     new SequentialEvent(5, "そうそう！上手！"),
                     new SequentialEvent(6, "それは違うボタンだよ！もう一回！"),
                 };

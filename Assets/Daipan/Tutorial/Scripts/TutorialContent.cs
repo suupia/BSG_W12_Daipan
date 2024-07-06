@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace Daipan.Tutorial.Scripts
 {
-    internal abstract class AbstractTutorialContent : ITutorialContent, IDisposable
+    public abstract class AbstractTutorialContent : ITutorialContent, IDisposable
     {
         public abstract void Execute();
         public abstract bool IsCompleted();
@@ -29,7 +29,7 @@ namespace Daipan.Tutorial.Scripts
         }
     }
 
-    internal sealed class DisplayBlackScreenWithProgress : AbstractTutorialContent
+    public sealed class DisplayBlackScreenWithProgress : AbstractTutorialContent
     {
         readonly DownloadGaugeViewMono _gaugeViewMono;
         const float FillAmountPerSec = 0.2f;
@@ -57,7 +57,7 @@ namespace Daipan.Tutorial.Scripts
         }
     }
 
-    internal class LanguageSelection : AbstractTutorialContent
+    public class LanguageSelection : AbstractTutorialContent
     {
         readonly LanguageConfig _languageConfig;
         readonly InputSerialManager _inputSerialManager;
@@ -106,7 +106,7 @@ namespace Daipan.Tutorial.Scripts
         }
     }
 
-    internal class FadeInTutorialStart : AbstractTutorialContent
+    public class FadeInTutorialStart : AbstractTutorialContent
     {
         readonly DownloadGaugeViewMono _gaugeViewMono;
         readonly BlackScreenViewMono _blackScreenViewMono;
@@ -143,7 +143,7 @@ namespace Daipan.Tutorial.Scripts
         }
     }
 
-    internal class UICatSpeaks : AbstractTutorialContent 
+    public class UICatSpeaks : AbstractTutorialContent 
     {
         readonly SpeechBubbleMono _speechBubbleMono;
         readonly InputSerialManager _inputSerialManager;
@@ -180,9 +180,9 @@ namespace Daipan.Tutorial.Scripts
         }
     }
 
-    internal class RedEnemyTutorial : AbstractTutorialContent
+    public class RedEnemyTutorial : AbstractTutorialContent
     {
-
+        public bool IsSuccess { get; set; }
         public override void Execute()
         {
             Debug.Log("Tutorial: Defeat the red enemy...");
@@ -197,7 +197,7 @@ namespace Daipan.Tutorial.Scripts
         }
     }
 
-    internal class SequentialEnemyTutorial : ITutorialContent
+    public class SequentialEnemyTutorial : ITutorialContent
     {
         bool _completed = false;
 
@@ -214,7 +214,7 @@ namespace Daipan.Tutorial.Scripts
         }
     }
 
-    internal class ShowWhiteComments : ITutorialContent
+    public class ShowWhiteComments : ITutorialContent
     {
         bool _completed = false;
 
@@ -231,7 +231,7 @@ namespace Daipan.Tutorial.Scripts
         }
     }
 
-    internal class ShowAntiComments : ITutorialContent
+    public class ShowAntiComments : ITutorialContent
     {
         bool _completed = false;
 
@@ -250,7 +250,7 @@ namespace Daipan.Tutorial.Scripts
     }
 
 
-    internal class DaipanCutscene : ITutorialContent
+    public class DaipanCutscene : ITutorialContent
     {
         bool _completed = false;
 
@@ -269,7 +269,7 @@ namespace Daipan.Tutorial.Scripts
     }
 
 
-    internal class CatSpeaksAfterDaipan : ITutorialContent
+    public class CatSpeaksAfterDaipan : ITutorialContent
     {
         bool _completed = false;
 
@@ -286,7 +286,7 @@ namespace Daipan.Tutorial.Scripts
         }
     }
 
-    internal class AimForTopStreamer : ITutorialContent
+    public class AimForTopStreamer : ITutorialContent
     {
         bool _completed = false;
 
@@ -303,7 +303,7 @@ namespace Daipan.Tutorial.Scripts
         }
     }
 
-    internal class StartActualGame : ITutorialContent
+    public class StartActualGame : ITutorialContent
     {
         bool _completed = false;
 
