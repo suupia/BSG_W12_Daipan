@@ -148,15 +148,18 @@ namespace Daipan.Tutorial.Scripts
         readonly SpeechBubbleMono _speechBubbleMono;
         readonly UICatMessage _uiCatMessage;
         readonly InputSerialManager _inputSerialManager;
+        readonly SpeechEventManager _speechEventManager;
         public UICatSpeaks(
             SpeechBubbleMono speechBubbleMono
             ,UICatMessage uiCatMessage
             ,InputSerialManager inputSerialManager
+            ,SpeechEventManager speechEventManager
             )
         {
             _speechBubbleMono = speechBubbleMono;
             _uiCatMessage = uiCatMessage;
             _inputSerialManager = inputSerialManager;
+            _speechEventManager = speechEventManager;
         }
         public override void Execute()
         {
@@ -166,7 +169,11 @@ namespace Daipan.Tutorial.Scripts
                 .Where(_ => !Completed)
                 .Subscribe(_ =>
                 {
-                    if(_inputSerialManager.GetButtonAny()) _speechBubbleMono.ShowSpeechBubble(_uiCatMessage.GetNextMessage());
+                    // if(_inputSerialManager.GetButtonAny()) _speechBubbleMono.ShowSpeechBubble(_uiCatMessage.GetNextMessage());
+                    if (_inputSerialManager.GetButtonAny())
+                    {
+                        _speechBubbleMono.ShowSpeechBubble(_speechEventManager.Execute().CurrentEvent.Message);
+                    }
                 }));
         }
 
