@@ -167,17 +167,7 @@ namespace Daipan.Tutorial.Scripts
             Debug.Log($"GetSpeechEventEnum = {_speechEventManager.GetSpeechEventEnum()}");
             
             _speechEventManager.MoveNext(); 
-            _speechBubbleMono.EnqueueSpeechMessage(_speechEventManager.CurrentEvent.Message); 
-            Disposables.Add(Observable.EveryUpdate()
-                .Where(_ => !_speechEventManager.IsEnd())
-                .Subscribe(_ =>
-                {
-                    if (_inputSerialManager.GetButtonAny())
-                    {
-                        _speechEventManager.MoveNext(); 
-                        _speechBubbleMono.EnqueueSpeechMessage(_speechEventManager.CurrentEvent.Message);
-                    }
-                }));
+
         }
 
         public override bool IsCompleted()
@@ -213,19 +203,7 @@ namespace Daipan.Tutorial.Scripts
                 ); 
           
             _speechEventManager.MoveNext(); 
-            _speechBubbleMono.EnqueueSpeechMessage(_speechEventManager.CurrentEvent.Message);
-            Disposables.Add(Observable.EveryUpdate()
-                .Where(_ => !_speechEventManager.IsEnd())
-                .Where(_ => _speechEventManager.GetSpeechEventEnum() == SpeechEventEnum.Listening)
-                .Subscribe(_ =>
-                {
-                    if (_inputSerialManager.GetButtonAny())
-                    {
-                        _speechEventManager.MoveNext(); 
-                        _speechBubbleMono.EnqueueSpeechMessage(_speechEventManager.CurrentEvent.Message);
-                    }       
-                }));
-           
+
             // Debug
             Disposables.Add(Observable.EveryUpdate()
                 .Subscribe(_ =>
