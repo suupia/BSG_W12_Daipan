@@ -11,6 +11,7 @@ using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Player.LevelDesign.Scripts;
 using Daipan.Player.MonoScripts;
 using Daipan.Stream.Scripts;
+using Daipan.Tutorial.Scripts;
 using UnityEngine;
 
 namespace Daipan.Player.Scripts
@@ -18,12 +19,11 @@ namespace Daipan.Player.Scripts
     public sealed class PlayerAttackEffectTutorialBuilder : IPlayerAttackEffectBuilder
     {
         readonly IPlayerParamDataContainer _playerParamDataContainer;
-        readonly ComboCounter _comboCounter;
         readonly EnemyCluster _enemyCluster;
-        readonly CommentSpawner _commentSpawner;
         readonly EnemyTotemOnAttack _enemyTotemOnAttack;
         readonly WaveState _waveState;
         readonly IPlayerAntiCommentParamData _playerAntiCommentParamData;
+        readonly RedEnemyTutorial _redEnemyTutorial;
 
         public PlayerAttackEffectTutorialBuilder(
             IPlayerParamDataContainer playerParamDataContainer
@@ -33,15 +33,15 @@ namespace Daipan.Player.Scripts
             ,EnemyTotemOnAttack enemyTotemOnAttack
             ,WaveState waveState
             ,IPlayerAntiCommentParamData playerAntiCommentParamData
+            ,RedEnemyTutorial redEnemyTutorial
         )
         {
             _playerParamDataContainer = playerParamDataContainer;
-            _comboCounter = comboCounter;
             _enemyCluster = enemyCluster;
-            _commentSpawner = commentSpawner;
             _enemyTotemOnAttack = enemyTotemOnAttack;
             _waveState = waveState;
             _playerAntiCommentParamData = playerAntiCommentParamData;
+            _redEnemyTutorial = redEnemyTutorial;
         }
 
         public PlayerAttackEffectMono Build(PlayerAttackEffectMono effect, PlayerMono playerMono,
@@ -52,7 +52,13 @@ namespace Daipan.Player.Scripts
             effect.OnHit += (sender, args) =>
             {
                 Debug.Log($"OnHit");
-                AttackEnemy(_playerParamDataContainer, playerViewMonos, playerColor, args.EnemyMono,_enemyTotemOnAttack );
+                AttackEnemy(
+                    _playerParamDataContainer
+                    , playerViewMonos
+                    , playerColor
+                    , args.EnemyMono
+                    ,_enemyTotemOnAttack
+                    ,_redEnemyTutorial);
             };
             return effect;
         }
@@ -64,6 +70,7 @@ namespace Daipan.Player.Scripts
             ,PlayerColor playerColor
             ,EnemyMono? enemyMono
             ,EnemyTotemOnAttack totemOnAttack
+            ,RedEnemyTutorial redEnemyTutorial
             )
         {
             Debug.Log($"Attack enemyMono?.EnemyEnum: {enemyMono?.EnemyEnum}");
@@ -83,6 +90,11 @@ namespace Daipan.Player.Scripts
                     // todo: 一旦はなし
                     // enemyMono.SuicideAttack(playerMono); 
                 };
+
+                if (enemyMono.EnemyEnum == EnemyEnum.Red)
+                {
+                    redEnemyTutorial.IsSuccess = true;
+                }
 
             }
 

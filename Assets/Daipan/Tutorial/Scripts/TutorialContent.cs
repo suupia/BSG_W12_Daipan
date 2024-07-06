@@ -166,7 +166,6 @@ namespace Daipan.Tutorial.Scripts
                 .Where(_ => !Completed)
                 .Subscribe(_ =>
                 {
-                    // if(_inputSerialManager.GetButtonAny()) _speechBubbleMono.ShowSpeechBubble(_uiCatMessage.GetNextMessage());
                     if (_inputSerialManager.GetButtonAny())
                     {
                         _speechBubbleMono.ShowSpeechBubble(_speechEventManager.Execute().CurrentEvent.Message);
