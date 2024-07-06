@@ -1,18 +1,28 @@
 #nullable enable
 using Daipan.Tutorial.Interfaces;
+using Daipan.Tutorial.MonoScripts;
 using UnityEngine;
 
 namespace Daipan.Tutorial.Scripts
 {
     internal class DisplayBlackScreenWithProgress : ITutorialContent
     {
-        bool _completed = false;
+        bool _completed;
+        readonly DownloadGaugeViewMono _gaugeViewMono;
+        double _fillAmount;
+        const double FillAmountPerSec = 0.2;
+
+        public DisplayBlackScreenWithProgress(DownloadGaugeViewMono gaugeViewMono)
+        {
+            _gaugeViewMono = gaugeViewMono;
+        }
 
         public void ExecuteUpdate()
         {
             Debug.Log("Displaying black screen with download progress...");
-            // Logic for this step
-           if(Input.GetKeyDown(KeyCode.T))  _completed = true; // Set to true once the step is done
+            _fillAmount += FillAmountPerSec * Time.deltaTime;
+            _gaugeViewMono.SetGaugeValue((float)_fillAmount);
+            if (_fillAmount >= 0.5) _completed = true;
         }
 
         public bool IsCompleted()
@@ -29,7 +39,7 @@ namespace Daipan.Tutorial.Scripts
         {
             Debug.Log("Language selection...");
             // Logic for this step
-            if(Input.GetKeyDown(KeyCode.T))  _completed = true; // Set to true once the step is done
+            if (Input.GetKeyDown(KeyCode.T)) _completed = true; // Set to true once the step is done
         }
 
         public bool IsCompleted()
@@ -45,7 +55,7 @@ namespace Daipan.Tutorial.Scripts
 
         public void ExecuteUpdate()
         {
-            if(Input.GetKeyDown(KeyCode.T))  _completed = true; // Set to true once the step is done
+            if (Input.GetKeyDown(KeyCode.T)) _completed = true; // Set to true once the step is done
         }
 
         public bool IsCompleted()
@@ -63,7 +73,7 @@ namespace Daipan.Tutorial.Scripts
             Debug.Log("Streamer wakes up...");
             Debug.Log("Cat speaks...");
             // Logic for this step
-            if(Input.GetKeyDown(KeyCode.T))  _completed = true;
+            if (Input.GetKeyDown(KeyCode.T)) _completed = true;
         }
 
         public bool IsCompleted()
@@ -82,7 +92,7 @@ namespace Daipan.Tutorial.Scripts
             // 敵を倒せれば上手！！
             // そうでなかったら、もう一回！
             // Logic for this step
-            if(Input.GetKeyDown(KeyCode.T)) _completed = true;
+            if (Input.GetKeyDown(KeyCode.T)) _completed = true;
         }
 
         public bool IsCompleted()
@@ -99,7 +109,7 @@ namespace Daipan.Tutorial.Scripts
         {
             Debug.Log("Tutorial: Defeat enemies in sequence...");
             // Logic for this step
-            if(Input.GetKeyDown(KeyCode.T)) _completed = true;
+            if (Input.GetKeyDown(KeyCode.T)) _completed = true;
         }
 
         public bool IsCompleted()
@@ -116,7 +126,7 @@ namespace Daipan.Tutorial.Scripts
         {
             Debug.Log("Displaying white comments...");
             // Logic for this step
-            if(Input.GetKeyDown(KeyCode.T)) _completed = true;
+            if (Input.GetKeyDown(KeyCode.T)) _completed = true;
         }
 
         public bool IsCompleted()
@@ -134,7 +144,7 @@ namespace Daipan.Tutorial.Scripts
             Debug.Log("Showing anti-comments with sound effects...");
             Debug.Log("Anger gauge animation...");
             // Logic for this step
-            if(Input.GetKeyDown(KeyCode.T)) _completed = true;
+            if (Input.GetKeyDown(KeyCode.T)) _completed = true;
         }
 
         public bool IsCompleted()
@@ -153,7 +163,7 @@ namespace Daipan.Tutorial.Scripts
             Debug.Log("Displaying special cutscene...");
             // 特別なカットに切り替える
             // Logic for this step
-            if(Input.GetKeyDown(KeyCode.T)) _completed = true;
+            if (Input.GetKeyDown(KeyCode.T)) _completed = true;
         }
 
         public bool IsCompleted()
@@ -171,7 +181,7 @@ namespace Daipan.Tutorial.Scripts
         {
             Debug.Log("Cat speaks more...");
             // Logic for this step
-            if(Input.GetKeyDown(KeyCode.T))   _completed = true;
+            if (Input.GetKeyDown(KeyCode.T)) _completed = true;
         }
 
         public bool IsCompleted()
@@ -188,7 +198,7 @@ namespace Daipan.Tutorial.Scripts
         {
             Debug.Log("Aim for top streamer...");
             // Logic for this step
-            if(Input.GetKeyDown(KeyCode.T))  _completed = true;
+            if (Input.GetKeyDown(KeyCode.T)) _completed = true;
         }
 
         public bool IsCompleted()
@@ -205,7 +215,7 @@ namespace Daipan.Tutorial.Scripts
         {
             Debug.Log("Starting actual game...");
             // Logic for this step
-            if(Input.GetKeyDown(KeyCode.T))  _completed = true;
+            if (Input.GetKeyDown(KeyCode.T)) _completed = true;
         }
 
         public bool IsCompleted()
