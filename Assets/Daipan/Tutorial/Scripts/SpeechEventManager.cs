@@ -99,30 +99,9 @@ namespace Daipan.Tutorial.Scripts
             
     }
 
-    public class SpeechEventBuilder
+    public static class SpeechEventBuilder
     {
-        readonly EnemySpawnerTutorial _enemySpawnerTutorial;
-        readonly RedEnemyTutorial _redEnemyTutorial; 
-        public SpeechEventBuilder(
-            EnemySpawnerTutorial enemySpawnerTutorial
-            ,RedEnemyTutorial redEnemyTutorial
-            )
-        {
-            _enemySpawnerTutorial = enemySpawnerTutorial;
-            _redEnemyTutorial = redEnemyTutorial;
-        }
-        
-        public ISpeechEvent Build(ITutorialContent tutorialContent)
-        {
-           return tutorialContent switch 
-           {
-               UICatIntroduce => BuildUICatIntroduce(),
-               RedEnemyTutorial => BuildRedEnemyTutorial(_enemySpawnerTutorial,_redEnemyTutorial),
-               _ => throw new ArgumentException("Invalid tutorialContent")
-           }; 
-        }
-
-        static ISpeechEvent BuildUICatIntroduce()
+        public static ISpeechEvent BuildUICatIntroduce()
         {
             List<ISpeechEvent> speechEvents =
                 new List<ISpeechEvent>
@@ -137,9 +116,10 @@ namespace Daipan.Tutorial.Scripts
             return speechEvents[0]; 
         }
         
-        static ISpeechEvent BuildRedEnemyTutorial(
-            EnemySpawnerTutorial enemySpawnerTutorial
-            ,RedEnemyTutorial redEnemyTutorial)
+        public static ISpeechEvent BuildRedEnemyTutorial(
+            RedEnemyTutorial redEnemyTutorial
+            , EnemySpawnerTutorial enemySpawnerTutorial
+            )
         {
             List<ISpeechEvent> speechEvents =
                 new List<ISpeechEvent>
@@ -164,16 +144,12 @@ namespace Daipan.Tutorial.Scripts
     public class SpeechEventManager
     {
         ISpeechEvent? CurrentEvent { get; set; } 
-        readonly SpeechEventBuilder _speechEventBuilder;
-        
-        public SpeechEventManager(SpeechEventBuilder speechEventBuilder)
+
+        public void SetSpeechEvent(ISpeechEvent speechEvent)
         {
-            _speechEventBuilder = speechEventBuilder;
+            CurrentEvent = speechEvent;
         }
-        public void SetSpeechEvent(ITutorialContent tutorialContent)
-        {
-            CurrentEvent = _speechEventBuilder.Build(tutorialContent);
-        }
+
         public (bool IsMoveNext,ISpeechEvent CurrentEvent) Execute()
         {
             if (CurrentEvent == null)

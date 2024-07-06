@@ -1,6 +1,7 @@
 #nullable enable
 using System;
 using System.Collections.Generic;
+using Daipan.Enemy.Scripts;
 using Daipan.InputSerial.Scripts;
 using Daipan.Option.Scripts;
 using Daipan.Streamer.Scripts;
@@ -162,7 +163,7 @@ namespace Daipan.Tutorial.Scripts
         {
             Debug.Log("Streamer wakes up...");
             Debug.Log("Cat speaks...");
-            _speechEventManager.SetSpeechEvent(this); 
+            _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildUICatIntroduce()); 
             Disposables.Add(Observable.EveryUpdate()
                 .Where(_ => !Completed)
                 .Subscribe(_ =>
@@ -185,21 +186,26 @@ namespace Daipan.Tutorial.Scripts
         readonly SpeechBubbleMono _speechBubbleMono;
         readonly InputSerialManager _inputSerialManager;
         readonly SpeechEventManager _speechEventManager;
+        readonly EnemySpawnerTutorial _enemySpawnerTutorial;
         public RedEnemyTutorial(
             SpeechBubbleMono speechBubbleMono
             ,InputSerialManager inputSerialManager
             ,SpeechEventManager speechEventManager
+            ,EnemySpawnerTutorial enemySpawnerTutorial
         )
         {
             _speechBubbleMono = speechBubbleMono;
             _inputSerialManager = inputSerialManager;
             _speechEventManager = speechEventManager;
+            _enemySpawnerTutorial = enemySpawnerTutorial;
         }
         public bool IsSuccess { get; set; }
         public override void Execute()
         {
             Debug.Log("Tutorial: Defeat the red enemy...");
-            _speechEventManager.SetSpeechEvent(this); 
+            _speechEventManager.SetSpeechEvent(
+                SpeechEventBuilder.BuildRedEnemyTutorial(this, _enemySpawnerTutorial)
+                ); 
             Disposables.Add(Observable.EveryUpdate()
                 .Where(_ => !Completed)
                 .Subscribe(_ =>
