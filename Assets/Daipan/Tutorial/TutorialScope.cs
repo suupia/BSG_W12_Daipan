@@ -27,6 +27,8 @@ using Daipan.Stream.Tests;
 using Daipan.Streamer.Scripts;
 using Daipan.Tower.MonoScripts;
 using Daipan.Tower.Scripts;
+using Daipan.Tutorial.Interfaces;
+using Daipan.Tutorial.Scripts;
 using UnityEngine;
 using UnityEngine.Serialization;
 using VContainer;
@@ -96,7 +98,7 @@ namespace Daipan.Tutorial
             builder.Register<EnemyBuilder>(Lifetime.Scoped).As<IEnemyBuilder>();
 
             builder.Register<EnemyAttackDecider>(Lifetime.Scoped);
-            builder.Register<EnemySpawner>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
+            builder.Register<EnemySpawnerTutorial>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
             builder.Register<EnemyCluster>(Lifetime.Scoped);
             builder.Register<EnemyTotemOnAttack>(Lifetime.Scoped);
 
@@ -196,6 +198,10 @@ namespace Daipan.Tutorial
             // Timer
             builder.Register<StreamTimer>(Lifetime.Scoped).AsSelf().As<IStart>().As<IUpdate>();
 
+            // Tutorial
+            builder.Register<TutorialFacilitator>(Lifetime.Scoped).As<IUpdate>();
+            RegisterTutorialContents(builder);
+            
             // Updater
             builder.UseEntryPoints(Lifetime.Scoped, entryPoints =>
             {
@@ -206,6 +212,22 @@ namespace Daipan.Tutorial
             
             // Debug
             RegisterDebugInput(builder);
+        }
+        
+        static void RegisterTutorialContents(IContainerBuilder builder)
+        {
+            builder.Register<DisplayBlackScreenWithProgress>(Lifetime.Scoped).As<ITutorialContent>();
+            builder.Register<LanguageSelection>(Lifetime.Scoped).As<ITutorialContent>();
+            builder.Register<FadeInTutorialStart>(Lifetime.Scoped).As<ITutorialContent>();
+            builder.Register<CatSpeaks>(Lifetime.Scoped).As<ITutorialContent>();
+            builder.Register<RedEnemyTutorial>(Lifetime.Scoped).As<ITutorialContent>();
+            builder.Register<SequentialEnemyTutorial>(Lifetime.Scoped).As<ITutorialContent>();
+            builder.Register<ShowWhiteComments>(Lifetime.Scoped).As<ITutorialContent>();
+            builder.Register<ShowAntiComments>(Lifetime.Scoped).As<ITutorialContent>();
+            builder.Register<DaipanCutscene>(Lifetime.Scoped).As<ITutorialContent>();
+            builder.Register<CatSpeaksAfterDaipan>(Lifetime.Scoped).As<ITutorialContent>();
+            builder.Register<AimForTopStreamer>(Lifetime.Scoped).As<ITutorialContent>();
+            builder.Register<StartActualGame>(Lifetime.Scoped).As<ITutorialContent>();
         }
 
         static void RegisterDebugInput(IContainerBuilder builder)
