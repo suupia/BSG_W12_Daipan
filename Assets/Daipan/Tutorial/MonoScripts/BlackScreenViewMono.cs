@@ -12,10 +12,10 @@ namespace Daipan.Tutorial.MonoScripts
        
         public void FadeOut(float time, Action onComplete)
         {
-            // blackScreenImage.DoColor(1, (float)time).OnComplete(() =>
-            // {
-            //     onComplete();
-            // });
+            blackScreenImage.DOFade(0, time).OnComplete(() =>
+            {
+                onComplete();
+            });
         }
 
         public void Hide()
