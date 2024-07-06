@@ -113,7 +113,6 @@ namespace Daipan.Daipan
                 .As<IPrefabLoader<PlayerAttackEffectMono>>();
             builder.Register<PlayerAttackEffectSpawner>(Lifetime.Scoped);
             builder.Register<PlayerAttackEffectBuilder>(Lifetime.Scoped);
-            builder.Register<AttackExecutor>(Lifetime.Transient).As<IAttackExecutor>();
         }
 
         public static void RegisterCombo(IContainerBuilder builder, ComboParamManager comboParamManager)
@@ -167,7 +166,6 @@ namespace Daipan.Daipan
                 new EnemyLevelDesignParamDataBuilder(builder, enemyParamManager.enemyLevelDesignParam));
             // Enemy
             builder.Register<EnemyPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<EnemyMono>>();
-            builder.Register<EnemySpawner>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
             builder.Register<EnemyBuilder>(Lifetime.Scoped).As<IEnemyBuilder>();
             builder.Register<EnemyCluster>(Lifetime.Scoped);
             builder.Register<EnemyAttackDecider>(Lifetime.Scoped);
@@ -216,34 +214,36 @@ namespace Daipan.Daipan
         {
             // Stream
             RegisterStream(builder, streamParam);
-
+            
             // Comment
             RegisterComment(builder, commentParamManager);
-
+            
             // Player
             RegisterPlayer(builder, playerParamManager);
-
+            builder.Register<AttackExecutor>(Lifetime.Transient).As<IAttackExecutor>();
+            
             // Combo
             RegisterCombo(builder, comboParamManager);
-
+            
             // Tower
             RegisterTower(builder, towerParams);
-
+            
             // Enemy
             RegisterEnemy(builder, enemyParamManager);
+            builder.Register<EnemySpawner>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
 
             // Irritated
             RegisterIrritated(builder, irritatedParams);
             
             // View
             RegisterView(builder);
-
+            
             // Battle
             RegisterBattle(builder);
             
             // InputSerial  
             RegisterInputSerial(builder);
-
+            
             // Updater
             builder.UseEntryPoints(Lifetime.Scoped, entryPoints =>
             {
