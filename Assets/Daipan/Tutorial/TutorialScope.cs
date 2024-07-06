@@ -67,6 +67,8 @@ namespace Daipan.Tutorial
             DaipanScope.RegisterPlayer(builder, playerParamManager);
             builder.Register<AttackExecutor>(Lifetime.Transient);
             builder.Register<AttackExecutorTutorial>(Lifetime.Transient).As<IAttackExecutor>(); 
+            builder.Register<PlayerAttackEffectBuilderTutorial>(Lifetime.Scoped).As<IPlayerAttackEffectBuilder>();
+            builder.Register<PlayerInputTutorial>(Lifetime.Transient).As<IPlayerInput>();
             
             // Combo
             DaipanScope.RegisterCombo(builder, comboParamManager);
@@ -98,8 +100,7 @@ namespace Daipan.Tutorial
             builder.RegisterComponentInHierarchy<LanguageSelectionPopupMono>();
             builder.RegisterComponentInHierarchy<BlackScreenViewMono>();
             builder.RegisterComponentInHierarchy<SpeechBubbleMono>();
-            builder.Register<SpeechEventManager>(Lifetime.Transient);
-            builder.Register<SpeechEventBuilder>(Lifetime.Transient);
+            builder.Register<SpeechEventManager>(Lifetime.Scoped);
 
             // Updater
             builder.UseEntryPoints(Lifetime.Scoped, entryPoints =>
@@ -118,8 +119,8 @@ namespace Daipan.Tutorial
             // builder.Register<DisplayBlackScreenWithProgress>(Lifetime.Scoped).As<ITutorialContent>();
             // builder.Register<LanguageSelection>(Lifetime.Scoped).As<ITutorialContent>();
             // builder.Register<FadeInTutorialStart>(Lifetime.Scoped).As<ITutorialContent>();
-            builder.Register<UICatSpeaks>(Lifetime.Scoped).As<ITutorialContent>();
-            builder.Register<RedEnemyTutorial>(Lifetime.Scoped).As<ITutorialContent>();
+            builder.Register<UICatIntroduce>(Lifetime.Scoped).As<ITutorialContent>();
+            builder.Register<RedEnemyTutorial>(Lifetime.Scoped).As<ITutorialContent>().AsSelf();
             builder.Register<SequentialEnemyTutorial>(Lifetime.Scoped).As<ITutorialContent>();
             builder.Register<ShowWhiteComments>(Lifetime.Scoped).As<ITutorialContent>();
             builder.Register<ShowAntiComments>(Lifetime.Scoped).As<ITutorialContent>();

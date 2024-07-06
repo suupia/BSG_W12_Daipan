@@ -1,6 +1,7 @@
 #nullable enable
 using System;
 using System.Collections.Generic;
+using Daipan.Enemy.Scripts;
 using Daipan.InputSerial.Scripts;
 using Daipan.Option.Scripts;
 using Daipan.Streamer.Scripts;
@@ -11,11 +12,11 @@ using UnityEngine;
 
 namespace Daipan.Tutorial.Scripts
 {
-    internal abstract class AbstractTutorialContent : ITutorialContent, IDisposable
+    public abstract class AbstractTutorialContent : ITutorialContent, IDisposable
     {
         public abstract void Execute();
         public abstract bool IsCompleted();
-        protected bool Completed;
+        protected bool Completed { get; set; }
         protected readonly IList<IDisposable> Disposables = new List<IDisposable>();
 
         public void Dispose()
@@ -29,7 +30,7 @@ namespace Daipan.Tutorial.Scripts
         }
     }
 
-    internal sealed class DisplayBlackScreenWithProgress : AbstractTutorialContent
+    public sealed class DisplayBlackScreenWithProgress : AbstractTutorialContent
     {
         readonly DownloadGaugeViewMono _gaugeViewMono;
         const float FillAmountPerSec = 0.2f;
@@ -57,7 +58,7 @@ namespace Daipan.Tutorial.Scripts
         }
     }
 
-    internal class LanguageSelection : AbstractTutorialContent
+    public class LanguageSelection : AbstractTutorialContent
     {
         readonly LanguageConfig _languageConfig;
         readonly InputSerialManager _inputSerialManager;
@@ -106,7 +107,7 @@ namespace Daipan.Tutorial.Scripts
         }
     }
 
-    internal class FadeInTutorialStart : AbstractTutorialContent
+    public class FadeInTutorialStart : AbstractTutorialContent
     {
         readonly DownloadGaugeViewMono _gaugeViewMono;
         readonly BlackScreenViewMono _blackScreenViewMono;
@@ -143,61 +144,71 @@ namespace Daipan.Tutorial.Scripts
         }
     }
 
-    internal class UICatSpeaks : AbstractTutorialContent 
+    public class UICatIntroduce : AbstractTutorialContent 
     {
-        readonly SpeechBubbleMono _speechBubbleMono;
-        readonly InputSerialManager _inputSerialManager;
         readonly SpeechEventManager _speechEventManager;
-        public UICatSpeaks(
-            SpeechBubbleMono speechBubbleMono
-            ,InputSerialManager inputSerialManager
-            ,SpeechEventManager speechEventManager
+        public UICatIntroduce(
+            SpeechEventManager speechEventManager
             )
         {
-            _speechBubbleMono = speechBubbleMono;
-            _inputSerialManager = inputSerialManager;
             _speechEventManager = speechEventManager;
         }
         public override void Execute()
         {
             Debug.Log("Streamer wakes up...");
             Debug.Log("Cat speaks...");
-            Disposables.Add(Observable.EveryUpdate()
-                .Where(_ => !Completed)
-                .Subscribe(_ =>
-                {
-                    // if(_inputSerialManager.GetButtonAny()) _speechBubbleMono.ShowSpeechBubble(_uiCatMessage.GetNextMessage());
-                    if (_inputSerialManager.GetButtonAny())
-                    {
-                        _speechBubbleMono.ShowSpeechBubble(_speechEventManager.Execute().CurrentEvent.Message);
-                    }
-                }));
+            _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildUICatIntroduce()); 
+
         }
 
         public override bool IsCompleted()
         {
-            return Completed;
+            return _speechEventManager.IsEnd();
         }
     }
 
-    internal class RedEnemyTutorial : AbstractTutorialContent
+    public class RedEnemyTutorial : AbstractTutorialContent
     {
-
+        readonly SpeechEventManager _speechEventManager;
+        readonly EnemySpawnerTutorial _enemySpawnerTutorial;
+        public RedEnemyTutorial(
+            SpeechEventManager speechEventManager
+            ,EnemySpawnerTutorial enemySpawnerTutorial
+        )
+        {
+            _speechEventManager = speechEventManager;
+            _enemySpawnerTutorial = enemySpawnerTutorial;
+        }
+        public bool IsSuccess { get; private set; }
         public override void Execute()
         {
             Debug.Log("Tutorial: Defeat the red enemy...");
-            // 敵を倒せれば上手！！
-            // そうでなかったら、もう一回！
-            // Logic for this step
+            _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildRedEnemyTutorial(this));
+
+            _enemySpawnerTutorial.SpawnRedEnemy();
+
+
+            // Debug
+            Disposables.Add(Observable.EveryUpdate()
+                .Subscribe(_ =>
+                {
+                    Debug.Log($"IsSuccess = {IsSuccess}");
+                }));
+        }
+        
+        public void SetIsSuccess(bool isSuccess)
+        {
+            IsSuccess = isSuccess;
+            _speechEventManager.MoveNext();
         }
 
         public override bool IsCompleted()
         {
-            return Completed;
+            return _speechEventManager.IsEnd();
         }
     }
 
-    internal class SequentialEnemyTutorial : ITutorialContent
+    public class SequentialEnemyTutorial : ITutorialContent
     {
         bool _completed = false;
 
@@ -214,7 +225,7 @@ namespace Daipan.Tutorial.Scripts
         }
     }
 
-    internal class ShowWhiteComments : ITutorialContent
+    public class ShowWhiteComments : ITutorialContent
     {
         bool _completed = false;
 
@@ -231,7 +242,7 @@ namespace Daipan.Tutorial.Scripts
         }
     }
 
-    internal class ShowAntiComments : ITutorialContent
+    public class ShowAntiComments : ITutorialContent
     {
         bool _completed = false;
 
@@ -250,7 +261,7 @@ namespace Daipan.Tutorial.Scripts
     }
 
 
-    internal class DaipanCutscene : ITutorialContent
+    public class DaipanCutscene : ITutorialContent
     {
         bool _completed = false;
 
@@ -269,7 +280,7 @@ namespace Daipan.Tutorial.Scripts
     }
 
 
-    internal class CatSpeaksAfterDaipan : ITutorialContent
+    public class CatSpeaksAfterDaipan : ITutorialContent
     {
         bool _completed = false;
 
@@ -286,7 +297,7 @@ namespace Daipan.Tutorial.Scripts
         }
     }
 
-    internal class AimForTopStreamer : ITutorialContent
+    public class AimForTopStreamer : ITutorialContent
     {
         bool _completed = false;
 
@@ -303,7 +314,7 @@ namespace Daipan.Tutorial.Scripts
         }
     }
 
-    internal class StartActualGame : ITutorialContent
+    public class StartActualGame : ITutorialContent
     {
         bool _completed = false;
 

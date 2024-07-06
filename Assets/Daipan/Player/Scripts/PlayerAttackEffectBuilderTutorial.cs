@@ -11,37 +11,35 @@ using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Player.LevelDesign.Scripts;
 using Daipan.Player.MonoScripts;
 using Daipan.Stream.Scripts;
+using Daipan.Tutorial.Scripts;
 using UnityEngine;
 
 namespace Daipan.Player.Scripts
 {
-    public sealed class PlayerAttackEffectBuilder : IPlayerAttackEffectBuilder
+    public sealed class PlayerAttackEffectBuilderTutorial : IPlayerAttackEffectBuilder
     {
         readonly IPlayerParamDataContainer _playerParamDataContainer;
-        readonly ComboCounter _comboCounter;
         readonly EnemyCluster _enemyCluster;
-        readonly CommentSpawner _commentSpawner;
         readonly EnemyTotemOnAttack _enemyTotemOnAttack;
         readonly WaveState _waveState;
         readonly IPlayerAntiCommentParamData _playerAntiCommentParamData;
+        readonly RedEnemyTutorial _redEnemyTutorial;
 
-        public PlayerAttackEffectBuilder(
+        public PlayerAttackEffectBuilderTutorial(
             IPlayerParamDataContainer playerParamDataContainer
-            ,ComboCounter comboCounter
             ,EnemyCluster enemyCluster
-            ,CommentSpawner commentSpawner
             ,EnemyTotemOnAttack enemyTotemOnAttack
             ,WaveState waveState
             ,IPlayerAntiCommentParamData playerAntiCommentParamData
+            ,RedEnemyTutorial redEnemyTutorial
         )
         {
             _playerParamDataContainer = playerParamDataContainer;
-            _comboCounter = comboCounter;
             _enemyCluster = enemyCluster;
-            _commentSpawner = commentSpawner;
             _enemyTotemOnAttack = enemyTotemOnAttack;
             _waveState = waveState;
             _playerAntiCommentParamData = playerAntiCommentParamData;
+            _redEnemyTutorial = redEnemyTutorial;
         }
 
         public PlayerAttackEffectMono Build(PlayerAttackEffectMono effect, PlayerMono playerMono,
@@ -52,49 +50,51 @@ namespace Daipan.Player.Scripts
             effect.OnHit += (sender, args) =>
             {
                 Debug.Log($"OnHit");
-                AttackEnemy(_playerParamDataContainer, playerViewMonos, playerColor, args, _enemyTotemOnAttack, _comboCounter);
-                SpawnAntiComment(args, _commentSpawner, _playerAntiCommentParamData,_waveState);
+                AttackEnemy(
+                    _playerParamDataContainer
+                    , playerViewMonos
+                    , playerColor
+                    , args.EnemyMono
+                    ,_enemyTotemOnAttack
+                    ,_redEnemyTutorial);
             };
             return effect;
         }
 
 
+
         static void AttackEnemy(IPlayerParamDataContainer playerParamDataContainer
             ,List<AbstractPlayerViewMono?> playerViewMonos
             ,PlayerColor playerColor
-            ,OnHitEventArgs args
+            ,EnemyMono? enemyMono
             ,EnemyTotemOnAttack totemOnAttack
-            ,ComboCounter comboCounter
+            ,RedEnemyTutorial redEnemyTutorial
             )
         {
+            Debug.Log($"Attack enemyMono?.EnemyEnum: {enemyMono?.EnemyEnum}");
+            if (enemyMono == null) return;
 
 
-            if (args.IsTargetEnemy && args.EnemyMono != null)
-             {
-                Debug.Log($"EnemyType: {args.EnemyMono.EnemyEnum}を攻撃");
+            Debug.Log($"EnemyType: {enemyMono.EnemyEnum}を攻撃");
+            if (enemyMono.EnemyEnum == EnemyEnum.Red)
+            {
+                Debug.Log("RedEnemyTutorial_Success");
+                redEnemyTutorial.SetIsSuccess(playerColor == PlayerColor.Red);
+            }
+            if (PlayerAttackModule.GetTargetEnemyEnum(playerColor).Contains(enemyMono.EnemyEnum))
+            {
                 // 敵を攻撃
                 var playerParamData = playerParamDataContainer.GetPlayerParamData(playerColor);
-                var HpBuffer = args.EnemyMono.EnemyEnum switch 
+                enemyMono.Hp = enemyMono.EnemyEnum switch 
                 {
-                    EnemyEnum.Totem => totemOnAttack.OnAttacked(args.EnemyMono.Hp, playerParamData),
-                    _ => PlayerAttackModule.Attack(args.EnemyMono.Hp,playerParamData)
+                    EnemyEnum.Totem => totemOnAttack.OnAttacked(enemyMono.Hp, playerParamData),
+                    _ => PlayerAttackModule.Attack(enemyMono.Hp,playerParamData)
                     // 敵が特攻攻撃をしてくる
                     // todo: 一旦はなし
                     // enemyMono.SuicideAttack(playerMono); 
                 };
-                //  HPに変化があれば、コンボ増加
 
-                if (args.EnemyMono.Hp.Value != HpBuffer.Value) comboCounter.IncreaseCombo();
-                args.EnemyMono.Hp = HpBuffer;
             }
-            else
-            {
-                Debug.Log(
-                    $"攻撃対象が{PlayerAttackModule.GetTargetEnemyEnum(playerColor)}ではないです args.EnemyMono?.EnemyEnum: {args.EnemyMono?.EnemyEnum}");
-                comboCounter.ResetCombo();
-                return;
-            }
-
 
 
             // Animation
@@ -105,27 +105,7 @@ namespace Daipan.Player.Scripts
                     playerViewMono.Attack();
             }
         }
-
-
         
-
-
-        static void SpawnAntiComment(
-            OnHitEventArgs args
-            ,CommentSpawner commentSpawner
-            ,IPlayerAntiCommentParamData playerAntiCommentParamData
-            ,WaveState waveState
-            )
-        {
-            if (args.IsTargetEnemy) return;
-            
-            var spawnPercent = playerAntiCommentParamData.GetAntiCommentPercentOnMissAttacks(waveState.CurrentWave);
-            
-            if (spawnPercent / 100f > Random.value)
-            {
-                commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
-            }
-           
-        }
+     
     }
 }

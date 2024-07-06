@@ -1,7 +1,7 @@
 #nullable enable
 namespace Daipan.Option.Scripts
 {
-    internal sealed class LanguageConfig
+    public sealed class LanguageConfig
     {
         public enum LanguageEnum
         {
