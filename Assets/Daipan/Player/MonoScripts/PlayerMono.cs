@@ -21,7 +21,7 @@ namespace Daipan.Player.MonoScripts
         CommentSpawner _commentSpawner = null!;
         PlayerAttackedCounter _attackedCounterForAntiComment = null!;
         IPlayerHpParamData _playerHpParamData = null!;
-        PlayerInput _playerInput = null!;
+        IPlayerInput _playerInput = null!;
         public Hp Hp { get; set; } = null!;
 
         public void Update()
@@ -40,7 +40,7 @@ namespace Daipan.Player.MonoScripts
             , CommentSpawner commentSpawner
             , WaveState waveState
             , IPlayerHpParamData playerHpParamData
-            , PlayerInput playerInput
+            , IPlayerInput playerInput
         )
         {
             _commentSpawner = commentSpawner;

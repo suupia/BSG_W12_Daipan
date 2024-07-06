@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Daipan.Player.Scripts
 {
-    public class PlayerInput
+    public class PlayerInput : IPlayerInput
     {
         readonly InputSerialManager _inputSerialManager; 
         readonly IAttackExecutor _attackExecutor;
