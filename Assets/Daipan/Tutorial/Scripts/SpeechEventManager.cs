@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Daipan.Enemy.Scripts;
 using Daipan.Option.Scripts;
+using Daipan.Tutorial.Interfaces;
 using UnityEngine;
 
 namespace Daipan.Tutorial.Scripts
@@ -111,7 +112,17 @@ namespace Daipan.Tutorial.Scripts
             _redEnemyTutorial = redEnemyTutorial;
         }
         
-        public ISpeechEvent Build()
+        public ISpeechEvent Build(ITutorialContent tutorialContent)
+        {
+           return tutorialContent switch 
+           {
+               UICatIntroduce => BuildUICatIntroduce(),
+               RedEnemyTutorial => BuildRedEnemyTutorial(_enemySpawnerTutorial,_redEnemyTutorial),
+               _ => throw new ArgumentException("Invalid tutorialContent")
+           }; 
+        }
+
+        static ISpeechEvent BuildUICatIntroduce()
         {
             List<ISpeechEvent> speechEvents =
                 new List<ISpeechEvent>
@@ -119,41 +130,57 @@ namespace Daipan.Tutorial.Scripts
                     new SequentialEvent(0, "やぁ、初めまして！僕はネコ！"),
                     new SequentialEvent(1, "君の配信をサポートするよ！"),
                     new SequentialEvent(2, "じゃあ、まずこのゲームの説明...！"),
-                    new SequentialEvent(3, "赤い敵が来たね！", () =>
-                    {
-                        _enemySpawnerTutorial.SpawnRedEnemy();
-                        return true;
-                    }),
-                    new ConditionalEvent(4, "赤色のボタンを押そう！", () => _redEnemyTutorial.IsSuccess),
-                    new SequentialEvent(5, "そうそう！上手！"),
-                    new SequentialEvent(6, "それは違うボタンだよ！もう一回！"),
                 };
-            
-            
             speechEvents[0].SetNextEvent(speechEvents[1]);
             speechEvents[1].SetNextEvent(speechEvents[2]);
-            speechEvents[2].SetNextEvent(speechEvents[3]);
-            speechEvents[3].SetNextEvent(speechEvents[4]);
-            speechEvents[4].SetNextEvent(speechEvents[5], speechEvents[6]);
 
-            return speechEvents[0];
+            return speechEvents[0]; 
+        }
+        
+        static ISpeechEvent BuildRedEnemyTutorial(
+            EnemySpawnerTutorial enemySpawnerTutorial
+            ,RedEnemyTutorial redEnemyTutorial)
+        {
+            List<ISpeechEvent> speechEvents =
+                new List<ISpeechEvent>
+                {
+                    new SequentialEvent(0, "赤い敵が来たね！", () =>
+                    {
+                        enemySpawnerTutorial.SpawnRedEnemy();
+                        return true;
+                    }),
+                    new ConditionalEvent(1, "赤色のボタンを押そう！", () => redEnemyTutorial.IsSuccess),
+                    new SequentialEvent(2, "そうそう！上手！"),
+                    new SequentialEvent(3, "それは違うボタンだよ！もう一回！"),
+                };
+            speechEvents[0].SetNextEvent(speechEvents[1]);
+            speechEvents[1].SetNextEvent(speechEvents[2], speechEvents[3]);
+
+            return speechEvents[0]; 
         }
     }
     
 
     public class SpeechEventManager
     {
-        ISpeechEvent CurrentEvent { get; set; } 
+        ISpeechEvent? CurrentEvent { get; set; } 
         readonly SpeechEventBuilder _speechEventBuilder;
         
         public SpeechEventManager(SpeechEventBuilder speechEventBuilder)
         {
             _speechEventBuilder = speechEventBuilder;
-            CurrentEvent = _speechEventBuilder.Build();
         }
-        
+        public void SetSpeechEvent(ITutorialContent tutorialContent)
+        {
+            CurrentEvent = _speechEventBuilder.Build(tutorialContent);
+        }
         public (bool IsMoveNext,ISpeechEvent CurrentEvent) Execute()
         {
+            if (CurrentEvent == null)
+            {
+                Debug.LogWarning("CurrentEvent is null");
+                return (false, null!);
+            }
             var currentEvent = CurrentEvent;
             currentEvent.Execute();
             var (result, nextEvent) = currentEvent.MoveNext(); 

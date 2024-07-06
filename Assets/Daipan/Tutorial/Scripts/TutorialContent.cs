@@ -143,12 +143,12 @@ namespace Daipan.Tutorial.Scripts
         }
     }
 
-    public class UICatSpeaks : AbstractTutorialContent 
+    public class UICatIntroduce : AbstractTutorialContent 
     {
         readonly SpeechBubbleMono _speechBubbleMono;
         readonly InputSerialManager _inputSerialManager;
         readonly SpeechEventManager _speechEventManager;
-        public UICatSpeaks(
+        public UICatIntroduce(
             SpeechBubbleMono speechBubbleMono
             ,InputSerialManager inputSerialManager
             ,SpeechEventManager speechEventManager
@@ -162,6 +162,7 @@ namespace Daipan.Tutorial.Scripts
         {
             Debug.Log("Streamer wakes up...");
             Debug.Log("Cat speaks...");
+            _speechEventManager.SetSpeechEvent(this); 
             Disposables.Add(Observable.EveryUpdate()
                 .Where(_ => !Completed)
                 .Subscribe(_ =>
@@ -181,13 +182,33 @@ namespace Daipan.Tutorial.Scripts
 
     public class RedEnemyTutorial : AbstractTutorialContent
     {
+        readonly SpeechBubbleMono _speechBubbleMono;
+        readonly InputSerialManager _inputSerialManager;
+        readonly SpeechEventManager _speechEventManager;
+        public RedEnemyTutorial(
+            SpeechBubbleMono speechBubbleMono
+            ,InputSerialManager inputSerialManager
+            ,SpeechEventManager speechEventManager
+        )
+        {
+            _speechBubbleMono = speechBubbleMono;
+            _inputSerialManager = inputSerialManager;
+            _speechEventManager = speechEventManager;
+        }
         public bool IsSuccess { get; set; }
         public override void Execute()
         {
             Debug.Log("Tutorial: Defeat the red enemy...");
-            // 敵を倒せれば上手！！
-            // そうでなかったら、もう一回！
-            // Logic for this step
+            _speechEventManager.SetSpeechEvent(this); 
+            Disposables.Add(Observable.EveryUpdate()
+                .Where(_ => !Completed)
+                .Subscribe(_ =>
+                {
+                    if (_inputSerialManager.GetButtonAny())
+                    {
+                        _speechBubbleMono.ShowSpeechBubble(_speechEventManager.Execute().CurrentEvent.Message);
+                    }
+                }));
         }
 
         public override bool IsCompleted()

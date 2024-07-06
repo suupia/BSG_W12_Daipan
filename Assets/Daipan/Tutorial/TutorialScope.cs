@@ -119,7 +119,7 @@ namespace Daipan.Tutorial
             // builder.Register<DisplayBlackScreenWithProgress>(Lifetime.Scoped).As<ITutorialContent>();
             // builder.Register<LanguageSelection>(Lifetime.Scoped).As<ITutorialContent>();
             // builder.Register<FadeInTutorialStart>(Lifetime.Scoped).As<ITutorialContent>();
-            builder.Register<UICatSpeaks>(Lifetime.Scoped).As<ITutorialContent>();
+            builder.Register<UICatIntroduce>(Lifetime.Scoped).As<ITutorialContent>();
             builder.Register<RedEnemyTutorial>(Lifetime.Scoped).As<ITutorialContent>().AsSelf();
             builder.Register<SequentialEnemyTutorial>(Lifetime.Scoped).As<ITutorialContent>();
             builder.Register<ShowWhiteComments>(Lifetime.Scoped).As<ITutorialContent>();
