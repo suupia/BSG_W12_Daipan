@@ -18,6 +18,7 @@ namespace Daipan.Tutorial.Scripts
         void SetNextEvent(params ISpeechEvent[] nextEvents);
     }
 
+
     public sealed record SequentialEvent : ISpeechEvent
     {
         public int Id { get; }
@@ -33,7 +34,11 @@ namespace Daipan.Tutorial.Scripts
             ExecuteAction = () => true;
         }
         
-        public SequentialEvent(int id,string message, Func<bool> executeAction)
+        public SequentialEvent(
+            int id
+            ,string message
+            ,Func<bool> executeAction
+            )
         {
             Id = id;
             Message = message;
@@ -64,21 +69,28 @@ namespace Daipan.Tutorial.Scripts
     {
        public  int Id { get; }
         public string Message { get; }
+        Func<bool> ExecuteAction { get; }
         Func<bool> Condition { get; }
         ISpeechEvent? TrueEvent { get; set; }
         ISpeechEvent? FalseEvent { get; set; }
         bool IsCompleted { get; set; }
-        public ConditionalEvent(int id, string message, Func<bool> condition)
+        public ConditionalEvent(
+            int id
+            ,string message
+            ,Func<bool> executeAction
+            ,Func<bool> condition
+            )
         {
             Id = id;
             Message = message; 
+            ExecuteAction = executeAction;
             Condition = condition;
         }
 
         public void Execute()
         {
             Debug.Log($"Id: {Id} Message: {Message}");
-            IsCompleted = true;
+            IsCompleted = ExecuteAction();
         }
         
         public (bool, ISpeechEvent) MoveNext()
@@ -147,13 +159,25 @@ namespace Daipan.Tutorial.Scripts
                         enemySpawnerTutorial.SpawnRedEnemy();
                         return true;
                     }),
-                    new ConditionalEvent(1, "赤色のボタンを押そう！", () => redEnemyTutorial.IsSuccess),
+                    new ConditionalEvent(1, "赤色のボタンを押そう！"
+                        , () =>
+                        {
+                             redEnemyTutorial.IsListeningTutorial = false;
+                             return true;
+                        },() => redEnemyTutorial.IsSuccess == true),
                     new SequentialEvent(2, "そうそう！上手！"),
-                    new SequentialEvent(3, "それは違うボタンだよ！もう一回！"),
+                    new SequentialEvent(3, "それは違うボタンだよ！もう一回！"
+                        , () =>
+                        {
+                            redEnemyTutorial.IsListeningTutorial = true;
+                            return true;
+                        }
+                        ),
                 };
             speechEvents[0].SetNextEvent(speechEvents[1]);
             speechEvents[1].SetNextEvent(speechEvents[2], speechEvents[3]);
             speechEvents[2].SetNextEvent(new EndEvent());
+            speechEvents[3].SetNextEvent(speechEvents[1]);
 
             return speechEvents[0]; 
         }
@@ -191,6 +215,7 @@ namespace Daipan.Tutorial.Scripts
             currentEvent.Execute();
             var (result, nextEvent) = currentEvent.MoveNext(); 
             if(result) CurrentEvent = nextEvent;
+            Debug.Log($"currentEvent: {currentEvent.Message} nextEvent: {nextEvent.Message}");
             return ( result, currentEvent);
         }
     }

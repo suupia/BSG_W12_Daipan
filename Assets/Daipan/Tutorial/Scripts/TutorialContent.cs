@@ -164,6 +164,9 @@ namespace Daipan.Tutorial.Scripts
             Debug.Log("Streamer wakes up...");
             Debug.Log("Cat speaks...");
             _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildUICatIntroduce()); 
+            
+            // 最初に一回表示
+            _speechBubbleMono.ShowSpeechBubble(_speechEventManager.Execute().CurrentEvent.Message);
             Disposables.Add(Observable.EveryUpdate()
                 .Where(_ => !Completed)
                 .Subscribe(_ =>
@@ -200,23 +203,50 @@ namespace Daipan.Tutorial.Scripts
             _speechEventManager = speechEventManager;
             _enemySpawnerTutorial = enemySpawnerTutorial;
         }
-        public bool IsSuccess { get; set; }
+        public bool IsSuccess { get; private set; }
+        public bool IsListeningTutorial = true;
         public override void Execute()
         {
             Debug.Log("Tutorial: Defeat the red enemy...");
             _speechEventManager.SetSpeechEvent(
                 SpeechEventBuilder.BuildRedEnemyTutorial(this, _enemySpawnerTutorial)
                 ); 
+            
+            // 最初に一回表示
+            _speechBubbleMono.ShowSpeechBubble(_speechEventManager.Execute().CurrentEvent.Message);
             Disposables.Add(Observable.EveryUpdate()
                 .Where(_ => !Completed)
+                .Where(_ => IsListeningTutorial)
                 .Subscribe(_ =>
                 {
                     if (_inputSerialManager.GetButtonAny())
                     {
-                        _speechBubbleMono.ShowSpeechBubble(_speechEventManager.Execute().CurrentEvent.Message);
+                       _speechBubbleMono.ShowSpeechBubble(_speechEventManager.Execute().CurrentEvent.Message);
                     }       
                     if(_speechEventManager.IsEnd()) Completed = true;
                 }));
+            // Disposables.Add(Observable.EveryValueChanged(this, _ => IsSuccess)
+            //     .Where(_ => !Completed)
+            //     .Where(_ => !IsListeningTutorial)
+            //     .Subscribe(isSuccess =>
+            //     {
+            //         Debug.Log($"Subscribe: isSuccess = {isSuccess}");
+            //         _speechBubbleMono.ShowSpeechBubble(_speechEventManager.Execute().CurrentEvent.Message);
+            //     }));
+           
+            // Debug
+            Disposables.Add(Observable.EveryUpdate()
+                .Subscribe(_ =>
+                {
+                    Debug.Log($"IsSuccess = {IsSuccess}");
+                    Debug.Log($"IsListeningTutorial = {IsListeningTutorial}");
+                }));
+        }
+        
+        public void SetIsSuccess(bool isSuccess)
+        {
+            IsSuccess = isSuccess;
+            _speechBubbleMono.ShowSpeechBubble(_speechEventManager.Execute().CurrentEvent.Message);
         }
 
         public override bool IsCompleted()

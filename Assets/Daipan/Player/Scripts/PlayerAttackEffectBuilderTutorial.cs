@@ -16,7 +16,7 @@ using UnityEngine;
 
 namespace Daipan.Player.Scripts
 {
-    public sealed class PlayerAttackEffectTutorialBuilder : IPlayerAttackEffectBuilder
+    public sealed class PlayerAttackEffectBuilderTutorial : IPlayerAttackEffectBuilder
     {
         readonly IPlayerParamDataContainer _playerParamDataContainer;
         readonly EnemyCluster _enemyCluster;
@@ -25,11 +25,9 @@ namespace Daipan.Player.Scripts
         readonly IPlayerAntiCommentParamData _playerAntiCommentParamData;
         readonly RedEnemyTutorial _redEnemyTutorial;
 
-        public PlayerAttackEffectTutorialBuilder(
+        public PlayerAttackEffectBuilderTutorial(
             IPlayerParamDataContainer playerParamDataContainer
-            ,ComboCounter comboCounter
             ,EnemyCluster enemyCluster
-            ,CommentSpawner commentSpawner
             ,EnemyTotemOnAttack enemyTotemOnAttack
             ,WaveState waveState
             ,IPlayerAntiCommentParamData playerAntiCommentParamData
@@ -78,6 +76,11 @@ namespace Daipan.Player.Scripts
 
 
             Debug.Log($"EnemyType: {enemyMono.EnemyEnum}を攻撃");
+            if (enemyMono.EnemyEnum == EnemyEnum.Red)
+            {
+                Debug.Log("RedEnemyTutorial_Success");
+                redEnemyTutorial.SetIsSuccess(playerColor == PlayerColor.Red);
+            }
             if (PlayerAttackModule.GetTargetEnemyEnum(playerColor).Contains(enemyMono.EnemyEnum))
             {
                 // 敵を攻撃
@@ -90,11 +93,6 @@ namespace Daipan.Player.Scripts
                     // todo: 一旦はなし
                     // enemyMono.SuicideAttack(playerMono); 
                 };
-
-                if (enemyMono.EnemyEnum == EnemyEnum.Red)
-                {
-                    redEnemyTutorial.IsSuccess = true;
-                }
 
             }
 
