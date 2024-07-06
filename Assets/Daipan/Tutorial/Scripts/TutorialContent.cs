@@ -1,6 +1,7 @@
 #nullable enable
 using System;
 using System.Collections.Generic;
+using Daipan.Option.Scripts;
 using Daipan.Tutorial.Interfaces;
 using Daipan.Tutorial.MonoScripts;
 using R3;
@@ -58,23 +59,27 @@ namespace Daipan.Tutorial.Scripts
             return Completed;
         }
         
-        
     }
 
-    internal class LanguageSelection : ITutorialContent
+    internal class LanguageSelection : AbstractTutorialContent 
     {
-        bool _completed;
-
-        public void Execute()
+        readonly LanguageConfig _languageConfig;
+        
+        
+        public LanguageSelection (LanguageConfig languageConfig)
+        {
+            _languageConfig = languageConfig;
+        }
+        public override void Execute()
         {
             Debug.Log("Language selection...");
             // Logic for this step
-            if (Input.GetKeyDown(KeyCode.T)) _completed = true; // Set to true once the step is done
+            
         }
 
-        public bool IsCompleted()
+        public override bool IsCompleted()
         {
-            return _completed;
+            return Completed;
         }
     }
 

@@ -17,6 +17,7 @@ using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.Player.LevelDesign.Scripts;
 using Daipan.LevelDesign.Stream;
 using Daipan.LevelDesign.Tower.Scripts;
+using Daipan.Option.Scripts;
 using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Player.MonoScripts;
 using Daipan.Player.Scripts;
@@ -209,6 +210,7 @@ namespace Daipan.Tutorial
             RegisterTutorialContents(builder);
 
             builder.RegisterComponentInHierarchy<DownloadGaugeViewMono>();
+            builder.Register<LanguageConfig>(Lifetime.Scoped);
 
             // Updater
             builder.UseEntryPoints(Lifetime.Scoped, entryPoints =>
