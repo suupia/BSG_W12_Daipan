@@ -1,4 +1,3 @@
-using System.Linq;
 using Daipan.Battle.scripts;
 using Daipan.Comment.MonoScripts;
 using Daipan.Comment.Scripts;
@@ -25,7 +24,6 @@ using Daipan.Player.Scripts;
 using Daipan.Stream.MonoScripts;
 using Daipan.Stream.Scripts;
 using Daipan.Stream.Scripts.Utility;
-using Daipan.Stream.Tests;
 using Daipan.Streamer.Scripts;
 using Daipan.Tower.MonoScripts;
 using Daipan.Tower.Scripts;
@@ -219,7 +217,7 @@ namespace Daipan.Tutorial
             builder.RegisterComponentInHierarchy<SpeechBubbleMono>();
             builder.Register<SpeechEventManager>(Lifetime.Transient);
             builder.Register<SpeechEventBuilder>(Lifetime.Transient);
-            
+
             // Updater
             builder.UseEntryPoints(Lifetime.Scoped, entryPoints =>
             {
