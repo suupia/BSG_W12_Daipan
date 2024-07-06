@@ -68,6 +68,7 @@ namespace Daipan.Tutorial
             builder.Register<AttackExecutor>(Lifetime.Transient);
             builder.Register<AttackExecutorTutorial>(Lifetime.Transient).As<IAttackExecutor>(); 
             builder.Register<PlayerAttackEffectBuilderTutorial>(Lifetime.Scoped).As<IPlayerAttackEffectBuilder>();
+            builder.Register<PlayerInputTutorial>(Lifetime.Transient).As<IPlayerInput>();
             
             // Combo
             DaipanScope.RegisterCombo(builder, comboParamManager);

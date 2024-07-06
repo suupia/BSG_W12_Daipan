@@ -254,21 +254,6 @@ namespace Daipan.Tutorial.Scripts
             return CurrentEvent is EndEvent;
         }
 
-        // public (bool IsMoveNext,ISpeechEvent CurrentEvent) Execute()
-        // {
-        //     if (CurrentEvent == null)
-        //     {
-        //         Debug.LogWarning("CurrentEvent is null");
-        //         return (false, null!);
-        //     }
-        //     var currentEvent = CurrentEvent;
-        //     currentEvent.Execute();
-        //     var (result, nextEvent) = currentEvent.MoveNext(); 
-        //     if(result) CurrentEvent = nextEvent;
-        //     Debug.Log($"currentEvent: {currentEvent.Message} nextEvent: {nextEvent.Message}");
-        //     return ( result, currentEvent);
-        // }
-        //
         public bool MoveNext()
         {
             var (result, nextEvent) = CurrentEvent.MoveNext(); 

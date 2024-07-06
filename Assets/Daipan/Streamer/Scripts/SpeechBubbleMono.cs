@@ -15,7 +15,7 @@ namespace Daipan.Streamer.Scripts
         const float DurationSec = 0.5f;
         double Timer = 0;
         const double MinShowSec = 1.0;
-        Queue<string> _speechQueue = new Queue<string>();
+        readonly Queue<string> _speechQueue = new ();
 
         void Awake()
         {
