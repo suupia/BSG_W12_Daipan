@@ -18,7 +18,7 @@ namespace Daipan.Tutorial.Scripts
         void SetNextEvent(params ISpeechEvent[] nextEvents);
     }
 
-    public record SequentialEvent : ISpeechEvent
+    public sealed record SequentialEvent : ISpeechEvent
     {
         public int Id { get; }
         public string Message { get; }
@@ -60,7 +60,7 @@ namespace Daipan.Tutorial.Scripts
         }
     }
 
-    public  record ConditionalEvent : ISpeechEvent
+    public sealed record ConditionalEvent : ISpeechEvent
     {
        public  int Id { get; }
         public string Message { get; }
@@ -75,7 +75,6 @@ namespace Daipan.Tutorial.Scripts
             Condition = condition;
         }
 
-        
         public void Execute()
         {
             Debug.Log($"Id: {Id} Message: {Message}");
@@ -95,8 +94,26 @@ namespace Daipan.Tutorial.Scripts
             TrueEvent = nextEvents[0];
             FalseEvent = nextEvents[1];
         }
-        
             
+    }
+    public sealed record EndEvent : ISpeechEvent
+    {
+        public int Id => -1; 
+        public string Message => string.Empty;
+        public void Execute()
+        {
+            Debug.Log($"Id: {Id} Message: {Message}");
+        }
+
+        public (bool, ISpeechEvent) MoveNext()
+        {
+            return (false, this);
+        }
+
+        public void SetNextEvent(ISpeechEvent[] nextEvents)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public static class SpeechEventBuilder
@@ -112,6 +129,7 @@ namespace Daipan.Tutorial.Scripts
                 };
             speechEvents[0].SetNextEvent(speechEvents[1]);
             speechEvents[1].SetNextEvent(speechEvents[2]);
+            speechEvents[2].SetNextEvent(new EndEvent());
 
             return speechEvents[0]; 
         }
@@ -135,6 +153,7 @@ namespace Daipan.Tutorial.Scripts
                 };
             speechEvents[0].SetNextEvent(speechEvents[1]);
             speechEvents[1].SetNextEvent(speechEvents[2], speechEvents[3]);
+            speechEvents[2].SetNextEvent(new EndEvent());
 
             return speechEvents[0]; 
         }
@@ -148,6 +167,17 @@ namespace Daipan.Tutorial.Scripts
         public void SetSpeechEvent(ISpeechEvent speechEvent)
         {
             CurrentEvent = speechEvent;
+        }
+        
+        public bool IsEnd()
+        {
+            if (CurrentEvent == null)
+            {
+                Debug.LogWarning("CurrentEvent is null");
+                return false;
+            }
+
+            return CurrentEvent is EndEvent;
         }
 
         public (bool IsMoveNext,ISpeechEvent CurrentEvent) Execute()

@@ -172,6 +172,7 @@ namespace Daipan.Tutorial.Scripts
                     {
                         _speechBubbleMono.ShowSpeechBubble(_speechEventManager.Execute().CurrentEvent.Message);
                     }
+                    if(_speechEventManager.IsEnd()) Completed = true;
                 }));
         }
 
@@ -213,7 +214,8 @@ namespace Daipan.Tutorial.Scripts
                     if (_inputSerialManager.GetButtonAny())
                     {
                         _speechBubbleMono.ShowSpeechBubble(_speechEventManager.Execute().CurrentEvent.Message);
-                    }
+                    }       
+                    if(_speechEventManager.IsEnd()) Completed = true;
                 }));
         }
 
