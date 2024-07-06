@@ -221,7 +221,8 @@ namespace Daipan.Daipan
             RegisterPlayer(builder, playerParamManager);
             builder.Register<AttackExecutor>(Lifetime.Transient).As<IAttackExecutor>();
             builder.Register<PlayerAttackEffectBuilder>(Lifetime.Scoped).As<IPlayerAttackEffectBuilder>();
- 
+            builder.Register<PlayerInput>(Lifetime.Transient);
+            
             // Combo
             RegisterCombo(builder, comboParamManager);
             
