@@ -18,7 +18,7 @@ namespace Daipan.Enemy.Scripts
     {
         readonly IEnemyParamContainer _enemyParamContainer;
         readonly CommentSpawner _commentSpawner;
-        readonly EnemyParamManager _enemyParamManager;
+        readonly EnemyParamsManager _enemyParamsManager;
         readonly ViewerNumber _viewerNumber;
         readonly IrritatedValue _irritatedValue;
         readonly EnemyCluster _enemyCluster;
@@ -31,7 +31,7 @@ namespace Daipan.Enemy.Scripts
             CommentSpawner commentSpawner,
             ViewerNumber viewerNumber,
             IrritatedValue irritatedValue,
-            EnemyParamManager enemyParamManager,
+            EnemyParamsManager enemyParamsManager,
             EnemyCluster enemyCluster,
             EnemyLevelDesignParamData enemyLevelDesignParamData,
             IEnemyTimeLineParamContainer enemyTimeLineParamContainer,
@@ -42,7 +42,7 @@ namespace Daipan.Enemy.Scripts
             _commentSpawner = commentSpawner;
             _viewerNumber = viewerNumber;
             _irritatedValue = irritatedValue;
-            _enemyParamManager = enemyParamManager;
+            _enemyParamsManager = enemyParamsManager;
             _enemyCluster = enemyCluster;
             _enemyLevelDesignParamData = enemyLevelDesignParamData;
             _enemyTimeLineParamContainer = enemyTimeLineParamContainer;
@@ -53,7 +53,14 @@ namespace Daipan.Enemy.Scripts
         {
             if (enemyEnum == EnemyEnum.None) enemyEnum = DecideRandomEnemyType(); // EnemyEnum.Noneが設定されていない時の処理
 
-            if (IsSpawnBoss()) enemyEnum = EnemyEnum.RedBoss;
+            if (IsSpawnBoss())
+            {
+                var random = new System.Random();
+                var bosses = new[] { EnemyEnum.RedBoss, EnemyEnum.BlueBoss, EnemyEnum.YellowBoss };
+                int index = random.Next(bosses.Length);
+                enemyEnum = bosses[index];
+            }
+
 
             Debug.Log($"enemyEnum: {enemyEnum}");
             var enemyParamData = _enemyParamContainer.GetEnemyParamData(enemyEnum);
@@ -136,7 +143,7 @@ namespace Daipan.Enemy.Scripts
 
             // 通常敵のType決め
             List<double> ratio = new();
-            foreach (var enemyLife in _enemyParamManager.enemyParams)
+            foreach (var enemyLife in _enemyParamsManager.enemyParams)
             {
                 if (enemyLife.enemyEnum == EnemyEnum.RedBoss) continue;
                 ratio.Add(enemyLife.enemySpawnParam.spawnRatio);
@@ -145,8 +152,8 @@ namespace Daipan.Enemy.Scripts
             // ここで100%に正規化
             ratio = EnemySpawnCalculator.NormalizeEnemySpawnRatioWithBoss(ratio,
                 _enemyTimeLineParamContainer.GetEnemyTimeLineParamData().GetSpawnBossPercent());
-            Debug.Log($"enemyPrams.Length : {_enemyParamManager.enemyParams.Count}");
-            var enemyEnum = _enemyParamManager.enemyParams[Randoms.RandomByRatios(ratio, Random.value)].enemyEnum;
+            Debug.Log($"enemyPrams.Length : {_enemyParamsManager.enemyParams.Count}");
+            var enemyEnum = _enemyParamsManager.enemyParams[Randoms.RandomByRatios(ratio, Random.value)].enemyEnum;
             if (enemyEnum == EnemyEnum.RedBoss) _enemyLevelDesignParamData.SetCurrentKillAmount(0);
             return enemyEnum;
         }

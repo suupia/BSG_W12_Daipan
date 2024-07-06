@@ -12,8 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35710a2bbde7cdd49a90e64f395b6d34, type: 3}
   m_Name: TowerParams
   m_EditorClassIdentifier: 
-  hpAmount: 0
-  backgroundSprite: {fileID: 21300000, guid: a3a8ce269ca644bb3a668060555e8e0c, type: 3}
-  emptySprite: {fileID: 21300000, guid: cfd27f862de974af69b7e62f5a041d4b, type: 3}
-  fullSprite: {fileID: 21300000, guid: 4036792149ae249fe87b185787cbd541, type: 3}
-  lightSprite: {fileID: 21300000, guid: e635bbf003fa147fbbc4e2bfe4a1d5f6, type: 3}
+  LightIsOnRatio: 0.5

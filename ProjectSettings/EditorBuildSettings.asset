@@ -44,4 +44,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Daipan/Result/Scenes/Ordinary3.unity
     guid: 4554c60ed42890548afa3be5ba504e3c
+  - enabled: 1
+    path: Assets/Daipan/Tutorial/TutorialScene.unity
+    guid: 90b366f09b6064027bbde9f8fcb4faeb
   m_configObjects: {}

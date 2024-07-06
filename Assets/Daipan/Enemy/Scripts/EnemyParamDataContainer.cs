@@ -16,11 +16,11 @@ namespace Daipan.Enemy.Scripts
 
         [Inject]
         public EnemyParamDataContainer(
-            EnemyParamManager enemyParamManager,
+            EnemyParamsManager enemyParamsManager,
             IEnemyTimeLineParamContainer enemyTimeLineParamContainer
             )
         {
-            _enemyParamDatas = CreateEnemyParamData(enemyParamManager, enemyTimeLineParamContainer);
+            _enemyParamDatas = CreateEnemyParamData(enemyParamsManager, enemyTimeLineParamContainer);
         }
 
         public IEnemyParamData GetEnemyParamData(EnemyEnum enemyEnum)
@@ -33,11 +33,11 @@ namespace Daipan.Enemy.Scripts
             return  _enemyParamDatas.First(x => x.GetEnemyEnum() == enemyEnum);
         }
 
-        static List<EnemyParamData> CreateEnemyParamData(EnemyParamManager enemyParamManager,
+        static List<EnemyParamData> CreateEnemyParamData(EnemyParamsManager enemyParamsManager,
             IEnemyTimeLineParamContainer enemyTimeLineParamDataContainer)
         {
             var enemyParams = new List<EnemyParamData>();
-            foreach (var enemyParam in enemyParamManager.enemyParams)
+            foreach (var enemyParam in enemyParamsManager.enemyParams)
                 enemyParams.Add(new EnemyParamData(enemyParam));
             return enemyParams;
         }

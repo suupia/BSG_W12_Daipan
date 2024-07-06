@@ -50,6 +50,10 @@ namespace Daipan.InputSerial.Scripts
             return getInput(3)
                 || Input.GetKeyDown(KeyCode.Tab);
         }
+        public bool GetButtonAny()
+        {
+            return GetButtonRed() || GetButtonBlue() || GetButtonYellow();
+        }
         // ここまで
 
 
