@@ -31,8 +31,7 @@ namespace Daipan.Tutorial.Scripts
     internal sealed class DisplayBlackScreenWithProgress : AbstractTutorialContent
     {
         readonly DownloadGaugeViewMono _gaugeViewMono;
-        double _fillAmount;
-        const double FillAmountPerSec = 0.2;
+        const float FillAmountPerSec = 0.2f;
 
         public DisplayBlackScreenWithProgress(DownloadGaugeViewMono gaugeViewMono)
         {
@@ -46,9 +45,8 @@ namespace Daipan.Tutorial.Scripts
                 .Subscribe(_ =>
                 {
                     Debug.Log("Displaying black screen with download progress...");
-                    _fillAmount += FillAmountPerSec * Time.deltaTime;
-                    _gaugeViewMono.SetGaugeValue((float)_fillAmount);
-                    if (_fillAmount >= 0.5f) Completed = true;
+                    _gaugeViewMono.SetGaugeValue(_gaugeViewMono.CurrentFillAmount + FillAmountPerSec * Time.deltaTime);
+                    if (_gaugeViewMono.CurrentFillAmount >= 0.5f) Completed = true;
                 }));
         }
 
@@ -107,19 +105,31 @@ namespace Daipan.Tutorial.Scripts
         }
     }
 
-    internal class FadeInTutorialStart : ITutorialContent
+    internal class FadeInTutorialStart : AbstractTutorialContent
     {
-        bool _completed = false;
+        readonly DownloadGaugeViewMono _gaugeViewMono;
+        const float FillAmountPerSec = 0.2f;
 
-
-        public void Execute()
+        public FadeInTutorialStart(DownloadGaugeViewMono gaugeViewMono)
         {
-            if (Input.GetKeyDown(KeyCode.T)) _completed = true; // Set to true once the step is done
+            _gaugeViewMono = gaugeViewMono;
         }
 
-        public bool IsCompleted()
+        public override void Execute()
         {
-            return _completed;
+            Disposables.Add(Observable.EveryUpdate()
+                .Where(_ => !Completed)
+                .Subscribe(_ =>
+                {
+                    Debug.Log("Displaying black screen with download progress...");
+                    _gaugeViewMono.SetGaugeValue(_gaugeViewMono.CurrentFillAmount + FillAmountPerSec * Time.deltaTime);
+                    if (_gaugeViewMono.CurrentFillAmount >= 1.0f) Completed = true;
+                }));
+        }
+
+        public override bool IsCompleted()
+        {
+            return Completed;
         }
     }
 
