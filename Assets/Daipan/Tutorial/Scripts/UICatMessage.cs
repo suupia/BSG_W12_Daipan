@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Daipan.Enemy.Scripts;
 using Daipan.Option.Scripts;
 using UnityEngine;
 
@@ -87,6 +88,7 @@ namespace Daipan.Tutorial.Scripts
     {
         public int Id { get; }
         public string Message { get; }
+        Action Action { get; }
         ISpeechEvent? NextEvent { get; set; }
 
         bool IsCompleted { get; set; }
@@ -94,11 +96,20 @@ namespace Daipan.Tutorial.Scripts
         {
             Id = id;
             Message = message;
+            Action = () => { };
+        }
+        
+        public SequentialEvent(int id,string message, Action action)
+        {
+            Id = id;
+            Message = message;
+            Action = action;
         }
 
         public void Execute()
         {
            Debug.Log(Message);
+           Action();
            IsCompleted = true;
         }
 
@@ -154,20 +165,25 @@ namespace Daipan.Tutorial.Scripts
         
             
     }
-    
 
-    public class SpeechEventManager
+    public class SpeechEventBuilder
     {
-        ISpeechEvent CurrentEvent { get; set; } 
-        public SpeechEventManager()
+        readonly EnemySpawnerTutorial _enemySpawnerTutorial;
+        
+        public SpeechEventBuilder(EnemySpawnerTutorial enemySpawnerTutorial)
+        {
+            _enemySpawnerTutorial = enemySpawnerTutorial;
+        }
+        
+        public ISpeechEvent Build()
         {
             List<ISpeechEvent> speechEvents =
-                new  List<ISpeechEvent>
+                new List<ISpeechEvent>
                 {
                     new SequentialEvent(0, "やぁ、初めまして！僕はネコ！"),
                     new SequentialEvent(1, "君の配信をサポートするよ！"),
                     new SequentialEvent(2, "じゃあ、まずこのゲームの説明...！"),
-                    new SequentialEvent(3, "赤い敵が来たね！"),
+                    new SequentialEvent(3, "赤い敵が来たね！", () => _enemySpawnerTutorial.SpawnRedEnemy()),
                     new ConditionalEvent(4, "赤色のボタンを押そう！", () => true),
                     new SequentialEvent(5, "そうそう！上手！"),
                     new SequentialEvent(6, "それは違うボタンだよ！もう一回！"),
@@ -180,7 +196,20 @@ namespace Daipan.Tutorial.Scripts
             speechEvents.ElementAt(3).SetNextEvent(speechEvents.ElementAt(4));
             speechEvents.ElementAt(4).SetNextEvent(speechEvents.ElementAt(5), speechEvents.ElementAt(6));
            
-            CurrentEvent = speechEvents.ElementAt(0); 
+            return speechEvents.ElementAt(0); 
+        }
+    }
+    
+
+    public class SpeechEventManager
+    {
+        ISpeechEvent CurrentEvent { get; set; } 
+        readonly SpeechEventBuilder _speechEventBuilder;
+        
+        public SpeechEventManager(SpeechEventBuilder speechEventBuilder)
+        {
+            _speechEventBuilder = speechEventBuilder;
+            CurrentEvent = _speechEventBuilder.Build();
         }
         
         public (bool IsMoveNext,ISpeechEvent CurrentEvent) Execute()

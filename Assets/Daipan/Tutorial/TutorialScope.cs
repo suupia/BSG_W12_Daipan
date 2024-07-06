@@ -216,6 +216,7 @@ namespace Daipan.Tutorial
             builder.RegisterComponentInHierarchy<SpeechBubbleMono>();
             builder.Register<UICatMessage>(Lifetime.Scoped);
             builder.Register<SpeechEventManager>(Lifetime.Transient);
+            builder.Register<SpeechEventBuilder>(Lifetime.Transient);
             
             // Updater
             builder.UseEntryPoints(Lifetime.Scoped, entryPoints =>

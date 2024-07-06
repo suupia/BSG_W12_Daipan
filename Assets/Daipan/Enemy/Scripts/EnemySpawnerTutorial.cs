@@ -20,14 +20,12 @@ using Random = UnityEngine.Random;
 
 namespace Daipan.Enemy.Scripts
 {
-    public sealed class EnemySpawnerTutorial : IUpdate
+    public sealed class EnemySpawnerTutorial 
     {
         readonly IObjectResolver _container;
         readonly IPrefabLoader<EnemyMono> _enemyMonoLoader;
         readonly EnemyCluster _enemyCluster;
         readonly IEnemySpawnPoint _enemySpawnPoint;
-        readonly IEnemyTimeLineParamContainer _enemyTimeLInePramContainer;
-        readonly float _spawnRandomPositionY = 0.2f;
         readonly IEnemyBuilder _enemyBuilder;
         float _timer;
 
@@ -37,7 +35,6 @@ namespace Daipan.Enemy.Scripts
             IPrefabLoader<EnemyMono> enemyMonoLoader, 
             EnemyCluster enemyCluster,
             IEnemySpawnPoint enemySpawnPoint,
-            IEnemyTimeLineParamContainer enemyTimeLInePramContainer,
             IEnemyBuilder enemyBuilder
         )
         {
@@ -45,36 +42,41 @@ namespace Daipan.Enemy.Scripts
             _enemyMonoLoader = enemyMonoLoader;
             _enemyCluster = enemyCluster;
             _enemySpawnPoint = enemySpawnPoint;
-            _enemyTimeLInePramContainer = enemyTimeLInePramContainer;
             _enemyBuilder = enemyBuilder;
         }
 
-
-        void IUpdate.Update()
+        public void SpawnRedEnemy()
         {
-            // _timer += Time.deltaTime;
-            // if (_timer > _enemyTimeLInePramContainer.GetEnemyTimeLineParamData().GetSpawnIntervalSec())
-            // {
-            //     SpawnEnemy();
-            //     _timer = 0;
-            // }
+            var spawnPosition = GetSpawnedPositions().LastOrDefault();
+            if (spawnPosition == null)
+            {
+                Debug.LogWarning("Spawn position is null");
+                return;
+            }
+            Debug.Log("Spawn Red Enemy");
+            SpawnEnemy(spawnPosition, EnemyEnum.Red);
         }
 
-        void SpawnEnemy()
+
+        void SpawnEnemy(Vector3 spawnPosition, EnemyEnum enemyEnum)
         {
-            var tuple = GetSpawnedPositionRandom();
-            var spawnPosition = new Vector3 { x = tuple.spawnedPos.x, y = tuple.spawnedPos.y + Random.Range(-_spawnRandomPositionY, _spawnRandomPositionY) };
             var enemyMonoPrefab = _enemyMonoLoader.Load();
             var enemyMonoObject = _container.Instantiate(enemyMonoPrefab, spawnPosition, Quaternion.identity);
-            var enemyMono = _enemyBuilder.Build(tuple.enemyEnum,enemyMonoObject);
+            var enemyMono = _enemyBuilder.Build(enemyEnum,enemyMonoObject);
             _enemyCluster.Add(enemyMono);
         }
 
-        (Vector3 spawnedPos, EnemyEnum enemyEnum) GetSpawnedPositionRandom()
+        List <Vector3> GetSpawnedPositions()
         {
             var positions = _enemySpawnPoint.GetEnemySpawnedPointXs()
                 .Zip(_enemySpawnPoint.GetEnemySpawnedPointYs(), (x, y) => new Vector3(x.x, y.y))
                 .ToList();
+            return positions;
+        }
+
+        (Vector3 spawnedPos, EnemyEnum enemyEnum) GetSpawnedPositionRandom()
+        {
+            var positions = GetSpawnedPositions(); 
             var enums = _enemySpawnPoint.GetEnemySpawnedEnemyEnums();
             var randomIndex = Randoms.RandomByRatios(_enemySpawnPoint.GetEnemySpawnRatios(), Random.value);
             return (positions[randomIndex], enums[randomIndex]);
