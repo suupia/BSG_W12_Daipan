@@ -13,35 +13,50 @@ namespace Daipan.Tutorial.Scripts
     {
         int Id { get; }
         string Message { get; }
+        SpeechEventEnum SpeechEventEnum { get; }
         void Execute();
         (bool, ISpeechEvent) MoveNext();
         void SetNextEvent(params ISpeechEvent[] nextEvents);
     }
-
+    
+    public enum SpeechEventEnum
+    {
+        None,
+        Listening, // 聞くタイプのチュートリアル
+        Practical, // 実践するタイプのチュートリアル
+    }
 
     public sealed record SequentialEvent : ISpeechEvent
     {
         public int Id { get; }
         public string Message { get; }
+        public SpeechEventEnum SpeechEventEnum { get; }
         Func<bool> ExecuteAction { get; }
         ISpeechEvent? NextEvent { get; set; }
 
         bool IsCompleted { get; set; }
-        public SequentialEvent(int id,string message)
+        public SequentialEvent(
+            int id
+            ,string message
+            ,SpeechEventEnum speechEventEnum
+            )
         {
             Id = id;
             Message = message;
+            SpeechEventEnum = speechEventEnum;
             ExecuteAction = () => true;
         }
         
         public SequentialEvent(
             int id
             ,string message
+            ,SpeechEventEnum speechEventEnum
             ,Func<bool> executeAction
             )
         {
             Id = id;
             Message = message;
+            SpeechEventEnum = speechEventEnum;
             ExecuteAction = executeAction;
         }
 
@@ -69,6 +84,7 @@ namespace Daipan.Tutorial.Scripts
     {
        public  int Id { get; }
         public string Message { get; }
+        public SpeechEventEnum SpeechEventEnum { get; }
         Func<bool> ExecuteAction { get; }
         Func<bool> Condition { get; }
         ISpeechEvent? TrueEvent { get; set; }
@@ -77,12 +93,14 @@ namespace Daipan.Tutorial.Scripts
         public ConditionalEvent(
             int id
             ,string message
+            ,SpeechEventEnum speechEventEnum
             ,Func<bool> executeAction
             ,Func<bool> condition
             )
         {
             Id = id;
             Message = message; 
+            SpeechEventEnum = speechEventEnum;
             ExecuteAction = executeAction;
             Condition = condition;
         }
@@ -112,6 +130,7 @@ namespace Daipan.Tutorial.Scripts
     {
         public int Id => -1; 
         public string Message => string.Empty;
+        public SpeechEventEnum SpeechEventEnum => SpeechEventEnum.None;
         public void Execute()
         {
             Debug.Log($"Id: {Id} Message: {Message}");
@@ -135,9 +154,9 @@ namespace Daipan.Tutorial.Scripts
             List<ISpeechEvent> speechEvents =
                 new List<ISpeechEvent>
                 {
-                    new SequentialEvent(0, "やぁ、初めまして！僕はネコ！"),
-                    new SequentialEvent(1, "君の配信をサポートするよ！"),
-                    new SequentialEvent(2, "じゃあ、まずこのゲームの説明...！"),
+                    new SequentialEvent(0, "やぁ、初めまして！僕はネコ！",SpeechEventEnum.Listening),
+                    new SequentialEvent(1, "君の配信をサポートするよ！",SpeechEventEnum.Listening),
+                    new SequentialEvent(2, "じゃあ、まずこのゲームの説明...！", SpeechEventEnum.Listening),
                 };
             speechEvents[0].SetNextEvent(speechEvents[1]);
             speechEvents[1].SetNextEvent(speechEvents[2]);
@@ -154,22 +173,20 @@ namespace Daipan.Tutorial.Scripts
             List<ISpeechEvent> speechEvents =
                 new List<ISpeechEvent>
                 {
-                    new SequentialEvent(0, "赤い敵が来たね！", () =>
+                    new SequentialEvent(0, "赤い敵が来たね！", SpeechEventEnum.Listening,() =>
                     {
                         enemySpawnerTutorial.SpawnRedEnemy();
                         return true;
                     }),
-                    new ConditionalEvent(1, "赤色のボタンを押そう！"
+                    new ConditionalEvent(1, "赤色のボタンを押そう！", SpeechEventEnum.Practical
                         , () =>
                         {
-                             redEnemyTutorial.IsListeningTutorial = false;
                              return true;
                         },() => redEnemyTutorial.IsSuccess == true),
-                    new SequentialEvent(2, "そうそう！上手！"),
-                    new SequentialEvent(3, "それは違うボタンだよ！もう一回！"
+                    new SequentialEvent(2, "そうそう！上手！", SpeechEventEnum.Listening),
+                    new SequentialEvent(3, "それは違うボタンだよ！もう一回！", SpeechEventEnum.Listening
                         , () =>
                         {
-                            redEnemyTutorial.IsListeningTutorial = true;
                             return true;
                         }
                         ),
@@ -191,6 +208,16 @@ namespace Daipan.Tutorial.Scripts
         public void SetSpeechEvent(ISpeechEvent speechEvent)
         {
             CurrentEvent = speechEvent;
+        }
+        public SpeechEventEnum GetSpeechEventEnum()
+        {
+            if (CurrentEvent == null)
+            {
+                Debug.LogWarning("CurrentEvent is null");
+                return SpeechEventEnum.None;
+            }
+
+            return CurrentEvent.SpeechEventEnum;
         }
         
         public bool IsEnd()

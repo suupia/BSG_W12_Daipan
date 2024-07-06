@@ -204,7 +204,6 @@ namespace Daipan.Tutorial.Scripts
             _enemySpawnerTutorial = enemySpawnerTutorial;
         }
         public bool IsSuccess { get; private set; }
-        public bool IsListeningTutorial = true;
         public override void Execute()
         {
             Debug.Log("Tutorial: Defeat the red enemy...");
@@ -216,7 +215,7 @@ namespace Daipan.Tutorial.Scripts
             _speechBubbleMono.ShowSpeechBubble(_speechEventManager.Execute().CurrentEvent.Message);
             Disposables.Add(Observable.EveryUpdate()
                 .Where(_ => !Completed)
-                .Where(_ => IsListeningTutorial)
+                .Where(_ => _speechEventManager.GetSpeechEventEnum() == SpeechEventEnum.Listening)
                 .Subscribe(_ =>
                 {
                     if (_inputSerialManager.GetButtonAny())
@@ -239,7 +238,6 @@ namespace Daipan.Tutorial.Scripts
                 .Subscribe(_ =>
                 {
                     Debug.Log($"IsSuccess = {IsSuccess}");
-                    Debug.Log($"IsListeningTutorial = {IsListeningTutorial}");
                 }));
         }
         

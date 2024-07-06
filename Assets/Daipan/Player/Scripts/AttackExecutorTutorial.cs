@@ -11,15 +11,16 @@ namespace Daipan.Player.Scripts
     public class AttackExecutorTutorial : IAttackExecutor
     {
         readonly IAttackExecutor _attackExecutor; 
-        readonly RedEnemyTutorial _redEnemyTutorial; 
+
+        readonly SpeechEventManager _speechEventManager;
         // 本当はDecoratorパターンを使いたいが、Resolveできないので、妥協
         public AttackExecutorTutorial(
             AttackExecutor attackExecutor
-            ,RedEnemyTutorial redEnemyTutorial
+            ,SpeechEventManager speechEventManager
             ) 
         {
             _attackExecutor = attackExecutor;
-            _redEnemyTutorial = redEnemyTutorial;
+            _speechEventManager = speechEventManager;
         }
 
         public void SetPlayerViewMonos(List<AbstractPlayerViewMono?> playerViewMonos)
@@ -30,7 +31,7 @@ namespace Daipan.Player.Scripts
         public void FireAttackEffect(PlayerMono playerMono, PlayerColor playerColor)
         {
             // チュートリアルを聞いている時なら攻撃せずにテキストを送る
-            if (_redEnemyTutorial.IsListeningTutorial) return;
+            if (_speechEventManager.GetSpeechEventEnum() == SpeechEventEnum.Listening) return;
             _attackExecutor.FireAttackEffect(playerMono, playerColor); 
         }
     }
