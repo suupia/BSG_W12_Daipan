@@ -211,6 +211,7 @@ namespace Daipan.Tutorial
 
             builder.RegisterComponentInHierarchy<DownloadGaugeViewMono>();
             builder.Register<LanguageConfig>(Lifetime.Scoped);
+            builder.RegisterComponentInHierarchy<LanguageSelectionPopupMono>();
 
             // Updater
             builder.UseEntryPoints(Lifetime.Scoped, entryPoints =>

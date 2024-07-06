@@ -1,6 +1,7 @@
 #nullable enable
 using System;
 using System.Collections.Generic;
+using Daipan.InputSerial.Scripts;
 using Daipan.Option.Scripts;
 using Daipan.Tutorial.Interfaces;
 using Daipan.Tutorial.MonoScripts;
@@ -15,22 +16,19 @@ namespace Daipan.Tutorial.Scripts
         public abstract bool IsCompleted();
         protected bool Completed;
         protected readonly IList<IDisposable> Disposables = new List<IDisposable>();
-        
+
         public void Dispose()
         {
-            foreach (var disposable in Disposables)
-            {
-                disposable.Dispose();
-            }
+            foreach (var disposable in Disposables) disposable.Dispose();
         }
-        
+
         ~AbstractTutorialContent()
         {
             Dispose();
         }
     }
-    
-    internal sealed class DisplayBlackScreenWithProgress : AbstractTutorialContent 
+
+    internal sealed class DisplayBlackScreenWithProgress : AbstractTutorialContent
     {
         readonly DownloadGaugeViewMono _gaugeViewMono;
         double _fillAmount;
@@ -43,7 +41,7 @@ namespace Daipan.Tutorial.Scripts
 
         public override void Execute()
         {
-            Disposables.Add(  Observable.EveryUpdate()
+            Disposables.Add(Observable.EveryUpdate()
                 .Where(_ => !Completed)
                 .Subscribe(_ =>
                 {
@@ -58,23 +56,49 @@ namespace Daipan.Tutorial.Scripts
         {
             return Completed;
         }
-        
     }
 
-    internal class LanguageSelection : AbstractTutorialContent 
+    internal class LanguageSelection : AbstractTutorialContent
     {
         readonly LanguageConfig _languageConfig;
-        
-        
-        public LanguageSelection (LanguageConfig languageConfig)
+        readonly InputSerialManager _inputSerialManager;
+        readonly LanguageSelectionPopupMono _languageSelectionPopupMono;
+
+        public LanguageSelection(
+            LanguageConfig languageConfig
+            , InputSerialManager inputSerialManager
+            , LanguageSelectionPopupMono languageSelectionPopupMono
+        )
         {
             _languageConfig = languageConfig;
+            _inputSerialManager = inputSerialManager;
+            _languageSelectionPopupMono = languageSelectionPopupMono;
         }
+
         public override void Execute()
         {
             Debug.Log("Language selection...");
-            // Logic for this step
-            
+            _languageSelectionPopupMono.ShowPopup();
+            Disposables.Add(Observable.EveryUpdate()
+                .Where(_ => !Completed)
+                .Subscribe(_ =>
+                {
+                    if (_inputSerialManager.GetButtonBlue())
+                    {
+                        _languageConfig.CurrentLanguage = LanguageConfig.LanguageEnum.Japanese;
+                        Debug.Log("Language set to Japanese");
+                        _languageSelectionPopupMono.HidePopup();
+                        Completed = true;
+                    }
+                    else if (_inputSerialManager.GetButtonYellow())
+                    {
+                        _languageConfig.CurrentLanguage = LanguageConfig.LanguageEnum.English;
+                        Debug.Log("Language set to English");
+                        _languageSelectionPopupMono.HidePopup();
+                        Completed = true;
+                    }
+                }));
+
         }
 
         public override bool IsCompleted()

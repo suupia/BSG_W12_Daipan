@@ -3,13 +3,12 @@ namespace Daipan.Option.Scripts
 {
     internal sealed class LanguageConfig
     {
-        public enum Language
+        public enum LanguageEnum
         {
             English,
-            Japanese,
+            Japanese
         }
-        
-        public Language CurrentLanguage { get; set; }
-    } 
-}
 
+        public LanguageEnum CurrentLanguage { get; set; }
+    }
+}
