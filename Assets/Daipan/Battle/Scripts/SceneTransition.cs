@@ -8,10 +8,11 @@ namespace Daipan.Battle.scripts
 {
     public static class SceneTransition
     {
-        static readonly Dictionary<SceneName, string> SeneNameTable = new()
+        static readonly Dictionary<SceneName, string> SceneNameTable = new()
         {
 
         {SceneName.TitleScene,"TitleScene" },
+        {SceneName.TutorialScene,"TutorialScene" },
         {SceneName.DaipanScene,"DaipanScene" },
         {SceneName.ResultScene,"ResultScene" },
         {SceneName.InsideTheBox,"InsideTheBox"},
@@ -28,7 +29,7 @@ namespace Daipan.Battle.scripts
 
         public static void TransitioningScene(SceneName nextScene)
         {
-            if (SeneNameTable.TryGetValue(nextScene, out var sceneName))
+            if (SceneNameTable.TryGetValue(nextScene, out var sceneName))
             {
                 Debug.Log($"Transitioning to {sceneName}");
                 UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
@@ -43,6 +44,7 @@ namespace Daipan.Battle.scripts
     public enum SceneName
     {
         TitleScene,
+        TutorialScene,
         DaipanScene,
         ResultScene,
         

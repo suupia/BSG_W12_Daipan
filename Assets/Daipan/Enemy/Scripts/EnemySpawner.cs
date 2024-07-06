@@ -20,7 +20,7 @@ using Random = UnityEngine.Random;
 
 namespace Daipan.Enemy.Scripts
 {
-    public sealed class EnemySpawner : IStart, IUpdate
+    public sealed class EnemySpawner : IUpdate
     {
         readonly IObjectResolver _container;
         readonly IPrefabLoader<EnemyMono> _enemyMonoLoader;
@@ -49,10 +49,6 @@ namespace Daipan.Enemy.Scripts
             _enemyBuilder = enemyBuilder;
         }
 
-        void IStart.Start()
-        {
-            // SpawnEnemy();
-        }
 
         void IUpdate.Update()
         {

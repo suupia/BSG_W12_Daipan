@@ -19,7 +19,7 @@ TagManager:
   - Comment
   - BackGround
   - AntiComment
-  - 
+  - BlackScreen
   - 
   - 
   - 
@@ -76,4 +76,7 @@ TagManager:
     locked: 0
   - name: UI
     uniqueID: 3637853659
+    locked: 0
+  - name: BlackScreen
+    uniqueID: 4174893465
     locked: 0
