@@ -8,20 +8,17 @@ namespace Daipan.Tutorial.MonoScripts
 {
     public class BlackScreenViewMono : MonoBehaviour
     {
-        [SerializeField] Image blackScreenImage = null!;
+        [SerializeField] CanvasGroup canvasGroup = null!;
        
         public void FadeOut(float time, Action onComplete)
         {
-            blackScreenImage.DOFade(0, time).OnComplete(() =>
+            canvasGroup.DOFade(0, time).OnComplete(() =>
             {
                 onComplete();
             });
         }
 
-        public void Hide()
-        {
-            blackScreenImage.gameObject.SetActive(false);
-        }
+   
     } 
 }
 

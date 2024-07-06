@@ -279,6 +279,8 @@ GameObject:
   - component: {fileID: 779130801}
   - component: {fileID: 779130800}
   - component: {fileID: 779130799}
+  - component: {fileID: 779130802}
+  - component: {fileID: 779130803}
   m_Layer: 14
   m_Name: BlackScreenCanvas
   m_TagString: Untagged
@@ -371,6 +373,31 @@ Canvas:
   m_SortingLayerID: -120073831
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!225 &779130802
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 779130797}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
+--- !u!114 &779130803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 779130797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a528b6e8f805470d947632350dee787f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasGroup: {fileID: 779130802}
 --- !u!1 &831416343
 GameObject:
   m_ObjectHideFlags: 0
@@ -4995,29 +5022,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 779130798}
     m_Modifications:
-    - target: {fileID: 1358683826775322214, guid: 415c0f83b69654574b0d87b5b64c15e1, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -62.809998
-      objectReference: {fileID: 0}
-    - target: {fileID: 3203131877948535399, guid: 415c0f83b69654574b0d87b5b64c15e1, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -62.807007
-      objectReference: {fileID: 0}
-    - target: {fileID: 4348635879079191885, guid: 415c0f83b69654574b0d87b5b64c15e1, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -21.380005
-      objectReference: {fileID: 0}
     - target: {fileID: 5860855099026524372, guid: 415c0f83b69654574b0d87b5b64c15e1, type: 3}
       propertyPath: m_Name
       value: LanguageSelectionPopup
-      objectReference: {fileID: 0}
-    - target: {fileID: 6005291342550719424, guid: 415c0f83b69654574b0d87b5b64c15e1, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -62.807007
-      objectReference: {fileID: 0}
-    - target: {fileID: 6295785704325854448, guid: 415c0f83b69654574b0d87b5b64c15e1, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -21.380005
       objectReference: {fileID: 0}
     - target: {fileID: 7579809348043225404, guid: 415c0f83b69654574b0d87b5b64c15e1, type: 3}
       propertyPath: m_Pivot.x
@@ -5098,10 +5105,6 @@ PrefabInstance:
     - target: {fileID: 7579809348043225404, guid: 415c0f83b69654574b0d87b5b64c15e1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7770192895463655547, guid: 415c0f83b69654574b0d87b5b64c15e1, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -62.809998
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
