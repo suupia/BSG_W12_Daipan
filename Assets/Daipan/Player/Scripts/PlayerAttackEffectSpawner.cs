@@ -11,11 +11,11 @@ namespace Daipan.Player.Scripts
     public sealed class PlayerAttackEffectSpawner
     {
         readonly IPrefabLoader<PlayerAttackEffectMono> _effectLoader;
-        readonly PlayerAttackEffectBuilder _playerAttackEffectBuilder;
+        readonly IPlayerAttackEffectBuilder _playerAttackEffectBuilder;
         
         public PlayerAttackEffectSpawner(
             IPrefabLoader<PlayerAttackEffectMono> effectLoader,
-            PlayerAttackEffectBuilder playerAttackEffectBuilder
+            IPlayerAttackEffectBuilder playerAttackEffectBuilder
             )
         {
             _effectLoader = effectLoader;

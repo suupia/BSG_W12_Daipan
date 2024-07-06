@@ -15,7 +15,7 @@ using UnityEngine;
 
 namespace Daipan.Player.Scripts
 {
-    public sealed class PlayerAttackEffectBuilder : IPlayerAttackEffectBuilder
+    public sealed class PlayerAttackEffectTutorialBuilder : IPlayerAttackEffectBuilder
     {
         readonly IPlayerParamDataContainer _playerParamDataContainer;
         readonly ComboCounter _comboCounter;
@@ -25,7 +25,7 @@ namespace Daipan.Player.Scripts
         readonly WaveState _waveState;
         readonly IPlayerAntiCommentParamData _playerAntiCommentParamData;
 
-        public PlayerAttackEffectBuilder(
+        public PlayerAttackEffectTutorialBuilder(
             IPlayerParamDataContainer playerParamDataContainer
             ,ComboCounter comboCounter
             ,EnemyCluster enemyCluster
@@ -53,29 +53,11 @@ namespace Daipan.Player.Scripts
             {
                 Debug.Log($"OnHit");
                 AttackEnemy(_playerParamDataContainer, playerViewMonos, playerColor, args.EnemyMono,_enemyTotemOnAttack );
-                UpdateCombo(_comboCounter, playerColor, args);
-                SpawnAntiComment(args, _commentSpawner, _playerAntiCommentParamData,_waveState);
             };
             return effect;
         }
 
-        static void UpdateCombo(
-            ComboCounter comboCounter
-            ,PlayerColor playerColor
-            ,OnHitEventArgs args
-        )
-        {
-            if (args.IsTargetEnemy)
-            {
-                comboCounter.IncreaseCombo();
-            }
-            else
-            {
-                Debug.Log(
-                    $"攻撃対象が{PlayerAttackModule.GetTargetEnemyEnum(playerColor)}ではないです args.EnemyMono?.EnemyEnum: {args.EnemyMono?.EnemyEnum}");
-                comboCounter.ResetCombo();
-            }
-        }
+
 
         static void AttackEnemy(IPlayerParamDataContainer playerParamDataContainer
             ,List<AbstractPlayerViewMono?> playerViewMonos
@@ -114,22 +96,6 @@ namespace Daipan.Player.Scripts
             }
         }
         
-        static void SpawnAntiComment(
-            OnHitEventArgs args
-            ,CommentSpawner commentSpawner
-            ,IPlayerAntiCommentParamData playerAntiCommentParamData
-            ,WaveState waveState
-            )
-        {
-            if (args.IsTargetEnemy) return;
-            
-            var spawnPercent = playerAntiCommentParamData.GetAntiCommentPercentOnMissAttacks(waveState.CurrentWave);
-            
-            if (spawnPercent / 100f > Random.value)
-            {
-                commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
-            }
-           
-        }
+     
     }
 }
