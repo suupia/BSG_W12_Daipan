@@ -146,17 +146,11 @@ namespace Daipan.Tutorial.Scripts
 
     public class UICatIntroduce : AbstractTutorialContent 
     {
-        readonly SpeechBubbleMono _speechBubbleMono;
-        readonly InputSerialManager _inputSerialManager;
         readonly SpeechEventManager _speechEventManager;
         public UICatIntroduce(
-            SpeechBubbleMono speechBubbleMono
-            ,InputSerialManager inputSerialManager
-            ,SpeechEventManager speechEventManager
+            SpeechEventManager speechEventManager
             )
         {
-            _speechBubbleMono = speechBubbleMono;
-            _inputSerialManager = inputSerialManager;
             _speechEventManager = speechEventManager;
         }
         public override void Execute()
@@ -166,6 +160,8 @@ namespace Daipan.Tutorial.Scripts
             _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildUICatIntroduce()); 
             Debug.Log($"GetSpeechEventEnum = {_speechEventManager.GetSpeechEventEnum()}");
             
+           // 最初のメッセージを表示（これだけ特別）
+           // メッセージに閉じる処理を入れればここは変わりうる
             _speechEventManager.MoveNext(); 
 
         }
@@ -179,18 +175,15 @@ namespace Daipan.Tutorial.Scripts
     public class RedEnemyTutorial : AbstractTutorialContent
     {
         readonly SpeechBubbleMono _speechBubbleMono;
-        readonly InputSerialManager _inputSerialManager;
         readonly SpeechEventManager _speechEventManager;
         readonly EnemySpawnerTutorial _enemySpawnerTutorial;
         public RedEnemyTutorial(
             SpeechBubbleMono speechBubbleMono
-            ,InputSerialManager inputSerialManager
             ,SpeechEventManager speechEventManager
             ,EnemySpawnerTutorial enemySpawnerTutorial
         )
         {
             _speechBubbleMono = speechBubbleMono;
-            _inputSerialManager = inputSerialManager;
             _speechEventManager = speechEventManager;
             _enemySpawnerTutorial = enemySpawnerTutorial;
         }
@@ -199,10 +192,11 @@ namespace Daipan.Tutorial.Scripts
         {
             Debug.Log("Tutorial: Defeat the red enemy...");
             _speechEventManager.SetSpeechEvent(
-                SpeechEventBuilder.BuildRedEnemyTutorial(this, _enemySpawnerTutorial)
-                ); 
-          
-            _speechEventManager.MoveNext(); 
+                SpeechEventBuilder.BuildRedEnemyTutorial(this)
+                );
+
+            _enemySpawnerTutorial.SpawnRedEnemy();
+
 
             // Debug
             Disposables.Add(Observable.EveryUpdate()

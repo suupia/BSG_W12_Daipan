@@ -16,8 +16,8 @@ namespace Daipan.Streamer.Scripts
         [SerializeField] TextMeshProUGUI speechText = null!;
 
         const float DurationSec = 0.5f;
-        double Timer { get; set; } 
-        const double MinShowSec = 1.0;
+        double Timer { get; set; }
+        const double MinShowSec = 0.5; 
         readonly Queue<string> _speechQueue = new ();
 
         [Inject]
