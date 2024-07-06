@@ -176,22 +176,20 @@ namespace Daipan.Tutorial.Scripts
         }
     }
 
-    internal class RedEnemyTutorial : ITutorialContent
+    internal class RedEnemyTutorial : AbstractTutorialContent
     {
-        bool _completed = false;
 
-        public void Execute()
+        public override void Execute()
         {
             Debug.Log("Tutorial: Defeat the red enemy...");
             // 敵を倒せれば上手！！
             // そうでなかったら、もう一回！
             // Logic for this step
-            if (Input.GetKeyDown(KeyCode.T)) _completed = true;
         }
 
-        public bool IsCompleted()
+        public override bool IsCompleted()
         {
-            return _completed;
+            return Completed;
         }
     }
 
