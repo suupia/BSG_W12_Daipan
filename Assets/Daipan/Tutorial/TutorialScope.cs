@@ -45,8 +45,8 @@ namespace Daipan.Tutorial
 
         [SerializeField] PlayerParamManager playerParamManager = null!;
 
-        [FormerlySerializedAs("enemyParamsManager")] [SerializeField]
-        EnemyParamManager enemyParamManager = null!;
+        [FormerlySerializedAs("enemyParamManager")] [SerializeField]
+        EnemyParamsManager enemyParamsManager = null!;
 
         [FormerlySerializedAs("commentParamsManager")] [SerializeField]
         CommentParamManager commentParamManager = null!;
@@ -75,7 +75,7 @@ namespace Daipan.Tutorial
             DaipanScope.RegisterTower(builder, towerParams);
     
             // Enemy
-            DaipanScope.RegisterEnemy(builder, enemyParamManager);
+            DaipanScope.RegisterEnemy(builder, enemyParamsManager);
             builder.Register<EnemySpawnerTutorial>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
             // Irritated
             DaipanScope.RegisterIrritated(builder, irritatedParams);

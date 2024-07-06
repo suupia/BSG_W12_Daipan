@@ -41,8 +41,8 @@ namespace Daipan.Daipan
 
         [SerializeField] PlayerParamManager playerParamManager = null!;
 
-        [FormerlySerializedAs("enemyParamsManager")] [SerializeField]
-        EnemyParamManager enemyParamManager = null!;
+        [FormerlySerializedAs("enemyParamManager")] [SerializeField]
+        EnemyParamsManager enemyParamsManager = null!;
 
         [FormerlySerializedAs("commentParamsManager")] [SerializeField]
         CommentParamManager commentParamManager = null!;
@@ -136,7 +136,7 @@ namespace Daipan.Daipan
             builder.Register<IStart, TowerSpawner>(Lifetime.Scoped);
         }
 
-        public static void RegisterEnemy(IContainerBuilder builder, EnemyParamManager enemyParamManager)
+        public static void RegisterEnemy(IContainerBuilder builder, EnemyParamsManager enemyParamsManager)
         {
             // Parameters
             EnemyPositionMono SetUpEnemyPositionMono()
@@ -157,13 +157,13 @@ namespace Daipan.Daipan
             }
 
             builder.RegisterComponent(SetUpEnemyPositionMono());
-            builder.RegisterInstance(enemyParamManager);
-            builder.RegisterInstance(enemyParamManager.enemyLevelDesignParam);
+            builder.RegisterInstance(enemyParamsManager);
+            builder.RegisterInstance(enemyParamsManager.enemyLevelDesignParam);
             builder.Register<EnemySpawnPoint>(Lifetime.Scoped).As<IEnemySpawnPoint>();
             builder.Register<EnemyTimeLineParamContainer>(Lifetime.Scoped).As<IEnemyTimeLineParamContainer>();
             builder.Register<EnemyParamDataContainer>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.RegisterInstance(
-                new EnemyLevelDesignParamDataBuilder(builder, enemyParamManager.enemyLevelDesignParam));
+                new EnemyLevelDesignParamDataBuilder(builder, enemyParamsManager.enemyLevelDesignParam));
             // Enemy
             builder.Register<EnemyPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<EnemyMono>>();
             builder.Register<EnemyBuilder>(Lifetime.Scoped).As<IEnemyBuilder>();
@@ -229,7 +229,7 @@ namespace Daipan.Daipan
             RegisterTower(builder, towerParams);
             
             // Enemy
-            RegisterEnemy(builder, enemyParamManager);
+            RegisterEnemy(builder, enemyParamsManager);
             builder.Register<EnemySpawner>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
 
             // Irritated
