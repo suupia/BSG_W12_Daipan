@@ -30,8 +30,9 @@ namespace Daipan.Tutorial.Scripts
             if (_currentStep == null || _currentStep.IsCompleted())
             {
                 _currentStep = _tutorialSteps.Dequeue();
+                _currentStep?.Execute();
             }
-            _currentStep?.ExecuteUpdate();
+
 
 
             if (_tutorialSteps.Count == 0 && _currentStep?.IsCompleted() == true)

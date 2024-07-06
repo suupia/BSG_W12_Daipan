@@ -3,7 +3,7 @@ namespace Daipan.Tutorial.Interfaces
 {
     public interface ITutorialContent
     {
-        void ExecuteUpdate();
+        void Execute();
         bool IsCompleted(); 
     } 
 }
