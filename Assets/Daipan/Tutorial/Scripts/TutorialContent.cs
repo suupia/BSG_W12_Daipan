@@ -166,14 +166,16 @@ namespace Daipan.Tutorial.Scripts
             _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildUICatIntroduce()); 
             Debug.Log($"GetSpeechEventEnum = {_speechEventManager.GetSpeechEventEnum()}");
             
+            _speechEventManager.MoveNext(); 
+            _speechBubbleMono.EnqueueSpeechMessage(_speechEventManager.CurrentEvent.Message); 
             Disposables.Add(Observable.EveryUpdate()
                 .Where(_ => !_speechEventManager.IsEnd())
                 .Subscribe(_ =>
                 {
                     if (_inputSerialManager.GetButtonAny())
                     {
-                        _speechBubbleMono.EnqueueSpeechMessage(_speechEventManager.CurrentEvent.Message);
                         _speechEventManager.MoveNext(); 
+                        _speechBubbleMono.EnqueueSpeechMessage(_speechEventManager.CurrentEvent.Message);
                     }
                 }));
         }
@@ -209,7 +211,9 @@ namespace Daipan.Tutorial.Scripts
             _speechEventManager.SetSpeechEvent(
                 SpeechEventBuilder.BuildRedEnemyTutorial(this, _enemySpawnerTutorial)
                 ); 
-            
+          
+            _speechEventManager.MoveNext(); 
+            _speechBubbleMono.EnqueueSpeechMessage(_speechEventManager.CurrentEvent.Message);
             Disposables.Add(Observable.EveryUpdate()
                 .Where(_ => !_speechEventManager.IsEnd())
                 .Where(_ => _speechEventManager.GetSpeechEventEnum() == SpeechEventEnum.Listening)
@@ -217,19 +221,10 @@ namespace Daipan.Tutorial.Scripts
                 {
                     if (_inputSerialManager.GetButtonAny())
                     {
-                        if(_speechEventManager.IsEnd()) Completed = true;
-                        _speechBubbleMono.EnqueueSpeechMessage(_speechEventManager.CurrentEvent.Message);
                         _speechEventManager.MoveNext(); 
+                        _speechBubbleMono.EnqueueSpeechMessage(_speechEventManager.CurrentEvent.Message);
                     }       
                 }));
-            // Disposables.Add(Observable.EveryValueChanged(this, _ => IsSuccess)
-            //     .Where(_ => !Completed)
-            //     .Where(_ => !IsListeningTutorial)
-            //     .Subscribe(isSuccess =>
-            //     {
-            //         Debug.Log($"Subscribe: isSuccess = {isSuccess}");
-            //         _speechBubbleMono.ShowSpeechBubble(_speechEventManager.Execute().CurrentEvent.Message);
-            //     }));
            
             // Debug
             Disposables.Add(Observable.EveryUpdate()
