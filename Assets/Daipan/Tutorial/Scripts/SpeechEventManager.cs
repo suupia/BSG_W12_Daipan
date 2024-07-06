@@ -11,7 +11,7 @@ namespace Daipan.Tutorial.Scripts
 {
     public interface ISpeechEvent
     {
-        int Id { get; }
+        int Id { get; } 
         string Message { get; }
         SpeechEventEnum SpeechEventEnum { get; }
         (bool, ISpeechEvent) MoveNext();
@@ -20,10 +20,10 @@ namespace Daipan.Tutorial.Scripts
 
     public abstract record AbstractSpeechEvent : ISpeechEvent, IDisposable
     {
-        public int Id { get; protected init; }
-        public string Message { get; protected init; }
+        public int Id { get; protected init; } = -1;
+        public string Message { get; protected init; } = string.Empty;
         public SpeechEventEnum SpeechEventEnum { get; protected init; }
-        protected Func<bool> OnMoveAction { get; set; }
+        protected Func<bool> OnMoveAction { get; set; } = () => true;
         protected readonly IList<IDisposable> Disposables = new List<IDisposable>();
         public void Dispose()
         {
