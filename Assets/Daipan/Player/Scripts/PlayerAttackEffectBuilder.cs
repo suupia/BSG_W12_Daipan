@@ -52,57 +52,49 @@ namespace Daipan.Player.Scripts
             effect.OnHit += (sender, args) =>
             {
                 Debug.Log($"OnHit");
-                AttackEnemy(_playerParamDataContainer, playerViewMonos, playerColor, args.EnemyMono,_enemyTotemOnAttack );
-                UpdateCombo(_comboCounter, playerColor, args);
+                AttackEnemy(_playerParamDataContainer, playerViewMonos, playerColor, args, _enemyTotemOnAttack, _comboCounter);
                 SpawnAntiComment(args, _commentSpawner, _playerAntiCommentParamData,_waveState);
             };
             return effect;
         }
 
-        static void UpdateCombo(
-            ComboCounter comboCounter
+
+        static void AttackEnemy(IPlayerParamDataContainer playerParamDataContainer
+            ,List<AbstractPlayerViewMono?> playerViewMonos
             ,PlayerColor playerColor
             ,OnHitEventArgs args
-        )
+            ,EnemyTotemOnAttack totemOnAttack
+            ,ComboCounter comboCounter
+            )
         {
-            if (args.IsTargetEnemy)
-            {
-                comboCounter.IncreaseCombo();
+
+
+            if (args.IsTargetEnemy && args.EnemyMono != null)
+             {
+                Debug.Log($"EnemyType: {args.EnemyMono.EnemyEnum}を攻撃");
+                // 敵を攻撃
+                var playerParamData = playerParamDataContainer.GetPlayerParamData(playerColor);
+                var HpBuffer = args.EnemyMono.EnemyEnum switch 
+                {
+                    EnemyEnum.Totem => totemOnAttack.OnAttacked(args.EnemyMono.Hp, playerParamData),
+                    _ => PlayerAttackModule.Attack(args.EnemyMono.Hp,playerParamData)
+                    // 敵が特攻攻撃をしてくる
+                    // todo: 一旦はなし
+                    // enemyMono.SuicideAttack(playerMono); 
+                };
+                //  HPに変化があれば、コンボ増加
+
+                if (args.EnemyMono.Hp.Value != HpBuffer.Value) comboCounter.IncreaseCombo();
+                args.EnemyMono.Hp = HpBuffer;
             }
             else
             {
                 Debug.Log(
                     $"攻撃対象が{PlayerAttackModule.GetTargetEnemyEnum(playerColor)}ではないです args.EnemyMono?.EnemyEnum: {args.EnemyMono?.EnemyEnum}");
                 comboCounter.ResetCombo();
+                return;
             }
-        }
 
-        static void AttackEnemy(IPlayerParamDataContainer playerParamDataContainer
-            ,List<AbstractPlayerViewMono?> playerViewMonos
-            ,PlayerColor playerColor
-            ,EnemyMono? enemyMono
-            ,EnemyTotemOnAttack totemOnAttack
-            )
-        {
-            Debug.Log($"Attack enemyMono?.EnemyEnum: {enemyMono?.EnemyEnum}");
-            if (enemyMono == null) return;
-
-
-            Debug.Log($"EnemyType: {enemyMono.EnemyEnum}を攻撃");
-            if (PlayerAttackModule.GetTargetEnemyEnum(playerColor).Contains(enemyMono.EnemyEnum))
-            {
-                // 敵を攻撃
-                var playerParamData = playerParamDataContainer.GetPlayerParamData(playerColor);
-                enemyMono.Hp = enemyMono.EnemyEnum switch 
-                {
-                    EnemyEnum.Totem => totemOnAttack.OnAttacked(enemyMono.Hp, playerParamData),
-                    _ => PlayerAttackModule.Attack(enemyMono.Hp,playerParamData)
-                    // 敵が特攻攻撃をしてくる
-                    // todo: 一旦はなし
-                    // enemyMono.SuicideAttack(playerMono); 
-                };
-
-            }
 
 
             // Animation
@@ -113,7 +105,11 @@ namespace Daipan.Player.Scripts
                     playerViewMono.Attack();
             }
         }
+
+
         
+
+
         static void SpawnAntiComment(
             OnHitEventArgs args
             ,CommentSpawner commentSpawner
