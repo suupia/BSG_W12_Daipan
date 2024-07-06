@@ -16,7 +16,7 @@ namespace Daipan.Tutorial.Scripts
     {
         public abstract void Execute();
         public abstract bool IsCompleted();
-        protected bool Completed;
+        protected bool Completed { get; set; }
         protected readonly IList<IDisposable> Disposables = new List<IDisposable>();
 
         public void Dispose()
@@ -164,24 +164,23 @@ namespace Daipan.Tutorial.Scripts
             Debug.Log("Streamer wakes up...");
             Debug.Log("Cat speaks...");
             _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildUICatIntroduce()); 
+            Debug.Log($"GetSpeechEventEnum = {_speechEventManager.GetSpeechEventEnum()}");
             
-            // 最初に一回表示
-            _speechBubbleMono.ShowSpeechBubble(_speechEventManager.Execute().CurrentEvent.Message);
             Disposables.Add(Observable.EveryUpdate()
-                .Where(_ => !Completed)
+                .Where(_ => !_speechEventManager.IsEnd())
                 .Subscribe(_ =>
                 {
                     if (_inputSerialManager.GetButtonAny())
                     {
-                        _speechBubbleMono.ShowSpeechBubble(_speechEventManager.Execute().CurrentEvent.Message);
+                        _speechBubbleMono.EnqueueSpeechMessage(_speechEventManager.CurrentEvent.Message);
+                        _speechEventManager.MoveNext(); 
                     }
-                    if(_speechEventManager.IsEnd()) Completed = true;
                 }));
         }
 
         public override bool IsCompleted()
         {
-            return Completed;
+            return _speechEventManager.IsEnd();
         }
     }
 
@@ -211,18 +210,17 @@ namespace Daipan.Tutorial.Scripts
                 SpeechEventBuilder.BuildRedEnemyTutorial(this, _enemySpawnerTutorial)
                 ); 
             
-            // 最初に一回表示
-            _speechBubbleMono.ShowSpeechBubble(_speechEventManager.Execute().CurrentEvent.Message);
             Disposables.Add(Observable.EveryUpdate()
-                .Where(_ => !Completed)
+                .Where(_ => !_speechEventManager.IsEnd())
                 .Where(_ => _speechEventManager.GetSpeechEventEnum() == SpeechEventEnum.Listening)
                 .Subscribe(_ =>
                 {
                     if (_inputSerialManager.GetButtonAny())
                     {
-                       _speechBubbleMono.ShowSpeechBubble(_speechEventManager.Execute().CurrentEvent.Message);
+                        if(_speechEventManager.IsEnd()) Completed = true;
+                        _speechBubbleMono.EnqueueSpeechMessage(_speechEventManager.CurrentEvent.Message);
+                        _speechEventManager.MoveNext(); 
                     }       
-                    if(_speechEventManager.IsEnd()) Completed = true;
                 }));
             // Disposables.Add(Observable.EveryValueChanged(this, _ => IsSuccess)
             //     .Where(_ => !Completed)
@@ -244,12 +242,13 @@ namespace Daipan.Tutorial.Scripts
         public void SetIsSuccess(bool isSuccess)
         {
             IsSuccess = isSuccess;
-            _speechBubbleMono.ShowSpeechBubble(_speechEventManager.Execute().CurrentEvent.Message);
+            _speechBubbleMono.EnqueueSpeechMessage(_speechEventManager.CurrentEvent.Message);
+            _speechEventManager.MoveNext();
         }
 
         public override bool IsCompleted()
         {
-            return Completed;
+            return _speechEventManager.IsEnd();
         }
     }
 

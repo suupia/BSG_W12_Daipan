@@ -14,7 +14,6 @@ namespace Daipan.Tutorial.Scripts
         int Id { get; }
         string Message { get; }
         SpeechEventEnum SpeechEventEnum { get; }
-        void Execute();
         (bool, ISpeechEvent) MoveNext();
         void SetNextEvent(params ISpeechEvent[] nextEvents);
     }
@@ -24,8 +23,7 @@ namespace Daipan.Tutorial.Scripts
         public int Id { get; protected init; }
         public string Message { get; protected init; }
         public SpeechEventEnum SpeechEventEnum { get; protected init; }
-        protected Func<bool> ExecuteAction { get; set; }
-        protected bool IsCompleted { get; set; }
+        protected Func<bool> OnMoveAction { get; set; }
         protected readonly IList<IDisposable> Disposables = new List<IDisposable>();
         public void Dispose()
         {
@@ -34,7 +32,6 @@ namespace Daipan.Tutorial.Scripts
                 disposable.Dispose();
             }
         }
-        public abstract void Execute();
         public abstract (bool, ISpeechEvent) MoveNext();
         public abstract void SetNextEvent(params ISpeechEvent[] nextEvents);
     }
@@ -59,31 +56,27 @@ namespace Daipan.Tutorial.Scripts
             Id = id;
             Message = message;
             SpeechEventEnum = speechEventEnum;
-            ExecuteAction = () => true;
+            OnMoveAction = () => true;
         }
         
         public SequentialEvent(
             int id
             ,string message
             ,SpeechEventEnum speechEventEnum
-            ,Func<bool> executeAction
+            ,Func<bool> onMoveAction
             )
         {
             Id = id;
             Message = message;
             SpeechEventEnum = speechEventEnum;
-            ExecuteAction = executeAction;
+            OnMoveAction = onMoveAction;
         }
 
-        public override void Execute()
-        {
-           Debug.Log($"Id: {Id} Message: {Message}");
-           IsCompleted = ExecuteAction();
-        }
 
         public override (bool, ISpeechEvent) MoveNext()
         {
-            if(!IsCompleted) return  (false, this);
+            var result = OnMoveAction();
+            if(!result) return  (false, this);
             if (NextEvent == null) return (false, this);
             return (true, NextEvent);
         }
@@ -104,26 +97,21 @@ namespace Daipan.Tutorial.Scripts
             int id
             ,string message
             ,SpeechEventEnum speechEventEnum
-            ,Func<bool> executeAction
+            ,Func<bool> onMoveAction
             ,Func<bool> condition
             )
         {
             Id = id;
             Message = message; 
             SpeechEventEnum = speechEventEnum;
-            ExecuteAction = executeAction;
+            OnMoveAction = onMoveAction;
             Condition = condition;
-        }
-
-        public override void Execute()
-        {
-            Debug.Log($"Id: {Id} Message: {Message}");
-            IsCompleted = ExecuteAction();
         }
         
         public override (bool, ISpeechEvent) MoveNext()
         {
-            if(!IsCompleted) return  (false, this);
+            var result = OnMoveAction();
+            if(!result) return  (false, this);
             if (TrueEvent == null || FalseEvent == null) return (false, this);
             return (true, Condition() ? TrueEvent : FalseEvent);
         }
@@ -138,11 +126,6 @@ namespace Daipan.Tutorial.Scripts
     }
     public sealed record EndEvent : AbstractSpeechEvent
     {
-        public override void Execute()
-        {
-            Debug.Log($"Id: {Id} Message: {Message}");
-        }
-
         public override (bool, ISpeechEvent) MoveNext()
         {
             return (false, this);
@@ -210,47 +193,55 @@ namespace Daipan.Tutorial.Scripts
 
     public class SpeechEventManager
     {
-        ISpeechEvent? CurrentEvent { get; set; } 
+        ISpeechEvent? _currentEvent;
 
+        public ISpeechEvent CurrentEvent
+        {
+            get
+            {
+                if (_currentEvent == null)
+                {
+                    Debug.LogWarning("CurrentEvent is null");
+                    return new EndEvent();
+                }
+                return _currentEvent;
+            }
+            private set => _currentEvent = value; 
+        }   
         public void SetSpeechEvent(ISpeechEvent speechEvent)
         {
             CurrentEvent = speechEvent;
         }
         public SpeechEventEnum GetSpeechEventEnum()
         {
-            if (CurrentEvent == null)
-            {
-                Debug.LogWarning("CurrentEvent is null");
-                return SpeechEventEnum.None;
-            }
-
             return CurrentEvent.SpeechEventEnum;
         }
         
         public bool IsEnd()
         {
-            if (CurrentEvent == null)
-            {
-                Debug.LogWarning("CurrentEvent is null");
-                return false;
-            }
-
             return CurrentEvent is EndEvent;
         }
 
-        public (bool IsMoveNext,ISpeechEvent CurrentEvent) Execute()
+        // public (bool IsMoveNext,ISpeechEvent CurrentEvent) Execute()
+        // {
+        //     if (CurrentEvent == null)
+        //     {
+        //         Debug.LogWarning("CurrentEvent is null");
+        //         return (false, null!);
+        //     }
+        //     var currentEvent = CurrentEvent;
+        //     currentEvent.Execute();
+        //     var (result, nextEvent) = currentEvent.MoveNext(); 
+        //     if(result) CurrentEvent = nextEvent;
+        //     Debug.Log($"currentEvent: {currentEvent.Message} nextEvent: {nextEvent.Message}");
+        //     return ( result, currentEvent);
+        // }
+        //
+        public bool MoveNext()
         {
-            if (CurrentEvent == null)
-            {
-                Debug.LogWarning("CurrentEvent is null");
-                return (false, null!);
-            }
-            var currentEvent = CurrentEvent;
-            currentEvent.Execute();
-            var (result, nextEvent) = currentEvent.MoveNext(); 
+            var (result, nextEvent) = CurrentEvent.MoveNext(); 
             if(result) CurrentEvent = nextEvent;
-            Debug.Log($"currentEvent: {currentEvent.Message} nextEvent: {nextEvent.Message}");
-            return ( result, currentEvent);
+            return result;
         }
     }
 }

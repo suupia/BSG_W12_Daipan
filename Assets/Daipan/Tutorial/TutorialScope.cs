@@ -99,7 +99,7 @@ namespace Daipan.Tutorial
             builder.RegisterComponentInHierarchy<LanguageSelectionPopupMono>();
             builder.RegisterComponentInHierarchy<BlackScreenViewMono>();
             builder.RegisterComponentInHierarchy<SpeechBubbleMono>();
-            builder.Register<SpeechEventManager>(Lifetime.Transient);
+            builder.Register<SpeechEventManager>(Lifetime.Scoped);
 
             // Updater
             builder.UseEntryPoints(Lifetime.Scoped, entryPoints =>

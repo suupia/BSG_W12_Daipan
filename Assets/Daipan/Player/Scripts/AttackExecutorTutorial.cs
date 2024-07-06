@@ -31,6 +31,8 @@ namespace Daipan.Player.Scripts
         public void FireAttackEffect(PlayerMono playerMono, PlayerColor playerColor)
         {
             // チュートリアルを聞いている時なら攻撃せずにテキストを送る
+            Debug.Log($"AttackExecutorTutorial: _speechEventManager.GetSpeechEventEnum() = {_speechEventManager.GetSpeechEventEnum()}" +
+                      $", SpeechEventEnum.Message = {_speechEventManager.CurrentEvent?.Message }");
             if (_speechEventManager.GetSpeechEventEnum() == SpeechEventEnum.Listening) return;
             _attackExecutor.FireAttackEffect(playerMono, playerColor); 
         }
