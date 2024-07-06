@@ -55,59 +55,47 @@ namespace Daipan.Daipan
         protected override void Configure(IContainerBuilder builder)
         {
             // Stream
-            RegisterStream(builder);
+            RegisterStream(builder, streamParam);
 
-            void RegisterStream(IContainerBuilder builder)
+            static void RegisterStream(IContainerBuilder builder, StreamParam streamParam)
             {
-                /*stream*/
+                // Parameters 
                 builder.RegisterInstance(new StreamParamDataBuilder(builder, streamParam));
-
                 builder.RegisterInstance(streamParam.viewer);
                 builder.RegisterInstance(streamParam.daipan);
-                builder.RegisterInstance(irritatedParams);
+                // Stream
                 builder.Register<StreamPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<StreamMono>>();
-                builder.Register<IrritatedValue>(Lifetime.Scoped).WithParameter("maxValue", 100);
                 builder.Register<ViewerNumber>(Lifetime.Scoped);
                 builder.Register<StreamStatus>(Lifetime.Scoped);
                 builder.Register<IStart, StreamSpawner>(Lifetime.Scoped).AsSelf();
             }
 
             // Comment
-            RegisterComment(builder);
+            RegisterComment(builder, commentParamManager);
 
-            void RegisterComment(IContainerBuilder builder)
+            static void RegisterComment(IContainerBuilder builder, CommentParamManager commentParamManager)
             {
-                builder.Register<CommentPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<CommentMono>>();
-                builder.Register<AntiCommentPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<AntiCommentMono>>();
-                builder.Register<IUpdate, CommentSpawner>(Lifetime.Scoped).AsSelf();
-                builder.Register<CommentCluster>(Lifetime.Scoped);
-                builder.Register<AntiCommentCluster>(Lifetime.Scoped);
-                builder.Register<IUpdate, AntiCommentRelocate>(Lifetime.Scoped);
-
-
-                /*comment*/
+                // Parameters 
+                builder.RegisterInstance(commentParamManager);
                 builder.Register<CommentParamsServer>(Lifetime.Scoped);
                 builder.RegisterComponentInHierarchy<CommentPosition>();
-                builder.RegisterInstance(commentParamManager);
+                // Comment 
+                builder.Register<CommentPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<CommentMono>>();
+                builder.Register<AntiCommentPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<AntiCommentMono>>();
+                builder.Register<CommentCluster>(Lifetime.Scoped);
+                builder.Register<IUpdate, CommentSpawner>(Lifetime.Scoped).AsSelf();
+                builder.Register<AntiCommentCluster>(Lifetime.Scoped);
+                builder.Register<IUpdate, AntiCommentRelocate>(Lifetime.Scoped);
             }
 
             builder.Register<DaipanExecutor>(Lifetime.Scoped);
 
             // Player
-            RegisterPlayer(builder);
+            RegisterPlayer(builder, playerParamManager);
 
-            void RegisterPlayer(IContainerBuilder builder)
+            static void RegisterPlayer(IContainerBuilder builder, PlayerParamManager playerParamManager)
             {
-                builder.Register<PlayerPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<PlayerMono>>();
-                builder.Register<PlayerAttackEffectPrefabLoader>(Lifetime.Scoped)
-                    .As<IPrefabLoader<PlayerAttackEffectMono>>();
-                builder.Register<PlayerAttackEffectSpawner>(Lifetime.Scoped);
-                builder.Register<PlayerAttackEffectBuilder>(Lifetime.Scoped);
-                builder.Register<AttackExecutor>(Lifetime.Transient).As<IAttackExecutor>();
-                builder.Register<PlayerHolder>(Lifetime.Scoped);
-                builder.Register<IStart, PlayerSpawner>(Lifetime.Scoped);
-
-                /*player*/
+                // Parameters
                 PlayerPositionMono SetUpPlayerPositionMono()
                 {
                     var lanePositionMono = FindObjectOfType<LanePositionMono>();
@@ -121,23 +109,31 @@ namespace Daipan.Daipan
                         lanePositionMono.attackEffectDespawnedPoint;
                     return playerPositionMono;
                 }
-
                 builder.RegisterInstance(new PlayerPositionMonoBuilder(builder, SetUpPlayerPositionMono()));
-
-                // builder.RegisterInstance(new PlayerParamDataBuilder(builder, playerParamManager));
                 builder.RegisterInstance(playerParamManager);
                 builder.Register<PlayerParamDataContainer>(Lifetime.Scoped).As<IPlayerParamDataContainer>();
                 builder.Register<PlayerHpParamData>(Lifetime.Scoped).As<IPlayerHpParamData>();
                 builder.Register<PlayerAntiCommentParamData>(Lifetime.Scoped).As<IPlayerAntiCommentParamData>();
+                // Player
+                builder.Register<PlayerPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<PlayerMono>>();
+                builder.Register<PlayerHolder>(Lifetime.Scoped);
                 builder.Register<PlayerAttackedCounter>(Lifetime.Scoped);
+                builder.Register<IStart, PlayerSpawner>(Lifetime.Scoped);
+                // Attack
+                builder.Register<PlayerAttackEffectPrefabLoader>(Lifetime.Scoped)
+                    .As<IPrefabLoader<PlayerAttackEffectMono>>();
+                builder.Register<PlayerAttackEffectSpawner>(Lifetime.Scoped);
+                builder.Register<PlayerAttackEffectBuilder>(Lifetime.Scoped);
+                builder.Register<AttackExecutor>(Lifetime.Transient).As<IAttackExecutor>();
             }
 
             // Combo
-            RegisterCombo(builder);
-
-            void RegisterCombo(IContainerBuilder builder)
+            RegisterCombo(builder, comboParamManager);
+            static void RegisterCombo(IContainerBuilder builder, ComboParamManager comboParamManager)
             {
+                // Parameters
                 builder.RegisterInstance(comboParamManager);
+                // Combo
                 builder.Register<ComboMultiplier>(Lifetime.Scoped).As<IComboMultiplier>();
                 builder.Register<ComboCounter>(Lifetime.Scoped);
                 builder.RegisterComponentInHierarchy<ComboViewMono>();
@@ -145,34 +141,17 @@ namespace Daipan.Daipan
 
             // Tower
             RegisterTower(builder);
-
-            void RegisterTower(IContainerBuilder builder)
+            static void RegisterTower(IContainerBuilder builder)
             {
                 builder.Register<TowerPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<TowerMono>>();
                 builder.Register<IStart, TowerSpawner>(Lifetime.Scoped);
             }
 
             // Enemy
-            RegisterEnemy(builder);
-
-            void RegisterEnemy(IContainerBuilder builder)
+            RegisterEnemy(builder, enemyParamManager);
+            static void RegisterEnemy(IContainerBuilder builder, EnemyParamManager enemyParamManager)
             {
-                builder.Register<EnemyPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<EnemyMono>>();
-                builder.Register<EnemyBuilder>(Lifetime.Scoped).As<IEnemyBuilder>();
-                builder.Register<EnemyAttackDecider>(Lifetime.Scoped);
-                builder.Register<EnemySpawner>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
-                builder.Register<EnemyCluster>(Lifetime.Scoped);
-                builder.Register<EnemyTotemOnAttack>(Lifetime.Scoped);
-                builder.Register<EnemyHighlightUpdater>(Lifetime.Scoped).AsImplementedInterfaces();
-
-                /*enemy*/
-                builder.RegisterInstance(enemyParamManager);
-                builder.RegisterInstance(enemyParamManager.enemyLevelDesignParam);
-                builder.Register<EnemyTimeLineParamContainer>(Lifetime.Scoped).As<IEnemyTimeLineParamContainer>();
-                builder.Register<EnemyParamDataContainer>(Lifetime.Scoped).AsImplementedInterfaces();
-                builder.RegisterInstance(
-                    new EnemyLevelDesignParamDataBuilder(builder, enemyParamManager.enemyLevelDesignParam));
-
+                // Parameters
                 EnemyPositionMono SetUpEnemyPositionMono()
                 {
                     var lanePositionMono = FindObjectOfType<LanePositionMono>();
@@ -189,9 +168,23 @@ namespace Daipan.Daipan
                     enemyPositionMono.enemyDespawnedPoint = lanePositionMono.enemyDespawnedPoint;
                     return enemyPositionMono;
                 }
-
                 builder.RegisterComponent(SetUpEnemyPositionMono());
+                builder.RegisterInstance(enemyParamManager);
+                builder.RegisterInstance(enemyParamManager.enemyLevelDesignParam);
                 builder.Register<EnemySpawnPoint>(Lifetime.Scoped).As<IEnemySpawnPoint>();
+                builder.Register<EnemyTimeLineParamContainer>(Lifetime.Scoped).As<IEnemyTimeLineParamContainer>();
+                builder.Register<EnemyParamDataContainer>(Lifetime.Scoped).AsImplementedInterfaces();
+                builder.RegisterInstance(
+                    new EnemyLevelDesignParamDataBuilder(builder, enemyParamManager.enemyLevelDesignParam));
+                // Enemy
+                builder.Register<EnemyPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<EnemyMono>>();
+                builder.Register<EnemySpawner>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
+                builder.Register<EnemyBuilder>(Lifetime.Scoped).As<IEnemyBuilder>();
+                builder.Register<EnemyCluster>(Lifetime.Scoped);
+                builder.Register<EnemyAttackDecider>(Lifetime.Scoped);
+                builder.Register<EnemyTotemOnAttack>(Lifetime.Scoped);
+                builder.Register<EnemyHighlightUpdater>(Lifetime.Scoped).AsImplementedInterfaces();
+
             }
 
             // Viewer
@@ -200,6 +193,9 @@ namespace Daipan.Daipan
             // IrritatedGauge
             builder.RegisterComponentInHierarchy<IrritatedViewMono>();
             builder.RegisterComponentInHierarchy<IrritatedGaugeBackgroundViewMono>();
+            builder.RegisterInstance(irritatedParams);
+            builder.Register<IrritatedValue>(Lifetime.Scoped).WithParameter("maxValue", 100);
+
 
             // View
             builder.RegisterComponentInHierarchy<StreamViewMono>();
