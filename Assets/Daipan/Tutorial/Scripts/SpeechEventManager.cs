@@ -18,6 +18,26 @@ namespace Daipan.Tutorial.Scripts
         (bool, ISpeechEvent) MoveNext();
         void SetNextEvent(params ISpeechEvent[] nextEvents);
     }
+
+    public abstract record AbstractSpeechEvent : ISpeechEvent, IDisposable
+    {
+        public int Id { get; protected init; }
+        public string Message { get; protected init; }
+        public SpeechEventEnum SpeechEventEnum { get; protected init; }
+        protected Func<bool> ExecuteAction { get; set; }
+        protected bool IsCompleted { get; set; }
+        protected readonly IList<IDisposable> Disposables = new List<IDisposable>();
+        public void Dispose()
+        {
+            foreach (var disposable in Disposables)
+            {
+                disposable.Dispose();
+            }
+        }
+        public abstract void Execute();
+        public abstract (bool, ISpeechEvent) MoveNext();
+        public abstract void SetNextEvent(params ISpeechEvent[] nextEvents);
+    }
     
     public enum SpeechEventEnum
     {
@@ -26,15 +46,10 @@ namespace Daipan.Tutorial.Scripts
         Practical, // 実践するタイプのチュートリアル
     }
 
-    public sealed record SequentialEvent : ISpeechEvent
+    public sealed record SequentialEvent : AbstractSpeechEvent
     {
-        public int Id { get; }
-        public string Message { get; }
-        public SpeechEventEnum SpeechEventEnum { get; }
-        Func<bool> ExecuteAction { get; }
         ISpeechEvent? NextEvent { get; set; }
 
-        bool IsCompleted { get; set; }
         public SequentialEvent(
             int id
             ,string message
@@ -60,36 +75,31 @@ namespace Daipan.Tutorial.Scripts
             ExecuteAction = executeAction;
         }
 
-        public void Execute()
+        public override void Execute()
         {
            Debug.Log($"Id: {Id} Message: {Message}");
            IsCompleted = ExecuteAction();
         }
 
-        public (bool, ISpeechEvent) MoveNext()
+        public override (bool, ISpeechEvent) MoveNext()
         {
             if(!IsCompleted) return  (false, this);
             if (NextEvent == null) return (false, this);
             return (true, NextEvent);
         }
 
-        public void SetNextEvent(ISpeechEvent[] nextEvents)
+        public override void SetNextEvent(params ISpeechEvent[] nextEvents)
         {
             if(nextEvents.Length != 1) throw new ArgumentException("NextEvent must be one");
             NextEvent = nextEvents[0];
         }
     }
 
-    public sealed record ConditionalEvent : ISpeechEvent
+    public sealed record ConditionalEvent : AbstractSpeechEvent
     {
-       public  int Id { get; }
-        public string Message { get; }
-        public SpeechEventEnum SpeechEventEnum { get; }
-        Func<bool> ExecuteAction { get; }
         Func<bool> Condition { get; }
         ISpeechEvent? TrueEvent { get; set; }
         ISpeechEvent? FalseEvent { get; set; }
-        bool IsCompleted { get; set; }
         public ConditionalEvent(
             int id
             ,string message
@@ -105,20 +115,20 @@ namespace Daipan.Tutorial.Scripts
             Condition = condition;
         }
 
-        public void Execute()
+        public override void Execute()
         {
             Debug.Log($"Id: {Id} Message: {Message}");
             IsCompleted = ExecuteAction();
         }
         
-        public (bool, ISpeechEvent) MoveNext()
+        public override (bool, ISpeechEvent) MoveNext()
         {
             if(!IsCompleted) return  (false, this);
             if (TrueEvent == null || FalseEvent == null) return (false, this);
             return (true, Condition() ? TrueEvent : FalseEvent);
         }
         
-        public void SetNextEvent(ISpeechEvent[] nextEvents)
+        public override void SetNextEvent(params ISpeechEvent[] nextEvents)
         {
             if(nextEvents.Length != 2) throw new ArgumentException("NextEvent must be two");
             TrueEvent = nextEvents[0];
@@ -126,22 +136,19 @@ namespace Daipan.Tutorial.Scripts
         }
             
     }
-    public sealed record EndEvent : ISpeechEvent
+    public sealed record EndEvent : AbstractSpeechEvent
     {
-        public int Id => -1; 
-        public string Message => string.Empty;
-        public SpeechEventEnum SpeechEventEnum => SpeechEventEnum.None;
-        public void Execute()
+        public override void Execute()
         {
             Debug.Log($"Id: {Id} Message: {Message}");
         }
 
-        public (bool, ISpeechEvent) MoveNext()
+        public override (bool, ISpeechEvent) MoveNext()
         {
             return (false, this);
         }
 
-        public void SetNextEvent(ISpeechEvent[] nextEvents)
+        public override void SetNextEvent(params ISpeechEvent[] nextEvents)
         {
             throw new NotImplementedException();
         }
