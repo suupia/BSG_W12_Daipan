@@ -10,9 +10,9 @@ namespace Daipan.Player.Scripts
     public class AttackExecutorTutorial : IAttackExecutor
     {
         readonly IAttackExecutor _attackExecutor; 
-        public AttackExecutorTutorial(
-            IAttackExecutor attackExecutor 
-            )
+        
+        // 本当はDecoratorパターンを使いたいが、Resolveできないので、妥協
+        public AttackExecutorTutorial(AttackExecutor attackExecutor) 
         {
             _attackExecutor = attackExecutor;
         }

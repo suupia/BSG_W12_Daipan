@@ -18,6 +18,7 @@ using Daipan.Player.LevelDesign.Scripts;
 using Daipan.LevelDesign.Stream;
 using Daipan.LevelDesign.Tower.Scripts;
 using Daipan.Option.Scripts;
+using Daipan.Player.Interfaces;
 using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Player.MonoScripts;
 using Daipan.Player.Scripts;
@@ -84,10 +85,12 @@ namespace Daipan.Tutorial
                 .As<IPrefabLoader<PlayerAttackEffectMono>>();
             builder.Register<PlayerAttackEffectSpawner>(Lifetime.Scoped);
             builder.Register<PlayerAttackEffectBuilder>(Lifetime.Scoped);
+            builder.Register<AttackExecutor>(Lifetime.Transient);
+            builder.Register<AttackExecutorTutorial>(Lifetime.Transient).As<IAttackExecutor>();
             builder.Register<PlayerHolder>(Lifetime.Scoped);
             builder.Register<IStart, PlayerSpawner>(Lifetime.Scoped);
 
-            // Combo
+            // Combo 
             builder.RegisterInstance(comboParamManager);
             builder.Register<ComboMultiplier>(Lifetime.Scoped).As<IComboMultiplier>();
             builder.Register<ComboCounter>(Lifetime.Scoped);
