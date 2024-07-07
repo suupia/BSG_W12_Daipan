@@ -48,7 +48,7 @@ namespace Daipan.Enemy.Scripts
 
         public EnemyMono Build(EnemyEnum enemyEnum, EnemyMono enemyMono)
         {
-            if (enemyEnum == EnemyEnum.None) enemyEnum = DecideRandomEnemyType(); // EnemyEnum.Noneが設定されていない時の処理
+            if (enemyEnum == EnemyEnum.None) enemyEnum = DecideRandomEnemyType(); // EnemyEnum.Noneとなっている場合にエラーを回避する
 
             if (IsSpawnBoss())
             {
@@ -107,16 +107,6 @@ namespace Daipan.Enemy.Scripts
             }
         }
 
-
-        // 本来はScriptableObjectで制御するのでこれは後でパラメータをもらうようにして消す
-        // 今はスクリプトで制御するために書いておく
-        EnemyEnum DecideRandomEnemyTypeCustom()
-        {
-            var rand = Random.value;
-            if (rand < 0.5f) return EnemyEnum.Blue;
-            return EnemyEnum.RedBoss;
-        }
-
         bool IsSpawnBoss()
         {
             // ボスが出現する条件1
@@ -135,9 +125,6 @@ namespace Daipan.Enemy.Scripts
 
         EnemyEnum DecideRandomEnemyType()
         {
-            // BOSSをスポーンするかどうかの判定
-            if (Random.value < _enemyTimeLineParamContainer.GetEnemyTimeLineParamData().GetSpawnBossPercent() / 100.0) return EnemyEnum.RedBoss;
-
             // 通常敵のType決め
             List<double> ratio = new();
             foreach (var enemyLife in _enemyParamManager.enemyParams)
