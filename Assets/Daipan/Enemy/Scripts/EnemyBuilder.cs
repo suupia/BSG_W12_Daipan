@@ -24,7 +24,6 @@ namespace Daipan.Enemy.Scripts
         readonly IrritatedValue _irritatedValue;
         readonly EnemyCluster _enemyCluster;
         readonly EnemyLevelDesignParamData _enemyLevelDesignParamData;
-        readonly IEnemyEnumSelector _enemyEnumSelector;
         
         public EnemyBuilder(
             IEnemyParamContainer enemyParamContainer
@@ -33,7 +32,6 @@ namespace Daipan.Enemy.Scripts
             , IrritatedValue irritatedValue
             , EnemyCluster enemyCluster
             , EnemyLevelDesignParamData enemyLevelDesignParamData
-            , IEnemyEnumSelector enemyEnumSelector
         )
         {
             _enemyParamContainer = enemyParamContainer;
@@ -42,12 +40,10 @@ namespace Daipan.Enemy.Scripts
             _irritatedValue = irritatedValue;
             _enemyCluster = enemyCluster;
             _enemyLevelDesignParamData = enemyLevelDesignParamData;
-            _enemyEnumSelector = enemyEnumSelector;
         }
 
-        public EnemyMono Build(EnemyMono enemyMono)
+        public EnemyMono Build(EnemyMono enemyMono, EnemyEnum enemyEnum)
         {
-            var enemyEnum = _enemyEnumSelector.SelectEnemyEnum(); 
             Debug.Log($"enemyEnum: {enemyEnum}");
             var enemyParamData = _enemyParamContainer.GetEnemyParamData(enemyEnum);
 
