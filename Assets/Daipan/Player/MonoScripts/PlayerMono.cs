@@ -18,8 +18,6 @@ namespace Daipan.Player.MonoScripts
     public sealed class PlayerMono : MonoBehaviour
     {
         [SerializeField] List<AbstractPlayerViewMono?> playerViewMonos = new();
-        CommentSpawner _commentSpawner = null!;
-        PlayerAttackedCounter _attackedCounterForAntiComment = null!;
         IPlayerHpParamData _playerHpParamData = null!;
         IPlayerInput _playerInput = null!;
         public Hp Hp { get; set; } = null!;
@@ -43,13 +41,10 @@ namespace Daipan.Player.MonoScripts
             , IPlayerInput playerInput
         )
         {
-            _commentSpawner = commentSpawner;
             _playerHpParamData = playerHpParamData;
             Observable.EveryValueChanged(waveState, x => x.CurrentWave)
                 .Subscribe(_ => Hp = new Hp(playerHpParamData.GetMaxHp()))
                 .AddTo(this);
-
-            _attackedCounterForAntiComment = playerAttackedCounter;
 
             EnemyAttackModule.AttackEvent += (sender, args) =>
             {
@@ -57,9 +52,9 @@ namespace Daipan.Player.MonoScripts
                 irritatedValue.IncreaseValue(args.DamageValue);
 
                 // AntiComment
-                _attackedCounterForAntiComment.CountUp();
-                if (_attackedCounterForAntiComment.IsOverThreshold)
-                    _commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
+                playerAttackedCounter.CountUp();
+                if (playerAttackedCounter.IsOverThreshold)
+                    commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
 
                 // View
                 foreach (var playerViewMono in playerViewMonos)
