@@ -92,7 +92,7 @@ namespace Daipan.Tutorial
             DaipanScope.RegisterInputSerial(builder);
 
             // Tutorial
-            builder.Register<TutorialFacilitator>(Lifetime.Scoped).As<IUpdate>();
+            builder.Register<TutorialFacilitator>(Lifetime.Scoped).AsSelf().As<IUpdate>();
             RegisterTutorialContents(builder);
 
             builder.RegisterComponentInHierarchy<DownloadGaugeViewMono>();

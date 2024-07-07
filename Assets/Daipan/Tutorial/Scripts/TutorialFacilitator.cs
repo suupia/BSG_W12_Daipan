@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Daipan.Tutorial.Scripts
 {
-    internal class TutorialFacilitator : IUpdate
+    public class TutorialFacilitator : IUpdate
     {
         public ITutorialContent? CurrentStep => _currentStep;
         readonly Queue<ITutorialContent> _tutorialSteps = new();

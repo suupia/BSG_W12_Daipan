@@ -24,7 +24,7 @@ namespace Daipan.Player.Scripts
         readonly WaveState _waveState;
         readonly IPlayerAntiCommentParamData _playerAntiCommentParamData;
         readonly RedEnemyTutorial _redEnemyTutorial;
-        readonly SpeechEventManager _speechEventManager;
+        readonly TutorialFacilitator _tutorialFacilitator; 
 
         public PlayerAttackEffectBuilderTutorial(
             IPlayerParamDataContainer playerParamDataContainer
@@ -33,7 +33,7 @@ namespace Daipan.Player.Scripts
             ,WaveState waveState
             ,IPlayerAntiCommentParamData playerAntiCommentParamData
             ,RedEnemyTutorial redEnemyTutorial
-            ,SpeechEventManager speechEventManager
+            ,TutorialFacilitator tutorialFacilitator 
         )
         {
             _playerParamDataContainer = playerParamDataContainer;
@@ -42,7 +42,7 @@ namespace Daipan.Player.Scripts
             _waveState = waveState;
             _playerAntiCommentParamData = playerAntiCommentParamData;
             _redEnemyTutorial = redEnemyTutorial;
-            _speechEventManager = speechEventManager;
+            _tutorialFacilitator = tutorialFacilitator;
         }
 
         public PlayerAttackEffectMono Build(PlayerAttackEffectMono effect, PlayerMono playerMono,
@@ -60,7 +60,7 @@ namespace Daipan.Player.Scripts
                     , args.EnemyMono
                     ,_enemyTotemOnAttack
                     ,_redEnemyTutorial
-                    ,_speechEventManager);
+                    ,_tutorialFacilitator);
             };
             return effect;
         }
@@ -73,7 +73,7 @@ namespace Daipan.Player.Scripts
             ,EnemyMono? enemyMono
             ,EnemyTotemOnAttack totemOnAttack
             ,RedEnemyTutorial redEnemyTutorial
-            ,SpeechEventManager speechEventManager
+            ,TutorialFacilitator tutorialFacilitator 
             )
         {
             Debug.Log($"Attack enemyMono?.EnemyEnum: {enemyMono?.EnemyEnum}");
@@ -84,7 +84,7 @@ namespace Daipan.Player.Scripts
             if (enemyMono.EnemyEnum == EnemyEnum.Red)
             {
                 Debug.Log("RedEnemyTutorial_Success");
-                if(speechEventManager.CurrentEvent is RedEnemyTutorial) redEnemyTutorial.SetIsSuccess(playerColor == PlayerColor.Red);
+                if(tutorialFacilitator.CurrentStep is RedEnemyTutorial) redEnemyTutorial.SetIsSuccess(playerColor == PlayerColor.Red);
             }
             if (PlayerAttackModule.GetTargetEnemyEnum(playerColor).Contains(enemyMono.EnemyEnum))
             {
