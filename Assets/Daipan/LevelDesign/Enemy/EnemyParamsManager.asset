@@ -16,7 +16,7 @@ MonoBehaviour:
     spawnBossAmount: 20
     increaseIrritatedValueByBoss: 30
     increaseViewerOnEnemyKill: 10
-    currentKillAmount: 12
+    currentKillAmount: 14
   enemyParams:
   - enemyEnum: 1
     enemyAttackParam:
@@ -99,7 +99,7 @@ MonoBehaviour:
       daipanThreshold: 0
       daipanProbability: 0
     enemyRewardParam:
-      irritationAfterKill: 100
+      irritationAfterKill: 30
     enemyAnimatorParam:
       animatorController: {fileID: 0}
       bodyColor: {r: 1, g: 0.8135679, b: 0, a: 1}
