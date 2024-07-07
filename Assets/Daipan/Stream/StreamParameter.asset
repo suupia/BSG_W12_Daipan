@@ -17,6 +17,6 @@ MonoBehaviour:
     decreaseNumberWhenIrradiated: 50
   daipan:
     increaseNumberByDaipan: 1000
-    increaseNumberWhenExciting: 100
+    increaseNumberWhenExciting: 200
   timer:
     maxTime: 150
