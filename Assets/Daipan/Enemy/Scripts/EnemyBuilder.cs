@@ -24,18 +24,16 @@ namespace Daipan.Enemy.Scripts
         readonly EnemyCluster _enemyCluster;
         readonly EnemyLevelDesignParamData _enemyLevelDesignParamData;
         readonly IEnemyTimeLineParamContainer _enemyTimeLineParamContainer;
-        readonly StreamTimer _streamTimer;
         
         public EnemyBuilder(
-            IEnemyParamContainer enemyParamContainer,
-            CommentSpawner commentSpawner,
-            ViewerNumber viewerNumber,
-            IrritatedValue irritatedValue,
-            EnemyParamManager enemyParamManager,
-            EnemyCluster enemyCluster,
-            EnemyLevelDesignParamData enemyLevelDesignParamData,
-            IEnemyTimeLineParamContainer enemyTimeLineParamContainer,
-            StreamTimer streamTimer
+            IEnemyParamContainer enemyParamContainer
+            , CommentSpawner commentSpawner
+            , ViewerNumber viewerNumber
+            , IrritatedValue irritatedValue
+            , EnemyParamManager enemyParamManager
+            , EnemyCluster enemyCluster
+            , EnemyLevelDesignParamData enemyLevelDesignParamData
+            , IEnemyTimeLineParamContainer enemyTimeLineParamContainer
         )
         {
             _enemyParamContainer = enemyParamContainer;
@@ -46,7 +44,6 @@ namespace Daipan.Enemy.Scripts
             _enemyCluster = enemyCluster;
             _enemyLevelDesignParamData = enemyLevelDesignParamData;
             _enemyTimeLineParamContainer = enemyTimeLineParamContainer;
-            _streamTimer = streamTimer;
         }
 
         public EnemyMono Build(EnemyEnum enemyEnum, EnemyMono enemyMono)
