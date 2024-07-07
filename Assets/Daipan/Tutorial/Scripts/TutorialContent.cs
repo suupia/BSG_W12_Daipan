@@ -238,7 +238,7 @@ namespace Daipan.Tutorial.Scripts
         {
             return  _speechEventManager.IsEnd();
         }
-        public void SetIsSuccess(bool isSuccess)
+        public void MoveNextSpeech()
         {
             _speechEventManager.MoveNext();
         }

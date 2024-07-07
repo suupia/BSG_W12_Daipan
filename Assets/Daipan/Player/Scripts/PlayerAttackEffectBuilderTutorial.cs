@@ -78,8 +78,8 @@ namespace Daipan.Player.Scripts
                 }
                 if(tutorialFacilitator.CurrentStep is SequentialEnemyTutorial sequentialEnemyTutorial)
                 {
-                    // 本来は全ての敵を倒したかどうかを判定するべきだが、最後の敵がRedなので、Redのみ判定をする
-                    sequentialEnemyTutorial.SetIsSuccess(playerColor == PlayerColor.Red);
+                    // 本来は全ての敵を倒したかどうかを判定するべきだが、最後の敵がたまたmRedなので、これで判定する
+                    if(playerColor == PlayerColor.Red) sequentialEnemyTutorial.MoveNextSpeech();
                 }
             }
             if (PlayerAttackModule.GetTargetEnemyEnum(playerColor).Contains(enemyMono.EnemyEnum))

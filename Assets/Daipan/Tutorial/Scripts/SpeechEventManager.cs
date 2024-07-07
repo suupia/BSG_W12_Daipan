@@ -263,8 +263,10 @@ namespace Daipan.Tutorial.Scripts
 
         public bool MoveNext()
         {
+            Debug.Log($"CurrentEvent.Message = {CurrentEvent.Message}");
             var (result, nextEvent) = CurrentEvent.MoveNext(); 
             if(result) CurrentEvent = nextEvent;
+            Debug.Log($"NextEvent.Message = {CurrentEvent.Message}");
             return result;
         }
     }
