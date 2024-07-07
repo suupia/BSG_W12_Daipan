@@ -225,7 +225,21 @@ namespace Daipan.Tutorial.Scripts
             speechEvents[0].SetNextEvent(speechEvents[1]);
             return speechEvents[0]; 
         }
-        
+        public static ISpeechEvent BuildShowDaipanCutsceneTutorial(
+            DaipanCutscene daipanCutscene
+        )
+        {
+            List<ISpeechEvent> speechEvents =
+                new List<ISpeechEvent>
+                {
+                    new SequentialEvent(0, "わっ...", SpeechEventEnum.Listening),
+                    new EndEvent(),
+                };
+            
+            speechEvents[0].SetNextEvent(speechEvents[1]);
+            return speechEvents[0]; 
+        }
+
         
     }
     

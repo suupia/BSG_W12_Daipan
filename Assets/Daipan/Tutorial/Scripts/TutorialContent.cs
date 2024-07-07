@@ -206,6 +206,7 @@ namespace Daipan.Tutorial.Scripts
     {
         readonly SpeechEventManager _speechEventManager;
         readonly EnemySpawnerTutorial _enemySpawnerTutorial;
+        
 
         public SequentialEnemyTutorial(
         SpeechEventManager speechEventManager
@@ -224,19 +225,22 @@ namespace Daipan.Tutorial.Scripts
            float intervalSec = 1f; // スポーンの間隔
            var enemyEnums = new Queue<EnemyEnum>(new []{EnemyEnum.Blue, EnemyEnum.Yellow, EnemyEnum.Red});
 
-           Disposables.Add(Observable.Interval(System.TimeSpan.FromSeconds(intervalSec))
+           Disposables.Add(Observable.Interval(TimeSpan.FromSeconds(intervalSec))
                .Take(enemyEnums.Count)
                .Subscribe(
                    _ => { _enemySpawnerTutorial.SpawnEnemyByType(enemyEnums.Dequeue()); },
-                   _ => { Debug.Log("Enemy spawn completed"); }
-               )
-           );
+                   _ =>
+                   {
+                       Debug.Log("Enemy spawn completed");
+
+                   }
+               ));
            
         }
 
         public override bool IsCompleted()
         {
-            return  _speechEventManager.IsEnd();
+            return _speechEventManager.IsEnd();
         }
         public void MoveNextSpeech()
         {
@@ -247,8 +251,8 @@ namespace Daipan.Tutorial.Scripts
     public class ShowWhiteCommentsTutorial : AbstractTutorialContent
     {
         readonly SpeechEventManager _speechEventManager;
-        readonly CommentSpawner _commentSpawner;
-
+        readonly CommentSpawner _commentSpawner;  
+        bool CanMoveNext { get; set; }
         public ShowWhiteCommentsTutorial(
             SpeechEventManager speechEventManager
             , CommentSpawner commentSpawner
@@ -265,12 +269,23 @@ namespace Daipan.Tutorial.Scripts
            
             float intervalSec = 0.5f; // スポーンの間隔
             int commentCount = 3;
+            float delaySec = 2.0f; // すべてのコメントが表示された後の待機時間 
 
             Disposables.Add(Observable.Interval(System.TimeSpan.FromSeconds(intervalSec))
                 .Take(commentCount)
                 .Subscribe(
                     _ => { _commentSpawner.SpawnCommentByType(CommentEnum.Normal); },
-                    _ => { Debug.Log( "Comment spawn completed"); }
+                    _ =>
+                    {
+                        Debug.Log( "Comment spawn completed");
+                        Observable.Timer(TimeSpan.FromSeconds(delaySec))
+                            .Subscribe(_ =>
+                            {
+                                CanMoveNext = true;
+                                Debug.Log("ShowWhiteCommentsTutorial Can move next");
+                            })
+                            .AddTo(Disposables);;
+                    }
                 )
             );
             
@@ -278,7 +293,7 @@ namespace Daipan.Tutorial.Scripts
 
         public override bool IsCompleted()
         {
-            return _speechEventManager.IsEnd();
+            return _speechEventManager.IsEnd() && CanMoveNext;
         }
     }
 
@@ -286,6 +301,7 @@ namespace Daipan.Tutorial.Scripts
     {
         readonly SpeechEventManager _speechEventManager;
         readonly CommentSpawner _commentSpawner;
+        bool CanMoveNext { get; set; }
         public ShowAntiCommentsTutorial(
             SpeechEventManager speechEventManager
             , CommentSpawner commentSpawner
@@ -301,19 +317,31 @@ namespace Daipan.Tutorial.Scripts
             
             float intervalSec = 0.5f; // スポーンの間隔
             int commentCount = 3;
+            float delaySec = 2.0f; // すべてのコメントが表示された後の待機時間 
 
             Disposables.Add(Observable.Interval(System.TimeSpan.FromSeconds(intervalSec))
                 .Take(commentCount)
                 .Subscribe(
                     _ => { _commentSpawner.SpawnCommentByType(CommentEnum.Spiky); },
-                    _ => { Debug.Log( "Comment spawn completed"); }
+                    _ =>
+                    {
+                        Debug.Log( "Comment spawn completed");
+                        Observable.Timer(TimeSpan.FromSeconds(delaySec))
+                            .Subscribe(_ =>
+                            {
+                                CanMoveNext = true;
+                                Debug.Log("ShowAntiCommentsTutorial Can move next");
+                            })
+                            .AddTo(Disposables);;
+                    }
+                    
                 )
             );
         }
 
         public override bool IsCompleted()
         {
-            return _speechEventManager.IsEnd();
+            return _speechEventManager.IsEnd() && CanMoveNext;
         }
     }
 
