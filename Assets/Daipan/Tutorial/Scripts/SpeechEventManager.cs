@@ -186,16 +186,14 @@ namespace Daipan.Tutorial.Scripts
                 new List<ISpeechEvent>
                 {
                     new SequentialEvent(0, "今度はたくさんの敵が来たね！", SpeechEventEnum.Listening),
-                    new ConditionalEvent(1, "対応するボタンを押そう！", SpeechEventEnum.Practical,() => sequentialEnemyTutorial.IsSuccess == true),
+                    new SequentialEvent(1, "対応するボタンを押そう！", SpeechEventEnum.Practical),
                     new SequentialEvent(2, "君、配信の才能あるよ！", SpeechEventEnum.Listening),
-                    new SequentialEvent(3, "本番はうまくいくよ！がんばろう！", SpeechEventEnum.Listening),
                     new EndEvent(),
                 };
             
             speechEvents[0].SetNextEvent(speechEvents[1]);
-            speechEvents[1].SetNextEvent(speechEvents[2], speechEvents[3]);
-            speechEvents[2].SetNextEvent(speechEvents[4]); // Success path
-            speechEvents[3].SetNextEvent(speechEvents[1]); // Failure path, retry
+            speechEvents[1].SetNextEvent(speechEvents[2]);
+            speechEvents[2].SetNextEvent(speechEvents[3]); 
             return speechEvents[0]; 
         }
     }

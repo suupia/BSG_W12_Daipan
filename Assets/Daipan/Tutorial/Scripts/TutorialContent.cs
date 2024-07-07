@@ -213,10 +213,15 @@ namespace Daipan.Tutorial.Scripts
         public bool IsSuccess { get; private set; }
 
         readonly SpeechEventManager _speechEventManager;
+        readonly EnemySpawnerTutorial _enemySpawnerTutorial;
 
-        public SequentialEnemyTutorial(SpeechEventManager speechEventManager)
+        public SequentialEnemyTutorial(
+        SpeechEventManager speechEventManager
+        , EnemySpawnerTutorial enemySpawnerTutorial
+        )
         {
             _speechEventManager = speechEventManager;
+            _enemySpawnerTutorial = enemySpawnerTutorial;
         }
 
         public override void Execute()
@@ -224,7 +229,15 @@ namespace Daipan.Tutorial.Scripts
             Debug.Log("Tutorial: Defeat enemies in sequence...");
            _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildSequentialEnemyTutorial(this));
            
-           
+           float intervalSec = 1f; // スポーンの間隔
+           var enemyEnums = new Queue<EnemyEnum>(new []{EnemyEnum.Blue, EnemyEnum.Yellow, EnemyEnum.Red});
+
+           Disposables.Add(Observable.Interval(System.TimeSpan.FromSeconds(intervalSec))
+               .Take(enemyEnums.Count)
+               .Subscribe(_ =>
+               {
+                  _enemySpawnerTutorial.SpawnEnemyByType(enemyEnums.Dequeue()); 
+               }));
         }
 
         public override bool IsCompleted()

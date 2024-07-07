@@ -44,7 +44,7 @@ namespace Daipan.Player.Scripts
         /// </summary>
         public void Update()
         {
-            
+            Debug.Log($"_speechEventManager.GetSpeechEventEnum() = {_speechEventManager.GetSpeechEventEnum()}"); 
             switch (_speechEventManager.GetSpeechEventEnum())
             {
                 case SpeechEventEnum.Listening:
