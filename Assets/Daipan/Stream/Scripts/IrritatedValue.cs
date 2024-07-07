@@ -14,13 +14,10 @@ namespace Daipan.Stream.Scripts
             MaxValue = maxValue;
             _irritatedParams = irritatedParams;
         }
-
         public int MaxValue { get; }
         public bool IsFull => Value >= MaxValue;
         public float Ratio => (float)Value / MaxValue;
-        public float Value => Mathf.Max(IncreasedValue - DecreasedValue, 0);
-        float DecreasedValue { get; set; }
-        float IncreasedValue { get; set; }
+        public float Value { get; private set; }
         public IReadOnlyList<float> RatioTable => _irritatedParams.RatioTable;
         public int CurrentIrritatedStage
         {
@@ -41,8 +38,7 @@ namespace Daipan.Stream.Scripts
             // [Precondition]
             if (amount < 0) Debug.LogWarning($"IrritatedValue.IncreaseValue() amount is negative : {amount}");
 
-            IncreasedValue += amount;
-            if (Value >= MaxValue) IncreasedValue = MaxValue;
+            Value = Mathf.Min(MaxValue, Value + amount); 
         }
 
         public void DecreaseValue(float amount)
@@ -50,11 +46,7 @@ namespace Daipan.Stream.Scripts
             // [Precondition]
             if (amount < 0) Debug.LogWarning($"IrritatedValue.DecreaseValue() amount is negative : {amount}");
 
-            if (Value <= 0) return;
-            if (Value - amount < 0)
-                DecreasedValue += Value;
-            else
-                DecreasedValue += amount;
+            Value = Mathf.Max(0, Value - amount);
         }
     }
 }
