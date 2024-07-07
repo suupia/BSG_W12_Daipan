@@ -43,7 +43,7 @@ namespace Daipan.Streamer.Scripts
 
         public void Daipan()
         {
-            animator.SetBool("IsDaipan", true);
+            animator.SetTrigger("IsDaipan");
         }
 
         public void AngerZoom(bool isFull)
