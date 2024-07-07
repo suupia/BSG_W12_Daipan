@@ -46,18 +46,10 @@ namespace Daipan.Enemy.Scripts
             _enemyTimeLineParamContainer = enemyTimeLineParamContainer;
         }
 
-        public EnemyMono Build(EnemyEnum enemyEnum, EnemyMono enemyMono)
+        public EnemyMono Build(EnemyMono enemyMono)
         {
-            if (enemyEnum == EnemyEnum.None) enemyEnum = DecideRandomEnemyType(); // EnemyEnum.Noneとなっている場合にエラーを回避する
-
-            if (IsSpawnBoss())
-            {
-                var random = new System.Random();
-                var bosses = new[] { EnemyEnum.RedBoss, EnemyEnum.BlueBoss, EnemyEnum.YellowBoss };
-                int index = random.Next(bosses.Length);
-                enemyEnum = bosses[index];
-            }
-
+            var enemyEnum = IsSpawnBoss(_enemyLevelDesignParamData, _enemyTimeLineParamContainer) 
+                ? DecideRandomEnemyBossType(_enemyParamsManager) : DecideRandomEnemyNormalType(_enemyParamsManager);
 
             Debug.Log($"enemyEnum: {enemyEnum}");
             var enemyParamData = _enemyParamContainer.GetEnemyParamData(enemyEnum);
@@ -107,39 +99,42 @@ namespace Daipan.Enemy.Scripts
             }
         }
 
-        bool IsSpawnBoss()
+        static bool IsSpawnBoss(
+            EnemyLevelDesignParamData enemyLevelDesignParamData
+            , IEnemyTimeLineParamContainer enemyTimeLineParamContainer
+            ) 
         {
             // ボスが出現する条件1
-            if (_enemyLevelDesignParamData.GetCurrentKillAmount() >= _enemyLevelDesignParamData.GetSpawnBossAmount())
+            if (enemyLevelDesignParamData.GetCurrentKillAmount() >= enemyLevelDesignParamData.GetSpawnBossAmount())
             {
-                _enemyLevelDesignParamData.SetCurrentKillAmount(0);
+                enemyLevelDesignParamData.SetCurrentKillAmount(0);
                 return true;
             }
 
             // ボスが出現する条件2
-            if (Random.value < _enemyTimeLineParamContainer.GetEnemyTimeLineParamData().GetSpawnBossPercent() / 100.0) return true;
+            if (Random.value < enemyTimeLineParamContainer.GetEnemyTimeLineParamData().GetSpawnBossPercent() / 100.0) return true;
 
             return false;
         }
 
-
-        EnemyEnum DecideRandomEnemyType()
+        static EnemyEnum DecideRandomEnemyNormalType(EnemyParamsManager enemyParamsManager)
         {
-            // 通常敵のType決め
-            List<double> ratio = new();
-            foreach (var enemyLife in _enemyParamsManager.enemyParams)
-            {
-                if (enemyLife.enemyEnum == EnemyEnum.RedBoss) continue;
-                ratio.Add(enemyLife.enemySpawnParam.spawnRatio);
-            }
-
-            // ここで100%に正規化
-            ratio = EnemySpawnCalculator.NormalizeEnemySpawnRatioWithBoss(ratio,
-                _enemyTimeLineParamContainer.GetEnemyTimeLineParamData().GetSpawnBossPercent());
-            Debug.Log($"enemyPrams.Length : {_enemyParamsManager.enemyParams.Count}");
-            var enemyEnum = _enemyParamsManager.enemyParams[Randoms.RandomByRatios(ratio, Random.value)].enemyEnum;
-            if (enemyEnum == EnemyEnum.RedBoss) _enemyLevelDesignParamData.SetCurrentKillAmount(0);
-            return enemyEnum;
+           List<(EnemyEnum EnemyEnum, double Ratio)> table =  enemyParamsManager.enemyParams
+                .Where(x => x.enemyEnum.IsBoss() != true)
+                .Select(x => (x.enemyEnum, x.enemySpawnParam.spawnRatio))
+                .ToList();
+           var randomIndex = Randoms.RandomByRatios(table.Select(x => x.Ratio).ToList(), Random.value);
+           return  table[randomIndex].EnemyEnum;
+        }
+        
+        static EnemyEnum DecideRandomEnemyBossType(EnemyParamsManager enemyParamsManager)
+        {
+            List<(EnemyEnum EnemyEnum, double Ratio)> table =  enemyParamsManager.enemyParams
+                .Where(x => x.enemyEnum.IsBoss() == true)
+                .Select(x => (x.enemyEnum, x.enemySpawnParam.spawnRatio))
+                .ToList();
+            var randomIndex = Randoms.RandomByRatios(table.Select(x => x.Ratio).ToList(), Random.value);
+            return  table[randomIndex].EnemyEnum;
         }
     }
 }

@@ -17,6 +17,12 @@ namespace Daipan.Utility.Scripts
         public static int RandomByRatios(List<double> ratios, double random)
         {
             // [Precondition]
+            if (!ratios.Any())
+            {
+                Debug.LogWarning("ratios must not be empty.");
+                return -1;
+            }
+            
             if (random is < 0 or >= 1)
             {
                 Debug.LogWarning("rand must be between 0 and 1.");
