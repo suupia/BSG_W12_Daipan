@@ -16,7 +16,7 @@ MonoBehaviour:
     spawnBossAmount: 20
     increaseIrritatedValueByBoss: 18
     increaseViewerOnEnemyKill: 5
-    currentKillAmount: 0
+    currentKillAmount: 8
   enemyParams:
   - enemyEnum: 1
     enemyAttackParam:
@@ -146,9 +146,9 @@ MonoBehaviour:
       irritationAfterKill: 30
     enemyAnimatorParam:
       animatorController: {fileID: 0}
-      bodyColor: {r: 1, g: 0.3529412, b: 0.54901963, a: 1}
+      bodyColor: {r: 0.99607843, g: 0.35686275, b: 0.54901963, a: 1}
       eyeColor: {r: 0.8862745, g: 0.972549, b: 0.8901961, a: 1}
-      eyeBallColor: {r: 1, g: 0.3529412, b: 0.54901963, a: 1}
+      eyeBallColor: {r: 0.99607843, g: 0.35686275, b: 0.54901963, a: 1}
       lineColor: {r: 0.43529412, g: 0.34117648, b: 0.41960785, a: 1}
   - enemyEnum: 6
     enemyAttackParam:
@@ -168,9 +168,9 @@ MonoBehaviour:
       irritationAfterKill: 30
     enemyAnimatorParam:
       animatorController: {fileID: 0}
-      bodyColor: {r: 1, g: 0.8117647, b: 0, a: 1}
+      bodyColor: {r: 0.98039216, g: 0.6784314, b: 0.38039216, a: 1}
       eyeColor: {r: 0.8862745, g: 0.972549, b: 0.8901961, a: 1}
-      eyeBallColor: {r: 1, g: 0.8117647, b: 0, a: 1}
+      eyeBallColor: {r: 0.972549, g: 0.68235296, b: 0.38431373, a: 1}
       lineColor: {r: 0.43529412, g: 0.34117648, b: 0.41960785, a: 1}
   - enemyEnum: 5
     enemyAttackParam:
@@ -200,13 +200,16 @@ MonoBehaviour:
     moveSpeedRate: 1
     spawnBossPercent: 0
     spawnSpecialPercent: 10
+    spawnTotemPercent: 10
   - startTime: 30
     spawnIntervalSec: 1
     moveSpeedRate: 1.5
     spawnBossPercent: 10
     spawnSpecialPercent: 10
+    spawnTotemPercent: 10
   - startTime: 60
     spawnIntervalSec: 1
     moveSpeedRate: 1.5
     spawnBossPercent: 100
     spawnSpecialPercent: 0
+    spawnTotemPercent: 10
