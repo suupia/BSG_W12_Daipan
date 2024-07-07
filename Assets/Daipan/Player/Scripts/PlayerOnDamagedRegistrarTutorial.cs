@@ -4,26 +4,19 @@ using System.Linq;
 using Daipan.Battle.Scripts;
 using Daipan.Comment.Scripts;
 using Daipan.Player.Interfaces;
-using Daipan.Stream.Scripts;
 
 namespace Daipan.Player.Scripts
 {
-    public class PlayerOnDamagedRegistrar : IPlayerOnDamagedRegistrar
+    public class PlayerOnDamagedRegistrarTutorial : IPlayerOnDamagedRegistrar
     {
-        readonly IrritatedValue _irritatedValue;
         readonly PlayerAttackedCounter _playerAttackedCounter;
-        readonly CommentSpawner _commentSpawner;
         
-        public PlayerOnDamagedRegistrar
+        public PlayerOnDamagedRegistrarTutorial
         (
-            IrritatedValue irritatedValue
-            , PlayerAttackedCounter playerAttackedCounter
-            , CommentSpawner commentSpawner
+             PlayerAttackedCounter playerAttackedCounter
         )
         {
-            _irritatedValue = irritatedValue;
             _playerAttackedCounter = playerAttackedCounter;
-            _commentSpawner = commentSpawner;
         }
         
         public void OnPlayerDamagedEvent
@@ -32,14 +25,6 @@ namespace Daipan.Player.Scripts
             , List<AbstractPlayerViewMono?> playerViewMonos
         )
         {
-            // Domain
-            _irritatedValue.IncreaseValue(args.DamageValue);
-
-            // AntiComment
-            _playerAttackedCounter.CountUp();
-            if (_playerAttackedCounter.IsOverThreshold)
-                _commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
-
             // View
             foreach (var playerViewMono in playerViewMonos)
             {
