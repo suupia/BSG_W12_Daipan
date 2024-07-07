@@ -35,7 +35,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
     [Serializable]
     public sealed class EnemySpawnParam
     {
-        [Header("敵の生成割合 (相対的に指定可)")] [Min(0)] public float spawnRatio;
+        [Header("敵の生成割合 (相対的に指定可)")] [Min(0)] public double spawnRatio;
 
         [Header("台パンの影響を受けるイライラ度の閾値")] [Min(0)]
         public int daipanThreshold;

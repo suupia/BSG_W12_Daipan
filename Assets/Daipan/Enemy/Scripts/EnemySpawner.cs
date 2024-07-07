@@ -62,22 +62,21 @@ namespace Daipan.Enemy.Scripts
 
         void SpawnEnemy()
         {
-            var tuple = GetSpawnedPositionRandom();
-            var spawnPosition = new Vector3 { x = tuple.spawnedPos.x, y = tuple.spawnedPos.y + Random.Range(-_spawnRandomPositionY, _spawnRandomPositionY) };
+            var spawnPosition = GetRandomSpawnPosition(_enemySpawnPoint);
+            var randomSpawnPosition = new Vector3 { x = spawnPosition.x, y = spawnPosition.y + Random.Range(-_spawnRandomPositionY, _spawnRandomPositionY) };
             var enemyMonoPrefab = _enemyMonoLoader.Load();
-            var enemyMonoObject = _container.Instantiate(enemyMonoPrefab, spawnPosition, Quaternion.identity);
-            var enemyMono = _enemyBuilder.Build(tuple.enemyEnum,enemyMonoObject);
+            var enemyMonoObject = _container.Instantiate(enemyMonoPrefab, randomSpawnPosition, Quaternion.identity);
+            var enemyMono = _enemyBuilder.Build(enemyMonoObject);
             _enemyCluster.Add(enemyMono);
         }
 
-        (Vector3 spawnedPos, EnemyEnum enemyEnum) GetSpawnedPositionRandom()
+        static Vector3 GetRandomSpawnPosition(IEnemySpawnPoint enemySpawnPoint)
         {
-            var positions = _enemySpawnPoint.GetEnemySpawnedPointXs()
-                .Zip(_enemySpawnPoint.GetEnemySpawnedPointYs(), (x, y) => new Vector3(x.x, y.y))
+            var positions = enemySpawnPoint.GetEnemySpawnedPointXs()
+                .Zip(enemySpawnPoint.GetEnemySpawnedPointYs(), (x, y) => new Vector3(x.x, y.y))
                 .ToList();
-            var enums = _enemySpawnPoint.GetEnemySpawnedEnemyEnums();
-            var randomIndex = Randoms.RandomByRatios(_enemySpawnPoint.GetEnemySpawnRatios(), Random.value);
-            return (positions[randomIndex], enums[randomIndex]);
+            var randomIndex = Randoms.RandomByRatios(enemySpawnPoint.GetEnemySpawnRatios(), Random.value);
+            return positions[randomIndex];
         }
     }
 }

@@ -61,7 +61,7 @@ namespace Daipan.Enemy.Scripts
         {
             var enemyMonoPrefab = _enemyMonoLoader.Load();
             var enemyMonoObject = _container.Instantiate(enemyMonoPrefab, spawnPosition, Quaternion.identity);
-            var enemyMono = _enemyBuilder.Build(enemyEnum,enemyMonoObject);
+            var enemyMono = _enemyBuilder.Build(enemyMonoObject);
             _enemyCluster.Add(enemyMono);
         }
 
