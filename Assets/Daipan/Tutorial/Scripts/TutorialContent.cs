@@ -185,7 +185,7 @@ namespace Daipan.Tutorial.Scripts
             Debug.Log("Tutorial: Defeat the red enemy...");
             _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildRedEnemyTutorial(this));
 
-            _enemySpawnerTutorial.SpawnRedEnemy();
+            _enemySpawnerTutorial.SpawnEnemyByType(EnemyEnum.Red);
 
 
             // Debug
@@ -195,33 +195,45 @@ namespace Daipan.Tutorial.Scripts
                     Debug.Log($"IsSuccess = {IsSuccess}");
                 }));
         }
-        
-        public void SetIsSuccess(bool isSuccess)
-        {
-            IsSuccess = isSuccess;
-            _speechEventManager.MoveNext();
-        }
 
         public override bool IsCompleted()
         {
             return _speechEventManager.IsEnd();
         }
+
+        public void SetIsSuccess(bool isSuccess)
+        {
+            IsSuccess = isSuccess;
+            _speechEventManager.MoveNext();
+        }
     }
 
-    public class SequentialEnemyTutorial : ITutorialContent
+    public class SequentialEnemyTutorial : AbstractTutorialContent
     {
-        bool _completed = false;
+        public bool IsSuccess { get; private set; }
 
-        public void Execute()
+        readonly SpeechEventManager _speechEventManager;
+
+        public SequentialEnemyTutorial(SpeechEventManager speechEventManager)
         {
-            Debug.Log("Tutorial: Defeat enemies in sequence...");
-            // Logic for this step
-            if (Input.GetKeyDown(KeyCode.T)) _completed = true;
+            _speechEventManager = speechEventManager;
         }
 
-        public bool IsCompleted()
+        public override void Execute()
         {
-            return _completed;
+            Debug.Log("Tutorial: Defeat enemies in sequence...");
+           _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildSequentialEnemyTutorial(this));
+           
+           
+        }
+
+        public override bool IsCompleted()
+        {
+            return false;
+        }
+        public void SetIsSuccess(bool isSuccess)
+        {
+            IsSuccess = isSuccess;
         }
     }
 

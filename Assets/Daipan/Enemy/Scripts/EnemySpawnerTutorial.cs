@@ -45,7 +45,7 @@ namespace Daipan.Enemy.Scripts
             _enemyBuilder = enemyBuilder;
         }
 
-        public void SpawnRedEnemy()
+        public void SpawnEnemyByType(EnemyEnum enemyEnum)
         {
             var spawnPosition = GetSpawnedPositions().LastOrDefault();
             if (spawnPosition == null)
@@ -54,9 +54,8 @@ namespace Daipan.Enemy.Scripts
                 return;
             }
             Debug.Log("Spawn Red Enemy");
-            SpawnEnemy(spawnPosition, EnemyEnum.Red);
+            SpawnEnemy(spawnPosition,enemyEnum);
         }
-
 
         void SpawnEnemy(Vector3 spawnPosition, EnemyEnum enemyEnum)
         {

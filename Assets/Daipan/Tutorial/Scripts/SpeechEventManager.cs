@@ -47,29 +47,17 @@ namespace Daipan.Tutorial.Scripts
     {
         ISpeechEvent? NextEvent { get; set; }
 
-        public SequentialEvent(
-            int id
-            ,string message
-            ,SpeechEventEnum speechEventEnum
-            )
-        {
-            Id = id;
-            Message = message;
-            SpeechEventEnum = speechEventEnum;
-            OnMoveAction = () => true;
-        }
-        
-        public SequentialEvent(
-            int id
-            ,string message
-            ,SpeechEventEnum speechEventEnum
-            ,Func<bool> onMoveAction
-            )
+        public SequentialEvent(int id, string message, SpeechEventEnum speechEventEnum, Func<bool> onMoveAction)
         {
             Id = id;
             Message = message;
             SpeechEventEnum = speechEventEnum;
             OnMoveAction = onMoveAction;
+        }
+
+        public SequentialEvent(int id, string message, SpeechEventEnum speechEventEnum)
+            : this(id, message, speechEventEnum, () => true)
+        {
         }
 
 
@@ -107,7 +95,11 @@ namespace Daipan.Tutorial.Scripts
             OnMoveAction = onMoveAction;
             Condition = condition;
         }
-        
+        public ConditionalEvent(int id, string message, SpeechEventEnum speechEventEnum, Func<bool> condition)
+            : this(id, message, speechEventEnum, () => true, condition)
+        {
+        }
+ 
         public override (bool, ISpeechEvent) MoveNext()
         {
             var result = OnMoveAction();
@@ -176,6 +168,27 @@ namespace Daipan.Tutorial.Scripts
                             return true;
                         }
                         ),
+                    new EndEvent(),
+                };
+            
+            speechEvents[0].SetNextEvent(speechEvents[1]);
+            speechEvents[1].SetNextEvent(speechEvents[2], speechEvents[3]);
+            speechEvents[2].SetNextEvent(speechEvents[4]); // Success path
+            speechEvents[3].SetNextEvent(speechEvents[1]); // Failure path, retry
+            return speechEvents[0]; 
+        }
+        
+        public static ISpeechEvent BuildSequentialEnemyTutorial(
+            SequentialEnemyTutorial sequentialEnemyTutorial
+        )
+        {
+            List<ISpeechEvent> speechEvents =
+                new List<ISpeechEvent>
+                {
+                    new SequentialEvent(0, "今度はたくさんの敵が来たね！", SpeechEventEnum.Listening),
+                    new ConditionalEvent(1, "対応するボタンを押そう！", SpeechEventEnum.Practical,() => sequentialEnemyTutorial.IsSuccess == true),
+                    new SequentialEvent(2, "君、配信の才能あるよ！", SpeechEventEnum.Listening),
+                    new SequentialEvent(3, "本番はうまくいくよ！がんばろう！", SpeechEventEnum.Listening),
                     new EndEvent(),
                 };
             
