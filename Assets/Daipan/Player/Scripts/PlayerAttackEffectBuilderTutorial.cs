@@ -21,25 +21,22 @@ namespace Daipan.Player.Scripts
         readonly IPlayerParamDataContainer _playerParamDataContainer;
         readonly EnemyCluster _enemyCluster;
         readonly EnemyTotemOnAttack _enemyTotemOnAttack;
-        readonly WaveState _waveState;
-        readonly IPlayerAntiCommentParamData _playerAntiCommentParamData;
         readonly RedEnemyTutorial _redEnemyTutorial;
+        readonly TutorialFacilitator _tutorialFacilitator; 
 
         public PlayerAttackEffectBuilderTutorial(
             IPlayerParamDataContainer playerParamDataContainer
             ,EnemyCluster enemyCluster
             ,EnemyTotemOnAttack enemyTotemOnAttack
-            ,WaveState waveState
-            ,IPlayerAntiCommentParamData playerAntiCommentParamData
             ,RedEnemyTutorial redEnemyTutorial
+            ,TutorialFacilitator tutorialFacilitator 
         )
         {
             _playerParamDataContainer = playerParamDataContainer;
             _enemyCluster = enemyCluster;
             _enemyTotemOnAttack = enemyTotemOnAttack;
-            _waveState = waveState;
-            _playerAntiCommentParamData = playerAntiCommentParamData;
             _redEnemyTutorial = redEnemyTutorial;
+            _tutorialFacilitator = tutorialFacilitator;
         }
 
         public PlayerAttackEffectMono Build(PlayerAttackEffectMono effect, PlayerMono playerMono,
@@ -56,7 +53,8 @@ namespace Daipan.Player.Scripts
                     , playerColor
                     , args.EnemyMono
                     ,_enemyTotemOnAttack
-                    ,_redEnemyTutorial);
+                    ,_redEnemyTutorial
+                    ,_tutorialFacilitator);
             };
             return effect;
         }
@@ -69,6 +67,7 @@ namespace Daipan.Player.Scripts
             ,EnemyMono? enemyMono
             ,EnemyTotemOnAttack totemOnAttack
             ,RedEnemyTutorial redEnemyTutorial
+            ,TutorialFacilitator tutorialFacilitator 
             )
         {
             Debug.Log($"Attack enemyMono?.EnemyEnum: {enemyMono?.EnemyEnum}");
@@ -79,7 +78,7 @@ namespace Daipan.Player.Scripts
             if (enemyMono.EnemyEnum == EnemyEnum.Red)
             {
                 Debug.Log("RedEnemyTutorial_Success");
-                redEnemyTutorial.SetIsSuccess(playerColor == PlayerColor.Red);
+                if(tutorialFacilitator.CurrentStep is RedEnemyTutorial) redEnemyTutorial.SetIsSuccess(playerColor == PlayerColor.Red);
             }
             if (PlayerAttackModule.GetTargetEnemyEnum(playerColor).Contains(enemyMono.EnemyEnum))
             {

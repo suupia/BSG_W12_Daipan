@@ -7,8 +7,9 @@ using UnityEngine;
 
 namespace Daipan.Tutorial.Scripts
 {
-    internal class TutorialFacilitator : IUpdate
+    public class TutorialFacilitator : IUpdate
     {
+        public ITutorialContent? CurrentStep => _currentStep;
         readonly Queue<ITutorialContent> _tutorialSteps = new();
         ITutorialContent? _currentStep;
 
@@ -32,8 +33,6 @@ namespace Daipan.Tutorial.Scripts
                 _currentStep = _tutorialSteps.Dequeue();
                 _currentStep?.Execute();
             }
-
-
 
             if (_tutorialSteps.Count == 0 && _currentStep?.IsCompleted() == true)
                 Debug.Log("Tutorial completed!");
