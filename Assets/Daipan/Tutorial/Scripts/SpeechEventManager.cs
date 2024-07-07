@@ -210,6 +210,23 @@ namespace Daipan.Tutorial.Scripts
             speechEvents[0].SetNextEvent(speechEvents[1]);
             return speechEvents[0]; 
         }
+        
+        public static ISpeechEvent BuildShowAntiCommentsTutorial(
+            ShowAntiCommentsTutorial showAntiCommentsTutorial
+        )
+        {
+            List<ISpeechEvent> speechEvents =
+                new List<ISpeechEvent>
+                {
+                    new SequentialEvent(0, "うわ！？アンチだ...！？どうしよ...；；", SpeechEventEnum.Listening),
+                    new EndEvent(),
+                };
+            
+            speechEvents[0].SetNextEvent(speechEvents[1]);
+            return speechEvents[0]; 
+        }
+        
+        
     }
     
 

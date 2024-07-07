@@ -247,17 +247,14 @@ namespace Daipan.Tutorial.Scripts
     public class ShowWhiteCommentsTutorial : AbstractTutorialContent
     {
         readonly SpeechEventManager _speechEventManager;
-        readonly EnemySpawnerTutorial _enemySpawnerTutorial;
         readonly CommentSpawner _commentSpawner;
 
         public ShowWhiteCommentsTutorial(
             SpeechEventManager speechEventManager
-            , EnemySpawnerTutorial enemySpawnerTutorial
             , CommentSpawner commentSpawner
         )
         {
             _speechEventManager = speechEventManager;
-            _enemySpawnerTutorial = enemySpawnerTutorial;
             _commentSpawner = commentSpawner;
         }
 
@@ -285,21 +282,38 @@ namespace Daipan.Tutorial.Scripts
         }
     }
 
-    public class ShowAntiComments : ITutorialContent
+    public class ShowAntiCommentsTutorial : AbstractTutorialContent
     {
-        bool _completed = false;
-
-        public void Execute()
+        readonly SpeechEventManager _speechEventManager;
+        readonly CommentSpawner _commentSpawner;
+        public ShowAntiCommentsTutorial(
+            SpeechEventManager speechEventManager
+            , CommentSpawner commentSpawner
+        )
+        {
+            _speechEventManager = speechEventManager;
+            _commentSpawner = commentSpawner;
+        }
+        public override void Execute()
         {
             Debug.Log("Showing anti-comments with sound effects...");
-            Debug.Log("Anger gauge animation...");
-            // Logic for this step
-            if (Input.GetKeyDown(KeyCode.T)) _completed = true;
+            _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildShowAntiCommentsTutorial(this));
+            
+            float intervalSec = 0.5f; // スポーンの間隔
+            int commentCount = 3;
+
+            Disposables.Add(Observable.Interval(System.TimeSpan.FromSeconds(intervalSec))
+                .Take(commentCount)
+                .Subscribe(
+                    _ => { _commentSpawner.SpawnCommentByType(CommentEnum.Spiky); },
+                    _ => { Debug.Log( "Comment spawn completed"); }
+                )
+            );
         }
 
-        public bool IsCompleted()
+        public override bool IsCompleted()
         {
-            return _completed;
+            return _speechEventManager.IsEnd();
         }
     }
 
@@ -311,6 +325,8 @@ namespace Daipan.Tutorial.Scripts
         public void Execute()
         {
             Debug.Log("Displaying special cutscene...");
+            Debug.Log("Anger gauge animation...");
+
             // 特別なカットに切り替える
             // Logic for this step
             if (Input.GetKeyDown(KeyCode.T)) _completed = true;
