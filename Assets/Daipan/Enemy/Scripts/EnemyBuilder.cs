@@ -50,7 +50,7 @@ namespace Daipan.Enemy.Scripts
         public EnemyMono Build(EnemyMono enemyMono)
         {
             var enemyEnum = 
-                IsSpawnBoss(_enemyLevelDesignParamData, _enemyTimeLineParamContainer) 
+                IsSpawnBoss(_enemyTimeLineParamContainer) 
                     ? DecideRandomEnemyType (_enemyParamsManager, x => x.IsBoss() == true)
                     : IsSpawnSpecial( _enemyTimeLineParamContainer) 
                         ? DecideRandomEnemyType (_enemyParamsManager, x => x.IsSpecial() == true)
@@ -107,20 +107,11 @@ namespace Daipan.Enemy.Scripts
         }
 
         static bool IsSpawnBoss(
-            EnemyLevelDesignParamData enemyLevelDesignParamData
-            , IEnemyTimeLineParamContainer enemyTimeLineParamContainer
+            IEnemyTimeLineParamContainer enemyTimeLineParamContainer
             ) 
         {
-            // Bossが出現する条件1
-            if (enemyLevelDesignParamData.GetCurrentKillAmount() >= enemyLevelDesignParamData.GetSpawnBossAmount())
-            {
-                enemyLevelDesignParamData.SetCurrentKillAmount(0);
-                return true;
-            }
-
-            // Bossが出現する条件2
+            // Bossが出現する条件
             if (Random.value < enemyTimeLineParamContainer.GetEnemyTimeLineParamData().GetSpawnBossPercent() / 100.0) return true;
-
             return false;
         }
 
