@@ -5,6 +5,7 @@ using Daipan.Comment.Scripts;
 using Daipan.Enemy.Scripts;
 using Daipan.InputSerial.Scripts;
 using Daipan.Option.Scripts;
+using Daipan.Stream.Scripts;
 using Daipan.Streamer.Scripts;
 using Daipan.Tutorial.Interfaces;
 using Daipan.Tutorial.MonoScripts;
@@ -125,7 +126,8 @@ namespace Daipan.Tutorial.Scripts
 
         public override void Execute()
         {
-            Disposables.Add(Observable.EveryUpdate()
+            Disposables.Add(
+                Observable.EveryUpdate()
                 .Where(_ => !Completed)
                 .Subscribe(_ =>
                 {
@@ -197,6 +199,7 @@ namespace Daipan.Tutorial.Scripts
 
         public void SetIsSuccess(bool isSuccess)
         {
+            Debug.Log($"RedEnemyTutorial isSuccess: {isSuccess}");
             IsSuccess = isSuccess;
             _speechEventManager.MoveNext();
         }
@@ -207,7 +210,6 @@ namespace Daipan.Tutorial.Scripts
         readonly SpeechEventManager _speechEventManager;
         readonly EnemySpawnerTutorial _enemySpawnerTutorial;
         
-
         public SequentialEnemyTutorial(
         SpeechEventManager speechEventManager
         , EnemySpawnerTutorial enemySpawnerTutorial
@@ -225,7 +227,8 @@ namespace Daipan.Tutorial.Scripts
            float intervalSec = 1f; // スポーンの間隔
            var enemyEnums = new Queue<EnemyEnum>(new []{EnemyEnum.Blue, EnemyEnum.Yellow, EnemyEnum.Red});
 
-           Disposables.Add(Observable.Interval(TimeSpan.FromSeconds(intervalSec))
+           Disposables.Add(
+               Observable.Interval(TimeSpan.FromSeconds(intervalSec))
                .Take(enemyEnums.Count)
                .Subscribe(
                    _ => { _enemySpawnerTutorial.SpawnEnemyByType(enemyEnums.Dequeue()); },
@@ -271,7 +274,8 @@ namespace Daipan.Tutorial.Scripts
             int commentCount = 3;
             float delaySec = 2.0f; // すべてのコメントが表示された後の待機時間 
 
-            Disposables.Add(Observable.Interval(System.TimeSpan.FromSeconds(intervalSec))
+            Disposables.Add(
+                Observable.Interval(System.TimeSpan.FromSeconds(intervalSec))
                 .Take(commentCount)
                 .Subscribe(
                     _ => { _commentSpawner.SpawnCommentByType(CommentEnum.Normal); },
@@ -319,7 +323,8 @@ namespace Daipan.Tutorial.Scripts
             int commentCount = 3;
             float delaySec = 2.0f; // すべてのコメントが表示された後の待機時間 
 
-            Disposables.Add(Observable.Interval(System.TimeSpan.FromSeconds(intervalSec))
+            Disposables.Add(
+                Observable.Interval(System.TimeSpan.FromSeconds(intervalSec))
                 .Take(commentCount)
                 .Subscribe(
                     _ => { _commentSpawner.SpawnCommentByType(CommentEnum.Spiky); },
@@ -334,7 +339,6 @@ namespace Daipan.Tutorial.Scripts
                             })
                             .AddTo(Disposables);;
                     }
-                    
                 )
             );
         }
@@ -346,23 +350,45 @@ namespace Daipan.Tutorial.Scripts
     }
 
 
-    public class DaipanCutscene : ITutorialContent
+    public class DaipanCutscene : AbstractTutorialContent
     {
-        bool _completed = false;
+        readonly SpeechEventManager _speechEventManager;
+        readonly IrritatedValue _irritatedValue;
+        bool CanMoveNext { get; set; }
+        public DaipanCutscene(
+            SpeechEventManager speechEventManager
+            , IrritatedValue irritatedValue 
+        )
+        {
+            _speechEventManager = speechEventManager;
+            _irritatedValue = irritatedValue;
+        }
 
-        public void Execute()
+        public override void Execute()
         {
             Debug.Log("Displaying special cutscene...");
             Debug.Log("Anger gauge animation...");
-
-            // 特別なカットに切り替える
-            // Logic for this step
-            if (Input.GetKeyDown(KeyCode.T)) _completed = true;
+            _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildShowDaipanCutsceneTutorial(this));
+            
+            const float fillRatioPerSec = 0.2f;
+            Disposables.Add(
+                Observable.EveryUpdate()
+                    .Subscribe(
+                        _ =>
+                        {
+                           _irritatedValue.IncreaseValue(fillRatioPerSec * _irritatedValue.MaxValue * Time.deltaTime); 
+                        },
+                        _ =>
+                        {
+                            Debug.Log($"IrritatedValue: {_irritatedValue.Value}"); 
+                        }
+                    )
+            );
         }
 
-        public bool IsCompleted()
+        public override bool IsCompleted()
         {
-            return _completed;
+            return _speechEventManager.IsEnd();
         }
     }
 
