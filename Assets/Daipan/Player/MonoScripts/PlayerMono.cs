@@ -27,19 +27,16 @@ namespace Daipan.Player.MonoScripts
         {
             _playerInput.Update();
 
-            // todo : 攻撃やHPの状況に応じて、AbstractPlayerViewMonoのメソッドを呼ぶ
             foreach (var playerViewMono in playerViewMonos) playerViewMono?.Idle();
         }
 
 
         [Inject]
         public void Initialize(
-            PlayerAttackedCounter playerAttackedCounter
-            , IrritatedValue irritatedValue
-            , CommentSpawner commentSpawner
-            , WaveState waveState
+             WaveState waveState
             , IPlayerHpParamData playerHpParamData
             , IPlayerInput playerInput
+            , IPlayerOnDamagedRegistrar playerOnDamagedRegistrar
         )
         {
             _playerHpParamData = playerHpParamData;
@@ -49,44 +46,12 @@ namespace Daipan.Player.MonoScripts
 
             EnemyAttackModule.AttackEvent += (sender, args) =>
             {
-                OnPlayerDamagedEvent 
-                (
-                    args
-                    , irritatedValue
-                    , playerAttackedCounter
-                    , commentSpawner
-                    , playerViewMonos
-                );
+                playerOnDamagedRegistrar.OnPlayerDamagedEvent(args, playerViewMonos);
             };
             playerInput.SetPlayerMono(this, playerViewMonos);
             _playerInput = playerInput;
         }
 
-        static void OnPlayerDamagedEvent
-        (
-            EnemyDamageArgs args
-            , IrritatedValue irritatedValue
-            , PlayerAttackedCounter playerAttackedCounter
-            , CommentSpawner commentSpawner
-            , List<AbstractPlayerViewMono?> playerViewMonos
-            )
-        {
-            // Domain
-            irritatedValue.IncreaseValue(args.DamageValue);
-
-            // AntiComment
-            playerAttackedCounter.CountUp();
-            if (playerAttackedCounter.IsOverThreshold)
-                commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
-
-            // View
-            foreach (var playerViewMono in playerViewMonos)
-            {
-                if (playerViewMono == null) continue;
-                if (PlayerAttackModule.GetTargetEnemyEnum(playerViewMono.playerColor).Contains(args.EnemyEnum))
-                    playerViewMono.Damage();
-            }
-        }
 
         public int MaxHp => _playerHpParamData.GetMaxHp();
     }

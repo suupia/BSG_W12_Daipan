@@ -9,14 +9,11 @@ namespace Daipan.Player.Scripts
 {
     public class PlayerOnDamagedRegistrarTutorial : IPlayerOnDamagedRegistrar
     {
-        readonly PlayerAttackedCounter _playerAttackedCounter;
         
         public PlayerOnDamagedRegistrarTutorial
         (
-             PlayerAttackedCounter playerAttackedCounter
         )
         {
-            _playerAttackedCounter = playerAttackedCounter;
         }
         
         public void OnPlayerDamagedEvent
