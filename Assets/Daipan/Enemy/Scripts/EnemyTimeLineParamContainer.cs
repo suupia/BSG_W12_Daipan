@@ -17,10 +17,10 @@ namespace Daipan.Enemy.Scripts
         readonly StreamTimer _streamTimer;
         [Inject]
         public EnemyTimeLineParamContainer(
-            EnemyParamManager enemyParamManager,
+            EnemyParamsManager enemyParamsManager,
             StreamTimer streamTimer)
         {
-            _enemyTimeLineParamDatas = CreateEnemyTimeLineParamData(enemyParamManager);
+            _enemyTimeLineParamDatas = CreateEnemyTimeLineParamData(enemyParamsManager);
             _streamTimer = streamTimer;
         }
 
@@ -42,18 +42,18 @@ namespace Daipan.Enemy.Scripts
                 .OrderByDescending(e => e.e.GetStartTime()).First();
         } 
 
-        static List<EnemyTimeLineParamData> CreateEnemyTimeLineParamData(EnemyParamManager enemyParamManager)
+        static List<EnemyTimeLineParamData> CreateEnemyTimeLineParamData(EnemyParamsManager enemyParamsManager)
         {
             // [Precondition]
-            if (enemyParamManager.enemyTimeLineParams.Count == 0)
+            if (enemyParamsManager.enemyTimeLineParams.Count == 0)
             {
                 Debug.LogWarning("EnemyTimeLineParams.Count is 0");
-                enemyParamManager.enemyTimeLineParams.Add(new EnemyTimeLineParam());
+                enemyParamsManager.enemyTimeLineParams.Add(new EnemyTimeLineParam());
             }
 
 
             var enemyTimeLineParams = new List<EnemyTimeLineParamData>();
-            foreach (var enemyTimeLineParam in enemyParamManager.enemyTimeLineParams)
+            foreach (var enemyTimeLineParam in enemyParamsManager.enemyTimeLineParams)
                 enemyTimeLineParams.Add(new EnemyTimeLineParamData(enemyTimeLineParam));
             return enemyTimeLineParams;
         }
