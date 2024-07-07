@@ -201,7 +201,13 @@ namespace Daipan.Tutorial.Scripts
         {
             Debug.Log($"RedEnemyTutorial isSuccess: {isSuccess}");
             IsSuccess = isSuccess;
-            _speechEventManager.MoveNext();
+            // これで強制的に次のスピーチに進む（危険かも）
+            while (!_speechEventManager.IsEnd())
+            {
+                _speechEventManager.MoveNext();
+                Debug.Log($"RedEnemyTutorial MoveNext _speechEventManager.CurrentEvent.Message: {_speechEventManager.CurrentEvent.Message}");
+            }
+
         }
     }
 
@@ -245,9 +251,15 @@ namespace Daipan.Tutorial.Scripts
         {
             return _speechEventManager.IsEnd();
         }
+
         public void MoveNextSpeech()
         {
-            _speechEventManager.MoveNext();
+            // これで強制的に次のスピーチに進む（危険かも）
+            while (!_speechEventManager.IsEnd())
+            {
+                _speechEventManager.MoveNext();
+                Debug.Log($"RedEnemyTutorial MoveNext _speechEventManager.CurrentEvent.Message: {_speechEventManager.CurrentEvent.Message}");
+            }
         }
     }
 
