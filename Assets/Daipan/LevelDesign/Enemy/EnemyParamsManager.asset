@@ -15,7 +15,7 @@ MonoBehaviour:
   enemyLevelDesignParam:
     spawnBossAmount: 20
     increaseIrritatedValueByBoss: 30
-    increaseViewerOnEnemyKill: 5
+    increaseViewerOnEnemyKill: 10
     currentKillAmount: 8
   enemyParams:
   - enemyEnum: 1
