@@ -17,9 +17,12 @@ namespace Daipan.Enemy.LevelDesign.Scripts
         public double moveSpeedRate = 1f;
 
         [Header("Bossの出現確率(0%～100%)")] [Range(0f, 100f)]
-        public float spawnBossPercent = 10f;
+        public double spawnBossPercent = 10f;
         
         [Header("Specialの出現確率(0%～100%)")] [Range(0f, 100f)]
-        public float spawnSpecialPercent = 10f;
+        public double spawnSpecialPercent = 10f;
+        
+        [Header("Totemの出現確率(0%～100%)")] [Range(0f, 100f)]
+        public double spawnTotemPercent = 10f;
     }
 }
