@@ -99,7 +99,7 @@ MonoBehaviour:
       daipanThreshold: 0
       daipanProbability: 0
     enemyRewardParam:
-      irritationAfterKill: 30
+      irritationAfterKill: 100
     enemyAnimatorParam:
       animatorController: {fileID: 0}
       bodyColor: {r: 1, g: 0.8135679, b: 0, a: 1}
