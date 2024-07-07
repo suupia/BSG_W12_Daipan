@@ -179,7 +179,7 @@ namespace Daipan.Tutorial.Scripts
             _speechEventManager = speechEventManager;
             _enemySpawnerTutorial = enemySpawnerTutorial;
         }
-        public bool IsSuccess { get; private set; }
+        public bool IsSuccess { get; private set; }  // UICatのSpeechEventの分岐で使用
         public override void Execute()
         {
             Debug.Log("Tutorial: Defeat the red enemy...");
@@ -188,12 +188,12 @@ namespace Daipan.Tutorial.Scripts
             _enemySpawnerTutorial.SpawnEnemyByType(EnemyEnum.Red);
 
 
-            // Debug
-            Disposables.Add(Observable.EveryUpdate()
-                .Subscribe(_ =>
-                {
-                    Debug.Log($"IsSuccess = {IsSuccess}");
-                }));
+            // // Debug
+            // Disposables.Add(Observable.EveryUpdate()
+            //     .Subscribe(_ =>
+            //     {
+            //         Debug.Log($"IsSuccess = {IsSuccess}");
+            //     }));
         }
 
         public override bool IsCompleted()
@@ -210,8 +210,6 @@ namespace Daipan.Tutorial.Scripts
 
     public class SequentialEnemyTutorial : AbstractTutorialContent
     {
-        public bool IsSuccess { get; private set; }
-
         readonly SpeechEventManager _speechEventManager;
         readonly EnemySpawnerTutorial _enemySpawnerTutorial;
 
@@ -234,10 +232,12 @@ namespace Daipan.Tutorial.Scripts
 
            Disposables.Add(Observable.Interval(System.TimeSpan.FromSeconds(intervalSec))
                .Take(enemyEnums.Count)
-               .Subscribe(_ =>
-               {
-                  _enemySpawnerTutorial.SpawnEnemyByType(enemyEnums.Dequeue()); 
-               }));
+               .Subscribe(
+                   _ => { _enemySpawnerTutorial.SpawnEnemyByType(enemyEnums.Dequeue()); },
+                   _ => { Debug.Log("Enemy spawn completed"); }
+               )
+           );
+           
         }
 
         public override bool IsCompleted()
@@ -246,7 +246,7 @@ namespace Daipan.Tutorial.Scripts
         }
         public void SetIsSuccess(bool isSuccess)
         {
-            IsSuccess = isSuccess;
+            _speechEventManager.MoveNext();
         }
     }
 
