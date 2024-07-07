@@ -124,7 +124,7 @@ namespace Daipan.Tutorial
             builder.Register<UICatIntroduce>(Lifetime.Scoped).As<ITutorialContent>();
             builder.Register<RedEnemyTutorial>(Lifetime.Scoped).As<ITutorialContent>().AsSelf();
             builder.Register<SequentialEnemyTutorial>(Lifetime.Scoped).As<ITutorialContent>();
-            builder.Register<ShowWhiteComments>(Lifetime.Scoped).As<ITutorialContent>();
+            builder.Register<ShowWhiteCommentsTutorial>(Lifetime.Scoped).As<ITutorialContent>();
             builder.Register<ShowAntiComments>(Lifetime.Scoped).As<ITutorialContent>();
             builder.Register<DaipanCutscene>(Lifetime.Scoped).As<ITutorialContent>();
             builder.Register<CatSpeaksAfterDaipan>(Lifetime.Scoped).As<ITutorialContent>();

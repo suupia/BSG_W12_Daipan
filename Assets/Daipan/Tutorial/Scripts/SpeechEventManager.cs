@@ -196,6 +196,20 @@ namespace Daipan.Tutorial.Scripts
             speechEvents[2].SetNextEvent(speechEvents[3]); 
             return speechEvents[0]; 
         }
+        public static ISpeechEvent BuildShowWitheCommentsTutorial(
+            ShowWhiteCommentsTutorial showWhiteCommentsTutorial
+        )
+        {
+            List<ISpeechEvent> speechEvents =
+                new List<ISpeechEvent>
+                {
+                    new SequentialEvent(0, "配信盛り上がっているネ...！", SpeechEventEnum.Listening),
+                    new EndEvent(),
+                };
+            
+            speechEvents[0].SetNextEvent(speechEvents[1]);
+            return speechEvents[0]; 
+        }
     }
     
 

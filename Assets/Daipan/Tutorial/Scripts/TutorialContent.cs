@@ -1,6 +1,7 @@
 #nullable enable
 using System;
 using System.Collections.Generic;
+using Daipan.Comment.Scripts;
 using Daipan.Enemy.Scripts;
 using Daipan.InputSerial.Scripts;
 using Daipan.Option.Scripts;
@@ -187,13 +188,6 @@ namespace Daipan.Tutorial.Scripts
 
             _enemySpawnerTutorial.SpawnEnemyByType(EnemyEnum.Red);
 
-
-            // // Debug
-            // Disposables.Add(Observable.EveryUpdate()
-            //     .Subscribe(_ =>
-            //     {
-            //         Debug.Log($"IsSuccess = {IsSuccess}");
-            //     }));
         }
 
         public override bool IsCompleted()
@@ -242,7 +236,7 @@ namespace Daipan.Tutorial.Scripts
 
         public override bool IsCompleted()
         {
-            return false;
+            return  _speechEventManager.IsEnd();
         }
         public void SetIsSuccess(bool isSuccess)
         {
@@ -250,20 +244,44 @@ namespace Daipan.Tutorial.Scripts
         }
     }
 
-    public class ShowWhiteComments : ITutorialContent
+    public class ShowWhiteCommentsTutorial : AbstractTutorialContent
     {
-        bool _completed = false;
+        readonly SpeechEventManager _speechEventManager;
+        readonly EnemySpawnerTutorial _enemySpawnerTutorial;
+        readonly CommentSpawner _commentSpawner;
 
-        public void Execute()
+        public ShowWhiteCommentsTutorial(
+            SpeechEventManager speechEventManager
+            , EnemySpawnerTutorial enemySpawnerTutorial
+            , CommentSpawner commentSpawner
+        )
         {
-            Debug.Log("Displaying white comments...");
-            // Logic for this step
-            if (Input.GetKeyDown(KeyCode.T)) _completed = true;
+            _speechEventManager = speechEventManager;
+            _enemySpawnerTutorial = enemySpawnerTutorial;
+            _commentSpawner = commentSpawner;
         }
 
-        public bool IsCompleted()
+        public override void Execute()
         {
-            return _completed;
+            Debug.Log("Displaying white comments...");
+            _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildShowWitheCommentsTutorial(this));
+           
+            float intervalSec = 0.5f; // スポーンの間隔
+            int commentCount = 3;
+
+            Disposables.Add(Observable.Interval(System.TimeSpan.FromSeconds(intervalSec))
+                .Take(commentCount)
+                .Subscribe(
+                    _ => { _commentSpawner.SpawnCommentByType(CommentEnum.Normal); },
+                    _ => { Debug.Log( "Comment spawn completed"); }
+                )
+            );
+            
+        }
+
+        public override bool IsCompleted()
+        {
+            return _speechEventManager.IsEnd();
         }
     }
 
