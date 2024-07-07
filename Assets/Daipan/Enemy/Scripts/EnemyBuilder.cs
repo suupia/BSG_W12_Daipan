@@ -1,4 +1,5 @@
 #nullable enable
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Daipan.Comment.Scripts;
@@ -48,8 +49,12 @@ namespace Daipan.Enemy.Scripts
 
         public EnemyMono Build(EnemyMono enemyMono)
         {
-            var enemyEnum = IsSpawnBoss(_enemyLevelDesignParamData, _enemyTimeLineParamContainer) 
-                ? DecideRandomEnemyBossType(_enemyParamsManager) : DecideRandomEnemyNormalType(_enemyParamsManager);
+            var enemyEnum = 
+                IsSpawnBoss(_enemyLevelDesignParamData, _enemyTimeLineParamContainer) 
+                    ? DecideRandomEnemyType (_enemyParamsManager, x => x.IsBoss() == true)
+                    : IsSpawnSpecial( _enemyTimeLineParamContainer) 
+                        ? DecideRandomEnemyType (_enemyParamsManager, x => x.IsSpecial() == true)
+                        : DecideRandomEnemyType (_enemyParamsManager, x => x.IsBoss() != true && x.IsSpecial() != true);
 
             Debug.Log($"enemyEnum: {enemyEnum}");
             var enemyParamData = _enemyParamContainer.GetEnemyParamData(enemyEnum);
@@ -104,33 +109,30 @@ namespace Daipan.Enemy.Scripts
             , IEnemyTimeLineParamContainer enemyTimeLineParamContainer
             ) 
         {
-            // ボスが出現する条件1
+            // Bossが出現する条件1
             if (enemyLevelDesignParamData.GetCurrentKillAmount() >= enemyLevelDesignParamData.GetSpawnBossAmount())
             {
                 enemyLevelDesignParamData.SetCurrentKillAmount(0);
                 return true;
             }
 
-            // ボスが出現する条件2
+            // Bossが出現する条件2
             if (Random.value < enemyTimeLineParamContainer.GetEnemyTimeLineParamData().GetSpawnBossPercent() / 100.0) return true;
 
             return false;
         }
 
-        static EnemyEnum DecideRandomEnemyNormalType(EnemyParamsManager enemyParamsManager)
+        static bool IsSpawnSpecial(IEnemyTimeLineParamContainer enemyTimeLineParamContainer)
         {
-           List<(EnemyEnum EnemyEnum, double Ratio)> table =  enemyParamsManager.enemyParams
-                .Where(x => x.enemyEnum.IsBoss() != true)
-                .Select(x => (x.enemyEnum, x.enemySpawnParam.spawnRatio))
-                .ToList();
-           var randomIndex = Randoms.RandomByRatios(table.Select(x => x.Ratio).ToList(), Random.value);
-           return  table[randomIndex].EnemyEnum;
+            // Specialが出現する条件
+            if (Random.value < enemyTimeLineParamContainer.GetEnemyTimeLineParamData().GetSpawnSpecialPercent() / 100.0) return true;
+            return false;
         }
-        
-        static EnemyEnum DecideRandomEnemyBossType(EnemyParamsManager enemyParamsManager)
+
+        static EnemyEnum DecideRandomEnemyType(EnemyParamsManager enemyParamsManager, Func<EnemyEnum,bool> targetEnemyEnum)
         {
             List<(EnemyEnum EnemyEnum, double Ratio)> table =  enemyParamsManager.enemyParams
-                .Where(x => x.enemyEnum.IsBoss() == true)
+                .Where(x => targetEnemyEnum(x.enemyEnum))
                 .Select(x => (x.enemyEnum, x.enemySpawnParam.spawnRatio))
                 .ToList();
             var randomIndex = Randoms.RandomByRatios(table.Select(x => x.Ratio).ToList(), Random.value);
