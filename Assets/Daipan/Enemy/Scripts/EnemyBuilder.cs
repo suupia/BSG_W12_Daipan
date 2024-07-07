@@ -54,7 +54,9 @@ namespace Daipan.Enemy.Scripts
                     ? DecideRandomEnemyType (_enemyParamsManager, x => x.IsBoss() == true)
                     : IsSpawnSpecial( _enemyTimeLineParamContainer) 
                         ? DecideRandomEnemyType (_enemyParamsManager, x => x.IsSpecial() == true)
-                        : DecideRandomEnemyType (_enemyParamsManager, x => x.IsBoss() != true && x.IsSpecial() != true);
+                        : IsSpawnTotem( _enemyTimeLineParamContainer) 
+                            ? DecideRandomEnemyType (_enemyParamsManager, x => x.IsTotem() == true)
+                            : DecideRandomEnemyType (_enemyParamsManager, x => x.IsBoss() != true && x.IsSpecial() != true && x.IsTotem() != true);
 
             Debug.Log($"enemyEnum: {enemyEnum}");
             var enemyParamData = _enemyParamContainer.GetEnemyParamData(enemyEnum);
@@ -126,6 +128,13 @@ namespace Daipan.Enemy.Scripts
         {
             // Specialが出現する条件
             if (Random.value < enemyTimeLineParamContainer.GetEnemyTimeLineParamData().GetSpawnSpecialPercent() / 100.0) return true;
+            return false;
+        }
+        
+        static bool IsSpawnTotem(IEnemyTimeLineParamContainer enemyTimeLineParamContainer)
+        {
+            // Totemが出現する条件
+            if (Random.value < enemyTimeLineParamContainer.GetEnemyTimeLineParamData().GetSpawnTotemPercent() / 100.0) return true;
             return false;
         }
 

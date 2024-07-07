@@ -19,5 +19,6 @@ namespace Daipan.Enemy.Scripts
         public double GetMoveSpeedRate() => _enemyTimeLineParam.moveSpeedRate;
         public double GetSpawnBossPercent() => _enemyTimeLineParam.spawnBossPercent;
         public double GetSpawnSpecialPercent() => _enemyTimeLineParam.spawnSpecialPercent;
+        public double GetSpawnTotemPercent() => _enemyTimeLineParam.spawnTotemPercent;
     }
 }
