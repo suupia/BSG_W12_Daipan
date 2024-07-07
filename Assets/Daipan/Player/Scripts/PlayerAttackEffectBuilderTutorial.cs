@@ -21,8 +21,6 @@ namespace Daipan.Player.Scripts
         readonly IPlayerParamDataContainer _playerParamDataContainer;
         readonly EnemyCluster _enemyCluster;
         readonly EnemyTotemOnAttack _enemyTotemOnAttack;
-        readonly WaveState _waveState;
-        readonly IPlayerAntiCommentParamData _playerAntiCommentParamData;
         readonly RedEnemyTutorial _redEnemyTutorial;
         readonly TutorialFacilitator _tutorialFacilitator; 
 
@@ -30,8 +28,6 @@ namespace Daipan.Player.Scripts
             IPlayerParamDataContainer playerParamDataContainer
             ,EnemyCluster enemyCluster
             ,EnemyTotemOnAttack enemyTotemOnAttack
-            ,WaveState waveState
-            ,IPlayerAntiCommentParamData playerAntiCommentParamData
             ,RedEnemyTutorial redEnemyTutorial
             ,TutorialFacilitator tutorialFacilitator 
         )
@@ -39,8 +35,6 @@ namespace Daipan.Player.Scripts
             _playerParamDataContainer = playerParamDataContainer;
             _enemyCluster = enemyCluster;
             _enemyTotemOnAttack = enemyTotemOnAttack;
-            _waveState = waveState;
-            _playerAntiCommentParamData = playerAntiCommentParamData;
             _redEnemyTutorial = redEnemyTutorial;
             _tutorialFacilitator = tutorialFacilitator;
         }
