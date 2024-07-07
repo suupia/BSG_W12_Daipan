@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Daipan.Battle.scripts;
+using Daipan.Battle.Scripts;
 using Daipan.Enemy.Scripts;
 using Daipan.InputSerial.Scripts;
 using Daipan.Player.Interfaces;
@@ -48,24 +49,43 @@ namespace Daipan.Player.MonoScripts
 
             EnemyAttackModule.AttackEvent += (sender, args) =>
             {
-                // Domain
-                irritatedValue.IncreaseValue(args.DamageValue);
-
-                // AntiComment
-                playerAttackedCounter.CountUp();
-                if (playerAttackedCounter.IsOverThreshold)
-                    commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
-
-                // View
-                foreach (var playerViewMono in playerViewMonos)
-                {
-                    if (playerViewMono == null) continue;
-                    if (PlayerAttackModule.GetTargetEnemyEnum(playerViewMono.playerColor).Contains(args.EnemyEnum))
-                        playerViewMono.Damage();
-                }
+                OnPlayerDamagedEvent 
+                (
+                    args
+                    , irritatedValue
+                    , playerAttackedCounter
+                    , commentSpawner
+                    , playerViewMonos
+                );
             };
             playerInput.SetPlayerMono(this, playerViewMonos);
             _playerInput = playerInput;
+        }
+
+        static void OnPlayerDamagedEvent
+        (
+            EnemyDamageArgs args
+            , IrritatedValue irritatedValue
+            , PlayerAttackedCounter playerAttackedCounter
+            , CommentSpawner commentSpawner
+            , List<AbstractPlayerViewMono?> playerViewMonos
+            )
+        {
+            // Domain
+            irritatedValue.IncreaseValue(args.DamageValue);
+
+            // AntiComment
+            playerAttackedCounter.CountUp();
+            if (playerAttackedCounter.IsOverThreshold)
+                commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
+
+            // View
+            foreach (var playerViewMono in playerViewMonos)
+            {
+                if (playerViewMono == null) continue;
+                if (PlayerAttackModule.GetTargetEnemyEnum(playerViewMono.playerColor).Contains(args.EnemyEnum))
+                    playerViewMono.Damage();
+            }
         }
 
         public int MaxHp => _playerHpParamData.GetMaxHp();
