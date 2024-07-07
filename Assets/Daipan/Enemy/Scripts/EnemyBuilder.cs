@@ -124,7 +124,6 @@ namespace Daipan.Enemy.Scripts
                 .Select(x => (x.enemyEnum, x.enemySpawnParam.spawnRatio))
                 .ToList();
            var randomIndex = Randoms.RandomByRatios(table.Select(x => x.Ratio).ToList(), Random.value);
-           Debug.Log($"DecideRandomEnemyNormalType {string.Join(",", table)}");
            return  table[randomIndex].EnemyEnum;
         }
         
