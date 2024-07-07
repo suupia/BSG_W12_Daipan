@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   viewer:
     increaseNumberPerSecond: 100
-    decreaseNumberWhenIrradiated: 5
+    decreaseNumberWhenIrradiated: 50
   daipan:
     increaseNumberByDaipan: 10
     increaseNumberWhenExciting: 100
