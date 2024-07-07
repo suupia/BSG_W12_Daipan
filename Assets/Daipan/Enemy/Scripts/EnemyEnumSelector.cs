@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Daipan.Comment.Scripts;
 using Daipan.Enemy.Interfaces;
+using Daipan.Enemy.LevelDesign.Interfaces;
 using Daipan.Enemy.LevelDesign.Scripts;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Stream.Scripts;
@@ -12,7 +13,7 @@ using Random = UnityEngine.Random;
 
 namespace Daipan.Enemy.Scripts
 {
-    public class EnemyEnumSelector
+    public class EnemyEnumSelector : IEnemyEnumSelector
     {
         readonly EnemyParamsManager _enemyParamsManager;
         readonly EnemyLevelDesignParamData _enemyLevelDesignParamData;
