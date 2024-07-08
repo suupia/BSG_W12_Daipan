@@ -100,7 +100,7 @@ namespace Daipan.Enemy.Scripts
         void SpawnRedBoss(Vector3 spawnPosition)
         {
             const float subordinateSpawnIntervalSec = 0.3f;
-            const float bossSpawnDelaySec = 0.5f; 
+            const float bossSpawnDelaySec = 0.6f; 
             const int subordinateCount = 5;
             _disposable = Observable.Interval(TimeSpan.FromSeconds(subordinateSpawnIntervalSec))
                 .Take(subordinateCount)
@@ -111,6 +111,11 @@ namespace Daipan.Enemy.Scripts
                         Observable.Timer(TimeSpan.FromSeconds(bossSpawnDelaySec))
                             .Subscribe(_ => { SpawnEnemy(spawnPosition, EnemyEnum.RedBoss); });
                     });
+        }
+        
+        ~EnemySpawner()
+        {
+            _disposable?.Dispose();
         }
     }
 }
