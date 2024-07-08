@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyLevelDesignParam:
     increaseViewerOnEnemyKill: 5
-    currentKillAmount: 293
+    currentKillAmount: 355
   enemyParams:
   - enemyEnum: 1
     enemyAttackParam:
@@ -93,7 +93,7 @@ MonoBehaviour:
     enemyMoveParam:
       moveSpeedPerSec: 2
     enemySpawnParam:
-      spawnRatio: 20
+      spawnRatio: 2000000
       daipanThreshold: 0
       daipanProbability: 0
     enemyRewardParam:
@@ -197,7 +197,7 @@ MonoBehaviour:
     spawnIntervalSec: 1
     moveSpeedRate: 1
     spawnBossPercent: 0
-    spawnSpecialPercent: 10
+    spawnSpecialPercent: 100
     spawnTotemPercent: 10
   - startTime: 30
     spawnIntervalSec: 1
