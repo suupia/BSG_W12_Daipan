@@ -9,19 +9,16 @@ namespace Daipan.Comment.Scripts
     public sealed class AntiCommentRelocate : IUpdate
     {
         readonly AntiCommentCluster _antiCommentCluster;
-        readonly StreamStatus _streamStatus;
     
         // todo : あとで調整する必要あり 必ずしもパラメータでもらう必要はない
         readonly float _verticalSpacing = 1.0f; // オブジェクト間の垂直間隔
     
     
         public AntiCommentRelocate(
-            AntiCommentCluster antiCommentCluster,
-            StreamStatus streamStatus
+            AntiCommentCluster antiCommentCluster
         )
         {
             _antiCommentCluster = antiCommentCluster;
-            _streamStatus = streamStatus;
         }
     
         void IUpdate.Update()

@@ -11,24 +11,20 @@ namespace Daipan.Stream.Scripts.Viewer.MonoScripts
         [SerializeField] TextMeshProUGUI isExcitingText = null!;
         [SerializeField] TextMeshProUGUI existIrrationalFactorsText = null!;
 
-        StreamStatus _streamStatus = null!;
         ViewerNumber _viewerNumber = null!;
 
         void Update()
         {
             viewerNumberText.text = $"Current Viewers : {_viewerNumber.Number}";
-            isExcitingText.text = $"IsExcited : {_streamStatus.IsExcited}";
-            existIrrationalFactorsText.text = $"IsIrritated : {_streamStatus.IsIrritated}";
         }
 
 
         [Inject]
         public void Initialize(
-            ViewerNumber viewerNumber,
-            StreamStatus streamStatus)
+            ViewerNumber viewerNumber
+            )
         {
             _viewerNumber = viewerNumber;
-            _streamStatus = streamStatus;
         }
     }
 }

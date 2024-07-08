@@ -7,12 +7,9 @@ namespace Daipan.Stream.Scripts
 {
     public sealed class ViewerNumber
     {
-        public float Ratio => (float)Number / MaxNumber;
         public int Number => Mathf.Max(IncreasedNumber - DecreasedNumber, 0);
         int DecreasedNumber { get; set; }
         int IncreasedNumber { get; set; }
-        int MaxNumber => 10_000;
-
 
         public void IncreaseViewer(int amount)
         {

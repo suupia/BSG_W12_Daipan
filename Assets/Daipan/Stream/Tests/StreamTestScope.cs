@@ -26,7 +26,6 @@ namespace Daipan.Stream.Tests
 
             // Domain
             builder.Register<ViewerNumber>(Lifetime.Scoped);
-            builder.Register<StreamStatus>(Lifetime.Scoped);
             builder.Register<StreamSpawner>(Lifetime.Scoped);
             builder.Register<IrritatedValue>(Lifetime.Scoped).WithParameter(100);
 
