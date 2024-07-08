@@ -386,16 +386,19 @@ namespace Daipan.Tutorial.Scripts
         readonly SpeechEventManager _speechEventManager;
         readonly IrritatedValue _irritatedValue;
         readonly DaipanExecutor _daipanExecutor;
+        readonly PushEnterTextViewMono _pushEnterTextViewMono;
 
         public DaipanCutscene(
             SpeechEventManager speechEventManager
             , IrritatedValue irritatedValue
             , DaipanExecutor daipanExecutor
+            , PushEnterTextViewMono pushEnterTextViewMono
         )
         {
             _speechEventManager = speechEventManager;
             _irritatedValue = irritatedValue;
             _daipanExecutor = daipanExecutor;
+            _pushEnterTextViewMono = pushEnterTextViewMono;
         }
 
         public override void Execute()
@@ -415,6 +418,22 @@ namespace Daipan.Tutorial.Scripts
                         },
                         _ => { Debug.Log($"IrritatedValue: {_irritatedValue.Value}"); }
                     )
+            );
+
+            Disposables.Add(
+                Observable.EveryValueChanged(_irritatedValue, irritatedValue => irritatedValue.Value)
+                    .Subscribe(
+                        _ =>
+                        {
+                            if (_irritatedValue.IsFull)
+                            {
+                                _pushEnterTextViewMono.Show();
+                            }
+                            else
+                            {
+                                _pushEnterTextViewMono.Hide();
+                            }
+                        })
             );
         }
 

@@ -12,26 +12,25 @@ using VContainer;
 
 namespace Daipan.Streamer.Scripts
 {
-    public class PushEnterTextMono : MonoBehaviour
+    public class PushEnterTextViewMono : MonoBehaviour
     {
+        [SerializeField] GameObject viewObject = null!;
         [SerializeField] TextMeshProUGUI pushEnterText = null!;
 
-        const float DurationSec = 0.5f;
-        double Timer { get; set; }
-        const double MinShowSec = 0.5; 
-        readonly Queue<string> _speechQueue = new ();
-
-
+        void Awake()
+        {
+            viewObject.SetActive(false); 
+        }
 
         public void Show()
         {
-             
+            pushEnterText.text = $"PUSH ENTER";
+            viewObject.SetActive(true);
         }
 
         public void Hide()
         {
-            
+            viewObject.SetActive(false);
         }
     }
-    
 }

@@ -359,7 +359,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &531250722
 RectTransform:
   m_ObjectHideFlags: 0
@@ -619,7 +619,7 @@ GameObject:
   - component: {fileID: 1078988814}
   - component: {fileID: 1078988815}
   m_Layer: 0
-  m_Name: PushEnterText
+  m_Name: PushEnter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -654,10 +654,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1078988813}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5254e17c3e04fe3bb4395e13c118ead, type: 3}
+  m_Script: {fileID: 11500000, guid: 351766f8b045431a883ceeb6141fef3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speechText: {fileID: 1850045031}
+  viewObject: {fileID: 2054784410}
+  pushEnterText: {fileID: 1850045031}
 --- !u!1 &1103018220
 GameObject:
   m_ObjectHideFlags: 0
@@ -1436,7 +1437,7 @@ GameObject:
   - component: {fileID: 1850045032}
   - component: {fileID: 1850045031}
   m_Layer: 0
-  m_Name: SpeechBubbleText
+  m_Name: PushEnterText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1481,7 +1482,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 'PUSH
+
+    ENTER'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cf31847a6a20b402e8d11509066363d2, type: 2}
   m_sharedMaterial: {fileID: -4466590664960433472, guid: cf31847a6a20b402e8d11509066363d2, type: 2}
@@ -1491,7 +1494,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 1, g: 0.34509805, b: 0.8509804, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1508,15 +1511,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 155.8
+  m_fontSizeBase: 155.8
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -1657,12 +1660,12 @@ GameObject:
   m_Component:
   - component: {fileID: 2054784411}
   m_Layer: 0
-  m_Name: SpeechBubbleView
+  m_Name: View
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2054784411
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1681,8 +1684,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 286.3, y: -226.3}
-  m_SizeDelta: {x: 600, y: 200}
+  m_AnchoredPosition: {x: 431.3, y: 192.29}
+  m_SizeDelta: {x: 804.38, y: 524.33}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &13570609811567668
 SpriteRenderer:
