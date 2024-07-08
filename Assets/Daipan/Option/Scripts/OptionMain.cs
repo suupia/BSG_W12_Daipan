@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Daipan.Option.Interfaces;
+using VContainer;
 
 namespace Daipan.Option.Scripts
 {
@@ -13,20 +14,13 @@ namespace Daipan.Option.Scripts
         {
             get => optionContent;
         }
-        readonly List<IOptionContent> transitionableOptions = new();
         myContent _myContent;
+        IHandleOption _handleOption;
 
-
-        public OptionMain(IEnumerable<IOptionContent> optionContents)
+        [Inject]
+        public OptionMain(IHandleOption handleOption)
         {
-            foreach(var option in optionContents)
-            {
-                if(option.OptionContent == OptionContent.ConfirmReturnTitle)
-                {
-                    transitionableOptions.Add(option);
-                }
-            }
-
+            _handleOption = handleOption;
             Prepare();
         }
         public void Prepare()
