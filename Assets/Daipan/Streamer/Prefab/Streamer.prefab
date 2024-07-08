@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 3295608956548331125}
+  daipanEffect: {fileID: 2119817373982441735}
   scaleRatio: 1.5
   moveAmountByAngerZoom: {x: 1, y: 0.4, z: 0}
   zoomDuration: 0.2
