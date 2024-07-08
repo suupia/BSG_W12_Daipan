@@ -27,16 +27,16 @@ namespace Daipan.Option.Scripts
             switch (_myContent)
             {
                 case myContent.BGM:
-                    Debug.Log("Select : BGM");
+                    Debug.Log($"Select : {_myContent}");
                     break;
                 case myContent.SE:
-                    Debug.Log("Select : SE");
+                    Debug.Log($"Select : {_myContent}");
                     break;
                 case myContent.IsShaking:
-                    Debug.Log("Select : IsShaking");
+                    Debug.Log($"Select : {_myContent}");
                     break;
                 case myContent.ReturnTitle:
-                    Debug.Log("Select : ReturnTitle");
+                    Debug.Log($"Select : {_myContent}");
                     break;
 
             }
