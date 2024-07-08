@@ -6,6 +6,7 @@ using Daipan.Player.Scripts;
 using Daipan.Player.Interfaces;
 using Daipan.Option.Scripts;
 using Daipan.Option.Interfaces;
+using Daipan.Option.Tests;
 
 public class OptionTestScope : LifetimeScope
 {
@@ -13,5 +14,7 @@ public class OptionTestScope : LifetimeScope
     {
         builder.Register<OptionController>(Lifetime.Scoped).As<IHandleOption>().As<IInputOption>();
         builder.Register<OptionMain>(Lifetime.Scoped).As<IOptionContent>();
+
+        builder.RegisterComponentInHierarchy<OptionTestInputMono>();
     }
 }

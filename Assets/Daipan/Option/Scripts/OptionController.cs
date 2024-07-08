@@ -10,15 +10,15 @@ namespace Daipan.Option.Scripts
 {
     public class OptionController : IHandleOption , IInputOption
     {
-        IOptionContent _currentOptionContent { get; set; }
-        IEnumerable<IOptionContent> _optionContents;
-        public bool IsOpening { private set; get; } 
+        IOptionContent? _currentOptionContent { get; set; }
+        IEnumerable<IOptionContent>? _optionContents;
+        public bool IsOpening { private set; get; }
 
         [Inject]
-        public OptionController(IEnumerable<IOptionContent> optionContents)
+        public OptionController(IEnumerable<IOptionContent>? optionContents)
         {
             _optionContents = optionContents;
-            Prepare();
+            _currentOptionContent = _optionContents.Where(x => x.OptionContent == OptionContent.Main).FirstOrDefault();
         }
 
         public void Select()
@@ -38,7 +38,7 @@ namespace Daipan.Option.Scripts
         {
             Prepare();
             IsOpening = true;
-            _currentOptionContent.Prepare();
+            _currentOptionContent?.Prepare();
         }
         public void CloseOption()
         {
