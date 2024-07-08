@@ -11,6 +11,7 @@ using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.Stream.Scripts;
 using Daipan.Stream.Scripts.Utility;
 using Daipan.Utility.Scripts;
+using R3;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -31,6 +32,7 @@ namespace Daipan.Enemy.Scripts
         readonly IEnemyBuilder _enemyBuilder;
         readonly IEnemyEnumSelector _enemyEnumSelector;
         float _timer;
+        IDisposable? _disposable;
 
         [Inject]
         public EnemySpawner(
@@ -52,7 +54,6 @@ namespace Daipan.Enemy.Scripts
             _enemyEnumSelector = enemyEnumSelector;
         }
 
-
         void IUpdate.Update()
         {
             _timer += Time.deltaTime;
@@ -67,12 +68,26 @@ namespace Daipan.Enemy.Scripts
         {
             var spawnPosition = GetRandomSpawnPosition(_enemySpawnPoint);
             var randomSpawnPosition = new Vector3 { x = spawnPosition.x, y = spawnPosition.y + Random.Range(-_spawnRandomPositionY, _spawnRandomPositionY) };
+           
+            var enemyEnum = _enemyEnumSelector.SelectEnemyEnum();
+            if (enemyEnum == EnemyEnum.RedBoss)
+            {
+                SpawnRedBoss(randomSpawnPosition); 
+            }
+            else
+            {
+                SpawnEnemy(randomSpawnPosition,enemyEnum); 
+            }
+           
+        }
+        
+        void SpawnEnemy(Vector3 spawnPosition, EnemyEnum enemyEnum)
+        {
             var enemyMonoPrefab = _enemyMonoLoader.Load();
-            var enemyMonoObject = _container.Instantiate(enemyMonoPrefab, randomSpawnPosition, Quaternion.identity);
-            var enemyMono = _enemyBuilder.Build(enemyMonoObject, _enemyEnumSelector.SelectEnemyEnum());
+            var enemyMonoObject = _container.Instantiate(enemyMonoPrefab, spawnPosition, Quaternion.identity);
+            var enemyMono = _enemyBuilder.Build(enemyMonoObject,enemyEnum);
             _enemyCluster.Add(enemyMono);
         }
-
         static Vector3 GetRandomSpawnPosition(IEnemySpawnPoint enemySpawnPoint)
         {
             var positions = enemySpawnPoint.GetEnemySpawnedPointXs()
@@ -80,6 +95,27 @@ namespace Daipan.Enemy.Scripts
                 .ToList();
             var randomIndex = Randoms.RandomByRatios(enemySpawnPoint.GetEnemySpawnRatios(), Random.value);
             return positions[randomIndex];
+        }
+
+        void SpawnRedBoss(Vector3 spawnPosition)
+        {
+            const float subordinateSpawnIntervalSec = 0.3f;
+            const float bossSpawnDelaySec = 0.7f; 
+            const int subordinateCount = 5;
+            _disposable = Observable.Interval(TimeSpan.FromSeconds(subordinateSpawnIntervalSec))
+                .Take(subordinateCount)
+                .Subscribe(
+                    _ => { SpawnEnemy(spawnPosition, EnemyEnum.Red); },
+                    _ =>
+                    {
+                        Observable.Timer(TimeSpan.FromSeconds(bossSpawnDelaySec))
+                            .Subscribe(_ => { SpawnEnemy(spawnPosition, EnemyEnum.RedBoss); });
+                    });
+        }
+        
+        ~EnemySpawner()
+        {
+            _disposable?.Dispose();
         }
     }
 }
