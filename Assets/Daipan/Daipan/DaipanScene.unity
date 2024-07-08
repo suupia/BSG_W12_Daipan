@@ -916,14 +916,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: -------------UI-------------
       objectReference: {fileID: 0}
-    - target: {fileID: 4016839692501095615, guid: bd6d676e1beb24678b55e4a53aa1c145, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4016839692501095615, guid: bd6d676e1beb24678b55e4a53aa1c145, type: 3}
-      propertyPath: m_WasSpriteAssigned
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6101671645835413348, guid: bd6d676e1beb24678b55e4a53aa1c145, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
