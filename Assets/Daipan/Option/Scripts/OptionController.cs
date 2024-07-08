@@ -18,13 +18,16 @@ namespace Daipan.Option.Scripts
         public OptionController(IEnumerable<IOptionContent>? optionContents)
         {
             _optionContents = optionContents;
+            foreach (var option in _optionContents!) option.SetIHandle(this);
             _currentOptionContent = _optionContents.Where(x => x.OptionContent == OptionContent.Main).FirstOrDefault();
         }
+
 
         public void Select()
         {
             _currentOptionContent?.Select();
         }
+
         public void MoveCursor(MoveCursorDirection moveCursorDirection)
         {
             _currentOptionContent?.MoveCursor(moveCursorDirection);
@@ -34,14 +37,18 @@ namespace Daipan.Option.Scripts
         {
             _currentOptionContent = optionContent;
         }
+
         public void OpenOption()
         {
+            Debug.Log("Open Option!!");
             Prepare();
             IsOpening = true;
             _currentOptionContent?.Prepare();
         }
+
         public void CloseOption()
         {
+            Debug.Log("Close Option!!");
             IsOpening = false;
         }
 

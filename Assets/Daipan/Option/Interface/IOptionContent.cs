@@ -12,5 +12,6 @@ namespace Daipan.Option.Interfaces
         void Prepare();
         void Select();
         void MoveCursor(MoveCursorDirection moveCursorDirection);
+        void SetIHandle(IHandleOption handleOption);
     }
 }

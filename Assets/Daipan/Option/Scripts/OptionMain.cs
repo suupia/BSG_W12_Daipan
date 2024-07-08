@@ -15,14 +15,8 @@ namespace Daipan.Option.Scripts
             get => optionContent;
         }
         myContent _myContent;
-        IHandleOption _handleOption;
+        IHandleOption _handleOption = null!;
 
-        [Inject]
-        public OptionMain(IHandleOption handleOption)
-        {
-            _handleOption = handleOption;
-            Prepare();
-        }
         public void Prepare()
         {
             _myContent = myContent.BGM;
@@ -60,6 +54,10 @@ namespace Daipan.Option.Scripts
                     _myContent++;
                 }
             }
+        }
+        public void SetIHandle(IHandleOption handleOption)
+        {
+            _handleOption = handleOption;
         }
 
         enum myContent
