@@ -2,14 +2,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Daipan.Option.Scripts;
 
 namespace Daipan.Option.Interfaces
 {
-    public interface IOptionController
+    public interface IInputOption
     {
-        IOptionContent _currentOptionContent { get; set; }
         void Select();
-        void MoveCursor();
+        void MoveCursor(MoveCursorDirection moveCursorDirection);
+    }
+    public interface IHandleOption
+    {
         void SetCurrentOption(IOptionContent optionContent);
+        void OpenOption();
+        void CloseOption();
     }
 }

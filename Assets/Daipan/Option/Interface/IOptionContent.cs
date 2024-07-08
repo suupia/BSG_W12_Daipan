@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Daipan.Option.Scripts;
 
 namespace Daipan.Option.Interfaces
 {
@@ -9,6 +10,6 @@ namespace Daipan.Option.Interfaces
     {
         IEnumerable _transitionableOptions { get; set; }
         void Select();
-        void MoveCursor();
+        void MoveCursor(MoveCursorDirection moveCursorDirection);
     }
 }
