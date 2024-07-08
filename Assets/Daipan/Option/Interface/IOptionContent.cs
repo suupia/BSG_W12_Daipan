@@ -8,7 +8,7 @@ namespace Daipan.Option.Interfaces
 {
     public interface IOptionContent
     {
-        IEnumerable _transitionableOptions { get; set; }
+        OptionContent OptionContent { get; }
         void Select();
         void MoveCursor(MoveCursorDirection moveCursorDirection);
     }
