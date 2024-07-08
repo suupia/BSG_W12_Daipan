@@ -14,6 +14,7 @@ public class OptionTestScope : LifetimeScope
     {
         builder.Register<OptionController>(Lifetime.Scoped).As<IHandleOption>().As<IInputOption>();
         builder.Register<OptionMain>(Lifetime.Scoped).As<IOptionContent>();
+        builder.Register<OptionConfirmReturnTitle>(Lifetime.Scoped).As<IOptionContent>();
 
         builder.RegisterComponentInHierarchy<OptionTestInputMono>();
     }

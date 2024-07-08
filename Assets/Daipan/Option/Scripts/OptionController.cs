@@ -19,7 +19,7 @@ namespace Daipan.Option.Scripts
         {
             _optionContents = optionContents;
             foreach (var option in _optionContents!) option.SetIHandle(this);
-            _currentOptionContent = _optionContents.Where(x => x.OptionContent == OptionContent.Main).FirstOrDefault();
+            _currentOptionContent = _optionContents.Where(x => x.OptionContent == OptionContentEnum.Main).FirstOrDefault();
         }
 
 
@@ -28,14 +28,14 @@ namespace Daipan.Option.Scripts
             _currentOptionContent?.Select();
         }
 
-        public void MoveCursor(MoveCursorDirection moveCursorDirection)
+        public void MoveCursor(MoveCursorDirectionEnum moveCursorDirection)
         {
             _currentOptionContent?.MoveCursor(moveCursorDirection);
         }
 
-        public void SetCurrentOption(IOptionContent optionContent)
+        public void SetCurrentOption(OptionContentEnum optionContent)
         {
-            _currentOptionContent = optionContent;
+            _currentOptionContent = _currentOptionContent = _optionContents.Where(x => x.OptionContent == optionContent).FirstOrDefault();
         }
 
         public void OpenOption()
@@ -54,12 +54,12 @@ namespace Daipan.Option.Scripts
 
         public void Prepare()
         {
-            _currentOptionContent = _optionContents.Where(x => x.OptionContent == OptionContent.Main).FirstOrDefault();
+            _currentOptionContent = _optionContents.Where(x => x.OptionContent == OptionContentEnum.Main).FirstOrDefault();
         }
 
     }
 
-    public enum MoveCursorDirection
+    public enum MoveCursorDirectionEnum
     {
         UP,
         Right,
@@ -67,7 +67,7 @@ namespace Daipan.Option.Scripts
         Left
     }
 
-    public enum OptionContent
+    public enum OptionContentEnum
     {
         Main,
         ConfirmReturnTitle

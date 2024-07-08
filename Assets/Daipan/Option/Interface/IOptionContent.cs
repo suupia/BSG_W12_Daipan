@@ -8,10 +8,10 @@ namespace Daipan.Option.Interfaces
 {
     public interface IOptionContent
     {
-        OptionContent OptionContent { get; }
+        OptionContentEnum OptionContent { get; }
         void Prepare();
         void Select();
-        void MoveCursor(MoveCursorDirection moveCursorDirection);
+        void MoveCursor(MoveCursorDirectionEnum moveCursorDirection);
         void SetIHandle(IHandleOption handleOption);
     }
 }

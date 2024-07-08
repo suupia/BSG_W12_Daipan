@@ -25,7 +25,7 @@ namespace Daipan.Option.Tests
 
             if (_inputOption.IsOpening)
             {
-                if (Input.GetKeyDown(KeyCode.W)) _inputOption.MoveCursor(Scripts.MoveCursorDirection.Down);
+                if (Input.GetKeyDown(KeyCode.W)) _inputOption.MoveCursor(Scripts.MoveCursorDirectionEnum.Down);
                 if (Input.GetKeyDown(KeyCode.A)) _inputOption.Select();
             }
         }

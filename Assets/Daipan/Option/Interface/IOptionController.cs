@@ -10,13 +10,13 @@ namespace Daipan.Option.Interfaces
     {
         bool IsOpening { get; }
         void Select();
-        void MoveCursor(MoveCursorDirection moveCursorDirection);
+        void MoveCursor(MoveCursorDirectionEnum moveCursorDirection);
         void OpenOption();
         void CloseOption();
     }
     public interface IHandleOption
     {
-        void SetCurrentOption(IOptionContent optionContent);
+        void SetCurrentOption(OptionContentEnum optionContent);
         void CloseOption();
     }
 }

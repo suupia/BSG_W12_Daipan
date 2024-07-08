@@ -8,8 +8,8 @@ namespace Daipan.Option.Scripts
 {
     public class OptionConfirmReturnTitle : IOptionContent
     {
-        const OptionContent optionContent = OptionContent.ConfirmReturnTitle;
-        public OptionContent OptionContent
+        const OptionContentEnum optionContent = OptionContentEnum.ConfirmReturnTitle;
+        public OptionContentEnum OptionContent
         {
             get => optionContent;
         }
@@ -27,15 +27,17 @@ namespace Daipan.Option.Scripts
             {
                 case myContent.Yes:
                     Debug.Log($"Select : {_myContent}");
+                    _handleOption.CloseOption();
                     break;
                 case myContent.No:
                     Debug.Log($"Select : {_myContent}");
+                    _handleOption.SetCurrentOption(OptionContentEnum.Main);
                     break;
             }
         }
-        public void MoveCursor(MoveCursorDirection moveCursorDirection)
+        public void MoveCursor(MoveCursorDirectionEnum moveCursorDirection)
         {
-            if (moveCursorDirection == MoveCursorDirection.Down)
+            if (moveCursorDirection == MoveCursorDirectionEnum.Down)
             {
                 if (_myContent == myContent.No)
                 {

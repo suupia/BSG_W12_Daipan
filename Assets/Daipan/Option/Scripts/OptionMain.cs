@@ -9,8 +9,8 @@ namespace Daipan.Option.Scripts
 {
     public class OptionMain : IOptionContent
     {
-        const OptionContent optionContent = OptionContent.Main;
-        public OptionContent OptionContent
+        const OptionContentEnum optionContent = OptionContentEnum.Main;
+        public OptionContentEnum OptionContent
         {
             get => optionContent;
         }
@@ -37,13 +37,14 @@ namespace Daipan.Option.Scripts
                     break;
                 case myContent.ReturnTitle:
                     Debug.Log($"Select : {_myContent}");
+                    _handleOption.SetCurrentOption(OptionContentEnum.ConfirmReturnTitle);
                     break;
 
             }
         }
-        public void MoveCursor(MoveCursorDirection moveCursorDirection)
+        public void MoveCursor(MoveCursorDirectionEnum moveCursorDirection)
         {
-            if(moveCursorDirection == MoveCursorDirection.Down)
+            if(moveCursorDirection == MoveCursorDirectionEnum.Down)
             {
                 if(_myContent == myContent.ReturnTitle)
                 {
