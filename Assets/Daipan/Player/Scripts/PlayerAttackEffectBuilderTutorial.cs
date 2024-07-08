@@ -74,7 +74,7 @@ namespace Daipan.Player.Scripts
                 // チュートリアルごとの処理 
                 if (tutorialFacilitator.CurrentStep is RedEnemyTutorial redEnemyTutorial)
                 {
-                    redEnemyTutorial.SetIsSuccess(playerColor == PlayerColor.Red);
+                   if(playerColor == PlayerColor.Red) redEnemyTutorial.SetIsSuccess();
                 }
                 if(tutorialFacilitator.CurrentStep is SequentialEnemyTutorial sequentialEnemyTutorial)
                 {

@@ -198,11 +198,11 @@ namespace Daipan.Tutorial.Scripts
             return _speechEventManager.IsEnd();
         }
 
-        public void SetIsSuccess(bool isSuccess)
+        public void SetIsSuccess()
         {
-            Debug.Log($"RedEnemyTutorial isSuccess: {isSuccess}");
-            IsSuccess = isSuccess;
-            // これで強制的に次のスピーチに進む（危険かも）
+            Debug.Log($"RedEnemyTutorial SetIsSuccess"); 
+            IsSuccess = true;
+            // これで強制的に次のスピーチに進む（危険かも）（IsSuccessをSpeechの方でObserveしているのでかなり危険）
             while (!_speechEventManager.IsEnd())
             {
                 _speechEventManager.MoveNext();
@@ -315,15 +315,18 @@ namespace Daipan.Tutorial.Scripts
     {
         readonly SpeechEventManager _speechEventManager;
         readonly CommentSpawner _commentSpawner;
+        readonly EnemySpawnerTutorial _enemySpawnerTutorial;
         bool CanMoveNext { get; set; }
 
         public ShowAntiCommentsTutorial(
             SpeechEventManager speechEventManager
             , CommentSpawner commentSpawner
+            , EnemySpawnerTutorial enemySpawnerTutorial
         )
         {
             _speechEventManager = speechEventManager;
             _commentSpawner = commentSpawner;
+            _enemySpawnerTutorial = enemySpawnerTutorial;
         }
 
         public override void Execute()
@@ -331,12 +334,12 @@ namespace Daipan.Tutorial.Scripts
             Debug.Log("Showing anti-comments with sound effects...");
             _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildShowAntiCommentsTutorial(this));
 
-            var intervalSec = 0.5f; // スポーンの間隔
-            var commentCount = 3;
-            var delaySec = 2.0f; // すべてのコメントが表示された後の待機時間 
-
+            // アンチコメントを生成→終わったら遷移可能
+            const float commentIntervalSec = 0.5f; // スポーンの間隔
+            const int commentCount = 3;
+            const float delaySec = 2.0f; // すべてのコメントが表示された後の待機時間 
             Disposables.Add(
-                Observable.Interval(TimeSpan.FromSeconds(intervalSec))
+                Observable.Interval(TimeSpan.FromSeconds(commentIntervalSec))
                     .Take(commentCount)
                     .Subscribe(
                         _ => { _commentSpawner.SpawnCommentByType(CommentEnum.Spiky); },
@@ -350,10 +353,25 @@ namespace Daipan.Tutorial.Scripts
                                     Debug.Log("ShowAntiCommentsTutorial Can move next");
                                 })
                                 .AddTo(Disposables);
-                            ;
                         }
                     )
             );
+            
+            // 雑魚敵とボスも生成する
+            const float enemyIntervalSec = 1.0f; // スポーンの間隔
+            var enemyEnums = new Queue<EnemyEnum>(new[] { EnemyEnum.Blue, EnemyEnum.RedBoss, EnemyEnum.Red, EnemyEnum.YellowBoss, EnemyEnum.Yellow, EnemyEnum.BlueBoss});
+            Disposables.Add(
+                Observable.Interval(TimeSpan.FromSeconds(enemyIntervalSec))
+                    .Take(enemyEnums.Count)
+                    .Subscribe(
+                        _ => {  _enemySpawnerTutorial.SpawnEnemyByType(enemyEnums.Dequeue()); },
+                        _ =>
+                        {
+                            Debug.Log( "Enemy spawn completed");
+                        }
+                    )
+                );
+            
         }
 
         public override bool IsCompleted()
@@ -399,7 +417,7 @@ namespace Daipan.Tutorial.Scripts
 
         public override bool IsCompleted()
         {
-            return _speechEventManager.IsEnd();
+            return _speechEventManager.IsEnd() && _irritatedValue.IsFull;
         }
     }
 
