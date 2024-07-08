@@ -15,7 +15,7 @@ namespace Daipan.Stream.Scripts
         readonly IrritatedValue _irritatedValue;
         readonly StreamerViewMono _streamerViewMono;
         readonly ShakeDisplayMono _shakeDisplayMono;
-
+        public int DaipanCount { get; private set; }
         public DaipanExecutor(
             IrritatedValue irritatedValue,
             EnemyCluster enemyCluster,
@@ -40,6 +40,7 @@ namespace Daipan.Stream.Scripts
                 _antiCommentCluster.BlownAway();
                 _streamerViewMono.Daipan();
                 _shakeDisplayMono.Daipan();
+                DaipanCount++;
                 
                 // 台パンしたら怒りゲージは0になる
                 _irritatedValue.DecreaseValue(_irritatedValue.Value);

@@ -385,15 +385,17 @@ namespace Daipan.Tutorial.Scripts
     {
         readonly SpeechEventManager _speechEventManager;
         readonly IrritatedValue _irritatedValue;
-        bool CanMoveNext { get; set; }
+        readonly DaipanExecutor _daipanExecutor;
 
         public DaipanCutscene(
             SpeechEventManager speechEventManager
             , IrritatedValue irritatedValue
+            , DaipanExecutor daipanExecutor
         )
         {
             _speechEventManager = speechEventManager;
             _irritatedValue = irritatedValue;
+            _daipanExecutor = daipanExecutor;
         }
 
         public override void Execute()
@@ -405,6 +407,7 @@ namespace Daipan.Tutorial.Scripts
             const float fillRatioPerSec = 0.2f;
             Disposables.Add(
                 Observable.EveryUpdate()
+                    .Where(_ => _daipanExecutor.DaipanCount < 1)
                     .Subscribe(
                         _ =>
                         {
@@ -417,7 +420,7 @@ namespace Daipan.Tutorial.Scripts
 
         public override bool IsCompleted()
         {
-            return _speechEventManager.IsEnd() && _irritatedValue.IsFull;
+            return _speechEventManager.IsEnd() && _daipanExecutor.DaipanCount >= 1; 
         }
     }
 

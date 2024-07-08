@@ -101,7 +101,7 @@ namespace Daipan.Battle.scripts
         static void ChangeToSacredLady(DaipanExecutor daipanExecutor)
         {
             Debug.Log("Check ChangeToSacredLady");
-            if (daipanExecutor.DaipanNum<=10)
+            if (daipanExecutor.DaipanCount<=10)
             {
                 Debug.Log("Change to SacredLady");
                 ResultShower.ShowResult(SceneName.SacredLady);
@@ -111,7 +111,7 @@ namespace Daipan.Battle.scripts
         static void ChangeToFlame(DaipanExecutor dipanExecutor)
         {
             Debug.Log("Check ChangeToFlame");
-            if (dipanExecutor.DaipanNum >= 10)
+            if (dipanExecutor.DaipanCount >= 10)
             {
                 Debug.Log("Change to Flame");
                 ResultShower.ShowResult(SceneName.Flame);

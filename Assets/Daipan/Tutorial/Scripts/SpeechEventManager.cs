@@ -228,7 +228,7 @@ namespace Daipan.Tutorial.Scripts
             var speechEvents =
                 new List<ISpeechEvent>
                 {
-                    new SequentialEvent(0, "わっ...", SpeechEventEnum.Listening),
+                    new SequentialEvent(0, "わっ...", SpeechEventEnum.Practical),
                     new EndEvent()
                 };
 

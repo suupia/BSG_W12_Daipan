@@ -92,7 +92,11 @@ namespace Daipan.Player.Scripts
                 _attackExecutor.FireAttackEffect(_playerMono, PlayerColor.Yellow);
             }
 
-            if (Input.GetKeyDown(KeyCode.Return)) _daipanExecutor.DaiPan(); 
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                _daipanExecutor.DaiPan();
+                _speechEventManager.MoveNext();
+            } 
         }
     }
 }
