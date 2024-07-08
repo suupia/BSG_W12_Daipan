@@ -42,6 +42,7 @@ namespace Daipan.Tutorial.Scripts
 
         public override void Execute()
         {
+        _gaugeViewMono.Show();
             Disposables.Add(Observable.EveryUpdate()
                 .Where(_ => !Completed)
                 .Subscribe(_ =>
@@ -123,6 +124,7 @@ namespace Daipan.Tutorial.Scripts
 
         public override void Execute()
         {
+            _gaugeViewMono.Show();
             Disposables.Add(
                 Observable.EveryUpdate()
                     .Where(_ => !Completed)
@@ -132,7 +134,11 @@ namespace Daipan.Tutorial.Scripts
                         _gaugeViewMono.SetGaugeValue(_gaugeViewMono.CurrentFillAmount +
                                                      FillAmountPerSec * Time.deltaTime);
                         if (_gaugeViewMono.CurrentFillAmount >= 1.0f)
-                            _blackScreenViewMono.FadeOut(1, () => { Completed = true; });
+                            _blackScreenViewMono.FadeOut(1, () =>
+                            {
+                                _gaugeViewMono.Hide();
+                                Completed = true;
+                            });
                     }));
         }
 
@@ -522,7 +528,7 @@ namespace Daipan.Tutorial.Scripts
         public override void Execute()
         {
             Debug.Log("Starting actual game...");
-            _blackScreenViewMono.FadeIn(0.2f, () =>
+            _blackScreenViewMono.FadeIn(1.0f, () =>
             {
                 // 配信待機所を表示
                 _standbyStreamingViewMono.Show();
