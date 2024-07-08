@@ -13,10 +13,8 @@ MonoBehaviour:
   m_Name: EnemyParamsManager
   m_EditorClassIdentifier: 
   enemyLevelDesignParam:
-    spawnBossAmount: 20
-    increaseIrritatedValueByBoss: 30
     increaseViewerOnEnemyKill: 5
-    currentKillAmount: 8
+    currentKillAmount: 293
   enemyParams:
   - enemyEnum: 1
     enemyAttackParam:

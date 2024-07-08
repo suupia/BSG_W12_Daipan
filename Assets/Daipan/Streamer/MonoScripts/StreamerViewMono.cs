@@ -20,7 +20,7 @@ namespace Daipan.Streamer.MonoScripts
         Vector3 _originalScale;
         Vector3 _originalPosition;
         Transform _transform = null!;
-        float _effectDelaySec = 0.4f;
+        float _effectDelaySec = 0.8f;
 
         [Inject]
         void Initialize(IrritatedValue irritatedValue)
@@ -46,11 +46,7 @@ namespace Daipan.Streamer.MonoScripts
         public void Daipan()
         {
             animator.SetTrigger("IsDaipan");
-            Observable.Timer(System.TimeSpan.FromSeconds(_effectDelaySec))
-                .Subscribe(_ =>
-                {
-                    daipanEffect.SetTrigger("IsDaipan");
-                });
+            daipanEffect.SetTrigger("IsDaipan");
         }
 
         public void AngerZoom(bool isFull)
@@ -66,7 +62,7 @@ namespace Daipan.Streamer.MonoScripts
 
 
             // 怒ってないとき通常サイズに
-            Observable.Timer(System.TimeSpan.FromSeconds(1))
+            Observable.Timer(System.TimeSpan.FromSeconds(_effectDelaySec))
                 .Subscribe(_ =>
                 {
                     senquence.Append(_transform.DOScale(_originalScale, zoomDuration));

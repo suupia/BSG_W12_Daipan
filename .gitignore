@@ -48,3 +48,5 @@ PaperSoulsServer/*.a
 
 # User settings
 UserSettings/Layouts/default-2022.dwlt
+
+.DS_Store
