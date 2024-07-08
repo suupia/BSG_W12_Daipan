@@ -513,6 +513,7 @@ namespace Daipan.Tutorial.Scripts
                 .Subscribe(_ =>
                 {
                     Completed = true; 
+                    _aimTopStreamerViewMono.Hide();
                 });
         }
 
