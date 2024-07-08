@@ -356,7 +356,7 @@ namespace Daipan.Tutorial.Scripts
             );
             
             // 雑魚敵とボスも生成する
-            const float enemyIntervalSec = 1.0f; // スポーンの間隔
+            const float enemyIntervalSec = 0.5f; // スポーンの間隔
             var enemyEnums = new Queue<EnemyEnum>(new[] { EnemyEnum.Blue, EnemyEnum.RedBoss, EnemyEnum.Red, EnemyEnum.YellowBoss, EnemyEnum.Yellow, EnemyEnum.BlueBoss});
             Disposables.Add(
                 Observable.Interval(TimeSpan.FromSeconds(enemyIntervalSec))
