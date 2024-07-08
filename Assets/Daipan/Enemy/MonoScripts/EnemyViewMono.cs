@@ -9,15 +9,15 @@ namespace Daipan.Enemy.MonoScripts
     public sealed class EnemyViewMono : AbstractEnemyViewMono
     {
         [SerializeField] EnemyNormalViewMono enemyNormalViewMono = null!;
-        [SerializeField] EnemyBoss1ViewMono enemyBoss1ViewMono = null!;
-        [SerializeField] EnemyBoss2ViewMono enemyBoss2ViewMono = null!;
-        [SerializeField] EnemyBoss3ViewMono enemyBoss3ViewMono = null!;
+        [SerializeField] EnemyBoss1ViewMono enemyBoss1ViewMono = null!; // Tank
+        [SerializeField] EnemyBoss2ViewMono enemyBoss2ViewMono = null!; // 筋肉
+        [SerializeField] EnemyBoss3ViewMono enemyBoss3ViewMono = null!; // 素早い
         AbstractEnemyViewMono _selectedEnemyViewMono = null!;
 
         public override void SetDomain(IEnemyViewParamData enemyParamData)
         {
             Debug.Log("SetDomain enemy enum: " + enemyParamData.GetEnemyEnum());
-            if (enemyParamData.GetEnemyEnum() == EnemyEnum.RedBoss)
+            if (enemyParamData.GetEnemyEnum() == EnemyEnum.YellowBoss)
             {
                 enemyNormalViewMono.gameObject.SetActive(false);
                 enemyBoss1ViewMono.gameObject.SetActive(true);
@@ -26,7 +26,7 @@ namespace Daipan.Enemy.MonoScripts
                 _selectedEnemyViewMono = enemyBoss1ViewMono;
                 _selectedEnemyViewMono.SetDomain(enemyParamData);
             }
-            else if (enemyParamData.GetEnemyEnum() == EnemyEnum.YellowBoss)
+            else if (enemyParamData.GetEnemyEnum() == EnemyEnum.RedBoss)
             {
                 enemyNormalViewMono.gameObject.SetActive(false);
                 enemyBoss1ViewMono.gameObject.SetActive(false);
