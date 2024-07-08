@@ -60,24 +60,22 @@ namespace Daipan.Player.Scripts
 
 
         static void AttackEnemy(IPlayerParamDataContainer playerParamDataContainer
-            ,List<AbstractPlayerViewMono?> playerViewMonos
-            ,PlayerColor playerColor
-            ,OnHitEventArgs args
-            ,EnemyTotemOnAttack totemOnAttack
-            ,ComboCounter comboCounter
-            )
+            , List<AbstractPlayerViewMono?> playerViewMonos
+            , PlayerColor playerColor
+            , OnHitEventArgs args
+            , EnemyTotemOnAttack totemOnAttack
+            , ComboCounter comboCounter
+        )
         {
-
-
             if (args.IsTargetEnemy && args.EnemyMono != null)
-             {
+            {
                 Debug.Log($"EnemyType: {args.EnemyMono.EnemyEnum}を攻撃");
                 // 敵を攻撃
                 var playerParamData = playerParamDataContainer.GetPlayerParamData(playerColor);
-                var HpBuffer = args.EnemyMono.EnemyEnum switch 
+                var HpBuffer = args.EnemyMono.EnemyEnum switch
                 {
                     EnemyEnum.Totem => totemOnAttack.OnAttacked(args.EnemyMono.Hp, playerParamData),
-                    _ => PlayerAttackModule.Attack(args.EnemyMono.Hp,playerParamData)
+                    _ => PlayerAttackModule.Attack(args.EnemyMono.Hp, playerParamData)
                     // 敵が特攻攻撃をしてくる
                     // todo: 一旦はなし
                     // enemyMono.SuicideAttack(playerMono); 
@@ -94,7 +92,6 @@ namespace Daipan.Player.Scripts
                 comboCounter.ResetCombo();
                 return;
             }
-
 
 
             // Animation

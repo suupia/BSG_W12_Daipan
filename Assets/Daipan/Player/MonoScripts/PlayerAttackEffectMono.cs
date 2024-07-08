@@ -73,24 +73,5 @@ namespace Daipan.Player.MonoScripts
 
     public record OnHitEventArgs(EnemyMono? EnemyMono, bool IsTargetEnemy);
     
-    public static class PlayerAttackModule
-    {
-        public static IEnumerable<EnemyEnum> GetTargetEnemyEnum(PlayerColor playerColor)
-        {
-            return playerColor switch
-            {
-                PlayerColor.Red => new[] {EnemyEnum.Red,EnemyEnum.RedBoss,EnemyEnum.Special,EnemyEnum.Totem},
-                PlayerColor.Blue => new[] {EnemyEnum.Blue,EnemyEnum.BlueBoss,EnemyEnum.Special,EnemyEnum.Totem},
-                PlayerColor.Yellow => new[] {EnemyEnum.Yellow,EnemyEnum.YellowBoss,EnemyEnum.Special,EnemyEnum.Totem},
-                _ => throw new ArgumentOutOfRangeException()
-            };
-        }
-
-        public static bool IsInScreenEnemy(EnemyMono enemyMono)
-        {
-            var worldPos = Camera.main.ViewportToWorldPoint(new Vector2(1, 1));
-            return enemyMono.gameObject.transform.position.x < worldPos.x;
-        }
-    }
 
 }
