@@ -475,35 +475,70 @@ namespace Daipan.Tutorial.Scripts
 
     public class AimForTopStreamer : AbstractTutorialContent
     {
-        bool _completed = false;
+        readonly SpeechEventManager _speechEventManager;
+        readonly AimTopStreamerViewMono _aimTopStreamerViewMono;
+        bool Completed { get; set; }  
+        public AimForTopStreamer (
+            SpeechEventManager speechEventManager
+            ,AimTopStreamerViewMono aimTopStreamerViewMono
+        )
+        {
+            _speechEventManager = speechEventManager;
+            _aimTopStreamerViewMono = aimTopStreamerViewMono;
+        }
 
         public override void Execute()
         {
             Debug.Log("Aim for top streamer...");
-            // Logic for this step
-            if (Input.GetKeyDown(KeyCode.T)) _completed = true;
+            _aimTopStreamerViewMono.Show(); 
+            
+            // 少し待つ
+            const float displaySec = 2.0f;
+            Observable.Timer(TimeSpan.FromSeconds(displaySec))
+                .Subscribe(_ =>
+                {
+                    Completed = true; 
+                });
         }
 
         public override bool IsCompleted()
         {
-            return _completed;
+             return _speechEventManager.IsEnd() && Completed;
         }
     }
 
-    public class StartActualGame : ITutorialContent
+    public class StartActualGame : AbstractTutorialContent
     {
-        bool _completed = false;
-
-        public void Execute()
+        readonly BlackScreenViewMono _blackScreenViewMono;
+        readonly StandbyStreamingViewMono _standbyStreamingViewMono;
+        bool Completed { get; set; } 
+        public StartActualGame(
+            BlackScreenViewMono blackScreenViewMono
+            , StandbyStreamingViewMono standbyStreamingViewMono)
+        {
+            _blackScreenViewMono = blackScreenViewMono;
+            _standbyStreamingViewMono = standbyStreamingViewMono;
+        }
+        public override void Execute()
         {
             Debug.Log("Starting actual game...");
-            // Logic for this step
-            if (Input.GetKeyDown(KeyCode.T)) _completed = true;
+            _blackScreenViewMono.FadeIn(0.2f, () =>
+            {
+                // 配信待機所を表示
+                _standbyStreamingViewMono.Show();
+                // すこししてからフェードアウト
+                const float displaySec = 2.0f;
+                Observable.Timer(TimeSpan.FromSeconds(displaySec))
+                    .Subscribe(_ =>
+                    {
+                        _blackScreenViewMono.FadeOut(0.2f, () => { Completed = true; });
+                    });
+            }); 
         }
 
-        public bool IsCompleted()
+        public override bool IsCompleted()
         {
-            return _completed;
+            return Completed;
         }
     }
 }

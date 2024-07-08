@@ -105,6 +105,8 @@ namespace Daipan.Tutorial
             builder.RegisterComponentInHierarchy<BlackScreenViewMono>();
             builder.RegisterComponentInHierarchy<SpeechBubbleMono>();
             builder.RegisterComponentInHierarchy<PushEnterTextViewMono>();
+            builder.RegisterComponentInHierarchy<AimTopStreamerViewMono>();
+            builder.RegisterComponentInHierarchy<StandbyStreamingViewMono>();
 
             // Updater
             builder.UseEntryPoints(Lifetime.Scoped, entryPoints =>
