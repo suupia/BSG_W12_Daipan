@@ -27,8 +27,9 @@ namespace Daipan.Player.Scripts
         } 
 
         
-        public static bool IsInScreenEnemy(EnemyMono enemyMono)
+        public static bool IsInScreenEnemy(EnemyMono? enemyMono)
         {
+            if (enemyMono == null) return false;
             var worldPosition = Camera.main.ViewportToWorldPoint(new Vector2(1, 1));
             return enemyMono.gameObject.transform.position.x < worldPosition.x;
         }

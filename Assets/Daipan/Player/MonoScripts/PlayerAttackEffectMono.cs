@@ -31,16 +31,10 @@ namespace Daipan.Player.MonoScripts
                 return;
             }
 
-            var enemyMono = _getNearestEnemyMono();
 
-            if(enemyMono != null)
-            {
-                if (!PlayerAttackModule.IsInScreenEnemy(enemyMono))
-                {
-                    enemyMono = null;
-                }
-                
-            }
+            var enemyMono = _getNearestEnemyMono();
+            enemyMono = PlayerAttackModule.IsInScreenEnemy(enemyMono) ? enemyMono : null;
+            
 
             Direction = enemyMono != null ? (enemyMono.transform.position - transform.position).normalized : Direction;
             transform.position += Direction * (float)(_speed * Time.deltaTime);
