@@ -10,12 +10,12 @@ namespace Daipan.Option.Scripts
 {
     public class OptionController : IHandleOption , IInputOption
     {
-        IOptionPopUpContent? CurrentOptionContent { get; set; }
-        readonly List<IOptionPopUpContent> _optionContents;
+        IOptionPopUp? CurrentOptionContent { get; set; }
+        readonly List<IOptionPopUp> _optionContents;
         public bool IsOpening { private set; get; }
 
         [Inject]
-        public OptionController(IEnumerable<IOptionPopUpContent> optionContents)
+        public OptionController(IEnumerable<IOptionPopUp> optionContents)
         {
             _optionContents = optionContents.ToList();
             foreach (var option in _optionContents) option.SetIHandle(this);
@@ -72,6 +72,7 @@ namespace Daipan.Option.Scripts
     public enum OptionContentEnum
     {
         Main,
-        ConfirmReturnTitle
+        ConfirmReturnTitle,
+        Language,
     }
 }

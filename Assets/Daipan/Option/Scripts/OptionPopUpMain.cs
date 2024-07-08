@@ -7,7 +7,7 @@ using VContainer;
 
 namespace Daipan.Option.Scripts
 {
-    public class OptionPopUpMain : IOptionPopUpContent
+    public class OptionPopUpMain : IOptionPopUp
     {
         const OptionContentEnum optionContent = OptionContentEnum.Main;
         public OptionContentEnum OptionContent
@@ -39,7 +39,9 @@ namespace Daipan.Option.Scripts
                     Debug.Log($"Select : {_myContent}");
                     _handleOption.SetCurrentOption(OptionContentEnum.ConfirmReturnTitle);
                     break;
-
+                case myContent.Language:
+                    _handleOption.SetCurrentOption(OptionContentEnum.Language);
+                    break;
             }
         }
         public void MoveCursor(MoveCursorDirectionEnum moveCursorDirection)
@@ -67,7 +69,8 @@ namespace Daipan.Option.Scripts
             BGM,
             SE,
             IsShaking,
-            ReturnTitle
+            ReturnTitle,
+            Language,
         }
     }
 }

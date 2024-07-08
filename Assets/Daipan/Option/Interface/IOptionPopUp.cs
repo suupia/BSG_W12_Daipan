@@ -6,7 +6,7 @@ using Daipan.Option.Scripts;
 
 namespace Daipan.Option.Interfaces
 {
-    public interface IOptionPopUpContent
+    public interface IOptionPopUp
     {
         OptionContentEnum OptionContent { get; }
         void Prepare();

@@ -3,12 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Daipan.Option.Interfaces;
+using VContainer;
 
 namespace Daipan.Option.Scripts
 {
-    public class OptionPopUpConfirmReturnTitle : IOptionPopUp
+    public class OptionPopUpLanguage : IOptionPopUp
     {
-        const OptionContentEnum optionContent = OptionContentEnum.ConfirmReturnTitle;
+        const OptionContentEnum optionContent = OptionContentEnum.Main;
         public OptionContentEnum OptionContent
         {
             get => optionContent;
@@ -18,30 +19,36 @@ namespace Daipan.Option.Scripts
 
         public void Prepare()
         {
-            _myContent = myContent.No;
+            _myContent = myContent.BGM;
         }
 
         public void Select()
         {
             switch (_myContent)
             {
-                case myContent.Yes:
+                case myContent.BGM:
                     Debug.Log($"Select : {_myContent}");
-                    _handleOption.CloseOption();
                     break;
-                case myContent.No:
+                case myContent.SE:
                     Debug.Log($"Select : {_myContent}");
-                    _handleOption.SetCurrentOption(OptionContentEnum.Main);
                     break;
+                case myContent.IsShaking:
+                    Debug.Log($"Select : {_myContent}");
+                    break;
+                case myContent.ReturnTitle:
+                    Debug.Log($"Select : {_myContent}");
+                    _handleOption.SetCurrentOption(OptionContentEnum.ConfirmReturnTitle);
+                    break;
+
             }
         }
         public void MoveCursor(MoveCursorDirectionEnum moveCursorDirection)
         {
-            if (moveCursorDirection == MoveCursorDirectionEnum.Down)
+            if(moveCursorDirection == MoveCursorDirectionEnum.Down)
             {
-                if (_myContent == myContent.No)
+                if(_myContent == myContent.ReturnTitle)
                 {
-                    _myContent = myContent.Yes;
+                    _myContent = myContent.BGM;
                 }
                 else
                 {
@@ -57,8 +64,11 @@ namespace Daipan.Option.Scripts
 
         enum myContent
         {
-            Yes,
-            No
+            BGM,
+            SE,
+            IsShaking,
+            ReturnTitle,
+            Language,
         }
     }
 }
