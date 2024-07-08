@@ -46,7 +46,7 @@ namespace Daipan.Enemy.Scripts
 
         public void SpawnEnemyByType(EnemyEnum enemyEnum)
         {
-            var spawnPosition = GetSpawnedPositions().LastOrDefault();
+            var spawnPosition = GetSpawnedPositions(_enemySpawnPoint).LastOrDefault();
             if (spawnPosition == null)
             {
                 Debug.LogWarning("Spawn position is null");
@@ -64,10 +64,10 @@ namespace Daipan.Enemy.Scripts
             _enemyCluster.Add(enemyMono);
         }
 
-        List <Vector3> GetSpawnedPositions()
+        static List <Vector3> GetSpawnedPositions(IEnemySpawnPoint enemySpawnPoint)
         {
-            var positions = _enemySpawnPoint.GetEnemySpawnedPointXs()
-                .Zip(_enemySpawnPoint.GetEnemySpawnedPointYs(), (x, y) => new Vector3(x.x, y.y))
+            var positions = enemySpawnPoint.GetEnemySpawnedPointXs()
+                .Zip(enemySpawnPoint.GetEnemySpawnedPointYs(), (x, y) => new Vector3(x.x, y.y))
                 .ToList();
             return positions;
         }
