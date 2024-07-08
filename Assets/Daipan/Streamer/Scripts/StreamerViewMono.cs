@@ -11,6 +11,7 @@ namespace Daipan.Streamer.Scripts
     public class StreamerViewMono : MonoBehaviour
     {
         [SerializeField] Animator animator = null!;
+        [SerializeField] Animator daipanEffect = null!;
         [SerializeField] float scaleRatio;
         [SerializeField] Vector3 moveAmountByAngerZoom;
         [SerializeField] float zoomDuration;
@@ -19,6 +20,7 @@ namespace Daipan.Streamer.Scripts
         Vector3 _originalScale;
         Vector3 _originalPosition;
         Transform _transform = null!;
+        float _effectDelaySec = 0.4f;
 
         [Inject]
         void Initialize(IrritatedValue irritatedValue)
@@ -44,6 +46,11 @@ namespace Daipan.Streamer.Scripts
         public void Daipan()
         {
             animator.SetTrigger("IsDaipan");
+            Observable.Timer(System.TimeSpan.FromSeconds(_effectDelaySec))
+                .Subscribe(_ =>
+                {
+                    daipanEffect.SetTrigger("IsDaipan");
+                });
         }
 
         public void AngerZoom(bool isFull)
@@ -57,10 +64,14 @@ namespace Daipan.Streamer.Scripts
                 return;
             }
 
-            // 怒ってないとき通常サイズに
-            senquence.Append(_transform.DOScale(_originalScale, zoomDuration));
-            senquence.Join(_transform.DOMove(_originalPosition, zoomDuration));
 
+            // 怒ってないとき通常サイズに
+            Observable.Timer(System.TimeSpan.FromSeconds(1))
+                .Subscribe(_ =>
+                {
+                    senquence.Append(_transform.DOScale(_originalScale, zoomDuration));
+                    senquence.Join(_transform.DOMove(_originalPosition, zoomDuration));
+                });
         }
     }
 }

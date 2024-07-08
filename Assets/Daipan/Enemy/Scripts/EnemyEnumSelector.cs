@@ -16,7 +16,6 @@ namespace Daipan.Enemy.Scripts
     public class EnemyEnumSelector : IEnemyEnumSelector
     {
         readonly EnemyParamsManager _enemyParamsManager;
-        readonly EnemyLevelDesignParamData _enemyLevelDesignParamData;
         readonly IEnemyTimeLineParamContainer _enemyTimeLineParamContainer;
 
         public EnemyEnumSelector(
@@ -26,14 +25,13 @@ namespace Daipan.Enemy.Scripts
         )
         {
             _enemyParamsManager = enemyParamsManager;
-            _enemyLevelDesignParamData = enemyLevelDesignParamData;
             _enemyTimeLineParamContainer = enemyTimeLineParamContainer;
         }
 
         public EnemyEnum SelectEnemyEnum()
         {
             return
-                IsSpawnBoss(_enemyLevelDesignParamData, _enemyTimeLineParamContainer)
+                IsSpawnBoss( _enemyTimeLineParamContainer)
                     ? DecideRandomEnemyType(_enemyParamsManager, x => x.IsBoss() == true)
                     : IsSpawnSpecial(_enemyTimeLineParamContainer)
                         ? DecideRandomEnemyType(_enemyParamsManager, x => x.IsSpecial() == true)
@@ -44,18 +42,10 @@ namespace Daipan.Enemy.Scripts
         }
 
         static bool IsSpawnBoss(
-            EnemyLevelDesignParamData enemyLevelDesignParamData
-            , IEnemyTimeLineParamContainer enemyTimeLineParamContainer
+             IEnemyTimeLineParamContainer enemyTimeLineParamContainer
         )
         {
-            // Bossが出現する条件1
-            if (enemyLevelDesignParamData.GetCurrentKillAmount() >= enemyLevelDesignParamData.GetSpawnBossAmount())
-            {
-                enemyLevelDesignParamData.SetCurrentKillAmount(0);
-                return true;
-            }
-
-            // Bossが出現する条件2
+            // Bossが出現する条件
             if (Random.value < enemyTimeLineParamContainer.GetEnemyTimeLineParamData().GetSpawnBossPercent() / 100.0)
                 return true;
 
