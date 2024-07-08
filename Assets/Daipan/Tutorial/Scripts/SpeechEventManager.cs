@@ -11,7 +11,7 @@ namespace Daipan.Tutorial.Scripts
 {
     public interface ISpeechEvent
     {
-        int Id { get; } 
+        int Id { get; }
         string Message { get; }
         SpeechEventEnum SpeechEventEnum { get; }
         (bool, ISpeechEvent) MoveNext();
@@ -25,22 +25,21 @@ namespace Daipan.Tutorial.Scripts
         public SpeechEventEnum SpeechEventEnum { get; protected init; }
         protected Func<bool> OnMoveAction { get; set; } = () => true;
         protected readonly IList<IDisposable> Disposables = new List<IDisposable>();
+
         public void Dispose()
         {
-            foreach (var disposable in Disposables)
-            {
-                disposable.Dispose();
-            }
+            foreach (var disposable in Disposables) disposable.Dispose();
         }
+
         public abstract (bool, ISpeechEvent) MoveNext();
         public abstract void SetNextEvent(params ISpeechEvent[] nextEvents);
     }
-    
+
     public enum SpeechEventEnum
     {
         None,
         Listening, // 聞くタイプのチュートリアル
-        Practical, // 実践するタイプのチュートリアル
+        Practical // 実践するタイプのチュートリアル
     }
 
     public sealed record SequentialEvent : AbstractSpeechEvent
@@ -64,14 +63,14 @@ namespace Daipan.Tutorial.Scripts
         public override (bool, ISpeechEvent) MoveNext()
         {
             var result = OnMoveAction();
-            if(!result) return  (false, this);
+            if (!result) return (false, this);
             if (NextEvent == null) return (false, this);
             return (true, NextEvent);
         }
 
         public override void SetNextEvent(params ISpeechEvent[] nextEvents)
         {
-            if(nextEvents.Length != 1) throw new ArgumentException("NextEvent must be one");
+            if (nextEvents.Length != 1) throw new ArgumentException("NextEvent must be one");
             NextEvent = nextEvents[0];
         }
     }
@@ -81,42 +80,43 @@ namespace Daipan.Tutorial.Scripts
         Func<bool> Condition { get; }
         ISpeechEvent? TrueEvent { get; set; }
         ISpeechEvent? FalseEvent { get; set; }
+
         public ConditionalEvent(
             int id
-            ,string message
-            ,SpeechEventEnum speechEventEnum
-            ,Func<bool> onMoveAction
-            ,Func<bool> condition
-            )
+            , string message
+            , SpeechEventEnum speechEventEnum
+            , Func<bool> onMoveAction
+            , Func<bool> condition
+        )
         {
             Id = id;
-            Message = message; 
+            Message = message;
             SpeechEventEnum = speechEventEnum;
             OnMoveAction = onMoveAction;
             Condition = condition;
         }
+
         public ConditionalEvent(int id, string message, SpeechEventEnum speechEventEnum, Func<bool> condition)
             : this(id, message, speechEventEnum, () => true, condition)
         {
         }
- 
+
         public override (bool, ISpeechEvent) MoveNext()
         {
             var result = OnMoveAction();
-            if(!result) return  (false, this);
+            if (!result) return (false, this);
             if (TrueEvent == null || FalseEvent == null) return (false, this);
             return (true, Condition() ? TrueEvent : FalseEvent);
         }
-        
+
         public override void SetNextEvent(params ISpeechEvent[] nextEvents)
         {
-            if(nextEvents.Length != 2) throw new ArgumentException("NextEvent must be two");
+            if (nextEvents.Length != 2) throw new ArgumentException("NextEvent must be two");
             TrueEvent = nextEvents[0];
             FalseEvent = nextEvents[1];
         }
-            
     }
-  
+
     public sealed record EndEvent : AbstractSpeechEvent
     {
         public override (bool, ISpeechEvent) MoveNext()
@@ -134,70 +134,130 @@ namespace Daipan.Tutorial.Scripts
     {
         public static ISpeechEvent BuildUICatIntroduce()
         {
-            List<ISpeechEvent> speechEvents =
+            var speechEvents =
                 new List<ISpeechEvent>
-                { 
-                    new SequentialEvent(0, "やぁ、初めまして！僕はネコ！",SpeechEventEnum.Listening),
-                    new SequentialEvent(1, "君の配信をサポートするよ！",SpeechEventEnum.Listening),
+                {
+                    new SequentialEvent(0, "やぁ、初めまして！僕はネコ！", SpeechEventEnum.Listening),
+                    new SequentialEvent(1, "君の配信をサポートするよ！", SpeechEventEnum.Listening),
                     new SequentialEvent(2, "じゃあ、まずこのゲームの説明...！", SpeechEventEnum.Listening),
                     new EndEvent()
                 };
             speechEvents[0].SetNextEvent(speechEvents[1]);
             speechEvents[1].SetNextEvent(speechEvents[2]);
             speechEvents[2].SetNextEvent(speechEvents[3]);
-            return speechEvents[0]; 
+            return speechEvents[0];
         }
-        
+
         public static ISpeechEvent BuildRedEnemyTutorial(
             RedEnemyTutorial redEnemyTutorial
-            )
+        )
         {
-            List<ISpeechEvent> speechEvents =
+            var speechEvents =
                 new List<ISpeechEvent>
                 {
                     new SequentialEvent(0, "赤い敵が来たね！", SpeechEventEnum.Listening),
                     new ConditionalEvent(1, "赤色のボタンを押そう！", SpeechEventEnum.Practical
-                        , () =>
-                        {
-                             return true;
-                        },() => redEnemyTutorial.IsSuccess == true),
+                        , () => { return true; }, () => redEnemyTutorial.IsSuccess == true),
                     new SequentialEvent(2, "そうそう！上手！", SpeechEventEnum.Listening),
                     new SequentialEvent(3, "それは違うボタンだよ！もう一回！", SpeechEventEnum.Listening
-                        , () =>
-                        {
-                            return true;
-                        }
-                        ),
-                    new EndEvent(),
+                        , () => { return true; }
+                    ),
+                    new EndEvent()
                 };
-            
+
             speechEvents[0].SetNextEvent(speechEvents[1]);
             speechEvents[1].SetNextEvent(speechEvents[2], speechEvents[3]);
             speechEvents[2].SetNextEvent(speechEvents[4]); // Success path
             speechEvents[3].SetNextEvent(speechEvents[1]); // Failure path, retry
-            return speechEvents[0]; 
+            return speechEvents[0];
         }
-        
+
         public static ISpeechEvent BuildSequentialEnemyTutorial(
             SequentialEnemyTutorial sequentialEnemyTutorial
         )
         {
-            List<ISpeechEvent> speechEvents =
+            var speechEvents =
                 new List<ISpeechEvent>
                 {
                     new SequentialEvent(0, "今度はたくさんの敵が来たね！", SpeechEventEnum.Listening),
                     new SequentialEvent(1, "対応するボタンを押そう！", SpeechEventEnum.Practical),
                     new SequentialEvent(2, "君、配信の才能あるよ！", SpeechEventEnum.Listening),
-                    new EndEvent(),
+                    new EndEvent()
                 };
-            
+
             speechEvents[0].SetNextEvent(speechEvents[1]);
             speechEvents[1].SetNextEvent(speechEvents[2]);
-            speechEvents[2].SetNextEvent(speechEvents[3]); 
-            return speechEvents[0]; 
+            speechEvents[2].SetNextEvent(speechEvents[3]);
+            return speechEvents[0];
+        }
+
+        public static ISpeechEvent BuildShowWitheCommentsTutorial(
+            ShowWhiteCommentsTutorial showWhiteCommentsTutorial
+        )
+        {
+            var speechEvents =
+                new List<ISpeechEvent>
+                {
+                    new SequentialEvent(0, "配信盛り上がっているネ...！", SpeechEventEnum.Listening),
+                    new EndEvent()
+                };
+
+            speechEvents[0].SetNextEvent(speechEvents[1]);
+            return speechEvents[0];
+        }
+
+        public static ISpeechEvent BuildShowAntiCommentsTutorial(
+            ShowAntiCommentsTutorial showAntiCommentsTutorial
+        )
+        {
+            var speechEvents =
+                new List<ISpeechEvent>
+                {
+                    new SequentialEvent(0, "うわ！？アンチだ...！？どうしよ...；；", SpeechEventEnum.Listening),
+                    new EndEvent()
+                };
+
+            speechEvents[0].SetNextEvent(speechEvents[1]);
+            return speechEvents[0];
+        }
+
+        public static ISpeechEvent BuildShowDaipanCutsceneTutorial(
+            DaipanCutscene daipanCutscene
+        )
+        {
+            var speechEvents =
+                new List<ISpeechEvent>
+                {
+                    new SequentialEvent(0, "わっ...", SpeechEventEnum.Practical),
+                    new EndEvent()
+                };
+
+            speechEvents[0].SetNextEvent(speechEvents[1]);
+            return speechEvents[0];
+        }
+
+        public static ISpeechEvent BuildCatSpeaksAfterDaipan(
+            CatSpeaksAfterDaipan catSpeaksAfterDaipan
+        )
+        {
+            var speechEvents =
+                new List<ISpeechEvent>
+                {
+                    new SequentialEvent(0, "す、スゴイ...！", SpeechEventEnum.Listening),
+                    new SequentialEvent(1, "君、配信の才能あるよ！", SpeechEventEnum.Listening),
+                    new SequentialEvent(2, "台パン配信者...！い、いける...これは売れるぞ〜〜！！！", SpeechEventEnum.Listening),
+                    new SequentialEvent(3, "...ヨシ！そろそろ本番の配信をしようか！", SpeechEventEnum.Listening),
+                    new EndEvent()
+                };
+
+            speechEvents[0].SetNextEvent(speechEvents[1]);
+            speechEvents[1].SetNextEvent(speechEvents[2]);
+            speechEvents[2].SetNextEvent(speechEvents[3]);
+            speechEvents[3].SetNextEvent(speechEvents[4]);
+            return speechEvents[0];
         }
     }
-    
+
 
     public class SpeechEventManager
     {
@@ -212,19 +272,22 @@ namespace Daipan.Tutorial.Scripts
                     Debug.LogWarning("CurrentEvent is null");
                     return new EndEvent();
                 }
+
                 return _currentEvent;
             }
-            private set => _currentEvent = value; 
-        }   
+            private set => _currentEvent = value;
+        }
+
         public void SetSpeechEvent(ISpeechEvent speechEvent)
         {
             CurrentEvent = speechEvent;
         }
+
         public SpeechEventEnum GetSpeechEventEnum()
         {
             return CurrentEvent.SpeechEventEnum;
         }
-        
+
         public bool IsEnd()
         {
             return CurrentEvent is EndEvent;
@@ -232,10 +295,11 @@ namespace Daipan.Tutorial.Scripts
 
         public bool MoveNext()
         {
-            var (result, nextEvent) = CurrentEvent.MoveNext(); 
-            if(result) CurrentEvent = nextEvent;
+            Debug.Log($"CurrentEvent.Message = {CurrentEvent.Message}");
+            var (result, nextEvent) = CurrentEvent.MoveNext();
+            if (result) CurrentEvent = nextEvent;
+            Debug.Log($"NextEvent.Message = {CurrentEvent.Message}");
             return result;
         }
     }
 }
-

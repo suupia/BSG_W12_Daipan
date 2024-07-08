@@ -69,6 +69,7 @@ namespace Daipan.Tutorial
             builder.Register<AttackExecutorTutorial>(Lifetime.Transient).As<IAttackExecutor>(); 
             builder.Register<PlayerAttackEffectBuilderTutorial>(Lifetime.Scoped).As<IPlayerAttackEffectBuilder>();
             builder.Register<PlayerInputTutorial>(Lifetime.Transient).As<IPlayerInput>();
+            builder.Register<PlayerOnDamagedRegistrarTutorial>(Lifetime.Transient).As<IPlayerOnDamagedRegistrar>();
             
             // Combo
             DaipanScope.RegisterCombo(builder, comboParamManager);
@@ -79,6 +80,8 @@ namespace Daipan.Tutorial
             // Enemy
             DaipanScope.RegisterEnemy(builder, enemyParamsManager);
             builder.Register<EnemySpawnerTutorial>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
+            builder.Register<EnemyBuilderTutorial>(Lifetime.Scoped).As<IEnemyBuilder>();
+
             // Irritated
             DaipanScope.RegisterIrritated(builder, irritatedParams);
     
@@ -122,8 +125,8 @@ namespace Daipan.Tutorial
             builder.Register<UICatIntroduce>(Lifetime.Scoped).As<ITutorialContent>();
             builder.Register<RedEnemyTutorial>(Lifetime.Scoped).As<ITutorialContent>().AsSelf();
             builder.Register<SequentialEnemyTutorial>(Lifetime.Scoped).As<ITutorialContent>();
-            builder.Register<ShowWhiteComments>(Lifetime.Scoped).As<ITutorialContent>();
-            builder.Register<ShowAntiComments>(Lifetime.Scoped).As<ITutorialContent>();
+            builder.Register<ShowWhiteCommentsTutorial>(Lifetime.Scoped).As<ITutorialContent>();
+            builder.Register<ShowAntiCommentsTutorial>(Lifetime.Scoped).As<ITutorialContent>();
             builder.Register<DaipanCutscene>(Lifetime.Scoped).As<ITutorialContent>();
             builder.Register<CatSpeaksAfterDaipan>(Lifetime.Scoped).As<ITutorialContent>();
             builder.Register<AimForTopStreamer>(Lifetime.Scoped).As<ITutorialContent>();

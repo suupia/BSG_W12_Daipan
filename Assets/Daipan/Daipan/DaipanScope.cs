@@ -165,7 +165,6 @@ namespace Daipan.Daipan
                 new EnemyLevelDesignParamDataBuilder(builder, enemyParamsManager.enemyLevelDesignParam));
             // Enemy
             builder.Register<EnemyPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<EnemyMono>>();
-            builder.Register<EnemyBuilder>(Lifetime.Scoped).As<IEnemyBuilder>();
             builder.Register<EnemyCluster>(Lifetime.Scoped);
             builder.Register<EnemyAttackDecider>(Lifetime.Scoped);
             builder.Register<EnemyTotemOnAttack>(Lifetime.Scoped);
@@ -222,6 +221,7 @@ namespace Daipan.Daipan
             builder.Register<AttackExecutor>(Lifetime.Transient).As<IAttackExecutor>();
             builder.Register<PlayerAttackEffectBuilder>(Lifetime.Scoped).As<IPlayerAttackEffectBuilder>();
             builder.Register<PlayerInput>(Lifetime.Transient).As<IPlayerInput>();
+            builder.Register<PlayerOnDamagedRegistrar>(Lifetime.Transient).As<IPlayerOnDamagedRegistrar>();
             
             // Combo
             RegisterCombo(builder, comboParamManager);
@@ -232,6 +232,8 @@ namespace Daipan.Daipan
             // Enemy
             RegisterEnemy(builder, enemyParamsManager);
             builder.Register<EnemySpawner>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
+            builder.Register<EnemyEnumSelector>(Lifetime.Scoped).As<IEnemyEnumSelector>();
+            builder.Register<EnemyBuilder>(Lifetime.Scoped).As<IEnemyBuilder>();
 
             // Irritated
             RegisterIrritated(builder, irritatedParams);

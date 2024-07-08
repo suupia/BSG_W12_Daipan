@@ -29,16 +29,18 @@ namespace Daipan.Enemy.Scripts
         readonly IEnemyTimeLineParamContainer _enemyTimeLInePramContainer;
         readonly float _spawnRandomPositionY = 0.2f;
         readonly IEnemyBuilder _enemyBuilder;
+        readonly IEnemyEnumSelector _enemyEnumSelector;
         float _timer;
 
         [Inject]
         public EnemySpawner(
-            IObjectResolver container,
-            IPrefabLoader<EnemyMono> enemyMonoLoader, 
-            EnemyCluster enemyCluster,
-            IEnemySpawnPoint enemySpawnPoint,
-            IEnemyTimeLineParamContainer enemyTimeLInePramContainer,
-            IEnemyBuilder enemyBuilder
+            IObjectResolver container
+            , IPrefabLoader<EnemyMono> enemyMonoLoader
+            ,EnemyCluster enemyCluster
+            ,IEnemySpawnPoint enemySpawnPoint
+            ,IEnemyTimeLineParamContainer enemyTimeLInePramContainer
+            ,IEnemyBuilder enemyBuilder
+            ,IEnemyEnumSelector enemyEnumSelector
         )
         {
             _container = container;
@@ -47,6 +49,7 @@ namespace Daipan.Enemy.Scripts
             _enemySpawnPoint = enemySpawnPoint;
             _enemyTimeLInePramContainer = enemyTimeLInePramContainer;
             _enemyBuilder = enemyBuilder;
+            _enemyEnumSelector = enemyEnumSelector;
         }
 
 
@@ -66,7 +69,7 @@ namespace Daipan.Enemy.Scripts
             var randomSpawnPosition = new Vector3 { x = spawnPosition.x, y = spawnPosition.y + Random.Range(-_spawnRandomPositionY, _spawnRandomPositionY) };
             var enemyMonoPrefab = _enemyMonoLoader.Load();
             var enemyMonoObject = _container.Instantiate(enemyMonoPrefab, randomSpawnPosition, Quaternion.identity);
-            var enemyMono = _enemyBuilder.Build(enemyMonoObject);
+            var enemyMono = _enemyBuilder.Build(enemyMonoObject, _enemyEnumSelector.SelectEnemyEnum());
             _enemyCluster.Add(enemyMono);
         }
 

@@ -21,21 +21,18 @@ namespace Daipan.Player.Scripts
         readonly IPlayerParamDataContainer _playerParamDataContainer;
         readonly EnemyCluster _enemyCluster;
         readonly EnemyTotemOnAttack _enemyTotemOnAttack;
-        readonly RedEnemyTutorial _redEnemyTutorial;
         readonly TutorialFacilitator _tutorialFacilitator; 
 
         public PlayerAttackEffectBuilderTutorial(
             IPlayerParamDataContainer playerParamDataContainer
             ,EnemyCluster enemyCluster
             ,EnemyTotemOnAttack enemyTotemOnAttack
-            ,RedEnemyTutorial redEnemyTutorial
             ,TutorialFacilitator tutorialFacilitator 
         )
         {
             _playerParamDataContainer = playerParamDataContainer;
             _enemyCluster = enemyCluster;
             _enemyTotemOnAttack = enemyTotemOnAttack;
-            _redEnemyTutorial = redEnemyTutorial;
             _tutorialFacilitator = tutorialFacilitator;
         }
 
@@ -53,7 +50,6 @@ namespace Daipan.Player.Scripts
                     , playerColor
                     , args.EnemyMono
                     ,_enemyTotemOnAttack
-                    ,_redEnemyTutorial
                     ,_tutorialFacilitator);
             };
             return effect;
@@ -66,19 +62,25 @@ namespace Daipan.Player.Scripts
             ,PlayerColor playerColor
             ,EnemyMono? enemyMono
             ,EnemyTotemOnAttack totemOnAttack
-            ,RedEnemyTutorial redEnemyTutorial
             ,TutorialFacilitator tutorialFacilitator 
             )
         {
             Debug.Log($"Attack enemyMono?.EnemyEnum: {enemyMono?.EnemyEnum}");
             if (enemyMono == null) return;
 
-
             Debug.Log($"EnemyType: {enemyMono.EnemyEnum}を攻撃");
             if (enemyMono.EnemyEnum == EnemyEnum.Red)
             {
-                Debug.Log("RedEnemyTutorial_Success");
-                if(tutorialFacilitator.CurrentStep is RedEnemyTutorial) redEnemyTutorial.SetIsSuccess(playerColor == PlayerColor.Red);
+                // チュートリアルごとの処理 
+                if (tutorialFacilitator.CurrentStep is RedEnemyTutorial redEnemyTutorial)
+                {
+                   if(playerColor == PlayerColor.Red) redEnemyTutorial.SetIsSuccess();
+                }
+                if(tutorialFacilitator.CurrentStep is SequentialEnemyTutorial sequentialEnemyTutorial)
+                {
+                    // 本来は全ての敵を倒したかどうかを判定するべきだが、最後の敵がたまたまRedなので、これで判定する
+                    if(playerColor == PlayerColor.Red) sequentialEnemyTutorial.MoveNextSpeech();
+                }
             }
             if (PlayerAttackModule.GetTargetEnemyEnum(playerColor).Contains(enemyMono.EnemyEnum))
             {
@@ -88,13 +90,9 @@ namespace Daipan.Player.Scripts
                 {
                     EnemyEnum.Totem => totemOnAttack.OnAttacked(enemyMono.Hp, playerParamData),
                     _ => PlayerAttackModule.Attack(enemyMono.Hp,playerParamData)
-                    // 敵が特攻攻撃をしてくる
-                    // todo: 一旦はなし
-                    // enemyMono.SuicideAttack(playerMono); 
                 };
 
             }
-
 
             // Animation
             foreach (var playerViewMono in playerViewMonos)

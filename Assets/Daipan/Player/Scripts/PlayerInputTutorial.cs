@@ -44,7 +44,7 @@ namespace Daipan.Player.Scripts
         /// </summary>
         public void Update()
         {
-            Debug.Log($"_speechEventManager.GetSpeechEventEnum() = {_speechEventManager.GetSpeechEventEnum()}"); 
+            Debug.Log($"_speechEventManager.GetSpeechEventEnum() = {_speechEventManager.GetSpeechEventEnum()} CurrentStep = {_speechEventManager.CurrentEvent.Message}"); 
             switch (_speechEventManager.GetSpeechEventEnum())
             {
                 case SpeechEventEnum.Listening:
@@ -92,7 +92,11 @@ namespace Daipan.Player.Scripts
                 _attackExecutor.FireAttackEffect(_playerMono, PlayerColor.Yellow);
             }
 
-            if (Input.GetKeyDown(KeyCode.Return)) _daipanExecutor.DaiPan(); 
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                _daipanExecutor.DaiPan();
+                _speechEventManager.MoveNext();
+            } 
         }
     }
 }
