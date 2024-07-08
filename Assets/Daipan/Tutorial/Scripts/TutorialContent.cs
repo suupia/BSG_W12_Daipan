@@ -18,14 +18,11 @@ namespace Daipan.Tutorial.Scripts
     {
         public abstract void Execute();
         public abstract bool IsCompleted();
-        protected bool Completed { get; set; }
         protected readonly IList<IDisposable> Disposables = new List<IDisposable>();
-
         public void Dispose()
         {
             foreach (var disposable in Disposables) disposable.Dispose();
         }
-
         ~AbstractTutorialContent()
         {
             Dispose();
@@ -36,6 +33,7 @@ namespace Daipan.Tutorial.Scripts
     {
         readonly DownloadGaugeViewMono _gaugeViewMono;
         const float FillAmountPerSec = 0.2f;
+        bool Completed { get; set; }
 
         public DisplayBlackScreenWithProgress(DownloadGaugeViewMono gaugeViewMono)
         {
@@ -65,7 +63,7 @@ namespace Daipan.Tutorial.Scripts
         readonly LanguageConfig _languageConfig;
         readonly InputSerialManager _inputSerialManager;
         readonly LanguageSelectionPopupMono _languageSelectionPopupMono;
-
+        bool Completed { get; set; }
         public LanguageSelection(
             LanguageConfig languageConfig
             , InputSerialManager inputSerialManager
@@ -113,7 +111,7 @@ namespace Daipan.Tutorial.Scripts
         readonly DownloadGaugeViewMono _gaugeViewMono;
         readonly BlackScreenViewMono _blackScreenViewMono;
         const float FillAmountPerSec = 0.2f;
-
+        bool Completed { get; set; }
         public FadeInTutorialStart(
             DownloadGaugeViewMono gaugeViewMono
             , BlackScreenViewMono blackScreenViewMono
