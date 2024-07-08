@@ -1,9 +1,11 @@
 #nullable enable
 using System;
 using System.Collections.Generic;
+using Daipan.Enemy.MonoScripts;
 using Daipan.Enemy.Scripts;
 using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Player.MonoScripts;
+using UnityEngine;
 
 namespace Daipan.Player.Scripts
 {
@@ -24,6 +26,13 @@ namespace Daipan.Player.Scripts
             };
         } 
 
-    }  
+        
+        public static bool IsInScreenEnemy(EnemyMono? enemyMono)
+        {
+            if (enemyMono == null) return false;
+            var worldPosition = Camera.main.ViewportToWorldPoint(new Vector2(1, 1));
+            return enemyMono.gameObject.transform.position.x < worldPosition.x;
+        }
+    }   
 }
 
