@@ -8,7 +8,6 @@ namespace Daipan.Option.Interfaces
 {
     public interface IOptionPopUp
     {
-        OptionContentEnum OptionContent { get; }
         void Prepare();
         void Select();
         void MoveCursor(MoveCursorDirectionEnum moveCursorDirection);

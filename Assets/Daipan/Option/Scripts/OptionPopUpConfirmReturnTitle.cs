@@ -8,11 +8,6 @@ namespace Daipan.Option.Scripts
 {
     public class OptionPopUpConfirmReturnTitle : IOptionPopUp
     {
-        const OptionContentEnum optionContent = OptionContentEnum.ConfirmReturnTitle;
-        public OptionContentEnum OptionContent
-        {
-            get => optionContent;
-        }
         myContent _myContent;
         IHandleOption _handleOption = null!;
 

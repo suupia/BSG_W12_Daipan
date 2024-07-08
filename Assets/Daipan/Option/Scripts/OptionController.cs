@@ -20,7 +20,19 @@ namespace Daipan.Option.Scripts
             _optionContents = optionContents.ToList();
             foreach (var option in _optionContents) option.SetIHandle(this);
             CurrentOptionContent = _optionContents
-                .FirstOrDefault(x => x.OptionContent == OptionContentEnum.Main);
+                .FirstOrDefault(x => x is OptionPopUpMain);
+
+            foreach (var option in _optionContents)
+            {
+                if (option is OptionPopUpMain optionPopUpMain)
+                {
+                    optionPopUpMain.RegisterTransition(myContent =>
+                    {
+                        return _optionContents.FirstOrDefault(x => x is OptionPopUpConfirmReturnTitle);
+                    });
+                }
+
+            }
         }
 
 
@@ -34,10 +46,10 @@ namespace Daipan.Option.Scripts
             CurrentOptionContent?.MoveCursor(moveCursorDirection);
         }
 
-        public void SetCurrentOption(OptionContentEnum optionContent)
+        public void SetCurrentOption(IOptionPopUp optionPopUp)
         {
             CurrentOptionContent = _optionContents
-                .FirstOrDefault(x => x.OptionContent == optionContent);
+                .FirstOrDefault(x => x.GetType() == optionPopUp.GetType());
         }
 
         public void OpenOption()
@@ -56,7 +68,7 @@ namespace Daipan.Option.Scripts
 
         public void Prepare()
         {
-            CurrentOptionContent = _optionContents.FirstOrDefault(x => x.OptionContent == OptionContentEnum.Main);
+            CurrentOptionContent = _optionContents.FirstOrDefault(x => x is OptionPopUpMain);
         }
 
     }
@@ -68,11 +80,5 @@ namespace Daipan.Option.Scripts
         Down,
         Left
     }
-
-    public enum OptionContentEnum
-    {
-        Main,
-        ConfirmReturnTitle,
-        Language,
-    }
+    
 }

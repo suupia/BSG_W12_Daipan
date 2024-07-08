@@ -1,4 +1,5 @@
 #nullable enable
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,13 +10,9 @@ namespace Daipan.Option.Scripts
 {
     public class OptionPopUpMain : IOptionPopUp
     {
-        const OptionContentEnum optionContent = OptionContentEnum.Main;
-        public OptionContentEnum OptionContent
-        {
-            get => optionContent;
-        }
         myContent _myContent;
         IHandleOption _handleOption = null!;
+        Func<myContent, IOptionPopUp?> _transitionFunc = null!; 
 
         public void Prepare()
         {
@@ -24,25 +21,8 @@ namespace Daipan.Option.Scripts
 
         public void Select()
         {
-            switch (_myContent)
-            {
-                case myContent.BGM:
-                    Debug.Log($"Select : {_myContent}");
-                    break;
-                case myContent.SE:
-                    Debug.Log($"Select : {_myContent}");
-                    break;
-                case myContent.IsShaking:
-                    Debug.Log($"Select : {_myContent}");
-                    break;
-                case myContent.ReturnTitle:
-                    Debug.Log($"Select : {_myContent}");
-                    _handleOption.SetCurrentOption(OptionContentEnum.ConfirmReturnTitle);
-                    break;
-                case myContent.Language:
-                    _handleOption.SetCurrentOption(OptionContentEnum.Language);
-                    break;
-            }
+            var nextOption = _transitionFunc(myContent.ReturnTitle);
+            if(nextOption != null) _handleOption.SetCurrentOption(nextOption);
         }
         public void MoveCursor(MoveCursorDirectionEnum moveCursorDirection)
         {
@@ -64,7 +44,11 @@ namespace Daipan.Option.Scripts
             _handleOption = handleOption;
         }
 
-        enum myContent
+        public void RegisterTransition(Func<myContent, IOptionPopUp?> transitionFunc)
+        {
+            _transitionFunc = transitionFunc;
+        }
+        public enum myContent
         {
             BGM,
             SE,
