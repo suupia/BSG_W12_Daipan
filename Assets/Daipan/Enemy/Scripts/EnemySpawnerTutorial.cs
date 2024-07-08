@@ -27,7 +27,6 @@ namespace Daipan.Enemy.Scripts
         readonly EnemyCluster _enemyCluster;
         readonly IEnemySpawnPoint _enemySpawnPoint;
         readonly IEnemyBuilder _enemyBuilder;
-        float _timer;
 
         [Inject]
         public EnemySpawnerTutorial(
@@ -73,12 +72,5 @@ namespace Daipan.Enemy.Scripts
             return positions;
         }
 
-        (Vector3 spawnedPos, EnemyEnum enemyEnum) GetSpawnedPositionRandom()
-        {
-            var positions = GetSpawnedPositions(); 
-            var enums = _enemySpawnPoint.GetEnemySpawnedEnemyEnums();
-            var randomIndex = Randoms.RandomByRatios(_enemySpawnPoint.GetEnemySpawnRatios(), Random.value);
-            return (positions[randomIndex], enums[randomIndex]);
-        }
     }
 }

@@ -67,12 +67,16 @@ namespace Daipan.Enemy.Scripts
         {
             var spawnPosition = GetRandomSpawnPosition(_enemySpawnPoint);
             var randomSpawnPosition = new Vector3 { x = spawnPosition.x, y = spawnPosition.y + Random.Range(-_spawnRandomPositionY, _spawnRandomPositionY) };
+            
+            SpawnEnemy(randomSpawnPosition, _enemyEnumSelector.SelectEnemyEnum());
+        }
+        void SpawnEnemy(Vector3 spawnPosition, EnemyEnum enemyEnum)
+        {
             var enemyMonoPrefab = _enemyMonoLoader.Load();
-            var enemyMonoObject = _container.Instantiate(enemyMonoPrefab, randomSpawnPosition, Quaternion.identity);
-            var enemyMono = _enemyBuilder.Build(enemyMonoObject, _enemyEnumSelector.SelectEnemyEnum());
+            var enemyMonoObject = _container.Instantiate(enemyMonoPrefab, spawnPosition, Quaternion.identity);
+            var enemyMono = _enemyBuilder.Build(enemyMonoObject,enemyEnum);
             _enemyCluster.Add(enemyMono);
         }
-
         static Vector3 GetRandomSpawnPosition(IEnemySpawnPoint enemySpawnPoint)
         {
             var positions = enemySpawnPoint.GetEnemySpawnedPointXs()
