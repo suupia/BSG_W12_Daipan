@@ -1,6 +1,7 @@
 #nullable enable
 using System;
 using System.Collections.Generic;
+using Daipan.Battle.scripts;
 using Daipan.Comment.Scripts;
 using Daipan.Enemy.Scripts;
 using Daipan.InputSerial.Scripts;
@@ -202,13 +203,21 @@ namespace Daipan.Tutorial.Scripts
             return _speechEventManager.IsEnd();
         }
 
-        public void SetIsSuccess()
+        public void SetSuccess()
         {
-            Debug.Log($"RedEnemyTutorial SetIsSuccess"); 
-            IsSuccess = true;
+            Debug.Log($"RedEnemyTutorial SetIsSuccess");
+
             // これで強制的に次のスピーチに進む（危険かも）（IsSuccessをSpeechの方でObserveしているのでかなり危険）
+            int cnt = 0;
             while (!_speechEventManager.IsEnd())
             {
+                cnt++;
+                if (cnt >= 100)
+                {
+                    Debug.LogError($"Detect infinite loop in RedEnemyTutorial SetSuccess()");
+                    break;
+                }
+
                 _speechEventManager.MoveNext();
                 Debug.Log(
                     $"RedEnemyTutorial MoveNext _speechEventManager.CurrentEvent.Message: {_speechEventManager.CurrentEvent.Message}");
@@ -517,13 +526,17 @@ namespace Daipan.Tutorial.Scripts
     {
         readonly BlackScreenViewMono _blackScreenViewMono;
         readonly StandbyStreamingViewMono _standbyStreamingViewMono;
+        readonly InputSerialManager _inputSerialManager; 
         bool Completed { get; set; } 
         public StartActualGame(
             BlackScreenViewMono blackScreenViewMono
-            , StandbyStreamingViewMono standbyStreamingViewMono)
+            , StandbyStreamingViewMono standbyStreamingViewMono
+            , InputSerialManager inputSerialManager
+            )
         {
             _blackScreenViewMono = blackScreenViewMono;
             _standbyStreamingViewMono = standbyStreamingViewMono;
+            _inputSerialManager = inputSerialManager;
         }
         public override void Execute()
         {
@@ -532,12 +545,16 @@ namespace Daipan.Tutorial.Scripts
             {
                 // 配信待機所を表示
                 _standbyStreamingViewMono.Show();
-                // すこししてからフェードアウト
+                // すこししてからフェードアウトして、次のシーンへ
                 const float displaySec = 2.0f;
                 Observable.Timer(TimeSpan.FromSeconds(displaySec))
                     .Subscribe(_ =>
                     {
-                        _blackScreenViewMono.FadeOut(0.2f, () => { Completed = true; });
+                        _blackScreenViewMono.FadeOut(0.2f, () =>
+                        {
+                            SceneTransition.TransitioningScene(SceneName.DaipanScene);
+                            Completed = true;
+                        });
                     });
             }); 
         }
