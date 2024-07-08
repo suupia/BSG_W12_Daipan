@@ -27,16 +27,16 @@ namespace Daipan.Option.Scripts
             switch (_myContent)
             {
                 case myContent.BGM:
-                    Debug.Log("BGMだよ");
+                    Debug.Log("Select : BGM");
                     break;
                 case myContent.SE:
-                    Debug.Log("SEだよ");
+                    Debug.Log("Select : SE");
                     break;
                 case myContent.IsShaking:
-                    Debug.Log("IsShakingだよ");
+                    Debug.Log("Select : IsShaking");
                     break;
                 case myContent.ReturnTitle:
-                    Debug.Log("ReturnTitleだよ");
+                    Debug.Log("Select : ReturnTitle");
                     break;
 
             }
@@ -53,6 +53,7 @@ namespace Daipan.Option.Scripts
                 {
                     _myContent++;
                 }
+                Debug.Log($"Move : {_myContent}");
             }
         }
         public void SetIHandle(IHandleOption handleOption)
