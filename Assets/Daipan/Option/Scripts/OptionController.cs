@@ -10,32 +10,34 @@ namespace Daipan.Option.Scripts
 {
     public class OptionController : IHandleOption , IInputOption
     {
-        IOptionContent? _currentOptionContent { get; set; }
-        IEnumerable<IOptionContent>? _optionContents;
+        IOptionPopUpContent? CurrentOptionContent { get; set; }
+        readonly List<IOptionPopUpContent> _optionContents;
         public bool IsOpening { private set; get; }
 
         [Inject]
-        public OptionController(IEnumerable<IOptionContent>? optionContents)
+        public OptionController(IEnumerable<IOptionPopUpContent> optionContents)
         {
-            _optionContents = optionContents;
-            foreach (var option in _optionContents!) option.SetIHandle(this);
-            _currentOptionContent = _optionContents.Where(x => x.OptionContent == OptionContentEnum.Main).FirstOrDefault();
+            _optionContents = optionContents.ToList();
+            foreach (var option in _optionContents) option.SetIHandle(this);
+            CurrentOptionContent = _optionContents
+                .FirstOrDefault(x => x.OptionContent == OptionContentEnum.Main);
         }
 
 
         public void Select()
         {
-            _currentOptionContent?.Select();
+            CurrentOptionContent?.Select();
         }
 
         public void MoveCursor(MoveCursorDirectionEnum moveCursorDirection)
         {
-            _currentOptionContent?.MoveCursor(moveCursorDirection);
+            CurrentOptionContent?.MoveCursor(moveCursorDirection);
         }
 
         public void SetCurrentOption(OptionContentEnum optionContent)
         {
-            _currentOptionContent = _currentOptionContent = _optionContents.Where(x => x.OptionContent == optionContent).FirstOrDefault();
+            CurrentOptionContent = _optionContents
+                .FirstOrDefault(x => x.OptionContent == optionContent);
         }
 
         public void OpenOption()
@@ -43,7 +45,7 @@ namespace Daipan.Option.Scripts
             Debug.Log("Open Option!!");
             Prepare();
             IsOpening = true;
-            _currentOptionContent?.Prepare();
+            CurrentOptionContent?.Prepare();
         }
 
         public void CloseOption()
@@ -54,14 +56,14 @@ namespace Daipan.Option.Scripts
 
         public void Prepare()
         {
-            _currentOptionContent = _optionContents.Where(x => x.OptionContent == OptionContentEnum.Main).FirstOrDefault();
+            CurrentOptionContent = _optionContents.FirstOrDefault(x => x.OptionContent == OptionContentEnum.Main);
         }
 
     }
 
     public enum MoveCursorDirectionEnum
     {
-        UP,
+        Up,
         Right,
         Down,
         Left

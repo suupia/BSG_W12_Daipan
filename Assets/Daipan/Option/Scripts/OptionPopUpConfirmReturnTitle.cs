@@ -6,7 +6,7 @@ using Daipan.Option.Interfaces;
 
 namespace Daipan.Option.Scripts
 {
-    public class OptionConfirmReturnTitle : IOptionContent
+    public class OptionPopUpConfirmReturnTitle : IOptionPopUpContent
     {
         const OptionContentEnum optionContent = OptionContentEnum.ConfirmReturnTitle;
         public OptionContentEnum OptionContent

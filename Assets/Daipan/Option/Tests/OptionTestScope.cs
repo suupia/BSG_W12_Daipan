@@ -13,8 +13,8 @@ public class OptionTestScope : LifetimeScope
     protected override void Configure(IContainerBuilder builder)
     {
         builder.Register<OptionController>(Lifetime.Scoped).As<IHandleOption>().As<IInputOption>();
-        builder.Register<OptionMain>(Lifetime.Scoped).As<IOptionContent>();
-        builder.Register<OptionConfirmReturnTitle>(Lifetime.Scoped).As<IOptionContent>();
+        builder.Register<OptionPopUpMain>(Lifetime.Scoped).As<IOptionPopUpContent>();
+        builder.Register<OptionPopUpConfirmReturnTitle>(Lifetime.Scoped).As<IOptionPopUpContent>();
 
         builder.RegisterComponentInHierarchy<OptionTestInputMono>();
     }

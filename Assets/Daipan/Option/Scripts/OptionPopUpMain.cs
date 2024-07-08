@@ -7,7 +7,7 @@ using VContainer;
 
 namespace Daipan.Option.Scripts
 {
-    public class OptionMain : IOptionContent
+    public class OptionPopUpMain : IOptionPopUpContent
     {
         const OptionContentEnum optionContent = OptionContentEnum.Main;
         public OptionContentEnum OptionContent
