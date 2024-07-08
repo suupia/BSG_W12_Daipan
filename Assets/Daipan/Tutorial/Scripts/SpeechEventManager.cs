@@ -75,48 +75,6 @@ namespace Daipan.Tutorial.Scripts
         }
     }
 
-    public sealed record ConditionalEvent : AbstractSpeechEvent
-    {
-        Func<bool> Condition { get; }
-        ISpeechEvent? TrueEvent { get; set; }
-        ISpeechEvent? FalseEvent { get; set; }
-
-        public ConditionalEvent(
-            int id
-            , string message
-            , SpeechEventEnum speechEventEnum
-            , Func<bool> onMoveAction
-            , Func<bool> condition
-        )
-        {
-            Id = id;
-            Message = message;
-            SpeechEventEnum = speechEventEnum;
-            OnMoveAction = onMoveAction;
-            Condition = condition;
-        }
-
-        public ConditionalEvent(int id, string message, SpeechEventEnum speechEventEnum, Func<bool> condition)
-            : this(id, message, speechEventEnum, () => true, condition)
-        {
-        }
-
-        public override (bool, ISpeechEvent) MoveNext()
-        {
-            var result = OnMoveAction();
-            if (!result) return (false, this);
-            if (TrueEvent == null || FalseEvent == null) return (false, this);
-            return (true, Condition() ? TrueEvent : FalseEvent);
-        }
-
-        public override void SetNextEvent(params ISpeechEvent[] nextEvents)
-        {
-            if (nextEvents.Length != 2) throw new ArgumentException("NextEvent must be two");
-            TrueEvent = nextEvents[0];
-            FalseEvent = nextEvents[1];
-        }
-    }
-
     public sealed record EndEvent : AbstractSpeechEvent
     {
         public override (bool, ISpeechEvent) MoveNext()
@@ -156,19 +114,14 @@ namespace Daipan.Tutorial.Scripts
                 new List<ISpeechEvent>
                 {
                     new SequentialEvent(0, "赤い敵が来たね！", SpeechEventEnum.Listening),
-                    new ConditionalEvent(1, "赤色のボタンを押そう！", SpeechEventEnum.Practical
-                        , () => { return true; }, () => redEnemyTutorial.IsSuccess == true),
+                    new SequentialEvent(1, "赤色のボタンを押そう！", SpeechEventEnum.Practical), 
                     new SequentialEvent(2, "そうそう！上手！", SpeechEventEnum.Listening),
-                    new SequentialEvent(3, "それは違うボタンだよ！もう一回！", SpeechEventEnum.Listening
-                        , () => { return true; }
-                    ),
                     new EndEvent()
                 };
 
             speechEvents[0].SetNextEvent(speechEvents[1]);
-            speechEvents[1].SetNextEvent(speechEvents[2], speechEvents[3]);
-            speechEvents[2].SetNextEvent(speechEvents[4]); // Success path
-            speechEvents[3].SetNextEvent(speechEvents[1]); // Failure path, retry
+            speechEvents[1].SetNextEvent(speechEvents[2]);
+            speechEvents[2].SetNextEvent(speechEvents[3]);
             return speechEvents[0];
         }
 

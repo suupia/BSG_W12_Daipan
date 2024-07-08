@@ -9,7 +9,7 @@ using DG.Tweening;
 using R3;
 using VContainer;
 
-namespace Daipan.Streamer.Scripts
+namespace Daipan.Streamer.MonoScripts
 {
     public class SpeechBubbleMono : MonoBehaviour
     {

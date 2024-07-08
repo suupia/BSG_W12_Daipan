@@ -1,10 +1,10 @@
 #nullable enable
 using Daipan.Comment.Scripts;
 using Daipan.Enemy.Scripts;
-using Daipan.Streamer.Scripts;
 using Daipan.LevelDesign.Enemy.Scripts;
 using UnityEngine;
 using Daipan.Stream.MonoScripts;
+using Daipan.Streamer.MonoScripts;
 
 namespace Daipan.Stream.Scripts
 {

@@ -25,7 +25,7 @@ using Daipan.Player.Scripts;
 using Daipan.Stream.MonoScripts;
 using Daipan.Stream.Scripts;
 using Daipan.Stream.Scripts.Utility;
-using Daipan.Streamer.Scripts;
+using Daipan.Streamer.MonoScripts;
 using Daipan.Tower.MonoScripts;
 using Daipan.Tower.Scripts;
 using Daipan.Tutorial.Interfaces;
@@ -97,13 +97,16 @@ namespace Daipan.Tutorial
             // Tutorial
             builder.Register<TutorialFacilitator>(Lifetime.Scoped).AsSelf().As<IUpdate>();
             RegisterTutorialContents(builder);
+            builder.Register<SpeechEventManager>(Lifetime.Scoped);
 
             builder.RegisterComponentInHierarchy<DownloadGaugeViewMono>();
             builder.Register<LanguageConfig>(Lifetime.Scoped);
             builder.RegisterComponentInHierarchy<LanguageSelectionPopupMono>();
             builder.RegisterComponentInHierarchy<BlackScreenViewMono>();
             builder.RegisterComponentInHierarchy<SpeechBubbleMono>();
-            builder.Register<SpeechEventManager>(Lifetime.Scoped);
+            builder.RegisterComponentInHierarchy<PushEnterTextViewMono>();
+            builder.RegisterComponentInHierarchy<AimTopStreamerViewMono>();
+            builder.RegisterComponentInHierarchy<StandbyStreamingViewMono>();
 
             // Updater
             builder.UseEntryPoints(Lifetime.Scoped, entryPoints =>
@@ -119,9 +122,9 @@ namespace Daipan.Tutorial
 
         static void RegisterTutorialContents(IContainerBuilder builder)
         {
-            // builder.Register<DisplayBlackScreenWithProgress>(Lifetime.Scoped).As<ITutorialContent>();
-            // builder.Register<LanguageSelection>(Lifetime.Scoped).As<ITutorialContent>();
-            // builder.Register<FadeInTutorialStart>(Lifetime.Scoped).As<ITutorialContent>();
+            builder.Register<DisplayBlackScreenWithProgress>(Lifetime.Scoped).As<ITutorialContent>();
+            builder.Register<LanguageSelection>(Lifetime.Scoped).As<ITutorialContent>();
+            builder.Register<FadeInTutorialStart>(Lifetime.Scoped).As<ITutorialContent>();
             builder.Register<UICatIntroduce>(Lifetime.Scoped).As<ITutorialContent>();
             builder.Register<RedEnemyTutorial>(Lifetime.Scoped).As<ITutorialContent>().AsSelf();
             builder.Register<SequentialEnemyTutorial>(Lifetime.Scoped).As<ITutorialContent>();

@@ -1,12 +1,13 @@
 #nullable enable
 using System;
 using System.Collections.Generic;
+using Daipan.Battle.scripts;
 using Daipan.Comment.Scripts;
 using Daipan.Enemy.Scripts;
 using Daipan.InputSerial.Scripts;
 using Daipan.Option.Scripts;
 using Daipan.Stream.Scripts;
-using Daipan.Streamer.Scripts;
+using Daipan.Streamer.MonoScripts;
 using Daipan.Tutorial.Interfaces;
 using Daipan.Tutorial.MonoScripts;
 using R3;
@@ -18,14 +19,11 @@ namespace Daipan.Tutorial.Scripts
     {
         public abstract void Execute();
         public abstract bool IsCompleted();
-        protected bool Completed { get; set; }
         protected readonly IList<IDisposable> Disposables = new List<IDisposable>();
-
         public void Dispose()
         {
             foreach (var disposable in Disposables) disposable.Dispose();
         }
-
         ~AbstractTutorialContent()
         {
             Dispose();
@@ -36,6 +34,7 @@ namespace Daipan.Tutorial.Scripts
     {
         readonly DownloadGaugeViewMono _gaugeViewMono;
         const float FillAmountPerSec = 0.2f;
+        bool Completed { get; set; }
 
         public DisplayBlackScreenWithProgress(DownloadGaugeViewMono gaugeViewMono)
         {
@@ -44,6 +43,7 @@ namespace Daipan.Tutorial.Scripts
 
         public override void Execute()
         {
+        _gaugeViewMono.Show();
             Disposables.Add(Observable.EveryUpdate()
                 .Where(_ => !Completed)
                 .Subscribe(_ =>
@@ -65,7 +65,7 @@ namespace Daipan.Tutorial.Scripts
         readonly LanguageConfig _languageConfig;
         readonly InputSerialManager _inputSerialManager;
         readonly LanguageSelectionPopupMono _languageSelectionPopupMono;
-
+        bool Completed { get; set; }
         public LanguageSelection(
             LanguageConfig languageConfig
             , InputSerialManager inputSerialManager
@@ -113,7 +113,7 @@ namespace Daipan.Tutorial.Scripts
         readonly DownloadGaugeViewMono _gaugeViewMono;
         readonly BlackScreenViewMono _blackScreenViewMono;
         const float FillAmountPerSec = 0.2f;
-
+        bool Completed { get; set; }
         public FadeInTutorialStart(
             DownloadGaugeViewMono gaugeViewMono
             , BlackScreenViewMono blackScreenViewMono
@@ -125,6 +125,7 @@ namespace Daipan.Tutorial.Scripts
 
         public override void Execute()
         {
+            _gaugeViewMono.Show();
             Disposables.Add(
                 Observable.EveryUpdate()
                     .Where(_ => !Completed)
@@ -134,7 +135,11 @@ namespace Daipan.Tutorial.Scripts
                         _gaugeViewMono.SetGaugeValue(_gaugeViewMono.CurrentFillAmount +
                                                      FillAmountPerSec * Time.deltaTime);
                         if (_gaugeViewMono.CurrentFillAmount >= 1.0f)
-                            _blackScreenViewMono.FadeOut(1, () => { Completed = true; });
+                            _blackScreenViewMono.FadeOut(1, () =>
+                            {
+                                _gaugeViewMono.Hide();
+                                Completed = true;
+                            });
                     }));
         }
 
@@ -198,13 +203,21 @@ namespace Daipan.Tutorial.Scripts
             return _speechEventManager.IsEnd();
         }
 
-        public void SetIsSuccess()
+        public void SetSuccess()
         {
-            Debug.Log($"RedEnemyTutorial SetIsSuccess"); 
-            IsSuccess = true;
+            Debug.Log($"RedEnemyTutorial SetIsSuccess");
+
             // これで強制的に次のスピーチに進む（危険かも）（IsSuccessをSpeechの方でObserveしているのでかなり危険）
+            int cnt = 0;
             while (!_speechEventManager.IsEnd())
             {
+                cnt++;
+                if (cnt >= 100)
+                {
+                    Debug.LogError($"Detect infinite loop in RedEnemyTutorial SetSuccess()");
+                    break;
+                }
+
                 _speechEventManager.MoveNext();
                 Debug.Log(
                     $"RedEnemyTutorial MoveNext _speechEventManager.CurrentEvent.Message: {_speechEventManager.CurrentEvent.Message}");
@@ -358,7 +371,7 @@ namespace Daipan.Tutorial.Scripts
             );
             
             // 雑魚敵とボスも生成する
-            const float enemyIntervalSec = 1.0f; // スポーンの間隔
+            const float enemyIntervalSec = 0.5f; // スポーンの間隔
             var enemyEnums = new Queue<EnemyEnum>(new[] { EnemyEnum.Blue, EnemyEnum.RedBoss, EnemyEnum.Red, EnemyEnum.YellowBoss, EnemyEnum.Yellow, EnemyEnum.BlueBoss});
             Disposables.Add(
                 Observable.Interval(TimeSpan.FromSeconds(enemyIntervalSec))
@@ -386,16 +399,19 @@ namespace Daipan.Tutorial.Scripts
         readonly SpeechEventManager _speechEventManager;
         readonly IrritatedValue _irritatedValue;
         readonly DaipanExecutor _daipanExecutor;
+        readonly PushEnterTextViewMono _pushEnterTextViewMono;
 
         public DaipanCutscene(
             SpeechEventManager speechEventManager
             , IrritatedValue irritatedValue
             , DaipanExecutor daipanExecutor
+            , PushEnterTextViewMono pushEnterTextViewMono
         )
         {
             _speechEventManager = speechEventManager;
             _irritatedValue = irritatedValue;
             _daipanExecutor = daipanExecutor;
+            _pushEnterTextViewMono = pushEnterTextViewMono;
         }
 
         public override void Execute()
@@ -415,6 +431,22 @@ namespace Daipan.Tutorial.Scripts
                         },
                         _ => { Debug.Log($"IrritatedValue: {_irritatedValue.Value}"); }
                     )
+            );
+
+            Disposables.Add(
+                Observable.EveryValueChanged(_irritatedValue, irritatedValue => irritatedValue.Value)
+                    .Subscribe(
+                        _ =>
+                        {
+                            if (_irritatedValue.IsFull)
+                            {
+                                _pushEnterTextViewMono.Show();
+                            }
+                            else
+                            {
+                                _pushEnterTextViewMono.Hide();
+                            }
+                        })
             );
         }
 
@@ -456,37 +488,81 @@ namespace Daipan.Tutorial.Scripts
         }
     }
 
-    public class AimForTopStreamer : ITutorialContent
+    public class AimForTopStreamer : AbstractTutorialContent
     {
-        bool _completed = false;
-
-        public void Execute()
+        readonly SpeechEventManager _speechEventManager;
+        readonly AimTopStreamerViewMono _aimTopStreamerViewMono;
+        bool Completed { get; set; }  
+        public AimForTopStreamer (
+            SpeechEventManager speechEventManager
+            ,AimTopStreamerViewMono aimTopStreamerViewMono
+        )
         {
-            Debug.Log("Aim for top streamer...");
-            // Logic for this step
-            if (Input.GetKeyDown(KeyCode.T)) _completed = true;
+            _speechEventManager = speechEventManager;
+            _aimTopStreamerViewMono = aimTopStreamerViewMono;
         }
 
-        public bool IsCompleted()
+        public override void Execute()
         {
-            return _completed;
+            Debug.Log("Aim for top streamer...");
+            _aimTopStreamerViewMono.Show(); 
+            
+            // 少し待つ
+            const float displaySec = 2.0f;
+            Observable.Timer(TimeSpan.FromSeconds(displaySec))
+                .Subscribe(_ =>
+                {
+                    Completed = true; 
+                    _aimTopStreamerViewMono.Hide();
+                });
+        }
+
+        public override bool IsCompleted()
+        {
+             return _speechEventManager.IsEnd() && Completed;
         }
     }
 
-    public class StartActualGame : ITutorialContent
+    public class StartActualGame : AbstractTutorialContent
     {
-        bool _completed = false;
-
-        public void Execute()
+        readonly BlackScreenViewMono _blackScreenViewMono;
+        readonly StandbyStreamingViewMono _standbyStreamingViewMono;
+        readonly InputSerialManager _inputSerialManager; 
+        bool Completed { get; set; } 
+        public StartActualGame(
+            BlackScreenViewMono blackScreenViewMono
+            , StandbyStreamingViewMono standbyStreamingViewMono
+            , InputSerialManager inputSerialManager
+            )
+        {
+            _blackScreenViewMono = blackScreenViewMono;
+            _standbyStreamingViewMono = standbyStreamingViewMono;
+            _inputSerialManager = inputSerialManager;
+        }
+        public override void Execute()
         {
             Debug.Log("Starting actual game...");
-            // Logic for this step
-            if (Input.GetKeyDown(KeyCode.T)) _completed = true;
+            _blackScreenViewMono.FadeIn(1.0f, () =>
+            {
+                // 配信待機所を表示
+                _standbyStreamingViewMono.Show();
+                // すこししてからフェードアウトして、次のシーンへ
+                const float displaySec = 2.0f;
+                Observable.Timer(TimeSpan.FromSeconds(displaySec))
+                    .Subscribe(_ =>
+                    {
+                        _blackScreenViewMono.FadeOut(0.2f, () =>
+                        {
+                            SceneTransition.TransitioningScene(SceneName.DaipanScene);
+                            Completed = true;
+                        });
+                    });
+            }); 
         }
 
-        public bool IsCompleted()
+        public override bool IsCompleted()
         {
-            return _completed;
+            return Completed;
         }
     }
 }
