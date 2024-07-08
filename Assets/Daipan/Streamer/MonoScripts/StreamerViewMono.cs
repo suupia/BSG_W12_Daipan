@@ -6,7 +6,7 @@ using DG.Tweening;
 using Daipan.Player.Scripts;
 using R3;
 
-namespace Daipan.Streamer.Scripts
+namespace Daipan.Streamer.MonoScripts
 {
     public class StreamerViewMono : MonoBehaviour
     {

@@ -10,7 +10,7 @@ using R3;
 using UnityEngine.Serialization;
 using VContainer;
 
-namespace Daipan.Streamer.Scripts
+namespace Daipan.Streamer.MonoScripts
 {
     public class PushEnterTextViewMono : MonoBehaviour
     {

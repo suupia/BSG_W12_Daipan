@@ -23,7 +23,7 @@ using Daipan.Player.Scripts;
 using Daipan.Stream.MonoScripts;
 using Daipan.Stream.Scripts;
 using Daipan.Stream.Scripts.Utility;
-using Daipan.Streamer.Scripts;
+using Daipan.Streamer.MonoScripts;
 using Daipan.Tower.MonoScripts;
 using Daipan.Tower.Scripts;
 using UnityEngine;

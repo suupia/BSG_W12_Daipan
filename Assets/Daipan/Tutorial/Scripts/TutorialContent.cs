@@ -6,7 +6,7 @@ using Daipan.Enemy.Scripts;
 using Daipan.InputSerial.Scripts;
 using Daipan.Option.Scripts;
 using Daipan.Stream.Scripts;
-using Daipan.Streamer.Scripts;
+using Daipan.Streamer.MonoScripts;
 using Daipan.Tutorial.Interfaces;
 using Daipan.Tutorial.MonoScripts;
 using R3;
@@ -473,18 +473,18 @@ namespace Daipan.Tutorial.Scripts
         }
     }
 
-    public class AimForTopStreamer : ITutorialContent
+    public class AimForTopStreamer : AbstractTutorialContent
     {
         bool _completed = false;
 
-        public void Execute()
+        public override void Execute()
         {
             Debug.Log("Aim for top streamer...");
             // Logic for this step
             if (Input.GetKeyDown(KeyCode.T)) _completed = true;
         }
 
-        public bool IsCompleted()
+        public override bool IsCompleted()
         {
             return _completed;
         }
