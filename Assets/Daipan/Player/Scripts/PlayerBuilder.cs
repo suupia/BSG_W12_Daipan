@@ -17,7 +17,7 @@ namespace Daipan.Player.Scripts
 
         public PlayerBuilder(
             WaveState waveState
-            ,PlayerHpParamData playerHpParamData
+            ,IPlayerHpParamData playerHpParamData
             ,EndSceneSelector endSceneSelector
         )
         {
