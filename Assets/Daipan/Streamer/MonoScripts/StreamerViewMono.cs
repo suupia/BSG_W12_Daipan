@@ -53,12 +53,12 @@ namespace Daipan.Streamer.MonoScripts
 
         public void AngerZoom(bool isFull)
         {
-            var senquence = DOTween.Sequence();
+            var sequence = DOTween.Sequence();
             // 怒ってるとき拡大
             if (isFull)
             {
-                senquence.Append(_transform.DOScale(_originalScale * scaleRatio, zoomDuration));
-                senquence.Join(_transform.DOMove(_originalPosition + moveAmountByAngerZoom, zoomDuration));
+                sequence.Append(_transform.DOScale(_originalScale * scaleRatio, zoomDuration));
+                sequence.Join(_transform.DOMove(_originalPosition + moveAmountByAngerZoom, zoomDuration));
                 return;
             }
 
@@ -67,9 +67,9 @@ namespace Daipan.Streamer.MonoScripts
             Observable.Timer(System.TimeSpan.FromSeconds(_effectDelaySec))
                 .Subscribe(_ =>
                 {
-                    var senquence = DOTween.Sequence();
-                    senquence.Append(_transform.DOScale(_originalScale, zoomDuration));
-                    senquence.Join(_transform.DOMove(_originalPosition, zoomDuration));
+                    DOTween.Sequence()
+                        .Append(_transform.DOScale(_originalScale, zoomDuration))
+                        .Join(_transform.DOMove(_originalPosition, zoomDuration));
                 });
         }
     }
