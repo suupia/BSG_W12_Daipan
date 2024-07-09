@@ -16,7 +16,7 @@ MonoBehaviour:
     maxHpAmount: 100
     hpAmount: 100
   playerAntiCommentParam:
-    antiCommentThreshold: 3
+    antiCommentThreshold: 10
     antiCommentPercentOnMissAttacks:
     - 10
     - 20
