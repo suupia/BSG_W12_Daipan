@@ -33,7 +33,6 @@ namespace Daipan.Streamer.MonoScripts
             _originalScale = _transform.localScale;
 
 
-
             Observable.EveryValueChanged(irritatedValue, x => x.IsFull)
                 .Subscribe(_ => AngerZoom(irritatedValue.IsFull))
                 .AddTo(this);
@@ -67,8 +66,9 @@ namespace Daipan.Streamer.MonoScripts
             Observable.Timer(System.TimeSpan.FromSeconds(_effectDelaySec))
                 .Subscribe(_ =>
                 {
-                    senquence.Append(_transform.DOScale(_originalScale, zoomDuration));
-                    senquence.Join(_transform.DOMove(_originalPosition, zoomDuration));
+                    DOTween.Sequence()
+                        .Append(_transform.DOScale(_originalScale, zoomDuration))
+                        .Join(_transform.DOMove(_originalPosition, zoomDuration));
                 });
         }
     }

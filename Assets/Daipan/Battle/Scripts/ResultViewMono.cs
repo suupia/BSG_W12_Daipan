@@ -17,8 +17,12 @@ namespace Daipan.Battle.scripts
         [SerializeField] TextMeshProUGUI playerHpText = null!;
         [SerializeField] TextMeshProUGUI tankYouText = null!;
         [SerializeField] TextMeshProUGUI pushEnterText = null!;
-        
-       
+
+        void Awake()
+        {
+            HideResult(); 
+        }
+
         [Inject]
         public void Constructor(
             ViewerNumber viewerNumber
@@ -35,7 +39,7 @@ namespace Daipan.Battle.scripts
                 .AddTo(this);
         }
         
-        public  void ShowResult()
+        public void ShowResult()
         {
             var playerMono = UnityEngine.Object.FindObjectOfType<PlayerMono>();
             if (playerMono == null)
