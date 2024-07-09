@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using Daipan.Battle.scripts;
+using Daipan.Battle.Scripts;
 using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Player.MonoScripts;
 using R3;
@@ -13,21 +14,18 @@ namespace Daipan.Player.Scripts
     {
         readonly WaveState _waveState;
         readonly IPlayerHpParamData _playerHpParamData;
-        readonly EndSceneSelector _endSceneSelector;
-        readonly ResultViewMono _resultViewMono;
+        readonly ResultState _resultState;
         readonly List<IDisposable> _disposables = new();
 
         public PlayerBuilder(
             WaveState waveState
             ,IPlayerHpParamData playerHpParamData
-            ,EndSceneSelector endSceneSelector
-            ,ResultViewMono resultViewMono
+            ,ResultState resultState
         )
         {
             _waveState = waveState;
-            _playerHpParamData = playerHpParamData; 
-            _endSceneSelector = endSceneSelector;
-            _resultViewMono = resultViewMono;
+            _playerHpParamData = playerHpParamData;
+            _resultState = resultState;
         }
        public PlayerMono Build(PlayerMono playerMono)
        {
@@ -37,7 +35,7 @@ namespace Daipan.Player.Scripts
            _disposables.Add(Observable.EveryUpdate()
                .Subscribe(_ =>
                {
-                   if (playerMono.Hp.Value <= 0) _resultViewMono.ShowResult();
+                   if (playerMono.Hp.Value <= 0) _resultState.ShowResult();
                }));
            return playerMono;
        }

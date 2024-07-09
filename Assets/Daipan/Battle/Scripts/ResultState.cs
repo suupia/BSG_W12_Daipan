@@ -9,7 +9,7 @@ namespace Daipan.Battle.Scripts
 {
     public class ResultState : IDisposable
     {
-        readonly StreamTimer _streamTimer;
+        readonly ResultViewMono _resultViewMono;
         readonly List<IDisposable> _disposables = new();
         
         public bool IsInResult { get; private set; }
@@ -19,18 +19,30 @@ namespace Daipan.Battle.Scripts
             , ResultViewMono resultViewMono
         )
         {
-            _streamTimer = streamTimer;
+            _resultViewMono = resultViewMono;
+            _disposables.Add(
+                Observable
+                .EveryValueChanged(this, x => x.IsInResult)
+                .Where(isInResult => isInResult)
+                .Subscribe(_ =>
+            {
+                ShowResult();
+            }));
             
             _disposables.Add(Observable.EveryUpdate().Subscribe(_ =>
             {
-                if (_streamTimer.CurrentProgressRatio >= 1)
+                if (streamTimer.CurrentProgressRatio >= 1)
                 {
-                    resultViewMono.ShowResult();
                     IsInResult = true;
                 }
             }));
             
         }
+        public void ShowResult()
+        {
+            _resultViewMono.ShowResult(); 
+        }
+        
         public void Dispose()
         {
             foreach (var disposable in _disposables)

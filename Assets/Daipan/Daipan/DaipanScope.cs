@@ -1,4 +1,5 @@
 using Daipan.Battle.scripts;
+using Daipan.Battle.Scripts;
 using Daipan.Comment.MonoScripts;
 using Daipan.Comment.Scripts;
 using Daipan.Core.Interfaces;
@@ -252,6 +253,7 @@ namespace Daipan.Daipan
             RegisterInputSerial(builder);
 
             // Result
+            builder.Register<ResultState>(Lifetime.Scoped);
             builder.RegisterComponentInHierarchy<ResultViewMono>();
             
             // EndScene
