@@ -28,6 +28,8 @@ namespace Daipan.Option.Scripts
                     break;
                 case myContent.No:
                     Debug.Log($"Select : {_myContent}");
+                    var nextOption = _transitionFunc(_myContent);
+                    if (nextOption != null) _handleOption.SetCurrentOption(nextOption);
                     break;
             }
         }

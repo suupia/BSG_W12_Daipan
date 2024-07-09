@@ -21,8 +21,8 @@ namespace Daipan.Option.Scripts
 
         public void Select()
         {
-            var nextOption = _transitionFunc(myContent.ReturnTitle);
-            if(nextOption != null) _handleOption.SetCurrentOption(nextOption);
+            var nextOption = _transitionFunc(_myContent);
+            if (nextOption != null) _handleOption.SetCurrentOption(nextOption);
         }
         public void MoveCursor(MoveCursorDirectionEnum moveCursorDirection)
         {

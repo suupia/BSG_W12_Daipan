@@ -28,14 +28,20 @@ namespace Daipan.Option.Scripts
                 {
                     optionPopUpMain.RegisterTransition(myContent =>
                     {
-                        return _optionContents.FirstOrDefault(x => x is OptionPopUpConfirmReturnTitle);
+                        if(myContent == OptionPopUpMain.myContent.ReturnTitle)
+                            return _optionContents.FirstOrDefault(x => x is OptionPopUpConfirmReturnTitle);
+
+                        return null;
                     });
                 }
                 if (option is OptionPopUpConfirmReturnTitle optionPopUpConfirmReturnTitle)
                 {
                     optionPopUpConfirmReturnTitle.RegisterTransition(myContent =>
                     {
-                        return _optionContents.FirstOrDefault(x => x is OptionPopUpMain);
+                        if(myContent == OptionPopUpConfirmReturnTitle.myContent.No)
+                            return _optionContents.FirstOrDefault(x => x is OptionPopUpMain);
+
+                        return null;
                     });
                 }
             }
