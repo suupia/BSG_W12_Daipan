@@ -21,7 +21,7 @@ EditorBuildSettings:
     path: Assets/Daipan/Result/Scenes/Thanksgiving.unity
     guid: eb5f5183a94e84044b0d3c8ea2f3b1c3
   - enabled: 1
-    path: Assets/Daipan/Result/Scenes/BottomYoutuber.unity
+    path: Assets/Daipan/Result/Scenes/NoobGamer.unity
     guid: 95139a61457cf6b4a96f2ea50b8b54c6
   - enabled: 1
     path: Assets/Daipan/Result/Scenes/TopYoutuber.unity
@@ -33,10 +33,10 @@ EditorBuildSettings:
     path: Assets/Daipan/Result/Scenes/SacredLady.unity
     guid: 1a85fe78fe06f73478497e75e9c7308d
   - enabled: 1
-    path: Assets/Daipan/Result/Scenes/Flame.unity
+    path: Assets/Daipan/Result/Scenes/Backlash.unity
     guid: e5d092036a9ce2144a4ad9193a863af1
   - enabled: 1
-    path: Assets/Daipan/Result/Scenes/Ordinary1.unity
+    path: Assets/Daipan/Result/Scenes/StrugglingStreamer.unity
     guid: 8675e1dbdb2066d4da203230b9ce54ac
   - enabled: 1
     path: Assets/Daipan/Result/Scenes/Ordinary2.unity
