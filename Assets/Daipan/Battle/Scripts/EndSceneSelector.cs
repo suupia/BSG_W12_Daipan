@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using Daipan.Core.Interfaces;
+using Daipan.End.Scripts;
 using Daipan.Player.MonoScripts;
 using Daipan.Player.Scripts;
 using Daipan.Stream.Scripts;
@@ -10,7 +11,7 @@ using UnityEngine;
 
 namespace Daipan.Battle.scripts
 {
-    public sealed class EndSceneSelector 
+    public sealed class EndSceneSelector
     {
         readonly ViewerNumber _viewerNumber;
         readonly DaipanExecutor _daipanExecutor;
@@ -43,13 +44,13 @@ namespace Daipan.Battle.scripts
         public void TransitToEndScene()
         {
             foreach (var judgeSceneName in _judgeList)
-            {
                 if (TransitionCondition(judgeSceneName, _viewerNumber, _playerMono!.Hp, _daipanExecutor))
                 {
-                    ResultShower.ShowResult(judgeSceneName);
+                    EndSceneStatic.EndSceneEnum = judgeSceneName;
+                    SceneTransition.TransitioningScene(SceneName.EndScene);
                     break;
                 }
-            }
+
             Debug.LogWarning("No scene to transit");
         }
 
@@ -74,7 +75,6 @@ namespace Daipan.Battle.scripts
             if (!result) Debug.LogWarning($"TransitionCondition is not satisfied: {sceneName}");
             return result;
         }
-
     }
 
     public enum EndSceneEnum

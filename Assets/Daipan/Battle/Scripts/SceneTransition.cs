@@ -13,7 +13,7 @@ namespace Daipan.Battle.scripts
             { SceneName.TitleScene, "TitleScene" },
             { SceneName.TutorialScene, "TutorialScene" },
             { SceneName.DaipanScene, "DaipanScene" },
-            { SceneName.ResultScene, "ResultScene" },
+            { SceneName.EndScene, "EndScene" }
         };
 
         public static void TransitioningScene(SceneName nextScene)
@@ -35,8 +35,6 @@ namespace Daipan.Battle.scripts
         TitleScene,
         TutorialScene,
         DaipanScene,
-        ResultScene,
-
+        EndScene
     }
-    
 }
