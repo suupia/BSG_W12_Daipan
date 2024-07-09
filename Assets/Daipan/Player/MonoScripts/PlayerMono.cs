@@ -21,7 +21,6 @@ namespace Daipan.Player.MonoScripts
         [SerializeField] List<AbstractPlayerViewMono?> playerViewMonos = new();
         IPlayerHpParamData _playerHpParamData = null!;
         IPlayerInput _playerInput = null!;
-        EndSceneSelector _endSceneSelector = null!;
         public Hp Hp { get; set; } = null!;
 
         public void Update()
@@ -34,24 +33,12 @@ namespace Daipan.Player.MonoScripts
 
         [Inject]
         public void Initialize(
-            WaveState waveState
-            , IPlayerHpParamData playerHpParamData
+             IPlayerHpParamData playerHpParamData
             , IPlayerInput playerInput
             , IPlayerOnDamagedRegistrar playerOnDamagedRegistrar
-            , EndSceneSelector endSceneSelector
         )
         {
             _playerHpParamData = playerHpParamData;
-            _endSceneSelector = endSceneSelector;
-            Observable.EveryValueChanged(waveState, x => x.CurrentWave)
-                .Subscribe(_ => Hp = new Hp(playerHpParamData.GetMaxHp()))
-                .AddTo(this);
-
-            Observable.EveryUpdate()
-                .Subscribe(_ =>
-                {
-                    if (Hp.Value <= 0) _endSceneSelector.TransitToEndScene();
-                });
 
             EnemyAttackModule.AttackEvent += (sender, args) =>
             {

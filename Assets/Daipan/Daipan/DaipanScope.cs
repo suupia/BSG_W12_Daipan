@@ -1,4 +1,5 @@
 using Daipan.Battle.scripts;
+using Daipan.Battle.Scripts;
 using Daipan.Comment.MonoScripts;
 using Daipan.Comment.Scripts;
 using Daipan.Core.Interfaces;
@@ -110,6 +111,7 @@ namespace Daipan.Daipan
             builder.Register<PlayerAttackedCounter>(Lifetime.Scoped);
             builder.Register<DaipanExecutor>(Lifetime.Scoped);
             builder.Register<IStart, PlayerSpawner>(Lifetime.Scoped);
+            builder.Register<PlayerBuilder>(Lifetime.Scoped);
             // Attack
             builder.Register<PlayerAttackEffectPrefabLoader>(Lifetime.Scoped)
                 .As<IPrefabLoader<PlayerAttackEffectMono>>();
@@ -250,6 +252,10 @@ namespace Daipan.Daipan
             // InputSerial  
             RegisterInputSerial(builder);
 
+            // Result
+            builder.Register<ResultState>(Lifetime.Scoped);
+            builder.RegisterComponentInHierarchy<ResultViewMono>();
+            
             // EndScene
             builder.RegisterInstance(endSceneTransitionParam);
 
