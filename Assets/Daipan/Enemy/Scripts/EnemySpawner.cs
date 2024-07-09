@@ -21,7 +21,7 @@ using Random = UnityEngine.Random;
 
 namespace Daipan.Enemy.Scripts
 {
-    public sealed class EnemySpawner : IUpdate
+    public sealed class EnemySpawner : IUpdate, IDisposable
     {
         readonly IObjectResolver _container;
         readonly IPrefabLoader<EnemyMono> _enemyMonoLoader;
@@ -31,8 +31,8 @@ namespace Daipan.Enemy.Scripts
         readonly float _spawnRandomPositionY = 0.2f;
         readonly IEnemyBuilder _enemyBuilder;
         readonly IEnemyEnumSelector _enemyEnumSelector;
+        readonly List<IDisposable> _disposables = new();
         float _timer;
-        IDisposable? _disposable;
 
         [Inject]
         public EnemySpawner(
@@ -100,22 +100,28 @@ namespace Daipan.Enemy.Scripts
         void SpawnRedBoss(Vector3 spawnPosition)
         {
             const float subordinateSpawnIntervalSec = 0.3f;
-            const float bossSpawnDelaySec = 0.7f; 
+            const float bossSpawnDelaySec = 0.7f;
             const int subordinateCount = 5;
-            _disposable = Observable.Interval(TimeSpan.FromSeconds(subordinateSpawnIntervalSec))
+            _disposables.Add(Observable.Interval(TimeSpan.FromSeconds(subordinateSpawnIntervalSec))
                 .Take(subordinateCount)
                 .Subscribe(
                     _ => { SpawnEnemy(spawnPosition, EnemyEnum.Red); },
                     _ =>
                     {
-                        Observable.Timer(TimeSpan.FromSeconds(bossSpawnDelaySec))
-                            .Subscribe(_ => { SpawnEnemy(spawnPosition, EnemyEnum.RedBoss); });
-                    });
+                        _disposables.Add(Observable.Timer(TimeSpan.FromSeconds(bossSpawnDelaySec))
+                            .Subscribe(_ => { SpawnEnemy(spawnPosition, EnemyEnum.RedBoss); }));
+                    }));
         }
-        
+        public void Dispose()
+        {
+            foreach (var disposable in _disposables)
+            {
+                disposable.Dispose();
+            }
+        }
         ~EnemySpawner()
         {
-            _disposable?.Dispose();
+            Dispose(); 
         }
     }
 }
