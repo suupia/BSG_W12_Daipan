@@ -19,15 +19,15 @@ namespace Daipan.Battle.scripts
 
 
         // この順番でシーン遷移の判定を行っていく
-        readonly List<SceneName> _judgeList = new()
+        readonly List<EndSceneEnum> _judgeList = new()
         {
-            SceneName.SacredLady,
-            SceneName.Backlash,
-            SceneName.NoobGamer,
-            SceneName.ProGamer,
-            SceneName.InsideTheBox,
-            SceneName.Thanksgiving,
-            SceneName.StrugglingStreamer
+            EndSceneEnum.SacredLady,
+            EndSceneEnum.Backlash,
+            EndSceneEnum.NoobGamer,
+            EndSceneEnum.ProGamer,
+            EndSceneEnum.InsideTheBox,
+            EndSceneEnum.Thanksgiving,
+            EndSceneEnum.StrugglingStreamer
         };
 
         public EndSceneSelector(
@@ -54,7 +54,7 @@ namespace Daipan.Battle.scripts
         }
 
         static bool TransitionCondition(
-            SceneName sceneName
+            EndSceneEnum sceneName
             , ViewerNumber viewerNumber
             , Hp hp
             , DaipanExecutor daipanExecutor
@@ -62,18 +62,29 @@ namespace Daipan.Battle.scripts
         {
             var result = sceneName switch
             {
-                SceneName.InsideTheBox => viewerNumber.Number <= 500,
-                SceneName.Thanksgiving => viewerNumber.Number >= 1000,
-                SceneName.NoobGamer => hp.Value <= 0,
-                SceneName.ProGamer => hp.Value >= 50,
-                SceneName.SacredLady => daipanExecutor.DaipanCount <= 10,
-                SceneName.Backlash => daipanExecutor.DaipanCount >= 10,
-                SceneName.StrugglingStreamer => true,
+                EndSceneEnum.InsideTheBox => viewerNumber.Number <= 500,
+                EndSceneEnum.Thanksgiving => viewerNumber.Number >= 1000,
+                EndSceneEnum.NoobGamer => hp.Value <= 0,
+                EndSceneEnum.ProGamer => hp.Value >= 50,
+                EndSceneEnum.SacredLady => daipanExecutor.DaipanCount <= 10,
+                EndSceneEnum.Backlash => daipanExecutor.DaipanCount >= 10,
+                EndSceneEnum.StrugglingStreamer => true,
                 _ => false
             };
             if (!result) Debug.LogWarning($"TransitionCondition is not satisfied: {sceneName}");
             return result;
         }
 
+    }
+
+    public enum EndSceneEnum
+    {
+        InsideTheBox,
+        Thanksgiving,
+        NoobGamer,
+        ProGamer,
+        SacredLady,
+        Backlash,
+        StrugglingStreamer
     }
 }

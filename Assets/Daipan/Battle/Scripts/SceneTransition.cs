@@ -14,13 +14,6 @@ namespace Daipan.Battle.scripts
             { SceneName.TutorialScene, "TutorialScene" },
             { SceneName.DaipanScene, "DaipanScene" },
             { SceneName.ResultScene, "ResultScene" },
-            { SceneName.InsideTheBox, "InsideTheBox" },
-            { SceneName.Thanksgiving, "Thanksgiving" },
-            { SceneName.NoobGamer, "NoobGamer" },
-            { SceneName.ProGamer, "ProGamer" },
-            { SceneName.SacredLady, "SacredLady" },
-            { SceneName.Backlash, "Flame" },
-            { SceneName.StrugglingStreamer, "Ordinary1" },
         };
 
         public static void TransitioningScene(SceneName nextScene)
@@ -44,14 +37,6 @@ namespace Daipan.Battle.scripts
         DaipanScene,
         ResultScene,
 
-        // End Scene
-        InsideTheBox,
-        Thanksgiving,
-        NoobGamer,
-        TopYoutuber,
-        ProGamer,
-        SacredLady,
-        Backlash,
-        StrugglingStreamer
     }
+    
 }
