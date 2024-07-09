@@ -1,5 +1,7 @@
 #nullable enable
 using System;
+using System.Linq;
+using Daipan.Battle.scripts;
 using Daipan.Enemy.LevelDesign.Scripts;
 using Daipan.Enemy.Scripts;
 using Daipan.Stream.Scripts;
@@ -8,54 +10,40 @@ using VContainer;
 
 namespace Daipan.DebugInput.MonoScripts
 {
-    public sealed class DebugWaveInputMono : MonoBehaviour
+    public sealed class DebugEndSceneInputMono : MonoBehaviour
     {
-        StreamTimer _streamTimer = null!;
-        EnemyParamsManager _enemyParamsManager = null!; 
+        EndSceneSelector _endSceneSelector = null!; 
        
         [Inject]
-        public void Initialize(StreamTimer streamTimer, EnemyParamsManager enemyParamsManager)
+        public void Initialize(
+            EndSceneSelector endSceneSelector
+            )
         {
-            _streamTimer = streamTimer;
-            _enemyParamsManager = enemyParamsManager;
+            _endSceneSelector = endSceneSelector;
         } 
         
         void Update()
         {
 #if UNITY_EDITOR
-            if (Input.GetKey(KeyCode.Alpha1))
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                SetTime(_streamTimer, _enemyParamsManager, 0);
+                _endSceneSelector.TransitToEndScene();
             }
-            if (Input.GetKey(KeyCode.Alpha2))
-            {
-                SetTime(_streamTimer, _enemyParamsManager, 1);
-            }
-            if (Input.GetKey(KeyCode.Alpha3))
-            {
-                SetTime(_streamTimer, _enemyParamsManager, 2);
-            }
-            if (Input.GetKey(KeyCode.Alpha4))
-            {
-                SetTime(_streamTimer, _enemyParamsManager, 3);
-            }
-            if (Input.GetKey(KeyCode.Alpha5))
-            {
-                SetTime(_streamTimer, _enemyParamsManager, 4);
-            }
+            
+            // todo : それぞれの遷移に対する条件を個別に設定してその通りに遷移するかテストする
+            // var enumValues = Enum.GetValues(typeof(EndSceneEnum)).Cast<EndSceneEnum>().ToList();
+            // for (int i = 0; i < enumValues.Count; i++)
+            // {
+            //     KeyCode keyCode = KeyCode.Alpha1 + i; // KeyCode.Alpha1 から順にキーコードを取得
+            //     if (Input.GetKey(keyCode))
+            //     {
+            //         // 線条件を条件を外部で設定する必要がある
+            //        _endSceneSelector.TransitToEndScene(enumValues[i]); 
+            //     }
+            // }
 #endif
         }
         
-        static void SetTime(StreamTimer streamTimer, EnemyParamsManager enemyParamsManager, int index)
-        {
-            if (index < 0 || index >= enemyParamsManager.enemyTimeLineParams.Count)
-            {
-                Debug.LogWarning($" index is out of range. index: {index}");
-                return;
-            }
-            Debug.Log($"SetTime index: {index}");
-            streamTimer.SetTime(enemyParamsManager.enemyTimeLineParams[index].startTime);
-        }
 
     }
 }

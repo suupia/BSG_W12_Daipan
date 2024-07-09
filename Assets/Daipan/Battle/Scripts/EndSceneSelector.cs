@@ -16,9 +16,6 @@ namespace Daipan.Battle.scripts
         readonly ViewerNumber _viewerNumber;
         readonly DaipanExecutor _daipanExecutor;
 
-        PlayerMono? _playerMono;
-
-
         // この順番でシーン遷移の判定を行っていく
         readonly List<EndSceneEnum> _judgeList = new()
         {
@@ -43,8 +40,14 @@ namespace Daipan.Battle.scripts
 
         public void TransitToEndScene()
         {
+            PlayerMono? playerMono = UnityEngine.Object.FindObjectOfType<PlayerMono>();
+            if (playerMono == null)
+            {
+                Debug.LogWarning("PlayerMono is not found");
+                return;
+            }
             foreach (var judgeSceneName in _judgeList)
-                if (TransitionCondition(judgeSceneName, _viewerNumber, _playerMono!.Hp, _daipanExecutor))
+                if (TransitionCondition(judgeSceneName, _viewerNumber, playerMono!.Hp, _daipanExecutor))
                 {
                     EndSceneStatic.EndSceneEnum = judgeSceneName;
                     SceneTransition.TransitioningScene(SceneName.EndScene);

@@ -8,7 +8,7 @@ using VContainer;
 
 namespace Daipan.DebugInput.MonoScripts
 {
-    public sealed class WaveDebugInputMono : MonoBehaviour
+    public sealed class DebugWaveInputMono : MonoBehaviour
     {
         StreamTimer _streamTimer = null!;
         EnemyParamsManager _enemyParamsManager = null!; 
