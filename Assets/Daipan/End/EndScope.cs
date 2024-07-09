@@ -3,6 +3,7 @@ using Daipan.Comment.Scripts;
 using Daipan.Core;
 using Daipan.Core.Interfaces;
 using Daipan.Daipan;
+using Daipan.End.MonoScripts;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Enemy.Scripts;
@@ -20,10 +21,13 @@ using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-public sealed class ResultScope : LifetimeScope
+namespace Daipan.End
 {
-    protected override void Configure(IContainerBuilder builder)
+    public sealed class EndScope : LifetimeScope
     {
-        builder.RegisterComponentInHierarchy<ResultMono>();
-    }
+        protected override void Configure(IContainerBuilder builder)
+        {
+            builder.RegisterComponentInHierarchy<EndMono>();
+        }
+    } 
 }

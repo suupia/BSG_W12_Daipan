@@ -197,7 +197,7 @@ namespace Daipan.Daipan
         {
             // Battle
             builder.Register<WaveState>(Lifetime.Scoped);
-            builder.Register<EndSceneSelector>(Lifetime.Scoped).As<IStart>().AsSelf();
+            builder.Register<EndSceneSelector>(Lifetime.Scoped);
         }
 
         public static void RegisterInputSerial(IContainerBuilder builder)
@@ -259,8 +259,10 @@ namespace Daipan.Daipan
 
         static void RegisterDebugInput(IContainerBuilder builder)
         {
-            var waveDebugInput = new GameObject().AddComponent<WaveDebugInputMono>();
-            builder.RegisterComponent(waveDebugInput);
+            var debugWaveInputMono = new GameObject().AddComponent<DebugWaveInputMono>();
+            builder.RegisterComponent(debugWaveInputMono);
+            var debugEndSceneInputMono = new GameObject().AddComponent<DebugEndSceneInputMono>();
+            builder.RegisterComponent(debugEndSceneInputMono);
         }
     }
 }
