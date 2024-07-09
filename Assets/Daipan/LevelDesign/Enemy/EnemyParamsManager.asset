@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyLevelDesignParam:
     increaseViewerOnEnemyKill: 5
-    currentKillAmount: 488
+    currentKillAmount: 669
   enemyParams:
   - enemyEnum: 1
     enemyAttackParam:
@@ -154,8 +154,8 @@ MonoBehaviour:
       attackDelaySec: 1
       attackRange: 2
     enemyHpParam:
-      maxHp: 10
-      hpAmount: 10
+      maxHp: 100
+      hpAmount: 100
     enemyMoveParam:
       moveSpeedPerSec: 1.5
     enemySpawnParam:
