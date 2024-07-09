@@ -5,6 +5,7 @@ using Daipan.Battle.scripts;
 using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Player.MonoScripts;
 using R3;
+using Result = GluonGui.Dialog.Result;
 
 namespace Daipan.Player.Scripts
 {
@@ -13,17 +14,20 @@ namespace Daipan.Player.Scripts
         readonly WaveState _waveState;
         readonly IPlayerHpParamData _playerHpParamData;
         readonly EndSceneSelector _endSceneSelector;
+        readonly ResultViewMono _resultViewMono;
         readonly List<IDisposable> _disposables = new();
 
         public PlayerBuilder(
             WaveState waveState
             ,IPlayerHpParamData playerHpParamData
             ,EndSceneSelector endSceneSelector
+            ,ResultViewMono resultViewMono
         )
         {
             _waveState = waveState;
             _playerHpParamData = playerHpParamData; 
             _endSceneSelector = endSceneSelector;
+            _resultViewMono = resultViewMono;
         }
        public PlayerMono Build(PlayerMono playerMono)
        {
@@ -33,7 +37,7 @@ namespace Daipan.Player.Scripts
            _disposables.Add(Observable.EveryUpdate()
                .Subscribe(_ =>
                {
-                   if (playerMono.Hp.Value <= 0) _endSceneSelector.TransitToEndScene();
+                   if (playerMono.Hp.Value <= 0) _resultViewMono.ShowResult();
                }));
            return playerMono;
        }

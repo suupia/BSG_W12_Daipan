@@ -251,6 +251,9 @@ namespace Daipan.Daipan
             // InputSerial  
             RegisterInputSerial(builder);
 
+            // Result
+            builder.RegisterComponentInHierarchy<ResultViewMono>();
+            
             // EndScene
             builder.RegisterInstance(endSceneTransitionParam);
 
