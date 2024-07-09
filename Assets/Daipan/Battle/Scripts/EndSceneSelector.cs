@@ -29,7 +29,7 @@ namespace Daipan.Battle.scripts
 
         void IStart.Start()
         {
-            //SetUp();
+            SetUp();
         }
 
         void SetUp()
@@ -45,13 +45,11 @@ namespace Daipan.Battle.scripts
                     
                     ChangeToInsideTheBox(_viewerNumber);
                     ChangeToThanksgiving(_viewerNumber);
-                    ChangeToBottomYoutuber(_playerMono.Hp);
+                    ChangeToNoobGamer(_playerMono.Hp);
                     ChangeToProGamer(_playerMono.Hp);
                     ChangeToSacredLady(_daipanExecutor);
-                    ChangeToFlame(_daipanExecutor);
-                    ChangeToOrdinary1(_viewerNumber);
-                    ChangeToOrdinary2(_viewerNumber);
-                    ChangeToOrdinary3(_viewerNumber);
+                    ChangeToBacklash(_daipanExecutor);
+                    ChangeToStrugglingStreamer(_viewerNumber);
                     
                 });
         }
@@ -76,7 +74,7 @@ namespace Daipan.Battle.scripts
             }
         }
 
-        static void ChangeToBottomYoutuber(Hp hp)
+        static void ChangeToNoobGamer(Hp hp)
         {
             Debug.Log("Check ChangeToBottomYoutuber");
             if (hp.Value <= 0)
@@ -107,7 +105,7 @@ namespace Daipan.Battle.scripts
             }
         }
 
-        static void ChangeToFlame(DaipanExecutor dipanExecutor)
+        static void ChangeToBacklash(DaipanExecutor dipanExecutor)
         {
             Debug.Log("Check ChangeToFlame");
             if (dipanExecutor.DaipanCount >= 10)
@@ -118,7 +116,7 @@ namespace Daipan.Battle.scripts
             
         }
 
-        static void ChangeToOrdinary1(ViewerNumber viewerNumber)
+        static void ChangeToStrugglingStreamer(ViewerNumber viewerNumber)
         {
             Debug.Log("Check ChangeToOrdinary1");
             if(viewerNumber.Number >= 1000&&viewerNumber.Number<=10000)
@@ -127,28 +125,6 @@ namespace Daipan.Battle.scripts
                 ResultShower.ShowResult(SceneName.Ordinary1);
             }
         }
-
-        static void ChangeToOrdinary2(ViewerNumber viewerNumber)
-        {
-            Debug.Log("Check ChangeToOrdinary2");
-            if (viewerNumber.Number >= 10000 && viewerNumber.Number <= 100000)
-            {
-                Debug.Log("Change to Ordinary2");
-                ResultShower.ShowResult(SceneName.Ordinary2);
-            }
-        }
-
-        static void ChangeToOrdinary3(ViewerNumber viewerNumber)
-        {
-            Debug.Log("Check ChangeToOrdinary3");
-            if (viewerNumber.Number >= 100000 && viewerNumber.Number <= 1000000)
-            {
-                Debug.Log("Change to Ordinary3");
-                ResultShower.ShowResult(SceneName.Ordinary3);
-            }
-        }
-        // todo: 対応する遷移の処理を追加する
-        // その時必要な依存関係は注入するようにする。
 
 
 
