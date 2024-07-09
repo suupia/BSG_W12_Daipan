@@ -1,15 +1,18 @@
 #nullable enable
+using System;
+using System.Collections.Generic;
 using Daipan.Core.Interfaces;
 using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.Player.MonoScripts;
 using Daipan.Stream.Scripts.Utility;
+using R3;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
 namespace Daipan.Player.Scripts
 {
-    public sealed class PlayerSpawner : IStart
+    public sealed class PlayerSpawner : IStart 
     {
         readonly IObjectResolver _container;
         readonly IPrefabLoader<PlayerMono> _playerMonoLoader;
@@ -37,8 +40,9 @@ namespace Daipan.Player.Scripts
             var playerMonoPrefab = _playerMonoLoader.Load();
             var position = _towerParamsConfig.GetTowerSpawnPosition();
             var positionOnlyX = new Vector3(_playerSpawnPointData.GetPlayerSpawnedPointX().playerSpawnTransformX.position.x, 0, position.z); 
-            var playerMono = _container.Instantiate(playerMonoPrefab, positionOnlyX, Quaternion.identity); 
+            var playerMono = _container.Instantiate(playerMonoPrefab, positionOnlyX, Quaternion.identity);
             _playerHolder.PlayerMono = playerMono;
         }
+        
     }
 }
