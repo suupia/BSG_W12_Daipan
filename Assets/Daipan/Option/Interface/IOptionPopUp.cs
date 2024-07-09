@@ -6,9 +6,8 @@ using Daipan.Option.Scripts;
 
 namespace Daipan.Option.Interfaces
 {
-    public interface IOptionContent
+    public interface IOptionPopUp
     {
-        OptionContentEnum OptionContent { get; }
         void Prepare();
         void Select();
         void MoveCursor(MoveCursorDirectionEnum moveCursorDirection);

@@ -1,54 +1,45 @@
 #nullable enable
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Daipan.Option.Interfaces;
-using VContainer;
 
 namespace Daipan.Option.Scripts
 {
-    public class OptionMain : IOptionContent
+    public class OptionPopUpConfirmReturnTitle : IOptionPopUp
     {
-        const OptionContentEnum optionContent = OptionContentEnum.Main;
-        public OptionContentEnum OptionContent
-        {
-            get => optionContent;
-        }
         myContent _myContent;
         IHandleOption _handleOption = null!;
+        Func<myContent, IOptionPopUp?> _transitionFunc = null!;
 
         public void Prepare()
         {
-            _myContent = myContent.BGM;
+            _myContent = myContent.No;
         }
 
         public void Select()
         {
             switch (_myContent)
             {
-                case myContent.BGM:
+                case myContent.Yes:
                     Debug.Log($"Select : {_myContent}");
+                    _handleOption.CloseOption();
                     break;
-                case myContent.SE:
+                case myContent.No:
                     Debug.Log($"Select : {_myContent}");
+                    var nextOption = _transitionFunc(_myContent);
+                    if (nextOption != null) _handleOption.SetCurrentOption(nextOption);
                     break;
-                case myContent.IsShaking:
-                    Debug.Log($"Select : {_myContent}");
-                    break;
-                case myContent.ReturnTitle:
-                    Debug.Log($"Select : {_myContent}");
-                    _handleOption.SetCurrentOption(OptionContentEnum.ConfirmReturnTitle);
-                    break;
-
             }
         }
         public void MoveCursor(MoveCursorDirectionEnum moveCursorDirection)
         {
-            if(moveCursorDirection == MoveCursorDirectionEnum.Down)
+            if (moveCursorDirection == MoveCursorDirectionEnum.Down)
             {
-                if(_myContent == myContent.ReturnTitle)
+                if (_myContent == myContent.No)
                 {
-                    _myContent = myContent.BGM;
+                    _myContent = myContent.Yes;
                 }
                 else
                 {
@@ -62,12 +53,15 @@ namespace Daipan.Option.Scripts
             _handleOption = handleOption;
         }
 
-        enum myContent
+        public void RegisterTransition(Func<myContent, IOptionPopUp?> transitionFunc)
         {
-            BGM,
-            SE,
-            IsShaking,
-            ReturnTitle
+            _transitionFunc = transitionFunc;
+        }
+
+        public enum myContent
+        {
+            Yes,
+            No
         }
     }
 }
