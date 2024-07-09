@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace Daipan.Player.LevelDesign.Scripts
+namespace Daipan.LevelDesign.EndScene
 {
-   
-    [CreateAssetMenu(fileName = "EndSceneTransitionParam", menuName = "ScriptableObjects/EndScene/EndSceneTransitionParam",
+    [CreateAssetMenu(fileName = "EndSceneTransitionParam",
+        menuName = "ScriptableObjects/EndScene/EndSceneTransitionParam",
         order = 1)]
     public sealed class EndSceneTransitionParam : ScriptableObject
     {
-        [Header("箱の中END：視聴者がx人以下の時")] [Min(0)]
-        public int viewerCountThresholdForInsideTheBoxEnd = 500;
+        [Header("箱の中END：視聴者がx人以下の時")] [Min(0)] public int viewerCountThresholdForInsideTheBoxEnd = 500;
 
         [Header("配信者ちゃん感謝祭END：視聴者がx人以上の時")] [Min(0)]
         public int viewerCountThresholdForThanksgivingEnd = 1000;

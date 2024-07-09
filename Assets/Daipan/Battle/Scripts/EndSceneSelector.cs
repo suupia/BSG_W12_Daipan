@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Daipan.Core.Interfaces;
 using Daipan.End.Scripts;
+using Daipan.LevelDesign.EndScene;
 using Daipan.Player.MonoScripts;
 using Daipan.Player.Scripts;
 using Daipan.Stream.Scripts;
@@ -13,6 +14,7 @@ namespace Daipan.Battle.scripts
 {
     public sealed class EndSceneSelector
     {
+        readonly EndSceneTransitionParam _endSceneTransitionParam;
         readonly ViewerNumber _viewerNumber;
         readonly DaipanExecutor _daipanExecutor;
 
@@ -29,10 +31,12 @@ namespace Daipan.Battle.scripts
         };
 
         public EndSceneSelector(
-            ViewerNumber viewerNumber
+            EndSceneTransitionParam endSceneTransitionParam
+            , ViewerNumber viewerNumber
             , DaipanExecutor daipanExecutor
         )
         {
+            _endSceneTransitionParam = endSceneTransitionParam;
             _viewerNumber = viewerNumber;
             _daipanExecutor = daipanExecutor;
         }
@@ -40,18 +44,19 @@ namespace Daipan.Battle.scripts
 
         public void TransitToEndScene()
         {
-            PlayerMono? playerMono = UnityEngine.Object.FindObjectOfType<PlayerMono>();
+            var playerMono = UnityEngine.Object.FindObjectOfType<PlayerMono>();
             if (playerMono == null)
             {
                 Debug.LogWarning("PlayerMono is not found");
                 return;
             }
+
             foreach (var judgeSceneName in _judgeList)
-                if (TransitionCondition(judgeSceneName, _viewerNumber, playerMono!.Hp, _daipanExecutor))
+                if (TransitionCondition(judgeSceneName, _endSceneTransitionParam, _viewerNumber, playerMono, _daipanExecutor))
                 {
                     EndSceneStatic.EndSceneEnum = judgeSceneName;
                     SceneTransition.TransitioningScene(SceneName.EndScene);
-                    break;
+                    return;
                 }
 
             Debug.LogWarning("No scene to transit");
@@ -59,22 +64,30 @@ namespace Daipan.Battle.scripts
 
         static bool TransitionCondition(
             EndSceneEnum sceneName
+            , EndSceneTransitionParam endSceneTransitionParam
             , ViewerNumber viewerNumber
-            , Hp hp
+            , PlayerMono playerMono
             , DaipanExecutor daipanExecutor
         )
         {
             var result = sceneName switch
             {
-                EndSceneEnum.InsideTheBox => viewerNumber.Number <= 500,
-                EndSceneEnum.Thanksgiving => viewerNumber.Number >= 1000,
-                EndSceneEnum.NoobGamer => hp.Value <= 0,
-                EndSceneEnum.ProGamer => hp.Value >= 50,
-                EndSceneEnum.SacredLady => daipanExecutor.DaipanCount <= 10,
-                EndSceneEnum.Backlash => daipanExecutor.DaipanCount >= 10,
+                EndSceneEnum.InsideTheBox => viewerNumber.Number <=
+                                             endSceneTransitionParam.viewerCountThresholdForInsideTheBoxEnd,
+                EndSceneEnum.Thanksgiving => viewerNumber.Number >=
+                                             endSceneTransitionParam.viewerCountThresholdForThanksgivingEnd,
+                EndSceneEnum.NoobGamer => (double)playerMono.Hp.Value / playerMono.MaxHp <=
+                                          endSceneTransitionParam.hpPercentThresholdForNoobGamerEnd,
+                EndSceneEnum.ProGamer => (double)playerMono.Hp.Value / playerMono.MaxHp <=
+                                         endSceneTransitionParam.hpPercentThresholdForProGamerEnd,
+                EndSceneEnum.SacredLady => daipanExecutor.DaipanCount <=
+                                           endSceneTransitionParam.daipanCountThresholdForSacredLadyEnd,
+                EndSceneEnum.Backlash => daipanExecutor.DaipanCount >=
+                                         endSceneTransitionParam.daipanCountThresholdForBacklashEnd,
                 EndSceneEnum.StrugglingStreamer => true,
                 _ => false
             };
+            Debug.Log($"TransitionCondition() SceneName: {sceneName}, result : {result}, viewerNumber: {viewerNumber.Number}, hp: {playerMono.Hp.Value}, maxHp: {playerMono.MaxHp}, daipanCount: {daipanExecutor.DaipanCount}");
             if (!result) Debug.LogWarning($"TransitionCondition is not satisfied: {sceneName}");
             return result;
         }
