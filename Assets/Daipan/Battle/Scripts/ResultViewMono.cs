@@ -30,13 +30,13 @@ namespace Daipan.Battle.scripts
             )
         {
             Debug.Log("ResultViewMono Constructor");
-            Observable.EveryValueChanged(viewerNumber, x => x.Number)
-                .Where(_ => viewObject.activeSelf)
-                .Subscribe(x => viewerNumberText.text = x.ToString())
+            Observable.EveryUpdate()
+                .Where(_ => viewObject.activeInHierarchy)
+                .Subscribe(_ => viewerNumberText.text = $"Viewer Number: {viewerNumber.Number}")
                 .AddTo(this);
-            Observable.EveryValueChanged(daipanExecutor, x => x.DaipanCount)
-                .Where(_ => viewObject.activeSelf)
-                .Subscribe(x => daipanCountText.text = x.ToString())
+            Observable.EveryUpdate()
+                .Where(_ => viewObject.activeInHierarchy)
+                .Subscribe(_ => daipanCountText.text = $"Daipan Count: {daipanExecutor.DaipanCount}")
                 .AddTo(this);
         }
         
@@ -48,7 +48,11 @@ namespace Daipan.Battle.scripts
                 Debug.LogWarning("PlayerMono is not found");
                 return;
             }
-            playerHpText.text = playerMono.Hp.Value.ToString();  // 本当はObserveしたいけど生成順序の関係でここで取得
+            playerHpText.text = $"Player HP :{playerMono.Hp.Value}";  // 本当はObserveしたいけど生成順序の関係でここで取得
+            
+            tankYouText.text = "Thank you for playing!";
+            pushEnterText.text = "Push Enter to see the end scene"; 
+            
             viewObject.SetActive(true);
         }
         
