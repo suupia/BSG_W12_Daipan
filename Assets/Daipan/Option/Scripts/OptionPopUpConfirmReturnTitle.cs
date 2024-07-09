@@ -1,4 +1,5 @@
 #nullable enable
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,7 @@ namespace Daipan.Option.Scripts
     {
         myContent _myContent;
         IHandleOption _handleOption = null!;
+        Func<myContent, IOptionPopUp?> _transitionFunc = null!;
 
         public void Prepare()
         {
@@ -26,7 +28,6 @@ namespace Daipan.Option.Scripts
                     break;
                 case myContent.No:
                     Debug.Log($"Select : {_myContent}");
-                    _handleOption.SetCurrentOption(OptionContentEnum.Main);
                     break;
             }
         }
@@ -50,7 +51,12 @@ namespace Daipan.Option.Scripts
             _handleOption = handleOption;
         }
 
-        enum myContent
+        public void RegisterTransition(Func<myContent, IOptionPopUp?> transitionFunc)
+        {
+            _transitionFunc = transitionFunc;
+        }
+
+        public enum myContent
         {
             Yes,
             No

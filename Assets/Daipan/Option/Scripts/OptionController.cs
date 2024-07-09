@@ -31,7 +31,13 @@ namespace Daipan.Option.Scripts
                         return _optionContents.FirstOrDefault(x => x is OptionPopUpConfirmReturnTitle);
                     });
                 }
-
+                if (option is OptionPopUpConfirmReturnTitle optionPopUpConfirmReturnTitle)
+                {
+                    optionPopUpConfirmReturnTitle.RegisterTransition(myContent =>
+                    {
+                        return _optionContents.FirstOrDefault(x => x is OptionPopUpMain);
+                    });
+                }
             }
         }
 
