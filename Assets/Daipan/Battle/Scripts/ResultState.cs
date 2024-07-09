@@ -34,15 +34,16 @@ namespace Daipan.Battle.Scripts
             {
                 if (streamTimer.CurrentProgressRatio >= 1)
                 {
-                    IsInResult = true;
+                    ShowResult(); 
                 }
             }));
             
         }
         public void ShowResult()
         {
-            _resultViewMono.ShowResult(); 
+            IsInResult = true;
             UnityEngine.Time.timeScale = 0;
+            _resultViewMono.ShowResult();
         }
         
         public void Dispose()
