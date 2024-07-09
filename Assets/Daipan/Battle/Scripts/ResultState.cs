@@ -1,6 +1,7 @@
 #nullable enable
 using System;
 using System.Collections.Generic;
+using Codice.Client.Common;
 using Daipan.Battle.scripts;
 using Daipan.Stream.Scripts;
 using R3;
@@ -41,6 +42,7 @@ namespace Daipan.Battle.Scripts
         public void ShowResult()
         {
             _resultViewMono.ShowResult(); 
+            UnityEngine.Time.timeScale = 0;
         }
         
         public void Dispose()
