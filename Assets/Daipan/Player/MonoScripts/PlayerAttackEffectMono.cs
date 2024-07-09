@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Enemy.Scripts;
+using Daipan.Player.Interfaces;
 using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Player.LevelDesign.Scripts;
 using Daipan.Player.Scripts;
@@ -21,7 +22,7 @@ namespace Daipan.Player.MonoScripts
             remove => _playerAttackTracking.OnHit -= value;
         }
 
-        PlayerAttackLinear _playerAttackTracking = null!;
+        IPlayerAttackMove _playerAttackTracking = null!;
 
         void Update()
         {
@@ -39,8 +40,5 @@ namespace Daipan.Player.MonoScripts
             );
         }
     }
-
-    public record OnHitEventArgs(EnemyMono? EnemyMono, bool IsTargetEnemy);
-    
 
 }

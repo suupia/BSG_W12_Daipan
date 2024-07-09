@@ -2,13 +2,14 @@
 using System;
 using System.Linq;
 using Daipan.Enemy.MonoScripts;
+using Daipan.Player.Interfaces;
 using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Player.MonoScripts;
 using UnityEngine;
 
 namespace Daipan.Player.Scripts
 {
-    public class PlayerAttackLinear
+    public class PlayerAttackLinear : IPlayerAttackMove
     {
         const double Speed = 30;
         const double HitDistance = 1.0;
