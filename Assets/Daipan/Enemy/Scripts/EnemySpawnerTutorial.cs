@@ -27,7 +27,6 @@ namespace Daipan.Enemy.Scripts
         readonly EnemyCluster _enemyCluster;
         readonly IEnemySpawnPoint _enemySpawnPoint;
         readonly IEnemyBuilder _enemyBuilder;
-        float _timer;
 
         [Inject]
         public EnemySpawnerTutorial(
@@ -47,7 +46,7 @@ namespace Daipan.Enemy.Scripts
 
         public void SpawnEnemyByType(EnemyEnum enemyEnum)
         {
-            var spawnPosition = GetSpawnedPositions().LastOrDefault();
+            var spawnPosition = GetSpawnedPositions(_enemySpawnPoint).LastOrDefault();
             if (spawnPosition == null)
             {
                 Debug.LogWarning("Spawn position is null");
@@ -61,24 +60,17 @@ namespace Daipan.Enemy.Scripts
         {
             var enemyMonoPrefab = _enemyMonoLoader.Load();
             var enemyMonoObject = _container.Instantiate(enemyMonoPrefab, spawnPosition, Quaternion.identity);
-            var enemyMono = _enemyBuilder.Build(enemyMonoObject);
+            var enemyMono = _enemyBuilder.Build(enemyMonoObject,enemyEnum);
             _enemyCluster.Add(enemyMono);
         }
 
-        List <Vector3> GetSpawnedPositions()
+        static List <Vector3> GetSpawnedPositions(IEnemySpawnPoint enemySpawnPoint)
         {
-            var positions = _enemySpawnPoint.GetEnemySpawnedPointXs()
-                .Zip(_enemySpawnPoint.GetEnemySpawnedPointYs(), (x, y) => new Vector3(x.x, y.y))
+            var positions = enemySpawnPoint.GetEnemySpawnedPointXs()
+                .Zip(enemySpawnPoint.GetEnemySpawnedPointYs(), (x, y) => new Vector3(x.x, y.y))
                 .ToList();
             return positions;
         }
 
-        (Vector3 spawnedPos, EnemyEnum enemyEnum) GetSpawnedPositionRandom()
-        {
-            var positions = GetSpawnedPositions(); 
-            var enums = _enemySpawnPoint.GetEnemySpawnedEnemyEnums();
-            var randomIndex = Randoms.RandomByRatios(_enemySpawnPoint.GetEnemySpawnRatios(), Random.value);
-            return (positions[randomIndex], enums[randomIndex]);
-        }
     }
 }

@@ -9,6 +9,14 @@ namespace Daipan.Tutorial.MonoScripts
     public class BlackScreenViewMono : MonoBehaviour
     {
         [SerializeField] CanvasGroup canvasGroup = null!;
+        
+        public void FadeIn(float time, Action onComplete)
+        {
+            canvasGroup.DOFade(1, time).OnComplete(() =>
+            {
+                onComplete();
+            });
+        }
        
         public void FadeOut(float time, Action onComplete)
         {

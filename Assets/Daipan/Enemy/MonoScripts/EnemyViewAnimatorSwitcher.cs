@@ -61,9 +61,9 @@ namespace Daipan.Enemy.MonoScripts
             _canHighlight = false;
             // _leaderAnimatorを代表とする
             var preState = _leaderAnimator.GetCurrentAnimatorStateInfo(0).fullPathHash;
-            Observable.EveryValueChanged(_leaderAnimator, a => a.IsEnd())
-                .Where(_ => preState != _leaderAnimator.GetCurrentAnimatorStateInfo(0).fullPathHash)
+            Observable.EveryValueChanged(_leaderAnimator, a => a.IsAlmostEnd())
                 .Where(isEnd => isEnd)
+                .Where(_ => preState != _leaderAnimator.GetCurrentAnimatorStateInfo(0).fullPathHash)
                 .Subscribe(_ => onDied())
                 .AddTo(_leaderAnimator.gameObject);
         }
@@ -75,9 +75,9 @@ namespace Daipan.Enemy.MonoScripts
             _canHighlight = false;
             // _leaderAnimatorを代表とする
             var preState = _leaderAnimator.GetCurrentAnimatorStateInfo(0).fullPathHash;
-            Observable.EveryValueChanged(_leaderAnimator, a => a.IsEnd())
-                .Where(_ => preState != _leaderAnimator.GetCurrentAnimatorStateInfo(0).fullPathHash)
+            Observable.EveryValueChanged(_leaderAnimator, a => a.IsAlmostEnd())
                 .Where(isEnd => isEnd)
+                .Where(_ => preState != _leaderAnimator.GetCurrentAnimatorStateInfo(0).fullPathHash)
                 .Subscribe(_ => onDied())
                 .AddTo(_leaderAnimator.gameObject);
         }

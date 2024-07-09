@@ -25,7 +25,7 @@ using Daipan.Player.Scripts;
 using Daipan.Stream.MonoScripts;
 using Daipan.Stream.Scripts;
 using Daipan.Stream.Scripts.Utility;
-using Daipan.Streamer.Scripts;
+using Daipan.Streamer.MonoScripts;
 using Daipan.Tower.MonoScripts;
 using Daipan.Tower.Scripts;
 using Daipan.Tutorial.Interfaces;
@@ -69,6 +69,7 @@ namespace Daipan.Tutorial
             builder.Register<AttackExecutorTutorial>(Lifetime.Transient).As<IAttackExecutor>(); 
             builder.Register<PlayerAttackEffectBuilderTutorial>(Lifetime.Scoped).As<IPlayerAttackEffectBuilder>();
             builder.Register<PlayerInputTutorial>(Lifetime.Transient).As<IPlayerInput>();
+            builder.Register<PlayerOnDamagedRegistrarTutorial>(Lifetime.Transient).As<IPlayerOnDamagedRegistrar>();
             
             // Combo
             DaipanScope.RegisterCombo(builder, comboParamManager);
@@ -79,6 +80,8 @@ namespace Daipan.Tutorial
             // Enemy
             DaipanScope.RegisterEnemy(builder, enemyParamsManager);
             builder.Register<EnemySpawnerTutorial>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
+            builder.Register<EnemyBuilderTutorial>(Lifetime.Scoped).As<IEnemyBuilder>();
+
             // Irritated
             DaipanScope.RegisterIrritated(builder, irritatedParams);
     
@@ -94,13 +97,16 @@ namespace Daipan.Tutorial
             // Tutorial
             builder.Register<TutorialFacilitator>(Lifetime.Scoped).AsSelf().As<IUpdate>();
             RegisterTutorialContents(builder);
+            builder.Register<SpeechEventManager>(Lifetime.Scoped);
 
             builder.RegisterComponentInHierarchy<DownloadGaugeViewMono>();
             builder.Register<LanguageConfig>(Lifetime.Scoped);
             builder.RegisterComponentInHierarchy<LanguageSelectionPopupMono>();
             builder.RegisterComponentInHierarchy<BlackScreenViewMono>();
             builder.RegisterComponentInHierarchy<SpeechBubbleMono>();
-            builder.Register<SpeechEventManager>(Lifetime.Scoped);
+            builder.RegisterComponentInHierarchy<PushEnterTextViewMono>();
+            builder.RegisterComponentInHierarchy<AimTopStreamerViewMono>();
+            builder.RegisterComponentInHierarchy<StandbyStreamingViewMono>();
 
             // Updater
             builder.UseEntryPoints(Lifetime.Scoped, entryPoints =>
@@ -116,14 +122,14 @@ namespace Daipan.Tutorial
 
         static void RegisterTutorialContents(IContainerBuilder builder)
         {
-            // builder.Register<DisplayBlackScreenWithProgress>(Lifetime.Scoped).As<ITutorialContent>();
-            // builder.Register<LanguageSelection>(Lifetime.Scoped).As<ITutorialContent>();
-            // builder.Register<FadeInTutorialStart>(Lifetime.Scoped).As<ITutorialContent>();
+            builder.Register<DisplayBlackScreenWithProgress>(Lifetime.Scoped).As<ITutorialContent>();
+            builder.Register<LanguageSelection>(Lifetime.Scoped).As<ITutorialContent>();
+            builder.Register<FadeInTutorialStart>(Lifetime.Scoped).As<ITutorialContent>();
             builder.Register<UICatIntroduce>(Lifetime.Scoped).As<ITutorialContent>();
             builder.Register<RedEnemyTutorial>(Lifetime.Scoped).As<ITutorialContent>().AsSelf();
             builder.Register<SequentialEnemyTutorial>(Lifetime.Scoped).As<ITutorialContent>();
-            builder.Register<ShowWhiteComments>(Lifetime.Scoped).As<ITutorialContent>();
-            builder.Register<ShowAntiComments>(Lifetime.Scoped).As<ITutorialContent>();
+            builder.Register<ShowWhiteCommentsTutorial>(Lifetime.Scoped).As<ITutorialContent>();
+            builder.Register<ShowAntiCommentsTutorial>(Lifetime.Scoped).As<ITutorialContent>();
             builder.Register<DaipanCutscene>(Lifetime.Scoped).As<ITutorialContent>();
             builder.Register<CatSpeaksAfterDaipan>(Lifetime.Scoped).As<ITutorialContent>();
             builder.Register<AimForTopStreamer>(Lifetime.Scoped).As<ITutorialContent>();
@@ -132,7 +138,7 @@ namespace Daipan.Tutorial
 
         static void RegisterDebugInput(IContainerBuilder builder)
         {
-            var waveDebugInput = new GameObject().AddComponent<WaveDebugInputMono>();
+            var waveDebugInput = new GameObject().AddComponent<DebugWaveInputMono>();
             builder.RegisterComponent(waveDebugInput);
         }
     }

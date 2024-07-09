@@ -11,6 +11,7 @@ using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.Stream.Scripts;
 using Daipan.Stream.Scripts.Utility;
 using Daipan.Utility.Scripts;
+using R3;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -29,16 +30,19 @@ namespace Daipan.Enemy.Scripts
         readonly IEnemyTimeLineParamContainer _enemyTimeLInePramContainer;
         readonly float _spawnRandomPositionY = 0.2f;
         readonly IEnemyBuilder _enemyBuilder;
+        readonly IEnemyEnumSelector _enemyEnumSelector;
         float _timer;
+        IDisposable? _disposable;
 
         [Inject]
         public EnemySpawner(
-            IObjectResolver container,
-            IPrefabLoader<EnemyMono> enemyMonoLoader, 
-            EnemyCluster enemyCluster,
-            IEnemySpawnPoint enemySpawnPoint,
-            IEnemyTimeLineParamContainer enemyTimeLInePramContainer,
-            IEnemyBuilder enemyBuilder
+            IObjectResolver container
+            , IPrefabLoader<EnemyMono> enemyMonoLoader
+            ,EnemyCluster enemyCluster
+            ,IEnemySpawnPoint enemySpawnPoint
+            ,IEnemyTimeLineParamContainer enemyTimeLInePramContainer
+            ,IEnemyBuilder enemyBuilder
+            ,IEnemyEnumSelector enemyEnumSelector
         )
         {
             _container = container;
@@ -47,8 +51,8 @@ namespace Daipan.Enemy.Scripts
             _enemySpawnPoint = enemySpawnPoint;
             _enemyTimeLInePramContainer = enemyTimeLInePramContainer;
             _enemyBuilder = enemyBuilder;
+            _enemyEnumSelector = enemyEnumSelector;
         }
-
 
         void IUpdate.Update()
         {
@@ -64,12 +68,26 @@ namespace Daipan.Enemy.Scripts
         {
             var spawnPosition = GetRandomSpawnPosition(_enemySpawnPoint);
             var randomSpawnPosition = new Vector3 { x = spawnPosition.x, y = spawnPosition.y + Random.Range(-_spawnRandomPositionY, _spawnRandomPositionY) };
+           
+            var enemyEnum = _enemyEnumSelector.SelectEnemyEnum();
+            if (enemyEnum == EnemyEnum.RedBoss)
+            {
+                SpawnRedBoss(randomSpawnPosition); 
+            }
+            else
+            {
+                SpawnEnemy(randomSpawnPosition,enemyEnum); 
+            }
+           
+        }
+        
+        void SpawnEnemy(Vector3 spawnPosition, EnemyEnum enemyEnum)
+        {
             var enemyMonoPrefab = _enemyMonoLoader.Load();
-            var enemyMonoObject = _container.Instantiate(enemyMonoPrefab, randomSpawnPosition, Quaternion.identity);
-            var enemyMono = _enemyBuilder.Build(enemyMonoObject);
+            var enemyMonoObject = _container.Instantiate(enemyMonoPrefab, spawnPosition, Quaternion.identity);
+            var enemyMono = _enemyBuilder.Build(enemyMonoObject,enemyEnum);
             _enemyCluster.Add(enemyMono);
         }
-
         static Vector3 GetRandomSpawnPosition(IEnemySpawnPoint enemySpawnPoint)
         {
             var positions = enemySpawnPoint.GetEnemySpawnedPointXs()
@@ -77,6 +95,27 @@ namespace Daipan.Enemy.Scripts
                 .ToList();
             var randomIndex = Randoms.RandomByRatios(enemySpawnPoint.GetEnemySpawnRatios(), Random.value);
             return positions[randomIndex];
+        }
+
+        void SpawnRedBoss(Vector3 spawnPosition)
+        {
+            const float subordinateSpawnIntervalSec = 0.3f;
+            const float bossSpawnDelaySec = 0.7f; 
+            const int subordinateCount = 5;
+            _disposable = Observable.Interval(TimeSpan.FromSeconds(subordinateSpawnIntervalSec))
+                .Take(subordinateCount)
+                .Subscribe(
+                    _ => { SpawnEnemy(spawnPosition, EnemyEnum.Red); },
+                    _ =>
+                    {
+                        Observable.Timer(TimeSpan.FromSeconds(bossSpawnDelaySec))
+                            .Subscribe(_ => { SpawnEnemy(spawnPosition, EnemyEnum.RedBoss); });
+                    });
+        }
+        
+        ~EnemySpawner()
+        {
+            _disposable?.Dispose();
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Daipan.Comment.Scripts;
 using Daipan.Enemy.Interfaces;
+using Daipan.Enemy.LevelDesign.Interfaces;
 using Daipan.Enemy.LevelDesign.Scripts;
 using Daipan.Enemy.MonoScripts;
 using Daipan.LevelDesign.Comment.Scripts;
@@ -19,45 +20,30 @@ namespace Daipan.Enemy.Scripts
     {
         readonly IEnemyParamContainer _enemyParamContainer;
         readonly CommentSpawner _commentSpawner;
-        readonly EnemyParamsManager _enemyParamsManager;
         readonly ViewerNumber _viewerNumber;
         readonly IrritatedValue _irritatedValue;
         readonly EnemyCluster _enemyCluster;
         readonly EnemyLevelDesignParamData _enemyLevelDesignParamData;
-        readonly IEnemyTimeLineParamContainer _enemyTimeLineParamContainer;
         
         public EnemyBuilder(
             IEnemyParamContainer enemyParamContainer
             , CommentSpawner commentSpawner
             , ViewerNumber viewerNumber
             , IrritatedValue irritatedValue
-            , EnemyParamsManager enemyParamsManager
             , EnemyCluster enemyCluster
             , EnemyLevelDesignParamData enemyLevelDesignParamData
-            , IEnemyTimeLineParamContainer enemyTimeLineParamContainer
         )
         {
             _enemyParamContainer = enemyParamContainer;
             _commentSpawner = commentSpawner;
             _viewerNumber = viewerNumber;
             _irritatedValue = irritatedValue;
-            _enemyParamsManager = enemyParamsManager;
             _enemyCluster = enemyCluster;
             _enemyLevelDesignParamData = enemyLevelDesignParamData;
-            _enemyTimeLineParamContainer = enemyTimeLineParamContainer;
         }
 
-        public EnemyMono Build(EnemyMono enemyMono)
+        public EnemyMono Build(EnemyMono enemyMono, EnemyEnum enemyEnum)
         {
-            var enemyEnum = 
-                IsSpawnBoss(_enemyLevelDesignParamData, _enemyTimeLineParamContainer) 
-                    ? DecideRandomEnemyType (_enemyParamsManager, x => x.IsBoss() == true)
-                    : IsSpawnSpecial( _enemyTimeLineParamContainer) 
-                        ? DecideRandomEnemyType (_enemyParamsManager, x => x.IsSpecial() == true)
-                        : IsSpawnTotem( _enemyTimeLineParamContainer) 
-                            ? DecideRandomEnemyType (_enemyParamsManager, x => x.IsTotem() == true)
-                            : DecideRandomEnemyType (_enemyParamsManager, x => x.IsBoss() != true && x.IsSpecial() != true && x.IsTotem() != true);
-
             Debug.Log($"enemyEnum: {enemyEnum}");
             var enemyParamData = _enemyParamContainer.GetEnemyParamData(enemyEnum);
 
@@ -106,46 +92,5 @@ namespace Daipan.Enemy.Scripts
             }
         }
 
-        static bool IsSpawnBoss(
-            EnemyLevelDesignParamData enemyLevelDesignParamData
-            , IEnemyTimeLineParamContainer enemyTimeLineParamContainer
-            ) 
-        {
-            // Bossが出現する条件1
-            if (enemyLevelDesignParamData.GetCurrentKillAmount() >= enemyLevelDesignParamData.GetSpawnBossAmount())
-            {
-                enemyLevelDesignParamData.SetCurrentKillAmount(0);
-                return true;
-            }
-
-            // Bossが出現する条件2
-            if (Random.value < enemyTimeLineParamContainer.GetEnemyTimeLineParamData().GetSpawnBossPercent() / 100.0) return true;
-
-            return false;
-        }
-
-        static bool IsSpawnSpecial(IEnemyTimeLineParamContainer enemyTimeLineParamContainer)
-        {
-            // Specialが出現する条件
-            if (Random.value < enemyTimeLineParamContainer.GetEnemyTimeLineParamData().GetSpawnSpecialPercent() / 100.0) return true;
-            return false;
-        }
-        
-        static bool IsSpawnTotem(IEnemyTimeLineParamContainer enemyTimeLineParamContainer)
-        {
-            // Totemが出現する条件
-            if (Random.value < enemyTimeLineParamContainer.GetEnemyTimeLineParamData().GetSpawnTotemPercent() / 100.0) return true;
-            return false;
-        }
-
-        static EnemyEnum DecideRandomEnemyType(EnemyParamsManager enemyParamsManager, Func<EnemyEnum,bool> targetEnemyEnum)
-        {
-            List<(EnemyEnum EnemyEnum, double Ratio)> table =  enemyParamsManager.enemyParams
-                .Where(x => targetEnemyEnum(x.enemyEnum))
-                .Select(x => (x.enemyEnum, x.enemySpawnParam.spawnRatio))
-                .ToList();
-            var randomIndex = Randoms.RandomByRatios(table.Select(x => x.Ratio).ToList(), Random.value);
-            return  table[randomIndex].EnemyEnum;
-        }
     }
 }

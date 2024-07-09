@@ -1,10 +1,13 @@
 #nullable enable
 using System;
 using System.Collections.Generic;
+using Daipan.Battle.scripts;
+using Daipan.Comment.Scripts;
 using Daipan.Enemy.Scripts;
 using Daipan.InputSerial.Scripts;
 using Daipan.Option.Scripts;
-using Daipan.Streamer.Scripts;
+using Daipan.Stream.Scripts;
+using Daipan.Streamer.MonoScripts;
 using Daipan.Tutorial.Interfaces;
 using Daipan.Tutorial.MonoScripts;
 using R3;
@@ -16,14 +19,11 @@ namespace Daipan.Tutorial.Scripts
     {
         public abstract void Execute();
         public abstract bool IsCompleted();
-        protected bool Completed { get; set; }
         protected readonly IList<IDisposable> Disposables = new List<IDisposable>();
-
         public void Dispose()
         {
             foreach (var disposable in Disposables) disposable.Dispose();
         }
-
         ~AbstractTutorialContent()
         {
             Dispose();
@@ -34,6 +34,7 @@ namespace Daipan.Tutorial.Scripts
     {
         readonly DownloadGaugeViewMono _gaugeViewMono;
         const float FillAmountPerSec = 0.2f;
+        bool Completed { get; set; }
 
         public DisplayBlackScreenWithProgress(DownloadGaugeViewMono gaugeViewMono)
         {
@@ -42,6 +43,7 @@ namespace Daipan.Tutorial.Scripts
 
         public override void Execute()
         {
+        _gaugeViewMono.Show();
             Disposables.Add(Observable.EveryUpdate()
                 .Where(_ => !Completed)
                 .Subscribe(_ =>
@@ -63,7 +65,7 @@ namespace Daipan.Tutorial.Scripts
         readonly LanguageConfig _languageConfig;
         readonly InputSerialManager _inputSerialManager;
         readonly LanguageSelectionPopupMono _languageSelectionPopupMono;
-
+        bool Completed { get; set; }
         public LanguageSelection(
             LanguageConfig languageConfig
             , InputSerialManager inputSerialManager
@@ -98,7 +100,6 @@ namespace Daipan.Tutorial.Scripts
                         Completed = true;
                     }
                 }));
-
         }
 
         public override bool IsCompleted()
@@ -112,11 +113,11 @@ namespace Daipan.Tutorial.Scripts
         readonly DownloadGaugeViewMono _gaugeViewMono;
         readonly BlackScreenViewMono _blackScreenViewMono;
         const float FillAmountPerSec = 0.2f;
-
+        bool Completed { get; set; }
         public FadeInTutorialStart(
             DownloadGaugeViewMono gaugeViewMono
             , BlackScreenViewMono blackScreenViewMono
-            )
+        )
         {
             _gaugeViewMono = gaugeViewMono;
             _blackScreenViewMono = blackScreenViewMono;
@@ -124,17 +125,22 @@ namespace Daipan.Tutorial.Scripts
 
         public override void Execute()
         {
-            Disposables.Add(Observable.EveryUpdate()
-                .Where(_ => !Completed)
-                .Subscribe(_ =>
-                {
-                    Debug.Log("Displaying black screen with download progress...");
-                    _gaugeViewMono.SetGaugeValue(_gaugeViewMono.CurrentFillAmount + FillAmountPerSec * Time.deltaTime);
-                    if (_gaugeViewMono.CurrentFillAmount >= 1.0f)  _blackScreenViewMono.FadeOut(1, () =>
+            _gaugeViewMono.Show();
+            Disposables.Add(
+                Observable.EveryUpdate()
+                    .Where(_ => !Completed)
+                    .Subscribe(_ =>
                     {
-                        Completed = true;
-                    });
-                }));
+                        Debug.Log("Displaying black screen with download progress...");
+                        _gaugeViewMono.SetGaugeValue(_gaugeViewMono.CurrentFillAmount +
+                                                     FillAmountPerSec * Time.deltaTime);
+                        if (_gaugeViewMono.CurrentFillAmount >= 1.0f)
+                            _blackScreenViewMono.FadeOut(1, () =>
+                            {
+                                _gaugeViewMono.Hide();
+                                Completed = true;
+                            });
+                    }));
         }
 
 
@@ -144,21 +150,22 @@ namespace Daipan.Tutorial.Scripts
         }
     }
 
-    public class UICatIntroduce : AbstractTutorialContent 
+    public class UICatIntroduce : AbstractTutorialContent
     {
         readonly SpeechEventManager _speechEventManager;
+
         public UICatIntroduce(
             SpeechEventManager speechEventManager
-            )
+        )
         {
             _speechEventManager = speechEventManager;
         }
+
         public override void Execute()
         {
             Debug.Log("Streamer wakes up...");
             Debug.Log("Cat speaks...");
-            _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildUICatIntroduce()); 
-
+            _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildUICatIntroduce());
         }
 
         public override bool IsCompleted()
@@ -171,29 +178,24 @@ namespace Daipan.Tutorial.Scripts
     {
         readonly SpeechEventManager _speechEventManager;
         readonly EnemySpawnerTutorial _enemySpawnerTutorial;
+
         public RedEnemyTutorial(
             SpeechEventManager speechEventManager
-            ,EnemySpawnerTutorial enemySpawnerTutorial
+            , EnemySpawnerTutorial enemySpawnerTutorial
         )
         {
             _speechEventManager = speechEventManager;
             _enemySpawnerTutorial = enemySpawnerTutorial;
         }
-        public bool IsSuccess { get; private set; }
+
+        public bool IsSuccess { get; private set; } // UICatのSpeechEventの分岐で使用
+
         public override void Execute()
         {
             Debug.Log("Tutorial: Defeat the red enemy...");
             _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildRedEnemyTutorial(this));
 
             _enemySpawnerTutorial.SpawnEnemyByType(EnemyEnum.Red);
-
-
-            // Debug
-            Disposables.Add(Observable.EveryUpdate()
-                .Subscribe(_ =>
-                {
-                    Debug.Log($"IsSuccess = {IsSuccess}");
-                }));
         }
 
         public override bool IsCompleted()
@@ -201,23 +203,36 @@ namespace Daipan.Tutorial.Scripts
             return _speechEventManager.IsEnd();
         }
 
-        public void SetIsSuccess(bool isSuccess)
+        public void SetSuccess()
         {
-            IsSuccess = isSuccess;
-            _speechEventManager.MoveNext();
+            Debug.Log($"RedEnemyTutorial SetIsSuccess");
+
+            // これで強制的に次のスピーチに進む（危険かも）（IsSuccessをSpeechの方でObserveしているのでかなり危険）
+            int cnt = 0;
+            while (!_speechEventManager.IsEnd())
+            {
+                cnt++;
+                if (cnt >= 100)
+                {
+                    Debug.LogError($"Detect infinite loop in RedEnemyTutorial SetSuccess()");
+                    break;
+                }
+
+                _speechEventManager.MoveNext();
+                Debug.Log(
+                    $"RedEnemyTutorial MoveNext _speechEventManager.CurrentEvent.Message: {_speechEventManager.CurrentEvent.Message}");
+            }
         }
     }
 
     public class SequentialEnemyTutorial : AbstractTutorialContent
     {
-        public bool IsSuccess { get; private set; }
-
         readonly SpeechEventManager _speechEventManager;
         readonly EnemySpawnerTutorial _enemySpawnerTutorial;
 
         public SequentialEnemyTutorial(
-        SpeechEventManager speechEventManager
-        , EnemySpawnerTutorial enemySpawnerTutorial
+            SpeechEventManager speechEventManager
+            , EnemySpawnerTutorial enemySpawnerTutorial
         )
         {
             _speechEventManager = speechEventManager;
@@ -227,132 +242,327 @@ namespace Daipan.Tutorial.Scripts
         public override void Execute()
         {
             Debug.Log("Tutorial: Defeat enemies in sequence...");
-           _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildSequentialEnemyTutorial(this));
-           
-           float intervalSec = 1f; // スポーンの間隔
-           var enemyEnums = new Queue<EnemyEnum>(new []{EnemyEnum.Blue, EnemyEnum.Yellow, EnemyEnum.Red});
+            _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildSequentialEnemyTutorial(this));
 
-           Disposables.Add(Observable.Interval(System.TimeSpan.FromSeconds(intervalSec))
-               .Take(enemyEnums.Count)
-               .Subscribe(_ =>
-               {
-                  _enemySpawnerTutorial.SpawnEnemyByType(enemyEnums.Dequeue()); 
-               }));
+            var intervalSec = 1f; // スポーンの間隔
+            var enemyEnums = new Queue<EnemyEnum>(new[] { EnemyEnum.Blue, EnemyEnum.Yellow, EnemyEnum.Red });
+
+            Disposables.Add(
+                Observable.Interval(TimeSpan.FromSeconds(intervalSec))
+                    .Take(enemyEnums.Count)
+                    .Subscribe(
+                        _ => { _enemySpawnerTutorial.SpawnEnemyByType(enemyEnums.Dequeue()); },
+                        _ => { Debug.Log("Enemy spawn completed"); }
+                    ));
         }
 
         public override bool IsCompleted()
         {
-            return false;
+            return _speechEventManager.IsEnd();
         }
-        public void SetIsSuccess(bool isSuccess)
+
+        public void MoveNextSpeech()
         {
-            IsSuccess = isSuccess;
+            // これで強制的に次のスピーチに進む（危険かも）
+            while (!_speechEventManager.IsEnd())
+            {
+                _speechEventManager.MoveNext();
+                Debug.Log(
+                    $"RedEnemyTutorial MoveNext _speechEventManager.CurrentEvent.Message: {_speechEventManager.CurrentEvent.Message}");
+            }
         }
     }
 
-    public class ShowWhiteComments : ITutorialContent
+    public class ShowWhiteCommentsTutorial : AbstractTutorialContent
     {
-        bool _completed = false;
+        readonly SpeechEventManager _speechEventManager;
+        readonly CommentSpawner _commentSpawner;
+        bool CanMoveNext { get; set; }
 
-        public void Execute()
+        public ShowWhiteCommentsTutorial(
+            SpeechEventManager speechEventManager
+            , CommentSpawner commentSpawner
+        )
+        {
+            _speechEventManager = speechEventManager;
+            _commentSpawner = commentSpawner;
+        }
+
+        public override void Execute()
         {
             Debug.Log("Displaying white comments...");
-            // Logic for this step
-            if (Input.GetKeyDown(KeyCode.T)) _completed = true;
+            _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildShowWitheCommentsTutorial(this));
+
+            var intervalSec = 0.5f; // スポーンの間隔
+            var commentCount = 3;
+            var delaySec = 2.0f; // すべてのコメントが表示された後の待機時間 
+
+            Disposables.Add(
+                Observable.Interval(TimeSpan.FromSeconds(intervalSec))
+                    .Take(commentCount)
+                    .Subscribe(
+                        _ => { _commentSpawner.SpawnCommentByType(CommentEnum.Normal); },
+                        _ =>
+                        {
+                            Debug.Log("Comment spawn completed");
+                            Observable.Timer(TimeSpan.FromSeconds(delaySec))
+                                .Subscribe(_ =>
+                                {
+                                    CanMoveNext = true;
+                                    Debug.Log("ShowWhiteCommentsTutorial Can move next");
+                                })
+                                .AddTo(Disposables);
+                            ;
+                        }
+                    )
+            );
         }
 
-        public bool IsCompleted()
+        public override bool IsCompleted()
         {
-            return _completed;
+            return _speechEventManager.IsEnd() && CanMoveNext;
         }
     }
 
-    public class ShowAntiComments : ITutorialContent
+    public class ShowAntiCommentsTutorial : AbstractTutorialContent
     {
-        bool _completed = false;
+        readonly SpeechEventManager _speechEventManager;
+        readonly CommentSpawner _commentSpawner;
+        readonly EnemySpawnerTutorial _enemySpawnerTutorial;
+        bool CanMoveNext { get; set; }
 
-        public void Execute()
+        public ShowAntiCommentsTutorial(
+            SpeechEventManager speechEventManager
+            , CommentSpawner commentSpawner
+            , EnemySpawnerTutorial enemySpawnerTutorial
+        )
+        {
+            _speechEventManager = speechEventManager;
+            _commentSpawner = commentSpawner;
+            _enemySpawnerTutorial = enemySpawnerTutorial;
+        }
+
+        public override void Execute()
         {
             Debug.Log("Showing anti-comments with sound effects...");
-            Debug.Log("Anger gauge animation...");
-            // Logic for this step
-            if (Input.GetKeyDown(KeyCode.T)) _completed = true;
+            _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildShowAntiCommentsTutorial(this));
+
+            // アンチコメントを生成→終わったら遷移可能
+            const float commentIntervalSec = 0.5f; // スポーンの間隔
+            const int commentCount = 3;
+            const float delaySec = 2.0f; // すべてのコメントが表示された後の待機時間 
+            Disposables.Add(
+                Observable.Interval(TimeSpan.FromSeconds(commentIntervalSec))
+                    .Take(commentCount)
+                    .Subscribe(
+                        _ => { _commentSpawner.SpawnCommentByType(CommentEnum.Spiky); },
+                        _ =>
+                        {
+                            Debug.Log("Comment spawn completed");
+                            Observable.Timer(TimeSpan.FromSeconds(delaySec))
+                                .Subscribe(_ =>
+                                {
+                                    CanMoveNext = true;
+                                    Debug.Log("ShowAntiCommentsTutorial Can move next");
+                                })
+                                .AddTo(Disposables);
+                        }
+                    )
+            );
+            
+            // 雑魚敵とボスも生成する
+            const float enemyIntervalSec = 0.5f; // スポーンの間隔
+            var enemyEnums = new Queue<EnemyEnum>(new[] { EnemyEnum.Blue, EnemyEnum.RedBoss, EnemyEnum.Red, EnemyEnum.YellowBoss, EnemyEnum.Yellow, EnemyEnum.BlueBoss});
+            Disposables.Add(
+                Observable.Interval(TimeSpan.FromSeconds(enemyIntervalSec))
+                    .Take(enemyEnums.Count)
+                    .Subscribe(
+                        _ => {  _enemySpawnerTutorial.SpawnEnemyByType(enemyEnums.Dequeue()); },
+                        _ =>
+                        {
+                            Debug.Log( "Enemy spawn completed");
+                        }
+                    )
+                );
+            
         }
 
-        public bool IsCompleted()
+        public override bool IsCompleted()
         {
-            return _completed;
+            return _speechEventManager.IsEnd() && CanMoveNext;
         }
     }
 
 
-    public class DaipanCutscene : ITutorialContent
+    public class DaipanCutscene : AbstractTutorialContent
     {
-        bool _completed = false;
+        readonly SpeechEventManager _speechEventManager;
+        readonly IrritatedValue _irritatedValue;
+        readonly DaipanExecutor _daipanExecutor;
+        readonly PushEnterTextViewMono _pushEnterTextViewMono;
 
-        public void Execute()
+        public DaipanCutscene(
+            SpeechEventManager speechEventManager
+            , IrritatedValue irritatedValue
+            , DaipanExecutor daipanExecutor
+            , PushEnterTextViewMono pushEnterTextViewMono
+        )
+        {
+            _speechEventManager = speechEventManager;
+            _irritatedValue = irritatedValue;
+            _daipanExecutor = daipanExecutor;
+            _pushEnterTextViewMono = pushEnterTextViewMono;
+        }
+
+        public override void Execute()
         {
             Debug.Log("Displaying special cutscene...");
-            // 特別なカットに切り替える
-            // Logic for this step
-            if (Input.GetKeyDown(KeyCode.T)) _completed = true;
+            Debug.Log("Anger gauge animation...");
+            _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildShowDaipanCutsceneTutorial(this));
+
+            const float fillRatioPerSec = 0.2f;
+            Disposables.Add(
+                Observable.EveryUpdate()
+                    .Where(_ => _daipanExecutor.DaipanCount < 1)
+                    .Subscribe(
+                        _ =>
+                        {
+                            _irritatedValue.IncreaseValue(fillRatioPerSec * _irritatedValue.MaxValue * Time.deltaTime);
+                        },
+                        _ => { Debug.Log($"IrritatedValue: {_irritatedValue.Value}"); }
+                    )
+            );
+
+            Disposables.Add(
+                Observable.EveryValueChanged(_irritatedValue, irritatedValue => irritatedValue.Value)
+                    .Subscribe(
+                        _ =>
+                        {
+                            if (_irritatedValue.IsFull)
+                            {
+                                _pushEnterTextViewMono.Show();
+                            }
+                            else
+                            {
+                                _pushEnterTextViewMono.Hide();
+                            }
+                        })
+            );
         }
 
-        public bool IsCompleted()
+        public override bool IsCompleted()
         {
-            return _completed;
+            return _speechEventManager.IsEnd() && _daipanExecutor.DaipanCount >= 1; 
         }
     }
 
 
-    public class CatSpeaksAfterDaipan : ITutorialContent
+    public class CatSpeaksAfterDaipan : AbstractTutorialContent
     {
-        bool _completed = false;
+        readonly SpeechEventManager _speechEventManager;
 
-        public void Execute()
+        public CatSpeaksAfterDaipan(
+            SpeechEventManager speechEventManager
+        )
+        {
+            _speechEventManager = speechEventManager;
+        }
+
+        public override void Execute()
         {
             Debug.Log("Cat speaks more...");
-            // Logic for this step
-            if (Input.GetKeyDown(KeyCode.T)) _completed = true;
+            _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildCatSpeaksAfterDaipan(this));
+
+            Disposables.Add(
+                Observable.EveryUpdate()
+                    .Subscribe(
+                        _ => { },
+                        _ => { Debug.Log("Completed CatSpeaksAfterDaipan"); }
+                    )
+            );
         }
 
-        public bool IsCompleted()
+        public override bool IsCompleted()
         {
-            return _completed;
+            return _speechEventManager.IsEnd();
         }
     }
 
-    public class AimForTopStreamer : ITutorialContent
+    public class AimForTopStreamer : AbstractTutorialContent
     {
-        bool _completed = false;
+        readonly SpeechEventManager _speechEventManager;
+        readonly AimTopStreamerViewMono _aimTopStreamerViewMono;
+        bool Completed { get; set; }  
+        public AimForTopStreamer (
+            SpeechEventManager speechEventManager
+            ,AimTopStreamerViewMono aimTopStreamerViewMono
+        )
+        {
+            _speechEventManager = speechEventManager;
+            _aimTopStreamerViewMono = aimTopStreamerViewMono;
+        }
 
-        public void Execute()
+        public override void Execute()
         {
             Debug.Log("Aim for top streamer...");
-            // Logic for this step
-            if (Input.GetKeyDown(KeyCode.T)) _completed = true;
+            _aimTopStreamerViewMono.Show(); 
+            
+            // 少し待つ
+            const float displaySec = 2.0f;
+            Observable.Timer(TimeSpan.FromSeconds(displaySec))
+                .Subscribe(_ =>
+                {
+                    Completed = true; 
+                    _aimTopStreamerViewMono.Hide();
+                });
         }
 
-        public bool IsCompleted()
+        public override bool IsCompleted()
         {
-            return _completed;
+             return _speechEventManager.IsEnd() && Completed;
         }
     }
 
-    public class StartActualGame : ITutorialContent
+    public class StartActualGame : AbstractTutorialContent
     {
-        bool _completed = false;
-
-        public void Execute()
+        readonly BlackScreenViewMono _blackScreenViewMono;
+        readonly StandbyStreamingViewMono _standbyStreamingViewMono;
+        readonly InputSerialManager _inputSerialManager; 
+        bool Completed { get; set; } 
+        public StartActualGame(
+            BlackScreenViewMono blackScreenViewMono
+            , StandbyStreamingViewMono standbyStreamingViewMono
+            , InputSerialManager inputSerialManager
+            )
+        {
+            _blackScreenViewMono = blackScreenViewMono;
+            _standbyStreamingViewMono = standbyStreamingViewMono;
+            _inputSerialManager = inputSerialManager;
+        }
+        public override void Execute()
         {
             Debug.Log("Starting actual game...");
-            // Logic for this step
-            if (Input.GetKeyDown(KeyCode.T)) _completed = true;
+            _blackScreenViewMono.FadeIn(1.0f, () =>
+            {
+                // 配信待機所を表示
+                _standbyStreamingViewMono.Show();
+                // すこししてからフェードアウトして、次のシーンへ
+                const float displaySec = 2.0f;
+                Observable.Timer(TimeSpan.FromSeconds(displaySec))
+                    .Subscribe(_ =>
+                    {
+                        _blackScreenViewMono.FadeOut(0.2f, () =>
+                        {
+                            SceneTransition.TransitioningScene(SceneName.DaipanScene);
+                            Completed = true;
+                        });
+                    });
+            }); 
         }
 
-        public bool IsCompleted()
+        public override bool IsCompleted()
         {
-            return _completed;
+            return Completed;
         }
     }
 }
