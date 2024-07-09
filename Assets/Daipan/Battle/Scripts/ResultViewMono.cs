@@ -29,6 +29,7 @@ namespace Daipan.Battle.scripts
             , DaipanExecutor daipanExecutor
             )
         {
+            Debug.Log("ResultViewMono Constructor");
             Observable.EveryValueChanged(viewerNumber, x => x.Number)
                 .Where(_ => viewObject.activeSelf)
                 .Subscribe(x => viewerNumberText.text = x.ToString())
