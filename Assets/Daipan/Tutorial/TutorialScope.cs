@@ -138,7 +138,7 @@ namespace Daipan.Tutorial
 
         static void RegisterDebugInput(IContainerBuilder builder)
         {
-            var waveDebugInput = new GameObject().AddComponent<WaveDebugInputMono>();
+            var waveDebugInput = new GameObject().AddComponent<DebugWaveInputMono>();
             builder.RegisterComponent(waveDebugInput);
         }
     }

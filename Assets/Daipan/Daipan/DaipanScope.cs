@@ -12,6 +12,7 @@ using Daipan.Enemy.Scripts;
 using Daipan.InputSerial.Scripts;
 using Daipan.LevelDesign.Battle.Scripts;
 using Daipan.LevelDesign.Comment.Scripts;
+using Daipan.LevelDesign.EndScene;
 using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.Player.LevelDesign.Scripts;
 using Daipan.LevelDesign.Stream;
@@ -50,6 +51,8 @@ namespace Daipan.Daipan
         [SerializeField] IrritatedParams irritatedParams = null!;
         [SerializeField] TowerParams towerParams = null!;
         [SerializeField] ComboParamManager comboParamManager = null!;
+
+        [SerializeField] EndSceneTransitionParam endSceneTransitionParam = null!;
 
         public static void RegisterStream(IContainerBuilder builder, StreamParam streamParam)
         {
@@ -169,6 +172,7 @@ namespace Daipan.Daipan
             builder.Register<EnemyTotemOnAttack>(Lifetime.Scoped);
             builder.Register<EnemyHighlightUpdater>(Lifetime.Scoped).AsImplementedInterfaces();
         }
+
         public static void RegisterIrritated(IContainerBuilder builder, IrritatedParams irritatedParams)
         {
             // Parameters
@@ -178,6 +182,7 @@ namespace Daipan.Daipan
             builder.RegisterComponentInHierarchy<IrritatedGaugeBackgroundViewMono>();
             builder.Register<IrritatedValue>(Lifetime.Scoped).WithParameter("maxValue", 100);
         }
+
         public static void RegisterView(IContainerBuilder builder)
         {
             // Viewer
@@ -190,14 +195,13 @@ namespace Daipan.Daipan
 
             // ShakeDisplay
             builder.RegisterComponentInHierarchy<ShakeDisplayMono>();
-
         }
 
         public static void RegisterBattle(IContainerBuilder builder)
         {
             // Battle
             builder.Register<WaveState>(Lifetime.Scoped);
-            builder.Register<EndSceneSelector>(Lifetime.Scoped).As<IStart>().AsSelf();
+            builder.Register<EndSceneSelector>(Lifetime.Scoped);
         }
 
         public static void RegisterInputSerial(IContainerBuilder builder)
@@ -211,23 +215,23 @@ namespace Daipan.Daipan
         {
             // Stream
             RegisterStream(builder, streamParam);
-            
+
             // Comment
             RegisterComment(builder, commentParamManager);
-            
+
             // Player
             RegisterPlayer(builder, playerParamManager);
             builder.Register<AttackExecutor>(Lifetime.Transient).As<IAttackExecutor>();
             builder.Register<PlayerAttackEffectBuilder>(Lifetime.Scoped).As<IPlayerAttackEffectBuilder>();
             builder.Register<PlayerInput>(Lifetime.Transient).As<IPlayerInput>();
             builder.Register<PlayerOnDamagedRegistrar>(Lifetime.Transient).As<IPlayerOnDamagedRegistrar>();
-            
+
             // Combo
             RegisterCombo(builder, comboParamManager);
-            
+
             // Tower
             RegisterTower(builder, towerParams);
-            
+
             // Enemy
             RegisterEnemy(builder, enemyParamsManager);
             builder.Register<EnemySpawner>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
@@ -236,31 +240,36 @@ namespace Daipan.Daipan
 
             // Irritated
             RegisterIrritated(builder, irritatedParams);
-            
+
             // View
             RegisterView(builder);
-            
+
             // Battle
             RegisterBattle(builder);
-            
+
             // InputSerial  
             RegisterInputSerial(builder);
-            
+
+            // EndScene
+            builder.RegisterInstance(endSceneTransitionParam);
+
             // Updater
             builder.UseEntryPoints(Lifetime.Scoped, entryPoints =>
             {
                 entryPoints.Add<Starter>();
                 entryPoints.Add<Updater>();
             });
-            
+
             // Debug
             RegisterDebugInput(builder);
         }
 
         static void RegisterDebugInput(IContainerBuilder builder)
         {
-            var waveDebugInput = new GameObject().AddComponent<WaveDebugInputMono>();
-            builder.RegisterComponent(waveDebugInput);
+            var debugWaveInputMono = new GameObject().AddComponent<DebugWaveInputMono>();
+            builder.RegisterComponent(debugWaveInputMono);
+            var debugEndSceneInputMono = new GameObject().AddComponent<DebugEndSceneInputMono>();
+            builder.RegisterComponent(debugEndSceneInputMono);
         }
     }
 }
