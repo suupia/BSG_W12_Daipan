@@ -67,6 +67,7 @@ namespace Daipan.Streamer.MonoScripts
             Observable.Timer(System.TimeSpan.FromSeconds(_effectDelaySec))
                 .Subscribe(_ =>
                 {
+                    var senquence = DOTween.Sequence();
                     senquence.Append(_transform.DOScale(_originalScale, zoomDuration));
                     senquence.Join(_transform.DOMove(_originalPosition, zoomDuration));
                 });
