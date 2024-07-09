@@ -26,7 +26,7 @@ namespace Daipan.DebugInput.MonoScripts
         {
 #if UNITY_EDITOR
             
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.R))
             {
                _resultState.ShowResult(); 
             }
