@@ -13,6 +13,17 @@ namespace Daipan.Utility.Scripts
             var stateInfo = animator.GetCurrentAnimatorStateInfo(layerIndex);
             return stateInfo.normalizedTime >= 1;
         }
+        
+        
+        // IsEnd()だと最初のフレームが再生されてしまうことがあった
+        public static bool IsAlmostEnd(this Animator animator, int layerIndex = 0)
+        {
+            // When the animator is not active, it is considered to be in the end state.
+            if (!animator.gameObject.activeInHierarchy)
+                return true;
+            var stateInfo = animator.GetCurrentAnimatorStateInfo(layerIndex);
+            return stateInfo.normalizedTime >= 0.95;
+        }
     }
 
 }
