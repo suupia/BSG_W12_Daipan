@@ -17,22 +17,22 @@ namespace Daipan.Player.MonoScripts
 
         public event EventHandler<OnHitEventArgs>? OnHit
         {
-            add => _playerAttackEffectMoveExecutor.OnHit += value;
-            remove => _playerAttackEffectMoveExecutor.OnHit -= value;
+            add => _playerAttackTracking.OnHit += value;
+            remove => _playerAttackTracking.OnHit -= value;
         }
 
-        PlayerAttackEffectMoveExecutor _playerAttackEffectMoveExecutor = null!;
+        PlayerAttackTracking _playerAttackTracking = null!;
 
         void Update()
         {
-            _playerAttackEffectMoveExecutor.Move();
+            _playerAttackTracking.Move();
         }
 
         public void SetUp(IPlayerParamData playerParamData, Func<EnemyMono?> getTargetEnemyMono)
         {
             Debug.Log($"PlayerAttackEffectMono data.Enum = {playerParamData.PlayerEnum()}");
             viewMono?.SetDomain(playerParamData);
-            _playerAttackEffectMoveExecutor = new PlayerAttackEffectMoveExecutor(
+            _playerAttackTracking = new PlayerAttackTracking(
                 this
                 , playerParamData
                 , getTargetEnemyMono

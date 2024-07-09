@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Daipan.Player.Scripts
 {
-    public class PlayerAttackEffectMoveExecutor
+    public class PlayerAttackTracking
     {
         const double Speed = 30;
         const double HitDistance = 1.0;
@@ -18,7 +18,7 @@ namespace Daipan.Player.Scripts
         Vector3 Direction { get; set; } = Vector3.right;
     
         readonly PlayerAttackEffectMono? _playerAttackEffectMono;
-        public  PlayerAttackEffectMoveExecutor(
+        public  PlayerAttackTracking(
             PlayerAttackEffectMono playerAttackEffectMono
             , IPlayerParamData playerParamData
             , Func<EnemyMono?> getTargetEnemyMono
