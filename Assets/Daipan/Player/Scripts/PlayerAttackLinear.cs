@@ -8,17 +8,18 @@ using UnityEngine;
 
 namespace Daipan.Player.Scripts
 {
-    public class PlayerAttackTracking
+    public class PlayerAttackLinear
     {
         const double Speed = 30;
         const double HitDistance = 1.0;
         public event EventHandler<OnHitEventArgs>? OnHit;
         readonly IPlayerParamData? _playerParamData;
-        readonly Func<EnemyMono?> _getNearestEnemyMono; 
-        Vector3 Direction { get; set; } = Vector3.right;
+        readonly Func<EnemyMono?> _getNearestEnemyMono;
+        Vector3 Direction { get; }
     
         readonly PlayerAttackEffectMono _playerAttackEffectMono;
-        public  PlayerAttackTracking(
+        
+        public  PlayerAttackLinear(
             PlayerAttackEffectMono playerAttackEffectMono
             , IPlayerParamData playerParamData
             , Func<EnemyMono?> getTargetEnemyMono
@@ -27,7 +28,10 @@ namespace Daipan.Player.Scripts
             _playerAttackEffectMono = playerAttackEffectMono;
             _playerParamData = playerParamData;
             _getNearestEnemyMono = getTargetEnemyMono;
+            var targetPosition = getTargetEnemyMono()?.transform.position ?? Vector3.zero;
+            Direction = targetPosition != Vector3.zero ? (targetPosition - _playerAttackEffectMono.transform.position).normalized : Vector3.right;
         }
+        
         public void Move()
         {
             if (_playerAttackEffectMono == null) return;
@@ -42,7 +46,6 @@ namespace Daipan.Player.Scripts
             var enemyMono = _getNearestEnemyMono();
             enemyMono = PlayerAttackModule.IsInScreenEnemy(enemyMono) ? enemyMono : null;
         
-            Direction = enemyMono != null ? (enemyMono.transform.position - _playerAttackEffectMono.transform.position).normalized : Direction;
             _playerAttackEffectMono.transform.position += Direction * (float)(Speed * Time.deltaTime);
             if (enemyMono != null)
             {

@@ -21,7 +21,7 @@ namespace Daipan.Player.MonoScripts
             remove => _playerAttackTracking.OnHit -= value;
         }
 
-        PlayerAttackTracking _playerAttackTracking = null!;
+        PlayerAttackLinear _playerAttackTracking = null!;
 
         void Update()
         {
@@ -32,7 +32,7 @@ namespace Daipan.Player.MonoScripts
         {
             Debug.Log($"PlayerAttackEffectMono data.Enum = {playerParamData.PlayerEnum()}");
             viewMono?.SetDomain(playerParamData);
-            _playerAttackTracking = new PlayerAttackTracking(
+            _playerAttackTracking = new PlayerAttackLinear(
                 this
                 , playerParamData
                 , getTargetEnemyMono
