@@ -20,7 +20,6 @@ namespace Daipan.Enemy.MonoScripts
         [SerializeField] AbstractEnemyViewMono? enemyViewMono;
         EnemyCluster _enemyCluster = null!;
         EnemyAttackDecider _enemyAttackDecider = null!;
-        EnemySuicideAttack _enemySuicideAttack = null!;
         EnemyDie _enemyDie = null!;
         IEnemySpawnPoint _enemySpawnPoint = null!;
         IEnemyParamContainer _enemyParamContainer = null!;
@@ -28,8 +27,7 @@ namespace Daipan.Enemy.MonoScripts
         public EnemyEnum EnemyEnum { get; private set; } = EnemyEnum.None;
         public bool IsReachedPlayer { get; private set; }
 
-        Hp _hp = null!;
-        public Hp Hp => _hp; 
+        public Hp Hp { get; private set; }
 
         void Update()
         {
@@ -51,7 +49,7 @@ namespace Daipan.Enemy.MonoScripts
             if (transform.position.x < _enemySpawnPoint.GetEnemyDespawnedPoint().x)
                Die(this,isDaipaned:false);
 
-            enemyViewMono?.SetHpGauge(_hp.Value, _enemyParamContainer.GetEnemyParamData(EnemyEnum).GetCurrentHp());
+            enemyViewMono?.SetHpGauge(Hp.Value, _enemyParamContainer.GetEnemyParamData(EnemyEnum).GetCurrentHp());
             
         }
 
@@ -71,32 +69,23 @@ namespace Daipan.Enemy.MonoScripts
             EnemyEnum enemyEnum
             ,EnemyCluster enemyCluster
             ,EnemyAttackDecider enemyAttackDecider
-            ,EnemySuicideAttack enemySuicideAttack
             ,EnemyDie enemyDie
         )
         {
             EnemyEnum = enemyEnum;
             _enemyCluster = enemyCluster;
             _enemyAttackDecider = enemyAttackDecider;
-            _enemySuicideAttack = enemySuicideAttack;
             _enemyDie = enemyDie;
             enemyViewMono?.SetDomain(_enemyParamContainer.GetEnemyViewParamData(EnemyEnum));
-            _hp = new Hp(_enemyParamContainer.GetEnemyParamData(EnemyEnum).GetMaxHp());
-
+            Hp = new Hp(_enemyParamContainer.GetEnemyParamData(EnemyEnum).GetMaxHp());
 
             Observable
-                .EveryValueChanged(_hp, x => x.Value)
+                .EveryValueChanged(Hp, x => x.Value)
                 .Subscribe(_ =>
                 {
-                    if(_hp.Value <= 0) Die(this,isDaipaned:false);
+                    if(Hp.Value <= 0) Die(this,isDaipaned:false);
                 }).AddTo(this);
         }
-
-        public void SuicideAttack(PlayerMono playerMono)
-        {
-            _enemySuicideAttack.SuicideAttack(playerMono);
-        }
-        
         public event EventHandler<DiedEventArgs>? OnDied
         {
             add => _enemyDie.OnDied += value;

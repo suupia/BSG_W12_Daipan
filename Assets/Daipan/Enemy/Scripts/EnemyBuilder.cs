@@ -51,7 +51,6 @@ namespace Daipan.Enemy.Scripts
                 enemyEnum,
                 _enemyCluster,
                 new EnemyAttackDecider(),
-                new EnemySuicideAttack(enemyMono,enemyParamData),
                 new EnemyDie(enemyMono)
             );
             
