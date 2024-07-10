@@ -26,6 +26,9 @@ namespace Daipan.Player.Scripts
         readonly WaveState _waveState;
         readonly IPlayerAntiCommentParamData _playerAntiCommentParamData;
 
+        EnemyTotemOnAttackNew _totemOnAttack2;
+        EnemyTotemOnAttackNew _totemOnAttack3;
+
         public PlayerAttackEffectBuilder(
             IPlayerParamDataContainer playerParamDataContainer
             ,ComboCounter comboCounter
@@ -50,21 +53,25 @@ namespace Daipan.Player.Scripts
         public PlayerAttackEffectMono Build(PlayerAttackEffectMono effect, PlayerMono playerMono,
             List<AbstractPlayerViewMono?> playerViewMonos, PlayerColor playerColor)
         {
+            BuildEnemyTotemOnAttacked();
+            
             effect.SetUp(_playerParamDataContainer.GetPlayerParamData(playerColor),
                 () => _enemyCluster.NearestEnemy(playerMono.transform.position));
             effect.OnHit += (sender, args) =>
             {
                 Debug.Log($"OnHit");
-                AttackEnemy(_playerParamDataContainer, playerViewMonos, playerColor, args,_comboCounter, _enemyTotemOnAttack,_enemySpecialOnAttack );
+                AttackEnemy(_playerParamDataContainer, playerViewMonos, playerColor, args,_comboCounter, _enemyTotemOnAttack,_enemySpecialOnAttack ,_totemOnAttack2,_totemOnAttack3 );
                 SpawnAntiComment(args, _commentSpawner, _playerAntiCommentParamData,_waveState);
             };
             return effect;
         }
 
-
-
-
-
+        void BuildEnemyTotemOnAttacked()
+        {
+            _totemOnAttack2 = new EnemyTotemOnAttackNew(new List<PlayerColor> {PlayerColor.Red, PlayerColor.Blue});
+            _totemOnAttack3 = new EnemyTotemOnAttackNew(new List<PlayerColor> {PlayerColor.Red, PlayerColor.Blue, PlayerColor.Yellow});
+        }
+        
 
         static void AttackEnemy(
             IPlayerParamDataContainer playerParamDataContainer
@@ -74,6 +81,8 @@ namespace Daipan.Player.Scripts
             , ComboCounter comboCounter
             , EnemyTotemOnAttack totemOnAttack
             , EnemySpecialOnAttack enemySpecialOnAttack
+            , EnemyTotemOnAttackNew enemyTotemOnAttackNew2
+            , EnemyTotemOnAttackNew enemyTotemOnAttackNew3
         )
         {
             if (args.IsTargetEnemy && args.EnemyMono != null)
@@ -83,7 +92,8 @@ namespace Daipan.Player.Scripts
                 var playerParamData = playerParamDataContainer.GetPlayerParamData(playerColor);
                 var hpBuffer = args.EnemyMono.EnemyEnum switch
                 {
-                    EnemyEnum.Totem => totemOnAttack.OnAttacked(args.EnemyMono.Hp, playerParamData),
+                    EnemyEnum.Totem2 => enemyTotemOnAttackNew2.OnAttacked(args.EnemyMono.Hp, playerParamData),
+                    EnemyEnum.Totem3 => enemyTotemOnAttackNew3.OnAttacked(args.EnemyMono.Hp, playerParamData),
                     EnemyEnum.Special => enemySpecialOnAttack.OnAttacked(args.EnemyMono.Hp,args.EnemyMono.EnemyEnum, playerParamData),
                         _ => PlayerAttackModule.Attack(args.EnemyMono.Hp, playerParamData)
                 };

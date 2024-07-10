@@ -18,7 +18,7 @@ namespace Daipan.Enemy.Scripts
             _disposables = new IDisposable[count];
         }
 
-        public void IsOn(int index)
+        public void SetOn(int index)
         {
             _flags[index] = true;
             _disposables[index]?.Dispose();

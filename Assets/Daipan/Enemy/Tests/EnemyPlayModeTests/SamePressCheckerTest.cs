@@ -30,9 +30,9 @@ public class SamePressCheckerTests
         var checker = new SamePressChecker(1.0, 3);
 
         // Act
-        checker.IsOn(0);
-        checker.IsOn(1);
-        checker.IsOn(2);
+        checker.SetOn(0);
+        checker.SetOn(1);
+        checker.SetOn(2);
         var result = checker.IsAllOn();
 
         // Assert
@@ -45,9 +45,9 @@ public class SamePressCheckerTests
     {
         // Arrange
         var checker = new SamePressChecker(1.0, 3);
-        checker.IsOn(0);
-        checker.IsOn(1);
-        checker.IsOn(2);
+        checker.SetOn(0);
+        checker.SetOn(1);
+        checker.SetOn(2);
 
         // Act
         yield return new WaitForSeconds(1.5f); 
@@ -64,9 +64,9 @@ public class SamePressCheckerTests
         var checker = new SamePressChecker(1.0, 1);
 
         // Act
-        checker.IsOn(0);
+        checker.SetOn(0);
         System.Threading.Thread.Sleep(500); // Sleep for less than allowableSec
-        checker.IsOn(0); // Reset the timer
+        checker.SetOn(0); // Reset the timer
         System.Threading.Thread.Sleep(600); // Sleep for less than allowableSec
         var result = checker.IsAllOn();
 
@@ -80,9 +80,9 @@ public class SamePressCheckerTests
     {
         // Arrange
         var checker = new SamePressChecker(1.0, 3);
-        checker.IsOn(0);
-        checker.IsOn(1);
-        checker.IsOn(2);
+        checker.SetOn(0);
+        checker.SetOn(1);
+        checker.SetOn(2);
 
         // Act
         checker.Dispose();
@@ -93,7 +93,7 @@ public class SamePressCheckerTests
         Exception caughtException = null;
         try
         {
-            checker.IsOn(0);
+            checker.SetOn(0);
         }
         catch (Exception ex)
         {

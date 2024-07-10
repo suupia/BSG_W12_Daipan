@@ -88,7 +88,8 @@ namespace Daipan.Player.Scripts
                 var playerParamData = playerParamDataContainer.GetPlayerParamData(playerColor);
                 enemyMono.Hp = enemyMono.EnemyEnum switch 
                 {
-                    EnemyEnum.Totem => totemOnAttack.OnAttacked(enemyMono.Hp, playerParamData),
+                    EnemyEnum.Totem2 => totemOnAttack.OnAttacked(enemyMono.Hp, playerParamData), // todo: チュートリアルだから関係ないが差し替える
+                    EnemyEnum.Totem3 => totemOnAttack.OnAttacked(enemyMono.Hp, playerParamData),
                     _ => PlayerAttackModule.Attack(enemyMono.Hp,playerParamData)
                 };
 
