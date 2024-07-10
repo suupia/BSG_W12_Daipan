@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Daipan.Option.Interfaces;
+using Daipan.Battle.scripts;
 
 namespace Daipan.Option.Scripts
 {
@@ -25,6 +26,7 @@ namespace Daipan.Option.Scripts
                 case myContent.Yes:
                     Debug.Log($"Select : {_myContent}");
                     _handleOption.CloseOption();
+                    SceneTransition.TransitioningScene(SceneName.TitleScene);
                     break;
                 case myContent.No:
                     Debug.Log($"Select : {_myContent}");
