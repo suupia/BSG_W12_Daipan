@@ -40,10 +40,10 @@ namespace Daipan.Enemy.Scripts
 
             enemyMono.SetDomain(
                 enemyEnum
-                ,_enemyCluster
-                ,new EnemyAttackDecider()
-                ,new EnemyDie(enemyMono)
-                ,_enemyOnAttackedBuilder.SwitchEnemyOnAttacked(enemyEnum)
+                , _enemyCluster
+                , new EnemyAttackDecider()
+                , new EnemyDie(enemyMono)
+                , _enemyOnAttackedBuilder.SwitchEnemyOnAttacked(enemyEnum)
                 
             );
             

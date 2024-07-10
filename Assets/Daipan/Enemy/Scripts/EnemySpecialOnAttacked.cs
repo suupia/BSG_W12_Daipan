@@ -7,6 +7,7 @@ using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Player.MonoScripts;
 using Daipan.Player.Scripts;
 using Daipan.Stream.Scripts;
+using UnityEngine;
 
 namespace Daipan.Enemy.Scripts
 {
@@ -36,6 +37,9 @@ namespace Daipan.Enemy.Scripts
                 _irritatedValue.IncreaseValue(_enemyLevelDesignParamData
                     .GetIncreaseIrritationGaugeOnSpecialEnemyKill());
             }
+            
+            // todo : IsSmaColorは現時点だと常にfalse。なぜなら、enemyEnumはSpecialが入っているから。
+            if (!IsSameColor(_enemyEnum, playerParamData.PlayerEnum())) Debug.Log("IsSameColor is false");
 
             hp.Decrease(playerParamData.GetAttack());
         }

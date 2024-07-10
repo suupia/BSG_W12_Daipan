@@ -21,19 +21,16 @@ namespace Daipan.Player.Scripts
         readonly ComboCounter _comboCounter;
         readonly EnemyCluster _enemyCluster;
         readonly CommentSpawner _commentSpawner;
-        readonly EnemySpecialOnAttacked _enemySpecialOnAttacked;
         readonly WaveState _waveState;
         readonly IPlayerAntiCommentParamData _playerAntiCommentParamData;
 
-        EnemyTotemOnAttackNew _totemOnAttack2;
-        EnemyTotemOnAttackNew _totemOnAttack3;
+
 
         public PlayerAttackEffectBuilder(
             IPlayerParamDataContainer playerParamDataContainer
             ,ComboCounter comboCounter
             ,EnemyCluster enemyCluster
             ,CommentSpawner commentSpawner
-            ,EnemySpecialOnAttacked enemySpecialOnAttacked
             ,WaveState waveState
             ,IPlayerAntiCommentParamData playerAntiCommentParamData
         )
@@ -42,7 +39,6 @@ namespace Daipan.Player.Scripts
             _comboCounter = comboCounter;
             _enemyCluster = enemyCluster;
             _commentSpawner = commentSpawner;
-            _enemySpecialOnAttacked = enemySpecialOnAttacked;
             _waveState = waveState;
             _playerAntiCommentParamData = playerAntiCommentParamData;
         }
@@ -50,25 +46,17 @@ namespace Daipan.Player.Scripts
         public PlayerAttackEffectMono Build(PlayerAttackEffectMono effect, PlayerMono playerMono,
             List<AbstractPlayerViewMono?> playerViewMonos, PlayerColor playerColor)
         {
-            BuildEnemyTotemOnAttacked();
-            
             effect.SetUp(_playerParamDataContainer.GetPlayerParamData(playerColor),
                 () => _enemyCluster.NearestEnemy(playerMono.transform.position));
             effect.OnHit += (sender, args) =>
             {
                 Debug.Log($"OnHit");
-                AttackEnemy(_playerParamDataContainer, playerViewMonos, playerColor, args,_comboCounter, _enemySpecialOnAttacked ,_totemOnAttack2,_totemOnAttack3 );
+                AttackEnemy(_playerParamDataContainer, playerViewMonos, playerColor, args,_comboCounter );
                 SpawnAntiComment(args, _commentSpawner, _playerAntiCommentParamData,_waveState);
             };
             return effect;
         }
 
-        void BuildEnemyTotemOnAttacked()
-        {
-            _totemOnAttack2 = new EnemyTotemOnAttackNew(new List<PlayerColor> {PlayerColor.Red, PlayerColor.Blue});
-            _totemOnAttack3 = new EnemyTotemOnAttackNew(new List<PlayerColor> {PlayerColor.Red, PlayerColor.Blue, PlayerColor.Yellow});
-        }
-        
 
         static void AttackEnemy(
             IPlayerParamDataContainer playerParamDataContainer
@@ -76,9 +64,6 @@ namespace Daipan.Player.Scripts
             , PlayerColor playerColor
             , OnHitEventArgs args
             , ComboCounter comboCounter
-            , EnemySpecialOnAttacked enemySpecialOnAttacked
-            , EnemyTotemOnAttackNew enemyTotemOnAttackNew2
-            , EnemyTotemOnAttackNew enemyTotemOnAttackNew3
         )
         {
             if (args.IsTargetEnemy && args.EnemyMono != null)

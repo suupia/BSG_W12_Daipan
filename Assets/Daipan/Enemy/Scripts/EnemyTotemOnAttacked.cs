@@ -13,13 +13,13 @@ using UnityEngine;
 
 namespace Daipan.Enemy.Scripts
 {
-    public sealed class EnemyTotemOnAttackNew : IEnemyOnAttacked
+    public sealed class EnemyTotemOnAttacked : IEnemyOnAttacked
     {
         const double AllowableSec = 0.1f;
         readonly SamePressChecker _samePressChecker;
         readonly List<PlayerColor> _canAttackPlayers;
 
-        public EnemyTotemOnAttackNew(List<PlayerColor> canAttackPlayers)
+        public EnemyTotemOnAttacked(List<PlayerColor> canAttackPlayers)
         {
            _samePressChecker = new SamePressChecker(AllowableSec, canAttackPlayers.Count); 
            _canAttackPlayers = canAttackPlayers;
