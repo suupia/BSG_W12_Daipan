@@ -54,17 +54,7 @@ namespace Daipan.Enemy.MonoScripts
             animatorLine.GetComponent<SpriteRenderer>().color = enemyViewParamData.GetLineColor();
             
             // temp
-            tempSpriteRenderer.color = enemyViewParamData.GetEnemyEnum() switch
-            {
-                EnemyEnum.Red => Color.red,
-                EnemyEnum.Blue => Color.blue,
-                EnemyEnum.Yellow => Color.yellow,
-                EnemyEnum.RedBoss => Color.Lerp(Color.red, Color.black, 0.5f), // 半分暗くする
-                EnemyEnum.SpecialRed => Color.Lerp(Color.red, Color.yellow, 0.5f), // 赤と黄色の中間色
-                EnemyEnum.SpecialBlue => Color.Lerp(Color.blue, Color.yellow, 0.5f), // 青と黄色の中間色
-                EnemyEnum.SpecialYellow => Color.Lerp(Color.yellow, Color.red, 0.5f), // 黄色と赤の中間色
-                _ => Color.white
-            };
+            tempSpriteRenderer.color = EnemyViewTempColor.GetTempColor(enemyViewParamData.GetEnemyEnum()); 
         }
 
         public override void SetHpGauge(double currentHp, int maxHp)
