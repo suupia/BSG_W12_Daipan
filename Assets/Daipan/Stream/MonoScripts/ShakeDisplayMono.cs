@@ -1,5 +1,6 @@
 #nullable enable
 using UnityEngine;
+using Daipan.Option.Scripts;
 using VContainer;
 using DG.Tweening;
 
@@ -17,6 +18,14 @@ namespace Daipan.Stream.MonoScripts
         Vector3 _originalPosition;
         Quaternion _originalRotation;
 
+        DaipanShakingConfig _daipanShakingConfig = null!;
+
+        [Inject]
+        public void Initialize(DaipanShakingConfig daipanShakingConfig)
+        {
+            _daipanShakingConfig = daipanShakingConfig;
+        }
+
         void Start()
         {
             _originalPosition = shakedObject.transform.position;
@@ -32,6 +41,8 @@ namespace Daipan.Stream.MonoScripts
 
         public void Daipan()
         {
+            if (!_daipanShakingConfig.IsShaking) return;
+
             var senquence = DOTween.Sequence();
             senquence.Append(shakedObject.transform.DOShakePosition(duration, shakePower, shakeNum, 1, false, true)
                 .OnComplete(() =>

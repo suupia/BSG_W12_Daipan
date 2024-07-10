@@ -10,9 +10,21 @@ namespace Daipan.Option.Scripts
 {
     public class OptionPopUpMain : IOptionPopUp
     {
+       readonly  LanguageConfig _languageConfig;
+       readonly DaipanShakingConfig _daipanShakingConfig;
+
+
         myContent _myContent;
         IHandleOption _handleOption = null!;
-        Func<myContent, IOptionPopUp?> _transitionFunc = null!; 
+        Func<myContent, IOptionPopUp?> _transitionFunc = null!;
+
+        [Inject]
+        public OptionPopUpMain(LanguageConfig languageConfig
+            ,DaipanShakingConfig daipanShakingConfig)
+        {
+            _languageConfig = languageConfig;
+            _daipanShakingConfig = daipanShakingConfig;
+        }
 
         public void Prepare()
         {
@@ -36,7 +48,47 @@ namespace Daipan.Option.Scripts
                 {
                     _myContent++;
                 }
-                Debug.Log($"Move : {_myContent}");
+                Debug.Log($"Option:Move : {_myContent}");
+
+                return;
+            }
+            if(moveCursorDirection == MoveCursorDirectionEnum.Right)
+            {
+                switch (_myContent)
+                {
+                    case myContent.BGM:
+                        break;
+                    case myContent.SE:
+                        break;
+                    case myContent.IsShaking:
+                        _daipanShakingConfig.IsShaking = false;
+                        Debug.Log("Option:Shaking OFF");
+                        break;
+                    case myContent.Language:
+                        _languageConfig.CurrentLanguage = LanguageConfig.LanguageEnum.English;
+                        Debug.Log("Option:Language = English");
+                        break;
+                }
+                return;
+            }
+            if(moveCursorDirection == MoveCursorDirectionEnum.Left)
+            {
+                switch (_myContent)
+                {
+                    case myContent.BGM:
+                        break;
+                    case myContent.SE:
+                        break;
+                    case myContent.IsShaking:
+                        _daipanShakingConfig.IsShaking = true;
+                        Debug.Log("Option:Shaking ON");
+                        break;
+                    case myContent.Language:
+                        _languageConfig.CurrentLanguage = LanguageConfig.LanguageEnum.Japanese;
+                        Debug.Log("Option:Language = Japanese");
+                        break;
+                }
+                return;
             }
         }
         public void SetIHandle(IHandleOption handleOption)
@@ -53,8 +105,8 @@ namespace Daipan.Option.Scripts
             BGM,
             SE,
             IsShaking,
-            ReturnTitle,
             Language,
+            ReturnTitle,
         }
     }
 }
