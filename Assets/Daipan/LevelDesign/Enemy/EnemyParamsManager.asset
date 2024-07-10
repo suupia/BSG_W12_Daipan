@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyLevelDesignParam:
     increaseViewerOnEnemyKill: 5
-    increaseIrritationGaugeOnSpecialEnemyKill: 30
-    currentKillAmount: 9
+    increaseIrritationGaugeOnSpecialEnemyKill: 10
+    currentKillAmount: 6
   enemyParams:
   - enemyEnum: 1
     enemyAttackParam:
@@ -114,7 +114,7 @@ MonoBehaviour:
       maxHp: 10
       hpAmount: 10
     enemyMoveParam:
-      moveSpeedPerSec: 1.5
+      moveSpeedPerSec: 2
     enemySpawnParam:
       spawnRatio: 20
       daipanThreshold: 0
@@ -136,7 +136,7 @@ MonoBehaviour:
       maxHp: 10
       hpAmount: 10
     enemyMoveParam:
-      moveSpeedPerSec: 1.5
+      moveSpeedPerSec: 2
     enemySpawnParam:
       spawnRatio: 20
       daipanThreshold: 0
@@ -180,7 +180,7 @@ MonoBehaviour:
       maxHp: 100
       hpAmount: 100
     enemyMoveParam:
-      moveSpeedPerSec: 1.5
+      moveSpeedPerSec: 2
     enemySpawnParam:
       spawnRatio: 20
       daipanThreshold: 0
@@ -202,7 +202,7 @@ MonoBehaviour:
       maxHp: 10
       hpAmount: 10
     enemyMoveParam:
-      moveSpeedPerSec: 1.5
+      moveSpeedPerSec: 3
     enemySpawnParam:
       spawnRatio: 20
       daipanThreshold: 0
@@ -224,7 +224,7 @@ MonoBehaviour:
       maxHp: 10
       hpAmount: 10
     enemyMoveParam:
-      moveSpeedPerSec: 1.5
+      moveSpeedPerSec: 2
     enemySpawnParam:
       spawnRatio: 20
       daipanThreshold: 0
@@ -246,7 +246,7 @@ MonoBehaviour:
       maxHp: 10
       hpAmount: 10
     enemyMoveParam:
-      moveSpeedPerSec: 1.5
+      moveSpeedPerSec: 2
     enemySpawnParam:
       spawnRatio: 20
       daipanThreshold: 0
