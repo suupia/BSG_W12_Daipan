@@ -14,6 +14,7 @@ namespace Daipan.Enemy.MonoScripts
         [SerializeField] EnemyBoss3ViewMono enemyBoss3ViewMono = null!; // 素早い
         [SerializeField] EnemySpecialViewMono enemySpecialViewMono = null!;
         [SerializeField] EnemyTotem2ViewMono enemyTotem2ViewMono = null!;
+        [SerializeField] EnemyTotem3ViewMono enemyTotem3ViewMono = null!;
         AbstractEnemyViewMono _selectedEnemyViewMono = null!;
 
         public override void SetDomain(IEnemyViewParamData enemyParamData)
@@ -30,6 +31,7 @@ namespace Daipan.Enemy.MonoScripts
             enemyBoss3ViewMono.gameObject.SetActive(false);
             enemySpecialViewMono.gameObject.SetActive(false);
             enemyTotem2ViewMono.gameObject.SetActive(false);
+            enemyTotem3ViewMono.gameObject.SetActive(false);
 
             switch (enemyEnum)
             {
@@ -55,7 +57,10 @@ namespace Daipan.Enemy.MonoScripts
                     enemyTotem2ViewMono.gameObject.SetActive(true);
                     _selectedEnemyViewMono = enemyTotem2ViewMono;
                     break;
-                // todo : EnemyEnum.Totem3
+                case EnemyEnum.Totem3:
+                    enemyTotem3ViewMono.gameObject.SetActive(true);
+                    _selectedEnemyViewMono = enemyTotem3ViewMono;
+                    break;
                 default:
                     enemyNormalViewMono.gameObject.SetActive(true);
                     _selectedEnemyViewMono = enemyNormalViewMono;
