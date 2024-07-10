@@ -15,7 +15,7 @@ namespace Daipan.Enemy.Scripts
 {
     public sealed class EnemyTotemOnAttacked : IEnemyOnAttacked
     {
-        const double AllowableSec = 0.1f;
+        const double AllowableSec = 0.15f;
         readonly SamePressChecker _samePressChecker;
         readonly List<PlayerColor> _canAttackPlayers;
 

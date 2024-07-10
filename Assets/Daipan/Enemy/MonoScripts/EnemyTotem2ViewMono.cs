@@ -6,23 +6,24 @@ using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.Utility.Scripts;
 using R3;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Daipan.Enemy.MonoScripts
 {
-    public sealed class EnemyBoss2ViewMono : AbstractEnemyViewMono
+    public sealed class EnemyTotem2ViewMono : AbstractEnemyViewMono
     {
         [SerializeField] HpGaugeMono hpGaugeMono = null!;
         [SerializeField] SpriteRenderer tempSpriteRenderer = null!; // todo: 完成時には削除する
         [SerializeField] Animator animatorHighlight = null!;
-        [SerializeField] Animator animatorBody = null!;
+        [SerializeField] Animator animatorBodyTop = null!;
+        [SerializeField] Animator animatorBodyBottom = null!;
         [SerializeField] Animator animatorEye = null!;
-        [SerializeField] Animator animatorEyeBall = null!;
-        [SerializeField] Animator animatorHand = null!;
         [SerializeField] Animator animatorLine = null!;
         [SerializeField] SpriteRenderer highlightSpriteRenderer = null!;
+        
+        EnemyViewAnimatorSwitcher _animatorSwitcher = null!; 
 
-        EnemyViewAnimatorSwitcher _animatorSwitcher = null!;
-        void Awake()    
+        void Awake()
         {
             if (hpGaugeMono == null)
             {
@@ -37,52 +38,34 @@ namespace Daipan.Enemy.MonoScripts
             }
             
             _animatorSwitcher = new EnemyViewAnimatorSwitcher(
-                new [] {animatorHighlight, animatorBody, animatorEye, animatorEyeBall, animatorHand, animatorLine, },
+                new [] {animatorHighlight, animatorBodyTop, animatorBodyBottom, animatorEye, animatorLine},
                 animatorLine,
                 hpGaugeMono,
                 highlightSpriteRenderer
             );
         }
 
-
         public override void SetDomain(IEnemyViewParamData enemyViewParamData)
         {
-            animatorBody.GetComponent<SpriteRenderer>().color = enemyViewParamData.GetBodyColor();
+            animatorBodyTop.GetComponent<SpriteRenderer>().color = EnemyViewTempColor.GetTempColor(EnemyEnum.Red);
+            animatorBodyBottom.GetComponent<SpriteRenderer>().color = EnemyViewTempColor.GetTempColor(EnemyEnum.Blue);
             animatorEye.GetComponent<SpriteRenderer>().color = enemyViewParamData.GetEyeColor();
-            animatorEyeBall.GetComponent<SpriteRenderer>().color = enemyViewParamData.GetEyeBallColor();
-            animatorHand.GetComponent<SpriteRenderer>().color = enemyViewParamData.GetBodyColor();
             animatorLine.GetComponent<SpriteRenderer>().color = enemyViewParamData.GetLineColor();
             
             // temp
             tempSpriteRenderer.color = EnemyViewTempColor.GetTempColor(enemyViewParamData.GetEnemyEnum()); 
+
         }
 
-        public override void SetHpGauge(double currentHp, int maxHp)
-        {
-            _animatorSwitcher.SetHpGauge(currentHp, maxHp);
-            
-        }
+        public override void SetHpGauge(double currentHp, int maxHp) => _animatorSwitcher.SetHpGauge(currentHp, maxHp);
 
-        public override void Move()
-        {
-            _animatorSwitcher.Move();
-        }
+        public override void Move() => _animatorSwitcher.Move();
 
-        public override void Attack()
-        {
-            _animatorSwitcher.Attack();
-        }
+        public override void Attack() => _animatorSwitcher.Attack();
 
-        public override void Died(Action onDied)
-        {
-            _animatorSwitcher.Died(onDied);
-        }
+        public override void Died(Action onDied) => _animatorSwitcher.Died(onDied);
 
-        public override void Daipaned(Action onDied)
-        {
-            _animatorSwitcher.Daipaned(onDied);
-        }
-
+        public override void Daipaned(Action onDied) => _animatorSwitcher.Daipaned(onDied);
         public override void Highlight(bool isHighlighted) => _animatorSwitcher.Highlight(isHighlighted);
 
 

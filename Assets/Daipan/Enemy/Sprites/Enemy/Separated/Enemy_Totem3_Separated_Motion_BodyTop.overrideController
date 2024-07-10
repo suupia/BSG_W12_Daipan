@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Enemy_Totem3_Separated_Motion_BodyTop
+  m_Controller: {fileID: 9100000, guid: 4940888e47d3047739df2882aa2ba248, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: e5f60ac1e88d24a0c9eb4fb9ae6384ce, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 275365895278e484fb5f027576806024, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 9aa6d4a6daf76459b9a55bf92d0b9e41, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 25b9a96e35e33b149963022d7b26f17a, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: d3f95ba77e50f4ceda482f44e7122bf9, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 204d2788571d9774baab8ef2527b1c43, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: dd78ff56d190d4b07b9829b58ca2e2c3, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: f44fd96bc454a5e45b5b53217e90005f, type: 2}
