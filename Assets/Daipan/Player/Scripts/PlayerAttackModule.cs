@@ -1,6 +1,7 @@
 #nullable enable
 using System;
 using System.Collections.Generic;
+using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Enemy.Scripts;
 using Daipan.Player.LevelDesign.Interfaces;
@@ -11,10 +12,11 @@ namespace Daipan.Player.Scripts
 {
     public static class PlayerAttackModule
     {
-        public static Hp Attack(Hp hp, IPlayerParamData playerParamData)
-            => new Hp(hp.Value - playerParamData.GetAttack()); 
-        
-        
+        public static void Attack(Hp hp, IPlayerParamData playerParamData)
+        {
+            hp.Decrease(playerParamData.GetAttack());
+        }
+
         public static IEnumerable<EnemyEnum> GetTargetEnemyEnum(PlayerColor playerColor)
         {
             return playerColor switch

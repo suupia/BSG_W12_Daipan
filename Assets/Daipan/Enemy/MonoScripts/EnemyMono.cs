@@ -8,6 +8,7 @@ using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.Player.MonoScripts;
 using Daipan.Player.Scripts;
 using DG.Tweening;
+using R3;
 using UnityEngine;
 using VContainer;
 
@@ -28,18 +29,7 @@ namespace Daipan.Enemy.MonoScripts
         public bool IsReachedPlayer { get; private set; }
 
         Hp _hp = null!;
-        public Hp Hp
-        {
-            get => _hp;
-            set
-            {
-                if (value.Value <= 0)
-                {
-                    Die(this); 
-                }
-                _hp = value;
-            }
-        }
+        public Hp Hp => _hp; 
 
         void Update()
         {
@@ -61,7 +51,7 @@ namespace Daipan.Enemy.MonoScripts
             if (transform.position.x < _enemySpawnPoint.GetEnemyDespawnedPoint().x)
                Die(this,isDaipaned:false);
 
-            enemyViewMono?.SetHpGauge(Hp.Value, _enemyParamContainer.GetEnemyParamData(EnemyEnum).GetCurrentHp());
+            enemyViewMono?.SetHpGauge(_hp.Value, _enemyParamContainer.GetEnemyParamData(EnemyEnum).GetCurrentHp());
             
         }
 
@@ -91,7 +81,15 @@ namespace Daipan.Enemy.MonoScripts
             _enemySuicideAttack = enemySuicideAttack;
             _enemyDie = enemyDie;
             enemyViewMono?.SetDomain(_enemyParamContainer.GetEnemyViewParamData(EnemyEnum));
-            Hp = new Hp(_enemyParamContainer.GetEnemyParamData(EnemyEnum).GetMaxHp());
+            _hp = new Hp(_enemyParamContainer.GetEnemyParamData(EnemyEnum).GetMaxHp());
+
+
+            Observable
+                .EveryValueChanged(_hp, x => x.Value)
+                .Subscribe(_ =>
+                {
+                    if(_hp.Value <= 0) Die(this,isDaipaned:false);
+                }).AddTo(this);
         }
 
         public void SuicideAttack(PlayerMono playerMono)

@@ -90,16 +90,26 @@ namespace Daipan.Player.Scripts
                 Debug.Log($"EnemyType: {args.EnemyMono.EnemyEnum}を攻撃");
                 // 敵を攻撃
                 var playerParamData = playerParamDataContainer.GetPlayerParamData(playerColor);
-                var hpBuffer = args.EnemyMono.EnemyEnum switch
+                var beforeHp = args.EnemyMono.Hp.Value; 
+                switch (args.EnemyMono.EnemyEnum)
                 {
-                    EnemyEnum.Totem2 => enemyTotemOnAttackNew2.OnAttacked(args.EnemyMono.Hp, playerParamData),
-                    EnemyEnum.Totem3 => enemyTotemOnAttackNew3.OnAttacked(args.EnemyMono.Hp, playerParamData),
-                    EnemyEnum.Special => enemySpecialOnAttack.OnAttacked(args.EnemyMono.Hp,args.EnemyMono.EnemyEnum, playerParamData),
-                        _ => PlayerAttackModule.Attack(args.EnemyMono.Hp, playerParamData)
-                };
+                    case EnemyEnum.Totem2:
+                        enemyTotemOnAttackNew2.OnAttacked(args.EnemyMono.Hp, playerParamData);
+                        break;
+                    case EnemyEnum.Totem3:
+                        enemyTotemOnAttackNew3.OnAttacked(args.EnemyMono.Hp, playerParamData);
+                        break;
+                    case EnemyEnum.Special:
+                        enemySpecialOnAttack.OnAttacked(args.EnemyMono.Hp,args.EnemyMono.EnemyEnum, playerParamData);
+                        break;
+                    default:
+                        PlayerAttackModule.Attack(args.EnemyMono.Hp, playerParamData);
+                        break;
+                }
+                var afterHp = args.EnemyMono.Hp.Value;
+                
                 //  HPに変化があれば、コンボ増加
-                if (args.EnemyMono.Hp.Value != hpBuffer.Value) comboCounter.IncreaseCombo();
-                args.EnemyMono.Hp = hpBuffer;
+                if (beforeHp != afterHp) comboCounter.IncreaseCombo();
             }
             else
             {

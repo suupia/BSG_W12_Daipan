@@ -23,14 +23,14 @@ namespace Daipan.Enemy.Scripts
         }
         
 
-        public Hp OnAttacked(Hp hp, EnemyEnum enemyEnum, IPlayerParamData playerParamData )
+        public void OnAttacked(Hp hp, EnemyEnum enemyEnum, IPlayerParamData playerParamData )
         {
             if (!IsSameColor(enemyEnum, playerParamData.PlayerEnum()))
             {
                 // 違う色のときはイライラゲージを増やす
                 _irritatedValue.IncreaseValue(_enemyLevelDesignParamData.GetIncreaseIrritationGaugeOnSpecialEnemyKill());
             }
-            return PlayerAttackModule.Attack(hp, playerParamData);
+            PlayerAttackModule.Attack(hp, playerParamData);
             
         }
 

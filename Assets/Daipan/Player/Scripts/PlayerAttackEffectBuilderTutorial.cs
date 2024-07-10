@@ -86,12 +86,8 @@ namespace Daipan.Player.Scripts
             {
                 // 敵を攻撃
                 var playerParamData = playerParamDataContainer.GetPlayerParamData(playerColor);
-                enemyMono.Hp = enemyMono.EnemyEnum switch 
-                {
-                    EnemyEnum.Totem2 => totemOnAttack.OnAttacked(enemyMono.Hp, playerParamData), // todo: チュートリアルだから関係ないが差し替える
-                    EnemyEnum.Totem3 => totemOnAttack.OnAttacked(enemyMono.Hp, playerParamData),
-                    _ => PlayerAttackModule.Attack(enemyMono.Hp,playerParamData)
-                };
+                // todo: チュートリアルのためSpecialなどの攻撃は分けていない
+                PlayerAttackModule.Attack(enemyMono.Hp, playerParamData);
 
             }
 

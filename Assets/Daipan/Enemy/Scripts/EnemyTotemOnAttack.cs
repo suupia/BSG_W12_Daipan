@@ -24,7 +24,7 @@ namespace Daipan.Enemy.Scripts
         }
 
 
-        public Hp OnAttacked(Hp hp, IPlayerParamData playerParamData)
+        public void OnAttacked(Hp hp, IPlayerParamData playerParamData)
         {
             switch (playerParamData.PlayerEnum())
             {
@@ -41,8 +41,8 @@ namespace Daipan.Enemy.Scripts
                     break;
             }
 
-            if (!IsAttackable()) return hp;
-            return PlayerAttackModule.Attack(hp, playerParamData);
+            if (!IsAttackable()) return;
+            PlayerAttackModule.Attack(hp, playerParamData);
         }
 
         bool IsAttackable()
