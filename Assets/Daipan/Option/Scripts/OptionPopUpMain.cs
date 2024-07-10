@@ -11,6 +11,7 @@ namespace Daipan.Option.Scripts
     public class OptionPopUpMain : IOptionPopUp
     {
        readonly  LanguageConfig _languageConfig;
+       readonly DaipanShakingConfig _daipanShakingConfig;
 
 
         myContent _myContent;
@@ -18,9 +19,11 @@ namespace Daipan.Option.Scripts
         Func<myContent, IOptionPopUp?> _transitionFunc = null!;
 
         [Inject]
-        public OptionPopUpMain(LanguageConfig languageConfig)
+        public OptionPopUpMain(LanguageConfig languageConfig
+            ,DaipanShakingConfig daipanShakingConfig)
         {
             _languageConfig = languageConfig;
+            _daipanShakingConfig = daipanShakingConfig;
         }
 
         public void Prepare()
@@ -58,6 +61,7 @@ namespace Daipan.Option.Scripts
                     case myContent.SE:
                         break;
                     case myContent.IsShaking:
+                        _daipanShakingConfig.IsShaking = false;
                         break;
                     case myContent.Language:
                         _languageConfig.CurrentLanguage = LanguageConfig.LanguageEnum.English;
@@ -74,6 +78,7 @@ namespace Daipan.Option.Scripts
                     case myContent.SE:
                         break;
                     case myContent.IsShaking:
+                        _daipanShakingConfig.IsShaking = true;
                         break;
                     case myContent.Language:
                         _languageConfig.CurrentLanguage = LanguageConfig.LanguageEnum.Japanese;
