@@ -12,49 +12,47 @@ namespace Daipan.Enemy.MonoScripts
         [SerializeField] EnemyBoss1ViewMono enemyBoss1ViewMono = null!; // Tank
         [SerializeField] EnemyBoss2ViewMono enemyBoss2ViewMono = null!; // 筋肉
         [SerializeField] EnemyBoss3ViewMono enemyBoss3ViewMono = null!; // 素早い
+        [SerializeField] EnemySpecialViewMono enemySpecialViewMono = null!;
         AbstractEnemyViewMono _selectedEnemyViewMono = null!;
 
         public override void SetDomain(IEnemyViewParamData enemyParamData)
         {
             Debug.Log("SetDomain enemy enum: " + enemyParamData.GetEnemyEnum());
-            if (enemyParamData.GetEnemyEnum() == EnemyEnum.YellowBoss)
+            SwitchEnemyView(enemyParamData.GetEnemyEnum());
+            _selectedEnemyViewMono.SetDomain(enemyParamData);
+        }
+        void SwitchEnemyView(EnemyEnum enemyEnum)
+        {
+            enemyNormalViewMono.gameObject.SetActive(false);
+            enemyBoss1ViewMono.gameObject.SetActive(false);
+            enemyBoss2ViewMono.gameObject.SetActive(false);
+            enemyBoss3ViewMono.gameObject.SetActive(false);
+            enemySpecialViewMono.gameObject.SetActive(false);
+
+            switch (enemyEnum)
             {
-                enemyNormalViewMono.gameObject.SetActive(false);
-                enemyBoss1ViewMono.gameObject.SetActive(true);
-                enemyBoss2ViewMono.gameObject.SetActive(false);
-                enemyBoss3ViewMono.gameObject.SetActive(false);
-                _selectedEnemyViewMono = enemyBoss1ViewMono;
-                _selectedEnemyViewMono.SetDomain(enemyParamData);
-            }
-            else if (enemyParamData.GetEnemyEnum() == EnemyEnum.RedBoss)
-            {
-                enemyNormalViewMono.gameObject.SetActive(false);
-                enemyBoss1ViewMono.gameObject.SetActive(false);
-                enemyBoss2ViewMono.gameObject.SetActive(true);
-                enemyBoss3ViewMono.gameObject.SetActive(false);
-                _selectedEnemyViewMono = enemyBoss2ViewMono;
-                _selectedEnemyViewMono.SetDomain(enemyParamData);
-            }
-            else if (enemyParamData.GetEnemyEnum() == EnemyEnum.BlueBoss)
-            {
-                enemyNormalViewMono.gameObject.SetActive(false);
-                enemyBoss1ViewMono.gameObject.SetActive(false);
-                enemyBoss2ViewMono.gameObject.SetActive(false);
-                enemyBoss3ViewMono.gameObject.SetActive(true);
-                _selectedEnemyViewMono = enemyBoss3ViewMono;
-                _selectedEnemyViewMono.SetDomain(enemyParamData);
-            }
-            else 
-            {
-                enemyNormalViewMono.gameObject.SetActive(true);
-                enemyBoss1ViewMono.gameObject.SetActive(false);
-                enemyBoss2ViewMono.gameObject.SetActive(false);
-                enemyBoss3ViewMono.gameObject.SetActive(false);
-                _selectedEnemyViewMono = enemyNormalViewMono;
-                _selectedEnemyViewMono.SetDomain(enemyParamData);
+                case EnemyEnum.YellowBoss:
+                    enemyBoss1ViewMono.gameObject.SetActive(true);
+                    _selectedEnemyViewMono = enemyBoss1ViewMono;
+                    break;
+                case EnemyEnum.RedBoss:
+                    enemyBoss2ViewMono.gameObject.SetActive(true);
+                    _selectedEnemyViewMono = enemyBoss2ViewMono;
+                    break;
+                case EnemyEnum.BlueBoss:
+                    enemyBoss3ViewMono.gameObject.SetActive(true);
+                    _selectedEnemyViewMono = enemyBoss3ViewMono;
+                    break;
+                case EnemyEnum.Special:
+                    enemySpecialViewMono.gameObject.SetActive(true);
+                    _selectedEnemyViewMono = enemySpecialViewMono;
+                    break;
+                default:
+                    enemyNormalViewMono.gameObject.SetActive(true);
+                    _selectedEnemyViewMono = enemyNormalViewMono;
+                    break;
             }
         }
-
         public override void SetHpGauge(double currentHp, int maxHp)
         {
             _selectedEnemyViewMono.SetHpGauge(currentHp, maxHp);
