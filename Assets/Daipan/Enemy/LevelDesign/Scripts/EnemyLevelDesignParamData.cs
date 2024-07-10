@@ -1,12 +1,28 @@
 #nullable enable
 using System;
+using Daipan.Enemy.LevelDesign.Interfaces;
 
 namespace Daipan.Enemy.LevelDesign.Scripts
 {
-    public sealed class EnemyLevelDesignParamData
+    public sealed class EnemyLevelDesignParamData : IEnemyLevelDesignParamData
     {
-        public Func<int> GetIncreaseViewerOnEnemyKill { get; init; } = () => 5; 
-        public Func<int> GetCurrentKillAmount { get; init; } = () => 0;
-        public Action<int> SetCurrentKillAmount { get; init; } = _ => { }; 
+        readonly EnemyLevelDesignParam _enemyLevelDesignParam;
+        public EnemyLevelDesignParamData(
+            EnemyLevelDesignParam levelDesignParam
+        )
+        {
+            _enemyLevelDesignParam = levelDesignParam;
+            
+            // 初期化
+            _enemyLevelDesignParam.currentKillAmount = 0;
+        }
+        public int GetIncreaseViewerOnEnemyKill() => _enemyLevelDesignParam.increaseViewerOnEnemyKill;
+        public int GetIncreaseIrritationGaugeOnSpecialEnemyKill() => _enemyLevelDesignParam.increaseIrritationGaugeOnSpecialEnemyKill;
+        
+        public int CurrentKillAmount
+        {
+            get => _enemyLevelDesignParam.currentKillAmount;
+            set => _enemyLevelDesignParam.currentKillAmount = value;
+        }
     }
 }
