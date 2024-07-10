@@ -47,7 +47,6 @@ namespace Daipan.Enemy.Scripts
 
         public EnemyMono Build(EnemyMono enemyMono, EnemyEnum enemyEnum)
         {
-            Debug.Log($"enemyEnum: {enemyEnum}");
             var enemyParamData = _enemyParamContainer.GetEnemyParamData(enemyEnum);
 
             enemyMono.SetDomain(

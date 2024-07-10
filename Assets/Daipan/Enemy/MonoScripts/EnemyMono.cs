@@ -28,7 +28,20 @@ namespace Daipan.Enemy.MonoScripts
         PlayerHolder _playerHolder = null!;
         public EnemyEnum EnemyEnum { get; private set; } = EnemyEnum.None;
         public bool IsReachedPlayer { get; private set; }
-        public Hp Hp { get; private set; } = null!;
+        Hp _hp = null!;
+
+        public Hp Hp
+        {
+            get => _hp;
+            private set
+            {
+                _hp = value;
+                if (_hp.Value <= 0)
+                {
+                    Die(this, isDaipaned:false);
+                }
+            }
+        }
 
         void Update()
         {
@@ -81,13 +94,7 @@ namespace Daipan.Enemy.MonoScripts
             _enemyOnAttacked = enemyOnAttacked;
             enemyViewMono?.SetDomain(_enemyParamContainer.GetEnemyViewParamData(EnemyEnum));
             Hp = new Hp(_enemyParamContainer.GetEnemyParamData(EnemyEnum).GetMaxHp());
-
-            Observable
-                .EveryUpdate()
-                .Subscribe(_ =>
-                {
-                    if(Hp.Value <= 0) Die(this,isDaipaned:false);
-                }).AddTo(this);
+            
         }
         public event EventHandler<DiedEventArgs>? OnDied
         {
