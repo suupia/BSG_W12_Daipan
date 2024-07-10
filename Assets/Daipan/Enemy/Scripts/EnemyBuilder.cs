@@ -24,6 +24,7 @@ namespace Daipan.Enemy.Scripts
         readonly IrritatedValue _irritatedValue;
         readonly EnemyCluster _enemyCluster;
         readonly EnemyLevelDesignParamData _enemyLevelDesignParamData;
+        readonly EnemyOnAttackedBuilder _enemyOnAttackedBuilder;
         
         public EnemyBuilder(
             IEnemyParamContainer enemyParamContainer
@@ -32,6 +33,7 @@ namespace Daipan.Enemy.Scripts
             , IrritatedValue irritatedValue
             , EnemyCluster enemyCluster
             , EnemyLevelDesignParamData enemyLevelDesignParamData
+            , EnemyOnAttackedBuilder enemyOnAttackedBuilder
         )
         {
             _enemyParamContainer = enemyParamContainer;
@@ -40,6 +42,7 @@ namespace Daipan.Enemy.Scripts
             _irritatedValue = irritatedValue;
             _enemyCluster = enemyCluster;
             _enemyLevelDesignParamData = enemyLevelDesignParamData;
+            _enemyOnAttackedBuilder = enemyOnAttackedBuilder;
         }
 
         public EnemyMono Build(EnemyMono enemyMono, EnemyEnum enemyEnum)
@@ -48,11 +51,11 @@ namespace Daipan.Enemy.Scripts
             var enemyParamData = _enemyParamContainer.GetEnemyParamData(enemyEnum);
 
             enemyMono.SetDomain(
-                enemyEnum,
-                _enemyCluster,
-                new EnemyAttackDecider(),
-                new EnemySuicideAttack(enemyMono,enemyParamData),
-                new EnemyDie(enemyMono)
+                enemyEnum
+                ,_enemyCluster
+                ,new EnemyAttackDecider()
+                ,new EnemyDie(enemyMono)
+               , _enemyOnAttackedBuilder.SwitchEnemyOnAttacked(enemyEnum)
             );
             
             enemyMono.OnDied += (sender, args) =>
@@ -60,17 +63,10 @@ namespace Daipan.Enemy.Scripts
                 // ボスを倒したときも含む
                 _enemyLevelDesignParamData.CurrentKillAmount += 1;
                
-                IncreaseIrritatedValue(args, _irritatedValue, enemyParamData);
                 IncreaseViewerNumber(args, _viewerNumber, _enemyLevelDesignParamData);
                 SpawnComment(args, _commentSpawner);
             };
             return enemyMono;
-        }
-        
-        static void IncreaseIrritatedValue(DiedEventArgs args, IrritatedValue irritatedValue, IEnemyParamData enemyParamData)
-        {
-            if (args.EnemyEnum.IsSpecial() == true)
-                irritatedValue.IncreaseValue(enemyParamData.GetIrritationAfterKill());
         }
         
         static void IncreaseViewerNumber(DiedEventArgs args, ViewerNumber viewerNumber, EnemyLevelDesignParamData enemyLevelDesignParamData)
@@ -91,6 +87,8 @@ namespace Daipan.Enemy.Scripts
                 commentSpawner.SpawnCommentByType(CommentEnum.Normal);
             }
         }
+
+   
 
     }
 }

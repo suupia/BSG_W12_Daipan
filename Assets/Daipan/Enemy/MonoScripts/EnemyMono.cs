@@ -5,9 +5,11 @@ using Daipan.Enemy.LevelDesign.Interfaces;
 using Daipan.Enemy.LevelDesign.Scripts;
 using Daipan.Enemy.Scripts;
 using Daipan.LevelDesign.Enemy.Scripts;
+using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Player.MonoScripts;
 using Daipan.Player.Scripts;
 using DG.Tweening;
+using R3;
 using UnityEngine;
 using VContainer;
 
@@ -19,27 +21,15 @@ namespace Daipan.Enemy.MonoScripts
         [SerializeField] AbstractEnemyViewMono? enemyViewMono;
         EnemyCluster _enemyCluster = null!;
         EnemyAttackDecider _enemyAttackDecider = null!;
-        EnemySuicideAttack _enemySuicideAttack = null!;
         EnemyDie _enemyDie = null!;
         IEnemySpawnPoint _enemySpawnPoint = null!;
         IEnemyParamContainer _enemyParamContainer = null!;
+        IEnemyOnAttacked _enemyOnAttacked = null!;
         PlayerHolder _playerHolder = null!;
         public EnemyEnum EnemyEnum { get; private set; } = EnemyEnum.None;
         public bool IsReachedPlayer { get; private set; }
 
-        Hp _hp = null!;
-        public Hp Hp
-        {
-            get => _hp;
-            set
-            {
-                if (value.Value <= 0)
-                {
-                    Die(this); 
-                }
-                _hp = value;
-            }
-        }
+        public Hp Hp { get; private set; }
 
         void Update()
         {
@@ -67,9 +57,9 @@ namespace Daipan.Enemy.MonoScripts
 
         [Inject]
         public void Initialize(
-            PlayerHolder playerHolder,
-            IEnemySpawnPoint enemySpawnPointData,
-            IEnemyParamContainer enemyParamContainer
+            PlayerHolder playerHolder
+            , IEnemySpawnPoint enemySpawnPointData
+            , IEnemyParamContainer enemyParamContainer
         )
         {
             _playerHolder = playerHolder;
@@ -81,24 +71,25 @@ namespace Daipan.Enemy.MonoScripts
             EnemyEnum enemyEnum
             ,EnemyCluster enemyCluster
             ,EnemyAttackDecider enemyAttackDecider
-            ,EnemySuicideAttack enemySuicideAttack
             ,EnemyDie enemyDie
+            , IEnemyOnAttacked enemyOnAttacked
         )
         {
             EnemyEnum = enemyEnum;
             _enemyCluster = enemyCluster;
             _enemyAttackDecider = enemyAttackDecider;
-            _enemySuicideAttack = enemySuicideAttack;
             _enemyDie = enemyDie;
+            _enemyOnAttacked = enemyOnAttacked;
             enemyViewMono?.SetDomain(_enemyParamContainer.GetEnemyViewParamData(EnemyEnum));
             Hp = new Hp(_enemyParamContainer.GetEnemyParamData(EnemyEnum).GetMaxHp());
-        }
 
-        public void SuicideAttack(PlayerMono playerMono)
-        {
-            _enemySuicideAttack.SuicideAttack(playerMono);
+            Observable
+                .EveryValueChanged(Hp, x => x.Value)
+                .Subscribe(_ =>
+                {
+                    if(Hp.Value <= 0) Die(this,isDaipaned:false);
+                }).AddTo(this);
         }
-        
         public event EventHandler<DiedEventArgs>? OnDied
         {
             add => _enemyDie.OnDied += value;
@@ -110,6 +101,11 @@ namespace Daipan.Enemy.MonoScripts
             _enemyCluster.Remove(thisEnemyMono);
             _enemyDie.Died(enemyViewMono, isDaipaned);
 
+        }
+
+        public void OnAttacked(IPlayerParamData playerParamData)
+        {
+            _enemyOnAttacked.OnAttacked(Hp, playerParamData);
         }
     }
 

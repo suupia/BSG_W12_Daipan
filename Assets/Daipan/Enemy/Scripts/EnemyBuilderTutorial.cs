@@ -20,14 +20,17 @@ namespace Daipan.Enemy.Scripts
     {
         readonly IEnemyParamContainer _enemyParamContainer;
         readonly EnemyCluster _enemyCluster;
+        readonly EnemyOnAttackedBuilder _enemyOnAttackedBuilder;
         
         public EnemyBuilderTutorial(
             IEnemyParamContainer enemyParamContainer
             , EnemyCluster enemyCluster
+            , EnemyOnAttackedBuilder enemyOnAttackedBuilder
         )
         {
             _enemyParamContainer = enemyParamContainer;
             _enemyCluster = enemyCluster;
+            _enemyOnAttackedBuilder = enemyOnAttackedBuilder;
         }
 
         public EnemyMono Build(EnemyMono enemyMono, EnemyEnum enemyEnum)
@@ -36,11 +39,12 @@ namespace Daipan.Enemy.Scripts
             var enemyParamData = _enemyParamContainer.GetEnemyParamData(enemyEnum);
 
             enemyMono.SetDomain(
-                enemyEnum,
-                _enemyCluster,
-                new EnemyAttackDecider(),
-                new EnemySuicideAttack(enemyMono,enemyParamData),
-                new EnemyDie(enemyMono)
+                enemyEnum
+                , _enemyCluster
+                , new EnemyAttackDecider()
+                , new EnemyDie(enemyMono)
+                , _enemyOnAttackedBuilder.SwitchEnemyOnAttacked(enemyEnum)
+                
             );
             
             return enemyMono;
