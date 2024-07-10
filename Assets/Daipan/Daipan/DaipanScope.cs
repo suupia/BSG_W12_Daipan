@@ -28,6 +28,8 @@ using Daipan.Stream.Scripts.Utility;
 using Daipan.Streamer.MonoScripts;
 using Daipan.Tower.MonoScripts;
 using Daipan.Tower.Scripts;
+using Daipan.Option.Interfaces;
+using Daipan.Option.Scripts;
 using UnityEngine;
 using UnityEngine.Serialization;
 using VContainer;
@@ -212,6 +214,22 @@ namespace Daipan.Daipan
             builder.Register<InputSerialManager>(Lifetime.Scoped);
         }
 
+        public static void RegisterOption(IContainerBuilder builder)
+        {
+            builder.Register<OptionController>(Lifetime.Scoped).As<IHandleOption>().As<IInputOption>();
+
+            // PopUp
+            builder.Register<OptionPopUpMain>(Lifetime.Scoped).As<IOptionPopUp>();
+            builder.Register<OptionPopUpConfirmReturnTitle>(Lifetime.Scoped).As<IOptionPopUp>();
+
+            // Config
+            builder.Register<LanguageConfig>(Lifetime.Scoped);
+            builder.Register<DaipanShakingConfig>(Lifetime.Scoped);
+
+            // Input
+            builder.Register<OptionInputUpdater>(Lifetime.Scoped).As<IUpdate>();
+        }
+
         protected override void Configure(IContainerBuilder builder)
         {
             // Stream
@@ -251,6 +269,9 @@ namespace Daipan.Daipan
 
             // InputSerial  
             RegisterInputSerial(builder);
+
+            // Option
+            RegisterOption(builder);
 
             // Result
             builder.Register<ResultState>(Lifetime.Scoped);
