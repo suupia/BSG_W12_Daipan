@@ -18,5 +18,10 @@ public class TitleMono : MonoBehaviour
         {
             SceneTransition.TransitioningScene(SceneName.TutorialScene);
         }
+
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            SceneTransition.TransitioningScene(SceneName.DaipanScene); 
+        }
     }
 }
