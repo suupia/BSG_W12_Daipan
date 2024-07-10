@@ -3,6 +3,6 @@ namespace Daipan.Option.Scripts
 {
     public sealed class DaipanShakingConfig
     {
-        public bool IsShaking;
+        public bool IsShaking = true;
     }
 }
