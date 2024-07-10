@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyLevelDesignParam:
     increaseViewerOnEnemyKill: 5
-    currentKillAmount: 669
+    increaseIrritationGaugeOnSpecialEnemyKill: 180
+    currentKillAmount: 6
   enemyParams:
   - enemyEnum: 1
     enemyAttackParam:

@@ -1,4 +1,5 @@
 #nullable enable
+using Daipan.Enemy.LevelDesign.Scripts;
 using Daipan.Player.Interfaces;
 using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Player.MonoScripts;
@@ -10,12 +11,15 @@ namespace Daipan.Enemy.Scripts
     public sealed class EnemySpecialOnAttack
     {
         readonly IrritatedValue _irritatedValue;
+        readonly EnemyLevelDesignParamData _enemyLevelDesignParamData;
 
         public EnemySpecialOnAttack(
            IrritatedValue irritatedValue 
+           , EnemyLevelDesignParamData enemyLevelDesignParamData
             )
         {
-           _irritatedValue = irritatedValue; 
+           _irritatedValue = irritatedValue;
+           _enemyLevelDesignParamData = enemyLevelDesignParamData;
         }
         
 
@@ -24,7 +28,7 @@ namespace Daipan.Enemy.Scripts
             if (!IsSameColor(enemyEnum, playerParamData.PlayerEnum()))
             {
                 // 違う色のときはイライラゲージを増やす
-                _irritatedValue.IncreaseValue(playerParamData.GetAttack());
+                _irritatedValue.IncreaseValue(_enemyLevelDesignParamData.GetIncreaseIrritationGaugeOnSpecialEnemyKill());
             }
             return PlayerAttackModule.Attack(hp, playerParamData);
             
