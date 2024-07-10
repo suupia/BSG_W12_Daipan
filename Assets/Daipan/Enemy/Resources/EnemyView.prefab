@@ -3228,10 +3228,10 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6021291937121101092}
-  - {fileID: 2266972778973404758}
   - {fileID: 5020758794593989439}
   - {fileID: 1827761873639071129}
   - {fileID: 7980834111331682717}
+  - {fileID: 2266972778973404758}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6127506084937510723
@@ -3250,6 +3250,7 @@ MonoBehaviour:
   enemyBoss1ViewMono: {fileID: 6195893377392259814}
   enemyBoss2ViewMono: {fileID: 994343671160577674}
   enemyBoss3ViewMono: {fileID: 4514046204393585722}
+  enemySpecialViewMono: {fileID: 2742169174885964660}
 --- !u!1 &6478648922457021855
 GameObject:
   m_ObjectHideFlags: 0
