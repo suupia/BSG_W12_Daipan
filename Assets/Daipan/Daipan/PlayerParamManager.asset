@@ -19,8 +19,8 @@ MonoBehaviour:
     antiCommentThreshold: 3
     antiCommentPercentOnMissAttacks:
     - 10
-    - 20
-    - 30
+    - 15
+    - 10
   playerParams:
   - playerAttackParam:
       attackAmount: 10
