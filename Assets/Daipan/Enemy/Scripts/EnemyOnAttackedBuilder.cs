@@ -32,8 +32,9 @@ namespace Daipan.Enemy.Scripts
        EnemyTotemOnAttacked BuildTotemOnAttack(EnemyEnum enemyEnum)
        { 
            return enemyEnum switch {
-               EnemyEnum.Totem2 => new EnemyTotemOnAttacked(RandomPlayerColor(2)),
-               EnemyEnum.Totem3 => new EnemyTotemOnAttacked(RandomPlayerColor(3)),
+               // todo : 一旦Viewとの兼ね合いで色を固定
+               EnemyEnum.Totem2 => new EnemyTotemOnAttacked( new List<PlayerColor> { PlayerColor.Red, PlayerColor.Blue }),
+               EnemyEnum.Totem3 => new EnemyTotemOnAttacked(new List<PlayerColor>(){ PlayerColor.Red, PlayerColor.Blue, PlayerColor.Yellow }),
                _ => throw new System.ArgumentException("Invalid totem type")
            };
        }
