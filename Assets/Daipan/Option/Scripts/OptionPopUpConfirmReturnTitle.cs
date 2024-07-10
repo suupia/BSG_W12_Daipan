@@ -24,12 +24,12 @@ namespace Daipan.Option.Scripts
             switch (_myContent)
             {
                 case myContent.Yes:
-                    Debug.Log($"Select : {_myContent}");
+                    Debug.Log($"Option:Select : {_myContent}");
                     _handleOption.CloseOption();
                     SceneTransition.TransitioningScene(SceneName.TitleScene);
                     break;
                 case myContent.No:
-                    Debug.Log($"Select : {_myContent}");
+                    Debug.Log($"Option:Select : {_myContent}");
                     var nextOption = _transitionFunc(_myContent);
                     if (nextOption != null) _handleOption.SetCurrentOption(nextOption);
                     break;
@@ -47,7 +47,7 @@ namespace Daipan.Option.Scripts
                 {
                     _myContent++;
                 }
-                Debug.Log($"Move : {_myContent}");
+                Debug.Log($"Option:Move : {_myContent}");
             }
         }
         public void SetIHandle(IHandleOption handleOption)

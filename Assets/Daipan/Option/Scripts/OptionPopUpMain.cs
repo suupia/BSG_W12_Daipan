@@ -48,7 +48,7 @@ namespace Daipan.Option.Scripts
                 {
                     _myContent++;
                 }
-                Debug.Log($"Move : {_myContent}");
+                Debug.Log($"Option:Move : {_myContent}");
 
                 return;
             }
@@ -62,9 +62,11 @@ namespace Daipan.Option.Scripts
                         break;
                     case myContent.IsShaking:
                         _daipanShakingConfig.IsShaking = false;
+                        Debug.Log("Option:Shaking OFF");
                         break;
                     case myContent.Language:
                         _languageConfig.CurrentLanguage = LanguageConfig.LanguageEnum.English;
+                        Debug.Log("Option:Language = English");
                         break;
                 }
                 return;
@@ -79,9 +81,11 @@ namespace Daipan.Option.Scripts
                         break;
                     case myContent.IsShaking:
                         _daipanShakingConfig.IsShaking = true;
+                        Debug.Log("Option:Shaking ON");
                         break;
                     case myContent.Language:
                         _languageConfig.CurrentLanguage = LanguageConfig.LanguageEnum.Japanese;
+                        Debug.Log("Option:Language = Japanese");
                         break;
                 }
                 return;

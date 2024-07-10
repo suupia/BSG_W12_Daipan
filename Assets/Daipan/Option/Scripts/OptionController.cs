@@ -66,7 +66,8 @@ namespace Daipan.Option.Scripts
 
         public void OpenOption()
         {
-            Debug.Log("Open Option!!");
+            Debug.Log("Option:Open Option!!");
+            Time.timeScale = 0;
             Prepare();
             IsOpening = true;
             CurrentOptionContent?.Prepare();
@@ -74,7 +75,8 @@ namespace Daipan.Option.Scripts
 
         public void CloseOption()
         {
-            Debug.Log("Close Option!!");
+            Debug.Log("Option:Close Option!!");
+            Time.timeScale = 1;
             IsOpening = false;
         }
 
