@@ -1,7 +1,12 @@
 #nullable enable
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Player.Scripts;
 using Daipan.Stream.Scripts;
+using R3;
+using UnityEngine;
 
 namespace Daipan.Enemy.Scripts
 {
@@ -15,11 +20,11 @@ namespace Daipan.Enemy.Scripts
 
         public EnemyTotemOnAttack(StreamTimer streamTimer)
         {
-            _streamTimer = streamTimer; 
+            _streamTimer = streamTimer;
         }
-        
 
-        public Hp OnAttacked(Hp hp, IPlayerParamData playerParamData )
+
+        public Hp OnAttacked(Hp hp, IPlayerParamData playerParamData)
         {
             switch (playerParamData.PlayerEnum())
             {
@@ -37,7 +42,7 @@ namespace Daipan.Enemy.Scripts
             }
 
             if (!IsAttackable()) return hp;
-            return PlayerAttackModule.Attack(hp, playerParamData); 
+            return PlayerAttackModule.Attack(hp, playerParamData);
         }
 
         bool IsAttackable()
@@ -45,6 +50,8 @@ namespace Daipan.Enemy.Scripts
             return (_streamTimer.CurrentTime - _redLatestAttackedTime < AllowableSec)
                    & (_streamTimer.CurrentTime - _blueLatestAttackedTime < AllowableSec)
                    & (_streamTimer.CurrentTime - _yellowLatestAttackedTime < AllowableSec);
-        } 
+        }
     }
+
+ 
 }
