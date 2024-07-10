@@ -225,9 +225,6 @@ namespace Daipan.Daipan
             // Config
             builder.Register<LanguageConfig>(Lifetime.Scoped);
             builder.Register<DaipanShakingConfig>(Lifetime.Scoped);
-
-            // Input
-            builder.Register<OptionInputUpdater>(Lifetime.Scoped).As<IUpdate>();
         }
 
         protected override void Configure(IContainerBuilder builder)

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Daipan.Battle.scripts;
 using Daipan.Battle.Scripts;
 using Daipan.InputSerial.Scripts;
+using Daipan.Option.Interfaces;
+using Daipan.Option.Scripts;
 using Daipan.Player.Interfaces;
 using Daipan.Player.MonoScripts;
 using Daipan.Stream.Scripts;
@@ -17,6 +19,7 @@ namespace Daipan.Player.Scripts
         readonly DaipanExecutor _daipanExecutor;
         readonly ResultState _resultState;
         readonly EndSceneSelector _endSceneSelector;
+        readonly IInputOption _inputOption;
         PlayerMono? _playerMono;
 
         public PlayerInput(
@@ -25,6 +28,7 @@ namespace Daipan.Player.Scripts
             , DaipanExecutor daipanExecutor
             , ResultState resultState
             , EndSceneSelector endSceneSelector
+            , IInputOption inputOption
         )
         {
             _inputSerialManager = inputSerialManager;
@@ -32,6 +36,7 @@ namespace Daipan.Player.Scripts
             _daipanExecutor = daipanExecutor;
             _resultState = resultState;
             _endSceneSelector = endSceneSelector;
+            _inputOption = inputOption;
         }
 
         public void SetPlayerMono(
@@ -54,7 +59,17 @@ namespace Daipan.Player.Scripts
             }
             else
             {
-                PlayingUpdate();
+                OpenMenuUpdate();
+
+                if (_inputOption.IsOpening)
+                {
+                    OptionUpdate();
+                }
+                else
+                {
+                    PlayingUpdate();
+
+                }
             }
         }
 
@@ -95,5 +110,23 @@ namespace Daipan.Player.Scripts
                 _endSceneSelector.TransitToEndScene();
             }
         }
+        void OpenMenuUpdate()
+        {
+            if (_inputSerialManager.GetButtonMenu())
+            {
+                if (!_inputOption.IsOpening) _inputOption.OpenOption();
+                else _inputOption.CloseOption();
+            }
+
+        }
+        void OptionUpdate()
+        {
+
+            if (_inputSerialManager.GetButtonRed()) _inputOption.MoveCursor(MoveCursorDirectionEnum.Down);
+            if (_inputSerialManager.GetButtonBlue()) _inputOption.MoveCursor(MoveCursorDirectionEnum.Right);
+            if (_inputSerialManager.GetButtonYellow()) _inputOption.MoveCursor(MoveCursorDirectionEnum.Left);
+            if (Input.GetKeyDown(KeyCode.Return)) _inputOption.Select();
+        }
+        
     }
 }
