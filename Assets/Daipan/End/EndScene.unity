@@ -309,7 +309,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   endSceneSprites:
   - endSceneEnum: 0
-    sprite: {fileID: 21300000, guid: 9b5cf95676a46294dbf6b02ae5c8b4e3, type: 3}
+    sprite: {fileID: 21300000, guid: f4d303214a7f9427d97e3d9dbca0a483, type: 3}
   - endSceneEnum: 1
     sprite: {fileID: 21300000, guid: e5da330c8e72d451b8630b46fa5d4cce, type: 3}
   - endSceneEnum: 2
@@ -321,7 +321,7 @@ MonoBehaviour:
   - endSceneEnum: 5
     sprite: {fileID: 21300000, guid: 9b5cf95676a46294dbf6b02ae5c8b4e3, type: 3}
   - endSceneEnum: 6
-    sprite: {fileID: 21300000, guid: 9b5cf95676a46294dbf6b02ae5c8b4e3, type: 3}
+    sprite: {fileID: 21300000, guid: 212a8ea7aee7f43949aa5c4ddae3d9fa, type: 3}
   endSceneImage: {fileID: 865121936}
   endSceneText: {fileID: 482297453}
 --- !u!1 &793867596
