@@ -33,5 +33,6 @@ public class PlayerAttackedCounterTest
     {
         public int GetAntiCommentThreshold() => 10;
         public double GetAntiCommentPercentOnMissAttacks(int index) => 0.0;
+        public int GetMissedAttackCountForAntiComment() => 0;
     }
 }

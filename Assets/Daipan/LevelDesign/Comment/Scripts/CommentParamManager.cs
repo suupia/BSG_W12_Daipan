@@ -15,9 +15,6 @@ namespace Daipan.LevelDesign.Comment.Scripts
 
         [Header("コメントの流れる速度")]
         [Min(0)] public float commentSpeed;
-        
-        [Header("n回攻撃をミスしたらアンチコメントが生成される")]
-        [Min(0)] public int missedAttackCountForAntiComments;
 
         [Header("コメントが生成されたときの視聴者の増加量")][Min(0)]
         public int diffCommentViewer;
