@@ -12,6 +12,9 @@ namespace Daipan.Enemy.LevelDesign.Scripts
         )
         {
             _enemyLevelDesignParam = levelDesignParam;
+            
+            // 初期化
+            _enemyLevelDesignParam.currentKillAmount = 0;
         }
         public int GetIncreaseViewerOnEnemyKill() => _enemyLevelDesignParam.increaseViewerOnEnemyKill;
         public int GetIncreaseIrritationGaugeOnSpecialEnemyKill() => _enemyLevelDesignParam.increaseIrritationGaugeOnSpecialEnemyKill;
