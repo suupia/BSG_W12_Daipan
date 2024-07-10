@@ -49,9 +49,9 @@ namespace Daipan.Enemy.Scripts
         {
             return enemyEnum switch
             {
-                EnemyEnum.Red => playerColor == PlayerColor.Red,
-                EnemyEnum.Blue => playerColor == PlayerColor.Blue,
-                EnemyEnum.Yellow => playerColor == PlayerColor.Yellow,
+                EnemyEnum.SpecialRed => playerColor == PlayerColor.Red,
+                EnemyEnum.SpecialBlue => playerColor == PlayerColor.Blue,
+                EnemyEnum.SpecialYellow => playerColor == PlayerColor.Yellow,
                 _ => false
             };
         }

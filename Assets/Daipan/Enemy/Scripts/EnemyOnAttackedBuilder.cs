@@ -23,17 +23,14 @@ public class EnemyOnAttackedBuilder
 
     public IEnemyOnAttacked SwitchEnemyOnAttacked(EnemyEnum enemyEnum)
     {
-        return enemyEnum switch
-        {
-            EnemyEnum.Special =>  new EnemySpecialOnAttacked(enemyEnum, _irritatedValue, _enemyLevelDesignParamData),
-            EnemyEnum.Totem2 => BuildTotemOnAttack(enemyEnum),
-            EnemyEnum.Totem3 => BuildTotemOnAttack(enemyEnum),
-            _ => new EnemyNormalOnAttacked(), 
-        };
+        if(enemyEnum.IsSpecial() == true) return new EnemySpecialOnAttacked(enemyEnum, _irritatedValue, _enemyLevelDesignParamData);
+        if(enemyEnum == EnemyEnum.Totem2 || enemyEnum == EnemyEnum.Totem3) return BuildTotemOnAttack(enemyEnum);
+        return new EnemyNormalOnAttacked();
     }
     
     EnemyTotemOnAttacked BuildTotemOnAttack(EnemyEnum enemyEnum)
-    {
+    { 
+        // todo: 実装する
         return new EnemyTotemOnAttacked(new List<PlayerColor>() { PlayerColor.Red, PlayerColor.Blue });
     }
 }

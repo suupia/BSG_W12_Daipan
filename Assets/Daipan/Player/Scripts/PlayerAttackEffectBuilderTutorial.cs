@@ -82,7 +82,6 @@ namespace Daipan.Player.Scripts
             {
                 // 敵を攻撃
                 var playerParamData = playerParamDataContainer.GetPlayerParamData(playerColor);
-                // todo: チュートリアルのためSpecialなどの攻撃は分けていない
                 PlayerAttackModule.Attack(enemyMono, playerParamData);
 
             }

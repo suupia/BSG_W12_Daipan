@@ -13,7 +13,9 @@ namespace Daipan.Enemy.Scripts
         [IsBoss(true)] RedBoss,
         [IsBoss(true)] BlueBoss,
         [IsBoss(true)] YellowBoss,
-        [IsSpecial(true)] Special,
+        [IsSpecial(true)] SpecialRed,
+        [IsSpecial(true)] SpecialBlue,
+        [IsSpecial(true)] SpecialYellow,
         [IsTotem(true)]Totem2,
         [IsTotem(true)]Totem3,
     }

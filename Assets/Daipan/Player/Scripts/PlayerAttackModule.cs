@@ -21,9 +21,9 @@ namespace Daipan.Player.Scripts
         {
             return playerColor switch
             {
-                PlayerColor.Red => new[] {EnemyEnum.Red,EnemyEnum.RedBoss,EnemyEnum.Special,EnemyEnum.Totem2, EnemyEnum.Totem3},
-                PlayerColor.Blue => new[] {EnemyEnum.Blue,EnemyEnum.BlueBoss,EnemyEnum.Special,EnemyEnum.Totem2, EnemyEnum.Totem3},
-                PlayerColor.Yellow => new[] {EnemyEnum.Yellow,EnemyEnum.YellowBoss,EnemyEnum.Special,EnemyEnum.Totem2, EnemyEnum.Totem3},
+                PlayerColor.Red => new[] {EnemyEnum.Red,EnemyEnum.RedBoss,EnemyEnum.SpecialRed,EnemyEnum.Totem2, EnemyEnum.Totem3},
+                PlayerColor.Blue => new[] {EnemyEnum.Blue,EnemyEnum.BlueBoss,EnemyEnum.SpecialBlue,EnemyEnum.Totem2, EnemyEnum.Totem3},
+                PlayerColor.Yellow => new[] {EnemyEnum.Yellow,EnemyEnum.YellowBoss,EnemyEnum.SpecialYellow,EnemyEnum.Totem2, EnemyEnum.Totem3},
                 _ => throw new ArgumentOutOfRangeException()
             };
         } 
