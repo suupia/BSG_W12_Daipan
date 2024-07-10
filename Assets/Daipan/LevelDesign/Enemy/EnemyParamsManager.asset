@@ -155,8 +155,8 @@ MonoBehaviour:
       attackDelaySec: 1
       attackRange: 2
     enemyHpParam:
-      maxHp: 100
-      hpAmount: 100
+      maxHp: 50
+      hpAmount: 50
     enemyMoveParam:
       moveSpeedPerSec: 1.5
     enemySpawnParam:
