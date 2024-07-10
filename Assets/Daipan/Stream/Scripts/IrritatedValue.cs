@@ -37,7 +37,7 @@ namespace Daipan.Stream.Scripts
         {
             // [Precondition]
             if (amount < 0) Debug.LogWarning($"IrritatedValue.IncreaseValue() amount is negative : {amount}");
-
+Debug.Log($"IrritatedValue.IncreaseValue() amount : {amount}");
             Value = Mathf.Min(MaxValue, Value + amount); 
         }
 

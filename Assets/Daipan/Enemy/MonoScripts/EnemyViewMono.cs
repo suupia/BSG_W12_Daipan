@@ -43,7 +43,9 @@ namespace Daipan.Enemy.MonoScripts
                     enemyBoss3ViewMono.gameObject.SetActive(true);
                     _selectedEnemyViewMono = enemyBoss3ViewMono;
                     break;
-                case EnemyEnum.Special:
+                case EnemyEnum.SpecialRed:
+                case EnemyEnum.SpecialBlue:
+                case EnemyEnum.SpecialYellow:
                     enemySpecialViewMono.gameObject.SetActive(true);
                     _selectedEnemyViewMono = enemySpecialViewMono;
                     break;

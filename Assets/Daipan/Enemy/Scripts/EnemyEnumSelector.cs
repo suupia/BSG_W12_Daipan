@@ -68,8 +68,10 @@ namespace Daipan.Enemy.Scripts
             return false;
         }
 
-        static EnemyEnum DecideRandomEnemyType(EnemyParamsManager enemyParamsManager,
-            Func<EnemyEnum, bool> targetEnemyEnum)
+        static EnemyEnum DecideRandomEnemyType(
+            EnemyParamsManager enemyParamsManager
+            , Func<EnemyEnum, bool> targetEnemyEnum
+        )
         {
             List<(EnemyEnum EnemyEnum, double Ratio)> table = enemyParamsManager.enemyParams
                 .Where(x => targetEnemyEnum(x.enemyEnum))

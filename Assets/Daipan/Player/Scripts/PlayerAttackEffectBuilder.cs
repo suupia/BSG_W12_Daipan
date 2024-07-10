@@ -21,18 +21,16 @@ namespace Daipan.Player.Scripts
         readonly ComboCounter _comboCounter;
         readonly EnemyCluster _enemyCluster;
         readonly CommentSpawner _commentSpawner;
-        readonly EnemyTotemOnAttack _enemyTotemOnAttack;
-        readonly EnemySpecialOnAttack _enemySpecialOnAttack;
         readonly WaveState _waveState;
         readonly IPlayerAntiCommentParamData _playerAntiCommentParamData;
+
+
 
         public PlayerAttackEffectBuilder(
             IPlayerParamDataContainer playerParamDataContainer
             ,ComboCounter comboCounter
             ,EnemyCluster enemyCluster
             ,CommentSpawner commentSpawner
-            ,EnemyTotemOnAttack enemyTotemOnAttack
-            ,EnemySpecialOnAttack enemySpecialOnAttack
             ,WaveState waveState
             ,IPlayerAntiCommentParamData playerAntiCommentParamData
         )
@@ -41,8 +39,6 @@ namespace Daipan.Player.Scripts
             _comboCounter = comboCounter;
             _enemyCluster = enemyCluster;
             _commentSpawner = commentSpawner;
-            _enemyTotemOnAttack = enemyTotemOnAttack;
-            _enemySpecialOnAttack = enemySpecialOnAttack;
             _waveState = waveState;
             _playerAntiCommentParamData = playerAntiCommentParamData;
         }
@@ -55,15 +51,11 @@ namespace Daipan.Player.Scripts
             effect.OnHit += (sender, args) =>
             {
                 Debug.Log($"OnHit");
-                AttackEnemy(_playerParamDataContainer, playerViewMonos, playerColor, args,_comboCounter, _enemyTotemOnAttack,_enemySpecialOnAttack );
+                AttackEnemy(_playerParamDataContainer, playerViewMonos, playerColor, args,_comboCounter );
                 SpawnAntiComment(args, _commentSpawner, _playerAntiCommentParamData,_waveState);
             };
             return effect;
         }
-
-
-
-
 
 
         static void AttackEnemy(
@@ -72,8 +64,6 @@ namespace Daipan.Player.Scripts
             , PlayerColor playerColor
             , OnHitEventArgs args
             , ComboCounter comboCounter
-            , EnemyTotemOnAttack totemOnAttack
-            , EnemySpecialOnAttack enemySpecialOnAttack
         )
         {
             if (args.IsTargetEnemy && args.EnemyMono != null)
@@ -81,15 +71,12 @@ namespace Daipan.Player.Scripts
                 Debug.Log($"EnemyType: {args.EnemyMono.EnemyEnum}を攻撃");
                 // 敵を攻撃
                 var playerParamData = playerParamDataContainer.GetPlayerParamData(playerColor);
-                var hpBuffer = args.EnemyMono.EnemyEnum switch
-                {
-                    EnemyEnum.Totem => totemOnAttack.OnAttacked(args.EnemyMono.Hp, playerParamData),
-                    EnemyEnum.Special => enemySpecialOnAttack.OnAttacked(args.EnemyMono.Hp,args.EnemyMono.EnemyEnum, playerParamData),
-                        _ => PlayerAttackModule.Attack(args.EnemyMono.Hp, playerParamData)
-                };
+                var beforeHp = args.EnemyMono.Hp.Value; 
+                PlayerAttackModule.Attack(args.EnemyMono, playerParamData);
+                var afterHp = args.EnemyMono.Hp.Value;
+                
                 //  HPに変化があれば、コンボ増加
-                if (args.EnemyMono.Hp.Value != hpBuffer.Value) comboCounter.IncreaseCombo();
-                args.EnemyMono.Hp = hpBuffer;
+                if (beforeHp != afterHp) comboCounter.IncreaseCombo();
             }
             else
             {

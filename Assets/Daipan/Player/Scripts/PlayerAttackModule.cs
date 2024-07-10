@@ -1,6 +1,7 @@
 #nullable enable
 using System;
 using System.Collections.Generic;
+using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Enemy.Scripts;
 using Daipan.Player.LevelDesign.Interfaces;
@@ -11,19 +12,23 @@ namespace Daipan.Player.Scripts
 {
     public static class PlayerAttackModule
     {
-        public static Hp Attack(Hp hp, IPlayerParamData playerParamData)
-            => new Hp(hp.Value - playerParamData.GetAttack()); 
-        
-        
+        public static void Attack(EnemyMono enemyMono, IPlayerParamData playerParamData)
+        {
+            enemyMono.OnAttacked(playerParamData);
+        }
+
         public static IEnumerable<EnemyEnum> GetTargetEnemyEnum(PlayerColor playerColor)
         {
-            return playerColor switch
+            // 全てのボタンに対して判定を行うもの
+            var result = new List<EnemyEnum>{EnemyEnum.SpecialRed,EnemyEnum.SpecialBlue,EnemyEnum.SpecialYellow, EnemyEnum.Totem2, EnemyEnum.Totem3};
+            result.AddRange(  playerColor switch
             {
-                PlayerColor.Red => new[] {EnemyEnum.Red,EnemyEnum.RedBoss,EnemyEnum.Special,EnemyEnum.Totem},
-                PlayerColor.Blue => new[] {EnemyEnum.Blue,EnemyEnum.BlueBoss,EnemyEnum.Special,EnemyEnum.Totem},
-                PlayerColor.Yellow => new[] {EnemyEnum.Yellow,EnemyEnum.YellowBoss,EnemyEnum.Special,EnemyEnum.Totem},
+                PlayerColor.Red => new[] {EnemyEnum.Red,EnemyEnum.RedBoss},
+                PlayerColor.Blue => new[] {EnemyEnum.Blue,EnemyEnum.BlueBoss},
+                PlayerColor.Yellow => new[] {EnemyEnum.Yellow,EnemyEnum.YellowBoss},
                 _ => throw new ArgumentOutOfRangeException()
-            };
+            });
+            return result;
         } 
 
         

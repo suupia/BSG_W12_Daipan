@@ -20,19 +20,16 @@ namespace Daipan.Player.Scripts
     {
         readonly IPlayerParamDataContainer _playerParamDataContainer;
         readonly EnemyCluster _enemyCluster;
-        readonly EnemyTotemOnAttack _enemyTotemOnAttack;
         readonly TutorialFacilitator _tutorialFacilitator; 
 
         public PlayerAttackEffectBuilderTutorial(
             IPlayerParamDataContainer playerParamDataContainer
             ,EnemyCluster enemyCluster
-            ,EnemyTotemOnAttack enemyTotemOnAttack
             ,TutorialFacilitator tutorialFacilitator 
         )
         {
             _playerParamDataContainer = playerParamDataContainer;
             _enemyCluster = enemyCluster;
-            _enemyTotemOnAttack = enemyTotemOnAttack;
             _tutorialFacilitator = tutorialFacilitator;
         }
 
@@ -49,8 +46,8 @@ namespace Daipan.Player.Scripts
                     , playerViewMonos
                     , playerColor
                     , args.EnemyMono
-                    ,_enemyTotemOnAttack
-                    ,_tutorialFacilitator);
+                    ,_tutorialFacilitator
+                    );
             };
             return effect;
         }
@@ -61,7 +58,6 @@ namespace Daipan.Player.Scripts
             ,List<AbstractPlayerViewMono?> playerViewMonos
             ,PlayerColor playerColor
             ,EnemyMono? enemyMono
-            ,EnemyTotemOnAttack totemOnAttack
             ,TutorialFacilitator tutorialFacilitator 
             )
         {
@@ -86,11 +82,7 @@ namespace Daipan.Player.Scripts
             {
                 // 敵を攻撃
                 var playerParamData = playerParamDataContainer.GetPlayerParamData(playerColor);
-                enemyMono.Hp = enemyMono.EnemyEnum switch 
-                {
-                    EnemyEnum.Totem => totemOnAttack.OnAttacked(enemyMono.Hp, playerParamData),
-                    _ => PlayerAttackModule.Attack(enemyMono.Hp,playerParamData)
-                };
+                PlayerAttackModule.Attack(enemyMono, playerParamData);
 
             }
 

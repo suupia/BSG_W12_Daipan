@@ -1,14 +1,8 @@
 #nullable enable
+using System;
+using UnityEngine;
+
 namespace Daipan.Player.Scripts
 {
-    public record Hp
-    {
-        public int Value { get; private set; }
-
-        public Hp(int value)
-        {
-            Value = value;
-        }
-
-    }
+    public record Hp(int Value);
 }

@@ -16,7 +16,8 @@ namespace Daipan.Enemy.Scripts
             AttackEvent?.Invoke( typeof(EnemyAttackModule) ,  new EnemyDamageArgs(enemyParamData.GetAttackAmount(), enemyParamData.GetEnemyEnum()));
             return new Hp(hp.Value - enemyParamData.GetAttackAmount()); 
         
-        } 
+        }
+        
     } 
 }
 
