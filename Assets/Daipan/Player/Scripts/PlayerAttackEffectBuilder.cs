@@ -23,8 +23,7 @@ namespace Daipan.Player.Scripts
         readonly CommentSpawner _commentSpawner;
         readonly WaveState _waveState;
         readonly IPlayerAntiCommentParamData _playerAntiCommentParamData;
-
-
+        readonly PlayerMissedAttackCounter _playerMissedAttackCounter;
 
         public PlayerAttackEffectBuilder(
             IPlayerParamDataContainer playerParamDataContainer
@@ -33,6 +32,7 @@ namespace Daipan.Player.Scripts
             ,CommentSpawner commentSpawner
             ,WaveState waveState
             ,IPlayerAntiCommentParamData playerAntiCommentParamData
+            ,PlayerMissedAttackCounter playerMissedAttackCounter
         )
         {
             _playerParamDataContainer = playerParamDataContainer;
@@ -41,17 +41,23 @@ namespace Daipan.Player.Scripts
             _commentSpawner = commentSpawner;
             _waveState = waveState;
             _playerAntiCommentParamData = playerAntiCommentParamData;
+            _playerMissedAttackCounter = playerMissedAttackCounter;
         }
 
-        public PlayerAttackEffectMono Build(PlayerAttackEffectMono effect, PlayerMono playerMono,
-            List<AbstractPlayerViewMono?> playerViewMonos, PlayerColor playerColor)
+        public PlayerAttackEffectMono Build
+        (
+            PlayerAttackEffectMono effect
+            , PlayerMono playerMono
+            , List<AbstractPlayerViewMono?> playerViewMonos
+            , PlayerColor playerColor
+            )
         {
             effect.SetUp(_playerParamDataContainer.GetPlayerParamData(playerColor),
                 () => _enemyCluster.NearestEnemy(playerMono.transform.position));
             effect.OnHit += (sender, args) =>
             {
                 Debug.Log($"OnHit");
-                AttackEnemy(_playerParamDataContainer, playerViewMonos, playerColor, args,_comboCounter );
+                AttackEnemy(_playerParamDataContainer, playerViewMonos, playerColor, args,_comboCounter, _playerMissedAttackCounter, _commentSpawner );
                 SpawnAntiComment(args, _commentSpawner, _playerAntiCommentParamData,_waveState);
             };
             return effect;
@@ -64,6 +70,8 @@ namespace Daipan.Player.Scripts
             , PlayerColor playerColor
             , OnHitEventArgs args
             , ComboCounter comboCounter
+            , PlayerMissedAttackCounter playerMissedAttackCounter
+            , CommentSpawner commentSpawner
         )
         {
             if (args.IsTargetEnemy && args.EnemyMono != null)
@@ -77,12 +85,16 @@ namespace Daipan.Player.Scripts
                 
                 //  HPに変化があれば、コンボ増加
                 if (beforeHp != afterHp) comboCounter.IncreaseCombo();
+                
             }
             else
             {
                 Debug.Log(
                     $"攻撃対象が{PlayerAttackModule.GetTargetEnemyEnum(playerColor)}ではないです args.EnemyMono?.EnemyEnum: {args.EnemyMono?.EnemyEnum}");
                 comboCounter.ResetCombo();
+                playerMissedAttackCounter.CountUp();
+                if (playerMissedAttackCounter.IsOverThreshold) commentSpawner.SpawnCommentByType(CommentEnum.Spiky); 
+
                 return;
             }
 

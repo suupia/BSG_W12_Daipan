@@ -32,7 +32,7 @@ namespace Daipan.Player.Scripts
             }
         }
 
-        public void CountReset()
+        void CountReset()
         {
             AttackedNumber = 0;
             _currentTermStartNumber = 0;
