@@ -6,7 +6,7 @@ namespace Daipan.Enemy.Interfaces
 {
     public interface IEnemyOnAttacked
     {
-        public void OnAttacked(Hp hp, IPlayerParamData playerParamData);
+        public Hp OnAttacked(Hp hp, IPlayerParamData playerParamData);
     } 
 }
 

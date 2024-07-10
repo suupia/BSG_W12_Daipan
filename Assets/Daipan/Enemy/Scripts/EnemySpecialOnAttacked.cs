@@ -29,18 +29,20 @@ namespace Daipan.Enemy.Scripts
         }
 
 
-        public void OnAttacked(Hp hp, IPlayerParamData playerParamData)
+        public Hp OnAttacked(Hp hp, IPlayerParamData playerParamData)
         {
-            hp.Decrease(playerParamData.GetAttack());
+            var afterHp  = new Hp(hp.Value - playerParamData.GetAttack()); 
             if (!IsSameColor(_enemyEnum, playerParamData.PlayerEnum()))
             {
                 Debug.Log($"_enemyEnum: {_enemyEnum}, playerParamData.PlayerEnum(): {playerParamData.PlayerEnum()} IsSameColor: {IsSameColor(_enemyEnum, playerParamData.PlayerEnum())}");
 
                 // 違う色のときに倒したのなら、イライラゲージを増やす
-                if (hp.Value <= 0)
+                if (afterHp.Value <= 0)
                     _irritatedValue.IncreaseValue(_enemyLevelDesignParamData
                         .GetIncreaseIrritationGaugeOnSpecialEnemyKill());
             }
+
+            return afterHp;
         }
 
 

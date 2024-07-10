@@ -28,8 +28,7 @@ namespace Daipan.Enemy.MonoScripts
         PlayerHolder _playerHolder = null!;
         public EnemyEnum EnemyEnum { get; private set; } = EnemyEnum.None;
         public bool IsReachedPlayer { get; private set; }
-
-        public Hp Hp { get; private set; }
+        public Hp Hp { get; private set; } = null!;
 
         void Update()
         {
@@ -84,7 +83,7 @@ namespace Daipan.Enemy.MonoScripts
             Hp = new Hp(_enemyParamContainer.GetEnemyParamData(EnemyEnum).GetMaxHp());
 
             Observable
-                .EveryValueChanged(Hp, x => x.Value)
+                .EveryUpdate()
                 .Subscribe(_ =>
                 {
                     if(Hp.Value <= 0) Die(this,isDaipaned:false);
@@ -105,7 +104,7 @@ namespace Daipan.Enemy.MonoScripts
 
         public void OnAttacked(IPlayerParamData playerParamData)
         {
-            _enemyOnAttacked.OnAttacked(Hp, playerParamData);
+            Hp = _enemyOnAttacked.OnAttacked(Hp, playerParamData);
         }
     }
 

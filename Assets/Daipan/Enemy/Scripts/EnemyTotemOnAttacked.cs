@@ -26,15 +26,15 @@ namespace Daipan.Enemy.Scripts
         }
 
 
-        public void OnAttacked(Hp hp, IPlayerParamData playerParamData)
+        public Hp OnAttacked(Hp hp, IPlayerParamData playerParamData)
         {
             Debug.Log($"OnAttacked hp: { hp.Value } playerParamData: { playerParamData }");
             var attackedPlayer = playerParamData.PlayerEnum();
             var index = _canAttackPlayers.IndexOf(attackedPlayer);
-            if (index == -1) return;
+            if (index == -1) return hp;
             _samePressChecker.SetOn(index);
-            if (!_samePressChecker.IsAllOn()) return; 
-            hp.Decrease(playerParamData.GetAttack());
+            if (!_samePressChecker.IsAllOn()) return hp;
+            return new Hp(hp.Value - playerParamData.GetAttack());
         }
         
     }
