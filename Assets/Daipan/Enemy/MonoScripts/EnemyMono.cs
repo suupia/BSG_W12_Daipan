@@ -20,7 +20,7 @@ namespace Daipan.Enemy.MonoScripts
         EnemyCluster _enemyCluster = null!;
         EnemyAttackDecider _enemyAttackDecider = null!;
         EnemySuicideAttack _enemySuicideAttack = null!;
-        EnemyDied _enemyDied = null!;
+        EnemyDie _enemyDie = null!;
         IEnemySpawnPoint _enemySpawnPoint = null!;
         IEnemyParamContainer _enemyParamContainer = null!;
         PlayerHolder _playerHolder = null!;
@@ -82,14 +82,14 @@ namespace Daipan.Enemy.MonoScripts
             ,EnemyCluster enemyCluster
             ,EnemyAttackDecider enemyAttackDecider
             ,EnemySuicideAttack enemySuicideAttack
-            ,EnemyDied enemyDied
+            ,EnemyDie enemyDie
         )
         {
             EnemyEnum = enemyEnum;
             _enemyCluster = enemyCluster;
             _enemyAttackDecider = enemyAttackDecider;
             _enemySuicideAttack = enemySuicideAttack;
-            _enemyDied = enemyDied;
+            _enemyDie = enemyDie;
             enemyViewMono?.SetDomain(_enemyParamContainer.GetEnemyViewParamData(EnemyEnum));
             Hp = new Hp(_enemyParamContainer.GetEnemyParamData(EnemyEnum).GetMaxHp());
         }
@@ -101,14 +101,14 @@ namespace Daipan.Enemy.MonoScripts
         
         public event EventHandler<DiedEventArgs>? OnDied
         {
-            add => _enemyDied.OnDied += value;
-            remove => _enemyDied.OnDied -= value;
+            add => _enemyDie.OnDied += value;
+            remove => _enemyDie.OnDied -= value;
         }
 
         public void Die(EnemyMono thisEnemyMono, bool isDaipaned = false)
         {
             _enemyCluster.Remove(thisEnemyMono);
-            _enemyDied.Died(enemyViewMono, isDaipaned);
+            _enemyDie.Died(enemyViewMono, isDaipaned);
 
         }
     }

@@ -7,12 +7,12 @@ using DG.Tweening;
 
 namespace Daipan.Enemy.Scripts
 {
-    public sealed class EnemyDied
+    public sealed class EnemyDie
     {
         public event EventHandler<DiedEventArgs>? OnDied;
         readonly EnemyMono _enemyMono;
         
-        public EnemyDied(EnemyMono enemyMono)
+        public EnemyDie(EnemyMono enemyMono)
         {
             _enemyMono = enemyMono;
         }

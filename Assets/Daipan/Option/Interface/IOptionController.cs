@@ -16,7 +16,7 @@ namespace Daipan.Option.Interfaces
     }
     public interface IHandleOption
     {
-        void SetCurrentOption(OptionContentEnum optionContent);
+        void SetCurrentOption(IOptionPopUp optionPopUp);
         void CloseOption();
     }
 }

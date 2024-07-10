@@ -52,7 +52,7 @@ namespace Daipan.Enemy.Scripts
                 _enemyCluster,
                 new EnemyAttackDecider(),
                 new EnemySuicideAttack(enemyMono,enemyParamData),
-                new EnemyDied(enemyMono)
+                new EnemyDie(enemyMono)
             );
             
             enemyMono.OnDied += (sender, args) =>

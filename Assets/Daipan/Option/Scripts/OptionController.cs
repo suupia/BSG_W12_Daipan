@@ -10,32 +10,58 @@ namespace Daipan.Option.Scripts
 {
     public class OptionController : IHandleOption , IInputOption
     {
-        IOptionContent? _currentOptionContent { get; set; }
-        IEnumerable<IOptionContent>? _optionContents;
+        IOptionPopUp? CurrentOptionContent { get; set; }
+        readonly List<IOptionPopUp> _optionContents;
         public bool IsOpening { private set; get; }
 
         [Inject]
-        public OptionController(IEnumerable<IOptionContent>? optionContents)
+        public OptionController(IEnumerable<IOptionPopUp> optionContents)
         {
-            _optionContents = optionContents;
-            foreach (var option in _optionContents!) option.SetIHandle(this);
-            _currentOptionContent = _optionContents.Where(x => x.OptionContent == OptionContentEnum.Main).FirstOrDefault();
+            _optionContents = optionContents.ToList();
+            foreach (var option in _optionContents) option.SetIHandle(this);
+            CurrentOptionContent = _optionContents
+                .FirstOrDefault(x => x is OptionPopUpMain);
+
+            foreach (var option in _optionContents)
+            {
+                if (option is OptionPopUpMain optionPopUpMain)
+                {
+                    optionPopUpMain.RegisterTransition(myContent =>
+                    {
+                        if(myContent == OptionPopUpMain.myContent.ReturnTitle)
+                            return _optionContents.FirstOrDefault(x => x is OptionPopUpConfirmReturnTitle);
+
+                        return null;
+                    });
+                }
+                if (option is OptionPopUpConfirmReturnTitle optionPopUpConfirmReturnTitle)
+                {
+                    optionPopUpConfirmReturnTitle.RegisterTransition(myContent =>
+                    {
+                        if(myContent == OptionPopUpConfirmReturnTitle.myContent.No)
+                            return _optionContents.FirstOrDefault(x => x is OptionPopUpMain);
+
+                        return null;
+                    });
+                }
+            }
         }
 
 
         public void Select()
         {
-            _currentOptionContent?.Select();
+            CurrentOptionContent?.Select();
         }
 
         public void MoveCursor(MoveCursorDirectionEnum moveCursorDirection)
         {
-            _currentOptionContent?.MoveCursor(moveCursorDirection);
+            CurrentOptionContent?.MoveCursor(moveCursorDirection);
         }
 
-        public void SetCurrentOption(OptionContentEnum optionContent)
+        public void SetCurrentOption(IOptionPopUp optionPopUp)
         {
-            _currentOptionContent = _currentOptionContent = _optionContents.Where(x => x.OptionContent == optionContent).FirstOrDefault();
+            CurrentOptionContent = _optionContents
+                .FirstOrDefault(x => x.GetType() == optionPopUp.GetType());
         }
 
         public void OpenOption()
@@ -43,7 +69,7 @@ namespace Daipan.Option.Scripts
             Debug.Log("Open Option!!");
             Prepare();
             IsOpening = true;
-            _currentOptionContent?.Prepare();
+            CurrentOptionContent?.Prepare();
         }
 
         public void CloseOption()
@@ -54,22 +80,17 @@ namespace Daipan.Option.Scripts
 
         public void Prepare()
         {
-            _currentOptionContent = _optionContents.Where(x => x.OptionContent == OptionContentEnum.Main).FirstOrDefault();
+            CurrentOptionContent = _optionContents.FirstOrDefault(x => x is OptionPopUpMain);
         }
 
     }
 
     public enum MoveCursorDirectionEnum
     {
-        UP,
+        Up,
         Right,
         Down,
         Left
     }
-
-    public enum OptionContentEnum
-    {
-        Main,
-        ConfirmReturnTitle
-    }
+    
 }
