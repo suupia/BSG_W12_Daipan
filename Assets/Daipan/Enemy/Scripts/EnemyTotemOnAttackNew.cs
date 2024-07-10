@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Daipan.Enemy.MonoScripts;
 using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Player.MonoScripts;
 using Daipan.Player.Scripts;
@@ -24,15 +25,15 @@ namespace Daipan.Enemy.Scripts
         }
 
 
-        public void OnAttacked(Hp hp, IPlayerParamData playerParamData)
+        public void OnAttacked(EnemyMono enemyMono, IPlayerParamData playerParamData)
         {
-            Debug.Log($"OnAttacked hp: { hp } playerParamData: { playerParamData }");
+            Debug.Log($"OnAttacked hp: { enemyMono.Hp.Value } playerParamData: { playerParamData }");
             var attackedPlayer = playerParamData.PlayerEnum();
             var index = _canAttackPlayers.IndexOf(attackedPlayer);
             if (index == -1) return;
             _samePressChecker.SetOn(index);
             if (!_samePressChecker.IsAllOn()) return; 
-            PlayerAttackModule.Attack(hp, playerParamData);
+            PlayerAttackModule.Attack(enemyMono, playerParamData);
         }
         
     }

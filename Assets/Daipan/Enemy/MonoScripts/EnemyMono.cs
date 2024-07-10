@@ -24,7 +24,7 @@ namespace Daipan.Enemy.MonoScripts
         EnemyDie _enemyDie = null!;
         IEnemySpawnPoint _enemySpawnPoint = null!;
         IEnemyParamContainer _enemyParamContainer = null!;
-        IEnemyOnAttack _enemyOnAttack = null!;
+        IEnemyOnAttacked _enemyOnAttacked = null!;
         PlayerHolder _playerHolder = null!;
         public EnemyEnum EnemyEnum { get; private set; } = EnemyEnum.None;
         public bool IsReachedPlayer { get; private set; }
@@ -57,9 +57,9 @@ namespace Daipan.Enemy.MonoScripts
 
         [Inject]
         public void Initialize(
-            PlayerHolder playerHolder,
-            IEnemySpawnPoint enemySpawnPointData,
-            IEnemyParamContainer enemyParamContainer
+            PlayerHolder playerHolder
+            , IEnemySpawnPoint enemySpawnPointData
+            , IEnemyParamContainer enemyParamContainer
         )
         {
             _playerHolder = playerHolder;
@@ -72,12 +72,14 @@ namespace Daipan.Enemy.MonoScripts
             ,EnemyCluster enemyCluster
             ,EnemyAttackDecider enemyAttackDecider
             ,EnemyDie enemyDie
+            , IEnemyOnAttacked enemyOnAttacked
         )
         {
             EnemyEnum = enemyEnum;
             _enemyCluster = enemyCluster;
             _enemyAttackDecider = enemyAttackDecider;
             _enemyDie = enemyDie;
+            _enemyOnAttacked = enemyOnAttacked;
             enemyViewMono?.SetDomain(_enemyParamContainer.GetEnemyViewParamData(EnemyEnum));
             Hp = new Hp(_enemyParamContainer.GetEnemyParamData(EnemyEnum).GetMaxHp());
 
@@ -103,7 +105,7 @@ namespace Daipan.Enemy.MonoScripts
 
         public void OnAttacked(IPlayerParamData playerParamData)
         {
-            _enemyOnAttack.OnAttacked(Hp, playerParamData);
+            _enemyOnAttacked.OnAttacked(Hp, playerParamData);
         }
     }
 

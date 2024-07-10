@@ -12,12 +12,7 @@ namespace Daipan.Player.Scripts
 {
     public static class PlayerAttackModule
     {
-        public static void Attack(Hp hp, IPlayerParamData playerParamData)
-        {
-            hp.Decrease(playerParamData.GetAttack());
-        }
-
-        public static void AttackNew(EnemyMono enemyMono, IPlayerParamData playerParamData)
+        public static void Attack(EnemyMono enemyMono, IPlayerParamData playerParamData)
         {
             enemyMono.OnAttacked(playerParamData);
         }

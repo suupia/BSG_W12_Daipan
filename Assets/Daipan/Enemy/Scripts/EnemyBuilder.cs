@@ -48,10 +48,11 @@ namespace Daipan.Enemy.Scripts
             var enemyParamData = _enemyParamContainer.GetEnemyParamData(enemyEnum);
 
             enemyMono.SetDomain(
-                enemyEnum,
-                _enemyCluster,
-                new EnemyAttackDecider(),
-                new EnemyDie(enemyMono)
+                enemyEnum
+                ,_enemyCluster
+                ,new EnemyAttackDecider()
+                ,new EnemyDie(enemyMono)
+               ,SwitchEnemyOnAttacked(enemyEnum) 
             );
             
             enemyMono.OnDied += (sender, args) =>
@@ -89,6 +90,15 @@ namespace Daipan.Enemy.Scripts
             {
                 commentSpawner.SpawnCommentByType(CommentEnum.Normal);
             }
+        }
+
+        public static IEnemyOnAttacked SwitchEnemyOnAttacked(EnemyEnum enemyEnum)
+        {
+            return enemyEnum switch
+            {
+                // todo 実装
+                
+            };
         }
 
     }

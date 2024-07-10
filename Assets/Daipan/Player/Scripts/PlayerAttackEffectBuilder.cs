@@ -21,7 +21,6 @@ namespace Daipan.Player.Scripts
         readonly ComboCounter _comboCounter;
         readonly EnemyCluster _enemyCluster;
         readonly CommentSpawner _commentSpawner;
-        readonly EnemyTotemOnAttack _enemyTotemOnAttack;
         readonly EnemySpecialOnAttack _enemySpecialOnAttack;
         readonly WaveState _waveState;
         readonly IPlayerAntiCommentParamData _playerAntiCommentParamData;
@@ -34,7 +33,6 @@ namespace Daipan.Player.Scripts
             ,ComboCounter comboCounter
             ,EnemyCluster enemyCluster
             ,CommentSpawner commentSpawner
-            ,EnemyTotemOnAttack enemyTotemOnAttack
             ,EnemySpecialOnAttack enemySpecialOnAttack
             ,WaveState waveState
             ,IPlayerAntiCommentParamData playerAntiCommentParamData
@@ -44,7 +42,6 @@ namespace Daipan.Player.Scripts
             _comboCounter = comboCounter;
             _enemyCluster = enemyCluster;
             _commentSpawner = commentSpawner;
-            _enemyTotemOnAttack = enemyTotemOnAttack;
             _enemySpecialOnAttack = enemySpecialOnAttack;
             _waveState = waveState;
             _playerAntiCommentParamData = playerAntiCommentParamData;
@@ -60,7 +57,7 @@ namespace Daipan.Player.Scripts
             effect.OnHit += (sender, args) =>
             {
                 Debug.Log($"OnHit");
-                AttackEnemy(_playerParamDataContainer, playerViewMonos, playerColor, args,_comboCounter, _enemyTotemOnAttack,_enemySpecialOnAttack ,_totemOnAttack2,_totemOnAttack3 );
+                AttackEnemy(_playerParamDataContainer, playerViewMonos, playerColor, args,_comboCounter, _enemySpecialOnAttack ,_totemOnAttack2,_totemOnAttack3 );
                 SpawnAntiComment(args, _commentSpawner, _playerAntiCommentParamData,_waveState);
             };
             return effect;
@@ -79,7 +76,6 @@ namespace Daipan.Player.Scripts
             , PlayerColor playerColor
             , OnHitEventArgs args
             , ComboCounter comboCounter
-            , EnemyTotemOnAttack totemOnAttack
             , EnemySpecialOnAttack enemySpecialOnAttack
             , EnemyTotemOnAttackNew enemyTotemOnAttackNew2
             , EnemyTotemOnAttackNew enemyTotemOnAttackNew3
@@ -94,16 +90,16 @@ namespace Daipan.Player.Scripts
                 switch (args.EnemyMono.EnemyEnum)
                 {
                     case EnemyEnum.Totem2:
-                        enemyTotemOnAttackNew2.OnAttacked(args.EnemyMono.Hp, playerParamData);
+                        enemyTotemOnAttackNew2.OnAttacked(args.EnemyMono, playerParamData);
                         break;
                     case EnemyEnum.Totem3:
-                        enemyTotemOnAttackNew3.OnAttacked(args.EnemyMono.Hp, playerParamData);
+                        enemyTotemOnAttackNew3.OnAttacked(args.EnemyMono, playerParamData);
                         break;
                     case EnemyEnum.Special:
-                        enemySpecialOnAttack.OnAttacked(args.EnemyMono.Hp,args.EnemyMono.EnemyEnum, playerParamData);
+                        enemySpecialOnAttack.OnAttacked(args.EnemyMono,args.EnemyMono.EnemyEnum, playerParamData);
                         break;
                     default:
-                        PlayerAttackModule.Attack(args.EnemyMono.Hp, playerParamData);
+                        PlayerAttackModule.Attack(args.EnemyMono, playerParamData);
                         break;
                 }
                 var afterHp = args.EnemyMono.Hp.Value;

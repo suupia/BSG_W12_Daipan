@@ -36,10 +36,12 @@ namespace Daipan.Enemy.Scripts
             var enemyParamData = _enemyParamContainer.GetEnemyParamData(enemyEnum);
 
             enemyMono.SetDomain(
-                enemyEnum,
-                _enemyCluster,
-                new EnemyAttackDecider(),
-                new EnemyDie(enemyMono)
+                enemyEnum
+                ,_enemyCluster
+                ,new EnemyAttackDecider()
+                ,new EnemyDie(enemyMono)
+                ,EnemyBuilder.SwitchEnemyOnAttacked(enemyEnum)
+                
             );
             
             return enemyMono;
