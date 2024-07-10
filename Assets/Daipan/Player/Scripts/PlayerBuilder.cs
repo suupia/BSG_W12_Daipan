@@ -6,7 +6,6 @@ using Daipan.Battle.Scripts;
 using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Player.MonoScripts;
 using R3;
-using Result = GluonGui.Dialog.Result;
 
 namespace Daipan.Player.Scripts
 {

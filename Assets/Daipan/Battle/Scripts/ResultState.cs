@@ -1,7 +1,6 @@
 #nullable enable
 using System;
 using System.Collections.Generic;
-using Codice.Client.Common;
 using Daipan.Battle.scripts;
 using Daipan.Stream.Scripts;
 using R3;
