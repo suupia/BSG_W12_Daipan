@@ -1,4 +1,5 @@
 using Daipan.Battle.scripts;
+using Daipan.Battle.Scripts;
 using Daipan.Comment.MonoScripts;
 using Daipan.Comment.Scripts;
 using Daipan.Core.Interfaces;
@@ -93,12 +94,18 @@ namespace Daipan.Tutorial
     
             // InputSerial  
             DaipanScope.RegisterInputSerial(builder);
-
+            
+            // Option
+            DaipanScope.RegisterOption(builder);
+            
             // Tutorial
             builder.Register<TutorialFacilitator>(Lifetime.Scoped).AsSelf().As<IUpdate>();
             RegisterTutorialContents(builder);
             builder.Register<SpeechEventManager>(Lifetime.Scoped);
-
+            
+            builder.Register<ResultState>(Lifetime.Scoped);  // todo : PlayerBuilderで必要になった。あとで消す。
+            builder.Register<ResultViewMono>(Lifetime.Scoped);
+            
             builder.RegisterComponentInHierarchy<DownloadGaugeViewMono>();
             builder.Register<LanguageConfig>(Lifetime.Scoped);
             builder.RegisterComponentInHierarchy<LanguageSelectionPopupMono>();
