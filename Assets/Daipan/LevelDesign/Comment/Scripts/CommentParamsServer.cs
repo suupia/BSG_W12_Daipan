@@ -33,6 +33,11 @@ namespace Daipan.LevelDesign.Comment.Scripts
             return _commentParamManager.commentSpeed;
         }
         
+        public int GetMissedAttackCountForAntiComments()
+        {
+            return _commentParamManager.missedAttackCountForAntiComments;
+        }
+        
         /// <returns>0 or more</returns>
         public int GetViewerDiffCommentNumber()
         {
