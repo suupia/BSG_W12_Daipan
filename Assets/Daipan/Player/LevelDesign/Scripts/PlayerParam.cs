@@ -38,6 +38,9 @@ namespace Daipan.Player.LevelDesign.Scripts
         public int antiCommentThreshold;
         [Header("Waveごとの、異なる敵に攻撃をしてしまった時にアンチコメントが生成される確率")]
         public List<double> antiCommentPercentOnMissAttacks = null!;
+        [Header("n回攻撃をミスしたらアンチコメントが生成される")]
+        [Min(0)] public int missedAttackCountForAntiComments;
+        
     }
 
     [Serializable]
