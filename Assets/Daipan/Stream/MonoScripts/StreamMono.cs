@@ -21,8 +21,8 @@ namespace Daipan.Stream.MonoScripts
             }
 
             // なにもなくても少しづつイライラゲージが貯まる 
-            _irritatedValue.IncreaseValue(1 / 60.0f);
-
+            // _irritatedValue.IncreaseValue(1 / 60.0f);  // todo :チュートリアルの関係で一旦なし
+            
 
         }
 
