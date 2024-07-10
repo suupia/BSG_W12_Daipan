@@ -63,17 +63,10 @@ namespace Daipan.Enemy.Scripts
                 // ボスを倒したときも含む
                 _enemyLevelDesignParamData.CurrentKillAmount += 1;
                
-                IncreaseIrritatedValue(args, _irritatedValue, enemyParamData);
                 IncreaseViewerNumber(args, _viewerNumber, _enemyLevelDesignParamData);
                 SpawnComment(args, _commentSpawner);
             };
             return enemyMono;
-        }
-        
-        static void IncreaseIrritatedValue(DiedEventArgs args, IrritatedValue irritatedValue, IEnemyParamData enemyParamData)
-        {
-            if (args.EnemyEnum.IsSpecial() == true)
-                irritatedValue.IncreaseValue(enemyParamData.GetIrritationAfterKill());
         }
         
         static void IncreaseViewerNumber(DiedEventArgs args, ViewerNumber viewerNumber, EnemyLevelDesignParamData enemyLevelDesignParamData)

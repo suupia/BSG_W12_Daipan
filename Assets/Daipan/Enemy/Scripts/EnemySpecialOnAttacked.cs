@@ -19,29 +19,28 @@ namespace Daipan.Enemy.Scripts
 
         public EnemySpecialOnAttacked(
             EnemyEnum enemyEnum
-           , IrritatedValue irritatedValue 
-           , EnemyLevelDesignParamData enemyLevelDesignParamData
-            )
+            , IrritatedValue irritatedValue
+            , EnemyLevelDesignParamData enemyLevelDesignParamData
+        )
         {
             _enemyEnum = enemyEnum;
-           _irritatedValue = irritatedValue;
-           _enemyLevelDesignParamData = enemyLevelDesignParamData;
+            _irritatedValue = irritatedValue;
+            _enemyLevelDesignParamData = enemyLevelDesignParamData;
         }
 
 
         public void OnAttacked(Hp hp, IPlayerParamData playerParamData)
         {
+            hp.Decrease(playerParamData.GetAttack());
             if (!IsSameColor(_enemyEnum, playerParamData.PlayerEnum()))
             {
-                // 違う色のときはイライラゲージを増やす
-                _irritatedValue.IncreaseValue(_enemyLevelDesignParamData
-                    .GetIncreaseIrritationGaugeOnSpecialEnemyKill());
-            }
-            
-            // todo : IsSmaColorは現時点だと常にfalse。なぜなら、enemyEnumはSpecialが入っているから。
-            if (!IsSameColor(_enemyEnum, playerParamData.PlayerEnum())) Debug.Log("IsSameColor is false");
+                Debug.Log($"_enemyEnum: {_enemyEnum}, playerParamData.PlayerEnum(): {playerParamData.PlayerEnum()} IsSameColor: {IsSameColor(_enemyEnum, playerParamData.PlayerEnum())}");
 
-            hp.Decrease(playerParamData.GetAttack());
+                // 違う色のときに倒したのなら、イライラゲージを増やす
+                if (hp.Value <= 0)
+                    _irritatedValue.IncreaseValue(_enemyLevelDesignParamData
+                        .GetIncreaseIrritationGaugeOnSpecialEnemyKill());
+            }
         }
 
 
