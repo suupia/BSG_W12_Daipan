@@ -17,6 +17,11 @@ namespace Daipan.Player.Scripts
             hp.Decrease(playerParamData.GetAttack());
         }
 
+        public static void AttackNew(EnemyMono enemyMono, IPlayerParamData playerParamData)
+        {
+            enemyMono.OnAttacked(playerParamData);
+        }
+
         public static IEnumerable<EnemyEnum> GetTargetEnemyEnum(PlayerColor playerColor)
         {
             return playerColor switch

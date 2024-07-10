@@ -5,6 +5,7 @@ using Daipan.Enemy.LevelDesign.Interfaces;
 using Daipan.Enemy.LevelDesign.Scripts;
 using Daipan.Enemy.Scripts;
 using Daipan.LevelDesign.Enemy.Scripts;
+using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Player.MonoScripts;
 using Daipan.Player.Scripts;
 using DG.Tweening;
@@ -23,6 +24,7 @@ namespace Daipan.Enemy.MonoScripts
         EnemyDie _enemyDie = null!;
         IEnemySpawnPoint _enemySpawnPoint = null!;
         IEnemyParamContainer _enemyParamContainer = null!;
+        IEnemyOnAttack _enemyOnAttack = null!;
         PlayerHolder _playerHolder = null!;
         public EnemyEnum EnemyEnum { get; private set; } = EnemyEnum.None;
         public bool IsReachedPlayer { get; private set; }
@@ -97,6 +99,11 @@ namespace Daipan.Enemy.MonoScripts
             _enemyCluster.Remove(thisEnemyMono);
             _enemyDie.Died(enemyViewMono, isDaipaned);
 
+        }
+
+        public void OnAttacked(IPlayerParamData playerParamData)
+        {
+            _enemyOnAttack.OnAttacked(Hp, playerParamData);
         }
     }
 
