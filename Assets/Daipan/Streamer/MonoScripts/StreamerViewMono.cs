@@ -32,7 +32,6 @@ namespace Daipan.Streamer.MonoScripts
             _originalPosition = transform.position;
             _originalScale = _transform.localScale;
 
-
             Observable.EveryValueChanged(irritatedValue, x => x.IsFull)
                 .Subscribe(_ => AngerZoom(irritatedValue.IsFull))
                 .AddTo(this);
