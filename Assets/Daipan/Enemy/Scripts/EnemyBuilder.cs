@@ -58,7 +58,7 @@ namespace Daipan.Enemy.Scripts
             enemyMono.OnDied += (sender, args) =>
             {
                 // ボスを倒したときも含む
-                _enemyLevelDesignParamData.SetCurrentKillAmount(_enemyLevelDesignParamData.GetCurrentKillAmount() + 1);
+                _enemyLevelDesignParamData.CurrentKillAmount += 1;
                
                 IncreaseIrritatedValue(args, _irritatedValue, enemyParamData);
                 IncreaseViewerNumber(args, _viewerNumber, _enemyLevelDesignParamData);
