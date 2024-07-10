@@ -129,7 +129,7 @@ MonoBehaviour:
       lineColor: {r: 0.43529412, g: 0.34117648, b: 0.41960785, a: 1}
   - enemyEnum: 4
     enemyAttackParam:
-      attackAmount: 1
+      attackAmount: 2
       attackDelaySec: 1
       attackRange: 2
     enemyHpParam:
