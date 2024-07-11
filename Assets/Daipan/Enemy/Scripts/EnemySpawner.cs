@@ -27,7 +27,7 @@ namespace Daipan.Enemy.Scripts
         readonly IPrefabLoader<EnemyMono> _enemyMonoLoader;
         readonly EnemyCluster _enemyCluster;
         readonly IEnemySpawnPoint _enemySpawnPoint;
-        readonly IEnemyTimeLineParamContainer _enemyTimeLinePramContainer;
+        readonly IEnemyWaveParamContainer _enemyWavePramContainer;
         readonly IEnemyBuilder _enemyBuilder;
         readonly IEnemyEnumSelector _enemyEnumSelector;
         readonly List<IDisposable> _disposables = new();
@@ -39,7 +39,7 @@ namespace Daipan.Enemy.Scripts
             , IPrefabLoader<EnemyMono> enemyMonoLoader
             , EnemyCluster enemyCluster
             , IEnemySpawnPoint enemySpawnPoint
-            , IEnemyTimeLineParamContainer enemyTimeLinePramContainer
+            , IEnemyWaveParamContainer enemyWavePramContainer
             , IEnemyBuilder enemyBuilder
             , IEnemyEnumSelector enemyEnumSelector
         )
@@ -48,7 +48,7 @@ namespace Daipan.Enemy.Scripts
             _enemyMonoLoader = enemyMonoLoader;
             _enemyCluster = enemyCluster;
             _enemySpawnPoint = enemySpawnPoint;
-            _enemyTimeLinePramContainer = enemyTimeLinePramContainer;
+            _enemyWavePramContainer = enemyWavePramContainer;
             _enemyBuilder = enemyBuilder;
             _enemyEnumSelector = enemyEnumSelector;
         }
@@ -56,7 +56,7 @@ namespace Daipan.Enemy.Scripts
         void IUpdate.Update()
         {
             _timer += Time.deltaTime;
-            if (_timer > _enemyTimeLinePramContainer.GetEnemyTimeLineParamData().GetSpawnIntervalSec())
+            if (_timer > _enemyWavePramContainer.GetEnemyTimeLineParamData().GetSpawnIntervalSec())
             {
                 SpawnEnemy();
                 _timer = 0;

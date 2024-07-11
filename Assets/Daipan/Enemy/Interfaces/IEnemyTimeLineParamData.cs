@@ -3,7 +3,7 @@ namespace Daipan.Enemy.Interfaces
 {
     public interface IEnemyTimeLineParamData
     {
-        double GetStartTime();
+        int GetSpawnEnemyCount();
         double GetSpawnIntervalSec();
         double GetMoveSpeedRate();
         double GetSpawnBossPercent();

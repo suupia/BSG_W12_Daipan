@@ -6,10 +6,9 @@ using UnityEngine.Serialization;
 namespace Daipan.Enemy.LevelDesign.Scripts
 {
     [Serializable]
-    public sealed class EnemyTimeLineParam
+    public sealed class EnemyWaveParam
     {
-        [Header("この区間の開始時刻（ゲーム開始を0とする）")] [Min(0)]
-        public float startTime = 0f;
+        [Header("このWaveでスポーンさせる敵の数")] public int spawnEnemyCount = 10;
 
         [Header("エネミー生成のクールタイム")] [Min(0)] public float spawnIntervalSec = 1f;
 

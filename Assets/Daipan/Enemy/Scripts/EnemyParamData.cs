@@ -11,12 +11,12 @@ namespace Daipan.Enemy.Scripts
     public sealed class EnemyParamData : IEnemyParamData, IEnemyViewParamData
     {
         readonly EnemyParam _enemyParam;
-        readonly IEnemyTimeLineParamContainer _enemyTimeLInePramContainer;
+        readonly IEnemyWaveParamContainer _enemyTimeLInePramContainer;
 
 
         public EnemyParamData(
             EnemyParam enemyParam
-            , IEnemyTimeLineParamContainer enemyTimeLInePramContainer
+            , IEnemyWaveParamContainer enemyTimeLInePramContainer
         )
         {
             _enemyParam = enemyParam;

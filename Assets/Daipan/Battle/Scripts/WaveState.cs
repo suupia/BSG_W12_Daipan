@@ -6,15 +6,15 @@ namespace Daipan.Battle.scripts
 {
     public sealed class WaveState
     {
-        public int CurrentWave => _enemyTimeLineParamContainer.GetEnemyTimeLineParamDataIndex();
+        public int CurrentWave => _enemyWaveParamContainer.GetEnemyTimeLineParamDataIndex();
 
-        readonly IEnemyTimeLineParamContainer _enemyTimeLineParamContainer;
+        readonly IEnemyWaveParamContainer _enemyWaveParamContainer;
         
         public WaveState(
-            IEnemyTimeLineParamContainer enemyTimeLineParamContainer
+            IEnemyWaveParamContainer enemyWaveParamContainer
             )
         {
-            _enemyTimeLineParamContainer = enemyTimeLineParamContainer;
+            _enemyWaveParamContainer = enemyWaveParamContainer;
         }
     }
 }

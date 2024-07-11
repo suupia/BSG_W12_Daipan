@@ -4,9 +4,9 @@ using Daipan.Stream.Scripts;
 
 namespace Daipan.Enemy.Interfaces
 {
-    public interface IEnemyTimeLineParamContainer
+    public interface IEnemyWaveParamContainer
     {
-        EnemyTimeLineParamData GetEnemyTimeLineParamData();
+        EnemyWaveParamData GetEnemyTimeLineParamData();
         int GetEnemyTimeLineParamDataIndex();
     }
 }

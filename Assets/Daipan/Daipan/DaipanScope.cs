@@ -164,7 +164,7 @@ namespace Daipan.Daipan
             builder.RegisterInstance(enemyParamsManager);
             builder.RegisterInstance(enemyParamsManager.enemyLevelDesignParam);
             builder.Register<EnemySpawnPoint>(Lifetime.Scoped).As<IEnemySpawnPoint>();
-            builder.Register<EnemyTimeLineParamContainer>(Lifetime.Scoped).As<IEnemyTimeLineParamContainer>();
+            builder.Register<EnemyWaveParamContainer>(Lifetime.Scoped).As<IEnemyWaveParamContainer>();
             builder.Register<EnemyParamDataContainer>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.RegisterInstance(new EnemyLevelDesignParamData(enemyParamsManager.enemyLevelDesignParam));
             builder.Register<EnemyOnAttackedBuilder>(Lifetime.Transient);

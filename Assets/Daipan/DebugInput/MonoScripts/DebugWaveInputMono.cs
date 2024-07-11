@@ -58,14 +58,14 @@ namespace Daipan.DebugInput.MonoScripts
 
         static void SetTime(StreamTimer streamTimer, EnemyParamsManager enemyParamsManager, int index)
         {
-            if (index < 0 || index >= enemyParamsManager.enemyTimeLineParams.Count)
-            {
-                Debug.LogWarning($" index is out of range. index: {index}");
-                return;
-            }
-
-            Debug.Log($"SetTime index: {index}");
-            streamTimer.SetTime(enemyParamsManager.enemyTimeLineParams[index].startTime);
+            // if (index < 0 || index >= enemyParamsManager.enemyTimeLineParams.Count)
+            // {
+            //     Debug.LogWarning($" index is out of range. index: {index}");
+            //     return;
+            // }
+            //
+            // Debug.Log($"SetTime index: {index}");
+            // streamTimer.SetTime(enemyParamsManager.enemyTimeLineParams[index].startTime);
         }
 
         static void SetNearLastTime(StreamTimer streamTimer, StreamData streamData)
