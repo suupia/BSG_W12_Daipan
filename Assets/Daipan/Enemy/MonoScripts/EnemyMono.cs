@@ -15,7 +15,7 @@ using VContainer;
 
 namespace Daipan.Enemy.MonoScripts
 {
-    public sealed class EnemyMono : MonoBehaviour , IHighlightable
+    public sealed class EnemyMono : AbstractEnemyMono , IHighlightable , IEnemyMonoDie
     {
         public AbstractEnemyViewMono? EnemyViewMono => enemyViewMono;
         [SerializeField] AbstractEnemyViewMono? enemyViewMono;
@@ -99,13 +99,13 @@ namespace Daipan.Enemy.MonoScripts
             remove => _enemyDie.OnDied -= value;
         }
 
-        public void Highlight(bool isHighlighted)
+        public override void Highlight(bool isHighlighted)
         {
             EnemyViewMono?.Highlight(isHighlighted);
         }
-        public void Die(EnemyMono thisEnemyMono, bool isDaipaned = false)
+        public override void Die(AbstractEnemyMono enemyMono, bool isDaipaned = false)
         {
-            _enemyCluster.Remove(thisEnemyMono);
+            _enemyCluster.Remove(enemyMono);
             _enemyDie.Died(enemyViewMono, isDaipaned);
         }
 

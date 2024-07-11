@@ -13,21 +13,21 @@ namespace Daipan.Enemy.Scripts
 {
     public sealed class EnemyCluster
     {
-        readonly List<EnemyMono?> _enemies = new();
-        readonly Queue<EnemyMono?> _reachedPlayer = new();
+        readonly List<AbstractEnemyMono?> _enemies = new();
+        readonly Queue<AbstractEnemyMono?> _reachedPlayer = new();
 
-        public void Add(EnemyMono enemy)
+        public void Add(AbstractEnemyMono enemy)
         {
             _enemies.Add(enemy);
         }
 
-        public void Remove(EnemyMono enemy)
+        public void Remove(AbstractEnemyMono enemy)
         {
             // _enemiesリストからenemyを削除
             _enemies.Remove(enemy);
 
             // _reachedPlayerキューからenemyを削除
-            Queue<EnemyMono?> newQueue = new Queue<EnemyMono?>();
+            Queue<AbstractEnemyMono?> newQueue = new Queue<AbstractEnemyMono?>();
             while (_reachedPlayer.Count > 0)
             {
                 var dequeuedEnemy = _reachedPlayer.Dequeue();
@@ -45,7 +45,7 @@ namespace Daipan.Enemy.Scripts
         }
 
         
-        public EnemyMono? NearestEnemy(Vector3 position)
+        public AbstractEnemyMono? NearestEnemy(Vector3 position)
         {
              var orderedEnemies = CalcOrderedEnemy( _enemies, _reachedPlayer, position);
              return orderedEnemies.FirstOrDefault();
@@ -74,9 +74,9 @@ namespace Daipan.Enemy.Scripts
             }
         }
 
-        static Queue<EnemyMono?> UpdateReachedPlayer(
-            List<EnemyMono?> enemies
-            ,Queue<EnemyMono?> reachedPlayer
+        static Queue<AbstractEnemyMono?> UpdateReachedPlayer(
+            List<AbstractEnemyMono?> enemies
+            ,Queue<AbstractEnemyMono?> reachedPlayer
             )
         {
             foreach (var enemy in enemies)
@@ -88,9 +88,9 @@ namespace Daipan.Enemy.Scripts
             return reachedPlayer;
         }
 
-        static List<EnemyMono?> CalcOrderedEnemy(
-            List<EnemyMono?> enemies
-            ,Queue<EnemyMono?> reachedPlayer
+        static List<AbstractEnemyMono?> CalcOrderedEnemy(
+            List<AbstractEnemyMono?> enemies
+            ,Queue<AbstractEnemyMono?> reachedPlayer
             ,Vector3 position
             )
         {
@@ -98,14 +98,14 @@ namespace Daipan.Enemy.Scripts
             var newReachedPlayer = UpdateReachedPlayer(enemies, reachedPlayer);
             
             // reachedPlayerキューをリストに変換
-            List<EnemyMono?> orderedEnemies = newReachedPlayer.ToList();
+            List<AbstractEnemyMono?> orderedEnemies = newReachedPlayer.ToList();
 
             // enemiesリストをソートし、orderedEnemiesリストに追加
             orderedEnemies.AddRange(enemies.OrderBy(e => Distance(e, position)));
             
             return orderedEnemies;
         }
-        static float Distance(EnemyMono? enemyMono, Vector3 position) => enemyMono == null ? float.MaxValue : (position - enemyMono.transform.position).sqrMagnitude;
+        static float Distance(AbstractEnemyMono? enemyMono, Vector3 position) => enemyMono == null ? float.MaxValue : (position - enemyMono.transform.position).sqrMagnitude;
         
     }
 }

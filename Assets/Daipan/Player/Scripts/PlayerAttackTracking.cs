@@ -41,7 +41,8 @@ namespace Daipan.Player.Scripts
             }
         
             var enemyMono = _getNearestEnemyMono();
-            enemyMono = PlayerAttackModule.IsInScreenEnemy(enemyMono) ? enemyMono : null;
+            if (enemyMono != null && PlayerAttackModule.IsInStreamScreen(enemyMono.transform.position))
+                enemyMono = null; 
         
             Direction = enemyMono != null ? (enemyMono.transform.position - _playerAttackEffectMono.transform.position).normalized : Direction;
             _playerAttackEffectMono.transform.position += Direction * (float)(Speed * Time.deltaTime);

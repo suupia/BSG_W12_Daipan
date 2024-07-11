@@ -8,5 +8,7 @@ namespace Daipan.Enemy.Interfaces
         public abstract void Die(AbstractEnemyMono enemyMono, bool isDaipaned = false);
 
         public abstract void Highlight(bool isHighlighted);
+        public bool IsReachedPlayer { get; protected set; }
     }
+    
 }
