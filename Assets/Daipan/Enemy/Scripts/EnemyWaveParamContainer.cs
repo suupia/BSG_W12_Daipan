@@ -41,7 +41,7 @@ namespace Daipan.Enemy.Scripts
             // [Precondition]
             if (enemyParamsManager.enemyWaveParams.Count == 0)
             {
-                Debug.LogWarning("EnemyTimeLineParams.Count is 0");
+                Debug.LogWarning("EnemyWaveParams.Count is 0");
                 enemyParamsManager.enemyWaveParams.Add(new EnemyWaveParam());
             }
 
