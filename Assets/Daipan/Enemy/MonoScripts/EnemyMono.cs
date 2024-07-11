@@ -17,7 +17,7 @@ namespace Daipan.Enemy.MonoScripts
 {
     public sealed class EnemyMono : MonoBehaviour
     {
-        public AbstractEnemyViewMono?  EnemyViewMono => enemyViewMono;
+        public AbstractEnemyViewMono? EnemyViewMono => enemyViewMono;
         [SerializeField] AbstractEnemyViewMono? enemyViewMono;
         EnemyCluster _enemyCluster = null!;
         EnemyAttackDecider _enemyAttackDecider = null!;
@@ -38,14 +38,15 @@ namespace Daipan.Enemy.MonoScripts
                 _hp = value;
                 if (_hp.Value <= 0)
                 {
-                    Die(this, isDaipaned:false);
+                    Die(this, isDaipaned: false);
                 }
             }
         }
 
         void Update()
         {
-            _playerHolder.PlayerMono.Hp = _enemyAttackDecider.AttackUpdate(this,_enemyParamContainer.GetEnemyParamData(EnemyEnum), _playerHolder.PlayerMono, enemyViewMono);
+            _playerHolder.PlayerMono.Hp = _enemyAttackDecider.AttackUpdate(this,
+                _enemyParamContainer.GetEnemyParamData(EnemyEnum), _playerHolder.PlayerMono, enemyViewMono);
 
             // 攻撃範囲よりプレイヤーとの距離が大きいときだけ動く
             if (transform.position.x - _playerHolder.PlayerMono.transform.position.x >=
@@ -61,10 +62,9 @@ namespace Daipan.Enemy.MonoScripts
             }
 
             if (transform.position.x < _enemySpawnPoint.GetEnemyDespawnedPoint().x)
-               Die(this,isDaipaned:false);
+                Die(this, isDaipaned: false);
 
             enemyViewMono?.SetHpGauge(Hp.Value, _enemyParamContainer.GetEnemyParamData(EnemyEnum).GetCurrentHp());
-            
         }
 
         [Inject]
@@ -81,9 +81,9 @@ namespace Daipan.Enemy.MonoScripts
 
         public void SetDomain(
             EnemyEnum enemyEnum
-            ,EnemyCluster enemyCluster
-            ,EnemyAttackDecider enemyAttackDecider
-            ,EnemyDie enemyDie
+            , EnemyCluster enemyCluster
+            , EnemyAttackDecider enemyAttackDecider
+            , EnemyDie enemyDie
             , IEnemyOnAttacked enemyOnAttacked
         )
         {
@@ -94,8 +94,8 @@ namespace Daipan.Enemy.MonoScripts
             _enemyOnAttacked = enemyOnAttacked;
             enemyViewMono?.SetDomain(_enemyParamContainer.GetEnemyViewParamData(EnemyEnum));
             Hp = new Hp(_enemyParamContainer.GetEnemyParamData(EnemyEnum).GetMaxHp());
-            
         }
+
         public event EventHandler<DiedEventArgs>? OnDied
         {
             add => _enemyDie.OnDied += value;
@@ -106,7 +106,6 @@ namespace Daipan.Enemy.MonoScripts
         {
             _enemyCluster.Remove(thisEnemyMono);
             _enemyDie.Died(enemyViewMono, isDaipaned);
-
         }
 
         public void OnAttacked(IPlayerParamData playerParamData)

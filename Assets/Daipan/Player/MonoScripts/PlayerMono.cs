@@ -38,17 +38,15 @@ namespace Daipan.Player.MonoScripts
         public void Initialize(
              IPlayerHpParamData playerHpParamData
             , IPlayerInput playerInput
-            , IPlayerOnDamagedRegistrar playerOnDamagedRegistrar
+            , IPlayerOnAttacked playerOnAttacked
         )
         {
             _playerHpParamData = playerHpParamData;
-
-            EnemyAttackModule.AttackEvent += (sender, args) =>
-            {
-                playerOnDamagedRegistrar.OnPlayerDamagedEvent(args, playerViewMonos);
-            };
             playerInput.SetPlayerMono(this, playerViewMonos);
             _playerInput = playerInput;
+            
+            playerOnAttacked.SetPlayerViews(playerViewMonos);
+            _playerOnAttacked = playerOnAttacked;
         }
 
         public void OnAttacked(IEnemyParamData enemyParamData)
