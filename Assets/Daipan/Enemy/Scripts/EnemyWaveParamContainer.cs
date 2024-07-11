@@ -1,6 +1,7 @@
 #nullable enable
 using System.Collections.Generic;
 using System.Linq;
+using Daipan.Battle.scripts;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.LevelDesign.Scripts;
 using Daipan.Enemy.Scripts;
@@ -14,32 +15,25 @@ namespace Daipan.Enemy.Scripts
     public sealed class EnemyWaveParamContainer : IEnemyWaveParamContainer
     {
         readonly IList<EnemyWaveParamData> _enemyWaveParamDatas;
-        readonly StreamTimer _streamTimer;
+        readonly WaveState _waveState;
         [Inject]
         public EnemyWaveParamContainer(
             EnemyParamsManager enemyParamsManager,
-            StreamTimer streamTimer)
+            WaveState waveState
+            )
         {
             _enemyWaveParamDatas = CreateEnemyTimeLineParamData(enemyParamsManager);
-            _streamTimer = streamTimer;
+            _waveState = waveState; 
         }
 
         public EnemyWaveParamData GetEnemyWaveParamData()
         {
-            return GetEnemyWaveParamData(_streamTimer, _enemyWaveParamDatas).data; 
+            return GetEnemyWaveParamData(_waveState, _enemyWaveParamDatas);
         }
         
-        public int GetEnemyTimeLineParamDataIndex()
+        static EnemyWaveParamData GetEnemyWaveParamData(WaveState waveState , IList<EnemyWaveParamData> enemyWaveParamDatas)
         {
-            return GetEnemyWaveParamData(_streamTimer, _enemyWaveParamDatas).index;
-        }
-        
-        static (EnemyWaveParamData data, int index) GetEnemyWaveParamData( , IList<EnemyWaveParamData> enemyTimeLineParamDatas)
-        {
-            return enemyTimeLineParamDatas
-                .Select((e, i) =>  (e, i))
-                .Where(e => e.e.GetStartTime() <= streamTimer.CurrentTime)
-                .OrderByDescending(e => e.e.GetStartTime()).First();
+            return enemyWaveParamDatas[waveState.CurrentWave]; 
         } 
 
         static List<EnemyWaveParamData> CreateEnemyTimeLineParamData(EnemyParamsManager enemyParamsManager)
@@ -50,7 +44,6 @@ namespace Daipan.Enemy.Scripts
                 Debug.LogWarning("EnemyTimeLineParams.Count is 0");
                 enemyParamsManager.enemyTimeLineParams.Add(new EnemyWaveParam());
             }
-
 
             var enemyTimeLineParams = new List<EnemyWaveParamData>();
             foreach (var enemyTimeLineParam in enemyParamsManager.enemyTimeLineParams)

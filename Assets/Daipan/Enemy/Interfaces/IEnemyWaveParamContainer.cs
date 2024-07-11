@@ -7,6 +7,5 @@ namespace Daipan.Enemy.Interfaces
     public interface IEnemyWaveParamContainer
     {
         EnemyWaveParamData GetEnemyWaveParamData();
-        int GetEnemyTimeLineParamDataIndex();
     }
 }
