@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Daipan.Core.Interfaces;
 using Daipan.LevelDesign.Enemy.Scripts;
+using Daipan.Player.Interfaces;
 using Daipan.Player.MonoScripts;
 using Daipan.Stream.Scripts.Utility;
 using R3;
@@ -19,7 +20,7 @@ namespace Daipan.Player.Scripts
         readonly PlayerHolder _playerHolder;
         readonly PlayerSpawnPointData _playerSpawnPointData;
         readonly TowerParamsConfig _towerParamsConfig;
-        readonly PlayerBuilder _playerBuilder;
+        readonly IPlayerBuilder _playerBuilder;
 
         [Inject]
         public PlayerSpawner(
@@ -28,7 +29,7 @@ namespace Daipan.Player.Scripts
             ,PlayerHolder playerHolder
             ,PlayerSpawnPointData playerSpawnPointData
             ,TowerParamsConfig towerParamsConfig
-            , PlayerBuilder playerBuilder
+            , IPlayerBuilder playerBuilder
             )
         {
             _container = container;

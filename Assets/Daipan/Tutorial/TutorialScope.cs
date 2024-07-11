@@ -66,6 +66,7 @@ namespace Daipan.Tutorial
     
             // Player
             DaipanScope.RegisterPlayer(builder, playerParamManager);
+            builder.Register<PlayerBuilderTutorial>(Lifetime.Scoped).As<IPlayerBuilder>();
             builder.Register<AttackExecutor>(Lifetime.Transient);
             builder.Register<AttackExecutorTutorial>(Lifetime.Transient).As<IAttackExecutor>(); 
             builder.Register<PlayerAttackEffectBuilderTutorial>(Lifetime.Scoped).As<IPlayerAttackEffectBuilder>();
@@ -102,9 +103,6 @@ namespace Daipan.Tutorial
             builder.Register<TutorialFacilitator>(Lifetime.Scoped).AsSelf().As<IUpdate>();
             RegisterTutorialContents(builder);
             builder.Register<SpeechEventManager>(Lifetime.Scoped);
-            
-            builder.Register<ResultState>(Lifetime.Scoped);  // todo : PlayerBuilderで必要になった。あとで消す。
-            builder.Register<ResultViewMono>(Lifetime.Scoped);
             
             builder.RegisterComponentInHierarchy<DownloadGaugeViewMono>();
             builder.Register<LanguageConfig>(Lifetime.Scoped);

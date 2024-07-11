@@ -113,7 +113,6 @@ namespace Daipan.Daipan
             builder.Register<PlayerAttackedCounter>(Lifetime.Scoped);
             builder.Register<DaipanExecutor>(Lifetime.Scoped);
             builder.Register<IStart, PlayerSpawner>(Lifetime.Scoped);
-            builder.Register<PlayerBuilder>(Lifetime.Scoped);
             // Attack
             builder.Register<PlayerAttackEffectPrefabLoader>(Lifetime.Scoped)
                 .As<IPrefabLoader<PlayerAttackEffectMono>>();
@@ -237,12 +236,13 @@ namespace Daipan.Daipan
 
             // Player
             RegisterPlayer(builder, playerParamManager);
+            builder.Register<PlayerBuilder>(Lifetime.Scoped).As<IPlayerBuilder>();
             builder.Register<AttackExecutor>(Lifetime.Transient).As<IAttackExecutor>();
             builder.Register<PlayerAttackEffectBuilder>(Lifetime.Scoped).As<IPlayerAttackEffectBuilder>();
             builder.Register<PlayerInput>(Lifetime.Transient).As<IPlayerInput>();
             builder.Register<PlayerOnDamagedRegistrar>(Lifetime.Transient).As<IPlayerOnDamagedRegistrar>();
             builder.Register<PlayerMissedAttackCounter>(Lifetime.Transient);
-            
+
             // Combo
             RegisterCombo(builder, comboParamManager);
 
