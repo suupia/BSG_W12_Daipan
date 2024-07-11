@@ -15,17 +15,27 @@ namespace Daipan.Enemy.Scripts
         /// <summary>
         /// Please call this method in Update method of MonoBehaviour
         /// </summary>
-        public void AttackUpdate(EnemyMono enemyMono, IEnemyParamData enemyParamData, PlayerMono playerMono, AbstractEnemyViewMono? enemyViewMono)
+        public void AttackUpdate(
+            EnemyMono enemyMono
+            , AbstractEnemyViewMono? enemyViewMono
+            , IEnemyParamData enemyParamData
+            , PlayerMono playerMono
+            )
         {
             Timer += Time.deltaTime;
             if (Timer >= enemyParamData.GetAttackDelayDec())
             {
                 Timer = 0;
-                Attack(enemyMono, enemyParamData,  playerMono, enemyViewMono);
+                Attack(enemyMono,enemyViewMono,enemyParamData, playerMono);
             }
         }
 
-        static void Attack(EnemyMono enemyMono, IEnemyParamData enemyParamData, PlayerMono playerMono, AbstractEnemyViewMono? enemyViewMono)
+        static void Attack(
+            EnemyMono enemyMono
+            , AbstractEnemyViewMono? enemyViewMono
+            , IEnemyParamData enemyParamData
+            , PlayerMono playerMono
+            )
         {
             if (!CanAttack(enemyMono,enemyParamData, playerMono)) return;
             if (enemyViewMono != null) enemyViewMono.Attack();
