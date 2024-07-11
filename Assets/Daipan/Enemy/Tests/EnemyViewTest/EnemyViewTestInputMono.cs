@@ -24,7 +24,7 @@ public sealed class EnemyViewTestInputMono : MonoBehaviour
     
     void Start()
     {
-       enemyViewMono.SetDomain(new EnemyViewParamRed());
+       enemyViewMono.SetDomain(new EnemyViewParamTotem3());
        enemyBoss1ViewMono.SetDomain(new EnemyBossViewParam());
        enemyBoss2ViewMono.SetDomain(new EnemyBossViewParam());
        enemyBoss3ViewMono.SetDomain(new EnemyBossViewParam());
@@ -103,6 +103,15 @@ public sealed class EnemyViewTestInputMono : MonoBehaviour
     class EnemyBossViewParam : IEnemyViewParamData
     {
         public EnemyEnum GetEnemyEnum() => EnemyEnum.RedBoss;
+        public Color GetBodyColor() => Color.red;
+        public Color GetEyeColor() => new(226f / 255f, 248f / 255f, 227f / 255f);
+        public Color GetEyeBallColor() => Color.red;
+        public Color GetLineColor() => new(111f / 255f, 87f / 255f, 107f / 255f);
+    }
+    
+    class EnemyViewParamTotem3 : IEnemyViewParamData
+    {
+        public EnemyEnum GetEnemyEnum() => EnemyEnum.Totem3;
         public Color GetBodyColor() => Color.red;
         public Color GetEyeColor() => new(226f / 255f, 248f / 255f, 227f / 255f);
         public Color GetEyeBallColor() => Color.red;
