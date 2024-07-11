@@ -36,7 +36,7 @@ namespace Daipan.Enemy.Scripts
         public int GetCurrentHp() => _enemyParam.enemyHpParam.hpAmount;
 
         // Move
-        public double GetMoveSpeedPerSec() => _enemyParam.enemyMoveParam.moveSpeedPerSec * _enemyTimeLInePramContainer.GetEnemyTimeLineParamData().GetMoveSpeedRate();
+        public double GetMoveSpeedPerSec() => _enemyParam.enemyMoveParam.moveSpeedPerSec * _enemyTimeLInePramContainer.GetEnemyWaveParamData().GetMoveSpeedRate();
 
         // Spawn
         public double GetSpawnRatio() => _enemyParam.enemySpawnParam.spawnRatio;

@@ -46,7 +46,7 @@ namespace Daipan.Enemy.Scripts
         static EnemyWaveParamData GetEnemyTimeLineParam(
             IEnemyWaveParamContainer enemyWaveParamDataContainer)
         {
-            return enemyWaveParamDataContainer.GetEnemyTimeLineParamData();
+            return enemyWaveParamDataContainer.GetEnemyWaveParamData();
         }
     }
 }

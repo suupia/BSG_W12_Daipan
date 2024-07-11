@@ -46,7 +46,7 @@ namespace Daipan.Enemy.Scripts
         )
         {
             // Bossが出現する条件
-            if (Random.value < enemyWaveParamContainer.GetEnemyTimeLineParamData().GetSpawnBossPercent() / 100.0)
+            if (Random.value < enemyWaveParamContainer.GetEnemyWaveParamData().GetSpawnBossPercent() / 100.0)
                 return true;
 
             return false;
@@ -55,7 +55,7 @@ namespace Daipan.Enemy.Scripts
         static bool IsSpawnSpecial(IEnemyWaveParamContainer enemyWaveParamContainer)
         {
             // Specialが出現する条件
-            if (Random.value < enemyWaveParamContainer.GetEnemyTimeLineParamData().GetSpawnSpecialPercent() /
+            if (Random.value < enemyWaveParamContainer.GetEnemyWaveParamData().GetSpawnSpecialPercent() /
                 100.0) return true;
             return false;
         }
@@ -63,7 +63,7 @@ namespace Daipan.Enemy.Scripts
         static bool IsSpawnTotem(IEnemyWaveParamContainer enemyWaveParamContainer)
         {
             // Totemが出現する条件
-            if (Random.value < enemyWaveParamContainer.GetEnemyTimeLineParamData().GetSpawnTotemPercent() / 100.0)
+            if (Random.value < enemyWaveParamContainer.GetEnemyWaveParamData().GetSpawnTotemPercent() / 100.0)
                 return true;
             return false;
         }

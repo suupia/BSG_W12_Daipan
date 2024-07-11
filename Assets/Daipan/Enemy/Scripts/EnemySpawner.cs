@@ -56,7 +56,7 @@ namespace Daipan.Enemy.Scripts
         void IUpdate.Update()
         {
             _timer += Time.deltaTime;
-            if (_timer > _enemyWavePramContainer.GetEnemyTimeLineParamData().GetSpawnIntervalSec())
+            if (_timer > _enemyWavePramContainer.GetEnemyWaveParamData().GetSpawnIntervalSec())
             {
                 SpawnEnemy();
                 _timer = 0;

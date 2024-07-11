@@ -24,17 +24,17 @@ namespace Daipan.Enemy.Scripts
             _streamTimer = streamTimer;
         }
 
-        public EnemyWaveParamData GetEnemyTimeLineParamData()
+        public EnemyWaveParamData GetEnemyWaveParamData()
         {
-            return GetEnemyTimeLineParamData(_streamTimer, _enemyWaveParamDatas).data; 
+            return GetEnemyWaveParamData(_streamTimer, _enemyWaveParamDatas).data; 
         }
         
         public int GetEnemyTimeLineParamDataIndex()
         {
-            return GetEnemyTimeLineParamData(_streamTimer, _enemyWaveParamDatas).index;
+            return GetEnemyWaveParamData(_streamTimer, _enemyWaveParamDatas).index;
         }
         
-        static (EnemyWaveParamData data, int index) GetEnemyTimeLineParamData(StreamTimer streamTimer, IList<EnemyWaveParamData> enemyTimeLineParamDatas)
+        static (EnemyWaveParamData data, int index) GetEnemyWaveParamData( , IList<EnemyWaveParamData> enemyTimeLineParamDatas)
         {
             return enemyTimeLineParamDatas
                 .Select((e, i) =>  (e, i))
