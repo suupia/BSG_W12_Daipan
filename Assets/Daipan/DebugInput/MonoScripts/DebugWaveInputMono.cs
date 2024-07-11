@@ -11,15 +11,21 @@ namespace Daipan.DebugInput.MonoScripts
     public sealed class DebugWaveInputMono : MonoBehaviour
     {
         StreamTimer _streamTimer = null!;
-        EnemyParamsManager _enemyParamsManager = null!; 
-       
+        StreamData _streamData = null!;
+        EnemyParamsManager _enemyParamsManager = null!;
+
         [Inject]
-        public void Initialize(StreamTimer streamTimer, EnemyParamsManager enemyParamsManager)
+        public void Initialize(
+            StreamTimer streamTimer
+            , StreamData streamData
+            , EnemyParamsManager enemyParamsManager
+        )
         {
             _streamTimer = streamTimer;
+            _streamData = streamData;
             _enemyParamsManager = enemyParamsManager;
-        } 
-        
+        }
+
         void Update()
         {
 #if UNITY_EDITOR
@@ -27,25 +33,29 @@ namespace Daipan.DebugInput.MonoScripts
             {
                 SetTime(_streamTimer, _enemyParamsManager, 0);
             }
+
             if (Input.GetKey(KeyCode.Alpha2))
             {
                 SetTime(_streamTimer, _enemyParamsManager, 1);
             }
+
             if (Input.GetKey(KeyCode.Alpha3))
             {
                 SetTime(_streamTimer, _enemyParamsManager, 2);
             }
+
             if (Input.GetKey(KeyCode.Alpha4))
             {
-                SetTime(_streamTimer, _enemyParamsManager, 3);
+                SetNearLastTime(_streamTimer, _streamData);
             }
+
             if (Input.GetKey(KeyCode.Alpha5))
             {
                 SetTime(_streamTimer, _enemyParamsManager, 4);
             }
 #endif
         }
-        
+
         static void SetTime(StreamTimer streamTimer, EnemyParamsManager enemyParamsManager, int index)
         {
             if (index < 0 || index >= enemyParamsManager.enemyTimeLineParams.Count)
@@ -53,9 +63,16 @@ namespace Daipan.DebugInput.MonoScripts
                 Debug.LogWarning($" index is out of range. index: {index}");
                 return;
             }
+
             Debug.Log($"SetTime index: {index}");
             streamTimer.SetTime(enemyParamsManager.enemyTimeLineParams[index].startTime);
         }
 
+        static void SetNearLastTime(StreamTimer streamTimer, StreamData streamData)
+        {
+            var nearLastTime = streamData.GetMaxTime() - 3;
+            Debug.Log($"SetNearLastTime nearLastTime: {nearLastTime}");
+            streamTimer.SetTime(nearLastTime);
+        }
     }
 }
