@@ -28,7 +28,7 @@ namespace Daipan.Enemy.Scripts
 
         // Attack
         public int GetAttackAmount() => _enemyParam.enemyAttackParam.attackAmount;
-        public double GetAttackDelayDec() => _enemyParam.enemyAttackParam.attackDelaySec;
+        public double GetAttackIntervalSec() => _enemyParam.enemyAttackParam.attackIntervalSec;
         public double GetAttackRange() => _enemyParam.enemyAttackParam.attackRange;
 
         // Hp
@@ -36,12 +36,6 @@ namespace Daipan.Enemy.Scripts
 
         // Move
         public double GetMoveSpeedPerSec() => _enemyParam.enemyMoveParam.moveSpeedPerSec * _enemyWaveParamContainer.GetEnemyWaveParamData().GetMoveSpeedRate();
-
-        // Spawn
-        public double GetSpawnRatio() => _enemyParam.enemySpawnParam.spawnRatio;
-
-        // Irritated value
-        public int GetIrritationAfterKill() => _enemyParam.enemyRewardParam.irritationAfterKill;
 
         // Colors
         public Color GetBodyColor() => _enemyParam.enemyAnimatorParam.bodyColor;

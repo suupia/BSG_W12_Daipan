@@ -10,7 +10,7 @@ namespace Daipan.Enemy.Interfaces
 
         // Attack
         int GetAttackAmount() => 0;
-        double GetAttackDelayDec() => 0;
+        double GetAttackIntervalSec() => 0;
         double GetAttackRange() => 0;
 
         // Hp
@@ -18,12 +18,6 @@ namespace Daipan.Enemy.Interfaces
 
         // Move
         double GetMoveSpeedPerSec() => 0;
-
-        // Spawn
-        double GetSpawnRatio() => 0;
-
-        // Irritated value
-        int GetIrritationAfterKill() => 0;
 
     } 
 }
