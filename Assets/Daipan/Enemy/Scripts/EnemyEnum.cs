@@ -18,6 +18,7 @@ namespace Daipan.Enemy.Scripts
         [IsSpecial(true)] SpecialYellow,
         [IsTotem(true)]Totem2,
         [IsTotem(true)]Totem3,
+        [IsFinalBoss(true)]FinalBoss,
     }
 
     public static class AnyTypesExtensions
@@ -38,6 +39,12 @@ namespace Daipan.Enemy.Scripts
         {
             var fieldInfo = self.GetType().GetField(self.ToString());
             return fieldInfo?.GetCustomAttribute<IsTotemAttribute>()?.IsTotem;
+        }
+
+        public static bool? IsFinalBoss(this EnemyEnum self)
+        {
+            var fieldInfo = self.GetType().GetField(self.ToString());
+            return fieldInfo?.GetCustomAttribute<IsFinalBossAttribute>()?.IsFinalBoss;
         }
     }
 
@@ -71,6 +78,16 @@ namespace Daipan.Enemy.Scripts
         public IsTotemAttribute(bool isTotem) : base()
         {
             IsTotem = isTotem;
+        }
+    }
+    [AttributeUsage(AttributeTargets.Field, Inherited = false, AllowMultiple = false)]
+    internal class IsFinalBossAttribute : Attribute
+    {
+        public bool IsFinalBoss { get; }
+
+        public IsFinalBossAttribute(bool isFinalBoss) : base()
+        {
+            isFinalBoss = isFinalBoss;
         }
     }
 }
