@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Daipan.Battle.scripts;
 using Daipan.Comment.Scripts;
+using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Enemy.Scripts;
 using Daipan.LevelDesign.Comment.Scripts;
@@ -57,7 +58,7 @@ namespace Daipan.Player.Scripts
         static void AttackEnemy(IPlayerParamDataContainer playerParamDataContainer
             ,List<AbstractPlayerViewMono?> playerViewMonos
             ,PlayerColor playerColor
-            ,EnemyMono? enemyMono
+            ,AbstractEnemyMono? enemyMono
             ,TutorialFacilitator tutorialFacilitator 
             )
         {

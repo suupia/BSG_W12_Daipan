@@ -27,14 +27,14 @@ namespace Daipan.Enemy.MonoScripts
         IEnemyParamContainer _enemyParamContainer = null!;
         IEnemyOnAttacked _enemyOnAttacked = null!;
         PlayerHolder _playerHolder = null!;
-        public EnemyEnum EnemyEnum { get; private set; } = EnemyEnum.None;
-        public bool IsReachedPlayer { get; private set; }
+        public override EnemyEnum EnemyEnum { get; protected set; } = EnemyEnum.None;
+        public override bool IsReachedPlayer { get; protected set; }
         Hp _hp = null!;
 
-        public Hp Hp
+        public override Hp Hp
         {
             get => _hp;
-            private set
+            protected set
             {
                 _hp = value;
                 if (_hp.Value <= 0)
@@ -109,14 +109,15 @@ namespace Daipan.Enemy.MonoScripts
             // _enemyCluster.Remove(thisEnemyMono);
             _enemyDie.Died(finalBossViewMono, isDaipaned);
         }
+
+        public override void OnAttacked(IPlayerParamData playerParamData)
+        {
+            Hp = _enemyOnAttacked.OnAttacked(Hp, playerParamData);
+        }
+
         public override void Highlight(bool isHighlighted)
         {
             finalBossViewMono?.Highlight(isHighlighted);
-        }
-
-        public void OnAttacked(IPlayerParamData playerParamData)
-        {
-            Hp = _enemyOnAttacked.OnAttacked(Hp, playerParamData);
         }
     }
 
