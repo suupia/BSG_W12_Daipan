@@ -26,7 +26,7 @@ namespace Daipan.Enemy.Scripts
         {
             if (!CanAttack(enemyMono,enemyParamData, playerMono)) return;
             if (enemyViewMono != null) enemyViewMono.Attack();
-            EnemyAttackModule.AttackNew(playerMono,enemyParamData);
+            EnemyAttackModule.Attack(playerMono,enemyParamData);
         }
         
         static bool CanAttack(EnemyMono enemyMono, IEnemyParamData enemyParamData,  PlayerMono playerMono)

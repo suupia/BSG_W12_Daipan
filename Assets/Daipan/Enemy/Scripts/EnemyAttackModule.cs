@@ -10,7 +10,7 @@ namespace Daipan.Enemy.Scripts
 {
     public static class EnemyAttackModule
     {
-        public static void AttackNew(PlayerMono playerMono, IEnemyParamData enemyParamData)
+        public static void Attack(PlayerMono playerMono, IEnemyParamData enemyParamData)
         {
             playerMono.OnAttacked(enemyParamData);
         }
