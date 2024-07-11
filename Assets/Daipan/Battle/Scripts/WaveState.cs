@@ -10,7 +10,9 @@ namespace Daipan.Battle.scripts
 
         readonly IEnemyTimeLineParamContainer _enemyTimeLineParamContainer;
         
-        public WaveState(IEnemyTimeLineParamContainer enemyTimeLineParamContainer)
+        public WaveState(
+            IEnemyTimeLineParamContainer enemyTimeLineParamContainer
+            )
         {
             _enemyTimeLineParamContainer = enemyTimeLineParamContainer;
         }
