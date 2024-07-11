@@ -3,6 +3,7 @@ using System;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.Scripts;
 using Daipan.LevelDesign.Enemy.Scripts;
+using Daipan.Stream.Scripts;
 using UnityEngine;
 
 namespace Daipan.Enemy.Scripts
@@ -10,13 +11,19 @@ namespace Daipan.Enemy.Scripts
     public sealed class EnemyParamData : IEnemyParamData, IEnemyViewParamData
     {
         readonly EnemyParam _enemyParam;
+        readonly IEnemyTimeLineParamContainer _enemyTimeLInePramContainer;
 
-        public EnemyParamData(EnemyParam enemyParam)
+
+        public EnemyParamData(
+            EnemyParam enemyParam
+            , IEnemyTimeLineParamContainer enemyTimeLInePramContainer
+        )
         {
-            _enemyParam = enemyParam ?? throw new ArgumentNullException(nameof(enemyParam));
+            _enemyParam = enemyParam;
+            _enemyTimeLInePramContainer = enemyTimeLInePramContainer;
         }
-
         // Enum
+
         public EnemyEnum GetEnemyEnum() => _enemyParam.enemyEnum;
 
         // Attack
@@ -29,7 +36,7 @@ namespace Daipan.Enemy.Scripts
         public int GetCurrentHp() => _enemyParam.enemyHpParam.hpAmount;
 
         // Move
-        public double GetMoveSpeedPerSec() => _enemyParam.enemyMoveParam.moveSpeedPerSec;
+        public double GetMoveSpeedPerSec() => _enemyParam.enemyMoveParam.moveSpeedPerSec * _enemyTimeLInePramContainer.GetEnemyTimeLineParamData().GetMoveSpeedRate();
 
         // Spawn
         public double GetSpawnRatio() => _enemyParam.enemySpawnParam.spawnRatio;

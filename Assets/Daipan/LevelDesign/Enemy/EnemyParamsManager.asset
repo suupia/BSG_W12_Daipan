@@ -15,7 +15,7 @@ MonoBehaviour:
   enemyLevelDesignParam:
     increaseViewerOnEnemyKill: 5
     increaseIrritationGaugeOnSpecialEnemyKill: 10
-    currentKillAmount: 5
+    currentKillAmount: 7
   enemyParams:
   - enemyEnum: 1
     enemyAttackParam:
@@ -266,15 +266,15 @@ MonoBehaviour:
     spawnBossPercent: 0
     spawnSpecialPercent: 0
     spawnTotemPercent: 10
-  - startTime: 30
+  - startTime: 45
     spawnIntervalSec: 1
     moveSpeedRate: 1.5
     spawnBossPercent: 10
     spawnSpecialPercent: 10
     spawnTotemPercent: 10
-  - startTime: 60
+  - startTime: 90
     spawnIntervalSec: 1
-    moveSpeedRate: 1.5
+    moveSpeedRate: 2
     spawnBossPercent: 50
     spawnSpecialPercent: 30
     spawnTotemPercent: 20
