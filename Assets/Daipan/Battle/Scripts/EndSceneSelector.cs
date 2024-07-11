@@ -18,7 +18,6 @@ namespace Daipan.Battle.scripts
         readonly EndSceneTransitionParam _endSceneTransitionParam;
         readonly ViewerNumber _viewerNumber;
         readonly DaipanExecutor _daipanExecutor;
-        readonly StreamTimer _streamTimer;
         IDisposable? _disposable;
 
         // この順番でシーン遷移の判定を行っていく
@@ -37,26 +36,13 @@ namespace Daipan.Battle.scripts
             EndSceneTransitionParam endSceneTransitionParam
             , ViewerNumber viewerNumber
             , DaipanExecutor daipanExecutor
-            , StreamTimer streamTimer
         )
         {
             _endSceneTransitionParam = endSceneTransitionParam;
             _viewerNumber = viewerNumber;
             _daipanExecutor = daipanExecutor;
-            _streamTimer = streamTimer;
-            
-            ObserveStreamTimer();
-            // 本当はPlayerのHpもここでObserveしたいが、PlayerのHpの初期化が遅いので、PlayerMonoに書いている
         }
         
-        void ObserveStreamTimer()
-        {
-             _disposable = Observable.EveryUpdate ()
-                .Subscribe (_ =>
-                {
-                    if (_streamTimer.CurrentProgressRatio >= 1) TransitToEndScene();
-                });
-        }
 
 
         public void TransitToEndScene()

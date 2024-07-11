@@ -29,27 +29,27 @@ namespace Daipan.DebugInput.MonoScripts
         void Update()
         {
 #if UNITY_EDITOR
-            if (Input.GetKey(KeyCode.Alpha1))
+            if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 SetTime(_streamTimer, _enemyParamsManager, 0);
             }
 
-            if (Input.GetKey(KeyCode.Alpha2))
+            if (Input.GetKeyDown(KeyCode.Alpha2))
             {
                 SetTime(_streamTimer, _enemyParamsManager, 1);
             }
 
-            if (Input.GetKey(KeyCode.Alpha3))
+            if (Input.GetKeyDown(KeyCode.Alpha3))
             {
                 SetTime(_streamTimer, _enemyParamsManager, 2);
             }
 
-            if (Input.GetKey(KeyCode.Alpha4))
+            if (Input.GetKeyDown(KeyCode.Alpha4))
             {
                 SetNearLastTime(_streamTimer, _streamData);
             }
 
-            if (Input.GetKey(KeyCode.Alpha5))
+            if (Input.GetKeyDown(KeyCode.Alpha5))
             {
                 SetTime(_streamTimer, _enemyParamsManager, 4);
             }
