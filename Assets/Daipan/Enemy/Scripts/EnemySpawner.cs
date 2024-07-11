@@ -38,11 +38,11 @@ namespace Daipan.Enemy.Scripts
         public EnemySpawner(
             IObjectResolver container
             , IPrefabLoader<EnemyMono> enemyMonoLoader
-            ,EnemyCluster enemyCluster
-            ,IEnemySpawnPoint enemySpawnPoint
-            ,IEnemyTimeLineParamContainer enemyTimeLInePramContainer
-            ,IEnemyBuilder enemyBuilder
-            ,IEnemyEnumSelector enemyEnumSelector
+            , EnemyCluster enemyCluster
+            , IEnemySpawnPoint enemySpawnPoint
+            , IEnemyTimeLineParamContainer enemyTimeLInePramContainer
+            , IEnemyBuilder enemyBuilder
+            , IEnemyEnumSelector enemyEnumSelector
         )
         {
             _container = container;
@@ -67,27 +67,30 @@ namespace Daipan.Enemy.Scripts
         void SpawnEnemy()
         {
             var spawnPosition = GetRandomSpawnPosition(_enemySpawnPoint);
-            var randomSpawnPosition = new Vector3 { x = spawnPosition.x, y = spawnPosition.y + Random.Range(-_spawnRandomPositionY, _spawnRandomPositionY) };
-           
+            var randomSpawnPosition = new Vector3
+            {
+                x = spawnPosition.x, y = spawnPosition.y + Random.Range(-_spawnRandomPositionY, _spawnRandomPositionY)
+            };
+
             var enemyEnum = _enemyEnumSelector.SelectEnemyEnum();
             if (enemyEnum == EnemyEnum.RedBoss)
             {
-                SpawnRedBoss(randomSpawnPosition); 
+                SpawnRedBoss(randomSpawnPosition);
             }
             else
             {
-                SpawnEnemy(randomSpawnPosition,enemyEnum); 
+                SpawnEnemy(randomSpawnPosition, enemyEnum);
             }
-           
         }
-        
+
         void SpawnEnemy(Vector3 spawnPosition, EnemyEnum enemyEnum)
         {
             var enemyMonoPrefab = _enemyMonoLoader.Load();
             var enemyMonoObject = _container.Instantiate(enemyMonoPrefab, spawnPosition, Quaternion.identity);
-            var enemyMono = _enemyBuilder.Build(enemyMonoObject,enemyEnum);
+            var enemyMono = _enemyBuilder.Build(enemyMonoObject, enemyEnum);
             _enemyCluster.Add(enemyMono);
         }
+
         static Vector3 GetRandomSpawnPosition(IEnemySpawnPoint enemySpawnPoint)
         {
             var positions = enemySpawnPoint.GetEnemySpawnedPointXs()
@@ -112,6 +115,7 @@ namespace Daipan.Enemy.Scripts
                             .Subscribe(_ => { SpawnEnemy(spawnPosition, EnemyEnum.RedBoss); }));
                     }));
         }
+
         public void Dispose()
         {
             foreach (var disposable in _disposables)
@@ -119,9 +123,10 @@ namespace Daipan.Enemy.Scripts
                 disposable.Dispose();
             }
         }
+
         ~EnemySpawner()
         {
-            Dispose(); 
+            Dispose();
         }
     }
 }
