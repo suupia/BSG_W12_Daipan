@@ -6,10 +6,10 @@ using UnityEngine.Serialization;
 namespace Daipan.Enemy.LevelDesign.Scripts
 {
     [Serializable]
-    public sealed class EnemyTimeLineParam
+    public sealed class EnemyWaveParam
     {
-        [Header("この区間の開始時刻（ゲーム開始を0とする）")] [Min(0)]
-        public float startTime = 0f;
+        [Header("このWaveでスポーンさせる敵の数")] public int spawnEnemyCount = 10;
+        [Header("Wave間のクールタイム")] public double waveIntervalSec = 5f;
 
         [Header("エネミー生成のクールタイム")] [Min(0)] public float spawnIntervalSec = 1f;
 
@@ -24,5 +24,8 @@ namespace Daipan.Enemy.LevelDesign.Scripts
         
         [Header("Totemの出現確率(0%～100%)")] [Range(0f, 100f)]
         public double spawnTotemPercent = 10f;
+        
+        [Header("FinalBossの出現確率（0%～100%）")] [Range(0f, 100f)]
+        public double spawnFinalBossPercent = 10f;
     }
 }

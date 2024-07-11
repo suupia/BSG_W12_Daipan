@@ -164,7 +164,7 @@ namespace Daipan.Daipan
             builder.RegisterInstance(enemyParamsManager);
             builder.RegisterInstance(enemyParamsManager.enemyLevelDesignParam);
             builder.Register<EnemySpawnPoint>(Lifetime.Scoped).As<IEnemySpawnPoint>();
-            builder.Register<EnemyTimeLineParamContainer>(Lifetime.Scoped).As<IEnemyTimeLineParamContainer>();
+            builder.Register<EnemyWaveParamContainer>(Lifetime.Scoped).As<IEnemyWaveParamContainer>();
             builder.Register<EnemyParamDataContainer>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.RegisterInstance(new EnemyLevelDesignParamData(enemyParamsManager.enemyLevelDesignParam));
             builder.Register<EnemyOnAttackedBuilder>(Lifetime.Transient);
@@ -251,6 +251,7 @@ namespace Daipan.Daipan
 
             // Enemy
             RegisterEnemy(builder, enemyParamsManager);
+            builder.Register<EnemySpawnerCounter>(Lifetime.Scoped).As<IUpdate>();
             builder.Register<EnemySpawner>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
             builder.Register<EnemyEnumSelector>(Lifetime.Scoped).As<IEnemyEnumSelector>();
             builder.Register<EnemyBuilder>(Lifetime.Scoped).As<IEnemyBuilder>();
@@ -264,6 +265,7 @@ namespace Daipan.Daipan
 
             // Battle
             RegisterBattle(builder);
+            builder.RegisterComponentInHierarchy<WaveTextMono>();
 
             // InputSerial  
             RegisterInputSerial(builder);

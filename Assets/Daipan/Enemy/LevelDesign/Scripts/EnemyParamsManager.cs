@@ -16,9 +16,8 @@ namespace Daipan.Enemy.LevelDesign.Scripts
         [Header("個々の敵のパラメータを設定してください。")] 
         public List<EnemyParam> enemyParams = null!;
 
-        [FormerlySerializedAs("enemyTimeLines")]
         [Header("時間による変化を設定してください。\n" +
                 "設定されてない場合はデフォルト値が使用されます。")]
-        public List<EnemyTimeLineParam> enemyTimeLineParams = null!;
+        public List<EnemyWaveParam> enemyWaveParams = null!;
     }
 }

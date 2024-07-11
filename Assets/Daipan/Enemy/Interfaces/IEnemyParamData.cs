@@ -15,7 +15,6 @@ namespace Daipan.Enemy.Interfaces
 
         // Hp
         int GetMaxHp() => 0;
-        int GetCurrentHp() => 0;
 
         // Move
         double GetMoveSpeedPerSec() => 0;

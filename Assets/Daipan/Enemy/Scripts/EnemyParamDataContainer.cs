@@ -16,10 +16,10 @@ namespace Daipan.Enemy.Scripts
         [Inject]
         public EnemyParamDataContainer(
             EnemyParamsManager enemyParamsManager
-            , IEnemyTimeLineParamContainer enemyTimeLineParamContainer
+            , IEnemyWaveParamContainer enemyWaveParamContainer
             )
         {
-            _enemyParamDatas = CreateEnemyParamData(enemyParamsManager, enemyTimeLineParamContainer);
+            _enemyParamDatas = CreateEnemyParamData(enemyParamsManager, enemyWaveParamContainer);
         }
 
         public IEnemyParamData GetEnemyParamData(EnemyEnum enemyEnum)
@@ -34,19 +34,13 @@ namespace Daipan.Enemy.Scripts
 
         static List<EnemyParamData> CreateEnemyParamData(
             EnemyParamsManager enemyParamsManager
-            , IEnemyTimeLineParamContainer enemyTimeLineParamDataContainer
+            , IEnemyWaveParamContainer enemyWaveParamDataContainer
            ) 
         {
             var enemyParams = new List<EnemyParamData>();
             foreach (var enemyParam in enemyParamsManager.enemyParams)
-                enemyParams.Add(new EnemyParamData(enemyParam, enemyTimeLineParamDataContainer));
+                enemyParams.Add(new EnemyParamData(enemyParam, enemyWaveParamDataContainer));
             return enemyParams;
-        }
-
-        static EnemyTimeLineParamData GetEnemyTimeLineParam(
-            IEnemyTimeLineParamContainer enemyTimeLineParamDataContainer)
-        {
-            return enemyTimeLineParamDataContainer.GetEnemyTimeLineParamData();
         }
     }
 }

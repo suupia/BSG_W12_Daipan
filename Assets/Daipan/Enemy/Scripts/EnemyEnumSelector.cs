@@ -16,54 +16,54 @@ namespace Daipan.Enemy.Scripts
     public class EnemyEnumSelector : IEnemyEnumSelector
     {
         readonly EnemyParamsManager _enemyParamsManager;
-        readonly IEnemyTimeLineParamContainer _enemyTimeLineParamContainer;
+        readonly IEnemyWaveParamContainer _enemyWaveParamContainer;
 
         public EnemyEnumSelector(
             EnemyParamsManager enemyParamsManager
             , EnemyLevelDesignParamData enemyLevelDesignParamData
-            , IEnemyTimeLineParamContainer enemyTimeLineParamContainer
+            , IEnemyWaveParamContainer enemyWaveParamContainer
         )
         {
             _enemyParamsManager = enemyParamsManager;
-            _enemyTimeLineParamContainer = enemyTimeLineParamContainer;
+            _enemyWaveParamContainer = enemyWaveParamContainer;
         }
 
         public EnemyEnum SelectEnemyEnum()
         {
             return
-                IsSpawnBoss( _enemyTimeLineParamContainer)
+                IsSpawnBoss( _enemyWaveParamContainer)
                     ? DecideRandomEnemyType(_enemyParamsManager, x => x.IsBoss() == true)
-                    : IsSpawnSpecial(_enemyTimeLineParamContainer)
+                    : IsSpawnSpecial(_enemyWaveParamContainer)
                         ? DecideRandomEnemyType(_enemyParamsManager, x => x.IsSpecial() == true)
-                        : IsSpawnTotem(_enemyTimeLineParamContainer)
+                        : IsSpawnTotem(_enemyWaveParamContainer)
                             ? DecideRandomEnemyType(_enemyParamsManager, x => x.IsTotem() == true)
                             : DecideRandomEnemyType(_enemyParamsManager,
                                 x => x.IsBoss() != true && x.IsSpecial() != true && x.IsTotem() != true);
         }
 
         static bool IsSpawnBoss(
-             IEnemyTimeLineParamContainer enemyTimeLineParamContainer
+             IEnemyWaveParamContainer enemyWaveParamContainer
         )
         {
             // Bossが出現する条件
-            if (Random.value < enemyTimeLineParamContainer.GetEnemyTimeLineParamData().GetSpawnBossPercent() / 100.0)
+            if (Random.value < enemyWaveParamContainer.GetEnemyWaveParamData().GetSpawnBossPercent() / 100.0)
                 return true;
 
             return false;
         }
 
-        static bool IsSpawnSpecial(IEnemyTimeLineParamContainer enemyTimeLineParamContainer)
+        static bool IsSpawnSpecial(IEnemyWaveParamContainer enemyWaveParamContainer)
         {
             // Specialが出現する条件
-            if (Random.value < enemyTimeLineParamContainer.GetEnemyTimeLineParamData().GetSpawnSpecialPercent() /
+            if (Random.value < enemyWaveParamContainer.GetEnemyWaveParamData().GetSpawnSpecialPercent() /
                 100.0) return true;
             return false;
         }
 
-        static bool IsSpawnTotem(IEnemyTimeLineParamContainer enemyTimeLineParamContainer)
+        static bool IsSpawnTotem(IEnemyWaveParamContainer enemyWaveParamContainer)
         {
             // Totemが出現する条件
-            if (Random.value < enemyTimeLineParamContainer.GetEnemyTimeLineParamData().GetSpawnTotemPercent() / 100.0)
+            if (Random.value < enemyWaveParamContainer.GetEnemyWaveParamData().GetSpawnTotemPercent() / 100.0)
                 return true;
             return false;
         }

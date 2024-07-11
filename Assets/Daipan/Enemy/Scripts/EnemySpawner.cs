@@ -21,13 +21,13 @@ using Random = UnityEngine.Random;
 
 namespace Daipan.Enemy.Scripts
 {
-    public sealed class EnemySpawner : IUpdate, IDisposable
+    public sealed class EnemySpawner : IDisposable
     {
         readonly IObjectResolver _container;
         readonly IPrefabLoader<EnemyMono> _enemyMonoLoader;
         readonly EnemyCluster _enemyCluster;
         readonly IEnemySpawnPoint _enemySpawnPoint;
-        readonly IEnemyTimeLineParamContainer _enemyTimeLinePramContainer;
+        readonly IEnemyWaveParamContainer _enemyWavePramContainer;
         readonly IEnemyBuilder _enemyBuilder;
         readonly IEnemyEnumSelector _enemyEnumSelector;
         readonly List<IDisposable> _disposables = new();
@@ -39,7 +39,7 @@ namespace Daipan.Enemy.Scripts
             , IPrefabLoader<EnemyMono> enemyMonoLoader
             , EnemyCluster enemyCluster
             , IEnemySpawnPoint enemySpawnPoint
-            , IEnemyTimeLineParamContainer enemyTimeLinePramContainer
+            , IEnemyWaveParamContainer enemyWavePramContainer
             , IEnemyBuilder enemyBuilder
             , IEnemyEnumSelector enemyEnumSelector
         )
@@ -48,22 +48,12 @@ namespace Daipan.Enemy.Scripts
             _enemyMonoLoader = enemyMonoLoader;
             _enemyCluster = enemyCluster;
             _enemySpawnPoint = enemySpawnPoint;
-            _enemyTimeLinePramContainer = enemyTimeLinePramContainer;
+            _enemyWavePramContainer = enemyWavePramContainer;
             _enemyBuilder = enemyBuilder;
             _enemyEnumSelector = enemyEnumSelector;
         }
 
-        void IUpdate.Update()
-        {
-            _timer += Time.deltaTime;
-            if (_timer > _enemyTimeLinePramContainer.GetEnemyTimeLineParamData().GetSpawnIntervalSec())
-            {
-                SpawnEnemy();
-                _timer = 0;
-            }
-        }
-
-        void SpawnEnemy()
+        public void SpawnEnemy()
         {
             const float spawnRandomPositionY = 0.2f;
             var spawnPosition = GetRandomSpawnPosition(_enemySpawnPoint);
