@@ -12,22 +12,21 @@ namespace Daipan.Enemy.Scripts
     {
         float Timer { get; set; }
 
-        public Hp AttackUpdate(EnemyMono enemyMono, IEnemyParamData enemyParamData, PlayerMono playerMono, AbstractEnemyViewMono? enemyViewMono)
+        public void AttackUpdate(EnemyMono enemyMono, IEnemyParamData enemyParamData, PlayerMono playerMono, AbstractEnemyViewMono? enemyViewMono)
         {
             Timer += Time.deltaTime;
             if (Timer >= enemyParamData.GetAttackDelayDec())
             {
                 Timer = 0;
-                return Attack(enemyMono, enemyParamData,  playerMono, enemyViewMono);
+                Attack(enemyMono, enemyParamData,  playerMono, enemyViewMono);
             }
-            return playerMono.Hp;
         }
 
-        static Hp Attack(EnemyMono enemyMono, IEnemyParamData enemyParamData, PlayerMono playerMono, AbstractEnemyViewMono? enemyViewMono)
+        static void Attack(EnemyMono enemyMono, IEnemyParamData enemyParamData, PlayerMono playerMono, AbstractEnemyViewMono? enemyViewMono)
         {
-            if (!CanAttack(enemyMono,enemyParamData, playerMono)) return playerMono.Hp;
+            if (!CanAttack(enemyMono,enemyParamData, playerMono)) return;
             if (enemyViewMono != null) enemyViewMono.Attack();
-            return EnemyAttackModule.Attack(enemyParamData,playerMono.Hp);
+            EnemyAttackModule.AttackNew(playerMono,enemyParamData);
         }
         
         static bool CanAttack(EnemyMono enemyMono, IEnemyParamData enemyParamData,  PlayerMono playerMono)
