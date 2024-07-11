@@ -16,7 +16,7 @@ using VContainer;
 
 namespace Daipan.Enemy.MonoScripts
 {
-    public sealed class FinalBossMono : MonoBehaviour , IEnemyMono
+    public sealed class FinalBossMono : AbstractEnemyMono 
     {
         public AbstractFinalBossViewMono? FinalBossViewMono => finalBossViewMono;
         [SerializeField] AbstractFinalBossViewMono? finalBossViewMono;
@@ -103,11 +103,15 @@ namespace Daipan.Enemy.MonoScripts
             remove => _enemyDie.OnDied -= value;
         }
 
-        public void Die(FinalBossMono thisEnemyMono, bool isDaipaned = false)
+        public override void Die(AbstractEnemyMono enemyMono, bool isDaipaned = false)
         {
             // todo: EnemyClusterとFinalBossを繋ぐ
             // _enemyCluster.Remove(thisEnemyMono);
             _enemyDie.Died(finalBossViewMono, isDaipaned);
+        }
+        public override void Highlight(bool isHighlighted)
+        {
+            finalBossViewMono?.Highlight(isHighlighted);
         }
 
         public void OnAttacked(IPlayerParamData playerParamData)

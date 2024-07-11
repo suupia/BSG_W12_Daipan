@@ -59,14 +59,7 @@ namespace Daipan.Enemy.Scripts
             foreach (var enemy in orderedEnemies)
             {
                 if(enemy == null) continue;
-                if (enemy == orderedEnemies.First())
-                {
-                    enemy.Highlight(true);
-                }
-                else
-                {
-                   enemy.Highlight(false); 
-                }
+                enemy.Highlight(enemy == orderedEnemies.First());
             }
 
         }
@@ -81,18 +74,6 @@ namespace Daipan.Enemy.Scripts
             }
         }
 
-        public void Daipaned(Func<EnemyEnum, bool> blowAwayCondition)
-        {
-            var enemies = _enemies.ToArray();
-            foreach (var enemy in enemies)
-            {
-                if (enemy == null) continue;
-                if (blowAwayCondition(enemy.EnemyEnum))
-                    enemy.Die(enemy, true);
-            }
-
-        }
-        
         static Queue<EnemyMono?> UpdateReachedPlayer(
             List<EnemyMono?> enemies
             ,Queue<EnemyMono?> reachedPlayer
