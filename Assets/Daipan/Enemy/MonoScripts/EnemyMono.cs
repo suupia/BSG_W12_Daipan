@@ -61,7 +61,7 @@ namespace Daipan.Enemy.MonoScripts
             if (transform.position.x < _enemySpawnPoint.GetEnemyDespawnedPoint().x)
                 Die(this, false);
 
-            enemyViewMono?.SetHpGauge(Hp.Value, _enemyParamContainer.GetEnemyParamData(EnemyEnum).GetCurrentHp());
+            enemyViewMono?.SetHpGauge(Hp.Value, _enemyParamContainer.GetEnemyParamData(EnemyEnum).GetMaxHp());
         }
 
         [Inject]

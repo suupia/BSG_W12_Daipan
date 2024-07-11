@@ -33,7 +33,6 @@ namespace Daipan.Enemy.Scripts
 
         // Hp
         public int GetMaxHp() => _enemyParam.enemyHpParam.maxHp;
-        public int GetCurrentHp() => _enemyParam.enemyHpParam.hpAmount;
 
         // Move
         public double GetMoveSpeedPerSec() => _enemyParam.enemyMoveParam.moveSpeedPerSec * _enemyTimeLInePramContainer.GetEnemyWaveParamData().GetMoveSpeedRate();
