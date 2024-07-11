@@ -15,12 +15,12 @@ MonoBehaviour:
   enemyLevelDesignParam:
     increaseViewerOnEnemyKill: 5
     increaseIrritationGaugeOnSpecialEnemyKill: 10
-    currentKillAmount: 6
+    currentKillAmount: 0
   enemyParams:
   - enemyEnum: 1
     enemyAttackParam:
       attackAmount: 1
-      attackDelaySec: 1
+      attackIntervalSec: 1
       attackRange: 2
     enemyHpParam:
       maxHp: 10
@@ -41,7 +41,7 @@ MonoBehaviour:
   - enemyEnum: 2
     enemyAttackParam:
       attackAmount: 1
-      attackDelaySec: 1
+      attackIntervalSec: 1
       attackRange: 2
     enemyHpParam:
       maxHp: 10
@@ -62,7 +62,7 @@ MonoBehaviour:
   - enemyEnum: 3
     enemyAttackParam:
       attackAmount: 1
-      attackDelaySec: 1
+      attackIntervalSec: 1
       attackRange: 2
     enemyHpParam:
       maxHp: 10
@@ -83,7 +83,7 @@ MonoBehaviour:
   - enemyEnum: 7
     enemyAttackParam:
       attackAmount: 1
-      attackDelaySec: 1
+      attackIntervalSec: 1
       attackRange: 2
     enemyHpParam:
       maxHp: 10
@@ -104,7 +104,7 @@ MonoBehaviour:
   - enemyEnum: 8
     enemyAttackParam:
       attackAmount: 1
-      attackDelaySec: 1
+      attackIntervalSec: 1
       attackRange: 2
     enemyHpParam:
       maxHp: 10
@@ -125,7 +125,7 @@ MonoBehaviour:
   - enemyEnum: 9
     enemyAttackParam:
       attackAmount: 1
-      attackDelaySec: 1
+      attackIntervalSec: 1
       attackRange: 2
     enemyHpParam:
       maxHp: 10
@@ -146,7 +146,7 @@ MonoBehaviour:
   - enemyEnum: 4
     enemyAttackParam:
       attackAmount: 2
-      attackDelaySec: 1
+      attackIntervalSec: 1
       attackRange: 2
     enemyHpParam:
       maxHp: 10
@@ -167,7 +167,7 @@ MonoBehaviour:
   - enemyEnum: 6
     enemyAttackParam:
       attackAmount: 1
-      attackDelaySec: 1
+      attackIntervalSec: 1
       attackRange: 2
     enemyHpParam:
       maxHp: 50
@@ -188,7 +188,7 @@ MonoBehaviour:
   - enemyEnum: 5
     enemyAttackParam:
       attackAmount: 1
-      attackDelaySec: 1
+      attackIntervalSec: 1
       attackRange: 2
     enemyHpParam:
       maxHp: 10
@@ -209,7 +209,7 @@ MonoBehaviour:
   - enemyEnum: 10
     enemyAttackParam:
       attackAmount: 1
-      attackDelaySec: 1
+      attackIntervalSec: 1
       attackRange: 2
     enemyHpParam:
       maxHp: 10
@@ -230,7 +230,7 @@ MonoBehaviour:
   - enemyEnum: 11
     enemyAttackParam:
       attackAmount: 1
-      attackDelaySec: 1
+      attackIntervalSec: 1
       attackRange: 2
     enemyHpParam:
       maxHp: 10
@@ -250,6 +250,7 @@ MonoBehaviour:
       lineColor: {r: 0.43529412, g: 0.34117648, b: 0.41960785, a: 1}
   enemyWaveParams:
   - spawnEnemyCount: 10
+    waveIntervalSec: 5
     spawnIntervalSec: 1
     moveSpeedRate: 1
     spawnBossPercent: 0
@@ -257,6 +258,7 @@ MonoBehaviour:
     spawnTotemPercent: 10
     spawnFinalBossPercent: 10
   - spawnEnemyCount: 10
+    waveIntervalSec: 5
     spawnIntervalSec: 1
     moveSpeedRate: 1.5
     spawnBossPercent: 10
@@ -264,6 +266,7 @@ MonoBehaviour:
     spawnTotemPercent: 10
     spawnFinalBossPercent: 10
   - spawnEnemyCount: 10
+    waveIntervalSec: 5
     spawnIntervalSec: 1
     moveSpeedRate: 2
     spawnBossPercent: 50
@@ -271,6 +274,7 @@ MonoBehaviour:
     spawnTotemPercent: 20
     spawnFinalBossPercent: 10
   - spawnEnemyCount: 10
+    waveIntervalSec: 5
     spawnIntervalSec: 1
     moveSpeedRate: 2
     spawnBossPercent: 50

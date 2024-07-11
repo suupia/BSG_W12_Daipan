@@ -48,6 +48,7 @@ namespace Daipan.Enemy.Scripts
             var enemyWaveParams = new List<EnemyWaveParamData>();
             foreach (var enemyWaveParam in enemyParamsManager.enemyWaveParams)
                 enemyWaveParams.Add(new EnemyWaveParamData(enemyWaveParam));
+            Debug.Log($"enemyWaveParams.Count: {enemyWaveParams.Count}");
             return enemyWaveParams;
         }
     }

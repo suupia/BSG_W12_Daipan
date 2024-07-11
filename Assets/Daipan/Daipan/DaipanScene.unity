@@ -632,6 +632,25 @@ MonoBehaviour:
         enemySpawnTransformY: {fileID: 4302195649188822399}
         enemySpawnRatio: 100
         enemyEnum: 0
+  - lanePositions:
+    - laneYTransform: {fileID: 2088212488912715381}
+      enemySpawnedPosition:
+        enemySpawnTransformX: {fileID: 3390511095270776573}
+        enemySpawnTransformY: {fileID: 3390511095270776573}
+        enemySpawnRatio: 100
+        enemyEnum: 0
+    - laneYTransform: {fileID: 6503951208260735791}
+      enemySpawnedPosition:
+        enemySpawnTransformX: {fileID: 5550933728411308974}
+        enemySpawnTransformY: {fileID: 5550933728411308974}
+        enemySpawnRatio: 100
+        enemyEnum: 0
+    - laneYTransform: {fileID: 4080870170283566479}
+      enemySpawnedPosition:
+        enemySpawnTransformX: {fileID: 4302195649188822399}
+        enemySpawnTransformY: {fileID: 4302195649188822399}
+        enemySpawnRatio: 100
+        enemyEnum: 0
   playerSpawnedPosition:
     playerSpawnTransformX: {fileID: 6703917124397549910}
   enemyDespawnedPoint: {fileID: 1073548111780720352}
