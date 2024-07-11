@@ -15,7 +15,7 @@ using VContainer;
 
 namespace Daipan.Enemy.MonoScripts
 {
-    public sealed class EnemyMono : MonoBehaviour
+    public sealed class EnemyMono : AbstractEnemyMono , IHighlightable , IEnemyMonoDie
     {
         public AbstractEnemyViewMono? EnemyViewMono => enemyViewMono;
         [SerializeField] AbstractEnemyViewMono? enemyViewMono;
@@ -26,27 +26,24 @@ namespace Daipan.Enemy.MonoScripts
         IEnemyParamContainer _enemyParamContainer = null!;
         IEnemyOnAttacked _enemyOnAttacked = null!;
         PlayerHolder _playerHolder = null!;
-        public EnemyEnum EnemyEnum { get; private set; } = EnemyEnum.None;
-        public bool IsReachedPlayer { get; private set; }
+        public override EnemyEnum EnemyEnum { get; protected set; } = EnemyEnum.None;
+        public override bool IsReachedPlayer { get; protected set; }
         Hp _hp = null!;
 
-        public Hp Hp
+        public override Hp Hp
         {
             get => _hp;
-            private set
+            protected set
             {
                 _hp = value;
-                if (_hp.Value <= 0)
-                {
-                    Die(this, isDaipaned: false);
-                }
+                if (_hp.Value <= 0) Die(this, false);
             }
         }
 
         void Update()
         {
-            _enemyAttackDecider.AttackUpdate(this,
-                _enemyParamContainer.GetEnemyParamData(EnemyEnum), _playerHolder.PlayerMono, enemyViewMono);
+            _enemyAttackDecider.AttackUpdate(this, enemyViewMono,
+                _enemyParamContainer.GetEnemyParamData(EnemyEnum), _playerHolder.PlayerMono);
 
             // 攻撃範囲よりプレイヤーとの距離が大きいときだけ動く
             if (transform.position.x - _playerHolder.PlayerMono.transform.position.x >=
@@ -62,7 +59,7 @@ namespace Daipan.Enemy.MonoScripts
             }
 
             if (transform.position.x < _enemySpawnPoint.GetEnemyDespawnedPoint().x)
-                Die(this, isDaipaned: false);
+                Die(this, false);
 
             enemyViewMono?.SetHpGauge(Hp.Value, _enemyParamContainer.GetEnemyParamData(EnemyEnum).GetCurrentHp());
         }
@@ -102,15 +99,20 @@ namespace Daipan.Enemy.MonoScripts
             remove => _enemyDie.OnDied -= value;
         }
 
-        public void Die(EnemyMono thisEnemyMono, bool isDaipaned = false)
+        public override void Highlight(bool isHighlighted)
         {
-            _enemyCluster.Remove(thisEnemyMono);
-            _enemyDie.Died(enemyViewMono, isDaipaned);
+            EnemyViewMono?.Highlight(isHighlighted);
         }
 
-        public void OnAttacked(IPlayerParamData playerParamData)
+        public override void OnAttacked(IPlayerParamData playerParamData)
         {
             Hp = _enemyOnAttacked.OnAttacked(Hp, playerParamData);
+        }
+
+        public override void Die(AbstractEnemyMono enemyMono, bool isDaipaned = false)
+        {
+            _enemyCluster.Remove(enemyMono);
+            _enemyDie.Died(enemyViewMono, isDaipaned);
         }
     }
 

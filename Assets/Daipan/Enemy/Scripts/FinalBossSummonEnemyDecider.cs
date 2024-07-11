@@ -8,42 +8,52 @@ using UnityEngine;
 
 namespace Daipan.Enemy.Scripts
 {
-    public sealed class EnemyAttackDecider
+    public sealed class FinalBossParam
+    {
+        public double GetSummonEnemyIntervalSec ()=> 1;
+        public int GetSummonEnemyCount() => 3;
+    }
+    
+    public sealed class FinalBossSummonEnemyDecider
     {
         float Timer { get; set; }
+        FinalBossParam _finalBossParam = null!;
         
         /// <summary>
         /// Please call this method in Update method of MonoBehaviour
         /// </summary>
         public void AttackUpdate(
             EnemyMono enemyMono
-            , AbstractEnemyViewMono? enemyViewMono
+            , AbstractFinalBossViewMono? enemyViewMono
             , IEnemyParamData enemyParamData
             , PlayerMono playerMono
             )
         {
             Timer += Time.deltaTime;
-            if (Timer >= enemyParamData.GetAttackDelayDec())
+            if (Timer >=_finalBossParam.GetSummonEnemyIntervalSec())
             {
                 Timer = 0;
-                Attack(enemyMono,enemyViewMono,enemyParamData, playerMono);
+                SummonEnemy(enemyMono,enemyViewMono,enemyParamData, playerMono);
             }
+
         }
 
-        static void Attack(
+        static void SummonEnemy(
             EnemyMono enemyMono
-            , AbstractEnemyViewMono? enemyViewMono
+            , AbstractFinalBossViewMono? enemyViewMono
             , IEnemyParamData enemyParamData
             , PlayerMono playerMono
             )
         {
-            if (!CanAttack(enemyMono,enemyParamData, playerMono)) return;
-            if (enemyViewMono != null) enemyViewMono.Attack();
-            EnemyAttackModule.Attack(playerMono,enemyParamData);
+            if (!CanSummon(enemyMono,enemyParamData, playerMono)) return;
+            if (enemyViewMono != null) enemyViewMono.SummonEnemy();
+             // EnemyAttackModule.Attack(playerMono,enemyParamData);
+             // todo: summon
         }
         
-        static bool CanAttack(EnemyMono enemyMono, IEnemyParamData enemyParamData,  PlayerMono playerMono)
+        static bool CanSummon(EnemyMono enemyMono, IEnemyParamData enemyParamData,  PlayerMono playerMono)
         {
+            // todo : 実装する
             if (playerMono.Hp.Value <= 0) return false;
             if (enemyMono.transform.position.x - playerMono.transform.position.x > enemyParamData.GetAttackRange()) return false;
             return true;

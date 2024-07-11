@@ -12,7 +12,7 @@ namespace Daipan.Player.Scripts
 {
     public static class PlayerAttackModule
     {
-        public static void Attack(EnemyMono enemyMono, IPlayerParamData playerParamData)
+        public static void Attack(AbstractEnemyMono enemyMono, IPlayerParamData playerParamData)
         {
             enemyMono.OnAttacked(playerParamData);
         }
@@ -30,13 +30,11 @@ namespace Daipan.Player.Scripts
             });
             return result;
         } 
-
         
-        public static bool IsInScreenEnemy(EnemyMono? enemyMono)
+        public static bool IsInStreamScreen(Vector3 position)
         {
-            if (enemyMono == null) return false;
             var worldPosition = Camera.main.ViewportToWorldPoint(new Vector2(1, 1));
-            return enemyMono.gameObject.transform.position.x < worldPosition.x;
+            return position.x < worldPosition.x;
         }
     }   
 }

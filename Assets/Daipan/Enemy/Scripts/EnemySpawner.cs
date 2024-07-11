@@ -27,8 +27,7 @@ namespace Daipan.Enemy.Scripts
         readonly IPrefabLoader<EnemyMono> _enemyMonoLoader;
         readonly EnemyCluster _enemyCluster;
         readonly IEnemySpawnPoint _enemySpawnPoint;
-        readonly IEnemyTimeLineParamContainer _enemyTimeLInePramContainer;
-        readonly float _spawnRandomPositionY = 0.2f;
+        readonly IEnemyTimeLineParamContainer _enemyTimeLinePramContainer;
         readonly IEnemyBuilder _enemyBuilder;
         readonly IEnemyEnumSelector _enemyEnumSelector;
         readonly List<IDisposable> _disposables = new();
@@ -38,18 +37,18 @@ namespace Daipan.Enemy.Scripts
         public EnemySpawner(
             IObjectResolver container
             , IPrefabLoader<EnemyMono> enemyMonoLoader
-            ,EnemyCluster enemyCluster
-            ,IEnemySpawnPoint enemySpawnPoint
-            ,IEnemyTimeLineParamContainer enemyTimeLInePramContainer
-            ,IEnemyBuilder enemyBuilder
-            ,IEnemyEnumSelector enemyEnumSelector
+            , EnemyCluster enemyCluster
+            , IEnemySpawnPoint enemySpawnPoint
+            , IEnemyTimeLineParamContainer enemyTimeLinePramContainer
+            , IEnemyBuilder enemyBuilder
+            , IEnemyEnumSelector enemyEnumSelector
         )
         {
             _container = container;
             _enemyMonoLoader = enemyMonoLoader;
             _enemyCluster = enemyCluster;
             _enemySpawnPoint = enemySpawnPoint;
-            _enemyTimeLInePramContainer = enemyTimeLInePramContainer;
+            _enemyTimeLinePramContainer = enemyTimeLinePramContainer;
             _enemyBuilder = enemyBuilder;
             _enemyEnumSelector = enemyEnumSelector;
         }
@@ -57,7 +56,7 @@ namespace Daipan.Enemy.Scripts
         void IUpdate.Update()
         {
             _timer += Time.deltaTime;
-            if (_timer > _enemyTimeLInePramContainer.GetEnemyTimeLineParamData().GetSpawnIntervalSec())
+            if (_timer > _enemyTimeLinePramContainer.GetEnemyTimeLineParamData().GetSpawnIntervalSec())
             {
                 SpawnEnemy();
                 _timer = 0;
@@ -66,28 +65,32 @@ namespace Daipan.Enemy.Scripts
 
         void SpawnEnemy()
         {
+            const float spawnRandomPositionY = 0.2f;
             var spawnPosition = GetRandomSpawnPosition(_enemySpawnPoint);
-            var randomSpawnPosition = new Vector3 { x = spawnPosition.x, y = spawnPosition.y + Random.Range(-_spawnRandomPositionY, _spawnRandomPositionY) };
-           
+            var randomSpawnPosition = new Vector3
+            {
+                x = spawnPosition.x, y = spawnPosition.y + Random.Range(-spawnRandomPositionY, spawnRandomPositionY)
+            };
+
             var enemyEnum = _enemyEnumSelector.SelectEnemyEnum();
             if (enemyEnum == EnemyEnum.RedBoss)
             {
-                SpawnRedBoss(randomSpawnPosition); 
+                SpawnRedBoss(randomSpawnPosition);
             }
             else
             {
-                SpawnEnemy(randomSpawnPosition,enemyEnum); 
+                SpawnEnemy(randomSpawnPosition, enemyEnum);
             }
-           
         }
-        
+
         void SpawnEnemy(Vector3 spawnPosition, EnemyEnum enemyEnum)
         {
             var enemyMonoPrefab = _enemyMonoLoader.Load();
             var enemyMonoObject = _container.Instantiate(enemyMonoPrefab, spawnPosition, Quaternion.identity);
-            var enemyMono = _enemyBuilder.Build(enemyMonoObject,enemyEnum);
+            var enemyMono = _enemyBuilder.Build(enemyMonoObject, enemyEnum);
             _enemyCluster.Add(enemyMono);
         }
+
         static Vector3 GetRandomSpawnPosition(IEnemySpawnPoint enemySpawnPoint)
         {
             var positions = enemySpawnPoint.GetEnemySpawnedPointXs()
@@ -112,6 +115,7 @@ namespace Daipan.Enemy.Scripts
                             .Subscribe(_ => { SpawnEnemy(spawnPosition, EnemyEnum.RedBoss); }));
                     }));
         }
+
         public void Dispose()
         {
             foreach (var disposable in _disposables)
@@ -119,9 +123,10 @@ namespace Daipan.Enemy.Scripts
                 disposable.Dispose();
             }
         }
+
         ~EnemySpawner()
         {
-            Dispose(); 
+            Dispose();
         }
     }
 }

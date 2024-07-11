@@ -1,6 +1,7 @@
 #nullable enable
 using System;
 using System.Linq;
+using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Player.Interfaces;
 using Daipan.Player.LevelDesign.Interfaces;
@@ -15,7 +16,7 @@ namespace Daipan.Player.Scripts
         const double HitDistance = 1.0;
         public event EventHandler<OnHitEventArgs>? OnHit;
         readonly IPlayerParamData? _playerParamData;
-        readonly Func<EnemyMono?> _getNearestEnemyMono;
+        readonly Func<AbstractEnemyMono?> _getNearestEnemyMono;
         Vector3 Direction { get; }
     
         readonly PlayerAttackEffectMono _playerAttackEffectMono;
@@ -23,7 +24,7 @@ namespace Daipan.Player.Scripts
         public  PlayerAttackLinear(
             PlayerAttackEffectMono playerAttackEffectMono
             , IPlayerParamData playerParamData
-            , Func<EnemyMono?> getTargetEnemyMono
+            , Func<AbstractEnemyMono?> getTargetEnemyMono
         )
         {
             _playerAttackEffectMono = playerAttackEffectMono;
@@ -45,7 +46,8 @@ namespace Daipan.Player.Scripts
             }
         
             var enemyMono = _getNearestEnemyMono();
-            enemyMono = PlayerAttackModule.IsInScreenEnemy(enemyMono) ? enemyMono : null;
+            if (enemyMono != null && !PlayerAttackModule.IsInStreamScreen(enemyMono.transform.position))
+                enemyMono = null; 
         
             _playerAttackEffectMono.transform.position += Direction * (float)(Speed * Time.deltaTime);
             if (enemyMono != null)
