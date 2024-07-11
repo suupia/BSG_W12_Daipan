@@ -12,12 +12,17 @@ namespace Daipan.Enemy.Scripts
 {
     public sealed class FinalBossActionDecider : IDisposable
     {
+        readonly EnemySpawner _enemySpawner;
+        readonly CompositeDisposable _disposable = new();
         FinalBossMono _finalBossMono = null!;
         AbstractFinalBossViewMono? _finalBossViewMono;
         IFinalBossParamData _finalBossParamData = null!;
         PlayerMono _playerMono = null!;
-        CompositeDisposable _disposable = new();
-        float Timer { get; set; }
+
+        public FinalBossActionDecider(EnemySpawner enemySpawner)
+        {
+            _enemySpawner = enemySpawner;
+        }
 
         public void SetDomain(
             FinalBossMono finalBossMono
@@ -33,42 +38,24 @@ namespace Daipan.Enemy.Scripts
 
             _disposable.Add(
                 Observable
-                    .Interval(TimeSpan.FromSeconds(finalBossParamData.GetSummonIntervalSec()))
+                    .Interval(TimeSpan.FromSeconds(finalBossParamData.GetSummonActionIntervalSec()))
                     .Subscribe(_ => SummonEnemy())
             );
             
             _disposable.Add(
                 Observable
                     .Interval(TimeSpan.FromSeconds(finalBossParamData.GetAttackIntervalSec()))
-                    .Subscribe(_ => Attack( _finalBossMono, _finalBossViewMono, _finalBossParamData, _playerMono))
+                    .Subscribe(_ => Attack(_finalBossMono, _finalBossViewMono, _finalBossParamData, _playerMono))
             );
         }
 
         void SummonEnemy()
         {
-        }
-
-
-        /// <summary>
-        /// Please call this method in Update method of MonoBehaviour
-        /// </summary>
-        public void ActionUpdate(
-            FinalBossMono enemyMono
-            , AbstractFinalBossViewMono? enemyViewMono
-            , IEnemyParamData enemyParamData
-            , PlayerMono playerMono
-        )
-        {
-            Timer += Time.deltaTime;
-            if (Timer >= enemyParamData.GetAttackIntervalSec())
-            {
-                Timer = 0;
-                Attack(enemyMono, enemyViewMono, enemyParamData, playerMono);
-            }
+            // todo: 敵を召喚する処理を書く
         }
 
         static void Attack(
-            FinalBossMono enemyMono
+            AbstractEnemyMono enemyMono
             , AbstractEnemyViewMono? enemyViewMono
             , IEnemyParamData enemyParamData
             , PlayerMono playerMono
@@ -79,7 +66,7 @@ namespace Daipan.Enemy.Scripts
             EnemyAttackModule.Attack(playerMono, enemyParamData);
         }
 
-        static bool CanAttack(FinalBossMono enemyMono, IEnemyParamData enemyParamData, PlayerMono playerMono)
+        static bool CanAttack(AbstractEnemyMono enemyMono, IEnemyParamData enemyParamData, PlayerMono playerMono)
         {
             if (playerMono.Hp.Value <= 0) return false;
             if (enemyMono.transform.position.x - playerMono.transform.position.x >

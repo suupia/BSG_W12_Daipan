@@ -3,7 +3,9 @@ namespace Daipan.Enemy.Interfaces
 {
     public interface IFinalBossParamData : IEnemyParamData
     {
-        double GetSummonIntervalSec() => 1;
+        double GetSummonActionIntervalSec() => 1;
+        int GetSummonCount() => 5;
+        double GetSummonEnemyIntervalSec() => 1;
     } 
 }
 

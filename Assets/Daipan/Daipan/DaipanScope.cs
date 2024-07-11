@@ -256,6 +256,7 @@ namespace Daipan.Daipan
             builder.Register<EnemyEnumSelector>(Lifetime.Scoped).As<IEnemyEnumSelector>();
             builder.Register<EnemyBuilder>(Lifetime.Scoped).As<IEnemyBuilder>();
             builder.Register<EnemySpecialOnAttacked>(Lifetime.Scoped);
+            builder.Register<FinalBossActionDecider>(Lifetime.Scoped);
 
             // Irritated
             RegisterIrritated(builder, irritatedParams);
