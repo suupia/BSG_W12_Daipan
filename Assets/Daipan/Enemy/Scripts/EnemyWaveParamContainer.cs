@@ -22,7 +22,7 @@ namespace Daipan.Enemy.Scripts
             WaveState waveState
             )
         {
-            _enemyWaveParamDatas = CreateEnemyTimeLineParamData(enemyParamsManager);
+            _enemyWaveParamDatas = CreateEnemyWaveParamData(enemyParamsManager);
             _waveState = waveState; 
         }
 
@@ -36,19 +36,19 @@ namespace Daipan.Enemy.Scripts
             return enemyWaveParamDatas[waveState.CurrentWave]; 
         } 
 
-        static List<EnemyWaveParamData> CreateEnemyTimeLineParamData(EnemyParamsManager enemyParamsManager)
+        static List<EnemyWaveParamData> CreateEnemyWaveParamData(EnemyParamsManager enemyParamsManager)
         {
             // [Precondition]
-            if (enemyParamsManager.enemyTimeLineParams.Count == 0)
+            if (enemyParamsManager.enemyWaveParams.Count == 0)
             {
                 Debug.LogWarning("EnemyTimeLineParams.Count is 0");
-                enemyParamsManager.enemyTimeLineParams.Add(new EnemyWaveParam());
+                enemyParamsManager.enemyWaveParams.Add(new EnemyWaveParam());
             }
 
-            var enemyTimeLineParams = new List<EnemyWaveParamData>();
-            foreach (var enemyTimeLineParam in enemyParamsManager.enemyTimeLineParams)
-                enemyTimeLineParams.Add(new EnemyWaveParamData(enemyTimeLineParam));
-            return enemyTimeLineParams;
+            var enemyWaveParams = new List<EnemyWaveParamData>();
+            foreach (var enemyWaveParam in enemyParamsManager.enemyWaveParams)
+                enemyWaveParams.Add(new EnemyWaveParamData(enemyWaveParam));
+            return enemyWaveParams;
         }
     }
 }

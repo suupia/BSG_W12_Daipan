@@ -11,16 +11,16 @@ namespace Daipan.Enemy.Scripts
     public sealed class EnemyParamData : IEnemyParamData, IEnemyViewParamData
     {
         readonly EnemyParam _enemyParam;
-        readonly IEnemyWaveParamContainer _enemyTimeLInePramContainer;
+        readonly IEnemyWaveParamContainer _enemyWaveParamContainer;
 
 
         public EnemyParamData(
             EnemyParam enemyParam
-            , IEnemyWaveParamContainer enemyTimeLInePramContainer
+            , IEnemyWaveParamContainer enemyWaveParamContainer
         )
         {
             _enemyParam = enemyParam;
-            _enemyTimeLInePramContainer = enemyTimeLInePramContainer;
+            _enemyWaveParamContainer = enemyWaveParamContainer;
         }
         // Enum
 
@@ -35,7 +35,7 @@ namespace Daipan.Enemy.Scripts
         public int GetMaxHp() => _enemyParam.enemyHpParam.maxHp;
 
         // Move
-        public double GetMoveSpeedPerSec() => _enemyParam.enemyMoveParam.moveSpeedPerSec * _enemyTimeLInePramContainer.GetEnemyWaveParamData().GetMoveSpeedRate();
+        public double GetMoveSpeedPerSec() => _enemyParam.enemyMoveParam.moveSpeedPerSec * _enemyWaveParamContainer.GetEnemyWaveParamData().GetMoveSpeedRate();
 
         // Spawn
         public double GetSpawnRatio() => _enemyParam.enemySpawnParam.spawnRatio;

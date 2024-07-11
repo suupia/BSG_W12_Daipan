@@ -5,7 +5,7 @@ using Daipan.LevelDesign.Enemy.Scripts;
 
 namespace Daipan.Enemy.Scripts
 {
-    public sealed class EnemyWaveParamData : IEnemyTimeLineParamData
+    public sealed class EnemyWaveParamData 
     {
         readonly EnemyWaveParam _enemyWaveParam;
 
