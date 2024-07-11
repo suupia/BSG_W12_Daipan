@@ -15,6 +15,7 @@ namespace Daipan.Enemy.Scripts
         }
 
         public int GetSpawnEnemyCount() => _enemyWaveParam.spawnEnemyCount; 
+        public double GetWaveIntervalSec() => _enemyWaveParam.waveIntervalSec;
         public double GetSpawnIntervalSec() => _enemyWaveParam.spawnIntervalSec;
         public double GetMoveSpeedRate() => _enemyWaveParam.moveSpeedRate;
         public double GetSpawnBossPercent() => _enemyWaveParam.spawnBossPercent;

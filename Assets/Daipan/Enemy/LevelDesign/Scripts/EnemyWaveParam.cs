@@ -9,6 +9,7 @@ namespace Daipan.Enemy.LevelDesign.Scripts
     public sealed class EnemyWaveParam
     {
         [Header("このWaveでスポーンさせる敵の数")] public int spawnEnemyCount = 10;
+        [Header("Wave間のクールタイム")] public double waveIntervalSec = 5f;
 
         [Header("エネミー生成のクールタイム")] [Min(0)] public float spawnIntervalSec = 1f;
 
