@@ -6,28 +6,11 @@ namespace Daipan.Battle.scripts
 {
     public sealed class WaveState
     {
-        // public int CurrentWave => _enemyWaveParamContainer.GetEnemyTimeLineParamDataIndex();
-        public int CurrentWave => 0; // todo:temp
+        public int CurrentWave { get; private set; } 
 
-        readonly IEnemyWaveParamContainer _enemyWaveParamContainer;
-        
-        public WaveState(
-            IEnemyWaveParamContainer enemyWaveParamContainer
-            )
+        public void NextWave()
         {
-            _enemyWaveParamContainer = enemyWaveParamContainer;
-        }
-    }
-
-    public sealed class WaveStateNew
-    {
-        public int CurrentWave { get; private set; }
-        public bool IsFinalWave;
-        
-        public WaveStateNew(IEnemyWaveParamContainer enemyWaveParamContainer)
-        {
-            // CurrentWave = enemyWaveParamContainer.GetEnemyTimeLineParamDataIndex();
-            // IsFinalWave = CurrentWave == 0;
+            CurrentWave++;
         }
     }
 }

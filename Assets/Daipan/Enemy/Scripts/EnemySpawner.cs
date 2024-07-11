@@ -21,7 +21,7 @@ using Random = UnityEngine.Random;
 
 namespace Daipan.Enemy.Scripts
 {
-    public sealed class EnemySpawner : IUpdate, IDisposable
+    public sealed class EnemySpawner : IDisposable
     {
         readonly IObjectResolver _container;
         readonly IPrefabLoader<EnemyMono> _enemyMonoLoader;
@@ -53,17 +53,7 @@ namespace Daipan.Enemy.Scripts
             _enemyEnumSelector = enemyEnumSelector;
         }
 
-        void IUpdate.Update()
-        {
-            _timer += Time.deltaTime;
-            if (_timer > _enemyWavePramContainer.GetEnemyWaveParamData().GetSpawnIntervalSec())
-            {
-                SpawnEnemy();
-                _timer = 0;
-            }
-        }
-
-        void SpawnEnemy()
+        public void SpawnEnemy()
         {
             const float spawnRandomPositionY = 0.2f;
             var spawnPosition = GetRandomSpawnPosition(_enemySpawnPoint);
