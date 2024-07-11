@@ -1,5 +1,6 @@
 #nullable enable
 using System;
+using Daipan.Battle.scripts;
 using Daipan.Enemy.LevelDesign.Scripts;
 using Daipan.Enemy.Scripts;
 using Daipan.Stream.Scripts;
@@ -12,17 +13,20 @@ namespace Daipan.DebugInput.MonoScripts
     {
         StreamTimer _streamTimer = null!;
         StreamData _streamData = null!;
+        WaveState _waveState = null!;
         EnemyParamsManager _enemyParamsManager = null!;
 
         [Inject]
         public void Initialize(
             StreamTimer streamTimer
             , StreamData streamData
+            , WaveState waveState
             , EnemyParamsManager enemyParamsManager
         )
         {
             _streamTimer = streamTimer;
             _streamData = streamData;
+            _waveState = waveState;
             _enemyParamsManager = enemyParamsManager;
         }
 
@@ -31,41 +35,38 @@ namespace Daipan.DebugInput.MonoScripts
 #if UNITY_EDITOR
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                SetTime(_streamTimer, _enemyParamsManager, 0);
+                ForceNextWave(_waveState, 0); 
             }
 
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                SetTime(_streamTimer, _enemyParamsManager, 1);
+                ForceNextWave (_waveState, 1);
             }
 
             if (Input.GetKeyDown(KeyCode.Alpha3))
             {
-                SetTime(_streamTimer, _enemyParamsManager, 2);
+                ForceNextWave(_waveState, 2); 
             }
 
             if (Input.GetKeyDown(KeyCode.Alpha4))
             {
-                SetNearLastTime(_streamTimer, _streamData);
+                ForceNextWave(_waveState, 3);  
             }
 
             if (Input.GetKeyDown(KeyCode.Alpha5))
             {
-                SetTime(_streamTimer, _enemyParamsManager, 4);
+               //  SetTime(_streamTimer, _enemyParamsManager, 4);
             }
 #endif
         }
 
-        static void SetTime(StreamTimer streamTimer, EnemyParamsManager enemyParamsManager, int index)
+        static void ForceNextWave(WaveState waveState, int index)
         {
-            // if (index < 0 || index >= enemyParamsManager.enemyTimeLineParams.Count)
-            // {
-            //     Debug.LogWarning($" index is out of range. index: {index}");
-            //     return;
-            // }
-            //
-            // Debug.Log($"SetTime index: {index}");
-            // streamTimer.SetTime(enemyParamsManager.enemyTimeLineParams[index].startTime);
+            while (waveState.CurrentWave < index)
+            {
+                waveState.NextWave();
+                if(waveState.CurrentWave > 100) break;
+            } 
         }
 
         static void SetNearLastTime(StreamTimer streamTimer, StreamData streamData)
