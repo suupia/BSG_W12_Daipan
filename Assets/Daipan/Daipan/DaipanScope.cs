@@ -265,6 +265,7 @@ namespace Daipan.Daipan
 
             // Battle
             RegisterBattle(builder);
+            builder.RegisterComponentInHierarchy<WaveTextMono>();
 
             // InputSerial  
             RegisterInputSerial(builder);
