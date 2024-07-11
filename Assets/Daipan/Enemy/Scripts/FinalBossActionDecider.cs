@@ -39,9 +39,10 @@ namespace Daipan.Enemy.Scripts
             _disposable.Add(
                 Observable
                     .Interval(TimeSpan.FromSeconds(finalBossParamData.GetSummonActionIntervalSec()))
-                    .Subscribe(_ => SummonEnemy())
+                    .Subscribe(_ =>
+                        _disposable.Add(SummonEnemy(finalBossParamData, finalBossViewMono, _enemySpawner)))
             );
-            
+
             _disposable.Add(
                 Observable
                     .Interval(TimeSpan.FromSeconds(finalBossParamData.GetAttackIntervalSec()))
@@ -49,9 +50,20 @@ namespace Daipan.Enemy.Scripts
             );
         }
 
-        void SummonEnemy()
+        static IDisposable SummonEnemy(
+            IFinalBossParamData finalBossParamData
+            , AbstractFinalBossViewMono? finalBossViewMono
+            , EnemySpawner enemySpawner)
         {
-            // todo: 敵を召喚する処理を書く
+            if (finalBossViewMono != null) finalBossViewMono.SummonEnemy();
+            return
+                Observable
+                    .Interval(TimeSpan.FromSeconds(finalBossParamData.GetSummonActionIntervalSec()))
+                    .Subscribe(_ =>
+                    {
+                        for (int i = 0; i < finalBossParamData.GetSummonEnemyCount(); i++)
+                            enemySpawner.SpawnEnemy();
+                    });
         }
 
         static void Attack(
@@ -73,11 +85,12 @@ namespace Daipan.Enemy.Scripts
                 enemyParamData.GetAttackRange()) return false;
             return true;
         }
-        
+
         public void Dispose()
         {
             _disposable.Dispose();
         }
+
         ~FinalBossActionDecider()
         {
             Dispose();
