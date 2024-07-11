@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.MonoScripts;
 using Daipan.LevelDesign.Enemy.Scripts;
 using UnityEngine;
@@ -60,11 +61,11 @@ namespace Daipan.Enemy.Scripts
                 if(enemy == null) continue;
                 if (enemy == orderedEnemies.First())
                 {
-                    SwitchHighlight(enemy, isHighlighted: true);
+                    enemy.Highlight(true);
                 }
                 else
                 {
-                    SwitchHighlight(enemy, isHighlighted: false);
+                   enemy.Highlight(false); 
                 }
             }
 
@@ -90,13 +91,6 @@ namespace Daipan.Enemy.Scripts
                     enemy.Die(enemy, true);
             }
 
-        }
-        
-        static void SwitchHighlight(EnemyMono enemyMono, bool isHighlighted)
-        {
-            var enemyViewMono = enemyMono.EnemyViewMono;
-            if (enemyViewMono == null) return;
-            enemyViewMono.Highlight(isHighlighted);
         }
         
         static Queue<EnemyMono?> UpdateReachedPlayer(

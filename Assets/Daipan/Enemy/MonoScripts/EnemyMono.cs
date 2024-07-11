@@ -15,7 +15,7 @@ using VContainer;
 
 namespace Daipan.Enemy.MonoScripts
 {
-    public sealed class EnemyMono : MonoBehaviour
+    public sealed class EnemyMono : MonoBehaviour , IHighlightable
     {
         public AbstractEnemyViewMono? EnemyViewMono => enemyViewMono;
         [SerializeField] AbstractEnemyViewMono? enemyViewMono;
@@ -36,10 +36,7 @@ namespace Daipan.Enemy.MonoScripts
             private set
             {
                 _hp = value;
-                if (_hp.Value <= 0)
-                {
-                    Die(this, isDaipaned: false);
-                }
+                if (_hp.Value <= 0) Die(this, false);
             }
         }
 
@@ -62,7 +59,7 @@ namespace Daipan.Enemy.MonoScripts
             }
 
             if (transform.position.x < _enemySpawnPoint.GetEnemyDespawnedPoint().x)
-                Die(this, isDaipaned: false);
+                Die(this, false);
 
             enemyViewMono?.SetHpGauge(Hp.Value, _enemyParamContainer.GetEnemyParamData(EnemyEnum).GetCurrentHp());
         }
@@ -102,6 +99,10 @@ namespace Daipan.Enemy.MonoScripts
             remove => _enemyDie.OnDied -= value;
         }
 
+        public void Highlight(bool isHighlighted)
+        {
+            EnemyViewMono?.Highlight(isHighlighted);
+        }
         public void Die(EnemyMono thisEnemyMono, bool isDaipaned = false)
         {
             _enemyCluster.Remove(thisEnemyMono);
