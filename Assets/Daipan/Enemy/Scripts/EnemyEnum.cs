@@ -87,7 +87,7 @@ namespace Daipan.Enemy.Scripts
 
         public IsFinalBossAttribute(bool isFinalBoss) : base()
         {
-            isFinalBoss = isFinalBoss;
+            IsFinalBoss = isFinalBoss;
         }
     }
 }
