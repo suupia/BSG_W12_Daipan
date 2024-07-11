@@ -11,6 +11,7 @@ using Daipan.Stream.Scripts;
 using UnityEngine;
 using VContainer;
 using Daipan.Comment.Scripts;
+using Daipan.Enemy.Interfaces;
 using Daipan.Player.LevelDesign.Interfaces;
 using R3;
 
@@ -23,6 +24,8 @@ namespace Daipan.Player.MonoScripts
         IPlayerInput _playerInput = null!;
         public Hp Hp { get; set; } = null!;
 
+        IPlayerOnAttacked _playerOnAttacked = null!;
+        
         public void Update()
         {
             _playerInput.Update();
@@ -48,7 +51,10 @@ namespace Daipan.Player.MonoScripts
             _playerInput = playerInput;
         }
 
-
+        public void OnAttacked(IEnemyParamData enemyParamData)
+        {
+            Hp = _playerOnAttacked.OnAttacked(Hp, enemyParamData);
+        }
         public int MaxHp => _playerHpParamData.GetMaxHp();
     }
 }
