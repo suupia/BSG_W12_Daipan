@@ -10,33 +10,25 @@ using R3;
 
 namespace Daipan.Player.Scripts
 {
-    public class PlayerBuilder : IDisposable, IPlayerBuilder
+    public class PlayerBuilderTutorial : IDisposable, IPlayerBuilder
     {
         readonly WaveState _waveState;
         readonly IPlayerHpParamData _playerHpParamData;
-        readonly ResultState _resultState;
         readonly List<IDisposable> _disposables = new();
 
-        public PlayerBuilder(
+        public PlayerBuilderTutorial(
             WaveState waveState
             ,IPlayerHpParamData playerHpParamData
-            ,ResultState resultState
         )
         {
             _waveState = waveState;
             _playerHpParamData = playerHpParamData;
-            _resultState = resultState;
         }
        public PlayerMono Build(PlayerMono playerMono)
        {
            _disposables.Add(Observable.EveryValueChanged(_waveState, x => x.CurrentWave)
                .Subscribe(_ => playerMono.Hp = new Hp(_playerHpParamData.GetMaxHp())));
 
-           _disposables.Add(Observable.EveryUpdate()
-               .Subscribe(_ =>
-               {
-                   if (playerMono.Hp.Value <= 0) _resultState.ShowResult();
-               }));
            return playerMono;
        }
        
@@ -48,7 +40,7 @@ namespace Daipan.Player.Scripts
            }
        }
        
-       ~PlayerBuilder()
+       ~PlayerBuilderTutorial()
        {
            Dispose();
        }
