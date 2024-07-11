@@ -42,6 +42,7 @@ namespace Daipan.Player.MonoScripts
         )
         {
             _playerHpParamData = playerHpParamData;
+            
             playerInput.SetPlayerMono(this, playerViewMonos);
             _playerInput = playerInput;
             

@@ -11,7 +11,10 @@ namespace Daipan.Enemy.Scripts
     public sealed class EnemyAttackDecider
     {
         float Timer { get; set; }
-
+        
+        /// <summary>
+        /// Please call this method in Update method of MonoBehaviour
+        /// </summary>
         public void AttackUpdate(EnemyMono enemyMono, IEnemyParamData enemyParamData, PlayerMono playerMono, AbstractEnemyViewMono? enemyViewMono)
         {
             Timer += Time.deltaTime;
