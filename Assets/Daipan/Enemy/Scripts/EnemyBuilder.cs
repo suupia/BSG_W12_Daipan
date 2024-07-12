@@ -18,28 +18,22 @@ namespace Daipan.Enemy.Scripts
 {
     public sealed class EnemyBuilder : IEnemyBuilder
     {
-        readonly IEnemyParamContainer _enemyParamContainer;
         readonly CommentSpawner _commentSpawner;
         readonly ViewerNumber _viewerNumber;
-        readonly IrritatedValue _irritatedValue;
         readonly EnemyCluster _enemyCluster;
         readonly EnemyLevelDesignParamData _enemyLevelDesignParamData;
         readonly EnemyOnAttackedBuilder _enemyOnAttackedBuilder;
         
         public EnemyBuilder(
-            IEnemyParamContainer enemyParamContainer
-            , CommentSpawner commentSpawner
+             CommentSpawner commentSpawner
             , ViewerNumber viewerNumber
-            , IrritatedValue irritatedValue
             , EnemyCluster enemyCluster
             , EnemyLevelDesignParamData enemyLevelDesignParamData
             , EnemyOnAttackedBuilder enemyOnAttackedBuilder
         )
         {
-            _enemyParamContainer = enemyParamContainer;
             _commentSpawner = commentSpawner;
             _viewerNumber = viewerNumber;
-            _irritatedValue = irritatedValue;
             _enemyCluster = enemyCluster;
             _enemyLevelDesignParamData = enemyLevelDesignParamData;
             _enemyOnAttackedBuilder = enemyOnAttackedBuilder;
@@ -47,7 +41,6 @@ namespace Daipan.Enemy.Scripts
 
         public EnemyMono Build(EnemyMono enemyMono, EnemyEnum enemyEnum)
         {
-            var enemyParamData = _enemyParamContainer.GetEnemyParamData(enemyEnum);
 
             enemyMono.SetDomain(
                 enemyEnum
