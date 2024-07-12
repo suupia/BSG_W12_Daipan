@@ -13,7 +13,29 @@ MonoBehaviour:
   m_Name: FinalBossParamManager
   m_EditorClassIdentifier: 
   finalBossParam:
-    summonActionIntervalSec: 1
+    enemyParam:
+      enemyEnum: 12
+      enemyAttackParam:
+        attackAmount: 1
+        attackIntervalSec: 1
+        attackRange: 5
+      enemyHpParam:
+        maxHp: 100
+      enemyMoveParam:
+        moveSpeedPerSec: 1
+      enemySpawnParam:
+        spawnRatio: 0
+        daipanThreshold: 0
+        daipanProbability: 0
+      enemyRewardParam:
+        irritationAfterKill: 30
+      enemyAnimatorParam:
+        animatorController: {fileID: 0}
+        bodyColor: {r: 1, g: 0.3529412, b: 0.54901963, a: 1}
+        eyeColor: {r: 0.8862745, g: 0.972549, b: 0.8901961, a: 1}
+        eyeBallColor: {r: 1, g: 0.3529412, b: 0.54901963, a: 1}
+        lineColor: {r: 0.43529412, g: 0.34117648, b: 0.41960785, a: 1}
+    summonActionIntervalSec: 10
     summonEnemyIntervalSec: 1
     summonEnemyCount: 5
   finalWaveParam:
