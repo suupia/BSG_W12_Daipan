@@ -103,8 +103,6 @@ namespace Daipan.Enemy.MonoScripts
             add => _enemyDie.OnDied += value;
             remove => _enemyDie.OnDied -= value;
         }
-    
-
 
         public override void OnAttacked(IPlayerParamData playerParamData)
         {
@@ -112,7 +110,8 @@ namespace Daipan.Enemy.MonoScripts
         }
         public override  void OnDaipaned()
         {
-            Die(this, isDaipaned:false); 
+            Hp = new Hp(Hp.Value / 2); // todo:パラメータを受け取って実装する
+            finalBossViewMono?.Daipaned(()=> Debug.Log($"FinalBossMono Daipaned"));
         }
         
         void Die(AbstractEnemyMono enemyMono, bool isDaipaned = false)
