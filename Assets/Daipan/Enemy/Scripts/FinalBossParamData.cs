@@ -12,9 +12,7 @@ namespace Daipan.Enemy.Scripts
             _finalBossParam = finalBossParam;
         }
 
-        public double GetSummonActionIntervalSec() => 1;
-        public int GetSummonEnemyCount() => 5;
-        public double GetSummonEnemyIntervalSec() => 1;
+
         public EnemyEnum GetEnemyEnum() => EnemyEnum.None;
 
         // Attack
@@ -27,6 +25,11 @@ namespace Daipan.Enemy.Scripts
 
         // Move
         public double GetMoveSpeedPerSec() => 0;
-    } 
+        
+        // FinalBoss
+        public double GetSummonActionIntervalSec() => _finalBossParam.summonActionIntervalSec;
+        public int GetSummonEnemyCount() => _finalBossParam.summonEnemyCount;
+        public double GetSummonEnemyIntervalSec() => _finalBossParam.summonEnemyIntervalSec;
+     } 
 }
 

@@ -1,4 +1,5 @@
 #nullable enable
+using System;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.MonoScripts;
 using Daipan.LevelDesign.Enemy.Scripts;
@@ -8,10 +9,12 @@ using UnityEngine;
 
 namespace Daipan.Enemy.Scripts
 {
+    [Serializable]
     public sealed class FinalBossParam
     {
-        public double GetSummonEnemyIntervalSec ()=> 1;
-        public int GetSummonEnemyCount() => 3;
+        public double summonActionIntervalSec = 1;
+        public double summonEnemyIntervalSec = 1;
+        public int summonEnemyCount = 5;
     }
     
     public sealed class FinalBossSummonEnemyDecider
@@ -30,7 +33,7 @@ namespace Daipan.Enemy.Scripts
             )
         {
             Timer += Time.deltaTime;
-            if (Timer >=_finalBossParam.GetSummonEnemyIntervalSec())
+            if (Timer >=_finalBossParam.summonEnemyIntervalSec)
             {
                 Timer = 0;
                 SummonEnemy(enemyMono,enemyViewMono,enemyParamData, playerMono);
