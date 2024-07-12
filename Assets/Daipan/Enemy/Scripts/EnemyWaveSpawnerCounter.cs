@@ -45,20 +45,11 @@ namespace Daipan.Enemy.Scripts
         }
         void IUpdate.Update()
         {
+            Debug.Log($"IsInWaveInterval: {IsInWaveInterval} CurrentSpawnedEnemyCount: {CurrentSpawnedEnemyCount} MaxSpawnedEnemyCount: {MaxSpawnedEnemyCount}");
+            
             IntervalSpawnEnemy();
 
-            if (CurrentSpawnedEnemyCount == MaxSpawnedEnemyCount)
-            {
-                IsInWaveInterval = true;
-                _waveSpawnDisposable?.Dispose();
-                _waveSpawnDisposable = Observable
-                    .Timer(TimeSpan.FromSeconds(_enemyWaveParamContainer.GetEnemyWaveParamData().GetWaveIntervalSec())) // これを逐次評価したいがわからないので、IUpdateにしている
-                    .Subscribe(_ =>
-                    {
-                        _waveState.NextWave();
-                        IsInWaveInterval = false;
-                    });
-            }
+            DelayNextWave();    
         }
 
         void IntervalSpawnEnemy()
@@ -85,6 +76,24 @@ namespace Daipan.Enemy.Scripts
             }
         }
 
+        void DelayNextWave()
+        {
+            if(IsInWaveInterval) return;
+            
+            if (CurrentSpawnedEnemyCount == MaxSpawnedEnemyCount)
+            {
+                IsInWaveInterval = true;
+                _waveSpawnDisposable?.Dispose();
+                _waveSpawnDisposable = Observable
+                    .Timer(TimeSpan.FromSeconds(_enemyWaveParamContainer.GetEnemyWaveParamData().GetWaveIntervalSec())) // これを逐次評価したいがわからないので、IUpdateにしている
+                    .Subscribe(_ =>
+                    {
+                        _waveState.NextWave();
+                        CurrentSpawnedEnemyCount = 0; // Observableでも0にしているが、ここで
+                        IsInWaveInterval = false;
+                    });
+            }
+        }
 
         public void Dispose()
         {
