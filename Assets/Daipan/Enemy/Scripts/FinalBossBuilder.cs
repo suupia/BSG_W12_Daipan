@@ -13,12 +13,14 @@ namespace Daipan.Enemy.Scripts
         readonly EnemyCluster _enemyCluster;
         readonly EnemyLevelDesignParamData _enemyLevelDesignParamData;
         readonly EnemyOnAttackedBuilder _enemyOnAttackedBuilder;
+        readonly EnemySpawner _enemySpawner;
         public FinalBossBuilder(
             CommentSpawner commentSpawner
             , ViewerNumber viewerNumber
             , EnemyCluster enemyCluster
             , EnemyLevelDesignParamData enemyLevelDesignParamData
             , EnemyOnAttackedBuilder enemyOnAttackedBuilder
+            , EnemySpawner enemySpawner
         )
         {
             _commentSpawner = commentSpawner;
@@ -26,13 +28,14 @@ namespace Daipan.Enemy.Scripts
             _enemyCluster = enemyCluster;
             _enemyLevelDesignParamData = enemyLevelDesignParamData;
             _enemyOnAttackedBuilder = enemyOnAttackedBuilder;
+            _enemySpawner = enemySpawner;
         }
         public FinalBossMono Build(FinalBossMono finalBossMono, EnemyEnum enemyEnum)
         {
             finalBossMono.SetDomain(
                 enemyEnum
                 ,_enemyCluster
-                ,new EnemyAttackDecider()
+                ,new FinalBossActionDecider(_enemySpawner)
                 ,new EnemyDie(finalBossMono)
                 , _enemyOnAttackedBuilder.SwitchEnemyOnAttacked(enemyEnum)
                 );

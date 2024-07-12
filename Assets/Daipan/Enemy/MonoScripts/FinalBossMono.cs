@@ -21,7 +21,7 @@ namespace Daipan.Enemy.MonoScripts
         public FinalBossViewMono? FinalBossViewMono => finalBossViewMono;
         [SerializeField] FinalBossViewMono? finalBossViewMono;
         EnemyCluster _enemyCluster = null!;
-        EnemyAttackDecider _enemyAttackDecider = null!;
+        FinalBossActionDecider _finalBossActionDecider = null!;
         EnemyDie _enemyDie = null!;
         IEnemySpawnPoint _enemySpawnPoint = null!;
         FinalBossParamData _finalBossParamData = null!;
@@ -48,7 +48,6 @@ namespace Daipan.Enemy.MonoScripts
         {
             // _enemyAttackDecider.AttackUpdate(this, finalBossViewMono,
             //     _enemyParamContainer.GetEnemyParamData(EnemyEnum), _playerHolder.PlayerMono);
-
             
             Debug.Log($"distance: {transform.position.x - _playerHolder.PlayerMono.transform.position.x}, attackRange: {_finalBossParamData.GetAttackRange()}");
             // 攻撃範囲よりプレイヤーとの距離が大きいときだけ動く
@@ -85,14 +84,15 @@ namespace Daipan.Enemy.MonoScripts
         public void SetDomain(
             EnemyEnum enemyEnum
             , EnemyCluster enemyCluster
-            , EnemyAttackDecider enemyAttackDecider
+            , FinalBossActionDecider finalBossActionDecider
             , EnemyDie enemyDie
             , IEnemyOnAttacked enemyOnAttacked
         )
         {
             EnemyEnum = enemyEnum;
             _enemyCluster = enemyCluster;
-            _enemyAttackDecider = enemyAttackDecider;
+            _finalBossActionDecider = finalBossActionDecider;
+            _finalBossActionDecider.SetDomain(this, finalBossViewMono, _finalBossParamData, _playerHolder.PlayerMono);
             _enemyDie = enemyDie;
             _enemyOnAttacked = enemyOnAttacked;
             finalBossViewMono?.SetDomain(_finalBossParamData);
