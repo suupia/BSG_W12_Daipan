@@ -116,6 +116,11 @@ namespace Daipan.Enemy.MonoScripts
                 .Subscribe(_ => onDied())
                 .AddTo(_leaderAnimator.gameObject);
         }
+        
+        public override void DaipanHit()
+        {
+            SetTriggerAll("OnDaipanHit");
+        }
 
         public override void Highlight(bool isHighlighted)
         {
