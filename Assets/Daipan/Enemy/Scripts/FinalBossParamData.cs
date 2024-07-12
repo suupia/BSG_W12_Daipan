@@ -1,4 +1,5 @@
 #nullable enable
+using System.Linq;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.LevelDesign.Scripts;
 using UnityEngine;
@@ -8,10 +9,15 @@ namespace Daipan.Enemy.Scripts
     public class FinalBossParamData : IFinalBossParamData, IFinalBossViewParamData
     {
         readonly FinalBossParam _finalBossParam;
+        readonly FinalBossColorChanger _finalBossColorChanger;
         
-        public FinalBossParamData(FinalBossParamManager finalBossParamManager)
+        public FinalBossParamData(
+            FinalBossParamManager finalBossParamManager
+            , FinalBossColorChanger finalBossColorChanger
+            )
         {
             _finalBossParam = finalBossParamManager.finalBossParam;
+            _finalBossColorChanger = finalBossColorChanger;
         }
 
 
@@ -34,10 +40,15 @@ namespace Daipan.Enemy.Scripts
         public double GetSummonEnemyIntervalSec() => _finalBossParam.summonEnemyIntervalSec;
         
         // View
-        public Color GetBodyColor() => _finalBossParam.enemyParam.enemyAnimatorParam.bodyColor;
-        public Color GetEyeColor() => _finalBossParam.enemyParam.enemyAnimatorParam.eyeColor;
-        public Color GetEyeBallColor() => _finalBossParam.enemyParam.enemyAnimatorParam.eyeBallColor;
-        public Color GetLineColor() => _finalBossParam.enemyParam.enemyAnimatorParam.lineColor; 
+        public Color GetBodyColor() =>
+            _finalBossParam.finalBossColorParams.First(x =>
+                x.finalBossColor == _finalBossColorChanger.CurrentColor).bodyColor;
+        public Color GetEyeColor() =>  _finalBossParam.finalBossColorParams.First(x =>
+                x.finalBossColor == _finalBossColorChanger.CurrentColor).eyeColor;
+        public Color GetEyeBallColor() => _finalBossParam.finalBossColorParams.First(x =>
+            x.finalBossColor == _finalBossColorChanger.CurrentColor).eyeBallColor;
+        public Color GetLineColor() => _finalBossParam.finalBossColorParams.First(x =>
+            x.finalBossColor == _finalBossColorChanger.CurrentColor).lineColor;
         
      } 
 }

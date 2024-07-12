@@ -19,7 +19,7 @@ namespace Daipan.Enemy.LevelDesign.Scripts
         public int summonEnemyCount = 5;
         
         [Header("FinalBOSSの色のパラメータを設定してください。")]
-        List<FinalBossColorParam> finalBossColorParams = null!;
+        public List<FinalBossColorParam> finalBossColorParams = null!;
     }
     
     [Serializable]
