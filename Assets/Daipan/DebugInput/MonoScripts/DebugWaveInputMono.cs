@@ -11,23 +11,17 @@ namespace Daipan.DebugInput.MonoScripts
 {
     public sealed class DebugWaveInputMono : MonoBehaviour
     {
-        StreamTimer _streamTimer = null!;
-        StreamData _streamData = null!;
         WaveState _waveState = null!;
-        EnemyParamsManager _enemyParamsManager = null!;
+        EnemyWaveSpawnerCounter _enemyWaveSpawnerCounter = null!;
 
         [Inject]
         public void Initialize(
-            StreamTimer streamTimer
-            , StreamData streamData
-            , WaveState waveState
-            , EnemyParamsManager enemyParamsManager
+            WaveState waveState
+            , EnemyWaveSpawnerCounter enemyWaveSpawnerCounter
         )
         {
-            _streamTimer = streamTimer;
-            _streamData = streamData;
             _waveState = waveState;
-            _enemyParamsManager = enemyParamsManager;
+            _enemyWaveSpawnerCounter = enemyWaveSpawnerCounter;
         }
 
         void Update()
@@ -60,13 +54,14 @@ namespace Daipan.DebugInput.MonoScripts
 #endif
         }
 
-        static void ForceNextWave(WaveState waveState, int index)
+        void ForceNextWave(WaveState waveState, int index)
         {
             while (waveState.CurrentWave < index)
             {
                 waveState.NextWave();
                 if(waveState.CurrentWave > 100) break;
             }
+            _enemyWaveSpawnerCounter.ResetCounter();
             Debug.Log($"ForceNextWave waveState.CurrentWave: {waveState.CurrentWave}");
         }
 

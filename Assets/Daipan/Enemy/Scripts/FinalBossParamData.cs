@@ -1,6 +1,7 @@
 #nullable enable
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.LevelDesign.Scripts;
+using UnityEngine;
 
 namespace Daipan.Enemy.Scripts
 {
@@ -31,6 +32,13 @@ namespace Daipan.Enemy.Scripts
         public double GetSummonActionIntervalSec() => _finalBossParam.summonActionIntervalSec;
         public int GetSummonEnemyCount() => _finalBossParam.summonEnemyCount;
         public double GetSummonEnemyIntervalSec() => _finalBossParam.summonEnemyIntervalSec;
+        
+        // View
+        public Color GetBodyColor() => _finalBossParam.enemyParam.enemyAnimatorParam.bodyColor;
+        public Color GetEyeColor() => _finalBossParam.enemyParam.enemyAnimatorParam.eyeColor;
+        public Color GetEyeBallColor() => _finalBossParam.enemyParam.enemyAnimatorParam.eyeBallColor;
+        public Color GetLineColor() => _finalBossParam.enemyParam.enemyAnimatorParam.lineColor; 
+        
      } 
 }
 
