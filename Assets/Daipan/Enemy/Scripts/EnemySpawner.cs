@@ -50,15 +50,6 @@ namespace Daipan.Enemy.Scripts
             _enemyEnumSelector = enemyEnumSelector;
         }
 
-        public void SpawnFinalBoss()
-        {
-            var spawnPositions = _enemySpawnPoint.GetEnemySpawnedPointXs()
-                .Zip(_enemySpawnPoint.GetEnemySpawnedPointYs(), (x, y) => new Vector3(x.x, y.y))
-                .ToList();
-            var middlePosition = spawnPositions[spawnPositions.Count / 2];
-                
-            SpawnEnemy(middlePosition, EnemyEnum.FinalBoss); 
-        }
         public void SpawnEnemy()
         {
             const float spawnRandomPositionY = 0.2f;

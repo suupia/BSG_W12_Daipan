@@ -11,6 +11,7 @@ namespace Daipan.Enemy.Scripts
     public class EnemySpawnerCounter : IUpdate, IDisposable
     {
         readonly EnemySpawner _enemySpawner;
+        readonly FinalBossSpawner _finalBossSpawner;
         readonly IEnemyWaveParamContainer _enemyWaveParamContainer;
         readonly WaveState _waveState;
         int CurrentSpawnedEnemyCount { get; set; }
@@ -21,11 +22,13 @@ namespace Daipan.Enemy.Scripts
 
         public EnemySpawnerCounter(
             EnemySpawner enemySpawner
+            , FinalBossSpawner finalBossSpawner
             , IEnemyWaveParamContainer enemyWaveParamContainer
             , WaveState waveState
         )
         {
             _enemySpawner = enemySpawner;
+            _finalBossSpawner = finalBossSpawner;
             _enemyWaveParamContainer = enemyWaveParamContainer;
             _waveState = waveState;
         }
@@ -62,7 +65,7 @@ namespace Daipan.Enemy.Scripts
             // LastWaveの時はFinalBossをスポーン
             if (_waveState.CurrentWave == _enemyWaveParamContainer.WaveTotalCount - 1)
             {
-                _enemySpawner.SpawnFinalBoss();
+                _finalBossSpawner.SpawnFinalBoss();
                 CurrentSpawnedEnemyCount++;
             }
             else

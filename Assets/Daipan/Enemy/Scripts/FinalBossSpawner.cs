@@ -9,7 +9,7 @@ using VContainer.Unity;
 
 namespace Daipan.Enemy.Scripts
 {
-    public class FinalBossSpawner
+    public sealed class FinalBossSpawner
     {
         readonly IObjectResolver _container;
         readonly IPrefabLoader<FinalBossMono> _finalBossMonoLoader;
