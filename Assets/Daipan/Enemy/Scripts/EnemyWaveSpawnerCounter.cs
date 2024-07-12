@@ -8,7 +8,7 @@ using R3;
 
 namespace Daipan.Enemy.Scripts
 {
-    public class EnemySpawnerCounter : IUpdate, IDisposable
+    public class EnemyWaveSpawnerCounter : IUpdate, IDisposable
     {
         readonly EnemySpawner _enemySpawner;
         readonly FinalBossSpawner _finalBossSpawner;
@@ -20,7 +20,7 @@ namespace Daipan.Enemy.Scripts
         bool IsInWaveInterval { get; set; }
         IDisposable? _disposable;
 
-        public EnemySpawnerCounter(
+        public EnemyWaveSpawnerCounter(
             EnemySpawner enemySpawner
             , FinalBossSpawner finalBossSpawner
             , IEnemyWaveParamContainer enemyWaveParamContainer
@@ -82,7 +82,7 @@ namespace Daipan.Enemy.Scripts
             _disposable?.Dispose();
         }
 
-        ~EnemySpawnerCounter()
+        ~EnemyWaveSpawnerCounter()
         {
             Dispose();
         }
