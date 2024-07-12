@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Daipan.Enemy.Interfaces
 {
-    public abstract class AbstractEnemyMono : MonoBehaviour, IHighlightable
+    public abstract class AbstractEnemyMono : MonoBehaviour
     {
         public abstract EnemyEnum EnemyEnum { get; protected set; }
         public abstract Hp Hp { get; protected set; }
