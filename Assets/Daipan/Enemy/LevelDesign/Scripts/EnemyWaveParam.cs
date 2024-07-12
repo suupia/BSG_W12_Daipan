@@ -26,6 +26,6 @@ namespace Daipan.Enemy.LevelDesign.Scripts
         public double spawnTotemPercent = 10f;
         
         [Header("FinalBossの出現確率（0%～100%）")] [Range(0f, 100f)]
-        public double spawnFinalBossPercent = 10f;
+        public double spawnFinalBossPercent = 0;
     }
 }

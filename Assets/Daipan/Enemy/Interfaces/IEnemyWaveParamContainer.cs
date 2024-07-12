@@ -6,6 +6,7 @@ namespace Daipan.Enemy.Interfaces
 {
     public interface IEnemyWaveParamContainer
     {
+        public int WaveTotalCount { get; }
         EnemyWaveParamData GetEnemyWaveParamData();
     }
 }

@@ -15,15 +15,15 @@ namespace Daipan.Enemy.Scripts
         readonly WaveState _waveState;
         int CurrentSpawnedEnemyCount { get; set; }
         int MaxSpawnedEnemyCount => _enemyWaveParamContainer.GetEnemyWaveParamData().GetSpawnEnemyCount();
-        double Timer { get;set; }
+        double Timer { get; set; }
         bool IsInWaveInterval { get; set; }
         IDisposable? _disposable;
-        
+
         public EnemySpawnerCounter(
             EnemySpawner enemySpawner
             , IEnemyWaveParamContainer enemyWaveParamContainer
             , WaveState waveState
-            )
+        )
         {
             _enemySpawner = enemySpawner;
             _enemyWaveParamContainer = enemyWaveParamContainer;
@@ -33,14 +33,14 @@ namespace Daipan.Enemy.Scripts
         void IUpdate.Update()
         {
             IntervalSpawnEnemy();
-            
-            if(CurrentSpawnedEnemyCount == MaxSpawnedEnemyCount)
+
+            if (CurrentSpawnedEnemyCount == MaxSpawnedEnemyCount)
             {
                 CurrentSpawnedEnemyCount = 0;
                 IsInWaveInterval = true;
                 _disposable?.Dispose();
-                _disposable = Observable.Timer(TimeSpan.FromSeconds(_enemyWaveParamContainer.GetEnemyWaveParamData()
-                        .GetWaveIntervalSec()))
+                _disposable = Observable
+                    .Timer(TimeSpan.FromSeconds(_enemyWaveParamContainer.GetEnemyWaveParamData().GetWaveIntervalSec()))
                     .Subscribe(_ =>
                     {
                         _waveState.NextWave();
@@ -48,13 +48,14 @@ namespace Daipan.Enemy.Scripts
                     });
             }
         }
-        
+
         void IntervalSpawnEnemy()
         {
             if (!IsInWaveInterval)
             {
                 Timer += Time.deltaTime;
-                if (Timer > _enemyWaveParamContainer.GetEnemyWaveParamData().GetSpawnIntervalSec())
+                Debug.Log($"WaveState: {_waveState.CurrentWave}");
+                if (Timer > _enemyWaveParamContainer.GetEnemyWaveParamData().GetSpawnIntervalSec()) // todo:ここでエラーが起きている
                 {
                     Timer = 0;
                     if (CurrentSpawnedEnemyCount < MaxSpawnedEnemyCount)
@@ -65,17 +66,16 @@ namespace Daipan.Enemy.Scripts
                 }
             }
         }
-        
+
         public void Dispose()
         {
             _enemySpawner.Dispose();
             _disposable?.Dispose();
         }
-        
+
         ~EnemySpawnerCounter()
         {
             Dispose();
         }
-    } 
+    }
 }
-
