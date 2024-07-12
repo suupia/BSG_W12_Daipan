@@ -8,41 +8,33 @@ namespace Daipan.Enemy.Scripts
 {
     public class FinalBossBuilder
     {
-        readonly CommentSpawner _commentSpawner;
-        readonly ViewerNumber _viewerNumber;
         readonly EnemyCluster _enemyCluster;
-        readonly EnemyLevelDesignParamData _enemyLevelDesignParamData;
-        readonly EnemyOnAttackedBuilder _enemyOnAttackedBuilder;
         readonly EnemySpawner _enemySpawner;
+        readonly FinalBossOnAttacked _finalBossOnAttacked;
+
         public FinalBossBuilder(
-            CommentSpawner commentSpawner
-            , ViewerNumber viewerNumber
-            , EnemyCluster enemyCluster
-            , EnemyLevelDesignParamData enemyLevelDesignParamData
-            , EnemyOnAttackedBuilder enemyOnAttackedBuilder
+            EnemyCluster enemyCluster
             , EnemySpawner enemySpawner
+            , FinalBossOnAttacked finalBossOnAttacked
         )
         {
-            _commentSpawner = commentSpawner;
-            _viewerNumber = viewerNumber;
             _enemyCluster = enemyCluster;
-            _enemyLevelDesignParamData = enemyLevelDesignParamData;
-            _enemyOnAttackedBuilder = enemyOnAttackedBuilder;
             _enemySpawner = enemySpawner;
+            _finalBossOnAttacked = finalBossOnAttacked;
         }
+
         public FinalBossMono Build(FinalBossMono finalBossMono, EnemyEnum enemyEnum)
         {
             finalBossMono.SetDomain(
                 enemyEnum
-                ,_enemyCluster
-                ,new FinalBossActionDecider(_enemySpawner)
-                ,new FinalBossDie(finalBossMono)
-                , _enemyOnAttackedBuilder.SwitchEnemyOnAttacked(enemyEnum)
-                );
-            
-            
+                , _enemyCluster
+                , new FinalBossActionDecider(_enemySpawner)
+                , new FinalBossDie(finalBossMono)
+                , _finalBossOnAttacked
+            );
+
+
             return finalBossMono;
         }
-    } 
+    }
 }
-

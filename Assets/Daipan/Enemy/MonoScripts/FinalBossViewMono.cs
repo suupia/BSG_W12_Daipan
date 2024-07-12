@@ -48,10 +48,19 @@ namespace Daipan.Enemy.MonoScripts
         public override void SetDomain(IFinalBossViewParamData enemyParamData)
         {
             Debug.Log("SetDomain FinalBossViewMono");
-            animatorBody.GetComponent<SpriteRenderer>().color = enemyParamData.GetBodyColor();
-            animatorLine.GetComponent<SpriteRenderer>().color = enemyParamData.GetLineColor();
-            animatorEye.GetComponent<SpriteRenderer>().color = enemyParamData.GetEyeColor();
-            animatorEyeBall.GetComponent<SpriteRenderer>().color = enemyParamData.GetEyeBallColor();
+            
+            Observable.EveryValueChanged(enemyParamData, p=> p.GetBodyColor())
+                .Subscribe(x => animatorBody.GetComponent<SpriteRenderer>().color = x)
+                .AddTo(this);
+            Observable.EveryValueChanged(enemyParamData, p=> p.GetLineColor())
+                .Subscribe(x => animatorLine.GetComponent<SpriteRenderer>().color = x)
+                .AddTo(this);
+            Observable.EveryValueChanged(enemyParamData, p=> p.GetEyeColor())
+                .Subscribe(x => animatorEye.GetComponent<SpriteRenderer>().color = x)
+                .AddTo(this);
+            Observable.EveryValueChanged(enemyParamData, p=> p.GetEyeBallColor())
+                .Subscribe(x => animatorEyeBall.GetComponent<SpriteRenderer>().color = x)
+                .AddTo(this);
             
             tempSpriteRenderer.color = EnemyViewTempColor.GetTempColor(EnemyEnum.YellowBoss);
             
