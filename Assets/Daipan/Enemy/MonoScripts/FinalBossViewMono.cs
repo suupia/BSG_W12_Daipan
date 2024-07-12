@@ -7,18 +7,19 @@ namespace Daipan.Enemy.MonoScripts
 {
     public sealed class FinalBossViewMono : MonoBehaviour 
     {
-        AbstractEnemyViewMono _selectedEnemyViewMono = null!;
+        FinalBossViewMono _selectedEnemyViewMono = null!;
 
-        public void SetDomain(IEnemyViewParamData enemyParamData)
+        public void SetDomain(IFinalBossViewParamData enemyParamData)
         {
-            Debug.Log("SetDomain enemy enum: " + enemyParamData.GetEnemyEnum());
-            SwitchEnemyView(enemyParamData.GetEnemyEnum());
+            Debug.Log("SetDomain FinalBossViewMono");
+            // Debug.Log("SetDomain enemy enum: " + enemyParamData.GetEnemyEnum());
+            // SwitchEnemyView(enemyParamData);
             _selectedEnemyViewMono.SetDomain(enemyParamData);
         }
-        void SwitchEnemyView(EnemyEnum enemyEnum)
-        {
-            
-        }
+        // void SwitchEnemyView(EnemyEnum enemyEnum)
+        // {
+        //     
+        // }
         public void SetHpGauge(double currentHp, int maxHp)
         {
             _selectedEnemyViewMono.SetHpGauge(currentHp, maxHp);
