@@ -1,5 +1,6 @@
 #nullable enable
 using Daipan.Enemy.Interfaces;
+using Daipan.Enemy.LevelDesign.Scripts;
 
 namespace Daipan.Enemy.Scripts
 {

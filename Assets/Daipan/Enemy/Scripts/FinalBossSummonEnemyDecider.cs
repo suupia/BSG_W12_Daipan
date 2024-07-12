@@ -1,6 +1,7 @@
 #nullable enable
 using System;
 using Daipan.Enemy.Interfaces;
+using Daipan.Enemy.LevelDesign.Scripts;
 using Daipan.Enemy.MonoScripts;
 using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.Player.MonoScripts;
@@ -9,18 +10,11 @@ using UnityEngine;
 
 namespace Daipan.Enemy.Scripts
 {
-    [Serializable]
-    public sealed class FinalBossParam
-    {
-        public double summonActionIntervalSec = 1;
-        public double summonEnemyIntervalSec = 1;
-        public int summonEnemyCount = 5;
-    }
-    
+
     public sealed class FinalBossSummonEnemyDecider
     {
         float Timer { get; set; }
-        FinalBossParam _finalBossParam = null!;
+        readonly FinalBossParam _finalBossParam = null!;
         
         /// <summary>
         /// Please call this method in Update method of MonoBehaviour
