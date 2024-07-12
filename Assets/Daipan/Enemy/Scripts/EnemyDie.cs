@@ -10,9 +10,9 @@ namespace Daipan.Enemy.Scripts
     public sealed class EnemyDie
     {
         public event EventHandler<DiedEventArgs>? OnDied;
-        readonly EnemyMono _enemyMono;
+        readonly AbstractEnemyMono _enemyMono;
         
-        public EnemyDie(EnemyMono enemyMono)
+        public EnemyDie(AbstractEnemyMono enemyMono)
         {
             _enemyMono = enemyMono;
         }
@@ -30,7 +30,7 @@ namespace Daipan.Enemy.Scripts
         }
 
         static void OnDiedProcess(
-            EnemyMono enemyMono, 
+            AbstractEnemyMono enemyMono, 
             bool isDaipaned,
             AbstractEnemyViewMono? enemyViewMono
             )
