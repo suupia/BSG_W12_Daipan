@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Daipan.Enemy.MonoScripts
 {
-    public sealed class FinalBossViewMono : MonoBehaviour 
+    public sealed class FinalBossViewMono : AbstractFinalBossViewMono 
     {
         [SerializeField] HpGaugeMono hpGaugeMono = null!;
         [SerializeField] SpriteRenderer tempSpriteRenderer = null!; // todo: 完成時には削除する
@@ -45,7 +45,7 @@ namespace Daipan.Enemy.MonoScripts
             
             _highlightSpriteRenderer.enabled = false;
         }
-        public void SetDomain(IFinalBossViewParamData enemyParamData)
+        public override void SetDomain(IFinalBossViewParamData enemyParamData)
         {
             Debug.Log("SetDomain FinalBossViewMono");
             animatorBody.GetComponent<SpriteRenderer>().color = enemyParamData.GetBodyColor();
@@ -57,30 +57,30 @@ namespace Daipan.Enemy.MonoScripts
             
         }
 
-        public void SetHpGauge(double currentHp, int maxHp)
+        public override void SetHpGauge(double currentHp, int maxHp)
         {
            _hpGaugeMono.SetRatio((float)currentHp / maxHp); 
         }
 
-        public void Move()
+        public override void Move()
         {
             SetBoolAll("IsMoving", true);
             SetBoolAll("IsAttacking", false);
         }
 
-        public void Attack()
+        public override void Attack()
         {
             SetBoolAll("IsMoving", false);
             SetBoolAll("IsAttacking", true);
         }
 
-        public void SummonEnemy()
+        public override void SummonEnemy()
         {
             // todo: 実装
             // SetBoolAll("IsMoving", false);
             // SetBoolAll("IsAttacking", true); 
         }
-        public void Died(System.Action onDied)
+        public override void Died(System.Action onDied)
         {
             SetTriggerAll("OnDied");
             _highlightSpriteRenderer.enabled = false;
@@ -94,7 +94,7 @@ namespace Daipan.Enemy.MonoScripts
                 .AddTo(_leaderAnimator.gameObject);
         }
 
-        public void Daipaned(System.Action onDied)
+        public override void Daipaned(System.Action onDied)
         {
             SetTriggerAll("OnDaipaned");
             _highlightSpriteRenderer.enabled = false;
@@ -108,7 +108,7 @@ namespace Daipan.Enemy.MonoScripts
                 .AddTo(_leaderAnimator.gameObject);
         }
 
-        public void Highlight(bool isHighlighted)
+        public override void Highlight(bool isHighlighted)
         {
             if (!_canHighlight) return;
             _highlightSpriteRenderer.enabled = isHighlighted;

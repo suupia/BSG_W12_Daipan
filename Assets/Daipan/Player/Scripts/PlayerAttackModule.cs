@@ -20,7 +20,7 @@ namespace Daipan.Player.Scripts
         public static IEnumerable<EnemyEnum> GetTargetEnemyEnum(PlayerColor playerColor)
         {
             // 全てのボタンに対して判定を行うもの
-            var result = new List<EnemyEnum>{EnemyEnum.SpecialRed,EnemyEnum.SpecialBlue,EnemyEnum.SpecialYellow, EnemyEnum.Totem2, EnemyEnum.Totem3};
+            var result = new List<EnemyEnum>{EnemyEnum.SpecialRed,EnemyEnum.SpecialBlue,EnemyEnum.SpecialYellow, EnemyEnum.Totem2, EnemyEnum.Totem3,EnemyEnum.FinalBoss,};
             result.AddRange(  playerColor switch
             {
                 PlayerColor.Red => new[] {EnemyEnum.Red,EnemyEnum.RedBoss},

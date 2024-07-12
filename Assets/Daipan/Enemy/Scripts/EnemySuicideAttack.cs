@@ -32,7 +32,7 @@ namespace Daipan.Enemy.Scripts
                 playerMono.Hp = new Hp(playerMono.Hp.Value - _enemyParamData.GetAttackAmount());
 
                 // Optionally, you can destroy the enemy after the attack if required
-                _enemyMono.Die(_enemyMono);
+                // _enemyMono.Die(_enemyMono);  // OnDaipaned()を呼ぶ？
             });
         }
     }
