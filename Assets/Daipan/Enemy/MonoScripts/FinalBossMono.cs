@@ -18,8 +18,8 @@ namespace Daipan.Enemy.MonoScripts
 {
     public sealed class FinalBossMono : AbstractEnemyMono 
     {
-        public AbstractFinalBossViewMono? FinalBossViewMono => finalBossViewMono;
-        [SerializeField] AbstractFinalBossViewMono? finalBossViewMono;
+        public FinalBossViewMono? FinalBossViewMono => finalBossViewMono;
+        [SerializeField] FinalBossViewMono? finalBossViewMono;
         EnemyCluster _enemyCluster = null!;
         EnemyAttackDecider _enemyAttackDecider = null!;
         EnemyDie _enemyDie = null!;
@@ -107,7 +107,7 @@ namespace Daipan.Enemy.MonoScripts
         {
             // todo: EnemyClusterとFinalBossを繋ぐ
             // _enemyCluster.Remove(thisEnemyMono);
-            _enemyDie.Died(finalBossViewMono, isDaipaned);
+           // _enemyDie.Died(finalBossViewMono, isDaipaned);
         }
 
         public override void OnAttacked(IPlayerParamData playerParamData)
