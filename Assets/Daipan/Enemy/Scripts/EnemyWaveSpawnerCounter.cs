@@ -62,7 +62,7 @@ namespace Daipan.Enemy.Scripts
 
             if (CurrentSpawnedEnemyCount >= MaxSpawnedEnemyCount) return;
             
-            Debug.Log($"_waveState.CurrentWave: {_waveState.CurrentWave} _enemyWaveParamContainer.WaveTotalCount: {_enemyWaveParamContainer.WaveTotalCount}"); // "SetDomain enemy enum: " + enemyParamData.GetEnemyEnum()
+            Debug.Log($"_waveState.CurrentWave: {_waveState.CurrentWave} _enemyWaveParamContainer.WaveTotalCount: {_enemyWaveParamContainer.WaveTotalCount}, CurrentSpawnedEnemyCount: {CurrentSpawnedEnemyCount}, MaxSpawnedEnemyCount: {MaxSpawnedEnemyCount}");
             // LastWaveの時はFinalBossをスポーン
             if (_waveState.CurrentWave == _enemyWaveParamContainer.WaveTotalCount - 1)
             {
@@ -89,12 +89,18 @@ namespace Daipan.Enemy.Scripts
                     .Subscribe(_ =>
                     {
                         _waveState.NextWave();
-                        CurrentSpawnedEnemyCount = 0; // Observableでも0にしているが、ここで
                         IsInWaveInterval = false;
                     });
             }
         }
 
+        // デバッグ用
+        public void ResetCounter()
+        {
+            CurrentSpawnedEnemyCount = 0;
+            Timer = 0;
+            IsInWaveInterval = false;
+        }
         public void Dispose()
         {
             _enemySpawner.Dispose();
