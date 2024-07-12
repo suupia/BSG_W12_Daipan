@@ -24,7 +24,7 @@ namespace Daipan.Enemy.MonoScripts
         EnemyAttackDecider _enemyAttackDecider = null!;
         EnemyDie _enemyDie = null!;
         IEnemySpawnPoint _enemySpawnPoint = null!;
-        IFinalBossParamContainer _finalBossParamContainer = null!;
+        FinalBossParamData _finalBossParamData = null!;
         IEnemyOnAttacked _enemyOnAttacked = null!;
         PlayerHolder _playerHolder = null!;
         public override EnemyEnum EnemyEnum { get; protected set; } = EnemyEnum.None;
@@ -51,9 +51,9 @@ namespace Daipan.Enemy.MonoScripts
 
             // 攻撃範囲よりプレイヤーとの距離が大きいときだけ動く
             if (transform.position.x - _playerHolder.PlayerMono.transform.position.x >=
-                _finalBossParamContainer.GetFinalBossParamData().GetAttackRange())
+                _finalBossParamData.GetAttackRange())
             {
-                var moveSpeed = (float)_finalBossParamContainer.GetFinalBossParamData().GetMoveSpeedPerSec();
+                var moveSpeed = (float)_finalBossParamData.GetMoveSpeedPerSec();
                 transform.position += Time.deltaTime * moveSpeed * Vector3.left;
                 IsReachedPlayer = false;
             }
@@ -65,19 +65,19 @@ namespace Daipan.Enemy.MonoScripts
             if (transform.position.x < _enemySpawnPoint.GetEnemyDespawnedPoint().x)
                 Die(this, isDaipaned: false);
 
-            finalBossViewMono?.SetHpGauge(Hp.Value, _finalBossParamContainer.GetFinalBossParamData().GetMaxHp());
+            finalBossViewMono?.SetHpGauge(Hp.Value, _finalBossParamData.GetMaxHp());
         }
 
         [Inject]
         public void Initialize(
             PlayerHolder playerHolder
             , IEnemySpawnPoint enemySpawnPointData
-            , IFinalBossParamContainer finalBossParamData
+            , FinalBossParamData finalBossParamData
         )
         {
             _playerHolder = playerHolder;
             _enemySpawnPoint = enemySpawnPointData;
-            _finalBossParamContainer = finalBossParamData;
+            _finalBossParamData = finalBossParamData;
         }
 
         public void SetDomain(
@@ -93,8 +93,8 @@ namespace Daipan.Enemy.MonoScripts
             _enemyAttackDecider = enemyAttackDecider;
             _enemyDie = enemyDie;
             _enemyOnAttacked = enemyOnAttacked;
-            finalBossViewMono?.SetDomain(_finalBossParamContainer.GetFinalBossViewParamData());
-            Hp = new Hp(_finalBossParamContainer.GetFinalBossParamData().GetMaxHp());
+            finalBossViewMono?.SetDomain(_finalBossParamData);
+            Hp = new Hp(_finalBossParamData.GetMaxHp());
         }
 
         public event EventHandler<DiedEventArgs>? OnDied
