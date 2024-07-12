@@ -64,7 +64,8 @@ namespace Daipan.Enemy.MonoScripts
 
             if (transform.position.x < _enemySpawnPoint.GetEnemyDespawnedPoint().x)
                 Die(this, isDaipaned: false);
-
+    
+            Debug.Log($"FinalBossMono Hp.Value: {Hp.Value}");
             finalBossViewMono?.SetHpGauge(Hp.Value, _finalBossParamData.GetMaxHp());
         }
 
