@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Daipan.Enemy.MonoScripts
 {
-    public sealed class FinalBossViewMono : MonoBehaviour 
+    public sealed class FinalBossViewMono : AbstractFinalBossViewMono 
     {
         [SerializeField] HpGaugeMono hpGaugeMono = null!;
         [SerializeField] SpriteRenderer tempSpriteRenderer = null!; // todo: 完成時には削除する

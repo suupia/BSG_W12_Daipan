@@ -22,7 +22,7 @@ namespace Daipan.Enemy.MonoScripts
         [SerializeField] FinalBossViewMono? finalBossViewMono;
         EnemyCluster _enemyCluster = null!;
         FinalBossActionDecider _finalBossActionDecider = null!;
-        EnemyDie _enemyDie = null!;
+        FinalBossDie _enemyDie = null!;
         IEnemySpawnPoint _enemySpawnPoint = null!;
         FinalBossParamData _finalBossParamData = null!;
         IEnemyOnAttacked _enemyOnAttacked = null!;
@@ -82,7 +82,7 @@ namespace Daipan.Enemy.MonoScripts
             EnemyEnum enemyEnum
             , EnemyCluster enemyCluster
             , FinalBossActionDecider finalBossActionDecider
-            , EnemyDie enemyDie
+            , FinalBossDie enemyDie
             , IEnemyOnAttacked enemyOnAttacked
         )
         {
@@ -117,7 +117,7 @@ namespace Daipan.Enemy.MonoScripts
         {
             // todo: EnemyClusterとFinalBossを繋ぐ
             _enemyCluster.Remove(this);
-            // _enemyDie.Died(finalBossViewMono, isDaipaned);
+            _enemyDie.Died(finalBossViewMono, isDaipaned);
         }
 
         public override void Highlight(bool isHighlighted)

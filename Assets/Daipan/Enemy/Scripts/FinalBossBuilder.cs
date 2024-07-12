@@ -36,7 +36,7 @@ namespace Daipan.Enemy.Scripts
                 enemyEnum
                 ,_enemyCluster
                 ,new FinalBossActionDecider(_enemySpawner)
-                ,new EnemyDie(finalBossMono)
+                ,new FinalBossDie(finalBossMono)
                 , _enemyOnAttackedBuilder.SwitchEnemyOnAttacked(enemyEnum)
                 );
             
