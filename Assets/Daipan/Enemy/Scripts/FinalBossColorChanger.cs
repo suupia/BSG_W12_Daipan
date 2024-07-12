@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Daipan.Enemy.Scripts
 {
-    public class FinalBossColorChanger
+    public class FinalBossColorChanger : IDisposable
     {
         const double ChangeColorSec = 2f;
         public FinalBossColor CurrentColor { get; private set; }

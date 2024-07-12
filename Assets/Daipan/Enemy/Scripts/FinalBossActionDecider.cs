@@ -15,7 +15,7 @@ namespace Daipan.Enemy.Scripts
         readonly EnemySpawner _enemySpawner;
         readonly CompositeDisposable _disposable = new();
         FinalBossMono _finalBossMono = null!;
-        FinalBossViewMono? _finalBossViewMono;
+        AbstractFinalBossViewMono? _finalBossViewMono;
         IFinalBossParamData _finalBossParamData = null!;
         PlayerMono _playerMono = null!;
 
@@ -26,7 +26,7 @@ namespace Daipan.Enemy.Scripts
 
         public void SetDomain(
             FinalBossMono finalBossMono
-            , FinalBossViewMono? finalBossViewMono
+            , AbstractFinalBossViewMono? finalBossViewMono
             , IFinalBossParamData finalBossParamData
             , PlayerMono playerMono
         )
@@ -52,7 +52,7 @@ namespace Daipan.Enemy.Scripts
 
         static IDisposable SummonEnemy(
             IFinalBossParamData finalBossParamData
-            , FinalBossViewMono? finalBossViewMono
+            , AbstractFinalBossViewMono? finalBossViewMono
             , EnemySpawner enemySpawner)
         {
             if (finalBossViewMono != null) finalBossViewMono.SummonEnemy();
@@ -68,7 +68,7 @@ namespace Daipan.Enemy.Scripts
 
         static void Attack(
             AbstractEnemyMono enemyMono
-            , FinalBossViewMono? enemyViewMono
+            , AbstractFinalBossViewMono? enemyViewMono
             , IEnemyParamData enemyParamData
             , PlayerMono playerMono
         )

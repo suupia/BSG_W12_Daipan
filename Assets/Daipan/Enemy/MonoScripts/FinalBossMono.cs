@@ -18,8 +18,8 @@ namespace Daipan.Enemy.MonoScripts
 {
     public sealed class FinalBossMono : AbstractEnemyMono
     {
-        public FinalBossViewMono? FinalBossViewMono => finalBossViewMono;
-        [SerializeField] FinalBossViewMono? finalBossViewMono;
+        public AbstractFinalBossViewMono? FinalBossViewMono => finalBossViewMono;
+        [SerializeField] AbstractFinalBossViewMono? finalBossViewMono;
         EnemyCluster _enemyCluster = null!;
         FinalBossActionDecider _finalBossActionDecider = null!;
         FinalBossDie _enemyDie = null!;
