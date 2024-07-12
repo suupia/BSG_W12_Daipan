@@ -27,7 +27,6 @@ namespace Daipan.Enemy.Scripts
         readonly IPrefabLoader<EnemyMono> _enemyMonoLoader;
         readonly EnemyCluster _enemyCluster;
         readonly IEnemySpawnPoint _enemySpawnPoint;
-        readonly IEnemyWaveParamContainer _enemyWavePramContainer;
         readonly IEnemyBuilder _enemyBuilder;
         readonly IEnemyEnumSelector _enemyEnumSelector;
         readonly List<IDisposable> _disposables = new();
@@ -39,7 +38,6 @@ namespace Daipan.Enemy.Scripts
             , IPrefabLoader<EnemyMono> enemyMonoLoader
             , EnemyCluster enemyCluster
             , IEnemySpawnPoint enemySpawnPoint
-            , IEnemyWaveParamContainer enemyWavePramContainer
             , IEnemyBuilder enemyBuilder
             , IEnemyEnumSelector enemyEnumSelector
         )
@@ -48,7 +46,6 @@ namespace Daipan.Enemy.Scripts
             _enemyMonoLoader = enemyMonoLoader;
             _enemyCluster = enemyCluster;
             _enemySpawnPoint = enemySpawnPoint;
-            _enemyWavePramContainer = enemyWavePramContainer;
             _enemyBuilder = enemyBuilder;
             _enemyEnumSelector = enemyEnumSelector;
         }
