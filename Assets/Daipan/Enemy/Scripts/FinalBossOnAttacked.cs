@@ -13,31 +13,53 @@ using UnityEngine;
 
 namespace Daipan.Enemy.Scripts
 {
-    public sealed class FinalBossOnAttacked : IEnemyOnAttacked
+    public sealed class FinalBossOnAttacked : IEnemyOnAttacked, IDisposable
     {
-        const double AllowableSec = 0.15f;
-        readonly SamePressChecker _samePressChecker;
-        readonly List<PlayerColor> _canAttackPlayers;
+        const double ChangeColorSec = 2f;
+        FinalBossColor CurrentColor { get; set; }
+        readonly CompositeDisposable _disposable = new();
 
-        public FinalBossOnAttacked(List<PlayerColor> canAttackPlayers)
+        public FinalBossOnAttacked()
         {
-           _samePressChecker = new SamePressChecker(AllowableSec, canAttackPlayers.Count); 
-           _canAttackPlayers = canAttackPlayers;
+            _disposable.Add(
+                Observable
+                    .Interval(TimeSpan.FromSeconds(ChangeColorSec))
+                    .Subscribe(_ => CurrentColor = NextColor(CurrentColor))
+            );
         }
 
+        enum FinalBossColor
+        {
+            Red,
+            Blue,
+            Yellow
+        }
+
+        public void Dispose()
+        {
+            _disposable.Dispose();
+        }
 
         public Hp OnAttacked(Hp hp, IPlayerParamData playerParamData)
         {
-            Debug.Log($"OnAttacked hp: { hp.Value } playerParamData: { playerParamData }");
+            Debug.Log($"OnAttacked hp: {hp.Value} playerParamData: {playerParamData}");
             var attackPlayer = playerParamData.PlayerEnum();
-            var index = _canAttackPlayers.IndexOf(attackPlayer);
-            if (index == -1) return hp;
-            _samePressChecker.SetOn(index);
-            if (!_samePressChecker.IsAllOn()) return hp;
-            return new Hp(hp.Value - playerParamData.GetAttack());
+            if (attackPlayer == PlayerColor.Red && CurrentColor == FinalBossColor.Red
+                || attackPlayer == PlayerColor.Blue && CurrentColor == FinalBossColor.Blue
+                || attackPlayer == PlayerColor.Yellow && CurrentColor == FinalBossColor.Yellow)
+                return new Hp(hp.Value - playerParamData.GetAttack());
+            return hp;
         }
-        
-    }
 
- 
+        static FinalBossColor NextColor(FinalBossColor currentColor)
+        {
+            return currentColor switch
+            {
+                FinalBossColor.Red => FinalBossColor.Blue,
+                FinalBossColor.Blue => FinalBossColor.Yellow,
+                FinalBossColor.Yellow => FinalBossColor.Red,
+                _ => throw new ArgumentOutOfRangeException(nameof(currentColor), currentColor, null)
+            };
+        }
+    }
 }

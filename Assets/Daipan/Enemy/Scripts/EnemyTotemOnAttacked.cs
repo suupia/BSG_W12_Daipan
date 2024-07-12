@@ -13,7 +13,7 @@ using UnityEngine;
 
 namespace Daipan.Enemy.Scripts
 {
-    public sealed class EnemyTotemOnAttacked : IEnemyOnAttacked
+    public sealed class EnemyTotemOnAttacked : IEnemyOnAttacked ,IDisposable
     {
         const double AllowableSec = 0.15f;
         readonly SamePressChecker _samePressChecker;
@@ -36,7 +36,11 @@ namespace Daipan.Enemy.Scripts
             if (!_samePressChecker.IsAllOn()) return hp;
             return new Hp(hp.Value - playerParamData.GetAttack());
         }
-        
+
+        public void Dispose()
+        {
+            _samePressChecker.Dispose();
+        }
     }
 
  
