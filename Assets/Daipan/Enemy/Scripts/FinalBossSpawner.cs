@@ -44,7 +44,6 @@ namespace Daipan.Enemy.Scripts
         
         void SpawnFinalBoss(Vector3 spawnPosition)
         {
-            Debug.Log($"FinalBossSpawner.SpawnFinalBoss() spawnPosition: {spawnPosition}");
             var enemyMonoPrefab = _finalBossMonoLoader.Load();
             Debug.Log($"enemyMonoPrefab: {enemyMonoPrefab}, spawnPosition: {spawnPosition}");
             var enemyMonoObject = _container.Instantiate(enemyMonoPrefab, spawnPosition, Quaternion.identity);

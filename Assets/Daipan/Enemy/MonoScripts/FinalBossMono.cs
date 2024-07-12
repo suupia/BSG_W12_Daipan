@@ -49,6 +49,8 @@ namespace Daipan.Enemy.MonoScripts
             // _enemyAttackDecider.AttackUpdate(this, finalBossViewMono,
             //     _enemyParamContainer.GetEnemyParamData(EnemyEnum), _playerHolder.PlayerMono);
 
+            
+            Debug.Log($"distance: {transform.position.x - _playerHolder.PlayerMono.transform.position.x}, attackRange: {_finalBossParamData.GetAttackRange()}");
             // 攻撃範囲よりプレイヤーとの距離が大きいときだけ動く
             if (transform.position.x - _playerHolder.PlayerMono.transform.position.x >=
                 _finalBossParamData.GetAttackRange())
@@ -106,8 +108,8 @@ namespace Daipan.Enemy.MonoScripts
         public override void Die(AbstractEnemyMono enemyMono, bool isDaipaned = false)
         {
             // todo: EnemyClusterとFinalBossを繋ぐ
-            // _enemyCluster.Remove(thisEnemyMono);
-           // _enemyDie.Died(finalBossViewMono, isDaipaned);
+            _enemyCluster.Remove(this);
+           // _enemyDie.Died(finalBossViewMono, isDaipaned); // finalBossViewMono
         }
 
         public override void OnAttacked(IPlayerParamData playerParamData)
