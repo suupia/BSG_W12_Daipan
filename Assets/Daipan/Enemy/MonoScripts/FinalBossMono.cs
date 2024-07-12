@@ -110,7 +110,8 @@ namespace Daipan.Enemy.MonoScripts
         public override void OnDaipaned()
         {
             Hp = new Hp(Hp.Value / 2); // todo:パラメータを受け取って実装する
-            finalBossViewMono?.Daipaned(() => Debug.Log($"FinalBossMono Daipaned"));
+            transform.position += Vector3.right * 3;  // 適当に右にノックバック 
+            finalBossViewMono?.DaipanHit();
         }
 
         void Die(AbstractEnemyMono enemyMono, bool isDaipaned = false)
