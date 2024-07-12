@@ -4,13 +4,13 @@ using Daipan.Enemy.LevelDesign.Scripts;
 
 namespace Daipan.Enemy.Scripts
 {
-    public class FinalBossParamData : IFinalBossParamData, IFinalBossViewParamData 
+    public class FinalBossParamData : IFinalBossParamData, IFinalBossViewParamData
     {
-        readonly FinalBossParam _finalBossParam;
+        readonly FinalBossParamManager _finalBossParamManager;
         
-        public FinalBossParamData(FinalBossParam finalBossParam)
+        public FinalBossParamData(FinalBossParamManager finalBossParamManager)
         {
-            _finalBossParam = finalBossParam;
+            _finalBossParamManager = finalBossParamManager;
         }
 
 
@@ -28,9 +28,9 @@ namespace Daipan.Enemy.Scripts
         public double GetMoveSpeedPerSec() => 0;
         
         // FinalBoss
-        public double GetSummonActionIntervalSec() => _finalBossParam.summonActionIntervalSec;
-        public int GetSummonEnemyCount() => _finalBossParam.summonEnemyCount;
-        public double GetSummonEnemyIntervalSec() => _finalBossParam.summonEnemyIntervalSec;
+        public double GetSummonActionIntervalSec() => _finalBossParamManager.finalBossParam.summonActionIntervalSec;
+        public int GetSummonEnemyCount() => _finalBossParamManager.finalBossParam.summonEnemyCount;
+        public double GetSummonEnemyIntervalSec() => _finalBossParamManager.finalBossParam.summonEnemyIntervalSec;
      } 
 }
 

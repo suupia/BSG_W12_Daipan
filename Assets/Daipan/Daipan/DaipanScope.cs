@@ -1,3 +1,4 @@
+using System;
 using Daipan.Battle.scripts;
 using Daipan.Battle.Scripts;
 using Daipan.Comment.MonoScripts;
@@ -50,6 +51,8 @@ namespace Daipan.Daipan
 
         [FormerlySerializedAs("commentParamsManager")] [SerializeField]
         CommentParamManager commentParamManager = null!;
+        
+        [SerializeField] FinalBossParamManager finalBossParamManager = null!;
 
         [SerializeField] IrritatedParams irritatedParams = null!;
         [SerializeField] TowerParams towerParams = null!;
@@ -256,6 +259,9 @@ namespace Daipan.Daipan
             builder.Register<EnemyEnumSelector>(Lifetime.Scoped).As<IEnemyEnumSelector>();
             builder.Register<EnemyBuilder>(Lifetime.Scoped).As<IEnemyBuilder>();
             builder.Register<EnemySpecialOnAttacked>(Lifetime.Scoped);
+            
+            // FinalBoss
+            builder.RegisterInstance(finalBossParamManager); 
             builder.Register<FinalBossActionDecider>(Lifetime.Scoped);
             builder.Register<FinalBossPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<FinalBossMono>>();
             builder.Register<FinalBossBuilder>(Lifetime.Scoped);
