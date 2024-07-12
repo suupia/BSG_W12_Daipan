@@ -66,7 +66,8 @@ namespace Daipan.DebugInput.MonoScripts
             {
                 waveState.NextWave();
                 if(waveState.CurrentWave > 100) break;
-            } 
+            }
+            Debug.Log($"ForceNextWave waveState.CurrentWave: {waveState.CurrentWave}");
         }
 
         static void SetNearLastTime(StreamTimer streamTimer, StreamData streamData)

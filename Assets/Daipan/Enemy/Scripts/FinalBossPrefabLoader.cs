@@ -11,7 +11,7 @@ public sealed class FinalBossPrefabLoader : IPrefabLoader<FinalBossMono>
 
     public FinalBossPrefabLoader()
     {
-        _loader = new PrefabLoaderFromResources<FinalBossMono>("Enemy");
+        _loader = new PrefabLoaderFromResources<FinalBossMono>("FinalBoss");
     }
 
     public FinalBossMono Load()

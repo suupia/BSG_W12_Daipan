@@ -39,12 +39,14 @@ namespace Daipan.Enemy.Scripts
                 .ToList();
             var middlePosition = spawnPositions[spawnPositions.Count / 2];
                 
-            SpawnEnemy(middlePosition); 
+            SpawnFinalBoss(middlePosition); 
         }
         
-        void SpawnEnemy(Vector3 spawnPosition)
+        void SpawnFinalBoss(Vector3 spawnPosition)
         {
+            Debug.Log($"FinalBossSpawner.SpawnFinalBoss() spawnPosition: {spawnPosition}");
             var enemyMonoPrefab = _finalBossMonoLoader.Load();
+            Debug.Log($"enemyMonoPrefab: {enemyMonoPrefab}, spawnPosition: {spawnPosition}");
             var enemyMonoObject = _container.Instantiate(enemyMonoPrefab, spawnPosition, Quaternion.identity);
             var enemyMono = _finalBossBuilder.Build(enemyMonoObject);
             _enemyCluster.Add(enemyMono);

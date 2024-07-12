@@ -5,6 +5,7 @@ using Daipan.Core.Interfaces;
 using Daipan.Enemy.Interfaces;
 using UnityEngine;
 using R3;
+using UnityEditor.IMGUI.Controls;
 
 namespace Daipan.Enemy.Scripts
 {
@@ -61,7 +62,8 @@ namespace Daipan.Enemy.Scripts
             Timer = 0;
 
             if (CurrentSpawnedEnemyCount >= MaxSpawnedEnemyCount) return;
-
+            
+            Debug.Log($"_waveState.CurrentWave: {_waveState.CurrentWave} _enemyWaveParamContainer.WaveTotalCount: {_enemyWaveParamContainer.WaveTotalCount}"); // "SetDomain enemy enum: " + enemyParamData.GetEnemyEnum()
             // LastWaveの時はFinalBossをスポーン
             if (_waveState.CurrentWave == _enemyWaveParamContainer.WaveTotalCount - 1)
             {
