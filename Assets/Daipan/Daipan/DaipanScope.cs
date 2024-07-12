@@ -254,14 +254,15 @@ namespace Daipan.Daipan
 
             // Enemy
             RegisterEnemy(builder, enemyParamsManager);
-            builder.Register<EnemyWaveSpawnerCounter>(Lifetime.Scoped).As<IUpdate>();
+            builder.Register<EnemyWaveSpawnerCounter>(Lifetime.Scoped).As<IStart>().As<IUpdate>();
             builder.Register<EnemySpawner>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
             builder.Register<EnemyEnumSelector>(Lifetime.Scoped).As<IEnemyEnumSelector>();
             builder.Register<EnemyBuilder>(Lifetime.Scoped).As<IEnemyBuilder>();
             builder.Register<EnemySpecialOnAttacked>(Lifetime.Scoped);
             
             // FinalBoss
-            builder.RegisterInstance(finalBossParamManager); 
+            builder.RegisterInstance(finalBossParamManager);
+            builder.Register<FinalBossParamData>(Lifetime.Scoped);
             builder.Register<FinalBossActionDecider>(Lifetime.Scoped);
             builder.Register<FinalBossPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<FinalBossMono>>();
             builder.Register<FinalBossBuilder>(Lifetime.Scoped);

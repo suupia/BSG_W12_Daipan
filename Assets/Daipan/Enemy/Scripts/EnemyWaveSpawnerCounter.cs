@@ -9,7 +9,7 @@ using UnityEditor.IMGUI.Controls;
 
 namespace Daipan.Enemy.Scripts
 {
-    public class EnemyWaveSpawnerCounter : IUpdate, IDisposable
+    public class EnemyWaveSpawnerCounter : IStart, IUpdate, IDisposable
     {
         readonly EnemySpawner _enemySpawner;
         readonly FinalBossSpawner _finalBossSpawner;
@@ -19,7 +19,8 @@ namespace Daipan.Enemy.Scripts
         int MaxSpawnedEnemyCount => _enemyWaveParamContainer.GetEnemyWaveParamData().GetSpawnEnemyCount();
         double Timer { get; set; }
         bool IsInWaveInterval { get; set; }
-        IDisposable? _disposable;
+        IDisposable? _waveSpawnDisposable;
+        readonly CompositeDisposable _disposables = new();
 
         public EnemyWaveSpawnerCounter(
             EnemySpawner enemySpawner
@@ -33,18 +34,25 @@ namespace Daipan.Enemy.Scripts
             _enemyWaveParamContainer = enemyWaveParamContainer;
             _waveState = waveState;
         }
-
+    
+        void IStart.Start()
+        {
+            _disposables.Add(
+                Observable
+                    .EveryValueChanged(_waveState, x => x.CurrentWave)
+                    .Subscribe(_ => CurrentSpawnedEnemyCount = 0)
+            );
+        }
         void IUpdate.Update()
         {
             IntervalSpawnEnemy();
 
             if (CurrentSpawnedEnemyCount == MaxSpawnedEnemyCount)
             {
-                CurrentSpawnedEnemyCount = 0;
                 IsInWaveInterval = true;
-                _disposable?.Dispose();
-                _disposable = Observable
-                    .Timer(TimeSpan.FromSeconds(_enemyWaveParamContainer.GetEnemyWaveParamData().GetWaveIntervalSec()))
+                _waveSpawnDisposable?.Dispose();
+                _waveSpawnDisposable = Observable
+                    .Timer(TimeSpan.FromSeconds(_enemyWaveParamContainer.GetEnemyWaveParamData().GetWaveIntervalSec())) // これを逐次評価したいがわからないので、IUpdateにしている
                     .Subscribe(_ =>
                     {
                         _waveState.NextWave();
@@ -81,7 +89,8 @@ namespace Daipan.Enemy.Scripts
         public void Dispose()
         {
             _enemySpawner.Dispose();
-            _disposable?.Dispose();
+            _waveSpawnDisposable?.Dispose();
+            _disposables.Dispose();
         }
 
         ~EnemyWaveSpawnerCounter()
