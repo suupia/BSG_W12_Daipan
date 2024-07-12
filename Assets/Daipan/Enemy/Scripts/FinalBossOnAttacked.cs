@@ -13,31 +13,14 @@ using UnityEngine;
 
 namespace Daipan.Enemy.Scripts
 {
-    public sealed class FinalBossOnAttacked : IEnemyOnAttacked, IDisposable
+    public sealed class FinalBossOnAttacked : IEnemyOnAttacked
     {
-        const double ChangeColorSec = 2f;
-        FinalBossColor CurrentColor { get; set; }
-        readonly CompositeDisposable _disposable = new();
+        FinalBossColor CurrentColor => _finalBossColorChanger.CurrentColor;
+        readonly FinalBossColorChanger _finalBossColorChanger;
 
-        public FinalBossOnAttacked()
+        public FinalBossOnAttacked(FinalBossColorChanger finalBossColorChanger)
         {
-            _disposable.Add(
-                Observable
-                    .Interval(TimeSpan.FromSeconds(ChangeColorSec))
-                    .Subscribe(_ => CurrentColor = NextColor(CurrentColor))
-            );
-        }
-
-        enum FinalBossColor
-        {
-            Red,
-            Blue,
-            Yellow
-        }
-
-        public void Dispose()
-        {
-            _disposable.Dispose();
+            _finalBossColorChanger = finalBossColorChanger;
         }
 
         public Hp OnAttacked(Hp hp, IPlayerParamData playerParamData)
@@ -51,15 +34,5 @@ namespace Daipan.Enemy.Scripts
             return hp;
         }
 
-        static FinalBossColor NextColor(FinalBossColor currentColor)
-        {
-            return currentColor switch
-            {
-                FinalBossColor.Red => FinalBossColor.Blue,
-                FinalBossColor.Blue => FinalBossColor.Yellow,
-                FinalBossColor.Yellow => FinalBossColor.Red,
-                _ => throw new ArgumentOutOfRangeException(nameof(currentColor), currentColor, null)
-            };
-        }
     }
 }
