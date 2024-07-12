@@ -22,7 +22,7 @@ MonoBehaviour:
       enemyHpParam:
         maxHp: 100
       enemyMoveParam:
-        moveSpeedPerSec: 1
+        moveSpeedPerSec: 0.5
       enemySpawnParam:
         spawnRatio: 0
         daipanThreshold: 0

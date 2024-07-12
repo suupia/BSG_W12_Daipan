@@ -117,6 +117,8 @@ namespace Daipan.Enemy.MonoScripts
         {
             // todo: EnemyClusterとFinalBossを繋ぐ
             _enemyCluster.Remove(this);
+            _finalBossActionDecider.Dispose();
+            
             _enemyDie.Died(finalBossViewMono, isDaipaned);
         }
 
