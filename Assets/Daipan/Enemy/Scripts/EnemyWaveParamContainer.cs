@@ -16,25 +16,28 @@ namespace Daipan.Enemy.Scripts
     {
         readonly IList<EnemyWaveParamData> _enemyWaveParamDatas;
         readonly WaveState _waveState;
+        public int WaveTotalCount => _enemyWaveParamDatas.Count;
+
         [Inject]
         public EnemyWaveParamContainer(
             EnemyParamsManager enemyParamsManager,
             WaveState waveState
-            )
+        )
         {
             _enemyWaveParamDatas = CreateEnemyWaveParamData(enemyParamsManager);
-            _waveState = waveState; 
+            _waveState = waveState;
         }
 
         public EnemyWaveParamData GetEnemyWaveParamData()
         {
             return GetEnemyWaveParamData(_waveState, _enemyWaveParamDatas);
         }
-        
-        static EnemyWaveParamData GetEnemyWaveParamData(WaveState waveState , IList<EnemyWaveParamData> enemyWaveParamDatas)
+
+        static EnemyWaveParamData GetEnemyWaveParamData(WaveState waveState,
+            IList<EnemyWaveParamData> enemyWaveParamDatas)
         {
-            return enemyWaveParamDatas[waveState.CurrentWave]; 
-        } 
+            return enemyWaveParamDatas[waveState.CurrentWave];
+        }
 
         static List<EnemyWaveParamData> CreateEnemyWaveParamData(EnemyParamsManager enemyParamsManager)
         {
@@ -48,6 +51,7 @@ namespace Daipan.Enemy.Scripts
             var enemyWaveParams = new List<EnemyWaveParamData>();
             foreach (var enemyWaveParam in enemyParamsManager.enemyWaveParams)
                 enemyWaveParams.Add(new EnemyWaveParamData(enemyWaveParam));
+            Debug.Log($"enemyWaveParams.Count: {enemyWaveParams.Count}");
             return enemyWaveParams;
         }
     }

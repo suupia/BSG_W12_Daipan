@@ -23,7 +23,7 @@ namespace Daipan.Enemy.Scripts
             )
         {
             Timer += Time.deltaTime;
-            if (Timer >= enemyParamData.GetAttackDelayDec())
+            if (Timer >= enemyParamData.GetAttackIntervalSec())
             {
                 Timer = 0;
                 Attack(enemyMono,enemyViewMono,enemyParamData, playerMono);

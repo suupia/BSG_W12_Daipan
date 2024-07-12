@@ -12,11 +12,11 @@ namespace Daipan.LevelDesign.Enemy.Scripts
     [Serializable]
     public sealed class EnemyAttackParam
     {
-        [Header("敵の攻撃力")] [Min(0)] public int attackAmount;
+        [Header("敵の攻撃力")] [Min(0)] public int attackAmount = 1;
 
-        [Header("攻撃間隔")] [Min(0)] public float attackDelaySec;
+        [FormerlySerializedAs("attackDelaySec")] [Header("攻撃間隔")] [Min(0)] public float attackIntervalSec = 1;
 
-        [Header("攻撃範囲")] [Min(0)] public float attackRange;
+        [Header("攻撃範囲")] [Min(0)] public float attackRange = 2;
     }
 
     [Serializable]

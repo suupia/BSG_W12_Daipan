@@ -1,5 +1,7 @@
 #nullable enable
+using System;
 using Daipan.Enemy.Interfaces;
+using Daipan.Enemy.LevelDesign.Scripts;
 using Daipan.Enemy.MonoScripts;
 using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.Player.MonoScripts;
@@ -8,16 +10,11 @@ using UnityEngine;
 
 namespace Daipan.Enemy.Scripts
 {
-    public sealed class FinalBossParam
-    {
-        public double GetSummonEnemyIntervalSec ()=> 1;
-        public int GetSummonEnemyCount() => 3;
-    }
-    
+
     public sealed class FinalBossSummonEnemyDecider
     {
         float Timer { get; set; }
-        FinalBossParam _finalBossParam = null!;
+        readonly FinalBossParam _finalBossParam = null!;
         
         /// <summary>
         /// Please call this method in Update method of MonoBehaviour
@@ -30,7 +27,7 @@ namespace Daipan.Enemy.Scripts
             )
         {
             Timer += Time.deltaTime;
-            if (Timer >=_finalBossParam.GetSummonEnemyIntervalSec())
+            if (Timer >=_finalBossParam.summonEnemyIntervalSec)
             {
                 Timer = 0;
                 SummonEnemy(enemyMono,enemyViewMono,enemyParamData, playerMono);

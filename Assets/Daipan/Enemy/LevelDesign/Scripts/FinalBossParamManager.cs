@@ -14,7 +14,7 @@ namespace Daipan.Enemy.LevelDesign.Scripts
         [Header("FinalBOSSに関するパラメータを設定してください。")]
         public FinalBossParam finalBossParam = null!;
         
-        [Header("FinalWaveに関するレベルデザインはこちら")] [Min(0)]
+        [Header("FinalWaveに関するレベルデザインはこちら")]
         public FinalWaveParam finalWaveParam = null!;
     } 
 }
