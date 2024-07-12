@@ -51,21 +51,27 @@ namespace Daipan.Enemy.Scripts
 
         void IntervalSpawnEnemy()
         {
-            if (!IsInWaveInterval)
+            if (IsInWaveInterval) return;
+
+            Timer += Time.deltaTime;
+            if (Timer <= _enemyWaveParamContainer.GetEnemyWaveParamData().GetSpawnIntervalSec()) return;
+            Timer = 0;
+
+            if (CurrentSpawnedEnemyCount >= MaxSpawnedEnemyCount) return;
+
+            // LastWaveの時はFinalBossをスポーン
+            if (_waveState.CurrentWave == _enemyWaveParamContainer.WaveTotalCount - 1)
             {
-                Timer += Time.deltaTime;
-                Debug.Log($"WaveState: {_waveState.CurrentWave}");
-                if (Timer > _enemyWaveParamContainer.GetEnemyWaveParamData().GetSpawnIntervalSec()) // todo:ここでエラーが起きている
-                {
-                    Timer = 0;
-                    if (CurrentSpawnedEnemyCount < MaxSpawnedEnemyCount)
-                    {
-                        _enemySpawner.SpawnEnemy();
-                        CurrentSpawnedEnemyCount++;
-                    }
-                }
+                _enemySpawner.SpawnFinalBoss();
+                CurrentSpawnedEnemyCount++;
+            }
+            else
+            {
+                _enemySpawner.SpawnEnemy();
+                CurrentSpawnedEnemyCount++;
             }
         }
+
 
         public void Dispose()
         {
