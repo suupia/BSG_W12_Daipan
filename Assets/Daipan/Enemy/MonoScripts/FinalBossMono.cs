@@ -103,19 +103,24 @@ namespace Daipan.Enemy.MonoScripts
             add => _enemyDie.OnDied += value;
             remove => _enemyDie.OnDied -= value;
         }
+    
 
-        public override void Die(AbstractEnemyMono enemyMono, bool isDaipaned = false)
-        {
-            // todo: EnemyClusterとFinalBossを繋ぐ
-            _enemyCluster.Remove(this);
-           // _enemyDie.Died(finalBossViewMono, isDaipaned); // finalBossViewMono
-        }
 
         public override void OnAttacked(IPlayerParamData playerParamData)
         {
             Hp = _enemyOnAttacked.OnAttacked(Hp, playerParamData);
         }
-
+        public override  void OnDaipaned()
+        {
+            Die(this, isDaipaned:false); 
+        }
+        
+        void Die(AbstractEnemyMono enemyMono, bool isDaipaned = false)
+        {
+            // todo: EnemyClusterとFinalBossを繋ぐ
+            _enemyCluster.Remove(this);
+            // _enemyDie.Died(finalBossViewMono, isDaipaned); // finalBossViewMono
+        }
         public override void Highlight(bool isHighlighted)
         {
             finalBossViewMono?.Highlight(isHighlighted);

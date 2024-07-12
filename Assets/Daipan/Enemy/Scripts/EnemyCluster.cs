@@ -70,7 +70,7 @@ namespace Daipan.Enemy.Scripts
             foreach (var enemy in enemies)
             {
                 if(enemy == null) continue;
-                enemy.Die(enemy,isDaipaned:true); 
+                enemy.OnDaipaned(); 
             }
         }
 
