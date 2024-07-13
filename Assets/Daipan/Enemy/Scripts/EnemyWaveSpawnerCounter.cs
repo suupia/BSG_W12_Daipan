@@ -39,7 +39,7 @@ namespace Daipan.Enemy.Scripts
         {
             _disposables.Add(
                 Observable
-                    .EveryValueChanged(_waveState, x => x.CurrentWave)
+                    .EveryValueChanged(_waveState, x => x.CurrentWaveIndex)
                     .Subscribe(_ => CurrentSpawnedEnemyCount = 0)
             );
         }
@@ -62,9 +62,9 @@ namespace Daipan.Enemy.Scripts
 
             if (CurrentSpawnedEnemyCount >= MaxSpawnedEnemyCount) return;
             
-            Debug.Log($"_waveState.CurrentWave: {_waveState.CurrentWave} _enemyWaveParamContainer.WaveTotalCount: {_enemyWaveParamContainer.WaveTotalCount}, CurrentSpawnedEnemyCount: {CurrentSpawnedEnemyCount}, MaxSpawnedEnemyCount: {MaxSpawnedEnemyCount}");
+            Debug.Log($"_waveState.CurrentWave: {_waveState.CurrentWaveIndex} _enemyWaveParamContainer.WaveTotalCount: {_enemyWaveParamContainer.WaveTotalCount}, CurrentSpawnedEnemyCount: {CurrentSpawnedEnemyCount}, MaxSpawnedEnemyCount: {MaxSpawnedEnemyCount}");
             // LastWaveの時はFinalBossをスポーン
-            if (_waveState.CurrentWave == _enemyWaveParamContainer.WaveTotalCount - 1)
+            if (_waveState.CurrentWaveIndex == _enemyWaveParamContainer.WaveTotalCount - 1)
             {
                 _finalBossSpawner.SpawnFinalBoss();
                 CurrentSpawnedEnemyCount++;

@@ -117,7 +117,7 @@ namespace Daipan.Player.Scripts
         {
             if (args.IsTargetEnemy) return;
             
-            var spawnPercent = playerAntiCommentParamData.GetAntiCommentPercentOnMissAttacks(waveState.CurrentWave);
+            var spawnPercent = playerAntiCommentParamData.GetAntiCommentPercentOnMissAttacks(waveState.CurrentWaveIndex);
             
             if (spawnPercent / 100f > Random.value)
             {

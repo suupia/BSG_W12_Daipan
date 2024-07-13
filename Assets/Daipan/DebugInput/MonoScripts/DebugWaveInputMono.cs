@@ -59,13 +59,13 @@ namespace Daipan.DebugInput.MonoScripts
 
         void ForceNextWave(WaveState waveState, int index)
         {
-            while (waveState.CurrentWave < index)
+            while (waveState.CurrentWaveIndex < index)
             {
                 waveState.NextWave();
-                if(waveState.CurrentWave > 100) break;
+                if(waveState.CurrentWaveIndex > 100) break;
             }
             _enemyWaveSpawnerCounter.ResetCounter();
-            Debug.Log($"ForceNextWave waveState.CurrentWave: {waveState.CurrentWave}");
+            Debug.Log($"ForceNextWave waveState.CurrentWave: {waveState.CurrentWaveIndex}");
         }
 
         static void SetNearLastTime(StreamTimer streamTimer, StreamData streamData)
