@@ -19,7 +19,7 @@ namespace Daipan.Tutorial.Scripts
     {
         public abstract void Execute();
         public abstract bool IsCompleted();
-        protected readonly IList<IDisposable> Disposables = new List<IDisposable>();
+        protected readonly CompositeDisposable Disposables = new(); 
         public void Dispose()
         {
             foreach (var disposable in Disposables) disposable.Dispose();
