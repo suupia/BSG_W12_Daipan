@@ -293,7 +293,6 @@ namespace Daipan.Tutorial.Scripts
                                     Debug.Log("ShowWhiteCommentsTutorial Can move next");
                                 })
                                 .AddTo(Disposables);
-                            ;
                         }
                     )
             );
