@@ -4,6 +4,7 @@ using System.Linq;
 using Daipan.Comment.Scripts;
 using Daipan.Enemy.Interfaces;
 using Daipan.Player.Interfaces;
+using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Stream.Scripts;
 using UnityEngine;
 
@@ -12,19 +13,19 @@ namespace Daipan.Player.Scripts
     public class PlayerOnAttacked : IPlayerOnAttacked
     {
         readonly IrritatedValue _irritatedValue;
-        readonly ThresholdResetCounter _thresholdResetCounter;
+        readonly ThresholdResetCounter _playerAttackedCounter;
         readonly CommentSpawner _commentSpawner;
         List<AbstractPlayerViewMono?>? _playerViewMonos; 
         public PlayerOnAttacked
         (
             IrritatedValue irritatedValue
-            , ThresholdResetCounter thresholdResetCounter
             , CommentSpawner commentSpawner
+            , IPlayerAntiCommentParamData playerAntiCommentParamData
         )
         {
             _irritatedValue = irritatedValue;
-            _thresholdResetCounter = thresholdResetCounter;
             _commentSpawner = commentSpawner;
+            _playerAttackedCounter = new ThresholdResetCounter(playerAntiCommentParamData.GetAntiCommentThreshold());
         }
 
         public void SetPlayerViews(List<AbstractPlayerViewMono?> playerViewMonos)
@@ -38,8 +39,8 @@ namespace Daipan.Player.Scripts
             _irritatedValue.IncreaseValue(enemyParamData.GetAttackAmount());
             
             // アンチコメント
-            _thresholdResetCounter.CountUp();
-            if (_thresholdResetCounter.IsOverThreshold)
+            _playerAttackedCounter.CountUp();
+            if (_playerAttackedCounter.IsOverThreshold)
                 _commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
             
             // view
