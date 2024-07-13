@@ -380,6 +380,7 @@ namespace Daipan.Tutorial.Scripts
         readonly IrritatedValue _irritatedValue;
         readonly DaipanExecutor _daipanExecutor;
         readonly PushEnterTextViewMono _pushEnterTextViewMono;
+        public bool IsDaipaned => _daipanExecutor.DaipanCount >= 1;
 
         public DaipanCutscene(
             SpeechEventManager speechEventManager
@@ -432,7 +433,7 @@ namespace Daipan.Tutorial.Scripts
 
         public override bool IsCompleted()
         {
-            return _speechEventManager.IsEnd() && _daipanExecutor.DaipanCount >= 1; 
+            return _speechEventManager.IsEnd() && IsDaipaned;
         }
     }
 
