@@ -18,23 +18,6 @@ namespace Daipan.Tutorial.Scripts
         void SetNextEvent(params ISpeechEvent[] nextEvents);
     }
 
-    public abstract record AbstractSpeechEvent : ISpeechEvent, IDisposable
-    {
-        public int Id { get; protected init; } = -1;
-        public string Message { get; protected init; } = string.Empty;
-        public SpeechEventEnum SpeechEventEnum { get; protected init; }
-        protected Func<bool> OnMoveAction { get; set; } = () => true;
-        protected readonly IList<IDisposable> Disposables = new List<IDisposable>();
-
-        public void Dispose()
-        {
-            foreach (var disposable in Disposables) disposable.Dispose();
-        }
-
-        public abstract (bool, ISpeechEvent) MoveNext();
-        public abstract void SetNextEvent(params ISpeechEvent[] nextEvents);
-    }
-
     public enum SpeechEventEnum
     {
         None,
@@ -42,16 +25,20 @@ namespace Daipan.Tutorial.Scripts
         Practical // 実践するタイプのチュートリアル
     }
 
-    public sealed record SequentialEvent : AbstractSpeechEvent
+    public sealed record SequentialEvent : ISpeechEvent
     {
+        public int Id { get; } = -1;
+        public string Message { get; } = string.Empty;
+        public SpeechEventEnum SpeechEventEnum { get; }
         ISpeechEvent? NextEvent { get; set; }
+        Func<bool> CanMove { get; } = () => true;
 
-        public SequentialEvent(int id, string message, SpeechEventEnum speechEventEnum, Func<bool> onMoveAction)
+        public SequentialEvent(int id, string message, SpeechEventEnum speechEventEnum, Func<bool> canMove)
         {
             Id = id;
             Message = message;
             SpeechEventEnum = speechEventEnum;
-            OnMoveAction = onMoveAction;
+            CanMove = canMove;
         }
 
         public SequentialEvent(int id, string message, SpeechEventEnum speechEventEnum)
@@ -59,30 +46,33 @@ namespace Daipan.Tutorial.Scripts
         {
         }
 
-
-        public override (bool, ISpeechEvent) MoveNext()
+        public (bool, ISpeechEvent) MoveNext()
         {
-            var result = OnMoveAction();
+            var result = CanMove();
             if (!result) return (false, this);
             if (NextEvent == null) return (false, this);
             return (true, NextEvent);
         }
 
-        public override void SetNextEvent(params ISpeechEvent[] nextEvents)
+        public void SetNextEvent(params ISpeechEvent[] nextEvents)
         {
             if (nextEvents.Length != 1) throw new ArgumentException("NextEvent must be one");
             NextEvent = nextEvents[0];
         }
     }
 
-    public sealed record EndEvent : AbstractSpeechEvent
+    public sealed record EndEvent : ISpeechEvent
     {
-        public override (bool, ISpeechEvent) MoveNext()
+        public int Id => -1;
+        public string Message => string.Empty;
+        public SpeechEventEnum SpeechEventEnum => SpeechEventEnum.None;
+
+        public (bool, ISpeechEvent) MoveNext()
         {
             return (false, this);
         }
 
-        public override void SetNextEvent(params ISpeechEvent[] nextEvents)
+        public void SetNextEvent(params ISpeechEvent[] nextEvents)
         {
             throw new NotImplementedException();
         }
@@ -253,7 +243,7 @@ namespace Daipan.Tutorial.Scripts
                     new SequentialEvent(0, SpeechContentByLanguage.RedEnemyTutorial(language)[0],
                         SpeechEventEnum.Listening),
                     new SequentialEvent(1, SpeechContentByLanguage.RedEnemyTutorial(language)[1],
-                        SpeechEventEnum.Practical),
+                        SpeechEventEnum.Practical, ()=> redEnemyTutorial.IsSuccess),
                     new SequentialEvent(2, SpeechContentByLanguage.RedEnemyTutorial(language)[2],
                         SpeechEventEnum.Listening),
                     new EndEvent()
@@ -276,7 +266,7 @@ namespace Daipan.Tutorial.Scripts
                     new SequentialEvent(0, SpeechContentByLanguage.SequentialEnemyTutorial(language)[0],
                         SpeechEventEnum.Listening),
                     new SequentialEvent(1, SpeechContentByLanguage.SequentialEnemyTutorial(language)[1],
-                        SpeechEventEnum.Practical),
+                        SpeechEventEnum.Practical, () => sequentialEnemyTutorial.IsSuccess),
                     new SequentialEvent(2, SpeechContentByLanguage.SequentialEnemyTutorial(language)[2],
                         SpeechEventEnum.Listening),
                     new EndEvent()
@@ -331,7 +321,7 @@ namespace Daipan.Tutorial.Scripts
                 new List<ISpeechEvent>
                 {
                     new SequentialEvent(0, SpeechContentByLanguage.DaipanCutscene(language)[0],
-                        SpeechEventEnum.Practical),
+                        SpeechEventEnum.Practical, () => daipanCutscene.IsDaipaned),
                     new EndEvent()
                 };
 

@@ -163,6 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   viewObject: {fileID: 690446767326175807}
+  downloadPercentText: {fileID: 3312467149922101780}
   gaugeImage: {fileID: 8118354606275365917}
 --- !u!1 &4105240554446381857
 GameObject:
