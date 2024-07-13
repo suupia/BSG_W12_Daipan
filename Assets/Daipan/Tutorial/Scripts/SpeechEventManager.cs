@@ -88,6 +88,139 @@ namespace Daipan.Tutorial.Scripts
         }
     }
 
+    public static class SpeechContentByLanguage
+    {
+        public static List<string> UICatIntroduce(LanguageConfig.LanguageEnum language)
+        {
+           return language switch
+           {
+               LanguageConfig.LanguageEnum.English => new List<string>
+               {
+                   "Hi, I'm a cat!",
+                   "I'll support your stream!",
+                   "Let's start the game explanation...!"
+               },
+               LanguageConfig.LanguageEnum.Japanese => new List<string>
+               {
+                   "やぁ、初めまして！僕はネコ！",
+                   "君の配信をサポートするよ！",
+                   "じゃあ、まずこのゲームの説明...!"
+               },
+               _ => new List<string>()
+           }; 
+        }
+        
+        public static List<string> RedEnemyTutorial(LanguageConfig.LanguageEnum language)
+        {
+            return language switch
+            {
+                LanguageConfig.LanguageEnum.English => new List<string>
+                {
+                    "A red enemy is coming!",
+                    "Press the red button!",
+                    "That's right! Good job!"
+                },
+                LanguageConfig.LanguageEnum.Japanese => new List<string>
+                {
+                    "赤い敵が来たね！",
+                    "赤色のボタンを押そう！",
+                    "そうそう！上手！"
+                },
+                _ => new List<string>()
+            };
+        }
+        
+        public static List<string> SequentialEnemyTutorial(LanguageConfig.LanguageEnum language)
+        {
+            return language switch
+            {
+                LanguageConfig.LanguageEnum.English => new List<string>
+                {
+                    "A lot of enemies are coming!",
+                    "Press the corresponding button!",
+                    "You have a talent for streaming!"
+                },
+                LanguageConfig.LanguageEnum.Japanese => new List<string>
+                {
+                    "今度はたくさんの敵が来たね！",
+                    "対応するボタンを押そう！",
+                    "君、配信の才能あるよ！"
+                },
+                _ => new List<string>()
+            };
+        }
+        
+        public static List<string> ShowWhiteCommentsTutorial(LanguageConfig.LanguageEnum language)
+        {
+            return language switch
+            {
+                LanguageConfig.LanguageEnum.English => new List<string>
+                {
+                    "The stream is getting exciting...!"
+                },
+                LanguageConfig.LanguageEnum.Japanese => new List<string>
+                {
+                    "配信盛り上がっているネ...！"
+                },
+                _ => new List<string>()
+            };
+        }
+        
+        public static List<string> ShowAntiCommentsTutorial(LanguageConfig.LanguageEnum language)
+        {
+            return language switch
+            {
+                LanguageConfig.LanguageEnum.English => new List<string>
+                {
+                    "Oh no! It's an anti...! What should I do... ; ;"
+                },
+                LanguageConfig.LanguageEnum.Japanese => new List<string>
+                {
+                    "うわ！？アンチだ...！？どうしよ...；；"
+                },
+                _ => new List<string>()
+            };
+        }
+        
+        public static List<string> DaipanCutscene(LanguageConfig.LanguageEnum language)
+        {
+            return language switch
+            {
+                LanguageConfig.LanguageEnum.English => new List<string>
+                {
+                    "Wow..."
+                },
+                LanguageConfig.LanguageEnum.Japanese => new List<string>
+                {
+                    "わっ..."
+                },
+                _ => new List<string>()
+            };
+        }
+        
+        public static List<string> CatSpeaksAfterDaipan(LanguageConfig.LanguageEnum language)
+        {
+            return language switch
+            {
+                LanguageConfig.LanguageEnum.English => new List<string>
+                {
+                    "A, Amazing...!",
+                    "You have a talent for streaming!",
+                    "Daipan streamer...! You can do it... This will sell~~~!!!",
+                    "...Alright! Let's start the actual stream soon!"
+                },
+                LanguageConfig.LanguageEnum.Japanese => new List<string>
+                {
+                    "す、スゴイ...！",
+                    "君、配信の才能あるよ！",
+                    "台パン配信者...！い、いける...これは売れるぞ〜〜！！！",
+                    "...ヨシ！そろそろ本番の配信をしようか！"
+                },
+                _ => new List<string>()
+            };
+        }
+    }
+
     public static class SpeechEventBuilder
     {
         public static ISpeechEvent BuildUICatIntroduce()
