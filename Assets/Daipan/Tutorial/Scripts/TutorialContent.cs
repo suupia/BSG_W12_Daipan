@@ -19,7 +19,7 @@ namespace Daipan.Tutorial.Scripts
     {
         public abstract void Execute();
         public abstract bool IsCompleted();
-        protected readonly IList<IDisposable> Disposables = new List<IDisposable>();
+        protected readonly CompositeDisposable Disposables = new(); 
         public void Dispose()
         {
             foreach (var disposable in Disposables) disposable.Dispose();
@@ -178,6 +178,7 @@ namespace Daipan.Tutorial.Scripts
     {
         readonly SpeechEventManager _speechEventManager;
         readonly EnemySpawnerTutorial _enemySpawnerTutorial;
+        public bool IsSuccess { get; private set; } 
 
         public RedEnemyTutorial(
             SpeechEventManager speechEventManager
@@ -188,7 +189,6 @@ namespace Daipan.Tutorial.Scripts
             _enemySpawnerTutorial = enemySpawnerTutorial;
         }
 
-        public bool IsSuccess { get; private set; } // UICatのSpeechEventの分岐で使用
 
         public override void Execute()
         {
@@ -200,28 +200,14 @@ namespace Daipan.Tutorial.Scripts
 
         public override bool IsCompleted()
         {
-            return _speechEventManager.IsEnd();
+            return  IsSuccess && _speechEventManager.IsEnd();
         }
 
         public void SetSuccess()
         {
             Debug.Log($"RedEnemyTutorial SetIsSuccess");
-
-            // これで強制的に次のスピーチに進む（危険かも）（IsSuccessをSpeechの方でObserveしているのでかなり危険）
-            int cnt = 0;
-            while (!_speechEventManager.IsEnd())
-            {
-                cnt++;
-                if (cnt >= 100)
-                {
-                    Debug.LogError($"Detect infinite loop in RedEnemyTutorial SetSuccess()");
-                    break;
-                }
-
-                _speechEventManager.MoveNext();
-                Debug.Log(
-                    $"RedEnemyTutorial MoveNext _speechEventManager.CurrentEvent.Message: {_speechEventManager.CurrentEvent.Message}");
-            }
+            IsSuccess = true;
+            _speechEventManager.MoveNext();
         }
     }
 
@@ -229,7 +215,7 @@ namespace Daipan.Tutorial.Scripts
     {
         readonly SpeechEventManager _speechEventManager;
         readonly EnemySpawnerTutorial _enemySpawnerTutorial;
-
+        public bool IsSuccess { get; private set; }
         public SequentialEnemyTutorial(
             SpeechEventManager speechEventManager
             , EnemySpawnerTutorial enemySpawnerTutorial
@@ -258,18 +244,13 @@ namespace Daipan.Tutorial.Scripts
 
         public override bool IsCompleted()
         {
-            return _speechEventManager.IsEnd();
+            return IsSuccess && _speechEventManager.IsEnd();
         }
 
-        public void MoveNextSpeech()
+        public void SetSuccess()
         {
-            // これで強制的に次のスピーチに進む（危険かも）
-            while (!_speechEventManager.IsEnd())
-            {
-                _speechEventManager.MoveNext();
-                Debug.Log(
-                    $"RedEnemyTutorial MoveNext _speechEventManager.CurrentEvent.Message: {_speechEventManager.CurrentEvent.Message}");
-            }
+            IsSuccess = true;
+            _speechEventManager.MoveNext();
         }
     }
 
@@ -312,7 +293,6 @@ namespace Daipan.Tutorial.Scripts
                                     Debug.Log("ShowWhiteCommentsTutorial Can move next");
                                 })
                                 .AddTo(Disposables);
-                            ;
                         }
                     )
             );
@@ -400,6 +380,7 @@ namespace Daipan.Tutorial.Scripts
         readonly IrritatedValue _irritatedValue;
         readonly DaipanExecutor _daipanExecutor;
         readonly PushEnterTextViewMono _pushEnterTextViewMono;
+        public bool IsDaipaned => _daipanExecutor.DaipanCount >= 1;
 
         public DaipanCutscene(
             SpeechEventManager speechEventManager
@@ -452,7 +433,7 @@ namespace Daipan.Tutorial.Scripts
 
         public override bool IsCompleted()
         {
-            return _speechEventManager.IsEnd() && _daipanExecutor.DaipanCount >= 1; 
+            return _speechEventManager.IsEnd() && IsDaipaned;
         }
     }
 
