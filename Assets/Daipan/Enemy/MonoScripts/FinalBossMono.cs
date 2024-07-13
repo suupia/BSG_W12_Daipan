@@ -44,9 +44,6 @@ namespace Daipan.Enemy.MonoScripts
 
         void Update()
         {
-            // _enemyAttackDecider.AttackUpdate(this, finalBossViewMono,
-            //     _enemyParamContainer.GetEnemyParamData(EnemyEnum), _playerHolder.PlayerMono);
-
             // 攻撃範囲よりプレイヤーとの距離が大きいときだけ動く
             if (transform.position.x - _playerHolder.PlayerMono.transform.position.x >=
                 _finalBossParamData.GetAttackRange())
@@ -54,6 +51,7 @@ namespace Daipan.Enemy.MonoScripts
                 var moveSpeed = (float)_finalBossParamData.GetMoveSpeedPerSec();
                 transform.position += Time.deltaTime * moveSpeed * Vector3.left;
                 IsReachedPlayer = false;
+                finalBossViewMono?.Move();
             }
             else
             {
@@ -121,7 +119,6 @@ namespace Daipan.Enemy.MonoScripts
 
         void Die(AbstractEnemyMono enemyMono, bool isDaipaned = false)
         {
-            // todo: EnemyClusterとFinalBossを繋ぐ
             _enemyCluster.Remove(this);
             _finalBossActionDecider.Dispose();
             
