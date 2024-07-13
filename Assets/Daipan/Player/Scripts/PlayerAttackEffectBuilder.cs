@@ -23,7 +23,7 @@ namespace Daipan.Player.Scripts
         readonly CommentSpawner _commentSpawner;
         readonly WaveState _waveState;
         readonly IPlayerAntiCommentParamData _playerAntiCommentParamData;
-        readonly PlayerMissedAttackCounter _playerMissedAttackCounter;
+        readonly ThresholdResetCounter _playerMissedAttackCounter;
 
         public PlayerAttackEffectBuilder(
             IPlayerParamDataContainer playerParamDataContainer
@@ -32,7 +32,6 @@ namespace Daipan.Player.Scripts
             ,CommentSpawner commentSpawner
             ,WaveState waveState
             ,IPlayerAntiCommentParamData playerAntiCommentParamData
-            ,PlayerMissedAttackCounter playerMissedAttackCounter
         )
         {
             _playerParamDataContainer = playerParamDataContainer;
@@ -41,7 +40,8 @@ namespace Daipan.Player.Scripts
             _commentSpawner = commentSpawner;
             _waveState = waveState;
             _playerAntiCommentParamData = playerAntiCommentParamData;
-            _playerMissedAttackCounter = playerMissedAttackCounter;
+            _playerMissedAttackCounter =
+                new ThresholdResetCounter(playerAntiCommentParamData.GetMissedAttackCountForAntiComment());
         }
 
         public PlayerAttackEffectMono Build
@@ -70,7 +70,7 @@ namespace Daipan.Player.Scripts
             , PlayerColor playerColor
             , OnHitEventArgs args
             , ComboCounter comboCounter
-            , PlayerMissedAttackCounter playerMissedAttackCounter
+            , ThresholdResetCounter playerMissedAttackCounter
             , CommentSpawner commentSpawner
         )
         {
