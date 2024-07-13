@@ -13,10 +13,17 @@ namespace Daipan.Enemy.LevelDesign.Scripts
         [Header("通常の敵と共通するパラメータを設定してください。")]
         public EnemyParam enemyParam = null!;
 
-        [Header("FinalBOSS固有のパラメータを設定してください。")]
+        [Header("召喚の間隔")][Min(0)]
         public double summonActionIntervalSec = 1;
-        public double summonEnemyIntervalSec = 1;
+        [Header("召喚する敵の数")][Min(0)]
         public int summonEnemyCount = 5;
+        [Header("召喚時の敵が出現する間隔")][Min(0)]
+        public double summonEnemyIntervalSec = 1;
+        
+        [Header("台パン時のダメージの割合")][Range(0, 100)]
+        public double daipanHitDamagePercent = 10;
+        [Header("ノックバック距離")][Min(0)]
+        public double knockBackDistance = 1;
         
         [Header("FinalBOSSの色のパラメータを設定してください。")]
         public List<FinalBossColorParam> finalBossColorParams = null!;
