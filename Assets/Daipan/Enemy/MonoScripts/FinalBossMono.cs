@@ -24,7 +24,8 @@ namespace Daipan.Enemy.MonoScripts
         FinalBossActionDecider _finalBossActionDecider = null!;
         FinalBossDie _enemyDie = null!;
         IEnemySpawnPoint _enemySpawnPoint = null!;
-        FinalBossParamData _finalBossParamData = null!;
+        IFinalBossParamData _finalBossParamData = null!;
+        IFinalBossViewParamData _finalBossViewParamData = null!;
         IEnemyOnAttacked _enemyOnAttacked = null!;
         PlayerHolder _playerHolder = null!;
         public override EnemyEnum EnemyEnum { get; protected set; } = EnemyEnum.None;
@@ -43,9 +44,6 @@ namespace Daipan.Enemy.MonoScripts
 
         void Update()
         {
-            // _enemyAttackDecider.AttackUpdate(this, finalBossViewMono,
-            //     _enemyParamContainer.GetEnemyParamData(EnemyEnum), _playerHolder.PlayerMono);
-
             // 攻撃範囲よりプレイヤーとの距離が大きいときだけ動く
             if (transform.position.x - _playerHolder.PlayerMono.transform.position.x >=
                 _finalBossParamData.GetAttackRange())
@@ -53,6 +51,7 @@ namespace Daipan.Enemy.MonoScripts
                 var moveSpeed = (float)_finalBossParamData.GetMoveSpeedPerSec();
                 transform.position += Time.deltaTime * moveSpeed * Vector3.left;
                 IsReachedPlayer = false;
+                finalBossViewMono?.Move();
             }
             else
             {
@@ -70,12 +69,14 @@ namespace Daipan.Enemy.MonoScripts
         public void Initialize(
             PlayerHolder playerHolder
             , IEnemySpawnPoint enemySpawnPointData
-            , FinalBossParamData finalBossParamData
+            , IFinalBossParamData finalBossParamData
+            , IFinalBossViewParamData finalBossViewParamData
         )
         {
             _playerHolder = playerHolder;
             _enemySpawnPoint = enemySpawnPointData;
             _finalBossParamData = finalBossParamData;
+            _finalBossViewParamData = finalBossViewParamData;
         }
 
         public void SetDomain(
@@ -92,7 +93,7 @@ namespace Daipan.Enemy.MonoScripts
             _finalBossActionDecider.SetDomain(this, finalBossViewMono, _finalBossParamData, _playerHolder.PlayerMono);
             _enemyDie = enemyDie;
             _enemyOnAttacked = enemyOnAttacked;
-            finalBossViewMono?.SetDomain(_finalBossParamData);
+            finalBossViewMono?.SetDomain(_finalBossViewParamData);
             Hp = new Hp(_finalBossParamData.GetMaxHp());
         }
 
@@ -109,14 +110,15 @@ namespace Daipan.Enemy.MonoScripts
 
         public override void OnDaipaned()
         {
-            Hp = new Hp(Hp.Value / 2); // todo:パラメータを受け取って実装する
-            transform.position += Vector3.right * 3;  // 適当に右にノックバック 
+            var daipanHitDamage =
+                _finalBossParamData.GetDaipanHitDamagePercent() * 0.01 * _finalBossParamData.GetMaxHp();
+            Hp = new Hp(Hp.Value - daipanHitDamage );
+            transform.position += (float)_finalBossParamData.GetKnockBackDistance() * Vector3.right;
             finalBossViewMono?.DaipanHit();
         }
 
         void Die(AbstractEnemyMono enemyMono, bool isDaipaned = false)
         {
-            // todo: EnemyClusterとFinalBossを繋ぐ
             _enemyCluster.Remove(this);
             _finalBossActionDecider.Dispose();
             

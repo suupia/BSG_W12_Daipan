@@ -50,20 +50,29 @@ namespace Daipan.Enemy.Scripts
             );
         }
 
-        static IDisposable SummonEnemy(
+        static CompositeDisposable SummonEnemy(
             IFinalBossParamData finalBossParamData
             , AbstractFinalBossViewMono? finalBossViewMono
             , EnemySpawner enemySpawner)
         {
             if (finalBossViewMono != null) finalBossViewMono.SummonEnemy();
-            return
+            CompositeDisposable disposable = new();
+            disposable.Add(
                 Observable
                     .Interval(TimeSpan.FromSeconds(finalBossParamData.GetSummonActionIntervalSec()))
                     .Subscribe(_ =>
                     {
-                        for (int i = 0; i < finalBossParamData.GetSummonEnemyCount(); i++)
-                            enemySpawner.SpawnEnemy();
-                    });
+                        var summonEnemyIntervalSec = finalBossParamData.GetSummonEnemyIntervalSec();
+                        var summonEnemyCount = finalBossParamData.GetSummonEnemyCount();
+
+                        disposable.Add(
+                            Observable.Interval(TimeSpan.FromSeconds(summonEnemyIntervalSec))
+                                .Take(summonEnemyCount)
+                                .Subscribe(_ => { enemySpawner.SpawnEnemy(); })
+                        );
+                    })
+            );
+            return disposable;
         }
 
         static void Attack(

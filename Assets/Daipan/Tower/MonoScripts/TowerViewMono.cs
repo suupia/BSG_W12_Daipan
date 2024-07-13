@@ -16,7 +16,7 @@ namespace Daipan.Tower.MonoScripts
             _towerFullMaterial = towerFullRender.material;
         }
         
-        public void SetRatio(float ratio)
+        public void SetRatio(double ratio)
         {
             if (_towerFullMaterial == null)
             {
@@ -24,7 +24,7 @@ namespace Daipan.Tower.MonoScripts
                 return;
             }
 
-            _towerFullMaterial.SetFloat("_Ratio", ratio);
+            _towerFullMaterial.SetFloat("_Ratio", (float)ratio);
         }
         
         public void SwitchLight(bool isOn)
