@@ -65,7 +65,7 @@ namespace Daipan.Option.Scripts
                         Debug.Log("Option:Shaking OFF");
                         break;
                     case myContent.Language:
-                        _languageConfig.CurrentLanguage = LanguageConfig.LanguageEnum.English;
+                        _languageConfig.CurrentLanguage = LanguageEnum.English;
                         Debug.Log("Option:Language = English");
                         break;
                 }
@@ -84,7 +84,7 @@ namespace Daipan.Option.Scripts
                         Debug.Log("Option:Shaking ON");
                         break;
                     case myContent.Language:
-                        _languageConfig.CurrentLanguage = LanguageConfig.LanguageEnum.Japanese;
+                        _languageConfig.CurrentLanguage = LanguageEnum.Japanese;
                         Debug.Log("Option:Language = Japanese");
                         break;
                 }
