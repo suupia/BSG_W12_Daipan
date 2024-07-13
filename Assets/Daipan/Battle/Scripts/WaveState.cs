@@ -7,18 +7,18 @@ namespace Daipan.Battle.scripts
 {
     public sealed class WaveState
     {
-        public int CurrentWave { get; private set; }
-        readonly int _waveTotalCount;
+        public int CurrentWaveIndex { get; private set; }
+        public int TotalWaveCount { get;}
 
         public WaveState(EnemyParamsManager enemyParamsManager)
         {
-            _waveTotalCount = enemyParamsManager.enemyWaveParams.Count; 
+            TotalWaveCount = enemyParamsManager.enemyWaveParams.Count; 
         }
 
         public void NextWave()
         {
-            if (CurrentWave + 1 < _waveTotalCount)
-                CurrentWave++;
+            if (CurrentWaveIndex + 1 < TotalWaveCount)
+                CurrentWaveIndex++;
         }
     }
 }

@@ -36,7 +36,7 @@ namespace Daipan.Enemy.Scripts
         static EnemyWaveParamData GetEnemyWaveParamData(WaveState waveState,
             IList<EnemyWaveParamData> enemyWaveParamDatas)
         {
-            return enemyWaveParamDatas[waveState.CurrentWave];
+            return enemyWaveParamDatas[waveState.CurrentWaveIndex];
         }
 
         static List<EnemyWaveParamData> CreateEnemyWaveParamData(EnemyParamsManager enemyParamsManager)

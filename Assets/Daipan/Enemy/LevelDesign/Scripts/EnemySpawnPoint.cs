@@ -48,7 +48,7 @@ namespace Daipan.Enemy.LevelDesign.Scripts
         static EnemySpawnedPositionContainer GetEnemyPositionContainer
             (EnemyPositionMono enemyPositionMono, WaveState waveState)
         {
-            return enemyPositionMono.enemySpawnedPositionContainers[waveState.CurrentWave];
+            return enemyPositionMono.enemySpawnedPositionContainers[waveState.CurrentWaveIndex];
         }
     }
 }

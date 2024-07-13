@@ -12,30 +12,33 @@ namespace Daipan.Enemy.MonoScripts
     {
         [SerializeField] TextMeshProUGUI waveText = null!;
 
+        WaveState _waveState = null!;
+
         [Inject]
         public void Initialize(WaveState state)
         {
-            Observable.EveryValueChanged(state, x => x.CurrentWave)
+            _waveState = state;
+            Observable.EveryValueChanged(state, x => x.CurrentWaveIndex)
                 .Subscribe(Show)
                 .AddTo(this);
         }
-        
+
         void Show(int wave)
         {
-            waveText.text = $"Wave {wave+1}";
+            waveText.text = wave + 1 != _waveState.TotalWaveCount ? $"Wave {wave + 1}" : "Final Wave";
             MoveWaveText(transform);
         }
-        
-        
+
+
         static void MoveWaveText(Transform transform)
         {
             const float offset = 8; // 画面外から出てくる位置
             const float moveDuration = 1.2f; // AttackとReleaseのそれぞれの時間
             const float showDuration = 0.15f; // holdの時間
-            var startPosition = new Vector3(0.0f, - offset, 0.0f);
+            var startPosition = new Vector3(0.0f, -offset, 0.0f);
             var centerPosition = new Vector3(0.0f, 0.0f, 0.0f);
             var endPosition = new Vector3(0.0f, offset, 0.0f);
-        
+
             DOTween.Sequence()
                 .OnStart(() => { transform.position = startPosition; })
                 .Append(transform.DOMove(centerPosition, moveDuration / 2).SetEase(Ease.OutQuart))
@@ -43,6 +46,5 @@ namespace Daipan.Enemy.MonoScripts
                 .Append(transform.DOMove(endPosition, moveDuration / 2).SetEase(Ease.InQuart))
                 .Play();
         }
-    } 
+    }
 }
-
