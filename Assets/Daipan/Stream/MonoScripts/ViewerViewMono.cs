@@ -1,4 +1,5 @@
 #nullable enable
+using System;
 using UnityEngine;
 using VContainer;
 using Daipan.Stream.Scripts;
@@ -13,36 +14,32 @@ namespace Daipan.Stream.MonoScripts
     {
         [SerializeField] TextMeshProUGUI viewerText = null!;
         [FormerlySerializedAs("digitSplitterMono")] [SerializeField] DigitSplitViewMono digitSplitViewMono = null!;
-        [SerializeField] int zoomingViewerThreshold;
-        [SerializeField] float scaleRatio;
-        [SerializeField] float zoomingDuration;
 
-        Vector3 _originalScale;
-        Transform _transform = null!;
-
+        int PreViewerNumber { get; set; }
+        Tweener? _tweener;
+        const float AnimationDuration = 0.3f;
+        
         [Inject]
         public void Initialize(ViewerNumber viewerNumber)
         {
-            _transform = viewerText.transform;
-            _originalScale = _transform.localScale;
+            PreViewerNumber = viewerNumber.Number;
 
-            Observable.EveryValueChanged(viewerNumber, x => viewerNumber.Number)
-                .Subscribe(_ => UpdateViewerText(viewerNumber.Number))
+            Observable
+                .EveryValueChanged(viewerNumber, x => viewerNumber.Number)
+                .Subscribe(newViewerNumber =>
+                {
+                    _tweener?.Kill();  // 以前のアニメーションを停止
+
+                    // DOTweenでアニメーションを設定
+                    _tweener = DOTween.To(() => PreViewerNumber, x => PreViewerNumber = x, newViewerNumber, AnimationDuration)
+                        .OnUpdate(() => UpdateViewerText(PreViewerNumber))
+                        .OnComplete(() => UpdateViewerText(newViewerNumber));
+                })
                 .AddTo(this);
         }
 
         void UpdateViewerText(int viewerNumber)
         {
-            // var sequence = DOTween.Sequence();
-            // if (viewerNumber >= ZoomingViewerThreshold)
-            // {
-            //     sequence.Append(_transform.DOScale(_originalScale * scaleRatio, zoomingDuration))
-            //        .SetEase(Ease.OutBounce);
-            // }
-            // else
-            // {
-            //     sequence.Append(_transform.DOScale(_originalScale, zoomingDuration));
-            // }
             viewerText.text = $"{viewerNumber}";
             digitSplitViewMono.SetDigit(viewerNumber);
         }
