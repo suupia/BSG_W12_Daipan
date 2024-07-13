@@ -18,10 +18,10 @@ MonoBehaviour:
   playerAntiCommentParam:
     antiCommentThreshold: 3
     antiCommentPercentOnMissAttacks:
-    - 10
-    - 15
-    - 20
-    - 30
+    - 4
+    - 3
+    - 2
+    - 1
     missedAttackCountForAntiComments: 2
   playerParams:
   - playerAttackParam:
