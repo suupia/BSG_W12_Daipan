@@ -6,38 +6,29 @@ namespace Daipan.Player.Scripts
 {
     public sealed class PlayerAttackedCounter
     {
-        public int AttackedNumber;
-        public bool IsOverThreshold;
-
-        int _currentTermStartNumber;
+        public bool IsOverThreshold => AttackedCountTotal - CurrentTermStartCount >= _threshold;
+        int AttackedCountTotal { get; set; }
+        int CurrentTermStartCount { get; set; }
         readonly int _threshold;
 
         public PlayerAttackedCounter(IPlayerAntiCommentParamData playerAntiCommentParamData)
         {
             _threshold = playerAntiCommentParamData.GetAntiCommentThreshold();
-            CountReset();
         }
 
         public void CountUp()
         {
-            AttackedNumber++;
+            AttackedCountTotal++;
 
-            if (AttackedNumber - _currentTermStartNumber >= _threshold)
-            {
-                IsOverThreshold = true;
-                _currentTermStartNumber = AttackedNumber;
-            }
-            else
-            {
-                IsOverThreshold = false;
-            }
+            if (AttackedCountTotal - CurrentTermStartCount > _threshold)
+                CurrentTermStartCount = AttackedCountTotal;
+
         }
 
-        public void CountReset()
+        public void ResetCount()
         {
-            AttackedNumber = 0;
-            _currentTermStartNumber = 0;
-            IsOverThreshold = false;
+            AttackedCountTotal = 0;
+            CurrentTermStartCount = 0;
         } 
     }
 }
