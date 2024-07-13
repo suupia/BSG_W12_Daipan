@@ -24,6 +24,7 @@ namespace Daipan.Tutorial.Scripts
         {
             foreach (var disposable in Disposables) disposable.Dispose();
         }
+
         ~AbstractTutorialContent()
         {
             Dispose();
@@ -43,7 +44,7 @@ namespace Daipan.Tutorial.Scripts
 
         public override void Execute()
         {
-        _gaugeViewMono.Show();
+            _gaugeViewMono.Show();
             Disposables.Add(Observable.EveryUpdate()
                 .Where(_ => !Completed)
                 .Subscribe(_ =>
@@ -66,6 +67,7 @@ namespace Daipan.Tutorial.Scripts
         readonly InputSerialManager _inputSerialManager;
         readonly LanguageSelectionPopupMono _languageSelectionPopupMono;
         bool Completed { get; set; }
+
         public LanguageSelection(
             LanguageConfig languageConfig
             , InputSerialManager inputSerialManager
@@ -87,14 +89,14 @@ namespace Daipan.Tutorial.Scripts
                 {
                     if (_inputSerialManager.GetButtonBlue())
                     {
-                        _languageConfig.CurrentLanguage = LanguageConfig.LanguageEnum.Japanese;
+                        _languageConfig.CurrentLanguage = LanguageEnum.Japanese;
                         Debug.Log("Language set to Japanese");
                         _languageSelectionPopupMono.HidePopup();
                         Completed = true;
                     }
                     else if (_inputSerialManager.GetButtonYellow())
                     {
-                        _languageConfig.CurrentLanguage = LanguageConfig.LanguageEnum.English;
+                        _languageConfig.CurrentLanguage = LanguageEnum.English;
                         Debug.Log("Language set to English");
                         _languageSelectionPopupMono.HidePopup();
                         Completed = true;
@@ -114,6 +116,7 @@ namespace Daipan.Tutorial.Scripts
         readonly BlackScreenViewMono _blackScreenViewMono;
         const float FillAmountPerSec = 0.2f;
         bool Completed { get; set; }
+
         public FadeInTutorialStart(
             DownloadGaugeViewMono gaugeViewMono
             , BlackScreenViewMono blackScreenViewMono
@@ -153,19 +156,22 @@ namespace Daipan.Tutorial.Scripts
     public class UICatIntroduce : AbstractTutorialContent
     {
         readonly SpeechEventManager _speechEventManager;
+        readonly LanguageConfig _languageConfig;
 
         public UICatIntroduce(
             SpeechEventManager speechEventManager
+            , LanguageConfig languageConfig
         )
         {
             _speechEventManager = speechEventManager;
+            _languageConfig = languageConfig;
         }
 
         public override void Execute()
         {
             Debug.Log("Streamer wakes up...");
             Debug.Log("Cat speaks...");
-            _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildUICatIntroduce());
+            _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildUICatIntroduce(_languageConfig.CurrentLanguage));
         }
 
         public override bool IsCompleted()
@@ -178,22 +184,26 @@ namespace Daipan.Tutorial.Scripts
     {
         readonly SpeechEventManager _speechEventManager;
         readonly EnemySpawnerTutorial _enemySpawnerTutorial;
+        readonly LanguageConfig _languageConfig;
         public bool IsSuccess { get; private set; } 
 
         public RedEnemyTutorial(
             SpeechEventManager speechEventManager
             , EnemySpawnerTutorial enemySpawnerTutorial
+            , LanguageConfig languageConfig
         )
         {
             _speechEventManager = speechEventManager;
             _enemySpawnerTutorial = enemySpawnerTutorial;
+            _languageConfig = languageConfig;
         }
 
 
         public override void Execute()
         {
             Debug.Log("Tutorial: Defeat the red enemy...");
-            _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildRedEnemyTutorial(this));
+            _speechEventManager.SetSpeechEvent(
+                SpeechEventBuilder.BuildRedEnemyTutorial(this, _languageConfig.CurrentLanguage));
 
             _enemySpawnerTutorial.SpawnEnemyByType(EnemyEnum.Red);
         }
@@ -215,20 +225,24 @@ namespace Daipan.Tutorial.Scripts
     {
         readonly SpeechEventManager _speechEventManager;
         readonly EnemySpawnerTutorial _enemySpawnerTutorial;
+        readonly LanguageConfig _languageConfig;
         public bool IsSuccess { get; private set; }
         public SequentialEnemyTutorial(
             SpeechEventManager speechEventManager
             , EnemySpawnerTutorial enemySpawnerTutorial
+            , LanguageConfig languageConfig
         )
         {
             _speechEventManager = speechEventManager;
             _enemySpawnerTutorial = enemySpawnerTutorial;
+            _languageConfig = languageConfig;
         }
 
         public override void Execute()
         {
             Debug.Log("Tutorial: Defeat enemies in sequence...");
-            _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildSequentialEnemyTutorial(this));
+            _speechEventManager.SetSpeechEvent(
+                SpeechEventBuilder.BuildSequentialEnemyTutorial(this, _languageConfig.CurrentLanguage));
 
             var intervalSec = 1f; // スポーンの間隔
             var enemyEnums = new Queue<EnemyEnum>(new[] { EnemyEnum.Blue, EnemyEnum.Yellow, EnemyEnum.Red });
@@ -258,21 +272,25 @@ namespace Daipan.Tutorial.Scripts
     {
         readonly SpeechEventManager _speechEventManager;
         readonly CommentSpawner _commentSpawner;
+        readonly LanguageConfig _languageConfig;
         bool CanMoveNext { get; set; }
 
         public ShowWhiteCommentsTutorial(
             SpeechEventManager speechEventManager
             , CommentSpawner commentSpawner
+            , LanguageConfig languageConfig
         )
         {
             _speechEventManager = speechEventManager;
             _commentSpawner = commentSpawner;
+            _languageConfig = languageConfig;
         }
 
         public override void Execute()
         {
             Debug.Log("Displaying white comments...");
-            _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildShowWitheCommentsTutorial(this));
+            _speechEventManager.SetSpeechEvent(
+                SpeechEventBuilder.BuildShowWitheCommentsTutorial(this, _languageConfig.CurrentLanguage));
 
             var intervalSec = 0.5f; // スポーンの間隔
             var commentCount = 3;
@@ -309,23 +327,27 @@ namespace Daipan.Tutorial.Scripts
         readonly SpeechEventManager _speechEventManager;
         readonly CommentSpawner _commentSpawner;
         readonly EnemySpawnerTutorial _enemySpawnerTutorial;
+        readonly LanguageConfig _languageConfig;
         bool CanMoveNext { get; set; }
 
         public ShowAntiCommentsTutorial(
             SpeechEventManager speechEventManager
             , CommentSpawner commentSpawner
             , EnemySpawnerTutorial enemySpawnerTutorial
+            , LanguageConfig languageConfig
         )
         {
             _speechEventManager = speechEventManager;
             _commentSpawner = commentSpawner;
             _enemySpawnerTutorial = enemySpawnerTutorial;
+            _languageConfig = languageConfig;   
         }
 
         public override void Execute()
         {
             Debug.Log("Showing anti-comments with sound effects...");
-            _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildShowAntiCommentsTutorial(this));
+            _speechEventManager.SetSpeechEvent(
+                SpeechEventBuilder.BuildShowAntiCommentsTutorial(this, _languageConfig.CurrentLanguage));
 
             // アンチコメントを生成→終わったら遷移可能
             const float commentIntervalSec = 0.5f; // スポーンの間隔
@@ -349,22 +371,22 @@ namespace Daipan.Tutorial.Scripts
                         }
                     )
             );
-            
+
             // 雑魚敵とボスも生成する
             const float enemyIntervalSec = 0.5f; // スポーンの間隔
-            var enemyEnums = new Queue<EnemyEnum>(new[] { EnemyEnum.Blue, EnemyEnum.RedBoss, EnemyEnum.Red, EnemyEnum.YellowBoss, EnemyEnum.Yellow, EnemyEnum.BlueBoss});
+            var enemyEnums = new Queue<EnemyEnum>(new[]
+            {
+                EnemyEnum.Blue, EnemyEnum.RedBoss, EnemyEnum.Red, EnemyEnum.YellowBoss, EnemyEnum.Yellow,
+                EnemyEnum.BlueBoss
+            });
             Disposables.Add(
                 Observable.Interval(TimeSpan.FromSeconds(enemyIntervalSec))
                     .Take(enemyEnums.Count)
                     .Subscribe(
-                        _ => {  _enemySpawnerTutorial.SpawnEnemyByType(enemyEnums.Dequeue()); },
-                        _ =>
-                        {
-                            Debug.Log( "Enemy spawn completed");
-                        }
+                        _ => { _enemySpawnerTutorial.SpawnEnemyByType(enemyEnums.Dequeue()); },
+                        _ => { Debug.Log("Enemy spawn completed"); }
                     )
-                );
-            
+            );
         }
 
         public override bool IsCompleted()
@@ -380,6 +402,7 @@ namespace Daipan.Tutorial.Scripts
         readonly IrritatedValue _irritatedValue;
         readonly DaipanExecutor _daipanExecutor;
         readonly PushEnterTextViewMono _pushEnterTextViewMono;
+        readonly LanguageConfig _languageConfig;
         public bool IsDaipaned => _daipanExecutor.DaipanCount >= 1;
 
         public DaipanCutscene(
@@ -387,19 +410,22 @@ namespace Daipan.Tutorial.Scripts
             , IrritatedValue irritatedValue
             , DaipanExecutor daipanExecutor
             , PushEnterTextViewMono pushEnterTextViewMono
+            , LanguageConfig languageConfig
         )
         {
             _speechEventManager = speechEventManager;
             _irritatedValue = irritatedValue;
             _daipanExecutor = daipanExecutor;
             _pushEnterTextViewMono = pushEnterTextViewMono;
+            _languageConfig = languageConfig;
         }
 
         public override void Execute()
         {
             Debug.Log("Displaying special cutscene...");
             Debug.Log("Anger gauge animation...");
-            _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildShowDaipanCutsceneTutorial(this));
+            _speechEventManager.SetSpeechEvent(
+                SpeechEventBuilder.BuildShowDaipanCutsceneTutorial(this, _languageConfig.CurrentLanguage));
 
             const float fillRatioPerSec = 0.2f;
             Disposables.Add(
@@ -441,18 +467,22 @@ namespace Daipan.Tutorial.Scripts
     public class CatSpeaksAfterDaipan : AbstractTutorialContent
     {
         readonly SpeechEventManager _speechEventManager;
+        readonly LanguageConfig _languageConfig;
 
         public CatSpeaksAfterDaipan(
             SpeechEventManager speechEventManager
+            , LanguageConfig languageConfig
         )
         {
             _speechEventManager = speechEventManager;
+            _languageConfig = languageConfig;
         }
 
         public override void Execute()
         {
             Debug.Log("Cat speaks more...");
-            _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildCatSpeaksAfterDaipan(this));
+            _speechEventManager.SetSpeechEvent(
+                SpeechEventBuilder.BuildCatSpeaksAfterDaipan(this, _languageConfig.CurrentLanguage));
 
             Disposables.Add(
                 Observable.EveryUpdate()
@@ -473,10 +503,11 @@ namespace Daipan.Tutorial.Scripts
     {
         readonly SpeechEventManager _speechEventManager;
         readonly AimTopStreamerViewMono _aimTopStreamerViewMono;
-        bool Completed { get; set; }  
-        public AimForTopStreamer (
+        bool Completed { get; set; }
+
+        public AimForTopStreamer(
             SpeechEventManager speechEventManager
-            ,AimTopStreamerViewMono aimTopStreamerViewMono
+            , AimTopStreamerViewMono aimTopStreamerViewMono
         )
         {
             _speechEventManager = speechEventManager;
@@ -486,21 +517,21 @@ namespace Daipan.Tutorial.Scripts
         public override void Execute()
         {
             Debug.Log("Aim for top streamer...");
-            _aimTopStreamerViewMono.Show(); 
-            
+            _aimTopStreamerViewMono.Show();
+
             // 少し待つ
             const float displaySec = 2.0f;
             Observable.Timer(TimeSpan.FromSeconds(displaySec))
                 .Subscribe(_ =>
                 {
-                    Completed = true; 
+                    Completed = true;
                     _aimTopStreamerViewMono.Hide();
                 });
         }
 
         public override bool IsCompleted()
         {
-             return _speechEventManager.IsEnd() && Completed;
+            return _speechEventManager.IsEnd() && Completed;
         }
     }
 
@@ -508,18 +539,20 @@ namespace Daipan.Tutorial.Scripts
     {
         readonly BlackScreenViewMono _blackScreenViewMono;
         readonly StandbyStreamingViewMono _standbyStreamingViewMono;
-        readonly InputSerialManager _inputSerialManager; 
-        bool Completed { get; set; } 
+        readonly InputSerialManager _inputSerialManager;
+        bool Completed { get; set; }
+
         public StartActualGame(
             BlackScreenViewMono blackScreenViewMono
             , StandbyStreamingViewMono standbyStreamingViewMono
             , InputSerialManager inputSerialManager
-            )
+        )
         {
             _blackScreenViewMono = blackScreenViewMono;
             _standbyStreamingViewMono = standbyStreamingViewMono;
             _inputSerialManager = inputSerialManager;
         }
+
         public override void Execute()
         {
             Debug.Log("Starting actual game...");
@@ -538,7 +571,7 @@ namespace Daipan.Tutorial.Scripts
                             Completed = true;
                         });
                     });
-            }); 
+            });
         }
 
         public override bool IsCompleted()
