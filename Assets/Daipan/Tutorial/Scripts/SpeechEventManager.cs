@@ -63,11 +63,9 @@ namespace Daipan.Tutorial.Scripts
 
     public sealed record EndEvent : ISpeechEvent
     {
-        public int Id { get; } = -1;
-        public string Message { get; } = string.Empty;
-        public SpeechEventEnum SpeechEventEnum { get; }
-        ISpeechEvent? NextEvent { get; set; }
-        Func<bool> CanMove { get; } = () => true;
+        public int Id => -1;
+        public string Message => string.Empty;
+        public SpeechEventEnum SpeechEventEnum => SpeechEventEnum.None;
 
         public (bool, ISpeechEvent) MoveNext()
         {
