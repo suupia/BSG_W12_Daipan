@@ -5,13 +5,13 @@ using NUnit.Framework;
 using UnityEngine;
 using Daipan.Player.Scripts;
 
-public class PlayerAttackedCounterTest
+public class ThresholdResetCounterTest
 {
     [Test]
     public void PlayerAttackedCounterTestWith10()
     {
         // Arrange
-        var counter = new PlayerAttackedCounter(new MockPlayerAntiCommentParamData());
+        var counter = new ThresholdResetCounter(10);
 
         // Act
         for(int i = 0; i < 10; i++)
@@ -33,7 +33,7 @@ public class PlayerAttackedCounterTest
     public void PlayerAttackedCounterTestWith5()
     {
         // Arrange
-        var counter = new PlayerAttackedCounter(new MockPlayerAntiCommentParamData());
+        var counter = new ThresholdResetCounter(10);
 
         // Act
         for(int i = 0; i < 9; i++)
@@ -55,12 +55,5 @@ public class PlayerAttackedCounterTest
         
         // Assert
         Assert.IsFalse(counter.IsOverThreshold);    
-    }
-    
-    class  MockPlayerAntiCommentParamData : IPlayerAntiCommentParamData 
-    {
-        public int GetAntiCommentThreshold() => 10;
-        public double GetAntiCommentPercentOnMissAttacks(int index) => 0.0;
-        public int GetMissedAttackCountForAntiComment() => 0;
     }
 }

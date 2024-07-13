@@ -113,7 +113,7 @@ namespace Daipan.Daipan
             // Player
             builder.Register<PlayerPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<PlayerMono>>();
             builder.Register<PlayerHolder>(Lifetime.Scoped);
-            builder.Register<PlayerAttackedCounter>(Lifetime.Scoped);
+            builder.Register<ThresholdResetCounter>(Lifetime.Scoped);
             builder.Register<DaipanExecutor>(Lifetime.Scoped);
             builder.Register<IStart, PlayerSpawner>(Lifetime.Scoped);
             // Attack
@@ -244,7 +244,6 @@ namespace Daipan.Daipan
             builder.Register<PlayerAttackEffectBuilder>(Lifetime.Scoped).As<IPlayerAttackEffectBuilder>();
             builder.Register<PlayerInput>(Lifetime.Transient).As<IPlayerInput>();
             builder.Register<PlayerOnAttacked>(Lifetime.Transient).As<IPlayerOnAttacked>();
-            builder.Register<PlayerMissedAttackCounter>(Lifetime.Transient);
 
             // Combo
             RegisterCombo(builder, comboParamManager);
