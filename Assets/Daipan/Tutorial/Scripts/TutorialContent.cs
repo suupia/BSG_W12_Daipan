@@ -340,6 +340,7 @@ namespace Daipan.Tutorial.Scripts
             _speechEventManager = speechEventManager;
             _commentSpawner = commentSpawner;
             _enemySpawnerTutorial = enemySpawnerTutorial;
+            _languageConfig = languageConfig;   
         }
 
         public override void Execute()
@@ -416,6 +417,7 @@ namespace Daipan.Tutorial.Scripts
             _irritatedValue = irritatedValue;
             _daipanExecutor = daipanExecutor;
             _pushEnterTextViewMono = pushEnterTextViewMono;
+            _languageConfig = languageConfig;
         }
 
         public override void Execute()
