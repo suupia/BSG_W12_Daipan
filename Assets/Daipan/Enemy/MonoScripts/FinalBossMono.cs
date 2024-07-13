@@ -24,7 +24,8 @@ namespace Daipan.Enemy.MonoScripts
         FinalBossActionDecider _finalBossActionDecider = null!;
         FinalBossDie _enemyDie = null!;
         IEnemySpawnPoint _enemySpawnPoint = null!;
-        FinalBossParamData _finalBossParamData = null!;
+        IFinalBossParamData _finalBossParamData = null!;
+        IFinalBossViewParamData _finalBossViewParamData = null!;
         IEnemyOnAttacked _enemyOnAttacked = null!;
         PlayerHolder _playerHolder = null!;
         public override EnemyEnum EnemyEnum { get; protected set; } = EnemyEnum.None;
@@ -70,12 +71,14 @@ namespace Daipan.Enemy.MonoScripts
         public void Initialize(
             PlayerHolder playerHolder
             , IEnemySpawnPoint enemySpawnPointData
-            , FinalBossParamData finalBossParamData
+            , IFinalBossParamData finalBossParamData
+            , IFinalBossViewParamData finalBossViewParamData
         )
         {
             _playerHolder = playerHolder;
             _enemySpawnPoint = enemySpawnPointData;
             _finalBossParamData = finalBossParamData;
+            _finalBossViewParamData = finalBossViewParamData;
         }
 
         public void SetDomain(
@@ -92,7 +95,7 @@ namespace Daipan.Enemy.MonoScripts
             _finalBossActionDecider.SetDomain(this, finalBossViewMono, _finalBossParamData, _playerHolder.PlayerMono);
             _enemyDie = enemyDie;
             _enemyOnAttacked = enemyOnAttacked;
-            finalBossViewMono?.SetDomain(_finalBossParamData);
+            finalBossViewMono?.SetDomain(_finalBossViewParamData);
             Hp = new Hp(_finalBossParamData.GetMaxHp());
         }
 
