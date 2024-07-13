@@ -113,7 +113,7 @@ namespace Daipan.Daipan
             // Player
             builder.Register<PlayerPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<PlayerMono>>();
             builder.Register<PlayerHolder>(Lifetime.Scoped);
-            builder.Register<PlayerAttackedCounter>(Lifetime.Scoped);
+            builder.Register<ThresholdResetCounter>(Lifetime.Scoped);
             builder.Register<DaipanExecutor>(Lifetime.Scoped);
             builder.Register<IStart, PlayerSpawner>(Lifetime.Scoped);
             // Attack

@@ -12,18 +12,18 @@ namespace Daipan.Player.Scripts
     public class PlayerOnAttacked : IPlayerOnAttacked
     {
         readonly IrritatedValue _irritatedValue;
-        readonly PlayerAttackedCounter _playerAttackedCounter;
+        readonly ThresholdResetCounter _thresholdResetCounter;
         readonly CommentSpawner _commentSpawner;
         List<AbstractPlayerViewMono?>? _playerViewMonos; 
         public PlayerOnAttacked
         (
             IrritatedValue irritatedValue
-            , PlayerAttackedCounter playerAttackedCounter
+            , ThresholdResetCounter thresholdResetCounter
             , CommentSpawner commentSpawner
         )
         {
             _irritatedValue = irritatedValue;
-            _playerAttackedCounter = playerAttackedCounter;
+            _thresholdResetCounter = thresholdResetCounter;
             _commentSpawner = commentSpawner;
         }
 
@@ -38,8 +38,8 @@ namespace Daipan.Player.Scripts
             _irritatedValue.IncreaseValue(enemyParamData.GetAttackAmount());
             
             // アンチコメント
-            _playerAttackedCounter.CountUp();
-            if (_playerAttackedCounter.IsOverThreshold)
+            _thresholdResetCounter.CountUp();
+            if (_thresholdResetCounter.IsOverThreshold)
                 _commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
             
             // view
