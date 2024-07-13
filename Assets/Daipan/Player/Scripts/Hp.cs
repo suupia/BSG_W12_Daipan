@@ -5,4 +5,4 @@ using UnityEngine;
 namespace Daipan.Player.Scripts
 {
     public record Hp(double Value);
-}
+}   

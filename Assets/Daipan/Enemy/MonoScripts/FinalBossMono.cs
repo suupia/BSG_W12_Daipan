@@ -109,8 +109,10 @@ namespace Daipan.Enemy.MonoScripts
 
         public override void OnDaipaned()
         {
-            Hp = new Hp(Hp.Value / 2); // todo:パラメータを受け取って実装する
-            transform.position += Vector3.right * 3;  // 適当に右にノックバック 
+            var daipanHitDamage =
+                _finalBossParamData.GetDaipanHitDamagePercent() * 0.01 * _finalBossParamData.GetMaxHp();
+            Hp = new Hp(Hp.Value - daipanHitDamage );
+            transform.position += (float)_finalBossParamData.GetKnockBackDistance() * Vector3.right;
             finalBossViewMono?.DaipanHit();
         }
 
