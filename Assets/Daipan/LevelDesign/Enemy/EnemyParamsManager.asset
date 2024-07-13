@@ -15,7 +15,7 @@ MonoBehaviour:
   enemyLevelDesignParam:
     increaseViewerOnEnemyKill: 5
     increaseIrritationGaugeOnSpecialEnemyKill: 20
-    currentKillAmount: 0
+    currentKillAmount: 141
   enemyParams:
   - enemyEnum: 1
     enemyAttackParam:
@@ -267,7 +267,7 @@ MonoBehaviour:
     spawnFinalBossPercent: 0
   - spawnEnemyCount: 40
     waveIntervalSec: 5
-    spawnIntervalSec: 0.75
+    spawnIntervalSec: 0.9
     moveSpeedRate: 1.4
     spawnBossPercent: 50
     spawnSpecialPercent: 30
