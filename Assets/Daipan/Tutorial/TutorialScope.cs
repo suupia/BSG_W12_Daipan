@@ -81,7 +81,7 @@ namespace Daipan.Tutorial
     
             // Enemy
             DaipanScope.RegisterEnemy(builder, enemyParamsManager);
-            builder.Register<EnemyWaveSpawnerCounter>(Lifetime.Scoped).As<IStart>().As<IUpdate>().AsSelf();
+            builder.Register<EnemySpawner>(Lifetime.Scoped);
             builder.Register<EnemySpawnerTutorial>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
             builder.Register<EnemyBuilderTutorial>(Lifetime.Scoped).As<IEnemyBuilder>();
 
@@ -144,8 +144,8 @@ namespace Daipan.Tutorial
 
         static void RegisterDebugInput(IContainerBuilder builder)
         {
-            var waveDebugInput = new GameObject().AddComponent<DebugWaveInputMono>();
-            builder.RegisterComponent(waveDebugInput);
+            // var waveDebugInput = new GameObject().AddComponent<DebugWaveInputMono>();
+            // builder.RegisterComponent(waveDebugInput);
         }
     }
 }

@@ -114,7 +114,7 @@ namespace Daipan.Tutorial.Scripts
                 new List<ISpeechEvent>
                 {
                     new SequentialEvent(0, "赤い敵が来たね！", SpeechEventEnum.Listening),
-                    new SequentialEvent(1, "赤色のボタンを押そう！", SpeechEventEnum.Practical), 
+                    new SequentialEvent(1, "赤色のボタンを押そう！", SpeechEventEnum.Practical, () => redEnemyTutorial.IsSuccess), 
                     new SequentialEvent(2, "そうそう！上手！", SpeechEventEnum.Listening),
                     new EndEvent()
                 };
@@ -133,7 +133,7 @@ namespace Daipan.Tutorial.Scripts
                 new List<ISpeechEvent>
                 {
                     new SequentialEvent(0, "今度はたくさんの敵が来たね！", SpeechEventEnum.Listening),
-                    new SequentialEvent(1, "対応するボタンを押そう！", SpeechEventEnum.Practical),
+                    new SequentialEvent(1, "対応するボタンを押そう！", SpeechEventEnum.Practical, () => sequentialEnemyTutorial.IsSuccess),
                     new SequentialEvent(2, "君、配信の才能あるよ！", SpeechEventEnum.Listening),
                     new EndEvent()
                 };

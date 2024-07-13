@@ -30,6 +30,58 @@ namespace Daipan.Tutorial.Scripts
         }
     }
 
+    public class RedEnemyTutorial : AbstractTutorialContent
+    {
+        readonly SpeechEventManager _speechEventManager;
+        readonly EnemySpawnerTutorial _enemySpawnerTutorial;
+        public bool IsSuccess { get; private set; } 
+
+        public RedEnemyTutorial(
+            SpeechEventManager speechEventManager
+            , EnemySpawnerTutorial enemySpawnerTutorial
+        )
+        {
+            _speechEventManager = speechEventManager;
+            _enemySpawnerTutorial = enemySpawnerTutorial;
+        }
+
+
+        public override void Execute()
+        {
+            Debug.Log("Tutorial: Defeat the red enemy...");
+            _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildRedEnemyTutorial(this));
+
+            _enemySpawnerTutorial.SpawnEnemyByType(EnemyEnum.Red);
+        }
+
+        public override bool IsCompleted()
+        {
+            return IsSuccess;
+        }
+
+        public void SetSuccess()
+        {
+            Debug.Log($"RedEnemyTutorial SetIsSuccess");
+            IsSuccess = true;
+
+            // これで強制的に次のスピーチに進む（危険かも）（IsSuccessをSpeechの方でObserveしているのでかなり危険）
+            int cnt = 0;
+            while (!_speechEventManager.IsEnd())
+            {
+                cnt++;
+                if (cnt >= 100)
+                {
+                    Debug.LogError($"Detect infinite loop in RedEnemyTutorial SetSuccess()");
+                    break;
+                }
+
+                _speechEventManager.MoveNext();
+                Debug.Log(
+                    $"RedEnemyTutorial MoveNext _speechEventManager.CurrentEvent.Message: {_speechEventManager.CurrentEvent.Message}");
+            }
+        }
+    }
+
     public sealed class DisplayBlackScreenWithProgress : AbstractTutorialContent
     {
         readonly DownloadGaugeViewMono _gaugeViewMono;
@@ -174,62 +226,11 @@ namespace Daipan.Tutorial.Scripts
         }
     }
 
-    public class RedEnemyTutorial : AbstractTutorialContent
-    {
-        readonly SpeechEventManager _speechEventManager;
-        readonly EnemySpawnerTutorial _enemySpawnerTutorial;
-
-        public RedEnemyTutorial(
-            SpeechEventManager speechEventManager
-            , EnemySpawnerTutorial enemySpawnerTutorial
-        )
-        {
-            _speechEventManager = speechEventManager;
-            _enemySpawnerTutorial = enemySpawnerTutorial;
-        }
-
-        public bool IsSuccess { get; private set; } // UICatのSpeechEventの分岐で使用
-
-        public override void Execute()
-        {
-            Debug.Log("Tutorial: Defeat the red enemy...");
-            _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildRedEnemyTutorial(this));
-
-            _enemySpawnerTutorial.SpawnEnemyByType(EnemyEnum.Red);
-        }
-
-        public override bool IsCompleted()
-        {
-            return _speechEventManager.IsEnd();
-        }
-
-        public void SetSuccess()
-        {
-            Debug.Log($"RedEnemyTutorial SetIsSuccess");
-
-            // これで強制的に次のスピーチに進む（危険かも）（IsSuccessをSpeechの方でObserveしているのでかなり危険）
-            int cnt = 0;
-            while (!_speechEventManager.IsEnd())
-            {
-                cnt++;
-                if (cnt >= 100)
-                {
-                    Debug.LogError($"Detect infinite loop in RedEnemyTutorial SetSuccess()");
-                    break;
-                }
-
-                _speechEventManager.MoveNext();
-                Debug.Log(
-                    $"RedEnemyTutorial MoveNext _speechEventManager.CurrentEvent.Message: {_speechEventManager.CurrentEvent.Message}");
-            }
-        }
-    }
-
     public class SequentialEnemyTutorial : AbstractTutorialContent
     {
         readonly SpeechEventManager _speechEventManager;
         readonly EnemySpawnerTutorial _enemySpawnerTutorial;
-
+        public bool IsSuccess { get; private set; }
         public SequentialEnemyTutorial(
             SpeechEventManager speechEventManager
             , EnemySpawnerTutorial enemySpawnerTutorial
@@ -258,12 +259,13 @@ namespace Daipan.Tutorial.Scripts
 
         public override bool IsCompleted()
         {
-            return _speechEventManager.IsEnd();
+            return IsSuccess;
         }
 
         public void MoveNextSpeech()
         {
             // これで強制的に次のスピーチに進む（危険かも）
+            IsSuccess = true;
             while (!_speechEventManager.IsEnd())
             {
                 _speechEventManager.MoveNext();
