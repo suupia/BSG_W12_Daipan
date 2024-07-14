@@ -23,16 +23,7 @@ namespace Daipan.Battle.Scripts
         )
         {
             _resultViewMono = resultViewMono;
-            
-            _disposables.Add(
-                Observable
-                .EveryValueChanged(this, x => x.IsInResult)
-                .Where(isInResult => isInResult)
-                .Subscribe(_ =>
-            {
-                ShowResult();
-            }));
-            
+
             _disposables.Add(Observable.EveryUpdate().Subscribe(_ =>
             {
                 if (waveProgress.CurrentProgressRatio >= 1 && !enemyCluster.Enemies.Any())
