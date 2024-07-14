@@ -10,6 +10,8 @@ using Daipan.Player.Interfaces;
 using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Player.LevelDesign.Scripts;
 using Daipan.Player.MonoScripts;
+using Daipan.Sound.Interfaces;
+using Daipan.Sound.MonoScripts;
 using Daipan.Stream.Scripts;
 using UnityEngine;
 
@@ -24,6 +26,7 @@ namespace Daipan.Player.Scripts
         readonly WaveState _waveState;
         readonly IPlayerAntiCommentParamData _playerAntiCommentParamData;
         readonly ThresholdResetCounter _playerMissedAttackCounter;
+        readonly ISoundManager _soundManager;
 
         public PlayerAttackEffectBuilder(
             IPlayerParamDataContainer playerParamDataContainer
@@ -32,6 +35,7 @@ namespace Daipan.Player.Scripts
             ,CommentSpawner commentSpawner
             ,WaveState waveState
             ,IPlayerAntiCommentParamData playerAntiCommentParamData
+            ,ISoundManager soundManager
         )
         {
             _playerParamDataContainer = playerParamDataContainer;
@@ -42,6 +46,7 @@ namespace Daipan.Player.Scripts
             _playerAntiCommentParamData = playerAntiCommentParamData;
             _playerMissedAttackCounter =
                 new ThresholdResetCounter(playerAntiCommentParamData.GetMissedAttackCountForAntiComment());
+            _soundManager = soundManager;
         }
 
         public PlayerAttackEffectMono Build
@@ -57,7 +62,17 @@ namespace Daipan.Player.Scripts
             effect.OnHit += (sender, args) =>
             {
                 Debug.Log($"OnHit");
-                AttackEnemy(_playerParamDataContainer, effect, playerViewMonos, playerColor, args,_comboCounter, _playerMissedAttackCounter, _commentSpawner );
+                AttackEnemy(
+                    _playerParamDataContainer
+                    , effect
+                    , playerViewMonos
+                    , playerColor
+                    , args
+                    ,_comboCounter
+                    , _playerMissedAttackCounter
+                    , _commentSpawner
+                    , _soundManager
+                    );
                 SpawnAntiComment(args, _commentSpawner, _playerAntiCommentParamData,_waveState);
             };
             return effect;
@@ -73,6 +88,7 @@ namespace Daipan.Player.Scripts
             , ComboCounter comboCounter
             , ThresholdResetCounter playerMissedAttackCounter
             , CommentSpawner commentSpawner
+            , ISoundManager soundManager
         )
         {
             if (args.IsTargetEnemy && args.EnemyMono != null)
@@ -94,6 +110,7 @@ namespace Daipan.Player.Scripts
                 {
                     comboCounter.ResetCombo();
                     playerAttackEffectMono.Defenced(args.EnemyMono.transform.position);
+                    soundManager.PlaySe(SeEnum.AttackDeflect);
                 }
 
             }
