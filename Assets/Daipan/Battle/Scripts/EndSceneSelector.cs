@@ -18,6 +18,7 @@ namespace Daipan.Battle.scripts
         readonly EndSceneTransitionParam _endSceneTransitionParam;
         readonly ViewerNumber _viewerNumber;
         readonly DaipanExecutor _daipanExecutor;
+        readonly ComboCounter _comboCounter;
         IDisposable? _disposable;
 
         // この順番でシーン遷移の判定を行っていく
@@ -36,11 +37,13 @@ namespace Daipan.Battle.scripts
             EndSceneTransitionParam endSceneTransitionParam
             , ViewerNumber viewerNumber
             , DaipanExecutor daipanExecutor
+            , ComboCounter comboCounter
         )
         {
             _endSceneTransitionParam = endSceneTransitionParam;
             _viewerNumber = viewerNumber;
             _daipanExecutor = daipanExecutor;
+            _comboCounter = comboCounter;
         }
         
 
@@ -55,7 +58,7 @@ namespace Daipan.Battle.scripts
             }
 
             foreach (var judgeSceneName in _judgeList)
-                if (TransitionCondition(judgeSceneName, _endSceneTransitionParam, _viewerNumber, playerMono, _daipanExecutor))
+                if (TransitionCondition(judgeSceneName, _endSceneTransitionParam, _viewerNumber, playerMono, _daipanExecutor, _comboCounter))
                 {
                     EndSceneStatic.EndSceneEnum = judgeSceneName;
                     SceneTransition.TransitioningScene(SceneName.EndScene);
@@ -71,6 +74,7 @@ namespace Daipan.Battle.scripts
             , ViewerNumber viewerNumber
             , PlayerMono playerMono
             , DaipanExecutor daipanExecutor
+            , ComboCounter counter
         )
         {
             var result = sceneName switch
@@ -81,8 +85,8 @@ namespace Daipan.Battle.scripts
                                              endSceneTransitionParam.viewerCountThresholdForThanksgivingEnd,
                 EndSceneEnum.NoobGamer => (double)playerMono.Hp.Value / playerMono.MaxHp <=
                                           endSceneTransitionParam.hpPercentThresholdForNoobGamerEnd,
-                EndSceneEnum.ProGamer => (double)playerMono.Hp.Value / playerMono.MaxHp <=
-                                         endSceneTransitionParam.hpPercentThresholdForProGamerEnd,
+                EndSceneEnum.ProGamer => counter.MaxComboCount >= 
+                                        endSceneTransitionParam.maxComboCountThresholdForProGamerEnd,
                 EndSceneEnum.SacredLady => daipanExecutor.DaipanCount <=
                                            endSceneTransitionParam.daipanCountThresholdForSacredLadyEnd,
                 EndSceneEnum.Backlash => daipanExecutor.DaipanCount >=
