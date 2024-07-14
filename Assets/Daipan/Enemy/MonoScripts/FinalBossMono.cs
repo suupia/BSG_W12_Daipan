@@ -22,6 +22,7 @@ namespace Daipan.Enemy.MonoScripts
         [SerializeField] AbstractFinalBossViewMono? finalBossViewMono;
         EnemyCluster _enemyCluster = null!;
         FinalBossActionDecider _finalBossActionDecider = null!;
+        EnemyMove _enemyMove=null!;
         FinalBossDie _enemyDie = null!;
         IEnemySpawnPoint _enemySpawnPoint = null!;
         IFinalBossParamData _finalBossParamData = null!;
@@ -44,19 +45,8 @@ namespace Daipan.Enemy.MonoScripts
 
         void Update()
         {
-            // 攻撃範囲よりプレイヤーとの距離が大きいときだけ動く
-            if (transform.position.x - _playerHolder.PlayerMono.transform.position.x >=
-                _finalBossParamData.GetAttackRange())
-            {
-                var moveSpeed = (float)_finalBossParamData.GetMoveSpeedPerSec();
-                transform.position += Time.deltaTime * moveSpeed * Vector3.left;
-                IsReachedPlayer = false;
-                finalBossViewMono?.Move();
-            }
-            else
-            {
-                IsReachedPlayer = true;
-            }
+            IsReachedPlayer = _enemyMove.MoveUpdate(_playerHolder.PlayerMono.transform,
+                _finalBossParamData, finalBossViewMono); 
 
             if (transform.position.x < _enemySpawnPoint.GetEnemyDespawnedPoint().x)
                 Die(this, isDaipaned: false);
@@ -91,6 +81,7 @@ namespace Daipan.Enemy.MonoScripts
             _enemyCluster = enemyCluster;
             _finalBossActionDecider = finalBossActionDecider;
             _finalBossActionDecider.SetDomain(this, finalBossViewMono, _finalBossParamData, _playerHolder.PlayerMono);
+            _enemyMove = new EnemyMove(transform);
             _enemyDie = enemyDie;
             _enemyOnAttacked = enemyOnAttacked;
             finalBossViewMono?.SetDomain(_finalBossViewParamData);
