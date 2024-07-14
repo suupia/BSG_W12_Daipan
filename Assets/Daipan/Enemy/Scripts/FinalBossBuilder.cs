@@ -1,6 +1,7 @@
 #nullable enable
 using Daipan.Battle.scripts;
 using Daipan.Comment.Scripts;
+using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.LevelDesign.Scripts;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Player.LevelDesign.Interfaces;
@@ -18,6 +19,7 @@ namespace Daipan.Enemy.Scripts
         readonly FinalBossColorChanger _finalBossColorChanger;
         readonly IPlayerAntiCommentParamData _playerAntiCommentParamData;
         readonly CommentSpawner _commentSpawner;
+        readonly IFinalBossParamData _finalBossParamData;
         public FinalBossBuilder(
             EnemyCluster enemyCluster
             , EnemySpawner enemySpawner
@@ -26,6 +28,7 @@ namespace Daipan.Enemy.Scripts
             , FinalBossColorChanger finalBossColorChanger
             , IPlayerAntiCommentParamData playerAntiCommentParamData
             , CommentSpawner commentSpawner
+            , IFinalBossParamData finalBossParamData
         )
         {
             _enemyCluster = enemyCluster;
@@ -35,6 +38,7 @@ namespace Daipan.Enemy.Scripts
             _finalBossColorChanger = finalBossColorChanger;
             _playerAntiCommentParamData = playerAntiCommentParamData;
             _commentSpawner = commentSpawner;
+            _finalBossParamData = finalBossParamData;
         }
 
         public FinalBossMono Build(FinalBossMono finalBossMono, EnemyEnum enemyEnum)
@@ -63,9 +67,17 @@ namespace Daipan.Enemy.Scripts
             finalBossMono.OnDiedEvent += (sender, args) =>
             {
                 _finalBossDefeatTracker.SetFinalBossDefeated();
+                
+                SpawnComment(args, _commentSpawner, _finalBossParamData.GetCommentCount()); 
             };
+            
 
             return finalBossMono;
+        }
+        
+        static void SpawnComment(DiedEventArgs args, CommentSpawner commentSpawner, int count)
+        {
+            for (var i = 0; i < count; i++) commentSpawner.SpawnCommentByType(CommentEnum.Normal);
         }
     }
 }

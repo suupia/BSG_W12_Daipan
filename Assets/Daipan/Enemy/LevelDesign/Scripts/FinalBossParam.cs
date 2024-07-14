@@ -24,6 +24,9 @@ namespace Daipan.Enemy.LevelDesign.Scripts
         public double daipanHitDamagePercent = 10;
         [Header("ノックバック距離")][Min(0)]
         public double knockBackDistance = 1;
+
+        [Header("倒したときに生成されるコメントの数")] [Min(0)] 
+        public int commentCount = 5;
         
         [Header("FinalBOSSの色のパラメータを設定してください。")]
         public List<FinalBossColorParam> finalBossColorParams = null!;
