@@ -17,12 +17,13 @@ MonoBehaviour:
     hpAmount: 100
   playerAntiCommentParam:
     antiCommentThreshold: 3
+    missedAttackCountForAntiComments: 2
     antiCommentPercentOnMissAttacks:
     - 30
     - 40
     - 50
     - 70
-    missedAttackCountForAntiComments: 2
+    finalBossAntiCommentPercentOnMissAttacks: 30
   playerParams:
   - playerAttackParam:
       attackAmount: 10
