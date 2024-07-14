@@ -78,7 +78,7 @@ namespace Daipan.Player.Scripts
             IsHit = true;
             _playerAttackEffectMono.transform.position -= new Vector3(0.2f, 0, 0); // すこし左にずらす
             if (_playerAttackEffectViewMono != null)
-                _playerAttackEffectViewMono.HitNew(() => UnityEngine.Object.Destroy(_playerAttackEffectMono.gameObject));
+                _playerAttackEffectViewMono.Hit(() => UnityEngine.Object.Destroy(_playerAttackEffectMono.gameObject));
             else UnityEngine.Object.Destroy(_playerAttackEffectMono.gameObject);
         }
 
