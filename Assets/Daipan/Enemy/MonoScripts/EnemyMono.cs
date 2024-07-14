@@ -52,6 +52,7 @@ namespace Daipan.Enemy.MonoScripts
                 var moveSpeed = (float)_enemyParamContainer.GetEnemyParamData(EnemyEnum).GetMoveSpeedPerSec();
                 transform.position += Time.deltaTime * moveSpeed * Vector3.left;
                 IsReachedPlayer = false;
+                enemyViewMono?.Move();
             }
             else
             {
