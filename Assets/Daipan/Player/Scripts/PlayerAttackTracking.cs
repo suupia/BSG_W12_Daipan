@@ -53,7 +53,14 @@ namespace Daipan.Player.Scripts
                     var isTargetEnemy = PlayerAttackModule.GetTargetEnemyEnum(_playerParamData.PlayerEnum())
                         .Contains(enemyMono.EnemyEnum);
                     OnHit?.Invoke(this, new OnHitEventArgs(enemyMono, isTargetEnemy));
-                    UnityEngine.Object.Destroy(_playerAttackEffectMono.gameObject);
+                    if (isTargetEnemy)
+                    {
+                        UnityEngine.Object.Destroy(_playerAttackEffectMono.gameObject);
+                    }
+                    else
+                    {
+                        _playerAttackEffectMono.Defenced(enemyMono.transform.position);
+                    }
         
                 }
             }
