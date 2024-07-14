@@ -88,12 +88,10 @@ namespace Daipan.Player.Scripts
                 if (beforeHp != afterHp)
                 {
                     comboCounter.IncreaseCombo();
-                    Object.Destroy(playerAttackEffectMono.gameObject);
                 }
                 else
                 {
                     comboCounter.ResetCombo();
-                    playerAttackEffectMono.Defenced(args.EnemyMono.transform.position);
                 }
 
             }
@@ -104,6 +102,7 @@ namespace Daipan.Player.Scripts
                 comboCounter.ResetCombo();
                 playerMissedAttackCounter.CountUp();
                 if (playerMissedAttackCounter.IsOverThreshold) commentSpawner.SpawnCommentByType(CommentEnum.Spiky); 
+                if(args.EnemyMono != null) playerAttackEffectMono.Defenced(args.EnemyMono.transform.position);
 
                 return;
             }

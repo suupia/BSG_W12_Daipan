@@ -20,16 +20,19 @@ namespace Daipan.Player.Scripts
         Vector3 Direction { get; }
     
         readonly PlayerAttackEffectMono _playerAttackEffectMono;
+        readonly PlayerAttackEffectViewMono? _playerAttackEffectViewMono;
         
         public  PlayerAttackLinear(
             PlayerAttackEffectMono playerAttackEffectMono
             , IPlayerParamData playerParamData
             , Func<AbstractEnemyMono?> getTargetEnemyMono
+            , PlayerAttackEffectViewMono? playerAttackEffectViewMono
         )
         {
             _playerAttackEffectMono = playerAttackEffectMono;
             _playerParamData = playerParamData;
             _getNearestEnemyMono = getTargetEnemyMono;
+            _playerAttackEffectViewMono = playerAttackEffectViewMono;
             var targetPosition = getTargetEnemyMono()?.transform.position ?? Vector3.zero;
             Direction = targetPosition != Vector3.zero ? (targetPosition - _playerAttackEffectMono.transform.position).normalized : Vector3.right;
         }
@@ -57,6 +60,8 @@ namespace Daipan.Player.Scripts
                     var isTargetEnemy = PlayerAttackModule.GetTargetEnemyEnum(_playerParamData.PlayerEnum())
                         .Contains(enemyMono.EnemyEnum);
                     OnHit?.Invoke(this, new OnHitEventArgs(enemyMono, isTargetEnemy));
+                    if (isTargetEnemy) UnityEngine.Object.Destroy(_playerAttackEffectMono.gameObject);
+                    else Defenced(_playerAttackEffectViewMono);
                 }
             }
             else
@@ -65,7 +70,15 @@ namespace Daipan.Player.Scripts
                     UnityEngine.Object.Destroy(_playerAttackEffectMono.gameObject);
             }
         }
-        
+
+        void Defenced(PlayerAttackEffectViewMono? playerAttackEffectViewMono)
+        {
+            _playerAttackEffectMono.transform.position -= new Vector3(1.2f, 0, 0); // 左にずらす
+            if (playerAttackEffectViewMono != null)
+                playerAttackEffectViewMono.HitNew(() => UnityEngine.Object.Destroy(_playerAttackEffectMono.gameObject));
+            else UnityEngine.Object.Destroy(_playerAttackEffectMono.gameObject);
+        }
+
  
     } 
 }

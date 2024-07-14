@@ -44,11 +44,13 @@ namespace Daipan.Player.MonoScripts
                 this
                 , playerParamData
                 , getTargetEnemyMono
+                , viewMono
             );
         }
 
         public void Defenced(Vector3 hitPosition)
         {
+            Debug.Log("Defenced");
             transform.position = hitPosition - new Vector3(1.2f, 0, 0); ;
             _isActive = false;
             viewMono?.Hit();
