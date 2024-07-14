@@ -1,4 +1,5 @@
 #nullable enable
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Daipan.Battle.scripts;
@@ -12,6 +13,7 @@ using Daipan.Player.LevelDesign.Scripts;
 using Daipan.Player.MonoScripts;
 using Daipan.Stream.Scripts;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Daipan.Player.Scripts
 {
@@ -85,14 +87,10 @@ namespace Daipan.Player.Scripts
                 var afterHp = args.EnemyMono.Hp.Value;
 
                 //  HPに変化があれば、コンボ増加
-                if (beforeHp != afterHp)
-                {
+                if (Math.Abs(beforeHp - afterHp) < double.Epsilon)
                     comboCounter.IncreaseCombo();
-                }
                 else
-                {
                     comboCounter.ResetCombo();
-                }
 
             }
             else
