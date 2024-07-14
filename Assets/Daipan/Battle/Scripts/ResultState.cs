@@ -37,8 +37,12 @@ namespace Daipan.Battle.Scripts
             {
                 if (waveProgress.CurrentProgressRatio >= 1 && !enemyCluster.Enemies.Any())
                 { 
-                    // todo: ここで遅延させる
-                    // ShowResult();
+                    const double delaySec = 2;
+                    _disposables.Add(
+                        Observable
+                            .Timer(TimeSpan.FromSeconds(delaySec))
+                            .Subscribe(_ => ShowResult())
+                        );
                 }
             }));
             
