@@ -57,7 +57,7 @@ namespace Daipan.Player.Scripts
             effect.OnHit += (sender, args) =>
             {
                 Debug.Log($"OnHit");
-                AttackEnemy(_playerParamDataContainer, playerViewMonos, playerColor, args,_comboCounter, _playerMissedAttackCounter, _commentSpawner );
+                AttackEnemy(_playerParamDataContainer, effect, playerViewMonos, playerColor, args,_comboCounter, _playerMissedAttackCounter, _commentSpawner );
                 SpawnAntiComment(args, _commentSpawner, _playerAntiCommentParamData,_waveState);
             };
             return effect;
@@ -66,6 +66,7 @@ namespace Daipan.Player.Scripts
 
         static void AttackEnemy(
             IPlayerParamDataContainer playerParamDataContainer
+            , PlayerAttackEffectMono playerAttackEffectMono
             , List<AbstractPlayerViewMono?> playerViewMonos
             , PlayerColor playerColor
             , OnHitEventArgs args
@@ -82,10 +83,18 @@ namespace Daipan.Player.Scripts
                 var beforeHp = args.EnemyMono.Hp.Value; 
                 PlayerAttackModule.Attack(args.EnemyMono, playerParamData);
                 var afterHp = args.EnemyMono.Hp.Value;
-                
+
                 //  HPに変化があれば、コンボ増加
-                if (beforeHp != afterHp) comboCounter.IncreaseCombo();
-                else comboCounter.ResetCombo();
+                if (beforeHp != afterHp)
+                {
+                    comboCounter.IncreaseCombo();
+                    Object.Destroy(playerAttackEffectMono.gameObject);
+                }
+                else
+                {
+                    comboCounter.ResetCombo();
+                    playerAttackEffectMono.Defenced(args.EnemyMono.transform.position);
+                }
 
             }
             else
