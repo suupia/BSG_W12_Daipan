@@ -12,6 +12,7 @@ namespace Daipan.Battle.Scripts
     public class ResultState : IDisposable
     {
         readonly ResultViewMono _resultViewMono;
+        readonly FinalBossDefeatTracker _finalBossDefeatTracker;
         readonly List<IDisposable> _disposables = new();
         
         public bool IsInResult { get; private set; }
@@ -20,22 +21,14 @@ namespace Daipan.Battle.Scripts
             WaveProgress waveProgress
             , ResultViewMono resultViewMono
             , EnemyCluster enemyCluster
+            , FinalBossDefeatTracker finalBossDefeatTracker
         )
         {
             _resultViewMono = resultViewMono;
-            
-            _disposables.Add(
-                Observable
-                .EveryValueChanged(this, x => x.IsInResult)
-                .Where(isInResult => isInResult)
-                .Subscribe(_ =>
-            {
-                ShowResult();
-            }));
-            
+
             _disposables.Add(Observable.EveryUpdate().Subscribe(_ =>
             {
-                if (waveProgress.CurrentProgressRatio >= 1 && !enemyCluster.Enemies.Any())
+                if (waveProgress.CurrentProgressRatio >= 1 && finalBossDefeatTracker.IsFinalBossDefeated && !IsInResult)
                 { 
                     const double delaySec = 2;
                     _disposables.Add(
