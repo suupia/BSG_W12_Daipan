@@ -13,11 +13,11 @@ namespace Daipan.Enemy.Scripts
             _transform = transform;
         }
 
-        public bool MoveUpdate(Vector3 targetPosition, IEnemyParamData enemyParamData, IEnemyViewMono? enemyViewMono)
+        public bool MoveUpdate(Transform targetTransform, IEnemyParamData enemyParamData, IEnemyViewMono? enemyViewMono)
         {
             // 攻撃範囲よりプレイヤーとの距離が大きいときだけ動く
             bool isReachedPlayer;
-            if (_transform.position.x - targetPosition.x >=
+            if (_transform.position.x - targetTransform.position.x >=
                 enemyParamData.GetAttackRange())
             {
                 var moveSpeed = (float)enemyParamData.GetMoveSpeedPerSec();

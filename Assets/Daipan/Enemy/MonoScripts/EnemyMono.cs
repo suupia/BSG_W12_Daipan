@@ -20,6 +20,7 @@ namespace Daipan.Enemy.MonoScripts
         public AbstractEnemyViewMono? EnemyViewMono => enemyViewMono;
         [SerializeField] AbstractEnemyViewMono? enemyViewMono;
         EnemyCluster _enemyCluster = null!;
+        EnemyMove _enemyMove = null!;
         EnemyAttackDecider _enemyAttackDecider = null!;
         EnemyDie _enemyDie = null!;
         IEnemySpawnPoint _enemySpawnPoint = null!;
@@ -45,22 +46,11 @@ namespace Daipan.Enemy.MonoScripts
             _enemyAttackDecider.AttackUpdate(this, enemyViewMono,
                 _enemyParamContainer.GetEnemyParamData(EnemyEnum), _playerHolder.PlayerMono);
 
-            // 攻撃範囲よりプレイヤーとの距離が大きいときだけ動く
-            if (transform.position.x - _playerHolder.PlayerMono.transform.position.x >=
-                _enemyParamContainer.GetEnemyParamData(EnemyEnum).GetAttackRange())
-            {
-                var moveSpeed = (float)_enemyParamContainer.GetEnemyParamData(EnemyEnum).GetMoveSpeedPerSec();
-                transform.position += Time.deltaTime * moveSpeed * Vector3.left;
-                IsReachedPlayer = false;
-                enemyViewMono?.Move();
-            }
-            else
-            {
-                IsReachedPlayer = true;
-            }
+            IsReachedPlayer = _enemyMove.MoveUpdate(_playerHolder.PlayerMono.transform,
+                _enemyParamContainer.GetEnemyParamData(EnemyEnum), enemyViewMono); 
 
             if (transform.position.x < _enemySpawnPoint.GetEnemyDespawnedPoint().x)
-                Die(this, false);
+                Die(this);
 
             enemyViewMono?.SetHpGauge(Hp.Value, _enemyParamContainer.GetEnemyParamData(EnemyEnum).GetMaxHp());
         }
@@ -87,6 +77,7 @@ namespace Daipan.Enemy.MonoScripts
         {
             EnemyEnum = enemyEnum;
             _enemyCluster = enemyCluster;
+            _enemyMove = new EnemyMove(transform); 
             _enemyAttackDecider = enemyAttackDecider;
             _enemyDie = enemyDie;
             _enemyOnAttacked = enemyOnAttacked;
