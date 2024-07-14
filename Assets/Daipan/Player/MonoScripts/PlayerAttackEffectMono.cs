@@ -40,6 +40,11 @@ namespace Daipan.Player.MonoScripts
                 , getTargetEnemyMono
             );
         }
+
+        public void Defenced()
+        {
+            viewMono?.Hit();
+        }
     }
 
 }

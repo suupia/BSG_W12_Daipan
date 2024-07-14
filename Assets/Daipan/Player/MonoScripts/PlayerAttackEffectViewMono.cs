@@ -21,11 +21,6 @@ namespace Daipan.Player.MonoScripts
             animator.runtimeAnimatorController = playerParamData.GetAnimator();
         }
 
-        public override void Idle()
-        {
-            animator.SetBool("IsIdling", true);
-        }
-
         public override void Hit()
         {
             animator.SetTrigger("OnHit");
