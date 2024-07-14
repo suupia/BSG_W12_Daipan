@@ -28,7 +28,8 @@ namespace Daipan.Player.MonoScripts
         public bool IsFinishAnimation()
         {
             Debug.Log($"animation {animator.GetCurrentAnimatorStateInfo(0).normalizedTime}");
-            return animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1;
+            return animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1
+                && !animator.IsInTransition(0);
         }
     }
 }

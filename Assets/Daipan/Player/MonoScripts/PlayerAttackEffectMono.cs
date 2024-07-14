@@ -47,8 +47,9 @@ namespace Daipan.Player.MonoScripts
             );
         }
 
-        public void Defenced()
-        {         
+        public void Defenced(Vector3 hitPosition)
+        {
+            transform.position = hitPosition - new Vector3(1f, 0, 0); ;
             _isActive = false;
             viewMono?.Hit();
         }

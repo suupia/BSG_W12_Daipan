@@ -59,7 +59,7 @@ namespace Daipan.Player.Scripts
                     }
                     else
                     {
-                        _playerAttackEffectMono.Defenced();
+                        _playerAttackEffectMono.Defenced(enemyMono.transform.position);
                     }
         
                 }
