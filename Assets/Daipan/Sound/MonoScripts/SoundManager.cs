@@ -10,11 +10,11 @@ namespace Daipan.Sound.MonoScripts
     {
         [SerializeField] List<SeParam> seParams = null!;
         
-        AudioSource audioSource = null!;
+        AudioSource _audioSource = null!;
 
         void Awake()
         {
-            audioSource = gameObject.AddComponent<AudioSource>(); 
+            _audioSource = gameObject.AddComponent<AudioSource>(); 
         }
 
 
@@ -27,8 +27,8 @@ namespace Daipan.Sound.MonoScripts
                 return;
             }
 
-            audioSource.clip = seParam.audioClip;
-            audioSource.Play();
+            _audioSource.clip = seParam.audioClip;
+            _audioSource.Play();
         }
     }
 

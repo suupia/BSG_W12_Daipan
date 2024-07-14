@@ -114,6 +114,9 @@ namespace Daipan.Tutorial
             builder.RegisterComponentInHierarchy<AimTopStreamerViewMono>();
             builder.RegisterComponentInHierarchy<StandbyStreamingViewMono>();
 
+            // Sound
+            DaipanScope.RegisterSound(builder);
+            
             // Updater
             builder.UseEntryPoints(Lifetime.Scoped, entryPoints =>
             {
