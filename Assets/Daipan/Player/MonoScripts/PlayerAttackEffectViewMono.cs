@@ -23,7 +23,12 @@ namespace Daipan.Player.MonoScripts
 
         public override void Hit()
         {
-            animator.SetTrigger("OnHit");
+            animator.SetTrigger("isHit");
+        }
+        public bool IsFinishAnimation()
+        {
+            Debug.Log($"animation {animator.GetCurrentAnimatorStateInfo(0).normalizedTime}");
+            return animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1;
         }
     }
 }

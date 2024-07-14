@@ -10,6 +10,7 @@ using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Player.LevelDesign.Scripts;
 using Daipan.Player.Scripts;
 using UnityEngine;
+using R3;
 
 namespace Daipan.Player.MonoScripts
 {
@@ -29,6 +30,10 @@ namespace Daipan.Player.MonoScripts
         void Update()
         {
             if(_isActive) _playerAttackTracking.Move();
+            else
+            {
+                if ((viewMono?.IsFinishAnimation()) != false) Destroy(gameObject);
+            }
         }
 
         public void SetUp(IPlayerParamData playerParamData, Func<AbstractEnemyMono?> getTargetEnemyMono)
@@ -43,7 +48,7 @@ namespace Daipan.Player.MonoScripts
         }
 
         public void Defenced()
-        {
+        {         
             _isActive = false;
             viewMono?.Hit();
         }
