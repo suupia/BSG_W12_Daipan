@@ -20,6 +20,7 @@ namespace Daipan.Player.Scripts
         readonly PlayerAttackEffectMono _playerAttackEffectMono;
         readonly PlayerAttackEffectViewMono? _playerAttackEffectViewMono;
         Vector3 Direction { get; }
+        bool IsHit { get; set; }
 
         public  PlayerAttackLinear(
             PlayerAttackEffectMono playerAttackEffectMono
@@ -46,6 +47,8 @@ namespace Daipan.Player.Scripts
                 Debug.LogWarning("PlayerAttackEffectMono: PlayerParamData is null");
                 return;
             }
+            
+            if(IsHit) return;
         
             var enemyMono = _getNearestEnemyMono();
             if (enemyMono != null && !PlayerAttackModule.IsInStreamScreen(enemyMono.transform.position))
@@ -60,7 +63,7 @@ namespace Daipan.Player.Scripts
                         .Contains(enemyMono.EnemyEnum);
                     OnHit?.Invoke(this, new OnHitEventArgs(enemyMono, isTargetEnemy));
                     if (isTargetEnemy) UnityEngine.Object.Destroy(_playerAttackEffectMono.gameObject);
-                    else Defenced(_playerAttackEffectViewMono);
+                    else Defenced();
                 }
             }
             else
@@ -70,11 +73,12 @@ namespace Daipan.Player.Scripts
             }
         }
 
-        void Defenced(PlayerAttackEffectViewMono? playerAttackEffectViewMono)
+        public void Defenced()
         {
-            _playerAttackEffectMono.transform.position -= new Vector3(1.2f, 0, 0); // 左にずらす
-            if (playerAttackEffectViewMono != null)
-                playerAttackEffectViewMono.HitNew(() => UnityEngine.Object.Destroy(_playerAttackEffectMono.gameObject));
+            IsHit = true;
+            _playerAttackEffectMono.transform.position -= new Vector3(0.2f, 0, 0); // すこし左にずらす
+            if (_playerAttackEffectViewMono != null)
+                _playerAttackEffectViewMono.HitNew(() => UnityEngine.Object.Destroy(_playerAttackEffectMono.gameObject));
             else UnityEngine.Object.Destroy(_playerAttackEffectMono.gameObject);
         }
 

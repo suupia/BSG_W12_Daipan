@@ -100,7 +100,7 @@ namespace Daipan.Player.Scripts
                 comboCounter.ResetCombo();
                 playerMissedAttackCounter.CountUp();
                 if (playerMissedAttackCounter.IsOverThreshold) commentSpawner.SpawnCommentByType(CommentEnum.Spiky); 
-                if(args.EnemyMono != null) playerAttackEffectMono.Defenced(args.EnemyMono.transform.position);
+                if(args.EnemyMono != null) playerAttackEffectMono.Defenced();
 
                 return;
             }

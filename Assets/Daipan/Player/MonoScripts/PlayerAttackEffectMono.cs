@@ -25,11 +25,10 @@ namespace Daipan.Player.MonoScripts
         }
 
         IPlayerAttackMove _playerAttackTracking = null!;
-        bool _isActive = true;
 
         void Update()
         {
-            if(_isActive) _playerAttackTracking.Move();
+             _playerAttackTracking.Move();
         }
 
         public void SetUp(IPlayerParamData playerParamData, Func<AbstractEnemyMono?> getTargetEnemyMono)
@@ -44,10 +43,9 @@ namespace Daipan.Player.MonoScripts
             );
         }
 
-        public void Defenced(Vector3 hitPosition)
+        public void Defenced()
         {
-            Debug.Log("Defenced");
-            _isActive = false;
+            _playerAttackTracking.Defenced(); 
         }
     }
 
