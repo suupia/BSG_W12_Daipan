@@ -15,6 +15,7 @@ MonoBehaviour:
   commentSpeed: 8
   diffCommentViewer: 1000
   diffAntiCommentViewer: 1000
+  irritationIncreasePerSec: 8
   commentWords:
   - "\u5929\u624D\u304B\uFF1F\uFF1F\uFF1F"
   - "\u30CA\u30A4\u30B9\u30FC\u30FC\u30FC\uFF01\uFF01\uFF01"
