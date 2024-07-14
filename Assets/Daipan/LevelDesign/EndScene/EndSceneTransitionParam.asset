@@ -15,6 +15,6 @@ MonoBehaviour:
   viewerCountThresholdForInsideTheBoxEnd: 50000
   viewerCountThresholdForThanksgivingEnd: 230000
   hpPercentThresholdForNoobGamerEnd: 0
-  maxComboCountThresholdForProGamerEnd: 100
+  maxComboCountThresholdForProGamerEnd: 140
   daipanCountThresholdForSacredLadyEnd: 0
   daipanCountThresholdForBacklashEnd: 10
