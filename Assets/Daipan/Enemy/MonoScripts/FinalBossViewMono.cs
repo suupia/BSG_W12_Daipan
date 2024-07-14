@@ -104,6 +104,10 @@ namespace Daipan.Enemy.MonoScripts
                 .Where(_ => preState != _leaderAnimator.GetCurrentAnimatorStateInfo(0).fullPathHash)
                 .Subscribe(_ => onDied())
                 .AddTo(_leaderAnimator.gameObject);
+                       
+            // Damaged
+            animatorDamage.SetTrigger("OnDamaged");
+            animatorDamageLine.SetTrigger("OnDamaged"); 
             
             // Gekiha
             animatorGekiha.SetTrigger("OnGekiha");
@@ -123,10 +127,6 @@ namespace Daipan.Enemy.MonoScripts
                 .Subscribe(_ => onDied())
                 .AddTo(_leaderAnimator.gameObject);
             
-            // Damaged
-            animatorDamage.SetTrigger("OnDamaged");
-            animatorDamageLine.SetTrigger("OnDamaged");
-            
             // Gekiha
             animatorGekiha.SetTrigger("OnGekiha");
             Debug.Log("FinalBossViewMono Gekiha");
@@ -135,6 +135,7 @@ namespace Daipan.Enemy.MonoScripts
         public override void DaipanHit()
         {
             SetTriggerAll("OnDaipanHit");
+
         }
 
         public override void Highlight(bool isHighlighted)

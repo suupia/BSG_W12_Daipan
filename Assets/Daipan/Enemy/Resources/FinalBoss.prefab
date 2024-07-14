@@ -7039,8 +7039,8 @@ MonoBehaviour:
   animatorEyeBall: {fileID: 9077591449563658034}
   animatorLine: {fileID: 5935720980682999202}
   animatorDamage: {fileID: 2263968893951358008}
-  animatorDamageLine: {fileID: 0}
-  animatorGekiha: {fileID: 1926274173979141894}
+  animatorDamageLine: {fileID: 1926274173979141894}
+  animatorGekiha: {fileID: 7559584350948322199}
   highlightSpriteRenderer: {fileID: 2417312336360961275}
 --- !u!1 &7363388465228311285
 GameObject:
