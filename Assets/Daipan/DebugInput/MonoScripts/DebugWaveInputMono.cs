@@ -68,11 +68,5 @@ namespace Daipan.DebugInput.MonoScripts
             Debug.Log($"ForceNextWave waveState.CurrentWave: {waveState.CurrentWaveIndex}");
         }
 
-        static void SetNearLastTime(StreamTimer streamTimer, StreamData streamData)
-        {
-            var nearLastTime = streamData.GetMaxTime() - 3;
-            Debug.Log($"SetNearLastTime nearLastTime: {nearLastTime}");
-            streamTimer.SetTime(nearLastTime);
-        }
     }
 }

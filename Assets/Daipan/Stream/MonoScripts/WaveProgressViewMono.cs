@@ -12,18 +12,18 @@ namespace Daipan.Stream.MonoScripts
     {
         [SerializeField] Slider waveProgressSlider = null!;
         
-        StreamTimer _streamTimer = null!;
+        WaveProgress _waveProgress = null!;
         void Update()
         {
-            waveProgressSlider.value = (float)_streamTimer.CurrentProgressRatio;
+            waveProgressSlider.value = (float)_waveProgress.CurrentProgressRatio;
         }
 
         [Inject]
         public void Initialize(
-            StreamTimer timer
+            WaveProgress timer
             )
         {
-            _streamTimer = timer;
+            _waveProgress = timer;
         }
     }
 }

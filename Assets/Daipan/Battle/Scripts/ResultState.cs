@@ -15,7 +15,7 @@ namespace Daipan.Battle.Scripts
         public bool IsInResult { get; private set; }
 
         public ResultState(
-            StreamTimer streamTimer
+            WaveProgress waveProgress
             , ResultViewMono resultViewMono
         )
         {
@@ -31,7 +31,7 @@ namespace Daipan.Battle.Scripts
             
             _disposables.Add(Observable.EveryUpdate().Subscribe(_ =>
             {
-                if (streamTimer.CurrentProgressRatio >= 1)
+                if (waveProgress.CurrentProgressRatio >= 1)
                 {
                     ShowResult(); 
                 }

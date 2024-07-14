@@ -70,7 +70,7 @@ namespace Daipan.Daipan
             builder.Register<StreamPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<StreamMono>>();
             builder.Register<ViewerNumber>(Lifetime.Scoped);
             builder.Register<IStart, StreamSpawner>(Lifetime.Scoped).AsSelf();
-            builder.Register<StreamTimer>(Lifetime.Scoped).AsSelf().As<IStart>().As<IUpdate>();
+            builder.Register<WaveProgress>(Lifetime.Scoped).AsSelf().As<IStart>().As<IUpdate>();
         }
 
         public static void RegisterComment(IContainerBuilder builder, CommentParamManager commentParamManager)
