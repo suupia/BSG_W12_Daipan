@@ -30,6 +30,7 @@ namespace Daipan.Enemy.Scripts
         public int GetAttackAmount() => _enemyParam.enemyAttackParam.attackAmount;
         public double GetAttackIntervalSec() => _enemyParam.enemyAttackParam.attackIntervalSec;
         public double GetAttackRange() => _enemyParam.enemyAttackParam.attackRange;
+        public double GetIncreaseIrritatedValueOnAttack() => _enemyParam.enemyAttackParam.increaseIrritatedValueOnAttack;
 
         // Hp
         public int GetMaxHp() => _enemyParam.enemyHpParam.maxHp;

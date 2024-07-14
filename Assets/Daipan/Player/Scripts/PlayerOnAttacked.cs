@@ -36,7 +36,7 @@ namespace Daipan.Player.Scripts
         public Hp OnAttacked(Hp hp, IEnemyParamData enemyParamData)
         {
             // イライラゲージ
-            _irritatedValue.IncreaseValue(enemyParamData.GetAttackAmount());
+            _irritatedValue.IncreaseValue(enemyParamData.GetIncreaseIrritatedValueOnAttack());
             
             // アンチコメント
             _playerAttackedCounter.CountUp();

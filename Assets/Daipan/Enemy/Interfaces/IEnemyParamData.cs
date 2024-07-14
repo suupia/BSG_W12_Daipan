@@ -9,9 +9,10 @@ namespace Daipan.Enemy.Interfaces
         EnemyEnum GetEnemyEnum() => EnemyEnum.None;
 
         // Attack
-        int GetAttackAmount() => 0;
-        double GetAttackIntervalSec() => 0;
-        double GetAttackRange() => 0;
+        int GetAttackAmount() => 1;
+        double GetAttackIntervalSec() => 1;
+        double GetAttackRange() => 2;
+        public double GetIncreaseIrritatedValueOnAttack() => 10;
 
         // Hp
         int GetMaxHp() => 0;

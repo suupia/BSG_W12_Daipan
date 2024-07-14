@@ -18,7 +18,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
 
         [Header("攻撃範囲")] [Min(0)] public float attackRange = 2;
         
-        [Header("一回の攻撃で貯まるイライラゲージの量")] [Min(0)] public int increaseIrritationGauge = 1;
+        [Header("一回の攻撃で貯まるイライラゲージの量")] [Min(0)] public int increaseIrritatedValueOnAttack = 10;
     }
 
     [Serializable]
