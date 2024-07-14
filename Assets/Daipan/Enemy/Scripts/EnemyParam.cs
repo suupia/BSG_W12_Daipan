@@ -36,19 +36,8 @@ namespace Daipan.LevelDesign.Enemy.Scripts
     {
         [Header("敵の生成割合 (相対的に指定可)")] [Min(0)] public double spawnRatio;
 
-        [Header("台パンの影響を受けるイライラ度の閾値")] [Min(0)]
-        public int daipanThreshold;
-
-        [Header("台パンされたときに死ぬ確率 (0～1)")] [Range(0.0f, 1.0f)] [Tooltip("最終的には別途、イライラ度に応じた確率シートを作成する")]
-        public float daipanProbability;
     }
 
-    [Serializable]
-    public sealed class EnemyRewardParam
-    {
-        [Header("Special敵を倒したときに獲得するイライラゲージの量")] [Min(0)]
-        public int irritationAfterKill = 30;
-    }
 
     [Serializable]
     public sealed class EnemyAnimatorParam
@@ -71,7 +60,6 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         public EnemyHpParam enemyHpParam = null!;
         public EnemyMoveParam enemyMoveParam = null!;
         public EnemySpawnParam enemySpawnParam = null!;
-        public EnemyRewardParam enemyRewardParam = null!;
         public EnemyAnimatorParam enemyAnimatorParam = null!;
     }
 }
