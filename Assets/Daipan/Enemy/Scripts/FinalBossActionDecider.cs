@@ -18,6 +18,7 @@ namespace Daipan.Enemy.Scripts
         AbstractFinalBossViewMono? _finalBossViewMono;
         IFinalBossParamData _finalBossParamData = null!;
         PlayerMono _playerMono = null!;
+        IDisposable? _summonEnemyDisposable;
 
         public FinalBossActionDecider(EnemySpawner enemySpawner)
         {
@@ -40,7 +41,7 @@ namespace Daipan.Enemy.Scripts
                 Observable
                     .Interval(TimeSpan.FromSeconds(finalBossParamData.GetSummonActionIntervalSec()))
                     .Subscribe(_ =>
-                        _disposable.Add(SummonEnemy(finalBossParamData, finalBossViewMono, _enemySpawner)))
+                        SummonEnemy(finalBossParamData, finalBossViewMono, _enemySpawner))
             );
 
             _disposable.Add(
@@ -50,29 +51,26 @@ namespace Daipan.Enemy.Scripts
             );
         }
 
-        static CompositeDisposable SummonEnemy(
+        void SummonEnemy(
             IFinalBossParamData finalBossParamData
             , AbstractFinalBossViewMono? finalBossViewMono
             , EnemySpawner enemySpawner)
         {
             if (finalBossViewMono != null) finalBossViewMono.SummonEnemy();
-            CompositeDisposable disposable = new();
-            disposable.Add(
+            _disposable.Add(
                 Observable
                     .Interval(TimeSpan.FromSeconds(finalBossParamData.GetSummonActionIntervalSec()))
                     .Subscribe(_ =>
                     {
                         var summonEnemyIntervalSec = finalBossParamData.GetSummonEnemyIntervalSec();
                         var summonEnemyCount = finalBossParamData.GetSummonEnemyCount();
-
-                        disposable.Add(
+                        _summonEnemyDisposable?.Dispose();
+                        _summonEnemyDisposable =
                             Observable.Interval(TimeSpan.FromSeconds(summonEnemyIntervalSec))
                                 .Take(summonEnemyCount)
-                                .Subscribe(_ => { enemySpawner.SpawnEnemy(); })
-                        );
+                                .Subscribe(_ => { enemySpawner.SpawnEnemy(); });
                     })
             );
-            return disposable;
         }
 
         static void Attack(
