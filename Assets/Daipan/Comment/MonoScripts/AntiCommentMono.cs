@@ -1,6 +1,8 @@
 #nullable enable
 using System;
 using Daipan.Comment.Scripts;
+using Daipan.LevelDesign.Comment.Scripts;
+using Daipan.Stream.Scripts;
 using UnityEngine;
 using VContainer;
 using TMPro;
@@ -12,31 +14,33 @@ namespace Daipan.Comment.MonoScripts
         [SerializeField] TextMeshPro commentText = null!;
 
         AntiCommentCluster _antiCommentCluster = null!;
-
-        string _antiCommentWord = null!;
-
-        public event EventHandler<DespawnEventArgs>? OnDespawn;
-        
+        CommentParamsServer _commentParamsServer = null!;
+        IrritatedValue _irritatedValue = null!; 
         
         [Inject]
         public void Initialize(
             AntiCommentCluster antiCommentCluster
+            , CommentParamsServer commentParamsServer
+            , IrritatedValue irritatedValue
         )
         {
             _antiCommentCluster = antiCommentCluster;
+            _commentParamsServer = commentParamsServer;
+            _irritatedValue = irritatedValue;
         }
 
+        void Update()
+        {
+            _irritatedValue.IncreaseValue(  _commentParamsServer.GetIrritationIncreasePerSec() * Time.deltaTime);
+        }
 
         public void SetParameter(string commentWord)
         {
-            _antiCommentWord = commentWord;
             commentText.text = commentWord;
         }
 
         public void Despawn()
         {
-            var args = new DespawnEventArgs(CommentEnum.None);
-            OnDespawn?.Invoke(this, args);
             Destroy(gameObject);
         }
         public void BlownAway()

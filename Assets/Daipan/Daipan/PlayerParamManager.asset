@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: PlayerParamManager
   m_EditorClassIdentifier: 
   playerHpParam:
-    maxHpAmount: 100
+    maxHpAmount: 300
     hpAmount: 100
   playerAntiCommentParam:
     antiCommentThreshold: 3
     antiCommentPercentOnMissAttacks:
-    - 4
-    - 3
-    - 2
-    - 1
+    - 30
+    - 40
+    - 50
+    - 70
     missedAttackCountForAntiComments: 2
   playerParams:
   - playerAttackParam:

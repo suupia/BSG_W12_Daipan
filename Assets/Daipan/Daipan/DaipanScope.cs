@@ -72,7 +72,7 @@ namespace Daipan.Daipan
             builder.Register<StreamPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<StreamMono>>();
             builder.Register<ViewerNumber>(Lifetime.Scoped);
             builder.Register<IStart, StreamSpawner>(Lifetime.Scoped).AsSelf();
-            builder.Register<StreamTimer>(Lifetime.Scoped).AsSelf().As<IStart>().As<IUpdate>();
+            builder.Register<WaveProgress>(Lifetime.Scoped);
         }
 
         public static void RegisterComment(IContainerBuilder builder, CommentParamManager commentParamManager)
@@ -197,7 +197,6 @@ namespace Daipan.Daipan
 
             // View
             builder.RegisterComponentInHierarchy<StreamViewMono>();
-            builder.RegisterComponentInHierarchy<WaveProgressViewMono>();
             builder.RegisterComponentInHierarchy<StreamerViewMono>();
 
             // ShakeDisplay
@@ -280,6 +279,8 @@ namespace Daipan.Daipan
 
             // View
             RegisterView(builder);
+            builder.RegisterComponentInHierarchy<WaveProgressViewMono>();
+
 
             // Battle
             RegisterBattle(builder);

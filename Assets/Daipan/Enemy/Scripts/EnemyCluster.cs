@@ -6,13 +6,13 @@ using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.MonoScripts;
 using Daipan.LevelDesign.Enemy.Scripts;
 using UnityEngine;
-using Object = UnityEngine.Object;
-using Random = UnityEngine.Random;
+
 
 namespace Daipan.Enemy.Scripts
 {
     public sealed class EnemyCluster
     {
+        public IEnumerable<AbstractEnemyMono?> Enemies => _enemies;
         readonly List<AbstractEnemyMono?> _enemies = new();
         readonly Queue<AbstractEnemyMono?> _reachedPlayer = new();
 

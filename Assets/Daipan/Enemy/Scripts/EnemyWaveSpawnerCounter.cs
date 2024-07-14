@@ -15,8 +15,8 @@ namespace Daipan.Enemy.Scripts
         readonly FinalBossSpawner _finalBossSpawner;
         readonly IEnemyWaveParamContainer _enemyWaveParamContainer;
         readonly WaveState _waveState;
-        int CurrentSpawnedEnemyCount { get; set; }
-        int MaxSpawnedEnemyCount => _enemyWaveParamContainer.GetEnemyWaveParamData().GetSpawnEnemyCount();
+        public int CurrentSpawnedEnemyCount { get; private set; }
+        public int MaxSpawnedEnemyCount => _enemyWaveParamContainer.GetEnemyWaveParamData().GetSpawnEnemyCount();
         double Timer { get; set; }
         bool IsInWaveInterval { get; set; }
         IDisposable? _waveSpawnDisposable;

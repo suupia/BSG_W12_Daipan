@@ -15,11 +15,11 @@ MonoBehaviour:
   enemyLevelDesignParam:
     increaseViewerOnEnemyKill: 5
     increaseIrritationGaugeOnSpecialEnemyKill: 25
-    currentKillAmount: 1
+    currentKillAmount: 30
   enemyParams:
   - enemyEnum: 1
     enemyAttackParam:
-      attackAmount: 1
+      attackAmount: 10
       attackIntervalSec: 1
       attackRange: 2
       increaseIrritatedValueOnAttack: 10
@@ -37,7 +37,7 @@ MonoBehaviour:
       lineColor: {r: 0.43529412, g: 0.34117648, b: 0.41960785, a: 1}
   - enemyEnum: 2
     enemyAttackParam:
-      attackAmount: 1
+      attackAmount: 10
       attackIntervalSec: 1
       attackRange: 2
       increaseIrritatedValueOnAttack: 10
@@ -55,7 +55,7 @@ MonoBehaviour:
       lineColor: {r: 0.43529412, g: 0.34117648, b: 0.41960785, a: 1}
   - enemyEnum: 3
     enemyAttackParam:
-      attackAmount: 1
+      attackAmount: 10
       attackIntervalSec: 1
       attackRange: 2
       increaseIrritatedValueOnAttack: 10
@@ -73,16 +73,16 @@ MonoBehaviour:
       lineColor: {r: 0.43529412, g: 0.34117648, b: 0.41960785, a: 1}
   - enemyEnum: 7
     enemyAttackParam:
-      attackAmount: 1
+      attackAmount: 5
       attackIntervalSec: 1
       attackRange: 2
-      increaseIrritatedValueOnAttack: 10
+      increaseIrritatedValueOnAttack: 30
     enemyHpParam:
       maxHp: 10
     enemyMoveParam:
       moveSpeedPerSec: 2
     enemySpawnParam:
-      spawnRatio: 20
+      spawnRatio: 10
     enemyAnimatorParam:
       animatorController: {fileID: 0}
       bodyColor: {r: 1, g: 0.3529412, b: 0.54901963, a: 1}
@@ -91,7 +91,7 @@ MonoBehaviour:
       lineColor: {r: 0.43529412, g: 0.34117648, b: 0.41960785, a: 1}
   - enemyEnum: 8
     enemyAttackParam:
-      attackAmount: 1
+      attackAmount: 5
       attackIntervalSec: 1
       attackRange: 2
       increaseIrritatedValueOnAttack: 10
@@ -109,7 +109,7 @@ MonoBehaviour:
       lineColor: {r: 0.43529412, g: 0.34117648, b: 0.41960785, a: 1}
   - enemyEnum: 9
     enemyAttackParam:
-      attackAmount: 1
+      attackAmount: 5
       attackIntervalSec: 1
       attackRange: 2
       increaseIrritatedValueOnAttack: 10
@@ -127,7 +127,7 @@ MonoBehaviour:
       lineColor: {r: 0.43529412, g: 0.34117648, b: 0.41960785, a: 1}
   - enemyEnum: 4
     enemyAttackParam:
-      attackAmount: 2
+      attackAmount: 30
       attackIntervalSec: 1
       attackRange: 2
       increaseIrritatedValueOnAttack: 10
@@ -136,7 +136,7 @@ MonoBehaviour:
     enemyMoveParam:
       moveSpeedPerSec: 2
     enemySpawnParam:
-      spawnRatio: 20
+      spawnRatio: 15
     enemyAnimatorParam:
       animatorController: {fileID: 0}
       bodyColor: {r: 0.99607843, g: 0.35686275, b: 0.54901963, a: 1}
@@ -145,12 +145,12 @@ MonoBehaviour:
       lineColor: {r: 0.43529412, g: 0.34117648, b: 0.41960785, a: 1}
   - enemyEnum: 6
     enemyAttackParam:
-      attackAmount: 1
+      attackAmount: 20
       attackIntervalSec: 1
       attackRange: 2
       increaseIrritatedValueOnAttack: 10
     enemyHpParam:
-      maxHp: 50
+      maxHp: 100
     enemyMoveParam:
       moveSpeedPerSec: 2
     enemySpawnParam:
@@ -163,7 +163,7 @@ MonoBehaviour:
       lineColor: {r: 0.43529412, g: 0.34117648, b: 0.41960785, a: 1}
   - enemyEnum: 5
     enemyAttackParam:
-      attackAmount: 1
+      attackAmount: 20
       attackIntervalSec: 1
       attackRange: 2
       increaseIrritatedValueOnAttack: 10
@@ -181,7 +181,7 @@ MonoBehaviour:
       lineColor: {r: 0.43529412, g: 0.34117648, b: 0.41960785, a: 1}
   - enemyEnum: 10
     enemyAttackParam:
-      attackAmount: 1
+      attackAmount: 10
       attackIntervalSec: 1
       attackRange: 2
       increaseIrritatedValueOnAttack: 10
@@ -199,7 +199,7 @@ MonoBehaviour:
       lineColor: {r: 0.43529412, g: 0.34117648, b: 0.41960785, a: 1}
   - enemyEnum: 11
     enemyAttackParam:
-      attackAmount: 1
+      attackAmount: 10
       attackIntervalSec: 1
       attackRange: 2
       increaseIrritatedValueOnAttack: 10
@@ -216,29 +216,29 @@ MonoBehaviour:
       eyeBallColor: {r: 0.1372549, g: 1, b: 0.30100578, a: 1}
       lineColor: {r: 0.43529412, g: 0.34117648, b: 0.41960785, a: 1}
   enemyWaveParams:
-  - spawnEnemyCount: 30
+  - spawnEnemyCount: 35
     waveIntervalSec: 5
     spawnIntervalSec: 1
     moveSpeedRate: 1
-    spawnBossPercent: 10
+    spawnBossPercent: 5
     spawnSpecialPercent: 0
-    spawnTotemPercent: 10
-    spawnFinalBossPercent: 0
-  - spawnEnemyCount: 35
-    waveIntervalSec: 5
-    spawnIntervalSec: 0.8
-    moveSpeedRate: 1.2
-    spawnBossPercent: 10
-    spawnSpecialPercent: 10
     spawnTotemPercent: 10
     spawnFinalBossPercent: 0
   - spawnEnemyCount: 40
     waveIntervalSec: 5
     spawnIntervalSec: 0.9
-    moveSpeedRate: 1.4
-    spawnBossPercent: 50
-    spawnSpecialPercent: 30
-    spawnTotemPercent: 20
+    moveSpeedRate: 1.2
+    spawnBossPercent: 15
+    spawnSpecialPercent: 10
+    spawnTotemPercent: 10
+    spawnFinalBossPercent: 0
+  - spawnEnemyCount: 45
+    waveIntervalSec: 5
+    spawnIntervalSec: 0.8
+    moveSpeedRate: 1.5
+    spawnBossPercent: 25
+    spawnSpecialPercent: 20
+    spawnTotemPercent: 30
     spawnFinalBossPercent: 0
   - spawnEnemyCount: 1
     waveIntervalSec: 5
