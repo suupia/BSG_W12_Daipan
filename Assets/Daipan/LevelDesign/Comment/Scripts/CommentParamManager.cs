@@ -12,7 +12,6 @@ namespace Daipan.LevelDesign.Comment.Scripts
         [Header("コメント全体のレベルデザインはこちら。")]
         [Space(30)]
 
-
         [Header("コメントの流れる速度")]
         [Min(0)] public float commentSpeed;
 
@@ -21,6 +20,9 @@ namespace Daipan.LevelDesign.Comment.Scripts
 
         [Header("アンチコメントが生成された時の視聴者の減少量")][Min(0)]
         public int diffAntiCommentViewer;
+
+        [Header("アンチコメントが残っているときに1秒あたりに増加するイライラゲージの量（コメント1つあたり）")] [Min(0)]
+        public double irritationIncreasePerSec = 0.2;
 
         [Header("コメント集")]
         public List<string> commentWords = new ();
