@@ -50,4 +50,5 @@ namespace Daipan.Enemy.Scripts
                 enemyViewMono.Died(() =>  UnityEngine.Object.Destroy(enemyMono.gameObject));
         }
     }
+    public record DiedEventArgs(EnemyEnum EnemyEnum);
 }
