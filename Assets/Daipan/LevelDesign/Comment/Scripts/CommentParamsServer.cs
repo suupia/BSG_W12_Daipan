@@ -16,7 +16,6 @@ namespace Daipan.LevelDesign.Comment.Scripts
     {
         readonly CommentParamManager _commentParamManager;
         readonly CommentPosition _commentPosition;
-        
 
         [Inject]
         CommentParamsServer (CommentParamManager commentParamManager, CommentPosition commentPosition)
@@ -33,16 +32,19 @@ namespace Daipan.LevelDesign.Comment.Scripts
             return _commentParamManager.commentSpeed;
         }
         
-        /// <returns>0 or more</returns>
         public int GetViewerDiffCommentNumber()
         {
             return _commentParamManager.diffCommentViewer;
         }
         
-        /// <returns>0 or more</returns>
         public int GetViewerDiffAntiCommentNumber()
         {
             return _commentParamManager.diffAntiCommentViewer;
+        }
+        
+        public double GetIrritationIncreasePerSec()
+        {
+            return _commentParamManager.irritationIncreasePerSec;
         }
 
         public string GetRandomCommentWord()
