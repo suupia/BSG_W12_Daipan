@@ -45,8 +45,9 @@ namespace Daipan.Enemy.MonoScripts
 
         void Update()
         {
-            IsReachedPlayer = _enemyMove.MoveUpdate(_playerHolder.PlayerMono.transform,
-                _finalBossParamData, finalBossViewMono); 
+            if (Hp.Value != 0)
+                IsReachedPlayer = _enemyMove.MoveUpdate(_playerHolder.PlayerMono.transform,
+                    _finalBossParamData, finalBossViewMono); 
 
             if (transform.position.x < _enemySpawnPoint.GetEnemyDespawnedPoint().x)
                 Die(this, isDaipaned: false);
