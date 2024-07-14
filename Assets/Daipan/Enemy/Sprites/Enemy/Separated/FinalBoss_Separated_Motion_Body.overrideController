@@ -9,11 +9,13 @@ AnimatorOverrideController:
   m_Name: FinalBoss_Separated_Motion_Body
   m_Controller: {fileID: 9100000, guid: 00ef359376e2e4fdcb6811d6385b3ee7, type: 2}
   m_Clips:
-  - m_OriginalClip: {fileID: 7400000, guid: e5f60ac1e88d24a0c9eb4fb9ae6384ce, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: 67040b944ff4644e0982d1c2aef4e2f8, type: 2}
-  - m_OriginalClip: {fileID: 7400000, guid: 9aa6d4a6daf76459b9a55bf92d0b9e41, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: 6cf6d9b9d55ee46c79a6e0695f5ba155, type: 2}
-  - m_OriginalClip: {fileID: 7400000, guid: d3f95ba77e50f4ceda482f44e7122bf9, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: e00bbace555e3409a970ea688b0151b2, type: 2}
-  - m_OriginalClip: {fileID: 7400000, guid: dd78ff56d190d4b07b9829b58ca2e2c3, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 97014ad00404d4728b6a854c71b697fa, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: ffbd1fa03378b450a8fff670189b0867, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 86a24e4dedc796a4badac65575cc2743, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: b739138746f9040f2ae7bdbdc9439dd3, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 08cb8487eb2cd4908879c2061e13010c, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: b165ed469cfa3440a843bf7279d0e351, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: f8b214265cbfd41a4b3c4fb2f3e8aa5e, type: 2}
     m_OverrideClip: {fileID: 7400000, guid: 7d69d11f9d0f142d8a85571f3a7ec58d, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: a21d0ecaabb544574ac5055f116b862e, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 18cd7ba78b1bc4bfa85f4c2750a20264, type: 2}

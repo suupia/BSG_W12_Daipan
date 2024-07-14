@@ -17,6 +17,8 @@ namespace Daipan.Enemy.MonoScripts
         [SerializeField] Animator animatorEye = null!;
         [SerializeField] Animator animatorEyeBall = null!;
         [SerializeField] Animator animatorLine = null!;
+        [SerializeField] Animator animatorDamage = null!;
+        [SerializeField] Animator animatorDamageLine = null!;
         [SerializeField] Animator animatorGekiha = null!;
         [SerializeField] SpriteRenderer highlightSpriteRenderer = null!;
         Animator _leaderAnimator = null!;
@@ -102,6 +104,10 @@ namespace Daipan.Enemy.MonoScripts
                 .Where(_ => preState != _leaderAnimator.GetCurrentAnimatorStateInfo(0).fullPathHash)
                 .Subscribe(_ => onDied())
                 .AddTo(_leaderAnimator.gameObject);
+                       
+            // Damaged
+            animatorDamage.SetTrigger("OnDamaged");
+            animatorDamageLine.SetTrigger("OnDamaged"); 
             
             // Gekiha
             animatorGekiha.SetTrigger("OnGekiha");
@@ -129,6 +135,7 @@ namespace Daipan.Enemy.MonoScripts
         public override void DaipanHit()
         {
             SetTriggerAll("OnDaipanHit");
+
         }
 
         public override void Highlight(bool isHighlighted)
