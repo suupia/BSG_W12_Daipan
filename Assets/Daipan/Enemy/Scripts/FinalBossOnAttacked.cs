@@ -27,11 +27,20 @@ namespace Daipan.Enemy.Scripts
         {
             Debug.Log($"OnAttacked hp: {hp.Value} playerParamData: {playerParamData}");
             var attackPlayer = playerParamData.PlayerEnum();
-            if (attackPlayer == PlayerColor.Red && CurrentColor == FinalBossColor.Red
-                || attackPlayer == PlayerColor.Blue && CurrentColor == FinalBossColor.Blue
-                || attackPlayer == PlayerColor.Yellow && CurrentColor == FinalBossColor.Yellow)
+            if (IsSameColor(CurrentColor, attackPlayer))
                 return new Hp(hp.Value - playerParamData.GetAttack());
             return hp;
+        }
+
+        static bool IsSameColor(FinalBossColor finalBossColor, PlayerColor playerColor)
+        {
+            return finalBossColor switch
+            {
+                FinalBossColor.Red => playerColor == PlayerColor.Red,
+                FinalBossColor.Blue => playerColor == PlayerColor.Blue,
+                FinalBossColor.Yellow => playerColor == PlayerColor.Yellow,
+                _ => false
+            };
         }
 
     }
