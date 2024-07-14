@@ -37,7 +37,7 @@ namespace Daipan.Enemy.MonoScripts
             protected set
             {
                 _hp = value;
-                if (_hp.Value <= 0) Die(this, false);
+                if (_hp.Value <= 0) Die();
             }
         }
 
@@ -103,11 +103,11 @@ namespace Daipan.Enemy.MonoScripts
 
         public override void OnDaipaned()
         {
-            Die(this, isDaipaned:true);
+            Die(isDaipaned:true);
         }
-        void Die(AbstractEnemyMono enemyMono, bool isDaipaned = false)
+        void Die(bool isDaipaned = false)
         {
-            _enemyCluster.Remove(enemyMono);
+            _enemyCluster.Remove(this);
             _enemyDie.Died(enemyViewMono, isDaipaned);
         }
     }
