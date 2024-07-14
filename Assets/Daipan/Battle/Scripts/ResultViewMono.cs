@@ -1,6 +1,7 @@
 #nullable enable
 using System;
 using Daipan.Player.MonoScripts;
+using Daipan.Player.Scripts;
 using Daipan.Stream.Scripts;
 using R3;
 using TMPro;
@@ -13,6 +14,7 @@ namespace Daipan.Battle.scripts
     {
         [SerializeField] GameObject viewObject = null!;
         [SerializeField] TextMeshProUGUI viewerNumberText = null!;
+        [SerializeField] TextMeshProUGUI comboCountText = null!;
         [SerializeField] TextMeshProUGUI daipanCountText = null!;
         [SerializeField] TextMeshProUGUI playerHpText = null!;
         [SerializeField] TextMeshProUGUI tankYouText = null!;
@@ -26,6 +28,7 @@ namespace Daipan.Battle.scripts
         [Inject]
         public void Constructor(
             ViewerNumber viewerNumber
+            , ComboCounter comboCounter
             , DaipanExecutor daipanExecutor
             )
         {
@@ -33,6 +36,10 @@ namespace Daipan.Battle.scripts
             Observable.EveryUpdate()
                 .Where(_ => viewObject.activeInHierarchy)
                 .Subscribe(_ => viewerNumberText.text = $"Viewer Number: {viewerNumber.Number}")
+                .AddTo(this);
+            Observable.EveryUpdate()
+                .Where(_ => viewObject.activeInHierarchy)
+                .Subscribe(_ => comboCountText.text = $"Combo Count: {comboCounter.MaxComboCount}")
                 .AddTo(this);
             Observable.EveryUpdate()
                 .Where(_ => viewObject.activeInHierarchy)
