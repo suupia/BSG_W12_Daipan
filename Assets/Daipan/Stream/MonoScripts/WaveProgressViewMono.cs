@@ -16,6 +16,7 @@ namespace Daipan.Stream.MonoScripts
         void Update()
         {
             waveProgressSlider.value = (float)_waveProgress.CurrentProgressRatio;
+            // Debug.Log($"waveProgressSlider.value: {waveProgressSlider.value}");
         }
 
         [Inject]
