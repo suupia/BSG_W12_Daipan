@@ -34,7 +34,7 @@ namespace Daipan.Enemy.Scripts
            return enemyEnum switch {
                // todo : 一旦Viewとの兼ね合いで色を固定
                EnemyEnum.Totem2 => new EnemyTotemOnAttacked( new List<PlayerColor> { PlayerColor.Red, PlayerColor.Blue }),
-               EnemyEnum.Totem3 => new EnemyTotemOnAttacked(new List<PlayerColor>(){ PlayerColor.Red, PlayerColor.Blue, PlayerColor.Yellow }),
+               EnemyEnum.Totem3 => new EnemyTotemOnAttacked(new List<PlayerColor>{ PlayerColor.Red, PlayerColor.Blue, PlayerColor.Yellow }),
                _ => throw new System.ArgumentException("Invalid totem type")
            };
        }
