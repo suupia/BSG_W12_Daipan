@@ -85,7 +85,8 @@ namespace Daipan.Player.Scripts
                 
                 //  HPに変化があれば、コンボ増加
                 if (beforeHp != afterHp) comboCounter.IncreaseCombo();
-                
+                else comboCounter.ResetCombo();
+
             }
             else
             {
