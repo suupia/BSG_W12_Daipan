@@ -13,7 +13,8 @@ namespace Daipan.Enemy.Scripts
         readonly EnemyCluster _enemyCluster;
         readonly EnemySpawner _enemySpawner;
         readonly FinalBossOnAttacked _finalBossOnAttacked;
-
+        readonly FinalBossDefeatTracker _finalBossDefeatTracker;
+        
         readonly FinalBossColorChanger _finalBossColorChanger;
         readonly IPlayerAntiCommentParamData _playerAntiCommentParamData;
         readonly CommentSpawner _commentSpawner;
@@ -21,6 +22,7 @@ namespace Daipan.Enemy.Scripts
             EnemyCluster enemyCluster
             , EnemySpawner enemySpawner
             , FinalBossOnAttacked finalBossOnAttacked
+            , FinalBossDefeatTracker finalBossDefeatTracker
             , FinalBossColorChanger finalBossColorChanger
             , IPlayerAntiCommentParamData playerAntiCommentParamData
             , CommentSpawner commentSpawner
@@ -29,6 +31,7 @@ namespace Daipan.Enemy.Scripts
             _enemyCluster = enemyCluster;
             _enemySpawner = enemySpawner;
             _finalBossOnAttacked = finalBossOnAttacked;
+            _finalBossDefeatTracker = finalBossDefeatTracker;
             _finalBossColorChanger = finalBossColorChanger;
             _playerAntiCommentParamData = playerAntiCommentParamData;
             _commentSpawner = commentSpawner;
@@ -55,6 +58,11 @@ namespace Daipan.Enemy.Scripts
                 {
                     _commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
                 }
+            };
+            
+            finalBossMono.OnDiedEvent += (sender, args) =>
+            {
+                _finalBossDefeatTracker.SetFinalBossDefeated();
             };
 
             return finalBossMono;

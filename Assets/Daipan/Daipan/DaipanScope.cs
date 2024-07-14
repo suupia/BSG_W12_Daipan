@@ -267,6 +267,7 @@ namespace Daipan.Daipan
             builder.Register<FinalBossOnAttacked>(Lifetime.Scoped);
             builder.Register<FinalBossBuilder>(Lifetime.Scoped);
             builder.Register<FinalBossSpawner>(Lifetime.Scoped);
+            builder.Register<FinalBossDefeatTracker>(Lifetime.Scoped);
 
             // Irritated
             RegisterIrritated(builder, irritatedParams);

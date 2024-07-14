@@ -89,7 +89,7 @@ namespace Daipan.Enemy.MonoScripts
             Hp = new Hp(_finalBossParamData.GetMaxHp());
         }
 
-        public event EventHandler<DiedEventArgs>? OnDied
+        public event EventHandler<DiedEventArgs>? OnDiedEvent
         {
             add => _enemyDie.OnDied += value;
             remove => _enemyDie.OnDied -= value;
