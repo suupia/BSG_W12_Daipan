@@ -18,8 +18,8 @@ namespace Daipan.LevelDesign.EndScene
         [Header("ゲーム下手配信者END：HPがxパーセント以下の時")] [Min(0)]
         public int hpPercentThresholdForNoobGamerEnd = 0;
 
-        [Header("プロゲーマーEND：HPがxパーセント以上の時")] [Min(0)]
-        public double hpPercentThresholdForProGamerEnd = 50;
+        [Header("プロゲーマーEND：最高コンボ数がx以上の時")] [Min(0)]
+        public int maxComboCountThresholdForProGamerEnd = 100;
 
         [Header("清らか悟りの境地END：台パンx回以下の時")] [Min(0)]
         public int daipanCountThresholdForSacredLadyEnd = 10;

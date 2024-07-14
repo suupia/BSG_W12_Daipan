@@ -18,6 +18,8 @@ public sealed class ComboTests
         Assert.AreEqual(1, comboCounter.ComboCount);
         comboCounter.IncreaseCombo();
         Assert.AreEqual(2, comboCounter.ComboCount);
+        
+        Assert.AreEqual(2, comboCounter.MaxComboCount);
     }
 
     [Test]
@@ -32,6 +34,8 @@ public sealed class ComboTests
         comboCounter.IncreaseCombo();
         comboCounter.ResetCombo();
         Assert.AreEqual(0, comboCounter.ComboCount);
+        
+        Assert.AreEqual(2, comboCounter.MaxComboCount);
     }
 
     [Test]
