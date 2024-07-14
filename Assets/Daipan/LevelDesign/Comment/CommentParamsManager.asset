@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   commentSpeed: 8
   diffCommentViewer: 1000
-  diffAntiCommentViewer: 1000
+  diffAntiCommentViewer: 1500
   irritationIncreasePerSec: 8
   commentWords:
   - "\u5929\u624D\u304B\uFF1F\uFF1F\uFF1F"

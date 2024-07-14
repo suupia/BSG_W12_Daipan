@@ -218,7 +218,7 @@ MonoBehaviour:
   enemyWaveParams:
   - spawnEnemyCount: 30
     waveIntervalSec: 5
-    spawnIntervalSec: 1.5
+    spawnIntervalSec: 1.4
     moveSpeedRate: 1.1
     spawnBossPercent: 3
     spawnSpecialPercent: 0
@@ -226,15 +226,15 @@ MonoBehaviour:
     spawnFinalBossPercent: 0
   - spawnEnemyCount: 40
     waveIntervalSec: 5
-    spawnIntervalSec: 1.3
-    moveSpeedRate: 1.4
-    spawnBossPercent: 15
+    spawnIntervalSec: 1.2
+    moveSpeedRate: 1.3
+    spawnBossPercent: 18
     spawnSpecialPercent: 10
-    spawnTotemPercent: 10
+    spawnTotemPercent: 15
     spawnFinalBossPercent: 0
   - spawnEnemyCount: 45
     waveIntervalSec: 5
-    spawnIntervalSec: 1
+    spawnIntervalSec: 0.9
     moveSpeedRate: 1.6
     spawnBossPercent: 25
     spawnSpecialPercent: 20
