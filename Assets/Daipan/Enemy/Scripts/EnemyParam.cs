@@ -17,6 +17,8 @@ namespace Daipan.LevelDesign.Enemy.Scripts
         [FormerlySerializedAs("attackDelaySec")] [Header("攻撃間隔")] [Min(0)] public float attackIntervalSec = 1;
 
         [Header("攻撃範囲")] [Min(0)] public float attackRange = 2;
+        
+        [Header("一回の攻撃で貯まるイライラゲージの量")] [Min(0)] public int increaseIrritationGauge = 1;
     }
 
     [Serializable]

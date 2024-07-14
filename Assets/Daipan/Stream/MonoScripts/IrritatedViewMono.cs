@@ -19,9 +19,9 @@ namespace Daipan.Stream.MonoScripts
                 .AddTo(this);
         }
 
-        void UpdateIrritatedGauge(float ratio)
+        void UpdateIrritatedGauge(double ratio)
         {
-            IrritatedGuage.fillAmount = ratio;
+            IrritatedGuage.fillAmount = (float)ratio;
         }
     }
 }

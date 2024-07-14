@@ -10,7 +10,6 @@ namespace Daipan.Stream.Scripts
         [Header("イライラゲージのレベルデザインはこちら")]
         [Space(30)]
 
-
-        [Min(0)] public float[] RatioTable;
+        [Min(0)] public double[] RatioTable;
     }
 }
