@@ -112,5 +112,5 @@ namespace Daipan.Enemy.MonoScripts
         }
     }
 
-    public record DiedEventArgs(EnemyEnum EnemyEnum, bool IsTrigger = false);
+
 }
