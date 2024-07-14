@@ -87,11 +87,8 @@ namespace Daipan.Player.Scripts
                 var afterHp = args.EnemyMono.Hp.Value;
 
                 //  HPに変化があれば、コンボ増加
-                if (Math.Abs(beforeHp - afterHp) < double.Epsilon)
+                if (Math.Abs(beforeHp - afterHp) > double.Epsilon)
                     comboCounter.IncreaseCombo();
-                else
-                    comboCounter.ResetCombo();
-
             }
             else
             {
