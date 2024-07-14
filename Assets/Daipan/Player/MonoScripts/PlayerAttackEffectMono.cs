@@ -30,10 +30,6 @@ namespace Daipan.Player.MonoScripts
         void Update()
         {
             if(_isActive) _playerAttackTracking.Move();
-            else
-            {
-                if ((viewMono?.IsFinishAnimation()) != false) Destroy(gameObject);
-            }
         }
 
         public void SetUp(IPlayerParamData playerParamData, Func<AbstractEnemyMono?> getTargetEnemyMono)
@@ -51,9 +47,7 @@ namespace Daipan.Player.MonoScripts
         public void Defenced(Vector3 hitPosition)
         {
             Debug.Log("Defenced");
-            transform.position = hitPosition - new Vector3(1.2f, 0, 0); ;
             _isActive = false;
-            viewMono?.Hit();
         }
     }
 

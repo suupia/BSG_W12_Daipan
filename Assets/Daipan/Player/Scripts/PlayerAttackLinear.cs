@@ -17,11 +17,10 @@ namespace Daipan.Player.Scripts
         public event EventHandler<OnHitEventArgs>? OnHit;
         readonly IPlayerParamData? _playerParamData;
         readonly Func<AbstractEnemyMono?> _getNearestEnemyMono;
-        Vector3 Direction { get; }
-    
         readonly PlayerAttackEffectMono _playerAttackEffectMono;
         readonly PlayerAttackEffectViewMono? _playerAttackEffectViewMono;
-        
+        Vector3 Direction { get; }
+
         public  PlayerAttackLinear(
             PlayerAttackEffectMono playerAttackEffectMono
             , IPlayerParamData playerParamData
