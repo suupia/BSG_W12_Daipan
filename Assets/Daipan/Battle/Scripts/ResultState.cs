@@ -1,7 +1,9 @@
 #nullable enable
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Daipan.Battle.scripts;
+using Daipan.Enemy.Scripts;
 using Daipan.Stream.Scripts;
 using R3;
 
@@ -17,9 +19,11 @@ namespace Daipan.Battle.Scripts
         public ResultState(
             WaveProgress waveProgress
             , ResultViewMono resultViewMono
+            , EnemyCluster enemyCluster
         )
         {
             _resultViewMono = resultViewMono;
+            
             _disposables.Add(
                 Observable
                 .EveryValueChanged(this, x => x.IsInResult)
@@ -31,9 +35,10 @@ namespace Daipan.Battle.Scripts
             
             _disposables.Add(Observable.EveryUpdate().Subscribe(_ =>
             {
-                if (waveProgress.CurrentProgressRatio >= 1)
-                {
-                    ShowResult(); 
+                if (waveProgress.CurrentProgressRatio >= 1 && !enemyCluster.Enemies.Any())
+                { 
+                    // todo: ここで遅延させる
+                    // ShowResult();
                 }
             }));
             

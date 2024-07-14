@@ -105,6 +105,7 @@ namespace Daipan.Enemy.MonoScripts
             
             // Gekiha
             animatorGekiha.SetTrigger("OnGekiha");
+            Debug.Log("FinalBossViewMono Gekiha");
         }
 
         public override void Daipaned(System.Action onDied)
@@ -119,6 +120,10 @@ namespace Daipan.Enemy.MonoScripts
                 .Where(_ => preState != _leaderAnimator.GetCurrentAnimatorStateInfo(0).fullPathHash)
                 .Subscribe(_ => onDied())
                 .AddTo(_leaderAnimator.gameObject);
+            
+            // Gekiha
+            animatorGekiha.SetTrigger("OnGekiha");
+            Debug.Log("FinalBossViewMono Gekiha");
         }
         
         public override void DaipanHit()
