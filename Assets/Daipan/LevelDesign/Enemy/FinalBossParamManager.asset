@@ -37,6 +37,7 @@ MonoBehaviour:
     summonEnemyIntervalSec: 0.2
     daipanHitDamagePercent: 15
     knockBackDistance: 2.5
+    commentCount: 10
     finalBossColorParams:
     - finalBossColor: 0
       bodyColor: {r: 1, g: 0.3529412, b: 0.54901963, a: 1}

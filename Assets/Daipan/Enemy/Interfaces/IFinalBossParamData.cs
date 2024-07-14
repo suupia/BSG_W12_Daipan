@@ -8,6 +8,7 @@ namespace Daipan.Enemy.Interfaces
         double GetSummonEnemyIntervalSec() => 1;
         double GetDaipanHitDamagePercent() => 10;
         double GetKnockBackDistance() => 1;
+        int GetCommentCount() => 5;
     } 
 }
 

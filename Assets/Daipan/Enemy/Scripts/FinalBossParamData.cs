@@ -40,6 +40,7 @@ namespace Daipan.Enemy.Scripts
         public double GetSummonEnemyIntervalSec() => _finalBossParam.summonEnemyIntervalSec;
         public double GetDaipanHitDamagePercent() => _finalBossParam.daipanHitDamagePercent;
         public double GetKnockBackDistance() => _finalBossParam.knockBackDistance;
+        public int GetCommentCount() => _finalBossParam.commentCount;
         
         // View
         public Color GetBodyColor() =>
