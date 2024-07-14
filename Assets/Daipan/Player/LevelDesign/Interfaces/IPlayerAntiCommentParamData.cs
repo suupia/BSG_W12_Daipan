@@ -6,6 +6,7 @@ namespace Daipan.Player.LevelDesign.Interfaces
     {
         public int GetAntiCommentThreshold();
         public int GetMissedAttackCountForAntiComment();
-        public double GetAntiCommentPercentOnMissAttacks(int index); 
+        public double GetAntiCommentPercentOnMissAttacks(int index);
+        public double GetFinalBossAntiCommentPercentOnMissAttacks();
     } 
 }

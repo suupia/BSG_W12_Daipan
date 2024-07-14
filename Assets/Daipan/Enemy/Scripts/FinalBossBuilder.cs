@@ -1,7 +1,9 @@
 #nullable enable
+using Daipan.Battle.scripts;
 using Daipan.Comment.Scripts;
 using Daipan.Enemy.LevelDesign.Scripts;
 using Daipan.Enemy.MonoScripts;
+using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Stream.Scripts;
 
 namespace Daipan.Enemy.Scripts
@@ -12,15 +14,24 @@ namespace Daipan.Enemy.Scripts
         readonly EnemySpawner _enemySpawner;
         readonly FinalBossOnAttacked _finalBossOnAttacked;
 
+        readonly FinalBossColorChanger _finalBossColorChanger;
+        readonly IPlayerAntiCommentParamData _playerAntiCommentParamData;
+        readonly CommentSpawner _commentSpawner;
         public FinalBossBuilder(
             EnemyCluster enemyCluster
             , EnemySpawner enemySpawner
             , FinalBossOnAttacked finalBossOnAttacked
+            , FinalBossColorChanger finalBossColorChanger
+            , IPlayerAntiCommentParamData playerAntiCommentParamData
+            , CommentSpawner commentSpawner
         )
         {
             _enemyCluster = enemyCluster;
             _enemySpawner = enemySpawner;
             _finalBossOnAttacked = finalBossOnAttacked;
+            _finalBossColorChanger = finalBossColorChanger;
+            _playerAntiCommentParamData = playerAntiCommentParamData;
+            _commentSpawner = commentSpawner;
         }
 
         public FinalBossMono Build(FinalBossMono finalBossMono, EnemyEnum enemyEnum)
@@ -32,7 +43,19 @@ namespace Daipan.Enemy.Scripts
                 , new FinalBossDie(finalBossMono)
                 , _finalBossOnAttacked
             );
+            
+            finalBossMono.OnAttackedEvent += (sender, args) =>
+            {
 
+                if (FinalBossOnAttacked.IsSameColor(_finalBossColorChanger.CurrentColor, args.PlayerEnum())) return;
+
+                var spawnPercent = _playerAntiCommentParamData.GetFinalBossAntiCommentPercentOnMissAttacks();
+            
+                if (spawnPercent / 100f > UnityEngine.Random.value)
+                {
+                    _commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
+                }
+            };
 
             return finalBossMono;
         }

@@ -32,7 +32,7 @@ namespace Daipan.Enemy.Scripts
             return hp;
         }
 
-        static bool IsSameColor(FinalBossColor finalBossColor, PlayerColor playerColor)
+        public static bool IsSameColor(FinalBossColor finalBossColor, PlayerColor playerColor)
         {
             return finalBossColor switch
             {
