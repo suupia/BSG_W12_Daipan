@@ -1,11 +1,12 @@
 #nullable enable
 using System;
 using System.Collections.Generic;
+using Daipan.Sound.Interfaces;
 using UnityEngine;
 
 namespace Daipan.Sound.MonoScripts
 {
-    public sealed class SoundManager : MonoBehaviour
+    public sealed class SoundManager : MonoBehaviour, ISoundManager
     {
         [SerializeField] List<SeParam> seParams = null!;
         
