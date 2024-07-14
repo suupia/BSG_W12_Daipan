@@ -61,8 +61,11 @@ namespace Daipan.Player.Scripts
                     UnityEngine.Object.Destroy(_playerAttackEffectMono.gameObject);
             }
         }
-        
- 
+
+        public void Defenced()
+        {
+            // 使っていないので、未実装
+        }
     } 
 }
 

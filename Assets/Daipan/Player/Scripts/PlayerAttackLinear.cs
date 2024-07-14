@@ -17,19 +17,22 @@ namespace Daipan.Player.Scripts
         public event EventHandler<OnHitEventArgs>? OnHit;
         readonly IPlayerParamData? _playerParamData;
         readonly Func<AbstractEnemyMono?> _getNearestEnemyMono;
-        Vector3 Direction { get; }
-    
         readonly PlayerAttackEffectMono _playerAttackEffectMono;
-        
+        readonly PlayerAttackEffectViewMono? _playerAttackEffectViewMono;
+        Vector3 Direction { get; }
+        bool IsHit { get; set; }
+
         public  PlayerAttackLinear(
             PlayerAttackEffectMono playerAttackEffectMono
             , IPlayerParamData playerParamData
             , Func<AbstractEnemyMono?> getTargetEnemyMono
+            , PlayerAttackEffectViewMono? playerAttackEffectViewMono
         )
         {
             _playerAttackEffectMono = playerAttackEffectMono;
             _playerParamData = playerParamData;
             _getNearestEnemyMono = getTargetEnemyMono;
+            _playerAttackEffectViewMono = playerAttackEffectViewMono;
             var targetPosition = getTargetEnemyMono()?.transform.position ?? Vector3.zero;
             Direction = targetPosition != Vector3.zero ? (targetPosition - _playerAttackEffectMono.transform.position).normalized : Vector3.right;
         }
@@ -44,6 +47,8 @@ namespace Daipan.Player.Scripts
                 Debug.LogWarning("PlayerAttackEffectMono: PlayerParamData is null");
                 return;
             }
+            
+            if(IsHit) return;
         
             var enemyMono = _getNearestEnemyMono();
             if (enemyMono != null && !PlayerAttackModule.IsInStreamScreen(enemyMono.transform.position))
@@ -57,6 +62,8 @@ namespace Daipan.Player.Scripts
                     var isTargetEnemy = PlayerAttackModule.GetTargetEnemyEnum(_playerParamData.PlayerEnum())
                         .Contains(enemyMono.EnemyEnum);
                     OnHit?.Invoke(this, new OnHitEventArgs(enemyMono, isTargetEnemy));
+                    if (isTargetEnemy) UnityEngine.Object.Destroy(_playerAttackEffectMono.gameObject);
+                    else Defenced();
                 }
             }
             else
@@ -65,7 +72,16 @@ namespace Daipan.Player.Scripts
                     UnityEngine.Object.Destroy(_playerAttackEffectMono.gameObject);
             }
         }
-        
+
+        public void Defenced()
+        {
+            IsHit = true;
+            _playerAttackEffectMono.transform.position -= new Vector3(0.2f, 0, 0); // すこし左にずらす
+            if (_playerAttackEffectViewMono != null)
+                _playerAttackEffectViewMono.Hit(() => UnityEngine.Object.Destroy(_playerAttackEffectMono.gameObject));
+            else UnityEngine.Object.Destroy(_playerAttackEffectMono.gameObject);
+        }
+
  
     } 
 }

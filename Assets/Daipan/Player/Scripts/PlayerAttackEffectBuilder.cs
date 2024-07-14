@@ -1,4 +1,5 @@
 #nullable enable
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Daipan.Battle.scripts;
@@ -12,6 +13,7 @@ using Daipan.Player.LevelDesign.Scripts;
 using Daipan.Player.MonoScripts;
 using Daipan.Stream.Scripts;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Daipan.Player.Scripts
 {
@@ -85,16 +87,10 @@ namespace Daipan.Player.Scripts
                 var afterHp = args.EnemyMono.Hp.Value;
 
                 //  HPに変化があれば、コンボ増加
-                if (beforeHp != afterHp)
-                {
+                if (Math.Abs(beforeHp - afterHp) < double.Epsilon)
                     comboCounter.IncreaseCombo();
-                    Object.Destroy(playerAttackEffectMono.gameObject);
-                }
                 else
-                {
                     comboCounter.ResetCombo();
-                    playerAttackEffectMono.Defenced(args.EnemyMono.transform.position);
-                }
 
             }
             else
@@ -104,6 +100,7 @@ namespace Daipan.Player.Scripts
                 comboCounter.ResetCombo();
                 playerMissedAttackCounter.CountUp();
                 if (playerMissedAttackCounter.IsOverThreshold) commentSpawner.SpawnCommentByType(CommentEnum.Spiky); 
+                if(args.EnemyMono != null) playerAttackEffectMono.Defenced();
 
                 return;
             }
