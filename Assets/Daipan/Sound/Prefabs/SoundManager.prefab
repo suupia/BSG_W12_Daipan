@@ -49,3 +49,5 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: a7ac3c0d1d4a84888b1c6ba0f55588ec, type: 3}
   - seEnum: 1
     audioClip: {fileID: 8300000, guid: c725a9c77836f4763b9153eadebf4669, type: 3}
+  - seEnum: 1
+    audioClip: {fileID: 8300000, guid: c725a9c77836f4763b9153eadebf4669, type: 3}
