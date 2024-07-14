@@ -175,7 +175,7 @@ MonoBehaviour:
       spawnRatio: 20
     enemyAnimatorParam:
       animatorController: {fileID: 0}
-      bodyColor: {r: 0.40730688, g: 0.707578, b: 0.764151, a: 1}
+      bodyColor: {r: 0.41568628, g: 0.6862745, b: 0.80784315, a: 1}
       eyeColor: {r: 0.8862745, g: 0.972549, b: 0.8901961, a: 1}
       eyeBallColor: {r: 0.1372549, g: 1, b: 0.30100578, a: 1}
       lineColor: {r: 0.43529412, g: 0.34117648, b: 0.41960785, a: 1}
