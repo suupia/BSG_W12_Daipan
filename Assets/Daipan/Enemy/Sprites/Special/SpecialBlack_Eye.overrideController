@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SpecialBlack_Eye
+  m_Controller: {fileID: 9100000, guid: ae6d1600981ff43a38571054d5f79567, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 28db25357fc474529bc0e6109b2bdadd, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: fcf12454dcf914fcc9a4887d5a38acde, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: fbe863594671c44228f0b3109ae113b5, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 054dc0fbd72054ea08e285ac4e93c843, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 302925ab1f4364c119295f9603163ab3, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: f3578f27717834429a1da8b6213d75c6, type: 2}

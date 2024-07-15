@@ -12,7 +12,6 @@ namespace Daipan.Battle.Scripts
     public class ResultState : IDisposable
     {
         readonly ResultViewMono _resultViewMono;
-        readonly FinalBossDefeatTracker _finalBossDefeatTracker;
         readonly List<IDisposable> _disposables = new();
         
         public bool IsInResult { get; private set; }
@@ -20,7 +19,6 @@ namespace Daipan.Battle.Scripts
         public ResultState(
             WaveProgress waveProgress
             , ResultViewMono resultViewMono
-            , EnemyCluster enemyCluster
             , FinalBossDefeatTracker finalBossDefeatTracker
         )
         {
