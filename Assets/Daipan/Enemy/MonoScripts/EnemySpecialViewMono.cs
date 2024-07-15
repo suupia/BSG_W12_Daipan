@@ -6,6 +6,7 @@ using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.Utility.Scripts;
 using R3;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Daipan.Enemy.MonoScripts
 {
@@ -18,7 +19,8 @@ namespace Daipan.Enemy.MonoScripts
         [SerializeField] Animator animatorEye = null!;
         [SerializeField] Animator animatorEyeBall = null!;
         [SerializeField] Animator animatorLine = null!;
-        [SerializeField] Animator animatorSpecialBlack = null!;
+        [SerializeField] Animator animatorSpecialBlackBody = null!;
+        [SerializeField] Animator animatorSpecialBlackEye = null!;
         [SerializeField] SpriteRenderer highlightSpriteRenderer = null!;
         
         EnemyViewAnimatorSwitcher _animatorSwitcher = null!; 
@@ -51,6 +53,8 @@ namespace Daipan.Enemy.MonoScripts
             animatorEye.GetComponent<SpriteRenderer>().color = enemyViewParamData.GetEyeColor();
             animatorEyeBall.GetComponent<SpriteRenderer>().color = enemyViewParamData.GetEyeBallColor();
             animatorLine.GetComponent<SpriteRenderer>().color = enemyViewParamData.GetLineColor();
+            animatorSpecialBlackBody.GetComponent<SpriteRenderer>().color = enemyViewParamData.GetLineColor();
+            animatorSpecialBlackEye.GetComponent<SpriteRenderer>().color = enemyViewParamData.GetEyeColor(); 
             
             // temp
             tempSpriteRenderer.color = EnemyViewTempColor.GetTempColor(enemyViewParamData.GetEnemyEnum()); 
@@ -68,8 +72,10 @@ namespace Daipan.Enemy.MonoScripts
         public override void Daipaned(Action onDied) => _animatorSwitcher.Daipaned(onDied);
         public override void Highlight(bool isHighlighted) => _animatorSwitcher.Highlight(isHighlighted);
         
-        public void SpecialBlack() => animatorSpecialBlack.SetTrigger("SpecialBlack");
-
-
+        public void SpecialBlack()
+        {
+            animatorSpecialBlackBody.SetTrigger("SpecialBlack");
+            animatorSpecialBlackEye.SetTrigger("SpecialBlack");
+        }
     }
 }

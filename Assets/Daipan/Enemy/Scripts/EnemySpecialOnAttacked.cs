@@ -34,6 +34,7 @@ namespace Daipan.Enemy.Scripts
             // [Precondition]
             if (enemyViewMono is EnemySpecialViewMono specialViewMono)
                 _enemySpecialViewMono = specialViewMono;
+            
         }
 
         public Hp OnAttacked(Hp hp, IPlayerParamData playerParamData)
