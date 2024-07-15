@@ -84,7 +84,13 @@ namespace Daipan.Enemy.MonoScripts
             animatorSpecialBlackBody.SetTrigger("SpecialBlack");
             animatorSpecialBlackEye.SetTrigger("SpecialBlack");
             
-            // SpecialBlack以外のアニメーションは
+            // SpecialBlack以外のアニメーションは非表示にする
+            animatorHighlight.gameObject.SetActive(false);
+            animatorBody.gameObject.SetActive(false);
+            animatorEye.gameObject.SetActive(false);
+            animatorEyeBall.gameObject.SetActive(false);
+            animatorLine.gameObject.SetActive(false);
+            
             
             const double releaseSec = 1.5f;
             Observable.Timer(TimeSpan.FromSeconds(releaseSec))
