@@ -16,7 +16,6 @@ namespace Daipan.Enemy.Scripts
         readonly EnemyEnum _enemyEnum;
         readonly IrritatedValue _irritatedValue;
         readonly EnemyLevelDesignParamData _enemyLevelDesignParamData;
-        EnemySpecialViewMono? _enemySpecialViewMono;
 
         public EnemySpecialOnAttacked(
             EnemyEnum enemyEnum
@@ -27,14 +26,6 @@ namespace Daipan.Enemy.Scripts
             _enemyEnum = enemyEnum;
             _irritatedValue = irritatedValue;
             _enemyLevelDesignParamData = enemyLevelDesignParamData;
-        }
-
-        public void SetView(AbstractEnemyViewMono? enemyViewMono)
-        {
-            // [Precondition]
-            if (enemyViewMono is EnemySpecialViewMono specialViewMono)
-                _enemySpecialViewMono = specialViewMono;
-            
         }
 
         public Hp OnAttacked(Hp hp, IPlayerParamData playerParamData)

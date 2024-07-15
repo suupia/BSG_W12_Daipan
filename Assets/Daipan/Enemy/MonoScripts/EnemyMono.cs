@@ -84,8 +84,6 @@ namespace Daipan.Enemy.MonoScripts
             enemyViewMono?.SetDomain(_enemyParamContainer.GetEnemyViewParamData(EnemyEnum));
             Hp = new Hp(_enemyParamContainer.GetEnemyParamData(EnemyEnum).GetMaxHp());
 
-            // View
-            enemyViewMono?.SetView(_enemyOnAttacked);
         }
 
         public event EventHandler<DiedEventArgs>? OnDied

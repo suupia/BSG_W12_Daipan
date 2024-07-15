@@ -25,11 +25,6 @@ namespace Daipan.Enemy.MonoScripts
             _selectedEnemyViewMono.SetDomain(enemyParamData);
         }
         
-        public void SetView(IEnemyOnAttacked enemyOnAttacked)
-        {
-             enemyOnAttacked.SetView(_selectedEnemyViewMono);
-        }
-        
         void SwitchEnemyView(EnemyEnum enemyEnum)
         {
             enemyNormalViewMono.gameObject.SetActive(false);

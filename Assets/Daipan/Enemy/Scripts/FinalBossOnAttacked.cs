@@ -22,11 +22,6 @@ namespace Daipan.Enemy.Scripts
         {
             _finalBossColorChanger = finalBossColorChanger;
         }
-        public void SetView(AbstractEnemyViewMono? enemyViewMono)
-        {
-            // 未実装
-        }
-
         public Hp OnAttacked(Hp hp, IPlayerParamData playerParamData)
         {
             Debug.Log($"OnAttacked hp: {hp.Value} playerParamData: {playerParamData}");
