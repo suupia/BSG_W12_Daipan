@@ -108,7 +108,7 @@ namespace Daipan.Enemy.MonoScripts
         {
             Die(isDaipaned:true);
         }
-        void Die(bool isDaipaned = false)
+        void Die(bool isDaipaned = false, bool isSpecialBlack = false)
         {
             _enemyCluster.Remove(this);
             _enemyDie.Died(enemyViewMono, isDaipaned);
