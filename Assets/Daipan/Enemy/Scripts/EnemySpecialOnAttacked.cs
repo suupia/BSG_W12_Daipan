@@ -41,7 +41,6 @@ namespace Daipan.Enemy.Scripts
                     _irritatedValue.IncreaseValue(_enemyLevelDesignParamData
                         .GetIncreaseIrritationGaugeOnSpecialEnemyKill());
             }
-
             return afterHp;
         }
 

@@ -18,6 +18,7 @@ namespace Daipan.Enemy.MonoScripts
         [SerializeField] Animator animatorEye = null!;
         [SerializeField] Animator animatorEyeBall = null!;
         [SerializeField] Animator animatorLine = null!;
+        [SerializeField] Animator animatorSpecialBlack = null!;
         [SerializeField] SpriteRenderer highlightSpriteRenderer = null!;
         
         EnemyViewAnimatorSwitcher _animatorSwitcher = null!; 
