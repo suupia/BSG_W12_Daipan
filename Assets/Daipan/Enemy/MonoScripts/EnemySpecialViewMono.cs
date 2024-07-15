@@ -67,6 +67,8 @@ namespace Daipan.Enemy.MonoScripts
 
         public override void Daipaned(Action onDied) => _animatorSwitcher.Daipaned(onDied);
         public override void Highlight(bool isHighlighted) => _animatorSwitcher.Highlight(isHighlighted);
+        
+        public void SpecialBlack() => animatorSpecialBlack.SetTrigger("SpecialBlack");
 
 
     }
