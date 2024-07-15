@@ -40,8 +40,7 @@ namespace Daipan.Enemy.MonoScripts
                 if (_hp.Value <= 0) Die();
             }
         }
-        
-        bool IsDead { get; set; }  // Die()の処理が2回以上呼ばれるのを防ぐためのフラグ
+
 
         void Update()
         {
@@ -49,10 +48,9 @@ namespace Daipan.Enemy.MonoScripts
                 _enemyParamContainer.GetEnemyParamData(EnemyEnum), _playerHolder.PlayerMono);
 
             IsReachedPlayer = _enemyMove.MoveUpdate(_playerHolder.PlayerMono.transform,
-                _enemyParamContainer.GetEnemyParamData(EnemyEnum), enemyViewMono); 
+                _enemyParamContainer.GetEnemyParamData(EnemyEnum), enemyViewMono);
 
-            if (transform.position.x < _enemySpawnPoint.GetEnemyDespawnedPoint().x)
-                Die(this);
+            if (transform.position.x < _enemySpawnPoint.GetEnemyDespawnedPoint().x) Die();
 
             enemyViewMono?.SetHpGauge(Hp.Value, _enemyParamContainer.GetEnemyParamData(EnemyEnum).GetMaxHp());
         }
@@ -79,13 +77,13 @@ namespace Daipan.Enemy.MonoScripts
         {
             EnemyEnum = enemyEnum;
             _enemyCluster = enemyCluster;
-            _enemyMove = new EnemyMove(transform); 
+            _enemyMove = new EnemyMove(transform);
             _enemyAttackDecider = enemyAttackDecider;
             _enemyDie = enemyDie;
             _enemyOnAttacked = enemyOnAttacked;
             enemyViewMono?.SetDomain(_enemyParamContainer.GetEnemyViewParamData(EnemyEnum));
             Hp = new Hp(_enemyParamContainer.GetEnemyParamData(EnemyEnum).GetMaxHp());
-            
+
             // View
             enemyViewMono?.SetView(_enemyOnAttacked);
         }
@@ -109,30 +107,23 @@ namespace Daipan.Enemy.MonoScripts
             {
                 // Die
                 Debug.Log("Special enemy die");
-                if (IsDead) return;
-                IsDead = true;
                 _enemyCluster.Remove(this);
                 _enemyDie.DiedBySpecialBlack(enemyViewMono);
             }
-            
+
             Hp = _enemyOnAttacked.OnAttacked(Hp, playerParamData);
-
         }
-
-
 
         public override void OnDaipaned()
         {
-            Die(isDaipaned:true);
-        }
-        void Die(bool isDaipaned = false)
-        {
-            if (IsDead) return;
-            IsDead = true;
             _enemyCluster.Remove(this);
-            _enemyDie.Died(enemyViewMono, isDaipaned);
+            _enemyDie.DiedByDaipan(enemyViewMono);
+        }
+
+        void Die()
+        {
+            _enemyCluster.Remove(this);
+            _enemyDie.Died(enemyViewMono);
         }
     }
-
-
 }
