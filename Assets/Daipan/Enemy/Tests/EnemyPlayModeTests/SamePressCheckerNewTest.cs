@@ -95,5 +95,20 @@ public class SamePressCheckerNewTests
         Assert.AreEqual(0, counter.Value);
     }
 
-   
+  
+    [UnityTest]
+    public IEnumerator Failure3()
+    {
+        var counter = new Counter(); 
+        // Arrange
+        var checker = new SamePressCheckerNew(1.0, 3, () => counter.Value++, () => counter.Value = 0);
+
+        // Act
+        checker.SetOn(0);
+        yield return new WaitForSeconds(1.2f);
+        checker.SetOn(0);
+
+        // Assert
+        Assert.AreEqual(0, counter.Value);
+    } 
 }

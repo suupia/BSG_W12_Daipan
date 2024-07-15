@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 using R3;
+using TMPro;
 using UnityEngine;
 
 namespace Daipan.Enemy.Scripts
@@ -12,7 +13,8 @@ namespace Daipan.Enemy.Scripts
         readonly bool[] _flags;
         readonly Action _onSuccess;
         readonly Action _onFailure;
-        readonly IDisposable?[] _disposables;
+        readonly IDisposable?[] _buttonDisposables; 
+        IDisposable? _initPushDisposable;
 
         public SamePressCheckerNew(
             double allowableSec
@@ -23,7 +25,7 @@ namespace Daipan.Enemy.Scripts
         {
             _allowableSec = allowableSec;
             _flags = new bool[buttonCount];
-            _disposables = new IDisposable[buttonCount];
+            _buttonDisposables = new IDisposable[buttonCount];
             _onSuccess = onSuccess;
             _onFailure = onFailure;
         }
@@ -31,14 +33,30 @@ namespace Daipan.Enemy.Scripts
         public void SetOn(int index)
         {
             _flags[index] = true;
-            _disposables[index]?.Dispose();
-            _disposables[index] = Observable.Timer(TimeSpan.FromSeconds(_allowableSec))
+        
+            // Dispose the previous timer for this button if it exists and trigger failure action
+            if (_buttonDisposables[index] != null)
+            {
+                _onFailure();
+                _buttonDisposables[index]?.Dispose();
+            }
+
+            // Start a new timer for this button to reset its flag after the allowable time
+            _buttonDisposables[index] = Observable.Timer(TimeSpan.FromSeconds(_allowableSec))
                 .Subscribe(_ => { _flags[index] = false; });
 
+            // If this is the first button press, start a global failure timer
+            if (_initPushDisposable == null)
+            {
+                _initPushDisposable = Observable.Timer(TimeSpan.FromSeconds(_allowableSec))
+                    .Subscribe(_ => { _onFailure(); });
+            }
+        
+            // Check if all flags are on, indicating success
             if (IsAllOn(_flags))
             {
                 _onSuccess();
-                Debug.Log($"All on");
+                Debug.Log("All on");
                 Dispose();
             }
         }
@@ -50,7 +68,7 @@ namespace Daipan.Enemy.Scripts
         
         public void Dispose()
         {
-            foreach (var disposable in _disposables)
+            foreach (var disposable in _buttonDisposables)
             {
                 disposable?.Dispose();
             }
