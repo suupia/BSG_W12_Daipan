@@ -71,7 +71,8 @@ namespace Daipan.Enemy.MonoScripts
 
         public override void SetHpGauge(double currentHp, int maxHp)
         {
-           _hpGaugeMono.SetRatio((float)currentHp / maxHp); 
+           _hpGaugeMono.SetRatio((float)currentHp / maxHp);
+            animatorBody.GetComponent<SpriteRenderer>().material.SetFloat("_Slider", 1 - (float)currentHp / maxHp);
         }
 
         public override void Move()
