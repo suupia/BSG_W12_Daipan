@@ -9,7 +9,7 @@ namespace Daipan.Enemy.Scripts
     public class EnemyNormalOnAttacked : IEnemyOnAttacked
     {
         EnemyNormalViewMono? _enemyNormalViewMono;
-        public void SetView(AbstractEnemyViewMono enemyViewMono)
+        public void SetView(AbstractEnemyViewMono? enemyViewMono)
         {
             // [Precondition]
             if (enemyViewMono is EnemyNormalViewMono normalViewMono)

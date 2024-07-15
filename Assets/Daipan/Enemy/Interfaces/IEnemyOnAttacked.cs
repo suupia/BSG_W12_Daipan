@@ -6,7 +6,7 @@ namespace Daipan.Enemy.Interfaces
 {
     public interface IEnemyOnAttacked
     {
-        public void SetView(AbstractEnemyViewMono enemyViewMono);
+        public void SetView(AbstractEnemyViewMono? enemyViewMono);
         public Hp OnAttacked(Hp hp, IPlayerParamData playerParamData);
     } 
 }

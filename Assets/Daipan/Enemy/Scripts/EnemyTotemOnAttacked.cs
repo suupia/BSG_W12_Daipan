@@ -24,7 +24,7 @@ namespace Daipan.Enemy.Scripts
            _samePressChecker = new SamePressChecker(AllowableSec, canAttackPlayers.Count); 
            _canAttackPlayers = canAttackPlayers;
         }
-        public void SetView(AbstractEnemyViewMono enemyViewMono)
+        public void SetView(AbstractEnemyViewMono? enemyViewMono)
         {
             // 未実装
         }

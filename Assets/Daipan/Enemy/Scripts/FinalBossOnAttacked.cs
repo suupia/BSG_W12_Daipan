@@ -22,7 +22,7 @@ namespace Daipan.Enemy.Scripts
         {
             _finalBossColorChanger = finalBossColorChanger;
         }
-        public void SetView(AbstractEnemyViewMono enemyViewMono)
+        public void SetView(AbstractEnemyViewMono? enemyViewMono)
         {
             // 未実装
         }

@@ -29,7 +29,7 @@ namespace Daipan.Enemy.Scripts
             _enemyLevelDesignParamData = enemyLevelDesignParamData;
         }
 
-        public void SetView(AbstractEnemyViewMono enemyViewMono)
+        public void SetView(AbstractEnemyViewMono? enemyViewMono)
         {
             // [Precondition]
             if (enemyViewMono is EnemySpecialViewMono specialViewMono)
