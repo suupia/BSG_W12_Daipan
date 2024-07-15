@@ -55,7 +55,7 @@ namespace Daipan.Enemy.Scripts
             return afterHp;
         }
 
-        static bool IsSameColor(EnemyEnum enemyEnum, PlayerColor playerColor)
+        public static bool IsSameColor(EnemyEnum enemyEnum, PlayerColor playerColor)
         {
             return enemyEnum switch
             {

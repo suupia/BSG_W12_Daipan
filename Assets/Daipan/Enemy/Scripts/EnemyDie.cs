@@ -17,7 +17,7 @@ namespace Daipan.Enemy.Scripts
             _enemyMono = enemyMono;
         }
 
-        public void Died(AbstractEnemyViewMono? enemyViewMono, bool isDaipaned = false)
+        public void Died(EnemyViewMono? enemyViewMono, bool isDaipaned = false)
         {
             var args = new DiedEventArgs(_enemyMono.EnemyEnum);
             OnDied?.Invoke(_enemyMono, args);
@@ -25,7 +25,7 @@ namespace Daipan.Enemy.Scripts
             OnDiedProcess(_enemyMono, isDaipaned, enemyViewMono);
         }
 
-        public void Died(AbstractEnemyViewMono? enemyViewMono)
+        public void Died(EnemyViewMono? enemyViewMono)
         {
             var args = new DiedEventArgs(_enemyMono.EnemyEnum);
             OnDied?.Invoke(_enemyMono, args);
@@ -39,7 +39,7 @@ namespace Daipan.Enemy.Scripts
             enemyViewMono.Died(() => UnityEngine.Object.Destroy(_enemyMono.gameObject));
         }
 
-        public void DiedByDaipan(AbstractEnemyViewMono? enemyViewMono)
+        public void DiedByDaipan(EnemyViewMono? enemyViewMono)
         {
             var args = new DiedEventArgs(_enemyMono.EnemyEnum);
             OnDied?.Invoke(_enemyMono, args);
@@ -55,7 +55,7 @@ namespace Daipan.Enemy.Scripts
                 .OnStart(() => { enemyViewMono.Daipaned(() => UnityEngine.Object.Destroy(_enemyMono.gameObject)); });
         }
         
-        public void DiedBySpecialBlack(AbstractEnemyViewMono? enemyViewMono)
+        public void DiedBySpecialBlack(EnemyViewMono? enemyViewMono)
         {
             var args = new DiedEventArgs(_enemyMono.EnemyEnum);
             OnDied?.Invoke(_enemyMono, args);
@@ -65,9 +65,9 @@ namespace Daipan.Enemy.Scripts
                 return;
             }
 
-            var _enemySpecialViewMono = enemyViewMono as EnemySpecialViewMono; // どうにかして持ってくる
+            var enemySpecialViewMono = enemyViewMono.EnemySpecialViewMono;
             // 違う色に攻撃したのなら、特殊アニメーションを再生し、Destroy
-            _enemySpecialViewMono?.SpecialBlack(() =>
+            enemySpecialViewMono.SpecialBlack(() =>
             {
                 UnityEngine.Object.Destroy(_enemyMono.gameObject);
             });

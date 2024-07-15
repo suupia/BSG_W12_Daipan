@@ -40,6 +40,8 @@ namespace Daipan.Enemy.MonoScripts
                 if (_hp.Value <= 0) Die();
             }
         }
+        
+        bool IsDead { get; set; }  // Die()の処理が2回以上呼ばれるのを防ぐためのフラグ
 
         void Update()
         {
@@ -101,15 +103,32 @@ namespace Daipan.Enemy.MonoScripts
 
         public override void OnAttacked(IPlayerParamData playerParamData)
         {
+            // Hpの増減より先に判定する必要がある
+            if (EnemyEnum.IsSpecial() == true &&
+                !EnemySpecialOnAttacked.IsSameColor(EnemyEnum, playerParamData.PlayerEnum()))
+            {
+                // Die
+                Debug.Log("Special enemy die");
+                if (IsDead) return;
+                IsDead = true;
+                _enemyCluster.Remove(this);
+                _enemyDie.DiedBySpecialBlack(enemyViewMono);
+            }
+            
             Hp = _enemyOnAttacked.OnAttacked(Hp, playerParamData);
+
         }
+
+
 
         public override void OnDaipaned()
         {
             Die(isDaipaned:true);
         }
-        void Die(bool isDaipaned = false, bool isSpecialBlack = false)
+        void Die(bool isDaipaned = false)
         {
+            if (IsDead) return;
+            IsDead = true;
             _enemyCluster.Remove(this);
             _enemyDie.Died(enemyViewMono, isDaipaned);
         }

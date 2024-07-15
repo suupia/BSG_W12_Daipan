@@ -79,6 +79,7 @@ namespace Daipan.Enemy.MonoScripts
         
         public void SpecialBlack(Action onSpecialBlack)
         {
+            Debug.Log("EnemySpecialViewMono.SpecialBlack()");
             IsPlayingSpecialBlack = true;
             animatorSpecialBlackBody.SetTrigger("SpecialBlack");
             animatorSpecialBlackEye.SetTrigger("SpecialBlack");
