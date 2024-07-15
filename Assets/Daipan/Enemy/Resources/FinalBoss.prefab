@@ -2765,6 +2765,8 @@ MonoBehaviour:
   animatorEye: {fileID: 9214986782242436863}
   animatorEyeBall: {fileID: 6868484698110283977}
   animatorLine: {fileID: 5240958870054752227}
+  animatorSpecialBlackBody: {fileID: 0}
+  animatorSpecialBlackEye: {fileID: 0}
   highlightSpriteRenderer: {fileID: 8186613675292986239}
 --- !u!1 &3486086018245634501
 GameObject:
@@ -6017,7 +6019,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 775ba772cf2a14403aca88442e7d37db, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
