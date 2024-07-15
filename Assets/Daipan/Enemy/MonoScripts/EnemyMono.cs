@@ -17,8 +17,8 @@ namespace Daipan.Enemy.MonoScripts
 {
     public sealed class EnemyMono : AbstractEnemyMono
     {
-        public AbstractEnemyViewMono? EnemyViewMono => enemyViewMono;
-        [SerializeField] AbstractEnemyViewMono? enemyViewMono;
+        public EnemyViewMono? EnemyViewMono => enemyViewMono;
+        [SerializeField] EnemyViewMono? enemyViewMono;
         EnemyCluster _enemyCluster = null!;
         EnemyMove _enemyMove = null!;
         EnemyAttackDecider _enemyAttackDecider = null!;
@@ -85,7 +85,7 @@ namespace Daipan.Enemy.MonoScripts
             Hp = new Hp(_enemyParamContainer.GetEnemyParamData(EnemyEnum).GetMaxHp());
             
             // View
-           _enemyOnAttacked.SetView(enemyViewMono); 
+            enemyViewMono?.SetView(_enemyOnAttacked);
         }
 
         public event EventHandler<DiedEventArgs>? OnDied

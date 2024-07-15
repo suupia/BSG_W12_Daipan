@@ -23,6 +23,12 @@ namespace Daipan.Enemy.MonoScripts
             SwitchEnemyView(enemyParamData.GetEnemyEnum());
             _selectedEnemyViewMono.SetDomain(enemyParamData);
         }
+        
+        public void SetView(IEnemyOnAttacked enemyOnAttacked)
+        {
+             enemyOnAttacked.SetView(_selectedEnemyViewMono);
+        }
+        
         void SwitchEnemyView(EnemyEnum enemyEnum)
         {
             enemyNormalViewMono.gameObject.SetActive(false);
