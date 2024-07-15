@@ -50,8 +50,16 @@ namespace Daipan.Enemy.Scripts
                     _irritatedValue.IncreaseValue(_enemyLevelDesignParamData
                         .GetIncreaseIrritationGaugeOnSpecialEnemyKill());
 
-                // 違う色に攻撃したのなら、特殊アニメーションを再生
-                _enemySpecialViewMono?.SpecialBlack();
+                // 違う色に攻撃したのなら、特殊アニメーションを再生し、Destory
+                _enemySpecialViewMono?.SpecialBlack(() =>
+                {
+                    var enemyMono = _enemySpecialViewMono.transform.root.GetComponent<EnemyMono>();
+                    if (enemyMono != null)
+                        enemyMono.Die
+                        
+                    else
+                    Object.Destroy(_enemySpecialViewMono.transform.root.gameObject);
+                });
             }
 
             return afterHp;

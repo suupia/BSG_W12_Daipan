@@ -23,7 +23,8 @@ namespace Daipan.Enemy.MonoScripts
         [SerializeField] Animator animatorSpecialBlackEye = null!;
         [SerializeField] SpriteRenderer highlightSpriteRenderer = null!;
         
-        EnemyViewAnimatorSwitcher _animatorSwitcher = null!; 
+        EnemyViewAnimatorSwitcher _animatorSwitcher = null!;
+        bool IsPlayingSpecialBlack { get; set; }
 
         void Awake()
         {
@@ -67,15 +68,30 @@ namespace Daipan.Enemy.MonoScripts
 
         public override void Attack() => _animatorSwitcher.Attack();
 
-        public override void Died(Action onDied) => _animatorSwitcher.Died(onDied);
+        public override void Died(Action onDied)
+        {
+            if (IsPlayingSpecialBlack) return;
+            _animatorSwitcher.Died(onDied);
+        }
 
         public override void Daipaned(Action onDied) => _animatorSwitcher.Daipaned(onDied);
         public override void Highlight(bool isHighlighted) => _animatorSwitcher.Highlight(isHighlighted);
         
-        public void SpecialBlack()
+        public void SpecialBlack(Action onSpecialBlack)
         {
+            IsPlayingSpecialBlack = true;
             animatorSpecialBlackBody.SetTrigger("SpecialBlack");
             animatorSpecialBlackEye.SetTrigger("SpecialBlack");
+            
+            // SpecialBlack以外のアニメーションは
+            
+            const double releaseSec = 1.5f;
+            Observable.Timer(TimeSpan.FromSeconds(releaseSec))
+                .Subscribe(_ =>
+                {
+                    IsPlayingSpecialBlack = false;
+                    onSpecialBlack();
+                });
         }
     }
 }
