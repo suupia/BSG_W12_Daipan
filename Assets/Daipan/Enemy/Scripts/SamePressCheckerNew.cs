@@ -53,7 +53,7 @@ namespace Daipan.Enemy.Scripts
             }
         
             // Check if all flags are on, indicating success
-            if (IsAllOn(_flags))
+            if (IsAllOn())
             {
                 _onSuccess();
                 Debug.Log("All on");
@@ -61,9 +61,9 @@ namespace Daipan.Enemy.Scripts
             }
         }
         
-        static bool IsAllOn(bool[] flags)
+        public bool IsAllOn()
         {
-            return flags.All(flag => flag);
+            return _flags.All(flag => flag);
         }
         
         public void Dispose()

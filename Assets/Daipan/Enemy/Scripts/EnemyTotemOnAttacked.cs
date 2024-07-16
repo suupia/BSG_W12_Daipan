@@ -13,20 +13,24 @@ using UnityEngine;
 
 namespace Daipan.Enemy.Scripts
 {
-    public sealed class EnemyTotemOnAttacked : IEnemyOnAttacked ,IDisposable
+    public sealed class EnemyTotemOnAttacked : IEnemyOnAttacked, IDisposable
     {
         const double AllowableSec = 0.15f;
-        readonly SamePressChecker _samePressChecker;
+        readonly SamePressCheckerNew _samePressChecker;
         readonly List<PlayerColor> _canAttackPlayers;
 
-        public EnemyTotemOnAttacked(List<PlayerColor> canAttackPlayers)
+        public EnemyTotemOnAttacked(
+            ComboCounter comboCounter
+            , List<PlayerColor> canAttackPlayers)
         {
-           _samePressChecker = new SamePressChecker(AllowableSec, canAttackPlayers.Count); 
-           _canAttackPlayers = canAttackPlayers;
+            _samePressChecker = new SamePressCheckerNew(AllowableSec, canAttackPlayers.Count,
+                comboCounter.IncreaseCombo, comboCounter.ResetCombo);
+            _canAttackPlayers = canAttackPlayers;
         }
+
         public Hp OnAttacked(Hp hp, IPlayerParamData playerParamData)
         {
-            Debug.Log($"OnAttacked hp: { hp.Value } playerParamData: { playerParamData }");
+            Debug.Log($"OnAttacked hp: {hp.Value} playerParamData: {playerParamData}");
             var attackPlayer = playerParamData.PlayerEnum();
             var index = _canAttackPlayers.IndexOf(attackPlayer);
             if (index == -1) return hp;
@@ -40,6 +44,4 @@ namespace Daipan.Enemy.Scripts
             _samePressChecker.Dispose();
         }
     }
-
- 
 }
