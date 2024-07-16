@@ -222,7 +222,7 @@ MonoBehaviour:
     moveSpeedRate: 1.1
     spawnBossPercent: 3
     spawnSpecialPercent: 0
-    spawnTotemPercent: 100
+    spawnTotemPercent: 18
     spawnFinalBossPercent: 0
   - spawnEnemyCount: 40
     waveIntervalSec: 5
