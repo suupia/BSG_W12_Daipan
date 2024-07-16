@@ -68,6 +68,7 @@ namespace Daipan.Enemy.Scripts
         
         public void Dispose()
         {
+            _initPushDisposable?.Dispose();
             foreach (var disposable in _buttonDisposables)
             {
                 disposable?.Dispose();

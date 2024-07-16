@@ -166,4 +166,27 @@ public class SamePressCheckerNewTests
         // Assert
         Assert.AreEqual(11, counter.Value);
     }
+    [UnityTest]
+    public IEnumerator SuccessWhenAllButtonsPressedBeforeTimeoutAndValueRemainsConstant()
+    {
+        var counter = new Counter();
+        // Arrange
+        var checker = new SamePressCheckerNew(1.0, 3, () => counter.Value++, () => counter.Value = 0);
+
+        // Act
+        checker.SetOn(0);
+        yield return new WaitForSeconds(0.8f);
+        checker.SetOn(1);
+        yield return new WaitForSeconds(0.1f);
+        checker.SetOn(2);
+
+        // Assert
+        Assert.AreEqual(11, counter.Value);
+        
+        // Act
+        yield return new WaitForSeconds(0.2f);
+        
+        // Assert
+        Assert.AreEqual(11, counter.Value);
+    }
 }
