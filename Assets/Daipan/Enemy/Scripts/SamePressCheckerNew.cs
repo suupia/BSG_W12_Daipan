@@ -56,8 +56,7 @@ namespace Daipan.Enemy.Scripts
             if (IsAllOn())
             {
                 _onSuccess();
-                Debug.Log("All on");
-                Dispose();
+                _initPushDisposable?.Dispose();
             }
         }
         
@@ -68,6 +67,7 @@ namespace Daipan.Enemy.Scripts
         
         public void Dispose()
         {
+            Array.Fill(_flags, false);
             _initPushDisposable?.Dispose();
             foreach (var disposable in _buttonDisposables)
             {
