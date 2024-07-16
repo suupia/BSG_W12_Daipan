@@ -30,14 +30,14 @@ namespace Daipan.Enemy.Scripts
         )
         {
             _samePressChecker = new SamePressChecker(AllowableSec, canAttackPlayers.Count
-                , () =>
+                ,  comboCounter.IncreaseCombo, () =>
                 {
-                    comboCounter.IncreaseCombo();
+                    comboCounter.ResetCombo();
                     var spawnPercent =
                         playerAntiCommentParamData.GetAntiCommentPercentOnMissAttacks(waveState.CurrentWaveIndex);
                     if (spawnPercent / 100f > UnityEngine.Random.value)
                         commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
-                }, comboCounter.ResetCombo);
+                });
             _canAttackPlayers = canAttackPlayers;
         }
 
