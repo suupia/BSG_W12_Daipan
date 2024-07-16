@@ -13,60 +13,45 @@ public class SamePressCheckerNewTests
     {
         public int Value { get; set; } = 10;
     }
-    [UnityTest]
-    public IEnumerator None()
-    {
-        var counter = new Counter(); 
-        // Arrange
-        var checker = new SamePressCheckerNew(1.0, 3, () => counter.Value++, () => counter.Value = 0);
-
-        // Act
-       checker.SetOn(0);
-       checker.SetOn(1);
-
-        // Assert
-        Assert.AreEqual(10, counter.Value); 
-        return  null;
-    }
 
     [UnityTest]
-    public IEnumerator Success()
+    public IEnumerator FailureWhenButtonPressedAfterTimeout()
     {
-        var counter = new Counter(); 
+        var counter = new Counter();
         // Arrange
         var checker = new SamePressCheckerNew(1.0, 3, () => counter.Value++, () => counter.Value = 0);
 
         // Act
         checker.SetOn(0);
+        yield return new WaitForSeconds(1.1f);
         checker.SetOn(1);
-        checker.SetOn(2);
 
         // Assert
-        Assert.AreEqual(11, counter.Value);
-        return null;
+        Assert.AreEqual(0, counter.Value);
     }
+
     [UnityTest]
-    public IEnumerator Success2()
+    public IEnumerator FailureWhenNotAllButtonsPressedInTime()
     {
-        var counter = new Counter(); 
+        var counter = new Counter();
         // Arrange
         var checker = new SamePressCheckerNew(1.0, 3, () => counter.Value++, () => counter.Value = 0);
 
         // Act
         checker.SetOn(0);
-        yield return new WaitForSeconds(0.2f);  
+        yield return new WaitForSeconds(1.1f);
         checker.SetOn(1);
         yield return new WaitForSeconds(0.2f);
         checker.SetOn(2);
 
         // Assert
-        Assert.AreEqual(11, counter.Value);
+        Assert.AreEqual(0, counter.Value);
     }
-    
+
     [UnityTest]
-    public IEnumerator Failure()
+    public IEnumerator FailureWhenSameButtonIsPressedTwice()
     {
-        var counter = new Counter(); 
+        var counter = new Counter();
         // Arrange
         var checker = new SamePressCheckerNew(1.0, 3, () => counter.Value++, () => counter.Value = 0);
 
@@ -80,9 +65,9 @@ public class SamePressCheckerNewTests
     }
 
     [UnityTest]
-    public IEnumerator Failure2()
+    public IEnumerator FailureWhenSameButtonIsPressedTwiceWithShortDelay()
     {
-        var counter = new Counter(); 
+        var counter = new Counter();
         // Arrange
         var checker = new SamePressCheckerNew(1.0, 3, () => counter.Value++, () => counter.Value = 0);
 
@@ -95,20 +80,90 @@ public class SamePressCheckerNewTests
         Assert.AreEqual(0, counter.Value);
     }
 
-  
     [UnityTest]
-    public IEnumerator Failure3()
+    public IEnumerator NoSuccessWhenNotAllButtonsArePressed()
     {
-        var counter = new Counter(); 
+        var counter = new Counter();
         // Arrange
         var checker = new SamePressCheckerNew(1.0, 3, () => counter.Value++, () => counter.Value = 0);
 
         // Act
         checker.SetOn(0);
-        yield return new WaitForSeconds(1.2f);
-        checker.SetOn(0);
+        checker.SetOn(1);
 
         // Assert
-        Assert.AreEqual(0, counter.Value);
-    } 
+        Assert.AreEqual(10, counter.Value);
+        return null;
+    }
+
+    [UnityTest]
+    public IEnumerator SuccessWhenAllButtonsArePressed()
+    {
+        var counter = new Counter();
+        // Arrange
+        var checker = new SamePressCheckerNew(1.0, 3, () => counter.Value++, () => counter.Value = 0);
+
+        // Act
+        checker.SetOn(0);
+        checker.SetOn(1);
+        checker.SetOn(2);
+
+        // Assert
+        Assert.AreEqual(11, counter.Value);
+        return null;
+    }
+
+    [UnityTest]
+    public IEnumerator SuccessWhenAllButtonsArePressedWithDelay()
+    {
+        var counter = new Counter();
+        // Arrange
+        var checker = new SamePressCheckerNew(1.0, 3, () => counter.Value++, () => counter.Value = 0);
+
+        // Act
+        checker.SetOn(0);
+        yield return new WaitForSeconds(0.2f);
+        checker.SetOn(1);
+        yield return new WaitForSeconds(0.2f);
+        checker.SetOn(2);
+
+        // Assert
+        Assert.AreEqual(11, counter.Value);
+    }
+
+    [UnityTest]
+    public IEnumerator SuccessWhenAllButtonsPressedBeforeTimeout()
+    {
+        var counter = new Counter();
+        // Arrange
+        var checker = new SamePressCheckerNew(1.0, 3, () => counter.Value++, () => counter.Value = 0);
+
+        // Act
+        checker.SetOn(0);
+        yield return new WaitForSeconds(0.4f);
+        checker.SetOn(1);
+        yield return new WaitForSeconds(0.5f);
+        checker.SetOn(2);
+
+        // Assert
+        Assert.AreEqual(11, counter.Value);
+    }
+
+    [UnityTest]
+    public IEnumerator SuccessWhenRemainingButtonsPressedBeforeTimeout()
+    {
+        var counter = new Counter();
+        // Arrange
+        var checker = new SamePressCheckerNew(1.0, 3, () => counter.Value++, () => counter.Value = 0);
+
+        // Act
+        checker.SetOn(0);
+        yield return new WaitForSeconds(0.8f);
+        checker.SetOn(1);
+        yield return new WaitForSeconds(0.1f);
+        checker.SetOn(2);
+
+        // Assert
+        Assert.AreEqual(11, counter.Value);
+    }
 }
