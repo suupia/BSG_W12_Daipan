@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Daipan.Battle.scripts;
+using Daipan.Comment.Scripts;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Player.LevelDesign.Interfaces;
@@ -21,10 +23,21 @@ namespace Daipan.Enemy.Scripts
 
         public EnemyTotemOnAttacked(
             ComboCounter comboCounter
-            , List<PlayerColor> canAttackPlayers)
+            , CommentSpawner commentSpawner
+            , IPlayerAntiCommentParamData playerAntiCommentParamData
+            , WaveState waveState
+            , List<PlayerColor> canAttackPlayers
+        )
         {
-            _samePressChecker = new SamePressChecker(AllowableSec, canAttackPlayers.Count,
-                comboCounter.IncreaseCombo, comboCounter.ResetCombo);
+            _samePressChecker = new SamePressChecker(AllowableSec, canAttackPlayers.Count
+                , () =>
+                {
+                    comboCounter.IncreaseCombo();
+                    var spawnPercent =
+                        playerAntiCommentParamData.GetAntiCommentPercentOnMissAttacks(waveState.CurrentWaveIndex);
+                    if (spawnPercent / 100f > UnityEngine.Random.value)
+                        commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
+                }, comboCounter.ResetCombo);
             _canAttackPlayers = canAttackPlayers;
         }
 

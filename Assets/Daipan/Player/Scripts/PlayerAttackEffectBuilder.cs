@@ -120,6 +120,7 @@ namespace Daipan.Player.Scripts
             )
         {
             if (args.IsTargetEnemy) return;
+            if (args.EnemyMono != null && args.EnemyMono.EnemyEnum.IsTotem() == true) return;  // TotemはOnAttackedで判定している
             
             var spawnPercent = playerAntiCommentParamData.GetAntiCommentPercentOnMissAttacks(waveState.CurrentWaveIndex);
             
