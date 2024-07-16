@@ -16,14 +16,14 @@ namespace Daipan.Enemy.Scripts
     public sealed class EnemyTotemOnAttacked : IEnemyOnAttacked, IDisposable
     {
         const double AllowableSec = 0.15f;
-        readonly SamePressCheckerNew _samePressChecker;
+        readonly SamePressChecker _samePressChecker;
         readonly List<PlayerColor> _canAttackPlayers;
 
         public EnemyTotemOnAttacked(
             ComboCounter comboCounter
             , List<PlayerColor> canAttackPlayers)
         {
-            _samePressChecker = new SamePressCheckerNew(AllowableSec, canAttackPlayers.Count,
+            _samePressChecker = new SamePressChecker(AllowableSec, canAttackPlayers.Count,
                 comboCounter.IncreaseCombo, comboCounter.ResetCombo);
             _canAttackPlayers = canAttackPlayers;
         }
