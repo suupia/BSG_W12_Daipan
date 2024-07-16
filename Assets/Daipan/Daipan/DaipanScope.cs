@@ -303,9 +303,6 @@ namespace Daipan.Daipan
 
             // Debug
             RegisterDebugInput(builder);
-
-            // todo BossSpawner
-            builder.RegisterComponentInHierarchy<FinalBossTestSpawnMono>();
         }
 
         static void RegisterDebugInput(IContainerBuilder builder)

@@ -2131,10 +2131,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Combo
       objectReference: {fileID: 0}
-    - target: {fileID: 5915417344567125706, guid: a690a98fbabd34570b85a50c718a00cf, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -30.434998
-      objectReference: {fileID: 0}
     - target: {fileID: 7619624251201827100, guid: a690a98fbabd34570b85a50c718a00cf, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
