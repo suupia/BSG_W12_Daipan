@@ -8,13 +8,6 @@ namespace Daipan.Enemy.Scripts
 {
     public class EnemyNormalOnAttacked : IEnemyOnAttacked
     {
-        EnemyNormalViewMono? _enemyNormalViewMono;
-        public void SetView(AbstractEnemyViewMono? enemyViewMono)
-        {
-            // [Precondition]
-            if (enemyViewMono is EnemyNormalViewMono normalViewMono)
-                _enemyNormalViewMono = normalViewMono;
-        }
         public Hp OnAttacked(Hp hp, IPlayerParamData playerParamData)
         {
            return new Hp (hp.Value - playerParamData.GetAttack()); 

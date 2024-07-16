@@ -86,8 +86,8 @@ namespace Daipan.Player.Scripts
                 PlayerAttackModule.Attack(args.EnemyMono, playerParamData);
                 var afterHp = args.EnemyMono.Hp.Value;
 
-                //  HPに変化があれば、コンボ増加
-                if (Math.Abs(beforeHp - afterHp) > double.Epsilon)
+                //  HPに変化があれば、コンボ増加（ただし、Totemの判定はOnAttackedで行っている）
+                if (Math.Abs(beforeHp - afterHp) > double.Epsilon && args.EnemyMono.EnemyEnum.IsTotem() != true)
                     comboCounter.IncreaseCombo();
             }
             else

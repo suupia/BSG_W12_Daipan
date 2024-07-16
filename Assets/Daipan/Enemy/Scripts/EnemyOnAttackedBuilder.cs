@@ -4,6 +4,7 @@ using System.Linq;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.LevelDesign.Scripts;
 using Daipan.Player.MonoScripts;
+using Daipan.Player.Scripts;
 using Daipan.Stream.Scripts;
 
 namespace Daipan.Enemy.Scripts
@@ -12,14 +13,17 @@ namespace Daipan.Enemy.Scripts
    {
        readonly IrritatedValue _irritatedValue;
        readonly EnemyLevelDesignParamData _enemyLevelDesignParamData;
+       readonly ComboCounter _comboCounter;
    
        public EnemyOnAttackedBuilder(
            IrritatedValue irritatedValue
            , EnemyLevelDesignParamData enemyLevelDesignParamData
+           , ComboCounter comboCounter
        )
        {
            _irritatedValue = irritatedValue;
            _enemyLevelDesignParamData = enemyLevelDesignParamData;
+              _comboCounter = comboCounter;
        }
    
        public IEnemyOnAttacked SwitchEnemyOnAttacked(EnemyEnum enemyEnum)
@@ -33,8 +37,8 @@ namespace Daipan.Enemy.Scripts
        { 
            return enemyEnum switch {
                // todo : 一旦Viewとの兼ね合いで色を固定
-               EnemyEnum.Totem2 => new EnemyTotemOnAttacked( new List<PlayerColor> { PlayerColor.Red, PlayerColor.Blue }),
-               EnemyEnum.Totem3 => new EnemyTotemOnAttacked(new List<PlayerColor>{ PlayerColor.Red, PlayerColor.Blue, PlayerColor.Yellow }),
+               EnemyEnum.Totem2 => new EnemyTotemOnAttacked( _comboCounter,new List<PlayerColor> { PlayerColor.Red, PlayerColor.Blue }),
+               EnemyEnum.Totem3 => new EnemyTotemOnAttacked(_comboCounter,new List<PlayerColor>{ PlayerColor.Red, PlayerColor.Blue, PlayerColor.Yellow }),
                _ => throw new System.ArgumentException("Invalid totem type")
            };
        }
