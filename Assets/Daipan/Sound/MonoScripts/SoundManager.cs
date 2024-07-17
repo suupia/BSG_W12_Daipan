@@ -9,14 +9,15 @@ namespace Daipan.Sound.MonoScripts
     public sealed class SoundManager : MonoBehaviour, ISoundManager
     {
         [SerializeField] List<SeParam> seParams = null!;
-        
-        AudioSource _audioSource = null!;
 
         void Awake()
         {
-            _audioSource = gameObject.AddComponent<AudioSource>(); 
+            foreach (var seParam in seParams)
+            {
+                seParam.audioSource.clip = seParam.audioClip;
+            }
         }
-
+        
 
         public void PlaySe(SeEnum seEnum)
         {
@@ -26,9 +27,8 @@ namespace Daipan.Sound.MonoScripts
                 Debug.LogError($"Not found SE: {seEnum}");
                 return;
             }
-
-            _audioSource.clip = seParam.audioClip;
-            _audioSource.Play();
+            
+            seParam.audioSource.Play(); 
         }
     }
 
@@ -36,6 +36,7 @@ namespace Daipan.Sound.MonoScripts
     public sealed class SeParam
     {
         public SeEnum seEnum;
+        public AudioSource audioSource = null!;
         public AudioClip audioClip = null!;
     }
 
