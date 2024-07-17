@@ -8,6 +8,7 @@ using Daipan.Enemy.LevelDesign.Scripts;
 using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Player.MonoScripts;
 using Daipan.Player.Scripts;
+using Daipan.Sound.Interfaces;
 using Daipan.Stream.Scripts;
 
 namespace Daipan.Enemy.Scripts
@@ -20,6 +21,7 @@ namespace Daipan.Enemy.Scripts
         readonly CommentSpawner _commentSpawner;
         readonly IPlayerAntiCommentParamData _playerAntiCommentParamData;
         readonly WaveState _waveState;
+        readonly ISoundManager _soundManager;
 
         public EnemyOnAttackedBuilder(
             IrritatedValue irritatedValue
@@ -28,6 +30,7 @@ namespace Daipan.Enemy.Scripts
             , CommentSpawner commentSpawner
             , IPlayerAntiCommentParamData playerAntiCommentParamData
             , WaveState waveState
+            , ISoundManager soundManager
         )
         {
             _irritatedValue = irritatedValue;
@@ -36,6 +39,7 @@ namespace Daipan.Enemy.Scripts
             _commentSpawner = commentSpawner;
             _playerAntiCommentParamData = playerAntiCommentParamData;
             _waveState = waveState;
+            _soundManager = soundManager;
         }
 
         public IEnemyOnAttacked SwitchEnemyOnAttacked(EnemyEnum enemyEnum)
@@ -52,9 +56,9 @@ namespace Daipan.Enemy.Scripts
             {
                 // todo : 一旦Viewとの兼ね合いで色を固定
                 EnemyEnum.Totem2 => new EnemyTotemOnAttacked(_comboCounter, _commentSpawner, _playerAntiCommentParamData,_waveState,
-                    new List<PlayerColor> { PlayerColor.Red, PlayerColor.Blue }),
+                    new List<PlayerColor> { PlayerColor.Red, PlayerColor.Blue }, _soundManager),
                 EnemyEnum.Totem3 => new EnemyTotemOnAttacked(_comboCounter,  _commentSpawner, _playerAntiCommentParamData,_waveState,
-                    new List<PlayerColor> { PlayerColor.Red, PlayerColor.Blue, PlayerColor.Yellow }),
+                    new List<PlayerColor> { PlayerColor.Red, PlayerColor.Blue, PlayerColor.Yellow }, _soundManager),
                 _ => throw new System.ArgumentException("Invalid totem type")
             };
         }

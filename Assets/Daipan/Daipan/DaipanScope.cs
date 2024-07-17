@@ -31,6 +31,9 @@ using Daipan.Tower.MonoScripts;
 using Daipan.Tower.Scripts;
 using Daipan.Option.Interfaces;
 using Daipan.Option.Scripts;
+using Daipan.Sound.Interfaces;
+using Daipan.Sound.MonoScripts;
+using Daipan.Sound.Scripts;
 using UnityEngine;
 using UnityEngine.Serialization;
 using VContainer;
@@ -228,6 +231,13 @@ namespace Daipan.Daipan
             builder.Register<DaipanShakingConfig>(Lifetime.Scoped);
         }
 
+        public static void RegisterSound(IContainerBuilder builder)
+        {
+            var soundManager = FindObjectOfType<SoundManager>();
+            soundManager.Initialize();
+            Debug.Log($"SoundManager: {soundManager}");
+            builder.RegisterInstance(soundManager).As<ISoundManager>();
+        }
         protected override void Configure(IContainerBuilder builder)
         {
             // Stream
@@ -294,6 +304,10 @@ namespace Daipan.Daipan
             // EndScene
             builder.RegisterInstance(endSceneTransitionParam);
 
+            // Sound
+            RegisterSound(builder);
+            builder.Register<DaipanSoundStarter>(Lifetime.Scoped).As<IStart>();
+            
             // Updater
             builder.UseEntryPoints(Lifetime.Scoped, entryPoints =>
             {
