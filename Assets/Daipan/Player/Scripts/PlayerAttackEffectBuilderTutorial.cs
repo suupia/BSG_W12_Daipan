@@ -11,6 +11,8 @@ using Daipan.Player.Interfaces;
 using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Player.LevelDesign.Scripts;
 using Daipan.Player.MonoScripts;
+using Daipan.Sound.Interfaces;
+using Daipan.Sound.MonoScripts;
 using Daipan.Stream.Scripts;
 using Daipan.Tutorial.Scripts;
 using UnityEngine;
@@ -21,17 +23,19 @@ namespace Daipan.Player.Scripts
     {
         readonly IPlayerParamDataContainer _playerParamDataContainer;
         readonly EnemyCluster _enemyCluster;
-        readonly TutorialFacilitator _tutorialFacilitator; 
-
+        readonly TutorialFacilitator _tutorialFacilitator;
+        readonly ISoundManager _soundManager;
         public PlayerAttackEffectBuilderTutorial(
             IPlayerParamDataContainer playerParamDataContainer
             ,EnemyCluster enemyCluster
             ,TutorialFacilitator tutorialFacilitator 
+            , ISoundManager soundManager
         )
         {
             _playerParamDataContainer = playerParamDataContainer;
             _enemyCluster = enemyCluster;
             _tutorialFacilitator = tutorialFacilitator;
+            _soundManager = soundManager;
         }
 
         public PlayerAttackEffectMono Build(PlayerAttackEffectMono effect, PlayerMono playerMono,
@@ -48,6 +52,7 @@ namespace Daipan.Player.Scripts
                     , playerColor
                     , args.EnemyMono
                     ,_tutorialFacilitator
+                    , _soundManager
                     );
             };
             return effect;
@@ -60,6 +65,7 @@ namespace Daipan.Player.Scripts
             ,PlayerColor playerColor
             ,AbstractEnemyMono? enemyMono
             ,TutorialFacilitator tutorialFacilitator 
+            ,ISoundManager soundManager
             )
         {
             Debug.Log($"Attack enemyMono?.EnemyEnum: {enemyMono?.EnemyEnum}");
@@ -84,7 +90,11 @@ namespace Daipan.Player.Scripts
                 // 敵を攻撃
                 var playerParamData = playerParamDataContainer.GetPlayerParamData(playerColor);
                 PlayerAttackModule.Attack(enemyMono, playerParamData);
-
+                soundManager.PlaySe(SeEnum.Attack);
+            }
+            else
+            {
+                soundManager.PlaySe(SeEnum.AttackDeflect);
             }
 
             // Animation
