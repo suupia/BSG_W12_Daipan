@@ -85,7 +85,7 @@ namespace Daipan.Comment.Scripts
             var multipliedAmount = (int)(_commentParamsServer.GetViewerDiffCommentNumber() * _comboMultiplier.CalculateComboMultiplier(_comboCounter.ComboCount));
             _viewerNumber.IncreaseViewer(multipliedAmount);
             
-            _soundManager.PlaySe(SeEnum.SpawnComment);
+            // _soundManager.PlaySe(SeEnum.SpawnComment);
         }
 
         void SpawnAntiComment()
@@ -101,7 +101,7 @@ namespace Daipan.Comment.Scripts
             var multipliedAmount = (int)(_commentParamsServer.GetViewerDiffAntiCommentNumber() * _comboMultiplier.CalculateComboMultiplier(_comboCounter.ComboCount));
             _viewerNumber.DecreaseViewer(multipliedAmount);
             
-            _soundManager.PlaySe(SeEnum.SpawnAntiComment);
+            // _soundManager.PlaySe(SeEnum.SpawnAntiComment);
         }
     }
 }
