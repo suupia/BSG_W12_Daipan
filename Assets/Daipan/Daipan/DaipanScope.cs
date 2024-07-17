@@ -233,7 +233,10 @@ namespace Daipan.Daipan
 
         public static void RegisterSound(IContainerBuilder builder)
         {
-            builder.RegisterComponentInHierarchy<SoundManager>().As<ISoundManager>();
+            var soundManager = FindObjectOfType<SoundManager>();
+            soundManager.Initialize();
+            Debug.Log($"SoundManager: {soundManager}");
+            builder.RegisterInstance(soundManager).As<ISoundManager>();
         }
         protected override void Configure(IContainerBuilder builder)
         {

@@ -1,6 +1,7 @@
 #nullable enable
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Daipan.Sound.Interfaces;
 using DG.Tweening;
 using UnityEngine;
@@ -11,9 +12,22 @@ namespace Daipan.Sound.MonoScripts
     {
         [SerializeField] List<BgmParam> bgmParams = null!;
         [SerializeField] List<SeParam> seParams = null!;
-
-        void Awake()
+        static SoundManager? _instance;
+        public static ISoundManager? Instance => _instance; 
+        
+        public void Initialize()
         {
+            if(_instance == null) 
+            {
+                _instance = this;
+                DontDestroyOnLoad(gameObject);
+                Debug.Log("SoundManager is created");
+            }
+            else
+            {
+                Debug.Log("SoundManager is already created");
+            } 
+            
             foreach (var bgmParam in bgmParams)
             {
                 bgmParam.audioSource.clip = bgmParam.audioClip;
