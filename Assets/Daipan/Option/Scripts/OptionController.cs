@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Daipan.Option.Interfaces;
+using Daipan.Option.MonoScripts;
 using VContainer;
 using System.Linq;
 
@@ -28,7 +29,7 @@ namespace Daipan.Option.Scripts
                 {
                     optionPopUpMain.RegisterTransition(myContent =>
                     {
-                        if(myContent == OptionPopUpMain.myContent.ReturnTitle)
+                        if(myContent == OptionPopUpMain.CurrentContents.ReturnTitle)
                             return _optionContents.FirstOrDefault(x => x is OptionPopUpConfirmReturnTitle);
 
                         return null;
