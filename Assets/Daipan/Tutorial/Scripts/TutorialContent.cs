@@ -116,19 +116,16 @@ namespace Daipan.Tutorial.Scripts
     {
         readonly DownloadGaugeViewMono _gaugeViewMono;
         readonly BlackScreenViewMono _blackScreenViewMono;
-        readonly ISoundManager _soundManager;
         const float FillAmountPerSec = 0.2f;
         bool Completed { get; set; }
 
         public FadeInTutorialStart(
             DownloadGaugeViewMono gaugeViewMono
             , BlackScreenViewMono blackScreenViewMono
-            , ISoundManager soundManager
         )
         {
             _gaugeViewMono = gaugeViewMono;
             _blackScreenViewMono = blackScreenViewMono;
-            _soundManager = soundManager;
         }
 
         public override void Execute()
@@ -143,12 +140,14 @@ namespace Daipan.Tutorial.Scripts
                         _gaugeViewMono.SetGaugeValue(_gaugeViewMono.CurrentFillAmount +
                                                      FillAmountPerSec * Time.deltaTime);
                         if (_gaugeViewMono.CurrentFillAmount >= 1.0f)
+                        {
                             _blackScreenViewMono.FadeOut(1, () =>
                             {
                                 _gaugeViewMono.Hide();
-                                _soundManager.PlayBgm(BgmEnum.Tutorial);
                                 Completed = true;
                             });
+                        }
+
                     }));
         }
 
@@ -163,14 +162,17 @@ namespace Daipan.Tutorial.Scripts
     {
         readonly SpeechEventManager _speechEventManager;
         readonly LanguageConfig _languageConfig;
+        readonly ISoundManager _soundManager;
 
         public UICatIntroduce(
             SpeechEventManager speechEventManager
             , LanguageConfig languageConfig
+            , ISoundManager soundManager
         )
         {
             _speechEventManager = speechEventManager;
             _languageConfig = languageConfig;
+            _soundManager = soundManager;
         }
 
         public override void Execute()
@@ -178,6 +180,9 @@ namespace Daipan.Tutorial.Scripts
             Debug.Log("Streamer wakes up...");
             Debug.Log("Cat speaks...");
             _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildUICatIntroduce(_languageConfig.CurrentLanguage));
+            
+            _soundManager.PlayBgm(BgmEnum.Tutorial);
+
         }
 
         public override bool IsCompleted()
