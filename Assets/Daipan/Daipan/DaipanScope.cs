@@ -227,7 +227,6 @@ namespace Daipan.Daipan
             builder.Register<OptionPopUpConfirmReturnTitle>(Lifetime.Scoped).As<IOptionPopUp>();
 
             // Config
-            builder.Register<LanguageConfig>(Lifetime.Scoped);
             builder.Register<DaipanShakingConfig>(Lifetime.Scoped);
         }
 
