@@ -2187,9 +2187,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   viewObject: {fileID: 8328810706473031142}
-  viewerNumberText: {fileID: 2606578888366167504}
-  comboCountText: {fileID: 0}
-  daipanCountText: {fileID: 7892144884064041897}
-  playerHpText: {fileID: 0}
+  viewerNumberExplainText: {fileID: 2606578888366167504}
+  viewerNumberText: {fileID: 2198419160830467956}
+  daipanCountExplainText: {fileID: 7892144884064041897}
+  daipanCountText: {fileID: 8700892264109230814}
+  playerHpExplainText: {fileID: 8171364100552779013}
+  playerHpText: {fileID: 4318024753157361870}
+  comboCountExplainText: {fileID: 6643978692903083061}
+  comboCountText: {fileID: 2216955212407850616}
   tankYouText: {fileID: 4424007824100226433}
   pushEnterText: {fileID: 9126970028555256370}
