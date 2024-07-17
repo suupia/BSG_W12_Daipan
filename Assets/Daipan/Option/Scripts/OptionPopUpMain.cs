@@ -6,6 +6,7 @@ using UnityEngine;
 using Daipan.Option.Interfaces;
 using Daipan.Sound.MonoScripts;
 using VContainer;
+using Daipan.Battle.scripts;
 
 namespace Daipan.Option.Scripts
 {
@@ -34,9 +35,14 @@ namespace Daipan.Option.Scripts
 
         public void Select()
         {
-            
-            var nextOption = _transitionFunc(CurrentContent);
-            if (nextOption != null) _handleOption.SetCurrentOption(nextOption);
+            if (CurrentContent == CurrentContents.Resume) _handleOption.CloseOption();
+            else if(CurrentContent == CurrentContents.ReturnTitle)
+            {
+                _handleOption.CloseOption();
+                SceneTransition.TransitioningScene(SceneName.TitleScene);
+            }
+            //var nextOption = _transitionFunc(CurrentContent);
+            //if (nextOption != null) _handleOption.SetCurrentOption(nextOption);
         }
         public void MoveCursor(MoveCursorDirectionEnum moveCursorDirection)
         {
