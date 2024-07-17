@@ -44,5 +44,6 @@ namespace Daipan.Sound.MonoScripts
         SpawnComment,
         SpawnAntiComment,
         AttackDeflect,
+        Attack,
     }
 }

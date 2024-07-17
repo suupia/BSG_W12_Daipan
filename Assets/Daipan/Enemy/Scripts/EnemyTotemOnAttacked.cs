@@ -33,7 +33,11 @@ namespace Daipan.Enemy.Scripts
         )
         {
             _samePressChecker = new SamePressChecker(AllowableSec, canAttackPlayers.Count
-                ,  comboCounter.IncreaseCombo, () =>
+                ,  () =>
+                {
+                    comboCounter.IncreaseCombo();
+                    soundManager.PlaySe(SeEnum.Attack);
+                }, () =>
                 {
                     comboCounter.ResetCombo();
                     var spawnPercent =
