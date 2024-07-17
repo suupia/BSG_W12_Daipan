@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using Daipan.Sound.Interfaces;
+using DG.Tweening;
 using UnityEngine;
 
 namespace Daipan.Sound.MonoScripts
@@ -32,8 +33,22 @@ namespace Daipan.Sound.MonoScripts
                 Debug.LogError($"Not found BGM: {bgmEnum}");
                 return;
             }
+            
+            const float fadeSec = 1f;
 
+            // Stop other BGMs with fade-out
+            foreach (var param in bgmParams)
+            {
+                if (param.bgmEnum != bgmEnum && param.audioSource.isPlaying)
+                {
+                    param.audioSource.DOFade(0, fadeSec).OnComplete(() => param.audioSource.Stop());
+                }
+            }
+
+            // Play the selected BGM
+            bgmParam.audioSource.volume = 0;
             bgmParam.audioSource.Play();
+            bgmParam.audioSource.DOFade(1, fadeSec);
         }
 
         public void PlaySe(SeEnum seEnum)
