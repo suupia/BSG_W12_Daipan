@@ -31,6 +31,7 @@ using Daipan.Tower.MonoScripts;
 using Daipan.Tower.Scripts;
 using Daipan.Option.Interfaces;
 using Daipan.Option.Scripts;
+using Daipan.Option.MonoScripts;
 using Daipan.Sound.Interfaces;
 using Daipan.Sound.MonoScripts;
 using Daipan.Sound.Scripts;
@@ -220,14 +221,24 @@ namespace Daipan.Daipan
 
         public static void RegisterOption(IContainerBuilder builder)
         {
-            builder.Register<OptionController>(Lifetime.Scoped).As<IHandleOption>().As<IInputOption>();
+            builder.Register<OptionController>(Lifetime.Scoped).As<IHandleOption>().As<IInputOption>().AsSelf();
 
             // PopUp
-            builder.Register<OptionPopUpMain>(Lifetime.Scoped).As<IOptionPopUp>();
+            builder.Register<OptionPopUpMain>(Lifetime.Scoped).As<IOptionPopUp>().AsSelf();
             builder.Register<OptionPopUpConfirmReturnTitle>(Lifetime.Scoped).As<IOptionPopUp>();
 
             // Config
             builder.Register<DaipanShakingConfig>(Lifetime.Scoped);
+
+            // View
+            builder.RegisterComponentInHierarchy<OptionPopUpViewMono>();
+            builder.RegisterComponentInHierarchy<OptionBGMViewMono>();
+            builder.RegisterComponentInHierarchy<OptionSEViewMono>();
+            builder.RegisterComponentInHierarchy<OptionShakingViewMono>();
+            builder.RegisterComponentInHierarchy<OptionLanguageViewMono>();
+            builder.RegisterComponentInHierarchy<OptionResumeViewMono>();
+            builder.RegisterComponentInHierarchy<OptionReturnTitleViewMono>();
+
         }
 
         public static void RegisterSound(IContainerBuilder builder)

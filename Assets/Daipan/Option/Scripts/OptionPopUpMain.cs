@@ -14,9 +14,9 @@ namespace Daipan.Option.Scripts
        readonly DaipanShakingConfig _daipanShakingConfig;
 
 
-        myContent _myContent;
+        public CurrentContents CurrentContent { get; private set; }
         IHandleOption _handleOption = null!;
-        Func<myContent, IOptionPopUp?> _transitionFunc = null!;
+        Func<CurrentContents, IOptionPopUp?> _transitionFunc = null!;
 
         [Inject]
         public OptionPopUpMain(LanguageConfig languageConfig
@@ -28,43 +28,44 @@ namespace Daipan.Option.Scripts
 
         public void Prepare()
         {
-            _myContent = myContent.BGM;
+            CurrentContent = CurrentContents.Resume;
         }
 
         public void Select()
         {
-            var nextOption = _transitionFunc(_myContent);
+            
+            var nextOption = _transitionFunc(CurrentContent);
             if (nextOption != null) _handleOption.SetCurrentOption(nextOption);
         }
         public void MoveCursor(MoveCursorDirectionEnum moveCursorDirection)
         {
             if(moveCursorDirection == MoveCursorDirectionEnum.Down)
             {
-                if(_myContent == myContent.ReturnTitle)
+                if(CurrentContent == CurrentContents.ReturnTitle)
                 {
-                    _myContent = myContent.BGM;
+                    CurrentContent = CurrentContents.Resume;
                 }
                 else
                 {
-                    _myContent++;
+                    CurrentContent++;
                 }
-                Debug.Log($"Option:Move : {_myContent}");
+                Debug.Log($"Option:Move : {CurrentContent}");
 
                 return;
             }
             if(moveCursorDirection == MoveCursorDirectionEnum.Right)
             {
-                switch (_myContent)
+                switch (CurrentContent)
                 {
-                    case myContent.BGM:
+                    case CurrentContents.BGM:
                         break;
-                    case myContent.SE:
+                    case CurrentContents.SE:
                         break;
-                    case myContent.IsShaking:
+                    case CurrentContents.IsShaking:
                         _daipanShakingConfig.IsShaking = false;
                         Debug.Log("Option:Shaking OFF");
                         break;
-                    case myContent.Language:
+                    case CurrentContents.Language:
                         _languageConfig.CurrentLanguage = LanguageEnum.English;
                         Debug.Log("Option:Language = English");
                         break;
@@ -73,17 +74,17 @@ namespace Daipan.Option.Scripts
             }
             if(moveCursorDirection == MoveCursorDirectionEnum.Left)
             {
-                switch (_myContent)
+                switch (CurrentContent)
                 {
-                    case myContent.BGM:
+                    case CurrentContents.BGM:
                         break;
-                    case myContent.SE:
+                    case CurrentContents.SE:
                         break;
-                    case myContent.IsShaking:
+                    case CurrentContents.IsShaking:
                         _daipanShakingConfig.IsShaking = true;
                         Debug.Log("Option:Shaking ON");
                         break;
-                    case myContent.Language:
+                    case CurrentContents.Language:
                         _languageConfig.CurrentLanguage = LanguageEnum.Japanese;
                         Debug.Log("Option:Language = Japanese");
                         break;
@@ -96,12 +97,13 @@ namespace Daipan.Option.Scripts
             _handleOption = handleOption;
         }
 
-        public void RegisterTransition(Func<myContent, IOptionPopUp?> transitionFunc)
+        public void RegisterTransition(Func<CurrentContents, IOptionPopUp?> transitionFunc)
         {
             _transitionFunc = transitionFunc;
         }
-        public enum myContent
+        public enum CurrentContents
         {
+            Resume,
             BGM,
             SE,
             IsShaking,
