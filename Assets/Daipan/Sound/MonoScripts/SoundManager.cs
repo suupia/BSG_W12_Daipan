@@ -13,8 +13,18 @@ namespace Daipan.Sound.MonoScripts
         [SerializeField] List<BgmParam> bgmParams = null!;
         [SerializeField] List<SeParam> seParams = null!;
         static SoundManager? _instance;
-        public static ISoundManager? Instance => _instance; 
-        
+        public static ISoundManager? Instance => _instance;
+        public static float BgmVolume
+        {
+            set => BgmVolume = value / 8f;
+            get => (int)(BgmVolume * 8);
+        }
+        public static float SeVolume
+        {
+            set => SeVolume = value / 8f;
+            get => (int)(SeVolume * 8);
+        }
+
         public void Initialize()
         {
             if(_instance == null) 
@@ -37,6 +47,8 @@ namespace Daipan.Sound.MonoScripts
             {
                 seParam.audioSource.clip = seParam.audioClip;
             }
+            BgmVolume = 6;
+            SeVolume = 6;
         }
 
         public void PlayBgm(BgmEnum bgmEnum)
@@ -62,7 +74,7 @@ namespace Daipan.Sound.MonoScripts
             // Play the selected BGM
             bgmParam.audioSource.volume = 0;
             bgmParam.audioSource.Play();
-            bgmParam.audioSource.DOFade(1, fadeSec);
+            bgmParam.audioSource.DOFade(BgmVolume, fadeSec);
             
             Debug.Log($"Play BGM: {bgmEnum} ,volume: {bgmParam.audioSource.volume}");
         }
@@ -76,6 +88,7 @@ namespace Daipan.Sound.MonoScripts
                 return;
             }
 
+            seParam.audioSource.volume = SeVolume;
             seParam.audioSource.Play();
         }
         
