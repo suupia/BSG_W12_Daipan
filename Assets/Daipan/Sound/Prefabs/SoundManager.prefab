@@ -1296,6 +1296,9 @@ MonoBehaviour:
   - seEnum: 3
     audioSource: {fileID: 6289242238402493489}
     audioClip: {fileID: 8300000, guid: 769c13e73281642e89ee7a5e29381e98, type: 3}
+  - seEnum: 4
+    audioSource: {fileID: 5991557617124743146}
+    audioClip: {fileID: 8300000, guid: 70be6a4424a9546109fcd6c50ebc773a, type: 3}
 --- !u!1 &6842311396710771111
 GameObject:
   m_ObjectHideFlags: 0

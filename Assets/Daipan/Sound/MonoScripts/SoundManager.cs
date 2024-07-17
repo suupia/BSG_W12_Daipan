@@ -111,5 +111,6 @@ namespace Daipan.Sound.MonoScripts
         SpawnAntiComment,
         AttackDeflect,
         Attack,
+        Daipan,
     }
 }
