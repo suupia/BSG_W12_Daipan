@@ -5,10 +5,13 @@ using UnityEngine;
 using Daipan.Option.Scripts;
 using VContainer;
 using R3;
+using UnityEngine.UI;
+using Daipan.Sound.MonoScripts;
 
 public class OptionSEViewMono : MonoBehaviour
 {
     [SerializeField] GameObject cursorObject = null!;
+    [SerializeField] Image volume = null!;
 
     [Inject]
     public void Initialize(OptionPopUpMain optionPopUpMain)
@@ -26,5 +29,10 @@ public class OptionSEViewMono : MonoBehaviour
                 }
             }).
             AddTo(this);
+    }
+
+    private void Update()
+    {
+        volume.fillAmount = SoundManager.SeVolume / 7;
     }
 }
