@@ -26,5 +26,10 @@ namespace Daipan.LevelDesign.EndScene
 
         [Header("炎上END：ゲーム終了時に台パンx回以上の時")] [Min(0)]
         public int daipanCountThresholdForBacklashEnd = 10;
+        
+        [Header("平凡END:視聴者の最小値") ] [Min(0)]
+        public int viewerCountThresholdForHeibonEndMin = 0;
+        [Header("平凡END:視聴者の最大値") ] [Min(0)]
+        public int viewerCountThresholdForHeibonEndMax = 1000;
     }
 }
