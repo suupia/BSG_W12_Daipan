@@ -57,7 +57,7 @@ namespace Daipan.Battle.scripts
             }
             playerHpText.text = $"Player HP :{playerMono.Hp.Value}";  // 本当はObserveしたいけど生成順序の関係でここで取得
             
-            tankYouText.text = "Thank you for playing!";
+            tankYouText.text = "ご視聴いただきありがとうございました！";
             pushEnterText.text = "Push Enter to see the end scene"; 
             
             viewObject.SetActive(true);
