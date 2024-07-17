@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Daipan.Option.Interfaces;
+using Daipan.Sound.MonoScripts;
 using VContainer;
 
 namespace Daipan.Option.Scripts
@@ -58,8 +59,10 @@ namespace Daipan.Option.Scripts
                 switch (CurrentContent)
                 {
                     case CurrentContents.BGM:
+                        SoundManager.BgmVolume = SoundManager.BgmVolume + 1;
                         break;
                     case CurrentContents.SE:
+                        SoundManager.SeVolume = SoundManager.SeVolume + 1;
                         break;
                     case CurrentContents.IsShaking:
                         _daipanShakingConfig.IsShaking = false;
@@ -77,8 +80,10 @@ namespace Daipan.Option.Scripts
                 switch (CurrentContent)
                 {
                     case CurrentContents.BGM:
+                        SoundManager.BgmVolume = SoundManager.BgmVolume - 1;
                         break;
                     case CurrentContents.SE:
+                        SoundManager.SeVolume = SoundManager.SeVolume - 1;
                         break;
                     case CurrentContents.IsShaking:
                         _daipanShakingConfig.IsShaking = true;

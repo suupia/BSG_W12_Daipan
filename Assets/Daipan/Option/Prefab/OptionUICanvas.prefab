@@ -996,6 +996,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursorObject: {fileID: 5053086726689303327}
+  volume: {fileID: 6166634075597687646}
 --- !u!1 &4397834629216623266
 GameObject:
   m_ObjectHideFlags: 0
@@ -1048,6 +1049,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursorObject: {fileID: 827506711436659517}
+  volume: {fileID: 6667779595388212411}
 --- !u!1 &4430949377227238085
 GameObject:
   m_ObjectHideFlags: 0
@@ -1193,7 +1195,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
