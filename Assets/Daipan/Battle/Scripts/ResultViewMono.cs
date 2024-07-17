@@ -1,5 +1,6 @@
 #nullable enable
 using System;
+using Daipan.Option.Scripts;
 using Daipan.Player.MonoScripts;
 using Daipan.Player.Scripts;
 using Daipan.Stream.Scripts;
@@ -13,13 +14,18 @@ namespace Daipan.Battle.scripts
     public class ResultViewMono : MonoBehaviour
     {
         [SerializeField] GameObject viewObject = null!;
+        [SerializeField] TextMeshProUGUI viewerNumberExplainText = null!;
         [SerializeField] TextMeshProUGUI viewerNumberText = null!;
-        [SerializeField] TextMeshProUGUI comboCountText = null!;
+        [SerializeField] TextMeshProUGUI daipanCountExplainText = null!;
         [SerializeField] TextMeshProUGUI daipanCountText = null!;
+        [SerializeField] TextMeshProUGUI playerHpExplainText = null!;
         [SerializeField] TextMeshProUGUI playerHpText = null!;
+        [SerializeField] TextMeshProUGUI comboCountExplainText = null!;
+        [SerializeField] TextMeshProUGUI comboCountText = null!;
         [SerializeField] TextMeshProUGUI tankYouText = null!;
         [SerializeField] TextMeshProUGUI pushEnterText = null!;
 
+        LanguageConfig _languageConfig = null!;
         void Awake()
         {
             HideResult(); 
@@ -30,21 +36,24 @@ namespace Daipan.Battle.scripts
             ViewerNumber viewerNumber
             , ComboCounter comboCounter
             , DaipanExecutor daipanExecutor
+            , LanguageConfig languageConfig
             )
         {
             Debug.Log("ResultViewMono Constructor");
             Observable.EveryUpdate()
                 .Where(_ => viewObject.activeInHierarchy)
-                .Subscribe(_ => viewerNumberText.text = $"Viewer Number: {viewerNumber.Number}")
+                .Subscribe(_ => viewerNumberText.text = $"{viewerNumber.Number}")
                 .AddTo(this);
             Observable.EveryUpdate()
                 .Where(_ => viewObject.activeInHierarchy)
-                .Subscribe(_ => comboCountText.text = $"Combo Count: {comboCounter.MaxComboCount}")
+                .Subscribe(_ => daipanCountText.text = $"{daipanExecutor.DaipanCount}")
                 .AddTo(this);
             Observable.EveryUpdate()
                 .Where(_ => viewObject.activeInHierarchy)
-                .Subscribe(_ => daipanCountText.text = $"Daipan Count: {daipanExecutor.DaipanCount}")
+                .Subscribe(_ => comboCountText.text = $"{comboCounter.MaxComboCount}")
                 .AddTo(this);
+            
+            _languageConfig = languageConfig;
         }
         
         public void ShowResult()
@@ -55,10 +64,48 @@ namespace Daipan.Battle.scripts
                 Debug.LogWarning("PlayerMono is not found");
                 return;
             }
-            playerHpText.text = $"Player HP :{playerMono.Hp.Value}";  // 本当はObserveしたいけど生成順序の関係でここで取得
+            playerHpText.text = $"{playerMono.Hp.Value} / {playerMono.MaxHp}";  // 本当はObserveしたいけど生成順序の関係でここで取得
+
+            viewerNumberExplainText.text = _languageConfig.CurrentLanguage switch
+            {
+                LanguageEnum.Japanese => "同時接続数",
+                LanguageEnum.English => "Concurrent Connections",
+                _ => throw new ArgumentOutOfRangeException()
+            };
+
+            daipanCountExplainText.text = _languageConfig.CurrentLanguage switch
+            {
+                LanguageEnum.Japanese => "台パン回数",
+                LanguageEnum.English => "Number of Daipan",
+                _ => throw new ArgumentOutOfRangeException()
+            };
+
+            playerHpExplainText.text = _languageConfig.CurrentLanguage switch
+            {
+                LanguageEnum.Japanese => "塔の最終HP",
+                LanguageEnum.English => "Final HP",
+                _ => throw new ArgumentOutOfRangeException()
+            };
+
+            comboCountExplainText.text = _languageConfig.CurrentLanguage switch
+            {
+                LanguageEnum.Japanese => "最大コンボ数",
+                LanguageEnum.English => "Max Combo Count",
+                _ => throw new ArgumentOutOfRangeException()
+            };
             
-            tankYouText.text = "Thank you for playing!";
-            pushEnterText.text = "Push Enter to see the end scene"; 
+            tankYouText.text = _languageConfig.CurrentLanguage switch
+            {
+                LanguageEnum.Japanese => "ご視聴ありがとうございました！",
+                LanguageEnum.English => "Thank you for watching!",
+                _ => throw new ArgumentOutOfRangeException()
+            };
+            pushEnterText.text = _languageConfig.CurrentLanguage switch
+            {
+                LanguageEnum.Japanese => "次へ",
+                LanguageEnum.English => "Next",
+                _ => throw new ArgumentOutOfRangeException()
+            }; 
             
             viewObject.SetActive(true);
         }
