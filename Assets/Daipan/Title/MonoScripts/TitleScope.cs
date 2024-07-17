@@ -25,5 +25,8 @@ public sealed class TitleScope : LifetimeScope
     protected override void Configure(IContainerBuilder builder)
     {
         builder.RegisterComponentInHierarchy<TitleMono>();
+        
+        // Sound
+        DaipanScope.RegisterSound(builder);
     }
 }

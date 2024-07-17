@@ -2,11 +2,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Daipan.Battle.scripts;
+using Daipan.Comment.Scripts;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Player.MonoScripts;
 using Daipan.Player.Scripts;
+using Daipan.Sound.Interfaces;
+using Daipan.Sound.MonoScripts;
 using Daipan.Stream.Scripts;
 using R3;
 using UnityEngine;
@@ -21,10 +25,27 @@ namespace Daipan.Enemy.Scripts
 
         public EnemyTotemOnAttacked(
             ComboCounter comboCounter
-            , List<PlayerColor> canAttackPlayers)
+            , CommentSpawner commentSpawner
+            , IPlayerAntiCommentParamData playerAntiCommentParamData
+            , WaveState waveState
+            , List<PlayerColor> canAttackPlayers
+            , ISoundManager soundManager
+        )
         {
-            _samePressChecker = new SamePressChecker(AllowableSec, canAttackPlayers.Count,
-                comboCounter.IncreaseCombo, comboCounter.ResetCombo);
+            _samePressChecker = new SamePressChecker(AllowableSec, canAttackPlayers.Count
+                ,  () =>
+                {
+                    comboCounter.IncreaseCombo();
+                    soundManager.PlaySe(SeEnum.Attack);
+                }, () =>
+                {
+                    comboCounter.ResetCombo();
+                    var spawnPercent =
+                        playerAntiCommentParamData.GetAntiCommentPercentOnMissAttacks(waveState.CurrentWaveIndex);
+                    if (spawnPercent / 100f > UnityEngine.Random.value)
+                        commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
+                    soundManager.PlaySe(SeEnum.AttackDeflect);
+                });
             _canAttackPlayers = canAttackPlayers;
         }
 

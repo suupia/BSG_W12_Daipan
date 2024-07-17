@@ -123,6 +123,50 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &433286774
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 433286776}
+  - component: {fileID: 433286775}
+  m_Layer: 0
+  m_Name: EndMono
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &433286775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 433286774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e9257ba141b68f498ebee547e62a943, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &433286776
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 433286774}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &482297451
 GameObject:
   m_ObjectHideFlags: 0
@@ -182,15 +226,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cf31847a6a20b402e8d11509066363d2, type: 2}
+  m_sharedMaterial: {fileID: -4466590664960433472, guid: cf31847a6a20b402e8d11509066363d2, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4283432704
-  m_fontColor: {r: 0, g: 1, b: 0.3082099, a: 1}
+    rgba: 4287189247
+  m_fontColor: {r: 1, g: 0.3137255, b: 0.5372549, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -313,15 +357,17 @@ MonoBehaviour:
   - endSceneEnum: 1
     sprite: {fileID: 21300000, guid: e5da330c8e72d451b8630b46fa5d4cce, type: 3}
   - endSceneEnum: 2
-    sprite: {fileID: 21300000, guid: 9b5cf95676a46294dbf6b02ae5c8b4e3, type: 3}
+    sprite: {fileID: 21300000, guid: b51079536927541a0b685fbfc1bce314, type: 3}
   - endSceneEnum: 3
-    sprite: {fileID: 21300000, guid: 9b5cf95676a46294dbf6b02ae5c8b4e3, type: 3}
+    sprite: {fileID: 21300000, guid: 7e5e3b7433baf43ce891356f9e11f8d4, type: 3}
   - endSceneEnum: 4
     sprite: {fileID: 21300000, guid: a6acdff0860004aa6aeb6e3365aba2ea, type: 3}
   - endSceneEnum: 5
-    sprite: {fileID: 21300000, guid: 9b5cf95676a46294dbf6b02ae5c8b4e3, type: 3}
+    sprite: {fileID: 21300000, guid: 20251e700f5f1422c8f665753634ed45, type: 3}
   - endSceneEnum: 6
     sprite: {fileID: 21300000, guid: 212a8ea7aee7f43949aa5c4ddae3d9fa, type: 3}
+  - endSceneEnum: 7
+    sprite: {fileID: 21300000, guid: 7ea43bce397524789bbfe4e174ec59b7, type: 3}
   endSceneImage: {fileID: 865121936}
   endSceneText: {fileID: 482297453}
 --- !u!1 &793867596
@@ -713,3 +759,4 @@ SceneRoots:
   - {fileID: 1586872089}
   - {fileID: 1773164600}
   - {fileID: 793867599}
+  - {fileID: 433286776}

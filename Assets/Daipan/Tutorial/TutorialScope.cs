@@ -106,7 +106,6 @@ namespace Daipan.Tutorial
             builder.Register<SpeechEventManager>(Lifetime.Scoped);
             
             builder.RegisterComponentInHierarchy<DownloadGaugeViewMono>();
-            builder.Register<LanguageConfig>(Lifetime.Scoped);
             builder.RegisterComponentInHierarchy<LanguageSelectionPopupMono>();
             builder.RegisterComponentInHierarchy<BlackScreenViewMono>();
             builder.RegisterComponentInHierarchy<SpeechBubbleMono>();
@@ -114,6 +113,9 @@ namespace Daipan.Tutorial
             builder.RegisterComponentInHierarchy<AimTopStreamerViewMono>();
             builder.RegisterComponentInHierarchy<StandbyStreamingViewMono>();
 
+            // Sound
+            DaipanScope.RegisterSound(builder);
+            
             // Updater
             builder.UseEntryPoints(Lifetime.Scoped, entryPoints =>
             {

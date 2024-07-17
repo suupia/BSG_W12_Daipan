@@ -11,6 +11,8 @@ using Daipan.Player.Interfaces;
 using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Player.LevelDesign.Scripts;
 using Daipan.Player.MonoScripts;
+using Daipan.Sound.Interfaces;
+using Daipan.Sound.MonoScripts;
 using Daipan.Stream.Scripts;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -26,6 +28,7 @@ namespace Daipan.Player.Scripts
         readonly WaveState _waveState;
         readonly IPlayerAntiCommentParamData _playerAntiCommentParamData;
         readonly ThresholdResetCounter _playerMissedAttackCounter;
+        readonly ISoundManager _soundManager;
 
         public PlayerAttackEffectBuilder(
             IPlayerParamDataContainer playerParamDataContainer
@@ -34,6 +37,7 @@ namespace Daipan.Player.Scripts
             ,CommentSpawner commentSpawner
             ,WaveState waveState
             ,IPlayerAntiCommentParamData playerAntiCommentParamData
+            ,ISoundManager soundManager
         )
         {
             _playerParamDataContainer = playerParamDataContainer;
@@ -44,6 +48,7 @@ namespace Daipan.Player.Scripts
             _playerAntiCommentParamData = playerAntiCommentParamData;
             _playerMissedAttackCounter =
                 new ThresholdResetCounter(playerAntiCommentParamData.GetMissedAttackCountForAntiComment());
+            _soundManager = soundManager;
         }
 
         public PlayerAttackEffectMono Build
@@ -59,7 +64,17 @@ namespace Daipan.Player.Scripts
             effect.OnHit += (sender, args) =>
             {
                 Debug.Log($"OnHit");
-                AttackEnemy(_playerParamDataContainer, effect, playerViewMonos, playerColor, args,_comboCounter, _playerMissedAttackCounter, _commentSpawner );
+                AttackEnemy(
+                    _playerParamDataContainer
+                    , effect
+                    , playerViewMonos
+                    , playerColor
+                    , args
+                    ,_comboCounter
+                    , _playerMissedAttackCounter
+                    , _commentSpawner
+                    , _soundManager
+                    );
                 SpawnAntiComment(args, _commentSpawner, _playerAntiCommentParamData,_waveState);
             };
             return effect;
@@ -75,6 +90,7 @@ namespace Daipan.Player.Scripts
             , ComboCounter comboCounter
             , ThresholdResetCounter playerMissedAttackCounter
             , CommentSpawner commentSpawner
+            , ISoundManager soundManager
         )
         {
             if (args.IsTargetEnemy && args.EnemyMono != null)
@@ -89,6 +105,7 @@ namespace Daipan.Player.Scripts
                 //  HPに変化があれば、コンボ増加（ただし、Totemの判定はOnAttackedで行っている）
                 if (Math.Abs(beforeHp - afterHp) > double.Epsilon && args.EnemyMono.EnemyEnum.IsTotem() != true)
                     comboCounter.IncreaseCombo();
+                soundManager.PlaySe(SeEnum.Attack);
             }
             else
             {
@@ -96,8 +113,12 @@ namespace Daipan.Player.Scripts
                     $"攻撃対象が{PlayerAttackModule.GetTargetEnemyEnum(playerColor)}ではないです args.EnemyMono?.EnemyEnum: {args.EnemyMono?.EnemyEnum}");
                 comboCounter.ResetCombo();
                 playerMissedAttackCounter.CountUp();
-                if (playerMissedAttackCounter.IsOverThreshold) commentSpawner.SpawnCommentByType(CommentEnum.Spiky); 
-                if(args.EnemyMono != null) playerAttackEffectMono.Defenced();
+                if (playerMissedAttackCounter.IsOverThreshold) commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
+                if (args.EnemyMono != null)
+                {
+                    playerAttackEffectMono.Defenced();
+                    soundManager.PlaySe(SeEnum.AttackDeflect);
+                }
 
                 return;
             }
@@ -120,6 +141,7 @@ namespace Daipan.Player.Scripts
             )
         {
             if (args.IsTargetEnemy) return;
+            if (args.EnemyMono != null && args.EnemyMono.EnemyEnum.IsTotem() == true) return;  // TotemはOnAttackedで判定している
             
             var spawnPercent = playerAntiCommentParamData.GetAntiCommentPercentOnMissAttacks(waveState.CurrentWaveIndex);
             

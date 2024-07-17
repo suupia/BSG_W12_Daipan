@@ -24,13 +24,13 @@ namespace Daipan.Battle.scripts
         // この順番でシーン遷移の判定を行っていく
         readonly List<EndSceneEnum> _judgeList = new()
         {
-            EndSceneEnum.SacredLady,
-            EndSceneEnum.Backlash,
+            EndSceneEnum.Seijo,
+            EndSceneEnum.Enjou,
             EndSceneEnum.NoobGamer,
             EndSceneEnum.ProGamer,
-            EndSceneEnum.InsideTheBox,
-            EndSceneEnum.Thanksgiving,
-            EndSceneEnum.StrugglingStreamer
+            EndSceneEnum.Hakononaka,
+            EndSceneEnum.Kansyasai,
+            EndSceneEnum.Genkai
         };
 
         public EndSceneSelector(
@@ -79,19 +79,21 @@ namespace Daipan.Battle.scripts
         {
             var result = sceneName switch
             {
-                EndSceneEnum.InsideTheBox => viewerNumber.Number <=
-                                             endSceneTransitionParam.viewerCountThresholdForInsideTheBoxEnd,
-                EndSceneEnum.Thanksgiving => viewerNumber.Number >=
-                                             endSceneTransitionParam.viewerCountThresholdForThanksgivingEnd,
-                EndSceneEnum.NoobGamer => (double)playerMono.Hp.Value / playerMono.MaxHp <=
+                EndSceneEnum.NoobGamer => playerMono.Hp.Value / playerMono.MaxHp <=
                                           endSceneTransitionParam.hpPercentThresholdForNoobGamerEnd,
+                EndSceneEnum.Seijo => daipanExecutor.DaipanCount <=
+                                      endSceneTransitionParam.daipanCountThresholdForSacredLadyEnd,
                 EndSceneEnum.ProGamer => counter.MaxComboCount >= 
-                                        endSceneTransitionParam.maxComboCountThresholdForProGamerEnd,
-                EndSceneEnum.SacredLady => daipanExecutor.DaipanCount <=
-                                           endSceneTransitionParam.daipanCountThresholdForSacredLadyEnd,
-                EndSceneEnum.Backlash => daipanExecutor.DaipanCount >=
-                                         endSceneTransitionParam.daipanCountThresholdForBacklashEnd,
-                EndSceneEnum.StrugglingStreamer => true,
+                                         endSceneTransitionParam.maxComboCountThresholdForProGamerEnd,
+                EndSceneEnum.Enjou => daipanExecutor.DaipanCount >=
+                                      endSceneTransitionParam.daipanCountThresholdForBacklashEnd,
+                EndSceneEnum.Hakononaka => viewerNumber.Number <=
+                                             endSceneTransitionParam.viewerCountThresholdForInsideTheBoxEnd,
+                EndSceneEnum.Kansyasai => viewerNumber.Number >=
+                                             endSceneTransitionParam.viewerCountThresholdForThanksgivingEnd,
+                EndSceneEnum.Heibon => endSceneTransitionParam.viewerCountThresholdForHeibonEndMin <= viewerNumber.Number &&
+                                        viewerNumber.Number <= endSceneTransitionParam.viewerCountThresholdForHeibonEndMax,
+                EndSceneEnum.Genkai => true,
                 _ => false
             };
             Debug.Log($"TransitionCondition() SceneName: {sceneName}, result : {result}, viewerNumber: {viewerNumber.Number}, hp: {playerMono.Hp.Value}, maxHp: {playerMono.MaxHp}, daipanCount: {daipanExecutor.DaipanCount}");
@@ -110,12 +112,13 @@ namespace Daipan.Battle.scripts
 
     public enum EndSceneEnum
     {
-        InsideTheBox,
-        Thanksgiving,
-        NoobGamer,
-        ProGamer,
-        SacredLady,
-        Backlash,
-        StrugglingStreamer
+        Hakononaka,  // 箱の中END
+        Kansyasai,  // 配信者ちゃん感謝祭END
+        NoobGamer,     // ゲーム下手配信者END
+        ProGamer,      // プロゲーマーEND
+        Seijo,    // 聖女END
+        Enjou,      // 炎上END
+        Genkai, // 限界配信者END
+        Heibon, // 平凡な配信者END
     }
 }
