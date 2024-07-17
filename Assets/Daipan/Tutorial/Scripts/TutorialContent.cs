@@ -36,17 +36,23 @@ namespace Daipan.Tutorial.Scripts
     public sealed class DisplayBlackScreenWithProgress : AbstractTutorialContent
     {
         readonly DownloadGaugeViewMono _gaugeViewMono;
+        readonly ISoundManager _soundManager;
         const float FillAmountPerSec = 0.2f;
         bool Completed { get; set; }
 
-        public DisplayBlackScreenWithProgress(DownloadGaugeViewMono gaugeViewMono)
+        public DisplayBlackScreenWithProgress(
+            DownloadGaugeViewMono gaugeViewMono
+            , ISoundManager soundManager)
         {
             _gaugeViewMono = gaugeViewMono;
+            _soundManager = soundManager;
         }
 
         public override void Execute()
         {
             _gaugeViewMono.Show();
+            _soundManager.FadOutBgm(1.0f);
+            
             Disposables.Add(Observable.EveryUpdate()
                 .Where(_ => !Completed)
                 .Subscribe(_ =>
@@ -55,6 +61,7 @@ namespace Daipan.Tutorial.Scripts
                     _gaugeViewMono.SetGaugeValue(_gaugeViewMono.CurrentFillAmount + FillAmountPerSec * Time.deltaTime);
                     if (_gaugeViewMono.CurrentFillAmount >= 0.5f) Completed = true;
                 }));
+            
         }
 
         public override bool IsCompleted()

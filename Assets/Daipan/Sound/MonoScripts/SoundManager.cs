@@ -78,6 +78,17 @@ namespace Daipan.Sound.MonoScripts
 
             seParam.audioSource.Play();
         }
+        
+        public void FadOutBgm(float fadeSec)
+        {
+            foreach (var param in bgmParams)
+            {
+                if (param.audioSource.isPlaying)
+                {
+                    param.audioSource.DOFade(0, fadeSec).OnComplete(() => param.audioSource.Stop());
+                }
+            }
+        } 
     }
 
     [Serializable]
