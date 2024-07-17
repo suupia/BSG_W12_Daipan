@@ -110,12 +110,13 @@ namespace Daipan.Battle.scripts
 
     public enum EndSceneEnum
     {
-        InsideTheBox,
-        Thanksgiving,
-        NoobGamer,
-        ProGamer,
-        SacredLady,
-        Backlash,
-        StrugglingStreamer
+        InsideTheBox,  // 箱の中END
+        Thanksgiving,  // 配信者ちゃん感謝祭END
+        NoobGamer,     // ゲーム下手配信者END
+        ProGamer,      // プロゲーマーEND
+        SacredLady,    // 清らか悟りの境地END
+        Backlash,      // 炎上END
+        StrugglingStreamer, // 限界配信者END
+        OrdinaryStreamer, // 平凡な配信者END
     }
 }
