@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Daipan.Battle.scripts;
 using Daipan.End.Scripts;
+using Daipan.Option.Scripts;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using VContainer;
 
 namespace Daipan.End.MonoScripts
 {
@@ -16,7 +18,7 @@ namespace Daipan.End.MonoScripts
         [SerializeField] List<EndSceneSprite> endSceneSprites = null!;
         
         [SerializeField] Image endSceneImage = null!;
-        [SerializeField] TextMeshProUGUI endSceneText = null!; // todo: debug用にEndSceneEnumを表示する
+        [SerializeField] TextMeshProUGUI endSceneText = null!; // フレーバーテキストを表示
 
         void Awake()
         {
@@ -24,7 +26,23 @@ namespace Daipan.End.MonoScripts
                 .Where(x => x.endSceneEnum == EndSceneStatic.EndSceneEnum)
                 .Select(x => x.sprite).FirstOrDefault();
             
-            endSceneText.text = EndSceneStatic.EndSceneEnum.ToString();
+            endSceneText.text =  GetEndSceneText(EndSceneStatic.EndSceneEnum); 
+        }
+        
+        static string GetEndSceneText(EndSceneEnum endSceneEnum)
+        {
+            return endSceneEnum switch
+            {
+                EndSceneEnum.Seijo => "聖女END",
+                EndSceneEnum.Enjou => "炎上END",
+                EndSceneEnum.NoobGamer => "ゲーム下手配信者END",
+                EndSceneEnum.ProGamer => "プロゲーマー配信者END",
+                EndSceneEnum.Hakononaka => "箱の中END",
+                EndSceneEnum.Kansyasai => "感謝祭END",
+                EndSceneEnum.Genkai => "限界配信者END",
+                EndSceneEnum.Heibon => "平凡END",
+                _ => throw new ArgumentOutOfRangeException(nameof(endSceneEnum), endSceneEnum, null)
+            };
         }
     }
 

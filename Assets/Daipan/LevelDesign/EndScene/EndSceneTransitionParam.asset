@@ -18,3 +18,5 @@ MonoBehaviour:
   maxComboCountThresholdForProGamerEnd: 140
   daipanCountThresholdForSacredLadyEnd: 0
   daipanCountThresholdForBacklashEnd: 10
+  viewerCountThresholdForHeibonEndMin: 100000
+  viewerCountThresholdForHeibonEndMax: 250000
