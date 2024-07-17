@@ -1276,13 +1276,13 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: 73f0b48b28dbf4109ba43ffdb05d5245, type: 3}
   - bgmEnum: 1
     audioSource: {fileID: 7237032824240752480}
-    audioClip: {fileID: 8300000, guid: 27f8a5c83c94d406882dd77af517e132, type: 3}
+    audioClip: {fileID: 8300000, guid: 61e7e0e8bdb9d4800b9ad90cf14884fd, type: 3}
   - bgmEnum: 2
     audioSource: {fileID: 8056484053290543210}
     audioClip: {fileID: 8300000, guid: 73f0b48b28dbf4109ba43ffdb05d5245, type: 3}
   - bgmEnum: 3
     audioSource: {fileID: 7145546137016082415}
-    audioClip: {fileID: 8300000, guid: 27f8a5c83c94d406882dd77af517e132, type: 3}
+    audioClip: {fileID: 8300000, guid: 61e7e0e8bdb9d4800b9ad90cf14884fd, type: 3}
   seParams:
   - seEnum: 0
     audioSource: {fileID: 4992814681495273698}
