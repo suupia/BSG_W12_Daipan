@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72f024932b2847ad93f6e86b805f06b4, type: 3}
   m_Name: EndSceneTransitionParam
   m_EditorClassIdentifier: 
-  viewerCountThresholdForInsideTheBoxEnd: 500
-  viewerCountThresholdForThanksgivingEnd: 1000
+  viewerCountThresholdForInsideTheBoxEnd: 50000
+  viewerCountThresholdForThanksgivingEnd: 230000
   hpPercentThresholdForNoobGamerEnd: 0
-  hpPercentThresholdForProGamerEnd: 50
-  daipanCountThresholdForSacredLadyEnd: 10
+  maxComboCountThresholdForProGamerEnd: 140
+  daipanCountThresholdForSacredLadyEnd: 0
   daipanCountThresholdForBacklashEnd: 10

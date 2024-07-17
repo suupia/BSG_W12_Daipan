@@ -5,6 +5,8 @@ using Daipan.Enemy.Interfaces;
 using Daipan.Player.Interfaces;
 using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Player.Scripts;
+using Daipan.Utility.Scripts;
+using R3;
 using UnityEngine;
 
 namespace Daipan.Player.MonoScripts
@@ -21,15 +23,16 @@ namespace Daipan.Player.MonoScripts
             animator.runtimeAnimatorController = playerParamData.GetAnimator();
         }
 
-        public override void Hit()
+        public override void Hit(Action onHit)
         {
-            animator.SetTrigger("isHit");
-        }
-        public bool IsFinishAnimation()
-        {
-            Debug.Log($"animation {animator.GetCurrentAnimatorStateInfo(0).normalizedTime}");
-            return animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1
-                && !animator.IsInTransition(0);
+            Debug.Log("HitNew");
+            animator.SetTrigger("isHit"); 
+            var preState = animator.GetCurrentAnimatorStateInfo(0).fullPathHash;
+            Observable.EveryValueChanged(animator, a => a.IsAlmostEnd())
+                .Where(isEnd => isEnd)
+                .Where(_ => preState != animator.GetCurrentAnimatorStateInfo(0).fullPathHash)
+                .Subscribe(_ => onHit())
+                .AddTo(animator.gameObject);
         }
     }
 }

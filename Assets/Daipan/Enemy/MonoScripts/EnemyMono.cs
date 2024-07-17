@@ -17,8 +17,8 @@ namespace Daipan.Enemy.MonoScripts
 {
     public sealed class EnemyMono : AbstractEnemyMono
     {
-        public AbstractEnemyViewMono? EnemyViewMono => enemyViewMono;
-        [SerializeField] AbstractEnemyViewMono? enemyViewMono;
+        public EnemyViewMono? EnemyViewMono => enemyViewMono;
+        [SerializeField] EnemyViewMono? enemyViewMono;
         EnemyCluster _enemyCluster = null!;
         EnemyMove _enemyMove = null!;
         EnemyAttackDecider _enemyAttackDecider = null!;
@@ -37,9 +37,10 @@ namespace Daipan.Enemy.MonoScripts
             protected set
             {
                 _hp = value;
-                if (_hp.Value <= 0) Die(this, false);
+                if (_hp.Value <= 0) Die();
             }
         }
+
 
         void Update()
         {
@@ -47,10 +48,9 @@ namespace Daipan.Enemy.MonoScripts
                 _enemyParamContainer.GetEnemyParamData(EnemyEnum), _playerHolder.PlayerMono);
 
             IsReachedPlayer = _enemyMove.MoveUpdate(_playerHolder.PlayerMono.transform,
-                _enemyParamContainer.GetEnemyParamData(EnemyEnum), enemyViewMono); 
+                _enemyParamContainer.GetEnemyParamData(EnemyEnum), enemyViewMono);
 
-            if (transform.position.x < _enemySpawnPoint.GetEnemyDespawnedPoint().x)
-                Die(this);
+            if (transform.position.x < _enemySpawnPoint.GetEnemyDespawnedPoint().x) Die();
 
             enemyViewMono?.SetHpGauge(Hp.Value, _enemyParamContainer.GetEnemyParamData(EnemyEnum).GetMaxHp());
         }
@@ -77,12 +77,13 @@ namespace Daipan.Enemy.MonoScripts
         {
             EnemyEnum = enemyEnum;
             _enemyCluster = enemyCluster;
-            _enemyMove = new EnemyMove(transform); 
+            _enemyMove = new EnemyMove(transform);
             _enemyAttackDecider = enemyAttackDecider;
             _enemyDie = enemyDie;
             _enemyOnAttacked = enemyOnAttacked;
             enemyViewMono?.SetDomain(_enemyParamContainer.GetEnemyViewParamData(EnemyEnum));
             Hp = new Hp(_enemyParamContainer.GetEnemyParamData(EnemyEnum).GetMaxHp());
+
         }
 
         public event EventHandler<DiedEventArgs>? OnDied
@@ -98,19 +99,29 @@ namespace Daipan.Enemy.MonoScripts
 
         public override void OnAttacked(IPlayerParamData playerParamData)
         {
+            // Hpの増減より先に判定する必要がある
+            if (EnemyEnum.IsSpecial() == true &&
+                !EnemySpecialOnAttacked.IsSameColor(EnemyEnum, playerParamData.PlayerEnum()))
+            {
+                // Die
+                Debug.Log("Special enemy die");
+                _enemyCluster.Remove(this);
+                _enemyDie.DiedBySpecialBlack(enemyViewMono);
+            }
+
             Hp = _enemyOnAttacked.OnAttacked(Hp, playerParamData);
         }
 
         public override void OnDaipaned()
         {
-            Die(this, isDaipaned:true);
+            _enemyCluster.Remove(this);
+            _enemyDie.DiedByDaipan(enemyViewMono);
         }
-        void Die(AbstractEnemyMono enemyMono, bool isDaipaned = false)
+
+        void Die()
         {
-            _enemyCluster.Remove(enemyMono);
-            _enemyDie.Died(enemyViewMono, isDaipaned);
+            _enemyCluster.Remove(this);
+            _enemyDie.Died(enemyViewMono);
         }
     }
-
-
 }

@@ -1,4 +1,5 @@
 #nullable enable
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Daipan.Battle.scripts;
@@ -14,6 +15,7 @@ using Daipan.Sound.Interfaces;
 using Daipan.Sound.MonoScripts;
 using Daipan.Stream.Scripts;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Daipan.Player.Scripts
 {
@@ -100,18 +102,9 @@ namespace Daipan.Player.Scripts
                 PlayerAttackModule.Attack(args.EnemyMono, playerParamData);
                 var afterHp = args.EnemyMono.Hp.Value;
 
-                //  HPに変化があれば、コンボ増加
-                if (beforeHp != afterHp)
-                {
+                //  HPに変化があれば、コンボ増加（ただし、Totemの判定はOnAttackedで行っている）
+                if (Math.Abs(beforeHp - afterHp) > double.Epsilon && args.EnemyMono.EnemyEnum.IsTotem() != true)
                     comboCounter.IncreaseCombo();
-                    Object.Destroy(playerAttackEffectMono.gameObject);
-                }
-                else
-                {
-                    comboCounter.ResetCombo();
-                    playerAttackEffectMono.Defenced(args.EnemyMono.transform.position);
-                    soundManager.PlaySe(SeEnum.AttackDeflect);
-                }
 
             }
             else
@@ -120,7 +113,12 @@ namespace Daipan.Player.Scripts
                     $"攻撃対象が{PlayerAttackModule.GetTargetEnemyEnum(playerColor)}ではないです args.EnemyMono?.EnemyEnum: {args.EnemyMono?.EnemyEnum}");
                 comboCounter.ResetCombo();
                 playerMissedAttackCounter.CountUp();
-                if (playerMissedAttackCounter.IsOverThreshold) commentSpawner.SpawnCommentByType(CommentEnum.Spiky); 
+                if (playerMissedAttackCounter.IsOverThreshold) commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
+                if (args.EnemyMono != null)
+                {
+                    playerAttackEffectMono.Defenced();
+                    soundManager.PlaySe(SeEnum.AttackDeflect);
+                }
 
                 return;
             }
@@ -143,6 +141,7 @@ namespace Daipan.Player.Scripts
             )
         {
             if (args.IsTargetEnemy) return;
+            if (args.EnemyMono != null && args.EnemyMono.EnemyEnum.IsTotem() == true) return;  // TotemはOnAttackedで判定している
             
             var spawnPercent = playerAntiCommentParamData.GetAntiCommentPercentOnMissAttacks(waveState.CurrentWaveIndex);
             

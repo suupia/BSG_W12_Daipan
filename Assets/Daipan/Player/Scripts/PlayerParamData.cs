@@ -49,7 +49,8 @@ namespace Daipan.Player.Scripts
             }
             return _playerParamManager.playerAntiCommentParam.antiCommentPercentOnMissAttacks[index];
         }
-        
+
+        public double GetFinalBossAntiCommentPercentOnMissAttacks() => _playerParamManager.playerAntiCommentParam.finalBossAntiCommentPercentOnMissAttacks;
         public int GetMissedAttackCountForAntiComment() => _playerParamManager.playerAntiCommentParam.missedAttackCountForAntiComments;
     }
 }

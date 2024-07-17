@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyLevelDesignParam:
     increaseViewerOnEnemyKill: 5
-    increaseIrritationGaugeOnSpecialEnemyKill: 25
-    currentKillAmount: 30
+    increaseIrritationGaugeOnSpecialEnemyKill: 35
+    currentKillAmount: 18
   enemyParams:
   - enemyEnum: 1
     enemyAttackParam:
@@ -175,7 +175,7 @@ MonoBehaviour:
       spawnRatio: 20
     enemyAnimatorParam:
       animatorController: {fileID: 0}
-      bodyColor: {r: 0.40730688, g: 0.707578, b: 0.764151, a: 1}
+      bodyColor: {r: 0.41568628, g: 0.6862745, b: 0.80784315, a: 1}
       eyeColor: {r: 0.8862745, g: 0.972549, b: 0.8901961, a: 1}
       eyeBallColor: {r: 0.1372549, g: 1, b: 0.30100578, a: 1}
       lineColor: {r: 0.43529412, g: 0.34117648, b: 0.41960785, a: 1}
@@ -216,26 +216,26 @@ MonoBehaviour:
       eyeBallColor: {r: 0.1372549, g: 1, b: 0.30100578, a: 1}
       lineColor: {r: 0.43529412, g: 0.34117648, b: 0.41960785, a: 1}
   enemyWaveParams:
-  - spawnEnemyCount: 35
+  - spawnEnemyCount: 30
     waveIntervalSec: 5
-    spawnIntervalSec: 1
-    moveSpeedRate: 1
-    spawnBossPercent: 5
+    spawnIntervalSec: 1.4
+    moveSpeedRate: 1.1
+    spawnBossPercent: 3
     spawnSpecialPercent: 0
-    spawnTotemPercent: 10
+    spawnTotemPercent: 100
     spawnFinalBossPercent: 0
   - spawnEnemyCount: 40
     waveIntervalSec: 5
-    spawnIntervalSec: 0.9
-    moveSpeedRate: 1.2
-    spawnBossPercent: 15
+    spawnIntervalSec: 1.2
+    moveSpeedRate: 1.3
+    spawnBossPercent: 18
     spawnSpecialPercent: 10
-    spawnTotemPercent: 10
+    spawnTotemPercent: 15
     spawnFinalBossPercent: 0
   - spawnEnemyCount: 45
     waveIntervalSec: 5
-    spawnIntervalSec: 0.8
-    moveSpeedRate: 1.5
+    spawnIntervalSec: 0.9
+    moveSpeedRate: 1.6
     spawnBossPercent: 25
     spawnSpecialPercent: 20
     spawnTotemPercent: 30

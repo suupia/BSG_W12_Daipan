@@ -335,6 +335,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2618412036318428857}
   - component: {fileID: 29944407497764037}
+  - component: {fileID: 1339249321957818899}
   m_Layer: 8
   m_Name: Tower
   m_TagString: Untagged
@@ -352,7 +353,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.95, y: 0.85, z: 0.85}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2317507978793509795}
@@ -371,6 +372,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerViewMono: {fileID: 2205246946638565881}
+--- !u!210 &1339249321957818899
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6408784214592250602}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
+  m_SortAtRoot: 0
 --- !u!1 &8662967730334091610
 GameObject:
   m_ObjectHideFlags: 0

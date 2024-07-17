@@ -10,6 +10,7 @@ namespace Daipan.Player.Interfaces
     {
         event EventHandler<OnHitEventArgs>? OnHit;
         void Move();
+        void Defenced();
     } 
     public record OnHitEventArgs(AbstractEnemyMono? EnemyMono, bool IsTargetEnemy);
 

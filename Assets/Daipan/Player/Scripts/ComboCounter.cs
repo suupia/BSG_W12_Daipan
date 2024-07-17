@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Player.LevelDesign.Scripts;
 using Daipan.Stream.Scripts;
+using UnityEngine;
 
 namespace Daipan.Player.Scripts
 {

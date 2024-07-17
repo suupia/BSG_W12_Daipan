@@ -28,25 +28,25 @@ namespace Daipan.Enemy.Scripts
             _enemyLevelDesignParamData = enemyLevelDesignParamData;
         }
 
-
         public Hp OnAttacked(Hp hp, IPlayerParamData playerParamData)
         {
-            var afterHp  = new Hp(hp.Value - playerParamData.GetAttack()); 
+            var afterHp = new Hp(hp.Value - playerParamData.GetAttack());
             if (!IsSameColor(_enemyEnum, playerParamData.PlayerEnum()))
             {
-                Debug.Log($"_enemyEnum: {_enemyEnum}, playerParamData.PlayerEnum(): {playerParamData.PlayerEnum()} IsSameColor: {IsSameColor(_enemyEnum, playerParamData.PlayerEnum())}");
+                Debug.Log(
+                    $"_enemyEnum: {_enemyEnum}, playerParamData.PlayerEnum(): {playerParamData.PlayerEnum()} IsSameColor: {IsSameColor(_enemyEnum, playerParamData.PlayerEnum())}");
 
                 // 違う色のときに倒したのなら、イライラゲージを増やす
                 if (afterHp.Value <= 0)
                     _irritatedValue.IncreaseValue(_enemyLevelDesignParamData
                         .GetIncreaseIrritationGaugeOnSpecialEnemyKill());
+
             }
 
             return afterHp;
         }
 
-
-        static bool IsSameColor(EnemyEnum enemyEnum, PlayerColor playerColor)
+        public static bool IsSameColor(EnemyEnum enemyEnum, PlayerColor playerColor)
         {
             return enemyEnum switch
             {

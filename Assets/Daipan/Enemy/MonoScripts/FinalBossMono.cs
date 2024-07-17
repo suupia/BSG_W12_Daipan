@@ -39,17 +39,18 @@ namespace Daipan.Enemy.MonoScripts
             protected set
             {
                 _hp = value;
-                if (_hp.Value <= 0) Die(this, isDaipaned: false);
+                if (_hp.Value <= 0) Die();
             }
         }
 
         void Update()
         {
-            IsReachedPlayer = _enemyMove.MoveUpdate(_playerHolder.PlayerMono.transform,
-                _finalBossParamData, finalBossViewMono); 
+            if (Hp.Value != 0)
+                IsReachedPlayer = _enemyMove.MoveUpdate(_playerHolder.PlayerMono.transform,
+                    _finalBossParamData, finalBossViewMono); 
 
             if (transform.position.x < _enemySpawnPoint.GetEnemyDespawnedPoint().x)
-                Die(this, isDaipaned: false);
+                Die();
 
             Debug.Log($"FinalBossMono Hp.Value: {Hp.Value}");
             finalBossViewMono?.SetHpGauge(Hp.Value, _finalBossParamData.GetMaxHp());
@@ -88,15 +89,18 @@ namespace Daipan.Enemy.MonoScripts
             Hp = new Hp(_finalBossParamData.GetMaxHp());
         }
 
-        public event EventHandler<DiedEventArgs>? OnDied
+        public event EventHandler<DiedEventArgs>? OnDiedEvent
         {
             add => _enemyDie.OnDied += value;
             remove => _enemyDie.OnDied -= value;
         }
 
+        public event EventHandler<IPlayerParamData>? OnAttackedEvent;
+
         public override void OnAttacked(IPlayerParamData playerParamData)
         {
             Hp = _enemyOnAttacked.OnAttacked(Hp, playerParamData);
+            OnAttackedEvent?.Invoke(this, playerParamData);
         }
 
         public override void OnDaipaned()
@@ -108,7 +112,7 @@ namespace Daipan.Enemy.MonoScripts
             finalBossViewMono?.DaipanHit();
         }
 
-        void Die(AbstractEnemyMono enemyMono, bool isDaipaned = false)
+        void Die(bool isDaipaned = false)
         {
             _enemyCluster.Remove(this);
             _finalBossActionDecider.Dispose();
