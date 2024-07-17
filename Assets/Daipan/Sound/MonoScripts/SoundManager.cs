@@ -49,6 +49,8 @@ namespace Daipan.Sound.MonoScripts
             bgmParam.audioSource.volume = 0;
             bgmParam.audioSource.Play();
             bgmParam.audioSource.DOFade(1, fadeSec);
+            
+            Debug.Log($"Play BGM: {bgmEnum} ,volume: {bgmParam.audioSource.volume}");
         }
 
         public void PlaySe(SeEnum seEnum)
@@ -84,7 +86,7 @@ namespace Daipan.Sound.MonoScripts
     {
         Title,
         Tutorial,
-        Battle,
+        Daipan,
         EndScene,
     }
 

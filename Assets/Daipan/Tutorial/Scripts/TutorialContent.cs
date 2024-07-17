@@ -6,6 +6,8 @@ using Daipan.Comment.Scripts;
 using Daipan.Enemy.Scripts;
 using Daipan.InputSerial.Scripts;
 using Daipan.Option.Scripts;
+using Daipan.Sound.Interfaces;
+using Daipan.Sound.MonoScripts;
 using Daipan.Stream.Scripts;
 using Daipan.Streamer.MonoScripts;
 using Daipan.Tutorial.Interfaces;
@@ -114,16 +116,19 @@ namespace Daipan.Tutorial.Scripts
     {
         readonly DownloadGaugeViewMono _gaugeViewMono;
         readonly BlackScreenViewMono _blackScreenViewMono;
+        readonly ISoundManager _soundManager;
         const float FillAmountPerSec = 0.2f;
         bool Completed { get; set; }
 
         public FadeInTutorialStart(
             DownloadGaugeViewMono gaugeViewMono
             , BlackScreenViewMono blackScreenViewMono
+            , ISoundManager soundManager
         )
         {
             _gaugeViewMono = gaugeViewMono;
             _blackScreenViewMono = blackScreenViewMono;
+            _soundManager = soundManager;
         }
 
         public override void Execute()
@@ -141,6 +146,7 @@ namespace Daipan.Tutorial.Scripts
                             _blackScreenViewMono.FadeOut(1, () =>
                             {
                                 _gaugeViewMono.Hide();
+                                _soundManager.PlayBgm(BgmEnum.Tutorial);
                                 Completed = true;
                             });
                     }));

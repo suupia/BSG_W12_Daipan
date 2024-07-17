@@ -33,6 +33,7 @@ using Daipan.Option.Interfaces;
 using Daipan.Option.Scripts;
 using Daipan.Sound.Interfaces;
 using Daipan.Sound.MonoScripts;
+using Daipan.Sound.Scripts;
 using UnityEngine;
 using UnityEngine.Serialization;
 using VContainer;
@@ -302,6 +303,7 @@ namespace Daipan.Daipan
 
             // Sound
             RegisterSound(builder);
+            builder.Register<DaipanSoundStarter>(Lifetime.Scoped).As<IStart>();
             
             // Updater
             builder.UseEntryPoints(Lifetime.Scoped, entryPoints =>
