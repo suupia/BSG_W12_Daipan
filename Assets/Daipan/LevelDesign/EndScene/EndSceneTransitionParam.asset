@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: EndSceneTransitionParam
   m_EditorClassIdentifier: 
   viewerCountThresholdForInsideTheBoxEnd: 50000
-  viewerCountThresholdForThanksgivingEnd: 230000
+  viewerCountThresholdForThanksgivingEnd: 250000
   hpPercentThresholdForNoobGamerEnd: 0
-  maxComboCountThresholdForProGamerEnd: 140
+  maxComboCountThresholdForProGamerEnd: 170
   daipanCountThresholdForSacredLadyEnd: 0
   daipanCountThresholdForBacklashEnd: 10
-  viewerCountThresholdForHeibonEndMin: 100000
+  viewerCountThresholdForHeibonEndMin: 50000
   viewerCountThresholdForHeibonEndMax: 250000

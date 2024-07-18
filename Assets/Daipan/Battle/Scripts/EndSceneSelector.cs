@@ -34,6 +34,7 @@ namespace Daipan.Battle.scripts
             EndSceneEnum.ProGamer,
             EndSceneEnum.Hakononaka,
             EndSceneEnum.Kansyasai,
+            EndSceneEnum.Heibon,
             EndSceneEnum.Genkai
         };
 
