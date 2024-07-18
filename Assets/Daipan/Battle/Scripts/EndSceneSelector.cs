@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using Daipan.Core.Interfaces;
+using Daipan.End.MonoScripts;
 using Daipan.End.Scripts;
 using Daipan.LevelDesign.EndScene;
 using Daipan.Player.MonoScripts;
@@ -67,9 +68,9 @@ namespace Daipan.Battle.scripts
                 {
                     EndSceneStatic.EndSceneEnum = judgeSceneName;
                     SceneTransition.TransitioningScene(SceneName.EndScene);
-                    // BGMのフェードアウトはシーンを跨ぐとDoTweeenが破棄されていルカもしれなくてうまくできないので、遷移先のシーンで止める(EndMono)
                     _soundManager.PlaySe(ConvertToSeEnum(judgeSceneName));
-                    Debug.Log($"Transit to {judgeSceneName}, ConvertToSeEnum: {ConvertToSeEnum(judgeSceneName)}"); 
+                    Debug.Log($"Transit to {judgeSceneName}, ConvertToSeEnum: {ConvertToSeEnum(judgeSceneName)}");
+                    EndSceneHolder.EndSceneEnum = judgeSceneName;  // todo:かなりまずいけど一旦
                     return;
                 }
 

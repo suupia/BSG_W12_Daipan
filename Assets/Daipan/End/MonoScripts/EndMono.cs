@@ -1,4 +1,5 @@
 #nullable enable
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Daipan.Battle.scripts;
@@ -10,15 +11,25 @@ namespace Daipan.End.MonoScripts
 {
     public class EndMono : MonoBehaviour
     {
+        [SerializeField] AudioSource audioSource = null!;
         ISoundManager _soundManager = null!;
+        [SerializeField] List<EndSceneSEParam> _endSceneSEParams = new List<EndSceneSEParam>();
 
         [Inject]
         public void Initialize(ISoundManager soundManager)
         {
             _soundManager = soundManager;
-            // _soundManager.FadOutBgm(0.5f);
             _soundManager.StopAllBgm();
             Debug.Log("EndMono is created");
+            
+            foreach (var endSceneSEParam in _endSceneSEParams)
+            {
+                if (endSceneSEParam.endSceneEnum == EndSceneHolder.EndSceneEnum)
+                {
+                    audioSource.clip = endSceneSEParam.audioClip;
+                    audioSource.Play();
+                }
+            }
         }
         
         void Start()
@@ -38,5 +49,16 @@ namespace Daipan.End.MonoScripts
             }
         }
     }
- 
+    
+    [Serializable]
+    public sealed class EndSceneSEParam
+    {
+        public EndSceneEnum endSceneEnum;
+        public AudioClip audioClip = null!;
+    }
+
+    public static class EndSceneHolder
+    {
+        public static EndSceneEnum EndSceneEnum { get; set; }
+    }
 }
