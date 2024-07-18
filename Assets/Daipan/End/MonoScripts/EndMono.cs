@@ -30,6 +30,9 @@ namespace Daipan.End.MonoScripts
                     audioSource.Play();
                 }
             }
+
+
+            UnityEngine.Time.timeScale = 1; // timeScaleを戻す
         }
         
         void Start()

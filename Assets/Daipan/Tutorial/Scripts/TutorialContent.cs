@@ -58,6 +58,7 @@ namespace Daipan.Tutorial.Scripts
                 .Subscribe(_ =>
                 {
                     Debug.Log("Displaying black screen with download progress...");
+                    Debug.Log($"_gaugeViewMono.CurrentFillAmount: {_gaugeViewMono.CurrentFillAmount}");
                     _gaugeViewMono.SetGaugeValue(_gaugeViewMono.CurrentFillAmount + FillAmountPerSec * Time.deltaTime);
                     if (_gaugeViewMono.CurrentFillAmount >= 0.5f) Completed = true;
                 }));
