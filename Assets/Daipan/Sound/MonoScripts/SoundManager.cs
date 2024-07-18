@@ -78,7 +78,6 @@ namespace Daipan.Sound.MonoScripts
             bgmParam.audioSource.volume = 0;
             bgmParam.audioSource.Play();
             bgmParam.audioSource.DOFade(_bgmVolume, fadeSec);
-            
             Debug.Log($"Play BGM: {bgmEnum} ,volume: {bgmParam.audioSource.volume}");
         }
 

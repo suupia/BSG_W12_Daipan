@@ -12,8 +12,8 @@ namespace Daipan.End.MonoScripts
     public class EndMono : MonoBehaviour
     {
         [SerializeField] AudioSource audioSource = null!;
+        [SerializeField] List<EndSceneSEParam> _endSceneSEParams = new ();
         ISoundManager _soundManager = null!;
-        [SerializeField] List<EndSceneSEParam> _endSceneSEParams = new List<EndSceneSEParam>();
 
         [Inject]
         public void Initialize(ISoundManager soundManager)
@@ -22,11 +22,11 @@ namespace Daipan.End.MonoScripts
             _soundManager.StopAllBgm();
             Debug.Log("EndMono is created");
             
-            foreach (var endSceneSEParam in _endSceneSEParams)
+            foreach (var endSceneSeParam in _endSceneSEParams)
             {
-                if (endSceneSEParam.endSceneEnum == EndSceneHolder.EndSceneEnum)
+                if (endSceneSeParam.endSceneEnum == EndSceneHolder.EndSceneEnum)
                 {
-                    audioSource.clip = endSceneSEParam.audioClip;
+                    audioSource.clip = endSceneSeParam.audioClip;
                     audioSource.Play();
                 }
             }
