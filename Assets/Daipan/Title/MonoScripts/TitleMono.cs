@@ -1,6 +1,8 @@
+#nullable enable
 using System.Collections;
 using System.Collections.Generic;
 using Daipan.Battle.scripts;
+using Daipan.Enemy.Scripts;
 using Daipan.Sound.Interfaces;
 using Daipan.Sound.MonoScripts;
 using Daipan.Option.Interfaces;
@@ -13,6 +15,7 @@ public class TitleMono : MonoBehaviour
 {
     InputSerialManager _inputSerialManager;
     IInputOption _inputOption;
+    SamePressChecker _samePressChecker = null!;
 
     [Inject]
     public void Initialize(ISoundManager soundManager,
@@ -24,6 +27,8 @@ public class TitleMono : MonoBehaviour
 
         _inputSerialManager = inputSerialManager;
         _inputOption = inputOption;
+        _samePressChecker = new SamePressChecker(0.5f, 3,
+            () => SceneTransition.TransitioningScene(SceneName.DaipanScene), () => { });
     }
 
 
@@ -48,6 +53,11 @@ public class TitleMono : MonoBehaviour
             {
                 SceneTransition.TransitioningScene(SceneName.DaipanScene);
             }
+            
+            // 3つのボタンを同時に推したらチュートリアルをスキップする
+            if(_inputSerialManager.GetButtonRed()) _samePressChecker.SetOn(0);
+            if(_inputSerialManager.GetButtonBlue()) _samePressChecker.SetOn(1);
+            if(_inputSerialManager.GetButtonYellow()) _samePressChecker.SetOn(2);
         }
     }
 
