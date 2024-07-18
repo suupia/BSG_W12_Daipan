@@ -12,6 +12,9 @@ public class OptionSEViewMono : MonoBehaviour
 {
     [SerializeField] GameObject cursorObject = null!;
     [SerializeField] Image volume = null!;
+    [SerializeField] GameObject triangleCursor = null!;
+    [SerializeField] RectTransform triangleLeft = null!;
+    [SerializeField] RectTransform triangleRight = null!;
 
     [Inject]
     public void Initialize(OptionPopUpMain optionPopUpMain)
@@ -34,5 +37,19 @@ public class OptionSEViewMono : MonoBehaviour
     private void Update()
     {
         volume.fillAmount = SoundManager.SeVolume / 7;
+        float cursorPositionRatio = (SoundManager.SeVolume - 1) / 6f;
+        if (cursorPositionRatio < 0)
+        {
+            triangleCursor.SetActive(false);
+        }
+        else
+        {
+            triangleCursor.SetActive(true);
+        }
+
+        triangleCursor.GetComponent<RectTransform>().position
+            = triangleLeft.position * (1 - cursorPositionRatio)
+            + triangleRight.position * cursorPositionRatio;
+
     }
 }
