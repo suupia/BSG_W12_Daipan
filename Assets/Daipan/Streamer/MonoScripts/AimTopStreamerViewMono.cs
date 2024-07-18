@@ -19,13 +19,14 @@ namespace Daipan.Streamer.MonoScripts
 
         void Awake()
         {
-            viewObject.SetActive(false); 
+            viewObject.SetActive(false);
         }
 
         public void Show()
         {
-            aimTopStreamerText.text = $"目指せ！神配信者！";
-            viewObject.SetActive(true);
+            // なしになった。
+            // aimTopStreamerText.text = $"目指せ！神配信者！";
+            // viewObject.SetActive(true);
         }
 
         public void Hide()
