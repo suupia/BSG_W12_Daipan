@@ -4,6 +4,8 @@ using Daipan.InputSerial.Scripts;
 using Daipan.Player.Interfaces;
 using Daipan.Player.MonoScripts;
 using Daipan.Stream.Scripts;
+using Daipan.Option.Interfaces;
+using Daipan.Option.Scripts;
 using Daipan.Tutorial.Scripts;
 using UnityEngine;
 
@@ -11,10 +13,12 @@ namespace Daipan.Player.Scripts
 {
     public class PlayerInputTutorial : IPlayerInput
     {
-        readonly InputSerialManager _inputSerialManager; 
+        readonly InputSerialManager _inputSerialManager;
         readonly IAttackExecutor _attackExecutor;
         readonly DaipanExecutor _daipanExecutor;
         readonly SpeechEventManager _speechEventManager;
+        readonly IInputOption _inputOption;
+
         PlayerMono? _playerMono;
 
         public PlayerInputTutorial(
@@ -22,17 +26,19 @@ namespace Daipan.Player.Scripts
             , IAttackExecutor attackExecutor
             , DaipanExecutor daipanExecutor
             , SpeechEventManager speechEventManager
+            , IInputOption inputOption
         )
         {
             _inputSerialManager = inputSerialManager;
             _attackExecutor = attackExecutor;
             _daipanExecutor = daipanExecutor;
             _speechEventManager = speechEventManager;
+            _inputOption = inputOption;
         }
 
         public void SetPlayerMono(
             PlayerMono playerMono
-            ,List<AbstractPlayerViewMono?> playerViewMonos
+            , List<AbstractPlayerViewMono?> playerViewMonos
             )
         {
             _playerMono = playerMono;
@@ -44,17 +50,27 @@ namespace Daipan.Player.Scripts
         /// </summary>
         public void Update()
         {
-            Debug.Log($"_speechEventManager.GetSpeechEventEnum() = {_speechEventManager.GetSpeechEventEnum()}, CurrentEvent = {_speechEventManager.CurrentEvent}, Message = {_speechEventManager.CurrentEvent?.Message}"); 
-            switch (_speechEventManager.GetSpeechEventEnum())
+            OpenMenuUpdate();
+
+            Debug.Log($"_speechEventManager.GetSpeechEventEnum() = {_speechEventManager.GetSpeechEventEnum()}, CurrentEvent = {_speechEventManager.CurrentEvent}, Message = {_speechEventManager.CurrentEvent?.Message}");
+
+            if (_inputOption.IsOpening)
             {
-                case SpeechEventEnum.Listening:
-                    TutorialListeningUpdate();
-                    break;
-                case SpeechEventEnum.Practical:
-                    TutorialPracticalUpdate();
-                    break;
-                case SpeechEventEnum.None:
-                    break;
+                OptionUpdate();
+            }
+            else
+            {
+                switch (_speechEventManager.GetSpeechEventEnum())
+                {
+                    case SpeechEventEnum.Listening:
+                        TutorialListeningUpdate();
+                        break;
+                    case SpeechEventEnum.Practical:
+                        TutorialPracticalUpdate();
+                        break;
+                    case SpeechEventEnum.None:
+                        break;
+                }
             }
         }
 
@@ -63,9 +79,9 @@ namespace Daipan.Player.Scripts
             if (_inputSerialManager.GetButtonAny())
             {
                 _speechEventManager.MoveNext();
-            } 
+            }
         }
-        
+
         void TutorialPracticalUpdate()
         {
             if (_playerMono == null)
@@ -73,7 +89,7 @@ namespace Daipan.Player.Scripts
                 Debug.LogWarning("PlayerMono is not set");
                 return;
             }
-            
+
             if (_inputSerialManager.GetButtonRed())
             {
                 Debug.Log("Wが押されたよ");
@@ -96,7 +112,24 @@ namespace Daipan.Player.Scripts
             {
                 _daipanExecutor.DaiPan();
                 _speechEventManager.MoveNext();
-            } 
+            }
+        }
+        void OpenMenuUpdate()
+        {
+            if (_inputSerialManager.GetButtonMenu())
+            {
+                if (!_inputOption.IsOpening) _inputOption.OpenOption();
+                else _inputOption.CloseOption();
+            }
+
+        }
+        void OptionUpdate()
+        {
+
+            if (_inputSerialManager.GetButtonRed()) _inputOption.MoveCursor(MoveCursorDirectionEnum.Down);
+            if (_inputSerialManager.GetButtonBlue()) _inputOption.MoveCursor(MoveCursorDirectionEnum.Left);
+            if (_inputSerialManager.GetButtonYellow()) _inputOption.MoveCursor(MoveCursorDirectionEnum.Right);
+            if (Input.GetKeyDown(KeyCode.Return)) _inputOption.Select();
         }
     }
 }

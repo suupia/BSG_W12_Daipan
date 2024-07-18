@@ -16,6 +16,7 @@ using Daipan.Stream.Scripts;
 using Daipan.Stream.Scripts.Utility;
 using Daipan.Tower.Scripts;
 using Daipan.Utility.Scripts;
+using Daipan.Option.MonoScripts;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -28,5 +29,11 @@ public sealed class TitleScope : LifetimeScope
         
         // Sound
         DaipanScope.RegisterSound(builder);
+
+        // Option
+        DaipanScope.RegisterOption(builder);
+
+        // Input
+        DaipanScope.RegisterInputSerial(builder);
     }
 }
