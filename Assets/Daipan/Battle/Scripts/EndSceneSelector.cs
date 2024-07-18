@@ -6,6 +6,8 @@ using Daipan.End.Scripts;
 using Daipan.LevelDesign.EndScene;
 using Daipan.Player.MonoScripts;
 using Daipan.Player.Scripts;
+using Daipan.Sound.Interfaces;
+using Daipan.Sound.MonoScripts;
 using Daipan.Stream.Scripts;
 using R3;
 using UnityEngine;
@@ -19,6 +21,7 @@ namespace Daipan.Battle.scripts
         readonly ViewerNumber _viewerNumber;
         readonly DaipanExecutor _daipanExecutor;
         readonly ComboCounter _comboCounter;
+        readonly ISoundManager _soundManager;
         IDisposable? _disposable;
 
         // この順番でシーン遷移の判定を行っていく
@@ -38,12 +41,14 @@ namespace Daipan.Battle.scripts
             , ViewerNumber viewerNumber
             , DaipanExecutor daipanExecutor
             , ComboCounter comboCounter
+            , ISoundManager soundManager
         )
         {
             _endSceneTransitionParam = endSceneTransitionParam;
             _viewerNumber = viewerNumber;
             _daipanExecutor = daipanExecutor;
             _comboCounter = comboCounter;
+            _soundManager = soundManager;
         }
         
 
@@ -62,6 +67,9 @@ namespace Daipan.Battle.scripts
                 {
                     EndSceneStatic.EndSceneEnum = judgeSceneName;
                     SceneTransition.TransitioningScene(SceneName.EndScene);
+                    _soundManager.FadOutBgm(0.5f);
+                    _soundManager.PlaySe(ConvertToSeEnum(judgeSceneName));
+                    Debug.Log($"Transit to {judgeSceneName}, ConvertToSeEnum: {ConvertToSeEnum(judgeSceneName)}"); 
                     return;
                 }
 
@@ -100,6 +108,30 @@ namespace Daipan.Battle.scripts
             if (!result) Debug.LogWarning($"TransitionCondition is not satisfied: {sceneName}");
             return result;
         }
+        public static SeEnum ConvertToSeEnum(EndSceneEnum endScene)
+        {
+            switch (endScene)
+            {
+                case EndSceneEnum.Hakononaka:
+                    return SeEnum.Hakononaka;
+                case EndSceneEnum.Kansyasai:
+                    return SeEnum.Kansyasai;
+                case EndSceneEnum.NoobGamer:
+                    return SeEnum.NoobGamer;
+                case EndSceneEnum.ProGamer:
+                    return SeEnum.ProGamer;
+                case EndSceneEnum.Seijo:
+                    return SeEnum.Seijo;
+                case EndSceneEnum.Enjou:
+                    return SeEnum.Enjou;
+                case EndSceneEnum.Genkai:
+                    return SeEnum.Genkai;
+                case EndSceneEnum.Heibon:
+                    return SeEnum.Heibon;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(endScene), endScene, null);
+            }
+        }
         public void Dispose()
         {
             _disposable?.Dispose();
@@ -109,6 +141,7 @@ namespace Daipan.Battle.scripts
             Dispose();
         }
     }
+
 
     public enum EndSceneEnum
     {

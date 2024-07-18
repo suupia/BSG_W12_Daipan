@@ -91,14 +91,17 @@ namespace Daipan.Sound.MonoScripts
                 return;
             }
 
+            seParam.audioSource.clip = seParam.audioClip;
             seParam.audioSource.volume = _seVolume;
             seParam.audioSource.Play();
+            Debug.Log($"Play SE: {seEnum}, volume: {seParam.audioSource.volume}, seParam.seEnum: {seParam.seEnum}, audioClip.name: {seParam.audioClip.name}");
         }
         
         public void FadOutBgm(float fadeSec)
         {
             foreach (var param in bgmParams)
             {
+                Debug.Log($"param : {param.bgmEnum}, {param.audioSource.isPlaying}");
                 if (param.audioSource.isPlaying)
                 {
                     param.audioSource.DOFade(0, fadeSec).OnComplete(() => param.audioSource.Stop());
@@ -139,5 +142,15 @@ namespace Daipan.Sound.MonoScripts
         AttackDeflect,
         Attack,
         Daipan,
+        
+        // EndScene
+        Hakononaka,  // 箱の中END
+        Kansyasai,  // 配信者ちゃん感謝祭END
+        NoobGamer,     // ゲーム下手配信者END
+        ProGamer,      // プロゲーマーEND
+        Seijo,    // 聖女END
+        Enjou,      // 炎上END
+        Genkai, // 限界配信者END
+        Heibon, // 平凡な配信者END
     }
 }
