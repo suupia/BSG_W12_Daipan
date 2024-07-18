@@ -2197,3 +2197,6 @@ MonoBehaviour:
   comboCountText: {fileID: 2216955212407850616}
   tankYouText: {fileID: 4424007824100226433}
   pushEnterText: {fileID: 9126970028555256370}
+  successBackground: {fileID: 21300000, guid: 04f1c5fc9606c4f7b8fb3f6b33c184c7, type: 3}
+  failureBackground: {fileID: 21300000, guid: e42d903def64b4f5288fece21738dab3, type: 3}
+  background: {fileID: 5712304764369138122}

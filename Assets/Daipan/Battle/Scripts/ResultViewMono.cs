@@ -7,6 +7,7 @@ using Daipan.Stream.Scripts;
 using R3;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using VContainer;
 
 namespace Daipan.Battle.scripts
@@ -24,6 +25,10 @@ namespace Daipan.Battle.scripts
         [SerializeField] TextMeshProUGUI comboCountText = null!;
         [SerializeField] TextMeshProUGUI tankYouText = null!;
         [SerializeField] TextMeshProUGUI pushEnterText = null!;
+        
+        [SerializeField] Sprite successBackground = null!;
+        [SerializeField] Sprite failureBackground = null!;
+        [SerializeField] Image background = null!;
 
         LanguageConfig _languageConfig = null!;
         void Awake()
@@ -65,6 +70,15 @@ namespace Daipan.Battle.scripts
                 return;
             }
             playerHpText.text = $"{playerMono.Hp.Value} / {playerMono.MaxHp}";  // 本当はObserveしたいけど生成順序の関係でここで取得
+
+            if (playerMono.Hp.Value <= 0)
+            {
+                background.sprite = failureBackground;
+            }
+            else
+            {
+                background.sprite = successBackground;
+            }
 
             viewerNumberExplainText.text = _languageConfig.CurrentLanguage switch
             {
