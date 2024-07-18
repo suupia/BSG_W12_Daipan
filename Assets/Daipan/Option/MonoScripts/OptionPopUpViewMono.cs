@@ -15,6 +15,7 @@ namespace Daipan.Option.MonoScripts
         [Inject]
         public void Initialize(OptionController optionController)
         {
+            // ここCurrentContentが変化したときに実行,IsOpeningだったらひらくの方がいいかも
             Observable.EveryValueChanged(optionController, x => x.IsOpening).
                 Subscribe(x =>
                 {
