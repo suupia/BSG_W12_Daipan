@@ -60,7 +60,7 @@ namespace Daipan.Streamer.MonoScripts
             transform.DOScale(Vector3.one, DurationSec).OnComplete(() =>
             {
                 speechText.text = text;
-                SoundManager.Instance?.PlaySe(SeEnum.Text);
+                if(text != string.Empty) SoundManager.Instance?.PlaySe(SeEnum.Text);
             });
         }
 
