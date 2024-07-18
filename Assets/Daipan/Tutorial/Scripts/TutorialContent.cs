@@ -186,6 +186,7 @@ namespace Daipan.Tutorial.Scripts
         {
             Debug.Log("Streamer wakes up...");
             Debug.Log("Cat speaks...");
+            UnityEngine.Object.FindObjectOfType<SpeechBubbleMono>().IsStartTutorial = true;
             _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildUICatIntroduce(_languageConfig.CurrentLanguage));
             
             _soundManager.PlayBgm(BgmEnum.Tutorial);

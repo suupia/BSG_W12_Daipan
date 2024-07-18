@@ -41,6 +41,7 @@ public class TitleMono : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Return))
             {
                 SceneTransition.TransitioningScene(SceneName.TutorialScene);
+                SoundManager.Instance.PlaySe(SeEnum.Decide);
             }
 
             if (Input.GetKeyDown(KeyCode.D))
