@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Daipan.Sound.Interfaces;
 using DG.Tweening;
+using R3;
 using UnityEngine;
 
 namespace Daipan.Sound.MonoScripts
 {
-    public sealed class SoundManager : MonoBehaviour, ISoundManager
+    public sealed class SoundManager : MonoBehaviour, ISoundManager , IDisposable
     {
         [SerializeField] List<BgmParam> bgmParams = null!;
         [SerializeField] List<SeParam> seParams = null!;
@@ -26,6 +27,8 @@ namespace Daipan.Sound.MonoScripts
             get => (int)(_seVolume * 7);
         }
         static float _seVolume;
+        
+        readonly CompositeDisposable _disposable = new ();
 
         public void Initialize()
         {
@@ -51,6 +54,18 @@ namespace Daipan.Sound.MonoScripts
             }
             BgmVolume = 4;
             SeVolume = 4;
+            
+            _disposable.Add(Observable.EveryUpdate().Subscribe(_ =>
+            {
+                foreach (var bgmParam in bgmParams)
+                {
+                    bgmParam.audioSource.volume = _bgmVolume;
+                }
+                foreach (var seParam in seParams)
+                {
+                    seParam.audioSource.volume = _seVolume;
+                }
+            }));
         }
 
         public void PlayBgm(BgmEnum bgmEnum)
@@ -118,6 +133,15 @@ namespace Daipan.Sound.MonoScripts
                     param.audioSource.Stop();
                 }
             }
+        }
+        
+        public void Dispose()
+        {
+            _disposable.Dispose();
+        }
+        ~SoundManager()
+        {
+            Dispose();
         }
     }
 
