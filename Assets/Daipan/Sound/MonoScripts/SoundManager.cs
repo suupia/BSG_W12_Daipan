@@ -187,5 +187,8 @@ namespace Daipan.Sound.MonoScripts
         Enjou,      // 炎上END
         Genkai, // 限界配信者END
         Heibon, // 平凡な配信者END
+        
+        Decide,
+        
     }
 }
