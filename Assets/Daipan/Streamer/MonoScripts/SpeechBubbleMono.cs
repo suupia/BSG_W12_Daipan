@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Daipan.Sound.MonoScripts;
 using Daipan.Tutorial.Scripts;
 using TMPro;
 using UnityEngine;
@@ -55,6 +56,7 @@ namespace Daipan.Streamer.MonoScripts
             transform.DOScale(Vector3.one, DurationSec).OnComplete(() =>
             {
                 speechText.text = text;
+                SoundManager.Instance?.PlaySe(SeEnum.Text);
             });
         }
 

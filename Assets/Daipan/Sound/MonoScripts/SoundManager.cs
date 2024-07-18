@@ -189,6 +189,6 @@ namespace Daipan.Sound.MonoScripts
         Heibon, // 平凡な配信者END
         
         Decide,
-        
+        Text,
     }
 }
