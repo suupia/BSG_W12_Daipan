@@ -105,7 +105,7 @@ namespace Daipan.Player.Scripts
                 //  HPに変化があれば、コンボ増加（ただし、Totemの判定はOnAttackedで行っている）
                 if (Math.Abs(beforeHp - afterHp) > double.Epsilon && args.EnemyMono.EnemyEnum.IsTotem() != true)
                     comboCounter.IncreaseCombo();
-                soundManager.PlaySe(SeEnum.Attack);
+                if(args.EnemyMono.EnemyEnum.IsTotem() != true) soundManager.PlaySe(SeEnum.Attack);
             }
             else
             {
