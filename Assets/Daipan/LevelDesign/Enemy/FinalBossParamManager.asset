@@ -16,12 +16,12 @@ MonoBehaviour:
     enemyParam:
       enemyEnum: 12
       enemyAttackParam:
-        attackAmount: 1
+        attackAmount: 45
         attackIntervalSec: 1
         attackRange: 5
         increaseIrritatedValueOnAttack: 10
       enemyHpParam:
-        maxHp: 500
+        maxHp: 700
       enemyMoveParam:
         moveSpeedPerSec: 0.5
       enemySpawnParam:
@@ -32,12 +32,12 @@ MonoBehaviour:
         eyeColor: {r: 0.8862745, g: 0.972549, b: 0.8901961, a: 1}
         eyeBallColor: {r: 1, g: 0.3529412, b: 0.54901963, a: 1}
         lineColor: {r: 0.43529412, g: 0.34117648, b: 0.41960785, a: 1}
-    summonActionIntervalSec: 5
+    summonActionIntervalSec: 4
     summonEnemyCount: 5
     summonEnemyIntervalSec: 0.5
     daipanHitDamagePercent: 15
-    knockBackDistance: 2.5
-    commentCount: 10
+    knockBackDistance: 2
+    commentCount: 30
     finalBossColorParams:
     - finalBossColor: 0
       bodyColor: {r: 1, g: 0.3529412, b: 0.54901963, a: 1}
