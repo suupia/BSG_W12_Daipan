@@ -20,6 +20,8 @@ namespace Daipan.Streamer.MonoScripts
         double Timer { get; set; }
         const double MinShowSec = 0.5; 
         readonly Queue<string> _speechQueue = new ();
+        
+        public bool IsStartTutorial { get; set; } // Loadingの時に吹き出しが出ないようにするために必要
 
         [Inject]
         public void Construct(SpeechEventManager speechEventManager)
@@ -38,6 +40,8 @@ namespace Daipan.Streamer.MonoScripts
         
         void Update()
         {
+            if (!IsStartTutorial) return;
+            
             Timer += Time.deltaTime;
 
             if (_speechQueue.Any())
