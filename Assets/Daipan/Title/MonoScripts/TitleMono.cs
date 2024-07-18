@@ -10,17 +10,20 @@ using Daipan.Option.Scripts;
 using UnityEngine;
 using VContainer;
 using Daipan.InputSerial.Scripts;
+using Daipan.Core.Interfaces;
 
 public class TitleMono : MonoBehaviour
 {
     InputSerialManager _inputSerialManager;
     IInputOption _inputOption;
     SamePressChecker _samePressChecker = null!;
+    IGetEnterKey _getEnterKey;
 
     [Inject]
     public void Initialize(ISoundManager soundManager,
         InputSerialManager inputSerialManager,
-        IInputOption inputOption)
+        IInputOption inputOption,
+        IGetEnterKey getEnterKey)
     {
         soundManager.PlayBgm(BgmEnum.Title);
         Debug.Log("TitleMono Initialized");
@@ -29,6 +32,8 @@ public class TitleMono : MonoBehaviour
         _inputOption = inputOption;
         _samePressChecker = new SamePressChecker(0.5f, 3,
             () => SceneTransition.TransitioningScene(SceneName.DaipanScene), () => { });
+
+        _getEnterKey = getEnterKey;
     }
 
 
@@ -43,7 +48,7 @@ public class TitleMono : MonoBehaviour
         }
         else
         {
-            if (Input.GetKeyDown(KeyCode.Return))
+            if (_getEnterKey.GetEnterKeyDown())
             {
                 SceneTransition.TransitioningScene(SceneName.TutorialScene);
                 SoundManager.Instance.PlaySe(SeEnum.Decide);
@@ -76,6 +81,6 @@ public class TitleMono : MonoBehaviour
         if (_inputSerialManager.GetButtonRed()) _inputOption.MoveCursor(MoveCursorDirectionEnum.Down);
         if (_inputSerialManager.GetButtonBlue()) _inputOption.MoveCursor(MoveCursorDirectionEnum.Left);
         if (_inputSerialManager.GetButtonYellow()) _inputOption.MoveCursor(MoveCursorDirectionEnum.Right);
-        if (Input.GetKeyDown(KeyCode.Return)) _inputOption.Select();
+        if (_getEnterKey.GetEnterKeyDown()) _inputOption.Select();
     }
 }

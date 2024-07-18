@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Daipan.Battle.scripts;
 using Daipan.Battle.Scripts;
+using Daipan.Core.Interfaces;
 using Daipan.InputSerial.Scripts;
 using Daipan.Option.Interfaces;
 using Daipan.Option.Scripts;
@@ -20,6 +21,7 @@ namespace Daipan.Player.Scripts
         readonly ResultState _resultState;
         readonly EndSceneSelector _endSceneSelector;
         readonly IInputOption _inputOption;
+        readonly IGetEnterKey _getEnterKey;
         PlayerMono? _playerMono;
 
         public PlayerInput(
@@ -29,6 +31,7 @@ namespace Daipan.Player.Scripts
             , ResultState resultState
             , EndSceneSelector endSceneSelector
             , IInputOption inputOption
+            , IGetEnterKey getEnterKey
         )
         {
             _inputSerialManager = inputSerialManager;
@@ -37,6 +40,7 @@ namespace Daipan.Player.Scripts
             _resultState = resultState;
             _endSceneSelector = endSceneSelector;
             _inputOption = inputOption;
+            _getEnterKey = getEnterKey;
         }
 
         public void SetPlayerMono(
@@ -99,12 +103,12 @@ namespace Daipan.Player.Scripts
                 _attackExecutor.FireAttackEffect(_playerMono, PlayerColor.Yellow);
             }
 
-            if (Input.GetKeyDown(KeyCode.Return)) _daipanExecutor.DaiPan();
+            if (_getEnterKey.GetEnterKeyDown()) _daipanExecutor.DaiPan();
         }
 
         void ResultUpdate()
         {
-            if (Input.GetKeyDown(KeyCode.Return))
+            if (_getEnterKey.GetEnterKeyDown())
             {
                 Debug.Log("Result中でEnterが押されたよ");
                 _endSceneSelector.TransitToEndScene();
@@ -125,7 +129,7 @@ namespace Daipan.Player.Scripts
             if (_inputSerialManager.GetButtonRed()) _inputOption.MoveCursor(MoveCursorDirectionEnum.Down);
             if (_inputSerialManager.GetButtonBlue()) _inputOption.MoveCursor(MoveCursorDirectionEnum.Left);
             if (_inputSerialManager.GetButtonYellow()) _inputOption.MoveCursor(MoveCursorDirectionEnum.Right);
-            if (Input.GetKeyDown(KeyCode.Return)) _inputOption.Select();
+            if (_getEnterKey.GetEnterKeyDown()) _inputOption.Select();
         }
         
     }

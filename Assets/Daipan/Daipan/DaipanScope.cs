@@ -217,6 +217,9 @@ namespace Daipan.Daipan
             // InputSerial
             builder.Register<SerialInput>(Lifetime.Scoped);
             builder.Register<InputSerialManager>(Lifetime.Scoped);
+
+            // Enter
+            builder.Register<GetEnterKey>(Lifetime.Scoped).As<IGetEnterKey>();
         }
 
         public static void RegisterOption(IContainerBuilder builder)

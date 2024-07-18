@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Daipan.Battle.scripts;
+using Daipan.Core.Interfaces;
 using Daipan.Sound.Interfaces;
 using UnityEngine;
 using VContainer;
@@ -14,9 +15,10 @@ namespace Daipan.End.MonoScripts
         [SerializeField] AudioSource audioSource = null!;
         [SerializeField] List<EndSceneSEParam> _endSceneSEParams = new ();
         ISoundManager _soundManager = null!;
+        IGetEnterKey _getEnterKey;
 
         [Inject]
-        public void Initialize(ISoundManager soundManager)
+        public void Initialize(ISoundManager soundManager,IGetEnterKey getEnterKey)
         {
             _soundManager = soundManager;
             _soundManager.StopAllBgm();
@@ -30,7 +32,7 @@ namespace Daipan.End.MonoScripts
                     audioSource.Play();
                 }
             }
-
+            _getEnterKey = getEnterKey;
 
             UnityEngine.Time.timeScale = 1; // timeScaleを戻す
         }
@@ -41,7 +43,7 @@ namespace Daipan.End.MonoScripts
         } 
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Return))
+            if (_getEnterKey.GetEnterKeyDown())
             {
                 SceneTransition.TransitioningScene(SceneName.TitleScene);
             }

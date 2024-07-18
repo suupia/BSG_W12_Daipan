@@ -8,6 +8,7 @@ using Daipan.Option.Interfaces;
 using Daipan.Option.Scripts;
 using Daipan.Tutorial.Scripts;
 using UnityEngine;
+using Daipan.Core.Interfaces;
 
 namespace Daipan.Player.Scripts
 {
@@ -18,6 +19,7 @@ namespace Daipan.Player.Scripts
         readonly DaipanExecutor _daipanExecutor;
         readonly SpeechEventManager _speechEventManager;
         readonly IInputOption _inputOption;
+        readonly IGetEnterKey _getEnterKey;
 
         PlayerMono? _playerMono;
 
@@ -27,6 +29,7 @@ namespace Daipan.Player.Scripts
             , DaipanExecutor daipanExecutor
             , SpeechEventManager speechEventManager
             , IInputOption inputOption
+            , IGetEnterKey getEnterKey
         )
         {
             _inputSerialManager = inputSerialManager;
@@ -34,6 +37,7 @@ namespace Daipan.Player.Scripts
             _daipanExecutor = daipanExecutor;
             _speechEventManager = speechEventManager;
             _inputOption = inputOption;
+            _getEnterKey = getEnterKey;
         }
 
         public void SetPlayerMono(
@@ -108,7 +112,7 @@ namespace Daipan.Player.Scripts
                 _attackExecutor.FireAttackEffect(_playerMono, PlayerColor.Yellow);
             }
 
-            if (Input.GetKeyDown(KeyCode.Return))
+            if (_getEnterKey.GetEnterKeyDown())
             {
                 _daipanExecutor.DaiPan();
                 _speechEventManager.MoveNext();
@@ -129,7 +133,7 @@ namespace Daipan.Player.Scripts
             if (_inputSerialManager.GetButtonRed()) _inputOption.MoveCursor(MoveCursorDirectionEnum.Down);
             if (_inputSerialManager.GetButtonBlue()) _inputOption.MoveCursor(MoveCursorDirectionEnum.Left);
             if (_inputSerialManager.GetButtonYellow()) _inputOption.MoveCursor(MoveCursorDirectionEnum.Right);
-            if (Input.GetKeyDown(KeyCode.Return)) _inputOption.Select();
+            if (_getEnterKey.GetEnterKeyDown()) _inputOption.Select();
         }
     }
 }

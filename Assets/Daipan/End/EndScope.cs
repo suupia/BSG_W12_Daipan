@@ -29,6 +29,8 @@ namespace Daipan.End
         {
             DaipanScope.RegisterSound(builder);
             builder.RegisterComponentInHierarchy<EndMono>();
+
+            DaipanScope.RegisterInputSerial(builder);
         }
     } 
 }
