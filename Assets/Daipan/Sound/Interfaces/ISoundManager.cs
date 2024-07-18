@@ -8,6 +8,6 @@ namespace Daipan.Sound.Interfaces
         void PlayBgm(BgmEnum bgmEnum);
         void PlaySe(SeEnum seEnum);
         void FadOutBgm(float fadeSec);
-    } 
+        void StopAllBgm();
+    }
 }
-

@@ -27,6 +27,7 @@ namespace Daipan.End
     {
         protected override void Configure(IContainerBuilder builder)
         {
+            DaipanScope.RegisterSound(builder);
             builder.RegisterComponentInHierarchy<EndMono>();
         }
     } 

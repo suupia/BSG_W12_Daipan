@@ -24,6 +24,7 @@ namespace Daipan.Tutorial.MonoScripts
         {
             downloadPercentText.text = $"{(int)(value * 100)}%";
             gaugeImage.fillAmount = value;
+            Debug.Log($"gaugeImage.fillAmount = {gaugeImage.fillAmount}, value = {value}");
         }
         public void Show()
         {
