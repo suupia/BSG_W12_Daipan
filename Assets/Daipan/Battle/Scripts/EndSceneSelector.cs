@@ -67,7 +67,7 @@ namespace Daipan.Battle.scripts
                 {
                     EndSceneStatic.EndSceneEnum = judgeSceneName;
                     SceneTransition.TransitioningScene(SceneName.EndScene);
-                    _soundManager.FadOutBgm(0.5f);
+                    // BGMのフェードアウトはシーンを跨ぐとDoTweeenが破棄されていルカもしれなくてうまくできないので、遷移先のシーンで止める(EndMono)
                     _soundManager.PlaySe(ConvertToSeEnum(judgeSceneName));
                     Debug.Log($"Transit to {judgeSceneName}, ConvertToSeEnum: {ConvertToSeEnum(judgeSceneName)}"); 
                     return;

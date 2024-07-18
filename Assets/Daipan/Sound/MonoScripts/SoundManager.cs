@@ -101,13 +101,25 @@ namespace Daipan.Sound.MonoScripts
         {
             foreach (var param in bgmParams)
             {
-                Debug.Log($"param : {param.bgmEnum}, {param.audioSource.isPlaying}");
+                Debug.Log($"FadOutBgm param : {param.bgmEnum}, {param.audioSource.isPlaying}");
                 if (param.audioSource.isPlaying)
                 {
+                    Debug.Log($"FadOutBgm enum : {param.bgmEnum}"); 
                     param.audioSource.DOFade(0, fadeSec).OnComplete(() => param.audioSource.Stop());
                 }
             }
-        } 
+        }
+        
+        public void StopAllBgm()
+        {
+            foreach (var param in bgmParams)
+            {
+                if (param.audioSource.isPlaying)
+                {
+                    param.audioSource.Stop();
+                }
+            }
+        }
     }
 
     [Serializable]
