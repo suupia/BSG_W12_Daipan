@@ -18,7 +18,6 @@ public sealed class AntiCommentCluster
     public void Remove(AntiCommentMono comment)
     {
         _comments.Remove(comment);
-        comment.Despawn();
     }
     public void BlownAway(float probability = 1.0f)
     {
