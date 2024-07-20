@@ -42,39 +42,24 @@ namespace Daipan.Comment.MonoScripts
 
         public void Daipaned()
         {
-            const float rotationDuration = 0.4f;
-            
-            // ここで潰れる演出をいれる。
-            // commentText.transform
-            //     .DOScaleY(0, 0.2f) // 小さくする
-            //     .SetEase(Ease.InQuint)
-            //     .DOTimeScale(1.1f, 0.15f) // 素早く大きくする
-            //     .SetEase(Ease.InQuint)
-            //     .Join
-            //     // .SetEase(Ease.OutBounce)
-            //     .OnComplete(() =>
-            //     {
-            //         _antiCommentCluster.Remove(this);
-            //         Destroy(gameObject);
-            //     });
-
-            Sample();
+            DaipanedSequence();
         }
-        void Sample()
-        {
-            var sequence = DOTween.Sequence()
-                .Append(commentText.transform.DOScaleY(0, 0.2f).SetEase(Ease.InQuint)) // 小さくする
-                .Append(commentText.transform.DOScaleY(1.1f, 0.15f).SetEase(Ease.InQuint)) // 素早く大きくする
-                // .Join(commentText.transform.DOMoveY(1, 0.2f).SetEase(Ease.InQuint) )  // 同時に上に移動
-                // .Append(commentText.transform.DOScaleY(0, 0.2f).SetEase(Ease.InQuint)) // 小さくしながら
-                // .Join(commentText.transform.DOMoveY(-1, 0.2f).SetEase(Ease.InQuint) )  // 同時に下に移動
-                   .OnComplete(() =>
-                    {
-                        _antiCommentCluster.Remove(this);
-                        Destroy(gameObject);
-                    });
-            
 
+        void DaipanedSequence()
+        {
+            var prePosition = commentText.transform.position;
+            var sequence = DOTween.Sequence()
+                .Append(commentText.transform.DOScaleY(0.3f, 0.2f).SetEase(Ease.InQuint)) // 縮めて、
+                .Join(commentText.transform.DOMoveY(prePosition.y -0.6f, 0.2f).SetEase(Ease.InQuint)) // 同時に下に移動
+                .Append(commentText.transform.DOScaleY(1.1f, 0.15f).SetEase(Ease.InCubic)) // 素早く大きくする
+                .Join(commentText.transform.DOMoveY(prePosition.y +0.6f, 0.15f).SetEase(Ease.InCubic)) // 同時に上に移動
+                .Append(commentText.transform.DOScaleY(0, 0.4f).SetEase(Ease.InCubic)) // 小さくしながら
+                .Join(commentText.transform.DOMoveY(prePosition.y -1, 0.4f).SetEase(Ease.InCubic)) // 同時に下に移動
+                .OnComplete(() =>
+                {
+                    _antiCommentCluster.Remove(this);
+                    Destroy(gameObject);
+                });
             sequence.Play();
         }
 

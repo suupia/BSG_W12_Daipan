@@ -25,7 +25,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 100}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 15857
+  controlID: 20786
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -93,7 +93,7 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 1
+    m_EnableMouseInput: 0
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1
@@ -148,7 +148,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 15858
+  controlID: 20787
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -173,7 +173,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 15859
+  controlID: 20788
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -193,8 +193,8 @@ MonoBehaviour:
     y: 0
     width: 241.5
     height: 457
-  m_MinSize: {x: 101, y: 121}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 6}
   m_Panes:
   - {fileID: 6}
@@ -584,9 +584,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -2.8703706, y: -1.2165048, z: 90}
+    m_Target: {x: 960.02905, y: 538.961, z: 0}
     speed: 2
-    m_Value: {x: -2.8703706, y: -1.2165048, z: 90}
+    m_Value: {x: 960.02905, y: 538.961, z: 0}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -636,9 +636,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 3.0117524
+    m_Target: 4.4135566
     speed: 2
-    m_Value: 3.0117524
+    m_Value: 4.4135566
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -3349,8 +3349,8 @@ MonoBehaviour:
     y: 0
     width: 664.5
     height: 457
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 2}
   m_Panes:
   - {fileID: 2}
@@ -4168,8 +4168,8 @@ MonoBehaviour:
     y: 457
     width: 906
     height: 544
-  m_MinSize: {x: 101, y: 121}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 12}
   m_Panes:
   - {fileID: 12}
@@ -4708,7 +4708,7 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 126340
+  m_LastSelectedObjectID: -991462
 --- !u!114 &15
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -4733,7 +4733,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 15900
+  controlID: 20847
 --- !u!114 &16
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -4797,9 +4797,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 7ca8f2ff
+      m_SelectedIDs: 5e9a0000
       m_LastClickedID: 0
-      m_ExpandedIDs: 88a8f2ffead4f2ff04e0f3ff42eef3ff80f8f3fff20ff4ff5eecf7ff2ceef7ff48f6f7ff0824f8ffe02ff8fff078f8ffda83f8ffaab8f8ff2214fafffe30fbff04b2feff2ab3feff3cb7feff4206ffff223fffff3e3fffff443fffffcc40ffff2042ffffea65ffff5070ffff8c79ffffe4cdffff4cddffff68ddffff6eddfffff6deffffdadfffff16fbfffff4ffffff4c9a000054ea0100c8ea010084ed010054ee0100c8ee01006005020086050200180c02003e0c0200680c02008e0c02005647020008490200c85102007a530200a47b0200c87b0200
+      m_ExpandedIDs: e878f0ff1adff0ff64dff0ff08e0f0ff88a8f2ffead4f2ff04e0f3ff42eef3ff80f8f3fff20ff4ff5eecf7ff2ceef7ff48f6f7ff0824f8ffe02ff8fff078f8ffda83f8ffaab8f8ff2214fafffe30fbff04b2feff2ab3feff3cb7feff4206ffff223fffff3e3fffff443fffffcc40ffff2042ffffea65ffff5070ffff8c79ffffe4cdffff4cddffff68ddffff6eddfffff6deffffdadfffff16fbfffff4ffffff4c9a000054ea0100c8ea010084ed010054ee0100c8ee01006005020086050200180c02003e0c0200680c02008e0c02005647020008490200c85102007a530200a47b0200c87b0200
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -4884,7 +4884,7 @@ MonoBehaviour:
     m_SaveData: []
     m_OverlaysVisible: 1
   m_SearchFilter:
-    m_NameFilter: 
+    m_NameFilter: Titles
     m_ClassNames: []
     m_AssetLabels: []
     m_AssetBundleNames: []
@@ -4894,24 +4894,24 @@ MonoBehaviour:
     m_SkipHidden: 1
     m_SearchArea: 1
     m_Folders:
-    - Assets/Daipan/Sound/SE
+    - Assets/Daipan/Comment/Resources
     m_Globs: []
-    m_OriginalText: 
+    m_OriginalText: Titles
     m_ImportLogFlags: 0
     m_FilterByTypeIntersection: 0
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Daipan/Sound/SE
+  - Assets/Daipan/Comment/Resources
   m_LastFoldersGridSize: 16
   m_LastProjectPath: /Users/koki/Unity/UnityProjects/BSG_W12_Daipan
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 372.5}
-    m_SelectedIDs: 46810000
-    m_LastClickedID: 33094
-    m_ExpandedIDs: 00000000a4800000a6800000a8800000aa800000ac800000ae800000b0800000b2800000b4800000b6800000b8800000ba800000bc800000be800000c0800000c2800000c4800000c6800000c8800000ca800000cc8000000e81000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 207}
+    m_SelectedIDs: 98d10000
+    m_LastClickedID: 53656
+    m_ExpandedIDs: 00000000a4800000a6800000a8800000aa800000ac800000ae800000b0800000b2800000b4800000b6800000b8800000ba800000bc800000be800000c0800000c2800000c4800000c6800000c8800000ca800000cc800000ea80000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -4964,8 +4964,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 7ca8f2ff
-    m_LastClickedInstanceID: -874372
+    m_SelectedInstanceIDs: 5e9a0000
+    m_LastClickedInstanceID: 39518
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000247100003271000096710000c6cdf7ff2a89000010760000f6710000b69f0000f2830000de7500007ccf000070cf000036bf00001ccf00006e870000
     m_RenameOverlay:
@@ -5014,8 +5014,8 @@ MonoBehaviour:
     y: 0
     width: 355.5
     height: 1001
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 21}
   m_Panes:
   - {fileID: 21}
