@@ -3,6 +3,7 @@ using System;
 using Daipan.Comment.Scripts;
 using Daipan.LevelDesign.Comment.Scripts;
 using Daipan.Stream.Scripts;
+using DG.Tweening;
 using UnityEngine;
 using VContainer;
 using TMPro;
@@ -41,8 +42,19 @@ namespace Daipan.Comment.MonoScripts
 
         public void Daipaned()
         {
-            _antiCommentCluster.Remove(this);
-            Destroy(gameObject);
+            const float rotationDuration = 0.4f;
+            
+            // ここで潰れる演出をいれる。
+            commentText.transform
+                .DOScaleY(0, rotationDuration) // Y軸でスケールを0にする
+                .SetEase(Ease.InQuint)
+                // .SetEase(Ease.OutBounce)
+                .OnComplete(() =>
+                {
+                    _antiCommentCluster.Remove(this);
+                    Destroy(gameObject);
+                });
+
         }
 
 
