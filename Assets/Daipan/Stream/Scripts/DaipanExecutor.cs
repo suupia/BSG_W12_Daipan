@@ -42,7 +42,7 @@ namespace Daipan.Stream.Scripts
             {
                 Debug.Log($"Daipan!");
                 _enemyCluster.Daipaned();
-                _antiCommentCluster.BlownAway();
+                _antiCommentCluster.Daipaned();
                 _streamerViewMono.Daipan();
                 _shakeDisplayMono.Daipan();
                 DaipanCount++;

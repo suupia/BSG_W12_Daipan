@@ -39,7 +39,7 @@ namespace Daipan.Comment.MonoScripts
             commentText.text = commentWord;
         }
 
-        public void BlownAway()
+        public void Daipaned()
         {
             _antiCommentCluster.Remove(this);
             Destroy(gameObject);
