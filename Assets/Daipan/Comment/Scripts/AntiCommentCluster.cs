@@ -18,14 +18,13 @@ public sealed class AntiCommentCluster
     public void Remove(AntiCommentMono comment)
     {
         _comments.Remove(comment);
-        comment.Despawn();
     }
-    public void BlownAway(float probability = 1.0f)
+    public void Daipaned(float probability = 1.0f)
     {
         var comments = _comments.ToArray();
         foreach (var comment in comments)
             if (Random.value < probability)
-                comment.BlownAway();
+                comment.Daipaned();
     }
 
 }
