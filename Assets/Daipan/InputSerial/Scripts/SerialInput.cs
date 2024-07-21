@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Daipan.InputSerial.Scripts
 {
-    public class SerialInput
+    public class SerialInput : IDisposable
     {
 
         private string portName = "COM";
@@ -80,10 +80,15 @@ namespace Daipan.InputSerial.Scripts
             }
         }
 
-        ~SerialInput()
+        public void Dispose()
         {
             this.isLoop = false;
-            this.serial.Close();
+            this.serial.Close(); 
+        }
+        
+        ~SerialInput()
+        {
+            Dispose();
         }
     }
 }
