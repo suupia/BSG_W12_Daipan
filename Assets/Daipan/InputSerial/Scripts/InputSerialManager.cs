@@ -46,12 +46,12 @@ namespace Daipan.InputSerial.Scripts
         public bool GetButtonBlue()
         {
             return getInput(1)
-                || Input.GetKeyDown(KeyCode.A);
+                || Input.GetKeyDown(KeyCode.S);
         }
         public bool GetButtonYellow()
         {
             return getInput(2)
-                || Input.GetKeyDown(KeyCode.S);
+                || Input.GetKeyDown(KeyCode.A);
         }
         public bool GetButtonMenu()
         {
@@ -72,12 +72,12 @@ namespace Daipan.InputSerial.Scripts
         public bool GetButtonPressingBlue()
         {
             return getInputContinue(1)
-                || Input.GetKey(KeyCode.A);
+                || Input.GetKey(KeyCode.S);
         }
         public bool GetButtonPressingYellow()
         {
             return getInputContinue(2)
-                || Input.GetKey(KeyCode.S);
+                || Input.GetKey(KeyCode.A);
         }
         public bool GetButtonPressingMenu()
         {
