@@ -9,7 +9,6 @@ using Daipan.Enemy.MonoScripts;
 using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Player.MonoScripts;
 using Daipan.Player.Scripts;
-using Daipan.Sound.Interfaces;
 using Daipan.Sound.MonoScripts;
 using Daipan.Stream.Scripts;
 using R3;
@@ -29,14 +28,13 @@ namespace Daipan.Enemy.Scripts
             , IPlayerAntiCommentParamData playerAntiCommentParamData
             , WaveState waveState
             , List<PlayerColor> canAttackPlayers
-            , ISoundManager soundManager
         )
         {
             _samePressChecker = new SamePressChecker(AllowableSec, canAttackPlayers.Count
                 ,  () =>
                 {
                     comboCounter.IncreaseCombo();
-                    soundManager.PlaySe(SeEnum.Attack);
+                    SoundManager.Instance?.PlaySe(SeEnum.Attack);
                 }, () =>
                 {
                     comboCounter.ResetCombo();
@@ -44,7 +42,7 @@ namespace Daipan.Enemy.Scripts
                         playerAntiCommentParamData.GetAntiCommentPercentOnMissAttacks(waveState.CurrentWaveIndex);
                     if (spawnPercent / 100f > UnityEngine.Random.value)
                         commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
-                    soundManager.PlaySe(SeEnum.AttackDeflect);
+                    SoundManager.Instance?.PlaySe(SeEnum.AttackDeflect);
                 });
             _canAttackPlayers = canAttackPlayers;
         }

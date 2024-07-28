@@ -11,7 +11,6 @@ using Daipan.Player.Interfaces;
 using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Player.LevelDesign.Scripts;
 using Daipan.Player.MonoScripts;
-using Daipan.Sound.Interfaces;
 using Daipan.Sound.MonoScripts;
 using Daipan.Stream.Scripts;
 using UnityEngine;
@@ -28,7 +27,6 @@ namespace Daipan.Player.Scripts
         readonly WaveState _waveState;
         readonly IPlayerAntiCommentParamData _playerAntiCommentParamData;
         readonly ThresholdResetCounter _playerMissedAttackCounter;
-        readonly ISoundManager _soundManager;
 
         public PlayerAttackEffectBuilder(
             IPlayerParamDataContainer playerParamDataContainer
@@ -37,7 +35,6 @@ namespace Daipan.Player.Scripts
             ,CommentSpawner commentSpawner
             ,WaveState waveState
             ,IPlayerAntiCommentParamData playerAntiCommentParamData
-            ,ISoundManager soundManager
         )
         {
             _playerParamDataContainer = playerParamDataContainer;
@@ -48,7 +45,6 @@ namespace Daipan.Player.Scripts
             _playerAntiCommentParamData = playerAntiCommentParamData;
             _playerMissedAttackCounter =
                 new ThresholdResetCounter(playerAntiCommentParamData.GetMissedAttackCountForAntiComment());
-            _soundManager = soundManager;
         }
 
         public PlayerAttackEffectMono Build
@@ -73,7 +69,6 @@ namespace Daipan.Player.Scripts
                     ,_comboCounter
                     , _playerMissedAttackCounter
                     , _commentSpawner
-                    , _soundManager
                     );
                 SpawnAntiComment(args, _commentSpawner, _playerAntiCommentParamData,_waveState);
             };
@@ -90,7 +85,6 @@ namespace Daipan.Player.Scripts
             , ComboCounter comboCounter
             , ThresholdResetCounter playerMissedAttackCounter
             , CommentSpawner commentSpawner
-            , ISoundManager soundManager
         )
         {
             if (args.IsTargetEnemy && args.EnemyMono != null)
@@ -105,7 +99,7 @@ namespace Daipan.Player.Scripts
                 //  HPに変化があれば、コンボ増加（ただし、Totemの判定はOnAttackedで行っている）
                 if (Math.Abs(beforeHp - afterHp) > double.Epsilon && args.EnemyMono.EnemyEnum.IsTotem() != true)
                     comboCounter.IncreaseCombo();
-                if(args.EnemyMono.EnemyEnum.IsTotem() != true) soundManager.PlaySe(SeEnum.Attack);
+                if(args.EnemyMono.EnemyEnum.IsTotem() != true) SoundManager.Instance?.PlaySe(SeEnum.Attack);
             }
             else
             {
@@ -117,7 +111,7 @@ namespace Daipan.Player.Scripts
                 if (args.EnemyMono != null)
                 {
                     playerAttackEffectMono.Defenced();
-                    soundManager.PlaySe(SeEnum.AttackDeflect);
+                    SoundManager.Instance?.PlaySe(SeEnum.AttackDeflect);
                 }
 
                 return;

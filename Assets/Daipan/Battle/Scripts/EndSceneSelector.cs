@@ -7,7 +7,6 @@ using Daipan.End.Scripts;
 using Daipan.LevelDesign.EndScene;
 using Daipan.Player.MonoScripts;
 using Daipan.Player.Scripts;
-using Daipan.Sound.Interfaces;
 using Daipan.Sound.MonoScripts;
 using Daipan.Stream.Scripts;
 using R3;
@@ -22,7 +21,6 @@ namespace Daipan.Battle.scripts
         readonly ViewerNumber _viewerNumber;
         readonly DaipanExecutor _daipanExecutor;
         readonly ComboCounter _comboCounter;
-        readonly ISoundManager _soundManager;
         IDisposable? _disposable;
 
         // この順番でシーン遷移の判定を行っていく
@@ -43,14 +41,12 @@ namespace Daipan.Battle.scripts
             , ViewerNumber viewerNumber
             , DaipanExecutor daipanExecutor
             , ComboCounter comboCounter
-            , ISoundManager soundManager
         )
         {
             _endSceneTransitionParam = endSceneTransitionParam;
             _viewerNumber = viewerNumber;
             _daipanExecutor = daipanExecutor;
             _comboCounter = comboCounter;
-            _soundManager = soundManager;
         }
         
 
@@ -69,7 +65,7 @@ namespace Daipan.Battle.scripts
                 {
                     EndSceneStatic.EndSceneEnum = judgeSceneName;
                     SceneTransition.TransitioningScene(SceneName.EndScene);
-                    _soundManager.PlaySe(ConvertToSeEnum(judgeSceneName));
+                    SoundManager.Instance?.PlaySe(ConvertToSeEnum(judgeSceneName));
                     Debug.Log($"Transit to {judgeSceneName}, ConvertToSeEnum: {ConvertToSeEnum(judgeSceneName)}");
                     EndSceneHolder.EndSceneEnum = judgeSceneName;  // todo:かなりまずいけど一旦
                     return;
