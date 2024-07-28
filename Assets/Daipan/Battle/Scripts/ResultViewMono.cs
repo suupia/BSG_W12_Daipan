@@ -119,9 +119,12 @@ namespace Daipan.Battle.scripts
                 LanguageEnum.Japanese => "次へ",
                 LanguageEnum.English => "Next",
                 _ => throw new ArgumentOutOfRangeException()
-            }; 
-            
-            viewObject.SetActive(true);
+            };
+
+            if (viewObject == null) // なぜかNullRefが出たので追加
+                Debug.LogWarning("viewObject is null");
+            else
+                viewObject.SetActive(true);
         }
         
         public void HideResult()
