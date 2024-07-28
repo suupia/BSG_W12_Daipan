@@ -83,7 +83,7 @@ namespace Daipan.InputSerial.Scripts
         public void Dispose()
         {
             this.isLoop = false;
-            this.serial.Close(); 
+            this.serial?.Close(); 
         }
         
         ~SerialInput()

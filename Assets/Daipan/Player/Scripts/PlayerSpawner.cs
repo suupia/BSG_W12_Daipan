@@ -46,6 +46,7 @@ namespace Daipan.Player.Scripts
             var position = _towerParamsConfig.GetTowerSpawnPosition();
             var positionOnlyX = new Vector3(_playerSpawnPointData.GetPlayerSpawnedPointX().playerSpawnTransformX.position.x, 0, position.z); 
             var playerMono = _container.Instantiate(playerMonoPrefab, positionOnlyX, Quaternion.identity);
+            Debug.LogWarning($"PlayerMono.Hp: {playerMono.Hp.Value}");
             var buildedPlayer = _playerBuilder.Build(playerMono);
             _playerHolder.PlayerMono = buildedPlayer;
         }

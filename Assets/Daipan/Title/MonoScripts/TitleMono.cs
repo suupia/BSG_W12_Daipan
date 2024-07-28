@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Daipan.Battle.scripts;
 using Daipan.Enemy.Scripts;
-using Daipan.Sound.Interfaces;
 using Daipan.Sound.MonoScripts;
 using Daipan.Option.Interfaces;
 using Daipan.Option.Scripts;
@@ -20,12 +19,20 @@ public class TitleMono : MonoBehaviour
     IGetEnterKey _getEnterKey;
 
     [Inject]
-    public void Initialize(ISoundManager soundManager,
+    public void Initialize(
         InputSerialManager inputSerialManager,
         IInputOption inputOption,
         IGetEnterKey getEnterKey)
     {
-        soundManager.PlayBgm(BgmEnum.Title);
+        UnityEngine.Time.timeScale = 1; // timeScaleを戻す
+        
+        var soundManager = FindObjectOfType<SoundManager>();
+        if (soundManager == null)
+            Debug.LogWarning("SoundManager is not found");
+        else
+           soundManager.Initialize();
+        
+        SoundManager.Instance?.PlayBgm(BgmEnum.Title);
         Debug.Log("TitleMono Initialized");
 
         _inputSerialManager = inputSerialManager;

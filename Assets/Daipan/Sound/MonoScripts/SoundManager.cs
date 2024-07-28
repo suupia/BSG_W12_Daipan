@@ -2,19 +2,18 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using Daipan.Sound.Interfaces;
 using DG.Tweening;
 using R3;
 using UnityEngine;
 
 namespace Daipan.Sound.MonoScripts
 {
-    public sealed class SoundManager : MonoBehaviour, ISoundManager , IDisposable
+    public sealed class SoundManager : MonoBehaviour , IDisposable
     {
         [SerializeField] List<BgmParam> bgmParams = null!;
         [SerializeField] List<SeParam> seParams = null!;
         static SoundManager? _instance;
-        public static ISoundManager? Instance => _instance;
+        public static SoundManager? Instance => _instance;
         public static float BgmVolume
         {
             set => _bgmVolume = Mathf.Clamp(value / 7f, 0, 1);
