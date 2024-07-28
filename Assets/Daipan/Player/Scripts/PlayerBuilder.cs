@@ -14,18 +14,15 @@ namespace Daipan.Player.Scripts
     public class PlayerBuilder : IDisposable, IPlayerBuilder
     {
         readonly WaveState _waveState;
-        readonly IPlayerHpParamData _playerHpParamData;
         readonly ResultState _resultState;
         readonly CompositeDisposable _disposable = new();
 
         public PlayerBuilder(
             WaveState waveState
-            , IPlayerHpParamData playerHpParamData
             , ResultState resultState
         )
         {
             _waveState = waveState;
-            _playerHpParamData = playerHpParamData;
             _resultState = resultState;
         }
 
@@ -38,7 +35,11 @@ namespace Daipan.Player.Scripts
             _disposable.Add(Observable.EveryUpdate()
                 .Subscribe(_ =>
                 {
-                    if (playerMono.Hp.Value <= 0) _resultState.ShowResult();
+                    if (playerMono.Hp.Value <= 0)
+                    {
+                        Debug.Log("Player is dead");
+                        _resultState.ShowResult();
+                    }
                 }));
             return playerMono;
         }
