@@ -7,6 +7,7 @@ using Daipan.Player.Interfaces;
 using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Player.MonoScripts;
 using R3;
+using UnityEngine;
 
 namespace Daipan.Player.Scripts
 {
@@ -30,8 +31,9 @@ namespace Daipan.Player.Scripts
 
         public PlayerMono Build(PlayerMono playerMono)
         {
+            _disposable.Clear(); 
             _disposable.Add(Observable.EveryValueChanged(_waveState, x => x.CurrentWaveIndex)
-                .Subscribe(_ => playerMono.Hp = new Hp(_playerHpParamData.GetMaxHp())));
+                .Subscribe(_ => playerMono.SetHpMax()));
 
             _disposable.Add(Observable.EveryUpdate()
                 .Subscribe(_ =>
@@ -44,6 +46,7 @@ namespace Daipan.Player.Scripts
         public void Dispose()
         {
             _disposable.Dispose();
+            Debug.Log($"Dispose {nameof(PlayerBuilder)}");
         }
 
         ~PlayerBuilder()
