@@ -24,6 +24,8 @@ public class TitleMono : MonoBehaviour
         IInputOption inputOption,
         IGetEnterKey getEnterKey)
     {
+        UnityEngine.Time.timeScale = 1; // timeScaleを戻す
+        
         var soundManager = FindObjectOfType<SoundManager>();
         if (soundManager == null)
             Debug.LogWarning("SoundManager is not found");

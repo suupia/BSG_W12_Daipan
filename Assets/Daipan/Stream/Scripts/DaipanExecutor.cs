@@ -44,7 +44,7 @@ namespace Daipan.Stream.Scripts
                 DaipanCount++;
                 
                 // 台パンしたら怒りゲージは0になる
-                _irritatedValue.DecreaseValue(_irritatedValue.Value);
+                _irritatedValue.Reset();
                 
                 SoundManager.Instance?.PlaySe(SeEnum.Daipan);
             }

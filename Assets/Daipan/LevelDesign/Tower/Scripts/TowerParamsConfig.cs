@@ -20,7 +20,7 @@ namespace Daipan.LevelDesign.Enemy.Scripts
 
         public Vector3 GetTowerSpawnPosition()
         {
-            return _towerPositionMono.towerSpawnTransform.position;
+            return  _towerPositionMono != null ? _towerPositionMono.towerSpawnTransform.position : Vector3.zero;
         }
         
         public double GetLightIsOnRatio()
