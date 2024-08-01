@@ -16,7 +16,8 @@ namespace Daipan.Comment.MonoScripts
 
         AntiCommentCluster _antiCommentCluster = null!;
         CommentParamsServer _commentParamsServer = null!;
-        IrritatedValue _irritatedValue = null!; 
+        IrritatedValue _irritatedValue = null!;
+        bool IsActive { get; set; } = true;
         
         [Inject]
         public void Initialize(
@@ -32,7 +33,7 @@ namespace Daipan.Comment.MonoScripts
 
         void Update()
         {
-            _irritatedValue.IncreaseValue(  _commentParamsServer.GetIrritationIncreasePerSec() * Time.deltaTime);
+           if(IsActive) _irritatedValue.IncreaseValue(  _commentParamsServer.GetIrritationIncreasePerSec() * Time.deltaTime);
         }
 
         public void SetParameter(string commentWord)
@@ -42,6 +43,7 @@ namespace Daipan.Comment.MonoScripts
 
         public void Daipaned()
         {
+            IsActive = false;
             DaipanedSequence();
         }
 
