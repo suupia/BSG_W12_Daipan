@@ -56,5 +56,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "BSG_W12_Daipan.sln"
+    "dotnet.defaultSolution": "BSG_W12_Daipan.sln",
+    "dotnet.preferCSharpExtension": true
 }
