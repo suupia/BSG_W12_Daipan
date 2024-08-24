@@ -20,11 +20,11 @@ TagManager:
   - BackGround
   - AntiComment
   - BlackScreen
-  - RenderTexture
   - 
-  - 
-  - 
-  - 
+  - GameBackRT
+  - GameRT
+  - CommentRT
+  - UIRT
   - 
   - 
   - 
