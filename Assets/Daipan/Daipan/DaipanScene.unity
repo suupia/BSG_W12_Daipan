@@ -1060,6 +1060,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6718282394163543922, guid: 30e91696e7cda4ce7b49b5cd15e11759, type: 3}
+      propertyPath: daipanWaveMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 11995d24ca4504098ab3624257d815f4, type: 2}
     - target: {fileID: 7019384296459631377, guid: 30e91696e7cda4ce7b49b5cd15e11759, type: 3}
       propertyPath: m_Name
       value: Streamer
@@ -2428,6 +2432,10 @@ PrefabInstance:
     - target: {fileID: 3087268379624898967, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4551183778950379205, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
+      propertyPath: m_Name
+      value: DaipanWave
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

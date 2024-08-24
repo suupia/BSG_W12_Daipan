@@ -13,6 +13,7 @@ namespace Daipan.Streamer.MonoScripts
         [SerializeField] Animator animator = null!;
         [SerializeField] Animator daipanEffect = null!;
         [SerializeField] Animator daipanWhiteEffect = null!;
+        [SerializeField] Material daipanWaveMaterial = null!;
         [SerializeField] float scaleRatio;
         [SerializeField] Vector3 moveAmountByAngerZoom;
         [SerializeField] float zoomDuration;
@@ -47,6 +48,11 @@ namespace Daipan.Streamer.MonoScripts
             animator.SetTrigger("IsDaipan");
             daipanEffect.SetTrigger("IsDaipan");
             daipanWhiteEffect.SetTrigger("IsDaipan");
+            DOVirtual.Float(0f, 2f, 1f, value =>
+            {
+                daipanWaveMaterial.SetFloat("_Radius", value);
+                Debug.Log($"radius : {value}");
+            });
         }
 
         public void AngerZoom(bool isFull)
