@@ -80,7 +80,7 @@ namespace Daipan.Player.Scripts
 
         void TutorialListeningUpdate()
         {
-            if (_inputSerialManager.GetButtonAny())
+            if (_inputSerialManager.GetButtonRed())
             {
                 _speechEventManager.MoveNext();
             }
