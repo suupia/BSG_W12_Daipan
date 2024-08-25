@@ -128,8 +128,8 @@ namespace Daipan.Tutorial
 
         static void RegisterTutorialContents(IContainerBuilder builder)
         {
-            builder.Register<DisplayBlackScreenWithProgress>(Lifetime.Scoped).As<ITutorialContent>();
             builder.Register<LanguageSelection>(Lifetime.Scoped).As<ITutorialContent>();
+            builder.Register<DisplayBlackScreenWithProgress>(Lifetime.Scoped).As<ITutorialContent>();
             builder.Register<FadeInTutorialStart>(Lifetime.Scoped).As<ITutorialContent>();
             builder.Register<UICatIntroduce>(Lifetime.Scoped).As<ITutorialContent>();
             builder.Register<RedEnemyTutorial>(Lifetime.Scoped).As<ITutorialContent>().AsSelf();
