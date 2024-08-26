@@ -112,8 +112,8 @@ namespace Daipan.Tutorial.Scripts
                 },
                 LanguageEnum.Japanese => new List<string>
                 {
-                    "赤い敵が来たね！",
-                    "赤色のボタンを押そう！",
+                    "青い敵が来たね！",
+                    "青色のボタンを押そう！",
                     "そうそう！上手！"
                 },
                 _ => new List<string>()
@@ -134,7 +134,7 @@ namespace Daipan.Tutorial.Scripts
                 {
                     "今度はたくさんの敵が来たね！",
                     "対応するボタンを押そう！",
-                    "君、配信の才能あるよ！"
+                    "いいかんじ！"
                 },
                 _ => new List<string>()
             };
@@ -151,9 +151,9 @@ namespace Daipan.Tutorial.Scripts
                 },
                 LanguageEnum.Japanese => new List<string>
                 {
-                    "今度の敵は色が複数あるね！",
-                    "対応するボタンを同時に押そう！",
-                    "君、配信の才能あるよ！"
+                    "わ！トーテムポールだ！",
+                    "対応するボタンを同時押しだ！",
+                    "最高！君、配信の才能あるよ！",
                 },
                 _ => new List<string>()
             };
