@@ -12,7 +12,7 @@ namespace Daipan.Tutorial.Scripts
     public interface ISpeechEvent
     {
         int Id { get; }
-        string Message { get; }
+        Speech Speech { get; }
         SpeechEventEnum SpeechEventEnum { get; }
         (bool, ISpeechEvent) MoveNext();
         void SetNextEvent(params ISpeechEvent[] nextEvents);
@@ -25,24 +25,29 @@ namespace Daipan.Tutorial.Scripts
         Practical // 実践するタイプのチュートリアル
     }
 
+    public sealed record Speech(string Message, string SpriteKey)
+    {
+        public static implicit operator Speech(string message) => new Speech(message, string.Empty);
+    }
+
     public sealed record SequentialEvent : ISpeechEvent
     {
         public int Id { get; } = -1;
-        public string Message { get; } = string.Empty;
+        public Speech Speech { get; }
         public SpeechEventEnum SpeechEventEnum { get; }
         ISpeechEvent? NextEvent { get; set; }
         Func<bool> CanMove { get; } = () => true;
 
-        public SequentialEvent(int id, string message, SpeechEventEnum speechEventEnum, Func<bool> canMove)
+        public SequentialEvent(int id, Speech speech, SpeechEventEnum speechEventEnum, Func<bool> canMove)
         {
             Id = id;
-            Message = message;
+            Speech = speech;
             SpeechEventEnum = speechEventEnum;
             CanMove = canMove;
         }
 
-        public SequentialEvent(int id, string message, SpeechEventEnum speechEventEnum)
-            : this(id, message, speechEventEnum, () => true)
+        public SequentialEvent(int id, Speech speech, SpeechEventEnum speechEventEnum)
+            : this(id, speech, speechEventEnum, () => true)
         {
         }
 
@@ -64,7 +69,7 @@ namespace Daipan.Tutorial.Scripts
     public sealed record EndEvent : ISpeechEvent
     {
         public int Id => -1;
-        public string Message => string.Empty;
+        public Speech Speech { get; }
         public SpeechEventEnum SpeechEventEnum => SpeechEventEnum.None;
 
         public (bool, ISpeechEvent) MoveNext()
@@ -435,10 +440,10 @@ namespace Daipan.Tutorial.Scripts
 
         public bool MoveNext()
         {
-            Debug.Log($"CurrentEvent.Message = {CurrentEvent.Message}");
+            Debug.Log($"CurrentEvent.Message = {CurrentEvent.Speech}");
             var (result, nextEvent) = CurrentEvent.MoveNext();
             if (result) CurrentEvent = nextEvent;
-            Debug.Log($"NextEvent.Message = {CurrentEvent.Message}");
+            Debug.Log($"NextEvent.Message = {CurrentEvent.Speech}");
             return result;
         }
     }

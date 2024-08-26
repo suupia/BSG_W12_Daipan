@@ -27,7 +27,7 @@ namespace Daipan.Streamer.MonoScripts
         public void Construct(SpeechEventManager speechEventManager)
         {
             Observable.EveryValueChanged(speechEventManager, x => x.CurrentEvent)
-                .Subscribe(_ => EnqueueSpeechMessage(speechEventManager.CurrentEvent.Message))
+                .Subscribe(_ => EnqueueSpeechMessage(speechEventManager.CurrentEvent.Speech.Message))
                 .AddTo(this);
         }
         

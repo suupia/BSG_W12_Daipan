@@ -32,7 +32,7 @@ namespace Daipan.Player.Scripts
         {
             // チュートリアルを聞いている時なら攻撃せずにテキストを送る
             Debug.Log($"AttackExecutorTutorial: _speechEventManager.GetSpeechEventEnum() = {_speechEventManager.GetSpeechEventEnum()}" +
-                      $", SpeechEventEnum.Message = {_speechEventManager.CurrentEvent?.Message }");
+                      $", SpeechEventEnum.Message = {_speechEventManager.CurrentEvent?.Speech }");
             if (_speechEventManager.GetSpeechEventEnum() == SpeechEventEnum.Listening) return;
             _attackExecutor.FireAttackEffect(playerMono, playerColor); 
         }
