@@ -456,6 +456,61 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 531250721}
   m_CullTransparentMesh: 1
+--- !u!1 &551928607
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 551928609}
+  - component: {fileID: 551928608}
+  m_Layer: 0
+  m_Name: TutorialSprites
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &551928608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 551928607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d3052636cd94a3fac09657bdb3d70f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialSprites:
+  - key: speech_blue
+    value: {fileID: 21300000, guid: 3a763d60f3f7e46e8984fd76a390f4af, type: 3}
+  - key: speech_red_blue
+    value: {fileID: 21300000, guid: f401b8941827b418a9495446d19f6898, type: 3}
+  - key: speech_all
+    value: {fileID: 21300000, guid: f98db3d4fbd414affb3b474c60e8aca0, type: 3}
+  - key: tutorial_enter_1
+    value: {fileID: 21300000, guid: f5333b6c2eaba4e3caa6d370b87a6194, type: 3}
+  - key: yellow
+    value: {fileID: 21300000, guid: 9828a428887fb4a7dab4da45909a1a5b, type: 3}
+--- !u!4 &551928609
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 551928607}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &779130797
 GameObject:
   m_ObjectHideFlags: 0
@@ -6612,3 +6667,4 @@ SceneRoots:
   - {fileID: 5221749628332188380}
   - {fileID: 1103018221}
   - {fileID: 81979262}
+  - {fileID: 551928609}
