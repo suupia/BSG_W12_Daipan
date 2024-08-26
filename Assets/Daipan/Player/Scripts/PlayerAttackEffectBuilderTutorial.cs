@@ -66,13 +66,16 @@ namespace Daipan.Player.Scripts
             if (enemyMono == null) return;
 
             Debug.Log($"EnemyType: {enemyMono.EnemyEnum}を攻撃");
+            if (enemyMono.EnemyEnum == EnemyEnum.Blue)
+            {
+                if (tutorialFacilitator.CurrentStep is BlueEnemyTutorial redEnemyTutorial)
+                {
+                    // Blueの敵を一体倒すチュートリアル
+                    if(playerColor == PlayerColor.Blue) redEnemyTutorial.SetSuccess();
+                } 
+            }
             if (enemyMono.EnemyEnum == EnemyEnum.Red)
             {
-                // チュートリアルごとの処理 
-                if (tutorialFacilitator.CurrentStep is RedEnemyTutorial redEnemyTutorial)
-                {
-                   if(playerColor == PlayerColor.Red) redEnemyTutorial.SetSuccess();
-                }
                 if(tutorialFacilitator.CurrentStep is SequentialEnemyTutorial sequentialEnemyTutorial)
                 {
                     // 本来は全ての敵を倒したかどうかを判定するべきだが、最後の敵がたまたまRedなので、これで判定する

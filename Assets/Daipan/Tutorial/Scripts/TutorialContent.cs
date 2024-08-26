@@ -195,14 +195,14 @@ namespace Daipan.Tutorial.Scripts
         }
     }
 
-    public class RedEnemyTutorial : AbstractTutorialContent
+    public class BlueEnemyTutorial : AbstractTutorialContent
     {
         readonly SpeechEventManager _speechEventManager;
         readonly EnemySpawnerTutorial _enemySpawnerTutorial;
         readonly LanguageConfig _languageConfig;
         public bool IsSuccess { get; private set; } 
 
-        public RedEnemyTutorial(
+        public BlueEnemyTutorial(
             SpeechEventManager speechEventManager
             , EnemySpawnerTutorial enemySpawnerTutorial
             , LanguageConfig languageConfig
@@ -216,11 +216,11 @@ namespace Daipan.Tutorial.Scripts
 
         public override void Execute()
         {
-            Debug.Log("Tutorial: Defeat the red enemy...");
+            Debug.Log("Tutorial: Defeat the blue enemy...");
             _speechEventManager.SetSpeechEvent(
-                SpeechEventBuilder.BuildRedEnemyTutorial(this, _languageConfig.CurrentLanguage));
+                SpeechEventBuilder.BuildBlueEnemyTutorial(this, _languageConfig.CurrentLanguage));
 
-            _enemySpawnerTutorial.SpawnEnemyByType(EnemyEnum.Red);
+            _enemySpawnerTutorial.SpawnEnemyByType(EnemyEnum.Blue);
         }
 
         public override bool IsCompleted()

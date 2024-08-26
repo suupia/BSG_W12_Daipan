@@ -132,7 +132,7 @@ namespace Daipan.Tutorial
             builder.Register<DisplayBlackScreenWithProgress>(Lifetime.Scoped).As<ITutorialContent>();
             builder.Register<FadeInTutorialStart>(Lifetime.Scoped).As<ITutorialContent>();
             builder.Register<UICatIntroduce>(Lifetime.Scoped).As<ITutorialContent>();
-            builder.Register<RedEnemyTutorial>(Lifetime.Scoped).As<ITutorialContent>().AsSelf();
+            builder.Register<BlueEnemyTutorial>(Lifetime.Scoped).As<ITutorialContent>().AsSelf();
             builder.Register<SequentialEnemyTutorial>(Lifetime.Scoped).As<ITutorialContent>();
             builder.Register<TotemEnemyTutorial>(Lifetime.Scoped).As<ITutorialContent>();
             builder.Register<ShowWhiteCommentsTutorial>(Lifetime.Scoped).As<ITutorialContent>();

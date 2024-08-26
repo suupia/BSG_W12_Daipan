@@ -251,8 +251,8 @@ namespace Daipan.Tutorial.Scripts
             return speechEvents[0];
         }
 
-        public static ISpeechEvent BuildRedEnemyTutorial(
-            RedEnemyTutorial redEnemyTutorial
+        public static ISpeechEvent BuildBlueEnemyTutorial(
+            BlueEnemyTutorial blueEnemyTutorial
             , LanguageEnum language
         )
         {
@@ -262,7 +262,7 @@ namespace Daipan.Tutorial.Scripts
                     new SequentialEvent(0, SpeechContentByLanguage.RedEnemyTutorial(language)[0],
                         SpeechEventEnum.Listening),
                     new SequentialEvent(1, SpeechContentByLanguage.RedEnemyTutorial(language)[1],
-                        SpeechEventEnum.Practical, ()=> redEnemyTutorial.IsSuccess),
+                        SpeechEventEnum.Practical, ()=> blueEnemyTutorial.IsSuccess),
                     new SequentialEvent(2, SpeechContentByLanguage.RedEnemyTutorial(language)[2],
                         SpeechEventEnum.Listening),
                     new EndEvent()
