@@ -258,7 +258,17 @@ namespace Daipan.Tutorial.Scripts
             Debug.Log("Tutorial: Defeat enemies in sequence...");
             _speechEventManager.SetSpeechEvent(
                 SpeechEventBuilder.BuildSequentialEnemyTutorial(this, _languageConfig.CurrentLanguage));
-            _enemySpawnerTutorial.SpawnEnemyByType(EnemyEnum.Totem2);
+
+            var intervalSec = 1f; // スポーンの間隔
+            var enemyEnums = new Queue<EnemyEnum>(new[] { EnemyEnum.Blue, EnemyEnum.Yellow, EnemyEnum.Red });
+
+            Disposables.Add(
+                Observable.Interval(TimeSpan.FromSeconds(intervalSec))
+                    .Take(enemyEnums.Count)
+                    .Subscribe(
+                        _ => { _enemySpawnerTutorial.SpawnEnemyByType(enemyEnums.Dequeue()); },
+                        _ => { Debug.Log("Enemy spawn completed"); }
+                    ));
         }
 
         public override bool IsCompleted()
@@ -294,17 +304,7 @@ namespace Daipan.Tutorial.Scripts
         {
             Debug.Log("Tutorial: Defeat totem enemy...");
             _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildTotemEnemyTutorial(this, _languageConfig.CurrentLanguage));
-
-            var intervalSec = 1f; // スポーンの間隔
-            var enemyEnums = new Queue<EnemyEnum>(new[] { EnemyEnum.Blue, EnemyEnum.Yellow, EnemyEnum.Red });
-
-            Disposables.Add(
-                Observable.Interval(TimeSpan.FromSeconds(intervalSec))
-                    .Take(enemyEnums.Count)
-                    .Subscribe(
-                        _ => { _enemySpawnerTutorial.SpawnEnemyByType(enemyEnums.Dequeue()); },
-                        _ => { Debug.Log("Enemy spawn completed"); }
-                    ));
+            _enemySpawnerTutorial.SpawnEnemyByType(EnemyEnum.Totem2);
         }
 
         public override bool IsCompleted()
@@ -314,7 +314,6 @@ namespace Daipan.Tutorial.Scripts
 
         public void SetSuccess()
         {
-            Debug.Log($"TotemEnemyTutorial SetIsSuccess");
             IsSuccess = true;
             _speechEventManager.MoveNext();
         }

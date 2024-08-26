@@ -79,11 +79,17 @@ namespace Daipan.Player.Scripts
                     if(playerColor == PlayerColor.Red) sequentialEnemyTutorial.SetSuccess();
                 }
 
+            }
+
+            if (enemyMono.EnemyEnum == EnemyEnum.Totem2)
+            {
+                
                 if (tutorialFacilitator.CurrentStep is TotemEnemyTutorial totemEnemyTutorial)
                 {
-                    // todo : 処理を書く
+                    totemEnemyTutorial.SetSuccess();
                 }
             }
+            
             if (PlayerAttackModule.GetTargetEnemyEnum(playerColor).Contains(enemyMono.EnemyEnum))
             {
                 // 敵を攻撃
