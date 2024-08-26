@@ -258,6 +258,42 @@ namespace Daipan.Tutorial.Scripts
             Debug.Log("Tutorial: Defeat enemies in sequence...");
             _speechEventManager.SetSpeechEvent(
                 SpeechEventBuilder.BuildSequentialEnemyTutorial(this, _languageConfig.CurrentLanguage));
+            _enemySpawnerTutorial.SpawnEnemyByType(EnemyEnum.Totem2);
+        }
+
+        public override bool IsCompleted()
+        {
+            return IsSuccess && _speechEventManager.IsEnd();
+        }
+
+        public void SetSuccess()
+        {
+            IsSuccess = true;
+            _speechEventManager.MoveNext();
+        }
+    }
+    
+    public class TotemEnemyTutorial : AbstractTutorialContent
+    {
+        readonly SpeechEventManager _speechEventManager;
+        readonly EnemySpawnerTutorial _enemySpawnerTutorial;
+        readonly LanguageConfig _languageConfig;
+        public bool IsSuccess { get; private set; }
+        public TotemEnemyTutorial(
+            SpeechEventManager speechEventManager
+            , EnemySpawnerTutorial enemySpawnerTutorial
+            , LanguageConfig languageConfig
+        )
+        {
+            _speechEventManager = speechEventManager;
+            _enemySpawnerTutorial = enemySpawnerTutorial;
+            _languageConfig = languageConfig;
+        }
+
+        public override void Execute()
+        {
+            Debug.Log("Tutorial: Defeat totem enemy...");
+            _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildTotemEnemyTutorial(this, _languageConfig.CurrentLanguage));
 
             var intervalSec = 1f; // スポーンの間隔
             var enemyEnums = new Queue<EnemyEnum>(new[] { EnemyEnum.Blue, EnemyEnum.Yellow, EnemyEnum.Red });
@@ -278,6 +314,7 @@ namespace Daipan.Tutorial.Scripts
 
         public void SetSuccess()
         {
+            Debug.Log($"TotemEnemyTutorial SetIsSuccess");
             IsSuccess = true;
             _speechEventManager.MoveNext();
         }

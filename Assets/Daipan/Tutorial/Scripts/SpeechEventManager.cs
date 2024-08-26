@@ -139,6 +139,25 @@ namespace Daipan.Tutorial.Scripts
                 _ => new List<string>()
             };
         }
+        public static List<string> TotemEnemyTutorial(LanguageEnum language)
+        {
+            return language switch
+            {
+                LanguageEnum.English => new List<string>
+                {
+                    "A totem enemy is coming!",
+                    "Press the corresponding button!",
+                    "You have a talent for streaming!"
+                },
+                LanguageEnum.Japanese => new List<string>
+                {
+                    "今度の敵は色が複数あるね！",
+                    "対応するボタンを同時に押そう！",
+                    "君、配信の才能あるよ！"
+                },
+                _ => new List<string>()
+            };
+        }
 
         public static List<string> ShowWhiteCommentsTutorial(LanguageEnum language)
         {
@@ -267,6 +286,29 @@ namespace Daipan.Tutorial.Scripts
                         SpeechEventEnum.Listening),
                     new SequentialEvent(1, SpeechContentByLanguage.SequentialEnemyTutorial(language)[1],
                         SpeechEventEnum.Practical, () => sequentialEnemyTutorial.IsSuccess),
+                    new SequentialEvent(2, SpeechContentByLanguage.SequentialEnemyTutorial(language)[2],
+                        SpeechEventEnum.Listening),
+                    new EndEvent()
+                };
+
+            speechEvents[0].SetNextEvent(speechEvents[1]);
+            speechEvents[1].SetNextEvent(speechEvents[2]);
+            speechEvents[2].SetNextEvent(speechEvents[3]);
+            return speechEvents[0];
+        }
+        
+        public static ISpeechEvent BuildTotemEnemyTutorial(
+            TotemEnemyTutorial totemEnemyTutorial
+            , LanguageEnum language
+        )
+        {
+            var speechEvents =
+                new List<ISpeechEvent>
+                {
+                    new SequentialEvent(0, SpeechContentByLanguage.SequentialEnemyTutorial(language)[0],
+                        SpeechEventEnum.Listening),
+                    new SequentialEvent(1, SpeechContentByLanguage.SequentialEnemyTutorial(language)[1],
+                        SpeechEventEnum.Practical, () => totemEnemyTutorial.IsSuccess),
                     new SequentialEvent(2, SpeechContentByLanguage.SequentialEnemyTutorial(language)[2],
                         SpeechEventEnum.Listening),
                     new EndEvent()

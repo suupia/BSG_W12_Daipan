@@ -78,6 +78,11 @@ namespace Daipan.Player.Scripts
                     // 本来は全ての敵を倒したかどうかを判定するべきだが、最後の敵がたまたまRedなので、これで判定する
                     if(playerColor == PlayerColor.Red) sequentialEnemyTutorial.SetSuccess();
                 }
+
+                if (tutorialFacilitator.CurrentStep is TotemEnemyTutorial totemEnemyTutorial)
+                {
+                    // todo : 処理を書く
+                }
             }
             if (PlayerAttackModule.GetTargetEnemyEnum(playerColor).Contains(enemyMono.EnemyEnum))
             {
