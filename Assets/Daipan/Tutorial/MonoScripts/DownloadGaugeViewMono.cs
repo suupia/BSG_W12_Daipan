@@ -17,19 +17,21 @@ namespace Daipan.Tutorial.MonoScripts
 
         void Awake()
         {
-           Hide(); 
+            Hide();
         }
 
         public void SetGaugeValue(float value)
         {
             downloadPercentText.text = $"{(int)(value * 100)}%";
             gaugeImage.fillAmount = value;
-            Debug.Log($"gaugeImage.fillAmount = {gaugeImage.fillAmount}, value = {value}");
+            // Debug.Log($"gaugeImage.fillAmount = {gaugeImage.fillAmount}, value = {value}");
         }
+
         public void Show()
         {
             viewObject.SetActive(true);
         }
+
         public void Hide()
         {
             gaugeImage.fillAmount = 0;

@@ -29,9 +29,11 @@ namespace Daipan.Tutorial.Scripts
     {
         public string Message { get; }
         public string SpriteKey { get; }
+
         public Speech(string message) : this(message, string.Empty)
         {
         }
+
         public Speech(string message, string spriteKey)
         {
             Message = message;
@@ -78,9 +80,9 @@ namespace Daipan.Tutorial.Scripts
     public sealed record EndEvent : ISpeechEvent
     {
         public int Id => -1;
-        public Speech Speech { get; } = new(string.Empty, string.Empty); 
+        public Speech Speech { get; } = new(string.Empty, string.Empty);
         public SpeechEventEnum SpeechEventEnum => SpeechEventEnum.None;
-        
+
         public (bool, ISpeechEvent) MoveNext()
         {
             return (false, this);
@@ -92,158 +94,158 @@ namespace Daipan.Tutorial.Scripts
         }
     }
 
-public static class SpeechContentByLanguage
-{
-    public static List<Speech> UICatIntroduce(LanguageEnum language)
+    public static class SpeechContentByLanguage
     {
-        return language switch
+        public static List<Speech> UICatIntroduce(LanguageEnum language)
         {
-            LanguageEnum.English => new List<Speech>
+            return language switch
             {
-                new("Hi, I'm a cat!"),
-                new("I'll support your stream!"),
-                new("Let's start the game explanation...!")
-            },
-            LanguageEnum.Japanese => new List<Speech>
-            {
-                new("やぁ、初めまして！僕はネコ！"),
-                new("君の配信をサポートするよ！"),
-                new("じゃあ、まずこのゲームの説明...!")
-            },
-            _ => new List<Speech>()
-        };
-    }
+                LanguageEnum.English => new List<Speech>
+                {
+                    new("Hi, I'm a cat!"),
+                    new("I'll support your stream!"),
+                    new("Let's start the game explanation...!")
+                },
+                LanguageEnum.Japanese => new List<Speech>
+                {
+                    new("やぁ、初めまして！僕はネコ！"),
+                    new("君の配信をサポートするよ！"),
+                    new("じゃあ、まずこのゲームの説明...!")
+                },
+                _ => new List<Speech>()
+            };
+        }
 
-    public static List<Speech> RedEnemyTutorial(LanguageEnum language)
-    {
-        return language switch
+        public static List<Speech> RedEnemyTutorial(LanguageEnum language)
         {
-            LanguageEnum.English => new List<Speech>
+            return language switch
             {
-                new("A red enemy is coming!"),
-                new("Press the red button!"),
-                new("That's right! Good job!")
-            },
-            LanguageEnum.Japanese => new List<Speech>
-            {
-                new("青い敵が来たね！"),
-                new("青色のボタンを押そう！", "speech_blue"),
-                new("そうそう！上手！")
-            },
-            _ => new List<Speech>()
-        };
-    }
+                LanguageEnum.English => new List<Speech>
+                {
+                    new("A red enemy is coming!"),
+                    new("Press the red button!"),
+                    new("That's right! Good job!")
+                },
+                LanguageEnum.Japanese => new List<Speech>
+                {
+                    new("青い敵が来たね！"),
+                    new("青色のボタンを押そう！", "speech_blue"),
+                    new("そうそう！上手！")
+                },
+                _ => new List<Speech>()
+            };
+        }
 
-    public static List<Speech> SequentialEnemyTutorial(LanguageEnum language)
-    {
-        return language switch
+        public static List<Speech> SequentialEnemyTutorial(LanguageEnum language)
         {
-            LanguageEnum.English => new List<Speech>
+            return language switch
             {
-                new("A lot of enemies are coming!"),
-                new("Press the corresponding button!"),
-                new("You have a talent for streaming!")
-            },
-            LanguageEnum.Japanese => new List<Speech>
-            {
-                new("今度はたくさんの敵が来たね！"),
-                new("対応するボタンを押そう！"),
-                new("いいかんじ！")
-            },
-            _ => new List<Speech>()
-        };
-    }
+                LanguageEnum.English => new List<Speech>
+                {
+                    new("A lot of enemies are coming!"),
+                    new("Press the corresponding button!"),
+                    new("You have a talent for streaming!")
+                },
+                LanguageEnum.Japanese => new List<Speech>
+                {
+                    new("今度はたくさんの敵が来たね！"),
+                    new("対応するボタンを押そう！", "speech_all"),
+                    new("いいかんじ！")
+                },
+                _ => new List<Speech>()
+            };
+        }
 
-    public static List<Speech> TotemEnemyTutorial(LanguageEnum language)
-    {
-        return language switch
+        public static List<Speech> TotemEnemyTutorial(LanguageEnum language)
         {
-            LanguageEnum.English => new List<Speech>
+            return language switch
             {
-                new("A totem enemy is coming!"),
-                new("Press the corresponding button!"),
-                new("You have a talent for streaming!")
-            },
-            LanguageEnum.Japanese => new List<Speech>
-            {
-                new("わ！トーテムポールだ！"),
-                new("対応するボタンを同時押しだ！"),
-                new("最高！君、配信の才能あるよ！")
-            },
-            _ => new List<Speech>()
-        };
-    }
+                LanguageEnum.English => new List<Speech>
+                {
+                    new("A totem enemy is coming!"),
+                    new("Press the corresponding button!"),
+                    new("You have a talent for streaming!")
+                },
+                LanguageEnum.Japanese => new List<Speech>
+                {
+                    new("わ！トーテムポールだ！"),
+                    new("対応するボタンを同時押しだ！", "speech_red_blue"),
+                    new("最高！君、配信の才能あるよ！")
+                },
+                _ => new List<Speech>()
+            };
+        }
 
-    public static List<Speech> ShowWhiteCommentsTutorial(LanguageEnum language)
-    {
-        return language switch
+        public static List<Speech> ShowWhiteCommentsTutorial(LanguageEnum language)
         {
-            LanguageEnum.English => new List<Speech>
+            return language switch
             {
-                new("The stream is getting exciting...!")
-            },
-            LanguageEnum.Japanese => new List<Speech>
-            {
-                new("配信盛り上がっているネ...！")
-            },
-            _ => new List<Speech>()
-        };
-    }
+                LanguageEnum.English => new List<Speech>
+                {
+                    new("The stream is getting exciting...!")
+                },
+                LanguageEnum.Japanese => new List<Speech>
+                {
+                    new("配信盛り上がっているネ...！")
+                },
+                _ => new List<Speech>()
+            };
+        }
 
-    public static List<Speech> ShowAntiCommentsTutorial(LanguageEnum language)
-    {
-        return language switch
+        public static List<Speech> ShowAntiCommentsTutorial(LanguageEnum language)
         {
-            LanguageEnum.English => new List<Speech>
+            return language switch
             {
-                new("Oh no! It's an anti...! What should I do... ; ;")
-            },
-            LanguageEnum.Japanese => new List<Speech>
-            {
-                new("うわ！？アンチだ...！？どうしよ...；；")
-            },
-            _ => new List<Speech>()
-        };
-    }
+                LanguageEnum.English => new List<Speech>
+                {
+                    new("Oh no! It's an anti...! What should I do... ; ;")
+                },
+                LanguageEnum.Japanese => new List<Speech>
+                {
+                    new("うわ！？アンチだ...！？どうしよ...；；")
+                },
+                _ => new List<Speech>()
+            };
+        }
 
-    public static List<Speech> DaipanCutscene(LanguageEnum language)
-    {
-        return language switch
+        public static List<Speech> DaipanCutscene(LanguageEnum language)
         {
-            LanguageEnum.English => new List<Speech>
+            return language switch
             {
-                new("Wow...")
-            },
-            LanguageEnum.Japanese => new List<Speech>
-            {
-                new("わっ...")
-            },
-            _ => new List<Speech>()
-        };
-    }
+                LanguageEnum.English => new List<Speech>
+                {
+                    new("Wow...")
+                },
+                LanguageEnum.Japanese => new List<Speech>
+                {
+                    new("わっ...")
+                },
+                _ => new List<Speech>()
+            };
+        }
 
-    public static List<Speech> CatSpeaksAfterDaipan(LanguageEnum language)
-    {
-        return language switch
+        public static List<Speech> CatSpeaksAfterDaipan(LanguageEnum language)
         {
-            LanguageEnum.English => new List<Speech>
+            return language switch
             {
-                new("A, Amazing...!"),
-                new("You have a talent for streaming!"),
-                new("Daipan streamer...! You can do it... This will sell~~~!!!"),
-                new("...Alright! Let's start the actual stream soon!")
-            },
-            LanguageEnum.Japanese => new List<Speech>
-            {
-                new("す、スゴイ...！"),
-                new("君、配信の才能あるよ！"),
-                new("台パン配信者...！い、いける...これは売れるぞ〜〜！！！"),
-                new("...ヨシ！そろそろ本番の配信をしようか！")
-            },
-            _ => new List<Speech>()
-        };
+                LanguageEnum.English => new List<Speech>
+                {
+                    new("A, Amazing...!"),
+                    new("You have a talent for streaming!"),
+                    new("Daipan streamer...! You can do it... This will sell~~~!!!"),
+                    new("...Alright! Let's start the actual stream soon!")
+                },
+                LanguageEnum.Japanese => new List<Speech>
+                {
+                    new("す、スゴイ...！"),
+                    new("君、配信の才能あるよ！"),
+                    new("台パン配信者...！い、いける...これは売れるぞ〜〜！！！"),
+                    new("...ヨシ！そろそろ本番の配信をしようか！")
+                },
+                _ => new List<Speech>()
+            };
+        }
     }
-}
 
 
     public static class SpeechEventBuilder
@@ -321,11 +323,11 @@ public static class SpeechContentByLanguage
             var speechEvents =
                 new List<ISpeechEvent>
                 {
-                    new SequentialEvent(0, SpeechContentByLanguage.SequentialEnemyTutorial(language)[0],
+                    new SequentialEvent(0, SpeechContentByLanguage.TotemEnemyTutorial(language)[0],
                         SpeechEventEnum.Listening),
-                    new SequentialEvent(1, SpeechContentByLanguage.SequentialEnemyTutorial(language)[1],
+                    new SequentialEvent(1, SpeechContentByLanguage.TotemEnemyTutorial(language)[1],
                         SpeechEventEnum.Practical, () => totemEnemyTutorial.IsSuccess),
-                    new SequentialEvent(2, SpeechContentByLanguage.SequentialEnemyTutorial(language)[2],
+                    new SequentialEvent(2, SpeechContentByLanguage.TotemEnemyTutorial(language)[2],
                         SpeechEventEnum.Listening),
                     new EndEvent()
                 };
