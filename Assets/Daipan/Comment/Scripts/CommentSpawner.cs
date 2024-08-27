@@ -87,7 +87,7 @@ namespace Daipan.Comment.Scripts
             var commentPrefab = _antiCommentLoader.Load();
             var spawnPosition = _commentParamsServer.GetAntiSpawnedPosition();
             var comment = _container.Instantiate(commentPrefab, spawnPosition,
-                Quaternion.identity, _commentParamsServer.GetCommentParent());
+                Quaternion.identity, _commentParamsServer.GetAntiCommentParent());
             comment.SetParameter(_commentParamsServer.GetRandomAntiCommentWord());　// コメントの文章を抽選する 
             _antiCommentCluster.Add(comment);
 
