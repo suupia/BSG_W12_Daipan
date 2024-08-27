@@ -47,7 +47,8 @@ namespace Daipan.Enemy.Scripts
                 ,_enemyCluster
                 ,new EnemyAttackDecider()
                 ,new EnemyDie(enemyMono)
-               , _enemyOnAttackedBuilder.SwitchEnemyOnAttacked(enemyEnum)
+                , _enemyOnAttackedBuilder.SwitchEnemyOnAttacked(enemyEnum)
+                , new NoneEnemyOnDied()
             );
             
             enemyMono.OnDied += (sender, args) =>

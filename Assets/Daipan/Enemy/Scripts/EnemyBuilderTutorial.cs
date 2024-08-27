@@ -44,6 +44,7 @@ namespace Daipan.Enemy.Scripts
                 , new EnemyAttackDecider()
                 , new EnemyDie(enemyMono)
                 , _enemyOnAttackedBuilder.SwitchEnemyOnAttacked(enemyEnum)
+                , new TutorialEnemyOnDied(enemyMono)
                 
             );
             
