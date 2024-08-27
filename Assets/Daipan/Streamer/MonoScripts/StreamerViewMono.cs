@@ -48,11 +48,12 @@ namespace Daipan.Streamer.MonoScripts
             animator.SetTrigger("IsDaipan");
             daipanEffect.SetTrigger("IsDaipan");
             daipanWhiteEffect.SetTrigger("IsDaipan");
-            DOVirtual.Float(0f, 2f, 1f, value =>
-            {
-                daipanWaveMaterial.SetFloat("_Radius", value);
-                Debug.Log($"radius : {value}");
-            });
+            // 台パンのエフェクトを動かすところ
+            //DOVirtual.Float(0f, 2f, 1f, value =>
+            //{
+            //    daipanWaveMaterial.SetFloat("_Radius", value);
+            //    Debug.Log($"radius : {value}");
+            //});
         }
 
         public void AngerZoom(bool isFull)
