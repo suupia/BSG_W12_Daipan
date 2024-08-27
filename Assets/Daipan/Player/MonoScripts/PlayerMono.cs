@@ -22,7 +22,7 @@ namespace Daipan.Player.MonoScripts
         [SerializeField] List<AbstractPlayerViewMono?> playerViewMonos = new();
         IPlayerHpParamData _playerHpParamData = null!;
         IPlayerInput _playerInput = null!;
-        public Hp Hp { get; set; } = null!;
+        public Hp Hp { get; private set; } = null!;
 
         IPlayerOnAttacked _playerOnAttacked = null!;
         
@@ -42,6 +42,7 @@ namespace Daipan.Player.MonoScripts
         )
         {
             _playerHpParamData = playerHpParamData;
+            Hp = new Hp(_playerHpParamData.GetMaxHp());
             
             playerInput.SetPlayerMono(this, playerViewMonos);
             _playerInput = playerInput;
@@ -54,6 +55,12 @@ namespace Daipan.Player.MonoScripts
         {
             Hp = _playerOnAttacked.OnAttacked(Hp, enemyParamData);
         }
+        
+        public void SetHpMax()
+        {
+            Hp = new Hp(_playerHpParamData.GetMaxHp());
+        }
+        
         public int MaxHp => _playerHpParamData.GetMaxHp();
     }
 }

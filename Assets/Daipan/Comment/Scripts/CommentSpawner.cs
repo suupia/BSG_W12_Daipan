@@ -10,7 +10,6 @@ using VContainer;
 using VContainer.Unity;
 using R3;
 using Daipan.Player.MonoScripts;
-using Daipan.Sound.Interfaces;
 using Daipan.Sound.MonoScripts;
 
 namespace Daipan.Comment.Scripts
@@ -30,8 +29,6 @@ namespace Daipan.Comment.Scripts
         readonly ComboCounter _comboCounter;
         readonly IComboMultiplier _comboMultiplier;
 
-        readonly ISoundManager _soundManager;
-
         
         public CommentSpawner(
             IObjectResolver container,
@@ -42,8 +39,7 @@ namespace Daipan.Comment.Scripts
             IPrefabLoader<AntiCommentMono> antiCommentLoader,
             ViewerNumber viewerNumber,
             ComboCounter comboCounter,
-            IComboMultiplier comboMultiplier,
-            ISoundManager soundManager
+            IComboMultiplier comboMultiplier
         )
         {
             _container = container;
@@ -55,7 +51,6 @@ namespace Daipan.Comment.Scripts
             _comboCounter = comboCounter;
             _comboMultiplier = comboMultiplier;
             _viewerNumber = viewerNumber;
-            _soundManager = soundManager;
         }
 
         void IUpdate.Update()
@@ -85,7 +80,6 @@ namespace Daipan.Comment.Scripts
             var multipliedAmount = (int)(_commentParamsServer.GetViewerDiffCommentNumber() * _comboMultiplier.CalculateComboMultiplier(_comboCounter.ComboCount));
             _viewerNumber.IncreaseViewer(multipliedAmount);
             
-            // _soundManager.PlaySe(SeEnum.SpawnComment);
         }
 
         void SpawnAntiComment()
@@ -101,7 +95,6 @@ namespace Daipan.Comment.Scripts
             var multipliedAmount = (int)(_commentParamsServer.GetViewerDiffAntiCommentNumber() * _comboMultiplier.CalculateComboMultiplier(_comboCounter.ComboCount));
             _viewerNumber.DecreaseViewer(multipliedAmount);
             
-            // _soundManager.PlaySe(SeEnum.SpawnAntiComment);
         }
     }
 }

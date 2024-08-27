@@ -27,9 +27,6 @@ public sealed class TitleScope : LifetimeScope
     {
         builder.RegisterComponentInHierarchy<TitleMono>();
         
-        // Sound
-        DaipanScope.RegisterSound(builder);
-
         // Option
         DaipanScope.RegisterOption(builder);
 

@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Daipan.Battle.scripts;
 using Daipan.Core.Interfaces;
-using Daipan.Sound.Interfaces;
+using Daipan.Sound.MonoScripts;
 using UnityEngine;
 using VContainer;
 
@@ -14,14 +14,12 @@ namespace Daipan.End.MonoScripts
     {
         [SerializeField] AudioSource audioSource = null!;
         [SerializeField] List<EndSceneSEParam> _endSceneSEParams = new ();
-        ISoundManager _soundManager = null!;
         IGetEnterKey _getEnterKey;
 
         [Inject]
-        public void Initialize(ISoundManager soundManager,IGetEnterKey getEnterKey)
+        public void Initialize(IGetEnterKey getEnterKey)
         {
-            _soundManager = soundManager;
-            _soundManager.StopAllBgm();
+            SoundManager.Instance?.StopAllBgm();
             Debug.Log("EndMono is created");
             
             foreach (var endSceneSeParam in _endSceneSEParams)
@@ -39,7 +37,7 @@ namespace Daipan.End.MonoScripts
         
         void Start()
         {
-            _soundManager.FadOutBgm(0.5f);
+            SoundManager.Instance?.FadOutBgm(0.5f);
         } 
         void Update()
         {
@@ -50,7 +48,7 @@ namespace Daipan.End.MonoScripts
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                _soundManager.FadOutBgm(0.5f);
+                SoundManager.Instance?.FadOutBgm(0.5f);
             }
         }
     }

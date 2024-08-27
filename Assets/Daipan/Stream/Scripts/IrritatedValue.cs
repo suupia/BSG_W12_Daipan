@@ -52,5 +52,10 @@ namespace Daipan.Stream.Scripts
 
             Value = Math.Max(0, Value - amount);
         }
+
+        public void Reset()
+        {
+            Value = 0;
+        }
     }
 }

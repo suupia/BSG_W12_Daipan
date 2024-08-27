@@ -6,7 +6,6 @@ using Daipan.Comment.Scripts;
 using Daipan.Enemy.Scripts;
 using Daipan.InputSerial.Scripts;
 using Daipan.Option.Scripts;
-using Daipan.Sound.Interfaces;
 using Daipan.Sound.MonoScripts;
 using Daipan.Stream.Scripts;
 using Daipan.Streamer.MonoScripts;
@@ -36,22 +35,20 @@ namespace Daipan.Tutorial.Scripts
     public sealed class DisplayBlackScreenWithProgress : AbstractTutorialContent
     {
         readonly DownloadGaugeViewMono _gaugeViewMono;
-        readonly ISoundManager _soundManager;
         const float FillAmountPerSec = 0.2f;
         bool Completed { get; set; }
 
         public DisplayBlackScreenWithProgress(
             DownloadGaugeViewMono gaugeViewMono
-            , ISoundManager soundManager)
+            )
         {
             _gaugeViewMono = gaugeViewMono;
-            _soundManager = soundManager;
         }
 
         public override void Execute()
         {
             _gaugeViewMono.Show();
-            _soundManager.FadOutBgm(1.0f);
+            SoundManager.Instance?.FadOutBgm(1.0f);
             
             Disposables.Add(Observable.EveryUpdate()
                 .Where(_ => !Completed)
@@ -170,17 +167,14 @@ namespace Daipan.Tutorial.Scripts
     {
         readonly SpeechEventManager _speechEventManager;
         readonly LanguageConfig _languageConfig;
-        readonly ISoundManager _soundManager;
 
         public UICatIntroduce(
             SpeechEventManager speechEventManager
             , LanguageConfig languageConfig
-            , ISoundManager soundManager
         )
         {
             _speechEventManager = speechEventManager;
             _languageConfig = languageConfig;
-            _soundManager = soundManager;
         }
 
         public override void Execute()
@@ -190,7 +184,7 @@ namespace Daipan.Tutorial.Scripts
             UnityEngine.Object.FindObjectOfType<SpeechBubbleMono>().IsStartTutorial = true;
             _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildUICatIntroduce(_languageConfig.CurrentLanguage));
             
-            _soundManager.PlayBgm(BgmEnum.Tutorial);
+            SoundManager.Instance?.PlayBgm(BgmEnum.Tutorial);
 
         }
 
