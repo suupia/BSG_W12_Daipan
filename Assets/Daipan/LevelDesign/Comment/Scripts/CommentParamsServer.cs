@@ -76,6 +76,10 @@ namespace Daipan.LevelDesign.Comment.Scripts
         {
             return _commentPosition.CommentParent;
         }
+        public Transform GetAntiCommentParent()
+        {
+            return _commentPosition.AntiCommentParent;
+        }
 
         public Vector3 GetAntiSpawnedPosition()
         {

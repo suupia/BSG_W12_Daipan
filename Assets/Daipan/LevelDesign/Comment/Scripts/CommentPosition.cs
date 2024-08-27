@@ -31,5 +31,9 @@ namespace Daipan.LevelDesign.Comment.Scripts
         [Header("コメントの親オブジェクト")]
         [Tooltip("コメントの親オブジェクトを入れて！！")]
         public Transform CommentParent = null!;
+
+        [Header("アンチコメントの親オブジェクト")]
+        [Tooltip("アンチコメントの親オブジェクトを入れて！！")]
+        public Transform AntiCommentParent = null!;
     }
 }
