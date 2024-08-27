@@ -10,12 +10,12 @@ namespace Daipan.Enemy.Scripts
     public class TutorialEnemyOnDied : IEnemyOnDied
     {
         readonly EnemyMono _enemyMono;
-        readonly TutorialFacilitator _tutorialFacilitator;
+        readonly TutorialCurrentStep _tutorialCurrentStep;
 
-        public TutorialEnemyOnDied(EnemyMono enemyMono, TutorialFacilitator tutorialFacilitator)
+        public TutorialEnemyOnDied(EnemyMono enemyMono, TutorialCurrentStep tutorialCurrentStep)
         {
             _enemyMono = enemyMono;
-            _tutorialFacilitator = tutorialFacilitator;
+            _tutorialCurrentStep = tutorialCurrentStep;
         }
 
         public void OnDied()
@@ -25,7 +25,7 @@ namespace Daipan.Enemy.Scripts
             Debug.Log($"EnemyType: {_enemyMono.EnemyEnum}を攻撃");
             if (_enemyMono.EnemyEnum == EnemyEnum.Blue)
             {
-                if (_tutorialFacilitator.CurrentStep is BlueEnemyTutorial redEnemyTutorial)
+                if (_tutorialCurrentStep.CurrentStep is BlueEnemyTutorial redEnemyTutorial)
                 {
                     // Blueの敵を一体倒すチュートリアル
                     redEnemyTutorial.SetSuccess();
@@ -34,7 +34,7 @@ namespace Daipan.Enemy.Scripts
 
             if (_enemyMono.EnemyEnum == EnemyEnum.Red)
             {
-                if (_tutorialFacilitator.CurrentStep is SequentialEnemyTutorial sequentialEnemyTutorial)
+                if (_tutorialCurrentStep.CurrentStep is SequentialEnemyTutorial sequentialEnemyTutorial)
                 {
                     // 本来は全ての敵を倒したかどうかを判定するべきだが、最後の敵がたまたまRedなので、これで判定する
                     sequentialEnemyTutorial.SetSuccess();
@@ -43,7 +43,7 @@ namespace Daipan.Enemy.Scripts
 
             if (_enemyMono.EnemyEnum == EnemyEnum.Totem2)
             {
-                if (_tutorialFacilitator.CurrentStep is TotemEnemyTutorial totemEnemyTutorial)
+                if (_tutorialCurrentStep.CurrentStep is TotemEnemyTutorial totemEnemyTutorial)
                 {
                     totemEnemyTutorial.SetSuccess();
                 }

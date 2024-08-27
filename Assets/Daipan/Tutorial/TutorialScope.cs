@@ -101,6 +101,7 @@ namespace Daipan.Tutorial
             DaipanScope.RegisterOption(builder);
             
             // Tutorial
+            builder.Register<TutorialCurrentStep>(Lifetime.Scoped);
             builder.Register<TutorialFacilitator>(Lifetime.Scoped).AsSelf().As<IUpdate>();
             RegisterTutorialContents(builder);
             builder.Register<SpeechEventManager>(Lifetime.Scoped);

@@ -22,19 +22,19 @@ namespace Daipan.Enemy.Scripts
         readonly IEnemyParamContainer _enemyParamContainer;
         readonly EnemyCluster _enemyCluster;
         readonly EnemyOnAttackedBuilder _enemyOnAttackedBuilder;
-        readonly TutorialFacilitator _tutorialFacilitator;
+        readonly TutorialCurrentStep _tutorialCurrentStep;
         
         public EnemyBuilderTutorial(
             IEnemyParamContainer enemyParamContainer
             , EnemyCluster enemyCluster
             , EnemyOnAttackedBuilder enemyOnAttackedBuilder
-            , TutorialFacilitator tutorialFacilitator
+            , TutorialCurrentStep tutorialCurrentStep
         )
         {
             _enemyParamContainer = enemyParamContainer;
             _enemyCluster = enemyCluster;
             _enemyOnAttackedBuilder = enemyOnAttackedBuilder;
-            _tutorialFacilitator = tutorialFacilitator;
+            _tutorialCurrentStep = tutorialCurrentStep; 
         }
 
         public EnemyMono Build(EnemyMono enemyMono, EnemyEnum enemyEnum)
@@ -48,7 +48,7 @@ namespace Daipan.Enemy.Scripts
                 , new EnemyAttackDecider()
                 , new EnemyDie(enemyMono)
                 , _enemyOnAttackedBuilder.SwitchEnemyOnAttacked(enemyEnum)
-                , new TutorialEnemyOnDied(enemyMono, _tutorialFacilitator)
+                , new TutorialEnemyOnDied(enemyMono, _tutorialCurrentStep)
                 
             );
             
