@@ -80,7 +80,7 @@ namespace Daipan.Streamer.MonoScripts
                     speechText.text = speech.Message;
                 }
 
-                if (speech != string.Empty) SoundManager.Instance?.PlaySe(SeEnum.Text);
+                if (speech.Message != string.Empty) SoundManager.Instance?.PlaySe(SeEnum.Text);
             });
         }
 
