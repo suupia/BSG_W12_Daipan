@@ -74,9 +74,12 @@ namespace Daipan.Streamer.MonoScripts
                 {
                     speechWithSpriteText.text = speech.Message;
                     speechImage.sprite = _speechSprites.GetSprite(speech.SpriteKey);
+                    speechText.text = string.Empty;
                 }
                 else
                 {
+                    speechWithSpriteText.text = string.Empty;
+                    speechImage.sprite = null; 
                     speechText.text = speech.Message;
                 }
 
