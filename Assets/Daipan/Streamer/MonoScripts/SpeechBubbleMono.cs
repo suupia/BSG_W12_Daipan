@@ -19,13 +19,15 @@ namespace Daipan.Streamer.MonoScripts
 {
     public class SpeechBubbleMono : MonoBehaviour
     {
-        // 画像付きの吹き出し
-        [SerializeField] Image speechImage = null!;
-
-        [SerializeField] TextMeshProUGUI speechWithSpriteText = null!;
-
         // 画像なしの吹き出し
+        [SerializeField] Transform speechParent = null!;
+        [SerializeField] Image nextButtonImage = null!;
         [SerializeField] TextMeshProUGUI speechText = null!;
+        
+        // 画像付きの吹き出し
+        [SerializeField] Transform speechWithSpriteParent = null!;
+        [SerializeField] Image speechImage = null!;
+        [SerializeField] TextMeshProUGUI speechWithSpriteText = null!;
 
         const float DurationSec = 0.5f;
         const double MinShowSec = 0.5;
@@ -72,15 +74,22 @@ namespace Daipan.Streamer.MonoScripts
             {
                 if (speech.SpriteKey != string.Empty)
                 {
+                    speechParent.gameObject.SetActive(false);
+                    speechText.text = string.Empty;
+                    nextButtonImage.sprite = null; 
+                    speechWithSpriteParent.gameObject.SetActive(true);
                     speechWithSpriteText.text = speech.Message;
                     speechImage.sprite = _speechSprites.GetSprite(speech.SpriteKey);
-                    speechText.text = string.Empty;
+
                 }
                 else
                 {
+                    speechParent.gameObject.SetActive(true);
+                    speechText.text = speech.Message;
+                    nextButtonImage.sprite = _speechSprites.GetSprite("red");
+                    speechWithSpriteParent.gameObject.SetActive(false);
                     speechWithSpriteText.text = string.Empty;
                     speechImage.sprite = null; 
-                    speechText.text = speech.Message;
                 }
 
                 if (speech.Message != string.Empty) SoundManager.Instance?.PlaySe(SeEnum.Text);

@@ -1132,9 +1132,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5254e17c3e04fe3bb4395e13c118ead, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speechParent: {fileID: 988579210}
+  nextButtonImage: {fileID: 1599879239}
+  speechText: {fileID: 1177030943}
+  speechWithSpriteParent: {fileID: 184600362}
   speechImage: {fileID: 1839351777}
   speechWithSpriteText: {fileID: 2042212244}
-  speechText: {fileID: 1177030943}
 --- !u!1 &1170389371
 GameObject:
   m_ObjectHideFlags: 0
@@ -1654,8 +1657,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 375.6, y: -40.4}
-  m_SizeDelta: {x: 80, y: 80}
+  m_AnchoredPosition: {x: 280, y: -25}
+  m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1599879239
 MonoBehaviour:
