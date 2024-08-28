@@ -372,6 +372,56 @@ namespace Daipan.Tutorial.Scripts
         }
     }
 
+    public class ForcedMissTutorial : AbstractTutorialContent
+    {
+        readonly SpeechEventManager _speechEventManager;
+        readonly CommentSpawner _commentSpawner;
+        readonly EnemySpawnerTutorial _enemySpawnerTutorial;
+        bool CanMoveNext { get; set; }
+
+        public ForcedMissTutorial(
+            SpeechEventManager speechEventManager
+            , CommentSpawner commentSpawner
+            , EnemySpawnerTutorial enemySpawnerTutorial
+        )
+        {
+            _speechEventManager = speechEventManager;
+            _commentSpawner = commentSpawner;
+            _enemySpawnerTutorial = enemySpawnerTutorial;
+        }
+
+        public override void Execute()
+        {
+                
+               
+                // todo : イライラゲージmaxになったら次のContentに遷移
+                // 次のシーンだが、（17.ヨシ！その怒りを力に変えろ～！ ）
+                
+                Debug.Log("Tutorial: forced miss..."); 
+                // todo : いいかんじのメッセージを表示
+                // _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildForcedMissTutorial(this, _languageConfig.CurrentLanguage));
+                // todo : BlueEnemyを生成
+                _enemySpawnerTutorial.SpawnEnemyByType(EnemyEnum.Blue);
+
+                // todo : 間違った攻撃をする
+                // あたらしくクラスを作る
+                
+                // todo : アンチコメントが確定で生成される
+                const int antiCommentNumber = 4; 
+                for(int i = 0; i < antiCommentNumber; i++)
+                {
+                    _commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
+                } 
+                // todo : イライラゲージが溜まっている時にスポットライトを当てる　（わわわ、怒りがどんどん溜まってる…！？｛怒りゲージにスポットライトを当てる｝）
+                // 新しくクラスを作る
+        }
+
+        public override bool IsCompleted()
+        {
+            return _speechEventManager.IsEnd() && CanMoveNext;
+        } 
+    }
+
     public class ShowAntiCommentsTutorial : AbstractTutorialContent
     {
         readonly SpeechEventManager _speechEventManager;
