@@ -30,6 +30,7 @@ namespace Daipan.Player.Scripts
 
         public void FireAttackEffect(PlayerMono playerMono, PlayerColor playerColor)
         {
+            Debug.Log($"FireAttackEffect: {playerColor}");
             var sameColorPlayerViewMono = _playerViewMonos
                 .FirstOrDefault(playerViewMono => playerViewMono?.playerColor == playerColor);
             if (sameColorPlayerViewMono == null)
