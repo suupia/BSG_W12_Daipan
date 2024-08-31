@@ -10,6 +10,7 @@ using Daipan.Enemy.MonoScripts;
 using Daipan.LevelDesign.Comment.Scripts;
 using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.Stream.Scripts;
+using Daipan.Tutorial.Scripts;
 using Daipan.Utility.Scripts;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -20,17 +21,20 @@ namespace Daipan.Enemy.Scripts
     {
         readonly IEnemyParamContainer _enemyParamContainer;
         readonly EnemyCluster _enemyCluster;
-        readonly EnemyOnAttackedBuilder _enemyOnAttackedBuilder;
+        readonly EnemyOnAttackedBuilderTutorial _enemyOnAttackedBuilder;
+        readonly TutorialCurrentStep _tutorialCurrentStep;
         
         public EnemyBuilderTutorial(
             IEnemyParamContainer enemyParamContainer
             , EnemyCluster enemyCluster
-            , EnemyOnAttackedBuilder enemyOnAttackedBuilder
+            , EnemyOnAttackedBuilderTutorial enemyOnAttackedBuilder
+            , TutorialCurrentStep tutorialCurrentStep
         )
         {
             _enemyParamContainer = enemyParamContainer;
             _enemyCluster = enemyCluster;
             _enemyOnAttackedBuilder = enemyOnAttackedBuilder;
+            _tutorialCurrentStep = tutorialCurrentStep; 
         }
 
         public EnemyMono Build(EnemyMono enemyMono, EnemyEnum enemyEnum)
@@ -44,6 +48,7 @@ namespace Daipan.Enemy.Scripts
                 , new EnemyAttackDecider()
                 , new EnemyDie(enemyMono)
                 , _enemyOnAttackedBuilder.SwitchEnemyOnAttacked(enemyEnum)
+                , new TutorialEnemyOnDied(enemyMono, _tutorialCurrentStep)
                 
             );
             

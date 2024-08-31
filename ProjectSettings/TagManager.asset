@@ -83,3 +83,6 @@ TagManager:
   - name: BlackScreen
     uniqueID: 4174893465
     locked: 0
+  - name: SpotLight
+    uniqueID: 552985959
+    locked: 0

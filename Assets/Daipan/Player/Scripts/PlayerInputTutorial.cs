@@ -56,7 +56,7 @@ namespace Daipan.Player.Scripts
         {
             OpenMenuUpdate();
 
-            Debug.Log($"_speechEventManager.GetSpeechEventEnum() = {_speechEventManager.GetSpeechEventEnum()}, CurrentEvent = {_speechEventManager.CurrentEvent}, Message = {_speechEventManager.CurrentEvent?.Message}");
+            Debug.Log($"_speechEventManager.GetSpeechEventEnum() = {_speechEventManager.GetSpeechEventEnum()}, CurrentEvent = {_speechEventManager.CurrentEvent}, Message = {_speechEventManager.CurrentEvent?.Speech}");
 
             if (_inputOption.IsOpening)
             {
@@ -72,6 +72,9 @@ namespace Daipan.Player.Scripts
                     case SpeechEventEnum.Practical:
                         TutorialPracticalUpdate();
                         break;
+                    case SpeechEventEnum.NoInput:
+                        // 何もしない
+                        break;
                     case SpeechEventEnum.None:
                         break;
                 }
@@ -80,7 +83,7 @@ namespace Daipan.Player.Scripts
 
         void TutorialListeningUpdate()
         {
-            if (_inputSerialManager.GetButtonAny())
+            if (_inputSerialManager.GetButtonRed())
             {
                 _speechEventManager.MoveNext();
             }
@@ -88,6 +91,8 @@ namespace Daipan.Player.Scripts
 
         void TutorialPracticalUpdate()
         {
+            Debug.Log($"AttackExecutorTutorial: _speechEventManager.GetSpeechEventEnum() = {_speechEventManager.GetSpeechEventEnum()}" +
+                      $", SpeechEventEnum.Message = {_speechEventManager.CurrentEvent?.Speech }");
             if (_playerMono == null)
             {
                 Debug.LogWarning("PlayerMono is not set");

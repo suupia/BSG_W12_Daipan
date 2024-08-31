@@ -15,23 +15,20 @@ MonoBehaviour:
   enemyLevelDesignParam:
     increaseViewerOnEnemyKill: 5
     increaseIrritationGaugeOnSpecialEnemyKill: 5
-    currentKillAmount: 8
+    currentKillAmount: 0
   enemyParams:
   - enemyEnum: 1
     enemyAttackParam:
       attackAmount: 1
       attackIntervalSec: 1
       attackRange: 2
+      increaseIrritatedValueOnAttack: 10
     enemyHpParam:
       maxHp: 10
     enemyMoveParam:
       moveSpeedPerSec: 2
     enemySpawnParam:
       spawnRatio: 60
-      daipanThreshold: 0
-      daipanProbability: 0
-    enemyRewardParam:
-      irritationAfterKill: 30
     enemyAnimatorParam:
       animatorController: {fileID: 0}
       bodyColor: {r: 1, g: 0.3529412, b: 0.54901963, a: 1}
@@ -43,16 +40,13 @@ MonoBehaviour:
       attackAmount: 1
       attackIntervalSec: 1
       attackRange: 2
+      increaseIrritatedValueOnAttack: 10
     enemyHpParam:
       maxHp: 10
     enemyMoveParam:
       moveSpeedPerSec: 2
     enemySpawnParam:
       spawnRatio: 20
-      daipanThreshold: 0
-      daipanProbability: 0
-    enemyRewardParam:
-      irritationAfterKill: 30
     enemyAnimatorParam:
       animatorController: {fileID: 0}
       bodyColor: {r: 0.41568628, g: 0.6862745, b: 0.80784315, a: 1}
@@ -64,16 +58,13 @@ MonoBehaviour:
       attackAmount: 1
       attackIntervalSec: 1
       attackRange: 2
+      increaseIrritatedValueOnAttack: 10
     enemyHpParam:
       maxHp: 10
     enemyMoveParam:
       moveSpeedPerSec: 2
     enemySpawnParam:
       spawnRatio: 20
-      daipanThreshold: 0
-      daipanProbability: 0
-    enemyRewardParam:
-      irritationAfterKill: 30
     enemyAnimatorParam:
       animatorController: {fileID: 0}
       bodyColor: {r: 0.972549, g: 0.6784314, b: 0.3882353, a: 1}
@@ -85,16 +76,13 @@ MonoBehaviour:
       attackAmount: 1
       attackIntervalSec: 1
       attackRange: 2
+      increaseIrritatedValueOnAttack: 10
     enemyHpParam:
       maxHp: 10
     enemyMoveParam:
       moveSpeedPerSec: 2
     enemySpawnParam:
       spawnRatio: 20
-      daipanThreshold: 0
-      daipanProbability: 0
-    enemyRewardParam:
-      irritationAfterKill: 30
     enemyAnimatorParam:
       animatorController: {fileID: 0}
       bodyColor: {r: 1, g: 0.8135679, b: 0, a: 1}
@@ -106,16 +94,13 @@ MonoBehaviour:
       attackAmount: 1
       attackIntervalSec: 1
       attackRange: 2
+      increaseIrritatedValueOnAttack: 10
     enemyHpParam:
       maxHp: 1000
     enemyMoveParam:
       moveSpeedPerSec: 1.5
     enemySpawnParam:
       spawnRatio: 20
-      daipanThreshold: 0
-      daipanProbability: 0
-    enemyRewardParam:
-      irritationAfterKill: 30
     enemyAnimatorParam:
       animatorController: {fileID: 0}
       bodyColor: {r: 0.503916, g: 0.7169812, b: 0.53450656, a: 1}
@@ -127,16 +112,13 @@ MonoBehaviour:
       attackAmount: 1
       attackIntervalSec: 1
       attackRange: 2
+      increaseIrritatedValueOnAttack: 10
     enemyHpParam:
       maxHp: 1000
     enemyMoveParam:
       moveSpeedPerSec: 2
     enemySpawnParam:
       spawnRatio: 20
-      daipanThreshold: 0
-      daipanProbability: 0
-    enemyRewardParam:
-      irritationAfterKill: 30
     enemyAnimatorParam:
       animatorController: {fileID: 0}
       bodyColor: {r: 0.99607843, g: 0.35686275, b: 0.54901963, a: 1}
@@ -148,16 +130,13 @@ MonoBehaviour:
       attackAmount: 1
       attackIntervalSec: 1
       attackRange: 2
+      increaseIrritatedValueOnAttack: 10
     enemyHpParam:
       maxHp: 1000
     enemyMoveParam:
       moveSpeedPerSec: 1.5
     enemySpawnParam:
       spawnRatio: 20
-      daipanThreshold: 0
-      daipanProbability: 0
-    enemyRewardParam:
-      irritationAfterKill: 30
     enemyAnimatorParam:
       animatorController: {fileID: 0}
       bodyColor: {r: 0.98039216, g: 0.6784314, b: 0.38039216, a: 1}
@@ -169,20 +148,43 @@ MonoBehaviour:
       attackAmount: 1
       attackIntervalSec: 1
       attackRange: 2
+      increaseIrritatedValueOnAttack: 10
     enemyHpParam:
       maxHp: 1000
     enemyMoveParam:
       moveSpeedPerSec: 1.5
     enemySpawnParam:
       spawnRatio: 20
-      daipanThreshold: 0
-      daipanProbability: 0
-    enemyRewardParam:
-      irritationAfterKill: 30
     enemyAnimatorParam:
       animatorController: {fileID: 0}
       bodyColor: {r: 0.40730688, g: 0.707578, b: 0.764151, a: 1}
       eyeColor: {r: 0.8862745, g: 0.972549, b: 0.8901961, a: 1}
       eyeBallColor: {r: 0.1372549, g: 1, b: 0.30100578, a: 1}
       lineColor: {r: 0.43529412, g: 0.34117648, b: 0.41960785, a: 1}
-  enemyWaveParams: []
+  - enemyEnum: 10
+    enemyAttackParam:
+      attackAmount: 10
+      attackIntervalSec: 1
+      attackRange: 2
+      increaseIrritatedValueOnAttack: 10
+    enemyHpParam:
+      maxHp: 10
+    enemyMoveParam:
+      moveSpeedPerSec: 2
+    enemySpawnParam:
+      spawnRatio: 20
+    enemyAnimatorParam:
+      animatorController: {fileID: 0}
+      bodyColor: {r: 0.40730688, g: 0.707578, b: 0.764151, a: 1}
+      eyeColor: {r: 0.8862745, g: 0.972549, b: 0.8901961, a: 1}
+      eyeBallColor: {r: 0.1372549, g: 1, b: 0.30100578, a: 1}
+      lineColor: {r: 0.43529412, g: 0.34117648, b: 0.41960785, a: 1}
+  enemyWaveParams:
+  - spawnEnemyCount: 10
+    waveIntervalSec: 5
+    spawnIntervalSec: 1
+    moveSpeedRate: 1
+    spawnBossPercent: 10
+    spawnSpecialPercent: 10
+    spawnTotemPercent: 10
+    spawnFinalBossPercent: 0

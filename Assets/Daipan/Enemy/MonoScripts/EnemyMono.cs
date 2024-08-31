@@ -26,6 +26,7 @@ namespace Daipan.Enemy.MonoScripts
         IEnemySpawnPoint _enemySpawnPoint = null!;
         IEnemyParamContainer _enemyParamContainer = null!;
         IEnemyOnAttacked _enemyOnAttacked = null!;
+        IEnemyOnDied _enemyOnDied = null!;
         PlayerHolder _playerHolder = null!;
         public override EnemyEnum EnemyEnum { get; protected set; } = EnemyEnum.None;
         public override bool IsReachedPlayer { get; protected set; }
@@ -73,6 +74,7 @@ namespace Daipan.Enemy.MonoScripts
             , EnemyAttackDecider enemyAttackDecider
             , EnemyDie enemyDie
             , IEnemyOnAttacked enemyOnAttacked
+            , IEnemyOnDied enemyOnDied
         )
         {
             EnemyEnum = enemyEnum;
@@ -81,6 +83,7 @@ namespace Daipan.Enemy.MonoScripts
             _enemyAttackDecider = enemyAttackDecider;
             _enemyDie = enemyDie;
             _enemyOnAttacked = enemyOnAttacked;
+            _enemyOnDied = enemyOnDied;
             enemyViewMono?.SetDomain(_enemyParamContainer.GetEnemyViewParamData(EnemyEnum));
             Hp = new Hp(_enemyParamContainer.GetEnemyParamData(EnemyEnum).GetMaxHp());
 
@@ -120,6 +123,7 @@ namespace Daipan.Enemy.MonoScripts
 
         void Die()
         {
+            _enemyOnDied.OnDied(); // Destroyする前の方がいいはず
             _enemyCluster.Remove(this);
             _enemyDie.Died(enemyViewMono);
         }

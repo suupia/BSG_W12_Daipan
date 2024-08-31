@@ -13,6 +13,11 @@ using Daipan.Tutorial.Interfaces;
 using Daipan.Tutorial.MonoScripts;
 using R3;
 using UnityEngine;
+using Object = UnityEngine.Object;
+using Cysharp.Threading.Tasks;
+using Daipan.Player.Interfaces;
+using Daipan.Player.MonoScripts;
+using Daipan.Player.Scripts;
 
 namespace Daipan.Tutorial.Scripts
 {
@@ -20,7 +25,8 @@ namespace Daipan.Tutorial.Scripts
     {
         public abstract void Execute();
         public abstract bool IsCompleted();
-        protected readonly CompositeDisposable Disposables = new(); 
+        protected readonly CompositeDisposable Disposables = new();
+
         public void Dispose()
         {
             foreach (var disposable in Disposables) disposable.Dispose();
@@ -29,42 +35,6 @@ namespace Daipan.Tutorial.Scripts
         ~AbstractTutorialContent()
         {
             Dispose();
-        }
-    }
-
-    public sealed class DisplayBlackScreenWithProgress : AbstractTutorialContent
-    {
-        readonly DownloadGaugeViewMono _gaugeViewMono;
-        const float FillAmountPerSec = 0.2f;
-        bool Completed { get; set; }
-
-        public DisplayBlackScreenWithProgress(
-            DownloadGaugeViewMono gaugeViewMono
-            )
-        {
-            _gaugeViewMono = gaugeViewMono;
-        }
-
-        public override void Execute()
-        {
-            _gaugeViewMono.Show();
-            SoundManager.Instance?.FadOutBgm(1.0f);
-            
-            Disposables.Add(Observable.EveryUpdate()
-                .Where(_ => !Completed)
-                .Subscribe(_ =>
-                {
-                    Debug.Log("Displaying black screen with download progress...");
-                    Debug.Log($"_gaugeViewMono.CurrentFillAmount: {_gaugeViewMono.CurrentFillAmount}");
-                    _gaugeViewMono.SetGaugeValue(_gaugeViewMono.CurrentFillAmount + FillAmountPerSec * Time.deltaTime);
-                    if (_gaugeViewMono.CurrentFillAmount >= 0.5f) Completed = true;
-                }));
-            
-        }
-
-        public override bool IsCompleted()
-        {
-            return Completed;
         }
     }
 
@@ -117,6 +87,42 @@ namespace Daipan.Tutorial.Scripts
         }
     }
 
+    public sealed class DisplayBlackScreenWithProgress : AbstractTutorialContent
+    {
+        readonly DownloadGaugeViewMono _gaugeViewMono;
+        const float FillAmountPerSec = 0.2f;
+        bool Completed { get; set; }
+
+        public DisplayBlackScreenWithProgress(
+            DownloadGaugeViewMono gaugeViewMono
+        )
+        {
+            _gaugeViewMono = gaugeViewMono;
+        }
+
+        public override void Execute()
+        {
+            _gaugeViewMono.Show();
+            SoundManager.Instance?.FadOutBgm(1.0f);
+
+            Disposables.Add(Observable.EveryUpdate()
+                .Where(_ => !Completed)
+                .Subscribe(_ =>
+                {
+                    Debug.Log("Displaying black screen with download progress...");
+                    // Debug.Log($"_gaugeViewMono.CurrentFillAmount: {_gaugeViewMono.CurrentFillAmount}");
+                    _gaugeViewMono.SetGaugeValue(_gaugeViewMono.CurrentFillAmount + FillAmountPerSec * Time.deltaTime);
+                    if (_gaugeViewMono.CurrentFillAmount >= 0.5f) Completed = true;
+                }));
+        }
+
+        public override bool IsCompleted()
+        {
+            return Completed;
+        }
+    }
+
+
     public class FadeInTutorialStart : AbstractTutorialContent
     {
         readonly DownloadGaugeViewMono _gaugeViewMono;
@@ -145,14 +151,11 @@ namespace Daipan.Tutorial.Scripts
                         _gaugeViewMono.SetGaugeValue(_gaugeViewMono.CurrentFillAmount +
                                                      FillAmountPerSec * Time.deltaTime);
                         if (_gaugeViewMono.CurrentFillAmount >= 1.0f)
-                        {
                             _blackScreenViewMono.FadeOut(1, () =>
                             {
                                 _gaugeViewMono.Hide();
                                 Completed = true;
                             });
-                        }
-
                     }));
         }
 
@@ -183,9 +186,8 @@ namespace Daipan.Tutorial.Scripts
             Debug.Log("Cat speaks...");
             UnityEngine.Object.FindObjectOfType<SpeechBubbleMono>().IsStartTutorial = true;
             _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildUICatIntroduce(_languageConfig.CurrentLanguage));
-            
-            SoundManager.Instance?.PlayBgm(BgmEnum.Tutorial);
 
+            SoundManager.Instance?.PlayBgm(BgmEnum.Tutorial);
         }
 
         public override bool IsCompleted()
@@ -194,14 +196,14 @@ namespace Daipan.Tutorial.Scripts
         }
     }
 
-    public class RedEnemyTutorial : AbstractTutorialContent
+    public class BlueEnemyTutorial : AbstractTutorialContent
     {
         readonly SpeechEventManager _speechEventManager;
         readonly EnemySpawnerTutorial _enemySpawnerTutorial;
         readonly LanguageConfig _languageConfig;
-        public bool IsSuccess { get; private set; } 
+        public bool IsSuccess { get; private set; }
 
-        public RedEnemyTutorial(
+        public BlueEnemyTutorial(
             SpeechEventManager speechEventManager
             , EnemySpawnerTutorial enemySpawnerTutorial
             , LanguageConfig languageConfig
@@ -215,16 +217,16 @@ namespace Daipan.Tutorial.Scripts
 
         public override void Execute()
         {
-            Debug.Log("Tutorial: Defeat the red enemy...");
+            Debug.Log("Tutorial: Defeat the blue enemy...");
             _speechEventManager.SetSpeechEvent(
-                SpeechEventBuilder.BuildRedEnemyTutorial(this, _languageConfig.CurrentLanguage));
+                SpeechEventBuilder.BuildBlueEnemyTutorial(this, _languageConfig.CurrentLanguage));
 
-            _enemySpawnerTutorial.SpawnEnemyByType(EnemyEnum.Red);
+            _enemySpawnerTutorial.SpawnEnemyByType(EnemyEnum.Blue);
         }
 
         public override bool IsCompleted()
         {
-            return  IsSuccess && _speechEventManager.IsEnd();
+            return IsSuccess && _speechEventManager.IsEnd();
         }
 
         public void SetSuccess()
@@ -241,6 +243,7 @@ namespace Daipan.Tutorial.Scripts
         readonly EnemySpawnerTutorial _enemySpawnerTutorial;
         readonly LanguageConfig _languageConfig;
         public bool IsSuccess { get; private set; }
+
         public SequentialEnemyTutorial(
             SpeechEventManager speechEventManager
             , EnemySpawnerTutorial enemySpawnerTutorial
@@ -268,6 +271,44 @@ namespace Daipan.Tutorial.Scripts
                         _ => { _enemySpawnerTutorial.SpawnEnemyByType(enemyEnums.Dequeue()); },
                         _ => { Debug.Log("Enemy spawn completed"); }
                     ));
+        }
+
+        public override bool IsCompleted()
+        {
+            return IsSuccess && _speechEventManager.IsEnd();
+        }
+
+        public void SetSuccess()
+        {
+            IsSuccess = true;
+            _speechEventManager.MoveNext();
+        }
+    }
+
+    public class TotemEnemyTutorial : AbstractTutorialContent
+    {
+        readonly SpeechEventManager _speechEventManager;
+        readonly EnemySpawnerTutorial _enemySpawnerTutorial;
+        readonly LanguageConfig _languageConfig;
+        public bool IsSuccess { get; private set; }
+
+        public TotemEnemyTutorial(
+            SpeechEventManager speechEventManager
+            , EnemySpawnerTutorial enemySpawnerTutorial
+            , LanguageConfig languageConfig
+        )
+        {
+            _speechEventManager = speechEventManager;
+            _enemySpawnerTutorial = enemySpawnerTutorial;
+            _languageConfig = languageConfig;
+        }
+
+        public override void Execute()
+        {
+            Debug.Log("Tutorial: Defeat totem enemy...");
+            _speechEventManager.SetSpeechEvent(
+                SpeechEventBuilder.BuildTotemEnemyTutorial(this, _languageConfig.CurrentLanguage));
+            _enemySpawnerTutorial.SpawnEnemyByType(EnemyEnum.Totem2);
         }
 
         public override bool IsCompleted()
@@ -336,6 +377,97 @@ namespace Daipan.Tutorial.Scripts
         }
     }
 
+    public class ForcedMissTutorial : AbstractTutorialContent
+    {
+        readonly SpeechEventManager _speechEventManager;
+        readonly CommentSpawner _commentSpawner;
+        readonly EnemySpawnerTutorial _enemySpawnerTutorial;
+        readonly LanguageConfig _languageConfig;
+        readonly IrritatedValue _irritatedValue;
+        readonly AttackExecutor _attackExecutor;
+        public bool IsMissed { get; set; }
+        bool CanMoveNext { get; set; }
+
+        public ForcedMissTutorial(
+            SpeechEventManager speechEventManager
+            , CommentSpawner commentSpawner
+            , EnemySpawnerTutorial enemySpawnerTutorial
+            , LanguageConfig languageConfig
+            , IrritatedValue irritatedValue
+            , AttackExecutor attackExecutor  // IAttackExecutorはAttackExecutorTutorialになっていて、Decoratorを妥協している
+        )
+        {
+            _speechEventManager = speechEventManager;
+            _commentSpawner = commentSpawner;
+            _enemySpawnerTutorial = enemySpawnerTutorial;
+            _languageConfig = languageConfig;
+            _irritatedValue = irritatedValue;
+            _attackExecutor = attackExecutor;
+        }
+
+        public override void Execute()
+        {
+            Debug.Log("Tutorial: forced miss...");
+            // todo : いいかんじのメッセージを表示
+            _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildForcedMissTutorial(this, _languageConfig.CurrentLanguage));
+            ExecuteAsync().Forget();
+        }
+        
+        public override bool IsCompleted()
+        {
+            return _speechEventManager.IsEnd() && CanMoveNext;
+        }
+
+        async UniTaskVoid ExecuteAsync()
+        {
+            // 雑魚敵とボスを生成する
+            const float enemyIntervalSec = 0.5f; // スポーンの間隔
+            var enemyEnums = new Queue<EnemyEnum>(new[]
+            {
+                EnemyEnum.Blue, EnemyEnum.RedBoss, EnemyEnum.Red, EnemyEnum.YellowBoss, EnemyEnum.Yellow,
+                EnemyEnum.BlueBoss
+            });
+            Disposables.Add(
+                Observable.Interval(TimeSpan.FromSeconds(enemyIntervalSec))
+                    .Take(enemyEnums.Count)
+                    .Subscribe(
+                        _ => { _enemySpawnerTutorial.SpawnEnemyByType(enemyEnums.Dequeue()); },
+                        _ => { Debug.Log("Enemy spawn completed"); }
+                    )
+            );
+
+            const double delaySecForMissed = 2.5f;
+            await UniTask.Delay(TimeSpan.FromSeconds(delaySecForMissed));
+            Debug.Log("Forced miss...");
+            var playerMono = Object.FindObjectOfType<PlayerMono>();
+            if (playerMono != null)
+                _attackExecutor.FireAttackEffect(playerMono, PlayerColor.Red);
+            else
+                Debug.LogWarning("PlayerMono is not set");
+            IsMissed = true;
+            _speechEventManager.MoveNext();
+            
+            const double delaySecForAntiComment = 2.0f;
+            await UniTask.Delay(TimeSpan.FromSeconds(delaySecForAntiComment));
+            for (int i = 0; i < 3; i++) 
+            {
+                _commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
+            }
+
+            // スポットライトを当てる
+            var irritatedGaugeSpotLight = Object.FindObjectOfType<IrritatedGaugeSpotLightMono>();
+            if(irritatedGaugeSpotLight != null) irritatedGaugeSpotLight.Show(); 
+            
+            await UniTask.WaitUntil(() => _irritatedValue.IsFull); // ここでイライラゲージがmaxになったかどうかを判定
+            
+            if(irritatedGaugeSpotLight != null) irritatedGaugeSpotLight.Hide();  
+            CanMoveNext = true;
+            Debug.Log("ForcedMissTutorial Can move next");  
+            // todo : イライラゲージmaxになったら次のContentに遷移
+            _speechEventManager.MoveNext(); 
+        } 
+    }
+
     public class ShowAntiCommentsTutorial : AbstractTutorialContent
     {
         readonly SpeechEventManager _speechEventManager;
@@ -354,7 +486,7 @@ namespace Daipan.Tutorial.Scripts
             _speechEventManager = speechEventManager;
             _commentSpawner = commentSpawner;
             _enemySpawnerTutorial = enemySpawnerTutorial;
-            _languageConfig = languageConfig;   
+            _languageConfig = languageConfig;
         }
 
         public override void Execute()
@@ -460,13 +592,9 @@ namespace Daipan.Tutorial.Scripts
                         _ =>
                         {
                             if (_irritatedValue.IsFull)
-                            {
                                 _pushEnterTextViewMono.Show();
-                            }
                             else
-                            {
                                 _pushEnterTextViewMono.Hide();
-                            }
                         })
             );
         }

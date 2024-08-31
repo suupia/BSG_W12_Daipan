@@ -12,7 +12,7 @@ namespace Daipan.Tutorial.Scripts
     public interface ISpeechEvent
     {
         int Id { get; }
-        string Message { get; }
+        Speech Speech { get; }
         SpeechEventEnum SpeechEventEnum { get; }
         (bool, ISpeechEvent) MoveNext();
         void SetNextEvent(params ISpeechEvent[] nextEvents);
@@ -22,27 +22,44 @@ namespace Daipan.Tutorial.Scripts
     {
         None,
         Listening, // 聞くタイプのチュートリアル
-        Practical // 実践するタイプのチュートリアル
+        Practical, // 実践するタイプのチュートリアル
+        NoInput, // 入力がないタイプのチュートリアル
+    }
+
+    public sealed record Speech
+    {
+        public string Message { get; }
+        public string SpriteKey { get; }
+
+        public Speech(string message) : this(message, string.Empty)
+        {
+        }
+
+        public Speech(string message, string spriteKey)
+        {
+            Message = message;
+            SpriteKey = spriteKey;
+        }
     }
 
     public sealed record SequentialEvent : ISpeechEvent
     {
         public int Id { get; } = -1;
-        public string Message { get; } = string.Empty;
+        public Speech Speech { get; }
         public SpeechEventEnum SpeechEventEnum { get; }
         ISpeechEvent? NextEvent { get; set; }
         Func<bool> CanMove { get; } = () => true;
 
-        public SequentialEvent(int id, string message, SpeechEventEnum speechEventEnum, Func<bool> canMove)
+        public SequentialEvent(int id, Speech speech, SpeechEventEnum speechEventEnum, Func<bool> canMove)
         {
             Id = id;
-            Message = message;
+            Speech = speech;
             SpeechEventEnum = speechEventEnum;
             CanMove = canMove;
         }
 
-        public SequentialEvent(int id, string message, SpeechEventEnum speechEventEnum)
-            : this(id, message, speechEventEnum, () => true)
+        public SequentialEvent(int id, Speech speech, SpeechEventEnum speechEventEnum)
+            : this(id, speech, speechEventEnum, () => true)
         {
         }
 
@@ -64,7 +81,7 @@ namespace Daipan.Tutorial.Scripts
     public sealed record EndEvent : ISpeechEvent
     {
         public int Id => -1;
-        public string Message => string.Empty;
+        public Speech Speech { get; } = new(string.Empty, string.Empty);
         public SpeechEventEnum SpeechEventEnum => SpeechEventEnum.None;
 
         public (bool, ISpeechEvent) MoveNext()
@@ -80,136 +97,175 @@ namespace Daipan.Tutorial.Scripts
 
     public static class SpeechContentByLanguage
     {
-        public static List<string> UICatIntroduce(LanguageEnum language)
+        public static List<Speech> UICatIntroduce(LanguageEnum language)
         {
             return language switch
             {
-                LanguageEnum.English => new List<string>
+                LanguageEnum.English => new List<Speech>
                 {
-                    "Hi, I'm a cat!",
-                    "I'll support your stream!",
-                    "Let's start the game explanation...!"
+                    new("Hi, I'm a cat!"),
+                    new("I'll support your stream!"),
+                    new("Let's start the game explanation...!")
                 },
-                LanguageEnum.Japanese => new List<string>
+                LanguageEnum.Japanese => new List<Speech>
                 {
-                    "やぁ、初めまして！僕はネコ！",
-                    "君の配信をサポートするよ！",
-                    "じゃあ、まずこのゲームの説明...!"
+                    new("やぁ、初めまして！僕はネコ！"),
+                    new("君の配信をサポートするよ！"),
+                    new("じゃあ、まずこのゲームの説明...!")
                 },
-                _ => new List<string>()
+                _ => new List<Speech>()
             };
         }
 
-        public static List<string> RedEnemyTutorial(LanguageEnum language)
+        public static List<Speech> RedEnemyTutorial(LanguageEnum language)
         {
             return language switch
             {
-                LanguageEnum.English => new List<string>
+                LanguageEnum.English => new List<Speech>
                 {
-                    "A red enemy is coming!",
-                    "Press the red button!",
-                    "That's right! Good job!"
+                    new("A red enemy is coming!"),
+                    new("Press the red button!"),
+                    new("That's right! Good job!")
                 },
-                LanguageEnum.Japanese => new List<string>
+                LanguageEnum.Japanese => new List<Speech>
                 {
-                    "赤い敵が来たね！",
-                    "赤色のボタンを押そう！",
-                    "そうそう！上手！"
+                    new("青い敵が来たね！"),
+                    new("青色のボタンを押そう！", "speech_blue"),
+                    new("そうそう！上手！")
                 },
-                _ => new List<string>()
+                _ => new List<Speech>()
             };
         }
 
-        public static List<string> SequentialEnemyTutorial(LanguageEnum language)
+        public static List<Speech> SequentialEnemyTutorial(LanguageEnum language)
         {
             return language switch
             {
-                LanguageEnum.English => new List<string>
+                LanguageEnum.English => new List<Speech>
                 {
-                    "A lot of enemies are coming!",
-                    "Press the corresponding button!",
-                    "You have a talent for streaming!"
+                    new("A lot of enemies are coming!"),
+                    new("Press the corresponding button!"),
+                    new("You have a talent for streaming!")
                 },
-                LanguageEnum.Japanese => new List<string>
+                LanguageEnum.Japanese => new List<Speech>
                 {
-                    "今度はたくさんの敵が来たね！",
-                    "対応するボタンを押そう！",
-                    "君、配信の才能あるよ！"
+                    new("今度はたくさんの敵が来たね！"),
+                    new("対応するボタンを押そう！", "speech_all"),
+                    new("いいかんじ！")
                 },
-                _ => new List<string>()
+                _ => new List<Speech>()
             };
         }
 
-        public static List<string> ShowWhiteCommentsTutorial(LanguageEnum language)
+        public static List<Speech> TotemEnemyTutorial(LanguageEnum language)
         {
             return language switch
             {
-                LanguageEnum.English => new List<string>
+                LanguageEnum.English => new List<Speech>
                 {
-                    "The stream is getting exciting...!"
+                    new("A totem enemy is coming!"),
+                    new("Press the corresponding button!"),
+                    new("You have a talent for streaming!")
                 },
-                LanguageEnum.Japanese => new List<string>
+                LanguageEnum.Japanese => new List<Speech>
                 {
-                    "配信盛り上がっているネ...！"
+                    new("わ！トーテムポールだ！"),
+                    new("対応するボタンを同時押しだ！", "speech_red_blue"),
+                    new("最高！君、配信の才能あるよ！")
                 },
-                _ => new List<string>()
+                _ => new List<Speech>()
             };
         }
 
-        public static List<string> ShowAntiCommentsTutorial(LanguageEnum language)
+        public static List<Speech> ShowWhiteCommentsTutorial(LanguageEnum language)
         {
             return language switch
             {
-                LanguageEnum.English => new List<string>
+                LanguageEnum.English => new List<Speech>
                 {
-                    "Oh no! It's an anti...! What should I do... ; ;"
+                    new("The stream is getting exciting...!")
                 },
-                LanguageEnum.Japanese => new List<string>
+                LanguageEnum.Japanese => new List<Speech>
                 {
-                    "うわ！？アンチだ...！？どうしよ...；；"
+                    new("配信盛り上がっているネ...！")
                 },
-                _ => new List<string>()
+                _ => new List<Speech>()
+            };
+        }
+        
+        public static List<Speech> ShowForcedMissTutorial(LanguageEnum language)
+        {
+            return language switch
+            {
+                LanguageEnum.English => new List<Speech>
+                {
+                    new(""),
+                    new("Oh no! You missed! If you miss, anti-comments will appear!")
+                },
+                LanguageEnum.Japanese => new List<Speech>
+                {
+                    new(""),
+                    new("ありゃ、ミスしちゃった。ミスするとアンチコメントが流れちゃうよ！")
+                },
+                _ => new List<Speech>()
             };
         }
 
-        public static List<string> DaipanCutscene(LanguageEnum language)
+        public static List<Speech> ShowAntiCommentsTutorial(LanguageEnum language)
         {
             return language switch
             {
-                LanguageEnum.English => new List<string>
+                LanguageEnum.English => new List<Speech>
                 {
-                    "Wow..."
+                    new("Oh no! It's an anti...! What should I do... ; ;")
                 },
-                LanguageEnum.Japanese => new List<string>
+                LanguageEnum.Japanese => new List<Speech>
                 {
-                    "わっ..."
+                    new("うわ！？アンチだ...！？どうしよ...；；")
                 },
-                _ => new List<string>()
+                _ => new List<Speech>()
             };
         }
 
-        public static List<string> CatSpeaksAfterDaipan(LanguageEnum language)
+        public static List<Speech> DaipanCutscene(LanguageEnum language)
         {
             return language switch
             {
-                LanguageEnum.English => new List<string>
+                LanguageEnum.English => new List<Speech>
                 {
-                    "A, Amazing...!",
-                    "You have a talent for streaming!",
-                    "Daipan streamer...! You can do it... This will sell~~~!!!",
-                    "...Alright! Let's start the actual stream soon!"
+                    new("Wow...")
                 },
-                LanguageEnum.Japanese => new List<string>
+                LanguageEnum.Japanese => new List<Speech>
                 {
-                    "す、スゴイ...！",
-                    "君、配信の才能あるよ！",
-                    "台パン配信者...！い、いける...これは売れるぞ〜〜！！！",
-                    "...ヨシ！そろそろ本番の配信をしようか！"
+                    new("わっ...")
                 },
-                _ => new List<string>()
+                _ => new List<Speech>()
+            };
+        }
+
+        public static List<Speech> CatSpeaksAfterDaipan(LanguageEnum language)
+        {
+            return language switch
+            {
+                LanguageEnum.English => new List<Speech>
+                {
+                    new("A, Amazing...!"),
+                    new("You have a talent for streaming!"),
+                    new("Daipan streamer...! You can do it... This will sell~~~!!!"),
+                    new("...Alright! Let's start the actual stream soon!")
+                },
+                LanguageEnum.Japanese => new List<Speech>
+                {
+                    new("す、スゴイ...！"),
+                    new("君、配信の才能あるよ！"),
+                    new("台パン配信者...！い、いける...これは売れるぞ〜〜！！！"),
+                    new("...ヨシ！そろそろ本番の配信をしようか！")
+                },
+                _ => new List<Speech>()
             };
         }
     }
+
 
     public static class SpeechEventBuilder
     {
@@ -232,8 +288,8 @@ namespace Daipan.Tutorial.Scripts
             return speechEvents[0];
         }
 
-        public static ISpeechEvent BuildRedEnemyTutorial(
-            RedEnemyTutorial redEnemyTutorial
+        public static ISpeechEvent BuildBlueEnemyTutorial(
+            BlueEnemyTutorial blueEnemyTutorial
             , LanguageEnum language
         )
         {
@@ -243,7 +299,7 @@ namespace Daipan.Tutorial.Scripts
                     new SequentialEvent(0, SpeechContentByLanguage.RedEnemyTutorial(language)[0],
                         SpeechEventEnum.Listening),
                     new SequentialEvent(1, SpeechContentByLanguage.RedEnemyTutorial(language)[1],
-                        SpeechEventEnum.Practical, ()=> redEnemyTutorial.IsSuccess),
+                        SpeechEventEnum.Practical, () => blueEnemyTutorial.IsSuccess),
                     new SequentialEvent(2, SpeechContentByLanguage.RedEnemyTutorial(language)[2],
                         SpeechEventEnum.Listening),
                     new EndEvent()
@@ -278,6 +334,29 @@ namespace Daipan.Tutorial.Scripts
             return speechEvents[0];
         }
 
+        public static ISpeechEvent BuildTotemEnemyTutorial(
+            TotemEnemyTutorial totemEnemyTutorial
+            , LanguageEnum language
+        )
+        {
+            var speechEvents =
+                new List<ISpeechEvent>
+                {
+                    new SequentialEvent(0, SpeechContentByLanguage.TotemEnemyTutorial(language)[0],
+                        SpeechEventEnum.Listening),
+                    new SequentialEvent(1, SpeechContentByLanguage.TotemEnemyTutorial(language)[1],
+                        SpeechEventEnum.Practical, () => totemEnemyTutorial.IsSuccess),
+                    new SequentialEvent(2, SpeechContentByLanguage.TotemEnemyTutorial(language)[2],
+                        SpeechEventEnum.Listening),
+                    new EndEvent()
+                };
+
+            speechEvents[0].SetNextEvent(speechEvents[1]);
+            speechEvents[1].SetNextEvent(speechEvents[2]);
+            speechEvents[2].SetNextEvent(speechEvents[3]);
+            return speechEvents[0];
+        }
+
         public static ISpeechEvent BuildShowWitheCommentsTutorial(
             ShowWhiteCommentsTutorial showWhiteCommentsTutorial
             , LanguageEnum language
@@ -292,6 +371,25 @@ namespace Daipan.Tutorial.Scripts
                 };
 
             speechEvents[0].SetNextEvent(speechEvents[1]);
+            return speechEvents[0];
+        }
+
+        public static ISpeechEvent BuildForcedMissTutorial(
+            ForcedMissTutorial forcedMissTutorial
+            , LanguageEnum language
+        )
+        {
+            var speechEvents =
+                new List<ISpeechEvent>
+                {
+                    new SequentialEvent(0, SpeechContentByLanguage.ShowForcedMissTutorial(language)[0],
+                        SpeechEventEnum.NoInput),
+                    new SequentialEvent(1, SpeechContentByLanguage.ShowForcedMissTutorial(language)[1],
+                        SpeechEventEnum.NoInput, () => forcedMissTutorial.IsMissed), // ForcedMissTutorialの中でMoveNext()を呼ぶ
+                    new EndEvent()
+                };
+            speechEvents[0].SetNextEvent(speechEvents[1]);
+            speechEvents[1].SetNextEvent(speechEvents[2]);
             return speechEvents[0];
         }
 
@@ -393,10 +491,10 @@ namespace Daipan.Tutorial.Scripts
 
         public bool MoveNext()
         {
-            Debug.Log($"CurrentEvent.Message = {CurrentEvent.Message}");
+            Debug.Log($"CurrentEvent.Message = {CurrentEvent.Speech}");
             var (result, nextEvent) = CurrentEvent.MoveNext();
             if (result) CurrentEvent = nextEvent;
-            Debug.Log($"NextEvent.Message = {CurrentEvent.Message}");
+            Debug.Log($"NextEvent.Message = {CurrentEvent.Speech}");
             return result;
         }
     }
