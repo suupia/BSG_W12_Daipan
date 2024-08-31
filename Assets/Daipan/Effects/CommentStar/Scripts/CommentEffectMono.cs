@@ -1,8 +1,10 @@
+#nullable enable
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
+using System;
 
 namespace Daipan.Effects.MonoScripts
 {
@@ -27,10 +29,12 @@ namespace Daipan.Effects.MonoScripts
         [SerializeField]
         float waveBand;
 
+        private Action? onDead;
+
         private void Start()
         {
             Vector3 direction = new Vector3(distinatian.x, distinatian.y, 0f) - star.position;
-            float a = Random.Range(-waveBand, waveBand);
+            float a = UnityEngine.Random.Range(-waveBand, waveBand);
 
             var sequence = DOTween.Sequence();
             sequence.Append(DOVirtual.Float(0, 1f, glowingTime, value =>
@@ -44,7 +48,11 @@ namespace Daipan.Effects.MonoScripts
                     star.localPosition = direction * value + Vector3.up * Mathf.Sin(Mathf.PI * value) * a;
                     star.eulerAngles = new Vector3(0f, 0f, 500f * value);
                     
-                }).SetEase(Ease.Linear);
+                }).SetEase(Ease.Linear).OnComplete(() =>
+                {
+                    if (onDead != null) onDead();
+                    Destroy(gameObject);
+                });
             }
             ));
 
@@ -53,10 +61,12 @@ namespace Daipan.Effects.MonoScripts
                 frontLight.color = new Vector4(1f, 1f, 1f, value);
                 backLight.color = new Vector4(1f, 1f, 1f, value);
             }).OnComplete(() => frontLight.gameObject.SetActive(false)
-            ));
+            ));   
+        }
 
-            
-
+        public void Initialize(Action ondead)
+        {
+            onDead = ondead;
         }
     }
 }

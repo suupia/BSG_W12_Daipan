@@ -2,6 +2,7 @@
 using System;
 using Daipan.Comment.Scripts;
 using Daipan.Core.Interfaces;
+using Daipan.Effects.MonoScripts;
 using Daipan.LevelDesign.Comment.Scripts;
 using TMPro;
 using UnityEngine;
@@ -12,13 +13,14 @@ namespace Daipan.Comment.MonoScripts
     public sealed class CommentMono : MonoBehaviour
     {
         [SerializeField] TextMeshPro commentText = null!;
-        [SerializeField] GameObject commentEffect = null!;
+        [SerializeField] CommentEffectMono commentEffect = null!;
         CommentCluster _commentCluster = null!;
         CommentParamsServer _commentParamsServer = null!;
 
         string _commentWord = null!;
         float _effectThreshold;
         bool _isEffected = false;
+
 
         void Update()
         {
@@ -30,12 +32,13 @@ namespace Daipan.Comment.MonoScripts
             if(transform.position.x - commentText.preferredWidth * 0.5f < _effectThreshold && !_isEffected)
             {
                 _isEffected = true;
-                Instantiate(commentEffect, new Vector3(_effectThreshold, transform.position.y, 0f), Quaternion.identity);
+                var effect =  Instantiate(commentEffect, new Vector3(_effectThreshold, transform.position.y, 0f), Quaternion.identity);
+                effect.Initialize(OnEffectDead);
             }
         }
 
-        public event EventHandler<DespawnEventArgs>? OnDespawn;
-
+        //public event EventHandler<DespawnEventArgs>? OnDespawn;
+        public Action OnEffectDead;
 
         [Inject]
         public void Initialize(
@@ -58,7 +61,7 @@ namespace Daipan.Comment.MonoScripts
         public void Despawn()
         {
             var args = new DespawnEventArgs(CommentEnum.None);
-            OnDespawn?.Invoke(this, args);
+            //OnDespawn?.Invoke(this, args);
             Destroy(gameObject);
         }
 

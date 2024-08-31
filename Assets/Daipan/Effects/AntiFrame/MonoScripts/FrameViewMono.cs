@@ -71,7 +71,7 @@ namespace Daipan.Effects.MonoScripts
                 ShowOriginalFrame();
                 _antiState = 0;
             }
-            else if(antiCommentNum < maxAntiThreshold && _antiState != 1)
+            else if(antiCommentNum >= antiThreshold && antiCommentNum < maxAntiThreshold && _antiState != 1)
             {
                 ShowAntiFrame();
                 _antiState = 1;
