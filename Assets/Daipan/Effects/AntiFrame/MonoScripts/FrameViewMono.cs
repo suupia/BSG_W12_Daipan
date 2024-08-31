@@ -71,7 +71,7 @@ namespace Daipan.Effects.MonoScripts
                 ShowOriginalFrame();
                 _antiState = 0;
             }
-            else if(antiCommentNum < maxAntiThreshold && _antiState != 1)
+            else if(antiCommentNum >= antiThreshold && antiCommentNum < maxAntiThreshold && _antiState != 1)
             {
                 ShowAntiFrame();
                 _antiState = 1;
@@ -151,7 +151,7 @@ namespace Daipan.Effects.MonoScripts
 
                 var sequence = DOTween.Sequence();
                 //effect.GetComponent<SpriteRenderer>().color.a = 0f;
-                sequence.Append(DOVirtual.Float(0, 0.7f, lifeTime * 0.5f, value =>
+                sequence.Append(DOVirtual.Float(0, 1f, lifeTime * 0.5f, value =>
                 {
                     effect.GetComponent<SpriteRenderer>().color = new Vector4(1f, 1f, 1f, value);
                 }).SetLoops(2, LoopType.Yoyo));
