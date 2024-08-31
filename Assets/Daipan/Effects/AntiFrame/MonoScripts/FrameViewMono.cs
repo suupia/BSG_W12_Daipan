@@ -38,13 +38,15 @@ namespace Daipan.Effects.MonoScripts
         [Min(0.1f)]
         [SerializeField] float interval;
 
+        [SerializeField] float downLength;
+
         int preAntiCommentNum = 0;
         IDisposable antiEffectSubscription;
         List<int> effectsY = new();
 
         void Start()
         {
-            ShowMaxAntiFrame();
+            //ShowMaxAntiFrame();
         }
 
         
@@ -59,8 +61,7 @@ namespace Daipan.Effects.MonoScripts
 
             if (antiCommentNum < antiThreshold)
             {
-                //ShowOriginalFrame();
-                ShowMaxAntiFrame();
+                ShowOriginalFrame();
             }
             else if(antiCommentNum < maxAntiThreshold)
             {
@@ -132,19 +133,14 @@ namespace Daipan.Effects.MonoScripts
                 sequence.Append(DOVirtual.Float(0, 0.7f, lifeTime * 0.5f, value =>
                 {
                     effect.GetComponent<SpriteRenderer>().color = new Vector4(1f, 1f, 1f, value);
-                }).SetLoops(1, LoopType.Yoyo));
+                }).SetLoops(2, LoopType.Yoyo));
 
                 sequence.Join(effect.transform.DOScale(effect.transform.localScale * 1.5f, lifeTime * 0.5f));
 
                 sequence.Join(effect.transform.DORotate(new Vector3(0f, 0f, -10f), lifeTime * 0.2f).SetLoops(5, LoopType.Yoyo));
 
+                sequence.Join(effect.transform.DOMoveY(effect.transform.position.y - downLength, lifeTime).SetEase(Ease.Linear));
 
-                sequence.Append(DOVirtual.Float(0.7f, 0f, lifeTime * 0.5f, value =>
-                {
-                    effect.GetComponent<SpriteRenderer>().color = new Vector4(1f, 1f, 1f, value);
-                }));
-
-                //sequence.Join(effect.transform.DORotate(new Vector3(0f, 0f, 270), lifeTime * 0.3f, RotateMode.FastBeyond360));
 
                 Destroy(effect, lifeTime);
             });
