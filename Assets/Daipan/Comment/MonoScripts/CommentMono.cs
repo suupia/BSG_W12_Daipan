@@ -12,6 +12,7 @@ namespace Daipan.Comment.MonoScripts
     public sealed class CommentMono : MonoBehaviour
     {
         [SerializeField] TextMeshPro commentText = null!;
+        [SerializeField] GameObject commentEffect = null!;
         CommentCluster _commentCluster = null!;
         CommentParamsServer _commentParamsServer = null!;
 
@@ -29,7 +30,7 @@ namespace Daipan.Comment.MonoScripts
             if(transform.position.x - commentText.preferredWidth * 0.5f < _effectThreshold && !_isEffected)
             {
                 _isEffected = true;
-                commentText.color = Color.red;
+                Instantiate(commentEffect, new Vector3(_effectThreshold, transform.position.y, 0f), Quaternion.identity);
             }
         }
 

@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   commentText: {fileID: 8977289515075342155}
+  commentEffect: {fileID: 2222710680527032099, guid: 5def056e099dc418ea61e937062db0f5, type: 3}
 --- !u!1 &6328872238912023510
 GameObject:
   m_ObjectHideFlags: 0
