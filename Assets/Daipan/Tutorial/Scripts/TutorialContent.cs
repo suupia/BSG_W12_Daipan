@@ -13,6 +13,8 @@ using Daipan.Tutorial.Interfaces;
 using Daipan.Tutorial.MonoScripts;
 using R3;
 using UnityEngine;
+using Object = UnityEngine.Object;
+using Cysharp.Threading.Tasks;
 
 namespace Daipan.Tutorial.Scripts
 {
@@ -400,45 +402,43 @@ namespace Daipan.Tutorial.Scripts
             // todo : いいかんじのメッセージを表示
             _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildForcedMissTutorial(this, _languageConfig.CurrentLanguage));
     
-            // todo : BlueEnemyを生成
-            _enemySpawnerTutorial.SpawnEnemyByType(EnemyEnum.Blue);
-
-            const double delaySecForMissed = 1.0f;
-            const double delaySecForAntiComment = 2.0f;
-
-            // BlueEnemyが召喚されてからdelaySecForMissed分だけ待って、Forced miss...のログを出す
-            Disposables.Add(
-                Observable.Timer(TimeSpan.FromSeconds(delaySecForMissed))
-                    .Subscribe(_ =>
-                    {
-                        Debug.Log("Forced miss...");
-                        IsMissed = true;
-
-                        // delaySecForAntiComment分だけ待ってからアンチコメントを生成
-                        Disposables.Add(
-                            Observable.Timer(TimeSpan.FromSeconds(delaySecForAntiComment))
-                                .Subscribe(__ =>
-                                {
-                                    for (int i = 0; i < 3; i++) 
-                                    {
-                                        _commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
-                                    }
-                                })
-                        );
-                    })
-            );
-
-            // todo : イライラゲージが溜まっている時にスポットライトを当てる
-            // 新しくクラスを作る
-    
-            // todo : イライラゲージmaxになったら次のContentに遷移
-            // 次のシーンだが、（17.ヨシ！その怒りを力に変えろ～！ ）
+            ExecuteAsync().Forget();
         }
         
         public override bool IsCompleted()
         {
             return _speechEventManager.IsEnd() && CanMoveNext;
         }
+
+        async UniTaskVoid ExecuteAsync()
+        {
+            // todo : BlueEnemyを生成
+            _enemySpawnerTutorial.SpawnEnemyByType(EnemyEnum.Blue);
+
+            const double delaySecForMissed = 1.0f;
+            await UniTask.Delay(TimeSpan.FromSeconds(delaySecForMissed));
+            Debug.Log("Forced miss...");
+            IsMissed = true;
+            
+            const double delaySecForAntiComment = 2.0f;
+            await UniTask.Delay(TimeSpan.FromSeconds(delaySecForAntiComment));
+            for (int i = 0; i < 3; i++) 
+            {
+                _commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
+            }
+
+            // todo : イライラゲージが溜まっている時にスポットライトを当てる
+            var irritatedGaugeSpotLight = Object.FindObjectOfType<IrritatedGaugeSpotLightMono>();
+            if(irritatedGaugeSpotLight != null) irritatedGaugeSpotLight.Show(); 
+            
+            // await UniTask.WaitUntil(() => irritatedGaugeSpotLight == null || irritatedGaugeSpotLight.IsFull); // todo ここでイライラゲージがmaxになったかどうかを判定
+            
+            if(irritatedGaugeSpotLight != null) irritatedGaugeSpotLight.Hide();  
+            CanMoveNext = true;
+            Debug.Log("ForcedMissTutorial Can move next");  
+            // todo : イライラゲージmaxになったら次のContentに遷移
+   
+        } 
     }
 
     public class ShowAntiCommentsTutorial : AbstractTutorialContent
