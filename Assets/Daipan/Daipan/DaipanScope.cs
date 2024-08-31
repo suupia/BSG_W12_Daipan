@@ -173,7 +173,6 @@ namespace Daipan.Daipan
             builder.Register<EnemyWaveParamContainer>(Lifetime.Scoped).As<IEnemyWaveParamContainer>();
             builder.Register<EnemyParamDataContainer>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.RegisterInstance(new EnemyLevelDesignParamData(enemyParamsManager.enemyLevelDesignParam));
-            builder.Register<EnemyOnAttackedBuilder>(Lifetime.Transient);
             // Enemy
             builder.Register<EnemyPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<EnemyMono>>();
             builder.Register<EnemyCluster>(Lifetime.Scoped);
@@ -267,6 +266,7 @@ namespace Daipan.Daipan
 
             // Enemy
             RegisterEnemy(builder, enemyParamsManager);
+            builder.Register<EnemyOnAttackedBuilder>(Lifetime.Transient);
             builder.Register<EnemyWaveSpawnerCounter>(Lifetime.Scoped).As<IStart>().As<IUpdate>().AsSelf();
             builder.Register<EnemySpawner>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
             builder.Register<EnemyEnumSelector>(Lifetime.Scoped).As<IEnemyEnumSelector>();

@@ -81,6 +81,7 @@ namespace Daipan.Tutorial
     
             // Enemy
             DaipanScope.RegisterEnemy(builder, enemyParamsManager);
+            builder.Register<EnemyOnAttackedBuilderTutorial>(Lifetime.Transient);
             builder.Register<EnemySpawner>(Lifetime.Scoped);
             builder.Register<EnemySpawnerTutorial>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
             builder.Register<EnemyBuilderTutorial>(Lifetime.Scoped).As<IEnemyBuilder>();

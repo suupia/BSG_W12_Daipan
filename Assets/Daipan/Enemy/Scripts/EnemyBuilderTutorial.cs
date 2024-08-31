@@ -21,13 +21,13 @@ namespace Daipan.Enemy.Scripts
     {
         readonly IEnemyParamContainer _enemyParamContainer;
         readonly EnemyCluster _enemyCluster;
-        readonly EnemyOnAttackedBuilder _enemyOnAttackedBuilder;
+        readonly EnemyOnAttackedBuilderTutorial _enemyOnAttackedBuilder;
         readonly TutorialCurrentStep _tutorialCurrentStep;
         
         public EnemyBuilderTutorial(
             IEnemyParamContainer enemyParamContainer
             , EnemyCluster enemyCluster
-            , EnemyOnAttackedBuilder enemyOnAttackedBuilder
+            , EnemyOnAttackedBuilderTutorial enemyOnAttackedBuilder
             , TutorialCurrentStep tutorialCurrentStep
         )
         {
