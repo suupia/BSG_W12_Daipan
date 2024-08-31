@@ -16,12 +16,21 @@ namespace Daipan.Comment.MonoScripts
         CommentParamsServer _commentParamsServer = null!;
 
         string _commentWord = null!;
+        float _effectThreshold;
+        bool _isEffected = false;
 
         void Update()
         {
-            var direction = (new Vector3(_commentParamsServer.GetDespawnedPosition().x - transform.position.x, 0, 0)).normalized;
+            var direction = (new Vector3(_commentParamsServer.GetDespawnedPosition().x - transform.position.x - commentText.preferredWidth * 0.5f, 0, 0)).normalized;
             transform.position += direction * _commentParamsServer.GetSpeed() * Time.deltaTime;
-            if (transform.position.x - _commentParamsServer.GetDespawnedPosition().x < 0.001f) _commentCluster.Remove(this);
+            if (transform.position.x + commentText.preferredWidth * 0.5f - _commentParamsServer.GetDespawnedPosition().x < 0.001f) _commentCluster.Remove(this);
+
+            // エフェクト生成
+            if(transform.position.x - commentText.preferredWidth * 0.5f < _effectThreshold && !_isEffected)
+            {
+                _isEffected = true;
+                commentText.color = Color.red;
+            }
         }
 
         public event EventHandler<DespawnEventArgs>? OnDespawn;
@@ -35,6 +44,8 @@ namespace Daipan.Comment.MonoScripts
         {
             _commentParamsServer = commentParamsServer;
             _commentCluster = commentCluster;
+
+            _effectThreshold = Camera.main.ViewportToWorldPoint(Vector3.one).x;
         }
 
         public void SetParameter(string commentWord)

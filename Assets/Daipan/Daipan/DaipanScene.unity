@@ -167,20 +167,20 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 31825739}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7821bf67024da409fabf25781a133329, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0644d0b6979d846318c0ea0773f3f3cf, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -385,13 +385,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 737943746}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4686,13 +4686,14 @@ MonoBehaviour:
   antiFrame: {fileID: 737943748}
   maxAntiFrame: {fileID: 31825741}
   antiCommentParent: {fileID: 348359998}
-  antiThreshold: 2
-  maxAntiThreshold: 4
+  antiThreshold: 4
+  maxAntiThreshold: 8
   antiEffect: {fileID: 4501215717798404077, guid: 33abe156044b046f4896f724e5d95dcf, type: 3}
   spawnWithin: 0.05
   lifeTime: 1
   interval: 0.2
   downLength: 3
+  changeTime: 0.3
 --- !u!224 &8214397832743070286
 RectTransform:
   m_ObjectHideFlags: 0
