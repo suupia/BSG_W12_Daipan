@@ -205,7 +205,7 @@ namespace Daipan.Tutorial.Scripts
                 LanguageEnum.Japanese => new List<Speech>
                 {
                     new(""),
-                    new("ありゃ、ミスしちゃった。ミスするとアンチコメントが流れちゃうよ！")
+                    new("ありゃ、ミスしちゃった。\nミスするとアンチコメントが流れちゃうよ！")
                 },
                 _ => new List<Speech>()
             };
@@ -258,8 +258,8 @@ namespace Daipan.Tutorial.Scripts
                 {
                     new("す、スゴイ...！"),
                     new("君、配信の才能あるよ！"),
-                    new("台パン配信者...！い、いける...これは売れるぞ〜〜！！！"),
-                    new("...ヨシ！そろそろ本番の配信をしようか！")
+                    new("台パン配信者...！い、いける...\nこれは売れるぞ〜〜！！！"),
+                    new("...ヨシ！\nそろそろ本番の配信をしようか！")
                 },
                 _ => new List<Speech>()
             };
