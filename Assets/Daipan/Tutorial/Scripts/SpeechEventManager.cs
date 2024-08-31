@@ -384,10 +384,11 @@ namespace Daipan.Tutorial.Scripts
                     new SequentialEvent(0, SpeechContentByLanguage.ShowForcedMissTutorial(language)[0],
                         SpeechEventEnum.Listening),
                     new SequentialEvent(1, SpeechContentByLanguage.ShowForcedMissTutorial(language)[1],
-                        SpeechEventEnum.Practical, () => forcedMissTutorial.IsMissed),
+                        SpeechEventEnum.Listening, () => forcedMissTutorial.IsMissed),
                     new EndEvent()
                 };
             speechEvents[0].SetNextEvent(speechEvents[1]);
+            speechEvents[1].SetNextEvent(speechEvents[2]);
             return speechEvents[0];
         }
 
