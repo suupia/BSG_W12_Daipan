@@ -22,7 +22,8 @@ namespace Daipan.Tutorial.Scripts
     {
         None,
         Listening, // 聞くタイプのチュートリアル
-        Practical // 実践するタイプのチュートリアル
+        Practical, // 実践するタイプのチュートリアル
+        NoInput, // 入力がないタイプのチュートリアル
     }
 
     public sealed record Speech
@@ -198,13 +199,13 @@ namespace Daipan.Tutorial.Scripts
             {
                 LanguageEnum.English => new List<Speech>
                 {
-                    new("[Test]"),
-                    new("Oh no! You missed!")
+                    new(""),
+                    new("Oh no! You missed! If you miss, anti-comments will appear!")
                 },
                 LanguageEnum.Japanese => new List<Speech>
                 {
-                    new("...[テスト]"),
-                    new("ありゃ、ミスしちゃった")
+                    new(""),
+                    new("ありゃ、ミスしちゃった。ミスするとアンチコメントが流れちゃうよ！")
                 },
                 _ => new List<Speech>()
             };
@@ -382,9 +383,9 @@ namespace Daipan.Tutorial.Scripts
                 new List<ISpeechEvent>
                 {
                     new SequentialEvent(0, SpeechContentByLanguage.ShowForcedMissTutorial(language)[0],
-                        SpeechEventEnum.Listening),
+                        SpeechEventEnum.NoInput),
                     new SequentialEvent(1, SpeechContentByLanguage.ShowForcedMissTutorial(language)[1],
-                        SpeechEventEnum.Listening, () => forcedMissTutorial.IsMissed),
+                        SpeechEventEnum.NoInput, () => forcedMissTutorial.IsMissed), // ForcedMissTutorialの中でMoveNext()を呼ぶ
                     new EndEvent()
                 };
             speechEvents[0].SetNextEvent(speechEvents[1]);

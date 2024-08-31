@@ -410,7 +410,6 @@ namespace Daipan.Tutorial.Scripts
             Debug.Log("Tutorial: forced miss...");
             // todo : いいかんじのメッセージを表示
             _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildForcedMissTutorial(this, _languageConfig.CurrentLanguage));
-    
             ExecuteAsync().Forget();
         }
         
@@ -421,10 +420,23 @@ namespace Daipan.Tutorial.Scripts
 
         async UniTaskVoid ExecuteAsync()
         {
-            // todo : BlueEnemyを生成
-            _enemySpawnerTutorial.SpawnEnemyByType(EnemyEnum.Blue);
+            // 雑魚敵とボスを生成する
+            const float enemyIntervalSec = 0.5f; // スポーンの間隔
+            var enemyEnums = new Queue<EnemyEnum>(new[]
+            {
+                EnemyEnum.Blue, EnemyEnum.RedBoss, EnemyEnum.Red, EnemyEnum.YellowBoss, EnemyEnum.Yellow,
+                EnemyEnum.BlueBoss
+            });
+            Disposables.Add(
+                Observable.Interval(TimeSpan.FromSeconds(enemyIntervalSec))
+                    .Take(enemyEnums.Count)
+                    .Subscribe(
+                        _ => { _enemySpawnerTutorial.SpawnEnemyByType(enemyEnums.Dequeue()); },
+                        _ => { Debug.Log("Enemy spawn completed"); }
+                    )
+            );
 
-            const double delaySecForMissed = 1.0f;
+            const double delaySecForMissed = 2.5f;
             await UniTask.Delay(TimeSpan.FromSeconds(delaySecForMissed));
             Debug.Log("Forced miss...");
             var playerMono = Object.FindObjectOfType<PlayerMono>();
@@ -433,6 +445,7 @@ namespace Daipan.Tutorial.Scripts
             else
                 Debug.LogWarning("PlayerMono is not set");
             IsMissed = true;
+            _speechEventManager.MoveNext();
             
             const double delaySecForAntiComment = 2.0f;
             await UniTask.Delay(TimeSpan.FromSeconds(delaySecForAntiComment));
@@ -451,7 +464,7 @@ namespace Daipan.Tutorial.Scripts
             CanMoveNext = true;
             Debug.Log("ForcedMissTutorial Can move next");  
             // todo : イライラゲージmaxになったら次のContentに遷移
-   
+            _speechEventManager.MoveNext(); 
         } 
     }
 

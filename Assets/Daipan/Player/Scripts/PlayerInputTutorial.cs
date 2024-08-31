@@ -72,6 +72,9 @@ namespace Daipan.Player.Scripts
                     case SpeechEventEnum.Practical:
                         TutorialPracticalUpdate();
                         break;
+                    case SpeechEventEnum.NoInput:
+                        // 何もしない
+                        break;
                     case SpeechEventEnum.None:
                         break;
                 }
