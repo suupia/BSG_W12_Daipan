@@ -88,6 +88,8 @@ namespace Daipan.Player.Scripts
 
         void TutorialPracticalUpdate()
         {
+            Debug.Log($"AttackExecutorTutorial: _speechEventManager.GetSpeechEventEnum() = {_speechEventManager.GetSpeechEventEnum()}" +
+                      $", SpeechEventEnum.Message = {_speechEventManager.CurrentEvent?.Speech }");
             if (_playerMono == null)
             {
                 Debug.LogWarning("PlayerMono is not set");

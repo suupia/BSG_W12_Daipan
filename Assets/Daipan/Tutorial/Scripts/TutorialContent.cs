@@ -15,6 +15,9 @@ using R3;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using Cysharp.Threading.Tasks;
+using Daipan.Player.Interfaces;
+using Daipan.Player.MonoScripts;
+using Daipan.Player.Scripts;
 
 namespace Daipan.Tutorial.Scripts
 {
@@ -381,6 +384,7 @@ namespace Daipan.Tutorial.Scripts
         readonly EnemySpawnerTutorial _enemySpawnerTutorial;
         readonly LanguageConfig _languageConfig;
         readonly IrritatedValue _irritatedValue;
+        readonly AttackExecutor _attackExecutor;
         public bool IsMissed { get; set; }
         bool CanMoveNext { get; set; }
 
@@ -390,6 +394,7 @@ namespace Daipan.Tutorial.Scripts
             , EnemySpawnerTutorial enemySpawnerTutorial
             , LanguageConfig languageConfig
             , IrritatedValue irritatedValue
+            // , AttackExecutor attackExecutor  // IAttackExecutorはAttackExecutorTutorialになっていて、Decoratorを妥協している
         )
         {
             _speechEventManager = speechEventManager;
@@ -397,6 +402,7 @@ namespace Daipan.Tutorial.Scripts
             _enemySpawnerTutorial = enemySpawnerTutorial;
             _languageConfig = languageConfig;
             _irritatedValue = irritatedValue;
+            // _attackExecutor = attackExecutor;
         }
 
         public override void Execute()
@@ -421,6 +427,11 @@ namespace Daipan.Tutorial.Scripts
             const double delaySecForMissed = 1.0f;
             await UniTask.Delay(TimeSpan.FromSeconds(delaySecForMissed));
             Debug.Log("Forced miss...");
+            var playerMono = Object.FindObjectOfType<PlayerMono>();
+            if (playerMono != null)
+                _attackExecutor.FireAttackEffect(playerMono, PlayerColor.Red);
+            else
+                Debug.LogWarning("PlayerMono is not set");
             IsMissed = true;
             
             const double delaySecForAntiComment = 2.0f;
@@ -430,11 +441,11 @@ namespace Daipan.Tutorial.Scripts
                 _commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
             }
 
-            // todo : イライラゲージが溜まっている時にスポットライトを当てる
+            // スポットライトを当てる
             var irritatedGaugeSpotLight = Object.FindObjectOfType<IrritatedGaugeSpotLightMono>();
             if(irritatedGaugeSpotLight != null) irritatedGaugeSpotLight.Show(); 
             
-            await UniTask.WaitUntil(() => _irritatedValue.IsFull); // todo ここでイライラゲージがmaxになったかどうかを判定
+            await UniTask.WaitUntil(() => _irritatedValue.IsFull); // ここでイライラゲージがmaxになったかどうかを判定
             
             if(irritatedGaugeSpotLight != null) irritatedGaugeSpotLight.Hide();  
             CanMoveNext = true;
