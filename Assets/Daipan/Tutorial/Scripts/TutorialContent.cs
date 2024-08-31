@@ -394,7 +394,7 @@ namespace Daipan.Tutorial.Scripts
             , EnemySpawnerTutorial enemySpawnerTutorial
             , LanguageConfig languageConfig
             , IrritatedValue irritatedValue
-            // , AttackExecutor attackExecutor  // IAttackExecutorはAttackExecutorTutorialになっていて、Decoratorを妥協している
+            , AttackExecutor attackExecutor  // IAttackExecutorはAttackExecutorTutorialになっていて、Decoratorを妥協している
         )
         {
             _speechEventManager = speechEventManager;
@@ -402,7 +402,7 @@ namespace Daipan.Tutorial.Scripts
             _enemySpawnerTutorial = enemySpawnerTutorial;
             _languageConfig = languageConfig;
             _irritatedValue = irritatedValue;
-            // _attackExecutor = attackExecutor;
+            _attackExecutor = attackExecutor;
         }
 
         public override void Execute()
