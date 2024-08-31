@@ -38,13 +38,22 @@ namespace Daipan.Effects.MonoScripts
         [Min(0.1f)]
         [SerializeField] float interval;
 
-        int preAntiCommentNum = 0;
-        IDisposable antiEffectSubscription;
-        List<int> effectsY = new();
+        [SerializeField] float downLength;
+
+        [SerializeField] float changeTime;
+
+        int _preAntiCommentNum = 0;
+        IDisposable _antiEffectSubscription;
+        List<int> _effectsY = new();
+        int _antiState;
+        
 
         void Start()
         {
-            ShowMaxAntiFrame();
+            originalFrame.color = Color.white;
+            antiFrame.color = Vector4.zero;
+            maxAntiFrame.color = Vector4.zero;
+            _antiState = 0;
         }
 
         
@@ -54,54 +63,66 @@ namespace Daipan.Effects.MonoScripts
             int antiCommentNum = antiCommentParent.childCount;
             //Debug.Log($"antiCommentNum:{antiCommentNum}");
 
-            if (preAntiCommentNum == antiCommentNum) return;
+            if (_preAntiCommentNum == antiCommentNum) return;
 
 
-            if (antiCommentNum < antiThreshold)
+            if (antiCommentNum < antiThreshold && _antiState != 0)
             {
-                //ShowOriginalFrame();
-                ShowMaxAntiFrame();
+                ShowOriginalFrame();
+                _antiState = 0;
             }
-            else if(antiCommentNum < maxAntiThreshold)
+            else if(antiCommentNum < maxAntiThreshold && _antiState != 1)
             {
                 ShowAntiFrame();
+                _antiState = 1;
             }
-            else
+            else if(antiCommentNum >= maxAntiThreshold && _antiState != 2)
             {
                 ShowMaxAntiFrame();
+                _antiState = 2;
             }
 
 
-            preAntiCommentNum = antiCommentNum;
+            _preAntiCommentNum = antiCommentNum;
         }
 
         void ShowOriginalFrame()
         {
-            originalFrame.color = Color.white;
-            antiFrame.enabled = false;
-            maxAntiFrame.enabled = false;
+            DOVirtual.Float(0, 1f, changeTime, value =>
+            {
+                originalFrame.color = new Vector4(0.8f + 0.2f * value, 0.8f + 0.2f * value, 0.8f + 0.2f * value, 1f);
+                antiFrame.color = antiFrame.color * (1 - value);
+                maxAntiFrame.color = maxAntiFrame.color * (1 - value);
+            });
 
-            antiEffectSubscription?.Dispose();
+
+            _antiEffectSubscription?.Dispose();
         }
         void ShowAntiFrame()
         {
-            originalFrame.color = new Vector4(0.8f, 0.8f, 0.8f, 1f);
-            antiFrame.enabled = true;
-            maxAntiFrame.enabled = false;
+            DOVirtual.Float(1f, 0, changeTime, value =>
+            {
+                originalFrame.color = new Vector4(0.8f + 0.2f * value, 0.8f + 0.2f * value, 0.8f + 0.2f * value, 1f);
+                antiFrame.color = Vector4.one * (1 - value);
+                maxAntiFrame.color = Vector4.zero;
+            });
 
-            antiEffectSubscription?.Dispose();
+            _antiEffectSubscription?.Dispose();
         }
         void ShowMaxAntiFrame()
         {
-            originalFrame.color = new Vector4(0.8f, 0.8f, 0.8f, 1f);
-            antiFrame.enabled = true;
-            maxAntiFrame.enabled = true;
+            DOVirtual.Float(1f, 0, changeTime, value =>
+            {
+                originalFrame.color = new Vector4(0.8f, 0.8f, 0.8f, 1f);
+                antiFrame.color = Color.white;
+                maxAntiFrame.color = Vector4.one * (1 - value);
+            });
 
-            antiEffectSubscription?.Dispose();
-            antiEffectSubscription = Observable.Interval(TimeSpan.FromSeconds(interval), destroyCancellationToken)
+            _antiEffectSubscription?.Dispose();
+            _antiEffectSubscription = Observable.Interval(TimeSpan.FromSeconds(interval), destroyCancellationToken)
             .Subscribe(_ =>
             {
-                if (effectsY.Count >= lifeTime / interval) effectsY.RemoveAt(0);
+                if (_effectsY.Count >= lifeTime / interval) _effectsY.RemoveAt(0);
 
                 Vector3 screenPos = new Vector3(UnityEngine.Random.Range(0, spawnWithin * 2), 0, 0);
                 if (screenPos.x >= spawnWithin) screenPos.x = 1 - screenPos.x * 0.5f;
@@ -111,15 +132,16 @@ namespace Daipan.Effects.MonoScripts
                 List<int> numbers = new();
                 for (int i = 0; i < num; i++)
                 {
-                    if (!effectsY.Contains(i))
+                    if (!_effectsY.Contains(i))
                         numbers.Add(i);
                 }
                 screenPos.y = numbers[UnityEngine.Random.Range(0, numbers.Count)] + UnityEngine.Random.value;
                 screenPos.y /= num;
 
-                effectsY.Add((int)MathF.Floor(screenPos.y * num));
+                _effectsY.Add((int)MathF.Floor(screenPos.y * num));
 
                 var pos = Camera.main.ViewportToWorldPoint(screenPos);
+                pos.y += downLength * 0.5f;
                 pos.z = 0;
 
 
@@ -132,19 +154,14 @@ namespace Daipan.Effects.MonoScripts
                 sequence.Append(DOVirtual.Float(0, 0.7f, lifeTime * 0.5f, value =>
                 {
                     effect.GetComponent<SpriteRenderer>().color = new Vector4(1f, 1f, 1f, value);
-                }).SetLoops(1, LoopType.Yoyo));
+                }).SetLoops(2, LoopType.Yoyo));
 
                 sequence.Join(effect.transform.DOScale(effect.transform.localScale * 1.5f, lifeTime * 0.5f));
 
                 sequence.Join(effect.transform.DORotate(new Vector3(0f, 0f, -10f), lifeTime * 0.2f).SetLoops(5, LoopType.Yoyo));
 
+                sequence.Join(effect.transform.DOMoveY(effect.transform.position.y - downLength, lifeTime).SetEase(Ease.Linear));
 
-                sequence.Append(DOVirtual.Float(0.7f, 0f, lifeTime * 0.5f, value =>
-                {
-                    effect.GetComponent<SpriteRenderer>().color = new Vector4(1f, 1f, 1f, value);
-                }));
-
-                //sequence.Join(effect.transform.DORotate(new Vector3(0f, 0f, 270), lifeTime * 0.3f, RotateMode.FastBeyond360));
 
                 Destroy(effect, lifeTime);
             });

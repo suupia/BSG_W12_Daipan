@@ -391,7 +391,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8, g: 0.8, b: 0.8, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4689,9 +4689,10 @@ MonoBehaviour:
   antiThreshold: 2
   maxAntiThreshold: 4
   antiEffect: {fileID: 4501215717798404077, guid: 33abe156044b046f4896f724e5d95dcf, type: 3}
-  spawnWithin: 0.186
+  spawnWithin: 0.05
   lifeTime: 1
   interval: 0.2
+  downLength: 3
 --- !u!224 &8214397832743070286
 RectTransform:
   m_ObjectHideFlags: 0
