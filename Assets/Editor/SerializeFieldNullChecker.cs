@@ -1,5 +1,6 @@
 #nullable enable
 using System.Linq;
+using Coffee.UIExtensions;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
@@ -88,6 +89,7 @@ public static class SerializeFieldNullChecker
         if (component is Button) return true;
         if (component is Scrollbar) return true;
         if (component is ScrollRect) return true;
+        if (component is Unmask) return true;
         return false;
     }
 
