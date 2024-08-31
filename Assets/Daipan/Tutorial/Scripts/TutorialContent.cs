@@ -380,6 +380,7 @@ namespace Daipan.Tutorial.Scripts
         readonly CommentSpawner _commentSpawner;
         readonly EnemySpawnerTutorial _enemySpawnerTutorial;
         readonly LanguageConfig _languageConfig;
+        readonly IrritatedValue _irritatedValue;
         public bool IsMissed { get; set; }
         bool CanMoveNext { get; set; }
 
@@ -388,12 +389,14 @@ namespace Daipan.Tutorial.Scripts
             , CommentSpawner commentSpawner
             , EnemySpawnerTutorial enemySpawnerTutorial
             , LanguageConfig languageConfig
+            , IrritatedValue irritatedValue
         )
         {
             _speechEventManager = speechEventManager;
             _commentSpawner = commentSpawner;
             _enemySpawnerTutorial = enemySpawnerTutorial;
             _languageConfig = languageConfig;
+            _irritatedValue = irritatedValue;
         }
 
         public override void Execute()
@@ -431,7 +434,7 @@ namespace Daipan.Tutorial.Scripts
             var irritatedGaugeSpotLight = Object.FindObjectOfType<IrritatedGaugeSpotLightMono>();
             if(irritatedGaugeSpotLight != null) irritatedGaugeSpotLight.Show(); 
             
-            // await UniTask.WaitUntil(() => irritatedGaugeSpotLight == null || irritatedGaugeSpotLight.IsFull); // todo ここでイライラゲージがmaxになったかどうかを判定
+            await UniTask.WaitUntil(() => _irritatedValue.IsFull); // todo ここでイライラゲージがmaxになったかどうかを判定
             
             if(irritatedGaugeSpotLight != null) irritatedGaugeSpotLight.Hide();  
             CanMoveNext = true;
