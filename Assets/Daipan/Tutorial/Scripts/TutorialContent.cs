@@ -377,49 +377,57 @@ namespace Daipan.Tutorial.Scripts
         readonly SpeechEventManager _speechEventManager;
         readonly CommentSpawner _commentSpawner;
         readonly EnemySpawnerTutorial _enemySpawnerTutorial;
+        readonly LanguageConfig _languageConfig;
         bool CanMoveNext { get; set; }
 
         public ForcedMissTutorial(
             SpeechEventManager speechEventManager
             , CommentSpawner commentSpawner
             , EnemySpawnerTutorial enemySpawnerTutorial
+            , LanguageConfig languageConfig
         )
         {
             _speechEventManager = speechEventManager;
             _commentSpawner = commentSpawner;
             _enemySpawnerTutorial = enemySpawnerTutorial;
+            _languageConfig = languageConfig;
         }
 
         public override void Execute()
         {
-                
-               
-                // todo : イライラゲージmaxになったら次のContentに遷移
-                // 次のシーンだが、（17.ヨシ！その怒りを力に変えろ～！ ）
-                
-                Debug.Log("Tutorial: forced miss..."); 
-                // todo : いいかんじのメッセージを表示
-                // _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildForcedMissTutorial(this, _languageConfig.CurrentLanguage));
-                // todo : BlueEnemyを生成
-                _enemySpawnerTutorial.SpawnEnemyByType(EnemyEnum.Blue);
+            Debug.Log("Tutorial: forced miss...");
+            // todo : いいかんじのメッセージを表示
+            _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildForcedMissTutorial(this, _languageConfig.CurrentLanguage));
+            
+            // todo : BlueEnemyを生成
+            _enemySpawnerTutorial.SpawnEnemyByType(EnemyEnum.Blue);
+            
+            // todo : 間違った攻撃をする
+            // あたらしくクラスを作る
+            
+            // 遅れてアンチコメントをいくつか生成（イライラゲージが溜まりやすいようにするため）
+            const double delaySec = 1.0f;
+            Disposables.Add(
+                Observable.Timer(TimeSpan.FromSeconds(delaySec))
+                    .Subscribe(_ =>
+                    {
+                        for(int i = 0; i < 3; i++) _commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
+                    })
+            );
 
-                // todo : 間違った攻撃をする
-                // あたらしくクラスを作る
-                
-                // todo : アンチコメントが確定で生成される
-                const int antiCommentNumber = 4; 
-                for(int i = 0; i < antiCommentNumber; i++)
-                {
-                    _commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
-                } 
-                // todo : イライラゲージが溜まっている時にスポットライトを当てる　（わわわ、怒りがどんどん溜まってる…！？｛怒りゲージにスポットライトを当てる｝）
-                // 新しくクラスを作る
+
+            // todo : イライラゲージが溜まっている時にスポットライトを当てる　（わわわ、怒りがどんどん溜まってる…！？｛怒りゲージにスポットライトを当てる｝）
+            // 新しくクラスを作る
+            
+            // todo : イライラゲージmaxになったら次のContentに遷移
+            // 次のシーンだが、（17.ヨシ！その怒りを力に変えろ～！ ）
+
         }
-
+        
         public override bool IsCompleted()
         {
             return _speechEventManager.IsEnd() && CanMoveNext;
-        } 
+        }
     }
 
     public class ShowAntiCommentsTutorial : AbstractTutorialContent

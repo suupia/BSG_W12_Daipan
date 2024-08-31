@@ -191,6 +191,24 @@ namespace Daipan.Tutorial.Scripts
                 _ => new List<Speech>()
             };
         }
+        
+        public static List<Speech> ShowForcedMissTutorial(LanguageEnum language)
+        {
+            return language switch
+            {
+                LanguageEnum.English => new List<Speech>
+                {
+                    new("[Test]"),
+                    new("Oh no! You missed!")
+                },
+                LanguageEnum.Japanese => new List<Speech>
+                {
+                    new("...[テスト]"),
+                    new("ありゃ、ミスしちゃった")
+                },
+                _ => new List<Speech>()
+            };
+        }
 
         public static List<Speech> ShowAntiCommentsTutorial(LanguageEnum language)
         {
@@ -351,6 +369,22 @@ namespace Daipan.Tutorial.Scripts
                     new EndEvent()
                 };
 
+            speechEvents[0].SetNextEvent(speechEvents[1]);
+            return speechEvents[0];
+        }
+
+        public static ISpeechEvent BuildForcedMissTutorial(
+            ForcedMissTutorial forcedMissTutorial
+            , LanguageEnum language
+        )
+        {
+            var speechEvents =
+                new List<ISpeechEvent>
+                {
+                    new SequentialEvent(0, SpeechContentByLanguage.ShowAntiCommentsTutorial(language)[0],
+                        SpeechEventEnum.Listening),
+                    new EndEvent()
+                };
             speechEvents[0].SetNextEvent(speechEvents[1]);
             return speechEvents[0];
         }
