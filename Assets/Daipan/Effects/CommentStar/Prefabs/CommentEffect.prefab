@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1699314699589404900}
   - component: {fileID: 2098593525317261798}
   m_Layer: 5
-  m_Name: CommetEffect
+  m_Name: CommentEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -65,7 +65,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1190287357324100944}
   - component: {fileID: 5731973175037275895}
-  m_Layer: 5
+  m_Layer: 12
   m_Name: Star
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,7 +151,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5814364413017733808}
   - component: {fileID: 2060853808195048297}
-  m_Layer: 5
+  m_Layer: 12
   m_Name: Star_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -236,7 +236,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6643000482726026250}
   - component: {fileID: 5807133175096632153}
-  m_Layer: 5
+  m_Layer: 12
   m_Name: Tail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -320,7 +320,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6347918661366617601}
   - component: {fileID: 9090769251360127496}
-  m_Layer: 5
+  m_Layer: 12
   m_Name: Tail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
