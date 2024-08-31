@@ -378,6 +378,7 @@ namespace Daipan.Tutorial.Scripts
         readonly CommentSpawner _commentSpawner;
         readonly EnemySpawnerTutorial _enemySpawnerTutorial;
         readonly LanguageConfig _languageConfig;
+        public bool IsMissed { get; set; }
         bool CanMoveNext { get; set; }
 
         public ForcedMissTutorial(
@@ -398,30 +399,40 @@ namespace Daipan.Tutorial.Scripts
             Debug.Log("Tutorial: forced miss...");
             // todo : いいかんじのメッセージを表示
             _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildForcedMissTutorial(this, _languageConfig.CurrentLanguage));
-            
+    
             // todo : BlueEnemyを生成
             _enemySpawnerTutorial.SpawnEnemyByType(EnemyEnum.Blue);
-            
-            // todo : 間違った攻撃をする
-            // あたらしくクラスを作る
-            
-            // 遅れてアンチコメントをいくつか生成（イライラゲージが溜まりやすいようにするため）
-            const double delaySec = 1.0f;
+
+            const double delaySecForMissed = 1.0f;
+            const double delaySecForAntiComment = 2.0f;
+
+            // BlueEnemyが召喚されてからdelaySecForMissed分だけ待って、Forced miss...のログを出す
             Disposables.Add(
-                Observable.Timer(TimeSpan.FromSeconds(delaySec))
+                Observable.Timer(TimeSpan.FromSeconds(delaySecForMissed))
                     .Subscribe(_ =>
                     {
-                        for(int i = 0; i < 3; i++) _commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
+                        Debug.Log("Forced miss...");
+                        IsMissed = true;
+
+                        // delaySecForAntiComment分だけ待ってからアンチコメントを生成
+                        Disposables.Add(
+                            Observable.Timer(TimeSpan.FromSeconds(delaySecForAntiComment))
+                                .Subscribe(__ =>
+                                {
+                                    for (int i = 0; i < 3; i++) 
+                                    {
+                                        _commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
+                                    }
+                                })
+                        );
                     })
             );
 
-
-            // todo : イライラゲージが溜まっている時にスポットライトを当てる　（わわわ、怒りがどんどん溜まってる…！？｛怒りゲージにスポットライトを当てる｝）
+            // todo : イライラゲージが溜まっている時にスポットライトを当てる
             // 新しくクラスを作る
-            
+    
             // todo : イライラゲージmaxになったら次のContentに遷移
             // 次のシーンだが、（17.ヨシ！その怒りを力に変えろ～！ ）
-
         }
         
         public override bool IsCompleted()
