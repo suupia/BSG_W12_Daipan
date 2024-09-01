@@ -301,7 +301,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blackScreen: {fileID: 1911669462}
-  blackoutTime: 0.5
+  blackoutTime: 0.3
 --- !u!4 &283245047
 Transform:
   m_ObjectHideFlags: 0
