@@ -58,7 +58,7 @@ public class TitleMono : MonoBehaviour
             if (_getEnterKey.GetEnterKeyDown())
             {
                 SceneTransition.TransitioningScene(SceneName.TutorialScene);
-                SoundManager.Instance.PlaySe(SeEnum.Decide);
+                SoundManager.Instance?.PlaySe(SeEnum.Decide);
             }
 
             if (Input.GetKeyDown(KeyCode.D))
@@ -86,8 +86,8 @@ public class TitleMono : MonoBehaviour
     {
 
         if (_inputSerialManager.GetButtonRed()) _inputOption.MoveCursor(MoveCursorDirectionEnum.Down);
-        if (_inputSerialManager.GetButtonBlue()) _inputOption.MoveCursor(MoveCursorDirectionEnum.Left);
-        if (_inputSerialManager.GetButtonYellow()) _inputOption.MoveCursor(MoveCursorDirectionEnum.Right);
+        if (_inputSerialManager.GetButtonBlue()) _inputOption.MoveCursor(MoveCursorDirectionEnum.Right);
+        if (_inputSerialManager.GetButtonYellow()) _inputOption.MoveCursor(MoveCursorDirectionEnum.Left);
         if (_getEnterKey.GetEnterKeyDown()) _inputOption.Select();
     }
 }

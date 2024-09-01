@@ -69,7 +69,7 @@ namespace Daipan.Option.Scripts
                         break;
                     case CurrentContents.SE:
                         SoundManager.SeVolume = SoundManager.SeVolume + 1;
-                        SoundManager.Instance.PlaySe(SeEnum.Attack);
+                        SoundManager.Instance?.PlaySe(SeEnum.Attack);
                         break;
                     case CurrentContents.IsShaking:
                         _daipanShakingConfig.IsShaking = false;
@@ -91,7 +91,7 @@ namespace Daipan.Option.Scripts
                         break;
                     case CurrentContents.SE:
                         SoundManager.SeVolume = SoundManager.SeVolume - 1;
-                        SoundManager.Instance.PlaySe(SeEnum.Attack);
+                        SoundManager.Instance?.PlaySe(SeEnum.Attack);
                         break;
                     case CurrentContents.IsShaking:
                         _daipanShakingConfig.IsShaking = true;

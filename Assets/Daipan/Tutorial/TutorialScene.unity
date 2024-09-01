@@ -7262,12 +7262,28 @@ PrefabInstance:
     m_TransformParent: {fileID: 779130798}
     m_Modifications:
     - target: {fileID: 4171276379065512900, guid: 415c0f83b69654574b0d87b5b64c15e1, type: 3}
-      propertyPath: rotateSpeed
-      value: 2
+      propertyPath: selectEnterSpeed
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4171276379065512900, guid: 415c0f83b69654574b0d87b5b64c15e1, type: 3}
+      propertyPath: moveTriangleSpeed
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5860855099026524372, guid: 415c0f83b69654574b0d87b5b64c15e1, type: 3}
       propertyPath: m_Name
       value: LanguageSelectionPopup
+      objectReference: {fileID: 0}
+    - target: {fileID: 6950704457630549222, guid: 415c0f83b69654574b0d87b5b64c15e1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6950704457630549222, guid: 415c0f83b69654574b0d87b5b64c15e1, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6950704457630549222, guid: 415c0f83b69654574b0d87b5b64c15e1, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 14.48
       objectReference: {fileID: 0}
     - target: {fileID: 7579809348043225404, guid: 415c0f83b69654574b0d87b5b64c15e1, type: 3}
       propertyPath: m_Pivot.x
@@ -7350,8 +7366,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 4065444190999482790, guid: 415c0f83b69654574b0d87b5b64c15e1, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 415c0f83b69654574b0d87b5b64c15e1, type: 3}
