@@ -1181,6 +1181,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   popupView: {fileID: 2295205380169427990}
+  satellites: {fileID: 7675487945468214184}
+  ling: {fileID: 31311722225947754}
+  rotateSpeed: 1
 --- !u!1 &6520564016977007942
 GameObject:
   m_ObjectHideFlags: 0
