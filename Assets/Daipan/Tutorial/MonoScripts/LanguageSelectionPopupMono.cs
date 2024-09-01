@@ -47,6 +47,11 @@ namespace Daipan.Tutorial.MonoScripts
 
         private LanguageConfig _languageConfig = null!;
 
+        public bool IsActive
+        {
+            get => popupView.activeSelf;
+        }
+
         [Inject]
         public void Initialize(LanguageConfig languageConfig)
         {

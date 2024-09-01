@@ -89,7 +89,7 @@ namespace Daipan.Tutorial.Scripts
 
         public override bool IsCompleted()
         {
-            return Completed;
+            return Completed && !_languageSelectionPopupMono.IsActive;
         }
     }
 
