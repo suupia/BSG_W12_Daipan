@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using VContainer;
 using Daipan.Option.Scripts;
+using DG.Tweening;
 
 namespace Daipan.Tutorial.MonoScripts
 {
@@ -23,13 +24,26 @@ namespace Daipan.Tutorial.MonoScripts
         [SerializeField]
         Image offEnglish = null!;
 
+        [SerializeField]
+        Image selectedEnglish = null!;
+
         // リング
         [SerializeField]
-        RectTransform satellites;
+        RectTransform satellites = null!;
         [SerializeField]
-        RectTransform ling;
+        RectTransform ling = null!;
         [SerializeField]
         float rotateSpeed;
+
+        // EnterKey
+        [SerializeField]
+        RectTransform triangle = null!;
+        [SerializeField]
+        RectTransform enterKey = null!;
+        [SerializeField]
+        float moveTriangleSpeed;
+        [SerializeField]
+        float selectEnterSpeed;
 
         private LanguageConfig _languageConfig = null!;
 
@@ -41,7 +55,7 @@ namespace Daipan.Tutorial.MonoScripts
 
         void Awake()
         {
-            HidePopup();
+            HidePopup(false);
         }
 
 
@@ -51,6 +65,11 @@ namespace Daipan.Tutorial.MonoScripts
             ActivateSatellites(value);
             ling.eulerAngles = new Vector3(0, 0, -360f * value);
 
+            value = Time.time * moveTriangleSpeed - MathF.Floor(Time.time * moveTriangleSpeed);
+            //value = Mathf.Abs(value - 0.5f) * 2;
+            value = MathF.Sin(MathF.PI * value);
+            triangle.anchoredPosition = new Vector3(0f, 10f * value, 0f);
+
             UpdateLanguage();
         }
         public void ShowPopup()
@@ -58,9 +77,13 @@ namespace Daipan.Tutorial.MonoScripts
             popupView.SetActive(true);
         }
         
-        public void HidePopup()
+        public void HidePopup(bool isAnimation = true)
         {
-            popupView.SetActive(false);
+            if (isAnimation)
+                enterKey.DOScale(1.5f, selectEnterSpeed).SetLoops(2, LoopType.Yoyo)
+                    .OnComplete(() => popupView.SetActive(false));
+            else
+                popupView.SetActive(false);
         }
 
         void ActivateSatellites(float index)
@@ -83,6 +106,7 @@ namespace Daipan.Tutorial.MonoScripts
                 offJapanese.gameObject.SetActive(true);
                 onEnglish.gameObject.SetActive(true);
                 offEnglish.gameObject.SetActive(false);
+                selectedEnglish.gameObject.SetActive(true);
             }
             else if(_languageConfig.CurrentLanguage == LanguageEnum.Japanese)
             {
@@ -90,6 +114,7 @@ namespace Daipan.Tutorial.MonoScripts
                 offJapanese.gameObject.SetActive(false);
                 onEnglish.gameObject.SetActive(false);
                 offEnglish.gameObject.SetActive(true);
+                selectedEnglish.gameObject.SetActive(false);
             }
         }
     } 
