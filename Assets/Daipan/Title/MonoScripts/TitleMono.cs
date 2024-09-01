@@ -10,6 +10,8 @@ using UnityEngine;
 using VContainer;
 using Daipan.InputSerial.Scripts;
 using Daipan.Core.Interfaces;
+using UnityEngine.UI;
+using DG.Tweening;
 
 public class TitleMono : MonoBehaviour
 {
@@ -17,6 +19,12 @@ public class TitleMono : MonoBehaviour
     IInputOption _inputOption;
     SamePressChecker _samePressChecker = null!;
     IGetEnterKey _getEnterKey;
+    bool _isTransitioned;
+
+    [SerializeField]
+    Image blackScreen = null!;
+    [SerializeField]
+    float blackoutTime;
 
     [Inject]
     public void Initialize(
@@ -41,12 +49,15 @@ public class TitleMono : MonoBehaviour
             () => SceneTransition.TransitioningScene(SceneName.DaipanScene), () => { });
 
         _getEnterKey = getEnterKey;
+        _isTransitioned = false;
     }
 
 
     // Update is called once per frame
     void Update()
     {
+        if (_isTransitioned) return;
+
         OpenMenuUpdate();
 
         if (_inputOption.IsOpening)
@@ -57,7 +68,10 @@ public class TitleMono : MonoBehaviour
         {
             if (_getEnterKey.GetEnterKeyDown())
             {
-                SceneTransition.TransitioningScene(SceneName.TutorialScene);
+                DOVirtual.Float(0, 1f, blackoutTime, value =>
+                {
+                    blackScreen.color = new Vector4(0, 0, 0, value);
+                }).OnComplete(() => SceneTransition.TransitioningScene(SceneName.TutorialScene));
                 SoundManager.Instance?.PlaySe(SeEnum.Decide);
             }
 
