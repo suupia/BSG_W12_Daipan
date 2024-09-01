@@ -336,7 +336,7 @@ GameObject:
   - component: {fileID: 273323580}
   - component: {fileID: 273323579}
   - component: {fileID: 273323578}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: TutorialUI_Enter_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -424,12 +424,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 273323577}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4, y: 2, z: -1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.6999512, y: 23.709976, z: -9827.999}
+  m_LocalScale: {x: 200, y: 200, z: 107.999985}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 2054784411}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &309620967
 GameObject:
@@ -2649,7 +2649,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1850045030
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3094,6 +3094,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 273323580}
   - {fileID: 531250722}
   - {fileID: 1850045030}
   m_Father: {fileID: 1078988814}
@@ -7642,4 +7643,3 @@ SceneRoots:
   - {fileID: 1103018221}
   - {fileID: 81979262}
   - {fileID: 551928609}
-  - {fileID: 273323580}
