@@ -93,42 +93,6 @@ namespace Daipan.Tutorial.Scripts
         }
     }
 
-    public sealed class DisplayBlackScreenWithProgress : AbstractTutorialContent
-    {
-        readonly DownloadGaugeViewMono _gaugeViewMono;
-        const float FillAmountPerSec = 0.2f;
-        bool Completed { get; set; }
-
-        public DisplayBlackScreenWithProgress(
-            DownloadGaugeViewMono gaugeViewMono
-        )
-        {
-            _gaugeViewMono = gaugeViewMono;
-        }
-
-        public override void Execute()
-        {
-            _gaugeViewMono.Show();
-            SoundManager.Instance?.FadOutBgm(1.0f);
-
-            Disposables.Add(Observable.EveryUpdate()
-                .Where(_ => !Completed)
-                .Subscribe(_ =>
-                {
-                    Debug.Log("Displaying black screen with download progress...");
-                    // Debug.Log($"_gaugeViewMono.CurrentFillAmount: {_gaugeViewMono.CurrentFillAmount}");
-                    _gaugeViewMono.SetGaugeValue(_gaugeViewMono.CurrentFillAmount + FillAmountPerSec * Time.deltaTime);
-                    if (_gaugeViewMono.CurrentFillAmount >= 0.5f) Completed = true;
-                }));
-        }
-
-        public override bool IsCompleted()
-        {
-            return Completed;
-        }
-    }
-
-
     public class FadeInTutorialStart : AbstractTutorialContent
     {
         readonly BlackScreenViewMono _blackScreenViewMono;
