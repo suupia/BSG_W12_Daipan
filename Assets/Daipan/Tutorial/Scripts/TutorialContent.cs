@@ -18,6 +18,7 @@ using Cysharp.Threading.Tasks;
 using Daipan.Player.Interfaces;
 using Daipan.Player.MonoScripts;
 using Daipan.Player.Scripts;
+using Daipan.Core.Interfaces;
 
 namespace Daipan.Tutorial.Scripts
 {
@@ -43,17 +44,20 @@ namespace Daipan.Tutorial.Scripts
         readonly LanguageConfig _languageConfig;
         readonly InputSerialManager _inputSerialManager;
         readonly LanguageSelectionPopupMono _languageSelectionPopupMono;
+        readonly IGetEnterKey _getEnterKey;
         bool Completed { get; set; }
 
         public LanguageSelection(
             LanguageConfig languageConfig
             , InputSerialManager inputSerialManager
             , LanguageSelectionPopupMono languageSelectionPopupMono
+            , IGetEnterKey getEnterKey
         )
         {
             _languageConfig = languageConfig;
             _inputSerialManager = inputSerialManager;
             _languageSelectionPopupMono = languageSelectionPopupMono;
+            _getEnterKey = getEnterKey;
         }
 
         public override void Execute()
@@ -64,26 +68,28 @@ namespace Daipan.Tutorial.Scripts
                 .Where(_ => !Completed)
                 .Subscribe(_ =>
                 {
-                    if (_inputSerialManager.GetButtonBlue())
+                    if (_inputSerialManager.GetButtonYellow())
                     {
                         _languageConfig.CurrentLanguage = LanguageEnum.Japanese;
                         Debug.Log("Language set to Japanese");
-                        _languageSelectionPopupMono.HidePopup();
-                        Completed = true;
                     }
-                    else if (_inputSerialManager.GetButtonYellow())
+                    else if (_inputSerialManager.GetButtonBlue())
                     {
                         _languageConfig.CurrentLanguage = LanguageEnum.English;
-                        Debug.Log("Language set to English");
+                        Debug.Log("Language set to English");   
+                    }
+                    else if (_getEnterKey.GetEnterKeyDown())
+                    {
                         _languageSelectionPopupMono.HidePopup();
                         Completed = true;
+                        Debug.Log("Language was set");
                     }
                 }));
         }
 
         public override bool IsCompleted()
         {
-            return Completed;
+            return Completed && !_languageSelectionPopupMono.IsActive;
         }
     }
 
