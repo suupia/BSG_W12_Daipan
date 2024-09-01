@@ -7261,6 +7261,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 779130798}
     m_Modifications:
+    - target: {fileID: 4171276379065512900, guid: 415c0f83b69654574b0d87b5b64c15e1, type: 3}
+      propertyPath: rotateSpeed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5860855099026524372, guid: 415c0f83b69654574b0d87b5b64c15e1, type: 3}
       propertyPath: m_Name
       value: LanguageSelectionPopup
@@ -7346,7 +7350,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4065444190999482790, guid: 415c0f83b69654574b0d87b5b64c15e1, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 415c0f83b69654574b0d87b5b64c15e1, type: 3}
