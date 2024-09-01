@@ -131,9 +131,7 @@ namespace Daipan.Tutorial.Scripts
 
     public class FadeInTutorialStart : AbstractTutorialContent
     {
-        readonly DownloadGaugeViewMono _gaugeViewMono;
         readonly BlackScreenViewMono _blackScreenViewMono;
-        const float FillAmountPerSec = 0.2f;
         bool Completed { get; set; }
 
         public FadeInTutorialStart(
@@ -141,25 +139,19 @@ namespace Daipan.Tutorial.Scripts
             , BlackScreenViewMono blackScreenViewMono
         )
         {
-            _gaugeViewMono = gaugeViewMono;
             _blackScreenViewMono = blackScreenViewMono;
         }
 
         public override void Execute()
         {
-            _gaugeViewMono.Show();
             Disposables.Add(
                 Observable.EveryUpdate()
                     .Where(_ => !Completed)
                     .Subscribe(_ =>
                     {
                         Debug.Log("Displaying black screen with download progress...");
-                        _gaugeViewMono.SetGaugeValue(_gaugeViewMono.CurrentFillAmount +
-                                                     FillAmountPerSec * Time.deltaTime);
-                        if (_gaugeViewMono.CurrentFillAmount >= 1.0f)
                             _blackScreenViewMono.FadeOut(1, () =>
                             {
-                                _gaugeViewMono.Hide();
                                 Completed = true;
                             });
                     }));
