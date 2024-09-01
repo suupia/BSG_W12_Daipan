@@ -76,10 +76,12 @@ namespace Daipan.Comment.Scripts
             comment.SetParameter(_commentParamsServer.GetRandomCommentWord()); // コメントの文章を抽選する
             _commentCluster.Add(comment);
 
-            // 視聴者を増やす
             var multipliedAmount = (int)(_commentParamsServer.GetViewerDiffCommentNumber() * _comboMultiplier.CalculateComboMultiplier(_comboCounter.ComboCount));
-            _viewerNumber.IncreaseViewer(multipliedAmount);
-            
+            // 視聴者を増やす
+            comment.OnEffectDead = () =>
+            {
+                _viewerNumber.IncreaseViewer(multipliedAmount);
+            };
         }
 
         void SpawnAntiComment()
