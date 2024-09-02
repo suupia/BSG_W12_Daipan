@@ -33,6 +33,7 @@ namespace Daipan.Player.Scripts
                 .Subscribe(_ => playerMono.SetHpMax()));
 
             _disposable.Add(Observable.EveryUpdate()
+                .Where(_ => _resultState.CurrentResultEnum == ResultState.ResultEnum.None)
                 .Subscribe(_ =>
                 {
                     if (playerMono.Hp.Value <= 0)

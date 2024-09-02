@@ -65,11 +65,13 @@ namespace Daipan.Battle.scripts
             _languageConfig = languageConfig;
         }
 
-        public void ShowResult()
+        public void ShowResult(Action onComplete)
         {
             // todo : 配信終了の画面
             viewObject.SetActive(true); 
             resultObject.SetActive(true);
+            // DoTweenでいい感じに表示
+            onComplete();
         }
         
         public void ShowDetails()
