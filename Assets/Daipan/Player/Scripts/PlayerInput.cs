@@ -57,7 +57,7 @@ namespace Daipan.Player.Scripts
         /// </summary>
         public void Update()
         {
-            if (_resultState.IsInResult)
+            if (_resultState.CurrentResultEnum != ResultState.ResultEnum.None)
             {
                 ResultUpdate();
             }
@@ -108,10 +108,24 @@ namespace Daipan.Player.Scripts
 
         void ResultUpdate()
         {
-            if (_getEnterKey.GetEnterKeyDown())
+            switch (_resultState.CurrentResultEnum)
             {
-                Debug.Log("Result中でEnterが押されたよ");
-                _endSceneSelector.TransitToEndScene();
+                case ResultState.ResultEnum.Result:
+                    if (_getEnterKey.GetEnterKeyDown())
+                    {
+                        Debug.Log("Result中でEnterが押されたよ");
+                        _resultState.ShowDetails();
+                    }
+
+                    break;
+                case ResultState.ResultEnum.Details:
+                    if (_getEnterKey.GetEnterKeyDown())
+                    {
+                        Debug.Log("Result中でEnterが押されたよ");
+                        _endSceneSelector.TransitToEndScene();
+                    }
+
+                    break;
             }
         }
         void OpenMenuUpdate()

@@ -1,5 +1,4 @@
 #nullable enable
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Daipan.Sound.MonoScripts;
@@ -9,9 +8,7 @@ using TMPro;
 using UnityEngine;
 using DG.Tweening;
 using R3;
-using UnityEditor.VersionControl;
 using UnityEngine.Assertions;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 using VContainer;
 
