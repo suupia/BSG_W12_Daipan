@@ -14,7 +14,13 @@ namespace Daipan.Battle.Scripts
         readonly ResultViewMono _resultViewMono;
         readonly List<IDisposable> _disposables = new();
         
-        public bool IsInResult { get; private set; }
+        public enum ResultEnum
+        {
+            None, 
+            Result, // 配信終了
+            Details, // 詳細
+        }
+        public ResultEnum CurrentResultEnum { get; private set; } = ResultEnum.None;
 
         public ResultState(
             WaveProgress waveProgress
@@ -26,7 +32,7 @@ namespace Daipan.Battle.Scripts
 
             _disposables.Add(Observable.EveryUpdate().Subscribe(_ =>
             {
-                if (waveProgress.CurrentProgressRatio >= 1 && finalBossDefeatTracker.IsFinalBossDefeated && !IsInResult)
+                if (waveProgress.CurrentProgressRatio >= 1 && finalBossDefeatTracker.IsFinalBossDefeated && CurrentResultEnum == ResultEnum.None)
                 { 
                     const double delaySec = 2;
                     _disposables.Add(
@@ -40,9 +46,14 @@ namespace Daipan.Battle.Scripts
         }
         public void ShowResult()
         {
-            IsInResult = true;
+            CurrentResultEnum = ResultEnum.Result;
             UnityEngine.Time.timeScale = 0;
             _resultViewMono.ShowResult();
+        }
+        
+        public void ShowDetails(){ 
+            CurrentResultEnum = ResultEnum.Details;
+            _resultViewMono.ShowDetails();
         }
         
         public void Dispose()

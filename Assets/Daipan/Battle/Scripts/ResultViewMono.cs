@@ -15,6 +15,10 @@ namespace Daipan.Battle.scripts
     public class ResultViewMono : MonoBehaviour
     {
         [SerializeField] GameObject viewObject = null!;
+        // 必要であればMonoBehaviourを分割
+        [SerializeField] GameObject resultObject = null!; // Result
+        [SerializeField] GameObject detailsObject = null!; // Details
+        
         [SerializeField] TextMeshProUGUI viewerNumberExplainText = null!;
         [SerializeField] TextMeshProUGUI viewerNumberText = null!;
         [SerializeField] TextMeshProUGUI daipanCountExplainText = null!;
@@ -60,8 +64,15 @@ namespace Daipan.Battle.scripts
             
             _languageConfig = languageConfig;
         }
-        
+
         public void ShowResult()
+        {
+            // todo : 配信終了の画面
+            viewObject.SetActive(true); 
+            resultObject.SetActive(true);
+        }
+        
+        public void ShowDetails()
         {
             var playerMono = UnityEngine.Object.FindObjectOfType<PlayerMono>();
             if (playerMono == null)
@@ -121,13 +132,10 @@ namespace Daipan.Battle.scripts
                 _ => throw new ArgumentOutOfRangeException()
             };
 
-            if (viewObject == null) // なぜかNullRefが出たので追加
-                Debug.LogWarning("viewObject is null");
-            else
-                viewObject.SetActive(true);
+            detailsObject.SetActive(true); 
         }
         
-        public void HideResult()
+        void HideResult()
         {
             viewObject.SetActive(false);
         }
