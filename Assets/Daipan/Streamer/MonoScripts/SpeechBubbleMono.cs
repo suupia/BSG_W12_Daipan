@@ -26,6 +26,9 @@ namespace Daipan.Streamer.MonoScripts
         [SerializeField] Image speechImage = null!;
         [SerializeField] TextMeshProUGUI speechWithSpriteText = null!;
 
+        //矢印の画像
+        [SerializeField] GameObject TutorialUIyazirushi = null!;
+
         const float DurationSec = 0.5f;
         const double MinShowSec = 0.5;
         readonly Queue<Speech> _speechQueue = new();
@@ -74,6 +77,7 @@ namespace Daipan.Streamer.MonoScripts
                     speechParent.gameObject.SetActive(false);
                     speechText.text = string.Empty;
                     nextButtonImage.sprite = null; 
+                    TutorialUIyazirushi.SetActive(false);
                     speechWithSpriteParent.gameObject.SetActive(true);
                     speechWithSpriteText.text = speech.Message;
                     speechImage.sprite = _speechSprites.GetSprite(speech.SpriteKey);
@@ -84,6 +88,7 @@ namespace Daipan.Streamer.MonoScripts
                     speechParent.gameObject.SetActive(true);
                     speechText.text = speech.Message;
                     nextButtonImage.sprite = _speechSprites.GetSprite("red");
+                    TutorialUIyazirushi.SetActive(true);
                     speechWithSpriteParent.gameObject.SetActive(false);
                     speechWithSpriteText.text = string.Empty;
                     speechImage.sprite = null; 
