@@ -50,7 +50,6 @@ namespace Daipan.Battle.Scripts
         }
         public void ShowResult()
         {
-            UnityEngine.Time.timeScale = 0;
             _resultViewMono.ShowResult(onComplete:()=>CurrentResultEnum = ResultEnum.Result);
         }
         

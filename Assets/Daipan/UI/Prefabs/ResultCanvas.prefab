@@ -318,12 +318,12 @@ GameObject:
   - component: {fileID: 5373997409594275187}
   - component: {fileID: 8820250406082658758}
   m_Layer: 5
-  m_Name: ShowTransition_2
+  m_Name: Transition_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1555660037450950284
 RectTransform:
   m_ObjectHideFlags: 0
@@ -864,7 +864,7 @@ GameObject:
   - component: {fileID: 6779624576239720444}
   - component: {fileID: 736909308124992110}
   m_Layer: 5
-  m_Name: HideTransition
+  m_Name: TransitionParent2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -886,10 +886,10 @@ RectTransform:
   - {fileID: 413200391352620286}
   m_Father: {fileID: 3939796882088322645}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &736909308124992110
 CanvasRenderer:
@@ -1190,12 +1190,12 @@ GameObject:
   - component: {fileID: 5079464843376519864}
   - component: {fileID: 176535198301291287}
   m_Layer: 5
-  m_Name: ShowTransition_1
+  m_Name: Transition_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8477203380205823980
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1935,12 +1935,12 @@ GameObject:
   - component: {fileID: 1368709167583560514}
   - component: {fileID: 7424717125169667352}
   m_Layer: 5
-  m_Name: HideTransition_3
+  m_Name: Transition_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5576394942633531832
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1955,10 +1955,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 6779624576239720444}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6255112365862750938
 CanvasRenderer:
@@ -2032,12 +2032,12 @@ GameObject:
   - component: {fileID: 1582503790070910836}
   - component: {fileID: 4176857346614272453}
   m_Layer: 5
-  m_Name: HideTransition_4
+  m_Name: Transition_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &413200391352620286
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2052,10 +2052,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 6779624576239720444}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6759928564856595419
 CanvasRenderer:
@@ -2164,7 +2164,7 @@ GameObject:
   - component: {fileID: 2088916922995158615}
   - component: {fileID: 7703192535866861812}
   m_Layer: 5
-  m_Name: ShowTransition
+  m_Name: TransitionParent1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2872,3 +2872,9 @@ MonoBehaviour:
   successBackground: {fileID: 21300000, guid: 04f1c5fc9606c4f7b8fb3f6b33c184c7, type: 3}
   failureBackground: {fileID: 21300000, guid: e42d903def64b4f5288fece21738dab3, type: 3}
   background: {fileID: 5712304764369138122}
+  transitionParent1: {fileID: 7130893429935217720}
+  transitionParent2: {fileID: 3246749147874570879}
+  transitionAnimator1: {fileID: 176535198301291287}
+  transitionAnimator2: {fileID: 8820250406082658758}
+  transitionAnimator3: {fileID: 7424717125169667352}
+  transitionAnimator4: {fileID: 4176857346614272453}
