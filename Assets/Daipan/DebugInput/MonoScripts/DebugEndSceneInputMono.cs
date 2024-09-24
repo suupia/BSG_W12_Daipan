@@ -13,27 +13,23 @@ namespace Daipan.DebugInput.MonoScripts
 {
     public sealed class DebugEndSceneInputMono : MonoBehaviour
     {
-        ResultState _resultState = null!; 
+        ResultState _resultState = null!;
+
         [Inject]
         public void Initialize(
             ResultState resultState
-            )
+        )
         {
             _resultState = resultState;
-        } 
-        
+        }
+
         void Update()
         {
 #if UNITY_EDITOR
-            
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-               _resultState.ShowResult(); 
-            }
-         
+
+            if (Input.GetKeyDown(KeyCode.R)) _resultState.ShowResult(true);
+
 #endif
         }
-        
-
     }
 }

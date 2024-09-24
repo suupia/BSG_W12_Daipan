@@ -28,7 +28,7 @@ namespace Daipan.Player.Scripts
 
         public PlayerMono Build(PlayerMono playerMono)
         {
-            _disposable.Clear(); 
+            _disposable.Clear();
             _disposable.Add(Observable.EveryValueChanged(_waveState, x => x.CurrentWaveIndex)
                 .Subscribe(_ => playerMono.SetHpMax()));
 
@@ -39,7 +39,7 @@ namespace Daipan.Player.Scripts
                     if (playerMono.Hp.Value <= 0)
                     {
                         Debug.Log("Player is dead");
-                        _resultState.ShowResult();
+                        _resultState.ShowResult(false);
                     }
                 }));
             return playerMono;
