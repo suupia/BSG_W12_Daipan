@@ -183,6 +183,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TitleCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 1696833151463783363, guid: 11c18c610b3114020b193022e10f9419, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3901892516711679243, guid: 11c18c610b3114020b193022e10f9419, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -262,6 +266,30 @@ PrefabInstance:
     - target: {fileID: 3901892516711679243, guid: 11c18c610b3114020b193022e10f9419, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4036688352361360236, guid: 11c18c610b3114020b193022e10f9419, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -42.130005
+      objectReference: {fileID: 0}
+    - target: {fileID: 5788335920882301254, guid: 11c18c610b3114020b193022e10f9419, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5788335920882301254, guid: 11c18c610b3114020b193022e10f9419, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 5788335920882301254, guid: 11c18c610b3114020b193022e10f9419, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
+      objectReference: {fileID: 0}
+    - target: {fileID: 6324716127217965590, guid: 11c18c610b3114020b193022e10f9419, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1687460790}
+    - target: {fileID: 7236119008747584154, guid: 11c18c610b3114020b193022e10f9419, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 50.569946
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
