@@ -66,14 +66,9 @@ namespace Daipan.Player.Scripts
                 OpenMenuUpdate();
 
                 if (_inputOption.IsOpening)
-                {
                     OptionUpdate();
-                }
                 else
-                {
                     PlayingUpdate();
-
-                }
             }
         }
 
@@ -128,6 +123,7 @@ namespace Daipan.Player.Scripts
                     break;
             }
         }
+
         void OpenMenuUpdate()
         {
             if (_inputSerialManager.GetButtonMenu())
@@ -135,8 +131,8 @@ namespace Daipan.Player.Scripts
                 if (!_inputOption.IsOpening) _inputOption.OpenOption();
                 else _inputOption.CloseOption();
             }
-
         }
+
         void OptionUpdate()
         {
             if (_inputSerialManager.GetButtonRed()) _inputOption.MoveCursor(MoveCursorDirectionEnum.Down);
@@ -144,6 +140,5 @@ namespace Daipan.Player.Scripts
             if (_inputSerialManager.GetButtonYellow()) _inputOption.MoveCursor(MoveCursorDirectionEnum.Left);
             if (_getEnterKey.GetEnterKeyDown()) _inputOption.Select();
         }
-        
     }
 }

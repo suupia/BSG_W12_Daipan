@@ -2375,6 +2375,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   viewObject: {fileID: 8328810706473031142}
+  clearScreenObject: {fileID: 4784069037750807826}
+  gameOverScreenObject: {fileID: 2368765459066750857}
   resultObject: {fileID: 4972536839756614349}
   detailsObject: {fileID: 8784118971430396740}
   viewerNumberExplainText: {fileID: 2606578888366167504}

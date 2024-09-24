@@ -14,13 +14,14 @@ namespace Daipan.Battle.Scripts
     {
         readonly ResultViewMono _resultViewMono;
         readonly List<IDisposable> _disposables = new();
-        
+
         public enum ResultEnum
         {
-            None, 
+            None,
             Result, // 配信終了
-            Details, // 詳細
+            Details // 詳細
         }
+
         public ResultEnum CurrentResultEnum { get; private set; } = ResultEnum.None;
 
         public ResultState(
@@ -42,36 +43,33 @@ namespace Daipan.Battle.Scripts
                         _disposables.Add(
                             Observable
                                 .Timer(TimeSpan.FromSeconds(delaySec))
-                                .Subscribe(_ => ShowResult())
+                                .Subscribe(_ => ShowResult(true))
                         );
                     }
                 }));
-            
         }
-        public void ShowResult()
+
+        public void ShowResult(bool isClear)
         {
-            UnityEngine.Time.timeScale = 0;
-            _resultViewMono.ShowResult(onComplete:()=>CurrentResultEnum = ResultEnum.Result);
+            Time.timeScale = 0;
+            _resultViewMono.ShowResult(isClear, () => CurrentResultEnum = ResultEnum.Result);
         }
-        
-        public void ShowDetails(){ 
+
+        public void ShowDetails()
+        {
             CurrentResultEnum = ResultEnum.Details;
             Debug.Log($"ShowDetails CurrentResultEnum:{CurrentResultEnum}");
             _resultViewMono.ShowDetails();
         }
-        
+
         public void Dispose()
         {
-            foreach (var disposable in _disposables)
-            {
-                disposable.Dispose();
-            }
+            foreach (var disposable in _disposables) disposable.Dispose();
         }
+
         ~ResultState()
         {
             Dispose();
         }
-            
-    } 
+    }
 }
-

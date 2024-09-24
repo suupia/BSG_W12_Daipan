@@ -15,10 +15,14 @@ namespace Daipan.Battle.scripts
     public class ResultViewMono : MonoBehaviour
     {
         [SerializeField] GameObject viewObject = null!;
+        [SerializeField] GameObject clearScreenObject = null!;
+
+        [SerializeField] GameObject gameOverScreenObject = null!;
+
         // 必要であればMonoBehaviourを分割
         [SerializeField] GameObject resultObject = null!; // Result
         [SerializeField] GameObject detailsObject = null!; // Details
-        
+
         [SerializeField] TextMeshProUGUI viewerNumberExplainText = null!;
         [SerializeField] TextMeshProUGUI viewerNumberText = null!;
         [SerializeField] TextMeshProUGUI daipanCountExplainText = null!;
@@ -29,15 +33,16 @@ namespace Daipan.Battle.scripts
         [SerializeField] TextMeshProUGUI comboCountText = null!;
         [SerializeField] TextMeshProUGUI tankYouText = null!;
         [SerializeField] TextMeshProUGUI pushEnterText = null!;
-        
+
         [SerializeField] Sprite successBackground = null!;
         [SerializeField] Sprite failureBackground = null!;
         [SerializeField] Image background = null!;
 
         LanguageConfig _languageConfig = null!;
+
         void Awake()
         {
-            HideResult(); 
+            HideResult();
         }
 
         [Inject]
@@ -46,7 +51,7 @@ namespace Daipan.Battle.scripts
             , ComboCounter comboCounter
             , DaipanExecutor daipanExecutor
             , LanguageConfig languageConfig
-            )
+        )
         {
             Debug.Log("ResultViewMono Constructor");
             Observable.EveryUpdate()
@@ -61,37 +66,36 @@ namespace Daipan.Battle.scripts
                 .Where(_ => viewObject.activeInHierarchy)
                 .Subscribe(_ => comboCountText.text = $"{comboCounter.MaxComboCount}")
                 .AddTo(this);
-            
+
             _languageConfig = languageConfig;
         }
 
-        public void ShowResult(Action onComplete)
+        public void ShowResult(bool isClear, Action onComplete)
         {
             // todo : 配信終了の画面
-            viewObject.SetActive(true); 
+            viewObject.SetActive(true);
+            clearScreenObject.SetActive(isClear);
+            gameOverScreenObject.SetActive(!isClear);
             resultObject.SetActive(true);
             // DoTweenでいい感じに表示
             onComplete();
         }
-        
+
         public void ShowDetails()
         {
-            var playerMono = UnityEngine.Object.FindObjectOfType<PlayerMono>();
+            var playerMono = FindObjectOfType<PlayerMono>();
             if (playerMono == null)
             {
                 Debug.LogWarning("PlayerMono is not found");
                 return;
             }
-            playerHpText.text = $"{playerMono.Hp.Value} / {playerMono.MaxHp}";  // 本当はObserveしたいけど生成順序の関係でここで取得
+
+            playerHpText.text = $"{playerMono.Hp.Value} / {playerMono.MaxHp}"; // 本当はObserveしたいけど生成順序の関係でここで取得
 
             if (playerMono.Hp.Value <= 0)
-            {
                 background.sprite = failureBackground;
-            }
             else
-            {
                 background.sprite = successBackground;
-            }
 
             viewerNumberExplainText.text = _languageConfig.CurrentLanguage switch
             {
@@ -120,7 +124,7 @@ namespace Daipan.Battle.scripts
                 LanguageEnum.English => "Max Combo Count",
                 _ => throw new ArgumentOutOfRangeException()
             };
-            
+
             tankYouText.text = _languageConfig.CurrentLanguage switch
             {
                 LanguageEnum.Japanese => "ご視聴ありがとうございました！",
@@ -134,9 +138,9 @@ namespace Daipan.Battle.scripts
                 _ => throw new ArgumentOutOfRangeException()
             };
 
-            detailsObject.SetActive(true); 
+            detailsObject.SetActive(true);
         }
-        
+
         void HideResult()
         {
             viewObject.SetActive(false);
