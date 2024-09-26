@@ -123,8 +123,8 @@ namespace Daipan.Tutorial.Scripts
             {
                 LanguageEnum.English => new List<Speech>
                 {
-                    new("A red enemy is coming!"),
-                    new("Press the red button!"),
+                    new("A blue enemy is coming!"),
+                    new("Press the blue button!"),
                     new("That's right! Good job!")
                 },
                 LanguageEnum.Japanese => new List<Speech>
