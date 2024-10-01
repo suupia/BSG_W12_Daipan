@@ -9,6 +9,8 @@ using Daipan.Enemy.LevelDesign.Scripts;
 using Daipan.Enemy.MonoScripts;
 using Daipan.LevelDesign.Comment.Scripts;
 using Daipan.LevelDesign.Enemy.Scripts;
+using Daipan.Player.LevelDesign.Interfaces;
+using Daipan.Player.Scripts;
 using Daipan.Stream.Scripts;
 using Daipan.Utility.Scripts;
 using UnityEngine;
@@ -24,12 +26,17 @@ namespace Daipan.Enemy.Scripts
         readonly EnemyLevelDesignParamData _enemyLevelDesignParamData;
         readonly EnemyOnAttackedBuilder _enemyOnAttackedBuilder;
         
+        readonly ComboSpawner _comboSpawner;
+        readonly ComboCounter _comboCounter;
+        
         public EnemyBuilder(
              CommentSpawner commentSpawner
             , ViewerNumber viewerNumber
             , EnemyCluster enemyCluster
             , EnemyLevelDesignParamData enemyLevelDesignParamData
             , EnemyOnAttackedBuilder enemyOnAttackedBuilder
+            , ComboSpawner comboSpawner
+            , ComboCounter comboCounter
         )
         {
             _commentSpawner = commentSpawner;
@@ -37,6 +44,8 @@ namespace Daipan.Enemy.Scripts
             _enemyCluster = enemyCluster;
             _enemyLevelDesignParamData = enemyLevelDesignParamData;
             _enemyOnAttackedBuilder = enemyOnAttackedBuilder;
+            _comboSpawner = comboSpawner;
+            _comboCounter = comboCounter;
         }
 
         public EnemyMono Build(EnemyMono enemyMono, EnemyEnum enemyEnum)
@@ -47,7 +56,7 @@ namespace Daipan.Enemy.Scripts
                 ,_enemyCluster
                 , new EnemyAttackDecider()
                 , new EnemyDie(enemyMono)
-                , _enemyOnAttackedBuilder.SwitchEnemyOnAttacked(enemyEnum)
+                , WrapWithComboSpawner(_enemyOnAttackedBuilder.SwitchEnemyOnAttacked(enemyEnum), enemyMono)
                 , new NoneEnemyOnDied()
             );
             
@@ -80,7 +89,41 @@ namespace Daipan.Enemy.Scripts
                 commentSpawner.SpawnCommentByType(CommentEnum.Normal);
             }
         }
+ 
+        IEnemyOnAttacked WrapWithComboSpawner(IEnemyOnAttacked enemyOnAttacked, EnemyMono enemyMono) 
+        {
+            return new EnemyOnAttackedWithComboSpawner(enemyOnAttacked, enemyMono, _comboSpawner, _comboCounter);
+        }
+        
+        class EnemyOnAttackedWithComboSpawner : IEnemyOnAttacked
+        {
+            readonly IEnemyOnAttacked _enemyOnAttacked;
+            readonly EnemyMono _enemyMono;
+            readonly ComboSpawner _comboSpawner;
+            readonly ComboCounter _comboCounter;
+            public EnemyOnAttackedWithComboSpawner(
+                IEnemyOnAttacked enemyOnAttacked
+               , EnemyMono enemyMono
+                    , ComboSpawner comboSpawner
+                    , ComboCounter comboCounter )
+            {
+                _enemyMono = enemyMono;
+                _enemyOnAttacked = enemyOnAttacked;
+                _comboSpawner = comboSpawner;
+                _comboCounter = comboCounter;
+            }
 
+            public Hp OnAttacked(Hp hp, IPlayerParamData playerParamData)
+            {
+                var newHp = _enemyOnAttacked.OnAttacked(hp, playerParamData);
+                if (newHp.Value < hp.Value)
+                {
+                  _comboCounter.IncreaseCombo();
+                    _comboSpawner.SpawnCombo(_comboCounter.ComboCount, _enemyMono.transform.position); 
+                }
+                return newHp;
+            }
+        } 
    
 
     }

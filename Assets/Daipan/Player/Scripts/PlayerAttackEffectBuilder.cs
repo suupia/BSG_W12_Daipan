@@ -97,17 +97,8 @@ namespace Daipan.Player.Scripts
                 Debug.Log($"EnemyType: {args.EnemyMono.EnemyEnum}を攻撃");
                 // 敵を攻撃
                 var playerParamData = playerParamDataContainer.GetPlayerParamData(playerColor);
-                var beforeHp = args.EnemyMono.Hp.Value; 
                 PlayerAttackModule.Attack(args.EnemyMono, playerParamData);
-                var afterHp = args.EnemyMono.Hp.Value;
-
-                //  HPに変化があれば、コンボ増加（ただし、Totemの判定はOnAttackedで行っている）
-                if (Math.Abs(beforeHp - afterHp) > double.Epsilon && args.EnemyMono.EnemyEnum.IsTotem() != true)
-                    comboCounter.IncreaseCombo();
-            
-                // コンボを表示
-                comboSpawner.SpawnCombo(comboCounter.ComboCount, args.EnemyMono.transform.position);
-                
+      
                 if(args.EnemyMono.EnemyEnum.IsTotem() != true) SoundManager.Instance?.PlaySe(SeEnum.Attack);
             }
             else
