@@ -1,4 +1,5 @@
 #nullable enable
+using System;
 using Daipan.Player.Scripts;
 using TMPro;
 using UnityEngine;
@@ -10,6 +11,7 @@ namespace Daipan.Player.MonoScripts
 {
     public sealed class ComboInstantViewMono : MonoBehaviour
     {
+        [SerializeField] GameObject viewObject = null!;
         [SerializeField] TextMeshProUGUI comboText = null!;
 
         [SerializeField] float scaleRatio;
@@ -19,63 +21,50 @@ namespace Daipan.Player.MonoScripts
 
 
         Vector3 _originalScale;
-        Transform _transform = null!;
 
-        [Inject]
-        public void Initialize(ComboCounter comboCounter)
+        void Awake()
         {
-            _transform = comboText.transform;
-            _originalScale = _transform.localScale;
-
-            Observable.EveryValueChanged(comboCounter, x => x.ComboCount)
-                .Subscribe(_ => UpdateComboText(comboCounter.ComboCount))
-                .AddTo(this);
+            Hide();
         }
-        
-        
+
         public void ShowComboText(int comboCount)
         {
             // comboCountが0なら表示しない
-            if (comboCount <= 0) return;
+            if (comboCount <= 0) Destroy(gameObject);
 
-            // 増える時にアニメーション
-            // 拡大
-            _transform.DOScale(_originalScale * scaleRatio, scaleUpDuration)
-                .SetEase(Ease.InOutCubic);
-        
-
-            // 縮小
-            _transform.DOScale(_originalScale, scaleDownDuration)
-                .SetEase(Ease.InOutCubic)
-                .SetDelay(scaleUpDuration);
+            // 初期のスケールが設定されていない場合は、現在のスケールを設定
+            if (_originalScale == Vector3.zero) _originalScale = viewObject.transform.localScale;
 
             comboText.text = $"{comboCount}";
+            Show();
+
+            // 初期スケールに設定してからアニメーションを開始
+            viewObject.transform.localScale = _originalScale;
+
+            // DOTweenのシーケンスを作成
+            var sequence = DOTween.Sequence();
+
+            // 拡大アニメーションを追加
+            sequence.Append(viewObject.transform.DOScale(_originalScale * scaleRatio, scaleUpDuration)
+                .SetEase(Ease.InOutCubic));
+
+            // 縮小アニメーションを追加し、拡大後に実行
+            sequence.Append(viewObject.transform.DOScale(_originalScale, scaleDownDuration)
+                .SetEase(Ease.InOutCubic));
+
+            // アニメーション完了後にオブジェクトを削除
+            sequence.OnComplete(() => Destroy(gameObject));
         }
 
+        void Hide()
 
-        public void UpdateComboText(int comboCount)
         {
-            DOTween.Kill(_transform);
+            comboText.gameObject.SetActive(false);
+        }
 
-            // comboCountが0ならフェードアウト
-            if(comboCount == 0)
-            {
-                _transform.DOScale(Vector3.zero, fadeoutDuration);
-                return;
-            }
-
-            // 増える時にアニメーション
-            // 拡大
-            _transform.DOScale(_originalScale * scaleRatio, scaleUpDuration)
-                .SetEase(Ease.InOutCubic);
-                
-
-            // 縮小
-            _transform.DOScale(_originalScale, scaleDownDuration)
-                .SetEase(Ease.InOutCubic)
-                .SetDelay(scaleUpDuration);
-
-            comboText.text = $"{comboCount}";
+        void Show()
+        {
+            comboText.gameObject.SetActive(true);
         }
     }
 }
