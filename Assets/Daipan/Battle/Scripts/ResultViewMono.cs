@@ -73,9 +73,9 @@ namespace Daipan.Battle.scripts
         public void ShowResult(bool isClear, Action onComplete)
         {
             // todo : 配信終了の画面
-            viewObject.SetActive(true);
             clearScreenObject.SetActive(isClear);
             gameOverScreenObject.SetActive(!isClear);
+            viewObject.SetActive(true);
             resultObject.SetActive(true);
             // DoTweenでいい感じに表示
             onComplete();
