@@ -31,6 +31,13 @@ namespace Daipan.Player.MonoScripts
         {
             // comboCountが0なら表示しない
             if (comboCount <= 0) Destroy(gameObject);
+            
+            // 他のComboInstantViewMonoを削除
+            var comboInstantViewMonos = FindObjectsOfType<ComboInstantViewMono>();
+            foreach (var comboInstantViewMono in comboInstantViewMonos)
+            {
+                if (comboInstantViewMono != this) Destroy(comboInstantViewMono.gameObject);
+            }
 
             // 初期のスケールが設定されていない場合は、現在のスケールを設定
             if (_originalScale == Vector3.zero) _originalScale = viewObject.transform.localScale;
