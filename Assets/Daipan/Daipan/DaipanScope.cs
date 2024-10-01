@@ -13,6 +13,7 @@ using Daipan.Enemy.MonoScripts;
 using Daipan.Enemy.Scripts;
 using Daipan.InputSerial.Scripts;
 using Daipan.LevelDesign.Battle.Scripts;
+using Daipan.LevelDesign.Combo.Scripts;
 using Daipan.LevelDesign.Comment.Scripts;
 using Daipan.LevelDesign.EndScene;
 using Daipan.LevelDesign.Enemy.Scripts;
@@ -135,6 +136,8 @@ namespace Daipan.Daipan
             builder.Register<ComboCounter>(Lifetime.Scoped);
             builder.RegisterComponentInHierarchy<ComboViewMono>();
             builder.Register<ComboSpawner>(Lifetime.Scoped);
+            builder.RegisterComponentInHierarchy<ComboPositionMono>();
+            builder.Register<ComboParamsManager>(Lifetime.Scoped);
         }
 
         public static void RegisterTower(IContainerBuilder builder, TowerParams towerParams)

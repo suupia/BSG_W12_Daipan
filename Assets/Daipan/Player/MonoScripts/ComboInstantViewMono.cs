@@ -8,7 +8,7 @@ using DG.Tweening;
 
 namespace Daipan.Player.MonoScripts
 {
-    public sealed class ComboViewMono : MonoBehaviour
+    public sealed class ComboInstantViewMono : MonoBehaviour
     {
         [SerializeField] TextMeshProUGUI comboText = null!;
 
@@ -32,7 +32,7 @@ namespace Daipan.Player.MonoScripts
                 .AddTo(this);
         }
 
-       public void UpdateComboText(int comboCount)
+        public void UpdateComboText(int comboCount)
         {
             DOTween.Kill(_transform);
 
