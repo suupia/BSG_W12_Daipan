@@ -26,15 +26,15 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 21703699902336472}
   - {fileID: 5915417344567125706}
   m_Father: {fileID: 7619624251201827100}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -270, y: 282.3}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -50, y: 160}
   m_SizeDelta: {x: 300, y: 132.63}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &3423613978251113706
@@ -46,7 +46,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7619624251201827100}
-  - component: {fileID: 8760753816907224978}
+  - component: {fileID: 6292128069778160414}
   m_Layer: 5
   m_Name: Combo
   m_TagString: Untagged
@@ -64,7 +64,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3137845242619598075}
   m_Father: {fileID: 0}
@@ -72,9 +72,9 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 250, y: 100}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &8760753816907224978
+--- !u!114 &6292128069778160414
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -83,9 +83,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3423613978251113706}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac8c38a37b7f461998231e2453e87c04, type: 3}
+  m_Script: {fileID: 11500000, guid: 97c4c61e53794d0d939c94b1e1257de7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  viewObject: {fileID: 1080111414881602953}
   comboText: {fileID: 3323682389863025022}
   scaleRatio: 1.3
   fadeoutDuration: 0.1

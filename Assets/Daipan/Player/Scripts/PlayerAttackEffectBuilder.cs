@@ -24,6 +24,7 @@ namespace Daipan.Player.Scripts
         readonly ComboCounter _comboCounter;
         readonly EnemyCluster _enemyCluster;
         readonly CommentSpawner _commentSpawner;
+        readonly ComboSpawner _comboSpawner;
         readonly WaveState _waveState;
         readonly IPlayerAntiCommentParamData _playerAntiCommentParamData;
         readonly ThresholdResetCounter _playerMissedAttackCounter;
@@ -33,6 +34,7 @@ namespace Daipan.Player.Scripts
             ,ComboCounter comboCounter
             ,EnemyCluster enemyCluster
             ,CommentSpawner commentSpawner
+            ,ComboSpawner comboSpawner
             ,WaveState waveState
             ,IPlayerAntiCommentParamData playerAntiCommentParamData
         )
@@ -41,6 +43,7 @@ namespace Daipan.Player.Scripts
             _comboCounter = comboCounter;
             _enemyCluster = enemyCluster;
             _commentSpawner = commentSpawner;
+            _comboSpawner = comboSpawner;
             _waveState = waveState;
             _playerAntiCommentParamData = playerAntiCommentParamData;
             _playerMissedAttackCounter =
@@ -69,6 +72,7 @@ namespace Daipan.Player.Scripts
                     ,_comboCounter
                     , _playerMissedAttackCounter
                     , _commentSpawner
+                    , _comboSpawner
                     );
                 SpawnAntiComment(args, _commentSpawner, _playerAntiCommentParamData,_waveState);
             };
@@ -85,6 +89,7 @@ namespace Daipan.Player.Scripts
             , ComboCounter comboCounter
             , ThresholdResetCounter playerMissedAttackCounter
             , CommentSpawner commentSpawner
+            , ComboSpawner comboSpawner
         )
         {
             if (args.IsTargetEnemy && args.EnemyMono != null)
@@ -99,6 +104,10 @@ namespace Daipan.Player.Scripts
                 //  HPに変化があれば、コンボ増加（ただし、Totemの判定はOnAttackedで行っている）
                 if (Math.Abs(beforeHp - afterHp) > double.Epsilon && args.EnemyMono.EnemyEnum.IsTotem() != true)
                     comboCounter.IncreaseCombo();
+            
+                // コンボを表示
+                comboSpawner.SpawnCombo(comboCounter.ComboCount, args.EnemyMono.transform.position);
+                
                 if(args.EnemyMono.EnemyEnum.IsTotem() != true) SoundManager.Instance?.PlaySe(SeEnum.Attack);
             }
             else
