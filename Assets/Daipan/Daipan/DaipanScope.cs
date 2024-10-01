@@ -133,6 +133,7 @@ namespace Daipan.Daipan
             builder.Register<ComboMultiplier>(Lifetime.Scoped).As<IComboMultiplier>();
             builder.Register<ComboCounter>(Lifetime.Scoped);
             builder.RegisterComponentInHierarchy<ComboViewMono>();
+            builder.Register<ComboSpawner>(Lifetime.Scoped);
         }
 
         public static void RegisterTower(IContainerBuilder builder, TowerParams towerParams)
