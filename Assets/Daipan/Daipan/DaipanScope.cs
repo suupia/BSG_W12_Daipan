@@ -131,7 +131,7 @@ namespace Daipan.Daipan
             // Parameters
             builder.RegisterInstance(comboParamManager);
             // Combo
-            builder.Register<ComboPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<ComboViewMono>>();
+            builder.Register<ComboPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<ComboInstantViewMono>>();
             builder.Register<ComboMultiplier>(Lifetime.Scoped).As<IComboMultiplier>();
             builder.Register<ComboCounter>(Lifetime.Scoped);
             builder.RegisterComponentInHierarchy<ComboViewMono>();

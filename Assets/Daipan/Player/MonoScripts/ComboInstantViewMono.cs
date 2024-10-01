@@ -31,6 +31,27 @@ namespace Daipan.Player.MonoScripts
                 .Subscribe(_ => UpdateComboText(comboCounter.ComboCount))
                 .AddTo(this);
         }
+        
+        
+        public void ShowComboText(int comboCount)
+        {
+            // comboCountが0なら表示しない
+            if (comboCount <= 0) return;
+
+            // 増える時にアニメーション
+            // 拡大
+            _transform.DOScale(_originalScale * scaleRatio, scaleUpDuration)
+                .SetEase(Ease.InOutCubic);
+        
+
+            // 縮小
+            _transform.DOScale(_originalScale, scaleDownDuration)
+                .SetEase(Ease.InOutCubic)
+                .SetDelay(scaleUpDuration);
+
+            comboText.text = $"{comboCount}";
+        }
+
 
         public void UpdateComboText(int comboCount)
         {

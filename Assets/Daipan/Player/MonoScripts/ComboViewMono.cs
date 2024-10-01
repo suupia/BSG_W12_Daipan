@@ -32,7 +32,7 @@ namespace Daipan.Player.MonoScripts
                 .AddTo(this);
         }
 
-       public void UpdateComboText(int comboCount)
+        void UpdateComboText(int comboCount)
         {
             DOTween.Kill(_transform);
 
