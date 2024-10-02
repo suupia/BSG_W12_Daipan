@@ -49,11 +49,11 @@ namespace Daipan.Streamer.MonoScripts
             daipanEffect.SetTrigger("IsDaipan");
             daipanWhiteEffect.SetTrigger("IsDaipan");
             // 台パンのエフェクトを動かすところ
-            //DOVirtual.Float(0f, 2f, 1f, value =>
-            //{
-            //    daipanWaveMaterial.SetFloat("_Radius", value);
-            //    Debug.Log($"radius : {value}");
-            //});
+            DOVirtual.Float(0f, 2f, 1f, value =>
+            {
+                daipanWaveMaterial.SetFloat("_Radius", value);
+                Debug.Log($"radius : {value}");
+            });
         }
 
         public void AngerZoom(bool isFull)
