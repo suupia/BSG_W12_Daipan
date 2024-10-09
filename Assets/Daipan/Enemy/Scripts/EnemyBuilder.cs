@@ -95,15 +95,15 @@ namespace Daipan.Enemy.Scripts
             return new EnemyOnAttackedWithComboSpawner(enemyOnAttacked, enemyMono, _comboSpawner, _comboCounter);
         }
         
-        class EnemyOnAttackedWithComboSpawner : IEnemyOnAttacked
+        public class EnemyOnAttackedWithComboSpawner : IEnemyOnAttacked
         {
             readonly IEnemyOnAttacked _enemyOnAttacked;
-            readonly EnemyMono _enemyMono;
+            readonly AbstractEnemyMono _enemyMono;
             readonly ComboSpawner _comboSpawner;
             readonly ComboCounter _comboCounter;
             public EnemyOnAttackedWithComboSpawner(
                 IEnemyOnAttacked enemyOnAttacked
-               , EnemyMono enemyMono
+               , AbstractEnemyMono enemyMono
                     , ComboSpawner comboSpawner
                     , ComboCounter comboCounter )
             {
@@ -118,7 +118,7 @@ namespace Daipan.Enemy.Scripts
                 var newHp = _enemyOnAttacked.OnAttacked(hp, playerParamData);
                 if (newHp.Value < hp.Value)
                 {
-                  _comboCounter.IncreaseCombo();
+                    _comboCounter.IncreaseCombo();
                     _comboSpawner.SpawnCombo(_comboCounter.ComboCount, _enemyMono.transform.position); 
                 }
                 return newHp;
