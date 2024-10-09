@@ -5,6 +5,7 @@ using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.LevelDesign.Scripts;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Player.LevelDesign.Interfaces;
+using Daipan.Player.Scripts;
 using Daipan.Stream.Scripts;
 
 namespace Daipan.Enemy.Scripts
@@ -20,6 +21,10 @@ namespace Daipan.Enemy.Scripts
         readonly IPlayerAntiCommentParamData _playerAntiCommentParamData;
         readonly CommentSpawner _commentSpawner;
         readonly IFinalBossParamData _finalBossParamData;
+        
+        readonly ComboSpawner _comboSpawner;
+        readonly ComboCounter _comboCounter;
+        
         public FinalBossBuilder(
             EnemyCluster enemyCluster
             , EnemySpawner enemySpawner
@@ -29,6 +34,8 @@ namespace Daipan.Enemy.Scripts
             , IPlayerAntiCommentParamData playerAntiCommentParamData
             , CommentSpawner commentSpawner
             , IFinalBossParamData finalBossParamData
+            , ComboSpawner comboSpawner
+            , ComboCounter comboCounter
         )
         {
             _enemyCluster = enemyCluster;
@@ -39,6 +46,8 @@ namespace Daipan.Enemy.Scripts
             _playerAntiCommentParamData = playerAntiCommentParamData;
             _commentSpawner = commentSpawner;
             _finalBossParamData = finalBossParamData;
+            _comboSpawner = comboSpawner;
+            _comboCounter = comboCounter;
         }
 
         public FinalBossMono Build(FinalBossMono finalBossMono, EnemyEnum enemyEnum)
@@ -48,7 +57,7 @@ namespace Daipan.Enemy.Scripts
                 , _enemyCluster
                 , new FinalBossActionDecider(_enemySpawner)
                 , new FinalBossDie(finalBossMono)
-                , _finalBossOnAttacked
+                , new EnemyBuilder.EnemyOnAttackedWithComboSpawner(_finalBossOnAttacked, finalBossMono, _comboSpawner, _comboCounter)
             );
             
             finalBossMono.OnAttackedEvent += (sender, args) =>
