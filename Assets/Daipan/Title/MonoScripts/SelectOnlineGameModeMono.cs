@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class SelectModeMono : MonoBehaviour
+public class SelectOnlineGameModeMono : MonoBehaviour
 {
     [SerializeField] GameObject selectModePopup = null!;
     [SerializeField] CustomButton joinAsHostButton = null!;

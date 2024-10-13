@@ -27,7 +27,6 @@ public class TitleMono : MonoBehaviour
     SamePressChecker _samePressChecker = null!;
     bool _isTransitioned;
 
-    const float BlackoutTime = 0.3f;
 
     [Inject]
     public void Initialize(
@@ -71,7 +70,8 @@ public class TitleMono : MonoBehaviour
         {
             if (_getEnterKey.GetEnterKeyDown())
             {
-                DOVirtual.Float(0, 1f, BlackoutTime, value =>
+                const float fadeoutTime = 0.3f;
+                DOVirtual.Float(0, 1f, fadeoutTime, value =>
                 {
                     blackScreen.color = new Vector4(0, 0, 0, value);
                 }).OnComplete(() => SceneTransition.TransitioningScene(SceneName.TutorialScene));
