@@ -17,14 +17,10 @@ public class TitleMono : MonoBehaviour
 {
     [SerializeField] Image blackScreen = null!;
 
-    // todo : あとで実装する
-    [SerializeField] CustomButton optionButton = null!;
-    [SerializeField] CustomButton quitButton = null!;
-
     InputSerialManager _inputSerialManager = null!;
     IInputOption _inputOption = null!;
     IGetEnterKey _getEnterKey = null!;
-    SamePressChecker _samePressChecker = null!;
+    SamePressChecker? _samePressChecker;
     bool _isTransitioned;
 
 
@@ -48,8 +44,7 @@ public class TitleMono : MonoBehaviour
 
         _inputSerialManager = inputSerialManager;
         _inputOption = inputOption;
-        _samePressChecker = new SamePressChecker(0.5f, 3,
-            () => SceneTransition.TransitioningScene(SceneName.DaipanScene), () => { });
+        _samePressChecker = new SamePressChecker(0.5f, 3, () => SceneTransition.TransitioningScene(SceneName.DaipanScene), () => { });
 
         _getEnterKey = getEnterKey;
         _isTransitioned = false;
@@ -84,9 +79,9 @@ public class TitleMono : MonoBehaviour
             }
             
             // 3つのボタンを同時に推したらチュートリアルをスキップする
-            if(_inputSerialManager.GetButtonRed()) _samePressChecker.SetOn(0);
-            if(_inputSerialManager.GetButtonBlue()) _samePressChecker.SetOn(1);
-            if(_inputSerialManager.GetButtonYellow()) _samePressChecker.SetOn(2);
+            if(_inputSerialManager.GetButtonRed()) _samePressChecker?.SetOn(0);
+            if(_inputSerialManager.GetButtonBlue()) _samePressChecker?.SetOn(1);
+            if(_inputSerialManager.GetButtonYellow()) _samePressChecker?.SetOn(2);
         }
     }
 
