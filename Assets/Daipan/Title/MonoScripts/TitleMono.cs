@@ -21,8 +21,6 @@ public class TitleMono : MonoBehaviour
     IInputOption _inputOption = null!;
     IGetEnterKey _getEnterKey = null!;
     SamePressChecker? _samePressChecker;
-    bool _isTransitioned;
-
 
     [Inject]
     public void Initialize(
@@ -47,14 +45,11 @@ public class TitleMono : MonoBehaviour
         _samePressChecker = new SamePressChecker(0.5f, 3, () => SceneTransition.TransitioningScene(SceneName.DaipanScene), () => { });
 
         _getEnterKey = getEnterKey;
-        _isTransitioned = false;
     }
 
 
     void Update()
     {
-        if (_isTransitioned) return;
-
         OpenMenuUpdate();
 
         if (_inputOption.IsOpening)
