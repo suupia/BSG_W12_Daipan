@@ -15,7 +15,6 @@ namespace Daipan.Streamer.MonoScripts
     public class AimTopStreamerViewMono : MonoBehaviour
     {
         [SerializeField] GameObject viewObject = null!;
-        [SerializeField] TextMeshProUGUI aimTopStreamerText = null!;
 
         void Awake()
         {
