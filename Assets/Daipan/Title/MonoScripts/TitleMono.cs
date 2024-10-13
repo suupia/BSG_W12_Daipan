@@ -15,24 +15,23 @@ using DG.Tweening;
 
 public class TitleMono : MonoBehaviour
 {
-    InputSerialManager _inputSerialManager;
-    IInputOption _inputOption;
+    [SerializeField] Image blackScreen = null!;
+    [SerializeField] float blackoutTime;
+    
+    InputSerialManager _inputSerialManager = null!;
+    IInputOption _inputOption = null!;
+    IGetEnterKey _getEnterKey = null!;
     SamePressChecker _samePressChecker = null!;
-    IGetEnterKey _getEnterKey;
     bool _isTransitioned;
-
-    [SerializeField]
-    Image blackScreen = null!;
-    [SerializeField]
-    float blackoutTime;
 
     [Inject]
     public void Initialize(
         InputSerialManager inputSerialManager,
         IInputOption inputOption,
-        IGetEnterKey getEnterKey)
+        IGetEnterKey getEnterKey
+        )
     {
-        UnityEngine.Time.timeScale = 1; // timeScaleを戻す
+        Time.timeScale = 1; // timeScaleを戻す
         
         var soundManager = FindObjectOfType<SoundManager>();
         if (soundManager == null)
@@ -53,7 +52,6 @@ public class TitleMono : MonoBehaviour
     }
 
 
-    // Update is called once per frame
     void Update()
     {
         if (_isTransitioned) return;
