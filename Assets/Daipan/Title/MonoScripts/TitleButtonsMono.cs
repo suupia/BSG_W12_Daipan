@@ -13,7 +13,14 @@ public class TitleButtonsMono : MonoBehaviour
 
     void Awake()
     {
-        onlineButton.OnClick += () => Debug.Log($"ポップアップを表示");
+        var selectOnlineGameModeMono = FindObjectOfType<SelectOnlineGameModeMono>();
+        if(selectOnlineGameModeMono == null)
+        {
+            Debug.LogError($"SelectOnlineGameModeMono is null");
+            return;
+        }
+        
+        onlineButton.OnClick += () => selectOnlineGameModeMono.ShowPopup(); 
         offlineButton.OnClick += () => Debug.Log($"実装するか未定");
         offlineButton.OnClick += () => Debug.Log($"実装お願いします");
         quitButton.OnClick += Quit;

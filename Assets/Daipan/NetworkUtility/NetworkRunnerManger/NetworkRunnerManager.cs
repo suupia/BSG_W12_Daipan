@@ -7,13 +7,12 @@ using Random = System.Random;
 namespace Daipan.NetworkUtility
 {
     // 全てのシーンにこれを配置しておけば、NetworkRunnerを使える
-// シーン上にNetworkRunnerがないならインスタンス化し、runner.StartGame()を実行
+    // シーン上にNetworkRunnerがないならインスタンス化し、runner.StartGame()を実行
     public class NetworkRunnerManager : MonoBehaviour
     {
         [SerializeField] NetworkRunner networkRunner;
         [SerializeField] NetworkSceneManagerDefault networkSceneManagerDefault;
         public NetworkRunner Runner { get; private set; }
-
 
         public async UniTask AttemptStartScene(string sessionName = default,
             GameMode gameMode = GameMode.AutoHostOrClient)

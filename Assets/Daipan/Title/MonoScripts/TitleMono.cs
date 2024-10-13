@@ -60,7 +60,9 @@ public class TitleMono : MonoBehaviour
         {
             if (_getEnterKey.GetEnterKeyDown())
             {
+                return; // todo : 仮
                 const float fadeoutTime = 0.3f;
+                blackScreen.gameObject.SetActive(true);
                 DOVirtual.Float(0, 1f, fadeoutTime, value =>
                 {
                     blackScreen.color = new Vector4(0, 0, 0, value);

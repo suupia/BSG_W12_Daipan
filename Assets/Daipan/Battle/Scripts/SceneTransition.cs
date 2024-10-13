@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Fusion;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -13,7 +14,8 @@ namespace Daipan.Battle.scripts
             { SceneName.TitleScene, "TitleScene" },
             { SceneName.TutorialScene, "TutorialScene" },
             { SceneName.DaipanScene, "DaipanScene" },
-            { SceneName.EndScene, "EndScene" }
+            { SceneName.EndScene, "EndScene" },
+            { SceneName.Lobby, "LobbyScene"},
         };
 
         public static void TransitioningScene(SceneName nextScene)
@@ -28,6 +30,18 @@ namespace Daipan.Battle.scripts
                 Debug.LogError($"{nextScene} is not registered in sceneNameTable.");
             }
         }
+        public static void TransitionSceneWithNetworkRunner(NetworkRunner runner, SceneName nextScene)
+        {
+            if (SceneNameTable.TryGetValue(nextScene, out var sceneName))
+            {
+                Debug.Log($"Transitioning to {sceneName}");
+                runner.LoadScene(sceneName);
+            }
+            else
+            {
+                Debug.LogError($"{nextScene} is not registered in sceneNameTable.");
+            }
+        }
     }
 
     public enum SceneName
@@ -35,6 +49,7 @@ namespace Daipan.Battle.scripts
         TitleScene,
         TutorialScene,
         DaipanScene,
-        EndScene
+        EndScene,
+        Lobby,
     }
 }

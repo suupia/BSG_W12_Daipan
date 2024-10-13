@@ -88,7 +88,7 @@ namespace Daipan.InputSerial.Scripts
 
         bool getInput(int digit)
         {
-            Debug.Log("GetInput : 0");
+            // Debug.Log("GetInput : 0"); // 一旦コメントアウト
             // シリアルポートが有効か？
             if (!isSerial()) return false;
             Debug.Log("GetInput : 1");

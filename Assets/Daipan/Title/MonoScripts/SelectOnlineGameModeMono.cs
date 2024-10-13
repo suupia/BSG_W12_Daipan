@@ -1,12 +1,12 @@
 #nullable enable
 using Cysharp.Threading.Tasks;
 using Daipan.Battle.scripts;
+using Daipan.NetworkUtility;
 using Fusion;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+using Assert = UnityEngine.Assertions.Assert;
 
 public class SelectOnlineGameModeMono : MonoBehaviour
 {
@@ -17,19 +17,23 @@ public class SelectOnlineGameModeMono : MonoBehaviour
     [SerializeField] CustomButton backButton = null!;
     
     string RoomName => roomNameInputField.text;
+    static bool _isStarted; // 連続で呼ばれるのを防ぐ
 
-    void Start()
+    void Awake()
     {
         selectModePopup.SetActive(false);
 
-        joinAsClientButton.OnClick += () => StartGame(RoomName, GameMode.Client).Forget();
-        
         //GameMode.Hostとして扱うかは未定。仮でAutoHostOrClientに設定
         //もし、GameMode.Hostかつ同じルーム名で始めた場合はStartGameExceptionがthrowされる
         joinAsHostButton.OnClick += () => StartGame(RoomName, GameMode.AutoHostOrClient).Forget();
-
-
+        joinAsClientButton.OnClick += () => StartGame(RoomName, GameMode.Client).Forget();
         backButton.OnClick += () => selectModePopup.SetActive(false);
+        
+    }
+
+    public void ShowPopup()
+    {
+        selectModePopup.SetActive(true);
     }
 
     void Quit()
@@ -43,19 +47,18 @@ public class SelectOnlineGameModeMono : MonoBehaviour
     
     public static async UniTaskVoid StartGame(string roomName, GameMode gameMode)
     {
-        // if (_isStarted) return;
+        if (_isStarted) return;
 
-        // var runnerManager = FindObjectOfType<NetworkRunnerManager>();
-        // Assert.IsNotNull(runnerManager, "NetworkRunnerManagerをシーンに配置してください");
-        //
-        // _isStarted = true; // 連続で呼ばれるのを防ぐ
-        //
-        // await runnerManager.AttemptStartScene(roomName, gameMode);
-        //
-        // runnerManager.Runner.Spawn(carryInitializerPrefab);
-        //
-        // Debug.Log("Transitioning to LobbySceneTestRoom");
-        // SceneTransition.TransitionSceneWithNetworkRunner(runnerManager.Runner, SceneName.LobbyScene);
+        var runnerManager = FindObjectOfType<NetworkRunnerManager>();
+        Assert.IsNotNull(runnerManager, "NetworkRunnerManagerをシーンに配置してください");
+        
+        _isStarted = true; 
+        
+        await runnerManager.AttemptStartScene(roomName, gameMode);
+        
+        
+        Debug.Log("Transitioning to LobbySceneTestRoom");
+        SceneTransition.TransitionSceneWithNetworkRunner(runnerManager.Runner, SceneName.Lobby);
     }
 
 
