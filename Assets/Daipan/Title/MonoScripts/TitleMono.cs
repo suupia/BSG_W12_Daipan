@@ -16,13 +16,18 @@ using DG.Tweening;
 public class TitleMono : MonoBehaviour
 {
     [SerializeField] Image blackScreen = null!;
-    [SerializeField] float blackoutTime;
-    
+
+    // todo : あとで実装する
+    [SerializeField] CustomButton optionButton = null!;
+    [SerializeField] CustomButton quitButton = null!;
+
     InputSerialManager _inputSerialManager = null!;
     IInputOption _inputOption = null!;
     IGetEnterKey _getEnterKey = null!;
     SamePressChecker _samePressChecker = null!;
     bool _isTransitioned;
+
+    const float BlackoutTime = 0.3f;
 
     [Inject]
     public void Initialize(
@@ -66,7 +71,7 @@ public class TitleMono : MonoBehaviour
         {
             if (_getEnterKey.GetEnterKeyDown())
             {
-                DOVirtual.Float(0, 1f, blackoutTime, value =>
+                DOVirtual.Float(0, 1f, BlackoutTime, value =>
                 {
                     blackScreen.color = new Vector4(0, 0, 0, value);
                 }).OnComplete(() => SceneTransition.TransitioningScene(SceneName.TutorialScene));
