@@ -11,11 +11,11 @@ namespace Daipan.Effects.MonoScripts
 {
     public class FrameViewMono : MonoBehaviour
     {
-        [SerializeField] Image originalFrame;
-        [SerializeField] Image antiFrame;
-        [SerializeField] Image maxAntiFrame;
+        [SerializeField] Image originalFrame = null!;
+        [SerializeField] Image antiFrame = null!;
+        [SerializeField] Image maxAntiFrame = null!;
 
-        [SerializeField] Transform antiCommentParent;
+        [SerializeField] Transform antiCommentParent = null!;
 
         [Header("アンチコメントがn以上あれば、antiFrame")]
         [Min(0)]
@@ -26,7 +26,7 @@ namespace Daipan.Effects.MonoScripts
         [SerializeField] int maxAntiThreshold;
 
         [Header("アンチエフェクト")]
-        [SerializeField] GameObject antiEffect;
+        [SerializeField] GameObject antiEffect = null!;
 
         [Header("両端からn以下の位置にランダムにエフェクト生成(0~0.5)")]
         [Range(0,0.5f)]
@@ -43,7 +43,7 @@ namespace Daipan.Effects.MonoScripts
         [SerializeField] float changeTime;
 
         int _preAntiCommentNum = 0;
-        IDisposable _antiEffectSubscription;
+        IDisposable? _antiEffectSubscription;
         List<int> _effectsY = new();
         int _antiState;
         

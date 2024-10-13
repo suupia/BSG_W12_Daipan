@@ -14,7 +14,7 @@ namespace Daipan.End.MonoScripts
     {
         [SerializeField] AudioSource audioSource = null!;
         [SerializeField] List<EndSceneSEParam> _endSceneSEParams = new ();
-        IGetEnterKey _getEnterKey;
+        IGetEnterKey _getEnterKey = null!;
 
         [Inject]
         public void Initialize(IGetEnterKey getEnterKey)

@@ -7,10 +7,10 @@ namespace Daipan.Tutorial.MonoScripts
     [Serializable]
     public class SerializableKeyPair<TKey, TValue>
     {
-        [SerializeField] TKey key;
-        [SerializeField] TValue value;
-        public TKey Key => key;
-        public TValue Value => value;
+        [SerializeField] TKey? key;
+        [SerializeField] TValue? value;
+        public TKey? Key => key;
+        public TValue? Value => value;
     }
 
     public class TutorialSpeechSpritesMono : MonoBehaviour
@@ -22,7 +22,7 @@ namespace Daipan.Tutorial.MonoScripts
             {
                 if (pair.Key == key)
                 {
-                    return pair.Value;
+                    return pair.Value!;
                 }
             }
             throw new Exception($"TutorialSpeechSpritesMono: key not found: {key}");

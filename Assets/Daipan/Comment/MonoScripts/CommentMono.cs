@@ -38,7 +38,7 @@ namespace Daipan.Comment.MonoScripts
         }
 
         //public event EventHandler<DespawnEventArgs>? OnDespawn;
-        public Action OnEffectDead;
+        public Action? OnEffectDead;
 
         [Inject]
         public void Initialize(

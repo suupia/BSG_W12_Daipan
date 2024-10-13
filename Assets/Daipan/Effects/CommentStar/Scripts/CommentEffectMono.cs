@@ -10,31 +10,23 @@ namespace Daipan.Effects.MonoScripts
 {
     public class CommentEffectMono : MonoBehaviour
     {
-        [SerializeField]
-        SpriteRenderer frontLight;
-        [SerializeField]
-        SpriteRenderer backLight;
-        [SerializeField]
-        Transform star;
+        [SerializeField] SpriteRenderer frontLight = null!;
+        [SerializeField] SpriteRenderer backLight = null!;
+        [SerializeField] Transform star = null!;
 
-        [SerializeField]
-        Vector2 distinatian;
+        [SerializeField] Vector2 distinatian;
 
-        [SerializeField]
-        float glowingTime;
-        [SerializeField]
-        float dimmingTime;
-        [SerializeField]
-        float moveTime;
-        [SerializeField]
-        float waveBand;
+        [SerializeField] float glowingTime;
+        [SerializeField] float dimmingTime;
+        [SerializeField] float moveTime;
+        [SerializeField] float waveBand;
 
-        private Action? onDead;
+        Action? _onDead;
 
 
-        public void Initialize(Action ondead)
+        public void Initialize(Action? onDead)
         {
-            onDead = ondead;
+            _onDead = onDead;
             Vector3 direction = new Vector3(distinatian.x, distinatian.y, 0f) - star.position;
             float a = UnityEngine.Random.Range(-waveBand, waveBand);
 
@@ -52,7 +44,7 @@ namespace Daipan.Effects.MonoScripts
 
                 }).SetEase(Ease.Linear).OnComplete(() =>
                 {
-                    if (onDead != null) onDead();
+                    if (_onDead != null) _onDead();
                     Destroy(gameObject);
                 });
             }
