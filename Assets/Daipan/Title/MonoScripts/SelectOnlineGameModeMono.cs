@@ -36,14 +36,6 @@ public class SelectOnlineGameModeMono : MonoBehaviour
         selectModePopup.SetActive(true);
     }
 
-    void Quit()
-    {
-#if UNITY_EDITOR
-        EditorApplication.isPlaying = false; //ゲームプレイ終了
-#else
-        Application.Quit();//ゲームプレイ終了
-#endif
-    }
     
     public static async UniTaskVoid StartGame(string roomName, GameMode gameMode)
     {
