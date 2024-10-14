@@ -11,8 +11,7 @@ using Assert = UnityEngine.Assertions.Assert;
 public class SelectOnlineGameModeMono : MonoBehaviour
 {
     [SerializeField] GameObject selectModePopup = null!;
-    [SerializeField] CustomButton joinAsHostButton = null!;
-    [SerializeField] CustomButton joinAsClientButton = null!;
+    [SerializeField] CustomButton startSharedButton = null!;
     [SerializeField] TMP_InputField roomNameInputField = null!;
     [SerializeField] CustomButton backButton = null!;
     
@@ -25,8 +24,7 @@ public class SelectOnlineGameModeMono : MonoBehaviour
 
         //GameMode.Hostとして扱うかは未定。仮でAutoHostOrClientに設定
         //もし、GameMode.Hostかつ同じルーム名で始めた場合はStartGameExceptionがthrowされる
-        joinAsHostButton.OnClick += () => StartGame(RoomName, GameMode.AutoHostOrClient).Forget();
-        joinAsClientButton.OnClick += () => StartGame(RoomName, GameMode.Client).Forget();
+        startSharedButton.OnClick += () => StartGame(RoomName, GameMode.Shared).Forget();
         backButton.OnClick += () => selectModePopup.SetActive(false);
         
     }

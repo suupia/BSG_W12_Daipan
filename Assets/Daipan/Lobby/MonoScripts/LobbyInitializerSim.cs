@@ -24,11 +24,13 @@ public class LobbyInitializerSim : SimulationBehaviour, IPlayerJoined, IPlayerLe
         _networkPlayerStatsUnitSpawner = networkPlayerStatsUnitSpawner;
         Debug.Log($"Runner: {runner}");
 
-        if (Runner.IsServer)
+        Debug.Log($"playerStatsUnitParent.InputAuthority == Runner.LocalPlayer: {playerStatsUnitParent.InputAuthority == Runner.LocalPlayer}");
+        
         {
             Debug.Log($"Runner.IsRunning : {Runner.IsRunning}");
             Runner.Spawn(playerStatsUnitPrefab, parentId: playerStatsUnitParent.Id);
         }
+        
     }
 
 
