@@ -23,6 +23,12 @@ public class LobbyInitializerSim : SimulationBehaviour, IPlayerJoined, IPlayerLe
         runner.AddGlobal(this);
         _networkPlayerStatsUnitSpawner = networkPlayerStatsUnitSpawner;
         Debug.Log($"Runner: {runner}");
+
+        if (Runner.IsServer)
+        {
+            Debug.Log($"Runner.IsRunning : {Runner.IsRunning}");
+            Runner.Spawn(playerStatsUnitPrefab, parentId: playerStatsUnitParent.Id);
+        }
     }
 
 
@@ -33,6 +39,7 @@ public class LobbyInitializerSim : SimulationBehaviour, IPlayerJoined, IPlayerLe
     void IPlayerJoined.PlayerJoined(PlayerRef player)
     {
         Debug.Log("PlayerJoined in  LobbyInitializerSim");
+        Debug.Log($"Runner.IsRunning : {Runner.IsRunning}");
         if (Runner.IsServer) Runner.Spawn(playerStatsUnitPrefab, inputAuthority: player);
         // Todo: RunnerがSetActiveシーンでシーンの切り替えをする時に対応するシーンマネジャーのUniTaskのキャンセルトークンを呼びたい
     }
@@ -66,6 +73,8 @@ public static class NetworkSpawnerExtension
     [Rpc]
     static void RPC_SetParent(NetworkRunner runner, NetworkId childId, NetworkId parentId, RpcInfo info = default)
     {
+        if(runner.IsClient) return;
+        
         // 親として設定するオブジェクトを NetworkId で取得
         runner.TryFindObject(parentId, out var parentObject);
 
