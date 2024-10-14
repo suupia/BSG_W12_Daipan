@@ -563,6 +563,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4804219951161929425}
+  - component: {fileID: 8128529038522025714}
+  - component: {fileID: 6008493459883154075}
   m_Layer: 5
   m_Name: PlayerStatsUnit
   m_TagString: Untagged
@@ -594,3 +596,37 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8128529038522025714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9102983609031659440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98f63df9854d4716bea7794cb415659d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  youAreThis: {fileID: 4424589249913684355}
+  playerName: {fileID: 4759200378644538241}
+  playerRole: {fileID: 1820565625860004170}
+  ready: {fileID: 6241601882913464250}
+--- !u!114 &6008493459883154075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9102983609031659440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 4203152113
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 8128529038522025714}

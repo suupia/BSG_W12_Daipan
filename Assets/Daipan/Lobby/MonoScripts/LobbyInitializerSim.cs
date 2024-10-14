@@ -13,27 +13,27 @@ public class LobbyInitializerSim : SimulationBehaviour, IPlayerJoined, IPlayerLe
 
     [SerializeField] NetworkPrefabRef playerStatsUnitPrefab; // todo : 一旦ここにおく
 
+
     [Inject]
     public void Construct(
-        NetworkPlayerStatsUnitSpawner networkPlayerStatsUnitSpawner 
+        NetworkRunner runner
+        , NetworkPlayerStatsUnitSpawner networkPlayerStatsUnitSpawner
     )
     {
-         _networkPlayerStatsUnitSpawner = networkPlayerStatsUnitSpawner;
-         
+        runner.AddGlobal(this);
+        _networkPlayerStatsUnitSpawner = networkPlayerStatsUnitSpawner;
+        Debug.Log($"Runner: {runner}");
     }
 
 
     async void Start()
     {
-
     }
 
     void IPlayerJoined.PlayerJoined(PlayerRef player)
     {
-        if (Runner.IsServer)
-        {
-            Runner.Spawn(playerStatsUnitPrefab, inputAuthority:player);
-        } 
+        Debug.Log("PlayerJoined in  LobbyInitializerSim");
+        if (Runner.IsServer) Runner.Spawn(playerStatsUnitPrefab, inputAuthority: player);
         // Todo: RunnerがSetActiveシーンでシーンの切り替えをする時に対応するシーンマネジャーのUniTaskのキャンセルトークンを呼びたい
     }
 
@@ -53,12 +53,13 @@ public static class NetworkSpawnerExtension
         Quaternion? rotation = null,
         PlayerRef? inputAuthority = null,
         NetworkRunner.OnBeforeSpawned onBeforeSpawned = null,
-        NetworkSpawnFlags flags = (NetworkSpawnFlags) 0,
+        NetworkSpawnFlags flags = (NetworkSpawnFlags)0,
         NetworkId parentId = default
-        )
-    {   
+    )
+    {
+        Debug.Log($"Spawn {prefabRef} with parent {parentId}");
         var networkObject = runner.Spawn(prefabRef, position, rotation, inputAuthority, onBeforeSpawned, flags);
-         RPC_SetParent(runner, networkObject.Id, parentId);
+        RPC_SetParent(runner, networkObject.Id, parentId);
         return networkObject;
     }
 
@@ -66,24 +67,24 @@ public static class NetworkSpawnerExtension
     static void RPC_SetParent(NetworkRunner runner, NetworkId childId, NetworkId parentId, RpcInfo info = default)
     {
         // 親として設定するオブジェクトを NetworkId で取得
-        runner.TryFindObject(parentId, out var parentObject); 
+        runner.TryFindObject(parentId, out var parentObject);
 
         if (parentObject == null)
         {
             Debug.LogWarning($"Parent object with NetworkId {parentId} not found.");
             return;
         }
-        
+
         // 現在の NetworkObject にアクセスし、親を設定
-        runner.TryFindObject(childId, out var childObject); 
-        
-        if(childObject == null)
+        runner.TryFindObject(childId, out var childObject);
+
+        if (childObject == null)
         {
             Debug.LogWarning($"Child object with NetworkId {childId} not found.");
             return;
         }
 
+        Debug.Log($"Set parent {parentObject.Id} to child {childObject.Id}");
         childObject.transform.SetParent(parentObject.transform);
- 
     }
 }
