@@ -15,7 +15,7 @@ namespace Daipan.NetworkUtility
         public NetworkRunner Runner { get; private set; }
 
         public async UniTask AttemptStartScene(string sessionName = default,
-            GameMode gameMode = GameMode.AutoHostOrClient)
+            GameMode gameMode = GameMode.Shared)
         {
             sessionName ??= RandomString(5);
             Runner = FindObjectOfType<NetworkRunner>();
@@ -37,9 +37,8 @@ namespace Daipan.NetworkUtility
                     GameMode = gameMode,
                     SessionName = sessionName,
                     Scene = SceneRef.FromIndex(SceneManager.GetActiveScene().buildIndex),
-                    SceneManager = sceneMangerDefault,
+                    SceneManager = sceneMangerDefault
                 });
-
             }
             else
             {
