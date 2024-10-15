@@ -8,17 +8,9 @@ using VContainer;
 
 public class PlayerStatsSim : SimulationBehaviour, IPlayerJoined, IPlayerLeft
 {
-    [SerializeField] NetworkPrefabRef playerStatsCanvasPrefab;
-    [SerializeField] GameObject popupView = null!;
+    [SerializeField] PlayerStatsCanvasNet playerStatsCanvasPrefab= null!;
     NetworkPlayerStatsUnitSpawner _networkPlayerStatsUnitSpawner;
     public bool IsInitialized { get; private set; }
-
-
-    void Awake()
-    {
-        popupView.SetActive(false);
-    }
-
 
     async void Start()
     {
@@ -46,10 +38,7 @@ public class PlayerStatsSim : SimulationBehaviour, IPlayerJoined, IPlayerLeft
         // }
     }
 
-    public void ShowPopup()
-    {
-        popupView.SetActive(true);
-    }
+
 
 
     void IPlayerJoined.PlayerJoined(PlayerRef player)

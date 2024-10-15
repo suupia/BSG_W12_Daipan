@@ -1586,8 +1586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b12bb5f551764e6ea1282cbd3f93fd08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStatsCanvasPrefab:
-    RawGuidValue: 0b9af1c31c60149048886d65b1acd2bd
+  playerStatsCanvasPrefab: {fileID: 8002936920382012653, guid: 0b9af1c31c60149048886d65b1acd2bd, type: 3}
   popupView: {fileID: 1512599891}
 --- !u!1 &883523916
 GameObject:

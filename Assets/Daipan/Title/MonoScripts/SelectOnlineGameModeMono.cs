@@ -27,7 +27,6 @@ public class SelectOnlineGameModeMono : MonoBehaviour
         //もし、GameMode.Hostかつ同じルーム名で始めた場合はStartGameExceptionがthrowされる
         startSharedButton.OnClick += () =>
         {
-            FindObjectOfType<PlayerStatsSim>().ShowPopup();
             StartGame(RoomName, GameMode.Shared).Forget();
         };
         backButton.OnClick += () => selectModePopup.SetActive(false);
