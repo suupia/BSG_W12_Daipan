@@ -50,9 +50,9 @@ namespace Daipan.Enemy.Scripts
             _comboCounter = comboCounter;
         }
 
-        public FinalBossMono Build(FinalBossMono finalBossMono, EnemyEnum enemyEnum)
+        public IEnemyMono Build(IEnemyMono finalBossMono, IFinalBossSetDomain finalBossSetDomain, EnemyEnum enemyEnum)
         {
-            finalBossMono.SetDomain(
+            finalBossSetDomain.SetDomain(
                 enemyEnum
                 , _enemyCluster
                 , new FinalBossActionDecider(_enemySpawner)

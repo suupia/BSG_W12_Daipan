@@ -43,7 +43,7 @@ namespace Daipan.Enemy.MonoScripts
                 if (_hp.Value <= 0) Die();
             }
         }
-
+        public event EventHandler<IPlayerParamData>? OnAttackedEvent;
 
         void Update()
         {
@@ -91,7 +91,7 @@ namespace Daipan.Enemy.MonoScripts
 
         }
 
-        public event EventHandler<DiedEventArgs>? OnDied
+        public event EventHandler<DiedEventArgs>? OnDiedEvent
         {
             add => _enemyDie.OnDied += value;
             remove => _enemyDie.OnDied -= value;

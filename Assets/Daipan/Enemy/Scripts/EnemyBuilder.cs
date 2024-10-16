@@ -48,10 +48,10 @@ namespace Daipan.Enemy.Scripts
             _comboCounter = comboCounter;
         }
 
-        public EnemyMono Build(EnemyMono enemyMono, EnemyEnum enemyEnum)
+        public IEnemyMono Build(IEnemyMono enemyMono, IEnemySetDomain enemySetDomain, EnemyEnum enemyEnum)
         {
 
-            enemyMono.SetDomain(
+            enemySetDomain.SetDomain(
                 enemyEnum
                 ,_enemyCluster
                 , new EnemyAttackDecider()
@@ -60,7 +60,7 @@ namespace Daipan.Enemy.Scripts
                 , new NoneEnemyOnDied()
             );
             
-            enemyMono.OnDied += (sender, args) =>
+            enemyMono.OnDiedEvent += (sender, args) =>
             {
                 // ボスを倒したときも含む
                 _enemyLevelDesignParamData.CurrentKillAmount += 1;
@@ -90,7 +90,7 @@ namespace Daipan.Enemy.Scripts
             }
         }
  
-        IEnemyOnAttacked WrapWithComboSpawner(IEnemyOnAttacked enemyOnAttacked, EnemyMono enemyMono) 
+        IEnemyOnAttacked WrapWithComboSpawner(IEnemyOnAttacked enemyOnAttacked, IEnemyMono enemyMono) 
         {
             return new EnemyOnAttackedWithComboSpawner(enemyOnAttacked, enemyMono, _comboSpawner, _comboCounter);
         }

@@ -37,12 +37,12 @@ namespace Daipan.Enemy.Scripts
             _tutorialCurrentStep = tutorialCurrentStep; 
         }
 
-        public EnemyMono Build(EnemyMono enemyMono, EnemyEnum enemyEnum)
+        public IEnemyMono Build(IEnemyMono enemyMono, IEnemySetDomain enemySetDomain, EnemyEnum enemyEnum)
         {
             Debug.Log($"enemyEnum: {enemyEnum}");
             var enemyParamData = _enemyParamContainer.GetEnemyParamData(enemyEnum);
 
-            enemyMono.SetDomain(
+            enemySetDomain.SetDomain(
                 enemyEnum
                 , _enemyCluster
                 , new EnemyAttackDecider()

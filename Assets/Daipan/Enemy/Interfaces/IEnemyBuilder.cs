@@ -7,6 +7,6 @@ namespace Daipan.Enemy.Interfaces
 {
     public interface IEnemyBuilder
     {
-        EnemyMono Build(EnemyMono enemyMono, EnemyEnum enemyEnum);
+        IEnemyMono Build(IEnemyMono enemyMono, IEnemySetDomain enemySetDomain, EnemyEnum enemyEnum);
     }
 }

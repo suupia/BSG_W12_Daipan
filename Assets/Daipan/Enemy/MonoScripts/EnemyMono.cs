@@ -15,7 +15,7 @@ using VContainer;
 
 namespace Daipan.Enemy.MonoScripts
 {
-    public sealed class EnemyMono : MonoBehaviour, IEnemyMono
+    public sealed class EnemyMono : MonoBehaviour, IEnemyMono, IEnemySetDomain
     {
         public GameObject GameObject => gameObject;
         public Transform Transform => transform;
@@ -42,6 +42,7 @@ namespace Daipan.Enemy.MonoScripts
                 if (_hp.Value <= 0) Die();
             }
         }
+        public event EventHandler<IPlayerParamData>? OnAttackedEvent;
 
 
         void Update()
@@ -90,7 +91,7 @@ namespace Daipan.Enemy.MonoScripts
 
         }
 
-        public event EventHandler<DiedEventArgs>? OnDied
+        public event EventHandler<DiedEventArgs>? OnDiedEvent
         {
             add => _enemyDie.OnDied += value;
             remove => _enemyDie.OnDied -= value;
