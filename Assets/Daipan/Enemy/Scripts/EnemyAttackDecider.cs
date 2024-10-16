@@ -17,7 +17,7 @@ namespace Daipan.Enemy.Scripts
         /// </summary>
         public void AttackUpdate(
             EnemyMono enemyMono
-            , AbstractEnemyViewMono? enemyViewMono
+            , IEnemyViewMono? enemyViewMono
             , IEnemyParamData enemyParamData
             , PlayerMono playerMono
             )
@@ -32,7 +32,7 @@ namespace Daipan.Enemy.Scripts
 
         static void Attack(
             EnemyMono enemyMono
-            , AbstractEnemyViewMono? enemyViewMono
+            , IEnemyViewMono? enemyViewMono
             , IEnemyParamData enemyParamData
             , PlayerMono playerMono
             )
