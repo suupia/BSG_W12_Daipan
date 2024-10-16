@@ -19,7 +19,6 @@ namespace Daipan.Enemy.MonoScripts
     {
         public GameObject GameObject => gameObject;
         public Transform Transform => transform;
-        public EnemyViewMono? EnemyViewMono => enemyViewMono;
         [SerializeField] EnemyViewMono? enemyViewMono;
         EnemyCluster _enemyCluster = null!;
         EnemyMove _enemyMove = null!;
@@ -99,7 +98,7 @@ namespace Daipan.Enemy.MonoScripts
 
         public  void Highlight(bool isHighlighted)
         {
-            EnemyViewMono?.Highlight(isHighlighted);
+            enemyViewMono?.Highlight(isHighlighted);
         }
 
         public  void OnAttacked(IPlayerParamData playerParamData)

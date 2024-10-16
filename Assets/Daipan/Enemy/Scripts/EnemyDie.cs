@@ -3,6 +3,7 @@ using System;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.MonoScripts;
 using DG.Tweening;
+using UnityEngine;
 
 
 namespace Daipan.Enemy.Scripts
@@ -18,7 +19,7 @@ namespace Daipan.Enemy.Scripts
         }
         bool IsDead { get; set; }  // Die()の処理が2回以上呼ばれるのを防ぐためのフラグ
 
-        public void Died(EnemyViewMono? enemyViewMono)
+        public void Died(IEnemyViewMono? enemyViewMono)
         {
             if(IsDead)return;
             IsDead = true;
@@ -33,7 +34,7 @@ namespace Daipan.Enemy.Scripts
             enemyViewMono.Died(() => UnityEngine.Object.Destroy(_enemyMono.GameObject));
         }
 
-        public void DiedByDaipan(EnemyViewMono? enemyViewMono)
+        public void DiedByDaipan(IEnemyViewMono? enemyViewMono)
         {
             if(IsDead)return;
             IsDead = true;
@@ -51,7 +52,7 @@ namespace Daipan.Enemy.Scripts
                 .OnStart(() => { enemyViewMono.Daipaned(() => UnityEngine.Object.Destroy(_enemyMono.GameObject)); });
         }
         
-        public void DiedBySpecialBlack(EnemyViewMono? enemyViewMono)
+        public void DiedBySpecialBlack(IGetAbstractEnemyViewMono? enemyViewMono)
         {
             if(IsDead)return;
             IsDead = true;
@@ -68,6 +69,11 @@ namespace Daipan.Enemy.Scripts
             {
                 // 違う色に攻撃したのなら、特殊アニメーションを再生し、Destroy
                 specialEnemyViewMono.SpecialBlack(() => UnityEngine.Object.Destroy(_enemyMono.GameObject));
+            }
+            else
+            {
+                // クライアントでSpecialかどうかを判定しているので、警告は出ないはず
+                Debug.LogWarning("Special enemy die but not special enemy view mono");
             }
         }
 
