@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Daipan.Enemy.Interfaces
 {
-    public abstract class AbstractFinalBossViewMono : MonoBehaviour, IEnemyViewMono, IFinalBossViewParamData 
+    public abstract class AbstractFinalBossViewMono : MonoBehaviour, IFinalBossViewMono , IFinalBossViewMonoSetDomain
     {
         public abstract void SetDomain(IFinalBossViewParamData finalBossViewParamData);
         public abstract void SetHpGauge(double currentHp, int maxHp);

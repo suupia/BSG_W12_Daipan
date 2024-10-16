@@ -5,11 +5,11 @@ namespace Daipan.Enemy.Interfaces
 {
     public interface IEnemyViewMono
     {
-        void SetHpGauge(double currentHp, int maxHp);
-        void Move();
-        void Attack();
-        void Died(Action onDied);
-        void Daipaned(Action onDaipaned);
-        void Highlight(bool isHighlighted);
+        public void SetHpGauge(double currentHp, int maxHp);
+        public void Move();
+        public void Attack();
+        public void Died(Action onDied);
+        public void Daipaned(Action onDaipaned);
+        public void Highlight(bool isHighlighted);
     }
 }
