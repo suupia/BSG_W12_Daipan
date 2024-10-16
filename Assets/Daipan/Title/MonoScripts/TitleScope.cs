@@ -27,8 +27,6 @@ public sealed class TitleScope : LifetimeScope
     {
         builder.RegisterComponentInHierarchy<TitleMono>();
 
-        builder.RegisterComponentInHierarchy<PlayerStatsSim>();
-
         // Option
         DaipanScope.RegisterOption(builder);
 

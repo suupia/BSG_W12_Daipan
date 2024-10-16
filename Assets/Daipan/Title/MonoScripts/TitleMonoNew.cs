@@ -12,22 +12,23 @@ public class TitleMonoNew : MonoBehaviour
     [SerializeField] CanvasGroup titleCanvasGroup = null!;
     [SerializeField] NetworkRunner networkRunnerPrefab = null!;
 
-    // JoinPanel
-    [SerializeField] GameObject joinPanel = null!;
+    [Header("JoinPanel")] [SerializeField] GameObject joinPanel = null!;
     [SerializeField] TMP_InputField localPlayerNameInputField = null!;
     [SerializeField] TMP_InputField localRoomNameInputField = null!;
     [SerializeField] CustomButton joinRoomButton = null!;
     [SerializeField] CustomButton closeJoinPanelButton = null!;
 
-    // PlayerStatsPanel
-    [SerializeField] GameObject playerStatsPanel = null!;
+    [Header("PlayerStatsPanel")] [SerializeField]
+    GameObject playerStatsPanel = null!;
+
     [SerializeField] TextMeshProUGUI roomName = null!;
     [SerializeField] public Transform playerStatsUnitParent = null!;
     [SerializeField] CustomButton readyButton = null!;
     [SerializeField] CustomButton startGameButton = null!; // MasterClient only
 
-    // ErrorPanel
-    [SerializeField] GameObject errorMessagePanel = null!;
+    [Header("ErrorPanel")] [SerializeField]
+    GameObject errorMessagePanel = null!;
+
     [SerializeField] TextMeshProUGUI errorMessageText = null!;
 
 
