@@ -1,6 +1,4 @@
 #nullable enable
-
-using System;
 using Fusion;
 using TMPro;
 using UnityEngine;
@@ -10,15 +8,20 @@ public class PlayerStatsUnitNet : NetworkBehaviour
 {
     [SerializeField] GameObject viewObject = null!;
     [SerializeField] Image youAreThisImage = null!;
-    [SerializeField] TextMeshProUGUI playerName = null!;
-    [SerializeField] TextMeshProUGUI ready = null!;
-    [SerializeField] CustomButton roleButton = null!;
+    [SerializeField] TextMeshProUGUI playerNameText = null!;
+    [SerializeField] TextMeshProUGUI readyText = null!;
+    [SerializeField] CustomButton playerRoleButton = null!;
+    [SerializeField] TextMeshProUGUI playerRoleText = null!;
 
     public PlayerRef PlayerRef { get; set; }
 
     [Networked]
     [OnChangedRender(nameof(OnPlayerNameChanged))]
     public NetworkString<_16> PlayerName { get; set; }
+
+    [Networked]
+    [OnChangedRender(nameof(OnPlayerRoleChanged))]
+    PlayerRoleEnum PlayerRole { get; set; } = PlayerRoleEnum.Streamer;
 
     void Awake()
     {
@@ -38,6 +41,18 @@ public class PlayerStatsUnitNet : NetworkBehaviour
         transform.SetParent(titleMonoNew.playerStatsUnitParent, false);
 
         youAreThisImage.gameObject.SetActive(HasStateAuthority);
+        playerRoleButton.OnClick += () =>
+        {
+            if (HasStateAuthority)
+            {
+                PlayerRole = PlayerRole switch
+                {
+                    PlayerRoleEnum.Streamer => PlayerRoleEnum.Anti,
+                    PlayerRoleEnum.Anti => PlayerRoleEnum.Streamer,
+                    _ => PlayerRoleEnum.Streamer
+                };
+            }
+        };
 
         // The OnRenderChanged functions are called during spawn to make sure they are set properly for players who have already joined the room.
         OnPlayerNameChanged();
@@ -50,6 +65,23 @@ public class PlayerStatsUnitNet : NetworkBehaviour
 
     void OnPlayerNameChanged()
     {
-        playerName.text = PlayerName.Value;
+        playerNameText.text = PlayerName.Value;
     }
+
+    void OnPlayerRoleChanged()
+    {
+        playerRoleText.text = PlayerRole switch
+        {
+            PlayerRoleEnum.Streamer => "Streamer",
+            PlayerRoleEnum.Anti => "Anti",
+            _ => "None"
+        };
+    }
+}
+
+public enum PlayerRoleEnum
+{
+    None,
+    Streamer,
+    Anti
 }

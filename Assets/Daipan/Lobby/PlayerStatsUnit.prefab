@@ -780,9 +780,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   viewObject: {fileID: 5328778570134144128}
   youAreThisImage: {fileID: 4424589249913684355}
-  playerName: {fileID: 4759200378644538241}
-  ready: {fileID: 6241601882913464250}
-  roleButton: {fileID: 4838541013485174410}
+  playerNameText: {fileID: 4759200378644538241}
+  readyText: {fileID: 6241601882913464250}
+  playerRoleButton: {fileID: 4838541013485174410}
+  playerRoleText: {fileID: 1048238794010059794}
+  _PlayerName:
+    _length: 0
+    _data:
+      Data: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  _PlayerRole: 0
 --- !u!114 &6008493459883154075
 MonoBehaviour:
   m_ObjectHideFlags: 0
