@@ -8,13 +8,13 @@ using UnityEngine;
 /// </summary>
 public class NetworkPlayerSpawnerSim : SimulationBehaviour, IPlayerJoined, IPlayerLeft
 {
-    public GameObject PlayerPrefab;
+    [SerializeField] PlayerStatsUnitNet playerStatsUnitNetPrefab;
 
     public void PlayerJoined(PlayerRef playerRef)
     {
         if (playerRef == Runner.LocalPlayer)
         {
-            var player = Runner.Spawn(PlayerPrefab, new Vector3(0, 1, 0), Quaternion.identity);
+            var playerStatsUnitNet = Runner.Spawn(playerStatsUnitNetPrefab, new Vector3(0, 1, 0), Quaternion.identity);
             // todo : ここで、Refを設定
         }
 
