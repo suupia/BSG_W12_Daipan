@@ -4,7 +4,7 @@ using System;
 using UnityEditor;
 using UnityEngine;
 
-public class TitleButtonsMono : MonoBehaviour
+public class MenuButtonsMono : MonoBehaviour
 {
     [SerializeField] CustomButton onlineButton = null!;
     [SerializeField] CustomButton offlineButton = null!;
@@ -13,14 +13,14 @@ public class TitleButtonsMono : MonoBehaviour
 
     void Awake()
     {
-        var selectOnlineGameModeMono = FindObjectOfType<SelectOnlineGameModeMono>();
-        if(selectOnlineGameModeMono == null)
+        var titleMonoNew = FindObjectOfType<TitleMonoNew>();
+        if(titleMonoNew == null)
         {
-            Debug.LogError($"SelectOnlineGameModeMono is null");
+            Debug.LogError($"TitleMonoNew is null");
             return;
         }
         
-        onlineButton.OnClick += () => selectOnlineGameModeMono.ShowPopup(); 
+        onlineButton.OnClick += () => titleMonoNew.GoToJoinPanel(); 
         offlineButton.OnClick += () => Debug.Log($"実装するか未定");
         offlineButton.OnClick += () => Debug.Log($"実装お願いします");
         quitButton.OnClick += Quit;
