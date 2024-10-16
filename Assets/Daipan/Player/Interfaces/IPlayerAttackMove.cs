@@ -12,7 +12,7 @@ namespace Daipan.Player.Interfaces
         void Move();
         void Defenced();
     } 
-    public record OnHitEventArgs(AbstractEnemyMono? EnemyMono, bool IsTargetEnemy);
+    public record OnHitEventArgs(IEnemyMono? EnemyMono, bool IsTargetEnemy);
 
 }
 

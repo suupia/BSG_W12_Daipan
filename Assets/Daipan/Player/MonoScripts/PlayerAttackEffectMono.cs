@@ -31,7 +31,7 @@ namespace Daipan.Player.MonoScripts
              _playerAttackTracking.Move();
         }
 
-        public void SetUp(IPlayerParamData playerParamData, Func<AbstractEnemyMono?> getTargetEnemyMono)
+        public void SetUp(IPlayerParamData playerParamData, Func<IEnemyMono?> getTargetEnemyMono)
         {
             Debug.Log($"PlayerAttackEffectMono data.Enum = {playerParamData.PlayerEnum()}");
             viewMono?.SetDomain(playerParamData);

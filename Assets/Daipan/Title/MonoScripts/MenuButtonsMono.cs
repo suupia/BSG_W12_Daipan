@@ -1,6 +1,7 @@
 #nullable enable
 
 using System;
+using Daipan.Battle.scripts;
 using UnityEditor;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ public class MenuButtonsMono : MonoBehaviour
     [SerializeField] CustomButton offlineButton = null!;
     [SerializeField] CustomButton optionButton = null!;
     [SerializeField] CustomButton quitButton = null!;
+    [SerializeField] CustomButton tempButton = null!; // todo : 後で消す
 
     void Awake()
     {
@@ -23,6 +25,7 @@ public class MenuButtonsMono : MonoBehaviour
         onlineButton.OnClick += () => titleMonoNew.GoToJoinPanel(); 
         offlineButton.OnClick += () => Debug.Log($"実装するか未定");
         offlineButton.OnClick += () => Debug.Log($"実装お願いします");
+        tempButton.OnClick += () => SceneTransition.TransitioningScene(SceneName.DaipanScene);
         quitButton.OnClick += Quit;
     }
     

@@ -10,9 +10,9 @@ namespace Daipan.Enemy.Scripts
     public sealed class EnemyDie
     {
         public event EventHandler<DiedEventArgs>? OnDied;
-        readonly AbstractEnemyMono _enemyMono;
+        readonly IEnemyMono _enemyMono;
         
-        public EnemyDie(AbstractEnemyMono enemyMono)
+        public EnemyDie(IEnemyMono enemyMono)
         {
             _enemyMono = enemyMono;
         }
@@ -26,11 +26,11 @@ namespace Daipan.Enemy.Scripts
             OnDied?.Invoke(_enemyMono, args);        
             if (enemyViewMono == null)
             {
-                UnityEngine.Object.Destroy(_enemyMono.gameObject);
+                UnityEngine.Object.Destroy(_enemyMono.GameObject);
                 return;
             }
 
-            enemyViewMono.Died(() => UnityEngine.Object.Destroy(_enemyMono.gameObject));
+            enemyViewMono.Died(() => UnityEngine.Object.Destroy(_enemyMono.GameObject));
         }
 
         public void DiedByDaipan(EnemyViewMono? enemyViewMono)
@@ -41,14 +41,14 @@ namespace Daipan.Enemy.Scripts
             OnDied?.Invoke(_enemyMono, args);
             if (enemyViewMono == null)
             {
-                UnityEngine.Object.Destroy(_enemyMono.gameObject);
+                UnityEngine.Object.Destroy(_enemyMono.GameObject);
                 return;
             }
 
-            _enemyMono.transform
+            _enemyMono.Transform
                 .DOMoveY(-1.7f, 0.3f)
                 .SetEase(Ease.InQuint)
-                .OnStart(() => { enemyViewMono.Daipaned(() => UnityEngine.Object.Destroy(_enemyMono.gameObject)); });
+                .OnStart(() => { enemyViewMono.Daipaned(() => UnityEngine.Object.Destroy(_enemyMono.GameObject)); });
         }
         
         public void DiedBySpecialBlack(EnemyViewMono? enemyViewMono)
@@ -59,7 +59,7 @@ namespace Daipan.Enemy.Scripts
             OnDied?.Invoke(_enemyMono, args);
             if (enemyViewMono == null)
             {
-                UnityEngine.Object.Destroy(_enemyMono.gameObject);
+                UnityEngine.Object.Destroy(_enemyMono.GameObject);
                 return;
             }
 
@@ -67,7 +67,7 @@ namespace Daipan.Enemy.Scripts
             // 違う色に攻撃したのなら、特殊アニメーションを再生し、Destroy
             enemySpecialViewMono.SpecialBlack(() =>
             {
-                UnityEngine.Object.Destroy(_enemyMono.gameObject);
+                UnityEngine.Object.Destroy(_enemyMono.GameObject);
             });
         }
 

@@ -98,12 +98,12 @@ namespace Daipan.Enemy.Scripts
         public class EnemyOnAttackedWithComboSpawner : IEnemyOnAttacked
         {
             readonly IEnemyOnAttacked _enemyOnAttacked;
-            readonly AbstractEnemyMono _enemyMono;
+            readonly IEnemyMono _enemyMono;
             readonly ComboSpawner _comboSpawner;
             readonly ComboCounter _comboCounter;
             public EnemyOnAttackedWithComboSpawner(
                 IEnemyOnAttacked enemyOnAttacked
-               , AbstractEnemyMono enemyMono
+               , IEnemyMono enemyMono
                     , ComboSpawner comboSpawner
                     , ComboCounter comboCounter )
             {
@@ -119,7 +119,7 @@ namespace Daipan.Enemy.Scripts
                 if (newHp.Value < hp.Value)
                 {
                     _comboCounter.IncreaseCombo();
-                    _comboSpawner.SpawnCombo(_comboCounter.ComboCount, _enemyMono.transform.position); 
+                    _comboSpawner.SpawnCombo(_comboCounter.ComboCount, _enemyMono.Transform.position); 
                 }
                 return newHp;
             }

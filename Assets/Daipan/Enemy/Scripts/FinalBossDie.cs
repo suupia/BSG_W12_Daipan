@@ -10,9 +10,9 @@ namespace Daipan.Enemy.Scripts
     public sealed class FinalBossDie 
     {
         public event EventHandler<DiedEventArgs>? OnDied;
-        readonly AbstractEnemyMono _enemyMono;
+        readonly IEnemyMono _enemyMono;
         
-        public FinalBossDie(AbstractEnemyMono enemyMono)
+        public FinalBossDie(IEnemyMono enemyMono)
         {
             _enemyMono = enemyMono;
         }
@@ -30,24 +30,24 @@ namespace Daipan.Enemy.Scripts
         }
 
         static void OnDiedProcess(
-            AbstractEnemyMono enemyMono, 
+            IEnemyMono enemyMono, 
             bool isDaipaned,
             AbstractFinalBossViewMono? enemyViewMono
             )
         {
             if (enemyViewMono == null)
             {
-                UnityEngine.Object.Destroy(enemyMono.gameObject); 
+                UnityEngine.Object.Destroy(enemyMono.GameObject); 
                 return;
             }
 
             if (isDaipaned)
-                enemyMono.transform
+                enemyMono.Transform
                     .DOMoveY(-1.7f, 0.3f)
                     .SetEase(Ease.InQuint)
-                    .OnStart(() => { enemyViewMono.Daipaned(() =>  UnityEngine.Object.Destroy(enemyMono.gameObject)); });
+                    .OnStart(() => { enemyViewMono.Daipaned(() =>  UnityEngine.Object.Destroy(enemyMono.GameObject)); });
             else
-                enemyViewMono.Died(() =>  UnityEngine.Object.Destroy(enemyMono.gameObject));
+                enemyViewMono.Died(() =>  UnityEngine.Object.Destroy(enemyMono.GameObject));
         }
     }
 }

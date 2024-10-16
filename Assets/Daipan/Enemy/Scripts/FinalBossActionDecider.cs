@@ -74,7 +74,7 @@ namespace Daipan.Enemy.Scripts
         }
 
         static void Attack(
-            AbstractEnemyMono enemyMono
+            IEnemyMono enemyMono
             , AbstractFinalBossViewMono? enemyViewMono
             , IEnemyParamData enemyParamData
             , PlayerMono playerMono
@@ -85,10 +85,10 @@ namespace Daipan.Enemy.Scripts
             EnemyAttackModule.Attack(playerMono, enemyParamData);
         }
 
-        static bool CanAttack(AbstractEnemyMono enemyMono, IEnemyParamData enemyParamData, PlayerMono playerMono)
+        static bool CanAttack(IEnemyMono enemyMono, IEnemyParamData enemyParamData, PlayerMono playerMono)
         {
             if (playerMono.Hp.Value <= 0) return false;
-            if (enemyMono.transform.position.x - playerMono.transform.position.x >
+            if (enemyMono.Transform.position.x - playerMono.transform.position.x >
                 enemyParamData.GetAttackRange()) return false;
             return true;
         }
