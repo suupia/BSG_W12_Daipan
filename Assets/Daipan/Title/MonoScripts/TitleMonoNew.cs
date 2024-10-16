@@ -20,6 +20,8 @@ public class TitleMonoNew : MonoBehaviour
     [SerializeField] GameObject playerStatsPanel = null!;
     [SerializeField] TextMeshProUGUI roomName = null!;
     [SerializeField] public Transform playerStatsUnitParent = null!;
+    [SerializeField] CustomButton readyButton = null!;
+    [SerializeField] CustomButton startGameButton = null!; // MasterClient only
 
     // ErrorPanel
     [SerializeField] GameObject errorMessagePanel = null!;
@@ -31,8 +33,12 @@ public class TitleMonoNew : MonoBehaviour
         joinPanel.SetActive(false);
         playerStatsPanel.SetActive(false);
         errorMessagePanel.SetActive(false);
-
+        // JoinPanel
         joinRoomButton.OnClick += StartGame;
+        // PlayerStatsPanel
+        readyButton.OnClick += ReadyButtonClicked;
+        startGameButton.gameObject.SetActive(false);
+        // startGameButton.OnClick +=  // todo : transit to DaipanNet scene 
     }
 
     async void StartGame()
@@ -80,6 +86,14 @@ public class TitleMonoNew : MonoBehaviour
     {
         joinPanel.SetActive(false);
         playerStatsPanel.SetActive(true);
+    }
+
+    void ReadyButtonClicked()
+    {
+        var playerStatsUnits = playerStatsUnitParent.GetComponentsInChildren<PlayerStatsUnitNet>();
+        foreach (var playerStatsUnit in playerStatsUnits)
+            if (playerStatsUnit.HasStateAuthority)
+                playerStatsUnit.IsReady = !playerStatsUnit.IsReady;
     }
 
     public string LocalPlayerName => localPlayerNameInputField.text;

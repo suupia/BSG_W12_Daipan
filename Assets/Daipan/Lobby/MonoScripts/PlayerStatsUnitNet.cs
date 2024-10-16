@@ -23,6 +23,10 @@ public class PlayerStatsUnitNet : NetworkBehaviour
     [OnChangedRender(nameof(OnPlayerRoleChanged))]
     PlayerRoleEnum PlayerRole { get; set; } = PlayerRoleEnum.Streamer;
 
+    [Networked]
+    [OnChangedRender(nameof(OnIsReadyChanged))]
+    public NetworkBool IsReady { get; set; }
+
     void Awake()
     {
         // viewObject.SetActive(false);
@@ -44,18 +48,18 @@ public class PlayerStatsUnitNet : NetworkBehaviour
         playerRoleButton.OnClick += () =>
         {
             if (HasStateAuthority)
-            {
                 PlayerRole = PlayerRole switch
                 {
                     PlayerRoleEnum.Streamer => PlayerRoleEnum.Anti,
                     PlayerRoleEnum.Anti => PlayerRoleEnum.Streamer,
                     _ => PlayerRoleEnum.Streamer
                 };
-            }
         };
 
         // The OnRenderChanged functions are called during spawn to make sure they are set properly for players who have already joined the room.
         OnPlayerNameChanged();
+        OnPlayerRoleChanged();
+        OnIsReadyChanged();
     }
 
     public void Show()
@@ -76,6 +80,11 @@ public class PlayerStatsUnitNet : NetworkBehaviour
             PlayerRoleEnum.Anti => "Anti",
             _ => "None"
         };
+    }
+
+    void OnIsReadyChanged()
+    {
+        readyText.text = IsReady ? "OK" : "NG";
     }
 }
 
