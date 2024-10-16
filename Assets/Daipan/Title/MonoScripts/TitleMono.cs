@@ -16,13 +16,11 @@ using DG.Tweening;
 public class TitleMono : MonoBehaviour
 {
     [SerializeField] Image blackScreen = null!;
-    [SerializeField] float blackoutTime;
-    
+
     InputSerialManager _inputSerialManager = null!;
     IInputOption _inputOption = null!;
     IGetEnterKey _getEnterKey = null!;
-    SamePressChecker _samePressChecker = null!;
-    bool _isTransitioned;
+    SamePressChecker? _samePressChecker;
 
     [Inject]
     public void Initialize(
@@ -44,18 +42,14 @@ public class TitleMono : MonoBehaviour
 
         _inputSerialManager = inputSerialManager;
         _inputOption = inputOption;
-        _samePressChecker = new SamePressChecker(0.5f, 3,
-            () => SceneTransition.TransitioningScene(SceneName.DaipanScene), () => { });
+        _samePressChecker = new SamePressChecker(0.5f, 3, () => SceneTransition.TransitioningScene(SceneName.DaipanScene), () => { });
 
         _getEnterKey = getEnterKey;
-        _isTransitioned = false;
     }
 
 
     void Update()
     {
-        if (_isTransitioned) return;
-
         OpenMenuUpdate();
 
         if (_inputOption.IsOpening)
@@ -66,7 +60,10 @@ public class TitleMono : MonoBehaviour
         {
             if (_getEnterKey.GetEnterKeyDown())
             {
-                DOVirtual.Float(0, 1f, blackoutTime, value =>
+                return; // todo : 仮
+                const float fadeoutTime = 0.3f;
+                blackScreen.gameObject.SetActive(true);
+                DOVirtual.Float(0, 1f, fadeoutTime, value =>
                 {
                     blackScreen.color = new Vector4(0, 0, 0, value);
                 }).OnComplete(() => SceneTransition.TransitioningScene(SceneName.TutorialScene));
@@ -79,9 +76,9 @@ public class TitleMono : MonoBehaviour
             }
             
             // 3つのボタンを同時に推したらチュートリアルをスキップする
-            if(_inputSerialManager.GetButtonRed()) _samePressChecker.SetOn(0);
-            if(_inputSerialManager.GetButtonBlue()) _samePressChecker.SetOn(1);
-            if(_inputSerialManager.GetButtonYellow()) _samePressChecker.SetOn(2);
+            if(_inputSerialManager.GetButtonRed()) _samePressChecker?.SetOn(0);
+            if(_inputSerialManager.GetButtonBlue()) _samePressChecker?.SetOn(1);
+            if(_inputSerialManager.GetButtonYellow()) _samePressChecker?.SetOn(2);
         }
     }
 

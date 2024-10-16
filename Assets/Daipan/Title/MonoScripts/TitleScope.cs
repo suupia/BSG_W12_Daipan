@@ -26,7 +26,7 @@ public sealed class TitleScope : LifetimeScope
     protected override void Configure(IContainerBuilder builder)
     {
         builder.RegisterComponentInHierarchy<TitleMono>();
-        
+
         // Option
         DaipanScope.RegisterOption(builder);
 
