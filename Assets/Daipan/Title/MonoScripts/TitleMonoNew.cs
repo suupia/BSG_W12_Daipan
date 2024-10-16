@@ -1,5 +1,8 @@
 #nullable enable
+using System.Linq;
+using Daipan.Battle.scripts;
 using Fusion;
+using R3;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -34,14 +37,14 @@ public class TitleMonoNew : MonoBehaviour
         playerStatsPanel.SetActive(false);
         errorMessagePanel.SetActive(false);
         // JoinPanel
-        joinRoomButton.OnClick += StartGame;
+        joinRoomButton.OnClick += JoinButtonOnClicked;
         // PlayerStatsPanel
         readyButton.OnClick += ReadyButtonClicked;
         startGameButton.gameObject.SetActive(false);
-        // startGameButton.OnClick +=  // todo : transit to DaipanNet scene 
+        startGameButton.OnClick += StartGameButtonClicked;
     }
 
-    async void StartGame()
+    async void JoinButtonOnClicked()
     {
         titleCanvasGroup.interactable = false;
 
@@ -94,6 +97,22 @@ public class TitleMonoNew : MonoBehaviour
         foreach (var playerStatsUnit in playerStatsUnits)
             if (playerStatsUnit.HasStateAuthority)
                 playerStatsUnit.IsReady = !playerStatsUnit.IsReady;
+    }
+
+    void StartGameButtonClicked()
+    {
+        // todo : transit to DaipanNet scene
+        var runner = FindObjectOfType<NetworkRunner>();
+        SceneTransition.TransitionSceneWithNetworkRunner(runner, SceneName.DaipanScene);
+    }
+
+    public void CheckAllReady()
+    {
+        var playerStatsUnits = playerStatsUnitParent.GetComponentsInChildren<PlayerStatsUnitNet>();
+        var isAllReady = playerStatsUnits.All(playerStatsUnit => playerStatsUnit.IsReady)
+                         && playerStatsUnits.Length > 1;
+        var runner = FindObjectOfType<NetworkRunner>();
+        if (runner.IsSharedModeMasterClient) startGameButton.gameObject.SetActive(isAllReady);
     }
 
     public string LocalPlayerName => localPlayerNameInputField.text;

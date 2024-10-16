@@ -27,6 +27,8 @@ public class PlayerStatsUnitNet : NetworkBehaviour
     [OnChangedRender(nameof(OnIsReadyChanged))]
     public NetworkBool IsReady { get; set; }
 
+    TitleMonoNew _titleMonoNew = null!;
+
     void Awake()
     {
         // viewObject.SetActive(false);
@@ -35,14 +37,14 @@ public class PlayerStatsUnitNet : NetworkBehaviour
     public override void Spawned()
     {
         base.Spawned();
-        var titleMonoNew = FindObjectOfType<TitleMonoNew>();
-        if (titleMonoNew == null)
+        _titleMonoNew = FindObjectOfType<TitleMonoNew>();
+        if (_titleMonoNew == null)
         {
             Debug.LogError($"TitleMonoNew is null");
             return;
         }
 
-        transform.SetParent(titleMonoNew.playerStatsUnitParent, false);
+        transform.SetParent(_titleMonoNew.playerStatsUnitParent, false);
 
         youAreThisImage.gameObject.SetActive(HasStateAuthority);
         playerRoleButton.OnClick += () =>
@@ -85,6 +87,7 @@ public class PlayerStatsUnitNet : NetworkBehaviour
     void OnIsReadyChanged()
     {
         readyText.text = IsReady ? "OK" : "NG";
+        _titleMonoNew.CheckAllReady();
     }
 }
 
