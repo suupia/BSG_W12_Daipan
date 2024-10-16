@@ -13,12 +13,13 @@ public class TitleMonoNew : MonoBehaviour
     [SerializeField] GameObject joinPanel = null!;
     [SerializeField] TMP_InputField localPlayerNameInputField = null!;
     [SerializeField] TMP_InputField localRoomNameInputField = null!;
+    [SerializeField] CustomButton joinRoomButton = null!;
     [SerializeField] CustomButton closeJoinPanelButton = null!;
 
     // PlayerStatsPanel
     [SerializeField] GameObject playerStatsPanel = null!;
     [SerializeField] TextMeshProUGUI roomName = null!;
-    [SerializeField] Transform playerStatsUnitParent = null!;
+    [SerializeField] public Transform playerStatsUnitParent = null!;
     
     // ErrorPanel
     [SerializeField] GameObject errorMessagePanel = null!;
@@ -30,9 +31,11 @@ public class TitleMonoNew : MonoBehaviour
         joinPanel.SetActive(false);
         playerStatsPanel.SetActive(false);
         errorMessagePanel.SetActive(false);
+        
+        joinRoomButton.OnClick += StartGame;
     }
     
-    public async void StartGame()
+    async void StartGame()
     {
         titleCanvasGroup.interactable = false;
 

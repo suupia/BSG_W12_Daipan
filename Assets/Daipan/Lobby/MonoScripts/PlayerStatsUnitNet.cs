@@ -21,13 +21,19 @@ public class PlayerStatsUnitNet : NetworkBehaviour
     }
     void Awake()
     {
-        viewObject.SetActive(false);
+        // viewObject.SetActive(false);
     }
 
     public override void Spawned()
     {
         base.Spawned();
-        transform.SetParent(FusionConnector.Instance.playerContainer, false);
+        var titleMonoNew = FindObjectOfType<TitleMonoNew>();
+        if (titleMonoNew == null)
+        {
+            Debug.LogError($"TitleMonoNew is null");
+            return;
+        }
+        transform.SetParent(titleMonoNew.playerStatsUnitParent, false);
     }
 
     public void Show()
