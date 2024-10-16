@@ -15,10 +15,11 @@ public class NetworkPlayerSpawnerSim : SimulationBehaviour, IPlayerJoined, IPlay
         if (playerRef == Runner.LocalPlayer)
         {
             var playerStatsUnitNet = Runner.Spawn(playerStatsUnitNetPrefab, new Vector3(0, 1, 0), Quaternion.identity);
-            // todo : ここで、Refを設定
-        }
+            playerStatsUnitNet.PlayerRef = playerRef;
 
-        FusionConnector.Instance?.OnPlayerJoin(Runner);
+            var titleMonoNew = FindObjectOfType<TitleMonoNew>();
+            if (titleMonoNew != null) playerStatsUnitNet.PlayerName = titleMonoNew.LocalPlayerName;
+        }
     }
 
     public void PlayerLeft(PlayerRef player)

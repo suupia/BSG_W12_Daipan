@@ -8,7 +8,7 @@ public class TitleMonoNew : MonoBehaviour
 {
     [SerializeField] CanvasGroup titleCanvasGroup = null!;
     [SerializeField] NetworkRunner networkRunnerPrefab = null!;
-    
+
     // JoinPanel
     [SerializeField] GameObject joinPanel = null!;
     [SerializeField] TMP_InputField localPlayerNameInputField = null!;
@@ -20,49 +20,48 @@ public class TitleMonoNew : MonoBehaviour
     [SerializeField] GameObject playerStatsPanel = null!;
     [SerializeField] TextMeshProUGUI roomName = null!;
     [SerializeField] public Transform playerStatsUnitParent = null!;
-    
+
     // ErrorPanel
     [SerializeField] GameObject errorMessagePanel = null!;
     [SerializeField] TextMeshProUGUI errorMessageText = null!;
-    
+
 
     void Awake()
     {
         joinPanel.SetActive(false);
         playerStatsPanel.SetActive(false);
         errorMessagePanel.SetActive(false);
-        
+
         joinRoomButton.OnClick += StartGame;
     }
-    
+
     async void StartGame()
     {
         titleCanvasGroup.interactable = false;
 
-        StartGameArgs startGameArgs = new StartGameArgs()
+        var startGameArgs = new StartGameArgs()
         {
             GameMode = GameMode.Shared,
             SessionName = localRoomNameInputField.text,
-            PlayerCount = 20,
+            PlayerCount = 20
         };
 
         var runner = Instantiate(networkRunnerPrefab);
 
-        StartGameResult result = await runner.StartGame(startGameArgs);
+        var result = await runner.StartGame(startGameArgs);
 
         if (result.Ok)
         {
             roomName.text = "Room:  " + runner.SessionInfo.Name;
             GoToPlayerStatsPanel();
-            
         }
         else
         {
             roomName.text = string.Empty;
 
             GoToJoinPanel();
-            
-            errorMessagePanel.SetActive(true); 
+
+            errorMessagePanel.SetActive(true);
             errorMessageText.text = result.ErrorMessage;
 
             Debug.LogWarning(result.ErrorMessage);
@@ -70,13 +69,12 @@ public class TitleMonoNew : MonoBehaviour
 
         titleCanvasGroup.interactable = true;
     }
-    
+
     public void GoToJoinPanel()
     {
         joinPanel.SetActive(true);
         playerStatsPanel.SetActive(false);
     }
-
 
     void GoToPlayerStatsPanel()
     {
@@ -84,7 +82,5 @@ public class TitleMonoNew : MonoBehaviour
         playerStatsPanel.SetActive(true);
     }
 
-
-    
-    
+    public string LocalPlayerName => localPlayerNameInputField.text;
 }

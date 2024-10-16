@@ -779,9 +779,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   viewObject: {fileID: 5328778570134144128}
-  youAreThis: {fileID: 4424589249913684355}
+  youAreThisImage: {fileID: 4424589249913684355}
   playerName: {fileID: 4759200378644538241}
-  playerRole: {fileID: 0}
   ready: {fileID: 6241601882913464250}
   roleButton: {fileID: 4838541013485174410}
 --- !u!114 &6008493459883154075
