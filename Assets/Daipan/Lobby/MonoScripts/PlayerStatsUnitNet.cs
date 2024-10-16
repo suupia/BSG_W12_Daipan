@@ -11,8 +11,10 @@ public class PlayerStatsUnitNet : NetworkBehaviour
     [SerializeField] GameObject viewObject = null!;
     [SerializeField] Image youAreThis = null!;
     [SerializeField] TextMeshProUGUI playerName = null!;
-    [SerializeField] TextMeshProUGUI playerRole = null!;
     [SerializeField] TextMeshProUGUI ready = null!;
+    [SerializeField] CustomButton roleButton = null!;
+    
+    public PlayerRef PlayerRef { get; set; }
     
     public string PlayerName
     {

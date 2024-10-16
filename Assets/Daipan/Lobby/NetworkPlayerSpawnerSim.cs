@@ -10,26 +10,12 @@ public class NetworkPlayerSpawnerSim : SimulationBehaviour, IPlayerJoined, IPlay
 {
     public GameObject PlayerPrefab;
 
-    public void PlayerJoined(PlayerRef player)
+    public void PlayerJoined(PlayerRef playerRef)
     {
-        if (player == Runner.LocalPlayer)
+        if (playerRef == Runner.LocalPlayer)
         {
-            var resultingPlayer = Runner.Spawn(PlayerPrefab, new Vector3(0, 1, 0), Quaternion.identity);
-
-            FusionConnector connector = GameObject.FindObjectOfType<FusionConnector>();
-            if (connector != null)
-            {
-                // なぜtestという名前なのかは謎
-                var testPlayer = resultingPlayer.GetComponent<PlayerStatsUnitNet>();
-
-                string playerName = connector.LocalPlayerName;
-
-                if (string.IsNullOrEmpty(playerName))
-                    testPlayer.PlayerName = "Player " + resultingPlayer.StateAuthority.PlayerId;
-                else
-                    testPlayer.PlayerName = playerName;
-
-            }
+            var player = Runner.Spawn(PlayerPrefab, new Vector3(0, 1, 0), Quaternion.identity);
+            // todo : ここで、Refを設定
         }
 
         FusionConnector.Instance?.OnPlayerJoin(Runner);
