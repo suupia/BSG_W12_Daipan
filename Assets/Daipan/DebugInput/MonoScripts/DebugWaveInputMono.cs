@@ -1,6 +1,7 @@
 #nullable enable
 using System;
 using Daipan.Battle.scripts;
+using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.LevelDesign.Scripts;
 using Daipan.Enemy.Scripts;
 using Daipan.Stream.Scripts;
@@ -12,13 +13,13 @@ namespace Daipan.DebugInput.MonoScripts
     public sealed class DebugWaveInputMono : MonoBehaviour
     {
         WaveState _waveState = null!;
-        EnemyWaveSpawnerCounter _enemyWaveSpawnerCounter = null!;
+        IEnemyWaveSpawnerCounter _enemyWaveSpawnerCounter = null!;
         IrritatedValue _irritatedValue = null!;
 
         [Inject]
         public void Initialize(
             WaveState waveState
-            , EnemyWaveSpawnerCounter enemyWaveSpawnerCounter
+            , IEnemyWaveSpawnerCounter enemyWaveSpawnerCounter
             , IrritatedValue irritatedValue
         )
         {

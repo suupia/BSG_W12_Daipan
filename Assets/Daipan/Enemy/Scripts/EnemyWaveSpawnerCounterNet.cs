@@ -3,17 +3,19 @@ using System;
 using Daipan.Battle.scripts;
 using Daipan.Core.Interfaces;
 using Daipan.Enemy.Interfaces;
+using Fusion;
 using UnityEngine;
 using R3;
+using VContainer;
 
 namespace Daipan.Enemy.Scripts
 {
-    public class EnemyWaveSpawnerCounter : IEnemyWaveSpawnerCounter, IStart, IUpdate, IDisposable
+    public class EnemyWaveSpawnerCounterNet : NetworkBehaviour, IEnemyWaveSpawnerCounter, IDisposable
     {
-        readonly IEnemySpawner _enemySpawner;
-        readonly IFinalBossSpawner _finalBossSpawner;
-        readonly IEnemyWaveParamContainer _enemyWaveParamContainer;
-        readonly WaveState _waveState;
+        IEnemySpawner _enemySpawner = null!;
+        IFinalBossSpawner _finalBossSpawner = null!;
+        IEnemyWaveParamContainer _enemyWaveParamContainer = null!;
+        WaveState _waveState;
         public int CurrentSpawnedEnemyCount { get; private set; }
         public int MaxSpawnedEnemyCount => _enemyWaveParamContainer.GetEnemyWaveParamData().GetSpawnEnemyCount();
         double Timer { get; set; }
@@ -21,7 +23,8 @@ namespace Daipan.Enemy.Scripts
         IDisposable? _waveSpawnDisposable;
         readonly CompositeDisposable _disposables = new();
 
-        public EnemyWaveSpawnerCounter(
+        [Inject]
+        public void Initialize(
             IEnemySpawner enemySpawner
             , IFinalBossSpawner finalBossSpawner
             , IEnemyWaveParamContainer enemyWaveParamContainer
@@ -33,22 +36,25 @@ namespace Daipan.Enemy.Scripts
             _enemyWaveParamContainer = enemyWaveParamContainer;
             _waveState = waveState;
         }
-    
-        void IStart.Start()
+
+        public override void Spawned()
         {
+            base.Spawned();
             _disposables.Add(
                 Observable
                     .EveryValueChanged(_waveState, x => x.CurrentWaveIndex)
                     .Subscribe(_ => CurrentSpawnedEnemyCount = 0)
             );
         }
-        void IUpdate.Update()
+
+        public override void FixedUpdateNetwork()
         {
+            base.FixedUpdateNetwork();
             Debug.Log($"IsInWaveInterval: {IsInWaveInterval} CurrentSpawnedEnemyCount: {CurrentSpawnedEnemyCount} MaxSpawnedEnemyCount: {MaxSpawnedEnemyCount}");
-            
+
             IntervalSpawnEnemy();
 
-            DelayNextWave();    
+            DelayNextWave();
         }
 
         void IntervalSpawnEnemy()
@@ -60,7 +66,7 @@ namespace Daipan.Enemy.Scripts
             Timer = 0;
 
             if (CurrentSpawnedEnemyCount >= MaxSpawnedEnemyCount) return;
-            
+
             // LastWaveの時はFinalBossをスポーン
             if (_waveState.CurrentWaveIndex == _enemyWaveParamContainer.WaveTotalCount - 1)
             {
@@ -76,8 +82,8 @@ namespace Daipan.Enemy.Scripts
 
         void DelayNextWave()
         {
-            if(IsInWaveInterval) return;
-            
+            if (IsInWaveInterval) return;
+
             if (CurrentSpawnedEnemyCount == MaxSpawnedEnemyCount)
             {
                 IsInWaveInterval = true;
@@ -99,6 +105,7 @@ namespace Daipan.Enemy.Scripts
             Timer = 0;
             IsInWaveInterval = false;
         }
+
         public void Dispose()
         {
             _enemySpawner.Dispose();
@@ -106,7 +113,7 @@ namespace Daipan.Enemy.Scripts
             _disposables.Dispose();
         }
 
-        ~EnemyWaveSpawnerCounter()
+        void OnDestroy()
         {
             Dispose();
         }

@@ -271,7 +271,7 @@ namespace Daipan.Daipan
             // Enemy
             RegisterEnemy(builder, enemyParamsManager);
             builder.Register<EnemyOnAttackedBuilder>(Lifetime.Transient);
-            builder.Register<EnemyWaveSpawnerCounter>(Lifetime.Scoped).As<IStart>().As<IUpdate>().AsSelf();
+            builder.Register<EnemyWaveSpawnerCounter>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<EnemySpawner>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
             builder.Register<EnemyEnumSelector>(Lifetime.Scoped).As<IEnemyEnumSelector>();
             builder.Register<EnemyBuilder>(Lifetime.Scoped).As<IEnemyBuilder>();
