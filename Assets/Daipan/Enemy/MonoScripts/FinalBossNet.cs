@@ -45,7 +45,7 @@ namespace Daipan.Enemy.MonoScripts
             }
         }
 
-        void Update()
+        public override void FixedUpdateNetwork()
         {
             if (Hp.Value != 0)
                 IsReachedPlayer = _enemyMove.MoveUpdate(_playerHolder.PlayerMono.transform, _finalBossParamData, finalBossViewMono); 

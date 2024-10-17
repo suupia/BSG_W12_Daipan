@@ -45,7 +45,7 @@ namespace Daipan.Enemy.MonoScripts
         }
         public event EventHandler<IPlayerParamData>? OnAttackedEvent;
 
-        void Update()
+        public override void FixedUpdateNetwork()
         {
             _enemyAttackDecider.AttackUpdate(this, enemyViewMono,
                 _enemyParamContainer.GetEnemyParamData(EnemyEnum), _playerHolder.PlayerMono);

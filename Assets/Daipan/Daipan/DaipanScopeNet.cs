@@ -290,7 +290,7 @@ namespace Daipan.Daipan
             builder.Register<FinalBossNetPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<FinalBossNet>>();
             builder.Register<FinalBossOnAttacked>(Lifetime.Scoped);
             builder.Register<FinalBossBuilder>(Lifetime.Scoped);
-            builder.Register<FinalBossSpawnerNet>(Lifetime.Scoped);
+            builder.Register<FinalBossSpawnerNet>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<FinalBossDefeatTracker>(Lifetime.Scoped);
 
             // Irritated
