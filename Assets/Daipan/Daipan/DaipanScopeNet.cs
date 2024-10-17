@@ -35,6 +35,7 @@ using Daipan.Option.Scripts;
 using Daipan.Option.MonoScripts;
 using Daipan.Sound.MonoScripts;
 using Daipan.Sound.Scripts;
+using Fusion;
 using UnityEngine;
 using UnityEngine.Serialization;
 using VContainer;
@@ -55,7 +56,7 @@ namespace Daipan.Daipan
 
         [FormerlySerializedAs("commentParamsManager")] [SerializeField]
         CommentParamManager commentParamManager = null!;
-        
+
         [SerializeField] FinalBossParamManager finalBossParamManager = null!;
 
         [SerializeField] IrritatedParams irritatedParams = null!;
@@ -179,7 +180,7 @@ namespace Daipan.Daipan
             builder.Register<EnemyParamDataContainer>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.RegisterInstance(new EnemyLevelDesignParamData(enemyParamsManager.enemyLevelDesignParam));
             // Enemy
-            builder.Register<EnemyPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<EnemyMono>>();
+            builder.Register<EnemyNetPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<EnemyNet>>();
             builder.Register<EnemyCluster>(Lifetime.Scoped);
             builder.Register<EnemyAttackDecider>(Lifetime.Scoped);
             builder.Register<EnemyHighlightUpdater>(Lifetime.Scoped).AsImplementedInterfaces();
@@ -243,11 +244,15 @@ namespace Daipan.Daipan
             builder.RegisterComponentInHierarchy<OptionLanguageViewMono>();
             builder.RegisterComponentInHierarchy<OptionResumeViewMono>();
             builder.RegisterComponentInHierarchy<OptionReturnTitleViewMono>();
-
         }
 
         protected override void Configure(IContainerBuilder builder)
         {
+            // [Precondition] 
+            var runner = FindObjectOfType<NetworkRunner>();
+            Debug.Log($"NetworkRunner : {runner}");
+            builder.RegisterComponent(runner);
+
             // Stream
             RegisterStream(builder, streamParam);
 
@@ -276,13 +281,13 @@ namespace Daipan.Daipan
             builder.Register<EnemyEnumSelector>(Lifetime.Scoped).As<IEnemyEnumSelector>();
             builder.Register<EnemyBuilder>(Lifetime.Scoped).As<IEnemyBuilder>();
             builder.Register<EnemySpecialOnAttacked>(Lifetime.Scoped);
-            
+
             // FinalBoss
             builder.RegisterInstance(finalBossParamManager);
             builder.Register<FinalBossColorChanger>(Lifetime.Scoped);
             builder.Register<FinalBossParamData>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<FinalBossActionDecider>(Lifetime.Scoped);
-            builder.Register<FinalBossPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<FinalBossMono>>();
+            builder.Register<FinalBossNetPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<FinalBossNet>>();
             builder.Register<FinalBossOnAttacked>(Lifetime.Scoped);
             builder.Register<FinalBossBuilder>(Lifetime.Scoped);
             builder.Register<FinalBossSpawnerNet>(Lifetime.Scoped);
@@ -309,13 +314,13 @@ namespace Daipan.Daipan
             // Result
             builder.Register<ResultState>(Lifetime.Scoped);
             builder.RegisterComponentInHierarchy<ResultViewMono>();
-            
+
             // EndScene
             builder.RegisterInstance(endSceneTransitionParam);
 
             // Sound
             builder.Register<DaipanSoundStarter>(Lifetime.Scoped).As<IStart>();
-            
+
             // Updater
             builder.UseEntryPoints(Lifetime.Scoped, entryPoints =>
             {
