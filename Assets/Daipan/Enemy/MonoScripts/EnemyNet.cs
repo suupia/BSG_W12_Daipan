@@ -16,7 +16,7 @@ using VContainer;
 
 namespace Daipan.Enemy.MonoScripts
 {
-    public sealed class EnemyNet : NetworkBehaviour, IEnemyMono
+    public sealed class EnemyNet : NetworkBehaviour, IEnemyMono, IEnemyInitializer, IEnemySetDomain
     {
         public GameObject GameObject => gameObject;
         public Transform Transform => transform;

@@ -15,7 +15,7 @@ using VContainer;
 
 namespace Daipan.Enemy.MonoScripts
 {
-    public sealed class EnemyMono : MonoBehaviour, IEnemyMono, IEnemySetDomain
+    public sealed class EnemyMono : MonoBehaviour, IEnemyMono, IEnemyInitializer, IEnemySetDomain
     {
         public GameObject GameObject => gameObject;
         public Transform Transform => transform;
