@@ -4,11 +4,12 @@ using VContainer;
 
 namespace Daipan.Enemy.Interfaces;
 
-public interface IEnemyInitializer
+public interface IFinalBossInitializer
 {
     public void Initialize(
         PlayerHolder playerHolder
         , IEnemySpawnPoint enemySpawnPointData
-        , IEnemyParamContainer enemyParamContainer
+        , IFinalBossParamData finalBossParamData
+        , IFinalBossViewParamData finalBossViewParamData
     );
 }

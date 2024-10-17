@@ -16,7 +16,7 @@ using VContainer;
 
 namespace Daipan.Enemy.MonoScripts
 {
-    public sealed class FinalBossMono : MonoBehaviour, IEnemyMono, IFinalBossSetDomain
+    public sealed class FinalBossMono : MonoBehaviour, IEnemyMono, IFinalBossInitializer, IFinalBossSetDomain
     {
         public GameObject GameObject => gameObject;
         public Transform Transform => transform;

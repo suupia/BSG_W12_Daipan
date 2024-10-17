@@ -1,7 +1,9 @@
 #nullable enable
 using System.Linq;
+using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.LevelDesign.Interfaces;
 using Daipan.Enemy.MonoScripts;
+using Daipan.Player.Scripts;
 using Daipan.Stream.Scripts.Utility;
 using UnityEngine;
 using VContainer;
@@ -46,7 +48,13 @@ namespace Daipan.Enemy.Scripts
         {
             var enemyMonoPrefab = _finalBossMonoLoader.Load();
             Debug.Log($"enemyMonoPrefab: {enemyMonoPrefab}, spawnPosition: {spawnPosition}");
-            var enemyMonoObject = _container.Instantiate(enemyMonoPrefab, spawnPosition, Quaternion.identity);
+            var enemyMonoObject = Object.Instantiate(enemyMonoPrefab, spawnPosition, Quaternion.identity);
+            enemyMonoObject.Initialize(
+                _container.Resolve<PlayerHolder>()
+                , _container.Resolve<IEnemySpawnPoint>()
+                , _container.Resolve<IFinalBossParamData>()
+                , _container.Resolve<IFinalBossViewParamData>()
+                ); 
             var enemyMono = _finalBossBuilder.Build(enemyMonoObject, enemyMonoObject ,EnemyEnum.FinalBoss);
             _enemyCluster.Add(enemyMono);
         }
