@@ -30,6 +30,8 @@ namespace Daipan.Enemy.MonoScripts
         IEnemyOnAttacked _enemyOnAttacked = null!;
         IEnemyOnDied _enemyOnDied = null!;
         PlayerHolder _playerHolder = null!;
+        [Networked]
+        [OnChangedRender(nameof(OnEnemyEnumChanged))]
         public  EnemyEnum EnemyEnum { get;  set; } = EnemyEnum.None;
         public  bool IsReachedPlayer { get;  set; }
         Hp _hp = null!;
@@ -44,6 +46,13 @@ namespace Daipan.Enemy.MonoScripts
             }
         }
         public event EventHandler<IPlayerParamData>? OnAttackedEvent;
+
+        public override void Spawned()
+        {
+            Debug.Log($"EnemyNet Spawned");
+            base.Spawned();
+            OnEnemyEnumChanged();
+        }
 
         public override void FixedUpdateNetwork()
         {
@@ -65,6 +74,7 @@ namespace Daipan.Enemy.MonoScripts
             , IEnemyParamContainer enemyParamContainer
         )
         {
+            Debug.Log($"EnemyNet Initialize");
             _playerHolder = playerHolder;
             _enemySpawnPoint = enemySpawnPointData;
             _enemyParamContainer = enemyParamContainer;
@@ -79,6 +89,7 @@ namespace Daipan.Enemy.MonoScripts
             , IEnemyOnDied enemyOnDied
         )
         {
+            Debug.Log($"EnemyNet SetDomain");
             EnemyEnum = enemyEnum;
             _enemyCluster = enemyCluster;
             _enemyMove = new EnemyMove(transform);
@@ -86,7 +97,6 @@ namespace Daipan.Enemy.MonoScripts
             _enemyDie = enemyDie;
             _enemyOnAttacked = enemyOnAttacked;
             _enemyOnDied = enemyOnDied;
-            enemyViewMono?.SetDomain(_enemyParamContainer.GetEnemyViewParamData(EnemyEnum));
             Hp = new Hp(_enemyParamContainer.GetEnemyParamData(EnemyEnum).GetMaxHp());
 
         }
@@ -128,6 +138,13 @@ namespace Daipan.Enemy.MonoScripts
             _enemyOnDied.OnDied(); // Destroyする前の方がいいはず
             _enemyCluster.Remove(this);
             _enemyDie.Died(enemyViewMono);
+        }
+        
+        // OnChangeRender functions 
+        void OnEnemyEnumChanged()
+        {
+            if (_enemyParamContainer == null) return;
+            enemyViewMono?.SetDomain(_enemyParamContainer.GetEnemyViewParamData(EnemyEnum));
         }
     }
 }

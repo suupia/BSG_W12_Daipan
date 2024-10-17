@@ -68,6 +68,8 @@ public class PlayerStatsUnitNet : NetworkBehaviour
     {
         viewObject.SetActive(true);
     }
+    
+    // OnChangedRender functions
 
     void OnPlayerNameChanged()
     {
