@@ -8,6 +8,7 @@ using Daipan.Enemy.LevelDesign.Interfaces;
 using Daipan.Enemy.LevelDesign.Scripts;
 using Daipan.Enemy.MonoScripts;
 using Daipan.LevelDesign.Enemy.Scripts;
+using Daipan.Player.Scripts;
 using Daipan.Stream.Scripts;
 using Daipan.Stream.Scripts.Utility;
 using Daipan.Utility.Scripts;
@@ -26,7 +27,7 @@ namespace Daipan.Enemy.Scripts
     {
         readonly IObjectResolver _container;
         readonly NetworkRunner _runner;
-        readonly IPrefabLoader<EnemyMono> _enemyMonoLoader;
+        readonly IPrefabLoader<EnemyNet> _enemyMonoLoader;
         readonly EnemyCluster _enemyCluster;
         readonly IEnemySpawnPoint _enemySpawnPoint;
         readonly IEnemyBuilder _enemyBuilder;
@@ -38,7 +39,7 @@ namespace Daipan.Enemy.Scripts
         public EnemySpawnerNet(
             IObjectResolver container
             , NetworkRunner runner
-            , IPrefabLoader<EnemyMono> enemyMonoLoader
+            , IPrefabLoader<EnemyNet> enemyMonoLoader
             , EnemyCluster enemyCluster
             , IEnemySpawnPoint enemySpawnPoint
             , IEnemyBuilder enemyBuilder
@@ -77,7 +78,12 @@ namespace Daipan.Enemy.Scripts
         void SpawnEnemy(Vector3 spawnPosition, EnemyEnum enemyEnum)
         {
             var enemyMonoPrefab = _enemyMonoLoader.Load();
-            var enemyMonoObject = _container.Instantiate(enemyMonoPrefab, spawnPosition, Quaternion.identity);
+            var enemyMonoObject = _runner.Spawn(enemyMonoPrefab, spawnPosition, Quaternion.identity);
+            enemyMonoObject.Initialize(
+                _container.Resolve<PlayerHolder>()
+                , _container.Resolve<IEnemySpawnPoint>()
+                , _container.Resolve<IEnemyParamContainer>()
+            );
             var enemyMono = _enemyBuilder.Build(enemyMonoObject, enemyMonoObject, enemyEnum);
             _enemyCluster.Add(enemyMono);
         }
