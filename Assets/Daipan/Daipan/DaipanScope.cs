@@ -286,7 +286,7 @@ namespace Daipan.Daipan
             builder.Register<FinalBossPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<FinalBossMono>>();
             builder.Register<FinalBossOnAttacked>(Lifetime.Scoped);
             builder.Register<FinalBossBuilder>(Lifetime.Scoped);
-            builder.Register<FinalBossSpawner>(Lifetime.Scoped);
+            builder.Register<FinalBossSpawner>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<FinalBossDefeatTracker>(Lifetime.Scoped);
 
             // Irritated

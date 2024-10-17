@@ -11,7 +11,7 @@ namespace Daipan.Enemy.Scripts
     public class EnemyWaveSpawnerCounter : IStart, IUpdate, IDisposable
     {
         readonly IEnemySpawner _enemySpawner;
-        readonly FinalBossSpawner _finalBossSpawner;
+        readonly IFinalBossSpawner _finalBossSpawner;
         readonly IEnemyWaveParamContainer _enemyWaveParamContainer;
         readonly WaveState _waveState;
         public int CurrentSpawnedEnemyCount { get; private set; }
@@ -23,7 +23,7 @@ namespace Daipan.Enemy.Scripts
 
         public EnemyWaveSpawnerCounter(
             IEnemySpawner enemySpawner
-            , FinalBossSpawner finalBossSpawner
+            , IFinalBossSpawner finalBossSpawner
             , IEnemyWaveParamContainer enemyWaveParamContainer
             , WaveState waveState
         )
