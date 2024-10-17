@@ -13,7 +13,7 @@ namespace Daipan.Enemy.Scripts
     public class FinalBossBuilder
     {
         readonly EnemyCluster _enemyCluster;
-        readonly EnemySpawner _enemySpawner;
+        readonly IEnemySpawner _enemySpawner;
         readonly FinalBossOnAttacked _finalBossOnAttacked;
         readonly FinalBossDefeatTracker _finalBossDefeatTracker;
         
@@ -27,7 +27,7 @@ namespace Daipan.Enemy.Scripts
         
         public FinalBossBuilder(
             EnemyCluster enemyCluster
-            , EnemySpawner enemySpawner
+            , IEnemySpawner enemySpawner
             , FinalBossOnAttacked finalBossOnAttacked
             , FinalBossDefeatTracker finalBossDefeatTracker
             , FinalBossColorChanger finalBossColorChanger

@@ -22,7 +22,7 @@ using Random = UnityEngine.Random;
 
 namespace Daipan.Enemy.Scripts
 {
-    public sealed class EnemySpawner : IDisposable
+    public sealed class EnemySpawner : IEnemySpawner
     {
         readonly IObjectResolver _container;
         readonly IPrefabLoader<EnemyMono> _enemyMonoLoader;

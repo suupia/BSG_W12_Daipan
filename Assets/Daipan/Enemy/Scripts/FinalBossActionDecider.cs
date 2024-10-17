@@ -12,7 +12,7 @@ namespace Daipan.Enemy.Scripts
 {
     public sealed class FinalBossActionDecider : IDisposable
     {
-        readonly EnemySpawner _enemySpawner;
+        readonly IEnemySpawner _enemySpawner;
         readonly CompositeDisposable _disposable = new();
         IEnemyMono _finalBossMono = null!;
         AbstractFinalBossViewMono? _finalBossViewMono;
@@ -20,7 +20,7 @@ namespace Daipan.Enemy.Scripts
         PlayerMono _playerMono = null!;
         IDisposable? _summonEnemyDisposable;
 
-        public FinalBossActionDecider(EnemySpawner enemySpawner)
+        public FinalBossActionDecider(IEnemySpawner enemySpawner)
         {
             _enemySpawner = enemySpawner;
         }
@@ -54,7 +54,7 @@ namespace Daipan.Enemy.Scripts
         void SummonEnemy(
             IFinalBossParamData finalBossParamData
             , AbstractFinalBossViewMono? finalBossViewMono
-            , EnemySpawner enemySpawner)
+            , IEnemySpawner enemySpawner)
         {
             if (finalBossViewMono != null) finalBossViewMono.SummonEnemy();
             _disposable.Add(

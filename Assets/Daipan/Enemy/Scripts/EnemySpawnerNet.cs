@@ -23,7 +23,7 @@ using Random = UnityEngine.Random;
 
 namespace Daipan.Enemy.Scripts
 {
-    public sealed class EnemySpawnerNet : IDisposable
+    public sealed class EnemySpawnerNet : IEnemySpawner 
     {
         readonly IObjectResolver _container;
         readonly NetworkRunner _runner;
