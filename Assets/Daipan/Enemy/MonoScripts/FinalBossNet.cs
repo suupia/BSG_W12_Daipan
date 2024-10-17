@@ -21,7 +21,6 @@ namespace Daipan.Enemy.MonoScripts
     {
         public GameObject GameObject => gameObject;
         public Transform Transform => transform;
-        public AbstractFinalBossViewMono? FinalBossViewMono => finalBossViewMono;
         [SerializeField] AbstractFinalBossViewMono? finalBossViewMono;
         EnemyCluster _enemyCluster = null!;
         FinalBossActionDecider _finalBossActionDecider = null!;
@@ -36,10 +35,10 @@ namespace Daipan.Enemy.MonoScripts
         public  bool IsReachedPlayer { get;  set; }
         Hp _hp = null!;
 
-        public  Hp Hp
+        public Hp Hp
         {
             get => _hp;
-             set
+            set
             {
                 _hp = value;
                 if (_hp.Value <= 0) Die();
@@ -49,8 +48,7 @@ namespace Daipan.Enemy.MonoScripts
         void Update()
         {
             if (Hp.Value != 0)
-                IsReachedPlayer = _enemyMove.MoveUpdate(_playerHolder.PlayerMono.transform,
-                    _finalBossParamData, finalBossViewMono); 
+                IsReachedPlayer = _enemyMove.MoveUpdate(_playerHolder.PlayerMono.transform, _finalBossParamData, finalBossViewMono); 
 
             if (transform.position.x < _enemySpawnPoint.GetEnemyDespawnedPoint().x)
                 Die();
@@ -108,8 +106,7 @@ namespace Daipan.Enemy.MonoScripts
 
         public  void OnDaipaned()
         {
-            var daipanHitDamage =
-                _finalBossParamData.GetDaipanHitDamagePercent() * 0.01 * _finalBossParamData.GetMaxHp();
+            var daipanHitDamage = _finalBossParamData.GetDaipanHitDamagePercent() * 0.01 * _finalBossParamData.GetMaxHp();
             Hp = new Hp(Hp.Value - daipanHitDamage );
             transform.position += (float)_finalBossParamData.GetKnockBackDistance() * Vector3.right;
             finalBossViewMono?.DaipanHit();
