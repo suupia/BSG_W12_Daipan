@@ -3499,7 +3499,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7963659699215799149}
-  - component: {fileID: 5325553112716872577}
+  - component: {fileID: 7943389818124389795}
+  - component: {fileID: 5395245001406546240}
+  - component: {fileID: 7337963763908465680}
   m_Layer: 7
   m_Name: FinalBossNet
   m_TagString: Untagged
@@ -3523,7 +3525,7 @@ Transform:
   - {fileID: 7782263893806004965}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5325553112716872577
+--- !u!114 &7943389818124389795
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3532,10 +3534,45 @@ MonoBehaviour:
   m_GameObject: {fileID: 3891201940032207295}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6b9c5c3d0ef4a819ddccd0273677458, type: 3}
+  m_Script: {fileID: 11500000, guid: bb51f95398344b199a03e23dd292eaf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   finalBossViewMono: {fileID: 8016048003139728124}
+--- !u!114 &5395245001406546240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3891201940032207295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 1021778435
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 7943389818124389795}
+  - {fileID: 7337963763908465680}
+--- !u!114 &7337963763908465680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3891201940032207295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncScale: 0
+  SyncParent: 0
+  _autoAOIOverride: 1
+  DisableSharedModeInterpolation: 0
 --- !u!1 &4067387483687350601
 GameObject:
   m_ObjectHideFlags: 0
