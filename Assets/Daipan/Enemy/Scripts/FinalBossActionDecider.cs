@@ -14,7 +14,7 @@ namespace Daipan.Enemy.Scripts
     {
         readonly EnemySpawner _enemySpawner;
         readonly CompositeDisposable _disposable = new();
-        FinalBossMono _finalBossMono = null!;
+        IEnemyMono _finalBossMono = null!;
         AbstractFinalBossViewMono? _finalBossViewMono;
         IFinalBossParamData _finalBossParamData = null!;
         PlayerMono _playerMono = null!;
@@ -26,7 +26,7 @@ namespace Daipan.Enemy.Scripts
         }
 
         public void SetDomain(
-            FinalBossMono finalBossMono
+            IEnemyMono finalBossMono
             , AbstractFinalBossViewMono? finalBossViewMono
             , IFinalBossParamData finalBossParamData
             , PlayerMono playerMono
