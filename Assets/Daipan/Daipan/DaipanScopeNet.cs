@@ -201,7 +201,6 @@ namespace Daipan.Daipan
             builder.RegisterComponentInHierarchy<ViewerViewMono>();
 
             // View
-            builder.RegisterComponentInHierarchy<StreamViewMono>();
             builder.RegisterComponentInHierarchy<StreamerViewMono>();
 
             // ShakeDisplay
