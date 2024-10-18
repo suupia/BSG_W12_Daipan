@@ -18,7 +18,7 @@ using R3;
 
 namespace Daipan.Player.MonoScripts
 {
-    public sealed class PlayerMono : MonoBehaviour, IPlayerMono, IMonoBehaviour
+    public sealed class PlayerMono : MonoBehaviour, IPlayerMono 
     {
         public GameObject GameObject => gameObject;
         public Transform Transform => transform;

@@ -24,7 +24,7 @@ namespace Daipan.Player.Scripts
             _waveState = waveState;
             _playerHpParamData = playerHpParamData;
         }
-       public PlayerMono Build(PlayerMono playerMono)
+       public IPlayerMono Build(IPlayerMono playerMono)
        {
            _disposables.Add(Observable.EveryValueChanged(_waveState, x => x.CurrentWaveIndex)
                .Subscribe(_ => playerMono.SetHpMax()));

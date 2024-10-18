@@ -5,7 +5,7 @@ namespace Daipan.Player.Interfaces
 {
     public interface IPlayerBuilder
     {
-        PlayerMono Build(PlayerMono playerMono);
+        IPlayerMono Build(IPlayerMono playerMono);
     } 
 }
 

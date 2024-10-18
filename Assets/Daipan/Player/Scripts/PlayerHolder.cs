@@ -1,4 +1,5 @@
 #nullable enable
+using Daipan.Player.Interfaces;
 using Daipan.Player.MonoScripts;
 using UnityEngine;
 
@@ -6,9 +7,9 @@ namespace Daipan.Player.Scripts
 {
     public sealed class PlayerHolder
     {
-        PlayerMono? _player;
+        IPlayerMono? _player;
 
-        public PlayerMono PlayerMono
+        public IPlayerMono PlayerMono
         {
             get
             {

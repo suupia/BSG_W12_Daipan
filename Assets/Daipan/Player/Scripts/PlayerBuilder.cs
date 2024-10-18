@@ -26,7 +26,7 @@ namespace Daipan.Player.Scripts
             _resultState = resultState;
         }
 
-        public PlayerMono Build(PlayerMono playerMono)
+        public IPlayerMono Build(IPlayerMono playerMono)
         {
             _disposable.Clear();
             _disposable.Add(Observable.EveryValueChanged(_waveState, x => x.CurrentWaveIndex)

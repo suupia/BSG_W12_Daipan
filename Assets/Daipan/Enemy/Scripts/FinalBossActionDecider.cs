@@ -3,6 +3,7 @@ using System;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.MonoScripts;
 using Daipan.LevelDesign.Enemy.Scripts;
+using Daipan.Player.Interfaces;
 using Daipan.Player.MonoScripts;
 using Daipan.Player.Scripts;
 using R3;
@@ -17,7 +18,7 @@ namespace Daipan.Enemy.Scripts
         IEnemyMono _finalBossMono = null!;
         AbstractFinalBossViewMono? _finalBossViewMono;
         IFinalBossParamData _finalBossParamData = null!;
-        PlayerMono _playerMono = null!;
+        IPlayerMono _playerMono = null!;
         IDisposable? _summonEnemyDisposable;
 
         public FinalBossActionDecider(IEnemySpawner enemySpawner)
@@ -29,7 +30,7 @@ namespace Daipan.Enemy.Scripts
             IEnemyMono finalBossMono
             , AbstractFinalBossViewMono? finalBossViewMono
             , IFinalBossParamData finalBossParamData
-            , PlayerMono playerMono
+            , IPlayerMono playerMono
         )
         {
             _finalBossMono = finalBossMono;
@@ -77,7 +78,7 @@ namespace Daipan.Enemy.Scripts
             IEnemyMono enemyMono
             , AbstractFinalBossViewMono? enemyViewMono
             , IEnemyParamData enemyParamData
-            , PlayerMono playerMono
+            , IPlayerMono playerMono
         )
         {
             if (!CanAttack(enemyMono, enemyParamData, playerMono)) return;
@@ -85,10 +86,10 @@ namespace Daipan.Enemy.Scripts
             EnemyAttackModule.Attack(playerMono, enemyParamData);
         }
 
-        static bool CanAttack(IEnemyMono enemyMono, IEnemyParamData enemyParamData, PlayerMono playerMono)
+        static bool CanAttack(IEnemyMono enemyMono, IEnemyParamData enemyParamData, IPlayerMono playerMono)
         {
             if (playerMono.Hp.Value <= 0) return false;
-            if (enemyMono.Transform.position.x - playerMono.transform.position.x >
+            if (enemyMono.Transform.position.x - playerMono.Transform.position.x >
                 enemyParamData.GetAttackRange()) return false;
             return true;
         }
