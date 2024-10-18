@@ -1,5 +1,6 @@
 #nullable enable
 using System;
+using Daipan.Daipan;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.LevelDesign.Interfaces;
 using Daipan.Enemy.LevelDesign.Scripts;
@@ -25,18 +26,20 @@ namespace Daipan.Enemy.MonoScripts
         EnemyMove _enemyMove = null!;
         EnemyAttackDecider _enemyAttackDecider = null!;
         EnemyDie _enemyDie = null!;
-        IEnemySpawnPoint _enemySpawnPoint = null!;
-        IEnemyParamContainer _enemyParamContainer = null!;
         IEnemyOnAttacked _enemyOnAttacked = null!;
         IEnemyOnDied _enemyOnDied = null!;
-        PlayerHolder _playerHolder = null!;
+        PlayerHolder? _playerHolder;
+        IEnemySpawnPoint? _enemySpawnPoint;
+        IEnemyParamContainer? _enemyParamContainer;
+
         [Networked]
         [OnChangedRender(nameof(OnEnemyEnumChanged))]
-        public  EnemyEnum EnemyEnum { get;  set; } = EnemyEnum.None;
-        public  bool IsReachedPlayer { get;  set; }
+        public EnemyEnum EnemyEnum { get; set; } = EnemyEnum.None;
+
+        public bool IsReachedPlayer { get; set; }
         Hp _hp = null!;
 
-        public  Hp Hp
+        public Hp Hp
         {
             get => _hp;
             set
@@ -45,12 +48,19 @@ namespace Daipan.Enemy.MonoScripts
                 if (_hp.Value <= 0) Die();
             }
         }
+
         public event EventHandler<IPlayerParamData>? OnAttackedEvent;
 
         public override void Spawned()
         {
-            Debug.Log($"EnemyNet Spawned");
             base.Spawned();
+            Debug.Log($"EnemyNet Spawned");
+            var daipanScopeNet = FindObjectOfType<DaipanScopeNet>();
+            Initialize(
+                daipanScopeNet.Container.Resolve<PlayerHolder>()
+                , daipanScopeNet.Container.Resolve<IEnemySpawnPoint>()
+                , daipanScopeNet.Container.Resolve<IEnemyParamContainer>()
+            );
             OnEnemyEnumChanged();
         }
 
@@ -98,7 +108,6 @@ namespace Daipan.Enemy.MonoScripts
             _enemyOnAttacked = enemyOnAttacked;
             _enemyOnDied = enemyOnDied;
             Hp = new Hp(_enemyParamContainer.GetEnemyParamData(EnemyEnum).GetMaxHp());
-
         }
 
         public event EventHandler<DiedEventArgs>? OnDiedEvent
@@ -107,12 +116,12 @@ namespace Daipan.Enemy.MonoScripts
             remove => _enemyDie.OnDied -= value;
         }
 
-        public  void Highlight(bool isHighlighted)
+        public void Highlight(bool isHighlighted)
         {
             enemyViewMono?.Highlight(isHighlighted);
         }
 
-        public  void OnAttacked(IPlayerParamData playerParamData)
+        public void OnAttacked(IPlayerParamData playerParamData)
         {
             // Hpの増減より先に判定する必要がある
             if (EnemyEnum.IsSpecial() == true &&
@@ -127,7 +136,7 @@ namespace Daipan.Enemy.MonoScripts
             Hp = _enemyOnAttacked.OnAttacked(Hp, playerParamData);
         }
 
-        public  void OnDaipaned()
+        public void OnDaipaned()
         {
             _enemyCluster.Remove(this);
             _enemyDie.DiedByDaipan(enemyViewMono);
@@ -139,11 +148,18 @@ namespace Daipan.Enemy.MonoScripts
             _enemyCluster.Remove(this);
             _enemyDie.Died(enemyViewMono);
         }
-        
+
         // OnChangeRender functions 
         void OnEnemyEnumChanged()
         {
-            if (_enemyParamContainer == null) return;
+            if (_enemyParamContainer == null)
+            {
+                Debug.LogWarning($"_enemyParamContainer is null");
+                return;
+            }
+            
+            if(EnemyEnum == EnemyEnum.None) return;
+
             enemyViewMono?.SetDomain(_enemyParamContainer.GetEnemyViewParamData(EnemyEnum));
         }
     }
