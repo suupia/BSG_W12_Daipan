@@ -15,9 +15,10 @@ using VContainer;
 
 namespace Daipan.Enemy.MonoScripts
 {
-    public sealed class EnemyMono : AbstractEnemyMono
+    public sealed class EnemyMono : MonoBehaviour, IEnemyMono, IEnemyInitializer, IEnemySetDomain
     {
-        public EnemyViewMono? EnemyViewMono => enemyViewMono;
+        public GameObject GameObject => gameObject;
+        public Transform Transform => transform;
         [SerializeField] EnemyViewMono? enemyViewMono;
         EnemyCluster _enemyCluster = null!;
         EnemyMove _enemyMove = null!;
@@ -28,19 +29,20 @@ namespace Daipan.Enemy.MonoScripts
         IEnemyOnAttacked _enemyOnAttacked = null!;
         IEnemyOnDied _enemyOnDied = null!;
         PlayerHolder _playerHolder = null!;
-        public override EnemyEnum EnemyEnum { get; protected set; } = EnemyEnum.None;
-        public override bool IsReachedPlayer { get; protected set; }
+        public  EnemyEnum EnemyEnum { get;  set; } = EnemyEnum.None;
+        public  bool IsReachedPlayer { get;  set; }
         Hp _hp = null!;
 
-        public override Hp Hp
+        public  Hp Hp
         {
             get => _hp;
-            protected set
+            set
             {
                 _hp = value;
                 if (_hp.Value <= 0) Die();
             }
         }
+        public event EventHandler<IPlayerParamData>? OnAttackedEvent;
 
 
         void Update()
@@ -89,18 +91,18 @@ namespace Daipan.Enemy.MonoScripts
 
         }
 
-        public event EventHandler<DiedEventArgs>? OnDied
+        public event EventHandler<DiedEventArgs>? OnDiedEvent
         {
             add => _enemyDie.OnDied += value;
             remove => _enemyDie.OnDied -= value;
         }
 
-        public override void Highlight(bool isHighlighted)
+        public  void Highlight(bool isHighlighted)
         {
-            EnemyViewMono?.Highlight(isHighlighted);
+            enemyViewMono?.Highlight(isHighlighted);
         }
 
-        public override void OnAttacked(IPlayerParamData playerParamData)
+        public  void OnAttacked(IPlayerParamData playerParamData)
         {
             // Hpの増減より先に判定する必要がある
             if (EnemyEnum.IsSpecial() == true &&
@@ -115,7 +117,7 @@ namespace Daipan.Enemy.MonoScripts
             Hp = _enemyOnAttacked.OnAttacked(Hp, playerParamData);
         }
 
-        public override void OnDaipaned()
+        public  void OnDaipaned()
         {
             _enemyCluster.Remove(this);
             _enemyDie.DiedByDaipan(enemyViewMono);

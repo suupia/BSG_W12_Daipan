@@ -16,8 +16,8 @@ namespace Daipan.Enemy.Scripts
         /// Please call this method in Update method of MonoBehaviour
         /// </summary>
         public void AttackUpdate(
-            EnemyMono enemyMono
-            , AbstractEnemyViewMono? enemyViewMono
+            IEnemyMono enemyMono
+            , IEnemyViewMono? enemyViewMono
             , IEnemyParamData enemyParamData
             , PlayerMono playerMono
             )
@@ -31,8 +31,8 @@ namespace Daipan.Enemy.Scripts
         }
 
         static void Attack(
-            EnemyMono enemyMono
-            , AbstractEnemyViewMono? enemyViewMono
+            IEnemyMono enemyMono
+            , IEnemyViewMono? enemyViewMono
             , IEnemyParamData enemyParamData
             , PlayerMono playerMono
             )
@@ -42,10 +42,10 @@ namespace Daipan.Enemy.Scripts
             EnemyAttackModule.Attack(playerMono,enemyParamData);
         }
         
-        static bool CanAttack(EnemyMono enemyMono, IEnemyParamData enemyParamData,  PlayerMono playerMono)
+        static bool CanAttack(IEnemyMono enemyMono, IEnemyParamData enemyParamData,  PlayerMono playerMono)
         {
             if (playerMono.Hp.Value <= 0) return false;
-            if (enemyMono.transform.position.x - playerMono.transform.position.x > enemyParamData.GetAttackRange()) return false;
+            if (enemyMono.Transform.position.x - playerMono.transform.position.x > enemyParamData.GetAttackRange()) return false;
             return true;
         }
         

@@ -102,9 +102,8 @@ public class TitleMonoNew : MonoBehaviour
 
     void StartGameButtonClicked()
     {
-        // todo : transit to DaipanNet scene
         var runner = FindObjectOfType<NetworkRunner>();
-        SceneTransition.TransitionSceneWithNetworkRunner(runner, SceneName.DaipanScene);
+        SceneTransition.TransitionSceneWithNetworkRunner(runner, SceneName.DaipanSceneNet);
     }
 
     public void CheckAllReady()
@@ -113,7 +112,13 @@ public class TitleMonoNew : MonoBehaviour
         var isAllReady = playerStatsUnits.All(playerStatsUnit => playerStatsUnit.IsReady)
                          && playerStatsUnits.Length > 1;
         var runner = FindObjectOfType<NetworkRunner>();
-        if (runner.IsSharedModeMasterClient) startGameButton.gameObject.SetActive(isAllReady);
+        if (runner.IsSharedModeMasterClient)
+        {
+            startGameButton.gameObject.SetActive(isAllReady);
+#if UNITY_EDITOR
+            startGameButton.gameObject.SetActive(true);
+#endif
+        }
     }
 
     public string LocalPlayerName => localPlayerNameInputField.text;

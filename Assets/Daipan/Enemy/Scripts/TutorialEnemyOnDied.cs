@@ -9,10 +9,10 @@ namespace Daipan.Enemy.Scripts
 {
     public class TutorialEnemyOnDied : IEnemyOnDied
     {
-        readonly EnemyMono _enemyMono;
+        readonly IEnemyMono _enemyMono;
         readonly TutorialCurrentStep _tutorialCurrentStep;
 
-        public TutorialEnemyOnDied(EnemyMono enemyMono, TutorialCurrentStep tutorialCurrentStep)
+        public TutorialEnemyOnDied(IEnemyMono enemyMono, TutorialCurrentStep tutorialCurrentStep)
         {
             _enemyMono = enemyMono;
             _tutorialCurrentStep = tutorialCurrentStep;

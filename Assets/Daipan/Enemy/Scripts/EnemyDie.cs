@@ -3,6 +3,7 @@ using System;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.MonoScripts;
 using DG.Tweening;
+using UnityEngine;
 
 
 namespace Daipan.Enemy.Scripts
@@ -10,15 +11,15 @@ namespace Daipan.Enemy.Scripts
     public sealed class EnemyDie
     {
         public event EventHandler<DiedEventArgs>? OnDied;
-        readonly AbstractEnemyMono _enemyMono;
+        readonly IEnemyMono _enemyMono;
         
-        public EnemyDie(AbstractEnemyMono enemyMono)
+        public EnemyDie(IEnemyMono enemyMono)
         {
             _enemyMono = enemyMono;
         }
         bool IsDead { get; set; }  // Die()の処理が2回以上呼ばれるのを防ぐためのフラグ
 
-        public void Died(EnemyViewMono? enemyViewMono)
+        public void Died(IEnemyViewMono? enemyViewMono)
         {
             if(IsDead)return;
             IsDead = true;
@@ -26,14 +27,14 @@ namespace Daipan.Enemy.Scripts
             OnDied?.Invoke(_enemyMono, args);        
             if (enemyViewMono == null)
             {
-                UnityEngine.Object.Destroy(_enemyMono.gameObject);
+                UnityEngine.Object.Destroy(_enemyMono.GameObject);
                 return;
             }
 
-            enemyViewMono.Died(() => UnityEngine.Object.Destroy(_enemyMono.gameObject));
+            enemyViewMono.Died(() => UnityEngine.Object.Destroy(_enemyMono.GameObject));
         }
 
-        public void DiedByDaipan(EnemyViewMono? enemyViewMono)
+        public void DiedByDaipan(IEnemyViewMono? enemyViewMono)
         {
             if(IsDead)return;
             IsDead = true;
@@ -41,17 +42,17 @@ namespace Daipan.Enemy.Scripts
             OnDied?.Invoke(_enemyMono, args);
             if (enemyViewMono == null)
             {
-                UnityEngine.Object.Destroy(_enemyMono.gameObject);
+                UnityEngine.Object.Destroy(_enemyMono.GameObject);
                 return;
             }
 
-            _enemyMono.transform
+            _enemyMono.Transform
                 .DOMoveY(-1.7f, 0.3f)
                 .SetEase(Ease.InQuint)
-                .OnStart(() => { enemyViewMono.Daipaned(() => UnityEngine.Object.Destroy(_enemyMono.gameObject)); });
+                .OnStart(() => { enemyViewMono.Daipaned(() => UnityEngine.Object.Destroy(_enemyMono.GameObject)); });
         }
         
-        public void DiedBySpecialBlack(EnemyViewMono? enemyViewMono)
+        public void DiedBySpecialBlack(IGetAbstractEnemyViewMono? enemyViewMono)
         {
             if(IsDead)return;
             IsDead = true;
@@ -59,16 +60,21 @@ namespace Daipan.Enemy.Scripts
             OnDied?.Invoke(_enemyMono, args);
             if (enemyViewMono == null)
             {
-                UnityEngine.Object.Destroy(_enemyMono.gameObject);
+                UnityEngine.Object.Destroy(_enemyMono.GameObject);
                 return;
             }
 
-            var enemySpecialViewMono = enemyViewMono.EnemySpecialViewMono;
-            // 違う色に攻撃したのなら、特殊アニメーションを再生し、Destroy
-            enemySpecialViewMono.SpecialBlack(() =>
+            var abstractEnemyViewMono = enemyViewMono.GetAbstractEnemyViewMono();
+            if(abstractEnemyViewMono is EnemySpecialViewMono specialEnemyViewMono)
             {
-                UnityEngine.Object.Destroy(_enemyMono.gameObject);
-            });
+                // 違う色に攻撃したのなら、特殊アニメーションを再生し、Destroy
+                specialEnemyViewMono.SpecialBlack(() => UnityEngine.Object.Destroy(_enemyMono.GameObject));
+            }
+            else
+            {
+                // クライアントでSpecialかどうかを判定しているので、警告は出ないはず
+                Debug.LogWarning("Special enemy die but not special enemy view mono");
+            }
         }
 
 

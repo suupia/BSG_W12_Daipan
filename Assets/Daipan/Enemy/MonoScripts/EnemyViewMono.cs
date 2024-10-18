@@ -6,9 +6,9 @@ using UnityEngine.Serialization;
 
 namespace Daipan.Enemy.MonoScripts
 {
-    public sealed class EnemyViewMono : AbstractEnemyViewMono
+    public sealed class EnemyViewMono : AbstractEnemyViewMono, IGetAbstractEnemyViewMono
     {
-        public EnemySpecialViewMono EnemySpecialViewMono => enemySpecialViewMono;
+        public AbstractEnemyViewMono GetAbstractEnemyViewMono() => _selectedEnemyViewMono;
         [SerializeField] EnemyNormalViewMono enemyNormalViewMono = null!;
         [SerializeField] EnemyBoss1ViewMono enemyBoss1ViewMono = null!; // Tank
         [SerializeField] EnemyBoss2ViewMono enemyBoss2ViewMono = null!; // 筋肉

@@ -16,8 +16,10 @@ using VContainer;
 
 namespace Daipan.Enemy.MonoScripts
 {
-    public sealed class FinalBossMono : AbstractEnemyMono
+    public sealed class FinalBossMono : MonoBehaviour, IEnemyMono, IFinalBossInitializer, IFinalBossSetDomain
     {
+        public GameObject GameObject => gameObject;
+        public Transform Transform => transform;
         public AbstractFinalBossViewMono? FinalBossViewMono => finalBossViewMono;
         [SerializeField] AbstractFinalBossViewMono? finalBossViewMono;
         EnemyCluster _enemyCluster = null!;
@@ -29,14 +31,14 @@ namespace Daipan.Enemy.MonoScripts
         IFinalBossViewParamData _finalBossViewParamData = null!;
         IEnemyOnAttacked _enemyOnAttacked = null!;
         PlayerHolder _playerHolder = null!;
-        public override EnemyEnum EnemyEnum { get; protected set; } = EnemyEnum.None;
-        public override bool IsReachedPlayer { get; protected set; }
+        public EnemyEnum EnemyEnum { get;  set; } = EnemyEnum.None;
+        public  bool IsReachedPlayer { get;  set; }
         Hp _hp = null!;
 
-        public override Hp Hp
+        public  Hp Hp
         {
             get => _hp;
-            protected set
+             set
             {
                 _hp = value;
                 if (_hp.Value <= 0) Die();
@@ -97,13 +99,13 @@ namespace Daipan.Enemy.MonoScripts
 
         public event EventHandler<IPlayerParamData>? OnAttackedEvent;
 
-        public override void OnAttacked(IPlayerParamData playerParamData)
+        public  void OnAttacked(IPlayerParamData playerParamData)
         {
             Hp = _enemyOnAttacked.OnAttacked(Hp, playerParamData);
             OnAttackedEvent?.Invoke(this, playerParamData);
         }
 
-        public override void OnDaipaned()
+        public  void OnDaipaned()
         {
             var daipanHitDamage =
                 _finalBossParamData.GetDaipanHitDamagePercent() * 0.01 * _finalBossParamData.GetMaxHp();
@@ -120,7 +122,7 @@ namespace Daipan.Enemy.MonoScripts
             _enemyDie.Died(finalBossViewMono, isDaipaned);
         }
 
-        public override void Highlight(bool isHighlighted)
+        public  void Highlight(bool isHighlighted)
         {
             finalBossViewMono?.Highlight(isHighlighted);
         }

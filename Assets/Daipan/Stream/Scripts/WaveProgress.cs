@@ -15,7 +15,7 @@ namespace Daipan.Stream.Scripts
     public sealed class WaveProgress 
     {
         readonly WaveState _waveState;
-        readonly EnemyWaveSpawnerCounter _enemyWaveSpawnerCounter;
+        readonly IEnemyWaveSpawnerCounter _enemyWaveSpawnerCounter;
         public double CurrentProgressRatio
             => CurrentWaveProgressRatio / _waveState.TotalWaveCount +
                (double)_waveState.CurrentWaveIndex / _waveState.TotalWaveCount;
@@ -24,7 +24,7 @@ namespace Daipan.Stream.Scripts
                                            _enemyWaveSpawnerCounter.MaxSpawnedEnemyCount; 
         public WaveProgress(
             WaveState waveState
-            , EnemyWaveSpawnerCounter enemyWaveSpawnerCounter
+            , IEnemyWaveSpawnerCounter enemyWaveSpawnerCounter
             )
         {
             _waveState = waveState;

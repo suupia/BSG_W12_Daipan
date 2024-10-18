@@ -15,7 +15,8 @@ namespace Daipan.Battle.scripts
             { SceneName.TutorialScene, "TutorialScene" },
             { SceneName.DaipanScene, "DaipanScene" },
             { SceneName.EndScene, "EndScene" },
-            { SceneName.Lobby, "LobbyScene"},
+            { SceneName.Lobby, "LobbyScene" },
+            { SceneName.DaipanSceneNet, "DaipanSceneNet" }
         };
 
         public static void TransitioningScene(SceneName nextScene)
@@ -30,6 +31,7 @@ namespace Daipan.Battle.scripts
                 Debug.LogError($"{nextScene} is not registered in sceneNameTable.");
             }
         }
+
         public static void TransitionSceneWithNetworkRunner(NetworkRunner runner, SceneName nextScene)
         {
             if (SceneNameTable.TryGetValue(nextScene, out var sceneName))
@@ -51,5 +53,6 @@ namespace Daipan.Battle.scripts
         DaipanScene,
         EndScene,
         Lobby,
+        DaipanSceneNet
     }
 }

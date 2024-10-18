@@ -8,10 +8,10 @@ using R3;
 
 namespace Daipan.Enemy.Scripts
 {
-    public class EnemyWaveSpawnerCounter : IStart, IUpdate, IDisposable
+    public class EnemyWaveSpawnerCounter : IEnemyWaveSpawnerCounter, IStart, IUpdate, IDisposable
     {
-        readonly EnemySpawner _enemySpawner;
-        readonly FinalBossSpawner _finalBossSpawner;
+        readonly IEnemySpawner _enemySpawner;
+        readonly IFinalBossSpawner _finalBossSpawner;
         readonly IEnemyWaveParamContainer _enemyWaveParamContainer;
         readonly WaveState _waveState;
         public int CurrentSpawnedEnemyCount { get; private set; }
@@ -22,8 +22,8 @@ namespace Daipan.Enemy.Scripts
         readonly CompositeDisposable _disposables = new();
 
         public EnemyWaveSpawnerCounter(
-            EnemySpawner enemySpawner
-            , FinalBossSpawner finalBossSpawner
+            IEnemySpawner enemySpawner
+            , IFinalBossSpawner finalBossSpawner
             , IEnemyWaveParamContainer enemyWaveParamContainer
             , WaveState waveState
         )

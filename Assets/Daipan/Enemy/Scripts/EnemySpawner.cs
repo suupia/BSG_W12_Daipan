@@ -8,6 +8,7 @@ using Daipan.Enemy.LevelDesign.Interfaces;
 using Daipan.Enemy.LevelDesign.Scripts;
 using Daipan.Enemy.MonoScripts;
 using Daipan.LevelDesign.Enemy.Scripts;
+using Daipan.Player.Scripts;
 using Daipan.Stream.Scripts;
 using Daipan.Stream.Scripts.Utility;
 using Daipan.Utility.Scripts;
@@ -21,7 +22,7 @@ using Random = UnityEngine.Random;
 
 namespace Daipan.Enemy.Scripts
 {
-    public sealed class EnemySpawner : IDisposable
+    public sealed class EnemySpawner : IEnemySpawner
     {
         readonly IObjectResolver _container;
         readonly IPrefabLoader<EnemyMono> _enemyMonoLoader;
@@ -73,8 +74,13 @@ namespace Daipan.Enemy.Scripts
         void SpawnEnemy(Vector3 spawnPosition, EnemyEnum enemyEnum)
         {
             var enemyMonoPrefab = _enemyMonoLoader.Load();
-            var enemyMonoObject = _container.Instantiate(enemyMonoPrefab, spawnPosition, Quaternion.identity);
-            var enemyMono = _enemyBuilder.Build(enemyMonoObject, enemyEnum);
+            var enemyMonoObject = Object.Instantiate(enemyMonoPrefab, spawnPosition, Quaternion.identity);
+            enemyMonoObject.Initialize(
+                _container.Resolve<PlayerHolder>()
+                , _container.Resolve<IEnemySpawnPoint>()
+                , _container.Resolve<IEnemyParamContainer>()
+                );
+            var enemyMono = _enemyBuilder.Build(enemyMonoObject, enemyMonoObject, enemyEnum);
             _enemyCluster.Add(enemyMono);
         }
 

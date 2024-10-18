@@ -16,7 +16,7 @@ namespace Daipan.Player.Scripts
         const double HitDistance = 1.0;
         public event EventHandler<OnHitEventArgs>? OnHit;
         readonly IPlayerParamData? _playerParamData;
-        readonly Func<AbstractEnemyMono?> _getNearestEnemyMono;
+        readonly Func<IEnemyMono?> _getNearestEnemyMono;
         readonly PlayerAttackEffectMono _playerAttackEffectMono;
         readonly PlayerAttackEffectViewMono? _playerAttackEffectViewMono;
         Vector3 Direction { get; }
@@ -25,7 +25,7 @@ namespace Daipan.Player.Scripts
         public  PlayerAttackLinear(
             PlayerAttackEffectMono playerAttackEffectMono
             , IPlayerParamData playerParamData
-            , Func<AbstractEnemyMono?> getTargetEnemyMono
+            , Func<IEnemyMono?> getTargetEnemyMono
             , PlayerAttackEffectViewMono? playerAttackEffectViewMono
         )
         {
@@ -33,7 +33,7 @@ namespace Daipan.Player.Scripts
             _playerParamData = playerParamData;
             _getNearestEnemyMono = getTargetEnemyMono;
             _playerAttackEffectViewMono = playerAttackEffectViewMono;
-            var targetPosition = getTargetEnemyMono()?.transform.position ?? Vector3.zero;
+            var targetPosition = getTargetEnemyMono()?.Transform.position ?? Vector3.zero;
             Direction = targetPosition != Vector3.zero ? (targetPosition - _playerAttackEffectMono.transform.position).normalized : Vector3.right;
         }
         
@@ -51,13 +51,13 @@ namespace Daipan.Player.Scripts
             if(IsHit) return;
         
             var enemyMono = _getNearestEnemyMono();
-            if (enemyMono != null && !PlayerAttackModule.IsInStreamScreen(enemyMono.transform.position))
+            if (enemyMono != null && !PlayerAttackModule.IsInStreamScreen(enemyMono.Transform.position))
                 enemyMono = null; 
         
             _playerAttackEffectMono.transform.position += Direction * (float)(Speed * Time.deltaTime);
             if (enemyMono != null)
             {
-                if (enemyMono.transform.position.x - _playerAttackEffectMono.transform.position.x < HitDistance)
+                if (enemyMono.Transform.position.x - _playerAttackEffectMono.transform.position.x < HitDistance)
                 {
                     var isTargetEnemy = PlayerAttackModule.GetTargetEnemyEnum(_playerParamData.PlayerEnum())
                         .Contains(enemyMono.EnemyEnum);

@@ -201,7 +201,6 @@ namespace Daipan.Daipan
             builder.RegisterComponentInHierarchy<ViewerViewMono>();
 
             // View
-            builder.RegisterComponentInHierarchy<StreamViewMono>();
             builder.RegisterComponentInHierarchy<StreamerViewMono>();
 
             // ShakeDisplay
@@ -272,7 +271,7 @@ namespace Daipan.Daipan
             // Enemy
             RegisterEnemy(builder, enemyParamsManager);
             builder.Register<EnemyOnAttackedBuilder>(Lifetime.Transient);
-            builder.Register<EnemyWaveSpawnerCounter>(Lifetime.Scoped).As<IStart>().As<IUpdate>().AsSelf();
+            builder.Register<EnemyWaveSpawnerCounter>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<EnemySpawner>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
             builder.Register<EnemyEnumSelector>(Lifetime.Scoped).As<IEnemyEnumSelector>();
             builder.Register<EnemyBuilder>(Lifetime.Scoped).As<IEnemyBuilder>();
@@ -286,7 +285,7 @@ namespace Daipan.Daipan
             builder.Register<FinalBossPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<FinalBossMono>>();
             builder.Register<FinalBossOnAttacked>(Lifetime.Scoped);
             builder.Register<FinalBossBuilder>(Lifetime.Scoped);
-            builder.Register<FinalBossSpawner>(Lifetime.Scoped);
+            builder.Register<FinalBossSpawner>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<FinalBossDefeatTracker>(Lifetime.Scoped);
 
             // Irritated

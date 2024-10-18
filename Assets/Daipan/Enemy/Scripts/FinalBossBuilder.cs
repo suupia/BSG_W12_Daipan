@@ -13,7 +13,7 @@ namespace Daipan.Enemy.Scripts
     public class FinalBossBuilder
     {
         readonly EnemyCluster _enemyCluster;
-        readonly EnemySpawner _enemySpawner;
+        readonly IEnemySpawner _enemySpawner;
         readonly FinalBossOnAttacked _finalBossOnAttacked;
         readonly FinalBossDefeatTracker _finalBossDefeatTracker;
         
@@ -27,7 +27,7 @@ namespace Daipan.Enemy.Scripts
         
         public FinalBossBuilder(
             EnemyCluster enemyCluster
-            , EnemySpawner enemySpawner
+            , IEnemySpawner enemySpawner
             , FinalBossOnAttacked finalBossOnAttacked
             , FinalBossDefeatTracker finalBossDefeatTracker
             , FinalBossColorChanger finalBossColorChanger
@@ -50,9 +50,9 @@ namespace Daipan.Enemy.Scripts
             _comboCounter = comboCounter;
         }
 
-        public FinalBossMono Build(FinalBossMono finalBossMono, EnemyEnum enemyEnum)
+        public IEnemyMono Build(IEnemyMono finalBossMono, IFinalBossSetDomain finalBossSetDomain, EnemyEnum enemyEnum)
         {
-            finalBossMono.SetDomain(
+            finalBossSetDomain.SetDomain(
                 enemyEnum
                 , _enemyCluster
                 , new FinalBossActionDecider(_enemySpawner)

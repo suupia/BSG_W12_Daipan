@@ -54,7 +54,7 @@ namespace Daipan.Player.Scripts
         static void AttackEnemy(IPlayerParamDataContainer playerParamDataContainer
             ,List<AbstractPlayerViewMono?> playerViewMonos
             ,PlayerColor playerColor
-            ,AbstractEnemyMono? enemyMono
+            ,IEnemyMono? enemyMono
             )
         {
             Debug.Log($"Attack enemyMono?.EnemyEnum: {enemyMono?.EnemyEnum}");

@@ -12,21 +12,21 @@ namespace Daipan.Enemy.Scripts
 {
     public sealed class FinalBossActionDecider : IDisposable
     {
-        readonly EnemySpawner _enemySpawner;
+        readonly IEnemySpawner _enemySpawner;
         readonly CompositeDisposable _disposable = new();
-        FinalBossMono _finalBossMono = null!;
+        IEnemyMono _finalBossMono = null!;
         AbstractFinalBossViewMono? _finalBossViewMono;
         IFinalBossParamData _finalBossParamData = null!;
         PlayerMono _playerMono = null!;
         IDisposable? _summonEnemyDisposable;
 
-        public FinalBossActionDecider(EnemySpawner enemySpawner)
+        public FinalBossActionDecider(IEnemySpawner enemySpawner)
         {
             _enemySpawner = enemySpawner;
         }
 
         public void SetDomain(
-            FinalBossMono finalBossMono
+            IEnemyMono finalBossMono
             , AbstractFinalBossViewMono? finalBossViewMono
             , IFinalBossParamData finalBossParamData
             , PlayerMono playerMono
@@ -54,7 +54,7 @@ namespace Daipan.Enemy.Scripts
         void SummonEnemy(
             IFinalBossParamData finalBossParamData
             , AbstractFinalBossViewMono? finalBossViewMono
-            , EnemySpawner enemySpawner)
+            , IEnemySpawner enemySpawner)
         {
             if (finalBossViewMono != null) finalBossViewMono.SummonEnemy();
             _disposable.Add(
@@ -74,7 +74,7 @@ namespace Daipan.Enemy.Scripts
         }
 
         static void Attack(
-            AbstractEnemyMono enemyMono
+            IEnemyMono enemyMono
             , AbstractFinalBossViewMono? enemyViewMono
             , IEnemyParamData enemyParamData
             , PlayerMono playerMono
@@ -85,10 +85,10 @@ namespace Daipan.Enemy.Scripts
             EnemyAttackModule.Attack(playerMono, enemyParamData);
         }
 
-        static bool CanAttack(AbstractEnemyMono enemyMono, IEnemyParamData enemyParamData, PlayerMono playerMono)
+        static bool CanAttack(IEnemyMono enemyMono, IEnemyParamData enemyParamData, PlayerMono playerMono)
         {
             if (playerMono.Hp.Value <= 0) return false;
-            if (enemyMono.transform.position.x - playerMono.transform.position.x >
+            if (enemyMono.Transform.position.x - playerMono.transform.position.x >
                 enemyParamData.GetAttackRange()) return false;
             return true;
         }
