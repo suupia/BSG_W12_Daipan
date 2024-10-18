@@ -10,12 +10,13 @@ using Daipan.Player.Interfaces;
 using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Player.LevelDesign.Scripts;
 using Daipan.Player.Scripts;
+using Fusion;
 using UnityEngine;
 using R3;
 
 namespace Daipan.Player.MonoScripts
 {
-    public sealed class PlayerAttackEffectMono : MonoBehaviour, IMonoBehaviour
+    public sealed class PlayerAttackEffectNet : NetworkBehaviour , IMonoBehaviour
     {
         public GameObject GameObject => gameObject;
         public Transform Transform => transform;
@@ -29,9 +30,10 @@ namespace Daipan.Player.MonoScripts
 
         IPlayerAttackMove _playerAttackTracking = null!;
 
-        void Update()
+        public override void FixedUpdateNetwork()
         {
-             _playerAttackTracking.Move();
+            base.FixedUpdateNetwork();
+            _playerAttackTracking.Move();
         }
 
         public void SetUp(IPlayerParamData playerParamData, Func<IEnemyMono?> getTargetEnemyMono)

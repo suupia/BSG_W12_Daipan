@@ -1,6 +1,7 @@
 #nullable enable
 using System;
 using System.Linq;
+using Daipan.Core.Interfaces;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Player.Interfaces;
@@ -17,13 +18,13 @@ namespace Daipan.Player.Scripts
         public event EventHandler<OnHitEventArgs>? OnHit;
         readonly IPlayerParamData? _playerParamData;
         readonly Func<IEnemyMono?> _getNearestEnemyMono;
-        readonly PlayerAttackEffectMono _playerAttackEffectMono;
+        readonly IMonoBehaviour _playerAttackEffectMono;
         readonly PlayerAttackEffectViewMono? _playerAttackEffectViewMono;
         Vector3 Direction { get; }
         bool IsHit { get; set; }
 
         public  PlayerAttackLinear(
-            PlayerAttackEffectMono playerAttackEffectMono
+            IMonoBehaviour playerAttackEffectMono
             , IPlayerParamData playerParamData
             , Func<IEnemyMono?> getTargetEnemyMono
             , PlayerAttackEffectViewMono? playerAttackEffectViewMono
@@ -34,7 +35,7 @@ namespace Daipan.Player.Scripts
             _getNearestEnemyMono = getTargetEnemyMono;
             _playerAttackEffectViewMono = playerAttackEffectViewMono;
             var targetPosition = getTargetEnemyMono()?.Transform.position ?? Vector3.zero;
-            Direction = targetPosition != Vector3.zero ? (targetPosition - _playerAttackEffectMono.transform.position).normalized : Vector3.right;
+            Direction = targetPosition != Vector3.zero ? (targetPosition - _playerAttackEffectMono.Transform.position).normalized : Vector3.right;
         }
         
         public void Move()
@@ -54,32 +55,32 @@ namespace Daipan.Player.Scripts
             if (enemyMono != null && !PlayerAttackModule.IsInStreamScreen(enemyMono.Transform.position))
                 enemyMono = null; 
         
-            _playerAttackEffectMono.transform.position += Direction * (float)(Speed * Time.deltaTime);
+            _playerAttackEffectMono.Transform.position += Direction * (float)(Speed * Time.deltaTime);
             if (enemyMono != null)
             {
-                if (enemyMono.Transform.position.x - _playerAttackEffectMono.transform.position.x < HitDistance)
+                if (enemyMono.Transform.position.x - _playerAttackEffectMono.Transform.position.x < HitDistance)
                 {
                     var isTargetEnemy = PlayerAttackModule.GetTargetEnemyEnum(_playerParamData.PlayerEnum())
                         .Contains(enemyMono.EnemyEnum);
                     OnHit?.Invoke(this, new OnHitEventArgs(enemyMono, isTargetEnemy));
-                    if (isTargetEnemy) UnityEngine.Object.Destroy(_playerAttackEffectMono.gameObject);
+                    if (isTargetEnemy) UnityEngine.Object.Destroy(_playerAttackEffectMono.GameObject);
                     else Defenced();
                 }
             }
             else
             {
-                if (_playerAttackEffectMono.transform.position.x > 10) // todo: parameterからもらう
-                    UnityEngine.Object.Destroy(_playerAttackEffectMono.gameObject);
+                if (_playerAttackEffectMono.Transform.position.x > 10) // todo: parameterからもらう
+                    UnityEngine.Object.Destroy(_playerAttackEffectMono.GameObject);
             }
         }
 
         public void Defenced()
         {
             IsHit = true;
-            _playerAttackEffectMono.transform.position -= new Vector3(0.2f, 0, 0); // すこし左にずらす
+            _playerAttackEffectMono.Transform.position -= new Vector3(0.2f, 0, 0); // すこし左にずらす
             if (_playerAttackEffectViewMono != null)
-                _playerAttackEffectViewMono.Hit(() => UnityEngine.Object.Destroy(_playerAttackEffectMono.gameObject));
-            else UnityEngine.Object.Destroy(_playerAttackEffectMono.gameObject);
+                _playerAttackEffectViewMono.Hit(() => UnityEngine.Object.Destroy(_playerAttackEffectMono.GameObject));
+            else UnityEngine.Object.Destroy(_playerAttackEffectMono.GameObject);
         }
 
  
