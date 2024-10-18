@@ -13,7 +13,7 @@ namespace Daipan.Enemy.Scripts
             _transform = transform;
         }
 
-        public bool MoveUpdate(Transform targetTransform, IEnemyParamData enemyParamData, IEnemyViewMono? enemyViewMono)
+        public bool MoveUpdate(float deltaTime, Transform targetTransform, IEnemyParamData enemyParamData, IEnemyViewMono? enemyViewMono)
         {
             // 攻撃範囲よりプレイヤーとの距離が大きいときだけ動く
             bool isReachedPlayer;
@@ -21,7 +21,7 @@ namespace Daipan.Enemy.Scripts
                 enemyParamData.GetAttackRange())
             {
                 var moveSpeed = (float)enemyParamData.GetMoveSpeedPerSec();
-                _transform.position += Time.deltaTime * moveSpeed * Vector3.left;
+                _transform.position += deltaTime * moveSpeed * Vector3.left;
                 enemyViewMono?.Move();
                 isReachedPlayer = false;
             }
