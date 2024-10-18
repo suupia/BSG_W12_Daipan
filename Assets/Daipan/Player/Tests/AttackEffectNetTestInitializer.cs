@@ -82,11 +82,26 @@ public class AttackEffectNetTestInitializer : MonoBehaviour
 
             _playerAttackEffectNet?.Defenced();
             _playerAttackEffectMono?.Defenced();
+            
+            Debug.Log($"_playerAttackEffectNetTest HasStateAuthority : {_playerAttackEffectNetTest?.HasStateAuthority}");
             _playerAttackEffectNetTest?.Hit(() => { });
         }
+        
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            if (_runner == null) return;
+            if (!_runner.IsSharedModeMasterClient) return;
+            
+            Debug.Log($"_playerAttackEffectNetTest HasStateAuthority : {_playerAttackEffectNetTest?.HasStateAuthority}");
+            _playerAttackEffectNetTest?.HitLocal(() => { });
+        }
+        
+        
 
-        if (_runner?.IsCloudReady == true)
-            debugText.text = "Cloud Ready";
+        if (_runner == null)
+            debugText.text = "Runner is null";
+        else if (_runner.IsCloudReady)
+            debugText.text = "Cloud is ready";
         else
             debugText.text = "---";
     }

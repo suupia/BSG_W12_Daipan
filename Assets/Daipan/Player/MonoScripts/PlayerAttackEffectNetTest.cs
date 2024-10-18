@@ -21,25 +21,23 @@ namespace Daipan.Player.MonoScripts
         public GameObject GameObject => gameObject;
         public Transform Transform => transform;
         [SerializeField] NetworkMecanimAnimator animatorNet = null!;
-        [SerializeField] RuntimeAnimatorController testAnimator = null!;
 
         void Awake()
         {
             if (animatorNet == null) Debug.LogWarning("animatorNet is null");
-
-            SetDomainTest();
-        }
-
-        public void SetDomainTest()
-        {
-            // 引数でIPlayerParamDataを受け取る代わりに、SerializeFieldのAnimatorを使う
-            animatorNet.Animator.runtimeAnimatorController = testAnimator;
+            
         }
 
         public void Hit(Action onHit)
         {
             Debug.Log("SetTrigger isHit");
             animatorNet.SetTrigger("isHit");
+        }
+        
+        public void HitLocal(Action onHit)
+        {
+            Debug.Log("SetTrigger isHit");
+            animatorNet.Animator.SetTrigger("isHit");
         }
     }
 }
