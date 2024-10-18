@@ -1,5 +1,6 @@
 #nullable enable
 using System.Collections.Generic;
+using Daipan.Core.Interfaces;
 using Daipan.Player.MonoScripts;
 
 namespace Daipan.Player.Interfaces
@@ -7,7 +8,7 @@ namespace Daipan.Player.Interfaces
     public interface IPlayerInput
     {
         public void SetPlayerMono(
-            PlayerMono playerMono
+            IMonoBehaviour playerMono
             ,List<AbstractPlayerViewMono?> playerViewMonos
         );
 

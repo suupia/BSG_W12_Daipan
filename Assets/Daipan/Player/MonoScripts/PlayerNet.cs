@@ -14,11 +14,12 @@ using Daipan.Comment.Scripts;
 using Daipan.Core.Interfaces;
 using Daipan.Enemy.Interfaces;
 using Daipan.Player.LevelDesign.Interfaces;
+using Fusion;
 using R3;
 
 namespace Daipan.Player.MonoScripts
 {
-    public sealed class PlayerMono : MonoBehaviour, IPlayerMono, IMonoBehaviour
+    public sealed class PlayerNet : NetworkBehaviour, IPlayerMono, IMonoBehaviour
     {
         public GameObject GameObject => gameObject;
         public Transform Transform => transform;
@@ -28,12 +29,13 @@ namespace Daipan.Player.MonoScripts
         public Hp Hp { get; private set; } = null!;
 
         IPlayerOnAttacked _playerOnAttacked = null!;
-        
-        public void Update()
+
+        public override void FixedUpdateNetwork()
         {
+            base.FixedUpdateNetwork();
             _playerInput.Update();
 
-            foreach (var playerViewMono in playerViewMonos) playerViewMono?.Idle();
+            foreach (var playerViewMono in playerViewMonos) playerViewMono?.Idle(); 
         }
 
 

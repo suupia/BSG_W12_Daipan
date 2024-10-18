@@ -1,5 +1,6 @@
 #nullable enable
 using System.Collections.Generic;
+using Daipan.Core.Interfaces;
 using Daipan.Player.Interfaces;
 using Daipan.Player.LevelDesign.Scripts;
 using Daipan.Player.MonoScripts;
@@ -22,7 +23,7 @@ namespace Daipan.Player.Scripts
             _playerAttackEffectBuilder = playerAttackEffectBuilder;
         }
 
-        public PlayerAttackEffectMono SpawnEffect(PlayerMono playerMono ,List<AbstractPlayerViewMono?> playerViewMonos, PlayerColor playerColor, Vector3 position, Quaternion rotation)
+        public PlayerAttackEffectMono SpawnEffect(IMonoBehaviour playerMono ,List<AbstractPlayerViewMono?> playerViewMonos, PlayerColor playerColor, Vector3 position, Quaternion rotation)
         {
             var effectPrefab = _effectLoader.Load();
             var effectObject = Object.Instantiate(effectPrefab, position, rotation);

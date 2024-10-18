@@ -1,6 +1,7 @@
 #nullable enable
 using System.Collections.Generic;
 using System.Linq;
+using Daipan.Core.Interfaces;
 using Daipan.Player.Interfaces;
 using Daipan.Player.MonoScripts;
 using UnityEngine;
@@ -28,7 +29,7 @@ namespace Daipan.Player.Scripts
             _playerViewMonos = playerViewMonos;
         }
 
-        public void FireAttackEffect(PlayerMono playerMono, PlayerColor playerColor)
+        public void FireAttackEffect(IMonoBehaviour playerMono, PlayerColor playerColor)
         {
             Debug.Log($"FireAttackEffect: {playerColor}");
             var sameColorPlayerViewMono = _playerViewMonos

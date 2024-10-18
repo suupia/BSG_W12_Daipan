@@ -21,7 +21,7 @@ namespace Daipan.Player.Scripts
         readonly IInputOption _inputOption;
         readonly IGetEnterKey _getEnterKey;
 
-        PlayerMono? _playerMono;
+        IMonoBehaviour? _playerMono;
 
         public PlayerInputTutorial(
             InputSerialManager inputSerialManager
@@ -41,7 +41,7 @@ namespace Daipan.Player.Scripts
         }
 
         public void SetPlayerMono(
-            PlayerMono playerMono
+            IMonoBehaviour playerMono
             , List<AbstractPlayerViewMono?> playerViewMonos
             )
         {
