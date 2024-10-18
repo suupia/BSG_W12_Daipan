@@ -7,7 +7,7 @@ namespace Daipan.Player.Interfaces
 {
     public interface IPlayerAttackEffectBuilder
     {
-        PlayerAttackEffectMono Build(PlayerAttackEffectMono effect, IMonoBehaviour playerMono,
+        IPlayerAttackEffectMono Build(IPlayerAttackEffectMono effect, IMonoBehaviour playerMono,
             List<AbstractPlayerViewMono?> playerViewMonos, PlayerColor playerColor);
     } 
 }

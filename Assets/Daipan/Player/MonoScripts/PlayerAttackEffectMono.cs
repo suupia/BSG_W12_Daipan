@@ -15,7 +15,7 @@ using R3;
 
 namespace Daipan.Player.MonoScripts
 {
-    public sealed class PlayerAttackEffectMono : MonoBehaviour, IMonoBehaviour
+    public sealed class PlayerAttackEffectMono : MonoBehaviour, IPlayerAttackEffectMono
     {
         public GameObject GameObject => gameObject;
         public Transform Transform => transform;

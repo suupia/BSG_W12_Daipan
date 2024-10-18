@@ -32,7 +32,7 @@ namespace Daipan.Player.Scripts
             _enemyCluster = enemyCluster;
         }
 
-        public PlayerAttackEffectMono Build(PlayerAttackEffectMono effect, IMonoBehaviour playerMono,
+        public IPlayerAttackEffectMono Build(IPlayerAttackEffectMono effect, IMonoBehaviour playerMono,
             List<AbstractPlayerViewMono?> playerViewMonos, PlayerColor playerColor)
         {
             effect.SetUp(_playerParamDataContainer.GetPlayerParamData(playerColor),

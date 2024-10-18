@@ -9,13 +9,13 @@ using UnityEngine;
 
 namespace Daipan.Player.Scripts
 {
-    public sealed class PlayerAttackEffectSpawner
+    public sealed class PlayerAttackEffectSpawnerNetwork
     {
-        readonly IPrefabLoader<PlayerAttackEffectMono> _effectLoader;
+        readonly IPrefabLoader<PlayerAttackEffectMonoNet> _effectLoader;
         readonly IPlayerAttackEffectBuilder _playerAttackEffectBuilder;
         
-        public PlayerAttackEffectSpawner(
-            IPrefabLoader<PlayerAttackEffectMono> effectLoader,
+        public PlayerAttackEffectSpawnerNetwork(
+            IPrefabLoader<PlayerAttackEffectMonoNet> effectLoader,
             IPlayerAttackEffectBuilder playerAttackEffectBuilder
             )
         {

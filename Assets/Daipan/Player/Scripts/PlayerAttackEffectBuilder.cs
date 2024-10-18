@@ -51,9 +51,9 @@ namespace Daipan.Player.Scripts
                 new ThresholdResetCounter(playerAntiCommentParamData.GetMissedAttackCountForAntiComment());
         }
 
-        public PlayerAttackEffectMono Build
+        public IPlayerAttackEffectMono Build
         (
-            PlayerAttackEffectMono effect
+            IPlayerAttackEffectMono effect
             , IMonoBehaviour playerMono
             , List<AbstractPlayerViewMono?> playerViewMonos
             , PlayerColor playerColor
@@ -83,7 +83,7 @@ namespace Daipan.Player.Scripts
 
         static void AttackEnemy(
             IPlayerParamDataContainer playerParamDataContainer
-            , PlayerAttackEffectMono playerAttackEffectMono
+            , IPlayerAttackEffectMono playerAttackEffectMono
             , List<AbstractPlayerViewMono?> playerViewMonos
             , PlayerColor playerColor
             , OnHitEventArgs args
