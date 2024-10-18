@@ -12,7 +12,7 @@ using UnityEngine;
 
 namespace Daipan.Player.MonoScripts
 {
-    public sealed class PlayerAttackEffectViewNet : AbstractAttackEffectViewMono, IAttackEffectViewMono
+    public sealed class PlayerAttackEffectViewNet : NetworkBehaviour, IAttackEffectViewMono
     {
         [SerializeField] NetworkMecanimAnimator animatorNet = null!;
         void Awake()
@@ -24,7 +24,7 @@ namespace Daipan.Player.MonoScripts
             animatorNet.Animator.runtimeAnimatorController = playerParamData.GetAnimator();
         }
 
-        public override void Hit(Action onHit)
+        public void Hit(Action onHit)
         {
             Debug.Log("HitNew");
             animatorNet.SetTrigger("isHit"); 
