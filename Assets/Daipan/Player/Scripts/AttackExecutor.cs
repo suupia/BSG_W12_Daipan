@@ -11,13 +11,13 @@ namespace Daipan.Player.Scripts
     public class AttackExecutor : IAttackExecutor
     {
         readonly PlayerAttackEffectPointData _playerAttackEffectPointData;
-        readonly PlayerAttackEffectSpawner _playerAttackEffectSpawner;
+        readonly IPlayerAttackEffectSpawner _playerAttackEffectSpawner;
 
         List<AbstractPlayerViewMono?> _playerViewMonos = new();
         
         public AttackExecutor(
             PlayerAttackEffectPointData playerAttackEffectPointData,
-            PlayerAttackEffectSpawner playerAttackEffectSpawner
+            IPlayerAttackEffectSpawner playerAttackEffectSpawner
             )
         {
             _playerAttackEffectPointData = playerAttackEffectPointData;
@@ -41,8 +41,7 @@ namespace Daipan.Player.Scripts
             }
 
             var spawnPosition = _playerAttackEffectPointData.GetAttackEffectSpawnedPoint();
-            _playerAttackEffectSpawner.SpawnEffect(playerMono, _playerViewMonos, playerColor, spawnPosition,
-                Quaternion.identity);
+            _playerAttackEffectSpawner.SpawnEffect(playerMono, _playerViewMonos, playerColor, spawnPosition, Quaternion.identity);
         }
     }
 }

@@ -123,7 +123,7 @@ namespace Daipan.Daipan
             builder.Register<IStart, PlayerSpawnerNet>(Lifetime.Scoped);
             // Attack
             builder.Register<PlayerAttackEffectPrefabLoaderNetwork>(Lifetime.Scoped).As<IPrefabLoader<PlayerAttackEffectNet>>();
-            builder.Register<PlayerAttackEffectSpawner>(Lifetime.Scoped);
+            builder.Register<PlayerAttackEffectSpawnerNetwork>(Lifetime.Scoped).AsImplementedInterfaces();
         }
 
         public static void RegisterCombo(IContainerBuilder builder, ComboParamManager comboParamManager)

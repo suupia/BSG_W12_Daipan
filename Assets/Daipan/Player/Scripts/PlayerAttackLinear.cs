@@ -40,6 +40,7 @@ namespace Daipan.Player.Scripts
         
         public void Move()
         {
+            Debug.Log($"PlayerAttackLinear: Move");
             if (_playerAttackEffectMono == null) return;
             
             // [Precondition]
