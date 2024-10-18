@@ -16,7 +16,7 @@ using R3;
 
 namespace Daipan.Player.MonoScripts
 {
-    public sealed class PlayerAttackEffectMonoNet : NetworkBehaviour , IPlayerAttackEffectMono
+    public sealed class PlayerAttackEffectNet : NetworkBehaviour , IPlayerAttackEffectMono
     {
         public GameObject GameObject => gameObject;
         public Transform Transform => transform;
