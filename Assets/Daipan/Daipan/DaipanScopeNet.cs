@@ -180,7 +180,7 @@ namespace Daipan.Daipan
             builder.Register<EnemyParamDataContainer>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.RegisterInstance(new EnemyLevelDesignParamData(enemyParamsManager.enemyLevelDesignParam));
             // Enemy
-            builder.Register<EnemyNetPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<EnemyNet>>();
+            builder.Register<EnemyPrefabLoaderNetwork>(Lifetime.Scoped).As<IPrefabLoader<EnemyNet>>();
             builder.Register<EnemyCluster>(Lifetime.Scoped);
             builder.Register<EnemyAttackDecider>(Lifetime.Scoped);
             builder.Register<EnemyHighlightUpdater>(Lifetime.Scoped).AsImplementedInterfaces();

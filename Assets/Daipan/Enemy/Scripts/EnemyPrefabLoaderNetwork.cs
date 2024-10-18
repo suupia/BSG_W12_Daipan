@@ -5,11 +5,11 @@ using Daipan.Stream.Scripts.Utility.Scripts;
 
 namespace Daipan.Enemy.Scripts
 {
-    public sealed class EnemyNetPrefabLoader : IPrefabLoader<EnemyNet>
+    public sealed class EnemyPrefabLoaderNetwork : IPrefabLoader<EnemyNet>
     {
         readonly PrefabLoaderFromResources<EnemyNet> _loader;
 
-        public EnemyNetPrefabLoader()
+        public EnemyPrefabLoaderNetwork()
         {
             _loader = new PrefabLoaderFromResources<EnemyNet>("EnemyNet");
         }
