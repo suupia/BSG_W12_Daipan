@@ -116,7 +116,7 @@ namespace Daipan.Daipan
             builder.Register<PlayerHpParamData>(Lifetime.Scoped).As<IPlayerHpParamData>();
             builder.Register<PlayerAntiCommentParamData>(Lifetime.Scoped).As<IPlayerAntiCommentParamData>();
             // Player
-            builder.Register<PlayerPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<PlayerMono>>();
+            builder.Register<PlayerPrefabLoaderNetwork>(Lifetime.Scoped).As<IPrefabLoader<PlayerNet>>();
             builder.Register<PlayerHolder>(Lifetime.Scoped);
             builder.Register<ThresholdResetCounter>(Lifetime.Scoped);
             builder.Register<DaipanExecutor>(Lifetime.Scoped);

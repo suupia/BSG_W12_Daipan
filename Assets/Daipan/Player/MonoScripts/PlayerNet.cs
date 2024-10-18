@@ -12,6 +12,7 @@ using UnityEngine;
 using VContainer;
 using Daipan.Comment.Scripts;
 using Daipan.Core.Interfaces;
+using Daipan.Daipan;
 using Daipan.Enemy.Interfaces;
 using Daipan.Player.LevelDesign.Interfaces;
 using Fusion;
@@ -29,6 +30,18 @@ namespace Daipan.Player.MonoScripts
         public Hp Hp { get; private set; } = null!;
 
         IPlayerOnAttacked _playerOnAttacked = null!;
+        
+        public override void Spawned()
+        {
+            base.Spawned();
+            Debug.Log($"PlayerNet Spawned");
+            var daipanScopeNet = FindObjectOfType<DaipanScopeNet>();
+            Initialize(
+                daipanScopeNet.Container.Resolve<IPlayerHpParamData>()
+                , daipanScopeNet.Container.Resolve<IPlayerInput>()
+                , daipanScopeNet.Container.Resolve<IPlayerOnAttacked>()
+            );
+        }
 
         public override void FixedUpdateNetwork()
         {

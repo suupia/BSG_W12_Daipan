@@ -12,7 +12,7 @@ namespace Daipan.Player.Scripts
 
         public PlayerPrefabLoaderNetwork()
         {
-            _loader = new PrefabLoaderFromResources<PlayerNet>("Player");
+            _loader = new PrefabLoaderFromResources<PlayerNet>("PlayerNet");
         }
 
         public PlayerNet Load()
