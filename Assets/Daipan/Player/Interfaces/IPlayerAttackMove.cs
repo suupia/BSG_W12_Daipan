@@ -9,7 +9,7 @@ namespace Daipan.Player.Interfaces
     public interface IPlayerAttackMove
     {
         event EventHandler<OnHitEventArgs>? OnHit;
-        void Move();
+        void Move(float deltaTime);
         void Defenced();
     } 
     public record OnHitEventArgs(IEnemyMono? EnemyMono, bool IsTargetEnemy);

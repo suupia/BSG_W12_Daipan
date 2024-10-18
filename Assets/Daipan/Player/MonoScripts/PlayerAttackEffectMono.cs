@@ -31,7 +31,7 @@ namespace Daipan.Player.MonoScripts
 
         void Update()
         {
-             _playerAttackTracking.Move();
+             _playerAttackTracking.Move(Time.deltaTime);
         }
 
         public void SetUp(IPlayerParamData playerParamData, Func<IEnemyMono?> getTargetEnemyMono)

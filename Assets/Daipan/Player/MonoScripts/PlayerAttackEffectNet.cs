@@ -33,7 +33,7 @@ namespace Daipan.Player.MonoScripts
         public override void FixedUpdateNetwork()
         {
             base.FixedUpdateNetwork();
-            _playerAttackTracking.Move();
+            _playerAttackTracking.Move(Runner.DeltaTime);
         }
 
         public void SetUp(IPlayerParamData playerParamData, Func<IEnemyMono?> getTargetEnemyMono)

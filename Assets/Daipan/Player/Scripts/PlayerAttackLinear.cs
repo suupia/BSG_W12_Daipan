@@ -38,7 +38,7 @@ namespace Daipan.Player.Scripts
             Direction = targetPosition != Vector3.zero ? (targetPosition - _playerAttackEffectMono.Transform.position).normalized : Vector3.right;
         }
         
-        public void Move()
+        public void Move(float deltaTime)
         {
             Debug.Log($"PlayerAttackLinear: Move");
             if (_playerAttackEffectMono == null) return;
@@ -56,7 +56,7 @@ namespace Daipan.Player.Scripts
             if (enemyMono != null && !PlayerAttackModule.IsInStreamScreen(enemyMono.Transform.position))
                 enemyMono = null; 
         
-            _playerAttackEffectMono.Transform.position += Direction * (float)(Speed * Time.deltaTime);
+            _playerAttackEffectMono.Transform.position += Direction * (float)(Speed * deltaTime);
             if (enemyMono != null)
             {
                 if (enemyMono.Transform.position.x - _playerAttackEffectMono.Transform.position.x < HitDistance)
