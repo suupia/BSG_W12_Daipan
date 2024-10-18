@@ -122,8 +122,7 @@ namespace Daipan.Daipan
             builder.Register<DaipanExecutor>(Lifetime.Scoped);
             builder.Register<IStart, PlayerSpawnerNet>(Lifetime.Scoped);
             // Attack
-            builder.Register<PlayerAttackEffectPrefabLoader>(Lifetime.Scoped)
-                .As<IPrefabLoader<PlayerAttackEffectMono>>();
+            builder.Register<PlayerAttackEffectPrefabLoaderNetwork>(Lifetime.Scoped).As<IPrefabLoader<PlayerAttackEffectNet>>();
             builder.Register<PlayerAttackEffectSpawner>(Lifetime.Scoped);
         }
 
