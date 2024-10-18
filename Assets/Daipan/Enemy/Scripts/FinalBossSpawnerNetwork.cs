@@ -11,7 +11,7 @@ using VContainer.Unity;
 
 namespace Daipan.Enemy.Scripts
 {
-    public sealed class FinalBossSpawnerNet : IFinalBossSpawner
+    public sealed class FinalBossSpawnerNetwork : IFinalBossSpawner
     {
         readonly IObjectResolver _container;
         readonly IPrefabLoader<FinalBossNet> _finalBossMonoLoader;
@@ -19,7 +19,7 @@ namespace Daipan.Enemy.Scripts
         readonly IEnemySpawnPoint _enemySpawnPoint;
         readonly FinalBossBuilder _finalBossBuilder;
         
-        public FinalBossSpawnerNet(
+        public FinalBossSpawnerNetwork(
             IObjectResolver container
             , IPrefabLoader<FinalBossNet> finalBossMonoLoader
             , EnemyCluster enemyCluster

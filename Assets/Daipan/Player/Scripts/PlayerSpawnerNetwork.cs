@@ -13,7 +13,7 @@ using VContainer.Unity;
 
 namespace Daipan.Player.Scripts
 {
-    public sealed class PlayerSpawnerNet : IStart 
+    public sealed class PlayerSpawnerNetwork : IStart 
     {
         readonly IObjectResolver _container;
         readonly IPrefabLoader<PlayerNet> _playerMonoLoader;
@@ -23,7 +23,7 @@ namespace Daipan.Player.Scripts
         readonly IPlayerBuilder _playerBuilder;
 
         [Inject]
-        public PlayerSpawnerNet(
+        public PlayerSpawnerNetwork(
             IObjectResolver container
             ,IPrefabLoader<PlayerNet> playerMonoLoader
             ,PlayerHolder playerHolder
