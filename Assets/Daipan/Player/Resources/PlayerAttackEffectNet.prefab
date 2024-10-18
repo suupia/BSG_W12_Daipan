@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a77be24a0914fe89ce482ca8abaae0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewMono: {fileID: 7974532547577645167}
+  viewMono: {fileID: 6511068922174221329}
 --- !u!114 &504140324807702609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,6 +136,7 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: 8997536822657733181}
   - {fileID: 504140324807702609}
+  - {fileID: 6511068922174221329}
   - {fileID: 4417197064093911440}
 --- !u!1 &4991814992150294134
 GameObject:
@@ -271,7 +272,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6716761675388850161}
-  - component: {fileID: 7974532547577645167}
+  - component: {fileID: 6511068922174221329}
   m_Layer: 6
   m_Name: PlayerAttackEffectView
   m_TagString: Untagged
@@ -295,7 +296,7 @@ Transform:
   - {fileID: 4951163859082023231}
   m_Father: {fileID: 1839528516076584320}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7974532547577645167
+--- !u!114 &6511068922174221329
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -304,7 +305,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8462788269711151845}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 850ea788f2494ff2956375f08c8c3266, type: 3}
+  m_Script: {fileID: 11500000, guid: 9ee37f22fc974503bb38d9f47e307d2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 6665741849164830164}
+  animatorNet: {fileID: 4417197064093911440}

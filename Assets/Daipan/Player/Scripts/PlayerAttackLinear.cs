@@ -19,7 +19,7 @@ namespace Daipan.Player.Scripts
         readonly IPlayerParamData? _playerParamData;
         readonly Func<IEnemyMono?> _getNearestEnemyMono;
         readonly IMonoBehaviour _playerAttackEffectMono;
-        readonly PlayerAttackEffectViewMono? _playerAttackEffectViewMono;
+        readonly IAttackEffectViewMono? _playerAttackEffectViewMono;
         Vector3 Direction { get; }
         bool IsHit { get; set; }
 
@@ -27,7 +27,7 @@ namespace Daipan.Player.Scripts
             IMonoBehaviour playerAttackEffectMono
             , IPlayerParamData playerParamData
             , Func<IEnemyMono?> getTargetEnemyMono
-            , PlayerAttackEffectViewMono? playerAttackEffectViewMono
+            , IAttackEffectViewMono? playerAttackEffectViewMono
         )
         {
             _playerAttackEffectMono = playerAttackEffectMono;

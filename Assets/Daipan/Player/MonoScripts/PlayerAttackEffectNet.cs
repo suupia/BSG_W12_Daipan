@@ -20,7 +20,7 @@ namespace Daipan.Player.MonoScripts
     {
         public GameObject GameObject => gameObject;
         public Transform Transform => transform;
-        [SerializeField] PlayerAttackEffectViewMono? viewMono;
+        [SerializeField] PlayerAttackEffectViewNet? viewMono;
 
         public event EventHandler<OnHitEventArgs>? OnHit
         {
