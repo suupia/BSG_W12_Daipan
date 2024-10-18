@@ -136,6 +136,7 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: 8997536822657733181}
   - {fileID: 504140324807702609}
+  - {fileID: 4417197064093911440}
 --- !u!1 &4991814992150294134
 GameObject:
   m_ObjectHideFlags: 0
@@ -147,8 +148,9 @@ GameObject:
   - component: {fileID: 4951163859082023231}
   - component: {fileID: 6665741849164830164}
   - component: {fileID: 3961047457715094365}
+  - component: {fileID: 4417197064093911440}
   m_Layer: 6
-  m_Name: Animator
+  m_Name: AnimatorNet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -242,6 +244,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4417197064093911440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4991814992150294134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 506319458, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Animator: {fileID: 6665741849164830164}
+  TotalWords: 1
+  ApplyTiming: 2
+  SyncSettings: 79
+  StateHashes: 0000000004990ab7f9cf9fa4a1609f62d8aa0cc4
+  TriggerHashes: 00000000e05454b6
 --- !u!1 &8462788269711151845
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace Daipan.Player.MonoScripts
 {
-    public sealed class PlayerAttackEffectViewMono : AbstractAttackEffectViewMono
+    public sealed class PlayerAttackEffectViewMono : AbstractAttackEffectViewMono, IAttackEffectViewMono
     {
         [SerializeField] Animator animator = null!;
         void Awake()
