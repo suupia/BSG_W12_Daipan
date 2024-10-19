@@ -78,13 +78,17 @@ namespace Daipan.Enemy.Scripts
         void SpawnEnemy(Vector3 spawnPosition, EnemyEnum enemyEnum)
         {
             var enemyMonoPrefab = _enemyMonoLoader.Load();
-            var enemyMonoObject = _runner.Spawn(enemyMonoPrefab, spawnPosition, Quaternion.identity);
-            enemyMonoObject.Initialize(
-                _container.Resolve<PlayerHolder>()
-                , _container.Resolve<IEnemySpawnPoint>()
-                , _container.Resolve<IEnemyParamContainer>()
-            );
-            _enemyBuilder.BuildAction(enemyMonoObject, enemyEnum)(enemyMonoObject);
+            var enemyMonoObject = _runner.Spawn(enemyMonoPrefab, spawnPosition, Quaternion.identity,
+                onBeforeSpawned: (runner, obj) =>
+                {
+                    var enemyMono = obj.GetComponent<EnemyNet>();
+                    enemyMono.Initialize(
+                        _container.Resolve<PlayerHolder>()
+                        , _container.Resolve<IEnemySpawnPoint>()
+                        , _container.Resolve<IEnemyParamContainer>()
+                    );
+                    _enemyBuilder.BuildAction(enemyMono, enemyEnum)(enemyMono); 
+                });
             _enemyCluster.Add(enemyMonoObject);
         }
 
