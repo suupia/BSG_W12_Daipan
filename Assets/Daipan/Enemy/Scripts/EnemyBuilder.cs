@@ -13,6 +13,7 @@ using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Player.Scripts;
 using Daipan.Stream.Scripts;
 using Daipan.Utility.Scripts;
+using JetBrains.Annotations;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -48,27 +49,28 @@ namespace Daipan.Enemy.Scripts
             _comboCounter = comboCounter;
         }
 
-        public IEnemyMono Build(IEnemyMono enemyMono, IEnemySetDomain enemySetDomain, EnemyEnum enemyEnum)
+        public Action<IEnemyMono> BuildAction(IEnemySetDomain enemySetDomain, EnemyEnum enemyEnum)
         {
-
-            enemySetDomain.SetDomain(
-                enemyEnum
-                ,_enemyCluster
-                , new EnemyAttackDecider()
-                , new EnemyDie(enemyMono)
-                , WrapWithComboSpawner(_enemyOnAttackedBuilder.SwitchEnemyOnAttacked(enemyEnum), enemyMono)
-                , new NoneEnemyOnDied()
-            );
-            
-            enemyMono.OnDiedEvent += (sender, args) =>
+            return enemyMono =>
             {
-                // ボスを倒したときも含む
-                _enemyLevelDesignParamData.CurrentKillAmount += 1;
+                enemySetDomain.SetDomain(
+                    enemyEnum
+                    ,_enemyCluster
+                    , new EnemyAttackDecider()
+                    , new EnemyDie(enemyMono)
+                    , WrapWithComboSpawner(_enemyOnAttackedBuilder.SwitchEnemyOnAttacked(enemyEnum), enemyMono)
+                    , new NoneEnemyOnDied()
+                );
+            
+                enemyMono.OnDiedEvent += (sender, args) =>
+                {
+                    // ボスを倒したときも含む
+                    _enemyLevelDesignParamData.CurrentKillAmount += 1;
                
-                IncreaseViewerNumber(args, _viewerNumber, _enemyLevelDesignParamData);
-                SpawnComment(args, _commentSpawner);
+                    IncreaseViewerNumber(args, _viewerNumber, _enemyLevelDesignParamData);
+                    SpawnComment(args, _commentSpawner);
+                };
             };
-            return enemyMono;
         }
         
         static void IncreaseViewerNumber(DiedEventArgs args, ViewerNumber viewerNumber, EnemyLevelDesignParamData enemyLevelDesignParamData)
