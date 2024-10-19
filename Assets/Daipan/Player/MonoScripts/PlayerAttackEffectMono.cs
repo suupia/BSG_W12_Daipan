@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Daipan.Core.Interfaces;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Enemy.Scripts;
@@ -14,8 +15,10 @@ using R3;
 
 namespace Daipan.Player.MonoScripts
 {
-    public sealed class PlayerAttackEffectMono : MonoBehaviour
+    public sealed class PlayerAttackEffectMono : MonoBehaviour, IPlayerAttackEffectMono
     {
+        public GameObject GameObject => gameObject;
+        public Transform Transform => transform;
         [SerializeField] PlayerAttackEffectViewMono? viewMono;
 
         public event EventHandler<OnHitEventArgs>? OnHit
@@ -28,7 +31,7 @@ namespace Daipan.Player.MonoScripts
 
         void Update()
         {
-             _playerAttackTracking.Move();
+             _playerAttackTracking.Move(Time.deltaTime);
         }
 
         public void SetUp(IPlayerParamData playerParamData, Func<IEnemyMono?> getTargetEnemyMono)

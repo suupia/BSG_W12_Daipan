@@ -2,6 +2,7 @@
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.MonoScripts;
 using Daipan.LevelDesign.Enemy.Scripts;
+using Daipan.Player.Interfaces;
 using Daipan.Player.MonoScripts;
 using Daipan.Player.Scripts;
 using UnityEngine;
@@ -19,7 +20,7 @@ namespace Daipan.Enemy.Scripts
             IEnemyMono enemyMono
             , IEnemyViewMono? enemyViewMono
             , IEnemyParamData enemyParamData
-            , PlayerMono playerMono
+            , IPlayerMono playerMono
             )
         {
             Timer += Time.deltaTime;
@@ -34,7 +35,7 @@ namespace Daipan.Enemy.Scripts
             IEnemyMono enemyMono
             , IEnemyViewMono? enemyViewMono
             , IEnemyParamData enemyParamData
-            , PlayerMono playerMono
+            , IPlayerMono playerMono
             )
         {
             if (!CanAttack(enemyMono,enemyParamData, playerMono)) return;
@@ -42,10 +43,10 @@ namespace Daipan.Enemy.Scripts
             EnemyAttackModule.Attack(playerMono,enemyParamData);
         }
         
-        static bool CanAttack(IEnemyMono enemyMono, IEnemyParamData enemyParamData,  PlayerMono playerMono)
+        static bool CanAttack(IEnemyMono enemyMono, IEnemyParamData enemyParamData, IPlayerMono playerMono)
         {
             if (playerMono.Hp.Value <= 0) return false;
-            if (enemyMono.Transform.position.x - playerMono.transform.position.x > enemyParamData.GetAttackRange()) return false;
+            if (enemyMono.Transform.position.x - playerMono.Transform.position.x > enemyParamData.GetAttackRange()) return false;
             return true;
         }
         

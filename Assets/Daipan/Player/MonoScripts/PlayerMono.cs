@@ -11,14 +11,17 @@ using Daipan.Stream.Scripts;
 using UnityEngine;
 using VContainer;
 using Daipan.Comment.Scripts;
+using Daipan.Core.Interfaces;
 using Daipan.Enemy.Interfaces;
 using Daipan.Player.LevelDesign.Interfaces;
 using R3;
 
 namespace Daipan.Player.MonoScripts
 {
-    public sealed class PlayerMono : MonoBehaviour
+    public sealed class PlayerMono : MonoBehaviour, IPlayerMono 
     {
+        public GameObject GameObject => gameObject;
+        public Transform Transform => transform;
         [SerializeField] List<AbstractPlayerViewMono?> playerViewMonos = new();
         IPlayerHpParamData _playerHpParamData = null!;
         IPlayerInput _playerInput = null!;

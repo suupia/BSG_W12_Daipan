@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Daipan.Battle.scripts;
 using Daipan.Comment.Scripts;
+using Daipan.Core.Interfaces;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Enemy.Scripts;
 using Daipan.LevelDesign.Comment.Scripts;
@@ -50,16 +51,16 @@ namespace Daipan.Player.Scripts
                 new ThresholdResetCounter(playerAntiCommentParamData.GetMissedAttackCountForAntiComment());
         }
 
-        public PlayerAttackEffectMono Build
+        public IPlayerAttackEffectMono Build
         (
-            PlayerAttackEffectMono effect
-            , PlayerMono playerMono
+            IPlayerAttackEffectMono effect
+            , IMonoBehaviour playerMono
             , List<AbstractPlayerViewMono?> playerViewMonos
             , PlayerColor playerColor
             )
         {
             effect.SetUp(_playerParamDataContainer.GetPlayerParamData(playerColor),
-                () => _enemyCluster.NearestEnemy(playerMono.transform.position));
+                () => _enemyCluster.NearestEnemy(playerMono.Transform.position));
             effect.OnHit += (sender, args) =>
             {
                 Debug.Log($"OnHit");
@@ -82,7 +83,7 @@ namespace Daipan.Player.Scripts
 
         static void AttackEnemy(
             IPlayerParamDataContainer playerParamDataContainer
-            , PlayerAttackEffectMono playerAttackEffectMono
+            , IPlayerAttackEffectMono playerAttackEffectMono
             , List<AbstractPlayerViewMono?> playerViewMonos
             , PlayerColor playerColor
             , OnHitEventArgs args

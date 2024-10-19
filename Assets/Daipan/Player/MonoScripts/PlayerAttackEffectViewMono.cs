@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace Daipan.Player.MonoScripts
 {
-    public sealed class PlayerAttackEffectViewMono : AbstractAttackEffectViewMono
+    public sealed class PlayerAttackEffectViewMono : MonoBehaviour, IAttackEffectViewMono
     {
         [SerializeField] Animator animator = null!;
         void Awake()
@@ -23,7 +23,7 @@ namespace Daipan.Player.MonoScripts
             animator.runtimeAnimatorController = playerParamData.GetAnimator();
         }
 
-        public override void Hit(Action onHit)
+        public void Hit(Action onHit)
         {
             Debug.Log("HitNew");
             animator.SetTrigger("isHit"); 

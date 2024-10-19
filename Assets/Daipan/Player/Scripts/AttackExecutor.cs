@@ -1,6 +1,7 @@
 #nullable enable
 using System.Collections.Generic;
 using System.Linq;
+using Daipan.Core.Interfaces;
 using Daipan.Player.Interfaces;
 using Daipan.Player.MonoScripts;
 using UnityEngine;
@@ -10,13 +11,13 @@ namespace Daipan.Player.Scripts
     public class AttackExecutor : IAttackExecutor
     {
         readonly PlayerAttackEffectPointData _playerAttackEffectPointData;
-        readonly PlayerAttackEffectSpawner _playerAttackEffectSpawner;
+        readonly IPlayerAttackEffectSpawner _playerAttackEffectSpawner;
 
         List<AbstractPlayerViewMono?> _playerViewMonos = new();
         
         public AttackExecutor(
             PlayerAttackEffectPointData playerAttackEffectPointData,
-            PlayerAttackEffectSpawner playerAttackEffectSpawner
+            IPlayerAttackEffectSpawner playerAttackEffectSpawner
             )
         {
             _playerAttackEffectPointData = playerAttackEffectPointData;
@@ -28,7 +29,7 @@ namespace Daipan.Player.Scripts
             _playerViewMonos = playerViewMonos;
         }
 
-        public void FireAttackEffect(PlayerMono playerMono, PlayerColor playerColor)
+        public void FireAttackEffect(IMonoBehaviour playerMono, PlayerColor playerColor)
         {
             Debug.Log($"FireAttackEffect: {playerColor}");
             var sameColorPlayerViewMono = _playerViewMonos
@@ -40,8 +41,7 @@ namespace Daipan.Player.Scripts
             }
 
             var spawnPosition = _playerAttackEffectPointData.GetAttackEffectSpawnedPoint();
-            _playerAttackEffectSpawner.SpawnEffect(playerMono, _playerViewMonos, playerColor, spawnPosition,
-                Quaternion.identity);
+            _playerAttackEffectSpawner.SpawnEffect(playerMono, _playerViewMonos, playerColor, spawnPosition, Quaternion.identity);
         }
     }
 }

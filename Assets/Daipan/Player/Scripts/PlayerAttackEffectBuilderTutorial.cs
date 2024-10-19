@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Daipan.Battle.scripts;
 using Daipan.Comment.Scripts;
+using Daipan.Core.Interfaces;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Enemy.Scripts;
@@ -31,11 +32,11 @@ namespace Daipan.Player.Scripts
             _enemyCluster = enemyCluster;
         }
 
-        public PlayerAttackEffectMono Build(PlayerAttackEffectMono effect, PlayerMono playerMono,
+        public IPlayerAttackEffectMono Build(IPlayerAttackEffectMono effect, IMonoBehaviour playerMono,
             List<AbstractPlayerViewMono?> playerViewMonos, PlayerColor playerColor)
         {
             effect.SetUp(_playerParamDataContainer.GetPlayerParamData(playerColor),
-                () => _enemyCluster.NearestEnemy(playerMono.transform.position));
+                () => _enemyCluster.NearestEnemy(playerMono.Transform.position));
             effect.OnHit += (sender, args) =>
             {
                 Debug.Log($"OnHit");

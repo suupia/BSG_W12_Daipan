@@ -116,15 +116,14 @@ namespace Daipan.Daipan
             builder.Register<PlayerHpParamData>(Lifetime.Scoped).As<IPlayerHpParamData>();
             builder.Register<PlayerAntiCommentParamData>(Lifetime.Scoped).As<IPlayerAntiCommentParamData>();
             // Player
-            builder.Register<PlayerPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<PlayerMono>>();
+            builder.Register<PlayerPrefabLoaderNetwork>(Lifetime.Scoped).As<IPrefabLoader<PlayerNet>>();
             builder.Register<PlayerHolder>(Lifetime.Scoped);
             builder.Register<ThresholdResetCounter>(Lifetime.Scoped);
             builder.Register<DaipanExecutor>(Lifetime.Scoped);
-            builder.Register<IStart, PlayerSpawner>(Lifetime.Scoped);
+            builder.Register<IStart, PlayerSpawnerNetwork>(Lifetime.Scoped);
             // Attack
-            builder.Register<PlayerAttackEffectPrefabLoader>(Lifetime.Scoped)
-                .As<IPrefabLoader<PlayerAttackEffectMono>>();
-            builder.Register<PlayerAttackEffectSpawner>(Lifetime.Scoped);
+            builder.Register<PlayerAttackEffectPrefabLoaderNetwork>(Lifetime.Scoped).As<IPrefabLoader<PlayerAttackEffectNet>>();
+            builder.Register<PlayerAttackEffectSpawnerNetwork>(Lifetime.Scoped).AsImplementedInterfaces();
         }
 
         public static void RegisterCombo(IContainerBuilder builder, ComboParamManager comboParamManager)
@@ -180,7 +179,7 @@ namespace Daipan.Daipan
             builder.Register<EnemyParamDataContainer>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.RegisterInstance(new EnemyLevelDesignParamData(enemyParamsManager.enemyLevelDesignParam));
             // Enemy
-            builder.Register<EnemyNetPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<EnemyNet>>();
+            builder.Register<EnemyPrefabLoaderNetwork>(Lifetime.Scoped).As<IPrefabLoader<EnemyNet>>();
             builder.Register<EnemyCluster>(Lifetime.Scoped);
             builder.Register<EnemyAttackDecider>(Lifetime.Scoped);
             builder.Register<EnemyHighlightUpdater>(Lifetime.Scoped).AsImplementedInterfaces();
@@ -277,7 +276,7 @@ namespace Daipan.Daipan
             RegisterEnemy(builder, enemyParamsManager);
             builder.Register<EnemyOnAttackedBuilder>(Lifetime.Transient);
             builder.RegisterComponentInHierarchy<EnemyWaveSpawnerCounterNet>().AsImplementedInterfaces();
-            builder.Register<EnemySpawnerNet>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
+            builder.Register<EnemySpawnerNetwork>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
             builder.Register<EnemyEnumSelector>(Lifetime.Scoped).As<IEnemyEnumSelector>();
             builder.Register<EnemyBuilder>(Lifetime.Scoped).As<IEnemyBuilder>();
             builder.Register<EnemySpecialOnAttacked>(Lifetime.Scoped);
@@ -290,7 +289,7 @@ namespace Daipan.Daipan
             builder.Register<FinalBossNetPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<FinalBossNet>>();
             builder.Register<FinalBossOnAttacked>(Lifetime.Scoped);
             builder.Register<FinalBossBuilder>(Lifetime.Scoped);
-            builder.Register<FinalBossSpawnerNet>(Lifetime.Scoped).AsImplementedInterfaces();
+            builder.Register<FinalBossSpawnerNetwork>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<FinalBossDefeatTracker>(Lifetime.Scoped);
 
             // Irritated

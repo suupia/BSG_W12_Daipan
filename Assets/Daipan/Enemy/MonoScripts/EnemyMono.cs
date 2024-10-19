@@ -50,8 +50,7 @@ namespace Daipan.Enemy.MonoScripts
             _enemyAttackDecider.AttackUpdate(this, enemyViewMono,
                 _enemyParamContainer.GetEnemyParamData(EnemyEnum), _playerHolder.PlayerMono);
 
-            IsReachedPlayer = _enemyMove.MoveUpdate(_playerHolder.PlayerMono.transform,
-                _enemyParamContainer.GetEnemyParamData(EnemyEnum), enemyViewMono);
+            IsReachedPlayer = _enemyMove.MoveUpdate(Time.deltaTime, _playerHolder.PlayerMono.Transform, _enemyParamContainer.GetEnemyParamData(EnemyEnum), enemyViewMono);
 
             if (transform.position.x < _enemySpawnPoint.GetEnemyDespawnedPoint().x) Die();
 

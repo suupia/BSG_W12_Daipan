@@ -1,5 +1,6 @@
 #nullable enable
 using System;
+using Daipan.Core.Interfaces;
 using Daipan.Enemy.Scripts;
 using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Player.Scripts;
@@ -7,10 +8,8 @@ using UnityEngine;
 
 namespace Daipan.Enemy.Interfaces
 {
-    public interface IEnemyMono 
+    public interface IEnemyMono : IMonoBehaviour 
     {
-        public GameObject GameObject { get; }
-        public Transform Transform { get; }
         public EnemyEnum EnemyEnum { get; protected set; }
         public Hp Hp { get; protected set; }
         public bool IsReachedPlayer { get; protected set; }

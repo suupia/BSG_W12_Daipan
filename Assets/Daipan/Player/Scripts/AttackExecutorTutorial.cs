@@ -1,6 +1,7 @@
 #nullable enable
 using System.Collections.Generic;
 using System.Linq;
+using Daipan.Core.Interfaces;
 using Daipan.Player.Interfaces;
 using Daipan.Player.MonoScripts;
 using Daipan.Tutorial.Scripts;
@@ -25,7 +26,7 @@ namespace Daipan.Player.Scripts
             _attackExecutor.SetPlayerViewMonos(playerViewMonos); 
         }
 
-        public void FireAttackEffect(PlayerMono playerMono, PlayerColor playerColor)
+        public void FireAttackEffect(IMonoBehaviour playerMono, PlayerColor playerColor)
         {
             _attackExecutor.FireAttackEffect(playerMono, playerColor); 
         }

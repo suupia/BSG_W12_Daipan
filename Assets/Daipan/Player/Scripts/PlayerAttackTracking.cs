@@ -29,7 +29,7 @@ namespace Daipan.Player.Scripts
             _playerParamData = playerParamData;
             _getNearestEnemyMono = getTargetEnemyMono;
         }
-        public void Move()
+        public void Move(float deltaTime)
         {
             if (_playerAttackEffectMono == null) return;
             
@@ -45,7 +45,7 @@ namespace Daipan.Player.Scripts
                 enemyMono = null; 
         
             Direction = enemyMono != null ? (enemyMono.transform.position - _playerAttackEffectMono.transform.position).normalized : Direction;
-            _playerAttackEffectMono.transform.position += Direction * (float)(Speed * Time.deltaTime);
+            _playerAttackEffectMono.transform.position += Direction * (float)(Speed * deltaTime);
             if (enemyMono != null)
             {
                 if (enemyMono.transform.position.x - _playerAttackEffectMono.transform.position.x < HitDistance)

@@ -48,7 +48,7 @@ namespace Daipan.Enemy.MonoScripts
         public override void FixedUpdateNetwork()
         {
             if (Hp.Value != 0)
-                IsReachedPlayer = _enemyMove.MoveUpdate(_playerHolder.PlayerMono.transform, _finalBossParamData, finalBossViewMono); 
+                IsReachedPlayer = _enemyMove.MoveUpdate(Runner.DeltaTime, _playerHolder.PlayerMono.Transform, _finalBossParamData, finalBossViewMono); 
 
             if (transform.position.x < _enemySpawnPoint.GetEnemyDespawnedPoint().x)
                 Die();
