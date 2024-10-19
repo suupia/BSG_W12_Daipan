@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Daipan.Core.Interfaces;
+using Daipan.Daipan;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Enemy.Scripts;
@@ -13,6 +14,7 @@ using Daipan.Player.Scripts;
 using Fusion;
 using UnityEngine;
 using R3;
+using VContainer;
 
 namespace Daipan.Player.MonoScripts
 {
@@ -29,7 +31,22 @@ namespace Daipan.Player.MonoScripts
         }
 
         IPlayerAttackMove _playerAttackTracking = null!;
-
+        
+        [Networked]
+        [OnChangedRender(nameof(OnPlayerColorChanged))]
+        PlayerColor PlayerColor { get; set; } = PlayerColor.None;
+        IPlayerParamDataContainer? _playerParamDataContainer;
+        
+        public override void Spawned()
+        {
+            base.Spawned();
+            Debug.Log($"PlayerAttackEffectNet Spawned");
+            
+            var daipanScopeNet = FindObjectOfType<DaipanScopeNet>();
+            _playerParamDataContainer = daipanScopeNet.Container.Resolve<IPlayerParamDataContainer>(); 
+            
+        }
+        
         public override void FixedUpdateNetwork()
         {
             base.FixedUpdateNetwork();
@@ -51,6 +68,18 @@ namespace Daipan.Player.MonoScripts
         public void Defenced()
         {
             _playerAttackTracking.Defenced(); 
+        }
+
+        void OnPlayerColorChanged()
+        {
+            if (PlayerColor == PlayerColor.None) return;
+            if (_playerParamDataContainer == null)
+            {
+                Debug.LogWarning($"_playerParamDataContainer is null");
+                return;
+            }
+            var playerParamData = _playerParamDataContainer.GetPlayerParamData(PlayerColor);
+            viewMono?.SetDomain(playerParamData);
         }
     }
 
