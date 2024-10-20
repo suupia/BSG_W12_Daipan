@@ -35,8 +35,8 @@ namespace Daipan.Player.Scripts
         public IPlayerAttackEffectMono Build(IPlayerAttackEffectMono effect, IMonoBehaviour playerMono,
             List<AbstractPlayerViewMono?> playerViewMonos, PlayerColor playerColor)
         {
-            effect.SetUp(_playerParamDataContainer.GetPlayerParamData(playerColor),
-                () => _enemyCluster.NearestEnemy(playerMono.Transform.position));
+            effect.Initialize(_playerParamDataContainer);
+            effect.SetUp(playerColor, () => _enemyCluster.NearestEnemy(playerMono.Transform.position));
             effect.OnHit += (sender, args) =>
             {
                 Debug.Log($"OnHit");

@@ -36,14 +36,17 @@ namespace Daipan.Player.MonoScripts
         [OnChangedRender(nameof(OnPlayerColorChanged))]
         PlayerColor PlayerColor { get; set; } = PlayerColor.None;
         IPlayerParamDataContainer? _playerParamDataContainer;
-        
+        bool _isInitialized;
         public override void Spawned()
         {
             base.Spawned();
             Debug.Log($"PlayerAttackEffectNet Spawned");
-            
-            var daipanScopeNet = FindObjectOfType<DaipanScopeNet>();
-            _playerParamDataContainer = daipanScopeNet.Container.Resolve<IPlayerParamDataContainer>(); 
+
+            if (!HasStateAuthority)
+            {
+                var daipanScopeNet = DaipanScopeNet.Instance; 
+                Initialize(daipanScopeNet.Container.Resolve<IPlayerParamDataContainer>()); 
+            }
             
             OnPlayerColorChanged();
         }
@@ -54,8 +57,22 @@ namespace Daipan.Player.MonoScripts
             _playerAttackTracking.Move(Runner.DeltaTime);
         }
 
-        public void SetUp(IPlayerParamData playerParamData, Func<IEnemyMono?> getTargetEnemyMono)
+        public void Initialize(IPlayerParamDataContainer playerParamDataContainer)
         {
+            _playerParamDataContainer = playerParamDataContainer;
+            _isInitialized = true;
+        }
+
+        public void SetUp(PlayerColor playerColor, Func<IEnemyMono?> getTargetEnemyMono)
+        {
+            if (!_isInitialized)
+            {
+                Debug.LogWarning($"PlayerAttackEffectNet is not initialized");
+                return;
+            }
+            
+            PlayerColor = playerColor;
+            var playerParamData = _playerParamDataContainer!.GetPlayerParamData(playerColor);
             Debug.Log($"PlayerAttackEffectMono data.Enum = {playerParamData.PlayerEnum()}");
             viewMono?.SetDomain(playerParamData);
             _playerAttackTracking = new PlayerAttackLinear(
