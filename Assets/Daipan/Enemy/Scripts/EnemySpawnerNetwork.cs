@@ -87,7 +87,7 @@ namespace Daipan.Enemy.Scripts
                         , _container.Resolve<IEnemySpawnPoint>()
                         , _container.Resolve<IEnemyParamContainer>()
                     );
-                    _enemyBuilder.BuildAction(enemyMono, enemyEnum)(enemyMono); 
+                    _enemyBuilder.Build(enemyMono, enemyEnum)(enemyMono); 
                 });
             _enemyCluster.Add(enemyMonoObject);
         }

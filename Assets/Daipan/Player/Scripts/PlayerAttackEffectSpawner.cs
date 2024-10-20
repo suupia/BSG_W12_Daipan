@@ -27,7 +27,7 @@ namespace Daipan.Player.Scripts
         {
             var effectPrefab = _effectLoader.Load();
             var effectObject = Object.Instantiate(effectPrefab, position, rotation);
-            return _playerAttackEffectBuilder.Build(effectObject, playerMono, playerViewMonos, playerColor);
+            return _playerAttackEffectBuilder.Build(playerMono, playerViewMonos, playerColor)(effectObject);
         }
     }
 }

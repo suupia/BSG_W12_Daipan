@@ -1,4 +1,5 @@
 #nullable enable
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Daipan.Battle.scripts;
@@ -32,22 +33,25 @@ namespace Daipan.Player.Scripts
             _enemyCluster = enemyCluster;
         }
 
-        public IPlayerAttackEffectMono Build(IPlayerAttackEffectMono effect, IMonoBehaviour playerMono,
-            List<AbstractPlayerViewMono?> playerViewMonos, PlayerColor playerColor)
+        public Func<IPlayerAttackEffectMono, IPlayerAttackEffectMono> Build(IMonoBehaviour playerMono, List<AbstractPlayerViewMono?> playerViewMonos, PlayerColor playerColor)
         {
-            effect.SetUp(_playerParamDataContainer.GetPlayerParamData(playerColor),
-                () => _enemyCluster.NearestEnemy(playerMono.Transform.position));
-            effect.OnHit += (sender, args) =>
+            return effect =>
             {
-                Debug.Log($"OnHit");
-                AttackEnemy(
-                    _playerParamDataContainer
-                    , playerViewMonos
-                    , playerColor
-                    , args.EnemyMono
+                effect.Initialize(_playerParamDataContainer);
+                effect.SetUp(playerColor, () => _enemyCluster.NearestEnemy(playerMono.Transform.position));
+                effect.OnHit += (sender, args) =>
+                {
+                    Debug.Log($"OnHit");
+                    AttackEnemy(
+                        _playerParamDataContainer
+                        , playerViewMonos
+                        , playerColor
+                        , args.EnemyMono
                     );
+                };
+                return effect;
             };
-            return effect;
+            
         }
 
 

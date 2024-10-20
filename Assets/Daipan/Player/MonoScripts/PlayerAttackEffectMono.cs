@@ -28,14 +28,28 @@ namespace Daipan.Player.MonoScripts
         }
 
         IPlayerAttackMove _playerAttackTracking = null!;
-
+        IPlayerParamDataContainer _playerParamDataContainer = null!;
+        bool _isInitialized;
         void Update()
         {
              _playerAttackTracking.Move(Time.deltaTime);
         }
 
-        public void SetUp(IPlayerParamData playerParamData, Func<IEnemyMono?> getTargetEnemyMono)
+        public void Initialize(IPlayerParamDataContainer playerParamDataContainer)
         {
+            _playerParamDataContainer = playerParamDataContainer;
+            _isInitialized = true;
+        }
+        
+        public void SetUp(PlayerColor playerColor, Func<IEnemyMono?> getTargetEnemyMono)
+        {
+            if (!_isInitialized)
+            {
+                Debug.LogWarning("PlayerAttackEffectMono: Not initialized");
+                return;
+            }
+            
+            var playerParamData = _playerParamDataContainer.GetPlayerParamData(playerColor);
             Debug.Log($"PlayerAttackEffectMono data.Enum = {playerParamData.PlayerEnum()}");
             viewMono?.SetDomain(playerParamData);
             _playerAttackTracking = new PlayerAttackLinear(

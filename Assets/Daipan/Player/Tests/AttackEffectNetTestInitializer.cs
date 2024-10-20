@@ -50,7 +50,7 @@ public class AttackEffectNetTestInitializer : MonoBehaviour
                 var attackEffectMono = obj.GetComponent<PlayerAttackEffectNet>();
                 var playerParam = playerParamManager.playerParams.First(); // 適当に1つ目を取得
                 var playerParamData = new PlayerParamData(playerParam);
-                attackEffectMono?.SetUp(playerParamData, () => null);
+                attackEffectMono?.SetUp(PlayerColor.Blue, () => null);
             });
         }
 
@@ -63,7 +63,8 @@ public class AttackEffectNetTestInitializer : MonoBehaviour
             _playerAttackEffectMono = Instantiate(playerAttackEffectMonoPrefab);
             var playerParam = playerParamManager.playerParams.First(); // 適当に1つ目を取得
             var playerParamData = new PlayerParamData(playerParam);
-            _playerAttackEffectMono?.SetUp(playerParamData, () => null);
+            // _playerAttackEffectMono?.Initialize(playerParamData); // Containerを入れないといけない
+            _playerAttackEffectMono?.SetUp(PlayerColor.Blue, () => null);
         }
 
         if (Input.GetKeyDown(KeyCode.P))

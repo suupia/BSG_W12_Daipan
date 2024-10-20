@@ -47,37 +47,38 @@ namespace Daipan.Player.Scripts
             _comboSpawner = comboSpawner;
             _waveState = waveState;
             _playerAntiCommentParamData = playerAntiCommentParamData;
-            _playerMissedAttackCounter =
-                new ThresholdResetCounter(playerAntiCommentParamData.GetMissedAttackCountForAntiComment());
+            _playerMissedAttackCounter = new ThresholdResetCounter(playerAntiCommentParamData.GetMissedAttackCountForAntiComment());
         }
 
-        public IPlayerAttackEffectMono Build
+        public Func<IPlayerAttackEffectMono, IPlayerAttackEffectMono> Build
         (
-            IPlayerAttackEffectMono effect
-            , IMonoBehaviour playerMono
+            IMonoBehaviour playerMono
             , List<AbstractPlayerViewMono?> playerViewMonos
             , PlayerColor playerColor
             )
         {
-            effect.SetUp(_playerParamDataContainer.GetPlayerParamData(playerColor),
-                () => _enemyCluster.NearestEnemy(playerMono.Transform.position));
-            effect.OnHit += (sender, args) =>
+            return effect =>
             {
-                Debug.Log($"OnHit");
-                AttackEnemy(
-                    _playerParamDataContainer
-                    , effect
-                    , playerViewMonos
-                    , playerColor
-                    , args
-                    ,_comboCounter
-                    , _playerMissedAttackCounter
-                    , _commentSpawner
-                    , _comboSpawner
+                effect.Initialize(_playerParamDataContainer);
+                effect.SetUp(playerColor, () => _enemyCluster.NearestEnemy(playerMono.Transform.position));
+                effect.OnHit += (sender, args) =>
+                {
+                    Debug.Log($"OnHit");
+                    AttackEnemy(
+                        _playerParamDataContainer
+                        , effect
+                        , playerViewMonos
+                        , playerColor
+                        , args
+                        ,_comboCounter
+                        , _playerMissedAttackCounter
+                        , _commentSpawner
+                        , _comboSpawner
                     );
-                SpawnAntiComment(args, _commentSpawner, _playerAntiCommentParamData,_waveState);
+                    SpawnAntiComment(args, _commentSpawner, _playerAntiCommentParamData,_waveState);
+                };
+                return effect;
             };
-            return effect;
         }
 
 

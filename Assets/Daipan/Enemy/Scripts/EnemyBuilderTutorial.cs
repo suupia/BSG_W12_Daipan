@@ -37,7 +37,7 @@ namespace Daipan.Enemy.Scripts
             _tutorialCurrentStep = tutorialCurrentStep; 
         }
 
-        public Action<IEnemyMono> BuildAction(IEnemySetDomain enemySetDomain, EnemyEnum enemyEnum)
+        public Func<IEnemyMono, IEnemyMono> Build(IEnemySetDomain enemySetDomain, EnemyEnum enemyEnum)
         {
             return enemyMono =>
             {
@@ -53,7 +53,7 @@ namespace Daipan.Enemy.Scripts
                     , new TutorialEnemyOnDied(enemyMono, _tutorialCurrentStep)
                 
                 );
-
+                return enemyMono;
             };
         }
         
