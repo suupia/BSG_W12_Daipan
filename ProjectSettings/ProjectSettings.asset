@@ -766,7 +766,7 @@ PlayerSettings:
     Stadia: DOTWEEN
     Standalone: DOTWEEN;FUSION_WEAVER;FUSION2
     VisionOS: DOTWEEN
-    WebGL: DOTWEEN
+    WebGL: DOTWEEN;FUSION_WEAVER;FUSION2
     Windows Store Apps: DOTWEEN
     XboxOne: DOTWEEN
     iPhone: DOTWEEN
