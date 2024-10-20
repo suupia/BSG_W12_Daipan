@@ -49,7 +49,7 @@ namespace Daipan.Enemy.Scripts
             _comboCounter = comboCounter;
         }
 
-        public Action<IEnemyMono> BuildAction(IEnemySetDomain enemySetDomain, EnemyEnum enemyEnum)
+        public Func<IEnemyMono,IEnemyMono> Build(IEnemySetDomain enemySetDomain, EnemyEnum enemyEnum)
         {
             return enemyMono =>
             {
@@ -70,6 +70,7 @@ namespace Daipan.Enemy.Scripts
                     IncreaseViewerNumber(args, _viewerNumber, _enemyLevelDesignParamData);
                     SpawnComment(args, _commentSpawner);
                 };
+                return enemyMono;
             };
         }
         

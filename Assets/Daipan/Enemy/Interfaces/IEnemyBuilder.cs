@@ -10,6 +10,6 @@ namespace Daipan.Enemy.Interfaces
     public interface IEnemyBuilder
     {
         [MustUseReturnValue]
-        Action<IEnemyMono> BuildAction(IEnemySetDomain enemySetDomain, EnemyEnum enemyEnum);
+        Func<IEnemyMono,IEnemyMono> Build(IEnemySetDomain enemySetDomain, EnemyEnum enemyEnum);
     }
 }
