@@ -336,6 +336,8 @@ MonoBehaviour:
     TypeName: 
   autoRun: 1
   autoInjectGameObjects: []
+  dtoNet:
+    RawGuidValue: 219d0a42ba5de4b49b62dfe640bc9e37
   streamParam: {fileID: 11400000, guid: 1b8bd700307d7c748a87d7ab4b98611c, type: 2}
   playerParamManager: {fileID: 11400000, guid: 651f7884d93c0421cb78640c6965c64a, type: 2}
   enemyParamsManager: {fileID: 11400000, guid: d5c28246bf0490340a52cc25d5aafc71, type: 2}

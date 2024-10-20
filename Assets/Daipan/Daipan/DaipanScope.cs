@@ -192,7 +192,7 @@ namespace Daipan.Daipan
             // IrritatedGauge
             builder.RegisterComponentInHierarchy<IrritatedViewMono>();
             builder.RegisterComponentInHierarchy<IrritatedGaugeBackgroundViewMono>();
-            builder.Register<IrritatedValue>(Lifetime.Scoped).WithParameter("maxValue", 100);
+            builder.Register<IrritatedGaugeValue>(Lifetime.Scoped).WithParameter("maxValue", 100);
         }
 
         public static void RegisterView(IContainerBuilder builder)

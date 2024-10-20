@@ -14,17 +14,17 @@ namespace Daipan.Enemy.Scripts
     public sealed class EnemySpecialOnAttacked : IEnemyOnAttacked
     {
         readonly EnemyEnum _enemyEnum;
-        readonly IrritatedValue _irritatedValue;
+        readonly IrritatedGaugeValue _irritatedGaugeValue;
         readonly EnemyLevelDesignParamData _enemyLevelDesignParamData;
 
         public EnemySpecialOnAttacked(
             EnemyEnum enemyEnum
-            , IrritatedValue irritatedValue
+            , IrritatedGaugeValue irritatedGaugeValue
             , EnemyLevelDesignParamData enemyLevelDesignParamData
         )
         {
             _enemyEnum = enemyEnum;
-            _irritatedValue = irritatedValue;
+            _irritatedGaugeValue = irritatedGaugeValue;
             _enemyLevelDesignParamData = enemyLevelDesignParamData;
         }
 
@@ -38,7 +38,7 @@ namespace Daipan.Enemy.Scripts
 
                 // 違う色のときに倒したのなら、イライラゲージを増やす
                 if (afterHp.Value <= 0)
-                    _irritatedValue.IncreaseValue(_enemyLevelDesignParamData
+                    _irritatedGaugeValue.IncreaseValue(_enemyLevelDesignParamData
                         .GetIncreaseIrritationGaugeOnSpecialEnemyKill());
 
             }

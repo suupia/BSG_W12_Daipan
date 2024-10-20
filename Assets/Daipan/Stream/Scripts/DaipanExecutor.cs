@@ -13,19 +13,19 @@ namespace Daipan.Stream.Scripts
     {
         readonly AntiCommentCluster _antiCommentCluster;
         readonly EnemyCluster _enemyCluster;
-        readonly IrritatedValue _irritatedValue;
+        readonly IrritatedGaugeValue _irritatedGaugeValue;
         readonly StreamerViewMono _streamerViewMono;
         readonly ShakeDisplayMono _shakeDisplayMono;
         public int DaipanCount { get; private set; }
         public DaipanExecutor(
-            IrritatedValue irritatedValue,
+            IrritatedGaugeValue irritatedGaugeValue,
             EnemyCluster enemyCluster,
             AntiCommentCluster antiCommentCluster,
             StreamerViewMono streamerViewMono,
             ShakeDisplayMono shakeDisplayMono
         )
         {
-            _irritatedValue = irritatedValue;
+            _irritatedGaugeValue = irritatedGaugeValue;
             _enemyCluster = enemyCluster;
             _antiCommentCluster = antiCommentCluster;
             _streamerViewMono = streamerViewMono;
@@ -33,7 +33,7 @@ namespace Daipan.Stream.Scripts
         }
         public void DaiPan()
         {
-            var canDaipan = _irritatedValue.IsFull;
+            var canDaipan = _irritatedGaugeValue.IsFull;
             if (canDaipan)
             {
                 Debug.Log($"Daipan!");
@@ -44,7 +44,7 @@ namespace Daipan.Stream.Scripts
                 DaipanCount++;
                 
                 // 台パンしたら怒りゲージは0になる
-                _irritatedValue.Reset();
+                _irritatedGaugeValue.Reset();
                 
                 SoundManager.Instance?.PlaySe(SeEnum.Daipan);
             }

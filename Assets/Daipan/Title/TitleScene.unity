@@ -3980,6 +3980,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   titleCanvasGroup: {fileID: 1811994191}
   networkRunnerPrefab: {fileID: 9077539603378056844, guid: 957fd199d139e4197bcca70f9363268c, type: 3}
+  dtoNetPrefab: {fileID: 2030922226672112631, guid: 219d0a42ba5de4b49b62dfe640bc9e37, type: 3}
   joinPanel: {fileID: 1127169373}
   localPlayerNameInputField: {fileID: 930919835}
   localRoomNameInputField: {fileID: 1161457107}

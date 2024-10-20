@@ -16,24 +16,24 @@ namespace Daipan.Comment.MonoScripts
 
         AntiCommentCluster _antiCommentCluster = null!;
         CommentParamsServer _commentParamsServer = null!;
-        IrritatedValue _irritatedValue = null!;
+        IrritatedGaugeValue _irritatedGaugeValue = null!;
         bool IsActive { get; set; } = true;
         
         [Inject]
         public void Initialize(
             AntiCommentCluster antiCommentCluster
             , CommentParamsServer commentParamsServer
-            , IrritatedValue irritatedValue
+            , IrritatedGaugeValue irritatedGaugeValue
         )
         {
             _antiCommentCluster = antiCommentCluster;
             _commentParamsServer = commentParamsServer;
-            _irritatedValue = irritatedValue;
+            _irritatedGaugeValue = irritatedGaugeValue;
         }
 
         void Update()
         {
-           if(IsActive) _irritatedValue.IncreaseValue(  _commentParamsServer.GetIrritationIncreasePerSec() * Time.deltaTime);
+           if(IsActive) _irritatedGaugeValue.IncreaseValue(  _commentParamsServer.GetIrritationIncreasePerSec() * Time.deltaTime);
         }
 
         public void SetParameter(string commentWord)

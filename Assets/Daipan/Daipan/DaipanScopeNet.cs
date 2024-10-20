@@ -3,6 +3,7 @@ using Daipan.Battle.scripts;
 using Daipan.Battle.Scripts;
 using Daipan.Comment.MonoScripts;
 using Daipan.Comment.Scripts;
+using Daipan.Core;
 using Daipan.Core.Interfaces;
 using Daipan.Core.Scripts;
 using Daipan.DebugInput.MonoScripts;
@@ -195,7 +196,7 @@ namespace Daipan.Daipan
             // IrritatedGauge
             builder.RegisterComponentInHierarchy<IrritatedViewMono>();
             builder.RegisterComponentInHierarchy<IrritatedGaugeBackgroundViewMono>();
-            builder.Register<IrritatedValue>(Lifetime.Scoped).WithParameter("maxValue", 100);
+            builder.Register<IrritatedGaugeValue>(Lifetime.Scoped).WithParameter("maxValue", 100);
         }
 
         public static void RegisterView(IContainerBuilder builder)
@@ -254,6 +255,10 @@ namespace Daipan.Daipan
             var runner = FindObjectOfType<NetworkRunner>();
             Debug.Log($"NetworkRunner : {runner}");
             builder.RegisterComponent(runner);
+
+            var dtoNet = FindObjectOfType<DTONet>(); 
+            Debug.Log($"DTONet : {dtoNet}");
+            builder.RegisterComponent(dtoNet);
 
             // Stream
             RegisterStream(builder, streamParam);

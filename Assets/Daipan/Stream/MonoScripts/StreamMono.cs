@@ -8,7 +8,7 @@ namespace Daipan.Stream.MonoScripts
     {
         ViewerNumber _viewerNumber = null!;
         ViewerParam _viewerParam = null!;
-        IrritatedValue _irritatedValue = null!;
+        IrritatedGaugeValue _irritatedGaugeValue = null!;
 
         float OneSecTimer { get; set; }
 
@@ -30,12 +30,12 @@ namespace Daipan.Stream.MonoScripts
         public void Initialize(
             ViewerParam viewerParam,
             ViewerNumber viewerNumber,
-            IrritatedValue irritatedValue
+            IrritatedGaugeValue irritatedGaugeValue
            ) 
         {
             _viewerParam = viewerParam;
             _viewerNumber = viewerNumber;
-            _irritatedValue = irritatedValue;
+            _irritatedGaugeValue = irritatedGaugeValue;
         }
     }
 }
