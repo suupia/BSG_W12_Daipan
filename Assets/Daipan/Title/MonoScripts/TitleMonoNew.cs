@@ -63,7 +63,7 @@ public class TitleMonoNew : MonoBehaviour
         var result = await runner.StartGame(startGameArgs);
 
         var dtoNet = runner.Spawn(dtoNetPrefab);
-        DontDestroyOnLoad(dtoNet);
+        runner.MakeDontDestroyOnLoad(dtoNet.gameObject);
 
         if (result.Ok)
         {
