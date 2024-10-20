@@ -61,9 +61,15 @@ public class TitleMonoNew : MonoBehaviour
         var runner = Instantiate(networkRunnerPrefab);
 
         var result = await runner.StartGame(startGameArgs);
+        
+        Debug.Log($"runner.IsCloudReady : {runner.IsCloudReady}");
 
-        var dtoNet = runner.Spawn(dtoNetPrefab);
-        runner.MakeDontDestroyOnLoad(dtoNet.gameObject);
+        if (runner.IsSharedModeMasterClient)
+        {
+            var dtoNet = runner.Spawn(dtoNetPrefab);
+            runner.MakeDontDestroyOnLoad(dtoNet.gameObject); 
+        }
+
 
         if (result.Ok)
         {
