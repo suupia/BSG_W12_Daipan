@@ -1353,6 +1353,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6718282394163543922, guid: 30e91696e7cda4ce7b49b5cd15e11759, type: 3}
+      propertyPath: daipanWaveSpeed
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7019384296459631377, guid: 30e91696e7cda4ce7b49b5cd15e11759, type: 3}
       propertyPath: m_Name
       value: Streamer
