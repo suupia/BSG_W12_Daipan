@@ -205,7 +205,7 @@ namespace Daipan.Daipan
             builder.RegisterComponentInHierarchy<ViewerViewMono>();
 
             // View
-            builder.RegisterComponentInHierarchy<StreamerViewMono>();
+            builder.RegisterComponentInHierarchy<StreamerViewMono>().AsSelf().As<IUpdate>();
 
             // ShakeDisplay
             builder.RegisterComponentInHierarchy<ShakeDisplayMono>();
@@ -305,7 +305,7 @@ namespace Daipan.Daipan
 
             // View
             RegisterView(builder);
-            builder.RegisterComponentInHierarchy<WaveProgressViewMono>();
+            builder.RegisterComponentInHierarchy<WaveProgressViewMono>().AsSelf().As<IUpdate>();
 
 
             // Battle

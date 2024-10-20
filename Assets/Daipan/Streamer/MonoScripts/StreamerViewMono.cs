@@ -1,4 +1,5 @@
 #nullable enable
+using Daipan.Core.Interfaces;
 using Daipan.Stream.Scripts;
 using UnityEngine;
 using VContainer;
@@ -8,7 +9,7 @@ using R3;
 
 namespace Daipan.Streamer.MonoScripts
 {
-    public class StreamerViewMono : MonoBehaviour
+    public class StreamerViewMono : MonoBehaviour, IUpdate
     {
         [SerializeField] Animator animator = null!;
         [SerializeField] Animator daipanEffect = null!;
@@ -38,7 +39,7 @@ namespace Daipan.Streamer.MonoScripts
                 .AddTo(this);
         }
 
-        void Update()
+        void IUpdate.Update()
         {
             animator.SetInteger("IrritatedStage", _irritatedGaugeValue.CurrentIrritatedStage);
         }

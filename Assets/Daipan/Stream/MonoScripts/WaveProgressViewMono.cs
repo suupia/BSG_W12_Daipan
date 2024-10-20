@@ -1,5 +1,6 @@
 #nullable enable
 using Daipan.Battle.scripts;
+using Daipan.Core.Interfaces;
 using Daipan.Stream.Scripts;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -8,12 +9,12 @@ using VContainer;
 
 namespace Daipan.Stream.MonoScripts
 {
-    public sealed class WaveProgressViewMono : MonoBehaviour
+    public sealed class WaveProgressViewMono : MonoBehaviour, IUpdate
     {
         [SerializeField] Slider waveProgressSlider = null!;
         
         WaveProgress _waveProgress = null!;
-        void Update()
+        void IUpdate.Update()
         {
             waveProgressSlider.value = (float)_waveProgress.CurrentProgressRatio;
             // Debug.Log($"waveProgressSlider.value: {waveProgressSlider.value}");
