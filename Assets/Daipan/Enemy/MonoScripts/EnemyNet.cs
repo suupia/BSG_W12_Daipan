@@ -55,12 +55,17 @@ namespace Daipan.Enemy.MonoScripts
         {
             base.Spawned();
             Debug.Log($"EnemyNet Spawned");
-            var daipanScopeNet = FindObjectOfType<DaipanScopeNet>();
-            Initialize(
-                daipanScopeNet.Container.Resolve<PlayerHolder>()
-                , daipanScopeNet.Container.Resolve<IEnemySpawnPoint>()
-                , daipanScopeNet.Container.Resolve<IEnemyParamContainer>()
-            );
+
+            if (!HasStateAuthority)
+            {
+                var daipanScopeNet = DaipanScopeNet.Instance; 
+                Initialize(
+                    daipanScopeNet.Container.Resolve<PlayerHolder>()
+                    , daipanScopeNet.Container.Resolve<IEnemySpawnPoint>()
+                    , daipanScopeNet.Container.Resolve<IEnemyParamContainer>()
+                ); 
+            }
+            
             OnEnemyEnumChanged();
         }
 

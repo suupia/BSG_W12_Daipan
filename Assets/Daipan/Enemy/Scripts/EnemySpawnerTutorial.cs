@@ -66,8 +66,8 @@ namespace Daipan.Enemy.Scripts
                 , _container.Resolve<IEnemySpawnPoint>()
                 , _container.Resolve<IEnemyParamContainer>()
             );
-            var enemyMono = _enemyBuilder.Build(enemyMonoObject, enemyMonoObject, enemyEnum);
-            _enemyCluster.Add(enemyMono);
+            _enemyBuilder.BuildAction(enemyMonoObject, enemyEnum)(enemyMonoObject);
+            _enemyCluster.Add(enemyMonoObject);
         }
 
         static List <Vector3> GetSpawnedPositions(IEnemySpawnPoint enemySpawnPoint)

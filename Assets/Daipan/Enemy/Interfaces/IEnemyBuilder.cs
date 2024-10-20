@@ -1,12 +1,15 @@
 ﻿#nullable enable
+using System;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Enemy.Scripts;
 using Daipan.LevelDesign.Enemy.Scripts;
+using JetBrains.Annotations;
 
 namespace Daipan.Enemy.Interfaces
 {
     public interface IEnemyBuilder
     {
-        IEnemyMono Build(IEnemyMono enemyMono, IEnemySetDomain enemySetDomain, EnemyEnum enemyEnum);
+        [MustUseReturnValue]
+        Action<IEnemyMono> BuildAction(IEnemySetDomain enemySetDomain, EnemyEnum enemyEnum);
     }
 }

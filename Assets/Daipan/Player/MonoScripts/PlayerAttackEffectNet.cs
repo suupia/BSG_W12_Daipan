@@ -45,6 +45,7 @@ namespace Daipan.Player.MonoScripts
             var daipanScopeNet = FindObjectOfType<DaipanScopeNet>();
             _playerParamDataContainer = daipanScopeNet.Container.Resolve<IPlayerParamDataContainer>(); 
             
+            OnPlayerColorChanged();
         }
         
         public override void FixedUpdateNetwork()

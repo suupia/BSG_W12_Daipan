@@ -1,4 +1,4 @@
-using System;
+#nullable enable
 using Daipan.Battle.scripts;
 using Daipan.Battle.Scripts;
 using Daipan.Comment.MonoScripts;
@@ -46,6 +46,9 @@ namespace Daipan.Daipan
 {
     public sealed class DaipanScopeNet : LifetimeScope
     {
+        static DaipanScopeNet? _instance;
+        public static DaipanScopeNet Instance => _instance ??= FindObjectOfType<DaipanScopeNet>();
+        
         [FormerlySerializedAs("streamParameter")] [SerializeField]
         StreamParam streamParam = null!;
 

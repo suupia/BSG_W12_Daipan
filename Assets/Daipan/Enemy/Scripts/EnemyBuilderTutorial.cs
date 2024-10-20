@@ -37,22 +37,24 @@ namespace Daipan.Enemy.Scripts
             _tutorialCurrentStep = tutorialCurrentStep; 
         }
 
-        public IEnemyMono Build(IEnemyMono enemyMono, IEnemySetDomain enemySetDomain, EnemyEnum enemyEnum)
+        public Action<IEnemyMono> BuildAction(IEnemySetDomain enemySetDomain, EnemyEnum enemyEnum)
         {
-            Debug.Log($"enemyEnum: {enemyEnum}");
-            var enemyParamData = _enemyParamContainer.GetEnemyParamData(enemyEnum);
+            return enemyMono =>
+            {
+                Debug.Log($"enemyEnum: {enemyEnum}");
+                var enemyParamData = _enemyParamContainer.GetEnemyParamData(enemyEnum);
 
-            enemySetDomain.SetDomain(
-                enemyEnum
-                , _enemyCluster
-                , new EnemyAttackDecider()
-                , new EnemyDie(enemyMono)
-                , _enemyOnAttackedBuilder.SwitchEnemyOnAttacked(enemyEnum)
-                , new TutorialEnemyOnDied(enemyMono, _tutorialCurrentStep)
+                enemySetDomain.SetDomain(
+                    enemyEnum
+                    , _enemyCluster
+                    , new EnemyAttackDecider()
+                    , new EnemyDie(enemyMono)
+                    , _enemyOnAttackedBuilder.SwitchEnemyOnAttacked(enemyEnum)
+                    , new TutorialEnemyOnDied(enemyMono, _tutorialCurrentStep)
                 
-            );
-            
-            return enemyMono;
+                );
+
+            };
         }
         
 
