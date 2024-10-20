@@ -2880,15 +2880,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4551183778950379205, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
-      propertyPath: m_Name
-      value: DaipanWave
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 38033584895707765, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
-    - {fileID: 3333971488957149570, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
-    - {fileID: 3039148929833545822, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
