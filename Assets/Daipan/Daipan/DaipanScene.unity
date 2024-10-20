@@ -360,7 +360,7 @@ Camera:
   field of view: 60
   orthographic: 1
   orthographic size: 5
-  m_Depth: 3
+  m_Depth: 49
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 8192
@@ -829,7 +829,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: 6bc4cca0bf8034a0d89b16e390923aa1, type: 2}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3160,9 +3160,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 309514489366225730, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
+      propertyPath: m_Depth
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 309514489366225730, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
+      propertyPath: m_ClearFlags
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 309514489366225730, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 5568
+      objectReference: {fileID: 0}
     - target: {fileID: 495236675369186314, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       propertyPath: m_Name
       value: ----------Cameras----------
+      objectReference: {fileID: 0}
+    - target: {fileID: 1948116558607679532, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
+      propertyPath: m_Depth
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 1948116558607679532, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       propertyPath: m_TargetTexture
@@ -3171,6 +3187,10 @@ PrefabInstance:
     - target: {fileID: 1948116558607679532, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       propertyPath: m_CullingMask.m_Bits
       value: 65536
+      objectReference: {fileID: 0}
+    - target: {fileID: 2497925990668980782, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
+      propertyPath: m_Depth
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3087268379624898967, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3211,6 +3231,10 @@ PrefabInstance:
     - target: {fileID: 3087268379624898967, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393267195869761840, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
+      propertyPath: m_Depth
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
