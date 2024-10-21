@@ -9,6 +9,7 @@ namespace Daipan.Tower.MonoScripts
         [SerializeField] Animator animator = null!;
         [SerializeField] SpriteRenderer towerFullRender = null!;
         [SerializeField] GameObject lightView = null!;
+        [SerializeField] GameObject rayView = null!;
         Material? _towerFullMaterial;
 
         void Awake()
@@ -30,6 +31,7 @@ namespace Daipan.Tower.MonoScripts
         public void SwitchLight(bool isOn)
         {
             lightView.SetActive(isOn);
+            rayView.SetActive(isOn);
         }
 
         public void Daipan()
