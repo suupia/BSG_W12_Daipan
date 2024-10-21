@@ -192,7 +192,7 @@ namespace Daipan.Daipan
             // IrritatedGauge
             builder.RegisterComponentInHierarchy<IrritatedViewMono>();
             builder.RegisterComponentInHierarchy<IrritatedGaugeBackgroundViewMono>();
-            builder.Register<IrritatedValue>(Lifetime.Scoped).WithParameter("maxValue", 100);
+            builder.Register<IrritatedGaugeValue>(Lifetime.Scoped).WithParameter("maxValue", 100);
         }
 
         public static void RegisterView(IContainerBuilder builder)
@@ -201,7 +201,7 @@ namespace Daipan.Daipan
             builder.RegisterComponentInHierarchy<ViewerViewMono>();
 
             // View
-            builder.RegisterComponentInHierarchy<StreamerViewMono>();
+            builder.RegisterComponentInHierarchy<StreamerViewMono>().AsSelf().As<IUpdate>();
 
             // ShakeDisplay
             builder.RegisterComponentInHierarchy<ShakeDisplayMono>();
@@ -293,7 +293,7 @@ namespace Daipan.Daipan
 
             // View
             RegisterView(builder);
-            builder.RegisterComponentInHierarchy<WaveProgressViewMono>();
+            builder.RegisterComponentInHierarchy<WaveProgressViewMono>().AsSelf().As<IUpdate>();
 
 
             // Battle

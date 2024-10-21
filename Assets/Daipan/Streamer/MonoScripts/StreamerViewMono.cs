@@ -1,4 +1,5 @@
 #nullable enable
+using Daipan.Core.Interfaces;
 using Daipan.Stream.Scripts;
 using UnityEngine;
 using VContainer;
@@ -8,7 +9,7 @@ using R3;
 
 namespace Daipan.Streamer.MonoScripts
 {
-    public class StreamerViewMono : MonoBehaviour
+    public class StreamerViewMono : MonoBehaviour, IUpdate
     {
         [SerializeField] Animator animator = null!;
         [SerializeField] Animator daipanEffect = null!;
@@ -18,29 +19,29 @@ namespace Daipan.Streamer.MonoScripts
         [SerializeField] Vector3 moveAmountByAngerZoom;
         [SerializeField] float zoomDuration;
 
-        IrritatedValue _irritatedValue = null!;
+        IrritatedGaugeValue _irritatedGaugeValue = null!;
         Vector3 _originalScale;
         Vector3 _originalPosition;
         Transform _transform = null!;
         float _effectDelaySec = 0.8f;
 
         [Inject]
-        void Initialize(IrritatedValue irritatedValue)
+        void Initialize(IrritatedGaugeValue irritatedGaugeValue)
         {
-            _irritatedValue = irritatedValue;
+            _irritatedGaugeValue = irritatedGaugeValue;
 
             _transform = transform;
             _originalPosition = transform.position;
             _originalScale = _transform.localScale;
 
-            Observable.EveryValueChanged(irritatedValue, x => x.IsFull)
-                .Subscribe(_ => AngerZoom(irritatedValue.IsFull))
+            Observable.EveryValueChanged(irritatedGaugeValue, x => x.IsFull)
+                .Subscribe(_ => AngerZoom(irritatedGaugeValue.IsFull))
                 .AddTo(this);
         }
 
-        void Update()
+        void IUpdate.Update()
         {
-            animator.SetInteger("IrritatedStage", _irritatedValue.CurrentIrritatedStage);
+            animator.SetInteger("IrritatedStage", _irritatedGaugeValue.CurrentIrritatedStage);
         }
 
         public void Daipan()

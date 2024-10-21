@@ -18,7 +18,7 @@ using VContainer;
 
 namespace Daipan.Player.MonoScripts
 {
-    public sealed class PlayerAttackEffectNet : NetworkBehaviour , IPlayerAttackEffectMono
+    public sealed class PlayerAttackEffectNet : NetworkBehaviour, IPlayerAttackEffectMono
     {
         public GameObject GameObject => gameObject;
         public Transform Transform => transform;
@@ -31,12 +31,14 @@ namespace Daipan.Player.MonoScripts
         }
 
         IPlayerAttackMove _playerAttackTracking = null!;
-        
+
         [Networked]
         [OnChangedRender(nameof(OnPlayerColorChanged))]
         PlayerColor PlayerColor { get; set; } = PlayerColor.None;
+
         IPlayerParamDataContainer? _playerParamDataContainer;
         bool _isInitialized;
+
         public override void Spawned()
         {
             base.Spawned();
@@ -44,13 +46,13 @@ namespace Daipan.Player.MonoScripts
 
             if (!HasStateAuthority)
             {
-                var daipanScopeNet = DaipanScopeNet.Instance; 
-                Initialize(daipanScopeNet.Container.Resolve<IPlayerParamDataContainer>()); 
+                var daipanScopeNet = DaipanScopeNet.BuildedContainer;
+                Initialize(daipanScopeNet.Container.Resolve<IPlayerParamDataContainer>());
             }
-            
+
             OnPlayerColorChanged();
         }
-        
+
         public override void FixedUpdateNetwork()
         {
             base.FixedUpdateNetwork();
@@ -70,7 +72,7 @@ namespace Daipan.Player.MonoScripts
                 Debug.LogWarning($"PlayerAttackEffectNet is not initialized");
                 return;
             }
-            
+
             PlayerColor = playerColor;
             var playerParamData = _playerParamDataContainer!.GetPlayerParamData(playerColor);
             Debug.Log($"PlayerAttackEffectMono data.Enum = {playerParamData.PlayerEnum()}");
@@ -85,7 +87,7 @@ namespace Daipan.Player.MonoScripts
 
         public void Defenced()
         {
-            _playerAttackTracking.Defenced(); 
+            _playerAttackTracking.Defenced();
         }
 
         void OnPlayerColorChanged()
@@ -96,9 +98,9 @@ namespace Daipan.Player.MonoScripts
                 Debug.LogWarning($"_playerParamDataContainer is null");
                 return;
             }
+
             var playerParamData = _playerParamDataContainer.GetPlayerParamData(PlayerColor);
             viewMono?.SetDomain(playerParamData);
         }
     }
-
 }

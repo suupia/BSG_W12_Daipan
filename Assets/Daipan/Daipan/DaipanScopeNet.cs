@@ -1,8 +1,10 @@
 #nullable enable
+using Cysharp.Threading.Tasks;
 using Daipan.Battle.scripts;
 using Daipan.Battle.Scripts;
 using Daipan.Comment.MonoScripts;
 using Daipan.Comment.Scripts;
+using Daipan.Core;
 using Daipan.Core.Interfaces;
 using Daipan.Core.Scripts;
 using Daipan.DebugInput.MonoScripts;
@@ -47,8 +49,18 @@ namespace Daipan.Daipan
     public sealed class DaipanScopeNet : LifetimeScope
     {
         static DaipanScopeNet? _instance;
-        public static DaipanScopeNet Instance => _instance ??= FindObjectOfType<DaipanScopeNet>();
-        
+
+        public static DaipanScopeNet BuildedContainer
+        {
+            get
+            {
+                if (_instance != null) return _instance;
+                var daipanScopeNet = FindObjectOfType<DaipanScopeNet>();
+                daipanScopeNet.Build();
+                return daipanScopeNet;
+            }
+        }
+
         [FormerlySerializedAs("streamParameter")] [SerializeField]
         StreamParam streamParam = null!;
 
@@ -67,6 +79,8 @@ namespace Daipan.Daipan
         [SerializeField] ComboParamManager comboParamManager = null!;
 
         [SerializeField] EndSceneTransitionParam endSceneTransitionParam = null!;
+
+        public NetworkRunner? Runner { private get; set; }
 
         public static void RegisterStream(IContainerBuilder builder, StreamParam streamParam)
         {
@@ -195,7 +209,7 @@ namespace Daipan.Daipan
             // IrritatedGauge
             builder.RegisterComponentInHierarchy<IrritatedViewMono>();
             builder.RegisterComponentInHierarchy<IrritatedGaugeBackgroundViewMono>();
-            builder.Register<IrritatedValue>(Lifetime.Scoped).WithParameter("maxValue", 100);
+            builder.Register<IrritatedGaugeValue>(Lifetime.Scoped).WithParameter("maxValue", 100);
         }
 
         public static void RegisterView(IContainerBuilder builder)
@@ -204,7 +218,7 @@ namespace Daipan.Daipan
             builder.RegisterComponentInHierarchy<ViewerViewMono>();
 
             // View
-            builder.RegisterComponentInHierarchy<StreamerViewMono>();
+            builder.RegisterComponentInHierarchy<StreamerViewMono>().AsSelf().As<IUpdate>();
 
             // ShakeDisplay
             builder.RegisterComponentInHierarchy<ShakeDisplayMono>();
@@ -250,10 +264,13 @@ namespace Daipan.Daipan
 
         protected override void Configure(IContainerBuilder builder)
         {
-            // [Precondition] 
+            Debug.Log($"DaipanScopeNet Configure() builder: {builder}");
+
+            if (Runner == null) Debug.LogWarning("NetworkRunner is null");
             var runner = FindObjectOfType<NetworkRunner>();
-            Debug.Log($"NetworkRunner : {runner}");
             builder.RegisterComponent(runner);
+
+            builder.Register<DTONetWrapper>(Lifetime.Scoped);
 
             // Stream
             RegisterStream(builder, streamParam);
@@ -278,7 +295,7 @@ namespace Daipan.Daipan
             // Enemy
             RegisterEnemy(builder, enemyParamsManager);
             builder.Register<EnemyOnAttackedBuilder>(Lifetime.Transient);
-            builder.RegisterComponentInHierarchy<EnemyWaveSpawnerCounterNet>().AsImplementedInterfaces();
+            builder.RegisterComponentInHierarchy<EnemyWaveSpawnerCounterNet>().AsSelf().AsImplementedInterfaces();
             builder.Register<EnemySpawnerNetwork>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
             builder.Register<EnemyEnumSelector>(Lifetime.Scoped).As<IEnemyEnumSelector>();
             builder.Register<EnemyBuilder>(Lifetime.Scoped).As<IEnemyBuilder>();
@@ -300,7 +317,7 @@ namespace Daipan.Daipan
 
             // View
             RegisterView(builder);
-            builder.RegisterComponentInHierarchy<WaveProgressViewMono>();
+            builder.RegisterComponentInHierarchy<WaveProgressViewMono>().AsSelf().As<IUpdate>();
 
 
             // Battle

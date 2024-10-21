@@ -12,10 +12,10 @@ namespace Daipan.Stream.MonoScripts
         [SerializeField] Image IrritatedGuage = null!;
 
         [Inject]
-        public void Initialize(IrritatedValue irritatedValue)
+        public void Initialize(IrritatedGaugeValue irritatedGaugeValue)
         {
-            Observable.EveryValueChanged(irritatedValue, x => irritatedValue.Ratio)
-                .Subscribe(_ => UpdateIrritatedGauge(irritatedValue.Ratio))
+            Observable.EveryValueChanged(irritatedGaugeValue, x => irritatedGaugeValue.Ratio)
+                .Subscribe(_ => UpdateIrritatedGauge(irritatedGaugeValue.Ratio))
                 .AddTo(this);
         }
 

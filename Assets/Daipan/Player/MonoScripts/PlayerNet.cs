@@ -30,12 +30,12 @@ namespace Daipan.Player.MonoScripts
         public Hp Hp { get; private set; } = null!;
 
         IPlayerOnAttacked _playerOnAttacked = null!;
-        
+
         public override void Spawned()
         {
             base.Spawned();
             Debug.Log($"PlayerNet Spawned");
-            var daipanScopeNet = FindObjectOfType<DaipanScopeNet>();
+            var daipanScopeNet = DaipanScopeNet.BuildedContainer;
             Initialize(
                 daipanScopeNet.Container.Resolve<IPlayerHpParamData>()
                 , daipanScopeNet.Container.Resolve<IPlayerInput>()
@@ -48,23 +48,23 @@ namespace Daipan.Player.MonoScripts
             base.FixedUpdateNetwork();
             _playerInput.Update();
 
-            foreach (var playerViewMono in playerViewMonos) playerViewMono?.Idle(); 
+            foreach (var playerViewMono in playerViewMonos) playerViewMono?.Idle();
         }
 
 
         [Inject]
         public void Initialize(
-             IPlayerHpParamData playerHpParamData
+            IPlayerHpParamData playerHpParamData
             , IPlayerInput playerInput
             , IPlayerOnAttacked playerOnAttacked
         )
         {
             _playerHpParamData = playerHpParamData;
             Hp = new Hp(_playerHpParamData.GetMaxHp());
-            
+
             playerInput.SetPlayerMono(this, playerViewMonos);
             _playerInput = playerInput;
-            
+
             playerOnAttacked.SetPlayerViews(playerViewMonos);
             _playerOnAttacked = playerOnAttacked;
         }
@@ -73,12 +73,12 @@ namespace Daipan.Player.MonoScripts
         {
             Hp = _playerOnAttacked.OnAttacked(Hp, enemyParamData);
         }
-        
+
         public void SetHpMax()
         {
             Hp = new Hp(_playerHpParamData.GetMaxHp());
         }
-        
+
         public int MaxHp => _playerHpParamData.GetMaxHp();
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using Daipan.Battle.scripts;
 using Daipan.Core.Interfaces;
+using Daipan.Daipan;
 using Daipan.Enemy.Interfaces;
 using Fusion;
 using UnityEngine;
@@ -40,6 +41,19 @@ namespace Daipan.Enemy.Scripts
         public override void Spawned()
         {
             base.Spawned();
+            Debug.Log($"EnemyWaveSpawnerCounterNet Spawned");
+
+            var daipanScopeNet = DaipanScopeNet.BuildedContainer;
+            Initialize(
+                daipanScopeNet.Container.Resolve<IEnemySpawner>()
+                , daipanScopeNet.Container.Resolve<IFinalBossSpawner>()
+                , daipanScopeNet.Container.Resolve<IEnemyWaveParamContainer>()
+                , daipanScopeNet.Container.Resolve<WaveState>()
+            );
+
+            Debug.Log($"_waveState : {_waveState}");
+
+
             _disposables.Add(
                 Observable
                     .EveryValueChanged(_waveState, x => x.CurrentWaveIndex)

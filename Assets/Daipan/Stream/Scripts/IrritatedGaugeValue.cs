@@ -2,31 +2,44 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Daipan.Core;
+using Daipan.Daipan;
 using UnityEngine;
+using VContainer;
 
 namespace Daipan.Stream.Scripts
 {
-    public sealed class IrritatedValue
+    public sealed class IrritatedGaugeValue
     {
         readonly IrritatedParams _irritatedParams;
+        readonly DTONetWrapper _dtoNet;
 
-        public IrritatedValue(double maxValue, IrritatedParams irritatedParams)
+
+        public IrritatedGaugeValue(double maxValue, IrritatedParams irritatedParams, DTONetWrapper dtoNet)
         {
             MaxValue = maxValue;
             _irritatedParams = irritatedParams;
+            _dtoNet = dtoNet;
         }
 
         public double MaxValue { get; }
         public bool IsFull => Value >= MaxValue;
         public double Ratio => Value / MaxValue;
-        public double Value { get; private set; }
+
+        public double Value
+        {
+            get => _dtoNet.IrritatedValue;
+            private set => _dtoNet.IrritatedValue = value;
+        }
+
         public IReadOnlyList<double> RatioTable => _irritatedParams.RatioTable;
+
 
         public int CurrentIrritatedStage
         {
             get
             {
-                for (int i = 0; i < RatioTable.Count; i++)
+                for (var i = 0; i < RatioTable.Count; i++)
                 {
                     if (Ratio >= RatioTable[i]) continue;
                     return i;

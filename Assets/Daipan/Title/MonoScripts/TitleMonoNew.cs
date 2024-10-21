@@ -1,6 +1,8 @@
 #nullable enable
 using System.Linq;
 using Daipan.Battle.scripts;
+using Daipan.Core;
+using Daipan.Daipan;
 using Fusion;
 using R3;
 using TMPro;
@@ -11,6 +13,7 @@ public class TitleMonoNew : MonoBehaviour
 {
     [SerializeField] CanvasGroup titleCanvasGroup = null!;
     [SerializeField] NetworkRunner networkRunnerPrefab = null!;
+    [SerializeField] DTONet dtoNetPrefab = null!;
 
     [Header("JoinPanel")] [SerializeField] GameObject joinPanel = null!;
     [SerializeField] TMP_InputField localPlayerNameInputField = null!;
@@ -59,6 +62,15 @@ public class TitleMonoNew : MonoBehaviour
         var runner = Instantiate(networkRunnerPrefab);
 
         var result = await runner.StartGame(startGameArgs);
+
+        Debug.Log($"runner.IsCloudReady : {runner.IsCloudReady}");
+
+        if (runner.IsSharedModeMasterClient)
+        {
+            var dtoNet = runner.Spawn(dtoNetPrefab);
+            runner.MakeDontDestroyOnLoad(dtoNet.gameObject);
+        }
+
 
         if (result.Ok)
         {

@@ -14,18 +14,18 @@ namespace Daipan.DebugInput.MonoScripts
     {
         WaveState _waveState = null!;
         IEnemyWaveSpawnerCounter _enemyWaveSpawnerCounter = null!;
-        IrritatedValue _irritatedValue = null!;
+        IrritatedGaugeValue _irritatedGaugeValue = null!;
 
         [Inject]
         public void Initialize(
             WaveState waveState
             , IEnemyWaveSpawnerCounter enemyWaveSpawnerCounter
-            , IrritatedValue irritatedValue
+            , IrritatedGaugeValue irritatedGaugeValue
         )
         {
             _waveState = waveState;
             _enemyWaveSpawnerCounter = enemyWaveSpawnerCounter;
-            _irritatedValue = irritatedValue;
+            _irritatedGaugeValue = irritatedGaugeValue;
         }
 
         void Update()
@@ -53,7 +53,7 @@ namespace Daipan.DebugInput.MonoScripts
 
             if (Input.GetKeyDown(KeyCode.I))
             {
-                _irritatedValue.IncreaseValue(_irritatedValue.MaxValue);
+                _irritatedGaugeValue.IncreaseValue(_irritatedGaugeValue.MaxValue);
             } 
 #endif
         }
