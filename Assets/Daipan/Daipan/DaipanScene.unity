@@ -2840,6 +2840,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ----------Cameras----------
       objectReference: {fileID: 0}
+    - target: {fileID: 2497925990668980782, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 33312
+      objectReference: {fileID: 0}
     - target: {fileID: 3087268379624898967, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
