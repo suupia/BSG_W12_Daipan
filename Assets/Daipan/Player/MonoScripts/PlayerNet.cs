@@ -42,13 +42,22 @@ namespace Daipan.Player.MonoScripts
                 , daipanScopeNet.Container.Resolve<IPlayerOnAttacked>()
             );
         }
+        
 
         public override void FixedUpdateNetwork()
         {
             base.FixedUpdateNetwork();
-            _playerInput.Update();
 
             foreach (var playerViewMono in playerViewMonos) playerViewMono?.Idle();
+        }
+
+        void Update()
+        {
+            // todo : 条件分岐はRoleで判定する
+            if (HasStateAuthority)
+            {
+                _playerInput.Update(Time.deltaTime);
+            }
         }
 
 

@@ -31,7 +31,7 @@ namespace Daipan.Player.MonoScripts
         
         public void Update()
         {
-            _playerInput.Update();
+            _playerInput.Update(Time.deltaTime);
 
             foreach (var playerViewMono in playerViewMonos) playerViewMono?.Idle();
         }

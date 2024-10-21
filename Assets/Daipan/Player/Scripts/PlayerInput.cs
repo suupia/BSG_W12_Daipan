@@ -52,10 +52,7 @@ namespace Daipan.Player.Scripts
             _attackExecutor.SetPlayerViewMonos(playerViewMonos);
         }
 
-        /// <summary>
-        /// Please call this method in Update method of MonoBehaviour
-        /// </summary>
-        public void Update()
+        public void Update(float deltaTime)
         {
             if (_resultState.CurrentResultEnum != ResultState.ResultEnum.None)
             {
