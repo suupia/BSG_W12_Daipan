@@ -41,11 +41,11 @@ public class TitleMonoNew : MonoBehaviour
         playerStatsPanel.SetActive(false);
         errorMessagePanel.SetActive(false);
         // JoinPanel
-        joinRoomButton.OnClick += JoinButtonOnClicked;
+        joinRoomButton.onClick += JoinButtonOnClicked;
         // PlayerStatsPanel
-        readyButton.OnClick += ReadyButtonClicked;
+        readyButton.onClick += ReadyButtonClicked;
         startGameButton.gameObject.SetActive(false);
-        startGameButton.OnClick += StartGameButtonClicked;
+        startGameButton.onClick += StartGameButtonClicked;
     }
 
     async void JoinButtonOnClicked()
