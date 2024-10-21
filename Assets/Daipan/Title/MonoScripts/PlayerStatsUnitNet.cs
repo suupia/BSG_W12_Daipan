@@ -40,7 +40,7 @@ public class PlayerStatsUnitNet : NetworkBehaviour
         _titleMonoNew = FindObjectOfType<TitleMonoNew>();
         if (_titleMonoNew == null)
         {
-            Debug.LogError($"TitleMonoNew is null");
+            Debug.LogWarning($"TitleMonoNew is null. Active scene: {UnityEngine.SceneManagement.SceneManager.GetActiveScene().name}");
             return;
         }
 
