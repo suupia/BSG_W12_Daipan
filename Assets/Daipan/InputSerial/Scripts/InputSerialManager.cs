@@ -4,11 +4,12 @@ using UnityEngine;
 using VContainer;
 using System;
 using System.Threading.Tasks;
+using Daipan.InputSerial.Interfaces;
 using R3;
 
 namespace Daipan.InputSerial.Scripts
 {
-    public class InputSerialManager
+    public class InputSerialManager : IInputSerialManager
     {
         SerialInput _serialInput = null;
         float _chatteringSec = 0.02f;
