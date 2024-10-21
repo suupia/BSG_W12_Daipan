@@ -1,4 +1,5 @@
 #nullable enable
+using Cysharp.Threading.Tasks;
 using Daipan.Battle.scripts;
 using Daipan.Battle.Scripts;
 using Daipan.Comment.MonoScripts;
@@ -48,8 +49,18 @@ namespace Daipan.Daipan
     public sealed class DaipanScopeNet : LifetimeScope
     {
         static DaipanScopeNet? _instance;
-        public static DaipanScopeNet Instance => _instance ??= FindObjectOfType<DaipanScopeNet>();
-        
+
+        public static DaipanScopeNet BuildedContainer
+        {
+            get
+            {
+                if (_instance != null) return _instance;
+                var daipanScopeNet = FindObjectOfType<DaipanScopeNet>();
+                daipanScopeNet.Build();
+                return daipanScopeNet;
+            }
+        }
+
         [FormerlySerializedAs("streamParameter")] [SerializeField]
         StreamParam streamParam = null!;
 
@@ -68,6 +79,29 @@ namespace Daipan.Daipan
         [SerializeField] ComboParamManager comboParamManager = null!;
 
         [SerializeField] EndSceneTransitionParam endSceneTransitionParam = null!;
+
+        NetworkRunner _runner = null!;
+        DTONet _dtoNet = null!;
+
+        protected override async void Awake()
+        {
+            // [Precondition] 
+            _runner = FindObjectOfType<NetworkRunner>();
+            Debug.Log($"NetworkRunner : {_runner}");
+            
+            await UniTask.WaitUntil(() => _runner.IsConnectedToServer);
+            
+            Debug.Log($"Runner.IsConnectedToServer : {_runner.IsConnectedToServer}");
+            Debug.Log($"Runner.IsCloudReady : {_runner.IsCloudReady}");
+            Debug.Log($"Runner.IsServer : {_runner.IsServer}");
+            Debug.Log($"Runner.IsClient : {_runner.IsClient}");
+            
+
+            _dtoNet = FindObjectOfType<DTONet>();
+            Debug.Log($"DTONet : {_dtoNet}");
+            
+            base.Awake();
+        }
 
         public static void RegisterStream(IContainerBuilder builder, StreamParam streamParam)
         {
@@ -251,14 +285,8 @@ namespace Daipan.Daipan
 
         protected override void Configure(IContainerBuilder builder)
         {
-            // [Precondition] 
-            var runner = FindObjectOfType<NetworkRunner>();
-            Debug.Log($"NetworkRunner : {runner}");
-            builder.RegisterComponent(runner);
-
-            var dtoNet = FindObjectOfType<DTONet>(); 
-            Debug.Log($"DTONet : {dtoNet}");
-            builder.RegisterComponent(dtoNet);
+            builder.RegisterComponent(_runner);
+            builder.RegisterComponent(_dtoNet);
 
             // Stream
             RegisterStream(builder, streamParam);
@@ -283,7 +311,7 @@ namespace Daipan.Daipan
             // Enemy
             RegisterEnemy(builder, enemyParamsManager);
             builder.Register<EnemyOnAttackedBuilder>(Lifetime.Transient);
-            builder.RegisterComponentInHierarchy<EnemyWaveSpawnerCounterNet>().AsImplementedInterfaces();
+            builder.RegisterComponentInHierarchy<EnemyWaveSpawnerCounterNet>().AsSelf().AsImplementedInterfaces();
             builder.Register<EnemySpawnerNetwork>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
             builder.Register<EnemyEnumSelector>(Lifetime.Scoped).As<IEnemyEnumSelector>();
             builder.Register<EnemyBuilder>(Lifetime.Scoped).As<IEnemyBuilder>();

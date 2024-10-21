@@ -58,14 +58,14 @@ namespace Daipan.Enemy.MonoScripts
 
             if (!HasStateAuthority)
             {
-                var daipanScopeNet = DaipanScopeNet.Instance; 
+                var daipanScopeNet = DaipanScopeNet.BuildedContainer;
                 Initialize(
                     daipanScopeNet.Container.Resolve<PlayerHolder>()
                     , daipanScopeNet.Container.Resolve<IEnemySpawnPoint>()
                     , daipanScopeNet.Container.Resolve<IEnemyParamContainer>()
-                ); 
+                );
             }
-            
+
             OnEnemyEnumChanged();
         }
 
@@ -161,8 +161,8 @@ namespace Daipan.Enemy.MonoScripts
                 Debug.LogWarning($"_enemyParamContainer is null");
                 return;
             }
-            
-            if(EnemyEnum == EnemyEnum.None) return;
+
+            if (EnemyEnum == EnemyEnum.None) return;
 
             enemyViewMono?.SetDomain(_enemyParamContainer.GetEnemyViewParamData(EnemyEnum));
         }
