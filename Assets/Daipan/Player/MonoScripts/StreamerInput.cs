@@ -56,6 +56,7 @@ public class StreamerInput : IPlayerInput
 
     public void Update(float deltaTime)
     {
+        Debug.Log($"_serialManager.GetButtonRed() = {_inputSerialManager.GetButtonRed()}");
         if (_resultState.CurrentResultEnum != ResultState.ResultEnum.None)
         {
             ResultUpdate();

@@ -23,18 +23,23 @@ namespace Daipan.InputSerial.Scripts
 
         void Start()
         {
-            redButton.onPointerDown += () => RedButton = true;
-            redButton.onPointerUp += () => RedButton = false;
-
-            blueButton.onPointerDown += () => BlueButton = true;
-            blueButton.onPointerUp += () => BlueButton = false;
-
-            yellowButton.onPointerDown += () => YellowButton = true;
-            yellowButton.onPointerUp += () => YellowButton = false;
-
-            menuButton.onPointerDown += () => MenuButton = true;
-            menuButton.onPointerUp += () => MenuButton = false;
+            // onClickでボタンが押されたときに状態を更新
+            redButton.onClick += () =>  RedButton = true;
+            blueButton.onClick += () => BlueButton = true;
+            yellowButton.onClick += () => YellowButton = true;
+            menuButton.onClick += () => MenuButton = true;
         }
+
+        void LateUpdate()
+        {
+            Debug.Log($"GetButtonRed: {RedButton}, blue: {BlueButton}, yellow: {YellowButton}, menu: {MenuButton}");
+            // ボタンの状態を毎フレームリセット
+            RedButton = false;
+            BlueButton = false;
+            YellowButton = false;
+            MenuButton = false;
+        }
+
     } 
 }
 
