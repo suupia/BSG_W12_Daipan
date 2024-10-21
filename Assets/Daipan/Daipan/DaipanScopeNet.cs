@@ -80,28 +80,7 @@ namespace Daipan.Daipan
 
         [SerializeField] EndSceneTransitionParam endSceneTransitionParam = null!;
 
-        NetworkRunner _runner = null!;
-        DTONet _dtoNet = null!;
-
-        protected override async void Awake()
-        {
-            // [Precondition] 
-            _runner = FindObjectOfType<NetworkRunner>();
-            Debug.Log($"NetworkRunner : {_runner}");
-            
-            await UniTask.WaitUntil(() => _runner.IsConnectedToServer);
-            
-            Debug.Log($"Runner.IsConnectedToServer : {_runner.IsConnectedToServer}");
-            Debug.Log($"Runner.IsCloudReady : {_runner.IsCloudReady}");
-            Debug.Log($"Runner.IsServer : {_runner.IsServer}");
-            Debug.Log($"Runner.IsClient : {_runner.IsClient}");
-            
-
-            _dtoNet = FindObjectOfType<DTONet>();
-            Debug.Log($"DTONet : {_dtoNet}");
-            
-            base.Awake();
-        }
+        public NetworkRunner? Runner { private get; set; }
 
         public static void RegisterStream(IContainerBuilder builder, StreamParam streamParam)
         {
@@ -285,8 +264,13 @@ namespace Daipan.Daipan
 
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.RegisterComponent(_runner);
-            builder.RegisterComponent(_dtoNet);
+            Debug.Log($"DaipanScopeNet Configure() builder: {builder}");
+
+            if (Runner == null) Debug.LogWarning("NetworkRunner is null");
+            var runner = FindObjectOfType<NetworkRunner>();
+            builder.RegisterComponent(runner);
+
+            builder.Register<DTONetWrapper>(Lifetime.Scoped);
 
             // Stream
             RegisterStream(builder, streamParam);

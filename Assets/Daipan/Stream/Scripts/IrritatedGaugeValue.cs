@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Daipan.Core;
+using Daipan.Daipan;
 using UnityEngine;
 using VContainer;
 
@@ -11,10 +12,10 @@ namespace Daipan.Stream.Scripts
     public sealed class IrritatedGaugeValue
     {
         readonly IrritatedParams _irritatedParams;
-        readonly DTONet _dtoNet;
+        readonly DTONetWrapper _dtoNet;
 
 
-        public IrritatedGaugeValue(double maxValue, IrritatedParams irritatedParams, DTONet dtoNet)
+        public IrritatedGaugeValue(double maxValue, IrritatedParams irritatedParams, DTONetWrapper dtoNet)
         {
             MaxValue = maxValue;
             _irritatedParams = irritatedParams;
@@ -38,7 +39,7 @@ namespace Daipan.Stream.Scripts
         {
             get
             {
-                for (int i = 0; i < RatioTable.Count; i++)
+                for (var i = 0; i < RatioTable.Count; i++)
                 {
                     if (Ratio >= RatioTable[i]) continue;
                     return i;

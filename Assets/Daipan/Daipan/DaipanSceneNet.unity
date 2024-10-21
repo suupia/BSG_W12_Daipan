@@ -354,7 +354,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 339068658}
-  - component: {fileID: 339068657}
   m_Layer: 0
   m_Name: DaipanInitializerMono
   m_TagString: Untagged
@@ -362,18 +361,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &339068657
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 339068656}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 683a8b4aea1f4df4ac50711ebbd816b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &339068658
 Transform:
   m_ObjectHideFlags: 0
