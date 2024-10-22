@@ -10,6 +10,7 @@ using UnityEngine;
 using VContainer;
 using Daipan.InputSerial.Scripts;
 using Daipan.Core.Interfaces;
+using Daipan.Player.Interfaces;
 using UnityEngine.UI;
 using DG.Tweening;
 
