@@ -8,7 +8,7 @@ namespace Daipan.Transporter.Scripts
     /// ロビーシーンからゲームシーンに遷移する際に、PlayerRefとPlayerDataの組を保持するクラス
     /// 他にも保持したい状態があったらこのクラスに追加する
     /// </summary>
-    public class PlayerRoleEnumTransporter
+    public class PlayerDataTransporter
     {
         public int PlayerCount => _playerDataDictionary.Count;
         readonly Dictionary<PlayerRef, PlayerData> _playerDataDictionary = new();
