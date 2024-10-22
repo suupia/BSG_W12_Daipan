@@ -13,10 +13,10 @@ namespace Daipan.Transporter.Scripts
         public int PlayerCount => _playerDataDictionary.Count;
         readonly Dictionary<PlayerRef, PlayerData> _playerDataDictionary = new();
 
-        public void AddPlayerNumber(PlayerRef playerRef, NetworkString<_32> name)
+        public void AddPlayerRef(PlayerRef playerRef)
         {
             Debug.Log($"Registering playerRef:{playerRef} as {_playerDataDictionary.Count + 1}P");
-            _playerDataDictionary[playerRef] = new PlayerData(){Name = name, Role = PlayerRoleEnum.None}; 
+            _playerDataDictionary[playerRef] = new PlayerData();
         }
 
         public PlayerRoleEnum GetPlayerRoleEnum(PlayerRef playerRef)
@@ -41,7 +41,7 @@ namespace Daipan.Transporter.Scripts
             return string.Empty;
         }
 
-        public void SetRole(PlayerRef playerRef, PlayerData playerData)
+        public void SetPlayerData(PlayerRef playerRef, PlayerData playerData)
         {
             Debug.Log($"Registering playerRef:{playerRef} as {playerData}");
             _playerDataDictionary[playerRef] = playerData;

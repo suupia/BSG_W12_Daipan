@@ -38,6 +38,7 @@ using Daipan.Option.Scripts;
 using Daipan.Option.MonoScripts;
 using Daipan.Sound.MonoScripts;
 using Daipan.Sound.Scripts;
+using Daipan.Transporter.Scripts;
 using Fusion;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -272,7 +273,7 @@ namespace Daipan.Daipan
             builder.RegisterComponent(runner);
 
             builder.Register<DTONetWrapper>(Lifetime.Scoped);
-
+            
             // Stream
             RegisterStream(builder, streamParam);
 
