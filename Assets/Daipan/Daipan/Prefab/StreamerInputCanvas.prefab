@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4949418990118093027}
   - component: {fileID: 4847602558824445744}
   - component: {fileID: 5288952331511950088}
+  - component: {fileID: 3280319487003285761}
   m_Layer: 5
   m_Name: EnterButton
   m_TagString: Untagged
@@ -121,6 +122,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3280319487003285761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 551904268809520243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 544205e024ed4911b943f745aa8037aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &705268653297995044
 GameObject:
   m_ObjectHideFlags: 0
@@ -804,6 +817,7 @@ GameObject:
   - component: {fileID: 1722791484316574816}
   - component: {fileID: 1644559576952920186}
   - component: {fileID: 1426763333178834190}
+  - component: {fileID: 8761756848304195120}
   m_Layer: 5
   m_Name: StreamerInputCanvas
   m_TagString: Untagged
@@ -914,6 +928,19 @@ MonoBehaviour:
   blueButton: {fileID: 6699716260107632373}
   yellowButton: {fileID: 3243864004058048393}
   menuButton: {fileID: 8397478067749633364}
+--- !u!114 &8761756848304195120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4709876791888845700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 751312645d0b426db506c323b2a576f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enterButton: {fileID: 3280319487003285761}
 --- !u!1 &5640182426841785863
 GameObject:
   m_ObjectHideFlags: 0

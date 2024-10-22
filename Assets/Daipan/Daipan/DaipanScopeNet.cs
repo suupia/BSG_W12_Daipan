@@ -232,14 +232,14 @@ namespace Daipan.Daipan
             builder.Register<EndSceneSelector>(Lifetime.Scoped);
         }
 
-        public static void RegisterInputSerial(IContainerBuilder builder)
+        static void RegisterInputSerial(IContainerBuilder builder)
         {
             // InputSerial
             builder.Register<SerialInput>(Lifetime.Scoped);
             builder.RegisterComponentInHierarchy<StreamInputButtonManagerMono>().As<IInputSerialManager>();
 
             // Enter
-            builder.Register<GetEnterKey>(Lifetime.Scoped).As<IGetEnterKey>();
+            builder.RegisterComponentInHierarchy<StreamInputEnterMono>().As<IGetEnterKey>();
         }
 
         public static void RegisterOption(IContainerBuilder builder)

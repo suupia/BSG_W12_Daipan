@@ -32,7 +32,7 @@ namespace Daipan.InputSerial.Scripts
 
         void LateUpdate()
         {
-            Debug.Log($"GetButtonRed: {RedButton}, blue: {BlueButton}, yellow: {YellowButton}, menu: {MenuButton}");
+            // Debug.Log($"GetButtonRed: {RedButton}, blue: {BlueButton}, yellow: {YellowButton}, menu: {MenuButton}");
             // ボタンの状態を毎フレームリセット
             RedButton = false;
             BlueButton = false;
