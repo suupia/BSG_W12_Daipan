@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Daipan.Battle.scripts;
 using Daipan.Core.Interfaces;
+using Daipan.Player.Interfaces;
 using Daipan.Sound.MonoScripts;
 using UnityEngine;
 using VContainer;

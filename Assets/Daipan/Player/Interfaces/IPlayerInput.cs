@@ -12,7 +12,7 @@ namespace Daipan.Player.Interfaces
             ,List<AbstractPlayerViewMono?> playerViewMonos
         );
 
-        public void Update();
+        public void Update(float deltaTime);
     } 
 }
 

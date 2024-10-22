@@ -22,11 +22,11 @@ public class MenuButtonsMono : MonoBehaviour
             return;
         }
         
-        onlineButton.OnClick += () => titleMonoNew.GoToJoinPanel(); 
-        offlineButton.OnClick += () => Debug.Log($"実装するか未定");
-        offlineButton.OnClick += () => Debug.Log($"実装お願いします");
-        tempButton.OnClick += () => SceneTransition.TransitioningScene(SceneName.DaipanScene);
-        quitButton.OnClick += Quit;
+        onlineButton.onClick += () => titleMonoNew.GoToJoinPanel(); 
+        offlineButton.onClick += () => Debug.Log($"実装するか未定");
+        offlineButton.onClick += () => Debug.Log($"実装お願いします");
+        tempButton.onClick += () => SceneTransition.TransitioningScene(SceneName.DaipanScene);
+        quitButton.onClick += Quit;
     }
     
     void Quit()

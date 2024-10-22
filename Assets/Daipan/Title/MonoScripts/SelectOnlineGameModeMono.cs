@@ -25,11 +25,11 @@ public class SelectOnlineGameModeMono : MonoBehaviour
 
         //GameMode.Hostとして扱うかは未定。仮でAutoHostOrClientに設定
         //もし、GameMode.Hostかつ同じルーム名で始めた場合はStartGameExceptionがthrowされる
-        startSharedButton.OnClick += () =>
+        startSharedButton.onClick += () =>
         {
             StartGame(RoomName, GameMode.Shared).Forget();
         };
-        backButton.OnClick += () => selectModePopup.SetActive(false);
+        backButton.onClick += () => selectModePopup.SetActive(false);
     }
 
     public void ShowPopup()

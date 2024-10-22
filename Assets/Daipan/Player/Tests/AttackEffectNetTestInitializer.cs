@@ -34,7 +34,7 @@ public class AttackEffectNetTestInitializer : MonoBehaviour
 
     void Awake()
     {
-        startSharedButton.OnClick += StartSharedButtonClicked;
+        startSharedButton.onClick += StartSharedButtonClicked;
     }
 
     void Update()

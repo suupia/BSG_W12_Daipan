@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Daipan.Core.Scripts
+namespace Daipan.Player.Scripts
 {
     public class GetEnterKey : Interfaces.IGetEnterKey
     {
@@ -22,7 +22,7 @@ namespace Daipan.Core.Scripts
     }
 }
 
-namespace Daipan.Core.Interfaces
+namespace Daipan.Player.Interfaces
 {
     public interface IGetEnterKey
     {

@@ -13,6 +13,7 @@ using Daipan.Enemy.LevelDesign.Interfaces;
 using Daipan.Enemy.LevelDesign.Scripts;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Enemy.Scripts;
+using Daipan.InputSerial.Interfaces;
 using Daipan.InputSerial.Scripts;
 using Daipan.LevelDesign.Battle.Scripts;
 using Daipan.LevelDesign.Combo.Scripts;
@@ -231,14 +232,14 @@ namespace Daipan.Daipan
             builder.Register<EndSceneSelector>(Lifetime.Scoped);
         }
 
-        public static void RegisterInputSerial(IContainerBuilder builder)
+        static void RegisterInputSerial(IContainerBuilder builder)
         {
             // InputSerial
             builder.Register<SerialInput>(Lifetime.Scoped);
-            builder.Register<InputSerialManager>(Lifetime.Scoped);
+            builder.RegisterComponentInHierarchy<StreamInputButtonManagerMono>().As<IInputSerialManager>();
 
             // Enter
-            builder.Register<GetEnterKey>(Lifetime.Scoped).As<IGetEnterKey>();
+            builder.RegisterComponentInHierarchy<StreamInputEnterMono>().As<IGetEnterKey>();
         }
 
         public static void RegisterOption(IContainerBuilder builder)
@@ -283,7 +284,7 @@ namespace Daipan.Daipan
             builder.Register<PlayerBuilder>(Lifetime.Scoped).As<IPlayerBuilder>();
             builder.Register<AttackExecutor>(Lifetime.Transient).As<IAttackExecutor>();
             builder.Register<PlayerAttackEffectBuilder>(Lifetime.Scoped).As<IPlayerAttackEffectBuilder>();
-            builder.Register<PlayerInput>(Lifetime.Transient).As<IPlayerInput>();
+            builder.Register<StreamerInput>(Lifetime.Transient).As<IPlayerInput>();
             builder.Register<PlayerOnAttacked>(Lifetime.Transient).As<IPlayerOnAttacked>();
 
             // Combo

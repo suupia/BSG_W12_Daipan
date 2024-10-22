@@ -47,7 +47,7 @@ public class PlayerStatsUnitNet : NetworkBehaviour
         transform.SetParent(_titleMonoNew.playerStatsUnitParent, false);
 
         youAreThisImage.gameObject.SetActive(HasStateAuthority);
-        playerRoleButton.OnClick += () =>
+        playerRoleButton.onClick += () =>
         {
             if (HasStateAuthority)
                 PlayerRole = PlayerRole switch
