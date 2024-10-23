@@ -3,6 +3,7 @@ using System.Linq;
 using Daipan.Battle.scripts;
 using Daipan.Core;
 using Daipan.Daipan;
+using Daipan.Transporter;
 using Daipan.Transporter.Scripts;
 using Fusion;
 using R3;
@@ -36,7 +37,8 @@ public class TitleMonoNew : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI errorMessageText = null!;
 
-
+    readonly PlayerDataTransporterNetWrapper _playerDataTransporterNetWrapper = new();
+    
     void Awake()
     {
         joinPanel.SetActive(false);
@@ -118,6 +120,19 @@ public class TitleMonoNew : MonoBehaviour
 
     void StartGameButtonClicked()
     {
+        // Save player data
+        var playerStatsUnits = playerStatsUnitParent.GetComponentsInChildren<PlayerStatsUnitNet>();
+        foreach (var playerStatsUnit in playerStatsUnits)
+        {
+            var playerData = new PlayerData()
+            {
+                Name = playerStatsUnit.PlayerName, 
+                Role = playerStatsUnit.PlayerRole,
+            };
+            _playerDataTransporterNetWrapper.SetPlayerData(playerStatsUnit.PlayerRef, playerData);
+        }
+        
+        // Transit to DaipanScene
         var runner = FindObjectOfType<NetworkRunner>();
         SceneTransition.TransitionSceneWithNetworkRunner(runner, SceneName.DaipanSceneNet);
     }
