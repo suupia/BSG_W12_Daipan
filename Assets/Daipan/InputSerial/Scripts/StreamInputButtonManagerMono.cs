@@ -1,11 +1,15 @@
 #nullable enable
 using Daipan.InputSerial.Interfaces;
+using Daipan.Transporter;
+using Fusion;
 using UnityEngine;
+using VContainer;
 
 namespace Daipan.InputSerial.Scripts
 {
     public class StreamInputButtonManagerMono : MonoBehaviour, IInputSerialManager
     {
+        [SerializeField] GameObject viewObject = null!;
         [SerializeField] CustomButton redButton = null!;
         [SerializeField] CustomButton blueButton = null!;
         [SerializeField] CustomButton yellowButton = null!;
@@ -20,6 +24,16 @@ namespace Daipan.InputSerial.Scripts
         public bool GetButtonBlue() => BlueButton;
         public bool GetButtonYellow() => YellowButton;
         public bool GetButtonMenu() => MenuButton;
+
+        [Inject]
+        public void Initialize(
+            NetworkRunner runner,
+            PlayerDataTransporterNetWrapper playerDataTransporterNetWrapper
+            )
+        {
+            var isStreamer = playerDataTransporterNetWrapper.GetPlayerRoleEnum(runner.LocalPlayer) == PlayerRoleEnum.Streamer;
+            viewObject.SetActive(isStreamer);
+        } 
 
         void Start()
         {
