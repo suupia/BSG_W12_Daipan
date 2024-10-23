@@ -23,7 +23,7 @@ public class NetworkPlayerSpawnerSim : SimulationBehaviour, IPlayerJoined, IPlay
             if (titleMonoNew != null) playerStatsUnitNet.PlayerName = titleMonoNew.LocalPlayerName;
 
             var rootScope = FindObjectOfType<RootScope>();
-            var playerDataTransporter = rootScope.Container.Resolve<PlayerDataTransporter>();
+            var playerDataTransporter = rootScope.Container.Resolve<PlayerDataTransporterNet>();
             playerDataTransporter.AddPlayerRef(playerRef);
         }
     }

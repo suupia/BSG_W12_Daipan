@@ -9,7 +9,7 @@ public sealed class RootScope : LifetimeScope
     protected override void Configure(IContainerBuilder builder)
     {
         builder.Register<LanguageConfig>(Lifetime.Singleton);
-        builder.Register<PlayerDataTransporter>(Lifetime.Singleton);
+        builder.Register<PlayerDataTransporterNet>(Lifetime.Singleton);
 
     }
 }
