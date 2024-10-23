@@ -273,6 +273,7 @@ namespace Daipan.Daipan
             builder.RegisterComponent(runner);
 
             builder.Register<DTONetWrapper>(Lifetime.Scoped);
+            builder.Register<PlayerDataTransporterNet>(Lifetime.Scoped);
             
             // Stream
             RegisterStream(builder, streamParam);
