@@ -3022,7 +3022,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 200.44, y: -272.70996}
+  m_AnchoredPosition: {x: 200.44006, y: -272.70996}
   m_SizeDelta: {x: 400.88, y: -545.43}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1184234359
@@ -3981,6 +3981,7 @@ MonoBehaviour:
   titleCanvasGroup: {fileID: 1811994191}
   networkRunnerPrefab: {fileID: 9077539603378056844, guid: 957fd199d139e4197bcca70f9363268c, type: 3}
   dtoNetPrefab: {fileID: 2030922226672112631, guid: 219d0a42ba5de4b49b62dfe640bc9e37, type: 3}
+  playerDataTransporterNetPrefab: {fileID: 6060838497941039018, guid: 86ccfe4b01fe04456966679a25c3d492, type: 3}
   joinPanel: {fileID: 1127169373}
   localPlayerNameInputField: {fileID: 930919835}
   localRoomNameInputField: {fileID: 1161457107}
