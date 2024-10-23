@@ -3,6 +3,8 @@ using System.Linq;
 using Daipan.Battle.scripts;
 using Daipan.Core;
 using Daipan.Daipan;
+using Daipan.Transporter;
+using Daipan.Transporter.Scripts;
 using Fusion;
 using R3;
 using TMPro;
@@ -14,6 +16,7 @@ public class TitleMonoNew : MonoBehaviour
     [SerializeField] CanvasGroup titleCanvasGroup = null!;
     [SerializeField] NetworkRunner networkRunnerPrefab = null!;
     [SerializeField] DTONet dtoNetPrefab = null!;
+    [SerializeField] PlayerDataTransporterNet playerDataTransporterNetPrefab = null!;
 
     [Header("JoinPanel")] [SerializeField] GameObject joinPanel = null!;
     [SerializeField] TMP_InputField localPlayerNameInputField = null!;
@@ -34,7 +37,8 @@ public class TitleMonoNew : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI errorMessageText = null!;
 
-
+    readonly PlayerDataTransporterNetWrapper _playerDataTransporterNetWrapper = new();
+    
     void Awake()
     {
         joinPanel.SetActive(false);
@@ -69,6 +73,8 @@ public class TitleMonoNew : MonoBehaviour
         {
             var dtoNet = runner.Spawn(dtoNetPrefab);
             runner.MakeDontDestroyOnLoad(dtoNet.gameObject);
+            var playerDataTransporterNet = runner.Spawn(playerDataTransporterNetPrefab);
+            runner.MakeDontDestroyOnLoad(playerDataTransporterNet.gameObject);
         }
 
 
@@ -114,6 +120,19 @@ public class TitleMonoNew : MonoBehaviour
 
     void StartGameButtonClicked()
     {
+        // Save player data
+        var playerStatsUnits = playerStatsUnitParent.GetComponentsInChildren<PlayerStatsUnitNet>();
+        foreach (var playerStatsUnit in playerStatsUnits)
+        {
+            var playerData = new PlayerData()
+            {
+                Name = playerStatsUnit.PlayerName, 
+                Role = playerStatsUnit.PlayerRole,
+            };
+            _playerDataTransporterNetWrapper.SetPlayerData(playerStatsUnit.PlayerRef, playerData);
+        }
+        
+        // Transit to DaipanScene
         var runner = FindObjectOfType<NetworkRunner>();
         SceneTransition.TransitionSceneWithNetworkRunner(runner, SceneName.DaipanSceneNet);
     }

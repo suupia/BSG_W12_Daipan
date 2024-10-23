@@ -17,11 +17,11 @@ public class PlayerStatsUnitNet : NetworkBehaviour
 
     [Networked]
     [OnChangedRender(nameof(OnPlayerNameChanged))]
-    public NetworkString<_16> PlayerName { get; set; }
+    public NetworkString<_32> PlayerName { get; set; }
 
     [Networked]
     [OnChangedRender(nameof(OnPlayerRoleChanged))]
-    PlayerRoleEnum PlayerRole { get; set; } = PlayerRoleEnum.Streamer;
+    public PlayerRoleEnum PlayerRole { get; private set; } = PlayerRoleEnum.Streamer;
 
     [Networked]
     [OnChangedRender(nameof(OnIsReadyChanged))]

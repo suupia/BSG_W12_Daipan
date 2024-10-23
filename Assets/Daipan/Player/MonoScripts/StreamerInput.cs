@@ -11,12 +11,15 @@ using Daipan.Option.Scripts;
 using Daipan.Player.Interfaces;
 using Daipan.Player.MonoScripts;
 using Daipan.Stream.Scripts;
+using Daipan.Transporter;
+using Daipan.Transporter.Scripts;
 using Fusion;
 using UnityEngine;
 using VContainer;
 
 public class StreamerInput : IPlayerInput
 {
+    readonly NetworkRunner _runner;
     readonly IInputSerialManager _inputSerialManager;
     readonly IAttackExecutor _attackExecutor;
     readonly DaipanExecutor _daipanExecutor;
@@ -24,18 +27,23 @@ public class StreamerInput : IPlayerInput
     readonly EndSceneSelector _endSceneSelector;
     readonly IInputOption _inputOption;
     readonly IGetEnterKey _getEnterKey;
+    readonly PlayerDataTransporterNetWrapper _playerDataTransporterNetWrapper;
+    readonly bool _isStreamer;
     IMonoBehaviour? _playerMono;
 
     public StreamerInput(
-        IInputSerialManager inputSerialManager
-        , IAttackExecutor attackExecutor
-        , DaipanExecutor daipanExecutor
-        , ResultState resultState
-        , EndSceneSelector endSceneSelector
-        , IInputOption inputOption
-        , IGetEnterKey getEnterKey
+        NetworkRunner runner,
+        IInputSerialManager inputSerialManager,
+        IAttackExecutor attackExecutor,
+        DaipanExecutor daipanExecutor,
+        ResultState resultState,
+        EndSceneSelector endSceneSelector,
+        IInputOption inputOption,
+        IGetEnterKey getEnterKey,
+        PlayerDataTransporterNetWrapper playerDataTransporterNetWrapper
     )
     {
+        _runner = runner;
         _inputSerialManager = inputSerialManager;
         _attackExecutor = attackExecutor;
         _daipanExecutor = daipanExecutor;
@@ -43,6 +51,8 @@ public class StreamerInput : IPlayerInput
         _endSceneSelector = endSceneSelector;
         _inputOption = inputOption;
         _getEnterKey = getEnterKey;
+        _playerDataTransporterNetWrapper = playerDataTransporterNetWrapper;
+        _isStreamer = _playerDataTransporterNetWrapper.GetPlayerRoleEnum(runner.LocalPlayer) == PlayerRoleEnum.Streamer;
     }
     
     public void SetPlayerMono(
@@ -56,6 +66,8 @@ public class StreamerInput : IPlayerInput
 
     public void Update(float deltaTime)
     {
+        if (!_isStreamer) return;
+        
         Debug.Log($"_serialManager.GetButtonRed() = {_inputSerialManager.GetButtonRed()}");
         if (_resultState.CurrentResultEnum != ResultState.ResultEnum.None)
         {
