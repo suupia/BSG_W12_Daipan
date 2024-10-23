@@ -19,7 +19,6 @@ using VContainer;
 
 public class StreamerInput : IPlayerInput
 {
-    readonly NetworkRunner _runner;
     readonly IInputSerialManager _inputSerialManager;
     readonly IAttackExecutor _attackExecutor;
     readonly DaipanExecutor _daipanExecutor;
@@ -43,7 +42,6 @@ public class StreamerInput : IPlayerInput
         PlayerDataTransporterNetWrapper playerDataTransporterNetWrapper
     )
     {
-        _runner = runner;
         _inputSerialManager = inputSerialManager;
         _attackExecutor = attackExecutor;
         _daipanExecutor = daipanExecutor;

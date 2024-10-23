@@ -239,6 +239,9 @@ namespace Daipan.Daipan
             // InputSerial
             builder.Register<SerialInput>(Lifetime.Scoped);
             builder.RegisterComponentInHierarchy<StreamInputButtonManagerMono>().As<IInputSerialManager>();
+            
+            // Anti
+            builder.RegisterComponentInHierarchy<AntiInputMono>();
 
             // Enter
             builder.RegisterComponentInHierarchy<StreamInputEnterMono>().As<IGetEnterKey>();
