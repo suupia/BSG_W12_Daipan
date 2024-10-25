@@ -35,7 +35,6 @@ namespace Daipan.Streamer.MonoScripts
             _originalScale = _transform.localScale;
 
             Observable.EveryValueChanged(irritatedGaugeValue, x => x.IsFull)
-                .DistinctUntilChanged()
                 .Subscribe(_ => AngerZoom(irritatedGaugeValue.IsFull))
                 .AddTo(this);
         }
@@ -43,7 +42,6 @@ namespace Daipan.Streamer.MonoScripts
         void IUpdate.Update()
         {
             animator.SetInteger("IrritatedStage", _irritatedGaugeValue.CurrentIrritatedStage);
-            Debug.Log($"irritatedGaugeValue.IsFull : {_irritatedGaugeValue.IsFull}");
         }
 
         public void Daipan()
