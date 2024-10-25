@@ -10,29 +10,29 @@ namespace Daipan.Transporter.Scripts
     /// </summary>
     public class PlayerDataTransporterNet : NetworkBehaviour
     {
-        public int PlayerCount => _playerDataDictionary.Count;
-        readonly Dictionary<PlayerRef, PlayerData> _playerDataDictionary = new();
+        public int PlayerCount => PlayerDataDictionary.Count;
+        [Networked] NetworkDictionary<PlayerRef, PlayerData> PlayerDataDictionary => default; 
 
         public void AddPlayerRef(PlayerRef playerRef)
         {
-            Debug.Log($"Registering playerRef:{playerRef} as {_playerDataDictionary.Count + 1}P");
-            _playerDataDictionary[playerRef] = new PlayerData();
+            Debug.Log($"Registering playerRef:{playerRef} as {PlayerDataDictionary.Count + 1}P");
+            PlayerDataDictionary.Add(playerRef, new PlayerData());
         }
 
         public PlayerRoleEnum GetPlayerRoleEnum(PlayerRef playerRef)
         {
-            if (_playerDataDictionary.TryGetValue(playerRef, out PlayerData playerData))
+            if (PlayerDataDictionary.TryGet(playerRef, out PlayerData playerData))
             {
                 Debug.Log($"GetPlayerRoleEnum playerRef:{playerRef} is {playerData.Role}");
                 return playerData.Role;
             }
-
+            Debug.LogWarning($"GetPlayerRoleEnum playerRef:{playerRef} is not found");
             return PlayerRoleEnum.None;
         }
         
         public string GetPlayerName(PlayerRef playerRef)
         {
-            if (_playerDataDictionary.TryGetValue(playerRef, out PlayerData playerData))
+            if (PlayerDataDictionary.TryGet(playerRef, out PlayerData playerData))
             {
                 Debug.Log($"GetPlayerName playerRef:{playerRef} is {playerData.Name}");
                 return playerData.Name.Value;
@@ -44,7 +44,7 @@ namespace Daipan.Transporter.Scripts
         public void SetPlayerData(PlayerRef playerRef, PlayerData playerData)
         {
             Debug.Log($"Registering playerRef:{playerRef} as {playerData}");
-            _playerDataDictionary[playerRef] = playerData;
+            PlayerDataDictionary.Add(playerRef, playerData);
         }
     }
 

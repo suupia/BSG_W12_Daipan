@@ -21,8 +21,15 @@ namespace Daipan.Player.MonoScripts
             PlayerDataTransporterNetWrapper playerDataTransporterNetWrapper
         )
         {
-            var isStreamer = playerDataTransporterNetWrapper.GetPlayerRoleEnum(runner.LocalPlayer) == PlayerRoleEnum.Anti;
-            viewObject.SetActive(isStreamer);
+            Debug.Log($"AntiInputMono Initialize isAnti: {playerDataTransporterNetWrapper.GetPlayerRoleEnum(runner.LocalPlayer) == PlayerRoleEnum.Anti}");
+            var isAnti = playerDataTransporterNetWrapper.GetPlayerRoleEnum(runner.LocalPlayer) == PlayerRoleEnum.Anti;
+            viewObject.SetActive(isAnti);
+
+            
+            foreach (var player in runner.ActivePlayers)
+            {
+               Debug.Log($"GetPlayerRoleEnum({player}): {playerDataTransporterNetWrapper.GetPlayerRoleEnum(player)}"); 
+            }
         }
 
         void Start()
@@ -31,6 +38,8 @@ namespace Daipan.Player.MonoScripts
             button2.onClick += () => Debug.Log("Button2"); //
             button3.onClick += () => Debug.Log("Button3"); // 
         }
+
+        
     } 
 }
 

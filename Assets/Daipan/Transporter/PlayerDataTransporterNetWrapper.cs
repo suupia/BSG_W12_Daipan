@@ -12,17 +12,17 @@ public class PlayerDataTransporterNetWrapper
 
     public void AddPlayerRef(PlayerRef playerRef)
     {
-        DataTransporterNet?.AddPlayerRef(playerRef);
+        DataTransporterNet.AddPlayerRef(playerRef);
     }
 
     public PlayerRoleEnum GetPlayerRoleEnum(PlayerRef playerRef)
     {
-        return DataTransporterNet?.GetPlayerRoleEnum(playerRef) ?? PlayerRoleEnum.None;
+        return DataTransporterNet.GetPlayerRoleEnum(playerRef);
     }
 
     public string GetPlayerName(PlayerRef playerRef)
     {
-        return DataTransporterNet?.GetPlayerName(playerRef) ?? string.Empty;
+        return DataTransporterNet.GetPlayerName(playerRef) ?? string.Empty;
     }
 
     public void SetPlayerData(PlayerRef playerRef, PlayerData playerData)
