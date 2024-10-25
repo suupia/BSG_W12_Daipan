@@ -51,15 +51,20 @@ namespace Daipan.Daipan
 {
     public sealed class DaipanScopeNet : LifetimeScope
     {
+        static bool _isBuilt;
         static DaipanScopeNet? _instance;
 
-        public static DaipanScopeNet BuildedContainer
+        public static DaipanScopeNet BuiltContainer
         {
             get
             {
                 if (_instance != null) return _instance;
                 var daipanScopeNet = FindObjectOfType<DaipanScopeNet>();
-                daipanScopeNet.Build();
+                if (!_isBuilt)
+                {
+                    daipanScopeNet.Build();
+                    _isBuilt = true;
+                }
                 return daipanScopeNet;
             }
         }

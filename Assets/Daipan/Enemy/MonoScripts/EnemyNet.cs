@@ -58,7 +58,7 @@ namespace Daipan.Enemy.MonoScripts
 
             if (!HasStateAuthority)
             {
-                var daipanScopeNet = DaipanScopeNet.BuildedContainer;
+                var daipanScopeNet = DaipanScopeNet.BuiltContainer;
                 Initialize(
                     daipanScopeNet.Container.Resolve<PlayerHolder>()
                     , daipanScopeNet.Container.Resolve<IEnemySpawnPoint>()
