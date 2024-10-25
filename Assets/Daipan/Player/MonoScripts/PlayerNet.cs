@@ -35,7 +35,7 @@ namespace Daipan.Player.MonoScripts
         {
             base.Spawned();
             Debug.Log($"PlayerNet Spawned");
-            var daipanScopeNet = DaipanScopeNet.BuildedContainer;
+            var daipanScopeNet = DaipanScopeNet.BuiltContainer;
             Initialize(
                 daipanScopeNet.Container.Resolve<IPlayerHpParamData>()
                 , daipanScopeNet.Container.Resolve<IPlayerInput>()

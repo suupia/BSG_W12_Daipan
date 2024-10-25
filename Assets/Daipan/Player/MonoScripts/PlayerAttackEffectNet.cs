@@ -46,7 +46,7 @@ namespace Daipan.Player.MonoScripts
 
             if (!HasStateAuthority)
             {
-                var daipanScopeNet = DaipanScopeNet.BuildedContainer;
+                var daipanScopeNet = DaipanScopeNet.BuiltContainer;
                 Initialize(daipanScopeNet.Container.Resolve<IPlayerParamDataContainer>());
             }
 

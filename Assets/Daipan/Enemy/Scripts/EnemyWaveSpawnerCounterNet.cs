@@ -43,7 +43,7 @@ namespace Daipan.Enemy.Scripts
             base.Spawned();
             Debug.Log($"EnemyWaveSpawnerCounterNet Spawned");
 
-            var daipanScopeNet = DaipanScopeNet.BuildedContainer;
+            var daipanScopeNet = DaipanScopeNet.BuiltContainer;
             Initialize(
                 daipanScopeNet.Container.Resolve<IEnemySpawner>()
                 , daipanScopeNet.Container.Resolve<IFinalBossSpawner>()

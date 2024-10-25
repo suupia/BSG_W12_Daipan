@@ -23,7 +23,8 @@ namespace Daipan.Stream.Scripts
         }
 
         public double MaxValue { get; }
-        public bool IsFull => Value >= MaxValue;
+        public bool IsFull =>  Value >= MaxValue;
+
         public double Ratio => Value / MaxValue;
 
         public double Value

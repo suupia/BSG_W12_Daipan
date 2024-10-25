@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerParamManager
   m_EditorClassIdentifier: 
   playerHpParam:
-    maxHpAmount: 300
+    maxHpAmount: 3000
     hpAmount: 100
   playerAntiCommentParam:
     antiCommentThreshold: 3
