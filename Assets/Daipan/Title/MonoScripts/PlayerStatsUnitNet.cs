@@ -13,6 +13,7 @@ public class PlayerStatsUnitNet : NetworkBehaviour
     [SerializeField] CustomButton playerRoleButton = null!;
     [SerializeField] TextMeshProUGUI playerRoleText = null!;
 
+    [Networked]
     public PlayerRef PlayerRef { get; set; }
 
     [Networked]
