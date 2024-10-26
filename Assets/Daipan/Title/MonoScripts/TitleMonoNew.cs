@@ -129,7 +129,7 @@ public class TitleMonoNew : MonoBehaviour
                 Name = playerStatsUnit.PlayerName, 
                 Role = playerStatsUnit.PlayerRole,
             };
-            _playerDataTransporterNetWrapper.SetPlayerData(playerStatsUnit.PlayerRef, playerData);
+            _playerDataTransporterNetWrapper.SetPlayerData(playerStatsUnit.NetworkedPlayerRef, playerData);
         }
         
         // Transit to DaipanScene

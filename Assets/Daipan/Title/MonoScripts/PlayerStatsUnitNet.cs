@@ -14,7 +14,7 @@ public class PlayerStatsUnitNet : NetworkBehaviour
     [SerializeField] TextMeshProUGUI playerRoleText = null!;
 
     [Networked]
-    public PlayerRef PlayerRef { get; set; }
+    public PlayerRef NetworkedPlayerRef { get; set; }
 
     [Networked]
     [OnChangedRender(nameof(OnPlayerNameChanged))]
