@@ -7970,6 +7970,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 297b8aec9a3007c499b1d3028318dcbd, type: 3}
     - target: {fileID: 4171276379065512900, guid: 415c0f83b69654574b0d87b5b64c15e1, type: 3}
+      propertyPath: rotateSpeed
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4171276379065512900, guid: 415c0f83b69654574b0d87b5b64c15e1, type: 3}
       propertyPath: selectEnterSpeed
       value: 0.2
       objectReference: {fileID: 0}
