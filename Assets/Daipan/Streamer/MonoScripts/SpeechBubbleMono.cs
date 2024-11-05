@@ -20,7 +20,7 @@ namespace Daipan.Streamer.MonoScripts
         [SerializeField] Transform speechParent = null!;
         [SerializeField] Image nextButtonImage = null!;
         [SerializeField] TextMeshProUGUI speechText = null!;
-        
+
         // 画像付きの吹き出し
         [SerializeField] Transform speechWithSpriteParent = null!;
         [SerializeField] Image speechImage = null!;
@@ -76,8 +76,8 @@ namespace Daipan.Streamer.MonoScripts
                 {
                     speechParent.gameObject.SetActive(false);
                     speechText.text = string.Empty;
-                    nextButtonImage.sprite = null; 
-                    TutorialUIyazirushi.SetActive(false);
+                    // nextButtonImage.sprite = null; 
+                    // TutorialUIyazirushi.SetActive(false);
                     speechWithSpriteParent.gameObject.SetActive(true);
                     speechWithSpriteText.text = speech.Message;
                     speechImage.sprite = _speechSprites.GetSprite(speech.SpriteKey);
@@ -87,11 +87,11 @@ namespace Daipan.Streamer.MonoScripts
                 {
                     speechParent.gameObject.SetActive(true);
                     speechText.text = speech.Message;
-                    nextButtonImage.sprite = _speechSprites.GetSprite("red");
-                    TutorialUIyazirushi.SetActive(true);
+                    // nextButtonImage.sprite = _speechSprites.GetSprite("red");
+                    // TutorialUIyazirushi.SetActive(true);
                     speechWithSpriteParent.gameObject.SetActive(false);
                     speechWithSpriteText.text = string.Empty;
-                    speechImage.sprite = null; 
+                    speechImage.sprite = null;
                 }
 
                 if (speech.Message != string.Empty) SoundManager.Instance?.PlaySe(SeEnum.Text);
