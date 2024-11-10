@@ -5,13 +5,14 @@ using TMPro;
 using UnityEngine;
 using R3;
 using VContainer;
+using UnityEngine.Video;
 
 namespace Daipan.Enemy.MonoScripts
 {
     public class WaveTextMono : MonoBehaviour
     {
         [SerializeField] TextMeshProUGUI waveText = null!;
-
+        [SerializeField] VideoPlayer videoPlayer = null!;
         WaveState _waveState = null!;
 
         [Inject]
@@ -26,6 +27,14 @@ namespace Daipan.Enemy.MonoScripts
         void Show(int wave)
         {
             waveText.text = wave + 1 != _waveState.TotalWaveCount ? $"Wave {wave + 1}" : "Final Wave";
+            if (wave == 0)
+            {
+                videoPlayer.Stop();
+            }
+            else
+            {
+                videoPlayer.Play();
+            }
             MoveWaveText(transform);
         }
 
