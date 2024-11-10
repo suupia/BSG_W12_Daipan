@@ -4820,6 +4820,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveText: {fileID: 7749739213334066147}
   videoPlayer: {fileID: 273378668}
+  videocanvas: {fileID: 1991172416}
 --- !u!224 &7571308594399529765
 RectTransform:
   m_ObjectHideFlags: 0
