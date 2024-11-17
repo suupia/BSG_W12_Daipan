@@ -124,7 +124,7 @@ namespace Daipan.Tutorial.Scripts
                 LanguageEnum.English => new List<Speech>
                 {
                     new("A blue enemy is coming!"),
-                    new("Press the blue button!"),
+                    new("Press the blue button!", "speech_blue"),
                     new("That's right! Good job!")
                 },
                 LanguageEnum.Japanese => new List<Speech>
@@ -192,7 +192,7 @@ namespace Daipan.Tutorial.Scripts
                 _ => new List<Speech>()
             };
         }
-        
+
         public static List<Speech> ShowForcedMissTutorial(LanguageEnum language)
         {
             return language switch

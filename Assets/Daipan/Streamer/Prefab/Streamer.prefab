@@ -50,6 +50,9 @@ MonoBehaviour:
   animator: {fileID: 3295608956548331125}
   daipanEffect: {fileID: 2119817373982441735}
   daipanWhiteEffect: {fileID: 2765568708233779730}
+  daipanWaveMaterial: {fileID: 2100000, guid: 11995d24ca4504098ab3624257d815f4, type: 2}
+  daipanDistortionMaterial: {fileID: 2100000, guid: 6bc4cca0bf8034a0d89b16e390923aa1, type: 2}
+  daipanWaveSpeed: 1
   scaleRatio: 1.5
   moveAmountByAngerZoom: {x: 1, y: 1, z: 0}
   zoomDuration: 0.2
@@ -125,7 +128,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1661063009
-  m_SortingLayer: 10
+  m_SortingLayer: 11
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -231,7 +234,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1661063009
-  m_SortingLayer: 10
+  m_SortingLayer: 11
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 648525da459c24be2b3f373465fba0b9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -369,7 +372,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1661063009
-  m_SortingLayer: 10
+  m_SortingLayer: 11
   m_SortingOrder: 2
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

@@ -1,5 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Daipan/Player/Tests/AttackEffectNetTestScene.unity.meta
 guid: 08031c347eef841d4bf383541e1a9ec5
+========
+guid: 41e050e06c7454231965dec3c9ed25a0
+folderAsset: yes
+>>>>>>>> develop:Assets/Daipan/Effects/DaipanAntiCommentDistortion.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

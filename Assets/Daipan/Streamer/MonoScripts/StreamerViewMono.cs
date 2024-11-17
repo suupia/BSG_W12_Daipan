@@ -15,6 +15,8 @@ namespace Daipan.Streamer.MonoScripts
         [SerializeField] Animator daipanEffect = null!;
         [SerializeField] Animator daipanWhiteEffect = null!;
         [SerializeField] Material daipanWaveMaterial = null!;
+        [SerializeField] Material daipanDistortionMaterial = null!;
+        [SerializeField] float daipanWaveSpeed;
         [SerializeField] float scaleRatio;
         [SerializeField] Vector3 moveAmountByAngerZoom;
         [SerializeField] float zoomDuration;
@@ -37,6 +39,9 @@ namespace Daipan.Streamer.MonoScripts
             Observable.EveryValueChanged(irritatedGaugeValue, x => x.IsFull)
                 .Subscribe(_ => AngerZoom(irritatedGaugeValue.IsFull))
                 .AddTo(this);
+
+            daipanWaveMaterial.SetFloat("_Radius", 0);
+            daipanDistortionMaterial.SetFloat("_Radius", 0);
         }
 
         void IUpdate.Update()
@@ -50,10 +55,15 @@ namespace Daipan.Streamer.MonoScripts
             daipanEffect.SetTrigger("IsDaipan");
             daipanWhiteEffect.SetTrigger("IsDaipan");
             // 台パンのエフェクトを動かすところ
-            DOVirtual.Float(0f, 2f, 1f, value =>
+            DOVirtual.Float(0f, 2f, daipanWaveSpeed, value =>
             {
                 daipanWaveMaterial.SetFloat("_Radius", value);
-                // Debug.Log($"radius : {value}");
+                daipanDistortionMaterial.SetFloat("_Radius", value);
+                Debug.Log($"radius : {value}");
+            }).OnComplete(() =>
+            {
+                daipanWaveMaterial.SetFloat("_Radius", 0);
+                daipanDistortionMaterial.SetFloat("_Radius", 0);
             });
         }
 

@@ -24,8 +24,8 @@ namespace Daipan.Tutorial.MonoScripts
         [SerializeField]
         Image offEnglish = null!;
 
-        [SerializeField]
-        Image selectedEnglish = null!;
+        /*[SerializeField]
+        Image selectedEnglish = null!;*/
 
         // リング
         [SerializeField]
@@ -111,7 +111,7 @@ namespace Daipan.Tutorial.MonoScripts
                 offJapanese.gameObject.SetActive(true);
                 onEnglish.gameObject.SetActive(true);
                 offEnglish.gameObject.SetActive(false);
-                selectedEnglish.gameObject.SetActive(true);
+                //selectedEnglish.gameObject.SetActive(true);
             }
             else if(_languageConfig.CurrentLanguage == LanguageEnum.Japanese)
             {
@@ -119,7 +119,7 @@ namespace Daipan.Tutorial.MonoScripts
                 offJapanese.gameObject.SetActive(false);
                 onEnglish.gameObject.SetActive(false);
                 offEnglish.gameObject.SetActive(true);
-                selectedEnglish.gameObject.SetActive(false);
+                //selectedEnglish.gameObject.SetActive(false);
             }
         }
     } 

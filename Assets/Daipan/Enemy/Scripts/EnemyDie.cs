@@ -12,7 +12,9 @@ namespace Daipan.Enemy.Scripts
     {
         public event EventHandler<DiedEventArgs>? OnDied;
         readonly IEnemyMono _enemyMono;
-        
+        readonly Vector2 _streamerPosition = new Vector2(-5.54f, -2.65f);
+        readonly float _daipanWaveSpeed = 40f;
+
         public EnemyDie(IEnemyMono enemyMono)
         {
             _enemyMono = enemyMono;
@@ -21,10 +23,10 @@ namespace Daipan.Enemy.Scripts
 
         public void Died(IEnemyViewMono? enemyViewMono)
         {
-            if(IsDead)return;
+            if (IsDead) return;
             IsDead = true;
             var args = new DiedEventArgs(_enemyMono.EnemyEnum);
-            OnDied?.Invoke(_enemyMono, args);        
+            OnDied?.Invoke(_enemyMono, args);
             if (enemyViewMono == null)
             {
                 UnityEngine.Object.Destroy(_enemyMono.GameObject);
@@ -36,7 +38,7 @@ namespace Daipan.Enemy.Scripts
 
         public void DiedByDaipan(IEnemyViewMono? enemyViewMono)
         {
-            if(IsDead)return;
+            if (IsDead) return;
             IsDead = true;
             var args = new DiedEventArgs(_enemyMono.EnemyEnum);
             OnDied?.Invoke(_enemyMono, args);
@@ -46,15 +48,19 @@ namespace Daipan.Enemy.Scripts
                 return;
             }
 
+            float delayTime = (new Vector2(_enemyMono.Transform.position.x, _enemyMono.Transform.position.y) - _streamerPosition)
+                .magnitude / _daipanWaveSpeed;
             _enemyMono.Transform
                 .DOMoveY(-1.7f, 0.3f)
                 .SetEase(Ease.InQuint)
+                .SetDelay(delayTime)
                 .OnStart(() => { enemyViewMono.Daipaned(() => UnityEngine.Object.Destroy(_enemyMono.GameObject)); });
         }
         
+
         public void DiedBySpecialBlack(IGetAbstractEnemyViewMono? enemyViewMono)
         {
-            if(IsDead)return;
+            if (IsDead) return;
             IsDead = true;
             var args = new DiedEventArgs(_enemyMono.EnemyEnum);
             OnDied?.Invoke(_enemyMono, args);
