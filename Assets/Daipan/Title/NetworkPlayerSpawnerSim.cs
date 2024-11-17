@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Daipan.Transporter.Scripts;
 using UnityEngine;
 using VContainer;
+using Daipan.Transporter;
 
 /// <summary>
 /// Basic player spawn based on the main shared mode sample.
@@ -14,6 +15,7 @@ public class NetworkPlayerSpawnerSim : SimulationBehaviour, IPlayerJoined, IPlay
 
     public void PlayerJoined(PlayerRef playerRef)
     {
+        Debug.Log("PlayerJoined!!");
         if (playerRef == Runner.LocalPlayer)
         {
             var playerStatsUnitNet = Runner.Spawn(playerStatsUnitNetPrefab, new Vector3(0, 1, 0), Quaternion.identity);
@@ -23,7 +25,8 @@ public class NetworkPlayerSpawnerSim : SimulationBehaviour, IPlayerJoined, IPlay
             if (titleMonoNew != null) playerStatsUnitNet.PlayerName = titleMonoNew.LocalPlayerName;
 
             var rootScope = FindObjectOfType<RootScope>();
-            var playerDataTransporter = rootScope.Container.Resolve<PlayerDataTransporterNet>();
+            var playerDataTransporter = rootScope.Container.Resolve<PlayerDataTransporterNetWrapper>();
+            Debug.Log($"Is PlayerDataTransporter NULL{playerDataTransporter == null}");
             playerDataTransporter.AddPlayerRef(playerRef);
         }
     }

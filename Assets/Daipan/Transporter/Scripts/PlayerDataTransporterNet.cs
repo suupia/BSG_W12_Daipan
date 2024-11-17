@@ -11,11 +11,11 @@ namespace Daipan.Transporter.Scripts
     public class PlayerDataTransporterNet : NetworkBehaviour
     {
         public int PlayerCount => PlayerDataDictionary.Count;
-        [Networked] NetworkDictionary<PlayerRef, PlayerData> PlayerDataDictionary => default; 
+        [Networked] NetworkDictionary<PlayerRef, PlayerData> PlayerDataDictionary => default;
 
         public void AddPlayerRef(PlayerRef playerRef)
         {
-            Debug.Log($"Registering playerRef:{playerRef} as {PlayerDataDictionary.Count + 1}P");
+            // Debug.Log($"Registering playerRef:{playerRef} as {PlayerDataDictionary.Count + 1}P");
             PlayerDataDictionary.Add(playerRef, new PlayerData());
         }
 
@@ -29,7 +29,7 @@ namespace Daipan.Transporter.Scripts
             Debug.LogWarning($"GetPlayerRoleEnum playerRef:{playerRef} is not found");
             return PlayerRoleEnum.None;
         }
-        
+
         public string GetPlayerName(PlayerRef playerRef)
         {
             if (PlayerDataDictionary.TryGet(playerRef, out PlayerData playerData))

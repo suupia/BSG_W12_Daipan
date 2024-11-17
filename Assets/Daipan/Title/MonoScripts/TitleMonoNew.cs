@@ -18,13 +18,14 @@ public class TitleMonoNew : MonoBehaviour
     [SerializeField] DTONet dtoNetPrefab = null!;
     [SerializeField] PlayerDataTransporterNet playerDataTransporterNetPrefab = null!;
 
-    [Header("JoinPanel")] [SerializeField] GameObject joinPanel = null!;
+    [Header("JoinPanel")][SerializeField] GameObject joinPanel = null!;
     [SerializeField] TMP_InputField localPlayerNameInputField = null!;
     [SerializeField] TMP_InputField localRoomNameInputField = null!;
     [SerializeField] CustomButton joinRoomButton = null!;
     [SerializeField] CustomButton closeJoinPanelButton = null!;
 
-    [Header("PlayerStatsPanel")] [SerializeField]
+    [Header("PlayerStatsPanel")]
+    [SerializeField]
     GameObject playerStatsPanel = null!;
 
     [SerializeField] TextMeshProUGUI roomName = null!;
@@ -32,13 +33,14 @@ public class TitleMonoNew : MonoBehaviour
     [SerializeField] CustomButton readyButton = null!;
     [SerializeField] CustomButton startGameButton = null!; // MasterClient only
 
-    [Header("ErrorPanel")] [SerializeField]
+    [Header("ErrorPanel")]
+    [SerializeField]
     GameObject errorMessagePanel = null!;
 
     [SerializeField] TextMeshProUGUI errorMessageText = null!;
 
     readonly PlayerDataTransporterNetWrapper _playerDataTransporterNetWrapper = new();
-    
+
     void Awake()
     {
         joinPanel.SetActive(false);
@@ -67,6 +69,8 @@ public class TitleMonoNew : MonoBehaviour
 
         var result = await runner.StartGame(startGameArgs);
 
+        Debug.Log("Game started!!");
+
         Debug.Log($"runner.IsCloudReady : {runner.IsCloudReady}");
 
         if (runner.IsSharedModeMasterClient)
@@ -76,6 +80,8 @@ public class TitleMonoNew : MonoBehaviour
             var playerDataTransporterNet = runner.Spawn(playerDataTransporterNetPrefab);
             runner.MakeDontDestroyOnLoad(playerDataTransporterNet.gameObject);
         }
+
+        Debug.Log("playerDataTransporterNet is spawned!!");
 
 
         if (result.Ok)
@@ -126,12 +132,12 @@ public class TitleMonoNew : MonoBehaviour
         {
             var playerData = new PlayerData()
             {
-                Name = playerStatsUnit.PlayerName, 
+                Name = playerStatsUnit.PlayerName,
                 Role = playerStatsUnit.PlayerRole,
             };
             _playerDataTransporterNetWrapper.SetPlayerData(playerStatsUnit.NetworkedPlayerRef, playerData);
         }
-        
+
         // Transit to DaipanScene
         var runner = FindObjectOfType<NetworkRunner>();
         SceneTransition.TransitionSceneWithNetworkRunner(runner, SceneName.DaipanSceneNet);
