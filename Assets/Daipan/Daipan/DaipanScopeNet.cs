@@ -40,6 +40,7 @@ using Daipan.Sound.MonoScripts;
 using Daipan.Sound.Scripts;
 using Daipan.Transporter;
 using Daipan.Transporter.Scripts;
+using Daipan.Anti.Scripts;
 using Fusion;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -276,6 +277,11 @@ namespace Daipan.Daipan
             builder.RegisterComponentInHierarchy<OptionReturnTitleViewMono>();
         }
 
+        public static void RegisterAnti(IContainerBuilder builder)
+        {
+            builder.Register<AntiEnemySpawnerNetwork>(Lifetime.Scoped);
+        }
+
         protected override void Configure(IContainerBuilder builder)
         {
             Debug.Log($"DaipanScopeNet Configure() builder: {builder}");
@@ -344,6 +350,9 @@ namespace Daipan.Daipan
 
             // Option
             RegisterOption(builder);
+
+            // Anti
+            RegisterAnti(builder);
 
             // Result
             builder.Register<ResultState>(Lifetime.Scoped);
