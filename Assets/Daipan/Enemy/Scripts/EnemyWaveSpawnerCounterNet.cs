@@ -61,9 +61,9 @@ namespace Daipan.Enemy.Scripts
             );
         }
 
-        public override void FixedUpdateNetwork()
+        public void Update()
         {
-            base.FixedUpdateNetwork();
+            // base.FixedUpdateNetwork();
             Debug.Log($"IsInWaveInterval: {IsInWaveInterval} CurrentSpawnedEnemyCount: {CurrentSpawnedEnemyCount} MaxSpawnedEnemyCount: {MaxSpawnedEnemyCount}");
 
             IntervalSpawnEnemy();

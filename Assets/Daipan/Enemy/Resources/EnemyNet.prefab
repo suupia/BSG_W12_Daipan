@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyViewMono: {fileID: 7697087465950959657}
+  _EnemyEnum: 0
 --- !u!114 &5680877540413540284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,7 +83,7 @@ MonoBehaviour:
   SyncScale: 0
   SyncParent: 0
   _autoAOIOverride: 1
-  DisableSharedModeInterpolation: 0
+  DisableSharedModeInterpolation: 1
 --- !u!1001 &4600649212154148714
 PrefabInstance:
   m_ObjectHideFlags: 0
