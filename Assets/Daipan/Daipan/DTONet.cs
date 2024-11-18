@@ -7,5 +7,11 @@ namespace Daipan.Daipan
     {
         [Networked] public double IrritatedValue { get; set; }
         [Networked] public NetworkBool TestFlag { get; set; }
+
+        public override void Spawned()
+        {
+            base.Spawned();
+            FindObjectOfType<NetworkRunner>().MakeDontDestroyOnLoad(gameObject);
+        }
     }
 }

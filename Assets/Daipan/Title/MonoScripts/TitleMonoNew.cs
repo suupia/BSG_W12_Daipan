@@ -73,17 +73,6 @@ public class TitleMonoNew : MonoBehaviour
 
         Debug.Log($"runner.IsCloudReady : {runner.IsCloudReady}");
 
-        if (runner.IsSharedModeMasterClient)
-        {
-            var dtoNet = runner.Spawn(dtoNetPrefab);
-            runner.MakeDontDestroyOnLoad(dtoNet.gameObject);
-            var playerDataTransporterNet = runner.Spawn(playerDataTransporterNetPrefab);
-            runner.MakeDontDestroyOnLoad(playerDataTransporterNet.gameObject);
-        }
-
-        Debug.Log("playerDataTransporterNet is spawned!!");
-
-
         if (result.Ok)
         {
             roomName.text = "Room:  " + runner.SessionInfo.Name;
@@ -126,6 +115,15 @@ public class TitleMonoNew : MonoBehaviour
 
     void StartGameButtonClicked()
     {
+        var runner = FindObjectOfType<NetworkRunner>();
+        if (runner.IsSharedModeMasterClient)
+        {
+            var dtoNet = runner.Spawn(dtoNetPrefab);
+            runner.MakeDontDestroyOnLoad(dtoNet.gameObject);
+            var playerDataTransporterNet = runner.Spawn(playerDataTransporterNetPrefab);
+            runner.MakeDontDestroyOnLoad(playerDataTransporterNet.gameObject);
+        }
+
         // Save player data
         var playerStatsUnits = playerStatsUnitParent.GetComponentsInChildren<PlayerStatsUnitNet>();
         foreach (var playerStatsUnit in playerStatsUnits)
@@ -139,8 +137,8 @@ public class TitleMonoNew : MonoBehaviour
             _playerDataTransporterNetWrapper.SetPlayerData(playerStatsUnit.NetworkedPlayerRef, playerData);
         }
 
+
         // Transit to DaipanScene
-        var runner = FindObjectOfType<NetworkRunner>();
         SceneTransition.TransitionSceneWithNetworkRunner(runner, SceneName.DaipanSceneNet);
     }
 

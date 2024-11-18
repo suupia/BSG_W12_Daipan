@@ -24,10 +24,10 @@ public class NetworkPlayerSpawnerSim : SimulationBehaviour, IPlayerJoined, IPlay
             var titleMonoNew = FindObjectOfType<TitleMonoNew>();
             if (titleMonoNew != null) playerStatsUnitNet.PlayerName = titleMonoNew.LocalPlayerName;
 
-            var rootScope = FindObjectOfType<RootScope>();
-            var playerDataTransporter = rootScope.Container.Resolve<PlayerDataTransporterNetWrapper>();
-            Debug.Log($"Is PlayerDataTransporter NULL{playerDataTransporter == null}");
-            playerDataTransporter.AddPlayerRef(playerRef);
+            // var rootScope = FindObjectOfType<RootScope>();
+            // var playerDataTransporter = rootScope.Container.Resolve<PlayerDataTransporterNetWrapper>();
+            // Debug.Log($"Is PlayerDataTransporter NULL{playerDataTransporter == null}");
+            // playerDataTransporter.AddPlayerRef(playerRef);
         }
     }
 

@@ -9,10 +9,16 @@ namespace Daipan.Transporter.Scripts
     /// ロビーシーンからゲームシーンに遷移する際に、PlayerRefとPlayerDataの組を保持するクラス
     /// 他にも保持したい状態があったらこのクラスに追加する
     /// </summary>
-    public class PlayerDataTransporterNet : NetworkBehaviour
+    public class PlayerDataTransporterNet : NetworkBehaviour, ISpawned
     {
         public int PlayerCount => PlayerDataDictionary.Count;
-        [SerializeField][Networked] NetworkDictionary<PlayerRef, PlayerData> PlayerDataDictionary => default;
+        [Networked] NetworkDictionary<PlayerRef, PlayerData> PlayerDataDictionary => default;
+
+        public override void Spawned()
+        {
+            base.Spawned();
+            FindObjectOfType<NetworkRunner>().MakeDontDestroyOnLoad(gameObject);
+        }
 
         public void AddPlayerRef(PlayerRef playerRef)
         {
@@ -49,7 +55,7 @@ namespace Daipan.Transporter.Scripts
         }
     }
 
-    [Serializable]
+
     public struct PlayerData : INetworkStruct
     {
         public NetworkString<_32> Name;
