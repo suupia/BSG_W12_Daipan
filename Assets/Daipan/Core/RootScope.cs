@@ -11,6 +11,7 @@ public sealed class RootScope : LifetimeScope
     {
         builder.Register<LanguageConfig>(Lifetime.Singleton);
         builder.Register<PlayerDataTransporterNetWrapper>(Lifetime.Singleton);
+        builder.Register<PlayerDataTransporterNet>(Lifetime.Singleton);
 
     }
 }

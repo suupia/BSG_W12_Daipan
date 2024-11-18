@@ -32,13 +32,14 @@ namespace Daipan.InputSerial.Scripts
             )
         {
             var isStreamer = playerDataTransporterNetWrapper.GetPlayerRoleEnum(runner.LocalPlayer) == PlayerRoleEnum.Streamer;
+            Debug.Log($"Streamer is {isStreamer}");
             viewObject.SetActive(isStreamer);
-        } 
+        }
 
         void Start()
         {
             // onClickでボタンが押されたときに状態を更新
-            redButton.onClick += () =>  RedButton = true;
+            redButton.onClick += () => RedButton = true;
             blueButton.onClick += () => BlueButton = true;
             yellowButton.onClick += () => YellowButton = true;
             menuButton.onClick += () => MenuButton = true;
@@ -54,6 +55,6 @@ namespace Daipan.InputSerial.Scripts
             MenuButton = false;
         }
 
-    } 
+    }
 }
 
