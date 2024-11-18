@@ -60,24 +60,27 @@ namespace Daipan.Daipan
             {
                 if (_instance != null) return _instance;
                 var daipanScopeNet = FindObjectOfType<DaipanScopeNet>();
-                if (!_isBuilt)
-                {
-                    daipanScopeNet.Build();
-                    _isBuilt = true;
-                }
+                // if (!_isBuilt)
+                // {
+                //     daipanScopeNet.Build();
+                //     _isBuilt = true;
+                // }
                 return daipanScopeNet;
             }
         }
 
-        [FormerlySerializedAs("streamParameter")] [SerializeField]
+        [FormerlySerializedAs("streamParameter")]
+        [SerializeField]
         StreamParam streamParam = null!;
 
         [SerializeField] PlayerParamManager playerParamManager = null!;
 
-        [FormerlySerializedAs("enemyParamManager")] [SerializeField]
+        [FormerlySerializedAs("enemyParamManager")]
+        [SerializeField]
         EnemyParamsManager enemyParamsManager = null!;
 
-        [FormerlySerializedAs("commentParamsManager")] [SerializeField]
+        [FormerlySerializedAs("commentParamsManager")]
+        [SerializeField]
         CommentParamManager commentParamManager = null!;
 
         [SerializeField] FinalBossParamManager finalBossParamManager = null!;
@@ -244,7 +247,7 @@ namespace Daipan.Daipan
             // InputSerial
             builder.Register<SerialInput>(Lifetime.Scoped);
             builder.RegisterComponentInHierarchy<StreamInputButtonManagerMono>().As<IInputSerialManager>();
-            
+
             // Anti
             builder.RegisterComponentInHierarchy<AntiInputMono>();
 
@@ -283,7 +286,7 @@ namespace Daipan.Daipan
 
             builder.Register<DTONetWrapper>(Lifetime.Scoped);
             builder.Register<PlayerDataTransporterNetWrapper>(Lifetime.Scoped);
-            
+
             // Stream
             RegisterStream(builder, streamParam);
 

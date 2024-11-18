@@ -11,6 +11,8 @@ using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.Player.Scripts;
 using Daipan.Stream.Scripts;
 using Daipan.Stream.Scripts.Utility;
+using Daipan.Transporter;
+using Daipan.Transporter.Scripts;
 using Daipan.Utility.Scripts;
 using Fusion;
 using R3;
@@ -23,7 +25,7 @@ using Random = UnityEngine.Random;
 
 namespace Daipan.Enemy.Scripts
 {
-    public sealed class EnemySpawnerNetwork : IEnemySpawner 
+    public sealed class EnemySpawnerNetwork : IEnemySpawner
     {
         readonly IObjectResolver _container;
         readonly NetworkRunner _runner;
@@ -33,6 +35,7 @@ namespace Daipan.Enemy.Scripts
         readonly IEnemyBuilder _enemyBuilder;
         readonly IEnemyEnumSelector _enemyEnumSelector;
         readonly List<IDisposable> _disposables = new();
+        readonly PlayerDataTransporterNetWrapper _playerDataTransporterNetWrapper;
         float _timer;
 
         [Inject]
@@ -44,6 +47,7 @@ namespace Daipan.Enemy.Scripts
             , IEnemySpawnPoint enemySpawnPoint
             , IEnemyBuilder enemyBuilder
             , IEnemyEnumSelector enemyEnumSelector
+            , PlayerDataTransporterNetWrapper playerDataTransporterNetWrapper
         )
         {
             _container = container;
@@ -53,15 +57,19 @@ namespace Daipan.Enemy.Scripts
             _enemySpawnPoint = enemySpawnPoint;
             _enemyBuilder = enemyBuilder;
             _enemyEnumSelector = enemyEnumSelector;
+            _playerDataTransporterNetWrapper = playerDataTransporterNetWrapper;
         }
 
         public void SpawnEnemy()
         {
+            // EnemyのSpawnはStreamerが行う
+            if (_playerDataTransporterNetWrapper.GetPlayerRoleEnum(_runner.LocalPlayer) != PlayerRoleEnum.Streamer) return;
             const float spawnRandomPositionY = 0.2f;
             var spawnPosition = GetRandomSpawnPosition(_enemySpawnPoint);
             var randomSpawnPosition = new Vector3
             {
-                x = spawnPosition.x, y = spawnPosition.y + Random.Range(-spawnRandomPositionY, spawnRandomPositionY)
+                x = spawnPosition.x,
+                y = spawnPosition.y + Random.Range(-spawnRandomPositionY, spawnRandomPositionY)
             };
 
             var enemyEnum = _enemyEnumSelector.SelectEnemyEnum();
@@ -77,6 +85,8 @@ namespace Daipan.Enemy.Scripts
 
         void SpawnEnemy(Vector3 spawnPosition, EnemyEnum enemyEnum)
         {
+            // EnemyのSpawnはStreamerが行う
+            if (_playerDataTransporterNetWrapper.GetPlayerRoleEnum(_runner.LocalPlayer) != PlayerRoleEnum.Streamer) return;
             var enemyMonoPrefab = _enemyMonoLoader.Load();
             var enemyMonoObject = _runner.Spawn(enemyMonoPrefab, spawnPosition, Quaternion.identity,
                 onBeforeSpawned: (runner, obj) =>
@@ -87,7 +97,7 @@ namespace Daipan.Enemy.Scripts
                         , _container.Resolve<IEnemySpawnPoint>()
                         , _container.Resolve<IEnemyParamContainer>()
                     );
-                    _enemyBuilder.Build(enemyMono, enemyEnum)(enemyMono); 
+                    _enemyBuilder.Build(enemyMono, enemyEnum)(enemyMono);
                 });
             _enemyCluster.Add(enemyMonoObject);
         }

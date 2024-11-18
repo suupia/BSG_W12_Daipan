@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Fusion;
 using UnityEngine;
 
@@ -8,15 +9,21 @@ namespace Daipan.Transporter.Scripts
     /// ロビーシーンからゲームシーンに遷移する際に、PlayerRefとPlayerDataの組を保持するクラス
     /// 他にも保持したい状態があったらこのクラスに追加する
     /// </summary>
-    public class PlayerDataTransporterNet : NetworkBehaviour
+    public class PlayerDataTransporterNet : NetworkBehaviour, ISpawned
     {
         public int PlayerCount => PlayerDataDictionary.Count;
-        [Networked] NetworkDictionary<PlayerRef, PlayerData> PlayerDataDictionary => default; 
+        [Networked] NetworkDictionary<PlayerRef, PlayerData> PlayerDataDictionary => default;
+
+        public override void Spawned()
+        {
+            base.Spawned();
+            FindObjectOfType<NetworkRunner>().MakeDontDestroyOnLoad(gameObject);
+        }
 
         public void AddPlayerRef(PlayerRef playerRef)
         {
             Debug.Log($"Registering playerRef:{playerRef} as {PlayerDataDictionary.Count + 1}P");
-            PlayerDataDictionary.Add(playerRef, new PlayerData());
+            // PlayerDataDictionary.Add(playerRef, new PlayerData());
         }
 
         public PlayerRoleEnum GetPlayerRoleEnum(PlayerRef playerRef)
@@ -29,7 +36,7 @@ namespace Daipan.Transporter.Scripts
             Debug.LogWarning($"GetPlayerRoleEnum playerRef:{playerRef} is not found");
             return PlayerRoleEnum.None;
         }
-        
+
         public string GetPlayerName(PlayerRef playerRef)
         {
             if (PlayerDataDictionary.TryGet(playerRef, out PlayerData playerData))
@@ -43,10 +50,11 @@ namespace Daipan.Transporter.Scripts
 
         public void SetPlayerData(PlayerRef playerRef, PlayerData playerData)
         {
-            Debug.Log($"Registering playerRef:{playerRef} as {playerData}");
-            PlayerDataDictionary.Add(playerRef, playerData);
+            Debug.Log($"Registering playerRef:{playerRef} as {playerData.Name},{playerData.Role}");
+            PlayerDataDictionary.Set(playerRef, playerData);
         }
     }
+
 
     public struct PlayerData : INetworkStruct
     {
