@@ -14,9 +14,9 @@ scopes = {
 	"last_search.E8DA15E5" = "enemyp"
 	"OpenInspectorPreview.E8DA15E5" = "0"
 	"currentGroup.E8DA15E5" = "asset"
-	"last_search.110DEAF1" = "Enemypara"
+	"last_search.110DEAF1" = "audio list"
 	"OpenInspectorPreview.110DEAF1" = "0"
-	"currentGroup.110DEAF1" = "asset"
+	"currentGroup.110DEAF1" = "menu"
 }
 providers = {
 	adb = {

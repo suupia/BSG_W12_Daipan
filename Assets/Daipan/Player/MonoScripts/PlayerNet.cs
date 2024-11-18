@@ -42,7 +42,7 @@ namespace Daipan.Player.MonoScripts
                 , daipanScopeNet.Container.Resolve<IPlayerOnAttacked>()
             );
         }
-        
+
 
         public override void FixedUpdateNetwork()
         {
