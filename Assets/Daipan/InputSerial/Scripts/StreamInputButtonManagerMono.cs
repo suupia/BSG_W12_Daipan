@@ -32,7 +32,7 @@ namespace Daipan.InputSerial.Scripts
             )
         {
             var isStreamer = playerDataTransporterNetWrapper.GetPlayerRoleEnum(runner.LocalPlayer) == PlayerRoleEnum.Streamer;
-            Debug.Log($"Streamer is {isStreamer}");
+            Debug.Log($"Streamer is {isStreamer} and {playerDataTransporterNetWrapper.GetPlayerRoleEnum(runner.LocalPlayer)} and Runner is {runner != null}");
             viewObject.SetActive(isStreamer);
         }
 

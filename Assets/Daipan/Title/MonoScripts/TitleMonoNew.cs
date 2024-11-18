@@ -135,6 +135,7 @@ public class TitleMonoNew : MonoBehaviour
                 Name = playerStatsUnit.PlayerName,
                 Role = playerStatsUnit.PlayerRole,
             };
+            Debug.Log($"playerData.Role = {playerData.Role}");
             _playerDataTransporterNetWrapper.SetPlayerData(playerStatsUnit.NetworkedPlayerRef, playerData);
         }
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Fusion;
 using UnityEngine;
 
@@ -11,12 +12,12 @@ namespace Daipan.Transporter.Scripts
     public class PlayerDataTransporterNet : NetworkBehaviour
     {
         public int PlayerCount => PlayerDataDictionary.Count;
-        [Networked] NetworkDictionary<PlayerRef, PlayerData> PlayerDataDictionary => default;
+        [SerializeField][Networked] NetworkDictionary<PlayerRef, PlayerData> PlayerDataDictionary => default;
 
         public void AddPlayerRef(PlayerRef playerRef)
         {
-            // Debug.Log($"Registering playerRef:{playerRef} as {PlayerDataDictionary.Count + 1}P");
-            PlayerDataDictionary.Add(playerRef, new PlayerData());
+            Debug.Log($"Registering playerRef:{playerRef} as {PlayerDataDictionary.Count + 1}P");
+            // PlayerDataDictionary.Add(playerRef, new PlayerData());
         }
 
         public PlayerRoleEnum GetPlayerRoleEnum(PlayerRef playerRef)
@@ -43,11 +44,12 @@ namespace Daipan.Transporter.Scripts
 
         public void SetPlayerData(PlayerRef playerRef, PlayerData playerData)
         {
-            Debug.Log($"Registering playerRef:{playerRef} as {playerData}");
-            PlayerDataDictionary.Add(playerRef, playerData);
+            Debug.Log($"Registering playerRef:{playerRef} as {playerData.Name},{playerData.Role}");
+            PlayerDataDictionary.Set(playerRef, playerData);
         }
     }
 
+    [Serializable]
     public struct PlayerData : INetworkStruct
     {
         public NetworkString<_32> Name;
