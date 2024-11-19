@@ -14,6 +14,7 @@ namespace Daipan.AntiNet.Scripts
         //
         int value;
 
+        public int Value { get => value; }
         SpawnEnemyCostValue()
         {
             value = initializedValue;
@@ -22,13 +23,13 @@ namespace Daipan.AntiNet.Scripts
         public void IncreaseValue(int amount)
         {
             if (amount < 0) return;
-            value = Math.Max(MaxValue, value + amount);
+            value = Math.Min(MaxValue, value + amount);
         }
 
         public void DecreaseValue(int amount)
         {
             if (amount < 0) return;
-            value = Math.Min(0, value - amount);
+            value = Math.Max(0, value - amount);
         }
     }
 }

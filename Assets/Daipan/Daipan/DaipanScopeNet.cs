@@ -282,6 +282,7 @@ namespace Daipan.Daipan
         public static void RegisterAntiNet(IContainerBuilder builder)
         {
             builder.Register<AntiEnemySpawnerNetwork>(Lifetime.Scoped);
+            builder.Register<SpawnEnemyCostValue>(Lifetime.Scoped);
         }
 
         public static void RegisterStreamerNet(IContainerBuilder builder)
