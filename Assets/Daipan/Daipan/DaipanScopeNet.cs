@@ -48,6 +48,7 @@ using VContainer;
 using VContainer.Unity;
 using Daipan.StreamerNet.MonoScripts;
 using Daipna.StreamerNet.Scripts;
+using Daipan.AntiNet.MonoScripts;
 
 namespace Daipan.Daipan
 
@@ -283,6 +284,7 @@ namespace Daipan.Daipan
         {
             builder.Register<AntiEnemySpawnerNetwork>(Lifetime.Scoped);
             builder.Register<SpawnEnemyCostValue>(Lifetime.Scoped);
+            builder.RegisterComponentInHierarchy<CostViewMono>();
         }
 
         public static void RegisterStreamerNet(IContainerBuilder builder)
