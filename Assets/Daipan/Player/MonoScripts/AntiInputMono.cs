@@ -40,9 +40,9 @@ namespace Daipan.Player.MonoScripts
 
         void Start()
         {
-            button1.onClick += () => _antiEnemySpawnerNetwork.SpawnEnemy(EnemyEnum.Red); // todo : 敵を出現させる 
-            button2.onClick += () => Debug.Log("Button2"); //
-            button3.onClick += () => Debug.Log("Button3"); // 
+            button1.onClick += () => _antiEnemySpawnerNetwork.SpawnEnemy(EnemyEnum.Red);
+            button2.onClick += () => _antiEnemySpawnerNetwork.SpawnEnemy(EnemyEnum.Red);
+            button3.onClick += () => _antiEnemySpawnerNetwork.SpawnEnemy(EnemyEnum.Red);
         }
 
 

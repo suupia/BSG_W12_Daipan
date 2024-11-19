@@ -37,7 +37,8 @@ namespace Daipan.StreamerNet.MonoScripts
         {
             if (_playerDataTransporterNetWrapper.GetPlayerRoleEnum(_runner.LocalPlayer) == PlayerRoleEnum.Streamer)
             {
-                Debug.Log($"StreamerRPCReceiverNet is Streamer {enemyEnum}");
+                _enemySpawner.SpawnEnemy(enemyEnum);
+                Debug.Log($"SpawnEnemy RPC received: {enemyEnum}");
             }
         }
 

@@ -21,7 +21,7 @@ namespace Daipan.AntiNet.Scripts
         public void SpawnEnemy(EnemyEnum enemyEnum)
         {
             Debug.Log($"Anti spawns {enemyEnum}");
-            _streamerRPCReceiverNetWrapper.RPCReceiverNet.SpawnEnemyRPC(EnemyEnum.None);
+            _streamerRPCReceiverNetWrapper.RPCReceiverNet.SpawnEnemyRPC(enemyEnum);
         }
     }
 }
