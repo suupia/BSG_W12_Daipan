@@ -83,6 +83,29 @@ namespace Daipan.Enemy.Scripts
             }
         }
 
+        public void SpawnEnemy(EnemyEnum enemyEnum)
+        {
+            if (enemyEnum == EnemyEnum.None) return;
+            // EnemyのSpawnはStreamerが行う
+            if (_playerDataTransporterNetWrapper.GetPlayerRoleEnum(_runner.LocalPlayer) != PlayerRoleEnum.Streamer) return;
+            const float spawnRandomPositionY = 0.2f;
+            var spawnPosition = GetRandomSpawnPosition(_enemySpawnPoint);
+            var randomSpawnPosition = new Vector3
+            {
+                x = spawnPosition.x,
+                y = spawnPosition.y + Random.Range(-spawnRandomPositionY, spawnRandomPositionY)
+            };
+
+            if (enemyEnum == EnemyEnum.RedBoss)
+            {
+                SpawnRedBoss(randomSpawnPosition);
+            }
+            else
+            {
+                SpawnEnemy(randomSpawnPosition, enemyEnum);
+            }
+        }
+
         void SpawnEnemy(Vector3 spawnPosition, EnemyEnum enemyEnum)
         {
             // EnemyのSpawnはStreamerが行う

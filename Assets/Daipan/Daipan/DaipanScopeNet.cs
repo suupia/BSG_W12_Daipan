@@ -40,11 +40,14 @@ using Daipan.Sound.MonoScripts;
 using Daipan.Sound.Scripts;
 using Daipan.Transporter;
 using Daipan.Transporter.Scripts;
+using Daipan.AntiNet.Scripts;
 using Fusion;
 using UnityEngine;
 using UnityEngine.Serialization;
 using VContainer;
 using VContainer.Unity;
+using Daipan.StreamerNet.MonoScripts;
+using Daipna.StreamerNet.Scripts;
 
 namespace Daipan.Daipan
 
@@ -276,6 +279,17 @@ namespace Daipan.Daipan
             builder.RegisterComponentInHierarchy<OptionReturnTitleViewMono>();
         }
 
+        public static void RegisterAntiNet(IContainerBuilder builder)
+        {
+            builder.Register<AntiEnemySpawnerNetwork>(Lifetime.Scoped);
+        }
+
+        public static void RegisterStreamerNet(IContainerBuilder builder)
+        {
+            builder.Register<StreamerRPCReceiverNetWrapper>(Lifetime.Scoped);
+            builder.RegisterComponentInHierarchy<StreamerRPCReceiverNet>();
+        }
+
         protected override void Configure(IContainerBuilder builder)
         {
             Debug.Log($"DaipanScopeNet Configure() builder: {builder}");
@@ -344,6 +358,12 @@ namespace Daipan.Daipan
 
             // Option
             RegisterOption(builder);
+
+            // Anti
+            RegisterAntiNet(builder);
+
+            // Streamer
+            RegisterStreamerNet(builder);
 
             // Result
             builder.Register<ResultState>(Lifetime.Scoped);
