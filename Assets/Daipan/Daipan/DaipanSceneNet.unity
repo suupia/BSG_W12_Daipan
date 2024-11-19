@@ -1024,7 +1024,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1816266150
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1631,10 +1631,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6718282394163543922, guid: 30e91696e7cda4ce7b49b5cd15e11759, type: 3}
-      propertyPath: daipanWaveMaterial
-      value: 
-      objectReference: {fileID: 2100000, guid: 11995d24ca4504098ab3624257d815f4, type: 2}
     - target: {fileID: 7019384296459631377, guid: 30e91696e7cda4ce7b49b5cd15e11759, type: 3}
       propertyPath: m_Name
       value: Streamer
@@ -4213,10 +4209,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3514311951368056615, guid: 8fd1516ac49ff4d69b423e0143b3d746, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 3.4899979
-      objectReference: {fileID: 0}
     - target: {fileID: 4798830512035955259, guid: 8fd1516ac49ff4d69b423e0143b3d746, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -4240,10 +4232,6 @@ PrefabInstance:
     - target: {fileID: 5208535946686048856, guid: 8fd1516ac49ff4d69b423e0143b3d746, type: 3}
       propertyPath: m_Name
       value: Viewer
-      objectReference: {fileID: 0}
-    - target: {fileID: 6039469736924833062, guid: 8fd1516ac49ff4d69b423e0143b3d746, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -108.619995
       objectReference: {fileID: 0}
     - target: {fileID: 7370306457207807497, guid: 8fd1516ac49ff4d69b423e0143b3d746, type: 3}
       propertyPath: m_AnchorMax.y
@@ -4429,10 +4417,6 @@ PrefabInstance:
     - target: {fileID: 2971335598226131560, guid: 00c4c7a4aa6ea47deb847f11227eae39, type: 3}
       propertyPath: m_Name
       value: ResultCanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 2971335598226131560, guid: 00c4c7a4aa6ea47deb847f11227eae39, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8801415033600251676, guid: 00c4c7a4aa6ea47deb847f11227eae39, type: 3}
       propertyPath: m_Pivot.x
@@ -4774,10 +4758,6 @@ PrefabInstance:
     - target: {fileID: 4709876791888845700, guid: e14e9eddc9151440abb22c158a952d28, type: 3}
       propertyPath: m_Name
       value: StreamerInputCanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 4709876791888845700, guid: e14e9eddc9151440abb22c158a952d28, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9104200569856987738, guid: e14e9eddc9151440abb22c158a952d28, type: 3}
       propertyPath: m_Camera
