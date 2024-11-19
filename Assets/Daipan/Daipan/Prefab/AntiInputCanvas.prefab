@@ -388,9 +388,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   viewObject: {fileID: 2317408217521360598}
-  button1: {fileID: 6431961511052987923}
-  button2: {fileID: 4554865257822160103}
-  button3: {fileID: 7912797831190165817}
+  yellowNormalButton: {fileID: 6431961511052987923}
+  redNormalButton: {fileID: 4554865257822160103}
+  blueNormalButton: {fileID: 7912797831190165817}
+  yellowBossButton: {fileID: 6624568394442739771}
+  redBossButton: {fileID: 2767770813102537342}
+  blueBossButton: {fileID: 3276782859016760517}
 --- !u!1 &2195162528534455383
 GameObject:
   m_ObjectHideFlags: 0
