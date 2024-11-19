@@ -40,7 +40,7 @@ using Daipan.Sound.MonoScripts;
 using Daipan.Sound.Scripts;
 using Daipan.Transporter;
 using Daipan.Transporter.Scripts;
-using Daipan.Anti.Scripts;
+using Daipan.AntiNet.Scripts;
 using Fusion;
 using UnityEngine;
 using UnityEngine.Serialization;
