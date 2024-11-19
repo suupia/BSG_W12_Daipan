@@ -46,6 +46,8 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using VContainer;
 using VContainer.Unity;
+using Daipan.StreamerNet.MonoScripts;
+using Daipna.StreamerNet.Scripts;
 
 namespace Daipan.Daipan
 
@@ -277,9 +279,15 @@ namespace Daipan.Daipan
             builder.RegisterComponentInHierarchy<OptionReturnTitleViewMono>();
         }
 
-        public static void RegisterAnti(IContainerBuilder builder)
+        public static void RegisterAntiNet(IContainerBuilder builder)
         {
             builder.Register<AntiEnemySpawnerNetwork>(Lifetime.Scoped);
+        }
+
+        public static void RegisterStreamerNet(IContainerBuilder builder)
+        {
+            builder.Register<StreamerRPCReceiverNetWrapper>(Lifetime.Scoped);
+            builder.RegisterComponentInHierarchy<StreamerRPCReceiverNet>();
         }
 
         protected override void Configure(IContainerBuilder builder)
@@ -352,7 +360,10 @@ namespace Daipan.Daipan
             RegisterOption(builder);
 
             // Anti
-            RegisterAnti(builder);
+            RegisterAntiNet(builder);
+
+            // Streamer
+            RegisterStreamerNet(builder);
 
             // Result
             builder.Register<ResultState>(Lifetime.Scoped);
