@@ -4,25 +4,26 @@ using UnityEngine;
 using Daipan.Enemy.Scripts;
 using VContainer;
 using Daipna.StreamerNet.Scripts;
+using Daipan.LevelDesign.Net;
 
 namespace Daipan.AntiNet.Scripts
 {
     public class AntiEnemySpawnerNetwork
     {
-        // todo 値出し
-        readonly int NormalCost = 1;
-        readonly int BossCost = 5;
-        //
         readonly StreamerRPCReceiverNetWrapper _streamerRPCReceiverNetWrapper;
-        private SpawnEnemyCostValue _spawnEnemyCost;
+        readonly SpawnEnemyCostValue _spawnEnemyCost;
+        readonly IEnemySpawnedCostParam _spawnedCostParam;
+
         [Inject]
         public AntiEnemySpawnerNetwork(
             StreamerRPCReceiverNetWrapper streamerRPCReceiverNetWrapper
             , SpawnEnemyCostValue spawnEnemyCost
+            , IEnemySpawnedCostParam enemySpawnedCostParam
         )
         {
             _streamerRPCReceiverNetWrapper = streamerRPCReceiverNetWrapper;
             _spawnEnemyCost = spawnEnemyCost;
+            _spawnedCostParam = enemySpawnedCostParam;
         }
 
         public void SpawnEnemy(EnemyEnum enemyEnum)
@@ -44,8 +45,8 @@ namespace Daipan.AntiNet.Scripts
 
         int GetCost(EnemyEnum enemyEnum)
         {
-            if (enemyEnum.IsBoss() == true) return BossCost;
-            return NormalCost;
+            if (enemyEnum.IsBoss() == true) return _spawnedCostParam.BossEnemyCost;
+            return _spawnedCostParam.NormalEnemyCost;
         }
     }
 }

@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: NetworkPlayerParamsManager
   m_EditorClassIdentifier: 
   enemySpawnedCostParam:
-    normalEnemyCost: 0
-    bossEnemyCost: 0
+    normalEnemyCost: 1
+    bossEnemyCost: 5
   costValueParam:
-    maxCostValue: 0
-    initializedCostValue: 0
+    maxCostValue: 100
+    initializedCostValue: 50
     increaseCostTime: 0
     increasedCostValue: 0

@@ -3,28 +3,32 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using VContainer;
 
 namespace Daipan.AntiNet.Scripts
 {
     public class SpawnEnemyCostValue
     {
-        // todo 値をParamsにまとめる
-        readonly int MaxValue = 20;
+        readonly int _maxValue;
 
-        readonly int initializedValue = 15;
+        readonly int _initializedValue;
         //
         int value;
 
         public int Value { get => value; }
-        SpawnEnemyCostValue()
+
+        [Inject]
+        public SpawnEnemyCostValue(ICostValueParam costValueParam)
         {
-            value = initializedValue;
+            _maxValue = costValueParam.MaxCostValue;
+            _initializedValue = costValueParam.InitializedCostValue;
+            value = _initializedValue;
         }
 
         public void IncreaseValue(int amount)
         {
             if (amount < 0) return;
-            value = Math.Min(MaxValue, value + amount);
+            value = Math.Min(_maxValue, value + amount);
         }
 
         public void DecreaseValue(int amount)
