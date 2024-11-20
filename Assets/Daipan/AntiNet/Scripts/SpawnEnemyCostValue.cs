@@ -10,6 +10,7 @@ namespace Daipan.AntiNet.Scripts
     {
         // todo 値をParamsにまとめる
         readonly int MaxValue = 20;
+
         readonly int initializedValue = 15;
         //
         int value;
