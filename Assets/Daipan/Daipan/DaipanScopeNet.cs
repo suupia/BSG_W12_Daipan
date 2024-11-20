@@ -289,6 +289,7 @@ namespace Daipan.Daipan
             builder.RegisterComponentInHierarchy<CostViewMono>();
             builder.RegisterInstance(networkPlayerParamsManager);
             builder.Register<NetworkParamsServer>(Lifetime.Scoped).As<ICostValueParam>().As<IEnemySpawnedCostParam>();
+            builder.Register<CostUpdater>(Lifetime.Scoped).As<IUpdate>();
         }
 
         public static void RegisterStreamerNet(IContainerBuilder builder)
