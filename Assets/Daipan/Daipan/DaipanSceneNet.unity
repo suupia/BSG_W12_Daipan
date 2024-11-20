@@ -345,6 +345,7 @@ MonoBehaviour:
   towerParams: {fileID: 11400000, guid: a3fb232ddade9e043b16e8c587a459ff, type: 2}
   comboParamManager: {fileID: 11400000, guid: b27dc473148d44553bb8e9accb9ad02e, type: 2}
   endSceneTransitionParam: {fileID: 11400000, guid: 25b3d181eb4d0412582a51d55c82145c, type: 2}
+  networkPlayerParamsManager: {fileID: 11400000, guid: e93ffd7f3630a46acbc94afd7c8e7bdf, type: 2}
 --- !u!1 &339068656
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,4 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1394fdc15eb0432db4c025667d7c6e9, type: 3}
   m_Name: NetworkPlayerParamsManager
   m_EditorClassIdentifier: 
-  a: 0
+  enemySpawnedCostParam:
+    normalEnemyCost: 0
+    bossEnemyCost: 0
+  costValueParam:
+    maxCostValue: 0
+    initializedCostValue: 0
+    increaseCostTime: 0
+    increasedCostValue: 0

@@ -367,7 +367,7 @@ namespace Daipan.Daipan
             RegisterOption(builder);
 
             // Anti
-            RegisterAntiNet(builder);
+            RegisterAntiNet(builder, networkPlayerParamsManager);
 
             // Streamer
             RegisterStreamerNet(builder);
