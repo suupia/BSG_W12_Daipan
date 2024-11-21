@@ -48,6 +48,7 @@ using VContainer;
 using VContainer.Unity;
 using Daipan.StreamerNet.MonoScripts;
 using Daipna.StreamerNet.Scripts;
+using Daipan.Comment.Interfaces;
 using Daipan.AntiNet.MonoScripts;
 using Daipan.LevelDesign.Net;
 
@@ -121,10 +122,12 @@ namespace Daipan.Daipan
             // Comment 
             builder.Register<CommentPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<CommentMono>>();
             builder.Register<AntiCommentPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<AntiCommentMono>>();
+            builder.Register<AntiCommentNetPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<AntiCommentNet>>();
             builder.Register<CommentCluster>(Lifetime.Scoped);
             builder.Register<IUpdate, CommentSpawner>(Lifetime.Scoped).AsSelf();
             builder.Register<AntiCommentCluster>(Lifetime.Scoped);
             builder.Register<IUpdate, AntiCommentRelocate>(Lifetime.Scoped);
+            builder.Register<AntiCommentSpawnerNetwork>(Lifetime.Scoped);
         }
 
         public static void RegisterPlayer(IContainerBuilder builder, PlayerParamManager playerParamManager)

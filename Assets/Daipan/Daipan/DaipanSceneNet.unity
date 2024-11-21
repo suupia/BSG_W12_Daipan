@@ -3691,6 +3691,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: AntiInputCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 2193812839182442417, guid: b8ba7a9facda74043a9a2ec8c656fed0, type: 3}
+      propertyPath: m_Text
+      value: "\u3042\u3044\u3046\u3048\u304A"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2193812839182442417, guid: b8ba7a9facda74043a9a2ec8c656fed0, type: 3}
+      propertyPath: m_GlobalFontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: cf31847a6a20b402e8d11509066363d2, type: 2}
+    - target: {fileID: 2193812839182442417, guid: b8ba7a9facda74043a9a2ec8c656fed0, type: 3}
+      propertyPath: m_GlobalPointSize
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 5432062560420191623, guid: b8ba7a9facda74043a9a2ec8c656fed0, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -3775,6 +3787,18 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1951700563}
+    - target: {fileID: 8474167228255568947, guid: b8ba7a9facda74043a9a2ec8c656fed0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8474167228255568947, guid: b8ba7a9facda74043a9a2ec8c656fed0, type: 3}
+      propertyPath: m_fontSize
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 8474167228255568947, guid: b8ba7a9facda74043a9a2ec8c656fed0, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 40
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
