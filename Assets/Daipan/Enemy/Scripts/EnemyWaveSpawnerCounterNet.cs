@@ -63,6 +63,7 @@ namespace Daipan.Enemy.Scripts
 
         public void Update()
         {
+            return;
             // base.FixedUpdateNetwork();
             Debug.Log($"IsInWaveInterval: {IsInWaveInterval} CurrentSpawnedEnemyCount: {CurrentSpawnedEnemyCount} MaxSpawnedEnemyCount: {MaxSpawnedEnemyCount}");
 
