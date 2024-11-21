@@ -124,6 +124,7 @@ namespace Daipan.Daipan
             builder.Register<IUpdate, CommentSpawner>(Lifetime.Scoped).AsSelf();
             builder.Register<AntiCommentCluster>(Lifetime.Scoped);
             builder.Register<IUpdate, AntiCommentRelocate>(Lifetime.Scoped);
+            builder.Register<AntiCommentSpawnerNetwork>(Lifetime.Scoped);
         }
 
         public static void RegisterPlayer(IContainerBuilder builder, PlayerParamManager playerParamManager)

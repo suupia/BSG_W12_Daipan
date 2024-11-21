@@ -9,6 +9,7 @@ using Daipan.LevelDesign.Comment.Scripts;
 using VContainer;
 using Daipan.Stream.Scripts;
 using Daipan.Comment.Interfaces;
+using Daipan.Daipan;
 
 namespace Daipan.Comment.MonoScripts
 {
@@ -21,7 +22,17 @@ namespace Daipan.Comment.MonoScripts
         IrritatedGaugeValue _irritatedGaugeValue = null!;
         bool IsActive { get; set; } = true;
 
-        [Inject]
+        public override void Spawned()
+        {
+            base.Spawned();
+            var daipanScopeNet = DaipanScopeNet.BuiltContainer;
+            Initialize(
+                daipanScopeNet.Container.Resolve<AntiCommentCluster>()
+               , daipanScopeNet.Container.Resolve<CommentParamsServer>()
+               , daipanScopeNet.Container.Resolve<IrritatedGaugeValue>()
+            );
+        }
+
         public void Initialize(
             AntiCommentCluster antiCommentCluster
             , CommentParamsServer commentParamsServer
@@ -35,7 +46,7 @@ namespace Daipan.Comment.MonoScripts
 
         void Update()
         {
-            if (IsActive) _irritatedGaugeValue.IncreaseValue(_commentParamsServer.GetIrritationIncreasePerSec() * Time.deltaTime);
+            // if (IsActive) _irritatedGaugeValue.IncreaseValue(_commentParamsServer.GetIrritationIncreasePerSec() * Time.deltaTime);
         }
 
         public void SetParameter(string commentWord)
