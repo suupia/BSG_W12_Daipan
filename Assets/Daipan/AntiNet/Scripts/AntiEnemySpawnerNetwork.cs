@@ -13,17 +13,20 @@ namespace Daipan.AntiNet.Scripts
         readonly StreamerRPCReceiverNetWrapper _streamerRPCReceiverNetWrapper;
         readonly SpawnEnemyCostValue _spawnEnemyCost;
         readonly IEnemySpawnedCostParam _spawnedCostParam;
+        readonly AntiCommentObserver _antiCommentObserver;
 
         [Inject]
         public AntiEnemySpawnerNetwork(
             StreamerRPCReceiverNetWrapper streamerRPCReceiverNetWrapper
             , SpawnEnemyCostValue spawnEnemyCost
             , IEnemySpawnedCostParam enemySpawnedCostParam
+            , AntiCommentObserver antiCommentObserver
         )
         {
             _streamerRPCReceiverNetWrapper = streamerRPCReceiverNetWrapper;
             _spawnEnemyCost = spawnEnemyCost;
             _spawnedCostParam = enemySpawnedCostParam;
+            _antiCommentObserver = antiCommentObserver;
         }
 
         public void SpawnEnemy(EnemyEnum enemyEnum)
@@ -36,6 +39,8 @@ namespace Daipan.AntiNet.Scripts
 
             _spawnEnemyCost.DecreaseValue(GetCost(enemyEnum));
             _streamerRPCReceiverNetWrapper.RPCReceiverNet.SpawnEnemyRPC(enemyEnum);
+
+            _antiCommentObserver.ResetCount();
         }
 
         bool CanSpawnEnemy(EnemyEnum enemyEnum)

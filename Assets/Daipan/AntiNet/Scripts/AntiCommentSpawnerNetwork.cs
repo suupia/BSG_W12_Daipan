@@ -20,6 +20,7 @@ namespace Daipan.AntiNet.Scripts
         readonly IPrefabLoader<AntiCommentNet> _antiCommentLoader;
         readonly CommentParamsServer _commentParamsServer;
         readonly AntiCommentCluster _antiCommentCluster;
+        readonly AntiCommentObserver _antiCommentObserver;
         readonly NetworkRunner _runner;
 
 
@@ -28,12 +29,14 @@ namespace Daipan.AntiNet.Scripts
             IPrefabLoader<AntiCommentNet> antiCommentLoader,
             CommentParamsServer commentParamsServer,
             AntiCommentCluster antiCommentCluster,
+            AntiCommentObserver antiCommentObserver,
             NetworkRunner runner
         )
         {
             _antiCommentLoader = antiCommentLoader;
             _commentParamsServer = commentParamsServer;
             _antiCommentCluster = antiCommentCluster;
+            _antiCommentObserver = antiCommentObserver;
             _runner = runner;
         }
 
@@ -57,6 +60,7 @@ namespace Daipan.AntiNet.Scripts
 
             antiComment.SetParameter(commentWord);
             _antiCommentCluster.Add(antiComment);
+            _antiCommentObserver.UpCount();
         }
 
         bool IsTextMoreThan(string text)
