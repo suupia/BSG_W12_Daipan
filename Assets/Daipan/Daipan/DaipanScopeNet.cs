@@ -49,6 +49,8 @@ using VContainer.Unity;
 using Daipan.StreamerNet.MonoScripts;
 using Daipna.StreamerNet.Scripts;
 using Daipan.Comment.Interfaces;
+using Daipan.AntiNet.MonoScripts;
+using Daipan.LevelDesign.Net;
 
 namespace Daipan.Daipan
 
@@ -94,6 +96,7 @@ namespace Daipan.Daipan
         [SerializeField] ComboParamManager comboParamManager = null!;
 
         [SerializeField] EndSceneTransitionParam endSceneTransitionParam = null!;
+        [SerializeField] NetworkPlayerParamsManager networkPlayerParamsManager = null!;
 
         public NetworkRunner? Runner { private get; set; }
 
@@ -282,9 +285,14 @@ namespace Daipan.Daipan
             builder.RegisterComponentInHierarchy<OptionReturnTitleViewMono>();
         }
 
-        public static void RegisterAntiNet(IContainerBuilder builder)
+        public static void RegisterAntiNet(IContainerBuilder builder, NetworkPlayerParamsManager networkPlayerParamsManager)
         {
             builder.Register<AntiEnemySpawnerNetwork>(Lifetime.Scoped);
+            builder.Register<SpawnEnemyCostValue>(Lifetime.Scoped);
+            builder.RegisterComponentInHierarchy<CostViewMono>();
+            builder.RegisterInstance(networkPlayerParamsManager);
+            builder.Register<NetworkParamsServer>(Lifetime.Scoped).As<ICostValueParam>().As<IEnemySpawnedCostParam>();
+            builder.Register<CostUpdater>(Lifetime.Scoped).As<IUpdate>();
         }
 
         public static void RegisterStreamerNet(IContainerBuilder builder)
@@ -363,7 +371,7 @@ namespace Daipan.Daipan
             RegisterOption(builder);
 
             // Anti
-            RegisterAntiNet(builder);
+            RegisterAntiNet(builder, networkPlayerParamsManager);
 
             // Streamer
             RegisterStreamerNet(builder);

@@ -34,7 +34,7 @@ namespace Daipan.Enemy.Scripts
             var fieldInfo = self.GetType().GetField(self.ToString());
             return fieldInfo?.GetCustomAttribute<IsSpecialAttribute>()?.IsSpecial;
         }
-        
+
         public static bool? IsTotem(this EnemyEnum self)
         {
             var fieldInfo = self.GetType().GetField(self.ToString());
@@ -69,7 +69,7 @@ namespace Daipan.Enemy.Scripts
             IsSpecial = isSpecial;
         }
     }
-    
+
     [AttributeUsage(AttributeTargets.Field, Inherited = false, AllowMultiple = false)]
     internal class IsTotemAttribute : Attribute
     {
