@@ -45,17 +45,20 @@ namespace Daipan.Daipan
 {
     public sealed class DaipanScope : LifetimeScope
     {
-        [FormerlySerializedAs("streamParameter")] [SerializeField]
+        [FormerlySerializedAs("streamParameter")]
+        [SerializeField]
         StreamParam streamParam = null!;
 
         [SerializeField] PlayerParamManager playerParamManager = null!;
 
-        [FormerlySerializedAs("enemyParamManager")] [SerializeField]
+        [FormerlySerializedAs("enemyParamManager")]
+        [SerializeField]
         EnemyParamsManager enemyParamsManager = null!;
 
-        [FormerlySerializedAs("commentParamsManager")] [SerializeField]
+        [FormerlySerializedAs("commentParamsManager")]
+        [SerializeField]
         CommentParamManager commentParamManager = null!;
-        
+
         [SerializeField] FinalBossParamManager finalBossParamManager = null!;
 
         [SerializeField] IrritatedParams irritatedParams = null!;
@@ -85,7 +88,7 @@ namespace Daipan.Daipan
             builder.RegisterComponentInHierarchy<CommentPosition>();
             // Comment 
             builder.Register<CommentPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<CommentMono>>();
-            builder.Register<AntiCommentPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<AntiCommentMono>>();
+            builder.Register<AntiCommentPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<IAntiCommentMono>>();
             builder.Register<CommentCluster>(Lifetime.Scoped);
             builder.Register<IUpdate, CommentSpawner>(Lifetime.Scoped).AsSelf();
             builder.Register<AntiCommentCluster>(Lifetime.Scoped);
@@ -276,7 +279,7 @@ namespace Daipan.Daipan
             builder.Register<EnemyEnumSelector>(Lifetime.Scoped).As<IEnemyEnumSelector>();
             builder.Register<EnemyBuilder>(Lifetime.Scoped).As<IEnemyBuilder>();
             builder.Register<EnemySpecialOnAttacked>(Lifetime.Scoped);
-            
+
             // FinalBoss
             builder.RegisterInstance(finalBossParamManager);
             builder.Register<FinalBossColorChanger>(Lifetime.Scoped);
@@ -309,13 +312,13 @@ namespace Daipan.Daipan
             // Result
             builder.Register<ResultState>(Lifetime.Scoped);
             builder.RegisterComponentInHierarchy<ResultViewMono>();
-            
+
             // EndScene
             builder.RegisterInstance(endSceneTransitionParam);
 
             // Sound
             builder.Register<DaipanSoundStarter>(Lifetime.Scoped).As<IStart>();
-            
+
             // Updater
             builder.UseEntryPoints(Lifetime.Scoped, entryPoints =>
             {

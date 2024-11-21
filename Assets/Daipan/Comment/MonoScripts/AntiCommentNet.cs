@@ -8,10 +8,11 @@ using Daipan.Comment.Scripts;
 using Daipan.LevelDesign.Comment.Scripts;
 using VContainer;
 using Daipan.Stream.Scripts;
+using Daipan.Comment.Interfaces;
 
 namespace Daipan.Comment.MonoScripts
 {
-    public class AntiCommentNet : NetworkBehaviour
+    public class AntiCommentNet : NetworkBehaviour, IAntiCommentMono
     {
         [SerializeField] TextMeshPro commentText = null!;
 
