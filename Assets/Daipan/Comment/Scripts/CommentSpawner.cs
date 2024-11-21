@@ -29,7 +29,7 @@ namespace Daipan.Comment.Scripts
         readonly ComboCounter _comboCounter;
         readonly IComboMultiplier _comboMultiplier;
 
-        
+
         public CommentSpawner(
             IObjectResolver container,
             CommentParamsServer commentParamsServer,
@@ -65,7 +65,7 @@ namespace Daipan.Comment.Scripts
         {
             if (commentEnum == CommentEnum.Normal) SpawnComment();
             else if (commentEnum == CommentEnum.Super) SpawnComment();
-            else if (commentEnum == CommentEnum.Spiky) SpawnAntiComment();
+            // else if (commentEnum == CommentEnum.Spiky) SpawnAntiComment();
         }
 
         void SpawnComment()
@@ -96,7 +96,7 @@ namespace Daipan.Comment.Scripts
             // 視聴者を減らす
             var multipliedAmount = (int)(_commentParamsServer.GetViewerDiffAntiCommentNumber() * _comboMultiplier.CalculateComboMultiplier(_comboCounter.ComboCount));
             _viewerNumber.DecreaseViewer(multipliedAmount);
-            
+
         }
     }
 }
