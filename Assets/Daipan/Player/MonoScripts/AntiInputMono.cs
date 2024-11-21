@@ -6,6 +6,8 @@ using UnityEngine;
 using VContainer;
 using Daipan.AntiNet.Scripts;
 using Daipan.Enemy.Scripts;
+using UnityEngine.UI;
+using TMPro;
 
 namespace Daipan.Player.MonoScripts
 {
@@ -19,6 +21,7 @@ namespace Daipan.Player.MonoScripts
         [SerializeField] CustomButton redBossButton = null!;
         [SerializeField] CustomButton blueBossButton = null!;
         [SerializeField] CustomButton antiCommentButton = null!;
+        [SerializeField] TMP_InputField antiCommentInput = null!;
 
         private AntiEnemySpawnerNetwork _antiEnemySpawnerNetwork = null!;
         private AntiCommentSpawnerNetwork _antiCommentSpawnerNetwork = null!;
@@ -53,7 +56,12 @@ namespace Daipan.Player.MonoScripts
             yellowBossButton.onClick += () => _antiEnemySpawnerNetwork.SpawnEnemy(EnemyEnum.YellowBoss);
             redBossButton.onClick += () => _antiEnemySpawnerNetwork.SpawnEnemy(EnemyEnum.RedBoss);
             blueBossButton.onClick += () => _antiEnemySpawnerNetwork.SpawnEnemy(EnemyEnum.BlueBoss);
-            antiCommentButton.onClick += () => _antiCommentSpawnerNetwork.SpawnAntiComment("アンチだ！！");
+            // antiCommentButton.onClick += () => _antiCommentSpawnerNetwork.SpawnAntiComment("アンチだ！！");
+            antiCommentInput.onEndEdit.AddListener(_ =>
+            {
+                _antiCommentSpawnerNetwork.SpawnAntiComment(antiCommentInput.text);
+                antiCommentInput.text = "";
+            });
         }
 
 

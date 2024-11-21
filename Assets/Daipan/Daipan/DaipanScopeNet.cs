@@ -293,6 +293,7 @@ namespace Daipan.Daipan
             builder.RegisterInstance(networkPlayerParamsManager);
             builder.Register<NetworkParamsServer>(Lifetime.Scoped).As<ICostValueParam>().As<IEnemySpawnedCostParam>();
             builder.Register<CostUpdater>(Lifetime.Scoped).As<IUpdate>();
+            builder.Register<AntiCommentObserver>(Lifetime.Scoped);
         }
 
         public static void RegisterStreamerNet(IContainerBuilder builder)
