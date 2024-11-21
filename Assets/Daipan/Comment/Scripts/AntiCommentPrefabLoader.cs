@@ -4,16 +4,16 @@ using Daipan.Stream.Scripts.Utility.Scripts;
 
 namespace Daipan.Comment.Scripts
 {
-    public sealed class AntiCommentPrefabLoader : IPrefabLoader<IAntiCommentMono>
+    public sealed class AntiCommentPrefabLoader : IPrefabLoader<AntiCommentMono>
     {
-        readonly PrefabLoaderFromResources<IAntiCommentMono> _loader;
+        readonly PrefabLoaderFromResources<AntiCommentMono> _loader;
 
         public AntiCommentPrefabLoader()
         {
-            _loader = new PrefabLoaderFromResources<IAntiCommentMono>("AntiComment");
+            _loader = new PrefabLoaderFromResources<AntiCommentMono>("AntiComment");
         }
 
-        public IAntiCommentMono Load()
+        public AntiCommentMono Load()
         {
             return _loader.Load();
         }

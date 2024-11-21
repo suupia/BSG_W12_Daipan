@@ -17,7 +17,7 @@ namespace Daipan.Comment.Scripts
     public sealed class CommentSpawner : IUpdate
     {
         readonly AntiCommentCluster _antiCommentCluster;
-        readonly IPrefabLoader<IAntiCommentMono> _antiCommentLoader;
+        readonly IPrefabLoader<AntiCommentMono> _antiCommentLoader;
         readonly CommentCluster _commentCluster;
         readonly IPrefabLoader<CommentMono> _commentLoader;
         readonly CommentParamsServer _commentParamsServer;
@@ -36,7 +36,7 @@ namespace Daipan.Comment.Scripts
             CommentCluster commentCluster,
             AntiCommentCluster antiCommentCluster,
             IPrefabLoader<CommentMono> commentCommentLoader,
-            IPrefabLoader<IAntiCommentMono> antiCommentLoader,
+            IPrefabLoader<AntiCommentMono> antiCommentLoader,
             ViewerNumber viewerNumber,
             ComboCounter comboCounter,
             IComboMultiplier comboMultiplier
