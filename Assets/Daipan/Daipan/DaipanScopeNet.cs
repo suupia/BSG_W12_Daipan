@@ -296,6 +296,7 @@ namespace Daipan.Daipan
             builder.Register<AntiCommentObserver>(Lifetime.Scoped);
             builder.Register<AntiStateEnum>(Lifetime.Scoped);
             builder.Register<AntiStateValue>(Lifetime.Scoped);
+            builder.Register<AntiDaipanExecutor>(Lifetime.Scoped);
         }
 
         public static void RegisterStreamerNet(IContainerBuilder builder)

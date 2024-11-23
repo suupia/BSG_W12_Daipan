@@ -60,8 +60,6 @@ namespace Daipan.Stream.Scripts
                 // 何もしない
                 // 台パンをスカした時のアニメーションを再生するかもしれない
             }
-
-
         }
     }
 }
