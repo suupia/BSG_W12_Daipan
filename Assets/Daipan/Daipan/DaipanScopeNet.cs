@@ -300,8 +300,8 @@ namespace Daipan.Daipan
 
         public static void RegisterStreamerNet(IContainerBuilder builder)
         {
-            builder.Register<StreamerRPCReceiverNetWrapper>(Lifetime.Scoped);
-            builder.RegisterComponentInHierarchy<StreamerRPCReceiverNet>();
+            builder.Register<RpcReceiverNetWrapper>(Lifetime.Scoped);
+            builder.RegisterComponentInHierarchy<RpcReceiverNet>();
         }
 
         protected override void Configure(IContainerBuilder builder)

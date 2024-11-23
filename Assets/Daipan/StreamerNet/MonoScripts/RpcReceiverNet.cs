@@ -10,7 +10,7 @@ using Daipan.Transporter;
 
 namespace Daipan.StreamerNet.MonoScripts
 {
-    public class StreamerRPCReceiverNet : NetworkBehaviour
+    public class RpcReceiverNet : NetworkBehaviour
     {
         private NetworkRunner _runner = null!;
         private PlayerDataTransporterNetWrapper _playerDataTransporterNetWrapper = null!;

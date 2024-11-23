@@ -3698,7 +3698,7 @@ GameObject:
   - component: {fileID: 2079236848317767569}
   - component: {fileID: 8561364565557301848}
   m_Layer: 0
-  m_Name: StreamerRPCReceiverNet
+  m_Name: RpcNetReceiverNet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
