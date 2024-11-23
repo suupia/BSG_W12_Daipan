@@ -9,9 +9,12 @@ namespace Daipan.Tutorial.MonoScripts
     public class BlackScreenViewMono : MonoBehaviour
     {
         [SerializeField] CanvasGroup canvasGroup = null!;
-        
+        [SerializeField] GameObject animesprite=null!;
+        [SerializeField] GameObject blackscreenview = null!;
         public void FadeIn(float time, Action onComplete)
         {
+            blackscreenview.SetActive(false);
+            animesprite.SetActive(true);
             canvasGroup.DOFade(1, time).OnComplete(() =>
             {
                 onComplete();
@@ -25,8 +28,6 @@ namespace Daipan.Tutorial.MonoScripts
                 onComplete();
             });
         }
-
-   
     } 
 }
 
