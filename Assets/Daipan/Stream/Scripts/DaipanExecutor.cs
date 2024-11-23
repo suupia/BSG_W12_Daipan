@@ -6,6 +6,8 @@ using Daipan.Sound.MonoScripts;
 using UnityEngine;
 using Daipan.Stream.MonoScripts;
 using Daipan.Streamer.MonoScripts;
+using VContainer;
+using Daipna.StreamerNet.Scripts;
 
 namespace Daipan.Stream.Scripts
 {
@@ -16,13 +18,16 @@ namespace Daipan.Stream.Scripts
         readonly IrritatedGaugeValue _irritatedGaugeValue;
         readonly StreamerViewMono _streamerViewMono;
         readonly ShakeDisplayMono _shakeDisplayMono;
+        readonly RpcReceiverNetWrapper _rpcReceiverNetWrapper;
         public int DaipanCount { get; private set; }
+        [Inject]
         public DaipanExecutor(
             IrritatedGaugeValue irritatedGaugeValue,
             EnemyCluster enemyCluster,
             AntiCommentCluster antiCommentCluster,
             StreamerViewMono streamerViewMono,
-            ShakeDisplayMono shakeDisplayMono
+            ShakeDisplayMono shakeDisplayMono,
+            RpcReceiverNetWrapper rpcReceiverNetWrapper
         )
         {
             _irritatedGaugeValue = irritatedGaugeValue;
@@ -30,6 +35,7 @@ namespace Daipan.Stream.Scripts
             _antiCommentCluster = antiCommentCluster;
             _streamerViewMono = streamerViewMono;
             _shakeDisplayMono = shakeDisplayMono;
+            _rpcReceiverNetWrapper = rpcReceiverNetWrapper;
         }
         public void DaiPan()
         {
@@ -41,11 +47,12 @@ namespace Daipan.Stream.Scripts
                 _antiCommentCluster.Daipaned();
                 _streamerViewMono.Daipan();
                 _shakeDisplayMono.Daipan();
+                _rpcReceiverNetWrapper.RpcReceiverNet.DaipanRPC();
                 DaipanCount++;
-                
+
                 // 台パンしたら怒りゲージは0になる
                 _irritatedGaugeValue.Reset();
-                
+
                 SoundManager.Instance?.PlaySe(SeEnum.Daipan);
             }
             else
@@ -54,7 +61,7 @@ namespace Daipan.Stream.Scripts
                 // 台パンをスカした時のアニメーションを再生するかもしれない
             }
 
-   
+
         }
     }
 }

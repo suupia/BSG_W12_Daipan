@@ -42,5 +42,14 @@ namespace Daipan.StreamerNet.MonoScripts
             }
         }
 
+        [Rpc(RpcSources.All, RpcTargets.All)]
+        public void DaipanRPC()
+        {
+            if (_playerDataTransporterNetWrapper.GetPlayerRoleEnum(_runner.LocalPlayer) == PlayerRoleEnum.Anti)
+            {
+                Debug.Log("Daipan RPC received");
+            }
+        }
+
     }
 }
