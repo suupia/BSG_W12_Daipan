@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using VContainer;
 
 namespace Daipan.AntiNet.Scripts
 {
@@ -14,11 +15,13 @@ namespace Daipan.AntiNet.Scripts
         public Action? OnOverCount;
         private int _antiCommentCount;
 
-        public AntiCommentObserver()
+        [Inject]
+        public AntiCommentObserver(AntiStateValue antiStateValue)
         {
             OnOverCount += () =>
             {
                 Debug.Log($"Comment Count is over {banCount} , so BAN!!");
+                antiStateValue.SetBan();
                 ResetCount();
             };
         }

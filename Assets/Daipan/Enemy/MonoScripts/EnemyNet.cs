@@ -142,12 +142,14 @@ namespace Daipan.Enemy.MonoScripts
 
         public void OnDaipaned()
         {
+            Debug.Log("Enemy is dead");
             _enemyCluster.Remove(this);
             _enemyDie.DiedByDaipan(enemyViewMono);
         }
 
         void Die()
         {
+            Debug.Log("Enemy is dead");
             _enemyOnDied.OnDied(); // Destroyする前の方がいいはず
             _enemyCluster.Remove(this);
             _enemyDie.Died(enemyViewMono);

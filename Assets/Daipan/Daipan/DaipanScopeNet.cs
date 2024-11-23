@@ -294,12 +294,16 @@ namespace Daipan.Daipan
             builder.Register<NetworkParamsServer>(Lifetime.Scoped).As<ICostValueParam>().As<IEnemySpawnedCostParam>();
             builder.Register<CostUpdater>(Lifetime.Scoped).As<IUpdate>();
             builder.Register<AntiCommentObserver>(Lifetime.Scoped);
+            builder.Register<AntiStateEnum>(Lifetime.Scoped);
+            builder.Register<AntiStateValue>(Lifetime.Scoped);
+            builder.Register<AntiDaipanExecutor>(Lifetime.Scoped);
+            builder.RegisterComponentInHierarchy<AntiStateViewMono>();
         }
 
         public static void RegisterStreamerNet(IContainerBuilder builder)
         {
-            builder.Register<StreamerRPCReceiverNetWrapper>(Lifetime.Scoped);
-            builder.RegisterComponentInHierarchy<StreamerRPCReceiverNet>();
+            builder.Register<RpcReceiverNetWrapper>(Lifetime.Scoped);
+            builder.RegisterComponentInHierarchy<RpcReceiverNet>();
         }
 
         protected override void Configure(IContainerBuilder builder)
