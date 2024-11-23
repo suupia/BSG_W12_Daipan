@@ -3507,6 +3507,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AntiInputCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 2193812839182442417, guid: b8ba7a9facda74043a9a2ec8c656fed0, type: 3}
+      propertyPath: m_Interactable
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5432062560420191623, guid: b8ba7a9facda74043a9a2ec8c656fed0, type: 3}
       propertyPath: m_Pivot.x
       value: 0

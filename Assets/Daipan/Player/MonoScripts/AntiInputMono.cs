@@ -8,6 +8,7 @@ using Daipan.AntiNet.Scripts;
 using Daipan.Enemy.Scripts;
 using UnityEngine.UI;
 using TMPro;
+using R3;
 
 namespace Daipan.Player.MonoScripts
 {
@@ -31,13 +32,20 @@ namespace Daipan.Player.MonoScripts
             NetworkRunner runner,
             PlayerDataTransporterNetWrapper playerDataTransporterNetWrapper,
             AntiEnemySpawnerNetwork antiEnemySpawnerNetwork,
-            AntiCommentSpawnerNetwork antiCommentSpawnerNetwork
+            AntiCommentSpawnerNetwork antiCommentSpawnerNetwork,
+            AntiStateValue antiStateValue
         )
         {
             Debug.Log($"AntiInputMono Initialize isAnti: {playerDataTransporterNetWrapper.GetPlayerRoleEnum(runner.LocalPlayer) == PlayerRoleEnum.Anti}");
             var isAnti = playerDataTransporterNetWrapper.GetPlayerRoleEnum(runner.LocalPlayer) == PlayerRoleEnum.Anti;
             viewObject.SetActive(isAnti);
 
+            Observable.EveryValueChanged(antiStateValue, x => x.AntiStateEnum)
+            .Subscribe(value =>
+            {
+                if (value == AntiStateEnum.BAN) antiCommentInput.interactable = false;
+                else antiCommentInput.interactable = true;
+            }).AddTo(this);
 
             foreach (var player in runner.ActivePlayers)
             {

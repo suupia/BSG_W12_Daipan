@@ -14,6 +14,7 @@ namespace Daipan.AntiNet.Scripts
         readonly SpawnEnemyCostValue _spawnEnemyCost;
         readonly IEnemySpawnedCostParam _spawnedCostParam;
         readonly AntiCommentObserver _antiCommentObserver;
+        readonly AntiStateValue _antiStateValue;
 
         [Inject]
         public AntiEnemySpawnerNetwork(
@@ -21,12 +22,14 @@ namespace Daipan.AntiNet.Scripts
             , SpawnEnemyCostValue spawnEnemyCost
             , IEnemySpawnedCostParam enemySpawnedCostParam
             , AntiCommentObserver antiCommentObserver
+            , AntiStateValue antiStateValue
         )
         {
             _rpcReceiverNetWrapper = streamerRPCReceiverNetWrapper;
             _spawnEnemyCost = spawnEnemyCost;
             _spawnedCostParam = enemySpawnedCostParam;
             _antiCommentObserver = antiCommentObserver;
+            _antiStateValue = antiStateValue;
         }
 
         public void SpawnEnemy(EnemyEnum enemyEnum)
@@ -50,8 +53,11 @@ namespace Daipan.AntiNet.Scripts
 
         int GetCost(EnemyEnum enemyEnum)
         {
-            if (enemyEnum.IsBoss() == true) return _spawnedCostParam.BossEnemyCost;
-            return _spawnedCostParam.NormalEnemyCost;
+            int multiplier = 1;
+            if (_antiStateValue.AntiStateEnum == AntiStateEnum.BAN) multiplier *= 2;
+
+            if (enemyEnum.IsBoss() == true) return _spawnedCostParam.BossEnemyCost * multiplier;
+            return _spawnedCostParam.NormalEnemyCost * multiplier;
         }
     }
 }
