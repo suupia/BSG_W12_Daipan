@@ -42,7 +42,7 @@ namespace Daipan.AntiNet.Scripts
 
         public void SpawnAntiComment(string commentWord)
         {
-            if (commentWord == null)
+            if (commentWord == "")
             {
                 Debug.Log("CommentWord is null");
                 return;
