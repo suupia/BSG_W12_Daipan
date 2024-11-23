@@ -13,17 +13,20 @@ namespace Daipan.AntiNet.Scripts
         readonly AntiCommentCluster _antiCommentCluster;
         readonly StreamerViewMono _streamerViewMono;
         readonly ShakeDisplayMono _shakeDisplayMono;
+        readonly AntiStateValue _antiStateValue;
         public int DaipanCount { get; private set; }
         [Inject]
         public AntiDaipanExecutor(
             AntiCommentCluster antiCommentCluster,
             StreamerViewMono streamerViewMono,
-            ShakeDisplayMono shakeDisplayMono
+            ShakeDisplayMono shakeDisplayMono,
+            AntiStateValue antiStateValue
         )
         {
             _antiCommentCluster = antiCommentCluster;
             _streamerViewMono = streamerViewMono;
             _shakeDisplayMono = shakeDisplayMono;
+            _antiStateValue = antiStateValue;
         }
         public void DaiPan()
         {
@@ -31,7 +34,7 @@ namespace Daipan.AntiNet.Scripts
             _streamerViewMono.Daipan();
             _shakeDisplayMono.Daipan();
             DaipanCount++;
-
+            _antiStateValue.SetBan();
             SoundManager.Instance?.PlaySe(SeEnum.Daipan);
         }
     }
