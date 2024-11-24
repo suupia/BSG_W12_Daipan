@@ -4,18 +4,18 @@ using System.Collections.Generic;
 using System.Linq;
 using Daipan.Core;
 using Daipan.Daipan;
+using Daipan.Stream.Interfaces;
 using UnityEngine;
 using VContainer;
 
 namespace Daipan.Stream.Scripts
 {
-    public sealed class IrritatedGaugeValue
+    public sealed class IrritatedGaugeValueNetwork : IIrritatedGaugeValue
     {
         readonly IrritatedParams _irritatedParams;
         readonly DTONetWrapper _dtoNet;
 
-
-        public IrritatedGaugeValue(double maxValue, IrritatedParams irritatedParams, DTONetWrapper dtoNet)
+        public IrritatedGaugeValueNetwork(double maxValue, IrritatedParams irritatedParams, DTONetWrapper dtoNet)
         {
             MaxValue = maxValue;
             _irritatedParams = irritatedParams;

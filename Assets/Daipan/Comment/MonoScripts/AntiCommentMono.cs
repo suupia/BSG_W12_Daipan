@@ -8,6 +8,7 @@ using UnityEngine;
 using VContainer;
 using TMPro;
 using Daipan.Comment.Interfaces;
+using Daipan.Stream.Interfaces;
 
 namespace Daipan.Comment.MonoScripts
 {
@@ -17,24 +18,24 @@ namespace Daipan.Comment.MonoScripts
 
         AntiCommentCluster _antiCommentCluster = null!;
         CommentParamsServer _commentParamsServer = null!;
-        IrritatedGaugeValue _irritatedGaugeValue = null!;
+        IIrritatedGaugeValue _irritatedGaugeValueNetwork = null!;
         bool IsActive { get; set; } = true;
 
         [Inject]
         public void Initialize(
             AntiCommentCluster antiCommentCluster
             , CommentParamsServer commentParamsServer
-            , IrritatedGaugeValue irritatedGaugeValue
+            , IIrritatedGaugeValue irritatedGaugeValueNetwork
         )
         {
             _antiCommentCluster = antiCommentCluster;
             _commentParamsServer = commentParamsServer;
-            _irritatedGaugeValue = irritatedGaugeValue;
+            _irritatedGaugeValueNetwork = irritatedGaugeValueNetwork;
         }
 
         void Update()
         {
-            if (IsActive) _irritatedGaugeValue.IncreaseValue(_commentParamsServer.GetIrritationIncreasePerSec() * Time.deltaTime);
+            if (IsActive) _irritatedGaugeValueNetwork.IncreaseValue(_commentParamsServer.GetIrritationIncreasePerSec() * Time.deltaTime);
         }
 
         public void SetParameter(string commentWord)

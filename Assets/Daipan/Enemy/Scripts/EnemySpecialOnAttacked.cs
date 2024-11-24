@@ -6,6 +6,7 @@ using Daipan.Player.Interfaces;
 using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Player.MonoScripts;
 using Daipan.Player.Scripts;
+using Daipan.Stream.Interfaces;
 using Daipan.Stream.Scripts;
 using UnityEngine;
 
@@ -14,17 +15,17 @@ namespace Daipan.Enemy.Scripts
     public sealed class EnemySpecialOnAttacked : IEnemyOnAttacked
     {
         readonly EnemyEnum _enemyEnum;
-        readonly IrritatedGaugeValue _irritatedGaugeValue;
+        readonly IIrritatedGaugeValue _irritatedGaugeValueNetwork;
         readonly EnemyLevelDesignParamData _enemyLevelDesignParamData;
 
         public EnemySpecialOnAttacked(
             EnemyEnum enemyEnum
-            , IrritatedGaugeValue irritatedGaugeValue
+            , IIrritatedGaugeValue irritatedGaugeValueNetwork
             , EnemyLevelDesignParamData enemyLevelDesignParamData
         )
         {
             _enemyEnum = enemyEnum;
-            _irritatedGaugeValue = irritatedGaugeValue;
+            _irritatedGaugeValueNetwork = irritatedGaugeValueNetwork;
             _enemyLevelDesignParamData = enemyLevelDesignParamData;
         }
 
@@ -38,7 +39,7 @@ namespace Daipan.Enemy.Scripts
 
                 // 違う色のときに倒したのなら、イライラゲージを増やす
                 if (afterHp.Value <= 0)
-                    _irritatedGaugeValue.IncreaseValue(_enemyLevelDesignParamData
+                    _irritatedGaugeValueNetwork.IncreaseValue(_enemyLevelDesignParamData
                         .GetIncreaseIrritationGaugeOnSpecialEnemyKill());
 
             }

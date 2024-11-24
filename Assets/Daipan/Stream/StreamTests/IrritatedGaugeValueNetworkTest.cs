@@ -4,7 +4,7 @@ using NUnit.Framework;
 
 namespace Daipan.Stream.StreamTests
 {
-    public class IrritatedGaugeValueTest
+    public class IrritatedGaugeValueNetworkTest
     {
         // [Test]
         // public void IncrementTest()

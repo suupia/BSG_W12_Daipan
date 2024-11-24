@@ -22,7 +22,7 @@ namespace Daipan.Comment.MonoScripts
 
         AntiCommentCluster _antiCommentCluster = null!;
         CommentParamsServer _commentParamsServer = null!;
-        IrritatedGaugeValue _irritatedGaugeValue = null!;
+        IrritatedGaugeValueNetwork _irritatedGaugeValueNetwork = null!;
         NetworkRunner _runner = null!;
         bool IsActive { get; set; } = true;
         [Networked]
@@ -36,7 +36,7 @@ namespace Daipan.Comment.MonoScripts
             Initialize(
                 daipanScopeNet.Container.Resolve<AntiCommentCluster>()
                , daipanScopeNet.Container.Resolve<CommentParamsServer>()
-               , daipanScopeNet.Container.Resolve<IrritatedGaugeValue>()
+               , daipanScopeNet.Container.Resolve<IrritatedGaugeValueNetwork>()
                , daipanScopeNet.Container.Resolve<NetworkRunner>()
             );
 
@@ -46,13 +46,13 @@ namespace Daipan.Comment.MonoScripts
         public void Initialize(
             AntiCommentCluster antiCommentCluster
             , CommentParamsServer commentParamsServer
-            , IrritatedGaugeValue irritatedGaugeValue
+            , IrritatedGaugeValueNetwork irritatedGaugeValueNetwork
             , NetworkRunner networkRunner
         )
         {
             _antiCommentCluster = antiCommentCluster;
             _commentParamsServer = commentParamsServer;
-            _irritatedGaugeValue = irritatedGaugeValue;
+            _irritatedGaugeValueNetwork = irritatedGaugeValueNetwork;
             _runner = networkRunner;
         }
 

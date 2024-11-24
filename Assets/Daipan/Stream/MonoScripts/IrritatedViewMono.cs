@@ -1,4 +1,5 @@
 #nullable enable
+using Daipan.Stream.Interfaces;
 using UnityEngine;
 using VContainer;
 using Daipan.Stream.Scripts;
@@ -12,7 +13,7 @@ namespace Daipan.Stream.MonoScripts
         [SerializeField] Image IrritatedGuage = null!;
 
         [Inject]
-        public void Initialize(IrritatedGaugeValue irritatedGaugeValue)
+        public void Initialize(IIrritatedGaugeValue irritatedGaugeValue)
         {
             Observable.EveryValueChanged(irritatedGaugeValue, x => irritatedGaugeValue.Ratio)
                 .Subscribe(_ => UpdateIrritatedGauge(irritatedGaugeValue.Ratio))

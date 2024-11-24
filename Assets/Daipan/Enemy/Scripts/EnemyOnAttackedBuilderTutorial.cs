@@ -8,13 +8,14 @@ using Daipan.Enemy.LevelDesign.Scripts;
 using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Player.MonoScripts;
 using Daipan.Player.Scripts;
+using Daipan.Stream.Interfaces;
 using Daipan.Stream.Scripts;
 
 namespace Daipan.Enemy.Scripts
 {
     public class EnemyOnAttackedBuilderTutorial
     {
-        readonly IrritatedGaugeValue _irritatedGaugeValue;
+        readonly IIrritatedGaugeValue _irritatedGaugeValueNetwork;
         readonly EnemyLevelDesignParamData _enemyLevelDesignParamData;
         readonly ComboCounter _comboCounter;
         readonly CommentSpawner _commentSpawner;
@@ -22,7 +23,7 @@ namespace Daipan.Enemy.Scripts
         readonly WaveState _waveState;
 
         public EnemyOnAttackedBuilderTutorial(
-            IrritatedGaugeValue irritatedGaugeValue
+            IIrritatedGaugeValue irritatedGaugeValueNetwork
             , EnemyLevelDesignParamData enemyLevelDesignParamData
             , ComboCounter comboCounter
             , CommentSpawner commentSpawner
@@ -30,7 +31,7 @@ namespace Daipan.Enemy.Scripts
             , WaveState waveState
         )
         {
-            _irritatedGaugeValue = irritatedGaugeValue;
+            _irritatedGaugeValueNetwork = irritatedGaugeValueNetwork;
             _enemyLevelDesignParamData = enemyLevelDesignParamData;
             _comboCounter = comboCounter;
             _commentSpawner = commentSpawner;
@@ -41,7 +42,7 @@ namespace Daipan.Enemy.Scripts
         public IEnemyOnAttacked SwitchEnemyOnAttacked(EnemyEnum enemyEnum)
         {
             if (enemyEnum.IsSpecial() == true)
-                return new EnemySpecialOnAttacked(enemyEnum, _irritatedGaugeValue, _enemyLevelDesignParamData);
+                return new EnemySpecialOnAttacked(enemyEnum, _irritatedGaugeValueNetwork, _enemyLevelDesignParamData);
             if (enemyEnum == EnemyEnum.Totem2 || enemyEnum == EnemyEnum.Totem3) return BuildTotemOnAttack(enemyEnum);
             return new EnemyNormalOnAttacked();
         }

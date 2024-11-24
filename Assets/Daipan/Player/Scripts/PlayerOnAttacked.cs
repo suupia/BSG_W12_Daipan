@@ -12,18 +12,18 @@ namespace Daipan.Player.Scripts
 {
     public class PlayerOnAttacked : IPlayerOnAttacked
     {
-        readonly IrritatedGaugeValue _irritatedGaugeValue;
+        readonly IrritatedGaugeValueNetwork _irritatedGaugeValueNetwork;
         readonly ThresholdResetCounter _playerAttackedCounter;
         readonly CommentSpawner _commentSpawner;
         List<AbstractPlayerViewMono?>? _playerViewMonos; 
         public PlayerOnAttacked
         (
-            IrritatedGaugeValue irritatedGaugeValue
+            IrritatedGaugeValueNetwork irritatedGaugeValueNetwork
             , CommentSpawner commentSpawner
             , IPlayerAntiCommentParamData playerAntiCommentParamData
         )
         {
-            _irritatedGaugeValue = irritatedGaugeValue;
+            _irritatedGaugeValueNetwork = irritatedGaugeValueNetwork;
             _commentSpawner = commentSpawner;
             _playerAttackedCounter = new ThresholdResetCounter(playerAntiCommentParamData.GetAntiCommentThreshold());
         }
@@ -36,7 +36,7 @@ namespace Daipan.Player.Scripts
         public Hp OnAttacked(Hp hp, IEnemyParamData enemyParamData)
         {
             // イライラゲージ
-            _irritatedGaugeValue.IncreaseValue(enemyParamData.GetIncreaseIrritatedValueOnAttack());
+            _irritatedGaugeValueNetwork.IncreaseValue(enemyParamData.GetIncreaseIrritatedValueOnAttack());
             
             // アンチコメント
             _playerAttackedCounter.CountUp();

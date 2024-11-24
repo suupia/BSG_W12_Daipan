@@ -3,6 +3,7 @@ using Daipan.Comment.Scripts;
 using Daipan.Enemy.Scripts;
 using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.Sound.MonoScripts;
+using Daipan.Stream.Interfaces;
 using UnityEngine;
 using Daipan.Stream.MonoScripts;
 using Daipan.Streamer.MonoScripts;
@@ -15,14 +16,14 @@ namespace Daipan.Stream.Scripts
     {
         readonly AntiCommentCluster _antiCommentCluster;
         readonly EnemyCluster _enemyCluster;
-        readonly IrritatedGaugeValue _irritatedGaugeValue;
+        readonly IIrritatedGaugeValue _irritatedGaugeValue;
         readonly StreamerViewMono _streamerViewMono;
         readonly ShakeDisplayMono _shakeDisplayMono;
         readonly RpcReceiverNetWrapper _rpcReceiverNetWrapper;
         public int DaipanCount { get; private set; }
         [Inject]
         public DaipanExecutor(
-            IrritatedGaugeValue irritatedGaugeValue,
+            IIrritatedGaugeValue irritatedGaugeValue,
             EnemyCluster enemyCluster,
             AntiCommentCluster antiCommentCluster,
             StreamerViewMono streamerViewMono,

@@ -8,13 +8,14 @@ using Daipan.Enemy.LevelDesign.Scripts;
 using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Player.MonoScripts;
 using Daipan.Player.Scripts;
+using Daipan.Stream.Interfaces;
 using Daipan.Stream.Scripts;
 
 namespace Daipan.Enemy.Scripts
 {
     public class EnemyOnAttackedBuilder
     {
-        readonly IrritatedGaugeValue _irritatedGaugeValue;
+        readonly IIrritatedGaugeValue _irritatedGaugeValue;
         readonly EnemyLevelDesignParamData _enemyLevelDesignParamData;
         readonly ComboCounter _comboCounter;
         readonly CommentSpawner _commentSpawner;
@@ -22,7 +23,7 @@ namespace Daipan.Enemy.Scripts
         readonly WaveState _waveState;
 
         public EnemyOnAttackedBuilder(
-            IrritatedGaugeValue irritatedGaugeValue
+            IIrritatedGaugeValue irritatedGaugeValue
             , EnemyLevelDesignParamData enemyLevelDesignParamData
             , ComboCounter comboCounter
             , CommentSpawner commentSpawner

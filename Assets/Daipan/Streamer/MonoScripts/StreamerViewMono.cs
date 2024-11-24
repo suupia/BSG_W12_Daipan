@@ -5,6 +5,7 @@ using UnityEngine;
 using VContainer;
 using DG.Tweening;
 using Daipan.Player.Scripts;
+using Daipan.Stream.Interfaces;
 using R3;
 
 namespace Daipan.Streamer.MonoScripts
@@ -21,14 +22,14 @@ namespace Daipan.Streamer.MonoScripts
         [SerializeField] Vector3 moveAmountByAngerZoom;
         [SerializeField] float zoomDuration;
 
-        IrritatedGaugeValue _irritatedGaugeValue = null!;
+        IIrritatedGaugeValue _irritatedGaugeValue = null!;
         Vector3 _originalScale;
         Vector3 _originalPosition;
         Transform _transform = null!;
         float _effectDelaySec = 0.8f;
 
         [Inject]
-        void Initialize(IrritatedGaugeValue irritatedGaugeValue)
+        void Initialize(IIrritatedGaugeValue irritatedGaugeValue)
         {
             _irritatedGaugeValue = irritatedGaugeValue;
 
