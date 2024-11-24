@@ -12,7 +12,7 @@ namespace Daipan.Transporter.Scripts
     public class PlayerDataTransporterNet : NetworkBehaviour, ISpawned
     {
         public int PlayerCount => PlayerDataDictionary.Count;
-        [Networked] NetworkDictionary<PlayerRef, PlayerData> PlayerDataDictionary => default;
+        [Networked][Capacity(4)] NetworkDictionary<PlayerRef, PlayerData> PlayerDataDictionary => default;
 
         public override void Spawned()
         {
