@@ -509,22 +509,22 @@ namespace Daipan.Tutorial.Scripts
     {
         readonly SpeechEventManager _speechEventManager;
         readonly IIrritatedGaugeValue _irritatedGaugeValue;
-        readonly DaipanExecutorNetwork _daipanExecutorNetwork;
+        readonly IDaipanExecutor _daipanExecutor;
         readonly PushEnterTextViewMono _pushEnterTextViewMono;
         readonly LanguageConfig _languageConfig;
-        public bool IsDaipaned => _daipanExecutorNetwork.DaipanCount >= 1;
+        public bool IsDaipaned => _daipanExecutor.DaipanCount >= 1;
 
         public DaipanCutscene(
             SpeechEventManager speechEventManager
             , IIrritatedGaugeValue irritatedGaugeValue
-            , DaipanExecutorNetwork daipanExecutorNetwork
+            , IDaipanExecutor daipanExecutor
             , PushEnterTextViewMono pushEnterTextViewMono
             , LanguageConfig languageConfig
         )
         {
             _speechEventManager = speechEventManager;
             _irritatedGaugeValue = irritatedGaugeValue;
-            _daipanExecutorNetwork = daipanExecutorNetwork;
+            _daipanExecutor = daipanExecutor;
             _pushEnterTextViewMono = pushEnterTextViewMono;
             _languageConfig = languageConfig;
         }
@@ -539,7 +539,7 @@ namespace Daipan.Tutorial.Scripts
             const float fillRatioPerSec = 0.2f;
             Disposables.Add(
                 Observable.EveryUpdate()
-                    .Where(_ => _daipanExecutorNetwork.DaipanCount < 1)
+                    .Where(_ => _daipanExecutor.DaipanCount < 1)
                     .Subscribe(
                         _ =>
                         {

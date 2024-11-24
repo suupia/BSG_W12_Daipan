@@ -8,6 +8,7 @@ using Daipan.LevelDesign.EndScene;
 using Daipan.Player.MonoScripts;
 using Daipan.Player.Scripts;
 using Daipan.Sound.MonoScripts;
+using Daipan.Stream.Interfaces;
 using Daipan.Stream.Scripts;
 using R3;
 using UnityEngine;
@@ -19,7 +20,7 @@ namespace Daipan.Battle.scripts
     {
         readonly EndSceneTransitionParam _endSceneTransitionParam;
         readonly ViewerNumber _viewerNumber;
-        readonly DaipanExecutorNetwork _daipanExecutorNetwork;
+        readonly IDaipanExecutor _daipanExecutor;
         readonly ComboCounter _comboCounter;
         IDisposable? _disposable;
 
@@ -39,13 +40,13 @@ namespace Daipan.Battle.scripts
         public EndSceneSelector(
             EndSceneTransitionParam endSceneTransitionParam
             , ViewerNumber viewerNumber
-            , DaipanExecutorNetwork daipanExecutorNetwork
+            , IDaipanExecutor daipanExecutor
             , ComboCounter comboCounter
         )
         {
             _endSceneTransitionParam = endSceneTransitionParam;
             _viewerNumber = viewerNumber;
-            _daipanExecutorNetwork = daipanExecutorNetwork;
+            _daipanExecutor = daipanExecutor;
             _comboCounter = comboCounter;
         }
         
@@ -61,7 +62,7 @@ namespace Daipan.Battle.scripts
             }
 
             foreach (var judgeSceneName in _judgeList)
-                if (TransitionCondition(judgeSceneName, _endSceneTransitionParam, _viewerNumber, playerMono, _daipanExecutorNetwork, _comboCounter))
+                if (TransitionCondition(judgeSceneName, _endSceneTransitionParam, _viewerNumber, playerMono, _daipanExecutor, _comboCounter))
                 {
                     EndSceneStatic.EndSceneEnum = judgeSceneName;
                     SceneTransition.TransitioningScene(SceneName.EndScene);
@@ -79,7 +80,7 @@ namespace Daipan.Battle.scripts
             , EndSceneTransitionParam endSceneTransitionParam
             , ViewerNumber viewerNumber
             , PlayerMono playerMono
-            , DaipanExecutorNetwork daipanExecutorNetwork
+            , IDaipanExecutor daipanExecutor
             , ComboCounter counter
         )
         {
@@ -87,11 +88,11 @@ namespace Daipan.Battle.scripts
             {
                 EndSceneEnum.NoobGamer => playerMono.Hp.Value / playerMono.MaxHp <=
                                           endSceneTransitionParam.hpPercentThresholdForNoobGamerEnd,
-                EndSceneEnum.Seijo => daipanExecutorNetwork.DaipanCount <=
+                EndSceneEnum.Seijo => daipanExecutor.DaipanCount <=
                                       endSceneTransitionParam.daipanCountThresholdForSacredLadyEnd,
                 EndSceneEnum.ProGamer => counter.MaxComboCount >= 
                                          endSceneTransitionParam.maxComboCountThresholdForProGamerEnd,
-                EndSceneEnum.Enjou => daipanExecutorNetwork.DaipanCount >=
+                EndSceneEnum.Enjou => daipanExecutor.DaipanCount >=
                                       endSceneTransitionParam.daipanCountThresholdForBacklashEnd,
                 EndSceneEnum.Hakononaka => viewerNumber.Number <=
                                              endSceneTransitionParam.viewerCountThresholdForInsideTheBoxEnd,
@@ -102,7 +103,7 @@ namespace Daipan.Battle.scripts
                 EndSceneEnum.Genkai => true,
                 _ => false
             };
-            Debug.Log($"TransitionCondition() SceneName: {sceneName}, result : {result}, viewerNumber: {viewerNumber.Number}, hp: {playerMono.Hp.Value}, maxHp: {playerMono.MaxHp}, daipanCount: {daipanExecutorNetwork.DaipanCount}");
+            Debug.Log($"TransitionCondition() SceneName: {sceneName}, result : {result}, viewerNumber: {viewerNumber.Number}, hp: {playerMono.Hp.Value}, maxHp: {playerMono.MaxHp}, daipanCount: {daipanExecutor.DaipanCount}");
             if (!result) Debug.LogWarning($"TransitionCondition is not satisfied: {sceneName}");
             return result;
         }

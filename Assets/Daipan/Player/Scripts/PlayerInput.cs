@@ -8,6 +8,7 @@ using Daipan.Option.Interfaces;
 using Daipan.Option.Scripts;
 using Daipan.Player.Interfaces;
 using Daipan.Player.MonoScripts;
+using Daipan.Stream.Interfaces;
 using Daipan.Stream.Scripts;
 using UnityEngine;
 
@@ -17,7 +18,7 @@ namespace Daipan.Player.Scripts
     {
         readonly InputSerialManager _inputSerialManager;
         readonly IAttackExecutor _attackExecutor;
-        readonly DaipanExecutorNetwork _daipanExecutorNetwork;
+        readonly IDaipanExecutor _daipanExecutor;
         readonly ResultState _resultState;
         readonly EndSceneSelector _endSceneSelector;
         readonly IInputOption _inputOption;
@@ -27,7 +28,7 @@ namespace Daipan.Player.Scripts
         public PlayerInput(
             InputSerialManager inputSerialManager
             , IAttackExecutor attackExecutor
-            , DaipanExecutorNetwork daipanExecutorNetwork
+            , IDaipanExecutor daipanExecutor
             , ResultState resultState
             , EndSceneSelector endSceneSelector
             , IInputOption inputOption
@@ -36,7 +37,7 @@ namespace Daipan.Player.Scripts
         {
             _inputSerialManager = inputSerialManager;
             _attackExecutor = attackExecutor;
-            _daipanExecutorNetwork = daipanExecutorNetwork;
+            _daipanExecutor = daipanExecutor;
             _resultState = resultState;
             _endSceneSelector = endSceneSelector;
             _inputOption = inputOption;
@@ -95,7 +96,7 @@ namespace Daipan.Player.Scripts
                 _attackExecutor.FireAttackEffect(_playerMono, PlayerColor.Yellow);
             }
 
-            if (_getEnterKey.GetEnterKeyDown()) _daipanExecutorNetwork.Daipan();
+            if (_getEnterKey.GetEnterKeyDown()) _daipanExecutor.Daipan();
         }
 
         void ResultUpdate()

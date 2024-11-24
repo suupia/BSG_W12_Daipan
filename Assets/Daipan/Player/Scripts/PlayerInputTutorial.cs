@@ -9,6 +9,7 @@ using Daipan.Option.Scripts;
 using Daipan.Tutorial.Scripts;
 using UnityEngine;
 using Daipan.Core.Interfaces;
+using Daipan.Stream.Interfaces;
 
 namespace Daipan.Player.Scripts
 {
@@ -16,7 +17,7 @@ namespace Daipan.Player.Scripts
     {
         readonly InputSerialManager _inputSerialManager;
         readonly IAttackExecutor _attackExecutor;
-        readonly DaipanExecutorNetwork _daipanExecutorNetwork;
+        readonly IDaipanExecutor _daipanExecutor;
         readonly SpeechEventManager _speechEventManager;
         readonly IInputOption _inputOption;
         readonly IGetEnterKey _getEnterKey;
@@ -26,7 +27,7 @@ namespace Daipan.Player.Scripts
         public PlayerInputTutorial(
             InputSerialManager inputSerialManager
             , IAttackExecutor attackExecutor
-            , DaipanExecutorNetwork daipanExecutorNetwork
+            , IDaipanExecutor daipanExecutor
             , SpeechEventManager speechEventManager
             , IInputOption inputOption
             , IGetEnterKey getEnterKey
@@ -34,7 +35,7 @@ namespace Daipan.Player.Scripts
         {
             _inputSerialManager = inputSerialManager;
             _attackExecutor = attackExecutor;
-            _daipanExecutorNetwork = daipanExecutorNetwork;
+            _daipanExecutor = daipanExecutor;
             _speechEventManager = speechEventManager;
             _inputOption = inputOption;
             _getEnterKey = getEnterKey;
@@ -116,7 +117,7 @@ namespace Daipan.Player.Scripts
 
             if (_getEnterKey.GetEnterKeyDown())
             {
-                _daipanExecutorNetwork.Daipan();
+                _daipanExecutor.Daipan();
                 _speechEventManager.MoveNext();
             }
         }

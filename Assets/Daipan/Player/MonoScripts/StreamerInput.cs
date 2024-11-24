@@ -10,6 +10,7 @@ using Daipan.Option.Interfaces;
 using Daipan.Option.Scripts;
 using Daipan.Player.Interfaces;
 using Daipan.Player.MonoScripts;
+using Daipan.Stream.Interfaces;
 using Daipan.Stream.Scripts;
 using Daipan.Transporter;
 using Daipan.Transporter.Scripts;
@@ -21,7 +22,7 @@ public class StreamerInput : IPlayerInput
 {
     readonly IInputSerialManager _inputSerialManager;
     readonly IAttackExecutor _attackExecutor;
-    readonly DaipanExecutorNetwork _daipanExecutorNetwork;
+    readonly IDaipanExecutor _daipanExecutor;
     readonly ResultState _resultState;
     readonly EndSceneSelector _endSceneSelector;
     readonly IInputOption _inputOption;
@@ -34,7 +35,7 @@ public class StreamerInput : IPlayerInput
         NetworkRunner runner,
         IInputSerialManager inputSerialManager,
         IAttackExecutor attackExecutor,
-        DaipanExecutorNetwork daipanExecutorNetwork,
+        IDaipanExecutor daipanExecutor,
         ResultState resultState,
         EndSceneSelector endSceneSelector,
         IInputOption inputOption,
@@ -44,7 +45,7 @@ public class StreamerInput : IPlayerInput
     {
         _inputSerialManager = inputSerialManager;
         _attackExecutor = attackExecutor;
-        _daipanExecutorNetwork = daipanExecutorNetwork;
+        _daipanExecutor = daipanExecutor;
         _resultState = resultState;
         _endSceneSelector = endSceneSelector;
         _inputOption = inputOption;
@@ -108,7 +109,7 @@ public class StreamerInput : IPlayerInput
             _attackExecutor.FireAttackEffect(_playerMono, PlayerColor.Yellow);
         }
     
-        if (_getEnterKey.GetEnterKeyDown()) _daipanExecutorNetwork.Daipan();
+        if (_getEnterKey.GetEnterKeyDown()) _daipanExecutor.Daipan();
     }
     
     void ResultUpdate()
