@@ -12,6 +12,7 @@ using Daipan.Comment.Interfaces;
 using Daipan.Daipan;
 using R3;
 using System;
+using Daipan.Stream.Interfaces;
 using DG.Tweening;
 
 namespace Daipan.Comment.MonoScripts
@@ -22,7 +23,7 @@ namespace Daipan.Comment.MonoScripts
 
         AntiCommentCluster _antiCommentCluster = null!;
         CommentParamsServer _commentParamsServer = null!;
-        IrritatedGaugeValueNetwork _irritatedGaugeValueNetwork = null!;
+        IIrritatedGaugeValue _irritatedGaugeValue = null!;
         NetworkRunner _runner = null!;
         bool IsActive { get; set; } = true;
         [Networked]
@@ -46,13 +47,13 @@ namespace Daipan.Comment.MonoScripts
         public void Initialize(
             AntiCommentCluster antiCommentCluster
             , CommentParamsServer commentParamsServer
-            , IrritatedGaugeValueNetwork irritatedGaugeValueNetwork
+            , IIrritatedGaugeValue irritatedGaugeValue
             , NetworkRunner networkRunner
         )
         {
             _antiCommentCluster = antiCommentCluster;
             _commentParamsServer = commentParamsServer;
-            _irritatedGaugeValueNetwork = irritatedGaugeValueNetwork;
+            _irritatedGaugeValue = irritatedGaugeValue;
             _runner = networkRunner;
         }
 

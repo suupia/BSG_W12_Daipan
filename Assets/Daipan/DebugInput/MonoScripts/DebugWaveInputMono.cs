@@ -4,6 +4,7 @@ using Daipan.Battle.scripts;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.LevelDesign.Scripts;
 using Daipan.Enemy.Scripts;
+using Daipan.Stream.Interfaces;
 using Daipan.Stream.Scripts;
 using UnityEngine;
 using VContainer;
@@ -14,18 +15,18 @@ namespace Daipan.DebugInput.MonoScripts
     {
         WaveState _waveState = null!;
         IEnemyWaveSpawnerCounter _enemyWaveSpawnerCounter = null!;
-        IrritatedGaugeValueNetwork _irritatedGaugeValueNetwork = null!;
+        IIrritatedGaugeValue _irritatedGaugeValue = null!;
 
         [Inject]
         public void Initialize(
             WaveState waveState
             , IEnemyWaveSpawnerCounter enemyWaveSpawnerCounter
-            , IrritatedGaugeValueNetwork irritatedGaugeValueNetwork
+            , IIrritatedGaugeValue irritatedGaugeValue
         )
         {
             _waveState = waveState;
             _enemyWaveSpawnerCounter = enemyWaveSpawnerCounter;
-            _irritatedGaugeValueNetwork = irritatedGaugeValueNetwork;
+            _irritatedGaugeValue = irritatedGaugeValue;
         }
 
         void Update()
@@ -53,7 +54,7 @@ namespace Daipan.DebugInput.MonoScripts
 
             if (Input.GetKeyDown(KeyCode.I))
             {
-                _irritatedGaugeValueNetwork.IncreaseValue(_irritatedGaugeValueNetwork.MaxValue);
+                _irritatedGaugeValue.IncreaseValue(_irritatedGaugeValue.MaxValue);
             } 
 #endif
         }

@@ -19,6 +19,7 @@ using Daipan.Player.Interfaces;
 using Daipan.Player.MonoScripts;
 using Daipan.Player.Scripts;
 using Daipan.Core.Interfaces;
+using Daipan.Stream.Interfaces;
 
 namespace Daipan.Tutorial.Scripts
 {
@@ -345,7 +346,7 @@ namespace Daipan.Tutorial.Scripts
         readonly CommentSpawner _commentSpawner;
         readonly EnemySpawnerTutorial _enemySpawnerTutorial;
         readonly LanguageConfig _languageConfig;
-        readonly IrritatedGaugeValueNetwork _irritatedGaugeValueNetwork;
+        readonly IIrritatedGaugeValue _irritatedGaugeValue;
         readonly AttackExecutor _attackExecutor;
         public bool IsMissed { get; set; }
         bool CanMoveNext { get; set; }
@@ -355,7 +356,7 @@ namespace Daipan.Tutorial.Scripts
             , CommentSpawner commentSpawner
             , EnemySpawnerTutorial enemySpawnerTutorial
             , LanguageConfig languageConfig
-            , IrritatedGaugeValueNetwork irritatedGaugeValueNetwork
+            , IIrritatedGaugeValue irritatedGaugeValue
             , AttackExecutor attackExecutor  // IAttackExecutorはAttackExecutorTutorialになっていて、Decoratorを妥協している
         )
         {
@@ -363,7 +364,7 @@ namespace Daipan.Tutorial.Scripts
             _commentSpawner = commentSpawner;
             _enemySpawnerTutorial = enemySpawnerTutorial;
             _languageConfig = languageConfig;
-            _irritatedGaugeValueNetwork = irritatedGaugeValueNetwork;
+            _irritatedGaugeValue = irritatedGaugeValue;
             _attackExecutor = attackExecutor;
         }
 
@@ -420,7 +421,7 @@ namespace Daipan.Tutorial.Scripts
             var irritatedGaugeSpotLight = Object.FindObjectOfType<IrritatedGaugeSpotLightMono>();
             if(irritatedGaugeSpotLight != null) irritatedGaugeSpotLight.Show(); 
             
-            await UniTask.WaitUntil(() => _irritatedGaugeValueNetwork.IsFull); // ここでイライラゲージがmaxになったかどうかを判定
+            await UniTask.WaitUntil(() => _irritatedGaugeValue.IsFull); // ここでイライラゲージがmaxになったかどうかを判定
             
             if(irritatedGaugeSpotLight != null) irritatedGaugeSpotLight.Hide();  
             CanMoveNext = true;
@@ -507,7 +508,7 @@ namespace Daipan.Tutorial.Scripts
     public class DaipanCutscene : AbstractTutorialContent
     {
         readonly SpeechEventManager _speechEventManager;
-        readonly IrritatedGaugeValueNetwork _irritatedGaugeValueNetwork;
+        readonly IIrritatedGaugeValue _irritatedGaugeValue;
         readonly DaipanExecutorNetwork _daipanExecutorNetwork;
         readonly PushEnterTextViewMono _pushEnterTextViewMono;
         readonly LanguageConfig _languageConfig;
@@ -515,14 +516,14 @@ namespace Daipan.Tutorial.Scripts
 
         public DaipanCutscene(
             SpeechEventManager speechEventManager
-            , IrritatedGaugeValueNetwork irritatedGaugeValueNetwork
+            , IIrritatedGaugeValue irritatedGaugeValue
             , DaipanExecutorNetwork daipanExecutorNetwork
             , PushEnterTextViewMono pushEnterTextViewMono
             , LanguageConfig languageConfig
         )
         {
             _speechEventManager = speechEventManager;
-            _irritatedGaugeValueNetwork = irritatedGaugeValueNetwork;
+            _irritatedGaugeValue = irritatedGaugeValue;
             _daipanExecutorNetwork = daipanExecutorNetwork;
             _pushEnterTextViewMono = pushEnterTextViewMono;
             _languageConfig = languageConfig;
@@ -542,18 +543,18 @@ namespace Daipan.Tutorial.Scripts
                     .Subscribe(
                         _ =>
                         {
-                            _irritatedGaugeValueNetwork.IncreaseValue(fillRatioPerSec * _irritatedGaugeValueNetwork.MaxValue * Time.deltaTime);
+                            _irritatedGaugeValue.IncreaseValue(fillRatioPerSec * _irritatedGaugeValue.MaxValue * Time.deltaTime);
                         },
-                        _ => { Debug.Log($"IrritatedValue: {_irritatedGaugeValueNetwork.Value}"); }
+                        _ => { Debug.Log($"IrritatedValue: {_irritatedGaugeValue.Value}"); }
                     )
             );
 
             Disposables.Add(
-                Observable.EveryValueChanged(_irritatedGaugeValueNetwork, irritatedValue => irritatedValue.Value)
+                Observable.EveryValueChanged(_irritatedGaugeValue, irritatedValue => irritatedValue.Value)
                     .Subscribe(
                         _ =>
                         {
-                            if (_irritatedGaugeValueNetwork.IsFull)
+                            if (_irritatedGaugeValue.IsFull)
                                 _pushEnterTextViewMono.Show();
                             else
                                 _pushEnterTextViewMono.Hide();
