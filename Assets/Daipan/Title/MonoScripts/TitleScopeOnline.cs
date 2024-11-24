@@ -21,11 +21,11 @@ using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-public sealed class TitleScope : LifetimeScope
+public sealed class TitleScopeOnline : LifetimeScope
 {
     protected override void Configure(IContainerBuilder builder)
     {
-        builder.RegisterComponentInHierarchy<TitleMono>();
+        builder.RegisterComponentInHierarchy<TitleGetInputMonoOnline>();
 
         // Option
         DaipanScope.RegisterOption(builder);

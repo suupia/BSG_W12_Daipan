@@ -14,7 +14,7 @@ using Daipan.Player.Interfaces;
 using UnityEngine.UI;
 using DG.Tweening;
 
-public class TitleMono : MonoBehaviour
+public class TitleGetInputMonoOnline : MonoBehaviour
 {
     [SerializeField] Image blackScreen = null!;
 
