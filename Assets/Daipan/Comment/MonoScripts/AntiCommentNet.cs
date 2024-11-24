@@ -37,7 +37,7 @@ namespace Daipan.Comment.MonoScripts
             Initialize(
                 daipanScopeNet.Container.Resolve<AntiCommentCluster>()
                , daipanScopeNet.Container.Resolve<CommentParamsServer>()
-               , daipanScopeNet.Container.Resolve<IrritatedGaugeValueNetwork>()
+               , daipanScopeNet.Container.Resolve<IIrritatedGaugeValue>()
                , daipanScopeNet.Container.Resolve<NetworkRunner>()
             );
 
