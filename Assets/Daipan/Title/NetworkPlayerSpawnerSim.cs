@@ -21,7 +21,7 @@ public class NetworkPlayerSpawnerSim : SimulationBehaviour, IPlayerJoined, IPlay
             var playerStatsUnitNet = Runner.Spawn(playerStatsUnitNetPrefab, new Vector3(0, 1, 0), Quaternion.identity);
             playerStatsUnitNet.NetworkedPlayerRef = playerRef;
 
-            var titleMonoNew = FindObjectOfType<TitleMonoNew>();
+            var titleMonoNew = FindObjectOfType<TitleMonoOnline>();
             if (titleMonoNew != null) playerStatsUnitNet.PlayerName = titleMonoNew.LocalPlayerName;
 
             // var rootScope = FindObjectOfType<RootScope>();

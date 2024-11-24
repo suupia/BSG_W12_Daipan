@@ -15,7 +15,7 @@ public class MenuButtonsMono : MonoBehaviour
 
     void Awake()
     {
-        var titleMonoNew = FindObjectOfType<TitleMonoNew>();
+        var titleMonoNew = FindObjectOfType<TitleMonoOnline>();
         if(titleMonoNew == null)
         {
             Debug.LogError($"TitleMonoNew is null");

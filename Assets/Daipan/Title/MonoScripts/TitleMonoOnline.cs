@@ -11,7 +11,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class TitleMonoNew : MonoBehaviour
+public class TitleMonoOnline : MonoBehaviour
 {
     [SerializeField] CanvasGroup titleCanvasGroup = null!;
     [SerializeField] NetworkRunner networkRunnerPrefab = null!;

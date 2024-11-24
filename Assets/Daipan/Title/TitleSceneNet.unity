@@ -3960,7 +3960,7 @@ GameObject:
   - component: {fileID: 1541461335}
   - component: {fileID: 1541461334}
   m_Layer: 0
-  m_Name: TitleMonoNew
+  m_Name: TitleMonoOnline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
