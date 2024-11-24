@@ -1,3 +1,4 @@
+using Daipan.Stream.Interfaces;
 using Daipan.Stream.Scripts;
 using UnityEngine;
 using VContainer;
@@ -8,7 +9,6 @@ namespace Daipan.Stream.MonoScripts
     {
         ViewerNumber _viewerNumber = null!;
         ViewerParam _viewerParam = null!;
-        IrritatedGaugeValueNetwork _irritatedGaugeValueNetwork = null!;
 
         float OneSecTimer { get; set; }
 
@@ -20,22 +20,18 @@ namespace Daipan.Stream.MonoScripts
                 OneSecTimer = 0;
             }
 
-            // なにもなくても少しづつイライラゲージが貯まる 
-            // _irritatedValue.IncreaseValue(1 / 60.0f);  // todo :チュートリアルの関係で一旦なし
-            
+
 
         }
 
         [Inject]
         public void Initialize(
             ViewerParam viewerParam,
-            ViewerNumber viewerNumber,
-            IrritatedGaugeValueNetwork irritatedGaugeValueNetwork
+            ViewerNumber viewerNumber
            ) 
         {
             _viewerParam = viewerParam;
             _viewerNumber = viewerNumber;
-            _irritatedGaugeValueNetwork = irritatedGaugeValueNetwork;
         }
     }
 }

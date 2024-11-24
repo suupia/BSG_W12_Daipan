@@ -3,6 +3,7 @@ using System;
 using Daipan.Option.Scripts;
 using Daipan.Player.MonoScripts;
 using Daipan.Player.Scripts;
+using Daipan.Stream.Interfaces;
 using Daipan.Stream.Scripts;
 using R3;
 using TMPro;
@@ -49,7 +50,7 @@ namespace Daipan.Battle.scripts
         public void Constructor(
             ViewerNumber viewerNumber
             , ComboCounter comboCounter
-            , DaipanExecutor daipanExecutor
+            , IDaipanExecutor daipanExecutor
             , LanguageConfig languageConfig
         )
         {

@@ -156,7 +156,7 @@ namespace Daipan.Daipan
             builder.Register<PlayerPrefabLoaderNetwork>(Lifetime.Scoped).As<IPrefabLoader<PlayerNet>>();
             builder.Register<PlayerHolder>(Lifetime.Scoped);
             builder.Register<ThresholdResetCounter>(Lifetime.Scoped);
-            builder.Register<DaipanExecutor>(Lifetime.Scoped);
+            builder.Register<DaipanExecutorNetwork>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<IStart, PlayerSpawnerNetwork>(Lifetime.Scoped);
             // Attack
             builder.Register<PlayerAttackEffectPrefabLoaderNetwork>(Lifetime.Scoped).As<IPrefabLoader<PlayerAttackEffectNet>>();

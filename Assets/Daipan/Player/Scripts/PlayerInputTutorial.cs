@@ -16,7 +16,7 @@ namespace Daipan.Player.Scripts
     {
         readonly InputSerialManager _inputSerialManager;
         readonly IAttackExecutor _attackExecutor;
-        readonly DaipanExecutor _daipanExecutor;
+        readonly DaipanExecutorNetwork _daipanExecutorNetwork;
         readonly SpeechEventManager _speechEventManager;
         readonly IInputOption _inputOption;
         readonly IGetEnterKey _getEnterKey;
@@ -26,7 +26,7 @@ namespace Daipan.Player.Scripts
         public PlayerInputTutorial(
             InputSerialManager inputSerialManager
             , IAttackExecutor attackExecutor
-            , DaipanExecutor daipanExecutor
+            , DaipanExecutorNetwork daipanExecutorNetwork
             , SpeechEventManager speechEventManager
             , IInputOption inputOption
             , IGetEnterKey getEnterKey
@@ -34,7 +34,7 @@ namespace Daipan.Player.Scripts
         {
             _inputSerialManager = inputSerialManager;
             _attackExecutor = attackExecutor;
-            _daipanExecutor = daipanExecutor;
+            _daipanExecutorNetwork = daipanExecutorNetwork;
             _speechEventManager = speechEventManager;
             _inputOption = inputOption;
             _getEnterKey = getEnterKey;
@@ -116,7 +116,7 @@ namespace Daipan.Player.Scripts
 
             if (_getEnterKey.GetEnterKeyDown())
             {
-                _daipanExecutor.DaiPan();
+                _daipanExecutorNetwork.Daipan();
                 _speechEventManager.MoveNext();
             }
         }

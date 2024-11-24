@@ -12,7 +12,7 @@ using Daipna.StreamerNet.Scripts;
 
 namespace Daipan.Stream.Scripts
 {
-    public sealed class DaipanExecutor
+    public sealed class DaipanExecutorNetwork : IDaipanExecutor
     {
         readonly AntiCommentCluster _antiCommentCluster;
         readonly EnemyCluster _enemyCluster;
@@ -22,7 +22,7 @@ namespace Daipan.Stream.Scripts
         readonly RpcReceiverNetWrapper _rpcReceiverNetWrapper;
         public int DaipanCount { get; private set; }
         [Inject]
-        public DaipanExecutor(
+        public DaipanExecutorNetwork(
             IIrritatedGaugeValue irritatedGaugeValue,
             EnemyCluster enemyCluster,
             AntiCommentCluster antiCommentCluster,
@@ -38,7 +38,7 @@ namespace Daipan.Stream.Scripts
             _shakeDisplayMono = shakeDisplayMono;
             _rpcReceiverNetWrapper = rpcReceiverNetWrapper;
         }
-        public void DaiPan()
+        public void Daipan()
         {
             var canDaipan = _irritatedGaugeValue.IsFull;
             if (canDaipan)

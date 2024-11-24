@@ -21,7 +21,7 @@ public class StreamerInput : IPlayerInput
 {
     readonly IInputSerialManager _inputSerialManager;
     readonly IAttackExecutor _attackExecutor;
-    readonly DaipanExecutor _daipanExecutor;
+    readonly DaipanExecutorNetwork _daipanExecutorNetwork;
     readonly ResultState _resultState;
     readonly EndSceneSelector _endSceneSelector;
     readonly IInputOption _inputOption;
@@ -34,7 +34,7 @@ public class StreamerInput : IPlayerInput
         NetworkRunner runner,
         IInputSerialManager inputSerialManager,
         IAttackExecutor attackExecutor,
-        DaipanExecutor daipanExecutor,
+        DaipanExecutorNetwork daipanExecutorNetwork,
         ResultState resultState,
         EndSceneSelector endSceneSelector,
         IInputOption inputOption,
@@ -44,7 +44,7 @@ public class StreamerInput : IPlayerInput
     {
         _inputSerialManager = inputSerialManager;
         _attackExecutor = attackExecutor;
-        _daipanExecutor = daipanExecutor;
+        _daipanExecutorNetwork = daipanExecutorNetwork;
         _resultState = resultState;
         _endSceneSelector = endSceneSelector;
         _inputOption = inputOption;
@@ -108,7 +108,7 @@ public class StreamerInput : IPlayerInput
             _attackExecutor.FireAttackEffect(_playerMono, PlayerColor.Yellow);
         }
     
-        if (_getEnterKey.GetEnterKeyDown()) _daipanExecutor.DaiPan();
+        if (_getEnterKey.GetEnterKeyDown()) _daipanExecutorNetwork.Daipan();
     }
     
     void ResultUpdate()
