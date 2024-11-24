@@ -126,7 +126,7 @@ namespace Daipan.Daipan
             // Attack
             builder.Register<PlayerAttackEffectPrefabLoader>(Lifetime.Scoped)
                 .As<IPrefabLoader<PlayerAttackEffectMono>>();
-            builder.Register<PlayerAttackEffectSpawner>(Lifetime.Scoped);
+            builder.Register<PlayerAttackEffectSpawner>(Lifetime.Scoped).AsImplementedInterfaces();
         }
 
         public static void RegisterCombo(IContainerBuilder builder, ComboParamManager comboParamManager)
