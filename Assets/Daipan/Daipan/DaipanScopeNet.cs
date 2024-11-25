@@ -327,7 +327,7 @@ namespace Daipan.Daipan
             RegisterPlayer(builder, playerParamManager);
             builder.Register<PlayerBuilder>(Lifetime.Scoped).As<IPlayerBuilder>();
             builder.Register<AttackExecutor>(Lifetime.Transient).As<IAttackExecutor>();
-            builder.Register<PlayerAttackEffectBuilder>(Lifetime.Scoped).As<IPlayerAttackEffectBuilder>();
+            builder.Register<PlayerAttackEffectBuilderNetwork>(Lifetime.Scoped).As<IPlayerAttackEffectBuilder>();
             builder.Register<StreamerInput>(Lifetime.Transient).As<IPlayerInput>();
             builder.Register<PlayerOnAttacked>(Lifetime.Transient).As<IPlayerOnAttacked>();
 
