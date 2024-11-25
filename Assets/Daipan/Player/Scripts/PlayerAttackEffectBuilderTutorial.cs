@@ -23,10 +23,10 @@ namespace Daipan.Player.Scripts
     public sealed class PlayerAttackEffectBuilderTutorial : IPlayerAttackEffectBuilder
     {
         readonly IPlayerParamDataContainer _playerParamDataContainer;
-        readonly EnemyCluster _enemyCluster;
+        readonly IEnemyCluster _enemyCluster;
         public PlayerAttackEffectBuilderTutorial(
             IPlayerParamDataContainer playerParamDataContainer
-            ,EnemyCluster enemyCluster
+            , IEnemyCluster enemyCluster
         )
         {
             _playerParamDataContainer = playerParamDataContainer;
@@ -51,22 +51,22 @@ namespace Daipan.Player.Scripts
                 };
                 return effect;
             };
-            
+
         }
 
 
 
         static void AttackEnemy(IPlayerParamDataContainer playerParamDataContainer
-            ,List<AbstractPlayerViewMono?> playerViewMonos
-            ,PlayerColor playerColor
-            ,IEnemyMono? enemyMono
+            , List<AbstractPlayerViewMono?> playerViewMonos
+            , PlayerColor playerColor
+            , IEnemyMono? enemyMono
             )
         {
             Debug.Log($"Attack enemyMono?.EnemyEnum: {enemyMono?.EnemyEnum}");
             if (enemyMono == null) return;
 
             Debug.Log($"EnemyType: {enemyMono.EnemyEnum}を攻撃");
-            
+
             if (PlayerAttackModule.GetTargetEnemyEnum(playerColor).Contains(enemyMono.EnemyEnum))
             {
                 // 敵を攻撃
@@ -87,7 +87,7 @@ namespace Daipan.Player.Scripts
                     playerViewMono.Attack();
             }
         }
-        
-     
+
+
     }
 }

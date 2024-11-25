@@ -1,15 +1,16 @@
 #nullable enable
 using Daipan.Enemy.Scripts;
 
-namespace Daipan.Enemy.Interfaces;
-
-public interface IFinalBossSetDomain
+namespace Daipan.Enemy.Interfaces
 {
-    public void SetDomain(
-        EnemyEnum enemyEnum
-        , EnemyCluster enemyCluster
-        , FinalBossActionDecider finalBossActionDecider
-        , FinalBossDie enemyDie
-        , IEnemyOnAttacked enemyOnAttacked
-    );
+    public interface IFinalBossSetDomain
+    {
+        public void SetDomain(
+            EnemyEnum enemyEnum
+            , IEnemyCluster enemyCluster
+            , FinalBossActionDecider finalBossActionDecider
+            , FinalBossDie enemyDie
+            , IEnemyOnAttacked enemyOnAttacked
+        );
+    }
 }

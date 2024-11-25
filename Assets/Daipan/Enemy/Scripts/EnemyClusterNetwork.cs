@@ -5,16 +5,19 @@ using System.Linq;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.MonoScripts;
 using Daipan.LevelDesign.Enemy.Scripts;
+using Fusion;
 using UnityEngine;
 
 
 namespace Daipan.Enemy.Scripts
 {
-    public sealed class EnemyCluster : IEnemyCluster
+    public sealed class EnemyClusterNetwork : IEnemyCluster, IEnemyClusterNetwork
     {
         public IEnumerable<IEnemyMono?> Enemies => _enemies;
         readonly List<IEnemyMono?> _enemies = new();
         readonly Queue<IEnemyMono?> _reachedPlayer = new();
+
+        readonly Dictionary<IEnemyMono, PlayerRef> _enemyParents = new();
 
         public void Add(IEnemyMono enemy)
         {
@@ -42,6 +45,9 @@ namespace Daipan.Enemy.Scripts
                 _reachedPlayer.Enqueue(newQueue.Dequeue());
             }
 
+            // _enemyParentsに登録されていれば削除
+            Debug.Log($"This enemy is spawned by {GetPlayerRef(enemy)}");
+            _enemyParents.Remove(enemy);
         }
 
 
@@ -72,6 +78,20 @@ namespace Daipan.Enemy.Scripts
                 if (enemy == null) continue;
                 enemy.OnDaipaned();
             }
+        }
+
+        public void SetPlayerRef(IEnemyMono enemy, PlayerRef playerRef)
+        {
+            _enemyParents[enemy] = playerRef;
+        }
+        public PlayerRef GetPlayerRef(IEnemyMono enemy)
+        {
+            if (_enemyParents.TryGetValue(enemy, out PlayerRef playerRef))
+            {
+                return playerRef;
+            }
+            else return PlayerRef.None;
+
         }
 
         static Queue<IEnemyMono?> UpdateReachedPlayer(

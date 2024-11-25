@@ -26,8 +26,8 @@ namespace Daipan.Enemy.Tests
             {
                 entryPoints.Add<EnemySpawner>();
             });
-        
+
         }
     }
- 
+
 }

@@ -22,17 +22,17 @@ namespace Daipan.Enemy.MonoScripts
         public GameObject GameObject => gameObject;
         public Transform Transform => transform;
         [SerializeField] AbstractFinalBossViewMono? finalBossViewMono;
-        EnemyCluster _enemyCluster = null!;
+        IEnemyCluster _enemyCluster = null!;
         FinalBossActionDecider _finalBossActionDecider = null!;
-        EnemyMove _enemyMove=null!;
+        EnemyMove _enemyMove = null!;
         FinalBossDie _enemyDie = null!;
         IEnemySpawnPoint _enemySpawnPoint = null!;
         IFinalBossParamData _finalBossParamData = null!;
         IFinalBossViewParamData _finalBossViewParamData = null!;
         IEnemyOnAttacked _enemyOnAttacked = null!;
         PlayerHolder _playerHolder = null!;
-        public EnemyEnum EnemyEnum { get;  set; } = EnemyEnum.None;
-        public  bool IsReachedPlayer { get;  set; }
+        public EnemyEnum EnemyEnum { get; set; } = EnemyEnum.None;
+        public bool IsReachedPlayer { get; set; }
         Hp _hp = null!;
 
         public Hp Hp
@@ -48,7 +48,7 @@ namespace Daipan.Enemy.MonoScripts
         public override void FixedUpdateNetwork()
         {
             if (Hp.Value != 0)
-                IsReachedPlayer = _enemyMove.MoveUpdate(Runner.DeltaTime, _playerHolder.PlayerMono.Transform, _finalBossParamData, finalBossViewMono); 
+                IsReachedPlayer = _enemyMove.MoveUpdate(Runner.DeltaTime, _playerHolder.PlayerMono.Transform, _finalBossParamData, finalBossViewMono);
 
             if (transform.position.x < _enemySpawnPoint.GetEnemyDespawnedPoint().x)
                 Die();
@@ -73,7 +73,7 @@ namespace Daipan.Enemy.MonoScripts
 
         public void SetDomain(
             EnemyEnum enemyEnum
-            , EnemyCluster enemyCluster
+            , IEnemyCluster enemyCluster
             , FinalBossActionDecider finalBossActionDecider
             , FinalBossDie enemyDie
             , IEnemyOnAttacked enemyOnAttacked
@@ -98,16 +98,16 @@ namespace Daipan.Enemy.MonoScripts
 
         public event EventHandler<IPlayerParamData>? OnAttackedEvent;
 
-        public  void OnAttacked(IPlayerParamData playerParamData)
+        public void OnAttacked(IPlayerParamData playerParamData)
         {
             Hp = _enemyOnAttacked.OnAttacked(Hp, playerParamData);
             OnAttackedEvent?.Invoke(this, playerParamData);
         }
 
-        public  void OnDaipaned()
+        public void OnDaipaned()
         {
             var daipanHitDamage = _finalBossParamData.GetDaipanHitDamagePercent() * 0.01 * _finalBossParamData.GetMaxHp();
-            Hp = new Hp(Hp.Value - daipanHitDamage );
+            Hp = new Hp(Hp.Value - daipanHitDamage);
             transform.position += (float)_finalBossParamData.GetKnockBackDistance() * Vector3.right;
             finalBossViewMono?.DaipanHit();
         }
@@ -116,11 +116,11 @@ namespace Daipan.Enemy.MonoScripts
         {
             _enemyCluster.Remove(this);
             _finalBossActionDecider.Dispose();
-            
+
             _enemyDie.Died(finalBossViewMono, isDaipaned);
         }
 
-        public  void Highlight(bool isHighlighted)
+        public void Highlight(bool isHighlighted)
         {
             finalBossViewMono?.Highlight(isHighlighted);
         }

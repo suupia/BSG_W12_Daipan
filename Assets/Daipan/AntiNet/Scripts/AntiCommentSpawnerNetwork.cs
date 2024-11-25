@@ -18,25 +18,31 @@ namespace Daipan.AntiNet.Scripts
         //
 
         readonly IPrefabLoader<AntiCommentNet> _antiCommentLoader;
+        readonly IPrefabLoader<SpecialAntiCommentNet> _specialAntiCommentLoader;
         readonly CommentParamsServer _commentParamsServer;
         readonly AntiCommentCluster _antiCommentCluster;
         readonly AntiCommentObserver _antiCommentObserver;
+        readonly AntiStateValue _antiStateValue;
         readonly NetworkRunner _runner;
 
 
         [Inject]
         public AntiCommentSpawnerNetwork(
             IPrefabLoader<AntiCommentNet> antiCommentLoader,
+            IPrefabLoader<SpecialAntiCommentNet> specialAntiCommentLoader,
             CommentParamsServer commentParamsServer,
             AntiCommentCluster antiCommentCluster,
             AntiCommentObserver antiCommentObserver,
+            AntiStateValue antiStateValue,
             NetworkRunner runner
         )
         {
             _antiCommentLoader = antiCommentLoader;
+            _specialAntiCommentLoader = specialAntiCommentLoader;
             _commentParamsServer = commentParamsServer;
             _antiCommentCluster = antiCommentCluster;
             _antiCommentObserver = antiCommentObserver;
+            _antiStateValue = antiStateValue;
             _runner = runner;
         }
 
@@ -53,6 +59,28 @@ namespace Daipan.AntiNet.Scripts
                 return; // 警告だすかも？
             }
 
+
+            if (_antiStateValue.IsSpecialFever)
+            {
+                SpawnSpecialAntiComment(commentWord);
+            }
+            else
+            {
+                SpawnNormalAntiComment(commentWord);
+            }
+
+
+            if (_antiStateValue.AntiStateEnum == AntiStateEnum.FEVER)
+            {
+                _antiCommentObserver.ResetCount();
+            }
+            else
+            {
+                _antiCommentObserver.UpCount();
+            }
+        }
+        void SpawnNormalAntiComment(string commentWord)
+        {
             var antiCommentPrefab = _antiCommentLoader.Load();
             var spawnPosition = _commentParamsServer.GetAntiSpawnedPosition();
 
@@ -60,8 +88,19 @@ namespace Daipan.AntiNet.Scripts
 
             antiComment.SetParameter(commentWord);
             _antiCommentCluster.Add(antiComment);
-            _antiCommentObserver.UpCount();
         }
+
+        void SpawnSpecialAntiComment(string commentWord)
+        {
+            var specialAntiCommentPrefab = _specialAntiCommentLoader.Load();
+            var spawnPosition = _commentParamsServer.GetAntiSpawnedPosition();
+
+            var antiComment = _runner.Spawn(specialAntiCommentPrefab, spawnPosition, Quaternion.identity);
+
+            antiComment.SetParameter(commentWord);
+            _antiCommentCluster.Add(antiComment);
+        }
+
 
         bool IsTextMoreThan(string text)
         {

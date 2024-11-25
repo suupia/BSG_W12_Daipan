@@ -123,8 +123,9 @@ namespace Daipan.Daipan
             builder.Register<CommentPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<CommentMono>>();
             builder.Register<AntiCommentPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<AntiCommentMono>>();
             builder.Register<AntiCommentNetPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<AntiCommentNet>>();
+            builder.Register<SpecialAntiCommentNetPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<SpecialAntiCommentNet>>();
             builder.Register<CommentCluster>(Lifetime.Scoped);
-            builder.Register<IUpdate, CommentSpawner>(Lifetime.Scoped).As<ICommentSpawner>();
+            builder.Register<IUpdate, CommentSpawnerNetwork>(Lifetime.Scoped).As<ICommentSpawner>();
             builder.Register<AntiCommentCluster>(Lifetime.Scoped);
             builder.Register<IUpdate, AntiCommentRelocate>(Lifetime.Scoped);
             builder.Register<AntiCommentSpawnerNetwork>(Lifetime.Scoped);
@@ -217,7 +218,7 @@ namespace Daipan.Daipan
             builder.RegisterInstance(new EnemyLevelDesignParamData(enemyParamsManager.enemyLevelDesignParam));
             // Enemy
             builder.Register<EnemyPrefabLoaderNetwork>(Lifetime.Scoped).As<IPrefabLoader<EnemyNet>>();
-            builder.Register<EnemyCluster>(Lifetime.Scoped);
+            builder.Register<EnemyClusterNetwork>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<EnemyAttackDecider>(Lifetime.Scoped);
             builder.Register<EnemyHighlightUpdater>(Lifetime.Scoped).AsImplementedInterfaces();
         }
@@ -327,7 +328,7 @@ namespace Daipan.Daipan
             RegisterPlayer(builder, playerParamManager);
             builder.Register<PlayerBuilder>(Lifetime.Scoped).As<IPlayerBuilder>();
             builder.Register<AttackExecutor>(Lifetime.Transient).As<IAttackExecutor>();
-            builder.Register<PlayerAttackEffectBuilder>(Lifetime.Scoped).As<IPlayerAttackEffectBuilder>();
+            builder.Register<PlayerAttackEffectBuilderNetwork>(Lifetime.Scoped).As<IPlayerAttackEffectBuilder>();
             builder.Register<StreamerInput>(Lifetime.Transient).As<IPlayerInput>();
             builder.Register<PlayerOnAttacked>(Lifetime.Transient).As<IPlayerOnAttacked>();
 
@@ -343,7 +344,7 @@ namespace Daipan.Daipan
             builder.RegisterComponentInHierarchy<EnemyWaveSpawnerCounterNet>().AsSelf().AsImplementedInterfaces();
             builder.Register<EnemySpawnerNetwork>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
             builder.Register<EnemyEnumSelector>(Lifetime.Scoped).As<IEnemyEnumSelector>();
-            builder.Register<EnemyBuilder>(Lifetime.Scoped).As<IEnemyBuilder>();
+            builder.Register<EnemyBuilderNetwork>(Lifetime.Scoped).As<IEnemyBuilder>();
             builder.Register<EnemySpecialOnAttacked>(Lifetime.Scoped);
 
             // FinalBoss

@@ -16,12 +16,13 @@ using Daipan.Player.LevelDesign.Scripts;
 using Daipan.Player.MonoScripts;
 using Daipan.Sound.MonoScripts;
 using Daipan.Stream.Scripts;
+using Daipna.StreamerNet.Scripts;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Daipan.Player.Scripts
 {
-    public sealed class PlayerAttackEffectBuilder : IPlayerAttackEffectBuilder
+    public sealed class PlayerAttackEffectBuilderNetwork : IPlayerAttackEffectBuilder
     {
         readonly IPlayerParamDataContainer _playerParamDataContainer;
         readonly ComboCounter _comboCounter;
@@ -31,8 +32,10 @@ namespace Daipan.Player.Scripts
         readonly WaveState _waveState;
         readonly IPlayerAntiCommentParamData _playerAntiCommentParamData;
         readonly ThresholdResetCounter _playerMissedAttackCounter;
+        readonly RpcReceiverNetWrapper _rpcReceiverNetWrapper;
+        readonly IEnemyClusterNetwork _enemyClusterNetwork;
 
-        public PlayerAttackEffectBuilder(
+        public PlayerAttackEffectBuilderNetwork(
             IPlayerParamDataContainer playerParamDataContainer
             , ComboCounter comboCounter
             , IEnemyCluster enemyCluster
@@ -40,6 +43,8 @@ namespace Daipan.Player.Scripts
             , ComboSpawner comboSpawner
             , WaveState waveState
             , IPlayerAntiCommentParamData playerAntiCommentParamData
+            , RpcReceiverNetWrapper rpcReceiverNetWrapper
+            , IEnemyClusterNetwork enemyClusterNetwork
         )
         {
             _playerParamDataContainer = playerParamDataContainer;
@@ -50,6 +55,8 @@ namespace Daipan.Player.Scripts
             _waveState = waveState;
             _playerAntiCommentParamData = playerAntiCommentParamData;
             _playerMissedAttackCounter = new ThresholdResetCounter(playerAntiCommentParamData.GetMissedAttackCountForAntiComment());
+            _rpcReceiverNetWrapper = rpcReceiverNetWrapper;
+            _enemyClusterNetwork = enemyClusterNetwork;
         }
 
         public Func<IPlayerAttackEffectMono, IPlayerAttackEffectMono> Build
@@ -77,7 +84,7 @@ namespace Daipan.Player.Scripts
                         , _commentSpawner
                         , _comboSpawner
                     );
-                    SpawnAntiComment(args, _commentSpawner, _playerAntiCommentParamData, _waveState);
+                    MakeAntiFever(args);
                 };
                 return effect;
             };
@@ -131,23 +138,14 @@ namespace Daipan.Player.Scripts
             }
         }
 
-        static void SpawnAntiComment(
-            OnHitEventArgs args
-            , ICommentSpawner commentSpawner
-            , IPlayerAntiCommentParamData playerAntiCommentParamData
-            , WaveState waveState
-            )
+        void MakeAntiFever(OnHitEventArgs args)
         {
+            if (args.EnemyMono == null) return;
             if (args.IsTargetEnemy) return;
-            if (args.EnemyMono != null && args.EnemyMono.EnemyEnum.IsTotem() == true) return;  // TotemはOnAttackedで判定している
 
-            var spawnPercent = playerAntiCommentParamData.GetAntiCommentPercentOnMissAttacks(waveState.CurrentWaveIndex);
-
-            if (spawnPercent / 100f > Random.value)
-            {
-                commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
-            }
-
+            _rpcReceiverNetWrapper.RpcReceiverNet.SetFeverRPC(_enemyClusterNetwork.GetPlayerRef(args.EnemyMono));
         }
+
+
     }
 }

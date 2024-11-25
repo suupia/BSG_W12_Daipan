@@ -20,7 +20,7 @@ namespace Daipan.Enemy.MonoScripts
         public GameObject GameObject => gameObject;
         public Transform Transform => transform;
         [SerializeField] EnemyViewMono? enemyViewMono;
-        EnemyCluster _enemyCluster = null!;
+        IEnemyCluster _enemyCluster = null!;
         EnemyMove _enemyMove = null!;
         EnemyAttackDecider _enemyAttackDecider = null!;
         EnemyDie _enemyDie = null!;
@@ -29,11 +29,11 @@ namespace Daipan.Enemy.MonoScripts
         IEnemyOnAttacked _enemyOnAttacked = null!;
         IEnemyOnDied _enemyOnDied = null!;
         PlayerHolder _playerHolder = null!;
-        public  EnemyEnum EnemyEnum { get;  set; } = EnemyEnum.None;
-        public  bool IsReachedPlayer { get;  set; }
+        public EnemyEnum EnemyEnum { get; set; } = EnemyEnum.None;
+        public bool IsReachedPlayer { get; set; }
         Hp _hp = null!;
 
-        public  Hp Hp
+        public Hp Hp
         {
             get => _hp;
             set
@@ -71,7 +71,7 @@ namespace Daipan.Enemy.MonoScripts
 
         public void SetDomain(
             EnemyEnum enemyEnum
-            , EnemyCluster enemyCluster
+            , IEnemyCluster enemyCluster
             , EnemyAttackDecider enemyAttackDecider
             , EnemyDie enemyDie
             , IEnemyOnAttacked enemyOnAttacked
@@ -96,12 +96,12 @@ namespace Daipan.Enemy.MonoScripts
             remove => _enemyDie.OnDied -= value;
         }
 
-        public  void Highlight(bool isHighlighted)
+        public void Highlight(bool isHighlighted)
         {
             enemyViewMono?.Highlight(isHighlighted);
         }
 
-        public  void OnAttacked(IPlayerParamData playerParamData)
+        public void OnAttacked(IPlayerParamData playerParamData)
         {
             // Hpの増減より先に判定する必要がある
             if (EnemyEnum.IsSpecial() == true &&
@@ -116,7 +116,7 @@ namespace Daipan.Enemy.MonoScripts
             Hp = _enemyOnAttacked.OnAttacked(Hp, playerParamData);
         }
 
-        public  void OnDaipaned()
+        public void OnDaipaned()
         {
             _enemyCluster.Remove(this);
             _enemyDie.DiedByDaipan(enemyViewMono);

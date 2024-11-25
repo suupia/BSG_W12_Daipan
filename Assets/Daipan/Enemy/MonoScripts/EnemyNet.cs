@@ -22,7 +22,7 @@ namespace Daipan.Enemy.MonoScripts
         public GameObject GameObject => gameObject;
         public Transform Transform => transform;
         [SerializeField] EnemyViewMono? enemyViewMono;
-        EnemyCluster _enemyCluster = null!;
+        IEnemyCluster _enemyCluster = null!;
         EnemyMove _enemyMove = null!;
         EnemyAttackDecider _enemyAttackDecider = null!;
         EnemyDie _enemyDie = null!;
@@ -31,12 +31,13 @@ namespace Daipan.Enemy.MonoScripts
         PlayerHolder? _playerHolder;
         IEnemySpawnPoint? _enemySpawnPoint;
         IEnemyParamContainer? _enemyParamContainer;
-
         [Networked]
         [OnChangedRender(nameof(OnEnemyEnumChanged))]
         public EnemyEnum EnemyEnum { get; set; } = EnemyEnum.None;
 
         public bool IsReachedPlayer { get; set; }
+
+
         Hp _hp = null!;
 
         public Hp Hp
@@ -96,7 +97,7 @@ namespace Daipan.Enemy.MonoScripts
 
         public void SetDomain(
             EnemyEnum enemyEnum
-            , EnemyCluster enemyCluster
+            , IEnemyCluster enemyCluster
             , EnemyAttackDecider enemyAttackDecider
             , EnemyDie enemyDie
             , IEnemyOnAttacked enemyOnAttacked
