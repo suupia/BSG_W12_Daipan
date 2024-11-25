@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Daipan.Battle.scripts;
+using Daipan.Comment.Interfaces;
 using Daipan.Comment.Scripts;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.MonoScripts;
@@ -24,14 +25,14 @@ namespace Daipan.Enemy.Scripts
 
         public EnemyTotemOnAttacked(
             ComboCounter comboCounter
-            , CommentSpawner commentSpawner
+            , ICommentSpawner commentSpawner
             , IPlayerAntiCommentParamData playerAntiCommentParamData
             , WaveState waveState
             , List<PlayerColor> canAttackPlayers
         )
         {
             _samePressChecker = new SamePressChecker(AllowableSec, canAttackPlayers.Count
-                ,  () =>
+                , () =>
                 {
                     comboCounter.IncreaseCombo();
                     SoundManager.Instance?.PlaySe(SeEnum.Attack);

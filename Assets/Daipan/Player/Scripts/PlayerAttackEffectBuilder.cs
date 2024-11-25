@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Daipan.Battle.scripts;
+using Daipan.Comment.Interfaces;
 using Daipan.Comment.Scripts;
 using Daipan.Core.Interfaces;
 using Daipan.Enemy.MonoScripts;
@@ -24,7 +25,7 @@ namespace Daipan.Player.Scripts
         readonly IPlayerParamDataContainer _playerParamDataContainer;
         readonly ComboCounter _comboCounter;
         readonly EnemyCluster _enemyCluster;
-        readonly CommentSpawner _commentSpawner;
+        readonly ICommentSpawner _commentSpawner;
         readonly ComboSpawner _comboSpawner;
         readonly WaveState _waveState;
         readonly IPlayerAntiCommentParamData _playerAntiCommentParamData;
@@ -32,12 +33,12 @@ namespace Daipan.Player.Scripts
 
         public PlayerAttackEffectBuilder(
             IPlayerParamDataContainer playerParamDataContainer
-            ,ComboCounter comboCounter
-            ,EnemyCluster enemyCluster
-            ,CommentSpawner commentSpawner
-            ,ComboSpawner comboSpawner
-            ,WaveState waveState
-            ,IPlayerAntiCommentParamData playerAntiCommentParamData
+            , ComboCounter comboCounter
+            , EnemyCluster enemyCluster
+            , ICommentSpawner commentSpawner
+            , ComboSpawner comboSpawner
+            , WaveState waveState
+            , IPlayerAntiCommentParamData playerAntiCommentParamData
         )
         {
             _playerParamDataContainer = playerParamDataContainer;
@@ -70,12 +71,12 @@ namespace Daipan.Player.Scripts
                         , playerViewMonos
                         , playerColor
                         , args
-                        ,_comboCounter
+                        , _comboCounter
                         , _playerMissedAttackCounter
                         , _commentSpawner
                         , _comboSpawner
                     );
-                    SpawnAntiComment(args, _commentSpawner, _playerAntiCommentParamData,_waveState);
+                    SpawnAntiComment(args, _commentSpawner, _playerAntiCommentParamData, _waveState);
                 };
                 return effect;
             };
@@ -90,7 +91,7 @@ namespace Daipan.Player.Scripts
             , OnHitEventArgs args
             , ComboCounter comboCounter
             , ThresholdResetCounter playerMissedAttackCounter
-            , CommentSpawner commentSpawner
+            , ICommentSpawner commentSpawner
             , ComboSpawner comboSpawner
         )
         {
@@ -100,8 +101,8 @@ namespace Daipan.Player.Scripts
                 // 敵を攻撃
                 var playerParamData = playerParamDataContainer.GetPlayerParamData(playerColor);
                 PlayerAttackModule.Attack(args.EnemyMono, playerParamData);
-      
-                if(args.EnemyMono.EnemyEnum.IsTotem() != true) SoundManager.Instance?.PlaySe(SeEnum.Attack);
+
+                if (args.EnemyMono.EnemyEnum.IsTotem() != true) SoundManager.Instance?.PlaySe(SeEnum.Attack);
             }
             else
             {
@@ -131,21 +132,21 @@ namespace Daipan.Player.Scripts
 
         static void SpawnAntiComment(
             OnHitEventArgs args
-            ,CommentSpawner commentSpawner
-            ,IPlayerAntiCommentParamData playerAntiCommentParamData
-            ,WaveState waveState
+            , ICommentSpawner commentSpawner
+            , IPlayerAntiCommentParamData playerAntiCommentParamData
+            , WaveState waveState
             )
         {
             if (args.IsTargetEnemy) return;
             if (args.EnemyMono != null && args.EnemyMono.EnemyEnum.IsTotem() == true) return;  // TotemはOnAttackedで判定している
-            
+
             var spawnPercent = playerAntiCommentParamData.GetAntiCommentPercentOnMissAttacks(waveState.CurrentWaveIndex);
-            
+
             if (spawnPercent / 100f > Random.value)
             {
                 commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
             }
-           
+
         }
     }
 }

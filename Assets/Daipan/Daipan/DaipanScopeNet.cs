@@ -124,7 +124,7 @@ namespace Daipan.Daipan
             builder.Register<AntiCommentPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<AntiCommentMono>>();
             builder.Register<AntiCommentNetPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<AntiCommentNet>>();
             builder.Register<CommentCluster>(Lifetime.Scoped);
-            builder.Register<IUpdate, CommentSpawner>(Lifetime.Scoped).AsSelf();
+            builder.Register<IUpdate, CommentSpawner>(Lifetime.Scoped).As<ICommentSpawner>();
             builder.Register<AntiCommentCluster>(Lifetime.Scoped);
             builder.Register<IUpdate, AntiCommentRelocate>(Lifetime.Scoped);
             builder.Register<AntiCommentSpawnerNetwork>(Lifetime.Scoped);

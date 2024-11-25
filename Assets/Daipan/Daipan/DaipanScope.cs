@@ -39,6 +39,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using VContainer;
 using VContainer.Unity;
+using Daipan.Comment.Interfaces;
 
 namespace Daipan.Daipan
 
@@ -90,7 +91,7 @@ namespace Daipan.Daipan
             builder.Register<CommentPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<CommentMono>>();
             builder.Register<AntiCommentPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<AntiCommentMono>>();
             builder.Register<CommentCluster>(Lifetime.Scoped);
-            builder.Register<IUpdate, CommentSpawner>(Lifetime.Scoped).AsSelf();
+            builder.Register<IUpdate, CommentSpawner>(Lifetime.Scoped).As<ICommentSpawner>();
             builder.Register<AntiCommentCluster>(Lifetime.Scoped);
             builder.Register<IUpdate, AntiCommentRelocate>(Lifetime.Scoped);
         }

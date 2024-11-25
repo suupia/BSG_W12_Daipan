@@ -15,7 +15,7 @@ using Daipan.Comment.Interfaces;
 
 namespace Daipan.Comment.Scripts
 {
-    public sealed class CommentSpawner : IUpdate, ICommentSpawner
+    public sealed class CommentSpawnerNetwork : IUpdate, ICommentSpawner
     {
         readonly AntiCommentCluster _antiCommentCluster;
         readonly IPrefabLoader<AntiCommentMono> _antiCommentLoader;
@@ -31,7 +31,7 @@ namespace Daipan.Comment.Scripts
         readonly IComboMultiplier _comboMultiplier;
 
 
-        public CommentSpawner(
+        public CommentSpawnerNetwork(
             IObjectResolver container,
             CommentParamsServer commentParamsServer,
             CommentCluster commentCluster,
@@ -66,7 +66,7 @@ namespace Daipan.Comment.Scripts
         {
             if (commentEnum == CommentEnum.Normal) SpawnComment();
             else if (commentEnum == CommentEnum.Super) SpawnComment();
-            else if (commentEnum == CommentEnum.Spiky) SpawnAntiComment();
+            // else if (commentEnum == CommentEnum.Spiky) SpawnAntiComment();
         }
 
         void SpawnComment()
@@ -91,7 +91,7 @@ namespace Daipan.Comment.Scripts
             var spawnPosition = _commentParamsServer.GetAntiSpawnedPosition();
             var comment = _container.Instantiate(commentPrefab, spawnPosition,
                 Quaternion.identity, _commentParamsServer.GetAntiCommentParent());
-            comment.SetParameter(_commentParamsServer.GetRandomAntiCommentWord());// コメントの文章を抽選する 
+            comment.SetParameter(_commentParamsServer.GetRandomAntiCommentWord());　// コメントの文章を抽選する 
             _antiCommentCluster.Add(comment);
 
             // 視聴者を減らす
