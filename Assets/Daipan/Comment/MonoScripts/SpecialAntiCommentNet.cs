@@ -76,6 +76,8 @@ namespace Daipan.Comment.MonoScripts
                 return;
             }
             IsActive = false;
+
+            gameObject.layer = LayerMask.NameToLayer("AntiComment");
             DaipanedSequence();
         }
 
