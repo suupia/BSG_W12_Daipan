@@ -15,7 +15,7 @@ namespace Daipan.Player.Scripts
         readonly NetworkRunner _runner;
         readonly IPrefabLoader<PlayerAttackEffectNet> _effectLoader;
         readonly IPlayerAttackEffectBuilder _playerAttackEffectBuilder;
-        
+
         public PlayerAttackEffectSpawnerNetwork(
             NetworkRunner runner,
             IPrefabLoader<PlayerAttackEffectNet> effectLoader,
@@ -27,7 +27,7 @@ namespace Daipan.Player.Scripts
             _playerAttackEffectBuilder = playerAttackEffectBuilder;
         }
 
-        public IPlayerAttackEffectMono SpawnEffect(IMonoBehaviour playerMono ,List<AbstractPlayerViewMono?> playerViewMonos, PlayerColor playerColor, Vector3 position, Quaternion rotation)
+        public IPlayerAttackEffectMono SpawnEffect(IMonoBehaviour playerMono, List<AbstractPlayerViewMono?> playerViewMonos, PlayerColor playerColor, Vector3 position, Quaternion rotation)
         {
             var effectPrefab = _effectLoader.Load();
             var effectObject = _runner.Spawn(effectPrefab, position, rotation);

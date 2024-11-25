@@ -21,6 +21,7 @@ namespace Daipan.AntiNet.Scripts
         readonly CommentParamsServer _commentParamsServer;
         readonly AntiCommentCluster _antiCommentCluster;
         readonly AntiCommentObserver _antiCommentObserver;
+        readonly AntiStateValue _antiStateValue;
         readonly NetworkRunner _runner;
 
 
@@ -30,6 +31,7 @@ namespace Daipan.AntiNet.Scripts
             CommentParamsServer commentParamsServer,
             AntiCommentCluster antiCommentCluster,
             AntiCommentObserver antiCommentObserver,
+            AntiStateValue antiStateValue,
             NetworkRunner runner
         )
         {
@@ -37,6 +39,7 @@ namespace Daipan.AntiNet.Scripts
             _commentParamsServer = commentParamsServer;
             _antiCommentCluster = antiCommentCluster;
             _antiCommentObserver = antiCommentObserver;
+            _antiStateValue = antiStateValue;
             _runner = runner;
         }
 
@@ -60,7 +63,16 @@ namespace Daipan.AntiNet.Scripts
 
             antiComment.SetParameter(commentWord);
             _antiCommentCluster.Add(antiComment);
-            _antiCommentObserver.UpCount();
+
+
+            if (_antiStateValue.AntiStateEnum == AntiStateEnum.FEVER)
+            {
+                _antiCommentObserver.ResetCount();
+            }
+            else
+            {
+                _antiCommentObserver.UpCount();
+            }
         }
 
         bool IsTextMoreThan(string text)

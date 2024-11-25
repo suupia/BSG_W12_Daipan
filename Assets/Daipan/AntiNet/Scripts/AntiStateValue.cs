@@ -10,12 +10,13 @@ namespace Daipan.AntiNet.Scripts
     {
         // todo 値出し
         float banTime = 5f;
+        float feverTime = 5f;
         //
 
         public AntiStateEnum AntiStateEnum { get => _antiStateEnum; }
 
         private AntiStateEnum _antiStateEnum;
-        private IDisposable? _banToNormalTimer;
+        private IDisposable? _returnNormalTimer;
 
         public AntiStateValue()
         {
@@ -27,21 +28,24 @@ namespace Daipan.AntiNet.Scripts
         {
             _antiStateEnum = AntiStateEnum.Normal;
 
-            _banToNormalTimer?.Dispose();
+            _returnNormalTimer?.Dispose();
         }
         public void SetBan()
         {
             _antiStateEnum = AntiStateEnum.BAN;
 
-            _banToNormalTimer?.Dispose();
-            _banToNormalTimer = Observable.Timer(TimeSpan.FromSeconds(banTime))
+            _returnNormalTimer?.Dispose();
+            _returnNormalTimer = Observable.Timer(TimeSpan.FromSeconds(banTime))
                 .Subscribe(_ => { SetNormal(); });
         }
         public void SetFever()
         {
             _antiStateEnum = AntiStateEnum.FEVER;
 
-            _banToNormalTimer?.Dispose();
+            _returnNormalTimer?.Dispose();
+
+            _returnNormalTimer = Observable.Timer(TimeSpan.FromSeconds(feverTime))
+                .Subscribe(_ => { SetNormal(); });
         }
 
     }

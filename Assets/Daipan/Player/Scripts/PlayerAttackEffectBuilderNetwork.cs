@@ -15,6 +15,7 @@ using Daipan.Player.LevelDesign.Scripts;
 using Daipan.Player.MonoScripts;
 using Daipan.Sound.MonoScripts;
 using Daipan.Stream.Scripts;
+using Daipna.StreamerNet.Scripts;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -30,6 +31,7 @@ namespace Daipan.Player.Scripts
         readonly WaveState _waveState;
         readonly IPlayerAntiCommentParamData _playerAntiCommentParamData;
         readonly ThresholdResetCounter _playerMissedAttackCounter;
+        readonly RpcReceiverNetWrapper _rpcReceiverNetWrapper;
 
         public PlayerAttackEffectBuilderNetwork(
             IPlayerParamDataContainer playerParamDataContainer
@@ -39,6 +41,7 @@ namespace Daipan.Player.Scripts
             , ComboSpawner comboSpawner
             , WaveState waveState
             , IPlayerAntiCommentParamData playerAntiCommentParamData
+            , RpcReceiverNetWrapper rpcReceiverNetWrapper
         )
         {
             _playerParamDataContainer = playerParamDataContainer;
@@ -49,6 +52,7 @@ namespace Daipan.Player.Scripts
             _waveState = waveState;
             _playerAntiCommentParamData = playerAntiCommentParamData;
             _playerMissedAttackCounter = new ThresholdResetCounter(playerAntiCommentParamData.GetMissedAttackCountForAntiComment());
+            _rpcReceiverNetWrapper = rpcReceiverNetWrapper;
         }
 
         public Func<IPlayerAttackEffectMono, IPlayerAttackEffectMono> Build
@@ -76,6 +80,7 @@ namespace Daipan.Player.Scripts
                         , _commentSpawner
                         , _comboSpawner
                     );
+                    MakeAntiFever(args);
                 };
                 return effect;
             };
@@ -127,6 +132,14 @@ namespace Daipan.Player.Scripts
                 if (playerViewMono.playerColor == playerColor)
                     playerViewMono.Attack();
             }
+        }
+
+        void MakeAntiFever(OnHitEventArgs args)
+        {
+            if (args.EnemyMono == null) return;
+            if (args.IsTargetEnemy) return;
+
+            _rpcReceiverNetWrapper.RpcReceiverNet.SetFeverRPC();
         }
 
 
