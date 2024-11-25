@@ -20,7 +20,7 @@ using Random = UnityEngine.Random;
 
 namespace Daipan.Enemy.Scripts
 {
-    public sealed class EnemyBuilder : IEnemyBuilder
+    public sealed class EnemyBuilderNetwork : IEnemyBuilder
     {
         readonly ICommentSpawner _commentSpawner;
         readonly ViewerNumber _viewerNumber;
@@ -31,7 +31,7 @@ namespace Daipan.Enemy.Scripts
         readonly ComboSpawner _comboSpawner;
         readonly ComboCounter _comboCounter;
 
-        public EnemyBuilder(
+        public EnemyBuilderNetwork(
              ICommentSpawner commentSpawner
             , ViewerNumber viewerNumber
             , IEnemyCluster enemyCluster

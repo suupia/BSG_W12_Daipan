@@ -184,7 +184,7 @@ namespace Daipan.Daipan
             builder.RegisterInstance(new EnemyLevelDesignParamData(enemyParamsManager.enemyLevelDesignParam));
             // Enemy
             builder.Register<EnemyPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<EnemyMono>>();
-            builder.Register<EnemyCluster>(Lifetime.Scoped);
+            builder.Register<EnemyCluster>(Lifetime.Scoped).As<IEnemyCluster>();
             builder.Register<EnemyAttackDecider>(Lifetime.Scoped);
             builder.Register<EnemyHighlightUpdater>(Lifetime.Scoped).AsImplementedInterfaces();
         }

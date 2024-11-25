@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace Daipan.Enemy.Scripts
 {
-    public sealed class EnemyCluster : IEnemyCluster
+    public sealed class EnemyClusterNetwork : IEnemyCluster
     {
         public IEnumerable<IEnemyMono?> Enemies => _enemies;
         readonly List<IEnemyMono?> _enemies = new();

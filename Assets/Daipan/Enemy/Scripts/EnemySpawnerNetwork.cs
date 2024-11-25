@@ -30,7 +30,7 @@ namespace Daipan.Enemy.Scripts
         readonly IObjectResolver _container;
         readonly NetworkRunner _runner;
         readonly IPrefabLoader<EnemyNet> _enemyMonoLoader;
-        readonly EnemyCluster _enemyCluster;
+        readonly IEnemyCluster _enemyCluster;
         readonly IEnemySpawnPoint _enemySpawnPoint;
         readonly IEnemyBuilder _enemyBuilder;
         readonly IEnemyEnumSelector _enemyEnumSelector;
@@ -43,7 +43,7 @@ namespace Daipan.Enemy.Scripts
             IObjectResolver container
             , NetworkRunner runner
             , IPrefabLoader<EnemyNet> enemyMonoLoader
-            , EnemyCluster enemyCluster
+            , IEnemyCluster enemyCluster
             , IEnemySpawnPoint enemySpawnPoint
             , IEnemyBuilder enemyBuilder
             , IEnemyEnumSelector enemyEnumSelector

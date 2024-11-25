@@ -15,14 +15,14 @@ namespace Daipan.Enemy.Scripts
     {
         readonly IObjectResolver _container;
         readonly IPrefabLoader<FinalBossMono> _finalBossMonoLoader;
-        readonly EnemyCluster _enemyCluster;
+        readonly IEnemyCluster _enemyCluster;
         readonly IEnemySpawnPoint _enemySpawnPoint;
         readonly FinalBossBuilder _finalBossBuilder;
-        
+
         public FinalBossSpawner(
             IObjectResolver container
             , IPrefabLoader<FinalBossMono> finalBossMonoLoader
-            , EnemyCluster enemyCluster
+            , IEnemyCluster enemyCluster
             , IEnemySpawnPoint enemySpawnPoint
             , FinalBossBuilder finalBossBuilder
         )
@@ -33,17 +33,17 @@ namespace Daipan.Enemy.Scripts
             _enemySpawnPoint = enemySpawnPoint;
             _finalBossBuilder = finalBossBuilder;
         }
-        
+
         public void SpawnFinalBoss()
         {
             var spawnPositions = _enemySpawnPoint.GetEnemySpawnedPointXs()
                 .Zip(_enemySpawnPoint.GetEnemySpawnedPointYs(), (x, y) => new UnityEngine.Vector3(x.x, y.y))
                 .ToList();
             var middlePosition = spawnPositions[spawnPositions.Count / 2];
-                
-            SpawnFinalBoss(middlePosition); 
+
+            SpawnFinalBoss(middlePosition);
         }
-        
+
         void SpawnFinalBoss(Vector3 spawnPosition)
         {
             var enemyMonoPrefab = _finalBossMonoLoader.Load();
@@ -54,10 +54,10 @@ namespace Daipan.Enemy.Scripts
                 , _container.Resolve<IEnemySpawnPoint>()
                 , _container.Resolve<IFinalBossParamData>()
                 , _container.Resolve<IFinalBossViewParamData>()
-                ); 
-            var enemyMono = _finalBossBuilder.Build(enemyMonoObject, enemyMonoObject ,EnemyEnum.FinalBoss);
+                );
+            var enemyMono = _finalBossBuilder.Build(enemyMonoObject, enemyMonoObject, EnemyEnum.FinalBoss);
             _enemyCluster.Add(enemyMono);
         }
-    } 
+    }
 }
 

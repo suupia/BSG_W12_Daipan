@@ -21,19 +21,19 @@ using Random = UnityEngine.Random;
 
 namespace Daipan.Enemy.Scripts
 {
-    public sealed class EnemySpawnerTutorial 
+    public sealed class EnemySpawnerTutorial
     {
         readonly IObjectResolver _container;
         readonly IPrefabLoader<EnemyMono> _enemyMonoLoader;
-        readonly EnemyCluster _enemyCluster;
+        readonly IEnemyCluster _enemyCluster;
         readonly IEnemySpawnPoint _enemySpawnPoint;
         readonly IEnemyBuilder _enemyBuilder;
 
         [Inject]
         public EnemySpawnerTutorial(
             IObjectResolver container,
-            IPrefabLoader<EnemyMono> enemyMonoLoader, 
-            EnemyCluster enemyCluster,
+            IPrefabLoader<EnemyMono> enemyMonoLoader,
+            IEnemyCluster enemyCluster,
             IEnemySpawnPoint enemySpawnPoint,
             IEnemyBuilder enemyBuilder
         )
@@ -54,7 +54,7 @@ namespace Daipan.Enemy.Scripts
                 return;
             }
             Debug.Log("Spawn Red Enemy");
-            SpawnEnemy(spawnPosition,enemyEnum);
+            SpawnEnemy(spawnPosition, enemyEnum);
         }
 
         void SpawnEnemy(Vector3 spawnPosition, EnemyEnum enemyEnum)
@@ -70,7 +70,7 @@ namespace Daipan.Enemy.Scripts
             _enemyCluster.Add(enemyMonoObject);
         }
 
-        static List <Vector3> GetSpawnedPositions(IEnemySpawnPoint enemySpawnPoint)
+        static List<Vector3> GetSpawnedPositions(IEnemySpawnPoint enemySpawnPoint)
         {
             var positions = enemySpawnPoint.GetEnemySpawnedPointXs()
                 .Zip(enemySpawnPoint.GetEnemySpawnedPointYs(), (x, y) => new Vector3(x.x, y.y))

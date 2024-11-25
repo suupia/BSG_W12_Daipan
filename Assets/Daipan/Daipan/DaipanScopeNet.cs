@@ -217,7 +217,7 @@ namespace Daipan.Daipan
             builder.RegisterInstance(new EnemyLevelDesignParamData(enemyParamsManager.enemyLevelDesignParam));
             // Enemy
             builder.Register<EnemyPrefabLoaderNetwork>(Lifetime.Scoped).As<IPrefabLoader<EnemyNet>>();
-            builder.Register<EnemyCluster>(Lifetime.Scoped);
+            builder.Register<EnemyClusterNetwork>(Lifetime.Scoped).As<IEnemyCluster>();
             builder.Register<EnemyAttackDecider>(Lifetime.Scoped);
             builder.Register<EnemyHighlightUpdater>(Lifetime.Scoped).AsImplementedInterfaces();
         }
@@ -343,7 +343,7 @@ namespace Daipan.Daipan
             builder.RegisterComponentInHierarchy<EnemyWaveSpawnerCounterNet>().AsSelf().AsImplementedInterfaces();
             builder.Register<EnemySpawnerNetwork>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
             builder.Register<EnemyEnumSelector>(Lifetime.Scoped).As<IEnemyEnumSelector>();
-            builder.Register<EnemyBuilder>(Lifetime.Scoped).As<IEnemyBuilder>();
+            builder.Register<EnemyBuilderNetwork>(Lifetime.Scoped).As<IEnemyBuilder>();
             builder.Register<EnemySpecialOnAttacked>(Lifetime.Scoped);
 
             // FinalBoss

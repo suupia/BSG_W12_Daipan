@@ -6,6 +6,7 @@ using Daipan.Battle.scripts;
 using Daipan.Comment.Interfaces;
 using Daipan.Comment.Scripts;
 using Daipan.Core.Interfaces;
+using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Enemy.Scripts;
 using Daipan.LevelDesign.Comment.Scripts;
@@ -24,7 +25,7 @@ namespace Daipan.Player.Scripts
     {
         readonly IPlayerParamDataContainer _playerParamDataContainer;
         readonly ComboCounter _comboCounter;
-        readonly EnemyCluster _enemyCluster;
+        readonly IEnemyCluster _enemyCluster;
         readonly ICommentSpawner _commentSpawner;
         readonly ComboSpawner _comboSpawner;
         readonly WaveState _waveState;
@@ -34,7 +35,7 @@ namespace Daipan.Player.Scripts
         public PlayerAttackEffectBuilder(
             IPlayerParamDataContainer playerParamDataContainer
             , ComboCounter comboCounter
-            , EnemyCluster enemyCluster
+            , IEnemyCluster enemyCluster
             , ICommentSpawner commentSpawner
             , ComboSpawner comboSpawner
             , WaveState waveState

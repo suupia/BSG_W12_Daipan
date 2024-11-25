@@ -26,7 +26,7 @@ namespace Daipan.Enemy.Scripts
     {
         readonly IObjectResolver _container;
         readonly IPrefabLoader<EnemyMono> _enemyMonoLoader;
-        readonly EnemyCluster _enemyCluster;
+        readonly IEnemyCluster _enemyCluster;
         readonly IEnemySpawnPoint _enemySpawnPoint;
         readonly IEnemyBuilder _enemyBuilder;
         readonly IEnemyEnumSelector _enemyEnumSelector;
@@ -37,7 +37,7 @@ namespace Daipan.Enemy.Scripts
         public EnemySpawner(
             IObjectResolver container
             , IPrefabLoader<EnemyMono> enemyMonoLoader
-            , EnemyCluster enemyCluster
+            , IEnemyCluster enemyCluster
             , IEnemySpawnPoint enemySpawnPoint
             , IEnemyBuilder enemyBuilder
             , IEnemyEnumSelector enemyEnumSelector

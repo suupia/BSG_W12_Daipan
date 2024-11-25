@@ -9,13 +9,14 @@ using Daipan.Stream.MonoScripts;
 using Daipan.Streamer.MonoScripts;
 using VContainer;
 using Daipna.StreamerNet.Scripts;
+using Daipan.Enemy.Interfaces;
 
 namespace Daipan.Stream.Scripts
 {
     public sealed class DaipanExecutorLocal : IDaipanExecutor
     {
         readonly AntiCommentCluster _antiCommentCluster;
-        readonly EnemyCluster _enemyCluster;
+        readonly IEnemyCluster _enemyCluster;
         readonly IIrritatedGaugeValue _irritatedGaugeValue;
         readonly StreamerViewMono _streamerViewMono;
         readonly ShakeDisplayMono _shakeDisplayMono;
@@ -23,7 +24,7 @@ namespace Daipan.Stream.Scripts
         [Inject]
         public DaipanExecutorLocal(
             IIrritatedGaugeValue irritatedGaugeValue,
-            EnemyCluster enemyCluster,
+            IEnemyCluster enemyCluster,
             AntiCommentCluster antiCommentCluster,
             StreamerViewMono streamerViewMono,
             ShakeDisplayMono shakeDisplayMono
