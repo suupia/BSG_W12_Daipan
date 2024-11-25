@@ -292,7 +292,7 @@ namespace Daipan.Daipan
             builder.Register<SpawnEnemyCostValue>(Lifetime.Scoped);
             builder.RegisterComponentInHierarchy<CostViewMono>();
             builder.RegisterInstance(networkPlayerParamsManager);
-            builder.Register<NetworkParamsServer>(Lifetime.Scoped).As<ICostValueParam>().As<IEnemySpawnedCostParam>();
+            builder.Register<NetworkParamsServer>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<CostUpdater>(Lifetime.Scoped).As<IUpdate>();
             builder.Register<AntiCommentObserver>(Lifetime.Scoped);
             builder.Register<AntiStateEnum>(Lifetime.Scoped);

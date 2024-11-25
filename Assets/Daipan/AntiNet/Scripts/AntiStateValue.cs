@@ -1,27 +1,29 @@
 #nullable enable
 
 using System;
+using Daipan.LevelDesign.Net;
 using R3;
 using UnityEngine;
+using VContainer;
 
 namespace Daipan.AntiNet.Scripts
 {
     public class AntiStateValue
     {
-        // todo 値出し
-        float banTime = 5f;
-        float feverTime = 10f;
-        //
-
         public AntiStateEnum AntiStateEnum { get => _antiStateEnum; }
         public bool IsSpecialFever { get; private set; }
 
         private AntiStateEnum _antiStateEnum;
         private IDisposable? _returnNormalTimer;
+        readonly IAntiStateParam _antiStateParam;
 
-        public AntiStateValue()
+        [Inject]
+        public AntiStateValue(
+            IAntiStateParam antiStateParam
+        )
         {
             SetNormal();
+            _antiStateParam = antiStateParam;
         }
 
 
@@ -38,7 +40,7 @@ namespace Daipan.AntiNet.Scripts
             IsSpecialFever = false;
 
             _returnNormalTimer?.Dispose();
-            _returnNormalTimer = Observable.Timer(TimeSpan.FromSeconds(banTime))
+            _returnNormalTimer = Observable.Timer(TimeSpan.FromSeconds(_antiStateParam.BanTime))
                 .Subscribe(_ => { SetNormal(); });
         }
         public void SetFever(bool isSpecial)
@@ -48,7 +50,7 @@ namespace Daipan.AntiNet.Scripts
 
             _returnNormalTimer?.Dispose();
 
-            _returnNormalTimer = Observable.Timer(TimeSpan.FromSeconds(feverTime))
+            _returnNormalTimer = Observable.Timer(TimeSpan.FromSeconds(_antiStateParam.FeverTime))
                 .Subscribe(_ => { SetNormal(); });
         }
 

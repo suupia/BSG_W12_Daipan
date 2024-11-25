@@ -13,16 +13,13 @@ namespace Daipan.AntiNet.Scripts
 {
     public class AntiCommentSpawnerNetwork
     {
-        // todo 値切り出す
-        int maxCharacterNum = 5;
-        //
-
         readonly IPrefabLoader<AntiCommentNet> _antiCommentLoader;
         readonly IPrefabLoader<SpecialAntiCommentNet> _specialAntiCommentLoader;
         readonly CommentParamsServer _commentParamsServer;
         readonly AntiCommentCluster _antiCommentCluster;
         readonly AntiCommentObserver _antiCommentObserver;
         readonly AntiStateValue _antiStateValue;
+        readonly IAntiCommentParam _antiCommentParam;
         readonly NetworkRunner _runner;
 
 
@@ -34,6 +31,7 @@ namespace Daipan.AntiNet.Scripts
             AntiCommentCluster antiCommentCluster,
             AntiCommentObserver antiCommentObserver,
             AntiStateValue antiStateValue,
+            IAntiCommentParam antiCommentParam,
             NetworkRunner runner
         )
         {
@@ -43,6 +41,7 @@ namespace Daipan.AntiNet.Scripts
             _antiCommentCluster = antiCommentCluster;
             _antiCommentObserver = antiCommentObserver;
             _antiStateValue = antiStateValue;
+            _antiCommentParam = antiCommentParam;
             _runner = runner;
         }
 
@@ -55,7 +54,7 @@ namespace Daipan.AntiNet.Scripts
             }
             if (IsTextMoreThan(commentWord))
             {
-                Debug.Log($"{commentWord} is longer than {maxCharacterNum}");
+                Debug.Log($"{commentWord} is longer than {_antiCommentParam.MaxCharacterNumber}");
                 return; // 警告だすかも？
             }
 
@@ -104,7 +103,7 @@ namespace Daipan.AntiNet.Scripts
 
         bool IsTextMoreThan(string text)
         {
-            return text.Length > maxCharacterNum;
+            return text.Length > _antiCommentParam.MaxCharacterNumber;
         }
     }
 }

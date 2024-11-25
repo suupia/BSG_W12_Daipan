@@ -6,7 +6,7 @@ using VContainer;
 
 namespace Daipan.LevelDesign.Net
 {
-    public class NetworkParamsServer : ICostValueParam, IEnemySpawnedCostParam
+    public class NetworkParamsServer : ICostValueParam, IEnemySpawnedCostParam, IAntiCommentParam, IAntiStateParam
     {
         readonly NetworkPlayerParamsManager _playerParamsManager;
 
@@ -22,6 +22,12 @@ namespace Daipan.LevelDesign.Net
         public int InitializedCostValue { get => _playerParamsManager.costValueParam.initializedCostValue; }
         public int IncreaseCostTime { get => _playerParamsManager.costValueParam.increaseCostTime; }
         public int IncreasedCostValue { get => _playerParamsManager.costValueParam.increasedCostValue; }
+        public int MaxCharacterNumber { get => _playerParamsManager.antiCommentParam.maxCharacterNumber; }
+        public int BanCount { get => _playerParamsManager.antiCommentParam.banCount; }
+        public int SpecialAntiCommentHp { get => _playerParamsManager.antiCommentParam.specialAntiCommentHp; }
+        public float BanTime { get => _playerParamsManager.antiStateParam.banTime; }
+        public float FeverTime { get => _playerParamsManager.antiStateParam.feverTime; }
+
 
     }
 }
