@@ -5,6 +5,7 @@ using Daipan.Enemy.Scripts;
 using VContainer;
 using Daipna.StreamerNet.Scripts;
 using Daipan.LevelDesign.Net;
+using Fusion;
 
 namespace Daipan.AntiNet.Scripts
 {
@@ -15,6 +16,7 @@ namespace Daipan.AntiNet.Scripts
         readonly IEnemySpawnedCostParam _spawnedCostParam;
         readonly AntiCommentObserver _antiCommentObserver;
         readonly AntiStateValue _antiStateValue;
+        readonly NetworkRunner _runner;
 
         [Inject]
         public AntiEnemySpawnerNetwork(
@@ -23,6 +25,7 @@ namespace Daipan.AntiNet.Scripts
             , IEnemySpawnedCostParam enemySpawnedCostParam
             , AntiCommentObserver antiCommentObserver
             , AntiStateValue antiStateValue
+            , NetworkRunner runner
         )
         {
             _rpcReceiverNetWrapper = streamerRPCReceiverNetWrapper;
@@ -30,6 +33,7 @@ namespace Daipan.AntiNet.Scripts
             _spawnedCostParam = enemySpawnedCostParam;
             _antiCommentObserver = antiCommentObserver;
             _antiStateValue = antiStateValue;
+            _runner = runner;
         }
 
         public void SpawnEnemy(EnemyEnum enemyEnum)
@@ -41,7 +45,7 @@ namespace Daipan.AntiNet.Scripts
             if (!CanSpawnEnemy(enemyEnum)) return;
 
             _spawnEnemyCost.DecreaseValue(GetCost(enemyEnum));
-            _rpcReceiverNetWrapper.RpcReceiverNet.SpawnEnemyRPC(enemyEnum);
+            _rpcReceiverNetWrapper.RpcReceiverNet.SpawnEnemyRPC(enemyEnum, _runner.LocalPlayer);
 
             _antiCommentObserver.ResetCount();
         }

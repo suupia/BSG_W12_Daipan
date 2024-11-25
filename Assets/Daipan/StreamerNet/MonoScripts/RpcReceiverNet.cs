@@ -16,7 +16,7 @@ namespace Daipan.StreamerNet.MonoScripts
         private NetworkRunner _runner = null!;
         private PlayerDataTransporterNetWrapper _playerDataTransporterNetWrapper = null!;
 
-        private IEnemySpawner _enemySpawner = null!;
+        private IEnemySpawnerNetwork _enemySpawner = null!;
         private AntiDaipanExecutor _antiDaipanExecutor = null!;
         private AntiStateValue _antiStateValue = null!;
 
@@ -24,7 +24,7 @@ namespace Daipan.StreamerNet.MonoScripts
         public void Initialize(
             NetworkRunner runner
             , PlayerDataTransporterNetWrapper playerDataTransporterNetWrapper
-            , IEnemySpawner enemySpawner
+            , IEnemySpawnerNetwork enemySpawner
             , AntiDaipanExecutor antiDaipanExecutor
             , AntiStateValue antiStateValue
         )
@@ -40,11 +40,11 @@ namespace Daipan.StreamerNet.MonoScripts
 
 
         [Rpc(RpcSources.All, RpcTargets.All)]
-        public void SpawnEnemyRPC(EnemyEnum enemyEnum)
+        public void SpawnEnemyRPC(EnemyEnum enemyEnum, PlayerRef playerRef)
         {
             if (_playerDataTransporterNetWrapper.GetPlayerRoleEnum(_runner.LocalPlayer) == PlayerRoleEnum.Streamer)
             {
-                _enemySpawner.SpawnEnemy(enemyEnum);
+                _enemySpawner.SpawnEnemy(enemyEnum, playerRef);
                 Debug.Log($"SpawnEnemy RPC received: {enemyEnum}");
             }
         }
