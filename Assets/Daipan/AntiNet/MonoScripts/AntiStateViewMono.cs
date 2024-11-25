@@ -21,7 +21,8 @@ namespace Daipan.AntiNet.MonoScripts
                 .EveryValueChanged(stateValue, x => x.AntiStateEnum)
                 .Subscribe(value =>
                 {
-                    stateText.text = value.ToString();
+                    if (stateValue.IsSpecialFever) stateText.text = "Special" + value.ToString();
+                    else stateText.text = value.ToString();
                 })
                 .AddTo(this);
         }

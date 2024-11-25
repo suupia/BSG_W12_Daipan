@@ -33,6 +33,7 @@ namespace Daipan.Player.Scripts
         readonly IPlayerAntiCommentParamData _playerAntiCommentParamData;
         readonly ThresholdResetCounter _playerMissedAttackCounter;
         readonly RpcReceiverNetWrapper _rpcReceiverNetWrapper;
+        readonly IEnemyClusterNetwork _enemyClusterNetwork;
 
         public PlayerAttackEffectBuilderNetwork(
             IPlayerParamDataContainer playerParamDataContainer
@@ -43,6 +44,7 @@ namespace Daipan.Player.Scripts
             , WaveState waveState
             , IPlayerAntiCommentParamData playerAntiCommentParamData
             , RpcReceiverNetWrapper rpcReceiverNetWrapper
+            , IEnemyClusterNetwork enemyClusterNetwork
         )
         {
             _playerParamDataContainer = playerParamDataContainer;
@@ -54,6 +56,7 @@ namespace Daipan.Player.Scripts
             _playerAntiCommentParamData = playerAntiCommentParamData;
             _playerMissedAttackCounter = new ThresholdResetCounter(playerAntiCommentParamData.GetMissedAttackCountForAntiComment());
             _rpcReceiverNetWrapper = rpcReceiverNetWrapper;
+            _enemyClusterNetwork = enemyClusterNetwork;
         }
 
         public Func<IPlayerAttackEffectMono, IPlayerAttackEffectMono> Build
@@ -140,7 +143,7 @@ namespace Daipan.Player.Scripts
             if (args.EnemyMono == null) return;
             if (args.IsTargetEnemy) return;
 
-            _rpcReceiverNetWrapper.RpcReceiverNet.SetFeverRPC();
+            _rpcReceiverNetWrapper.RpcReceiverNet.SetFeverRPC(_enemyClusterNetwork.GetPlayerRef(args.EnemyMono));
         }
 
 

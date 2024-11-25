@@ -60,11 +60,12 @@ namespace Daipan.StreamerNet.MonoScripts
         }
 
         [Rpc(RpcSources.All, RpcTargets.All)]
-        public void SetFeverRPC()
+        public void SetFeverRPC(PlayerRef specialPlayer)
         {
             if (_playerDataTransporterNetWrapper.GetPlayerRoleEnum(_runner.LocalPlayer) == PlayerRoleEnum.Anti)
             {
-                _antiStateValue.SetFever();
+                bool isSpecial = specialPlayer == _runner.LocalPlayer;
+                _antiStateValue.SetFever(isSpecial);
                 Debug.Log("Set Fever RPC received");
             }
         }
