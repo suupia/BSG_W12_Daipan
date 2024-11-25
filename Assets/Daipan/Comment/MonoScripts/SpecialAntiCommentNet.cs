@@ -14,6 +14,7 @@ using R3;
 using System;
 using Daipan.Stream.Interfaces;
 using DG.Tweening;
+using Daipan.Player.Scripts;
 
 namespace Daipan.Comment.MonoScripts
 {
@@ -26,7 +27,7 @@ namespace Daipan.Comment.MonoScripts
         IIrritatedGaugeValue _irritatedGaugeValue = null!;
         NetworkRunner _runner = null!;
         bool IsActive { get; set; } = true;
-        bool isFirstDaipan = true;
+        int _hp;
         [Networked]
         [OnChangedRender(nameof(OnCommentTextChanged))]
         public NetworkString<_8> CommentText { get; set; }
@@ -39,6 +40,7 @@ namespace Daipan.Comment.MonoScripts
                 daipanScopeNet.Container.Resolve<AntiCommentCluster>()
                , daipanScopeNet.Container.Resolve<CommentParamsServer>()
                , daipanScopeNet.Container.Resolve<IIrritatedGaugeValue>()
+               , daipanScopeNet.Container.Resolve<IAntiCommentParam>()
                , daipanScopeNet.Container.Resolve<NetworkRunner>()
             );
 
@@ -49,6 +51,7 @@ namespace Daipan.Comment.MonoScripts
             AntiCommentCluster antiCommentCluster
             , CommentParamsServer commentParamsServer
             , IIrritatedGaugeValue irritatedGaugeValue
+            , IAntiCommentParam antiCommentParam
             , NetworkRunner networkRunner
         )
         {
@@ -56,6 +59,8 @@ namespace Daipan.Comment.MonoScripts
             _commentParamsServer = commentParamsServer;
             _irritatedGaugeValue = irritatedGaugeValue;
             _runner = networkRunner;
+
+            _hp = antiCommentParam.SpecialAntiCommentHp;
         }
 
         void Update()
@@ -70,14 +75,19 @@ namespace Daipan.Comment.MonoScripts
 
         public void Daipaned()
         {
-            if (isFirstDaipan)
+            _hp--;
+            if (_hp > 0)
             {
-                isFirstDaipan = false;
                 return;
             }
             IsActive = false;
 
             gameObject.layer = LayerMask.NameToLayer("AntiComment");
+            foreach (Transform child in transform)
+            {
+                child.gameObject.layer = LayerMask.NameToLayer("AntiComment");
+            }
+
             DaipanedSequence();
         }
 

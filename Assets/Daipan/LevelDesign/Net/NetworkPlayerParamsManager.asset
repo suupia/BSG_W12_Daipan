@@ -20,3 +20,10 @@ MonoBehaviour:
     initializedCostValue: 50
     increaseCostTime: 1
     increasedCostValue: 1
+  antiCommentParam:
+    maxCharacterNumber: 5
+    banCount: 3
+    specialAntiCommentHp: 2
+  antiStateParam:
+    banTime: 5
+    feverTime: 5

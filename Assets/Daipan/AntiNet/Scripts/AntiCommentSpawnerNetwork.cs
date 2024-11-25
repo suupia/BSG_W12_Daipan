@@ -54,7 +54,7 @@ namespace Daipan.AntiNet.Scripts
             }
             if (IsTextMoreThan(commentWord))
             {
-                Debug.Log($"{commentWord} is longer than {maxCharacterNum}");
+                Debug.Log($"{commentWord} is longer than {_antiCommentParam.MaxCharacterNumber}");
                 return; // 警告だすかも？
             }
 
