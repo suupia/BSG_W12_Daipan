@@ -18,6 +18,7 @@ namespace Daipan.StreamerNet.MonoScripts
 
         private IEnemySpawner _enemySpawner = null!;
         private AntiDaipanExecutor _antiDaipanExecutor = null!;
+        private AntiStateValue _antiStateValue = null!;
 
         [Inject]
         public void Initialize(
@@ -25,12 +26,14 @@ namespace Daipan.StreamerNet.MonoScripts
             , PlayerDataTransporterNetWrapper playerDataTransporterNetWrapper
             , IEnemySpawner enemySpawner
             , AntiDaipanExecutor antiDaipanExecutor
+            , AntiStateValue antiStateValue
         )
         {
             _runner = runner;
             _playerDataTransporterNetWrapper = playerDataTransporterNetWrapper;
             _enemySpawner = enemySpawner;
             _antiDaipanExecutor = antiDaipanExecutor;
+            _antiStateValue = antiStateValue;
 
             Debug.Log("StreamerRPCReceiverNet is initialized");
         }
@@ -53,6 +56,16 @@ namespace Daipan.StreamerNet.MonoScripts
             {
                 _antiDaipanExecutor.DaiPan();
                 Debug.Log("Daipan RPC received");
+            }
+        }
+
+        [Rpc(RpcSources.All, RpcTargets.All)]
+        public void SetFeverRPC()
+        {
+            if (_playerDataTransporterNetWrapper.GetPlayerRoleEnum(_runner.LocalPlayer) == PlayerRoleEnum.Anti)
+            {
+                _antiStateValue.SetFever();
+                Debug.Log("Set Fever RPC received");
             }
         }
 

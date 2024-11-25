@@ -76,7 +76,6 @@ namespace Daipan.Player.Scripts
                         , _commentSpawner
                         , _comboSpawner
                     );
-                    SpawnAntiComment(args, _commentSpawner, _playerAntiCommentParamData, _waveState);
                 };
                 return effect;
             };
@@ -130,23 +129,6 @@ namespace Daipan.Player.Scripts
             }
         }
 
-        static void SpawnAntiComment(
-            OnHitEventArgs args
-            , ICommentSpawner commentSpawner
-            , IPlayerAntiCommentParamData playerAntiCommentParamData
-            , WaveState waveState
-            )
-        {
-            if (args.IsTargetEnemy) return;
-            if (args.EnemyMono != null && args.EnemyMono.EnemyEnum.IsTotem() == true) return;  // TotemはOnAttackedで判定している
 
-            var spawnPercent = playerAntiCommentParamData.GetAntiCommentPercentOnMissAttacks(waveState.CurrentWaveIndex);
-
-            if (spawnPercent / 100f > Random.value)
-            {
-                commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
-            }
-
-        }
     }
 }
