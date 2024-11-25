@@ -20,6 +20,7 @@ using Daipan.Player.MonoScripts;
 using Daipan.Player.Scripts;
 using Daipan.Core.Interfaces;
 using Daipan.Stream.Interfaces;
+using Daipan.Comment.Interfaces;
 
 namespace Daipan.Tutorial.Scripts
 {
@@ -77,7 +78,7 @@ namespace Daipan.Tutorial.Scripts
                     else if (_inputSerialManager.GetButtonBlue())
                     {
                         _languageConfig.CurrentLanguage = LanguageEnum.English;
-                        Debug.Log("Language set to English");   
+                        Debug.Log("Language set to English");
                     }
                     else if (_getEnterKey.GetEnterKeyDown())
                     {
@@ -115,10 +116,10 @@ namespace Daipan.Tutorial.Scripts
                     .Subscribe(_ =>
                     {
                         Debug.Log("Displaying black screen with download progress...");
-                            _blackScreenViewMono.FadeOut(1, () =>
-                            {
-                                Completed = true;
-                            });
+                        _blackScreenViewMono.FadeOut(1, () =>
+                        {
+                            Completed = true;
+                        });
                     }));
         }
 
@@ -289,13 +290,13 @@ namespace Daipan.Tutorial.Scripts
     public class ShowWhiteCommentsTutorial : AbstractTutorialContent
     {
         readonly SpeechEventManager _speechEventManager;
-        readonly CommentSpawner _commentSpawner;
+        readonly ICommentSpawner _commentSpawner;
         readonly LanguageConfig _languageConfig;
         bool CanMoveNext { get; set; }
 
         public ShowWhiteCommentsTutorial(
             SpeechEventManager speechEventManager
-            , CommentSpawner commentSpawner
+            , ICommentSpawner commentSpawner
             , LanguageConfig languageConfig
         )
         {
@@ -343,7 +344,7 @@ namespace Daipan.Tutorial.Scripts
     public class ForcedMissTutorial : AbstractTutorialContent
     {
         readonly SpeechEventManager _speechEventManager;
-        readonly CommentSpawner _commentSpawner;
+        readonly ICommentSpawner _commentSpawner;
         readonly EnemySpawnerTutorial _enemySpawnerTutorial;
         readonly LanguageConfig _languageConfig;
         readonly IIrritatedGaugeValue _irritatedGaugeValue;
@@ -353,7 +354,7 @@ namespace Daipan.Tutorial.Scripts
 
         public ForcedMissTutorial(
             SpeechEventManager speechEventManager
-            , CommentSpawner commentSpawner
+            , ICommentSpawner commentSpawner
             , EnemySpawnerTutorial enemySpawnerTutorial
             , LanguageConfig languageConfig
             , IIrritatedGaugeValue irritatedGaugeValue
@@ -375,7 +376,7 @@ namespace Daipan.Tutorial.Scripts
             _speechEventManager.SetSpeechEvent(SpeechEventBuilder.BuildForcedMissTutorial(this, _languageConfig.CurrentLanguage));
             ExecuteAsync().Forget();
         }
-        
+
         public override bool IsCompleted()
         {
             return _speechEventManager.IsEnd() && CanMoveNext;
@@ -409,39 +410,39 @@ namespace Daipan.Tutorial.Scripts
                 Debug.LogWarning("PlayerMono is not set");
             IsMissed = true;
             _speechEventManager.MoveNext();
-            
+
             const double delaySecForAntiComment = 2.0f;
             await UniTask.Delay(TimeSpan.FromSeconds(delaySecForAntiComment));
-            for (int i = 0; i < 3; i++) 
+            for (int i = 0; i < 3; i++)
             {
                 _commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
             }
 
             // スポットライトを当てる
             var irritatedGaugeSpotLight = Object.FindObjectOfType<IrritatedGaugeSpotLightMono>();
-            if(irritatedGaugeSpotLight != null) irritatedGaugeSpotLight.Show(); 
-            
+            if (irritatedGaugeSpotLight != null) irritatedGaugeSpotLight.Show();
+
             await UniTask.WaitUntil(() => _irritatedGaugeValue.IsFull); // ここでイライラゲージがmaxになったかどうかを判定
-            
-            if(irritatedGaugeSpotLight != null) irritatedGaugeSpotLight.Hide();  
+
+            if (irritatedGaugeSpotLight != null) irritatedGaugeSpotLight.Hide();
             CanMoveNext = true;
-            Debug.Log("ForcedMissTutorial Can move next");  
+            Debug.Log("ForcedMissTutorial Can move next");
             // todo : イライラゲージmaxになったら次のContentに遷移
-            _speechEventManager.MoveNext(); 
-        } 
+            _speechEventManager.MoveNext();
+        }
     }
 
     public class ShowAntiCommentsTutorial : AbstractTutorialContent
     {
         readonly SpeechEventManager _speechEventManager;
-        readonly CommentSpawner _commentSpawner;
+        readonly ICommentSpawner _commentSpawner;
         readonly EnemySpawnerTutorial _enemySpawnerTutorial;
         readonly LanguageConfig _languageConfig;
         bool CanMoveNext { get; set; }
 
         public ShowAntiCommentsTutorial(
             SpeechEventManager speechEventManager
-            , CommentSpawner commentSpawner
+            , ICommentSpawner commentSpawner
             , EnemySpawnerTutorial enemySpawnerTutorial
             , LanguageConfig languageConfig
         )

@@ -1,6 +1,7 @@
 #nullable enable
 using System.Collections.Generic;
 using System.Linq;
+using Daipan.Comment.Interfaces;
 using Daipan.Comment.Scripts;
 using Daipan.Enemy.Interfaces;
 using Daipan.Player.Interfaces;
@@ -15,12 +16,12 @@ namespace Daipan.Player.Scripts
     {
         readonly IIrritatedGaugeValue _irritatedGaugeValue;
         readonly ThresholdResetCounter _playerAttackedCounter;
-        readonly CommentSpawner _commentSpawner;
-        List<AbstractPlayerViewMono?>? _playerViewMonos; 
+        readonly ICommentSpawner _commentSpawner;
+        List<AbstractPlayerViewMono?>? _playerViewMonos;
         public PlayerOnAttacked
         (
             IIrritatedGaugeValue irritatedGaugeValue
-            , CommentSpawner commentSpawner
+            , ICommentSpawner commentSpawner
             , IPlayerAntiCommentParamData playerAntiCommentParamData
         )
         {
@@ -38,12 +39,12 @@ namespace Daipan.Player.Scripts
         {
             // イライラゲージ
             _irritatedGaugeValue.IncreaseValue(enemyParamData.GetIncreaseIrritatedValueOnAttack());
-            
+
             // アンチコメント
             _playerAttackedCounter.CountUp();
             if (_playerAttackedCounter.IsOverThreshold)
                 _commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
-            
+
             // view
             if (_playerViewMonos == null)
             {
@@ -55,10 +56,10 @@ namespace Daipan.Player.Scripts
                 if (playerViewMono == null) continue;
                 if (PlayerAttackModule.GetTargetEnemyEnum(playerViewMono.playerColor).Contains(enemyParamData.GetEnemyEnum()))
                     playerViewMono.Damage();
-            }            
+            }
             return new Hp(hp.Value - enemyParamData.GetAttackAmount());
         }
 
-    } 
+    }
 }
 

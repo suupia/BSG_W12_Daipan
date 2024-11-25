@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Daipan.Comment.Interfaces;
 using Daipan.Comment.Scripts;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.LevelDesign.Interfaces;
@@ -21,17 +22,17 @@ namespace Daipan.Enemy.Scripts
 {
     public sealed class EnemyBuilder : IEnemyBuilder
     {
-        readonly CommentSpawner _commentSpawner;
+        readonly ICommentSpawner _commentSpawner;
         readonly ViewerNumber _viewerNumber;
         readonly EnemyCluster _enemyCluster;
         readonly EnemyLevelDesignParamData _enemyLevelDesignParamData;
         readonly EnemyOnAttackedBuilder _enemyOnAttackedBuilder;
-        
+
         readonly ComboSpawner _comboSpawner;
         readonly ComboCounter _comboCounter;
-        
+
         public EnemyBuilder(
-             CommentSpawner commentSpawner
+             ICommentSpawner commentSpawner
             , ViewerNumber viewerNumber
             , EnemyCluster enemyCluster
             , EnemyLevelDesignParamData enemyLevelDesignParamData
@@ -49,38 +50,38 @@ namespace Daipan.Enemy.Scripts
             _comboCounter = comboCounter;
         }
 
-        public Func<IEnemyMono,IEnemyMono> Build(IEnemySetDomain enemySetDomain, EnemyEnum enemyEnum)
+        public Func<IEnemyMono, IEnemyMono> Build(IEnemySetDomain enemySetDomain, EnemyEnum enemyEnum)
         {
             return enemyMono =>
             {
                 enemySetDomain.SetDomain(
                     enemyEnum
-                    ,_enemyCluster
+                    , _enemyCluster
                     , new EnemyAttackDecider()
                     , new EnemyDie(enemyMono)
                     , WrapWithComboSpawner(_enemyOnAttackedBuilder.SwitchEnemyOnAttacked(enemyEnum), enemyMono)
                     , new NoneEnemyOnDied()
                 );
-            
+
                 enemyMono.OnDiedEvent += (sender, args) =>
                 {
                     // ボスを倒したときも含む
                     _enemyLevelDesignParamData.CurrentKillAmount += 1;
-               
+
                     IncreaseViewerNumber(args, _viewerNumber, _enemyLevelDesignParamData);
                     SpawnComment(args, _commentSpawner);
                 };
                 return enemyMono;
             };
         }
-        
+
         static void IncreaseViewerNumber(DiedEventArgs args, ViewerNumber viewerNumber, EnemyLevelDesignParamData enemyLevelDesignParamData)
         {
             if (args.EnemyEnum.IsBoss() == false)
                 viewerNumber.IncreaseViewer(enemyLevelDesignParamData.GetIncreaseViewerOnEnemyKill());
         }
 
-        static void SpawnComment(DiedEventArgs args, CommentSpawner commentSpawner)
+        static void SpawnComment(DiedEventArgs args, ICommentSpawner commentSpawner)
         {
             if (args.EnemyEnum.IsBoss() == true)
             {
@@ -92,12 +93,12 @@ namespace Daipan.Enemy.Scripts
                 commentSpawner.SpawnCommentByType(CommentEnum.Normal);
             }
         }
- 
-        IEnemyOnAttacked WrapWithComboSpawner(IEnemyOnAttacked enemyOnAttacked, IEnemyMono enemyMono) 
+
+        IEnemyOnAttacked WrapWithComboSpawner(IEnemyOnAttacked enemyOnAttacked, IEnemyMono enemyMono)
         {
             return new EnemyOnAttackedWithComboSpawner(enemyOnAttacked, enemyMono, _comboSpawner, _comboCounter);
         }
-        
+
         public class EnemyOnAttackedWithComboSpawner : IEnemyOnAttacked
         {
             readonly IEnemyOnAttacked _enemyOnAttacked;
@@ -108,7 +109,7 @@ namespace Daipan.Enemy.Scripts
                 IEnemyOnAttacked enemyOnAttacked
                , IEnemyMono enemyMono
                     , ComboSpawner comboSpawner
-                    , ComboCounter comboCounter )
+                    , ComboCounter comboCounter)
             {
                 _enemyMono = enemyMono;
                 _enemyOnAttacked = enemyOnAttacked;
@@ -122,12 +123,12 @@ namespace Daipan.Enemy.Scripts
                 if (newHp.Value < hp.Value)
                 {
                     _comboCounter.IncreaseCombo();
-                    _comboSpawner.SpawnCombo(_comboCounter.ComboCount, _enemyMono.Transform.position); 
+                    _comboSpawner.SpawnCombo(_comboCounter.ComboCount, _enemyMono.Transform.position);
                 }
                 return newHp;
             }
-        } 
-   
+        }
+
 
     }
 }

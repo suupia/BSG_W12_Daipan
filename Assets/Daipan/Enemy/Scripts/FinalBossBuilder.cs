@@ -1,5 +1,6 @@
 #nullable enable
 using Daipan.Battle.scripts;
+using Daipan.Comment.Interfaces;
 using Daipan.Comment.Scripts;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.LevelDesign.Scripts;
@@ -16,15 +17,15 @@ namespace Daipan.Enemy.Scripts
         readonly IEnemySpawner _enemySpawner;
         readonly FinalBossOnAttacked _finalBossOnAttacked;
         readonly FinalBossDefeatTracker _finalBossDefeatTracker;
-        
+
         readonly FinalBossColorChanger _finalBossColorChanger;
         readonly IPlayerAntiCommentParamData _playerAntiCommentParamData;
-        readonly CommentSpawner _commentSpawner;
+        readonly ICommentSpawner _commentSpawner;
         readonly IFinalBossParamData _finalBossParamData;
-        
+
         readonly ComboSpawner _comboSpawner;
         readonly ComboCounter _comboCounter;
-        
+
         public FinalBossBuilder(
             EnemyCluster enemyCluster
             , IEnemySpawner enemySpawner
@@ -32,7 +33,7 @@ namespace Daipan.Enemy.Scripts
             , FinalBossDefeatTracker finalBossDefeatTracker
             , FinalBossColorChanger finalBossColorChanger
             , IPlayerAntiCommentParamData playerAntiCommentParamData
-            , CommentSpawner commentSpawner
+            , ICommentSpawner commentSpawner
             , IFinalBossParamData finalBossParamData
             , ComboSpawner comboSpawner
             , ComboCounter comboCounter
@@ -59,32 +60,32 @@ namespace Daipan.Enemy.Scripts
                 , new FinalBossDie(finalBossMono)
                 , new EnemyBuilder.EnemyOnAttackedWithComboSpawner(_finalBossOnAttacked, finalBossMono, _comboSpawner, _comboCounter)
             );
-            
+
             finalBossMono.OnAttackedEvent += (sender, args) =>
             {
 
                 if (FinalBossOnAttacked.IsSameColor(_finalBossColorChanger.CurrentColor, args.PlayerEnum())) return;
 
                 var spawnPercent = _playerAntiCommentParamData.GetFinalBossAntiCommentPercentOnMissAttacks();
-            
+
                 if (spawnPercent / 100f > UnityEngine.Random.value)
                 {
                     _commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
                 }
             };
-            
+
             finalBossMono.OnDiedEvent += (sender, args) =>
             {
                 _finalBossDefeatTracker.SetFinalBossDefeated();
-                
-                SpawnComment(args, _commentSpawner, _finalBossParamData.GetCommentCount()); 
+
+                SpawnComment(args, _commentSpawner, _finalBossParamData.GetCommentCount());
             };
-            
+
 
             return finalBossMono;
         }
-        
-        static void SpawnComment(DiedEventArgs args, CommentSpawner commentSpawner, int count)
+
+        static void SpawnComment(DiedEventArgs args, ICommentSpawner commentSpawner, int count)
         {
             for (var i = 0; i < count; i++) commentSpawner.SpawnCommentByType(CommentEnum.Normal);
         }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Daipan.Battle.scripts;
+using Daipan.Comment.Interfaces;
 using Daipan.Comment.Scripts;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.LevelDesign.Scripts;
@@ -18,7 +19,7 @@ namespace Daipan.Enemy.Scripts
         readonly IIrritatedGaugeValue _irritatedGaugeValue;
         readonly EnemyLevelDesignParamData _enemyLevelDesignParamData;
         readonly ComboCounter _comboCounter;
-        readonly CommentSpawner _commentSpawner;
+        readonly ICommentSpawner _commentSpawner;
         readonly IPlayerAntiCommentParamData _playerAntiCommentParamData;
         readonly WaveState _waveState;
 
@@ -26,7 +27,7 @@ namespace Daipan.Enemy.Scripts
             IIrritatedGaugeValue irritatedGaugeValue
             , EnemyLevelDesignParamData enemyLevelDesignParamData
             , ComboCounter comboCounter
-            , CommentSpawner commentSpawner
+            , ICommentSpawner commentSpawner
             , IPlayerAntiCommentParamData playerAntiCommentParamData
             , WaveState waveState
         )
@@ -52,10 +53,10 @@ namespace Daipan.Enemy.Scripts
             return enemyEnum switch
             {
                 // todo : 一旦Viewとの兼ね合いで色を固定
-                EnemyEnum.Totem2 => new EnemyTotemOnAttacked(_comboCounter, _commentSpawner, _playerAntiCommentParamData,_waveState,
+                EnemyEnum.Totem2 => new EnemyTotemOnAttacked(_comboCounter, _commentSpawner, _playerAntiCommentParamData, _waveState,
                     new List<PlayerColor> { PlayerColor.Red, PlayerColor.Blue }),
-                EnemyEnum.Totem3 => new EnemyTotemOnAttacked(_comboCounter,  _commentSpawner, _playerAntiCommentParamData,_waveState,
-                    new List<PlayerColor> { PlayerColor.Red, PlayerColor.Blue, PlayerColor.Yellow } ),
+                EnemyEnum.Totem3 => new EnemyTotemOnAttacked(_comboCounter, _commentSpawner, _playerAntiCommentParamData, _waveState,
+                    new List<PlayerColor> { PlayerColor.Red, PlayerColor.Blue, PlayerColor.Yellow }),
                 _ => throw new System.ArgumentException("Invalid totem type")
             };
         }
