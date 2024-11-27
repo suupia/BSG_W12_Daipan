@@ -12,7 +12,6 @@ namespace Daipan.Enemy.MonoScripts
     public class WaveTextMono : MonoBehaviour
     {
         [SerializeField] TextMeshProUGUI waveText = null!;
-        [SerializeField] VideoPlayer videoPlayer = null!;
         [SerializeField] GameObject videocanvas=null!;
         WaveState _waveState = null!;
 
@@ -23,22 +22,15 @@ namespace Daipan.Enemy.MonoScripts
             Observable.EveryValueChanged(state, x => x.CurrentWaveIndex)
                 .Subscribe(Show)
                 .AddTo(this);
-            videoPlayer.loopPointReached += vp => videocanvas.SetActive(false);
-            videoPlayer.playOnAwake = false;
             videocanvas.SetActive(false);
         }
 
         void Show(int wave)
         {
             waveText.text = wave + 1 != _waveState.TotalWaveCount ? $"Wave {wave + 1}" : "Final Wave";
-            if (wave == 0)
-            {
-                videoPlayer.Stop();
-            }
-            else
+            if (wave != 0)
             {
                 videocanvas.SetActive(true);
-                videoPlayer.Play();
             }
             MoveWaveText(transform);
         }
@@ -59,6 +51,11 @@ namespace Daipan.Enemy.MonoScripts
                 .AppendInterval(showDuration)
                 .Append(transform.DOMove(endPosition, moveDuration / 2).SetEase(Ease.InQuart))
                 .Play();
+        }
+
+        public void OnAnimationEnd()
+        {
+            videocanvas.SetActive(false);
         }
     }
 }
