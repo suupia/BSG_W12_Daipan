@@ -8,6 +8,8 @@ using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.Scripts;
 using Daipan.Transporter;
 using Daipan.AntiNet.Scripts;
+using Daipan.Stream.Scripts;
+using Daipan.Stream.Interfaces;
 
 namespace Daipan.StreamerNet.MonoScripts
 {
@@ -19,6 +21,7 @@ namespace Daipan.StreamerNet.MonoScripts
         private IEnemySpawnerNetwork _enemySpawner = null!;
         private AntiDaipanExecutor _antiDaipanExecutor = null!;
         private AntiStateValue _antiStateValue = null!;
+        private IIrritatedGaugeValue _irritatedGaugeValue = null!;
 
         [Inject]
         public void Initialize(
@@ -27,6 +30,7 @@ namespace Daipan.StreamerNet.MonoScripts
             , IEnemySpawnerNetwork enemySpawner
             , AntiDaipanExecutor antiDaipanExecutor
             , AntiStateValue antiStateValue
+            , IIrritatedGaugeValue irritatedGaugeValue
         )
         {
             _runner = runner;
@@ -34,6 +38,7 @@ namespace Daipan.StreamerNet.MonoScripts
             _enemySpawner = enemySpawner;
             _antiDaipanExecutor = antiDaipanExecutor;
             _antiStateValue = antiStateValue;
+            _irritatedGaugeValue = irritatedGaugeValue;
 
             Debug.Log("StreamerRPCReceiverNet is initialized");
         }
@@ -68,6 +73,17 @@ namespace Daipan.StreamerNet.MonoScripts
                 _antiStateValue.SetFever(isSpecial);
                 Debug.Log("Set Fever RPC received");
             }
+        }
+
+        [Rpc(RpcSources.All, RpcTargets.All)]
+        public void SetIrritatedValueRPC(double amount)
+        {
+            if (_playerDataTransporterNetWrapper.GetPlayerRoleEnum(_runner.LocalPlayer) == PlayerRoleEnum.Anti)
+            {
+                _irritatedGaugeValue.SetValue(amount);
+                Debug.Log("Set IrritatedValue RPC received");
+            }
+
         }
 
     }

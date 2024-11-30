@@ -5,6 +5,10 @@ using System.Linq;
 using Daipan.Core;
 using Daipan.Daipan;
 using Daipan.Stream.Interfaces;
+using Daipan.Transporter;
+using Daipna.StreamerNet.Scripts;
+using Fusion;
+using R3;
 using UnityEngine;
 using VContainer;
 
@@ -12,26 +16,38 @@ namespace Daipan.Stream.Scripts
 {
     public sealed class IrritatedGaugeValueNetwork : IIrritatedGaugeValue
     {
+        readonly bool _isStreamer;
         readonly IrritatedParams _irritatedParams;
-        readonly DTONetWrapper _dtoNet;
+        readonly RpcReceiverNetWrapper _rpcReceiverNetWrapper;
 
-        public IrritatedGaugeValueNetwork(double maxValue, IrritatedParams irritatedParams, DTONetWrapper dtoNet)
+        [Inject]
+        public IrritatedGaugeValueNetwork(
+            double maxValue
+            , IrritatedParams irritatedParams
+            , NetworkRunner runner
+            , PlayerDataTransporterNetWrapper playerDataTransporterNetWrapper
+            , RpcReceiverNetWrapper rpcReceiverNetWrapper)
         {
             MaxValue = maxValue;
             _irritatedParams = irritatedParams;
-            _dtoNet = dtoNet;
+            Value = 0;
+
+            _isStreamer = playerDataTransporterNetWrapper.GetPlayerRoleEnum(runner.LocalPlayer) == PlayerRoleEnum.Streamer;
+
+            _rpcReceiverNetWrapper = rpcReceiverNetWrapper;
         }
 
         public double MaxValue { get; }
-        public bool IsFull =>  Value >= MaxValue;
+        public bool IsFull => Value >= MaxValue;
 
         public double Ratio => Value / MaxValue;
 
         public double Value
         {
-            get => _dtoNet.IrritatedValue;
-            private set => _dtoNet.IrritatedValue = value;
+            get => _value;
+            private set => _value = value;
         }
+        private double _value;
 
         public IReadOnlyList<double> RatioTable => _irritatedParams.RatioTable;
 
@@ -57,6 +73,11 @@ namespace Daipan.Stream.Scripts
             if (amount < 0) Debug.LogWarning($"IrritatedValue.IncreaseValue() amount is negative : {amount}");
             // Debug.Log($"IrritatedValue.IncreaseValue() amount : {amount}");
             Value = Math.Min(MaxValue, Value + amount);
+
+            if (_isStreamer)
+            {
+                _rpcReceiverNetWrapper.RpcReceiverNet.SetIrritatedValueRPC(Value);
+            }
         }
 
         public void DecreaseValue(double amount)
@@ -65,11 +86,24 @@ namespace Daipan.Stream.Scripts
             if (amount < 0) Debug.LogWarning($"IrritatedValue.DecreaseValue() amount is negative : {amount}");
 
             Value = Math.Max(0, Value - amount);
+
+            if (_isStreamer)
+            {
+                _rpcReceiverNetWrapper.RpcReceiverNet.SetIrritatedValueRPC(Value);
+            }
         }
 
         public void Reset()
         {
             Value = 0;
+            if (_isStreamer)
+            {
+                _rpcReceiverNetWrapper.RpcReceiverNet.SetIrritatedValueRPC(Value);
+            }
+        }
+        public void SetValue(double amount)
+        {
+            Value = amount;
         }
     }
 }
