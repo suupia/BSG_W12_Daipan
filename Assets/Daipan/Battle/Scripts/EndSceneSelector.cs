@@ -19,7 +19,7 @@ namespace Daipan.Battle.scripts
     public sealed class EndSceneSelector : IDisposable
     {
         readonly EndSceneTransitionParam _endSceneTransitionParam;
-        readonly ViewerNumber _viewerNumber;
+        readonly IViewerNumber _viewerNumber;
         readonly IDaipanExecutor _daipanExecutor;
         readonly ComboCounter _comboCounter;
         IDisposable? _disposable;
@@ -39,7 +39,7 @@ namespace Daipan.Battle.scripts
 
         public EndSceneSelector(
             EndSceneTransitionParam endSceneTransitionParam
-            , ViewerNumber viewerNumber
+            , IViewerNumber viewerNumber
             , IDaipanExecutor daipanExecutor
             , ComboCounter comboCounter
         )
@@ -49,7 +49,7 @@ namespace Daipan.Battle.scripts
             _daipanExecutor = daipanExecutor;
             _comboCounter = comboCounter;
         }
-        
+
 
 
         public void TransitToEndScene()
@@ -78,7 +78,7 @@ namespace Daipan.Battle.scripts
         static bool TransitionCondition(
             EndSceneEnum sceneName
             , EndSceneTransitionParam endSceneTransitionParam
-            , ViewerNumber viewerNumber
+            , IViewerNumber viewerNumber
             , PlayerMono playerMono
             , IDaipanExecutor daipanExecutor
             , ComboCounter counter
@@ -90,7 +90,7 @@ namespace Daipan.Battle.scripts
                                           endSceneTransitionParam.hpPercentThresholdForNoobGamerEnd,
                 EndSceneEnum.Seijo => daipanExecutor.DaipanCount <=
                                       endSceneTransitionParam.daipanCountThresholdForSacredLadyEnd,
-                EndSceneEnum.ProGamer => counter.MaxComboCount >= 
+                EndSceneEnum.ProGamer => counter.MaxComboCount >=
                                          endSceneTransitionParam.maxComboCountThresholdForProGamerEnd,
                 EndSceneEnum.Enjou => daipanExecutor.DaipanCount >=
                                       endSceneTransitionParam.daipanCountThresholdForBacklashEnd,

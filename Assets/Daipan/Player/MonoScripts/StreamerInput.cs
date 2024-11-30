@@ -1,6 +1,7 @@
 #nullable enable
 
 using System.Collections.Generic;
+using Daipan.Battle.interfaces;
 using Daipan.Battle.scripts;
 using Daipan.Battle.Scripts;
 using Daipan.Core.Interfaces;
@@ -23,7 +24,7 @@ public class StreamerInput : IPlayerInput
     readonly IInputSerialManager _inputSerialManager;
     readonly IAttackExecutor _attackExecutor;
     readonly IDaipanExecutor _daipanExecutor;
-    readonly ResultState _resultState;
+    readonly IResultState _resultState;
     readonly EndSceneSelector _endSceneSelector;
     readonly IInputOption _inputOption;
     readonly IGetEnterKey _getEnterKey;
@@ -36,7 +37,7 @@ public class StreamerInput : IPlayerInput
         IInputSerialManager inputSerialManager,
         IAttackExecutor attackExecutor,
         IDaipanExecutor daipanExecutor,
-        ResultState resultState,
+        IResultState resultState,
         EndSceneSelector endSceneSelector,
         IInputOption inputOption,
         IGetEnterKey getEnterKey,
@@ -53,7 +54,7 @@ public class StreamerInput : IPlayerInput
         _playerDataTransporterNetWrapper = playerDataTransporterNetWrapper;
         _isStreamer = _playerDataTransporterNetWrapper.GetPlayerRoleEnum(runner.LocalPlayer) == PlayerRoleEnum.Streamer;
     }
-    
+
     public void SetPlayerMono(
         IMonoBehaviour playerMono
         , List<AbstractPlayerViewMono?> playerViewMonos
@@ -66,23 +67,23 @@ public class StreamerInput : IPlayerInput
     public void Update(float deltaTime)
     {
         if (!_isStreamer) return;
-        
+
         Debug.Log($"_serialManager.GetButtonRed() = {_inputSerialManager.GetButtonRed()}");
-        if (_resultState.CurrentResultEnum != ResultState.ResultEnum.None)
+        if (_resultState.CurrentResultEnum != ResultEnum.None)
         {
             ResultUpdate();
         }
         else
         {
             OpenMenuUpdate();
-    
+
             if (_inputOption.IsOpening)
                 OptionUpdate();
             else
                 PlayingUpdate();
         }
     }
-    
+
     void PlayingUpdate()
     {
         if (_playerMono == null)
@@ -90,51 +91,51 @@ public class StreamerInput : IPlayerInput
             Debug.LogWarning("PlayerMono is not set");
             return;
         }
-    
+
         if (_inputSerialManager.GetButtonRed())
         {
             Debug.Log("Wが押されたよ");
             _attackExecutor.FireAttackEffect(_playerMono, PlayerColor.Red);
         }
-    
+
         if (_inputSerialManager.GetButtonBlue())
         {
             Debug.Log("Aが押されたよ");
             _attackExecutor.FireAttackEffect(_playerMono, PlayerColor.Blue);
         }
-    
+
         if (_inputSerialManager.GetButtonYellow())
         {
             Debug.Log("Sが押されたよ");
             _attackExecutor.FireAttackEffect(_playerMono, PlayerColor.Yellow);
         }
-    
+
         if (_getEnterKey.GetEnterKeyDown()) _daipanExecutor.Daipan();
     }
-    
+
     void ResultUpdate()
     {
         switch (_resultState.CurrentResultEnum)
         {
-            case ResultState.ResultEnum.Result:
+            case ResultEnum.Result:
                 if (_getEnterKey.GetEnterKeyDown())
                 {
                     Debug.Log("Result中でEnterが押されたよ");
                     _resultState.ShowDetails();
                 }
-    
+
                 break;
-            case ResultState.ResultEnum.Details:
+            case ResultEnum.Details:
                 if (_getEnterKey.GetEnterKeyDown())
                 {
                     Debug.Log("Result中でEnterが押されたよ");
                     _endSceneSelector.TransitToEndScene();
                 }
-    
+
                 break;
         }
     }
-    
+
     void OpenMenuUpdate()
     {
         if (_inputSerialManager.GetButtonMenu())
@@ -143,7 +144,7 @@ public class StreamerInput : IPlayerInput
             else _inputOption.CloseOption();
         }
     }
-    
+
     void OptionUpdate()
     {
         if (_inputSerialManager.GetButtonRed()) _inputOption.MoveCursor(MoveCursorDirectionEnum.Down);

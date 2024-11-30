@@ -4,6 +4,7 @@ using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Player.LevelDesign.Scripts;
 using Daipan.Player.MonoScripts;
 using Daipan.Player.Scripts;
+using Daipan.Stream.Interfaces;
 using Daipan.Stream.Scripts;
 using Daipan.Stream.Scripts.Utility;
 using UnityEngine;
@@ -19,7 +20,7 @@ public class ComboTestScope : LifetimeScope
 
     protected override void Configure(IContainerBuilder builder)
     {
-        builder.Register<ViewerNumber>(Lifetime.Scoped);
+        builder.Register<IViewerNumber>(Lifetime.Scoped);
 
         builder.RegisterInstance(comboParamManager);
         builder.Register<ComboMultiplier>(Lifetime.Scoped).As<IComboMultiplier>();

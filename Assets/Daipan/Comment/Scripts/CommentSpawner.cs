@@ -12,6 +12,7 @@ using R3;
 using Daipan.Player.MonoScripts;
 using Daipan.Sound.MonoScripts;
 using Daipan.Comment.Interfaces;
+using Daipan.Stream.Interfaces;
 
 namespace Daipan.Comment.Scripts
 {
@@ -26,7 +27,7 @@ namespace Daipan.Comment.Scripts
         readonly IObjectResolver _container;
 
         // todo : 後で分離する
-        readonly ViewerNumber _viewerNumber;
+        readonly IViewerNumber _viewerNumber;
         readonly ComboCounter _comboCounter;
         readonly IComboMultiplier _comboMultiplier;
 
@@ -38,7 +39,7 @@ namespace Daipan.Comment.Scripts
             AntiCommentCluster antiCommentCluster,
             IPrefabLoader<CommentMono> commentCommentLoader,
             IPrefabLoader<AntiCommentMono> antiCommentLoader,
-            ViewerNumber viewerNumber,
+            IViewerNumber viewerNumber,
             ComboCounter comboCounter,
             IComboMultiplier comboMultiplier
         )

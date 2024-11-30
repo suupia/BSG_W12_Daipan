@@ -5,6 +5,7 @@ using Daipan.Enemy.LevelDesign.Interfaces;
 using Daipan.Enemy.MonoScripts;
 using Daipan.Player.Scripts;
 using Daipan.Stream.Scripts.Utility;
+using Fusion;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -48,7 +49,7 @@ namespace Daipan.Enemy.Scripts
         {
             var enemyMonoPrefab = _finalBossMonoLoader.Load();
             Debug.Log($"enemyMonoPrefab: {enemyMonoPrefab}, spawnPosition: {spawnPosition}");
-            var enemyMonoObject = Object.Instantiate(enemyMonoPrefab, spawnPosition, Quaternion.identity);
+            var enemyMonoObject = _container.Resolve<NetworkRunner>().Spawn(enemyMonoPrefab, spawnPosition, Quaternion.identity);
             enemyMonoObject.Initialize(
                 _container.Resolve<PlayerHolder>()
                 , _container.Resolve<IEnemySpawnPoint>()

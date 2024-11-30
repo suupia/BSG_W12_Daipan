@@ -7,20 +7,21 @@ using R3;
 using TMPro;
 using DG.Tweening;
 using UnityEngine.Serialization;
+using Daipan.Stream.Interfaces;
 
 namespace Daipan.Stream.MonoScripts
 {
     public sealed class ViewerViewMono : MonoBehaviour
     {
         [SerializeField] TextMeshProUGUI viewerText = null!;
-        [FormerlySerializedAs("digitSplitterMono")] [SerializeField] DigitSplitViewMono digitSplitViewMono = null!;
+        [FormerlySerializedAs("digitSplitterMono")][SerializeField] DigitSplitViewMono digitSplitViewMono = null!;
 
         int PreViewerNumber { get; set; }
         Tweener? _tweener;
         const float AnimationDuration = 0.3f;
-        
+
         [Inject]
-        public void Initialize(ViewerNumber viewerNumber)
+        public void Initialize(IViewerNumber viewerNumber)
         {
             PreViewerNumber = viewerNumber.Number;
 

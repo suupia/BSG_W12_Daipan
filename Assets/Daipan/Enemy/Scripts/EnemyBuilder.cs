@@ -12,6 +12,7 @@ using Daipan.LevelDesign.Comment.Scripts;
 using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Player.Scripts;
+using Daipan.Stream.Interfaces;
 using Daipan.Stream.Scripts;
 using Daipan.Utility.Scripts;
 using JetBrains.Annotations;
@@ -23,7 +24,7 @@ namespace Daipan.Enemy.Scripts
     public sealed class EnemyBuilder : IEnemyBuilder
     {
         readonly ICommentSpawner _commentSpawner;
-        readonly ViewerNumber _viewerNumber;
+        readonly IViewerNumber _viewerNumber;
         readonly IEnemyCluster _enemyCluster;
         readonly EnemyLevelDesignParamData _enemyLevelDesignParamData;
         readonly EnemyOnAttackedBuilder _enemyOnAttackedBuilder;
@@ -33,7 +34,7 @@ namespace Daipan.Enemy.Scripts
 
         public EnemyBuilder(
              ICommentSpawner commentSpawner
-            , ViewerNumber viewerNumber
+            , IViewerNumber viewerNumber
             , IEnemyCluster enemyCluster
             , EnemyLevelDesignParamData enemyLevelDesignParamData
             , EnemyOnAttackedBuilder enemyOnAttackedBuilder
@@ -75,7 +76,7 @@ namespace Daipan.Enemy.Scripts
             };
         }
 
-        static void IncreaseViewerNumber(DiedEventArgs args, ViewerNumber viewerNumber, EnemyLevelDesignParamData enemyLevelDesignParamData)
+        static void IncreaseViewerNumber(DiedEventArgs args, IViewerNumber viewerNumber, EnemyLevelDesignParamData enemyLevelDesignParamData)
         {
             if (args.EnemyEnum.IsBoss() == false)
                 viewerNumber.IncreaseViewer(enemyLevelDesignParamData.GetIncreaseViewerOnEnemyKill());

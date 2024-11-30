@@ -18,7 +18,7 @@ public sealed class ComboTests
         Assert.AreEqual(1, comboCounter.ComboCount);
         comboCounter.IncreaseCombo();
         Assert.AreEqual(2, comboCounter.ComboCount);
-        
+
         Assert.AreEqual(2, comboCounter.MaxComboCount);
     }
 
@@ -34,7 +34,7 @@ public sealed class ComboTests
         comboCounter.IncreaseCombo();
         comboCounter.ResetCombo();
         Assert.AreEqual(0, comboCounter.ComboCount);
-        
+
         Assert.AreEqual(2, comboCounter.MaxComboCount);
     }
 
@@ -72,21 +72,21 @@ public sealed class ComboTests
         var comboCounter = new ComboCounter();
         var comboMultiplier = new ComboMultiplier();
         var viewerNumber = new ViewerNumber();
-        
+
         // Act 1
         viewerNumber.IncreaseViewer(1000);
         // Assert 1
         Assert.AreEqual(1000, viewerNumber.Number);
-        
+
         // Act 2
         for (var i = 0; i < 10; i++) comboCounter.IncreaseCombo();
         var increaseAmount = 1000;
-        var multipliedAmount = (int)(increaseAmount * comboMultiplier.CalculateComboMultiplier(comboCounter.ComboCount)); 
+        var multipliedAmount = (int)(increaseAmount * comboMultiplier.CalculateComboMultiplier(comboCounter.ComboCount));
         viewerNumber.IncreaseViewer(multipliedAmount);
         // Assert 2
         Assert.AreEqual(2100, viewerNumber.Number);
     }
-    
+
     [Test]
     public void ComboMultiplierWithDecreaseViewersTest()
     {
@@ -94,20 +94,20 @@ public sealed class ComboTests
         var comboCounter = new ComboCounter();
         var comboMultiplier = new ComboMultiplier();
         var viewerNumber = new ViewerNumber();
-        
+
         // Act 1
         viewerNumber.IncreaseViewer(1000);
         // Assert 1
         Assert.AreEqual(1000, viewerNumber.Number);
-        
+
         // Act 2
         for (var i = 0; i < 10; i++) comboCounter.IncreaseCombo();
         var decreaseAmount = 1000;
         var multipliedAmount = (int)(decreaseAmount * comboMultiplier.CalculateComboMultiplier(comboCounter.ComboCount));
-        viewerNumber.DecreaseViewer( multipliedAmount);
+        viewerNumber.DecreaseViewer(multipliedAmount);
         // Assert 2
-        Assert.AreEqual( 0, viewerNumber.Number);
-        
+        Assert.AreEqual(0, viewerNumber.Number);
+
         // Act 3
         var decreaseAmount2 = 1000;
         var multipliedAmount2 = (int)(decreaseAmount2 * comboMultiplier.CalculateComboMultiplier(comboCounter.ComboCount));

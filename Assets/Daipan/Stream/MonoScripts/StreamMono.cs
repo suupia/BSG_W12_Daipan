@@ -7,7 +7,7 @@ namespace Daipan.Stream.MonoScripts
 {
     public sealed class StreamMono : MonoBehaviour
     {
-        ViewerNumber _viewerNumber = null!;
+        IViewerNumber _viewerNumber = null!;
         ViewerParam _viewerParam = null!;
 
         float OneSecTimer { get; set; }
@@ -27,8 +27,8 @@ namespace Daipan.Stream.MonoScripts
         [Inject]
         public void Initialize(
             ViewerParam viewerParam,
-            ViewerNumber viewerNumber
-           ) 
+            IViewerNumber viewerNumber
+           )
         {
             _viewerParam = viewerParam;
             _viewerNumber = viewerNumber;

@@ -24,6 +24,7 @@ namespace Daipan.Enemy.Scripts
         public int MaxSpawnedEnemyCount => _enemyWaveParamContainer.GetEnemyWaveParamData().GetSpawnEnemyCount();
         double Timer { get; set; }
         bool IsInWaveInterval { get; set; }
+        bool _isStreamer;
         IDisposable? _waveSpawnDisposable;
         NetworkRunner _runner = null!;
         PlayerDataTransporterNetWrapper _playerDataTransporterWrapper = null!;
@@ -75,11 +76,13 @@ namespace Daipan.Enemy.Scripts
                     .EveryValueChanged(_waveState, x => x.CurrentWaveIndex)
                     .Subscribe(_ => CurrentSpawnedEnemyCount = 0)
             );
+
+            _isStreamer = _playerDataTransporterWrapper.GetPlayerRoleEnum(_runner.LocalPlayer) == PlayerRoleEnum.Streamer;
         }
 
         public void Update()
         {
-            if (_playerDataTransporterWrapper.GetPlayerRoleEnum(_runner.LocalPlayer) != PlayerRoleEnum.Streamer) return;
+            if (!_isStreamer) return;
 
             base.FixedUpdateNetwork();
             Debug.Log($"IsInWaveInterval: {IsInWaveInterval} CurrentSpawnedEnemyCount: {CurrentSpawnedEnemyCount} MaxSpawnedEnemyCount: {MaxSpawnedEnemyCount}");

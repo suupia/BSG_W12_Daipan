@@ -1,6 +1,7 @@
 #nullable enable
 using System;
 using System.Collections.Generic;
+using Daipan.Battle.interfaces;
 using Daipan.Battle.scripts;
 using Daipan.Battle.Scripts;
 using Daipan.Player.Interfaces;
@@ -14,12 +15,12 @@ namespace Daipan.Player.Scripts
     public class PlayerBuilder : IDisposable, IPlayerBuilder
     {
         readonly WaveState _waveState;
-        readonly ResultState _resultState;
+        readonly IResultState _resultState;
         readonly CompositeDisposable _disposable = new();
 
         public PlayerBuilder(
             WaveState waveState
-            , ResultState resultState
+            , IResultState resultState
         )
         {
             _waveState = waveState;
@@ -33,7 +34,7 @@ namespace Daipan.Player.Scripts
                 .Subscribe(_ => playerMono.SetHpMax()));
 
             _disposable.Add(Observable.EveryUpdate()
-                .Where(_ => _resultState.CurrentResultEnum == ResultState.ResultEnum.None)
+                .Where(_ => _resultState.CurrentResultEnum == ResultEnum.None)
                 .Subscribe(_ =>
                 {
                     if (playerMono.Hp.Value <= 0)

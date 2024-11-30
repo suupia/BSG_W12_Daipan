@@ -5,27 +5,39 @@ using System.Linq;
 using Daipan.Battle.interfaces;
 using Daipan.Battle.scripts;
 using Daipan.Enemy.Scripts;
+using Daipan.Stream.Interfaces;
 using Daipan.Stream.Scripts;
+using Daipan.StreamerNet.MonoScripts;
+using Daipan.Transporter;
+using Daipna.StreamerNet.Scripts;
+using Fusion;
 using R3;
 using UnityEngine;
+using VContainer;
 
 namespace Daipan.Battle.Scripts
 {
-    public class ResultState : IDisposable, IResultState
+    public class ResultStateNetwork : IDisposable, IResultState
     {
         readonly ResultViewMono _resultViewMono;
         readonly List<IDisposable> _disposables = new();
 
         public ResultEnum CurrentResultEnum { get; private set; } = ResultEnum.None;
 
-        public ResultState(
+        [Inject]
+        public ResultStateNetwork(
             WaveProgress waveProgress
             , ResultViewMono resultViewMono
             , FinalBossDefeatTracker finalBossDefeatTracker
+            , NetworkRunner runner
+            , PlayerDataTransporterNetWrapper playerDataTransporterNetWrapper
+            , RpcReceiverNetWrapper rpcReceiverNetWrapper
+            , IViewerNumber viewerNumber
         )
         {
             _resultViewMono = resultViewMono;
 
+            if (playerDataTransporterNetWrapper.GetPlayerRoleEnum(runner.LocalPlayer) != PlayerRoleEnum.Streamer) return;
             _disposables.Add(Observable.EveryUpdate()
                 .Where(_ => CurrentResultEnum == ResultEnum.None)
                 .Subscribe(_ =>
@@ -37,10 +49,18 @@ namespace Daipan.Battle.Scripts
                         _disposables.Add(
                             Observable
                                 .Timer(TimeSpan.FromSeconds(delaySec))
-                                .Subscribe(_ => ShowResult(true))
+                                .Subscribe(_ => rpcReceiverNetWrapper.RpcReceiverNet.ShowResultRPC(PlayerRoleEnum.Streamer))
                         );
                     }
                 }));
+            _disposables.Add(Observable.EveryValueChanged(viewerNumber, x => x.Number)
+            .Subscribe(_ =>
+            {
+                if (viewerNumber.Number <= 0)
+                {
+                    rpcReceiverNetWrapper.RpcReceiverNet.ShowResultRPC(PlayerRoleEnum.Anti);
+                }
+            }));
         }
 
         public void ShowResult(bool isClear)
@@ -61,7 +81,7 @@ namespace Daipan.Battle.Scripts
             foreach (var disposable in _disposables) disposable.Dispose();
         }
 
-        ~ResultState()
+        ~ResultStateNetwork()
         {
             Dispose();
         }
