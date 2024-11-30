@@ -50,6 +50,7 @@ namespace Daipan.Enemy.MonoScripts
             if (Hp.Value != 0)
                 IsReachedPlayer = _enemyMove.MoveUpdate(Runner.DeltaTime, _playerHolder.PlayerMono.Transform, _finalBossParamData, finalBossViewMono);
 
+            Debug.Log($"FinalBossEnemy is reaching{IsReachedPlayer}");
             if (transform.position.x < _enemySpawnPoint.GetEnemyDespawnedPoint().x)
                 Die();
 
