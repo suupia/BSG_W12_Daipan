@@ -384,7 +384,7 @@ namespace Daipan.Daipan
             RegisterStreamerNet(builder);
 
             // Result
-            builder.Register<ResultState>(Lifetime.Scoped).As<IResultState>();
+            builder.Register<ResultStateNetwork>(Lifetime.Scoped).As<IResultState>();
             builder.RegisterComponentInHierarchy<ResultViewMono>();
 
             // EndScene
