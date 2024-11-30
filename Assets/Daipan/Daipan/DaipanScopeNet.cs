@@ -110,7 +110,7 @@ namespace Daipan.Daipan
             builder.RegisterInstance(streamParam.daipan);
             // Stream
             builder.Register<StreamPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<StreamMono>>();
-            builder.Register<ViewerNumber>(Lifetime.Scoped).As<IViewerNumber>();
+            builder.Register<ViewerNumberNetwork>(Lifetime.Scoped).As<IViewerNumber>();
             builder.Register<IStart, StreamSpawner>(Lifetime.Scoped).AsSelf();
             builder.Register<WaveProgress>(Lifetime.Scoped);
         }
