@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using Daipan.Comment.MonoScripts;
 using Daipan.Comment.Scripts;
 using Daipan.LevelDesign.Comment.Scripts;
+using Daipan.Player.LevelDesign.Interfaces;
+using Daipan.Player.Scripts;
+using Daipan.Stream.Interfaces;
 using Daipan.Stream.Scripts.Utility;
 using Fusion;
 using UnityEngine;
@@ -21,6 +24,9 @@ namespace Daipan.AntiNet.Scripts
         readonly AntiStateValue _antiStateValue;
         readonly IAntiCommentParam _antiCommentParam;
         readonly NetworkRunner _runner;
+        readonly IComboMultiplier _comboMultiplier;
+        readonly ComboCounter _comboCounter;
+        readonly IViewerNumber _viewerNumber;
 
 
         [Inject]
@@ -32,7 +38,10 @@ namespace Daipan.AntiNet.Scripts
             AntiCommentObserver antiCommentObserver,
             AntiStateValue antiStateValue,
             IAntiCommentParam antiCommentParam,
-            NetworkRunner runner
+            NetworkRunner runner,
+            IComboMultiplier comboMultiplier,
+            ComboCounter comboCounter,
+            IViewerNumber viewerNumber
         )
         {
             _antiCommentLoader = antiCommentLoader;
@@ -43,6 +52,9 @@ namespace Daipan.AntiNet.Scripts
             _antiStateValue = antiStateValue;
             _antiCommentParam = antiCommentParam;
             _runner = runner;
+            _comboMultiplier = comboMultiplier;
+            _comboCounter = comboCounter;
+            _viewerNumber = viewerNumber;
         }
 
         public void SpawnAntiComment(string commentWord)
@@ -87,6 +99,10 @@ namespace Daipan.AntiNet.Scripts
 
             antiComment.SetParameter(commentWord);
             _antiCommentCluster.Add(antiComment);
+
+            // 暫定
+            var multipliedAmount = (int)(_commentParamsServer.GetViewerDiffAntiCommentNumber() * _comboMultiplier.CalculateComboMultiplier(_comboCounter.ComboCount));
+            _viewerNumber.DecreaseViewer(multipliedAmount);
         }
 
         void SpawnSpecialAntiComment(string commentWord)
@@ -98,6 +114,10 @@ namespace Daipan.AntiNet.Scripts
 
             antiComment.SetParameter(commentWord);
             _antiCommentCluster.Add(antiComment);
+
+            // 暫定
+            var multipliedAmount = (int)(_commentParamsServer.GetViewerDiffAntiCommentNumber() * _comboMultiplier.CalculateComboMultiplier(_comboCounter.ComboCount));
+            _viewerNumber.DecreaseViewer(multipliedAmount);
         }
 
 
