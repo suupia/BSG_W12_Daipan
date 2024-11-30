@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Daipan.Enemy.MonoScripts;
 
-public class AnimationEnd
+public class AnimationEnd:MonoBehaviour
 {
     [SerializeField]WaveTextMono anime=null!;
     public void AnimeEnd()
