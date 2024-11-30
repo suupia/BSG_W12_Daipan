@@ -10,6 +10,7 @@ using Daipan.Transporter;
 using Daipan.AntiNet.Scripts;
 using Daipan.Stream.Scripts;
 using Daipan.Stream.Interfaces;
+using Daipan.Battle.scripts;
 
 namespace Daipan.StreamerNet.MonoScripts
 {
@@ -22,6 +23,7 @@ namespace Daipan.StreamerNet.MonoScripts
         private AntiDaipanExecutor _antiDaipanExecutor = null!;
         private AntiStateValue _antiStateValue = null!;
         private IIrritatedGaugeValue _irritatedGaugeValue = null!;
+        private WaveState _waveState = null!;
 
         [Inject]
         public void Initialize(
@@ -31,6 +33,7 @@ namespace Daipan.StreamerNet.MonoScripts
             , AntiDaipanExecutor antiDaipanExecutor
             , AntiStateValue antiStateValue
             , IIrritatedGaugeValue irritatedGaugeValue
+            , WaveState waveState
         )
         {
             _runner = runner;
@@ -39,6 +42,7 @@ namespace Daipan.StreamerNet.MonoScripts
             _antiDaipanExecutor = antiDaipanExecutor;
             _antiStateValue = antiStateValue;
             _irritatedGaugeValue = irritatedGaugeValue;
+            _waveState = waveState;
 
             Debug.Log("StreamerRPCReceiverNet is initialized");
         }
@@ -83,7 +87,16 @@ namespace Daipan.StreamerNet.MonoScripts
                 _irritatedGaugeValue.SetValue(amount);
                 Debug.Log("Set IrritatedValue RPC received");
             }
+        }
 
+        [Rpc(RpcSources.All, RpcTargets.All)]
+        public void NextWaveRPC()
+        {
+            if (_playerDataTransporterNetWrapper.GetPlayerRoleEnum(_runner.LocalPlayer) == PlayerRoleEnum.Anti)
+            {
+                _waveState.NextWave();
+                Debug.Log("Set NextWave RPC received");
+            }
         }
 
     }
