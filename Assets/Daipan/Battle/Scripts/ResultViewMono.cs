@@ -48,7 +48,7 @@ namespace Daipan.Battle.scripts
 
         [Inject]
         public void Constructor(
-            ViewerNumber viewerNumber
+            IViewerNumber viewerNumber
             , ComboCounter comboCounter
             , IDaipanExecutor daipanExecutor
             , LanguageConfig languageConfig

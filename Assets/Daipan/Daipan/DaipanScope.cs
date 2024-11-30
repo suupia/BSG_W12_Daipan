@@ -41,6 +41,7 @@ using VContainer;
 using VContainer.Unity;
 using Daipan.Comment.Interfaces;
 using Daipan.Battle.interfaces;
+using Daipan.Stream.Interfaces;
 
 namespace Daipan.Daipan
 
@@ -77,7 +78,7 @@ namespace Daipan.Daipan
             builder.RegisterInstance(streamParam.daipan);
             // Stream
             builder.Register<StreamPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<StreamMono>>();
-            builder.Register<ViewerNumber>(Lifetime.Scoped);
+            builder.Register<ViewerNumber>(Lifetime.Scoped).As<IViewerNumber>();
             builder.Register<IStart, StreamSpawner>(Lifetime.Scoped).AsSelf();
             builder.Register<WaveProgress>(Lifetime.Scoped);
         }
