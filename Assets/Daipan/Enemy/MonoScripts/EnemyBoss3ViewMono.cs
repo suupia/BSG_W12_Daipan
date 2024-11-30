@@ -14,7 +14,7 @@ namespace Daipan.Enemy.MonoScripts
     {
         [SerializeField] HpGaugeMono hpGaugeMono = null!;
         [SerializeField] SpriteRenderer tempSpriteRenderer = null!; // todo: 完成時には削除する
-        [SerializeField] Animator animatorHighlight = null!;
+        //[SerializeField] Animator animatorHighlight = null!;
         [SerializeField] Animator animatorBody = null!;
         [SerializeField] Animator animatorEye = null!;
         [SerializeField] Animator animatorFoot = null!;
@@ -37,7 +37,7 @@ namespace Daipan.Enemy.MonoScripts
             }
             
             _animatorSwitcher = new EnemyViewAnimatorSwitcher(
-                new [] {animatorHighlight, animatorBody, animatorEye, animatorFoot, animatorLine, },
+                new [] {/*animatorHighlight,*/ animatorBody, animatorEye, animatorFoot, animatorLine, },
                 animatorLine,
                 hpGaugeMono,
                 highlightSpriteRenderer
