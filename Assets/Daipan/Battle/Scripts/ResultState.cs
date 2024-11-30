@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Daipan.Battle.interfaces;
 using Daipan.Battle.scripts;
 using Daipan.Enemy.Scripts;
 using Daipan.Stream.Scripts;
@@ -10,17 +11,10 @@ using UnityEngine;
 
 namespace Daipan.Battle.Scripts
 {
-    public class ResultState : IDisposable
+    public class ResultState : IDisposable, IResultState
     {
         readonly ResultViewMono _resultViewMono;
         readonly List<IDisposable> _disposables = new();
-
-        public enum ResultEnum
-        {
-            None,
-            Result, // 配信終了
-            Details // 詳細
-        }
 
         public ResultEnum CurrentResultEnum { get; private set; } = ResultEnum.None;
 

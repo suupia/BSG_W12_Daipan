@@ -40,6 +40,7 @@ using UnityEngine.Serialization;
 using VContainer;
 using VContainer.Unity;
 using Daipan.Comment.Interfaces;
+using Daipan.Battle.interfaces;
 
 namespace Daipan.Daipan
 
@@ -311,7 +312,7 @@ namespace Daipan.Daipan
             RegisterOption(builder);
 
             // Result
-            builder.Register<ResultState>(Lifetime.Scoped);
+            builder.Register<ResultState>(Lifetime.Scoped).As<IResultState>();
             builder.RegisterComponentInHierarchy<ResultViewMono>();
 
             // EndScene

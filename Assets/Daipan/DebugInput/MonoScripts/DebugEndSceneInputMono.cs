@@ -1,6 +1,7 @@
 #nullable enable
 using System;
 using System.Linq;
+using Daipan.Battle.interfaces;
 using Daipan.Battle.scripts;
 using Daipan.Battle.Scripts;
 using Daipan.Enemy.LevelDesign.Scripts;
@@ -13,11 +14,11 @@ namespace Daipan.DebugInput.MonoScripts
 {
     public sealed class DebugEndSceneInputMono : MonoBehaviour
     {
-        ResultState _resultState = null!;
+        IResultState _resultState = null!;
 
         [Inject]
         public void Initialize(
-            ResultState resultState
+            IResultState resultState
         )
         {
             _resultState = resultState;

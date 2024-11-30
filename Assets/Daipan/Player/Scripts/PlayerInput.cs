@@ -1,5 +1,6 @@
 #nullable enable
 using System.Collections.Generic;
+using Daipan.Battle.interfaces;
 using Daipan.Battle.scripts;
 using Daipan.Battle.Scripts;
 using Daipan.Core.Interfaces;
@@ -19,7 +20,7 @@ namespace Daipan.Player.Scripts
         readonly InputSerialManager _inputSerialManager;
         readonly IAttackExecutor _attackExecutor;
         readonly IDaipanExecutor _daipanExecutor;
-        readonly ResultState _resultState;
+        readonly IResultState _resultState;
         readonly EndSceneSelector _endSceneSelector;
         readonly IInputOption _inputOption;
         readonly IGetEnterKey _getEnterKey;
@@ -29,7 +30,7 @@ namespace Daipan.Player.Scripts
             InputSerialManager inputSerialManager
             , IAttackExecutor attackExecutor
             , IDaipanExecutor daipanExecutor
-            , ResultState resultState
+            , IResultState resultState
             , EndSceneSelector endSceneSelector
             , IInputOption inputOption
             , IGetEnterKey getEnterKey
@@ -55,7 +56,7 @@ namespace Daipan.Player.Scripts
 
         public void Update(float deltaTime)
         {
-            if (_resultState.CurrentResultEnum != ResultState.ResultEnum.None)
+            if (_resultState.CurrentResultEnum != ResultEnum.None)
             {
                 ResultUpdate();
             }
@@ -103,7 +104,7 @@ namespace Daipan.Player.Scripts
         {
             switch (_resultState.CurrentResultEnum)
             {
-                case ResultState.ResultEnum.Result:
+                case ResultEnum.Result:
                     if (_getEnterKey.GetEnterKeyDown())
                     {
                         Debug.Log("Result中でEnterが押されたよ");
@@ -111,7 +112,7 @@ namespace Daipan.Player.Scripts
                     }
 
                     break;
-                case ResultState.ResultEnum.Details:
+                case ResultEnum.Details:
                     if (_getEnterKey.GetEnterKeyDown())
                     {
                         Debug.Log("Result中でEnterが押されたよ");

@@ -12,6 +12,7 @@ using Daipan.Stream.Scripts;
 using Daipan.Stream.Interfaces;
 using Daipan.Battle.scripts;
 using Daipan.Battle.Scripts;
+using Daipan.Battle.interfaces;
 
 namespace Daipan.StreamerNet.MonoScripts
 {
@@ -25,7 +26,7 @@ namespace Daipan.StreamerNet.MonoScripts
         private AntiStateValue _antiStateValue = null!;
         private IIrritatedGaugeValue _irritatedGaugeValue = null!;
         private WaveState _waveState = null!;
-        private ResultState _resultState = null!;
+        private IResultState _resultState = null!;
 
         [Inject]
         public void Initialize(
@@ -36,7 +37,7 @@ namespace Daipan.StreamerNet.MonoScripts
             , AntiStateValue antiStateValue
             , IIrritatedGaugeValue irritatedGaugeValue
             , WaveState waveState
-            , ResultState resultState
+            , IResultState resultState
         )
         {
             _runner = runner;

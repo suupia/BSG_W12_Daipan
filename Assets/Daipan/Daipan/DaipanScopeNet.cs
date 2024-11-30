@@ -51,6 +51,7 @@ using Daipna.StreamerNet.Scripts;
 using Daipan.Comment.Interfaces;
 using Daipan.AntiNet.MonoScripts;
 using Daipan.LevelDesign.Net;
+using Daipan.Battle.interfaces;
 
 namespace Daipan.Daipan
 
@@ -383,7 +384,7 @@ namespace Daipan.Daipan
             RegisterStreamerNet(builder);
 
             // Result
-            builder.Register<ResultState>(Lifetime.Scoped);
+            builder.Register<ResultState>(Lifetime.Scoped).As<IResultState>();
             builder.RegisterComponentInHierarchy<ResultViewMono>();
 
             // EndScene
