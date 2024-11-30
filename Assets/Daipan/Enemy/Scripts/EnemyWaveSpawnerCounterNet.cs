@@ -8,6 +8,9 @@ using Fusion;
 using UnityEngine;
 using R3;
 using VContainer;
+using Daipan.Transporter;
+using Daipan.StreamerNet.MonoScripts;
+using Daipna.StreamerNet.Scripts;
 
 namespace Daipan.Enemy.Scripts
 {
@@ -22,6 +25,9 @@ namespace Daipan.Enemy.Scripts
         double Timer { get; set; }
         bool IsInWaveInterval { get; set; }
         IDisposable? _waveSpawnDisposable;
+        NetworkRunner _runner = null!;
+        PlayerDataTransporterNetWrapper _playerDataTransporterWrapper = null!;
+        RpcReceiverNetWrapper _rpcReceiverNetWrapper = null!;
         readonly CompositeDisposable _disposables = new();
 
         [Inject]
@@ -30,12 +36,19 @@ namespace Daipan.Enemy.Scripts
             , IFinalBossSpawner finalBossSpawner
             , IEnemyWaveParamContainer enemyWaveParamContainer
             , WaveState waveState
+            , NetworkRunner runner
+            , PlayerDataTransporterNetWrapper playerDataTransporterWrapper
+            , RpcReceiverNetWrapper rpcReceiverNetWrapper
+
         )
         {
             _enemySpawner = enemySpawner;
             _finalBossSpawner = finalBossSpawner;
             _enemyWaveParamContainer = enemyWaveParamContainer;
             _waveState = waveState;
+            _runner = runner;
+            _playerDataTransporterWrapper = playerDataTransporterWrapper;
+            _rpcReceiverNetWrapper = rpcReceiverNetWrapper;
         }
 
         public override void Spawned()
@@ -49,6 +62,9 @@ namespace Daipan.Enemy.Scripts
                 , daipanScopeNet.Container.Resolve<IFinalBossSpawner>()
                 , daipanScopeNet.Container.Resolve<IEnemyWaveParamContainer>()
                 , daipanScopeNet.Container.Resolve<WaveState>()
+                , daipanScopeNet.Container.Resolve<NetworkRunner>()
+                , daipanScopeNet.Container.Resolve<PlayerDataTransporterNetWrapper>()
+                , daipanScopeNet.Container.Resolve<RpcReceiverNetWrapper>()
             );
 
             Debug.Log($"_waveState : {_waveState}");
@@ -63,7 +79,9 @@ namespace Daipan.Enemy.Scripts
 
         public void Update()
         {
-            // base.FixedUpdateNetwork();
+            if (_playerDataTransporterWrapper.GetPlayerRoleEnum(_runner.LocalPlayer) != PlayerRoleEnum.Streamer) return;
+
+            base.FixedUpdateNetwork();
             Debug.Log($"IsInWaveInterval: {IsInWaveInterval} CurrentSpawnedEnemyCount: {CurrentSpawnedEnemyCount} MaxSpawnedEnemyCount: {MaxSpawnedEnemyCount}");
 
             IntervalSpawnEnemy();
@@ -107,6 +125,7 @@ namespace Daipan.Enemy.Scripts
                     .Subscribe(_ =>
                     {
                         _waveState.NextWave();
+                        _rpcReceiverNetWrapper.RpcReceiverNet.NextWaveRPC();
                         IsInWaveInterval = false;
                     });
             }
