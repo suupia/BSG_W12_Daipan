@@ -5356,7 +5356,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waveText: {fileID: 7749739213334066147}
-  videocanvas: {fileID: 1816266149}
+  videocanvas: {fileID: 985891631}
 --- !u!224 &7571308594399529765
 RectTransform:
   m_ObjectHideFlags: 0
