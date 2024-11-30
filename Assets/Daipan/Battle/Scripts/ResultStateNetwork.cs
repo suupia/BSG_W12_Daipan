@@ -5,6 +5,7 @@ using System.Linq;
 using Daipan.Battle.interfaces;
 using Daipan.Battle.scripts;
 using Daipan.Enemy.Scripts;
+using Daipan.Stream.Interfaces;
 using Daipan.Stream.Scripts;
 using Daipan.StreamerNet.MonoScripts;
 using Daipan.Transporter;
@@ -31,6 +32,7 @@ namespace Daipan.Battle.Scripts
             , NetworkRunner runner
             , PlayerDataTransporterNetWrapper playerDataTransporterNetWrapper
             , RpcReceiverNetWrapper rpcReceiverNetWrapper
+            , IViewerNumber viewerNumber
         )
         {
             _resultViewMono = resultViewMono;
@@ -51,6 +53,14 @@ namespace Daipan.Battle.Scripts
                         );
                     }
                 }));
+            _disposables.Add(Observable.EveryValueChanged(viewerNumber, x => x.Number)
+            .Subscribe(_ =>
+            {
+                if (viewerNumber.Number <= 0)
+                {
+                    rpcReceiverNetWrapper.RpcReceiverNet.ShowResultRPC(PlayerRoleEnum.Anti);
+                }
+            }));
         }
 
         public void ShowResult(bool isClear)

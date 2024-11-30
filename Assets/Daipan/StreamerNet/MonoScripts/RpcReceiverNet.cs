@@ -27,6 +27,7 @@ namespace Daipan.StreamerNet.MonoScripts
         private IIrritatedGaugeValue _irritatedGaugeValue = null!;
         private WaveState _waveState = null!;
         private IResultState _resultState = null!;
+        private IViewerNumber _viewerNumber = null!;
 
         [Inject]
         public void Initialize(
@@ -38,6 +39,7 @@ namespace Daipan.StreamerNet.MonoScripts
             , IIrritatedGaugeValue irritatedGaugeValue
             , WaveState waveState
             , IResultState resultState
+            , IViewerNumber viewerNumber
         )
         {
             _runner = runner;
@@ -48,6 +50,7 @@ namespace Daipan.StreamerNet.MonoScripts
             _irritatedGaugeValue = irritatedGaugeValue;
             _waveState = waveState;
             _resultState = resultState;
+            _viewerNumber = viewerNumber;
 
             Debug.Log("StreamerRPCReceiverNet is initialized");
         }
@@ -109,6 +112,12 @@ namespace Daipan.StreamerNet.MonoScripts
         {
             _resultState.ShowResult(_playerDataTransporterNetWrapper.GetPlayerRoleEnum(_runner.LocalPlayer) == winPlayer);
             Debug.Log("Show Result RPC received");
+        }
+        [Rpc(RpcSources.All, RpcTargets.All)]
+        public void SetViewerRPC(PlayerRef caller, int amount)
+        {
+            if (_runner.LocalPlayer == caller) return;
+            _viewerNumber.SetViewer(amount);
         }
     }
 }
