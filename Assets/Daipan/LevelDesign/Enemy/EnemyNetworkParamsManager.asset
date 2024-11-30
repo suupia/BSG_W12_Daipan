@@ -216,25 +216,25 @@ MonoBehaviour:
       eyeBallColor: {r: 0.1372549, g: 1, b: 0.30100578, a: 1}
       lineColor: {r: 0.43529412, g: 0.34117648, b: 0.41960785, a: 1}
   enemyWaveParams:
-  - spawnEnemyCount: 30
+  - spawnEnemyCount: 15
     waveIntervalSec: 5
-    spawnIntervalSec: 1.4
+    spawnIntervalSec: 3
     moveSpeedRate: 1.1
     spawnBossPercent: 3
     spawnSpecialPercent: 0
     spawnTotemPercent: 18
     spawnFinalBossPercent: 0
-  - spawnEnemyCount: 40
+  - spawnEnemyCount: 20
     waveIntervalSec: 5
-    spawnIntervalSec: 1.2
+    spawnIntervalSec: 2.5
     moveSpeedRate: 1.3
     spawnBossPercent: 18
     spawnSpecialPercent: 10
     spawnTotemPercent: 15
     spawnFinalBossPercent: 0
-  - spawnEnemyCount: 45
+  - spawnEnemyCount: 20
     waveIntervalSec: 5
-    spawnIntervalSec: 0.9
+    spawnIntervalSec: 2
     moveSpeedRate: 1.6
     spawnBossPercent: 25
     spawnSpecialPercent: 20
