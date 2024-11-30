@@ -22,7 +22,7 @@ namespace Daipan.Enemy.MonoScripts
             Observable.EveryValueChanged(state, x => x.CurrentWaveIndex)
                 .Subscribe(Show)
                 .AddTo(this);
-            // videocanvas.SetActive(false);
+            videocanvas.SetActive(false);
         }
 
         void Show(int wave)
@@ -30,7 +30,7 @@ namespace Daipan.Enemy.MonoScripts
             waveText.text = wave + 1 != _waveState.TotalWaveCount ? $"Wave {wave + 1}" : "Final Wave";
             if (wave != 0)
             {
-                // videocanvas.SetActive(true);
+                videocanvas.SetActive(true);
             }
             MoveWaveText(transform);
         }
