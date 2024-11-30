@@ -14,7 +14,7 @@ namespace Daipan.Enemy.MonoScripts
     {
         [SerializeField] HpGaugeMono hpGaugeMono = null!;
         [SerializeField] SpriteRenderer tempSpriteRenderer = null!; // todo: 完成時には削除する
-        [SerializeField] Animator animatorHighlight = null!;
+        //[SerializeField] Animator animatorHighlight = null!;
         [SerializeField] Animator animatorBody = null!;
         [SerializeField] Animator animatorEye = null!;
         [SerializeField] Animator animatorEyeBall = null!;
@@ -41,7 +41,7 @@ namespace Daipan.Enemy.MonoScripts
             }
             
             _animatorSwitcher = new EnemyViewAnimatorSwitcher(
-                new [] {animatorHighlight, animatorBody, animatorEye, animatorEyeBall, animatorLine},
+                new [] {/*animatorHighlight,*/ animatorBody, animatorEye, animatorEyeBall, animatorLine},
                 animatorLine,
                 hpGaugeMono,
                 highlightSpriteRenderer
@@ -85,7 +85,7 @@ namespace Daipan.Enemy.MonoScripts
             animatorSpecialBlackEye.SetTrigger("SpecialBlack");
             
             // SpecialBlack以外のアニメーションは非表示にする
-            animatorHighlight.gameObject.SetActive(false);
+            //animatorHighlight.gameObject.SetActive(false);
             animatorBody.gameObject.SetActive(false);
             animatorEye.gameObject.SetActive(false);
             animatorEyeBall.gameObject.SetActive(false);

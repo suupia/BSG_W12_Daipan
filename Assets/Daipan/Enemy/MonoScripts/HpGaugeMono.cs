@@ -13,15 +13,16 @@ namespace Daipan.Enemy.MonoScripts
             _hpGaugeMaterial = hpGaugeSpriteRenderer.material;
         }
 
-        public void SetRatio(float ratio)
+        public void SetRatio(float ratio,int HP)
         {
             if (_hpGaugeMaterial == null)
             {
                 Debug.LogWarning("_hpGaugeMaterial is null");
                 return;
             }
-
+            Debug.Log("hp="+ratio);
             _hpGaugeMaterial.SetFloat("_Ratio", ratio);
+
         }
     } 
 }
