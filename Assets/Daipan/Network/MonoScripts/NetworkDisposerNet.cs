@@ -6,6 +6,7 @@ using Fusion;
 using Fusion.Sockets;
 using System;
 using VContainer;
+using Daipan.Battle.scripts;
 
 namespace Daipan.Network.MonoScripts
 {
@@ -34,6 +35,8 @@ namespace Daipan.Network.MonoScripts
         public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason)
         {
             Debug.Log($"this game is shutdown");
+
+            SceneTransition.TransitioningScene(SceneName.ResultSceneNet);
         }
 
         public void OnApplicationQuit()
