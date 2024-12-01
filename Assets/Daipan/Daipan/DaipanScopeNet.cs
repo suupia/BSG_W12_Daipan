@@ -53,6 +53,7 @@ using Daipan.AntiNet.MonoScripts;
 using Daipan.LevelDesign.Net;
 using Daipan.Battle.interfaces;
 using Daipan.Stream.Interfaces;
+using Daipan.Network.MonoScripts;
 
 namespace Daipan.Daipan
 
@@ -400,6 +401,8 @@ namespace Daipan.Daipan
                 entryPoints.Add<Starter>();
                 entryPoints.Add<Updater>();
             });
+
+            builder.RegisterComponentInHierarchy<NetworkDisposerNet>();
 
             // Debug
             RegisterDebugInput(builder);

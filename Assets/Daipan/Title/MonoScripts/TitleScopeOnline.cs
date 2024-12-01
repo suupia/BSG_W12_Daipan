@@ -20,6 +20,7 @@ using Daipan.Option.MonoScripts;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
+using Daipan.Network.MonoScripts;
 
 public sealed class TitleScopeOnline : LifetimeScope
 {
