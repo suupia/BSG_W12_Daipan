@@ -21,6 +21,7 @@ namespace Daipan.Battle.Scripts
     {
         readonly ResultViewMono _resultViewMono;
         readonly List<IDisposable> _disposables = new();
+        readonly NetworkRunner _runner;
 
         public ResultEnum CurrentResultEnum { get; private set; } = ResultEnum.None;
 
@@ -36,6 +37,7 @@ namespace Daipan.Battle.Scripts
         )
         {
             _resultViewMono = resultViewMono;
+            _runner = runner;
 
             if (playerDataTransporterNetWrapper.GetPlayerRoleEnum(runner.LocalPlayer) != PlayerRoleEnum.Streamer) return;
             _disposables.Add(Observable.EveryUpdate()
@@ -68,6 +70,7 @@ namespace Daipan.Battle.Scripts
             // Time.timeScale = 0;
             // _resultViewMono.ShowResult(isClear, () => CurrentResultEnum = ResultEnum.Result);
 
+            _runner.Shutdown();
             SceneTransition.TransitioningScene(SceneName.ResultSceneNet);
         }
 
