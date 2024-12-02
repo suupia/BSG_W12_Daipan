@@ -68,7 +68,6 @@ public class StreamerInput : IPlayerInput
     {
         if (!_isStreamer) return;
 
-        Debug.Log($"_serialManager.GetButtonRed() = {_inputSerialManager.GetButtonRed()}");
         if (_resultState.CurrentResultEnum != ResultEnum.None)
         {
             ResultUpdate();
