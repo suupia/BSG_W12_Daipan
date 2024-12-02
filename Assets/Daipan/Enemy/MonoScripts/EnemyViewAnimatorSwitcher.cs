@@ -39,7 +39,6 @@ namespace Daipan.Enemy.MonoScripts
 
         public void SetHpGauge(double currentHp, int maxHp)
         {
-            Debug.Log("hp=" + currentHp);
             _hpGaugeMono.SetRatio((float)currentHp / maxHp,(int)currentHp/10);
         }
 

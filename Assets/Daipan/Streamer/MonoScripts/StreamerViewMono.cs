@@ -60,7 +60,6 @@ namespace Daipan.Streamer.MonoScripts
             {
                 daipanWaveMaterial.SetFloat("_Radius", value);
                 daipanDistortionMaterial.SetFloat("_Radius", value);
-                Debug.Log($"radius : {value}");
             }).OnComplete(() =>
             {
                 daipanWaveMaterial.SetFloat("_Radius", 0);
