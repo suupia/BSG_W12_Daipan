@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Daipan/Daipan/DaipanSceneNet.unity
     guid: 575f772179826420e9f20173ccfa179c
+  - enabled: 1
+    path: Assets/Daipan/Result/Scenes/ResultSceneNet.unity
+    guid: c2ad00d9e6b474598aaa04c73c60ee71
   m_configObjects: {}

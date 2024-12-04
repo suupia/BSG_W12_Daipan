@@ -22,16 +22,16 @@ using VContainer;
 using VContainer.Unity;
 using Daipan.Network.MonoScripts;
 
-public sealed class TitleScopeOnline : LifetimeScope
+public sealed class ResultScopeNet : LifetimeScope
 {
     protected override void Configure(IContainerBuilder builder)
     {
-        builder.RegisterComponentInHierarchy<TitleGetInputMonoOnline>();
+        // builder.RegisterComponentInHierarchy<TitleGetInputMonoOnline>();
 
-        // Option
-        DaipanScope.RegisterOption(builder);
+        // // Option
+        // DaipanScope.RegisterOption(builder);
 
-        // Input
-        DaipanScope.RegisterInputSerial(builder);
+        // // Input
+        // DaipanScope.RegisterInputSerial(builder);
     }
 }
