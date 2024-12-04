@@ -7,6 +7,7 @@ using Fusion.Sockets;
 using System;
 using VContainer;
 using Daipan.Battle.scripts;
+using Daipan.Result.MonoScripts;
 
 namespace Daipan.Network.MonoScripts
 {
@@ -19,6 +20,7 @@ namespace Daipan.Network.MonoScripts
             Debug.Log($"NetworkDisposerNet is Initialized");
             _runner = runner;
             _runner.AddCallbacks(this);
+            NetworkPlayerResultHolder.NetworkPlayerResultEnum = NetworkPlayerResultEnum.Quit;
         }
 
         /// <summary>
@@ -26,23 +28,22 @@ namespace Daipan.Network.MonoScripts
         /// </summary>
         public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
         {
-            Debug.Log($"this game is left player");
-            _runner.Shutdown();
+            // Debug.Log($"this game is left player");
+            // _runner.Shutdown();
         }
         /// <summary>Called when the runner is shutdown</summary>
         /// <param name="runner">The runner being shutdown</param>
         /// <param name="shutdownReason">Describes the reason Fusion was Shutdown</param>
         public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason)
         {
-            Debug.Log($"this game is shutdown");
-
-            SceneTransition.TransitioningScene(SceneName.ResultSceneNet);
+            // Debug.Log($"this game is shutdown");
+            // SceneTransition.TransitioningScene(SceneName.ResultSceneNet);
         }
 
         public void OnApplicationQuit()
         {
-            _runner.Shutdown();
-            Debug.Log($"OnApplicationQuit");
+            // _runner.Shutdown();
+            // Debug.Log($"OnApplicationQuit");
         }
 
         #region Callbacks

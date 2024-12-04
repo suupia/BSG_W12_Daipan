@@ -5,6 +5,7 @@ using System.Linq;
 using Daipan.Battle.interfaces;
 using Daipan.Battle.scripts;
 using Daipan.Enemy.Scripts;
+using Daipan.Result.MonoScripts;
 using Daipan.Stream.Interfaces;
 using Daipan.Stream.Scripts;
 using Daipan.StreamerNet.MonoScripts;
@@ -67,11 +68,11 @@ namespace Daipan.Battle.Scripts
 
         public void ShowResult(bool isClear)
         {
-            // Time.timeScale = 0;
-            // _resultViewMono.ShowResult(isClear, () => CurrentResultEnum = ResultEnum.Result);
-
-            _runner.Shutdown();
-            SceneTransition.TransitioningScene(SceneName.ResultSceneNet);
+            Time.timeScale = 0;
+            _resultViewMono.ShowResult(isClear, () => CurrentResultEnum = ResultEnum.Result);
+            // NetworkPlayerResultHolder.NetworkPlayerResultEnum = isClear ? NetworkPlayerResultEnum.Win : NetworkPlayerResultEnum.Lose;
+            // _runner.Shutdown();
+            // SceneTransition.TransitioningScene(SceneName.ResultSceneNet);
         }
 
         public void ShowDetails()
