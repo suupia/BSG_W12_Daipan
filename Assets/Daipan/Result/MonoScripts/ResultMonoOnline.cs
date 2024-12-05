@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.PlayerLoop;
+using Daipan.Battle.scripts;
 
 namespace Daipan.Result.MonoScripts
 {
@@ -13,6 +15,14 @@ namespace Daipan.Result.MonoScripts
         void Start()
         {
             resultText.text = NetworkPlayerResultHolder.NetworkPlayerResultEnum.ToString();
+        }
+
+        void Update()
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                SceneTransition.TransitioningScene(SceneName.TitleSceneNet);
+            }
         }
     }
 

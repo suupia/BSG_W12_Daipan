@@ -17,7 +17,8 @@ namespace Daipan.Battle.scripts
             { SceneName.EndScene, "EndScene" },
             { SceneName.Lobby, "LobbyScene" },
             { SceneName.DaipanSceneNet, "DaipanSceneNet" },
-            { SceneName.ResultSceneNet, "ResultSceneNet" }
+            { SceneName.ResultSceneNet, "ResultSceneNet" },
+            { SceneName.TitleSceneNet, "TitleSceneNet" },
         };
 
         public static void TransitioningScene(SceneName nextScene)
@@ -56,5 +57,6 @@ namespace Daipan.Battle.scripts
         Lobby,
         DaipanSceneNet,
         ResultSceneNet,
+        TitleSceneNet,
     }
 }

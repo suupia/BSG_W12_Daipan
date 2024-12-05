@@ -72,7 +72,7 @@ namespace Daipan.Battle.Scripts
 
             if (_runner.IsSharedModeMasterClient)
             {
-                const double delaySec = 2;
+                const double delaySec = 1;
                 _disposables.Add(Observable
                                 .Timer(TimeSpan.FromSeconds(delaySec))
                                 .Subscribe(_ => _runner.Shutdown())
