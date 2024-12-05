@@ -21,6 +21,7 @@ namespace Daipan.Streamer.MonoScripts
         [SerializeField] float scaleRatio;
         [SerializeField] Vector3 moveAmountByAngerZoom;
         [SerializeField] float zoomDuration;
+        [SerializeField] GameObject syutyusen=null!;
 
         IIrritatedGaugeValue _irritatedGaugeValue = null!;
         Vector3 _originalScale;
@@ -55,6 +56,7 @@ namespace Daipan.Streamer.MonoScripts
             animator.SetTrigger("IsDaipan");
             daipanEffect.SetTrigger("IsDaipan");
             daipanWhiteEffect.SetTrigger("IsDaipan");
+            syutyusen.SetActive(false);
             // 台パンのエフェクトを動かすところ
             DOVirtual.Float(0f, 2f, daipanWaveSpeed, value =>
             {
@@ -72,9 +74,11 @@ namespace Daipan.Streamer.MonoScripts
             Debug.Log($"AngerZoom isFull : {isFull}");
             
             var sequence = DOTween.Sequence();
+            
             // 怒ってるとき拡大
             if (isFull)
             {
+                syutyusen.SetActive(true);
                 sequence.Append(_transform.DOScale(_originalScale * scaleRatio, zoomDuration));
                 sequence.Join(_transform.DOMove(_originalPosition + moveAmountByAngerZoom, zoomDuration));
                 return;
