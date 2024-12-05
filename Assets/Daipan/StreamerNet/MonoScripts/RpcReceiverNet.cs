@@ -111,6 +111,7 @@ namespace Daipan.StreamerNet.MonoScripts
         public void ShowResultRPC(PlayerRoleEnum winPlayer)
         {
             _resultState.ShowResult(_playerDataTransporterNetWrapper.GetPlayerRoleEnum(_runner.LocalPlayer) == winPlayer);
+
             Debug.Log("Show Result RPC received");
         }
         [Rpc(RpcSources.All, RpcTargets.All)]

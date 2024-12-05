@@ -68,11 +68,16 @@ namespace Daipan.Battle.Scripts
 
         public void ShowResult(bool isClear)
         {
-            Time.timeScale = 0;
-            _resultViewMono.ShowResult(isClear, () => CurrentResultEnum = ResultEnum.Result);
-            // NetworkPlayerResultHolder.NetworkPlayerResultEnum = isClear ? NetworkPlayerResultEnum.Win : NetworkPlayerResultEnum.Lose;
-            // _runner.Shutdown();
-            // SceneTransition.TransitioningScene(SceneName.ResultSceneNet);
+            NetworkPlayerResultHolder.NetworkPlayerResultEnum = isClear ? NetworkPlayerResultEnum.Win : NetworkPlayerResultEnum.Lose;
+
+            if (_runner.IsSharedModeMasterClient)
+            {
+                const double delaySec = 1;
+                _disposables.Add(Observable
+                                .Timer(TimeSpan.FromSeconds(delaySec))
+                                .Subscribe(_ => _runner.Shutdown())
+                );
+            }
         }
 
         public void ShowDetails()
