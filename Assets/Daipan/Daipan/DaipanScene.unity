@@ -863,6 +863,30 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 628314605838309017, guid: 3111819a51a234c318bc0a14465c90b5, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 130
+      objectReference: {fileID: 0}
+    - target: {fileID: 628314605838309017, guid: 3111819a51a234c318bc0a14465c90b5, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 130
+      objectReference: {fileID: 0}
+    - target: {fileID: 628314605838309017, guid: 3111819a51a234c318bc0a14465c90b5, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 130
+      objectReference: {fileID: 0}
+    - target: {fileID: 628314605838309017, guid: 3111819a51a234c318bc0a14465c90b5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -80
+      objectReference: {fileID: 0}
+    - target: {fileID: 628314605838309017, guid: 3111819a51a234c318bc0a14465c90b5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 628314605838309017, guid: 3111819a51a234c318bc0a14465c90b5, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 729784927490845087, guid: 3111819a51a234c318bc0a14465c90b5, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
