@@ -49,6 +49,15 @@ namespace Daipan.InputSerial.Scripts
             menuButton.onClick += () => Debug.Log("Menu Button is Clicked");
         }
 
+#if UNITY_EDITOR
+        void Update()
+        {
+            if (Input.GetKey(KeyCode.W)) RedButton = true;
+            if (Input.GetKey(KeyCode.A)) YellowButton = true;
+            if (Input.GetKey(KeyCode.S)) BlueButton = true;
+        }
+#endif
+        
         void LateUpdate()
         {
             // Debug.Log($"GetButtonRed: {RedButton}, blue: {BlueButton}, yellow: {YellowButton}, menu: {MenuButton}");
