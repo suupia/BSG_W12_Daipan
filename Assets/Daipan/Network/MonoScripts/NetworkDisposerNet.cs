@@ -28,7 +28,8 @@ namespace Daipan.Network.MonoScripts
         public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
         {
             Debug.Log($"OnPlayerLeft player:{player}");
-            NetworkPlayerResultHolder.NetworkPlayerResultEnum = NetworkPlayerResultEnum.QuitByPlayerLeft;
+            // 既に結果が出ている場合は変更しないようにする。
+            if(NetworkPlayerResultHolder.NetworkPlayerResultEnum == NetworkPlayerResultEnum.None) NetworkPlayerResultHolder.NetworkPlayerResultEnum = NetworkPlayerResultEnum.QuitByPlayerLeft;
             _runner.Shutdown();
         }
         /// <summary>Called when the runner is shutdown</summary>
