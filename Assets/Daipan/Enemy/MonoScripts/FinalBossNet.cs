@@ -109,12 +109,7 @@ namespace Daipan.Enemy.MonoScripts
         {
             var daipanHitDamage = _finalBossParamData.GetDaipanHitDamagePercent() * 0.01 * _finalBossParamData.GetMaxHp();
             Hp = new Hp(Hp.Value - daipanHitDamage);
-            Debug.Log($"[Debug FinalBoss position] _finalBossParamData.GetEnemyEnum().IsBoss() == true : {_finalBossParamData.GetEnemyEnum().IsFinalBoss() == true}, EnemyEnum: {EnemyEnum}, GetEnemyEnum: {_finalBossParamData.GetEnemyEnum()}");
-            Debug.Log($"HasStateAuthority: {HasStateAuthority}, IsMasterClient: {Runner.IsSharedModeMasterClient}");
-            Debug.Log($"[Debug FinalBoss position] Before OnDaipaned() : transform.position.x: {transform.position.x}");
-            // transform.position += (float)_finalBossParamData.GetKnockBackDistance() * Vector3.right;
             GetComponent<NetworkTransform>().Teleport(transform.position + (float)_finalBossParamData.GetKnockBackDistance() * Vector3.right);
-            Debug.Log($"[Debug FinalBoss position] After OnDaipaned() : transform.position.x: {transform.position.x}");
             finalBossViewMono?.DaipanHit();
         }
 
