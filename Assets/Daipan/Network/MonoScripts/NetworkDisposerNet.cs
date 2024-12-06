@@ -20,7 +20,6 @@ namespace Daipan.Network.MonoScripts
             Debug.Log($"NetworkDisposerNet is Initialized");
             _runner = runner;
             _runner.AddCallbacks(this);
-            NetworkPlayerResultHolder.NetworkPlayerResultEnum = NetworkPlayerResultEnum.Quit;
         }
 
         /// <summary>
@@ -28,7 +27,8 @@ namespace Daipan.Network.MonoScripts
         /// </summary>
         public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
         {
-            Debug.Log($"this game is left player");
+            Debug.Log($"OnPlayerLeft player:{player}");
+            NetworkPlayerResultHolder.NetworkPlayerResultEnum = NetworkPlayerResultEnum.QuitByPlayerLeft;
             _runner.Shutdown();
         }
         /// <summary>Called when the runner is shutdown</summary>
@@ -36,7 +36,7 @@ namespace Daipan.Network.MonoScripts
         /// <param name="shutdownReason">Describes the reason Fusion was Shutdown</param>
         public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason)
         {
-            Debug.Log($"this game is shutdown");
+            Debug.Log($"OnShutdown shutdownReason:{shutdownReason}");
             SceneTransition.TransitioningScene(SceneName.ResultSceneNet);
         }
 

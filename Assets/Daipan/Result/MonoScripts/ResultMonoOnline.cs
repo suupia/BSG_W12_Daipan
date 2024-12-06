@@ -28,13 +28,14 @@ namespace Daipan.Result.MonoScripts
 
     public static class NetworkPlayerResultHolder
     {
-        public static NetworkPlayerResultEnum NetworkPlayerResultEnum { get; set; } = NetworkPlayerResultEnum.Quit;
-    }
+        public static NetworkPlayerResultEnum NetworkPlayerResultEnum { get; set; } = NetworkPlayerResultEnum.None;
+}
 
     public enum NetworkPlayerResultEnum
     {
+        None,
         Win,
         Lose,
-        Quit,
+        QuitByPlayerLeft,
     }
 }
