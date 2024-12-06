@@ -52,9 +52,9 @@ namespace Daipan.InputSerial.Scripts
 #if UNITY_EDITOR
         void Update()
         {
-            if (Input.GetKey(KeyCode.W)) RedButton = true;
-            if (Input.GetKey(KeyCode.A)) YellowButton = true;
-            if (Input.GetKey(KeyCode.S)) BlueButton = true;
+            if (Input.GetKeyDown(KeyCode.W)) RedButton = true;
+            if (Input.GetKeyDown(KeyCode.A)) YellowButton = true;
+            if (Input.GetKeyDown(KeyCode.S)) BlueButton = true;
         }
 #endif
         
