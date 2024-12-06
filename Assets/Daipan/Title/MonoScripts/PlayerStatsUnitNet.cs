@@ -59,6 +59,8 @@ public class PlayerStatsUnitNet : NetworkBehaviour
                 };
         };
 
+        PlayerRole = PlayerRoleEnum.Streamer; // 最初はStreamerで初期化（なぜか、フィールドの初期値が反映されないため）
+
         // The OnRenderChanged functions are called during spawn to make sure they are set properly for players who have already joined the room.
         OnPlayerNameChanged();
         OnPlayerRoleChanged();
