@@ -11,10 +11,10 @@ scopes = {
 	"last_search.FD7A1EDD" = "ref=\"/PlayerAttackEffect/PlayerAttackEffectView\""
 	"OpenInspectorPreview.FD7A1EDD" = "0"
 	"currentGroup.FD7A1EDD" = "all"
-	"last_search.E8DA15E5" = "enemyp"
+	"last_search.E8DA15E5" = "Enemy"
 	"OpenInspectorPreview.E8DA15E5" = "0"
 	"currentGroup.E8DA15E5" = "asset"
-	"last_search.110DEAF1" = "audio list"
+	"last_search.110DEAF1" = "Enemy"
 	"OpenInspectorPreview.110DEAF1" = "0"
 	"currentGroup.110DEAF1" = "menu"
 }
