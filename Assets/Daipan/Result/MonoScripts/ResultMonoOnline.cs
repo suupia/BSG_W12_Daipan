@@ -36,6 +36,6 @@ namespace Daipan.Result.MonoScripts
         None,
         Win,
         Lose,
-        Quit,
+        QuitByPlayerLeft,
     }
 }
