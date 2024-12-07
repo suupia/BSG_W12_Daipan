@@ -29,4 +29,9 @@ public class PlayerDataTransporterNetWrapper
     {
         DataTransporterNet.SetPlayerData(playerRef, playerData);
     }
+    
+    public int GetPlayerCount()
+    {
+        return DataTransporterNet.GetPlayerCount();
+    }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.PlayerLoop;
 using Daipan.Battle.scripts;
+using Fusion;
 
 namespace Daipan.Result.MonoScripts
 {
@@ -15,6 +16,16 @@ namespace Daipan.Result.MonoScripts
         void Start()
         {
             resultText.text = NetworkPlayerResultHolder.NetworkPlayerResultEnum.ToString();
+            
+            var runner = FindObjectOfType<NetworkRunner>();
+            if (runner is not null)
+            {
+                runner.Shutdown();
+            }
+            else
+            {
+                Debug.LogWarning("NetworkRunner is not found");
+            }
         }
 
         void Update()
