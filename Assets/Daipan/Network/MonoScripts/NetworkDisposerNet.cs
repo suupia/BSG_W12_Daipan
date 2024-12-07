@@ -20,6 +20,7 @@ namespace Daipan.Network.MonoScripts
             Debug.Log($"NetworkDisposerNet is Initialized");
             _runner = runner;
             _runner.AddCallbacks(this);
+            NetworkPlayerResultHolder.NetworkPlayerResultEnum = NetworkPlayerResultEnum.None;
         }
 
         /// <summary>
