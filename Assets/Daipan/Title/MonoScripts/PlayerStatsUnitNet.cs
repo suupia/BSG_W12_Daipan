@@ -11,7 +11,10 @@ public class PlayerStatsUnitNet : NetworkBehaviour
     [SerializeField] TextMeshProUGUI playerNameText = null!;
     [SerializeField] TextMeshProUGUI readyText = null!;
     [SerializeField] CustomButton playerRoleButton = null!;
-    [SerializeField] TextMeshProUGUI playerRoleText = null!;
+    [SerializeField] Image playerRoleButtom = null!;
+    //[SerializeField] TextMeshProUGUI playerRoleText = null!;
+    [SerializeField] Sprite streamerUI=null!;
+    [SerializeField] Sprite antiUI=null!;
 
     [Networked]
     public PlayerRef NetworkedPlayerRef { get; set; }
@@ -81,11 +84,17 @@ public class PlayerStatsUnitNet : NetworkBehaviour
 
     void OnPlayerRoleChanged()
     {
-        playerRoleText.text = PlayerRole switch
+        /*playerRoleText.text = PlayerRole switch
         {
             PlayerRoleEnum.Streamer => "Streamer",
             PlayerRoleEnum.Anti => "Anti",
             _ => "None"
+        };*/
+        playerRoleButtom.sprite = PlayerRole switch
+        {
+            PlayerRoleEnum.Streamer=>streamerUI,
+            PlayerRoleEnum.Anti=>antiUI,
+            _ => null
         };
     }
 

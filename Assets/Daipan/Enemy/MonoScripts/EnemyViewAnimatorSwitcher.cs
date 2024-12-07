@@ -82,10 +82,11 @@ namespace Daipan.Enemy.MonoScripts
                 .AddTo(_leaderAnimator.gameObject);
         }
 
-        public void Highlight(bool isHighlighted)
+        public void Highlight(bool isHighlighted,SpriteRenderer HpSprite)
         {
             if (!_canHighlight) return;
             _highlightSpriteRenderer.enabled = isHighlighted;
+            HpSprite.enabled = isHighlighted;
         }
 
         void SetTriggerAll(string paramName)
