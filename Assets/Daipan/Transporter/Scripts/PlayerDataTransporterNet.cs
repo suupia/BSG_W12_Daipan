@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using Fusion;
 using UnityEngine;
 
@@ -52,6 +53,11 @@ namespace Daipan.Transporter.Scripts
         {
             Debug.Log($"Registering playerRef:{playerRef} as {playerData.Name},{playerData.Role}");
             PlayerDataDictionary.Set(playerRef, playerData);
+        }
+        
+        public int GetPlayerCount()
+        {
+            return PlayerDataDictionary.Count;
         }
     }
 

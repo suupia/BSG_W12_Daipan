@@ -70,14 +70,8 @@ namespace Daipan.Battle.Scripts
         {
             NetworkPlayerResultHolder.NetworkPlayerResultEnum = isClear ? NetworkPlayerResultEnum.Win : NetworkPlayerResultEnum.Lose;
 
-            if (_runner.IsSharedModeMasterClient)
-            {
-                const double delaySec = 1;
-                _disposables.Add(Observable
-                                .Timer(TimeSpan.FromSeconds(delaySec))
-                                .Subscribe(_ => _runner.Shutdown())
-                );
-            }
+            SceneTransition.TransitionSceneWithNetworkRunner(_runner, SceneName.ResultSceneNet);
+      
         }
 
         public void ShowDetails()

@@ -5,6 +5,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.PlayerLoop;
 using Daipan.Battle.scripts;
+using Fusion;
 
 namespace Daipan.Result.MonoScripts
 {
@@ -15,6 +16,7 @@ namespace Daipan.Result.MonoScripts
         void Start()
         {
             resultText.text = NetworkPlayerResultHolder.NetworkPlayerResultEnum.ToString();
+            
         }
 
         void Update()
@@ -29,7 +31,7 @@ namespace Daipan.Result.MonoScripts
     public static class NetworkPlayerResultHolder
     {
         public static NetworkPlayerResultEnum NetworkPlayerResultEnum { get; set; } = NetworkPlayerResultEnum.None;
-}
+    }
 
     public enum NetworkPlayerResultEnum
     {
