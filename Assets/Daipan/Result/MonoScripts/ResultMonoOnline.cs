@@ -17,15 +17,6 @@ namespace Daipan.Result.MonoScripts
         {
             resultText.text = NetworkPlayerResultHolder.NetworkPlayerResultEnum.ToString();
             
-            var runner = FindObjectOfType<NetworkRunner>();
-            if (runner is not null)
-            {
-                runner.Shutdown();
-            }
-            else
-            {
-                Debug.LogWarning("NetworkRunner is not found");
-            }
         }
 
         void Update()
