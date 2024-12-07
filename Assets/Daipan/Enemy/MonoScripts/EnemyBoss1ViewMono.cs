@@ -20,6 +20,7 @@ namespace Daipan.Enemy.MonoScripts
         [SerializeField] Animator animatorLine = null!;
         [SerializeField] Animator animatorTank = null!;
         [SerializeField] SpriteRenderer highlightSpriteRenderer = null!;
+        [SerializeField] SpriteRenderer HpSprite=null!;
 
         EnemyViewAnimatorSwitcher _animatorSwitcher = null!;
         [SerializeField] EnemyTankOffsetEventMono enemyTankOffsetEventMono = null!;
@@ -96,7 +97,7 @@ namespace Daipan.Enemy.MonoScripts
             _animatorSwitcher.Daipaned(onDied);
         }
 
-        public override void Highlight(bool isHighlighted) => _animatorSwitcher.Highlight(isHighlighted);
+        public override void Highlight(bool isHighlighted) => _animatorSwitcher.Highlight(isHighlighted,HpSprite);
 
 
     }

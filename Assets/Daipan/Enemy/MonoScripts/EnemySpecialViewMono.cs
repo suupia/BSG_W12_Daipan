@@ -22,6 +22,7 @@ namespace Daipan.Enemy.MonoScripts
         [SerializeField] Animator animatorSpecialBlackBody = null!;
         [SerializeField] Animator animatorSpecialBlackEye = null!;
         [SerializeField] SpriteRenderer highlightSpriteRenderer = null!;
+        [SerializeField] SpriteRenderer HpSprite=null!;
         
         EnemyViewAnimatorSwitcher _animatorSwitcher = null!;
         bool IsPlayingSpecialBlack { get; set; }
@@ -75,7 +76,7 @@ namespace Daipan.Enemy.MonoScripts
         }
 
         public override void Daipaned(Action onDied) => _animatorSwitcher.Daipaned(onDied);
-        public override void Highlight(bool isHighlighted) => _animatorSwitcher.Highlight(isHighlighted);
+        public override void Highlight(bool isHighlighted) => _animatorSwitcher.Highlight(isHighlighted, HpSprite);
         
         public void SpecialBlack(Action onSpecialBlack)
         {

@@ -21,6 +21,7 @@ namespace Daipan.Enemy.MonoScripts
         [SerializeField] Animator animatorEye = null!;
         [SerializeField] Animator animatorLine = null!;
         [SerializeField] SpriteRenderer highlightSpriteRenderer = null!;
+        [SerializeField] SpriteRenderer HpSprite=null!;
         
         EnemyViewAnimatorSwitcher _animatorSwitcher = null!; 
 
@@ -68,7 +69,7 @@ namespace Daipan.Enemy.MonoScripts
         public override void Died(Action onDied) => _animatorSwitcher.Died(onDied);
 
         public override void Daipaned(Action onDied) => _animatorSwitcher.Daipaned(onDied);
-        public override void Highlight(bool isHighlighted) => _animatorSwitcher.Highlight(isHighlighted);
+        public override void Highlight(bool isHighlighted) => _animatorSwitcher.Highlight(isHighlighted, HpSprite);
 
 
     }

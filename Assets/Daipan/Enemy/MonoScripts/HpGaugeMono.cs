@@ -7,6 +7,8 @@ namespace Daipan.Enemy.MonoScripts
     {
         [SerializeField] SpriteRenderer hpGaugeSpriteRenderer = null!;
         Material? _hpGaugeMaterial;
+        [SerializeField] Sprite[] HpSprite=null!;
+        [SerializeField] SpriteRenderer Hp = null!;
 
         void Awake()
         {
@@ -20,7 +22,8 @@ namespace Daipan.Enemy.MonoScripts
                 Debug.LogWarning("_hpGaugeMaterial is null");
                 return;
             }
-            Debug.Log("hp="+ratio);
+            Debug.Log("hp="+HP);
+            Hp.sprite=HpSprite[HP];
             _hpGaugeMaterial.SetFloat("_Ratio", ratio);
 
         }
