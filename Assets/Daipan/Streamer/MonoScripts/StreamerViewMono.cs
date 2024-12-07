@@ -21,13 +21,13 @@ namespace Daipan.Streamer.MonoScripts
         [SerializeField] float scaleRatio;
         [SerializeField] Vector3 moveAmountByAngerZoom;
         [SerializeField] float zoomDuration;
-        [SerializeField] GameObject syutyusen=null!;
+        [SerializeField] GameObject syutyusen = null!;
 
         IIrritatedGaugeValue _irritatedGaugeValue = null!;
         Vector3 _originalScale;
         Vector3 _originalPosition;
         Transform _transform = null!;
-        float _effectDelaySec = 0.8f;
+        readonly float _effectDelaySec = 0.8f;
 
         [Inject]
         void Initialize(IIrritatedGaugeValue irritatedGaugeValue)
@@ -69,7 +69,7 @@ namespace Daipan.Streamer.MonoScripts
             });
         }
 
-        public void AngerZoom(bool isFull)
+        void AngerZoom(bool isFull)
         {
             Debug.Log($"AngerZoom isFull : {isFull}");
             
