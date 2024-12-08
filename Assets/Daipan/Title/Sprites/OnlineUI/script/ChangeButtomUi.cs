@@ -1,26 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
-public class ChangeButtomUi : MonoBehaviour
+namespace A
 {
-    [SerializeField]
-    Image Button = null!;
-    [SerializeField]
-    Sprite readyUi=null!;
-    [SerializeField]
-    Sprite OkUi=null!;
-    private bool flg = true;
-
-    private void Start()
+    public class ChangeButtomUi : MonoBehaviour
     {
-    }
+        [SerializeField]
+        Image button = null!;
+        [SerializeField]
+        Sprite readyUi = null!;
+        [SerializeField]
+        Sprite OkUi = null!;
+        private bool flg = false;
 
-    public void OnClick()
-    {
-        Debug.Log("hoge");
-        Button.sprite= (flg) ? OkUi : readyUi;
-        flg = !flg;
+        private void Start()
+        {
+        }
+
+        public void OnClick()
+        {
+            Debug.Log("hoge");
+            button.sprite = (flg) ? OkUi : readyUi;
+            flg = !flg;
+        }
     }
 }
