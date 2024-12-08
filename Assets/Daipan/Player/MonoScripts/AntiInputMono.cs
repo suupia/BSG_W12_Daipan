@@ -21,7 +21,6 @@ namespace Daipan.Player.MonoScripts
         [SerializeField] CustomButton yellowBossButton = null!;
         [SerializeField] CustomButton redBossButton = null!;
         [SerializeField] CustomButton blueBossButton = null!;
-        [SerializeField] CustomButton antiCommentButton = null!;
         [SerializeField] TMP_InputField antiCommentInput = null!;
 
         private AntiEnemySpawnerNetwork _antiEnemySpawnerNetwork = null!;
