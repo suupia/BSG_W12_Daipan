@@ -382,7 +382,6 @@ namespace Daipan.Daipan
 
             // Anti
             RegisterAntiNet(builder, networkPlayerParamsManager);
-            builder.RegisterComponentInHierarchy<CameraTargetChangerNet>();
 
             // Streamer
             RegisterStreamerNet(builder);
