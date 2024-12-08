@@ -54,6 +54,7 @@ using Daipan.LevelDesign.Net;
 using Daipan.Battle.interfaces;
 using Daipan.Stream.Interfaces;
 using Daipan.Network.MonoScripts;
+using Daipan.UINet.MonoScripts;
 
 namespace Daipan.Daipan
 
@@ -381,6 +382,7 @@ namespace Daipan.Daipan
 
             // Anti
             RegisterAntiNet(builder, networkPlayerParamsManager);
+            builder.RegisterComponentInHierarchy<CameraTargetChangerNet>();
 
             // Streamer
             RegisterStreamerNet(builder);

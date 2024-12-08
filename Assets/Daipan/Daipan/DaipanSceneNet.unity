@@ -779,7 +779,7 @@ Camera:
   m_GameObject: {fileID: 1667613169}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 4
   m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -797,9 +797,9 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.05588898
+    x: 0.09977728
     y: 0
-    width: 0.88822204
+    width: 0.80044544
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
@@ -1690,6 +1690,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ComboParent: {fileID: 833321242}
+--- !u!114 &2127748082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4363609678459505441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d3b50bca20824227a85a3e665b6600f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2128689209
 GameObject:
   m_ObjectHideFlags: 0
@@ -1816,7 +1828,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 309514489366225730, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       propertyPath: m_NormalizedViewPortRect.x
-      value: 0.05588898
+      value: 0.09977728
       objectReference: {fileID: 0}
     - target: {fileID: 309514489366225730, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
@@ -1824,7 +1836,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 309514489366225730, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
-      value: 0.88822204
+      value: 0.80044544
       objectReference: {fileID: 0}
     - target: {fileID: 309514489366225730, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
@@ -1840,7 +1852,7 @@ PrefabInstance:
       objectReference: {fileID: 8400000, guid: 6a3f6427632c843a5906315b4285168c, type: 2}
     - target: {fileID: 1243360813622444110, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       propertyPath: m_NormalizedViewPortRect.x
-      value: 0.05588898
+      value: 0.09977728
       objectReference: {fileID: 0}
     - target: {fileID: 1243360813622444110, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
@@ -1848,7 +1860,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1243360813622444110, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
-      value: 0.88822204
+      value: 0.80044544
       objectReference: {fileID: 0}
     - target: {fileID: 1243360813622444110, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
@@ -1884,7 +1896,7 @@ PrefabInstance:
       objectReference: {fileID: 8400000, guid: 6a3f6427632c843a5906315b4285168c, type: 2}
     - target: {fileID: 1948116558607679532, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       propertyPath: m_NormalizedViewPortRect.x
-      value: 0.05588898
+      value: 0.09977728
       objectReference: {fileID: 0}
     - target: {fileID: 1948116558607679532, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
@@ -1892,7 +1904,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1948116558607679532, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
-      value: 0.88822204
+      value: 0.80044544
       objectReference: {fileID: 0}
     - target: {fileID: 1948116558607679532, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
@@ -1904,7 +1916,7 @@ PrefabInstance:
       objectReference: {fileID: 8400000, guid: 6a3f6427632c843a5906315b4285168c, type: 2}
     - target: {fileID: 2497925990668980782, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       propertyPath: m_NormalizedViewPortRect.x
-      value: 0.05588898
+      value: 0.09977728
       objectReference: {fileID: 0}
     - target: {fileID: 2497925990668980782, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
@@ -1912,7 +1924,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2497925990668980782, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
-      value: 0.88822204
+      value: 0.80044544
       objectReference: {fileID: 0}
     - target: {fileID: 2497925990668980782, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
@@ -1992,7 +2004,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6953553113699317605, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       propertyPath: m_NormalizedViewPortRect.x
-      value: 0.05588898
+      value: 0.09977728
       objectReference: {fileID: 0}
     - target: {fileID: 6953553113699317605, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
@@ -2000,7 +2012,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6953553113699317605, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
-      value: 0.88822204
+      value: 0.80044544
       objectReference: {fileID: 0}
     - target: {fileID: 6953553113699317605, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
@@ -2008,7 +2020,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7435612411058713823, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       propertyPath: m_NormalizedViewPortRect.x
-      value: 0.05588898
+      value: 0.09977728
       objectReference: {fileID: 0}
     - target: {fileID: 7435612411058713823, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
@@ -2016,7 +2028,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7435612411058713823, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
-      value: 0.88822204
+      value: 0.80044544
       objectReference: {fileID: 0}
     - target: {fileID: 7435612411058713823, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
@@ -2028,7 +2040,7 @@ PrefabInstance:
       objectReference: {fileID: 8400000, guid: 6a3f6427632c843a5906315b4285168c, type: 2}
     - target: {fileID: 8393267195869761840, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       propertyPath: m_NormalizedViewPortRect.x
-      value: 0.05588898
+      value: 0.09977728
       objectReference: {fileID: 0}
     - target: {fileID: 8393267195869761840, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
@@ -2036,7 +2048,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8393267195869761840, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
-      value: 0.88822204
+      value: 0.80044544
       objectReference: {fileID: 0}
     - target: {fileID: 8393267195869761840, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
@@ -2074,6 +2086,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6919780861489780909, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1245597166}
+    - targetCorrespondingSourceObject: {fileID: 6919780861489780909, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2127748082}
   m_SourcePrefab: {fileID: 100100000, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
 --- !u!20 &4363609678459505437 stripped
 Camera:
