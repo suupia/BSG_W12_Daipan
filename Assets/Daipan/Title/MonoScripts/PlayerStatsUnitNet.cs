@@ -84,12 +84,6 @@ public class PlayerStatsUnitNet : NetworkBehaviour
 
     void OnPlayerRoleChanged()
     {
-        /*playerRoleText.text = PlayerRole switch
-        {
-            PlayerRoleEnum.Streamer => "Streamer",
-            PlayerRoleEnum.Anti => "Anti",
-            _ => "None"
-        };*/
         playerRoleButtom.sprite = PlayerRole switch
         {
             PlayerRoleEnum.Streamer=>streamerUI,
