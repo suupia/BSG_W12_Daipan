@@ -54,6 +54,7 @@ using Daipan.LevelDesign.Net;
 using Daipan.Battle.interfaces;
 using Daipan.Stream.Interfaces;
 using Daipan.Network.MonoScripts;
+using Daipan.UINet.MonoScripts;
 
 namespace Daipan.Daipan
 
@@ -302,6 +303,7 @@ namespace Daipan.Daipan
             builder.Register<AntiStateValue>(Lifetime.Scoped);
             builder.Register<AntiDaipanExecutor>(Lifetime.Scoped);
             builder.RegisterComponentInHierarchy<AntiStateViewMono>();
+            builder.RegisterComponentInHierarchy<AntiEnemyCostViewMono>();
         }
 
         public static void RegisterStreamerNet(IContainerBuilder builder)
