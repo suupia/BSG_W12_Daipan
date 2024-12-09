@@ -15,8 +15,8 @@ namespace Daipan.Stream.Scripts
     {
         public int Number { get; private set; }
 
-        private NetworkRunner _runner = null!;
-        private RpcReceiverNetWrapper _rpcReceiverNetWrapper = null!;
+        readonly NetworkRunner _runner;
+        readonly RpcReceiverNetWrapper _rpcReceiverNetWrapper;
         [Inject]
         public ViewerNumberNetwork(
             NetworkRunner runner
