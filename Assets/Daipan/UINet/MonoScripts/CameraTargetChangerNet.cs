@@ -5,7 +5,6 @@ using Daipan.Transporter;
 using Fusion;
 using UnityEngine;
 using VContainer;
-using UnityEngine.Rendering.VirtualTexturing;
 using Daipan.Transporter.Scripts;
 
 namespace Daipan.UINet.MonoScripts
