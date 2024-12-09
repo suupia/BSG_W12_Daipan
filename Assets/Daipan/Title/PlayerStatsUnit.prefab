@@ -168,7 +168,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -424.9134, y: 0}
+  m_AnchoredPosition: {x: -366, y: 0}
   m_SizeDelta: {x: -849.8268, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6438024103329906508
@@ -378,7 +378,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 601, y: -3}
-  m_SizeDelta: {x: 268.8, y: 100.8}
+  m_SizeDelta: {x: 252, y: 118.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8673736460511453278
 CanvasRenderer:
@@ -408,7 +408,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 83ae4bb8ad843b84ab22a95bba56e441, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 28c6cd90fd080fc4dbb454af28d31fed, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -858,6 +858,8 @@ MonoBehaviour:
   youAreThisImage: {fileID: 4424589249913684355}
   playerNameText: {fileID: 4759200378644538241}
   readyImage: {fileID: 8547326007926187773}
+  OK: {fileID: 21300000, guid: 6cf752a47224d0b4f911d27916e0a873, type: 3}
+  NG: {fileID: 21300000, guid: 28c6cd90fd080fc4dbb454af28d31fed, type: 3}
   readyText: {fileID: 6241601882913464250}
   playerRoleButton: {fileID: 4838541013485174410}
   playerRoleButtom: {fileID: 80594800048386723}

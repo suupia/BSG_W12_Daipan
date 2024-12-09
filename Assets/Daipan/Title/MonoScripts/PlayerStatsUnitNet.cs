@@ -10,6 +10,8 @@ public class PlayerStatsUnitNet : NetworkBehaviour
     [SerializeField] Image youAreThisImage = null!;
     [SerializeField] TextMeshProUGUI playerNameText = null!;
     [SerializeField] Image readyImage = null!;
+    [SerializeField] Sprite OK=null!;
+    [SerializeField] Sprite NG=null!;
     [SerializeField] TextMeshProUGUI readyText = null!;
     [SerializeField] CustomButton playerRoleButton = null!;
     [SerializeField] Image playerRoleButtom = null!;
@@ -96,6 +98,7 @@ public class PlayerStatsUnitNet : NetworkBehaviour
     void OnIsReadyChanged()
     {
         readyText.text = IsReady ? "OK" : "NG";
+        readyImage.sprite = IsReady ? OK : NG;
         _titleMonoOnline.CheckAllReady();
     }
 }
