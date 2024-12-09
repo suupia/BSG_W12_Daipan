@@ -9,6 +9,8 @@ using Daipan.Enemy.Scripts;
 using UnityEngine.UI;
 using TMPro;
 using R3;
+using Daipan.AntiNet.MonoScripts;
+using UnityEngine.EventSystems;
 
 namespace Daipan.Player.MonoScripts
 {
@@ -25,6 +27,7 @@ namespace Daipan.Player.MonoScripts
 
         private AntiEnemySpawnerNetwork _antiEnemySpawnerNetwork = null!;
         private AntiCommentSpawnerNetwork _antiCommentSpawnerNetwork = null!;
+        private AntiCommentInputViewMono _antiCommentInputViewMono = null!;
 
         [Inject]
         public void Initialize(
@@ -32,7 +35,8 @@ namespace Daipan.Player.MonoScripts
             PlayerDataTransporterNetWrapper playerDataTransporterNetWrapper,
             AntiEnemySpawnerNetwork antiEnemySpawnerNetwork,
             AntiCommentSpawnerNetwork antiCommentSpawnerNetwork,
-            AntiStateValue antiStateValue
+            AntiStateValue antiStateValue,
+            AntiCommentInputViewMono commentInputViewMono
         )
         {
             Debug.Log($"AntiInputMono Initialize isAnti: {playerDataTransporterNetWrapper.GetPlayerRoleEnum(runner.LocalPlayer) == PlayerRoleEnum.Anti}");
@@ -53,6 +57,7 @@ namespace Daipan.Player.MonoScripts
 
             _antiEnemySpawnerNetwork = antiEnemySpawnerNetwork;
             _antiCommentSpawnerNetwork = antiCommentSpawnerNetwork;
+            _antiCommentInputViewMono = commentInputViewMono;
         }
 
         void Start()
@@ -63,10 +68,33 @@ namespace Daipan.Player.MonoScripts
             yellowBossButton.onClick += () => _antiEnemySpawnerNetwork.SpawnEnemy(EnemyEnum.YellowBoss);
             redBossButton.onClick += () => _antiEnemySpawnerNetwork.SpawnEnemy(EnemyEnum.RedBoss);
             blueBossButton.onClick += () => _antiEnemySpawnerNetwork.SpawnEnemy(EnemyEnum.BlueBoss);
+
+            // 入力開始
+            antiCommentInput.onSelect.AddListener(_ =>
+            {
+                _antiCommentInputViewMono.OpenChat();
+            });
+            // 入力更新
+            antiCommentInput.onValueChanged.AddListener(_ =>
+            {
+                _antiCommentInputViewMono.UpdateCharacters(antiCommentInput.text);
+            });
+            // 入力終了
             antiCommentInput.onEndEdit.AddListener(_ =>
             {
+                _antiCommentInputViewMono.CloseChat();
                 _antiCommentSpawnerNetwork.SpawnAntiComment(antiCommentInput.text);
                 antiCommentInput.text = "";
+
+                // if (EventSystem.current.currentSelectedGameObject != null)
+                // {
+                //     EventSystem.current.SetSelectedGameObject(null);
+                // }
+                // antiCommentInput.DeactivateInputField(false);
+            });
+            antiCommentInput.onDeselect.AddListener(_ =>
+            {
+                Debug.Log("DeSelect");
             });
         }
 
