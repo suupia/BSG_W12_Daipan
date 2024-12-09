@@ -356,8 +356,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ab6a02354cd647ec85bb47258e43f15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  costText: {fileID: 7201838609577368446}
-  enemyEnum: 6
+  yellowCostText: {fileID: 0}
+  redCostText: {fileID: 0}
+  blueCostText: {fileID: 0}
+  yellowBossCostText: {fileID: 0}
+  redBossCostText: {fileID: 0}
+  blueBossCostText: {fileID: 0}
 --- !u!1 &901460372500444081
 GameObject:
   m_ObjectHideFlags: 0
@@ -644,11 +648,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2970687567773981917}
+  - {fileID: 8656877753453778191}
   - {fileID: 6886484242810679809}
-  - {fileID: 5809339786685987996}
   - {fileID: 5862362955877529496}
   - {fileID: 5988130294639046321}
-  - {fileID: 8656877753453778191}
+  - {fileID: 5809339786685987996}
   m_Father: {fileID: 5432062560420191623}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1162,8 +1166,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ab6a02354cd647ec85bb47258e43f15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  costText: {fileID: 208137112056871941}
-  enemyEnum: 2
+  yellowCostText: {fileID: 0}
+  redCostText: {fileID: 0}
+  blueCostText: {fileID: 0}
+  yellowBossCostText: {fileID: 0}
+  redBossCostText: {fileID: 0}
+  blueBossCostText: {fileID: 0}
 --- !u!1 &4042421275103675415
 GameObject:
   m_ObjectHideFlags: 0
@@ -1922,8 +1930,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ab6a02354cd647ec85bb47258e43f15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  costText: {fileID: 8475740182963378137}
-  enemyEnum: 1
+  yellowCostText: {fileID: 0}
+  redCostText: {fileID: 0}
+  blueCostText: {fileID: 0}
+  yellowBossCostText: {fileID: 0}
+  redBossCostText: {fileID: 0}
+  blueBossCostText: {fileID: 0}
 --- !u!1 &6441456622253612893
 GameObject:
   m_ObjectHideFlags: 0
@@ -2123,8 +2135,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ab6a02354cd647ec85bb47258e43f15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  costText: {fileID: 3779659080774833552}
-  enemyEnum: 3
+  yellowCostText: {fileID: 0}
+  redCostText: {fileID: 0}
+  blueCostText: {fileID: 0}
+  yellowBossCostText: {fileID: 0}
+  redBossCostText: {fileID: 0}
+  blueBossCostText: {fileID: 0}
 --- !u!1 &6531186201430338303
 GameObject:
   m_ObjectHideFlags: 0
@@ -2148,15 +2164,15 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6531186201430338303}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3132839344723392931}
   - {fileID: 2422079816268720776}
   - {fileID: 6655501063827073258}
   - {fileID: 4978440568701212071}
+  - {fileID: 3132839344723392931}
   m_Father: {fileID: 987491915082324481}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -2181,7 +2197,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8656877753453778191
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2383,8 +2399,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ab6a02354cd647ec85bb47258e43f15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  costText: {fileID: 6615818109818018240}
-  enemyEnum: 5
+  yellowCostText: {fileID: 0}
+  redCostText: {fileID: 0}
+  blueCostText: {fileID: 0}
+  yellowBossCostText: {fileID: 0}
+  redBossCostText: {fileID: 0}
+  blueBossCostText: {fileID: 0}
 --- !u!1 &7417204454539044525
 GameObject:
   m_ObjectHideFlags: 0
@@ -3467,5 +3487,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ab6a02354cd647ec85bb47258e43f15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  costText: {fileID: 7559596616944005167}
-  enemyEnum: 4
+  yellowCostText: {fileID: 0}
+  redCostText: {fileID: 0}
+  blueCostText: {fileID: 0}
+  yellowBossCostText: {fileID: 0}
+  redBossCostText: {fileID: 0}
+  blueBossCostText: {fileID: 0}

@@ -63,7 +63,6 @@ namespace Daipan.Player.MonoScripts
             yellowBossButton.onClick += () => _antiEnemySpawnerNetwork.SpawnEnemy(EnemyEnum.YellowBoss);
             redBossButton.onClick += () => _antiEnemySpawnerNetwork.SpawnEnemy(EnemyEnum.RedBoss);
             blueBossButton.onClick += () => _antiEnemySpawnerNetwork.SpawnEnemy(EnemyEnum.BlueBoss);
-            // antiCommentButton.onClick += () => _antiCommentSpawnerNetwork.SpawnAntiComment("アンチだ！！");
             antiCommentInput.onEndEdit.AddListener(_ =>
             {
                 _antiCommentSpawnerNetwork.SpawnAntiComment(antiCommentInput.text);
