@@ -262,6 +262,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &353851991 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 852473478217761652, guid: b8ba7a9facda74043a9a2ec8c656fed0, type: 3}
+  m_PrefabInstance: {fileID: 4870961278684223820}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &438743629
 GameObject:
   m_ObjectHideFlags: 0
@@ -2278,6 +2289,10 @@ PrefabInstance:
       value: AntiInputCanvas
       objectReference: {fileID: 0}
     - target: {fileID: 1427767018160975275, guid: b8ba7a9facda74043a9a2ec8c656fed0, type: 3}
+      propertyPath: banImage
+      value: 
+      objectReference: {fileID: 353851991}
+    - target: {fileID: 1427767018160975275, guid: b8ba7a9facda74043a9a2ec8c656fed0, type: 3}
       propertyPath: duration
       value: 0.3
       objectReference: {fileID: 0}
@@ -2511,6 +2526,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8554678747787672744, guid: b8ba7a9facda74043a9a2ec8c656fed0, type: 3}
       propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8994480768466991609, guid: b8ba7a9facda74043a9a2ec8c656fed0, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

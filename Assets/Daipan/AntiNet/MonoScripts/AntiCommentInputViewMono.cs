@@ -16,10 +16,30 @@ namespace Daipan.AntiNet.MonoScripts
     public class AntiCommentInputViewMono : MonoBehaviour
     {
         [SerializeField] Image writingImage = null!;
+        [SerializeField] Image banImage = null!;
         [SerializeField] List<TMP_Text> characterTexts = null!;
         [SerializeField] float duration;
 
         private Sequence _sequence = null!;
+
+        [Inject]
+        public void Initialize(AntiStateValue antiStateValue)
+        {
+            Observable
+                .EveryValueChanged(antiStateValue, x => x.AntiStateEnum)
+                .Subscribe(value =>
+                {
+                    if (value == AntiStateEnum.BAN)
+                    {
+                        banImage.gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        banImage.gameObject.SetActive(false);
+                    }
+                })
+                .AddTo(this);
+        }
 
         void Start()
         {

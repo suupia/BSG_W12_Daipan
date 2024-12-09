@@ -32,7 +32,6 @@ namespace Daipan.AntiNet.MonoScripts
         [Inject]
         public void Initialize(
             AntiStateValue stateValue
-            , AntiStateValue antiStateValue
             , IEnemySpawnedCostParam enemySpawnedCostParam
             , SpawnEnemyCostValue spawnEnemyCostValue)
         {
