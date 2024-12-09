@@ -38,6 +38,8 @@ namespace Daipan.Enemy.MonoScripts
         public bool IsReachedPlayer { get; set; }
         [Networked]
         Hp _hp { get; set; }
+        [Networked]
+        int MaxHp { get; set; }
 
         public Hp Hp
         {
@@ -76,8 +78,12 @@ namespace Daipan.Enemy.MonoScripts
             if (transform.position.x < _enemySpawnPoint.GetEnemyDespawnedPoint().x)
                 Die();
 
+        }
+
+        public override void Render()
+        {
             Debug.Log($"FinalBossMono Hp.Value: {Hp.Value}");
-            finalBossViewMono?.SetHpGauge(Hp.Value, _finalBossParamData.GetMaxHp());
+            finalBossViewMono?.SetHpGauge(Hp.Value, MaxHp);
         }
 
         [Inject]
@@ -110,6 +116,7 @@ namespace Daipan.Enemy.MonoScripts
             _enemyDie = enemyDie;
             _enemyOnAttacked = enemyOnAttacked;
             finalBossViewMono?.SetDomain(_finalBossViewParamData);
+            MaxHp = _finalBossParamData.GetMaxHp();
             Hp = new Hp(_finalBossParamData.GetMaxHp());
         }
 
@@ -129,7 +136,7 @@ namespace Daipan.Enemy.MonoScripts
 
         public void OnDaipaned()
         {
-            var daipanHitDamage = _finalBossParamData.GetDaipanHitDamagePercent() * 0.01 * _finalBossParamData.GetMaxHp();
+            var daipanHitDamage = _finalBossParamData.GetDaipanHitDamagePercent() * 0.01 * MaxHp;
             Hp = new Hp(Hp.Value - daipanHitDamage);
             GetComponent<NetworkTransform>().Teleport(transform.position + (float)_finalBossParamData.GetKnockBackDistance() * Vector3.right);
             finalBossViewMono?.DaipanHit();
