@@ -25,7 +25,7 @@ namespace Daipan.Player.MonoScripts
         [SerializeField] List<AbstractPlayerViewMono?> playerViewMonos = new();
         IPlayerHpParamData _playerHpParamData = null!;
         IPlayerInput _playerInput = null!;
-        public Hp Hp { get; private set; } = null!;
+        public Hp Hp { get; private set; } 
 
         IPlayerOnAttacked _playerOnAttacked = null!;
         

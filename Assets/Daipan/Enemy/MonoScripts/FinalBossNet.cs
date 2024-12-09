@@ -36,7 +36,8 @@ namespace Daipan.Enemy.MonoScripts
         [OnChangedRender(nameof(OnEnemyEnumChanged))]
         public EnemyEnum EnemyEnum { get; set; } = EnemyEnum.None;
         public bool IsReachedPlayer { get; set; }
-        Hp _hp = null!;
+        [Networked]
+        Hp _hp { get; set; }
 
         public Hp Hp
         {

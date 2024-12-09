@@ -38,7 +38,7 @@ namespace Daipan.Enemy.MonoScripts
         public bool IsReachedPlayer { get; set; }
 
 
-        Hp _hp = null!;
+        Hp _hp; 
 
         public Hp Hp
         {
