@@ -8,6 +8,8 @@ using VContainer;
 using R3;
 using Daipan.Enemy.Scripts;
 using Daipan.LevelDesign.Net;
+using UnityEngine.UI;
+using System;
 
 namespace Daipan.AntiNet.MonoScripts
 {
@@ -20,12 +22,18 @@ namespace Daipan.AntiNet.MonoScripts
         [SerializeField] TMP_Text redBossCostText = null!;
         [SerializeField] TMP_Text blueBossCostText = null!;
 
+        [SerializeField] CustomButton yellowButton = null!;
+        [SerializeField] CustomButton redButton = null!;
+        [SerializeField] CustomButton blueButton = null!;
+        [SerializeField] CustomButton yellowBossButton = null!;
+        [SerializeField] CustomButton redBossButton = null!;
+        [SerializeField] CustomButton blueBossButton = null!;
 
         [Inject]
         public void Initialize(
             AntiStateValue stateValue
-            , AntiStateValue antiStateValue
-            , IEnemySpawnedCostParam enemySpawnedCostParam)
+            , IEnemySpawnedCostParam enemySpawnedCostParam
+            , SpawnEnemyCostValue spawnEnemyCostValue)
         {
             Observable
                 .EveryValueChanged(stateValue, x => x.AntiStateEnum)
@@ -39,11 +47,49 @@ namespace Daipan.AntiNet.MonoScripts
                     ChangeValue(blueBossCostText, EnemyEnum.BlueBoss, value, enemySpawnedCostParam);
                 })
                 .AddTo(this);
+
+            Observable
+                .EveryValueChanged(spawnEnemyCostValue, x => x.Value)
+                .Subscribe(_ =>
+                {
+                    UpdateButtonState(yellowButton, EnemyEnum.Yellow, stateValue.AntiStateEnum, enemySpawnedCostParam, spawnEnemyCostValue);
+                    UpdateButtonState(redButton, EnemyEnum.Red, stateValue.AntiStateEnum, enemySpawnedCostParam, spawnEnemyCostValue);
+                    UpdateButtonState(blueButton, EnemyEnum.Blue, stateValue.AntiStateEnum, enemySpawnedCostParam, spawnEnemyCostValue);
+                    UpdateButtonState(yellowBossButton, EnemyEnum.YellowBoss, stateValue.AntiStateEnum, enemySpawnedCostParam, spawnEnemyCostValue);
+                    UpdateButtonState(redBossButton, EnemyEnum.RedBoss, stateValue.AntiStateEnum, enemySpawnedCostParam, spawnEnemyCostValue);
+                    UpdateButtonState(blueBossButton, EnemyEnum.BlueBoss, stateValue.AntiStateEnum, enemySpawnedCostParam, spawnEnemyCostValue);
+                })
+                .AddTo(this);
         }
-        void ChangeValue(TMP_Text text, EnemyEnum enemyEnum, AntiStateEnum antiStateEnum, IEnemySpawnedCostParam enemySpawnedCostParam)
+        void ChangeValue(
+            TMP_Text text
+            , EnemyEnum enemyEnum
+            , AntiStateEnum antiStateEnum
+            , IEnemySpawnedCostParam enemySpawnedCostParam)
         {
             int cost = GetCost(enemyEnum, antiStateEnum, enemySpawnedCostParam);
             text.text = $"{cost}";
+        }
+
+        void UpdateButtonState(
+            CustomButton button
+            , EnemyEnum enemyEnum
+            , AntiStateEnum antiStateEnum
+            , IEnemySpawnedCostParam enemySpawnedCostParam
+            , SpawnEnemyCostValue spawnEnemyCostValue
+        )
+        {
+            int cost = GetCost(enemyEnum, antiStateEnum, enemySpawnedCostParam);
+            if (spawnEnemyCostValue.Value < cost)
+            {
+                Debug.Log($"{enemyEnum}Button is Judged false");
+                button.GetComponent<Button>().interactable = false;
+            }
+            else
+            {
+                Debug.Log($"{enemyEnum}Button is Judged true");
+                button.GetComponent<Button>().interactable = true;
+            }
         }
 
         int GetCost(EnemyEnum enemyEnum, AntiStateEnum antiStateEnum, IEnemySpawnedCostParam enemySpawnedCostParam)
