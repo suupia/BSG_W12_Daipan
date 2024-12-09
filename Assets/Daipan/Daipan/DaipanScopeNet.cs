@@ -304,6 +304,7 @@ namespace Daipan.Daipan
             builder.Register<AntiDaipanExecutor>(Lifetime.Scoped);
             builder.RegisterComponentInHierarchy<AntiStateViewMono>();
             builder.RegisterComponentInHierarchy<AntiEnemyCostViewMono>();
+            builder.RegisterComponentInHierarchy<AntiCommentInputViewMono>();
         }
 
         public static void RegisterStreamerNet(IContainerBuilder builder)
