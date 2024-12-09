@@ -18,7 +18,7 @@ MonoBehaviour:
   costValueParam:
     maxCostValue: 20
     initializedCostValue: 10
-    increaseCostTime: 15
+    increaseCostTime: 2
     increasedCostValue: 1
   antiCommentParam:
     maxCharacterNumber: 5

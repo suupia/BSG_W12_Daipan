@@ -43,6 +43,7 @@ namespace Daipan.AntiNet.MonoScripts
 
 
             _sequence.Kill();
+            _sequence = DOTween.Sequence();
             var transform = writingImage.gameObject.GetComponent<RectTransform>();
             transform.localScale = new Vector3(0.5f, 0f, 1f);
             _sequence.Append(transform.DOScale(Vector3.one, duration).SetEase(Ease.OutQuad));
@@ -53,6 +54,7 @@ namespace Daipan.AntiNet.MonoScripts
         public void CloseChat()
         {
             _sequence.Kill();
+            _sequence = DOTween.Sequence();
             var transform = writingImage.gameObject.GetComponent<RectTransform>();
             transform.localScale = Vector3.one;
             transform.DOScale(new Vector3(0.5f, 0f, 1f), duration).SetEase(Ease.OutQuad).OnComplete(() => writingImage.gameObject.SetActive(false));
