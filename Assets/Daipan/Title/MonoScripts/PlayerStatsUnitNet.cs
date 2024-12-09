@@ -9,6 +9,9 @@ public class PlayerStatsUnitNet : NetworkBehaviour
     [SerializeField] GameObject viewObject = null!;
     [SerializeField] Image youAreThisImage = null!;
     [SerializeField] TextMeshProUGUI playerNameText = null!;
+    [SerializeField] Image readyImage = null!;
+    [SerializeField] Sprite OK=null!;
+    [SerializeField] Sprite NG=null!;
     [SerializeField] TextMeshProUGUI readyText = null!;
     [SerializeField] CustomButton playerRoleButton = null!;
     [SerializeField] Image playerRoleButtom = null!;
@@ -84,12 +87,6 @@ public class PlayerStatsUnitNet : NetworkBehaviour
 
     void OnPlayerRoleChanged()
     {
-        /*playerRoleText.text = PlayerRole switch
-        {
-            PlayerRoleEnum.Streamer => "Streamer",
-            PlayerRoleEnum.Anti => "Anti",
-            _ => "None"
-        };*/
         playerRoleButtom.sprite = PlayerRole switch
         {
             PlayerRoleEnum.Streamer=>streamerUI,
@@ -101,6 +98,7 @@ public class PlayerStatsUnitNet : NetworkBehaviour
     void OnIsReadyChanged()
     {
         readyText.text = IsReady ? "OK" : "NG";
+        readyImage.sprite = IsReady ? OK : NG;
         _titleMonoOnline.CheckAllReady();
     }
 }
