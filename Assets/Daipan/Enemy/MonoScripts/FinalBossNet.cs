@@ -1,5 +1,6 @@
 #nullable enable
 using System;
+using Daipan.Daipan;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.LevelDesign.Interfaces;
 using Daipan.Enemy.LevelDesign.Scripts;
@@ -31,6 +32,8 @@ namespace Daipan.Enemy.MonoScripts
         IFinalBossViewParamData _finalBossViewParamData = null!;
         IEnemyOnAttacked _enemyOnAttacked = null!;
         PlayerHolder _playerHolder = null!;
+        [Networked]
+        [OnChangedRender(nameof(OnEnemyEnumChanged))]
         public EnemyEnum EnemyEnum { get; set; } = EnemyEnum.None;
         public bool IsReachedPlayer { get; set; }
         Hp _hp = null!;
@@ -45,6 +48,24 @@ namespace Daipan.Enemy.MonoScripts
             }
         }
 
+        public override void Spawned()
+        {
+            base.Spawned();
+            Debug.Log($"FinalBossNet Spawned");
+
+            if (!HasStateAuthority)
+            {
+                var daipanScopeNet = DaipanScopeNet.BuiltContainer;
+                Initialize(
+                    daipanScopeNet.Container.Resolve<PlayerHolder>()
+                    , daipanScopeNet.Container.Resolve<IEnemySpawnPoint>()
+                    , daipanScopeNet.Container.Resolve<IFinalBossParamData>()
+                    , daipanScopeNet.Container.Resolve<IFinalBossViewParamData>()
+                );
+            }
+
+            OnEnemyEnumChanged();
+        }
         public override void FixedUpdateNetwork()
         {
             if (Hp.Value != 0)
@@ -124,6 +145,20 @@ namespace Daipan.Enemy.MonoScripts
         public void Highlight(bool isHighlighted)
         {
             finalBossViewMono?.Highlight(isHighlighted);
+        }
+        
+        // OnChangeRender functions 
+        void OnEnemyEnumChanged()
+        {
+            if (_finalBossViewParamData == null)
+            {
+                Debug.LogWarning($"_finalBossParamData is null");
+                return;
+            }
+
+            if (EnemyEnum == EnemyEnum.None) return;
+
+            finalBossViewMono?.SetDomain(_finalBossViewParamData);
         }
     }
 }
