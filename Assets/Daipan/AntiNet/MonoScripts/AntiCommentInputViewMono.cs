@@ -9,6 +9,7 @@ using R3;
 using Daipan.Enemy.Scripts;
 using Daipan.LevelDesign.Net;
 using UnityEngine.UI;
+using DG.Tweening;
 
 namespace Daipan.AntiNet.MonoScripts
 {
@@ -16,7 +17,18 @@ namespace Daipan.AntiNet.MonoScripts
     {
         [SerializeField] Image writingImage = null!;
         [SerializeField] List<TMP_Text> characterTexts = null!;
+        [SerializeField] float duration;
 
+        private Sequence _sequence = null!;
+
+        void Start()
+        {
+            var transform = writingImage.gameObject.GetComponent<RectTransform>();
+            transform.localScale = new Vector3(0.5f, 0f, 1f);
+            transform.anchoredPosition = new Vector2(703f, -29.7f);
+
+            _sequence = DOTween.Sequence();
+        }
         public void UpdateCharacters(string characters)
         {
             for (int i = 0; i < characterTexts.Count; i++)
@@ -28,10 +40,27 @@ namespace Daipan.AntiNet.MonoScripts
         public void OpenChat()
         {
             writingImage.gameObject.SetActive(true);
+
+
+            _sequence.Kill();
+            _sequence = DOTween.Sequence();
+            var transform = writingImage.gameObject.GetComponent<RectTransform>();
+            transform.localScale = new Vector3(0.5f, 0f, 1f);
+            _sequence.Append(transform.DOScale(Vector3.one, duration).SetEase(Ease.OutQuad));
+
+            transform.anchoredPosition = new Vector2(703f, -29.7f);
+            _sequence.Join(transform.DOAnchorPos(new Vector2(569.5f, -29.7f), duration).SetEase(Ease.OutQuad));
         }
         public void CloseChat()
         {
-            writingImage.gameObject.SetActive(false);
+            _sequence.Kill();
+            _sequence = DOTween.Sequence();
+            var transform = writingImage.gameObject.GetComponent<RectTransform>();
+            transform.localScale = Vector3.one;
+            transform.DOScale(new Vector3(0.5f, 0f, 1f), duration).SetEase(Ease.OutQuad).OnComplete(() => writingImage.gameObject.SetActive(false));
+
+            transform.anchoredPosition = new Vector2(569.5f, -29.7f);
+            _sequence.Join(transform.DOAnchorPos(new Vector2(703f, -29.7f), duration).SetEase(Ease.OutQuad));
         }
     }
 }
