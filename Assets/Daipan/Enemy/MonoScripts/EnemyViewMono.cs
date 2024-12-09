@@ -6,7 +6,7 @@ using UnityEngine.Serialization;
 
 namespace Daipan.Enemy.MonoScripts
 {
-    public sealed class EnemyViewMono : AbstractEnemyViewMono, IGetAbstractEnemyViewMono
+    public sealed class EnemyViewMono : AbstractEnemyViewMono
     {
         public AbstractEnemyViewMono GetAbstractEnemyViewMono() => _selectedEnemyViewMono;
         [SerializeField] EnemyNormalViewMono enemyNormalViewMono = null!;

@@ -10,7 +10,7 @@ using UnityEngine.Serialization;
 
 namespace Daipan.Enemy.MonoScripts
 {
-    public sealed class EnemySpecialViewMono : AbstractEnemyViewMono
+    public sealed class EnemySpecialViewMono : AbstractEnemyViewMono, IEnemySpecialView
     {
         [SerializeField] HpGaugeMono hpGaugeMono = null!;
         [SerializeField] SpriteRenderer tempSpriteRenderer = null!; // todo: 完成時には削除する
