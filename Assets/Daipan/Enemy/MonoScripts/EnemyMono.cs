@@ -31,7 +31,7 @@ namespace Daipan.Enemy.MonoScripts
         PlayerHolder _playerHolder = null!;
         public EnemyEnum EnemyEnum { get; set; } = EnemyEnum.None;
         public bool IsReachedPlayer { get; set; }
-        Hp _hp = null!;
+        Hp _hp; 
 
         public Hp Hp
         {
