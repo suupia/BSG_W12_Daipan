@@ -9,15 +9,15 @@ namespace Daipan.Enemy.Scripts
     public class FinalBossParamData : IFinalBossParamData, IFinalBossViewParamData
     {
         readonly FinalBossParam _finalBossParam;
-        readonly FinalBossColorChanger _finalBossColorChanger;
+        readonly IFinalBossCurrentColor _finalBossCurrentColor;
         
         public FinalBossParamData(
             FinalBossParamManager finalBossParamManager
-            , FinalBossColorChanger finalBossColorChanger
+            , IFinalBossCurrentColor finalBossCurrentColor
             )
         {
             _finalBossParam = finalBossParamManager.finalBossParam;
-            _finalBossColorChanger = finalBossColorChanger;
+            _finalBossCurrentColor = finalBossCurrentColor;
         }
 
 
@@ -45,13 +45,13 @@ namespace Daipan.Enemy.Scripts
         // View
         public Color GetBodyColor() =>
             _finalBossParam.finalBossColorParams.First(x =>
-                x.finalBossColor == _finalBossColorChanger.CurrentColor).bodyColor;
+                x.finalBossColor == _finalBossCurrentColor.CurrentColor).bodyColor;
         public Color GetEyeColor() =>  _finalBossParam.finalBossColorParams.First(x =>
-                x.finalBossColor == _finalBossColorChanger.CurrentColor).eyeColor;
+                x.finalBossColor == _finalBossCurrentColor.CurrentColor).eyeColor;
         public Color GetEyeBallColor() => _finalBossParam.finalBossColorParams.First(x =>
-            x.finalBossColor == _finalBossColorChanger.CurrentColor).eyeBallColor;
+            x.finalBossColor == _finalBossCurrentColor.CurrentColor).eyeBallColor;
         public Color GetLineColor() => _finalBossParam.finalBossColorParams.First(x =>
-            x.finalBossColor == _finalBossColorChanger.CurrentColor).lineColor;
+            x.finalBossColor == _finalBossCurrentColor.CurrentColor).lineColor;
         
      } 
 }

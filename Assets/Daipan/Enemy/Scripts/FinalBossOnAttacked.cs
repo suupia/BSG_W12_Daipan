@@ -15,12 +15,12 @@ namespace Daipan.Enemy.Scripts
 {
     public sealed class FinalBossOnAttacked : IEnemyOnAttacked
     {
-        FinalBossColor CurrentColor => _finalBossColorChanger.CurrentColor;
-        readonly FinalBossColorChanger _finalBossColorChanger;
+        FinalBossColor CurrentColor => _finalBossCurrentColor.CurrentColor;
+        readonly IFinalBossCurrentColor _finalBossCurrentColor;
 
-        public FinalBossOnAttacked(FinalBossColorChanger finalBossColorChanger)
+        public FinalBossOnAttacked(IFinalBossCurrentColor finalBossCurrentColor)
         {
-            _finalBossColorChanger = finalBossColorChanger;
+            _finalBossCurrentColor = finalBossCurrentColor;
         }
         public Hp OnAttacked(Hp hp, IPlayerParamData playerParamData)
         {

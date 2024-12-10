@@ -355,7 +355,7 @@ namespace Daipan.Daipan
 
             // FinalBoss
             builder.RegisterInstance(finalBossParamManager);
-            builder.Register<FinalBossColorChanger>(Lifetime.Scoped);
+            builder.Register<FinalBossColorChangerNetwork>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
             builder.Register<FinalBossParamData>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<FinalBossActionDecider>(Lifetime.Scoped);
             builder.Register<FinalBossNetPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<FinalBossNet>>();
