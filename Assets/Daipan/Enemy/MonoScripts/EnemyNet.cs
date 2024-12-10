@@ -21,7 +21,7 @@ namespace Daipan.Enemy.MonoScripts
     {
         public GameObject GameObject => gameObject;
         public Transform Transform => transform;
-        [SerializeField] EnemyViewMono? enemyViewMono;
+        [SerializeField] EnemyViewNet? enemyViewMono;
         IEnemyCluster _enemyCluster = null!;
         EnemyMove _enemyMove = null!;
         EnemyAttackDecider _enemyAttackDecider = null!;
