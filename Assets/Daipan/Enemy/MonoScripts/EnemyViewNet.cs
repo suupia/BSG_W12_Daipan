@@ -8,6 +8,7 @@ namespace Daipan.Enemy.MonoScripts
 {
     public sealed class EnemyViewNet : AbstractEnemyViewNet
     {
+        public IEnemyViewMono GetSelectedEnemyViewMono => _selectedEnemyViewMono;
         [SerializeField] EnemyNormalViewNet enemyNormalViewMono = null!;
         [SerializeField] EnemyBoss1ViewNet enemyBoss1ViewMono = null!; // Tank
         [SerializeField] EnemyBoss2ViewNet enemyBoss2ViewMono = null!; // 筋肉

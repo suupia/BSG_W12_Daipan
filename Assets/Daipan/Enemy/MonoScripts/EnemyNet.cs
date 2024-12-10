@@ -129,13 +129,13 @@ namespace Daipan.Enemy.MonoScripts
         public void OnAttacked(IPlayerParamData playerParamData)
         {
             // Hpの増減より先に判定する必要がある
-            if (EnemyEnum.IsSpecial() == true &&
+            if (EnemyEnum.IsSpecial() == true && 
                 !EnemySpecialOnAttacked.IsSameColor(EnemyEnum, playerParamData.PlayerEnum()))
             {
                 // Die
-                Debug.Log("Special enemy die");
+                Debug.Log($"Special enemy die. enemyViewMono : {enemyViewMono}, EnemyEnum : {EnemyEnum}");
                 _enemyCluster.Remove(this);
-                _enemyDie.DiedBySpecialBlack(enemyViewMono);
+                _enemyDie.DiedBySpecialBlack(enemyViewMono?.GetSelectedEnemyViewMono);
             }
 
             Hp = _enemyOnAttacked.OnAttacked(Hp, playerParamData);
