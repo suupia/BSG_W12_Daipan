@@ -29,11 +29,11 @@ namespace Daipan.Enemy.Scripts
             OnDied?.Invoke(_enemyMono, args);
             if (enemyViewMono == null)
             {
-                UnityEngine.Object.Destroy(_enemyMono.GameObject);
+                _enemyMono.DeleteSelf();
                 return;
             }
 
-            enemyViewMono.Died(() => UnityEngine.Object.Destroy(_enemyMono.GameObject));
+            enemyViewMono.Died(() => _enemyMono.DeleteSelf());
         }
 
         public void DiedByDaipan(IEnemyViewMono? enemyViewMono)
@@ -44,7 +44,7 @@ namespace Daipan.Enemy.Scripts
             OnDied?.Invoke(_enemyMono, args);
             if (enemyViewMono == null)
             {
-                UnityEngine.Object.Destroy(_enemyMono.GameObject);
+                _enemyMono.DeleteSelf();
                 return;
             }
 
@@ -54,7 +54,7 @@ namespace Daipan.Enemy.Scripts
                 .DOMoveY(-1.7f, 0.3f)
                 .SetEase(Ease.InQuint)
                 .SetDelay(delayTime)
-                .OnStart(() => { enemyViewMono.Daipaned(() => UnityEngine.Object.Destroy(_enemyMono.GameObject)); });
+                .OnStart(() => { enemyViewMono.Daipaned(() => _enemyMono.DeleteSelf()); });
         }
         
 
@@ -66,14 +66,14 @@ namespace Daipan.Enemy.Scripts
             OnDied?.Invoke(_enemyMono, args);
             if (enemyViewMono == null)
             {
-                UnityEngine.Object.Destroy(_enemyMono.GameObject);
+                _enemyMono.DeleteSelf();
                 return;
             }
 
             if(enemyViewMono is IEnemySpecialView specialEnemyViewMono)
             {
                 // 違う色に攻撃したのなら、特殊アニメーションを再生し、Destroy
-                specialEnemyViewMono.SpecialBlack(() => UnityEngine.Object.Destroy(_enemyMono.GameObject));
+                specialEnemyViewMono.SpecialBlack(() => _enemyMono.DeleteSelf());
                 // Debug.Log("Special enemy die by SpecialBlack()");
             }
             else
