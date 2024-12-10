@@ -101,6 +101,11 @@ namespace Daipan.Enemy.MonoScripts
             enemyViewMono?.Highlight(isHighlighted);
         }
 
+        public void DeleteSelf()
+        {
+           Destroy(gameObject);
+        }
+
         public void OnAttacked(IPlayerParamData playerParamData)
         {
             // Hpの増減より先に判定する必要がある

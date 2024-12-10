@@ -125,6 +125,11 @@ namespace Daipan.Enemy.MonoScripts
         {
             enemyViewMono?.Highlight(isHighlighted);
         }
+        
+        public void DeleteSelf()
+        {
+            Runner.Despawn(Object);
+        }
 
         public void OnAttacked(IPlayerParamData playerParamData)
         {
