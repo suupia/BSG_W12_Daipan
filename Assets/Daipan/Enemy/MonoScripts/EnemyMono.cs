@@ -110,7 +110,7 @@ namespace Daipan.Enemy.MonoScripts
                 // Die
                 Debug.Log("Special enemy die");
                 _enemyCluster.Remove(this);
-                _enemyDie.DiedBySpecialBlack(enemyViewMono);
+                _enemyDie.DiedBySpecialBlack(enemyViewMono?.GetEnemyViewMono);
             }
 
             Hp = _enemyOnAttacked.OnAttacked(Hp, playerParamData);
