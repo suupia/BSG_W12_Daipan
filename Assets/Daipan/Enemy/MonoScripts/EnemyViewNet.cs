@@ -6,17 +6,17 @@ using UnityEngine.Serialization;
 
 namespace Daipan.Enemy.MonoScripts
 {
-    public sealed class EnemyViewMono : AbstractEnemyViewMono
+    public sealed class EnemyViewNet : AbstractEnemyViewNet
     {
-        public IEnemyViewMono GetEnemyViewMono => _selectedEnemyViewMono;
-        [SerializeField] EnemyNormalViewMono enemyNormalViewMono = null!;
-        [SerializeField] EnemyBoss1ViewMono enemyBoss1ViewMono = null!; // Tank
-        [SerializeField] EnemyBoss2ViewMono enemyBoss2ViewMono = null!; // 筋肉
-        [SerializeField] EnemyBoss3ViewMono enemyBoss3ViewMono = null!; // 素早い
-        [SerializeField] EnemySpecialViewMono enemySpecialViewMono = null!;
-        [SerializeField] EnemyTotem2ViewMono enemyTotem2ViewMono = null!;
-        [SerializeField] EnemyTotem3ViewMono enemyTotem3ViewMono = null!;
-        AbstractEnemyViewMono _selectedEnemyViewMono = null!;
+        public IEnemyViewMono GetSelectedEnemyViewMono => _selectedEnemyViewMono;
+        [SerializeField] EnemyNormalViewNet enemyNormalViewMono = null!;
+        [SerializeField] EnemyBoss1ViewNet enemyBoss1ViewMono = null!; // Tank
+        [SerializeField] EnemyBoss2ViewNet enemyBoss2ViewMono = null!; // 筋肉
+        [SerializeField] EnemyBoss3ViewNet enemyBoss3ViewMono = null!; // 素早い
+        [SerializeField] EnemySpecialViewNet enemySpecialViewMono = null!;
+        [SerializeField] EnemyTotem2ViewNet enemyTotem2ViewMono = null!;
+        [SerializeField] EnemyTotem3ViewNet enemyTotem3ViewMono = null!;
+        AbstractEnemyViewNet _selectedEnemyViewMono = null!;
 
         public override void SetDomain(IEnemyViewParamData enemyParamData)
         {

@@ -28,6 +28,7 @@ namespace Daipan.StreamerNet.MonoScripts
         private WaveState _waveState = null!;
         private IResultState _resultState = null!;
         private IViewerNumber _viewerNumber = null!;
+        private FinalBossColorChangerNetwork _finalBossColorChangerNetwork = null!;
 
         [Inject]
         public void Initialize(
@@ -40,6 +41,7 @@ namespace Daipan.StreamerNet.MonoScripts
             , WaveState waveState
             , IResultState resultState
             , IViewerNumber viewerNumber
+            , FinalBossColorChangerNetwork finalBossColorChangerNetwork
         )
         {
             _runner = runner;
@@ -51,6 +53,7 @@ namespace Daipan.StreamerNet.MonoScripts
             _waveState = waveState;
             _resultState = resultState;
             _viewerNumber = viewerNumber;
+            _finalBossColorChangerNetwork = finalBossColorChangerNetwork;
 
             Debug.Log("StreamerRPCReceiverNet is initialized");
         }
@@ -119,6 +122,13 @@ namespace Daipan.StreamerNet.MonoScripts
         {
             if (_runner.LocalPlayer == caller) return;
             _viewerNumber.SetViewer(amount);
+        }
+        
+        [Rpc(RpcSources.All, RpcTargets.All)]
+        public void SetFinalBossColorRPC(FinalBossColor color)
+        {
+            Debug.Log($"SetFinalBossColorRPC received: {color}");
+            _finalBossColorChangerNetwork.CurrentColor = color;
         }
     }
 }

@@ -58,7 +58,7 @@ namespace Daipan.Enemy.Scripts
         }
         
 
-        public void DiedBySpecialBlack(IGetAbstractEnemyViewMono? enemyViewMono)
+        public void DiedBySpecialBlack(IEnemyViewMono? enemyViewMono)
         {
             if (IsDead) return;
             IsDead = true;
@@ -70,11 +70,11 @@ namespace Daipan.Enemy.Scripts
                 return;
             }
 
-            var abstractEnemyViewMono = enemyViewMono.GetAbstractEnemyViewMono();
-            if(abstractEnemyViewMono is EnemySpecialViewMono specialEnemyViewMono)
+            if(enemyViewMono is IEnemySpecialView specialEnemyViewMono)
             {
                 // 違う色に攻撃したのなら、特殊アニメーションを再生し、Destroy
                 specialEnemyViewMono.SpecialBlack(() => UnityEngine.Object.Destroy(_enemyMono.GameObject));
+                // Debug.Log("Special enemy die by SpecialBlack()");
             }
             else
             {

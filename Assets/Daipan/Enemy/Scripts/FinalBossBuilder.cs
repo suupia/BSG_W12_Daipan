@@ -18,7 +18,7 @@ namespace Daipan.Enemy.Scripts
         readonly FinalBossOnAttacked _finalBossOnAttacked;
         readonly FinalBossDefeatTracker _finalBossDefeatTracker;
 
-        readonly FinalBossColorChanger _finalBossColorChanger;
+        readonly IFinalBossCurrentColor _finalBossCurrentColor;
         readonly IPlayerAntiCommentParamData _playerAntiCommentParamData;
         readonly ICommentSpawner _commentSpawner;
         readonly IFinalBossParamData _finalBossParamData;
@@ -31,7 +31,7 @@ namespace Daipan.Enemy.Scripts
             , IEnemySpawner enemySpawner
             , FinalBossOnAttacked finalBossOnAttacked
             , FinalBossDefeatTracker finalBossDefeatTracker
-            , FinalBossColorChanger finalBossColorChanger
+            , IFinalBossCurrentColor finalBossCurrentColor
             , IPlayerAntiCommentParamData playerAntiCommentParamData
             , ICommentSpawner commentSpawner
             , IFinalBossParamData finalBossParamData
@@ -43,7 +43,7 @@ namespace Daipan.Enemy.Scripts
             _enemySpawner = enemySpawner;
             _finalBossOnAttacked = finalBossOnAttacked;
             _finalBossDefeatTracker = finalBossDefeatTracker;
-            _finalBossColorChanger = finalBossColorChanger;
+            _finalBossCurrentColor = finalBossCurrentColor;
             _playerAntiCommentParamData = playerAntiCommentParamData;
             _commentSpawner = commentSpawner;
             _finalBossParamData = finalBossParamData;
@@ -64,7 +64,7 @@ namespace Daipan.Enemy.Scripts
             finalBossMono.OnAttackedEvent += (sender, args) =>
             {
 
-                if (FinalBossOnAttacked.IsSameColor(_finalBossColorChanger.CurrentColor, args.PlayerEnum())) return;
+                if (FinalBossOnAttacked.IsSameColor(_finalBossCurrentColor.CurrentColor, args.PlayerEnum())) return;
 
                 var spawnPercent = _playerAntiCommentParamData.GetFinalBossAntiCommentPercentOnMissAttacks();
 
