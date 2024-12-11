@@ -192,5 +192,7 @@ namespace Daipan.Sound.MonoScripts
         Text,
         TowerDamage,
         BAN,
+        SelectLanguage,
+        Cansel,
     }
 }
