@@ -11,6 +11,7 @@ using TMPro;
 using R3;
 using Daipan.AntiNet.MonoScripts;
 using UnityEngine.EventSystems;
+using AntiEnemySpawnerNetwork = Daipan.AntiNet.Scripts.AntiEnemySpawnerNetwork;
 
 namespace Daipan.Player.MonoScripts
 {

@@ -25,7 +25,7 @@ using Random = UnityEngine.Random;
 
 namespace Daipan.Enemy.Scripts
 {
-    public sealed class EnemySpawnerNetwork : IEnemySpawner, IEnemySpawnerNetwork
+    public sealed class AntiEnemySpawnerNetwork : IEnemySpawner, IAntiEnemySpawnerNetwork
     {
         readonly IObjectResolver _container;
         readonly NetworkRunner _runner;
@@ -40,7 +40,7 @@ namespace Daipan.Enemy.Scripts
         float _timer;
 
         [Inject]
-        public EnemySpawnerNetwork(
+        public AntiEnemySpawnerNetwork(
             IObjectResolver container
             , NetworkRunner runner
             , IPrefabLoader<EnemyNet> enemyMonoLoader
@@ -109,7 +109,7 @@ namespace Daipan.Enemy.Scripts
             }
         }
 
-        public void SpawnEnemy(EnemyEnum enemyEnum, PlayerRef playerRef)
+        public void SpawnAntiEnemy(EnemyEnum enemyEnum, PlayerRef playerRef)
         {
             if (enemyEnum == EnemyEnum.None) return;
             // EnemyのSpawnはStreamerが行う
@@ -187,7 +187,7 @@ namespace Daipan.Enemy.Scripts
             }
         }
 
-        ~EnemySpawnerNetwork()
+        ~AntiEnemySpawnerNetwork()
         {
             Dispose();
         }

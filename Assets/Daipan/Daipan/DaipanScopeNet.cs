@@ -55,6 +55,7 @@ using Daipan.Battle.interfaces;
 using Daipan.Stream.Interfaces;
 using Daipan.Network.MonoScripts;
 using Daipan.UINet.MonoScripts;
+using AntiEnemySpawnerNetwork = Daipan.Enemy.Scripts.AntiEnemySpawnerNetwork;
 
 namespace Daipan.Daipan
 
@@ -293,7 +294,7 @@ namespace Daipan.Daipan
 
         public static void RegisterAntiNet(IContainerBuilder builder, NetworkPlayerParamsManager networkPlayerParamsManager)
         {
-            builder.Register<AntiEnemySpawnerNetwork>(Lifetime.Scoped);
+            builder.Register<AntiNet.Scripts.AntiEnemySpawnerNetwork>(Lifetime.Scoped);
             builder.Register<SpawnEnemyCostValue>(Lifetime.Scoped);
             builder.RegisterComponentInHierarchy<CostViewMono>();
             builder.RegisterInstance(networkPlayerParamsManager);
@@ -349,7 +350,7 @@ namespace Daipan.Daipan
             RegisterEnemy(builder, enemyParamsManager);
             builder.Register<EnemyOnAttackedBuilder>(Lifetime.Transient);
             builder.RegisterComponentInHierarchy<EnemyWaveSpawnerCounterNet>().AsSelf().AsImplementedInterfaces();
-            builder.Register<EnemySpawnerNetwork>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
+            builder.Register<AntiEnemySpawnerNetwork>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
             builder.Register<EnemyEnumSelector>(Lifetime.Scoped).As<IEnemyEnumSelector>();
             builder.Register<EnemyBuilderNetwork>(Lifetime.Scoped).As<IEnemyBuilder>();
             builder.Register<EnemySpecialOnAttacked>(Lifetime.Scoped);
