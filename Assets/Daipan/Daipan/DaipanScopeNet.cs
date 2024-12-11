@@ -306,6 +306,7 @@ namespace Daipan.Daipan
             builder.RegisterComponentInHierarchy<AntiStateViewMono>();
             builder.RegisterComponentInHierarchy<AntiEnemyCostViewMono>();
             builder.RegisterComponentInHierarchy<AntiCommentInputViewMono>();
+            builder.RegisterComponentInHierarchy<AntiBanEffectViewMono>();
         }
 
         public static void RegisterStreamerNet(IContainerBuilder builder)
