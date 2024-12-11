@@ -206,6 +206,7 @@ namespace Daipan.Daipan
             // Viewer
             builder.RegisterComponentInHierarchy<ViewerViewMono>();
             builder.Register<ViewerPrefabLoader>(Lifetime.Scoped).As<IPrefabLoader<ViewerDifferenceViewMono>>();
+            builder.Register<ViewerDifferenceSpawner>(Lifetime.Scoped);
 
             // View
             builder.RegisterComponentInHierarchy<StreamerViewMono>().AsSelf().As<IUpdate>();
