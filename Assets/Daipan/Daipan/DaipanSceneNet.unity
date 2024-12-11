@@ -712,7 +712,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1667613170
 Transform:
   m_ObjectHideFlags: 0
@@ -1800,7 +1800,7 @@ PrefabInstance:
     - target: {fileID: 1243360813622444110, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       propertyPath: m_TargetTexture
       value: 
-      objectReference: {fileID: 8400000, guid: 6a3f6427632c843a5906315b4285168c, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 1243360813622444110, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       propertyPath: m_NormalizedViewPortRect.x
       value: 0.10002869
@@ -1844,7 +1844,7 @@ PrefabInstance:
     - target: {fileID: 1948116558607679532, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       propertyPath: m_TargetTexture
       value: 
-      objectReference: {fileID: 8400000, guid: 6a3f6427632c843a5906315b4285168c, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 1948116558607679532, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       propertyPath: m_NormalizedViewPortRect.x
       value: 0.10002869
@@ -1864,7 +1864,7 @@ PrefabInstance:
     - target: {fileID: 2497925990668980782, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       propertyPath: m_TargetTexture
       value: 
-      objectReference: {fileID: 8400000, guid: 6a3f6427632c843a5906315b4285168c, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 2497925990668980782, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       propertyPath: m_NormalizedViewPortRect.x
       value: 0.10002869
@@ -1940,7 +1940,7 @@ PrefabInstance:
     - target: {fileID: 6953553113699317605, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       propertyPath: m_TargetTexture
       value: 
-      objectReference: {fileID: 8400000, guid: 6a3f6427632c843a5906315b4285168c, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 6953553113699317605, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       propertyPath: m_BackGroundColor.b
       value: 0
@@ -1988,7 +1988,7 @@ PrefabInstance:
     - target: {fileID: 8393267195869761840, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       propertyPath: m_TargetTexture
       value: 
-      objectReference: {fileID: 8400000, guid: 6a3f6427632c843a5906315b4285168c, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 8393267195869761840, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       propertyPath: m_NormalizedViewPortRect.x
       value: 0.10002869
@@ -2709,49 +2709,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1377864866711895347, guid: e14e9eddc9151440abb22c158a952d28, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 1377864866711895347, guid: e14e9eddc9151440abb22c158a952d28, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 2848884792875201571, guid: e14e9eddc9151440abb22c158a952d28, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 2848884792875201571, guid: e14e9eddc9151440abb22c158a952d28, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 4077353167279598138, guid: e14e9eddc9151440abb22c158a952d28, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 4077353167279598138, guid: e14e9eddc9151440abb22c158a952d28, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 200
-      objectReference: {fileID: 0}
     - target: {fileID: 4709876791888845700, guid: e14e9eddc9151440abb22c158a952d28, type: 3}
       propertyPath: m_Name
       value: StreamerInputCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 4908035269355676675, guid: e14e9eddc9151440abb22c158a952d28, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 200
+    - target: {fileID: 6585618239752147910, guid: e14e9eddc9151440abb22c158a952d28, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 400
       objectReference: {fileID: 0}
-    - target: {fileID: 4908035269355676675, guid: e14e9eddc9151440abb22c158a952d28, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 8538412758801992426, guid: e14e9eddc9151440abb22c158a952d28, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 8538412758801992426, guid: e14e9eddc9151440abb22c158a952d28, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 200
+    - target: {fileID: 6585618239752147910, guid: e14e9eddc9151440abb22c158a952d28, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -390
       objectReference: {fileID: 0}
     - target: {fileID: 9104200569856987738, guid: e14e9eddc9151440abb22c158a952d28, type: 3}
       propertyPath: m_Camera
