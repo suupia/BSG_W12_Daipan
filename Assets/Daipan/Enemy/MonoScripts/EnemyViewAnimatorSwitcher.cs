@@ -20,7 +20,6 @@ namespace Daipan.Enemy.MonoScripts
 
         bool _canHighlight = true;
 
-
         public EnemyViewAnimatorSwitcher(
             IEnumerable<Animator> animators,
             Animator leaderAnimator,
