@@ -2527,9 +2527,21 @@ PrefabInstance:
       value: ChainView
       objectReference: {fileID: 0}
     - target: {fileID: 8038644789197522368, guid: b8ba7a9facda74043a9a2ec8c656fed0, type: 3}
+      propertyPath: banMessage
+      value: 
+      objectReference: {fileID: 1334467004}
+    - target: {fileID: 8038644789197522368, guid: b8ba7a9facda74043a9a2ec8c656fed0, type: 3}
+      propertyPath: blinkingTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8038644789197522368, guid: b8ba7a9facda74043a9a2ec8c656fed0, type: 3}
       propertyPath: banChainEffect
       value: 
       objectReference: {fileID: 4870961278684223821}
+    - target: {fileID: 8038644789197522368, guid: b8ba7a9facda74043a9a2ec8c656fed0, type: 3}
+      propertyPath: banMessageText
+      value: 
+      objectReference: {fileID: 428781488}
     - target: {fileID: 8038644789197522368, guid: b8ba7a9facda74043a9a2ec8c656fed0, type: 3}
       propertyPath: banChainEffectAnimator
       value: 

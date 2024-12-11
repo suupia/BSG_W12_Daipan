@@ -23,15 +23,16 @@ namespace Daipan.AntiNet.MonoScripts
 
         [SerializeField] Image banMessage = null!;
         [SerializeField] TMP_Text banMessageText = null!;
+        [SerializeField] float blinkingTime;
 
-        private Sequence _sequence = null!;
+        private Sequence? _sequence = null!;
         private IDisposable? _disposable = null!;
 
         [Inject]
         public void Initialize(AntiStateValue antiStateValue)
         {
-            // BANアニメーション
             banChainEffect.SetActive(false);
+            banMessage.gameObject.SetActive(false);
             Observable
                 .EveryValueChanged(antiStateValue, x => x.AntiStateEnum)
                 .Subscribe(value =>
@@ -39,6 +40,11 @@ namespace Daipan.AntiNet.MonoScripts
                     if (value == AntiStateEnum.BAN)
                     {
                         ShowEffect();
+                        ShowMessage(antiStateValue.IsDaipaned);
+                    }
+                    else
+                    {
+                        HideMessage();
                     }
                 })
                 .AddTo(this);
@@ -55,6 +61,37 @@ namespace Daipan.AntiNet.MonoScripts
             _disposable = Observable
                 .Timer(TimeSpan.FromSeconds(uncontrollableTime))
                 .Subscribe(_ => banChainEffect.SetActive(false));
+        }
+
+        void ShowMessage(bool isDaipaned)
+        {
+            _sequence = DOTween.Sequence();
+
+            banMessage.gameObject.SetActive(true);
+            banMessageText.text = isDaipaned
+                ? "配信者ちゃんにBANされた！？"
+                : "アンチコメント書き過ぎて \n モデレーターにBANされた！";
+            banMessageText.fontSize = isDaipaned
+                ? 90 : 65;
+
+            _sequence.Append(
+                DOVirtual.Float(
+                    0.5f,
+                    1f,
+                    blinkingTime,
+                    onVirtualUpdate: (value) =>
+                    {
+                        banMessageText.color = new Color(0.906f, 0.271f, 0.243f, value);
+                    })
+                    .SetEase(Ease.InOutQuart)
+                    .SetLoops(-1, LoopType.Yoyo)
+            );
+        }
+
+        void HideMessage()
+        {
+            banMessage.gameObject.SetActive(false);
+            _sequence?.Kill();
         }
     }
 }
