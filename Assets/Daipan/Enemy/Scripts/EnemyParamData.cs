@@ -38,21 +38,15 @@ namespace Daipan.Enemy.Scripts
         public double GetMoveSpeedPerSec() => _enemyParam.enemyMoveParam.moveSpeedPerSec * _enemyWaveParamContainer.GetEnemyWaveParamData().GetMoveSpeedRate();
 
         // Colors
-        public Color GetBodyColor() => IsSpawnedByAnti 
-            ? ColorAdjuster.GetDarkenedColor(_enemyParam.enemyAnimatorParam.bodyColor) 
-            : _enemyParam.enemyAnimatorParam.bodyColor;
+        public Color GetBodyColor() => _enemyParam.enemyAnimatorParam.bodyColor;
 
         public Color GetEyeColor() => IsSpawnedByAnti 
-            ? ColorAdjuster.GetDarkenedColor(_enemyParam.enemyAnimatorParam.eyeColor) 
+            ? _enemyParam.enemyAnimatorParam.lineColor // Antiが出した敵は、目の色をラインの色にする 
             : _enemyParam.enemyAnimatorParam.eyeColor;
 
-        public Color GetEyeBallColor() => IsSpawnedByAnti 
-            ? ColorAdjuster.GetDarkenedColor(_enemyParam.enemyAnimatorParam.eyeBallColor) 
-            : _enemyParam.enemyAnimatorParam.eyeBallColor;
+        public Color GetEyeBallColor() => _enemyParam.enemyAnimatorParam.eyeBallColor;
 
-        public Color GetLineColor() => IsSpawnedByAnti 
-            ? ColorAdjuster.GetDarkenedColor(_enemyParam.enemyAnimatorParam.lineColor) 
-            : _enemyParam.enemyAnimatorParam.lineColor;
+        public Color GetLineColor() =>  _enemyParam.enemyAnimatorParam.lineColor;
 
         public bool IsSpawnedByAnti { get; set; }
     }
