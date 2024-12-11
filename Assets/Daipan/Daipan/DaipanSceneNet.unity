@@ -1381,10 +1381,42 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1694577628719845345, guid: 3111819a51a234c318bc0a14465c90b5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2
+      objectReference: {fileID: 0}
     - target: {fileID: 1766471758223218499, guid: 3111819a51a234c318bc0a14465c90b5, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1951700563}
+    - target: {fileID: 1889435008762239795, guid: 3111819a51a234c318bc0a14465c90b5, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 1889435008762239795, guid: 3111819a51a234c318bc0a14465c90b5, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 1889435008762239795, guid: 3111819a51a234c318bc0a14465c90b5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1889435008762239795, guid: 3111819a51a234c318bc0a14465c90b5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1889435008762239795, guid: 3111819a51a234c318bc0a14465c90b5, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 920.53
+      objectReference: {fileID: 0}
+    - target: {fileID: 1889435008762239795, guid: 3111819a51a234c318bc0a14465c90b5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 125.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1889435008762239795, guid: 3111819a51a234c318bc0a14465c90b5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 1959671152598709517, guid: 3111819a51a234c318bc0a14465c90b5, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2709,49 +2741,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1377864866711895347, guid: e14e9eddc9151440abb22c158a952d28, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 1377864866711895347, guid: e14e9eddc9151440abb22c158a952d28, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 2848884792875201571, guid: e14e9eddc9151440abb22c158a952d28, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 2848884792875201571, guid: e14e9eddc9151440abb22c158a952d28, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 4077353167279598138, guid: e14e9eddc9151440abb22c158a952d28, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 4077353167279598138, guid: e14e9eddc9151440abb22c158a952d28, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 200
-      objectReference: {fileID: 0}
     - target: {fileID: 4709876791888845700, guid: e14e9eddc9151440abb22c158a952d28, type: 3}
       propertyPath: m_Name
       value: StreamerInputCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 4908035269355676675, guid: e14e9eddc9151440abb22c158a952d28, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 200
+    - target: {fileID: 6585618239752147910, guid: e14e9eddc9151440abb22c158a952d28, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 400
       objectReference: {fileID: 0}
-    - target: {fileID: 4908035269355676675, guid: e14e9eddc9151440abb22c158a952d28, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 8538412758801992426, guid: e14e9eddc9151440abb22c158a952d28, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 8538412758801992426, guid: e14e9eddc9151440abb22c158a952d28, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 200
+    - target: {fileID: 6585618239752147910, guid: e14e9eddc9151440abb22c158a952d28, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -390
       objectReference: {fileID: 0}
     - target: {fileID: 9104200569856987738, guid: e14e9eddc9151440abb22c158a952d28, type: 3}
       propertyPath: m_Camera
