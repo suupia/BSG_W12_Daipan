@@ -4,6 +4,7 @@ using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.Scripts;
 using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.Utility.Scripts;
+using Fusion;
 using R3;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -15,12 +16,12 @@ namespace Daipan.Enemy.MonoScripts
         [SerializeField] HpGaugeMono hpGaugeMono = null!;
         [SerializeField] SpriteRenderer tempSpriteRenderer = null!; // todo: 完成時には削除する
         //[SerializeField] Animator animatorHighlight = null!;
-        [SerializeField] Animator animatorBody = null!;
-        [SerializeField] Animator animatorEye = null!;
-        [SerializeField] Animator animatorEyeBall = null!;
-        [SerializeField] Animator animatorLine = null!;
-        [SerializeField] Animator animatorSpecialBlackBody = null!;
-        [SerializeField] Animator animatorSpecialBlackEye = null!;
+        [SerializeField] NetworkMecanimAnimator animatorBody = null!;
+        [SerializeField] NetworkMecanimAnimator animatorEye = null!;
+        [SerializeField] NetworkMecanimAnimator animatorEyeBall = null!;
+        [SerializeField] NetworkMecanimAnimator animatorLine = null!;
+        [SerializeField] NetworkMecanimAnimator animatorSpecialBlackBody = null!;
+        [SerializeField] NetworkMecanimAnimator animatorSpecialBlackEye = null!;
         [SerializeField] SpriteRenderer highlightSpriteRenderer = null!;
         [SerializeField] SpriteRenderer HpSprite=null!;
         
@@ -41,7 +42,7 @@ namespace Daipan.Enemy.MonoScripts
                 return;
             }
             
-            _animatorSwitcher = new EnemyViewAnimatorSwitcher(
+            _animatorSwitcher = new EnemyViewAnimatorSwitcherNetwork(
                 new [] {/*animatorHighlight,*/ animatorBody, animatorEye, animatorEyeBall, animatorLine},
                 animatorLine,
                 hpGaugeMono,
