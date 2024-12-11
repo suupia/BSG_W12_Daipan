@@ -32,6 +32,7 @@ namespace Daipan.AntiNet.MonoScripts
                     if (value == AntiStateEnum.BAN)
                     {
                         banImage.gameObject.SetActive(true);
+                        CloseChat();
                     }
                     else
                     {
