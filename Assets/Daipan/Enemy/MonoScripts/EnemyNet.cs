@@ -245,6 +245,7 @@ namespace Daipan.Enemy.MonoScripts
             if (EnemyEnum == EnemyEnum.None) return;
             var enemyViewParamData = _enemyParamContainer.GetEnemyViewParamData(EnemyEnum);
             enemyViewParamData.IsSpawnedByAnti = IsSpawnedByAnti;
+            enemyViewMono?.SetDomain(enemyViewParamData);
             enemyViewMono?.SetOnDiedCallback(DeleteSelf);
             enemyViewMono?.SetOnDaipanedCallback(OnDaipaned);
             enemyViewMono?.SetSpecialBlackCallback(DeleteSelf); 

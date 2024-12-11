@@ -38,10 +38,37 @@ namespace Daipan.Enemy.Scripts
         public double GetMoveSpeedPerSec() => _enemyParam.enemyMoveParam.moveSpeedPerSec * _enemyWaveParamContainer.GetEnemyWaveParamData().GetMoveSpeedRate();
 
         // Colors
-        public Color GetBodyColor() => _enemyParam.enemyAnimatorParam.bodyColor;
-        public Color GetEyeColor() => _enemyParam.enemyAnimatorParam.eyeColor;
-        public Color GetEyeBallColor() => _enemyParam.enemyAnimatorParam.eyeBallColor;
-        public Color GetLineColor() => _enemyParam.enemyAnimatorParam.lineColor;
+        public Color GetBodyColor() => IsSpawnedByAnti 
+            ? ColorAdjuster.GetDarkenedColor(_enemyParam.enemyAnimatorParam.bodyColor) 
+            : _enemyParam.enemyAnimatorParam.bodyColor;
+
+        public Color GetEyeColor() => IsSpawnedByAnti 
+            ? ColorAdjuster.GetDarkenedColor(_enemyParam.enemyAnimatorParam.eyeColor) 
+            : _enemyParam.enemyAnimatorParam.eyeColor;
+
+        public Color GetEyeBallColor() => IsSpawnedByAnti 
+            ? ColorAdjuster.GetDarkenedColor(_enemyParam.enemyAnimatorParam.eyeBallColor) 
+            : _enemyParam.enemyAnimatorParam.eyeBallColor;
+
+        public Color GetLineColor() => IsSpawnedByAnti 
+            ? ColorAdjuster.GetDarkenedColor(_enemyParam.enemyAnimatorParam.lineColor) 
+            : _enemyParam.enemyAnimatorParam.lineColor;
+
         public bool IsSpawnedByAnti { get; set; }
+    }
+
+    public static class ColorAdjuster
+    {
+        const float DarkenFactor = 0.8f; // Adjust this factor to control the level of darkening
+
+        public static Color GetDarkenedColor(Color color)
+        {
+            return new Color(
+                color.r * DarkenFactor,
+                color.g * DarkenFactor,
+                color.b * DarkenFactor,
+                color.a // Keep alpha unchanged
+            );
+        }
     }
 }
