@@ -102,23 +102,10 @@ namespace Daipan.Enemy.MonoScripts
         {
             Debug.Log($"[EnemyViewNet] Died() , Object.StateAuthority: {Object.HasStateAuthority}");
             _selectedEnemyViewMono.Died(_onDied);
-           // RpcDied(); 
-        }
-        [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
-        void RpcDied()
-        {
-            Debug.Log($"[EnemyViewNet] RpcDied() , Object.StateAuthority: {Object.HasStateAuthority}");
-            _selectedEnemyViewMono.Died(_onDied);
         }
 
         public override void Daipaned()
         {
-            RpcDaipaned(); 
-        }
-        [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
-        void RpcDaipaned()
-        {
-            Debug.Log($"[EnemyViewNet] RpcDaipaned() , Object.StateAuthority: {Object.HasStateAuthority}");
             _selectedEnemyViewMono.Daipaned(_onDaipaned);
         }
 
