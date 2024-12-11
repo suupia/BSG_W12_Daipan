@@ -52,6 +52,7 @@ namespace Daipan.Enemy.MonoScripts
             animatorEye.GetComponent<SpriteRenderer>().color = enemyViewParamData.GetEyeColor();
             animatorEyeBall.GetComponent<SpriteRenderer>().color = enemyViewParamData.GetEyeBallColor();
             animatorLine.GetComponent<SpriteRenderer>().color = enemyViewParamData.GetLineColor();
+            highlightSpriteRenderer.color = enemyViewParamData.GetBodyColor();
             
             // temp
             tempSpriteRenderer.color = EnemyViewTempColor.GetTempColor(enemyViewParamData.GetEnemyEnum()); 
