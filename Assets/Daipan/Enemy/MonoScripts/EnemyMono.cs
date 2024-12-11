@@ -51,7 +51,13 @@ namespace Daipan.Enemy.MonoScripts
                 _enemyParamContainer.GetEnemyParamData(EnemyEnum), _playerHolder.PlayerMono);
 
             IsReachedPlayer = _enemyMove.MoveUpdate(Time.deltaTime, _playerHolder.PlayerMono.Transform, _enemyParamContainer.GetEnemyParamData(EnemyEnum), enemyViewMono);
-
+            if (EnemyEnum.IsSpecial() == true && IsReachedPlayer)
+            {
+                // Special Enemy Die
+                Debug.Log("Special enemy die by ReachedPlayer");
+                DieBySpecialBlack();
+            }
+            
             if (transform.position.x < _enemySpawnPoint.GetEnemyDespawnedPoint().x) Die();
 
             enemyViewMono?.SetHpGauge(Hp.Value, _enemyParamContainer.GetEnemyParamData(EnemyEnum).GetMaxHp());
@@ -115,10 +121,8 @@ namespace Daipan.Enemy.MonoScripts
             if (EnemyEnum.IsSpecial() == true &&
                 !EnemySpecialOnAttacked.IsSameColor(EnemyEnum, playerParamData.PlayerEnum()))
             {
-                // Die
                 Debug.Log("Special enemy die");
-                _enemyCluster.Remove(this);
-                _enemyDie.DiedBySpecialBlack(enemyViewMono?.GetEnemyViewMono);
+                DieBySpecialBlack(); 
             }
 
             Hp = _enemyOnAttacked.OnAttacked(Hp, playerParamData);
@@ -135,6 +139,12 @@ namespace Daipan.Enemy.MonoScripts
             _enemyOnDied.OnDied(); // Destroyする前の方がいいはず
             _enemyCluster.Remove(this);
             _enemyDie.Died(enemyViewMono);
+        }
+        
+        void DieBySpecialBlack()
+        {
+            _enemyCluster.Remove(this);
+            _enemyDie.DiedBySpecialBlack(enemyViewMono?.GetEnemyViewMono);
         }
     }
 }
