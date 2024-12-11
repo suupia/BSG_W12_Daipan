@@ -16,8 +16,8 @@ namespace Daipan.AntiNet.MonoScripts
 {
     public class AntiBanEffectViewMono : MonoBehaviour
     {
-        [SerializeField] GameObject banEffect = null!;
-        [SerializeField] Animator banEffectAnimator = null!;
+        [SerializeField] GameObject banChainEffect = null!;
+        [SerializeField] Animator banChainEffectAnimator = null!;
         // animationの終了関係なくuncontrollableTimeで終了
         [SerializeField] float uncontrollableTime;
 
@@ -27,7 +27,7 @@ namespace Daipan.AntiNet.MonoScripts
         [Inject]
         public void Initialize(AntiStateValue antiStateValue)
         {
-            banEffect.SetActive(false);
+            banChainEffect.SetActive(false);
             Observable
                 .EveryValueChanged(antiStateValue, x => x.AntiStateEnum)
                 .Subscribe(value =>
@@ -43,12 +43,12 @@ namespace Daipan.AntiNet.MonoScripts
         void ShowEffect()
         {
             _disposable?.Dispose();
-            banEffect.SetActive(true);
-            banEffectAnimator.SetTrigger("Fire");
+            banChainEffect.SetActive(true);
+            banChainEffectAnimator.SetTrigger("Fire");
 
             _disposable = Observable
                 .Timer(TimeSpan.FromSeconds(uncontrollableTime))
-                .Subscribe(_ => banEffect.SetActive(false));
+                .Subscribe(_ => banChainEffect.SetActive(false));
         }
     }
 }
