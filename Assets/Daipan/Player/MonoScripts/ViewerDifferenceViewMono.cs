@@ -27,22 +27,19 @@ namespace Daipan.Player.MonoScripts
             Hide();
         }
 
-        public void ShowComboText(int comboCount)
+        public void ShowViewerDifferenceText(int viewerDifference)
         {
-            // comboCountが0なら表示しない
-            if (comboCount <= 0) Destroy(gameObject);
-
             // 他のComboInstantViewMonoを削除
-            var comboInstantViewMonos = FindObjectsOfType<ComboInstantViewMono>();
-            foreach (var comboInstantViewMono in comboInstantViewMonos)
+            var viewerDifferenceViewMonos = FindObjectsOfType<ViewerDifferenceViewMono>();
+            foreach (var viewerDifferenceViewMono in viewerDifferenceViewMonos)
             {
-                if (comboInstantViewMono != this) Destroy(comboInstantViewMono.gameObject);
+                if (viewerDifferenceViewMono != this) Destroy(viewerDifferenceViewMono.gameObject);
             }
 
             // 初期のスケールが設定されていない場合は、現在のスケールを設定
             if (_originalScale == Vector3.zero) _originalScale = viewObject.transform.localScale;
 
-            viewerText.text = $"{comboCount}";
+            // viewerText.text = $"{comboCount}";
             Show();
 
             // 初期スケールに設定してからアニメーションを開始
