@@ -21,7 +21,7 @@ namespace Daipan.Enemy.Scripts
         }
         bool IsDead { get; set; }  // Die()の処理が2回以上呼ばれるのを防ぐためのフラグ
 
-        public void Died(IEnemyViewMono? enemyViewMono)
+        public void Died(IEnemyViewEndCallbacksFacade? enemyViewMono)
         {
             if (IsDead) return;
             IsDead = true;
@@ -33,10 +33,10 @@ namespace Daipan.Enemy.Scripts
                 return;
             }
 
-            enemyViewMono.Died(() => _enemyMono.DeleteSelf());
+            enemyViewMono.Died();
         }
 
-        public void DiedByDaipan(IEnemyViewMono? enemyViewMono)
+        public void DiedByDaipan(IEnemyViewEndCallbacksFacade? enemyViewMono)
         {
             if (IsDead) return;
             IsDead = true;
@@ -54,7 +54,7 @@ namespace Daipan.Enemy.Scripts
                 .DOMoveY(-1.7f, 0.3f)
                 .SetEase(Ease.InQuint)
                 .SetDelay(delayTime)
-                .OnStart(() => { enemyViewMono.Daipaned(() => _enemyMono.DeleteSelf()); });
+                .OnStart(enemyViewMono.Daipaned);
         }
         
 

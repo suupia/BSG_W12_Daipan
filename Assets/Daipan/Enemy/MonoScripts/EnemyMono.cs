@@ -86,6 +86,8 @@ namespace Daipan.Enemy.MonoScripts
             _enemyOnAttacked = enemyOnAttacked;
             _enemyOnDied = enemyOnDied;
             enemyViewMono?.SetDomain(_enemyParamContainer.GetEnemyViewParamData(EnemyEnum));
+            enemyViewMono?.SetOnDiedCallback(DeleteSelf);
+            enemyViewMono?.SetOnDaipanedCallback(DeleteSelf);
             Hp = new Hp(_enemyParamContainer.GetEnemyParamData(EnemyEnum).GetMaxHp());
 
         }
