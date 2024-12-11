@@ -38,9 +38,9 @@ namespace Daipan.Enemy.MonoScripts
                 return;
             }
             
-            _animatorSwitcher = new EnemyViewAnimatorSwitcher(
-                new [] {/*animatorHighlight,*/ animatorBody.Animator, animatorEye.Animator, animatorEyeBall.Animator, animatorLine.Animator},
-                animatorLine.Animator,
+            _animatorSwitcher = new EnemyViewAnimatorSwitcherNetwork(
+                new [] {/*animatorHighlight,*/ animatorBody, animatorEye, animatorEyeBall, animatorLine},
+                animatorLine,
                 hpGaugeMono,
                 highlightSpriteRenderer
             );

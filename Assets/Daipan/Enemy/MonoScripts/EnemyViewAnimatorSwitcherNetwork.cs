@@ -6,6 +6,7 @@ using System.Linq;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.Scripts;
 using Daipan.Utility.Scripts;
+using Fusion;
 using R3;
 using UnityEngine;
 
@@ -13,16 +14,16 @@ namespace Daipan.Enemy.MonoScripts
 {
     public sealed class EnemyViewAnimatorSwitcherNetwork : IEnemyViewAnimatorSwitcher
     {
-        readonly IEnumerable<Animator> _animators;
-        readonly Animator _leaderAnimator;
+        readonly IEnumerable<NetworkMecanimAnimator> _animators;
+        readonly NetworkMecanimAnimator _leaderAnimator;
         readonly HpGaugeMono _hpGaugeMono;
         readonly SpriteRenderer _highlightSpriteRenderer;
 
         bool _canHighlight = true;
 
         public EnemyViewAnimatorSwitcherNetwork(
-            IEnumerable<Animator> animators,
-            Animator leaderAnimator,
+            IEnumerable<NetworkMecanimAnimator> animators,
+            NetworkMecanimAnimator leaderAnimator,
             HpGaugeMono hpGaugeMono,
             SpriteRenderer highlightSpriteRenderer
         )
@@ -59,10 +60,10 @@ namespace Daipan.Enemy.MonoScripts
             _highlightSpriteRenderer.enabled = false;
             _canHighlight = false;
             // _leaderAnimatorを代表とする
-            var preState = _leaderAnimator.GetCurrentAnimatorStateInfo(0).fullPathHash;
+            var preState = _leaderAnimator.Animator.GetCurrentAnimatorStateInfo(0).fullPathHash;
             Observable.EveryValueChanged(_leaderAnimator, a => a.IsAlmostEnd())
                 .Where(isEnd => isEnd)
-                .Where(_ => preState != _leaderAnimator.GetCurrentAnimatorStateInfo(0).fullPathHash)
+                .Where(_ => preState != _leaderAnimator.Animator.GetCurrentAnimatorStateInfo(0).fullPathHash)
                 .Subscribe(_ => onDied())
                 .AddTo(_leaderAnimator.gameObject);
         }
@@ -73,10 +74,10 @@ namespace Daipan.Enemy.MonoScripts
             _highlightSpriteRenderer.enabled = false;
             _canHighlight = false;
             // _leaderAnimatorを代表とする
-            var preState = _leaderAnimator.GetCurrentAnimatorStateInfo(0).fullPathHash;
+            var preState = _leaderAnimator.Animator.GetCurrentAnimatorStateInfo(0).fullPathHash;
             Observable.EveryValueChanged(_leaderAnimator, a => a.IsAlmostEnd())
                 .Where(isEnd => isEnd)
-                .Where(_ => preState != _leaderAnimator.GetCurrentAnimatorStateInfo(0).fullPathHash)
+                .Where(_ => preState != _leaderAnimator.Animator.GetCurrentAnimatorStateInfo(0).fullPathHash)
                 .Subscribe(_ => onDied())
                 .AddTo(_leaderAnimator.gameObject);
         }
@@ -95,7 +96,7 @@ namespace Daipan.Enemy.MonoScripts
 
         void SetBoolAll(string paramName, bool value)
         {
-            foreach (var animator in _animators) animator.SetBool(paramName, value);
+            foreach (var animator in _animators) animator.Animator.SetBool(paramName, value);
         }
     }
 }
