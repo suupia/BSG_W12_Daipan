@@ -25,7 +25,7 @@ using Random = UnityEngine.Random;
 
 namespace Daipan.Enemy.Scripts
 {
-    public sealed class AntiEnemySpawnerNetwork : IEnemySpawner, IAntiEnemySpawnerNetwork
+    public sealed class EnemySpawnerNetwork : IEnemySpawner, IAntiEnemySpawnerNetwork
     {
         readonly IObjectResolver _container;
         readonly NetworkRunner _runner;
@@ -40,7 +40,7 @@ namespace Daipan.Enemy.Scripts
         float _timer;
 
         [Inject]
-        public AntiEnemySpawnerNetwork(
+        public EnemySpawnerNetwork(
             IObjectResolver container
             , NetworkRunner runner
             , IPrefabLoader<EnemyNet> enemyMonoLoader
@@ -187,7 +187,7 @@ namespace Daipan.Enemy.Scripts
             }
         }
 
-        ~AntiEnemySpawnerNetwork()
+        ~EnemySpawnerNetwork()
         {
             Dispose();
         }
