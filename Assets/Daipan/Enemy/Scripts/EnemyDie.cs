@@ -73,7 +73,7 @@ namespace Daipan.Enemy.Scripts
             if(enemyViewMono is IEnemySpecialView specialEnemyViewMono)
             {
                 // 違う色に攻撃したのなら、特殊アニメーションを再生し、Destroy
-                specialEnemyViewMono.SpecialBlack(() => _enemyMono.DeleteSelf());
+                specialEnemyViewMono.SpecialBlack();
                 // Debug.Log("Special enemy die by SpecialBlack()");
             }
             else

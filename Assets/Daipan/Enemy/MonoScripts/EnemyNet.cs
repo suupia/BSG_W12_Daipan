@@ -79,7 +79,13 @@ namespace Daipan.Enemy.MonoScripts
                 _enemyParamContainer.GetEnemyParamData(EnemyEnum), _playerHolder.PlayerMono);
 
             IsReachedPlayer = _enemyMove.MoveUpdate(Runner.DeltaTime, _playerHolder.PlayerMono.Transform, _enemyParamContainer.GetEnemyParamData(EnemyEnum), enemyViewMono);
-
+            if (EnemyEnum.IsSpecial() == true && IsReachedPlayer)
+            {
+                // Special Enemy Die
+                Debug.Log("Special enemy die by ReachedPlayer");
+                DieBySpecialBlack();
+            }
+            
             if (transform.position.x < _enemySpawnPoint.GetEnemyDespawnedPoint().x) Die();
 
             enemyViewMono?.SetHpGauge(Hp.Value, _enemyParamContainer.GetEnemyParamData(EnemyEnum).GetMaxHp());
@@ -164,8 +170,7 @@ namespace Daipan.Enemy.MonoScripts
             {
                 // Die
                 Debug.Log($"Special enemy die. enemyViewMono : {enemyViewMono}, EnemyEnum : {EnemyEnum}");
-                _enemyCluster.Remove(this);
-                _enemyDie.DiedBySpecialBlack(enemyViewMono?.GetSelectedEnemyViewMono);
+                DieBySpecialBlack();
             }
 
             Hp = _enemyOnAttacked.OnAttacked(Hp, playerParamData);
@@ -185,6 +190,11 @@ namespace Daipan.Enemy.MonoScripts
             _enemyCluster.Remove(this);
             _enemyDie.Died(enemyViewMono);
         }
+        void DieBySpecialBlack()
+        {
+            _enemyCluster.Remove(this);
+            _enemyDie.DiedBySpecialBlack(enemyViewMono?.GetSelectedEnemyViewMono);
+        }
 
         // OnChangeRender functions 
         void OnEnemyEnumChanged()
@@ -200,6 +210,7 @@ namespace Daipan.Enemy.MonoScripts
             enemyViewMono?.SetDomain(_enemyParamContainer.GetEnemyViewParamData(EnemyEnum));
             enemyViewMono?.SetOnDiedCallback(DeleteSelf);
             enemyViewMono?.SetOnDaipanedCallback(OnDaipaned);
+            enemyViewMono?.SetSpecialBlackCallback(DeleteSelf);
         }
     }
 }

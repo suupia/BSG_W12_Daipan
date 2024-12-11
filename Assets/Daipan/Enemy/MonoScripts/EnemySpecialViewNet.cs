@@ -27,6 +27,7 @@ namespace Daipan.Enemy.MonoScripts
         
         IEnemyViewAnimatorSwitcher _animatorSwitcher = null!;
         bool IsPlayingSpecialBlack { get; set; }
+        Action _onSpecialBlack = () => { };
 
         void Awake()
         {
@@ -63,6 +64,10 @@ namespace Daipan.Enemy.MonoScripts
             tempSpriteRenderer.color = EnemyViewTempColor.GetTempColor(enemyViewParamData.GetEnemyEnum()); 
 
         }
+        public  void SetSpecialBlackCallback(Action onSpecialBlack)
+        {
+            _onSpecialBlack = onSpecialBlack; 
+        }
 
         public override void SetHpGauge(double currentHp, int maxHp) => _animatorSwitcher.SetHpGauge(currentHp, maxHp);
 
@@ -79,7 +84,7 @@ namespace Daipan.Enemy.MonoScripts
         public override void Daipaned(Action onDied) => _animatorSwitcher.Daipaned(onDied);
         public override void Highlight(bool isHighlighted) => _animatorSwitcher.Highlight(isHighlighted, HpSprite);
         
-        public void SpecialBlack(Action onSpecialBlack)
+        public void SpecialBlack()
         {
             Debug.Log("EnemySpecialViewMono.SpecialBlack()");
             IsPlayingSpecialBlack = true;
@@ -99,7 +104,7 @@ namespace Daipan.Enemy.MonoScripts
                 .Subscribe(_ =>
                 {
                     IsPlayingSpecialBlack = false;
-                    onSpecialBlack();
+                    _onSpecialBlack();
                 });
         }
     }
