@@ -116,14 +116,15 @@ namespace Daipan.Enemy.Scripts
             var enemyMonoObject = _runner.Spawn(enemyMonoPrefab, spawnPosition, Quaternion.identity,
                 onBeforeSpawned: (runner, obj) =>
                 {
-                    var enemyMono = obj.GetComponent<EnemyNet>();
-                    enemyMono.Initialize(
+                    var enemyNet = obj.GetComponent<EnemyNet>();
+                    enemyNet.Initialize(
                         _container.Resolve<PlayerHolder>()
                         , _container.Resolve<IEnemySpawnPoint>()
                         , _container.Resolve<IEnemyParamContainer>()
                     );
-                    _enemyBuilder.Build(enemyMono, enemyEnum)(enemyMono);
-                    _enemyClusterNetwork.SetPlayerRef(enemyMono, playerRef);
+                    _enemyBuilder.Build(enemyNet, enemyEnum)(enemyNet);
+                    enemyNet.SetIsSpawnedByAnti(playerRef != PlayerRef.None);
+                    _enemyClusterNetwork.SetPlayerRef(enemyNet, playerRef);
                 });
             _enemyCluster.Add(enemyMonoObject);
         }
