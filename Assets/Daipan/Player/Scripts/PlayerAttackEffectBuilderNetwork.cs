@@ -33,7 +33,7 @@ namespace Daipan.Player.Scripts
         readonly IPlayerAntiCommentParamData _playerAntiCommentParamData;
         readonly ThresholdResetCounter _playerMissedAttackCounter;
         readonly RpcReceiverNetWrapper _rpcReceiverNetWrapper;
-        readonly IEnemyClusterNetwork _enemyClusterNetwork;
+        readonly EnemyClusterNetwork _enemyClusterNetwork;
 
         public PlayerAttackEffectBuilderNetwork(
             IPlayerParamDataContainer playerParamDataContainer
@@ -44,7 +44,7 @@ namespace Daipan.Player.Scripts
             , WaveState waveState
             , IPlayerAntiCommentParamData playerAntiCommentParamData
             , RpcReceiverNetWrapper rpcReceiverNetWrapper
-            , IEnemyClusterNetwork enemyClusterNetwork
+            , EnemyClusterNetwork enemyClusterNetwork
         )
         {
             _playerParamDataContainer = playerParamDataContainer;
