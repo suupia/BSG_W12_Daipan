@@ -25,7 +25,7 @@ using Random = UnityEngine.Random;
 
 namespace Daipan.Enemy.Scripts
 {
-    public sealed class EnemySpawnerNetwork : IEnemySpawner, IEnemySpawnerNetwork
+    public sealed class EnemySpawnerNetwork : IEnemySpawner, IAntiEnemySpawnerNetwork
     {
         readonly IObjectResolver _container;
         readonly NetworkRunner _runner;
@@ -33,7 +33,7 @@ namespace Daipan.Enemy.Scripts
         readonly IEnemyCluster _enemyCluster;
         readonly EnemyClusterNetwork _enemyClusterNetwork;
         readonly IEnemySpawnPoint _enemySpawnPoint;
-        readonly IEnemyBuilder _enemyBuilder;
+        readonly EnemyBuilderNetwork _enemyBuilder;
         readonly IEnemyEnumSelector _enemyEnumSelector;
         readonly List<IDisposable> _disposables = new();
         readonly PlayerDataTransporterNetWrapper _playerDataTransporterNetWrapper;
@@ -47,7 +47,7 @@ namespace Daipan.Enemy.Scripts
             , IEnemyCluster enemyCluster
             , EnemyClusterNetwork enemyClusterNetwork
             , IEnemySpawnPoint enemySpawnPoint
-            , IEnemyBuilder enemyBuilder
+            , EnemyBuilderNetwork enemyBuilder
             , IEnemyEnumSelector enemyEnumSelector
             , PlayerDataTransporterNetWrapper playerDataTransporterNetWrapper
         )
@@ -65,55 +65,30 @@ namespace Daipan.Enemy.Scripts
 
         public void SpawnEnemy()
         {
-            // EnemyのSpawnはStreamerが行う
-            if (_playerDataTransporterNetWrapper.GetPlayerRoleEnum(_runner.LocalPlayer) != PlayerRoleEnum.Streamer) return;
-            const float spawnRandomPositionY = 0.2f;
-            var spawnPosition = GetRandomSpawnPosition(_enemySpawnPoint);
-            var randomSpawnPosition = new Vector3
-            {
-                x = spawnPosition.x,
-                y = spawnPosition.y + Random.Range(-spawnRandomPositionY, spawnRandomPositionY)
-            };
-
             var enemyEnum = _enemyEnumSelector.SelectEnemyEnum();
-            if (enemyEnum == EnemyEnum.RedBoss)
-            {
-                SpawnRedBoss(randomSpawnPosition, PlayerRef.None);
-            }
-            else
-            {
-                SpawnEnemy(randomSpawnPosition, enemyEnum, PlayerRef.None);
-            }
+
+            ProcessEnemySpawn(enemyEnum, PlayerRef.None);
         }
 
         public void SpawnEnemy(EnemyEnum enemyEnum)
         {
             if (enemyEnum == EnemyEnum.None) return;
-            // EnemyのSpawnはStreamerが行う
-            if (_playerDataTransporterNetWrapper.GetPlayerRoleEnum(_runner.LocalPlayer) != PlayerRoleEnum.Streamer) return;
-            const float spawnRandomPositionY = 0.2f;
-            var spawnPosition = GetRandomSpawnPosition(_enemySpawnPoint);
-            var randomSpawnPosition = new Vector3
-            {
-                x = spawnPosition.x,
-                y = spawnPosition.y + Random.Range(-spawnRandomPositionY, spawnRandomPositionY)
-            };
 
-            if (enemyEnum == EnemyEnum.RedBoss)
-            {
-                SpawnRedBoss(randomSpawnPosition, PlayerRef.None);
-            }
-            else
-            {
-                SpawnEnemy(randomSpawnPosition, enemyEnum, PlayerRef.None);
-            }
+            ProcessEnemySpawn(enemyEnum, PlayerRef.None);
         }
 
-        public void SpawnEnemy(EnemyEnum enemyEnum, PlayerRef playerRef)
+        public void SpawnAntiEnemy(EnemyEnum enemyEnum, PlayerRef playerRef)
         {
             if (enemyEnum == EnemyEnum.None) return;
+
+            ProcessEnemySpawn(enemyEnum, playerRef);
+        }
+
+        void ProcessEnemySpawn(EnemyEnum enemyEnum, PlayerRef playerRef)
+        {
             // EnemyのSpawnはStreamerが行う
             if (_playerDataTransporterNetWrapper.GetPlayerRoleEnum(_runner.LocalPlayer) != PlayerRoleEnum.Streamer) return;
+            
             const float spawnRandomPositionY = 0.2f;
             var spawnPosition = GetRandomSpawnPosition(_enemySpawnPoint);
             var randomSpawnPosition = new Vector3
@@ -129,7 +104,7 @@ namespace Daipan.Enemy.Scripts
             else
             {
                 SpawnEnemy(randomSpawnPosition, enemyEnum, playerRef);
-            }
+            } 
         }
 
 
@@ -141,14 +116,15 @@ namespace Daipan.Enemy.Scripts
             var enemyMonoObject = _runner.Spawn(enemyMonoPrefab, spawnPosition, Quaternion.identity,
                 onBeforeSpawned: (runner, obj) =>
                 {
-                    var enemyMono = obj.GetComponent<EnemyNet>();
-                    enemyMono.Initialize(
+                    var enemyNet = obj.GetComponent<EnemyNet>();
+                    enemyNet.Initialize(
                         _container.Resolve<PlayerHolder>()
                         , _container.Resolve<IEnemySpawnPoint>()
                         , _container.Resolve<IEnemyParamContainer>()
                     );
-                    _enemyBuilder.Build(enemyMono, enemyEnum)(enemyMono);
-                    _enemyClusterNetwork.SetPlayerRef(enemyMono, playerRef);
+                    _enemyBuilder.Build(enemyNet, enemyEnum)(enemyNet);
+                    enemyNet.SetIsSpawnedByAnti(playerRef != PlayerRef.None);
+                    _enemyClusterNetwork.SetPlayerRef(enemyNet, playerRef);
                 });
             _enemyCluster.Add(enemyMonoObject);
         }
