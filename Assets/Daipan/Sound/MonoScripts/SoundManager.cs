@@ -190,5 +190,7 @@ namespace Daipan.Sound.MonoScripts
         
         Decide,
         Text,
+        TowerDamage,
+        BAN,
     }
 }
