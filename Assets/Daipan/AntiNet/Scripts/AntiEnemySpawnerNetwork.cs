@@ -45,7 +45,7 @@ namespace Daipan.AntiNet.Scripts
             if (!CanSpawnEnemy(enemyEnum)) return;
 
             _spawnEnemyCost.DecreaseValue(GetCost(enemyEnum));
-            _rpcReceiverNetWrapper.RpcReceiverNet.SpawnEnemyRPC(enemyEnum, _runner.LocalPlayer);
+            _rpcReceiverNetWrapper.RpcReceiverNet.SpawnAntiEnemyRPC(enemyEnum, _runner.LocalPlayer);
 
             _antiCommentObserver.ResetCount();
         }

@@ -22,5 +22,6 @@ public class EnemyHighlightTestInputMono : MonoBehaviour
         public Color GetEyeColor() => new(226f / 255f, 248f / 255f, 227f / 255f);
         public Color GetEyeBallColor() => Color.red;
         public Color GetLineColor() =>new(111f / 255f, 87f / 255f, 107f / 255f);
+        public bool IsSpawnedByAnti { get; set; }
     }
 }

@@ -21,7 +21,7 @@ namespace Daipan.StreamerNet.MonoScripts
         private NetworkRunner _runner = null!;
         private PlayerDataTransporterNetWrapper _playerDataTransporterNetWrapper = null!;
 
-        private IEnemySpawnerNetwork _enemySpawner = null!;
+        private IAntiEnemySpawnerNetwork _antiEnemySpawner = null!;
         private AntiDaipanExecutor _antiDaipanExecutor = null!;
         private AntiStateValue _antiStateValue = null!;
         private IIrritatedGaugeValue _irritatedGaugeValue = null!;
@@ -34,7 +34,7 @@ namespace Daipan.StreamerNet.MonoScripts
         public void Initialize(
             NetworkRunner runner
             , PlayerDataTransporterNetWrapper playerDataTransporterNetWrapper
-            , IEnemySpawnerNetwork enemySpawner
+            , IAntiEnemySpawnerNetwork antiEnemySpawner
             , AntiDaipanExecutor antiDaipanExecutor
             , AntiStateValue antiStateValue
             , IIrritatedGaugeValue irritatedGaugeValue
@@ -46,7 +46,7 @@ namespace Daipan.StreamerNet.MonoScripts
         {
             _runner = runner;
             _playerDataTransporterNetWrapper = playerDataTransporterNetWrapper;
-            _enemySpawner = enemySpawner;
+            _antiEnemySpawner = antiEnemySpawner;
             _antiDaipanExecutor = antiDaipanExecutor;
             _antiStateValue = antiStateValue;
             _irritatedGaugeValue = irritatedGaugeValue;
@@ -60,11 +60,11 @@ namespace Daipan.StreamerNet.MonoScripts
 
 
         [Rpc(RpcSources.All, RpcTargets.All)]
-        public void SpawnEnemyRPC(EnemyEnum enemyEnum, PlayerRef playerRef)
+        public void SpawnAntiEnemyRPC(EnemyEnum enemyEnum, PlayerRef playerRef)
         {
             if (_playerDataTransporterNetWrapper.GetPlayerRoleEnum(_runner.LocalPlayer) == PlayerRoleEnum.Streamer)
             {
-                _enemySpawner.SpawnEnemy(enemyEnum, playerRef);
+                _antiEnemySpawner.SpawnAntiEnemy(enemyEnum, playerRef);
                 Debug.Log($"SpawnEnemy RPC received: {enemyEnum}");
             }
         }
