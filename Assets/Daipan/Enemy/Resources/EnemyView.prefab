@@ -1094,12 +1094,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpGaugeSpriteRenderer: {fileID: 1453256163993064696}
   HpSprite:
-  - {fileID: 21300000, guid: e8f7bba437fce7d499e433e83377b37e, type: 3}
-  - {fileID: 21300000, guid: 03b7800e9e0079b4eab5f3fe9699835c, type: 3}
-  - {fileID: 21300000, guid: 2a8bd2e6ad6c3344b861126f75ad0525, type: 3}
-  - {fileID: 21300000, guid: c3442189d04fb7340ae82581888a9b25, type: 3}
-  - {fileID: 21300000, guid: 7e61cb85f68434b4eaf2d3144f234c78, type: 3}
-  - {fileID: 21300000, guid: d5f819970fec177499642886dafb45ff, type: 3}
+  - {fileID: 21300000, guid: 85e62bce99d63734dad78424842c614b, type: 3}
+  - {fileID: 21300000, guid: c200ce4fb83413144b4ed913b66d1b6b, type: 3}
+  - {fileID: 21300000, guid: 739a79cc6d048d94bad534621a79c8db, type: 3}
+  - {fileID: 21300000, guid: 37650c46426915144a472744705e2a56, type: 3}
+  - {fileID: 21300000, guid: b2391b9721c99354ca561733c386db1a, type: 3}
+  - {fileID: 21300000, guid: 4e7f6eb3f724ae5438f9258dcbb64605, type: 3}
+  - {fileID: 21300000, guid: 51d15b062f015084590fde0dc0c4df04, type: 3}
+  - {fileID: 21300000, guid: b3451431620ca724ba7dfe39aedad639, type: 3}
+  - {fileID: 21300000, guid: 49c91036c6a04974cbbde80a0e43a1e0, type: 3}
+  - {fileID: 21300000, guid: 1e71cfef9b9a51c498b35a18ef12cbe8, type: 3}
+  - {fileID: 21300000, guid: cc6e2d8fadb2fe64892789cc92dbfdc1, type: 3}
   Hp: {fileID: 6883060968631074531}
 --- !u!1 &1110462809014793386
 GameObject:
@@ -2289,12 +2294,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpGaugeSpriteRenderer: {fileID: 2446297469903332641}
   HpSprite:
-  - {fileID: 21300000, guid: e8f7bba437fce7d499e433e83377b37e, type: 3}
-  - {fileID: 21300000, guid: 03b7800e9e0079b4eab5f3fe9699835c, type: 3}
-  - {fileID: 21300000, guid: 2a8bd2e6ad6c3344b861126f75ad0525, type: 3}
-  - {fileID: 21300000, guid: c3442189d04fb7340ae82581888a9b25, type: 3}
-  - {fileID: 21300000, guid: 7e61cb85f68434b4eaf2d3144f234c78, type: 3}
-  - {fileID: 21300000, guid: d5f819970fec177499642886dafb45ff, type: 3}
+  - {fileID: 21300000, guid: 85e62bce99d63734dad78424842c614b, type: 3}
+  - {fileID: 21300000, guid: c200ce4fb83413144b4ed913b66d1b6b, type: 3}
+  - {fileID: 21300000, guid: 739a79cc6d048d94bad534621a79c8db, type: 3}
+  - {fileID: 21300000, guid: 37650c46426915144a472744705e2a56, type: 3}
+  - {fileID: 21300000, guid: b2391b9721c99354ca561733c386db1a, type: 3}
+  - {fileID: 21300000, guid: 4e7f6eb3f724ae5438f9258dcbb64605, type: 3}
+  - {fileID: 21300000, guid: 51d15b062f015084590fde0dc0c4df04, type: 3}
+  - {fileID: 21300000, guid: b3451431620ca724ba7dfe39aedad639, type: 3}
+  - {fileID: 21300000, guid: 49c91036c6a04974cbbde80a0e43a1e0, type: 3}
+  - {fileID: 21300000, guid: 1e71cfef9b9a51c498b35a18ef12cbe8, type: 3}
+  - {fileID: 21300000, guid: cc6e2d8fadb2fe64892789cc92dbfdc1, type: 3}
   Hp: {fileID: 6884061508647074053}
 --- !u!1 &2228278038083883665
 GameObject:
@@ -2641,12 +2651,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpGaugeSpriteRenderer: {fileID: 7593355405118296679}
   HpSprite:
-  - {fileID: 21300000, guid: e8f7bba437fce7d499e433e83377b37e, type: 3}
-  - {fileID: 21300000, guid: 03b7800e9e0079b4eab5f3fe9699835c, type: 3}
-  - {fileID: 21300000, guid: 2a8bd2e6ad6c3344b861126f75ad0525, type: 3}
-  - {fileID: 21300000, guid: c3442189d04fb7340ae82581888a9b25, type: 3}
-  - {fileID: 21300000, guid: 7e61cb85f68434b4eaf2d3144f234c78, type: 3}
-  - {fileID: 21300000, guid: d5f819970fec177499642886dafb45ff, type: 3}
+  - {fileID: 21300000, guid: 85e62bce99d63734dad78424842c614b, type: 3}
+  - {fileID: 21300000, guid: c200ce4fb83413144b4ed913b66d1b6b, type: 3}
+  - {fileID: 21300000, guid: 739a79cc6d048d94bad534621a79c8db, type: 3}
+  - {fileID: 21300000, guid: 37650c46426915144a472744705e2a56, type: 3}
+  - {fileID: 21300000, guid: b2391b9721c99354ca561733c386db1a, type: 3}
+  - {fileID: 21300000, guid: 4e7f6eb3f724ae5438f9258dcbb64605, type: 3}
+  - {fileID: 21300000, guid: 51d15b062f015084590fde0dc0c4df04, type: 3}
+  - {fileID: 21300000, guid: b3451431620ca724ba7dfe39aedad639, type: 3}
+  - {fileID: 21300000, guid: 49c91036c6a04974cbbde80a0e43a1e0, type: 3}
+  - {fileID: 21300000, guid: 1e71cfef9b9a51c498b35a18ef12cbe8, type: 3}
+  - {fileID: 21300000, guid: cc6e2d8fadb2fe64892789cc92dbfdc1, type: 3}
   Hp: {fileID: 8450587476596595752}
 --- !u!1 &2645656264458980727
 GameObject:
@@ -3157,7 +3172,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6355448234644027253
 Transform:
   m_ObjectHideFlags: 0
@@ -3698,7 +3713,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8847102984352745566
 Transform:
   m_ObjectHideFlags: 0
@@ -3972,7 +3987,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8602948293607182030
 Transform:
   m_ObjectHideFlags: 0
@@ -4255,12 +4270,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpGaugeSpriteRenderer: {fileID: 7072993054762764423}
   HpSprite:
-  - {fileID: 21300000, guid: e8f7bba437fce7d499e433e83377b37e, type: 3}
-  - {fileID: 21300000, guid: 03b7800e9e0079b4eab5f3fe9699835c, type: 3}
-  - {fileID: 21300000, guid: 2a8bd2e6ad6c3344b861126f75ad0525, type: 3}
-  - {fileID: 21300000, guid: c3442189d04fb7340ae82581888a9b25, type: 3}
-  - {fileID: 21300000, guid: 7e61cb85f68434b4eaf2d3144f234c78, type: 3}
-  - {fileID: 21300000, guid: d5f819970fec177499642886dafb45ff, type: 3}
+  - {fileID: 21300000, guid: 85e62bce99d63734dad78424842c614b, type: 3}
+  - {fileID: 21300000, guid: c200ce4fb83413144b4ed913b66d1b6b, type: 3}
+  - {fileID: 21300000, guid: 739a79cc6d048d94bad534621a79c8db, type: 3}
+  - {fileID: 21300000, guid: 37650c46426915144a472744705e2a56, type: 3}
+  - {fileID: 21300000, guid: b2391b9721c99354ca561733c386db1a, type: 3}
+  - {fileID: 21300000, guid: 4e7f6eb3f724ae5438f9258dcbb64605, type: 3}
+  - {fileID: 21300000, guid: 51d15b062f015084590fde0dc0c4df04, type: 3}
+  - {fileID: 21300000, guid: b3451431620ca724ba7dfe39aedad639, type: 3}
+  - {fileID: 21300000, guid: 49c91036c6a04974cbbde80a0e43a1e0, type: 3}
+  - {fileID: 21300000, guid: 1e71cfef9b9a51c498b35a18ef12cbe8, type: 3}
+  - {fileID: 21300000, guid: cc6e2d8fadb2fe64892789cc92dbfdc1, type: 3}
   Hp: {fileID: 6881711241274013873}
 --- !u!1 &5358038753485269380
 GameObject:
@@ -4309,12 +4329,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpGaugeSpriteRenderer: {fileID: 986700437204291388}
   HpSprite:
-  - {fileID: 21300000, guid: e8f7bba437fce7d499e433e83377b37e, type: 3}
-  - {fileID: 21300000, guid: 03b7800e9e0079b4eab5f3fe9699835c, type: 3}
-  - {fileID: 21300000, guid: 2a8bd2e6ad6c3344b861126f75ad0525, type: 3}
-  - {fileID: 21300000, guid: c3442189d04fb7340ae82581888a9b25, type: 3}
-  - {fileID: 21300000, guid: 7e61cb85f68434b4eaf2d3144f234c78, type: 3}
-  - {fileID: 21300000, guid: d5f819970fec177499642886dafb45ff, type: 3}
+  - {fileID: 21300000, guid: 85e62bce99d63734dad78424842c614b, type: 3}
+  - {fileID: 21300000, guid: c200ce4fb83413144b4ed913b66d1b6b, type: 3}
+  - {fileID: 21300000, guid: 739a79cc6d048d94bad534621a79c8db, type: 3}
+  - {fileID: 21300000, guid: 37650c46426915144a472744705e2a56, type: 3}
+  - {fileID: 21300000, guid: b2391b9721c99354ca561733c386db1a, type: 3}
+  - {fileID: 21300000, guid: 4e7f6eb3f724ae5438f9258dcbb64605, type: 3}
+  - {fileID: 21300000, guid: 51d15b062f015084590fde0dc0c4df04, type: 3}
+  - {fileID: 21300000, guid: b3451431620ca724ba7dfe39aedad639, type: 3}
+  - {fileID: 21300000, guid: 49c91036c6a04974cbbde80a0e43a1e0, type: 3}
+  - {fileID: 21300000, guid: 1e71cfef9b9a51c498b35a18ef12cbe8, type: 3}
+  - {fileID: 21300000, guid: cc6e2d8fadb2fe64892789cc92dbfdc1, type: 3}
   Hp: {fileID: 4001084377573469509}
 --- !u!1 &5568702681411442686
 GameObject:
@@ -4922,12 +4947,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpGaugeSpriteRenderer: {fileID: 5003110177008165700}
   HpSprite:
-  - {fileID: 21300000, guid: e8f7bba437fce7d499e433e83377b37e, type: 3}
-  - {fileID: 21300000, guid: 03b7800e9e0079b4eab5f3fe9699835c, type: 3}
-  - {fileID: 21300000, guid: 2a8bd2e6ad6c3344b861126f75ad0525, type: 3}
-  - {fileID: 21300000, guid: c3442189d04fb7340ae82581888a9b25, type: 3}
-  - {fileID: 21300000, guid: 7e61cb85f68434b4eaf2d3144f234c78, type: 3}
-  - {fileID: 21300000, guid: d5f819970fec177499642886dafb45ff, type: 3}
+  - {fileID: 21300000, guid: 85e62bce99d63734dad78424842c614b, type: 3}
+  - {fileID: 21300000, guid: c200ce4fb83413144b4ed913b66d1b6b, type: 3}
+  - {fileID: 21300000, guid: 739a79cc6d048d94bad534621a79c8db, type: 3}
+  - {fileID: 21300000, guid: 37650c46426915144a472744705e2a56, type: 3}
+  - {fileID: 21300000, guid: b2391b9721c99354ca561733c386db1a, type: 3}
+  - {fileID: 21300000, guid: 4e7f6eb3f724ae5438f9258dcbb64605, type: 3}
+  - {fileID: 21300000, guid: 51d15b062f015084590fde0dc0c4df04, type: 3}
+  - {fileID: 21300000, guid: b3451431620ca724ba7dfe39aedad639, type: 3}
+  - {fileID: 21300000, guid: 49c91036c6a04974cbbde80a0e43a1e0, type: 3}
+  - {fileID: 21300000, guid: 1e71cfef9b9a51c498b35a18ef12cbe8, type: 3}
+  - {fileID: 21300000, guid: cc6e2d8fadb2fe64892789cc92dbfdc1, type: 3}
   Hp: {fileID: 1173257668534245117}
 --- !u!1 &6197750942044043355
 GameObject:
@@ -5716,7 +5746,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2769528090362674900
 Transform:
   m_ObjectHideFlags: 0
@@ -5884,7 +5914,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1265381886217506676
 Transform:
   m_ObjectHideFlags: 0
@@ -6573,12 +6603,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpGaugeSpriteRenderer: {fileID: 8601578889210108885}
   HpSprite:
-  - {fileID: 21300000, guid: e8f7bba437fce7d499e433e83377b37e, type: 3}
-  - {fileID: 21300000, guid: 03b7800e9e0079b4eab5f3fe9699835c, type: 3}
-  - {fileID: 21300000, guid: 2a8bd2e6ad6c3344b861126f75ad0525, type: 3}
-  - {fileID: 21300000, guid: c3442189d04fb7340ae82581888a9b25, type: 3}
-  - {fileID: 21300000, guid: 7e61cb85f68434b4eaf2d3144f234c78, type: 3}
-  - {fileID: 21300000, guid: d5f819970fec177499642886dafb45ff, type: 3}
+  - {fileID: 21300000, guid: 85e62bce99d63734dad78424842c614b, type: 3}
+  - {fileID: 21300000, guid: c200ce4fb83413144b4ed913b66d1b6b, type: 3}
+  - {fileID: 21300000, guid: 739a79cc6d048d94bad534621a79c8db, type: 3}
+  - {fileID: 21300000, guid: 37650c46426915144a472744705e2a56, type: 3}
+  - {fileID: 21300000, guid: b2391b9721c99354ca561733c386db1a, type: 3}
+  - {fileID: 21300000, guid: 4e7f6eb3f724ae5438f9258dcbb64605, type: 3}
+  - {fileID: 21300000, guid: 51d15b062f015084590fde0dc0c4df04, type: 3}
+  - {fileID: 21300000, guid: b3451431620ca724ba7dfe39aedad639, type: 3}
+  - {fileID: 21300000, guid: 49c91036c6a04974cbbde80a0e43a1e0, type: 3}
+  - {fileID: 21300000, guid: 1e71cfef9b9a51c498b35a18ef12cbe8, type: 3}
+  - {fileID: 21300000, guid: cc6e2d8fadb2fe64892789cc92dbfdc1, type: 3}
   Hp: {fileID: 240724382169920219}
 --- !u!1 &8010328751348814689
 GameObject:
@@ -7004,7 +7039,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6235179204394602694
 Transform:
   m_ObjectHideFlags: 0
