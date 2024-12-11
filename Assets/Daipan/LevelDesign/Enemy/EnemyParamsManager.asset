@@ -15,7 +15,7 @@ MonoBehaviour:
   enemyLevelDesignParam:
     increaseViewerOnEnemyKill: 5
     increaseIrritationGaugeOnSpecialEnemyKill: 35
-    currentKillAmount: 165
+    currentKillAmount: 2
   enemyParams:
   - enemyEnum: 1
     enemyAttackParam:
@@ -150,7 +150,7 @@ MonoBehaviour:
       attackRange: 2
       increaseIrritatedValueOnAttack: 10
     enemyHpParam:
-      maxHp: 50
+      maxHp: 100
     enemyMoveParam:
       moveSpeedPerSec: 2
     enemySpawnParam:
