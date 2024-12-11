@@ -1,12 +1,14 @@
 #nullable enable
+using System;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.Scripts;
+using Fusion;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace Daipan.Enemy.MonoScripts
 {
-    public sealed class EnemyViewNet : AbstractEnemyViewNet
+    public sealed class EnemyViewNet : AbstractEnemyViewCompositeNet
     {
         public IEnemyViewMono GetSelectedEnemyViewMono => _selectedEnemyViewMono;
         [SerializeField] EnemyNormalViewNet enemyNormalViewMono = null!;
@@ -17,12 +19,24 @@ namespace Daipan.Enemy.MonoScripts
         [SerializeField] EnemyTotem2ViewNet enemyTotem2ViewMono = null!;
         [SerializeField] EnemyTotem3ViewNet enemyTotem3ViewMono = null!;
         AbstractEnemyViewNet _selectedEnemyViewMono = null!;
+        Action _onDied = () => { };
+        Action _onDaipaned = () => { };
 
         public override void SetDomain(IEnemyViewParamData enemyParamData)
         {
             Debug.Log("SetDomain enemy enum: " + enemyParamData.GetEnemyEnum());
             SwitchEnemyView(enemyParamData.GetEnemyEnum());
             _selectedEnemyViewMono.SetDomain(enemyParamData);
+        }
+        
+        public override void SetOnDiedCallback(Action onDied)
+        {
+            _onDied = onDied;
+        }
+        
+        public override void SetOnDaipanedCallback(Action onDaipaned)
+        {
+            _onDaipaned = onDaipaned;
         }
         
         void SwitchEnemyView(EnemyEnum enemyEnum)
@@ -84,14 +98,15 @@ namespace Daipan.Enemy.MonoScripts
             _selectedEnemyViewMono.Attack();
         }
 
-        public override void Died(System.Action onDied)
+        public override void Died()
         {
-            _selectedEnemyViewMono.Died(onDied);
+            Debug.Log($"[EnemyViewNet] Died() , Object.StateAuthority: {Object.HasStateAuthority}");
+            _selectedEnemyViewMono.Died(_onDied);
         }
 
-        public override void Daipaned(System.Action onDaipaned)
+        public override void Daipaned()
         {
-            _selectedEnemyViewMono.Daipaned(onDaipaned);
+            _selectedEnemyViewMono.Daipaned(_onDaipaned);
         }
 
         public override void Highlight(bool isHighlighted)

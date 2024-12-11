@@ -550,12 +550,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpGaugeMono: {fileID: 7151186939974061193}
   tempSpriteRenderer: {fileID: 9213063829378893300}
-  animatorBody: {fileID: 1577052071372667209}
-  animatorEye: {fileID: 5603729240636519153}
-  animatorEyeBall: {fileID: 7887920448022828231}
-  animatorLine: {fileID: 8835473101223021549}
-  animatorSpecialBlackBody: {fileID: 386861590707825046}
-  animatorSpecialBlackEye: {fileID: 424540316332033616}
+  animatorBody: {fileID: 3183809455611188387}
+  animatorEye: {fileID: 8209475703637108527}
+  animatorEyeBall: {fileID: 8523496727601352827}
+  animatorLine: {fileID: 6540364537819318925}
+  animatorSpecialBlackBody: {fileID: 2910234356835849733}
+  animatorSpecialBlackEye: {fileID: 450122781060957728}
   highlightSpriteRenderer: {fileID: 4880484078883737457}
   HpSprite: {fileID: 5944243906424261589}
 --- !u!114 &2197219654808271492 stripped
@@ -636,10 +636,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpGaugeMono: {fileID: 882867261911558805}
   tempSpriteRenderer: {fileID: 7695495124054223818}
-  animatorBodyTop: {fileID: 2831592371283180172}
-  animatorBodyBottom: {fileID: 6671986072047662051}
-  animatorEye: {fileID: 2210567155238962000}
-  animatorLine: {fileID: 1780777519567104971}
+  animatorBodyTop: {fileID: 7490683265814758651}
+  animatorBodyBottom: {fileID: 5825428246192478749}
+  animatorEye: {fileID: 6584289909541057154}
+  animatorLine: {fileID: 3786202626500328196}
   highlightSpriteRenderer: {fileID: 7934288675853758732}
   HpSprite: {fileID: 5943351575767256455}
 --- !u!1 &2975137613634911763 stripped
@@ -1315,10 +1315,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpGaugeMono: {fileID: 6731634071441907106}
   tempSpriteRenderer: {fileID: 2769420548229730711}
-  animatorBody: {fileID: 2030035706402274720}
-  animatorEye: {fileID: 1807977652699143580}
-  animatorFoot: {fileID: 6946973102900472185}
-  animatorLine: {fileID: 4635924724676069272}
+  animatorBody: {fileID: 4266910725015016623}
+  animatorEye: {fileID: 702175361072347568}
+  animatorFoot: {fileID: 5039228202254658855}
+  animatorLine: {fileID: 2720392267432561003}
   highlightSpriteRenderer: {fileID: 2710265364898232621}
   HpSprite: {fileID: 2141094511973852569}
 --- !u!212 &7642390476354491011 stripped
@@ -1523,11 +1523,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpGaugeMono: {fileID: 6622907600067954778}
   tempSpriteRenderer: {fileID: 7432793276706384768}
-  animatorBodyTop: {fileID: 6117424772060259827}
-  animatorMiddle: {fileID: 5716672491195744771}
-  animatorBodyBottom: {fileID: 1379026960959198875}
-  animatorEye: {fileID: 994100194100242982}
-  animatorLine: {fileID: 7974285455604663994}
+  animatorBodyTop: {fileID: 6038795604116492866}
+  animatorMiddle: {fileID: 590419267699975915}
+  animatorBodyBottom: {fileID: 4342678737801937221}
+  animatorEye: {fileID: 3485532099750337252}
+  animatorLine: {fileID: 6653839548959081654}
   highlightSpriteRenderer: {fileID: 7642390476354491011}
   HpSprite: {fileID: 1056573721453691327}
 --- !u!95 &8835473101223021549 stripped
@@ -1559,11 +1559,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpGaugeMono: {fileID: 2197219654808271492}
   tempSpriteRenderer: {fileID: 3327452818266333259}
-  animatorBody: {fileID: 6589536635397899592}
-  animatorEye: {fileID: 6048773160983753131}
-  animatorEyeBall: {fileID: 1667923242060141088}
-  animatorHand: {fileID: 5290571408908912855}
-  animatorLine: {fileID: 7670585905535240390}
+  animatorBody: {fileID: 8740937256288852727}
+  animatorEye: {fileID: 1665425943744836181}
+  animatorEyeBall: {fileID: 8720840981364072415}
+  animatorHand: {fileID: 1545516486934277167}
+  animatorLine: {fileID: 2505660232550512148}
   highlightSpriteRenderer: {fileID: 6790575548010947860}
   HpSprite: {fileID: 4213179803792072225}
 --- !u!212 &9213063829378893300 stripped

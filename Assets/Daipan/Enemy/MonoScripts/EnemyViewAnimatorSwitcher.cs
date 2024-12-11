@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace Daipan.Enemy.MonoScripts
 {
-    public sealed class EnemyViewAnimatorSwitcher
+    public sealed class EnemyViewAnimatorSwitcher : IEnemyViewAnimatorSwitcher
     {
         readonly IEnumerable<Animator> _animators;
         readonly Animator _leaderAnimator;
@@ -19,7 +19,6 @@ namespace Daipan.Enemy.MonoScripts
         readonly SpriteRenderer _highlightSpriteRenderer;
 
         bool _canHighlight = true;
-
 
         public EnemyViewAnimatorSwitcher(
             IEnumerable<Animator> animators,

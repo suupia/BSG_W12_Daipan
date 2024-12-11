@@ -155,6 +155,11 @@ namespace Daipan.Enemy.MonoScripts
             finalBossViewMono?.Highlight(isHighlighted);
         }
         
+        public void DeleteSelf()
+        {
+            Runner.Despawn(Object);
+        }
+        
         // OnChangeRender functions 
         void OnEnemyEnumChanged()
         {

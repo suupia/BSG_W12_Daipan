@@ -10,8 +10,6 @@ namespace Daipan.Enemy.Interfaces
         public void SetHpGauge(double currentHp, int maxHp);
         public void Move();
         public void Attack();
-        public void Died(Action onDied);
-        public void Daipaned(Action onDaipaned);
         public void Highlight(bool isHighlighted);
     }
 }

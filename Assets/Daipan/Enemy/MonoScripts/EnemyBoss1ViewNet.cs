@@ -23,7 +23,7 @@ namespace Daipan.Enemy.MonoScripts
         [SerializeField] SpriteRenderer highlightSpriteRenderer = null!;
         [SerializeField] SpriteRenderer HpSprite=null!;
 
-        EnemyViewAnimatorSwitcher _animatorSwitcher = null!;
+        IEnemyViewAnimatorSwitcher _animatorSwitcher = null!;
         [SerializeField] EnemyTankOffsetEventMono enemyTankOffsetEventMono = null!;
         void Awake()    
         {
@@ -39,9 +39,9 @@ namespace Daipan.Enemy.MonoScripts
                 return;
             }
             
-            _animatorSwitcher = new EnemyViewAnimatorSwitcher(
-                new [] {/*animatorHighlight,*/ animatorBody.Animator, animatorEye.Animator, animatorEyeBall.Animator, animatorLine.Animator, animatorTank.Animator},
-                animatorLine.Animator,
+            _animatorSwitcher = new EnemyViewAnimatorSwitcherNetwork(
+                new [] {/*animatorHighlight,*/ animatorBody, animatorEye, animatorEyeBall, animatorLine, animatorTank},
+                animatorLine,
                 hpGaugeMono,
                 highlightSpriteRenderer
             );

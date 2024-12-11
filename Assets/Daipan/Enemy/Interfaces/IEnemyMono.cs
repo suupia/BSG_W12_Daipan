@@ -18,6 +18,7 @@ namespace Daipan.Enemy.Interfaces
         public void OnAttacked(IPlayerParamData playerParamData);
         public void OnDaipaned();
         public void Highlight(bool isHighlighted);
+        public void DeleteSelf();
     }
     
 }

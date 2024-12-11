@@ -24,7 +24,7 @@ namespace Daipan.Enemy.MonoScripts
         [SerializeField] SpriteRenderer highlightSpriteRenderer = null!;
         [SerializeField] SpriteRenderer HpSprite=null!;
         
-        EnemyViewAnimatorSwitcher _animatorSwitcher = null!;
+        IEnemyViewAnimatorSwitcher _animatorSwitcher = null!;
         bool IsPlayingSpecialBlack { get; set; }
 
         void Awake()

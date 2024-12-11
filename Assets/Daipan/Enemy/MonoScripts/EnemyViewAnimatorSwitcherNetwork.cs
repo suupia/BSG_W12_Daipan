@@ -1,0 +1,102 @@
+#nullable enable
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using Daipan.Enemy.Interfaces;
+using Daipan.Enemy.Scripts;
+using Daipan.Utility.Scripts;
+using Fusion;
+using R3;
+using UnityEngine;
+
+namespace Daipan.Enemy.MonoScripts
+{
+    public sealed class EnemyViewAnimatorSwitcherNetwork : IEnemyViewAnimatorSwitcher
+    {
+        readonly IEnumerable<NetworkMecanimAnimator> _animators;
+        readonly NetworkMecanimAnimator _leaderAnimator;
+        readonly HpGaugeMono _hpGaugeMono;
+        readonly SpriteRenderer _highlightSpriteRenderer;
+
+        bool _canHighlight = true;
+
+        public EnemyViewAnimatorSwitcherNetwork(
+            IEnumerable<NetworkMecanimAnimator> animators,
+            NetworkMecanimAnimator leaderAnimator,
+            HpGaugeMono hpGaugeMono,
+            SpriteRenderer highlightSpriteRenderer
+        )
+        {
+            _animators = animators;
+            _leaderAnimator = leaderAnimator;
+            _highlightSpriteRenderer = highlightSpriteRenderer;
+            _hpGaugeMono = hpGaugeMono;
+
+            _highlightSpriteRenderer.enabled = false;
+        }
+
+
+        public void SetHpGauge(double currentHp, int maxHp)
+        {
+            _hpGaugeMono.SetRatio((float)currentHp / maxHp,(int)currentHp/10);
+        }
+
+        public void Move()
+        {
+            SetBoolAll("IsMoving", true);
+            SetBoolAll("IsAttacking", false);
+        }
+
+        public void Attack()
+        {
+            SetBoolAll("IsMoving", false);
+            SetBoolAll("IsAttacking", true);
+        }
+
+        public void Died(Action onDied)
+        {
+            SetTriggerAll("OnDied");
+            _highlightSpriteRenderer.enabled = false;
+            _canHighlight = false;
+            // _leaderAnimatorを代表とする
+            var preState = _leaderAnimator.Animator.GetCurrentAnimatorStateInfo(0).fullPathHash;
+            Observable.EveryValueChanged(_leaderAnimator, a => a.IsAlmostEnd())
+                .Where(isEnd => isEnd)
+                .Where(_ => preState != _leaderAnimator.Animator.GetCurrentAnimatorStateInfo(0).fullPathHash)
+                .Subscribe(_ => onDied())
+                .AddTo(_leaderAnimator.gameObject);
+        }
+
+        public void Daipaned(Action onDied)
+        {
+            SetTriggerAll("OnDaipaned");
+            _highlightSpriteRenderer.enabled = false;
+            _canHighlight = false;
+            // _leaderAnimatorを代表とする
+            var preState = _leaderAnimator.Animator.GetCurrentAnimatorStateInfo(0).fullPathHash;
+            Observable.EveryValueChanged(_leaderAnimator, a => a.IsAlmostEnd())
+                .Where(isEnd => isEnd)
+                .Where(_ => preState != _leaderAnimator.Animator.GetCurrentAnimatorStateInfo(0).fullPathHash)
+                .Subscribe(_ => onDied())
+                .AddTo(_leaderAnimator.gameObject);
+        }
+
+        public void Highlight(bool isHighlighted,SpriteRenderer HpSprite)
+        {
+            if (!_canHighlight) return;
+            _highlightSpriteRenderer.enabled = isHighlighted;
+            HpSprite.enabled = isHighlighted;
+        }
+
+        void SetTriggerAll(string paramName)
+        {
+            foreach (var animator in _animators) animator.SetTrigger(paramName);
+        }
+
+        void SetBoolAll(string paramName, bool value)
+        {
+            foreach (var animator in _animators) animator.Animator.SetBool(paramName, value);
+        }
+    }
+}

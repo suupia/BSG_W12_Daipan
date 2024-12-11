@@ -125,5 +125,10 @@ namespace Daipan.Enemy.MonoScripts
         {
             finalBossViewMono?.Highlight(isHighlighted);
         }
+        
+        public void DeleteSelf()
+        {
+            Destroy(gameObject); 
+        }
     }
 }

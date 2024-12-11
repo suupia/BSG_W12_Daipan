@@ -1,5 +1,6 @@
 #nullable enable
 using System;
+using System.Linq;
 using Daipan.Daipan;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.LevelDesign.Interfaces;
@@ -36,7 +37,9 @@ namespace Daipan.Enemy.MonoScripts
         public EnemyEnum EnemyEnum { get; set; } = EnemyEnum.None;
 
         public bool IsReachedPlayer { get; set; }
-
+        [Networked] 
+        [Capacity(4)]
+        NetworkLinkedList<PlayerRef> IsDiedList => default;
 
         Hp _hp; 
 
@@ -125,6 +128,33 @@ namespace Daipan.Enemy.MonoScripts
         {
             enemyViewMono?.Highlight(isHighlighted);
         }
+        
+        public void DeleteSelf()
+        {
+            RpcDeleteSelf();
+        }
+        
+        [Rpc(RpcSources.All, RpcTargets.All)]
+        void RpcDeleteSelf()
+        {
+            DeleteSelfBody();
+        }
+        void DeleteSelfBody()
+        {
+            Debug.Log("[EnemyNet] DeleteSelf. LocalPlayer : " + Runner.LocalPlayer);
+            IsDiedList.Add(Runner.LocalPlayer);
+            Debug.Log($"[EnemyNet] IsDiedList.Count : {IsDiedList.Count}, Runner.ActivePlayers.Count() : {Runner.ActivePlayers.Count()}");
+            if (IsDiedList.Count == Runner.ActivePlayers.Count())
+            {
+                Debug.Log("[EnemyNet] All players died");
+                RpcDespawn(); 
+            } 
+        }
+        [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
+        void RpcDespawn()
+        {
+            Runner.Despawn(Object);
+        }
 
         public void OnAttacked(IPlayerParamData playerParamData)
         {
@@ -168,6 +198,8 @@ namespace Daipan.Enemy.MonoScripts
             if (EnemyEnum == EnemyEnum.None) return;
 
             enemyViewMono?.SetDomain(_enemyParamContainer.GetEnemyViewParamData(EnemyEnum));
+            enemyViewMono?.SetOnDiedCallback(DeleteSelf);
+            enemyViewMono?.SetOnDaipanedCallback(OnDaipaned);
         }
     }
 }
