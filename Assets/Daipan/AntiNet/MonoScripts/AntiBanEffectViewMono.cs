@@ -21,12 +21,16 @@ namespace Daipan.AntiNet.MonoScripts
         // animationの終了関係なくuncontrollableTimeで終了
         [SerializeField] float uncontrollableTime;
 
+        [SerializeField] Image banMessage = null!;
+        [SerializeField] TMP_Text banMessageText = null!;
+
         private Sequence _sequence = null!;
         private IDisposable? _disposable = null!;
 
         [Inject]
         public void Initialize(AntiStateValue antiStateValue)
         {
+            // BANアニメーション
             banChainEffect.SetActive(false);
             Observable
                 .EveryValueChanged(antiStateValue, x => x.AntiStateEnum)
@@ -38,6 +42,8 @@ namespace Daipan.AntiNet.MonoScripts
                     }
                 })
                 .AddTo(this);
+
+
         }
 
         void ShowEffect()

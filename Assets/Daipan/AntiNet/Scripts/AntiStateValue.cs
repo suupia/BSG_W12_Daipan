@@ -12,6 +12,7 @@ namespace Daipan.AntiNet.Scripts
     {
         public AntiStateEnum AntiStateEnum { get => _antiStateEnum; }
         public bool IsSpecialFever { get; private set; }
+        public bool IsDaipaned { get; private set; }
 
         private AntiStateEnum _antiStateEnum;
         private IDisposable? _returnNormalTimer;
@@ -34,10 +35,11 @@ namespace Daipan.AntiNet.Scripts
 
             _returnNormalTimer?.Dispose();
         }
-        public void SetBan()
+        public void SetBan(bool isDaipaned = false)
         {
             _antiStateEnum = AntiStateEnum.BAN;
             IsSpecialFever = false;
+            IsDaipaned = isDaipaned;
 
             _returnNormalTimer?.Dispose();
             _returnNormalTimer = Observable.Timer(TimeSpan.FromSeconds(_antiStateParam.BanTime))
