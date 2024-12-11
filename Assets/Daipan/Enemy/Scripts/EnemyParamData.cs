@@ -23,7 +23,6 @@ namespace Daipan.Enemy.Scripts
             _enemyWaveParamContainer = enemyWaveParamContainer;
         }
         // Enum
-
         public EnemyEnum GetEnemyEnum() => _enemyParam.enemyEnum;
 
         // Attack
@@ -43,5 +42,6 @@ namespace Daipan.Enemy.Scripts
         public Color GetEyeColor() => _enemyParam.enemyAnimatorParam.eyeColor;
         public Color GetEyeBallColor() => _enemyParam.enemyAnimatorParam.eyeBallColor;
         public Color GetLineColor() => _enemyParam.enemyAnimatorParam.lineColor;
+        public bool IsSpawnedByAnti { get; set; }
     }
 }
