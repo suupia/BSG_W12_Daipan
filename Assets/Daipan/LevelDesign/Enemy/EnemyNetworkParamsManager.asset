@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: EnemyNetworkParamsManager
   m_EditorClassIdentifier: 
   enemyLevelDesignParam:
-    increaseViewerOnEnemyKill: 5
+    increaseViewerOnEnemyKill: 100
     increaseIrritationGaugeOnSpecialEnemyKill: 35
     currentKillAmount: 165
   enemyParams:
   - enemyEnum: 1
     enemyAttackParam:
-      attackAmount: 10
+      attackAmount: 5
       attackIntervalSec: 1
       attackRange: 2
       increaseIrritatedValueOnAttack: 10
@@ -37,7 +37,7 @@ MonoBehaviour:
       lineColor: {r: 0.43529412, g: 0.34117648, b: 0.41960785, a: 1}
   - enemyEnum: 2
     enemyAttackParam:
-      attackAmount: 10
+      attackAmount: 5
       attackIntervalSec: 1
       attackRange: 2
       increaseIrritatedValueOnAttack: 10
@@ -55,7 +55,7 @@ MonoBehaviour:
       lineColor: {r: 0.43529412, g: 0.34117648, b: 0.41960785, a: 1}
   - enemyEnum: 3
     enemyAttackParam:
-      attackAmount: 10
+      attackAmount: 5
       attackIntervalSec: 1
       attackRange: 2
       increaseIrritatedValueOnAttack: 10
@@ -216,17 +216,17 @@ MonoBehaviour:
       eyeBallColor: {r: 0.1372549, g: 1, b: 0.30100578, a: 1}
       lineColor: {r: 0.43529412, g: 0.34117648, b: 0.41960785, a: 1}
   enemyWaveParams:
-  - spawnEnemyCount: 15
+  - spawnEnemyCount: 10
     waveIntervalSec: 5
-    spawnIntervalSec: 3
+    spawnIntervalSec: 5
     moveSpeedRate: 1.1
     spawnBossPercent: 3
     spawnSpecialPercent: 0
     spawnTotemPercent: 18
     spawnFinalBossPercent: 0
-  - spawnEnemyCount: 20
+  - spawnEnemyCount: 15
     waveIntervalSec: 5
-    spawnIntervalSec: 2.5
+    spawnIntervalSec: 3.5
     moveSpeedRate: 1.3
     spawnBossPercent: 18
     spawnSpecialPercent: 10
@@ -234,7 +234,7 @@ MonoBehaviour:
     spawnFinalBossPercent: 0
   - spawnEnemyCount: 20
     waveIntervalSec: 5
-    spawnIntervalSec: 2
+    spawnIntervalSec: 3
     moveSpeedRate: 1.6
     spawnBossPercent: 25
     spawnSpecialPercent: 20
@@ -242,8 +242,8 @@ MonoBehaviour:
     spawnFinalBossPercent: 0
   - spawnEnemyCount: 1
     waveIntervalSec: 5
-    spawnIntervalSec: 1
-    moveSpeedRate: 1.6
+    spawnIntervalSec: 5
+    moveSpeedRate: 1.3
     spawnBossPercent: 0
     spawnSpecialPercent: 0
     spawnTotemPercent: 0
