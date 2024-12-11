@@ -200,6 +200,7 @@ namespace Daipan.Enemy.MonoScripts
             enemyViewMono?.SetDomain(_enemyParamContainer.GetEnemyViewParamData(EnemyEnum));
             enemyViewMono?.SetOnDiedCallback(DeleteSelf);
             enemyViewMono?.SetOnDaipanedCallback(OnDaipaned);
+            enemyViewMono?.SetSpecialBlackCallback(DeleteSelf);
         }
     }
 }

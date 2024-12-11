@@ -38,6 +38,11 @@ namespace Daipan.Enemy.MonoScripts
         {
             _onDaipaned = onDaipaned;
         }
+        public override void SetSpecialBlackCallback(Action onSpecialBlack)
+        {
+            if(_selectedEnemyViewMono is IEnemySpecialView specialView)
+                specialView.SetSpecialBlackCallback(onSpecialBlack); 
+        }
         
         void SwitchEnemyView(EnemyEnum enemyEnum)
         {
