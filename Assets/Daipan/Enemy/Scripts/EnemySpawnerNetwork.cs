@@ -65,55 +65,30 @@ namespace Daipan.Enemy.Scripts
 
         public void SpawnEnemy()
         {
-            // EnemyのSpawnはStreamerが行う
-            if (_playerDataTransporterNetWrapper.GetPlayerRoleEnum(_runner.LocalPlayer) != PlayerRoleEnum.Streamer) return;
-            const float spawnRandomPositionY = 0.2f;
-            var spawnPosition = GetRandomSpawnPosition(_enemySpawnPoint);
-            var randomSpawnPosition = new Vector3
-            {
-                x = spawnPosition.x,
-                y = spawnPosition.y + Random.Range(-spawnRandomPositionY, spawnRandomPositionY)
-            };
-
             var enemyEnum = _enemyEnumSelector.SelectEnemyEnum();
-            if (enemyEnum == EnemyEnum.RedBoss)
-            {
-                SpawnRedBoss(randomSpawnPosition, PlayerRef.None);
-            }
-            else
-            {
-                SpawnEnemy(randomSpawnPosition, enemyEnum, PlayerRef.None);
-            }
+
+            ProcessEnemySpawn(enemyEnum, PlayerRef.None);
         }
 
         public void SpawnEnemy(EnemyEnum enemyEnum)
         {
             if (enemyEnum == EnemyEnum.None) return;
-            // EnemyのSpawnはStreamerが行う
-            if (_playerDataTransporterNetWrapper.GetPlayerRoleEnum(_runner.LocalPlayer) != PlayerRoleEnum.Streamer) return;
-            const float spawnRandomPositionY = 0.2f;
-            var spawnPosition = GetRandomSpawnPosition(_enemySpawnPoint);
-            var randomSpawnPosition = new Vector3
-            {
-                x = spawnPosition.x,
-                y = spawnPosition.y + Random.Range(-spawnRandomPositionY, spawnRandomPositionY)
-            };
 
-            if (enemyEnum == EnemyEnum.RedBoss)
-            {
-                SpawnRedBoss(randomSpawnPosition, PlayerRef.None);
-            }
-            else
-            {
-                SpawnEnemy(randomSpawnPosition, enemyEnum, PlayerRef.None);
-            }
+            ProcessEnemySpawn(enemyEnum, PlayerRef.None);
         }
 
         public void SpawnAntiEnemy(EnemyEnum enemyEnum, PlayerRef playerRef)
         {
             if (enemyEnum == EnemyEnum.None) return;
+
+            ProcessEnemySpawn(enemyEnum, playerRef);
+        }
+
+        void ProcessEnemySpawn(EnemyEnum enemyEnum, PlayerRef playerRef)
+        {
             // EnemyのSpawnはStreamerが行う
             if (_playerDataTransporterNetWrapper.GetPlayerRoleEnum(_runner.LocalPlayer) != PlayerRoleEnum.Streamer) return;
+            
             const float spawnRandomPositionY = 0.2f;
             var spawnPosition = GetRandomSpawnPosition(_enemySpawnPoint);
             var randomSpawnPosition = new Vector3
@@ -129,7 +104,7 @@ namespace Daipan.Enemy.Scripts
             else
             {
                 SpawnEnemy(randomSpawnPosition, enemyEnum, playerRef);
-            }
+            } 
         }
 
 
