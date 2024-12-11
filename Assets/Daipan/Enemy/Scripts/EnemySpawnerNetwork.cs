@@ -33,7 +33,7 @@ namespace Daipan.Enemy.Scripts
         readonly IEnemyCluster _enemyCluster;
         readonly EnemyClusterNetwork _enemyClusterNetwork;
         readonly IEnemySpawnPoint _enemySpawnPoint;
-        readonly IEnemyBuilder _enemyBuilder;
+        readonly EnemyBuilderNetwork _enemyBuilder;
         readonly IEnemyEnumSelector _enemyEnumSelector;
         readonly List<IDisposable> _disposables = new();
         readonly PlayerDataTransporterNetWrapper _playerDataTransporterNetWrapper;
@@ -47,7 +47,7 @@ namespace Daipan.Enemy.Scripts
             , IEnemyCluster enemyCluster
             , EnemyClusterNetwork enemyClusterNetwork
             , IEnemySpawnPoint enemySpawnPoint
-            , IEnemyBuilder enemyBuilder
+            , EnemyBuilderNetwork enemyBuilder
             , IEnemyEnumSelector enemyEnumSelector
             , PlayerDataTransporterNetWrapper playerDataTransporterNetWrapper
         )

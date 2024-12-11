@@ -351,7 +351,7 @@ namespace Daipan.Daipan
             builder.RegisterComponentInHierarchy<EnemyWaveSpawnerCounterNet>().AsSelf().AsImplementedInterfaces();
             builder.Register<EnemySpawnerNetwork>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
             builder.Register<EnemyEnumSelector>(Lifetime.Scoped).As<IEnemyEnumSelector>();
-            builder.Register<EnemyBuilderNetwork>(Lifetime.Scoped).As<IEnemyBuilder>();
+            builder.Register<EnemyBuilderNetwork>(Lifetime.Scoped);
             builder.Register<EnemySpecialOnAttacked>(Lifetime.Scoped);
 
             // FinalBoss
