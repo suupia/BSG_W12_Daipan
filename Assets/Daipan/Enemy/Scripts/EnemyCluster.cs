@@ -73,21 +73,7 @@ namespace Daipan.Enemy.Scripts
                 enemy.OnDaipaned();
             }
         }
-
-        static Queue<IEnemyMono?> UpdateReachedPlayer(
-            List<IEnemyMono?> enemies
-            , Queue<IEnemyMono?> reachedPlayer
-            )
-        {
-            foreach (var enemy in enemies)
-            {
-                if (enemy == null) continue;
-                if (enemy.IsReachedPlayer == false) continue;
-                if (!reachedPlayer.Contains(enemy)) reachedPlayer.Enqueue(enemy);
-            }
-            return reachedPlayer;
-        }
-
+        
         static List<IEnemyMono?> CalcOrderedEnemy(
             List<IEnemyMono?> enemies
             , Queue<IEnemyMono?> reachedPlayer
@@ -98,14 +84,28 @@ namespace Daipan.Enemy.Scripts
             var newReachedPlayer = UpdateReachedPlayer(enemies, reachedPlayer);
 
             // reachedPlayerキューをリストに変換
-            List<IEnemyMono?> orderedEnemies = newReachedPlayer.ToList();
+            List<IEnemyMono?> orderedEnemies = newReachedPlayer.OrderBy(e => Distance(e, position)).ToList();
 
             // enemiesリストをソートし、orderedEnemiesリストに追加
             orderedEnemies.AddRange(enemies.OrderBy(e => Distance(e, position)));
 
             return orderedEnemies;
         }
+        
         static float Distance(IEnemyMono? enemyMono, Vector3 position) => enemyMono == null ? float.MaxValue : (position - enemyMono.Transform.position).sqrMagnitude;
-
+        
+        static Queue<IEnemyMono?> UpdateReachedPlayer(
+            List<IEnemyMono?> enemies
+            , Queue<IEnemyMono?> reachedPlayer
+        )
+        {
+            foreach (var enemy in enemies)
+            {
+                if (enemy == null) continue;
+                if (enemy.IsReachedPlayer == false) continue;
+                if (!reachedPlayer.Contains(enemy)) reachedPlayer.Enqueue(enemy);
+            }
+            return reachedPlayer;
+        }
     }
 }
