@@ -44,7 +44,7 @@ namespace Daipan.Player.MonoScripts
 
             if (viewerDifference == 0)
             {
-                viewerText.text = $"{viewerDifference}";
+                viewerText.text = $"";
                 viewerText.color = zeroColor;
             }
             else if (viewerDifference > 0)
