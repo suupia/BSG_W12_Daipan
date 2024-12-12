@@ -36,6 +36,7 @@ namespace Daipan.Enemy.MonoScripts
         
         public override void SetOnDaipanedCallback(Action onDaipaned)
         {
+            Debug.Log($"[EnemyViewNet] SetOnDaipanedCallback() , Object.StateAuthority: {Object.HasStateAuthority}");
             _onDaipaned = onDaipaned;
         }
         public override void SetSpecialBlackCallback(Action onSpecialBlack)
@@ -111,6 +112,7 @@ namespace Daipan.Enemy.MonoScripts
 
         public override void Daipaned()
         {
+            Debug.Log($"[EnemyViewNet] Daipaned() , Object.StateAuthority: {Object.HasStateAuthority}");
             _selectedEnemyViewMono.Daipaned(_onDaipaned);
         }
 

@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using VContainer;
 using Daipan.Option.Scripts;
 using DG.Tweening;
+using Daipan.Sound.MonoScripts;
 
 namespace Daipan.Tutorial.MonoScripts
 {
@@ -45,6 +46,8 @@ namespace Daipan.Tutorial.MonoScripts
         [SerializeField]
         float selectEnterSpeed;
 
+        bool EnglishSE=true;
+        bool JapaneseSE=false;
         private LanguageConfig _languageConfig = null!;
 
         public bool IsActive
@@ -111,6 +114,12 @@ namespace Daipan.Tutorial.MonoScripts
                 offJapanese.gameObject.SetActive(true);
                 onEnglish.gameObject.SetActive(true);
                 offEnglish.gameObject.SetActive(false);
+                if (EnglishSE)
+                {
+                    SoundManager.Instance?.PlaySe(SeEnum.SelectLanguage);
+                    EnglishSE = false;
+                    JapaneseSE = true;
+                }
                 //selectedEnglish.gameObject.SetActive(true);
             }
             else if(_languageConfig.CurrentLanguage == LanguageEnum.Japanese)
@@ -119,6 +128,12 @@ namespace Daipan.Tutorial.MonoScripts
                 offJapanese.gameObject.SetActive(false);
                 onEnglish.gameObject.SetActive(false);
                 offEnglish.gameObject.SetActive(true);
+                if (JapaneseSE)
+                {
+                    SoundManager.Instance?.PlaySe(SeEnum.SelectLanguage);
+                    JapaneseSE = false;
+                    EnglishSE= true;
+                }
                 //selectedEnglish.gameObject.SetActive(false);
             }
         }

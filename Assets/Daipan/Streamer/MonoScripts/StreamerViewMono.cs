@@ -58,7 +58,7 @@ namespace Daipan.Streamer.MonoScripts
             daipanWhiteEffect.SetTrigger("IsDaipan");
             syutyusen.SetActive(false);
             // 台パンのエフェクトを動かすところ
-            DOVirtual.Float(0f, 2f, daipanWaveSpeed, value =>
+            DOVirtual.Float(-0.2f, 2f, daipanWaveSpeed, value =>
             {
                 daipanWaveMaterial.SetFloat("_Radius", value);
                 daipanDistortionMaterial.SetFloat("_Radius", value);
@@ -72,9 +72,9 @@ namespace Daipan.Streamer.MonoScripts
         void AngerZoom(bool isFull)
         {
             Debug.Log($"AngerZoom isFull : {isFull}");
-            
+
             var sequence = DOTween.Sequence();
-            
+
             // 怒ってるとき拡大
             if (isFull)
             {

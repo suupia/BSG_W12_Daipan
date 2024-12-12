@@ -69,6 +69,12 @@ namespace Daipan.AntiNet.MonoScripts
         {
             int cost = GetCost(enemyEnum, antiStateEnum, enemySpawnedCostParam);
             text.text = $"{cost}";
+
+            // Ban Mark
+            foreach (Transform child in text.transform)
+            {
+                child.gameObject.SetActive(antiStateEnum == AntiStateEnum.BAN);
+            }
         }
 
         void UpdateButtonState(
