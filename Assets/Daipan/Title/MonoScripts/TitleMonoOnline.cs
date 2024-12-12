@@ -10,10 +10,12 @@ using R3;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class TitleMonoOnline : MonoBehaviour
 {
     [SerializeField] CanvasGroup titleCanvasGroup = null!;
+    [SerializeField] Button JoinButton = null!;
     [SerializeField] NetworkRunner networkRunnerPrefab = null!;
     [SerializeField] DTONet dtoNetPrefab = null!;
     [SerializeField] PlayerDataTransporterNet playerDataTransporterNetPrefab = null!;
@@ -21,7 +23,7 @@ public class TitleMonoOnline : MonoBehaviour
     [Header("JoinPanel")][SerializeField] GameObject joinPanel = null!;
     [SerializeField] TMP_InputField localPlayerNameInputField = null!;
     [SerializeField] TMP_InputField localRoomNameInputField = null!;
-    [SerializeField] CustomButton joinRoomButton = null!;
+    //[SerializeField] CustomButton joinRoomButton = null!;
     [SerializeField] CustomButton closeJoinPanelButton = null!;
 
     [Header("PlayerStatsPanel")]
@@ -47,7 +49,8 @@ public class TitleMonoOnline : MonoBehaviour
         playerStatsPanel.SetActive(false);
         errorMessagePanel.SetActive(false);
         // JoinPanel
-        joinRoomButton.onClick += JoinButtonOnClicked;
+        //joinRoomButton.onClick += JoinButtonOnClicked;
+        JoinButton.onClick.AddListener(JoinButtonOnClicked);
         // PlayerStatsPanel
         readyButton.onClick += ReadyButtonClicked;
         startGameButton.gameObject.SetActive(false);
@@ -57,6 +60,7 @@ public class TitleMonoOnline : MonoBehaviour
     async void JoinButtonOnClicked()
     {
         titleCanvasGroup.interactable = false;
+        JoinButton.interactable = false;
 
         var startGameArgs = new StartGameArgs()
         {

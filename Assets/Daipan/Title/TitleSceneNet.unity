@@ -3063,7 +3063,6 @@ GameObject:
   - component: {fileID: 1222635084}
   - component: {fileID: 1222635083}
   - component: {fileID: 1222635082}
-  - component: {fileID: 1222635085}
   m_Layer: 5
   m_Name: JoinRoomButton
   m_TagString: Untagged
@@ -3173,18 +3172,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1222635080}
   m_CullTransparentMesh: 1
---- !u!114 &1222635085
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1222635080}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 544205e024ed4911b943f745aa8037aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1279322285
 GameObject:
   m_ObjectHideFlags: 0
@@ -4085,13 +4072,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   titleCanvasGroup: {fileID: 1811994191}
+  JoinButton: {fileID: 1222635082}
   networkRunnerPrefab: {fileID: 9077539603378056844, guid: 957fd199d139e4197bcca70f9363268c, type: 3}
   dtoNetPrefab: {fileID: 2030922226672112631, guid: 219d0a42ba5de4b49b62dfe640bc9e37, type: 3}
   playerDataTransporterNetPrefab: {fileID: 6060838497941039018, guid: 86ccfe4b01fe04456966679a25c3d492, type: 3}
   joinPanel: {fileID: 1127169373}
   localPlayerNameInputField: {fileID: 930919835}
   localRoomNameInputField: {fileID: 1161457107}
-  joinRoomButton: {fileID: 1222635085}
   closeJoinPanelButton: {fileID: 1935609272}
   playerStatsPanel: {fileID: 1124224506}
   roomName: {fileID: 1783635545}
@@ -4380,9 +4367,9 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.11904761
+    x: 0.00028783083
     y: 0
-    width: 0.7619048
+    width: 0.99942434
     height: 1
   near clip plane: 0.3
   far clip plane: 1000

@@ -37,7 +37,6 @@ namespace Daipan.AntiNet.MonoScripts
 
         void UpdateText(string text)
         {
-
             _sequence.Kill();
             _sequence = DOTween.Sequence();
 
