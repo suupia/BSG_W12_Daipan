@@ -23,7 +23,6 @@ namespace Daipan.Enemy.MonoScripts
                 return;
             }
 
-            Debug.Log("hp=" + hp);
             if (0 <= hp && hp < HpSprite.Length)
             {
                 Hp.sprite = HpSprite[hp];
