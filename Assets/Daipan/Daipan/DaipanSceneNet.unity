@@ -1857,11 +1857,11 @@ PrefabInstance:
     - target: {fileID: 1712307057897044848, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       propertyPath: m_Cameras.Array.data[0]
       value: 
-      objectReference: {fileID: 4363609678459505439}
+      objectReference: {fileID: 4363609678459505438}
     - target: {fileID: 1712307057897044848, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       propertyPath: m_Cameras.Array.data[1]
       value: 
-      objectReference: {fileID: 4363609678459505438}
+      objectReference: {fileID: 4363609678459505439}
     - target: {fileID: 1712307057897044848, guid: 5d64a1c2557cf4781aca3a0bfff0c9cf, type: 3}
       propertyPath: m_Cameras.Array.data[2]
       value: 
