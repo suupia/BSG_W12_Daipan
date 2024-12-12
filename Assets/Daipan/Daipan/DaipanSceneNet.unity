@@ -414,6 +414,14 @@ MonoBehaviour:
   wordImage: {fileID: 1797906580}
   headImage: {fileID: 1255864570}
   handImage: {fileID: 1329129839}
+  wordPosition: {x: 0, y: 0}
+  headPosition: {x: 0, y: 0}
+  handPosition: {x: 0, y: 0}
+  wordMove: {x: 0, y: 50}
+  headMove: {x: 40, y: 30}
+  handMove: {x: -40, y: -30}
+  duration: 0.3
+  testFlag: 0
 --- !u!114 &659252941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2401,9 +2409,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4123369324132796363, guid: e14e9eddc9151440abb22c158a952d28, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -425
+      objectReference: {fileID: 0}
     - target: {fileID: 4709876791888845700, guid: e14e9eddc9151440abb22c158a952d28, type: 3}
       propertyPath: m_Name
       value: StreamerInputCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6299028274082196692, guid: e14e9eddc9151440abb22c158a952d28, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -280
+      objectReference: {fileID: 0}
+    - target: {fileID: 6299028274082196692, guid: e14e9eddc9151440abb22c158a952d28, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -150
       objectReference: {fileID: 0}
     - target: {fileID: 9104200569856987738, guid: e14e9eddc9151440abb22c158a952d28, type: 3}
       propertyPath: m_Camera
