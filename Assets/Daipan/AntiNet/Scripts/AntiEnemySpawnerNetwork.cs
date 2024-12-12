@@ -6,6 +6,7 @@ using VContainer;
 using Daipna.StreamerNet.Scripts;
 using Daipan.LevelDesign.Net;
 using Fusion;
+using Daipan.Sound.MonoScripts;
 
 namespace Daipan.AntiNet.Scripts
 {
@@ -38,11 +39,16 @@ namespace Daipan.AntiNet.Scripts
 
         public void SpawnEnemy(EnemyEnum enemyEnum)
         {
+
             if (enemyEnum == EnemyEnum.None) return;
             Debug.Log($"Anti spawns {enemyEnum}");
             Debug.Log($"Left Cost is {_spawnEnemyCost.Value}");
 
-            if (!CanSpawnEnemy(enemyEnum)) return;
+            if (!CanSpawnEnemy(enemyEnum))
+            {
+                SoundManager.Instance?.PlaySe(SeEnum.Cancel);
+                return;
+            }
 
             _spawnEnemyCost.DecreaseValue(GetCost(enemyEnum));
             _rpcReceiverNetWrapper.RpcReceiverNet.SpawnAntiEnemyRPC(enemyEnum, _runner.LocalPlayer);
