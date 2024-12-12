@@ -53,7 +53,7 @@ public class PlayerStatsUnitNet : NetworkBehaviour
 
         transform.SetParent(_titleMonoOnline.playerStatsUnitParent, false);
 
-        youAreThisImage.gameObject.SetActive(HasStateAuthority);
+        youAreThisImage.color = HasStateAuthority ? new Color(79f / 255f, 235f / 255f, 230f / 255f) : new Color(253f / 255f, 120f / 255f, 134f / 255f);
         playerRoleButton.onClick += () =>
         {
             if (HasStateAuthority)
