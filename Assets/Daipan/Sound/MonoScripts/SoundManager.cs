@@ -69,7 +69,6 @@ namespace Daipan.Sound.MonoScripts
 
         public void PlayBgm(BgmEnum bgmEnum)
         {
-            return; // todo : ビルド時に毎回かかるのが面倒なので一旦return
             var bgmParam = bgmParams.Find(x => x.bgmEnum == bgmEnum);
             if (bgmParam == null)
             {
