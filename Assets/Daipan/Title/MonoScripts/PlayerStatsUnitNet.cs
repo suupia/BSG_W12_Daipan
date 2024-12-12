@@ -10,17 +10,18 @@ public class PlayerStatsUnitNet : NetworkBehaviour
     [SerializeField] Image youAreThisImage = null!;
     [SerializeField] TextMeshProUGUI playerNameText = null!;
     [SerializeField] Image readyImage = null!;
-    [SerializeField] Sprite OK=null!;
-    [SerializeField] Sprite NG=null!;
+    [SerializeField] Sprite OK = null!;
+    [SerializeField] Sprite NG = null!;
     [SerializeField] TextMeshProUGUI readyText = null!;
     [SerializeField] CustomButton playerRoleButton = null!;
-    [SerializeField] Image playerRoleButtom = null!;
-    //[SerializeField] TextMeshProUGUI playerRoleText = null!;
-    [SerializeField] Sprite streamerUI=null!;
-    [SerializeField] Sprite antiUI=null!;
 
-    [Networked]
-    public PlayerRef NetworkedPlayerRef { get; set; }
+    [SerializeField] Image playerRoleButtom = null!;
+
+    //[SerializeField] TextMeshProUGUI playerRoleText = null!;
+    [SerializeField] Sprite streamerUI = null!;
+    [SerializeField] Sprite antiUI = null!;
+
+    [Networked] public PlayerRef NetworkedPlayerRef { get; set; }
 
     [Networked]
     [OnChangedRender(nameof(OnPlayerNameChanged))]
@@ -28,7 +29,7 @@ public class PlayerStatsUnitNet : NetworkBehaviour
 
     [Networked]
     [OnChangedRender(nameof(OnPlayerRoleChanged))]
-    public PlayerRoleEnum PlayerRole { get; private set; } = PlayerRoleEnum.Streamer;
+    public PlayerRoleEnum PlayerRole { get; private set; } 
 
     [Networked]
     [OnChangedRender(nameof(OnIsReadyChanged))]
@@ -65,7 +66,7 @@ public class PlayerStatsUnitNet : NetworkBehaviour
                 };
         };
 
-        PlayerRole = PlayerRoleEnum.Streamer; // 最初はStreamerで初期化（なぜか、フィールドの初期値が反映されないため）
+        if(PlayerRole == PlayerRoleEnum.None) PlayerRole = PlayerRoleEnum.Streamer; // 同期されていなければStreamerにする 
 
         // The OnRenderChanged functions are called during spawn to make sure they are set properly for players who have already joined the room.
         OnPlayerNameChanged();
@@ -77,7 +78,7 @@ public class PlayerStatsUnitNet : NetworkBehaviour
     {
         viewObject.SetActive(true);
     }
-    
+
     // OnChangedRender functions
 
     void OnPlayerNameChanged()
@@ -89,8 +90,8 @@ public class PlayerStatsUnitNet : NetworkBehaviour
     {
         playerRoleButtom.sprite = PlayerRole switch
         {
-            PlayerRoleEnum.Streamer=>streamerUI,
-            PlayerRoleEnum.Anti=>antiUI,
+            PlayerRoleEnum.Streamer => streamerUI,
+            PlayerRoleEnum.Anti => antiUI,
             _ => null
         };
     }
