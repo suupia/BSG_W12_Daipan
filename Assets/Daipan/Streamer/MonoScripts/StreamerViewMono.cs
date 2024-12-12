@@ -56,6 +56,8 @@ namespace Daipan.Streamer.MonoScripts
             animator.SetTrigger("IsDaipan");
             daipanEffect.SetTrigger("IsDaipan");
             daipanWhiteEffect.SetTrigger("IsDaipan");
+            daipanWaveMaterial.SetFloat("_Width", 0.2f);
+            daipanDistortionMaterial.SetFloat("_Width", 0.2f);
             syutyusen.SetActive(false);
             // 台パンのエフェクトを動かすところ
             DOVirtual.Float(-0.2f, 2f, daipanWaveSpeed, value =>
@@ -65,7 +67,9 @@ namespace Daipan.Streamer.MonoScripts
             }).OnComplete(() =>
             {
                 daipanWaveMaterial.SetFloat("_Radius", -0.2f);
+                daipanWaveMaterial.SetFloat("_Width", 0f);
                 daipanDistortionMaterial.SetFloat("_Radius", -0.2f);
+                daipanDistortionMaterial.SetFloat("_Width", 0f);
             });
         }
 

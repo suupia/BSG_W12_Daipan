@@ -188,7 +188,7 @@ namespace Daipan.Player.Scripts
             if (args.IsTargetEnemy) return;
             if (args.EnemyMono == null) return;
             int diff = (int)(commentParamsServer.GetViewerDiffAntiCommentNumber() * comboMultiplier.CalculateComboMultiplier(comboCounter.ComboCount)) * spawnCount;
-            if (viewerNumber.Number == 0) diff = -viewerNumber.Difference;
+            if (viewerNumber.Number == 0) diff = viewerNumber.Difference;
             viewerDifferenceSpawner.SpawnViewer(-diff, args.EnemyMono.Transform.position);
         }
     }

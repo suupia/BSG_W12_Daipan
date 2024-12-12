@@ -54,7 +54,7 @@ namespace Daipan.Enemy.Scripts
                     {
                         commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
                         int diff = (int)(commentParamsServer.GetViewerDiffAntiCommentNumber() * comboMultiplier.CalculateComboMultiplier(comboCounter.ComboCount));
-                        if (viewerNumber.Number == 0) diff = -viewerNumber.Difference;
+                        if (viewerNumber.Number == 0) diff = viewerNumber.Difference;
                         viewerDifferenceSpawner.SpawnViewer(-diff, enemyMono.Transform.position);
                     }
                     else
