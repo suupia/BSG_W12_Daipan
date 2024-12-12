@@ -614,11 +614,6 @@ Transform:
   - {fileID: 1903138279}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &294857317 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 596830345927320808, guid: e867836528ba344398ad325a2342615c, type: 3}
-  m_PrefabInstance: {fileID: 2694378212597704457}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &302452845
 GameObject:
   m_ObjectHideFlags: 0
@@ -887,11 +882,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 303271521}
   m_CullTransparentMesh: 1
---- !u!82 &479701131 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 5604969739941542944, guid: e867836528ba344398ad325a2342615c, type: 3}
-  m_PrefabInstance: {fileID: 2694378212597704457}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &547542069
 GameObject:
   m_ObjectHideFlags: 0
@@ -4266,8 +4256,8 @@ Camera:
   m_GameObject: {fileID: 1687460788}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -4284,9 +4274,9 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.00011360645
+    x: 0.055555552
     y: 0
-    width: 0.9997728
+    width: 0.8888889
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
@@ -5932,18 +5922,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 596830345927320808, guid: e867836528ba344398ad325a2342615c, type: 3}
-      propertyPath: m_Volume
-      value: 0.5714286
-      objectReference: {fileID: 0}
-    - target: {fileID: 3623247836378579756, guid: e867836528ba344398ad325a2342615c, type: 3}
-      propertyPath: m_Volume
-      value: 0.5714286
-      objectReference: {fileID: 0}
-    - target: {fileID: 4216550158729446658, guid: e867836528ba344398ad325a2342615c, type: 3}
-      propertyPath: m_Volume
-      value: 0.5714286
-      objectReference: {fileID: 0}
     - target: {fileID: 4728128620803627037, guid: e867836528ba344398ad325a2342615c, type: 3}
       propertyPath: m_Volume
       value: 0.5714286
@@ -6036,42 +6014,6 @@ PrefabInstance:
       propertyPath: m_Volume
       value: 0.5714286
       objectReference: {fileID: 0}
-    - target: {fileID: 8969438075379753290, guid: e867836528ba344398ad325a2342615c, type: 3}
-      propertyPath: seParams.Array.size
-      value: 19
-      objectReference: {fileID: 0}
-    - target: {fileID: 8969438075379753290, guid: e867836528ba344398ad325a2342615c, type: 3}
-      propertyPath: seParams.Array.data[17].seEnum
-      value: 16
-      objectReference: {fileID: 0}
-    - target: {fileID: 8969438075379753290, guid: e867836528ba344398ad325a2342615c, type: 3}
-      propertyPath: seParams.Array.data[18].seEnum
-      value: 18
-      objectReference: {fileID: 0}
-    - target: {fileID: 8969438075379753290, guid: e867836528ba344398ad325a2342615c, type: 3}
-      propertyPath: seParams.Array.data[4].audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 3a3d518e7cca57643a306f75d5762901, type: 3}
-    - target: {fileID: 8969438075379753290, guid: e867836528ba344398ad325a2342615c, type: 3}
-      propertyPath: seParams.Array.data[13].audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 593d7d210d5f52d47b845907fa1538ad, type: 3}
-    - target: {fileID: 8969438075379753290, guid: e867836528ba344398ad325a2342615c, type: 3}
-      propertyPath: seParams.Array.data[17].audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 7983e51c9f025cb41804e5865fe2d5dd, type: 3}
-    - target: {fileID: 8969438075379753290, guid: e867836528ba344398ad325a2342615c, type: 3}
-      propertyPath: seParams.Array.data[18].audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: ac916d1bd16d29348b31cccdd7e5fe36, type: 3}
-    - target: {fileID: 8969438075379753290, guid: e867836528ba344398ad325a2342615c, type: 3}
-      propertyPath: seParams.Array.data[17].audioSource
-      value: 
-      objectReference: {fileID: 294857317}
-    - target: {fileID: 8969438075379753290, guid: e867836528ba344398ad325a2342615c, type: 3}
-      propertyPath: seParams.Array.data[18].audioSource
-      value: 
-      objectReference: {fileID: 479701131}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
