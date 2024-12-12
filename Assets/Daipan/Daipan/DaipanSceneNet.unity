@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &201955036 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2532166423636006719, guid: 3111819a51a234c318bc0a14465c90b5, type: 3}
+  m_PrefabInstance: {fileID: 2038595691}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &244808956
 GameObject:
   m_ObjectHideFlags: 0
@@ -173,6 +178,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1103018221}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &297890007 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6799838396282394251, guid: 3111819a51a234c318bc0a14465c90b5, type: 3}
+  m_PrefabInstance: {fileID: 2038595691}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &297890009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 297890007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 402bb545e3c234b37add8e964caaace2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cat: {fileID: 297890007}
+  progressBar: {fileID: 201955036}
 --- !u!1 &309620967
 GameObject:
   m_ObjectHideFlags: 0
@@ -1626,7 +1650,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6799838396282394251, guid: 3111819a51a234c318bc0a14465c90b5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 297890009}
   m_SourcePrefab: {fileID: 100100000, guid: 3111819a51a234c318bc0a14465c90b5, type: 3}
 --- !u!4 &2038595692 stripped
 Transform:
