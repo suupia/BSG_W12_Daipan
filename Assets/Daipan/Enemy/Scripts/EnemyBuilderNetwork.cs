@@ -27,7 +27,7 @@ namespace Daipan.Enemy.Scripts
         readonly IViewerNumber _viewerNumber;
         readonly IEnemyCluster _enemyCluster;
         readonly EnemyLevelDesignParamData _enemyLevelDesignParamData;
-        readonly EnemyOnAttackedBuilder _enemyOnAttackedBuilder;
+        readonly EnemyOnAttackedBuilderNetwork _enemyOnAttackedBuilder;
 
         readonly ComboSpawner _comboSpawner;
         readonly ComboCounter _comboCounter;
@@ -37,7 +37,7 @@ namespace Daipan.Enemy.Scripts
             , IViewerNumber viewerNumber
             , IEnemyCluster enemyCluster
             , EnemyLevelDesignParamData enemyLevelDesignParamData
-            , EnemyOnAttackedBuilder enemyOnAttackedBuilder
+            , EnemyOnAttackedBuilderNetwork enemyOnAttackedBuilder
             , ComboSpawner comboSpawner
             , ComboCounter comboCounter
         )
