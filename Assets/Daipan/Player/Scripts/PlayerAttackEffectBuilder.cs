@@ -15,6 +15,7 @@ using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Player.LevelDesign.Scripts;
 using Daipan.Player.MonoScripts;
 using Daipan.Sound.MonoScripts;
+using Daipan.Stream.Interfaces;
 using Daipan.Stream.Scripts;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -31,6 +32,10 @@ namespace Daipan.Player.Scripts
         readonly WaveState _waveState;
         readonly IPlayerAntiCommentParamData _playerAntiCommentParamData;
         readonly ThresholdResetCounter _playerMissedAttackCounter;
+        readonly ViewerDifferenceSpawner _viewerDifferenceSpawner;
+        readonly CommentParamsServer _commentParamsServer;
+        readonly IComboMultiplier _comboMultiplier;
+        readonly IViewerNumber _viewerNumber;
 
         public PlayerAttackEffectBuilder(
             IPlayerParamDataContainer playerParamDataContainer
@@ -40,6 +45,10 @@ namespace Daipan.Player.Scripts
             , ComboSpawner comboSpawner
             , WaveState waveState
             , IPlayerAntiCommentParamData playerAntiCommentParamData
+            , ViewerDifferenceSpawner viewerDifferenceSpawner
+            , CommentParamsServer commentParamManager
+            , IComboMultiplier comboMultiplier
+            , IViewerNumber viewerNumber
         )
         {
             _playerParamDataContainer = playerParamDataContainer;
@@ -50,6 +59,10 @@ namespace Daipan.Player.Scripts
             _waveState = waveState;
             _playerAntiCommentParamData = playerAntiCommentParamData;
             _playerMissedAttackCounter = new ThresholdResetCounter(playerAntiCommentParamData.GetMissedAttackCountForAntiComment());
+            _viewerDifferenceSpawner = viewerDifferenceSpawner;
+            _commentParamsServer = commentParamManager;
+            _comboMultiplier = comboMultiplier;
+            _viewerNumber = viewerNumber;
         }
 
         public Func<IPlayerAttackEffectMono, IPlayerAttackEffectMono> Build
@@ -77,7 +90,8 @@ namespace Daipan.Player.Scripts
                         , _commentSpawner
                         , _comboSpawner
                     );
-                    SpawnAntiComment(args, _commentSpawner, _playerAntiCommentParamData, _waveState);
+                    bool isSpawned = SpawnAntiComment(args, _commentSpawner, _playerAntiCommentParamData, _waveState);
+                    SpawnViewerDifference(args, _viewerDifferenceSpawner, _commentParamsServer, _comboMultiplier, _viewerNumber, _comboCounter, isSpawned);
                 };
                 return effect;
             };
@@ -131,28 +145,43 @@ namespace Daipan.Player.Scripts
             }
         }
 
-        static void SpawnAntiComment(
+        static bool SpawnAntiComment(
             OnHitEventArgs args
             , ICommentSpawner commentSpawner
             , IPlayerAntiCommentParamData playerAntiCommentParamData
             , WaveState waveState
             )
         {
-            if (args.IsTargetEnemy) return;
-            if (args.EnemyMono != null && args.EnemyMono.EnemyEnum.IsTotem() == true) return;  // TotemはOnAttackedで判定している
+            if (args.IsTargetEnemy) return false;
+            if (args.EnemyMono != null && args.EnemyMono.EnemyEnum.IsTotem() == true) return false;  // TotemはOnAttackedで判定している
 
             var spawnPercent = playerAntiCommentParamData.GetAntiCommentPercentOnMissAttacks(waveState.CurrentWaveIndex);
 
             if (spawnPercent / 100f > Random.value)
             {
                 commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
+                return true;
             }
+            return false;
 
         }
-        void SpawnViewerDifference()
-        [
+        static void SpawnViewerDifference(
+            OnHitEventArgs args
+            , ViewerDifferenceSpawner viewerDifferenceSpawner
+            , CommentParamsServer commentParamsServer
+            , IComboMultiplier comboMultiplier
+            , IViewerNumber viewerNumber
+            , ComboCounter comboCounter
+            , bool isSpawned
+        )
+        {
+            if (args.IsTargetEnemy) return;
+            if (args.EnemyMono == null) return;
 
-
-        ]
+            int diff = (int)(commentParamsServer.GetViewerDiffAntiCommentNumber() * comboMultiplier.CalculateComboMultiplier(comboCounter.ComboCount));
+            diff = Math.Min(diff, viewerNumber.Number);
+            if (!isSpawned) diff = 0;
+            viewerDifferenceSpawner.SpawnViewer(-diff, args.EnemyMono.Transform.position);
+        }
     }
 }
