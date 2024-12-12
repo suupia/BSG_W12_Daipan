@@ -49,7 +49,6 @@ namespace Daipan.AntiNet.MonoScripts
         {
             particleEffect.SetActive(true);
             particleEffect.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
-            particleAnimation.SetTrigger("Fire");
         }
 
         void HideEffect()
