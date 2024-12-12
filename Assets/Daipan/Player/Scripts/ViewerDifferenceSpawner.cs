@@ -22,6 +22,7 @@ public class ViewerDifferenceSpawner
 
     public void SpawnViewer(int diff, Vector3 position)
     {
+        Debug.Log($"Spawning ViewerDifference with {diff}");
         var viewerPrefab = _viewerViewMonoPrefabLoader.Load();
         var viewerViewMono = _container.Instantiate(viewerPrefab, position, Quaternion.identity);
         viewerViewMono.ShowViewerDifferenceText(diff);

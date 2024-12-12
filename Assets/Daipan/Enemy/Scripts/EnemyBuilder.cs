@@ -32,6 +32,10 @@ namespace Daipan.Enemy.Scripts
         readonly ComboSpawner _comboSpawner;
         readonly ComboCounter _comboCounter;
 
+        readonly ViewerDifferenceSpawner _viewerDifferenceSpawner;
+        readonly CommentParamsServer _commentParamsServer;
+        readonly IComboMultiplier _comboMultiplier;
+
         public EnemyBuilder(
              ICommentSpawner commentSpawner
             , IViewerNumber viewerNumber
@@ -40,6 +44,9 @@ namespace Daipan.Enemy.Scripts
             , EnemyOnAttackedBuilder enemyOnAttackedBuilder
             , ComboSpawner comboSpawner
             , ComboCounter comboCounter
+            , ViewerDifferenceSpawner viewerDifferenceSpawner
+            , CommentParamsServer commentParamsServer
+            , IComboMultiplier comboMultiplier
         )
         {
             _commentSpawner = commentSpawner;
@@ -49,6 +56,9 @@ namespace Daipan.Enemy.Scripts
             _enemyOnAttackedBuilder = enemyOnAttackedBuilder;
             _comboSpawner = comboSpawner;
             _comboCounter = comboCounter;
+            _viewerDifferenceSpawner = viewerDifferenceSpawner;
+            _commentParamsServer = commentParamsServer;
+            _comboMultiplier = comboMultiplier;
         }
 
         public Func<IEnemyMono, IEnemyMono> Build(IEnemySetDomain enemySetDomain, EnemyEnum enemyEnum)
@@ -60,7 +70,8 @@ namespace Daipan.Enemy.Scripts
                     , _enemyCluster
                     , new EnemyAttackDecider()
                     , new EnemyDie(enemyMono)
-                    , WrapWithComboSpawner(_enemyOnAttackedBuilder.SwitchEnemyOnAttacked(enemyEnum), enemyMono)
+                    // , WrapWithComboSpawner(_enemyOnAttackedBuilder.SwitchEnemyOnAttacked(enemyEnum), enemyMono)
+                    , WrapWithViewerDifferenceSpawner(_enemyOnAttackedBuilder.SwitchEnemyOnAttacked(enemyEnum), enemyMono)
                     , new NoneEnemyOnDied()
                 );
 
@@ -100,6 +111,18 @@ namespace Daipan.Enemy.Scripts
             return new EnemyOnAttackedWithComboSpawner(enemyOnAttacked, enemyMono, _comboSpawner, _comboCounter);
         }
 
+        IEnemyOnAttacked WrapWithViewerDifferenceSpawner(IEnemyOnAttacked enemyOnAttacked, IEnemyMono enemyMono)
+        {
+            return new EnemyOnAttackedWithViewerDifferenceSpawner(
+                enemyOnAttacked
+                , enemyMono
+                , _viewerDifferenceSpawner
+                , _commentParamsServer
+                , _comboMultiplier
+                , _comboCounter
+            );
+        }
+
         public class EnemyOnAttackedWithComboSpawner : IEnemyOnAttacked
         {
             readonly IEnemyOnAttacked _enemyOnAttacked;
@@ -125,6 +148,49 @@ namespace Daipan.Enemy.Scripts
                 {
                     _comboCounter.IncreaseCombo();
                     _comboSpawner.SpawnCombo(_comboCounter.ComboCount, _enemyMono.Transform.position);
+                }
+                return newHp;
+            }
+        }
+
+        public class EnemyOnAttackedWithViewerDifferenceSpawner : IEnemyOnAttacked
+        {
+            readonly IEnemyOnAttacked _enemyOnAttacked;
+            readonly IEnemyMono _enemyMono;
+            readonly ViewerDifferenceSpawner _viewerDifferenceSpawner;
+            readonly CommentParamsServer _commentParamsServer;
+            readonly IComboMultiplier _comboMultiplier;
+            readonly ComboCounter _comboCounter;
+            public EnemyOnAttackedWithViewerDifferenceSpawner(
+                IEnemyOnAttacked enemyOnAttacked
+                , IEnemyMono enemyMono
+                , ViewerDifferenceSpawner viewerDifferenceSpawner
+                , CommentParamsServer commentParamsServer
+                , IComboMultiplier comboMultiplier
+                , ComboCounter comboCounter
+            )
+            {
+                _enemyOnAttacked = enemyOnAttacked;
+                _enemyMono = enemyMono;
+                _viewerDifferenceSpawner = viewerDifferenceSpawner;
+                _commentParamsServer = commentParamsServer;
+                _comboMultiplier = comboMultiplier;
+                _comboCounter = comboCounter;
+            }
+
+            public Hp OnAttacked(Hp hp, IPlayerParamData playerParamData)
+            {
+                var newHp = _enemyOnAttacked.OnAttacked(hp, playerParamData);
+                if (newHp.Value < hp.Value)
+                {
+                    _comboCounter.IncreaseCombo();
+                    int diff = (int)(_commentParamsServer.GetViewerDiffCommentNumber() * _comboMultiplier.CalculateComboMultiplier(_comboCounter.ComboCount));
+                    _viewerDifferenceSpawner.SpawnViewer(diff, _enemyMono.Transform.position);
+                }
+                else
+                {
+                    // int diff = (int)(_commentParamsServer.GetViewerDiffCommentNumber() * _comboMultiplier.CalculateComboMultiplier(_comboCounter.ComboCount));
+                    // _viewerDifferenceSpawner.SpawnViewer(-diff, _enemyMono.Transform.position);
                 }
                 return newHp;
             }
