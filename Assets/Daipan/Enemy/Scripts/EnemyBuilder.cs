@@ -71,7 +71,7 @@ namespace Daipan.Enemy.Scripts
                     , new EnemyAttackDecider()
                     , new EnemyDie(enemyMono)
                     // , WrapWithComboSpawner(_enemyOnAttackedBuilder.SwitchEnemyOnAttacked(enemyEnum), enemyMono)
-                    , WrapWithViewerDifferenceSpawner(_enemyOnAttackedBuilder.SwitchEnemyOnAttacked(enemyEnum), enemyMono)
+                    , WrapWithViewerDifferenceSpawner(_enemyOnAttackedBuilder.SwitchEnemyOnAttacked(enemyEnum, enemyMono), enemyMono)
                     , new NoneEnemyOnDied()
                 );
 

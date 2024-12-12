@@ -170,7 +170,6 @@ namespace Daipan.Player.Scripts
             if (spawnPercent / 100f > Random.value)
             {
                 commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
-                Debug.Log($"ANTI SPAWN");
                 return true;
             }
             return false;

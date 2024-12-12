@@ -6,6 +6,7 @@ using Daipan.Comment.Interfaces;
 using Daipan.Comment.Scripts;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.LevelDesign.Scripts;
+using Daipan.LevelDesign.Comment.Scripts;
 using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Player.MonoScripts;
 using Daipan.Player.Scripts;
@@ -22,6 +23,10 @@ namespace Daipan.Enemy.Scripts
         readonly ICommentSpawner _commentSpawner;
         readonly IPlayerAntiCommentParamData _playerAntiCommentParamData;
         readonly WaveState _waveState;
+        readonly ViewerDifferenceSpawner _viewerDifferenceSpawner;
+        readonly CommentParamsServer _commentParamsServer;
+        readonly IComboMultiplier _comboMultiplier;
+        readonly IViewerNumber _viewerNumber;
 
         public EnemyOnAttackedBuilder(
             IIrritatedGaugeValue irritatedGaugeValue
@@ -30,6 +35,10 @@ namespace Daipan.Enemy.Scripts
             , ICommentSpawner commentSpawner
             , IPlayerAntiCommentParamData playerAntiCommentParamData
             , WaveState waveState
+            , ViewerDifferenceSpawner viewerDifferenceSpawner
+            , CommentParamsServer commentParamsServer
+            , IComboMultiplier comboMultiplier
+            , IViewerNumber viewerNumber
         )
         {
             _irritatedGaugeValue = irritatedGaugeValue;
@@ -38,25 +47,29 @@ namespace Daipan.Enemy.Scripts
             _commentSpawner = commentSpawner;
             _playerAntiCommentParamData = playerAntiCommentParamData;
             _waveState = waveState;
+            _viewerDifferenceSpawner = viewerDifferenceSpawner;
+            _commentParamsServer = commentParamsServer;
+            _comboMultiplier = comboMultiplier;
+            _viewerNumber = viewerNumber;
         }
 
-        public IEnemyOnAttacked SwitchEnemyOnAttacked(EnemyEnum enemyEnum)
+        public IEnemyOnAttacked SwitchEnemyOnAttacked(EnemyEnum enemyEnum, IEnemyMono enemyMono)
         {
             if (enemyEnum.IsSpecial() == true)
                 return new EnemySpecialOnAttacked(enemyEnum, _irritatedGaugeValue, _enemyLevelDesignParamData);
-            if (enemyEnum == EnemyEnum.Totem2 || enemyEnum == EnemyEnum.Totem3) return BuildTotemOnAttack(enemyEnum);
+            if (enemyEnum == EnemyEnum.Totem2 || enemyEnum == EnemyEnum.Totem3) return BuildTotemOnAttack(enemyEnum, enemyMono);
             return new EnemyNormalOnAttacked();
         }
 
-        EnemyTotemOnAttacked BuildTotemOnAttack(EnemyEnum enemyEnum)
+        EnemyTotemOnAttacked BuildTotemOnAttack(EnemyEnum enemyEnum, IEnemyMono enemyMono)
         {
             return enemyEnum switch
             {
                 // todo : 一旦Viewとの兼ね合いで色を固定
-                EnemyEnum.Totem2 => new EnemyTotemOnAttacked(_comboCounter, _commentSpawner, _playerAntiCommentParamData, _waveState,
-                    new List<PlayerColor> { PlayerColor.Red, PlayerColor.Blue }),
-                EnemyEnum.Totem3 => new EnemyTotemOnAttacked(_comboCounter, _commentSpawner, _playerAntiCommentParamData, _waveState,
-                    new List<PlayerColor> { PlayerColor.Red, PlayerColor.Blue, PlayerColor.Yellow }),
+                EnemyEnum.Totem2 => new EnemyTotemOnAttacked(enemyMono, _comboCounter, _commentSpawner, _playerAntiCommentParamData, _waveState,
+                    new List<PlayerColor> { PlayerColor.Red, PlayerColor.Blue }, _commentParamsServer, _comboMultiplier, _viewerNumber, _viewerDifferenceSpawner),
+                EnemyEnum.Totem3 => new EnemyTotemOnAttacked(enemyMono, _comboCounter, _commentSpawner, _playerAntiCommentParamData, _waveState,
+                    new List<PlayerColor> { PlayerColor.Red, PlayerColor.Blue, PlayerColor.Yellow }, _commentParamsServer, _comboMultiplier, _viewerNumber, _viewerDifferenceSpawner),
                 _ => throw new System.ArgumentException("Invalid totem type")
             };
         }
