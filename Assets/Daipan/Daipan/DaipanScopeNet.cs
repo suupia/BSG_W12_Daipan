@@ -315,6 +315,7 @@ namespace Daipan.Daipan
         {
             builder.Register<RpcReceiverNetWrapper>(Lifetime.Scoped);
             builder.RegisterComponentInHierarchy<RpcReceiverNet>();
+            builder.RegisterComponentInHierarchy<DaipanInputViewMono>();
         }
 
         protected override void Configure(IContainerBuilder builder)
