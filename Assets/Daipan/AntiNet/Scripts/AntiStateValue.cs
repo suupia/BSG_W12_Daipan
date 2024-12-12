@@ -55,6 +55,5 @@ namespace Daipan.AntiNet.Scripts
             _returnNormalTimer = Observable.Timer(TimeSpan.FromSeconds(_antiStateParam.FeverTime))
                 .Subscribe(_ => { SetNormal(); });
         }
-
     }
 }
