@@ -46,7 +46,10 @@ namespace Daipan.AntiNet.Scripts
 
             if (!CanSpawnEnemy(enemyEnum))
             {
-                SoundManager.Instance?.PlaySe(SeEnum.Cancel);
+                if (AntiStateEnum.BAN == _antiStateValue.AntiStateEnum)
+                {
+                    SoundManager.Instance?.PlaySe(SeEnum.Cancel);
+                }
                 return;
             }
 
