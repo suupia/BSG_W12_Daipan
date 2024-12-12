@@ -24,6 +24,7 @@ namespace Daipan.Enemy.MonoScripts
         [SerializeField] SpriteRenderer HpSprite=null!;
 
         IEnemyViewAnimatorSwitcher _animatorSwitcher = null!;
+        [Networked] float EnemyTankOffsetRatio { get; set; }
         [SerializeField] EnemyTankOffsetEventMono enemyTankOffsetEventMono = null!;
         void Awake()    
         {
@@ -45,6 +46,11 @@ namespace Daipan.Enemy.MonoScripts
                 hpGaugeMono,
                 highlightSpriteRenderer
             );
+        }
+
+        public override void Render()
+        {
+            enemyTankOffsetEventMono.ratio = EnemyTankOffsetRatio;
         }
 
 
@@ -75,8 +81,8 @@ namespace Daipan.Enemy.MonoScripts
         {
             
             _animatorSwitcher.SetHpGauge(currentHp, maxHp);
+            EnemyTankOffsetRatio = (float)currentHp / maxHp;
             
-            enemyTankOffsetEventMono.ratio = currentHp / maxHp;
         }
 
         public override void Move()
