@@ -64,8 +64,8 @@ namespace Daipan.Streamer.MonoScripts
                 daipanDistortionMaterial.SetFloat("_Radius", value);
             }).OnComplete(() =>
             {
-                daipanWaveMaterial.SetFloat("_Radius", 0);
-                daipanDistortionMaterial.SetFloat("_Radius", 0);
+                daipanWaveMaterial.SetFloat("_Radius", -0.2f);
+                daipanDistortionMaterial.SetFloat("_Radius", -0.2f);
             });
         }
 

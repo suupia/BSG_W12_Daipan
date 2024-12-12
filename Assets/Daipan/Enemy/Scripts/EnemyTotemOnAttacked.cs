@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Codice.CM.Common.Merge;
 using Daipan.Battle.scripts;
 using Daipan.Comment.Interfaces;
 using Daipan.Comment.Scripts;
@@ -53,7 +54,7 @@ namespace Daipan.Enemy.Scripts
                     {
                         commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
                         int diff = (int)(commentParamsServer.GetViewerDiffAntiCommentNumber() * comboMultiplier.CalculateComboMultiplier(comboCounter.ComboCount));
-                        diff = Math.Min(diff, viewerNumber.Number);
+                        if (viewerNumber.Number == 0) diff = -viewerNumber.Difference;
                         viewerDifferenceSpawner.SpawnViewer(-diff, enemyMono.Transform.position);
                     }
                     else
