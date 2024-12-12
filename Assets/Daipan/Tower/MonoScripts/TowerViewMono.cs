@@ -15,8 +15,10 @@ namespace Daipan.Tower.MonoScripts
         void Awake()
         {
             _towerFullMaterial = towerFullRender.material;
+            SetRatio(1);
+            SwitchLight(false);
         }
-        
+
         public void SetRatio(double ratio)
         {
             if (_towerFullMaterial == null)
@@ -27,7 +29,7 @@ namespace Daipan.Tower.MonoScripts
 
             _towerFullMaterial.SetFloat("_Ratio", (float)ratio);
         }
-        
+
         public void SwitchLight(bool isOn)
         {
             lightView.SetActive(isOn);
