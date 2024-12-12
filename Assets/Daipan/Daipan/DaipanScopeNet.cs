@@ -310,6 +310,7 @@ namespace Daipan.Daipan
             builder.RegisterComponentInHierarchy<AntiCommentInputViewMono>();
             builder.RegisterComponentInHierarchy<AntiBanEffectViewMono>();
             builder.RegisterComponentInHierarchy<WaveCatPositioningMono>();
+            builder.RegisterComponentInHierarchy<AntiFeverEffectViewMono>();
         }
 
         public static void RegisterStreamerNet(IContainerBuilder builder)
