@@ -55,6 +55,9 @@ MonoBehaviour:
   fadeoutDuration: 0.1
   scaleUpDuration: 0.3
   scaleDownDuration: 0.2
+  plusColor: {r: 0.9607843, g: 0.17254902, b: 0.32941177, a: 1}
+  minusColor: {r: 0.13238695, g: 0.2971735, b: 0.8018868, a: 1}
+  zeroColor: {r: 0.7735849, g: 0.64725995, b: 0.14960839, a: 1}
 --- !u!1 &3120882600297083640
 GameObject:
   m_ObjectHideFlags: 0

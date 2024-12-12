@@ -60,7 +60,7 @@ namespace Daipan.Enemy.Scripts
                     , _enemyCluster
                     , new EnemyAttackDecider()
                     , new EnemyDie(enemyMono)
-                    , WrapWithComboSpawner(_enemyOnAttackedBuilder.SwitchEnemyOnAttacked(enemyEnum), enemyMono)
+                    , WrapWithComboSpawner(_enemyOnAttackedBuilder.SwitchEnemyOnAttacked(enemyEnum, enemyMono), enemyMono)
                     , new NoneEnemyOnDied()
                 );
 

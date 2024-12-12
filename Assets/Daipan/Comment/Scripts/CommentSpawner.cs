@@ -98,7 +98,7 @@ namespace Daipan.Comment.Scripts
             // 視聴者を減らす
             var multipliedAmount = (int)(_commentParamsServer.GetViewerDiffAntiCommentNumber() * _comboMultiplier.CalculateComboMultiplier(_comboCounter.ComboCount));
             _viewerNumber.DecreaseViewer(multipliedAmount);
-
+            Debug.Log("ANTI COMMENT IS SPAWNED");
         }
     }
 }

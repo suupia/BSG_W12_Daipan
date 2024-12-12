@@ -2,15 +2,19 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Codice.CM.Common.Merge;
 using Daipan.Battle.scripts;
 using Daipan.Comment.Interfaces;
 using Daipan.Comment.Scripts;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.MonoScripts;
+using Daipan.LevelDesign.Comment.Scripts;
 using Daipan.Player.LevelDesign.Interfaces;
+using Daipan.Player.LevelDesign.Scripts;
 using Daipan.Player.MonoScripts;
 using Daipan.Player.Scripts;
 using Daipan.Sound.MonoScripts;
+using Daipan.Stream.Interfaces;
 using Daipan.Stream.Scripts;
 using R3;
 using UnityEngine;
@@ -24,11 +28,16 @@ namespace Daipan.Enemy.Scripts
         readonly List<PlayerColor> _canAttackPlayers;
 
         public EnemyTotemOnAttacked(
-            ComboCounter comboCounter
+            IEnemyMono enemyMono
+            , ComboCounter comboCounter
             , ICommentSpawner commentSpawner
             , IPlayerAntiCommentParamData playerAntiCommentParamData
             , WaveState waveState
             , List<PlayerColor> canAttackPlayers
+            , CommentParamsServer commentParamsServer
+            , IComboMultiplier comboMultiplier
+            , IViewerNumber viewerNumber
+            , ViewerDifferenceSpawner viewerDifferenceSpawner
         )
         {
             _samePressChecker = new SamePressChecker(AllowableSec, canAttackPlayers.Count
@@ -42,7 +51,16 @@ namespace Daipan.Enemy.Scripts
                     var spawnPercent =
                         playerAntiCommentParamData.GetAntiCommentPercentOnMissAttacks(waveState.CurrentWaveIndex);
                     if (spawnPercent / 100f > UnityEngine.Random.value)
+                    {
                         commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
+                        int diff = (int)(commentParamsServer.GetViewerDiffAntiCommentNumber() * comboMultiplier.CalculateComboMultiplier(comboCounter.ComboCount));
+                        if (viewerNumber.Number == 0) diff = viewerNumber.Difference;
+                        viewerDifferenceSpawner.SpawnViewer(-diff, enemyMono.Transform.position);
+                    }
+                    else
+                    {
+                        viewerDifferenceSpawner.SpawnViewer(0, enemyMono.Transform.position);
+                    }
                     SoundManager.Instance?.PlaySe(SeEnum.AttackDeflect);
                 });
             _canAttackPlayers = canAttackPlayers;
