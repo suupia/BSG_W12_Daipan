@@ -21,7 +21,7 @@ using Random = UnityEngine.Random;
 
 namespace Daipan.Enemy.Scripts
 {
-    public sealed class EnemyBuilderNetwork : IEnemyBuilder
+    public sealed class EnemyBuilderNetwork
     {
         readonly ICommentSpawner _commentSpawner;
         readonly IViewerNumber _viewerNumber;

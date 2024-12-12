@@ -35,6 +35,10 @@ namespace Daipan.Enemy.MonoScripts
         [Networked]
         [OnChangedRender(nameof(OnEnemyEnumChanged))]
         public EnemyEnum EnemyEnum { get; set; } = EnemyEnum.None;
+        
+        [Networked]
+        [OnChangedRender(nameof(OnIsSpawnedByAntiChanged))]
+        NetworkBool IsSpawnedByAnti { get; set; }
 
         public bool IsReachedPlayer { get; set; }
         [Networked] 
@@ -52,6 +56,10 @@ namespace Daipan.Enemy.MonoScripts
                 if (_hp.Value <= 0) Die();
             }
         }
+
+        // EnemyViewの初期化のためのフラグ
+        bool _isCallOnChangedEnemyEnumChanged;
+        bool _isCallOnChangedIsSpawnedByAntiChanged;
 
         public event EventHandler<IPlayerParamData>? OnAttackedEvent;
 
@@ -71,6 +79,7 @@ namespace Daipan.Enemy.MonoScripts
             }
 
             OnEnemyEnumChanged();
+            OnIsSpawnedByAntiChanged();
         }
 
         public override void FixedUpdateNetwork()
@@ -123,6 +132,11 @@ namespace Daipan.Enemy.MonoScripts
             _enemyOnDied = enemyOnDied;
             Hp = new Hp(_enemyParamContainer.GetEnemyParamData(EnemyEnum).GetMaxHp());
         }
+        
+        public void SetIsSpawnedByAnti(bool isSpawnedByAnti)
+        {
+            IsSpawnedByAnti = isSpawnedByAnti;
+        }
 
         public event EventHandler<DiedEventArgs>? OnDiedEvent
         {
@@ -137,12 +151,14 @@ namespace Daipan.Enemy.MonoScripts
         
         public void DeleteSelf()
         {
+            Debug.Log($"[EnemyNet] DeleteSelf()");
             RpcDeleteSelf();
         }
         
         [Rpc(RpcSources.All, RpcTargets.All)]
         void RpcDeleteSelf()
         {
+            Debug.Log($"[EnemyNet] RpcDeleteSelf()");
             DeleteSelfBody();
         }
         void DeleteSelfBody()
@@ -178,14 +194,14 @@ namespace Daipan.Enemy.MonoScripts
 
         public void OnDaipaned()
         {
-            Debug.Log("Enemy is dead");
+            Debug.Log("[EnemyNet] OnDaipaned()");
             _enemyCluster.Remove(this);
             _enemyDie.DiedByDaipan(enemyViewMono);
         }
 
         void Die()
         {
-            Debug.Log("Enemy is dead");
+            Debug.Log("[EnemyNet] Die()");
             _enemyOnDied.OnDied(); // Destroyする前の方がいいはず
             _enemyCluster.Remove(this);
             _enemyDie.Died(enemyViewMono);
@@ -199,6 +215,29 @@ namespace Daipan.Enemy.MonoScripts
         // OnChangeRender functions 
         void OnEnemyEnumChanged()
         {
+            Debug.Log($"[EnemyNet] OnEnemyEnumChanged() EnemyEnum : {EnemyEnum}");
+            _isCallOnChangedEnemyEnumChanged = true;
+            TryEnemyViewMonoSetDomain();
+        }
+
+        void OnIsSpawnedByAntiChanged()
+        {
+            Debug.Log($"[EnemyNet] OnIsSpawnedByAntiChanged() IsSpawnedByAnti : {IsSpawnedByAnti}");
+            _isCallOnChangedIsSpawnedByAntiChanged = true;
+            TryEnemyViewMonoSetDomain();
+        }
+        
+        void TryEnemyViewMonoSetDomain()
+        {
+            if (_isCallOnChangedEnemyEnumChanged && _isCallOnChangedIsSpawnedByAntiChanged)
+            {
+                EnemyViewMonoSetDomain();
+            }
+        }
+
+        void EnemyViewMonoSetDomain()
+        {
+            Debug.Log($"[EnemyNet] EnemyViewMonoSetDomain() EnemyEnum : {EnemyEnum}, IsSpawnedByAnti : {IsSpawnedByAnti}");
             if (_enemyParamContainer == null)
             {
                 Debug.LogWarning($"_enemyParamContainer is null");
@@ -206,11 +245,12 @@ namespace Daipan.Enemy.MonoScripts
             }
 
             if (EnemyEnum == EnemyEnum.None) return;
-
-            enemyViewMono?.SetDomain(_enemyParamContainer.GetEnemyViewParamData(EnemyEnum));
+            var enemyViewParamData = _enemyParamContainer.GetEnemyViewParamData(EnemyEnum);
+            enemyViewParamData.IsSpawnedByAnti = IsSpawnedByAnti;
+            enemyViewMono?.SetDomain(enemyViewParamData);
             enemyViewMono?.SetOnDiedCallback(DeleteSelf);
-            enemyViewMono?.SetOnDaipanedCallback(OnDaipaned);
-            enemyViewMono?.SetSpecialBlackCallback(DeleteSelf);
+            enemyViewMono?.SetOnDaipanedCallback(DeleteSelf);
+            enemyViewMono?.SetSpecialBlackCallback(DeleteSelf); 
         }
     }
 }

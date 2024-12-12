@@ -34,7 +34,7 @@ namespace Daipan.AntiNet.Scripts
             _streamerViewMono.Daipan();
             _shakeDisplayMono.Daipan();
             DaipanCount++;
-            _antiStateValue.SetBan();
+            _antiStateValue.SetBan(true);
             SoundManager.Instance?.PlaySe(SeEnum.Daipan);
         }
     }

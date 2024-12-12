@@ -22,8 +22,8 @@ MonoBehaviour:
     increasedCostValue: 1
   antiCommentParam:
     maxCharacterNumber: 5
-    banCount: 3
+    banCount: 5
     specialAntiCommentHp: 2
   antiStateParam:
-    banTime: 5
+    banTime: 10
     feverTime: 5

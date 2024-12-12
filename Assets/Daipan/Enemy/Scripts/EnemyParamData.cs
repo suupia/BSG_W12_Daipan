@@ -23,7 +23,6 @@ namespace Daipan.Enemy.Scripts
             _enemyWaveParamContainer = enemyWaveParamContainer;
         }
         // Enum
-
         public EnemyEnum GetEnemyEnum() => _enemyParam.enemyEnum;
 
         // Attack
@@ -40,8 +39,30 @@ namespace Daipan.Enemy.Scripts
 
         // Colors
         public Color GetBodyColor() => _enemyParam.enemyAnimatorParam.bodyColor;
-        public Color GetEyeColor() => _enemyParam.enemyAnimatorParam.eyeColor;
+
+        public Color GetEyeColor() => IsSpawnedByAnti 
+            ? _enemyParam.enemyAnimatorParam.lineColor // Antiが出した敵は、目の色をラインの色にする 
+            : _enemyParam.enemyAnimatorParam.eyeColor;
+
         public Color GetEyeBallColor() => _enemyParam.enemyAnimatorParam.eyeBallColor;
-        public Color GetLineColor() => _enemyParam.enemyAnimatorParam.lineColor;
+
+        public Color GetLineColor() =>  _enemyParam.enemyAnimatorParam.lineColor;
+
+        public bool IsSpawnedByAnti { get; set; }
+    }
+
+    public static class ColorAdjuster
+    {
+        const float DarkenFactor = 0.8f; // Adjust this factor to control the level of darkening
+
+        public static Color GetDarkenedColor(Color color)
+        {
+            return new Color(
+                color.r * DarkenFactor,
+                color.g * DarkenFactor,
+                color.b * DarkenFactor,
+                color.a // Keep alpha unchanged
+            );
+        }
     }
 }

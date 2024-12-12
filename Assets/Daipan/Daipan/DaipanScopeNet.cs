@@ -293,7 +293,7 @@ namespace Daipan.Daipan
 
         public static void RegisterAntiNet(IContainerBuilder builder, NetworkPlayerParamsManager networkPlayerParamsManager)
         {
-            builder.Register<AntiEnemySpawnerNetwork>(Lifetime.Scoped);
+            builder.Register<AntiNet.Scripts.AntiEnemySpawnerNetwork>(Lifetime.Scoped);
             builder.Register<SpawnEnemyCostValue>(Lifetime.Scoped);
             builder.RegisterComponentInHierarchy<CostViewMono>();
             builder.RegisterInstance(networkPlayerParamsManager);
@@ -306,6 +306,7 @@ namespace Daipan.Daipan
             builder.RegisterComponentInHierarchy<AntiStateViewMono>();
             builder.RegisterComponentInHierarchy<AntiEnemyCostViewMono>();
             builder.RegisterComponentInHierarchy<AntiCommentInputViewMono>();
+            builder.RegisterComponentInHierarchy<AntiBanEffectViewMono>();
         }
 
         public static void RegisterStreamerNet(IContainerBuilder builder)
@@ -351,7 +352,7 @@ namespace Daipan.Daipan
             builder.RegisterComponentInHierarchy<EnemyWaveSpawnerCounterNet>().AsSelf().AsImplementedInterfaces();
             builder.Register<EnemySpawnerNetwork>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
             builder.Register<EnemyEnumSelector>(Lifetime.Scoped).As<IEnemyEnumSelector>();
-            builder.Register<EnemyBuilderNetwork>(Lifetime.Scoped).As<IEnemyBuilder>();
+            builder.Register<EnemyBuilderNetwork>(Lifetime.Scoped);
             builder.Register<EnemySpecialOnAttacked>(Lifetime.Scoped);
 
             // FinalBoss

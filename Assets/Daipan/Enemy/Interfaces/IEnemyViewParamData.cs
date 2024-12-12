@@ -13,6 +13,7 @@ namespace Daipan.Enemy.Interfaces
         Color GetEyeColor() => Color.white;
         Color GetEyeBallColor() => Color.white;
         Color GetLineColor() => Color.white;
+        bool IsSpawnedByAnti { get; set; }
     } 
 }
 
