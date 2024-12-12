@@ -32,16 +32,16 @@ namespace Daipan.Tower.MonoScripts
                 _playerMono = FindObjectOfType<PlayerMono>();
                 if (_playerMono == null) return;
             }
-            
+
             // Update tower gauge
             var playerHpRatio = _playerMono.Hp.Value / (float)_playerMono.MaxHp;
             towerViewMono?.SetRatio(playerHpRatio);
             towerViewMono?.SwitchLight(playerHpRatio < _towerParamsConfig.GetLightIsOnRatio());
-             
+
         }
 
 
     }
- 
+
 }
 

@@ -309,6 +309,7 @@ namespace Daipan.Daipan
             builder.RegisterComponentInHierarchy<AntiEnemyCostViewMono>();
             builder.RegisterComponentInHierarchy<AntiCommentInputViewMono>();
             builder.RegisterComponentInHierarchy<AntiBanEffectViewMono>();
+            builder.RegisterComponentInHierarchy<WaveCatPositioningMono>();
         }
 
         public static void RegisterStreamerNet(IContainerBuilder builder)
@@ -351,7 +352,7 @@ namespace Daipan.Daipan
 
             // Enemy
             RegisterEnemy(builder, enemyParamsManager);
-            builder.Register<EnemyOnAttackedBuilder>(Lifetime.Transient);
+            builder.Register<EnemyOnAttackedBuilderNetwork>(Lifetime.Transient);
             builder.RegisterComponentInHierarchy<EnemyWaveSpawnerCounterNet>().AsSelf().AsImplementedInterfaces();
             builder.Register<EnemySpawnerNetwork>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
             builder.Register<EnemyEnumSelector>(Lifetime.Scoped).As<IEnemyEnumSelector>();
