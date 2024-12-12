@@ -39,7 +39,7 @@ namespace Daipan.Player.MonoScripts
             // 初期のスケールが設定されていない場合は、現在のスケールを設定
             if (_originalScale == Vector3.zero) _originalScale = viewObject.transform.localScale;
 
-            viewerText.text = $"{}";
+            viewerText.text = $"{viewerDifference}";
             Show();
 
             // 初期スケールに設定してからアニメーションを開始

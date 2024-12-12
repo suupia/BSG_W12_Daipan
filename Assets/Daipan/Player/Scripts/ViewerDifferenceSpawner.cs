@@ -1,4 +1,5 @@
 #nullable enable
+using Daipan.LevelDesign.Combo.Scripts;
 using Daipan.Player.MonoScripts;
 using Daipan.Stream.Scripts.Utility;
 using UnityEngine;
@@ -11,20 +12,23 @@ public class ViewerDifferenceSpawner
 {
     readonly IObjectResolver _container;
     readonly IPrefabLoader<ViewerDifferenceViewMono> _viewerViewMonoPrefabLoader;
+    readonly ComboParamsManager _comboParamsManager;
     public ViewerDifferenceSpawner(
         IObjectResolver container
         , IPrefabLoader<ViewerDifferenceViewMono> viewerViewMonoPrefabLoader
+        , ComboParamsManager comboParamsManager
     )
     {
         _container = container;
         _viewerViewMonoPrefabLoader = viewerViewMonoPrefabLoader;
+        _comboParamsManager = comboParamsManager;
     }
 
     public void SpawnViewer(int diff, Vector3 position)
     {
         Debug.Log($"Spawning ViewerDifference with {diff}");
         var viewerPrefab = _viewerViewMonoPrefabLoader.Load();
-        var viewerViewMono = _container.Instantiate(viewerPrefab, position, Quaternion.identity);
+        var viewerViewMono = _container.Instantiate(viewerPrefab, position, Quaternion.identity, _comboParamsManager.GetComboParent());
         viewerViewMono.ShowViewerDifferenceText(diff);
     }
 }
