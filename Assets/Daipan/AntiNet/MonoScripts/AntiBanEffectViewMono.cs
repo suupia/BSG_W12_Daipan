@@ -11,6 +11,7 @@ using Daipan.LevelDesign.Net;
 using UnityEngine.UI;
 using DG.Tweening;
 using System;
+using Daipan.Sound.MonoScripts;
 
 namespace Daipan.AntiNet.MonoScripts
 {
@@ -56,6 +57,7 @@ namespace Daipan.AntiNet.MonoScripts
         {
             _disposable?.Dispose();
             banChainEffect.SetActive(true);
+            SoundManager.Instance?.PlaySe(SeEnum.BAN);
             banChainEffectAnimator.SetTrigger("Fire");
 
             _disposable = Observable
