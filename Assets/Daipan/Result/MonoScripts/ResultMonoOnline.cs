@@ -5,7 +5,9 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.PlayerLoop;
 using Daipan.Battle.scripts;
+using Daipan.Enemy.MonoScripts;
 using Fusion;
+using System.Linq;
 
 namespace Daipan.Result.MonoScripts
 {
@@ -16,7 +18,14 @@ namespace Daipan.Result.MonoScripts
         void Start()
         {
             resultText.text = NetworkPlayerResultHolder.NetworkPlayerResultEnum.ToString();
-            
+
+            // 念のため、残っている敵を削除
+            var remainingEnemies = FindObjectsByType<EnemyNet>(FindObjectsSortMode.None);
+            foreach (var enemy in remainingEnemies)
+                enemy?.DeleteSelf();
+            var remainingFinalBosses = FindObjectsByType<FinalBossNet>(FindObjectsSortMode.None);
+            foreach (var finalBoss in remainingFinalBosses)
+                finalBoss?.DeleteSelf();
         }
 
         void Update()
