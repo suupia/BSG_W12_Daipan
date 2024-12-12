@@ -75,22 +75,49 @@ namespace Daipan.Enemy.Scripts
         }
         
         static List<IEnemyMono?> CalcOrderedEnemy(
-            List<IEnemyMono?> enemies
-            , Queue<IEnemyMono?> reachedPlayer
-            , Vector3 position
-            )
+            List<IEnemyMono?> enemies,
+            Queue<IEnemyMono?> reachedPlayer,
+            Vector3 position
+        )
         {
             // reachedPlayerキューを更新
             var newReachedPlayer = UpdateReachedPlayer(enemies, reachedPlayer);
 
             // reachedPlayerキューをリストに変換
-            List<IEnemyMono?> orderedEnemies = newReachedPlayer.OrderBy(e => Distance(e, position)).ToList();
+            var reachedEnemies = new List<IEnemyMono?>(newReachedPlayer);
+
+            // FinalBossとそれ以外を分ける
+            var finalBosses = reachedEnemies.Where(e => e?.EnemyEnum.IsFinalBoss() == true).ToList();
+            var nonFinalBosses = reachedEnemies.Where(e => e?.EnemyEnum.IsFinalBoss() != true).ToList();
+
+            // FinalBossを距離順にソート
+            finalBosses = finalBosses.OrderBy(e => Distance(e, position)).ToList();
+
+            // nonFinalBossesにFinalBossを適切な位置に挿入
+            foreach (var finalBoss in finalBosses)
+            {
+                int insertIndex = nonFinalBosses.FindIndex(e => Distance(e, position) > Distance(finalBoss, position));
+                if (insertIndex == -1)
+                {
+                    // 適切な位置が見つからない場合は末尾に追加
+                    nonFinalBosses.Add(finalBoss);
+                }
+                else
+                {
+                    // 適切な位置に挿入
+                    nonFinalBosses.Insert(insertIndex, finalBoss);
+                }
+            }
+
+            // reachedEnemiesを更新済みリストとして使用
+            var orderedEnemies = nonFinalBosses;
 
             // enemiesリストをソートし、orderedEnemiesリストに追加
-            orderedEnemies.AddRange(enemies.OrderBy(e => Distance(e, position)));
+            orderedEnemies.AddRange(enemies.Where(e => !reachedEnemies.Contains(e)).OrderBy(e => Distance(e, position)));
 
             return orderedEnemies;
         }
+
         
         static float Distance(IEnemyMono? enemyMono, Vector3 position) => enemyMono == null ? float.MaxValue : (position - enemyMono.Transform.position).sqrMagnitude;
         

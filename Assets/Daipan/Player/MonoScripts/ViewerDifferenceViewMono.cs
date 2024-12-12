@@ -18,6 +18,9 @@ namespace Daipan.Player.MonoScripts
         [SerializeField] float fadeoutDuration;
         [SerializeField] float scaleUpDuration;
         [SerializeField] float scaleDownDuration;
+        [SerializeField] Color plusColor;
+        [SerializeField] Color minusColor;
+        [SerializeField] Color zeroColor;
 
 
         Vector3 _originalScale;
@@ -39,7 +42,21 @@ namespace Daipan.Player.MonoScripts
             // 初期のスケールが設定されていない場合は、現在のスケールを設定
             if (_originalScale == Vector3.zero) _originalScale = viewObject.transform.localScale;
 
-            // viewerText.text = $"{comboCount}";
+            if (viewerDifference == 0)
+            {
+                viewerText.text = $"{viewerDifference}";
+                viewerText.color = zeroColor;
+            }
+            else if (viewerDifference > 0)
+            {
+                viewerText.text = $"+{viewerDifference}";
+                viewerText.color = plusColor;
+            }
+            else
+            {
+                viewerText.text = $"{viewerDifference}";
+                viewerText.color = minusColor;
+            }
             Show();
 
             // 初期スケールに設定してからアニメーションを開始

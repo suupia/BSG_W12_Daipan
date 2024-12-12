@@ -14,6 +14,7 @@ namespace Daipan.Stream.Scripts
     public sealed class ViewerNumberNetwork : IViewerNumber
     {
         public int Number { get; private set; }
+        public int Difference { get; private set; }
 
         readonly NetworkRunner _runner;
         readonly RpcReceiverNetWrapper _rpcReceiverNetWrapper;
@@ -36,6 +37,8 @@ namespace Daipan.Stream.Scripts
             Number += amount;
 
             _rpcReceiverNetWrapper.RpcReceiverNet.SetViewerRPC(_runner.LocalPlayer, Number);
+
+            Difference = amount;
         }
 
         public void DecreaseViewer(int amount)
@@ -43,14 +46,19 @@ namespace Daipan.Stream.Scripts
             // [Prerequisite]
             if (amount < 0) Debug.LogWarning($"ViewerNumber.DecreaseViewer() amount is negative : {amount}");
 
+            int preNumber = Number;
+
             Number = Mathf.Max(0, Number - amount);
 
             _rpcReceiverNetWrapper.RpcReceiverNet.SetViewerRPC(_runner.LocalPlayer, Number);
+
+            Difference = preNumber - Number;
         }
         public void SetViewer(int amount)
         {
             // [Prerequisite]
             if (amount < 0) Debug.LogWarning($"ViewerNumber.DecreaseViewer() amount is negative : {amount}");
+            Difference = amount - Number;
             Number = amount;
         }
     }
