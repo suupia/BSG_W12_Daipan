@@ -6,6 +6,7 @@ using Daipan.Comment.Scripts;
 using Daipan.Enemy.Interfaces;
 using Daipan.Player.Interfaces;
 using Daipan.Player.LevelDesign.Interfaces;
+using Daipan.Sound.MonoScripts;
 using Daipan.Stream.Interfaces;
 using Daipan.Stream.Scripts;
 using UnityEngine;
@@ -51,6 +52,7 @@ namespace Daipan.Player.Scripts
                 Debug.LogWarning("PlayerViewMonos is null");
                 return new Hp(hp.Value - enemyParamData.GetAttackAmount());
             }
+            SoundManager.Instance?.PlaySe(SeEnum.TowerDamage);
             foreach (var playerViewMono in _playerViewMonos)
             {
                 if (playerViewMono == null) continue;
