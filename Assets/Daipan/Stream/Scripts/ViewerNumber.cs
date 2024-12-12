@@ -30,7 +30,6 @@ namespace Daipan.Stream.Scripts
             Number = Mathf.Max(0, Number - amount);
 
             Difference = preNumber - Number;
-            Debug.Log($"Test aaa {Difference}");
         }
         public void SetViewer(int amount)
         {

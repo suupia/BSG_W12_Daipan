@@ -78,8 +78,9 @@ namespace Daipan.Player.Scripts
                 effect.SetUp(playerColor, () => _enemyCluster.NearestEnemy(playerMono.Transform.position));
                 effect.OnHit += (sender, args) =>
                 {
+                    int spawnCount = 0;
                     Debug.Log($"OnHit");
-                    AttackEnemy(
+                    bool isSpawned0 = AttackEnemy(
                         _playerParamDataContainer
                         , effect
                         , playerViewMonos
@@ -90,15 +91,17 @@ namespace Daipan.Player.Scripts
                         , _commentSpawner
                         , _comboSpawner
                     );
-                    bool isSpawned = SpawnAntiComment(args, _commentSpawner, _playerAntiCommentParamData, _waveState);
-                    SpawnViewerDifference(args, _viewerDifferenceSpawner, _commentParamsServer, _comboMultiplier, _viewerNumber, _comboCounter, isSpawned);
+                    bool isSpawned1 = SpawnAntiComment(args, _commentSpawner, _playerAntiCommentParamData, _waveState);
+                    spawnCount += isSpawned0 ? 1 : 0;
+                    spawnCount += isSpawned1 ? 1 : 0;
+                    SpawnViewerDifference(args, _viewerDifferenceSpawner, _commentParamsServer, _comboMultiplier, _viewerNumber, _comboCounter, spawnCount);
                 };
                 return effect;
             };
         }
 
 
-        static void AttackEnemy(
+        static bool AttackEnemy(
             IPlayerParamDataContainer playerParamDataContainer
             , IPlayerAttackEffectMono playerAttackEffectMono
             , List<AbstractPlayerViewMono?> playerViewMonos
@@ -121,18 +124,23 @@ namespace Daipan.Player.Scripts
             }
             else
             {
+                bool isAntiCommentSpawned = false;
                 Debug.Log(
                     $"攻撃対象が{PlayerAttackModule.GetTargetEnemyEnum(playerColor)}ではないです args.EnemyMono?.EnemyEnum: {args.EnemyMono?.EnemyEnum}");
                 comboCounter.ResetCombo();
                 playerMissedAttackCounter.CountUp();
-                if (playerMissedAttackCounter.IsOverThreshold) commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
+                if (playerMissedAttackCounter.IsOverThreshold)
+                {
+                    commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
+                    isAntiCommentSpawned = true;
+                }
                 if (args.EnemyMono != null)
                 {
                     playerAttackEffectMono.Defenced();
                     SoundManager.Instance?.PlaySe(SeEnum.AttackDeflect);
                 }
 
-                return;
+                return isAntiCommentSpawned;
             }
 
 
@@ -143,6 +151,8 @@ namespace Daipan.Player.Scripts
                 if (playerViewMono.playerColor == playerColor)
                     playerViewMono.Attack();
             }
+
+            return false;
         }
 
         static bool SpawnAntiComment(
@@ -160,6 +170,7 @@ namespace Daipan.Player.Scripts
             if (spawnPercent / 100f > Random.value)
             {
                 commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
+                Debug.Log($"ANTI SPAWN");
                 return true;
             }
             return false;
@@ -172,15 +183,13 @@ namespace Daipan.Player.Scripts
             , IComboMultiplier comboMultiplier
             , IViewerNumber viewerNumber
             , ComboCounter comboCounter
-            , bool isSpawned
+            , int spawnCount
         )
         {
             if (args.IsTargetEnemy) return;
             if (args.EnemyMono == null) return;
-
-            int diff = (int)(commentParamsServer.GetViewerDiffAntiCommentNumber() * comboMultiplier.CalculateComboMultiplier(comboCounter.ComboCount));
+            int diff = (int)(commentParamsServer.GetViewerDiffAntiCommentNumber() * comboMultiplier.CalculateComboMultiplier(comboCounter.ComboCount)) * spawnCount;
             diff = Math.Min(diff, viewerNumber.Number);
-            if (!isSpawned) diff = 0;
             viewerDifferenceSpawner.SpawnViewer(-diff, args.EnemyMono.Transform.position);
         }
     }
