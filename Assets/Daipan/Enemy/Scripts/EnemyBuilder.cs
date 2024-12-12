@@ -184,13 +184,11 @@ namespace Daipan.Enemy.Scripts
                 if (newHp.Value < hp.Value)
                 {
                     _comboCounter.IncreaseCombo();
-                    int diff = (int)(_commentParamsServer.GetViewerDiffCommentNumber() * _comboMultiplier.CalculateComboMultiplier(_comboCounter.ComboCount));
-                    _viewerDifferenceSpawner.SpawnViewer(diff, _enemyMono.Transform.position);
-                }
-                else
-                {
-                    // int diff = (int)(_commentParamsServer.GetViewerDiffCommentNumber() * _comboMultiplier.CalculateComboMultiplier(_comboCounter.ComboCount));
-                    // _viewerDifferenceSpawner.SpawnViewer(-diff, _enemyMono.Transform.position);
+                    if (newHp.Value <= 0)
+                    {
+                        int diff = (int)(_commentParamsServer.GetViewerDiffCommentNumber() * _comboMultiplier.CalculateComboMultiplier(_comboCounter.ComboCount));
+                        _viewerDifferenceSpawner.SpawnViewer(diff, _enemyMono.Transform.position);
+                    }
                 }
                 return newHp;
             }
