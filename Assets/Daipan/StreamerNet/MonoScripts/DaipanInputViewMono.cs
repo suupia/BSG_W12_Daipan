@@ -119,15 +119,15 @@ namespace Daipan.StreamerNet.MonoScripts
         {
             _sequence?.Kill();
             _sequence.Append(
-                wordImage.GetComponent<RectTransform>().DOAnchorPos(wordPosition + new Vector2(0, 2000f), 0.5f)
+                wordImage.GetComponent<RectTransform>().DOAnchorPos(wordPosition + new Vector2(0, 2000f), 1.5f)
                 .SetEase(Ease.Linear)
             )
             .Join(
-                headImage.GetComponent<RectTransform>().DOAnchorPos(headPosition + new Vector2(0, 2000f), 0.5f)
+                headImage.GetComponent<RectTransform>().DOAnchorPos(headPosition + new Vector2(0, 2000f), 1.5f)
                 .SetEase(Ease.Linear)
             )
             .Join(
-                handImage.GetComponent<RectTransform>().DOAnchorPos(handPosition + new Vector2(-2000, 0), 0.5f)
+                handImage.GetComponent<RectTransform>().DOAnchorPos(handPosition + new Vector2(-2000, 0), 1.5f)
                 .SetEase(Ease.Linear)
             ).OnComplete(() =>
             {
