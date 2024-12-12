@@ -151,12 +151,14 @@ namespace Daipan.Enemy.MonoScripts
         
         public void DeleteSelf()
         {
+            Debug.Log($"[EnemyNet] DeleteSelf()");
             RpcDeleteSelf();
         }
         
         [Rpc(RpcSources.All, RpcTargets.All)]
         void RpcDeleteSelf()
         {
+            Debug.Log($"[EnemyNet] RpcDeleteSelf()");
             DeleteSelfBody();
         }
         void DeleteSelfBody()
@@ -192,14 +194,14 @@ namespace Daipan.Enemy.MonoScripts
 
         public void OnDaipaned()
         {
-            Debug.Log("Enemy is dead");
+            Debug.Log("[EnemyNet] OnDaipaned()");
             _enemyCluster.Remove(this);
             _enemyDie.DiedByDaipan(enemyViewMono);
         }
 
         void Die()
         {
-            Debug.Log("Enemy is dead");
+            Debug.Log("[EnemyNet] Die()");
             _enemyOnDied.OnDied(); // Destroyする前の方がいいはず
             _enemyCluster.Remove(this);
             _enemyDie.Died(enemyViewMono);
@@ -247,7 +249,7 @@ namespace Daipan.Enemy.MonoScripts
             enemyViewParamData.IsSpawnedByAnti = IsSpawnedByAnti;
             enemyViewMono?.SetDomain(enemyViewParamData);
             enemyViewMono?.SetOnDiedCallback(DeleteSelf);
-            enemyViewMono?.SetOnDaipanedCallback(OnDaipaned);
+            enemyViewMono?.SetOnDaipanedCallback(DeleteSelf);
             enemyViewMono?.SetSpecialBlackCallback(DeleteSelf); 
         }
     }
