@@ -59,6 +59,7 @@ namespace Daipan.Battle.scripts
             , ComboCounter comboCounter
             , IDaipanExecutor daipanExecutor
             , LanguageConfig languageConfig
+            , WaveState waveState
         )
         {
             Debug.Log("ResultViewMono Constructor");
@@ -84,6 +85,13 @@ namespace Daipan.Battle.scripts
                 {
                     comboCountText.text = $"{comboCounter.MaxComboCount}";
                     comboCountMono.SetDigit(comboCounter.MaxComboCount);
+                })
+                .AddTo(this);
+            Observable.EveryUpdate()
+                .Where(_ => viewObject.activeInHierarchy)
+                .Subscribe(_ =>
+                {
+                    lastWaveMono.SetDigit(waveState.CurrentWaveIndex+1);
                 })
                 .AddTo(this);
 
