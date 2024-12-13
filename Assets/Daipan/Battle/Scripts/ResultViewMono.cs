@@ -39,7 +39,11 @@ namespace Daipan.Battle.scripts
         [SerializeField] Sprite successBackground = null!;
         [SerializeField] Sprite failureBackground = null!;
         [SerializeField] Image background = null!;
-        
+
+        // new result ui
+        [SerializeField] Image backgroundJapanese = null!;
+        [SerializeField] Image backgroundEnglish = null!;
+
         [SerializeField] DigitSplitResultNumberMono viewerNumberMono = null!;
         [SerializeField] DigitSplitResultNumberMono daipanCountMono = null!;
         [SerializeField] DigitSplitResultNumberMono playerHpMono = null!;
@@ -89,13 +93,25 @@ namespace Daipan.Battle.scripts
                 .AddTo(this);
             Observable.EveryUpdate()
                 .Where(_ => viewObject.activeInHierarchy)
-                .Subscribe(_ =>
-                {
-                    lastWaveMono.SetDigit(waveState.CurrentWaveIndex+1);
-                })
+                .Subscribe(_ => { lastWaveMono.SetDigit(waveState.CurrentWaveIndex + 1); })
                 .AddTo(this);
 
             _languageConfig = languageConfig;
+            switch (languageConfig.CurrentLanguage)
+            {
+                case LanguageEnum.English:
+                    backgroundEnglish.gameObject.SetActive(true);
+                    backgroundJapanese.gameObject.SetActive(false);
+                    break;
+                case LanguageEnum.Japanese:
+                    backgroundEnglish.gameObject.SetActive(false);
+                    backgroundEnglish.gameObject.SetActive(true);
+                    break;
+                default:
+                    backgroundEnglish.gameObject.SetActive(true);
+                    backgroundJapanese.gameObject.SetActive(false);
+                    break;
+            }
         }
 
         public void ShowResult(bool isClear, Action onComplete)
@@ -119,7 +135,7 @@ namespace Daipan.Battle.scripts
             }
 
             playerHpText.text = $"{playerMono.Hp.Value} / {playerMono.MaxHp}"; // 本当はObserveしたいけど生成順序の関係でここで取得
-            playerHpMono.SetDigit((int)playerMono.Hp.Value);
+            playerHpMono.SetDigit((int)playerMono.Hp.Value); // なんか更新が遅れることがある？？処理が重いだけか？
 
             if (playerMono.Hp.Value <= 0)
                 background.sprite = failureBackground;
