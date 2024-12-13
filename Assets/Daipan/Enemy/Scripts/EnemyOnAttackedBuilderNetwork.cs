@@ -12,6 +12,7 @@ using Daipan.Player.MonoScripts;
 using Daipan.Player.Scripts;
 using Daipan.Stream.Interfaces;
 using Daipan.Stream.Scripts;
+using Daipna.StreamerNet.Scripts;
 
 namespace Daipan.Enemy.Scripts
 {
@@ -23,6 +24,8 @@ namespace Daipan.Enemy.Scripts
         readonly ICommentSpawner _commentSpawner;
         readonly IPlayerAntiCommentParamData _playerAntiCommentParamData;
         readonly WaveState _waveState;
+        readonly EnemyClusterNetwork _enemyClusterNetwork;
+        readonly RpcReceiverNetWrapper _rpcReceiverNetWrapper;
 
         public EnemyOnAttackedBuilderNetwork(
             IIrritatedGaugeValue irritatedGaugeValue
@@ -31,6 +34,8 @@ namespace Daipan.Enemy.Scripts
             , ICommentSpawner commentSpawner
             , IPlayerAntiCommentParamData playerAntiCommentParamData
             , WaveState waveState
+            , EnemyClusterNetwork enemyClusterNetwork
+            , RpcReceiverNetWrapper rpcReceiverNetWrapper
         )
         {
             _irritatedGaugeValue = irritatedGaugeValue;
@@ -39,6 +44,8 @@ namespace Daipan.Enemy.Scripts
             _commentSpawner = commentSpawner;
             _playerAntiCommentParamData = playerAntiCommentParamData;
             _waveState = waveState;
+            _enemyClusterNetwork = enemyClusterNetwork;
+            _rpcReceiverNetWrapper = rpcReceiverNetWrapper;
         }
 
         public IEnemyOnAttacked SwitchEnemyOnAttacked(EnemyEnum enemyEnum, IEnemyMono enemyMono)
@@ -55,9 +62,9 @@ namespace Daipan.Enemy.Scripts
             {
                 // todo : 一旦Viewとの兼ね合いで色を固定
                 EnemyEnum.Totem2 => new EnemyTotemOnAttackedNetwork(enemyMono, _comboCounter, _commentSpawner, _playerAntiCommentParamData, _waveState,
-                    new List<PlayerColor> { PlayerColor.Red, PlayerColor.Blue }),
+                    new List<PlayerColor> { PlayerColor.Red, PlayerColor.Blue }, _enemyClusterNetwork, _rpcReceiverNetWrapper),
                 EnemyEnum.Totem3 => new EnemyTotemOnAttackedNetwork(enemyMono, _comboCounter, _commentSpawner, _playerAntiCommentParamData, _waveState,
-                    new List<PlayerColor> { PlayerColor.Red, PlayerColor.Blue, PlayerColor.Yellow }),
+                    new List<PlayerColor> { PlayerColor.Red, PlayerColor.Blue, PlayerColor.Yellow }, _enemyClusterNetwork, _rpcReceiverNetWrapper),
                 _ => throw new System.ArgumentException("Invalid totem type")
             };
         }

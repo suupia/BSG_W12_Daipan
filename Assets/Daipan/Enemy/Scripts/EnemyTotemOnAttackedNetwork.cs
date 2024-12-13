@@ -15,6 +15,7 @@ using Daipan.Player.Scripts;
 using Daipan.Sound.MonoScripts;
 using Daipan.Stream.Interfaces;
 using Daipan.Stream.Scripts;
+using Daipna.StreamerNet.Scripts;
 using R3;
 using UnityEngine;
 
@@ -33,6 +34,8 @@ namespace Daipan.Enemy.Scripts
             , IPlayerAntiCommentParamData playerAntiCommentParamData
             , WaveState waveState
             , List<PlayerColor> canAttackPlayers
+            , EnemyClusterNetwork enemyClusterNetwork
+            , RpcReceiverNetWrapper rpcReceiverNetWrapper
         )
         {
             _samePressChecker = new SamePressChecker(AllowableSec, canAttackPlayers.Count
@@ -43,12 +46,7 @@ namespace Daipan.Enemy.Scripts
                 }, () =>
                 {
                     comboCounter.ResetCombo();
-                    var spawnPercent =
-                        playerAntiCommentParamData.GetAntiCommentPercentOnMissAttacks(waveState.CurrentWaveIndex);
-                    if (spawnPercent / 100f > UnityEngine.Random.value)
-                    {
-                        commentSpawner.SpawnCommentByType(CommentEnum.Spiky);
-                    }
+                    rpcReceiverNetWrapper.RpcReceiverNet.SetFeverRPC(enemyClusterNetwork.GetPlayerRef(enemyMono));
                     SoundManager.Instance?.PlaySe(SeEnum.AttackDeflect);
                 });
             _canAttackPlayers = canAttackPlayers;
