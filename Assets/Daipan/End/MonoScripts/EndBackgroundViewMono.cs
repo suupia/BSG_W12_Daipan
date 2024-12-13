@@ -18,7 +18,7 @@ namespace Daipan.End.MonoScripts
         [SerializeField] List<EndSceneSprite> endSceneSprites = null!;
         
         [SerializeField] Image endSceneImage = null!;
-        [SerializeField] TextMeshProUGUI endSceneText = null!; // フレーバーテキストを表示
+        [SerializeField] public TextMeshProUGUI endSceneText = null!; // フレーバーテキストを表示　（クレジットの関係でpublic）
 
         void Awake()
         {

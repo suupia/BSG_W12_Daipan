@@ -264,6 +264,13 @@ namespace Daipan.Sound.MonoScripts
                 if (param.audioSource.isPlaying)
                     param.audioSource.Stop();
         }
+        
+        public void StopAllSe()
+        {
+            foreach (var param in seParams)
+                if (param.audioSource.isPlaying)
+                    param.audioSource.Stop();
+        }
 
         public void Dispose()
         {
