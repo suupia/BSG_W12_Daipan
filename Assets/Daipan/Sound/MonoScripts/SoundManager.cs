@@ -334,6 +334,11 @@ namespace Daipan.Sound.MonoScripts
         Cancel,
 
         EnemyDieContraction,
-        EnemyDieExplosion
+        EnemyDieExplosion,
+        DaipanWord,
+        DaipanInput,
+        FeverTime,
+        CountUpViewer,
+        CountDownViewer,
     }
 }

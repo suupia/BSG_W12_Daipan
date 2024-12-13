@@ -1,6 +1,5 @@
 #nullable enable
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using Daipan.AntiNet.Scripts;
 using TMPro;
 using UnityEngine;
@@ -10,7 +9,6 @@ using Daipan.Enemy.Scripts;
 using Daipan.LevelDesign.Net;
 using UnityEngine.UI;
 using DG.Tweening;
-using System;
 using Daipan.Sound.MonoScripts;
 
 namespace Daipan.AntiNet.MonoScripts
@@ -24,11 +22,15 @@ namespace Daipan.AntiNet.MonoScripts
         private Sequence? _sequence = null!;
         private IDisposable? _disposable = null!;
 
+        // SE再生フラグ
+        private bool _hasPlayedFeverSe = false;
+
         [Inject]
         public void Initialize(AntiStateValue antiStateValue)
         {
             particleEffect.SetActive(false);
             becameFeverEffect.gameObject.SetActive(false);
+
             Observable
                 .EveryValueChanged(antiStateValue, x => x.AntiStateEnum)
                 .Subscribe(value =>
@@ -43,8 +45,6 @@ namespace Daipan.AntiNet.MonoScripts
                     }
                 })
                 .AddTo(this);
-
-
         }
 
         void ShowEffect()
@@ -52,10 +52,18 @@ namespace Daipan.AntiNet.MonoScripts
             particleEffect.SetActive(true);
             particleEffect.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
             becameFeverEffect.gameObject.SetActive(true);
+
+            // 初回のみSEを再生
+            if (!_hasPlayedFeverSe)
+            {
+                SoundManager.Instance?.PlaySe(SeEnum.FeverTime);
+                _hasPlayedFeverSe = true;
+            }
         }
 
         void HideEffect()
         {
+            _sequence?.Kill();
             _sequence = DOTween.Sequence();
 
             _sequence.Append(
@@ -65,13 +73,20 @@ namespace Daipan.AntiNet.MonoScripts
                     fadeTime,
                     onVirtualUpdate: (value) =>
                     {
-                        particleEffect.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, value);
+                        var spriteRenderer = particleEffect.GetComponent<SpriteRenderer>();
+                        if (spriteRenderer != null)
+                        {
+                            spriteRenderer.color = new Color(1f, 1f, 1f, value);
+                        }
                     })
                     .SetEase(Ease.Linear)
                     .OnComplete(() =>
                     {
                         particleEffect.gameObject.SetActive(false);
                         becameFeverEffect.gameObject.SetActive(false);
+
+                        // Hideしたのでフラグをリセット
+                        _hasPlayedFeverSe = false;
                     }
                     )
             );
