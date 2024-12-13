@@ -16,13 +16,17 @@ namespace Daipan.Result.MonoScripts
     public class ResultMonoOnline : MonoBehaviour
     {
         [SerializeField] Image resultImage = null!;
+        [SerializeField] Image quiteImage = null!;
         [SerializeField] ResultSpriteParam[] resultSpriteParams = null!; 
+        [SerializeField] ResultQuitImage[] resultQuitImages = null!;
         
         [SerializeField] TMP_Text resultText = null!;
 
         void Start()
         {
             resultText.text = NetworkPlayerResultHolder.NetworkPlayerResultEnum.ToString();
+            
+            // Resultの結果を表す画像
             foreach (var resultSpriteParam in resultSpriteParams)
             {
                 if (resultSpriteParam.networkPlayerResultEnum == NetworkPlayerResultHolder.NetworkPlayerResultEnum)
@@ -30,6 +34,16 @@ namespace Daipan.Result.MonoScripts
                     resultImage.sprite = resultSpriteParam.resultSprite;
                 }
             }
+            
+            // 実装を断念
+            // // 「終了」ボタンの画像
+            // foreach (var resultQuitImage in resultQuitImages)
+            // {
+            //     if (resultQuitImage.localPlayerRoleEnum == NetworkPlayerResultHolder.LocalPlayerRoleEnum)
+            //     {
+            //         quiteImage.sprite = resultQuitImage.quitSprite;
+            //     }
+            // }
 
             // 念のため、残っている敵を削除
             var remainingEnemies = FindObjectsByType<EnemyNet>(FindObjectsSortMode.None);
@@ -53,7 +67,14 @@ namespace Daipan.Result.MonoScripts
     public sealed class ResultSpriteParam
     {
         public NetworkPlayerResultEnum networkPlayerResultEnum;
-        public Sprite? resultSprite;
+        public Sprite? resultSprite;  // 勝敗に応じて表示する画像
+    }
+    
+    [Serializable]
+    public sealed class ResultQuitImage
+    {
+        public PlayerRoleEnum localPlayerRoleEnum;
+        public Sprite? quitSprite;  // プレイヤーのRoleに応じて、画像を変更 
     }
 
     public static class NetworkPlayerResultHolder
