@@ -16,7 +16,7 @@ MonoBehaviour:
     normalEnemyCost: 1
     bossEnemyCost: 5
   costValueParam:
-    maxCostValue: 15
+    maxCostValue: 20
     initializedCostValue: 5
     increaseCostTime: 2
     increasedCostValue: 1
