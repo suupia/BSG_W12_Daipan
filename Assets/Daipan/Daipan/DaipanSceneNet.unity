@@ -2690,6 +2690,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1377864866711895347, guid: e14e9eddc9151440abb22c158a952d28, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 350
+      objectReference: {fileID: 0}
+    - target: {fileID: 2433305294429402737, guid: e14e9eddc9151440abb22c158a952d28, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4123369324132796363, guid: e14e9eddc9151440abb22c158a952d28, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -425
@@ -2697,6 +2705,10 @@ PrefabInstance:
     - target: {fileID: 4709876791888845700, guid: e14e9eddc9151440abb22c158a952d28, type: 3}
       propertyPath: m_Name
       value: StreamerInputCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 4908035269355676675, guid: e14e9eddc9151440abb22c158a952d28, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6299028274082196692, guid: e14e9eddc9151440abb22c158a952d28, type: 3}
       propertyPath: m_AnchoredPosition.x
