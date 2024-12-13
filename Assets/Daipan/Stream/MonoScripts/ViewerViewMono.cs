@@ -32,17 +32,18 @@ namespace Daipan.Stream.MonoScripts
                 {
                     _tweener?.Kill();  // 以前のアニメーションを停止
 
-                    // 視聴者数の増減をチェック
-                    if (newViewerNumber > PreViewerNumber)
-                    {
-                        // 視聴者が増えた時
-                        SoundManager.Instance?.PlaySe(SeEnum.CountUpViewer);
-                    }
-                    else if (newViewerNumber < PreViewerNumber)
-                    {
-                        // 視聴者が減った時
-                        SoundManager.Instance?.PlaySe(SeEnum.CountDownViewer);
-                    }
+                    // なしになった。
+                    // // 視聴者数の増減をチェック
+                    // if (newViewerNumber > PreViewerNumber)
+                    // {
+                    //     // 視聴者が増えた時
+                    //     SoundManager.Instance?.PlaySe(SeEnum.CountUpViewer);
+                    // }
+                    // else if (newViewerNumber < PreViewerNumber)
+                    // {
+                    //     // 視聴者が減った時
+                    //     SoundManager.Instance?.PlaySe(SeEnum.CountDownViewer);
+                    // }
 
                     // DOTweenでアニメーションを設定
                     _tweener = DOTween.To(() => PreViewerNumber, x => PreViewerNumber = x, newViewerNumber, AnimationDuration)
