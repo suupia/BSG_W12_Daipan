@@ -100,6 +100,15 @@ namespace Daipan.StreamerNet.MonoScripts
                         _hasPlayedInitialWordSe = true;
                     }
                 })
+                // 手が動いた時に1回だけSE再生
+                .AppendCallback(() =>
+                {
+                    if (!_hasPlayedInitialInputSe)
+                    {
+                        SoundManager.Instance?.PlaySe(SeEnum.DaipanInput);
+                        _hasPlayedInitialInputSe = true;
+                    }
+                })
 
                 // 前方向への移動アニメーション
                 .Append(wordImage.GetComponent<RectTransform>()
@@ -122,16 +131,6 @@ namespace Daipan.StreamerNet.MonoScripts
                 .Join(handImage.GetComponent<RectTransform>()
                     .DOAnchorPos(handPosition, duration * 1.5f)
                     .SetEase(Ease.Linear))
-
-                // 手が現れた(全アニメ復帰後)のタイミングで1回だけSE再生
-                .AppendCallback(() =>
-                {
-                    if (!_hasPlayedInitialInputSe)
-                    {
-                        SoundManager.Instance?.PlaySe(SeEnum.DaipanInput);
-                        _hasPlayedInitialInputSe = true;
-                    }
-                })
 
                 // 繰り返し
                 .SetLoops(-1, LoopType.Restart);
