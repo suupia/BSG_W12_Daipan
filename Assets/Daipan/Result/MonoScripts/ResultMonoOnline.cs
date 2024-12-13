@@ -1,4 +1,5 @@
 #nullable enable
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,11 +9,15 @@ using Daipan.Battle.scripts;
 using Daipan.Enemy.MonoScripts;
 using Fusion;
 using System.Linq;
+using UnityEngine.UI;
 
 namespace Daipan.Result.MonoScripts
 {
     public class ResultMonoOnline : MonoBehaviour
     {
+        [SerializeField] Image resultImage = null!;
+        [SerializeField] ResultSpriteParam[] resultSpriteParams = null!; 
+        
         [SerializeField] TMP_Text resultText = null!;
 
         void Start()
@@ -35,6 +40,13 @@ namespace Daipan.Result.MonoScripts
                 SceneTransition.TransitioningScene(SceneName.TitleSceneNet);
             }
         }
+    }
+    
+    [Serializable]
+    public sealed class ResultSpriteParam
+    {
+        public NetworkPlayerResultEnum networkPlayerResultEnum;
+        public Sprite? resultSprite;
     }
 
     public static class NetworkPlayerResultHolder
