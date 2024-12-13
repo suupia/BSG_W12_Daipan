@@ -45,7 +45,6 @@ namespace Daipan.End.MonoScripts
                 if (!_isShowedCredit)
                 {
                     _isShowedCredit = true;
-                    FindObjectOfType<EndBackgroundViewMono>().endSceneText.gameObject.SetActive(false);
                     _creditImage.gameObject.SetActive(true);
 
                     // audioSourceをフェードアウト

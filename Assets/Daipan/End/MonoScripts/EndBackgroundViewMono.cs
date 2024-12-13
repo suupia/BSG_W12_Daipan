@@ -18,15 +18,12 @@ namespace Daipan.End.MonoScripts
         [SerializeField] List<EndSceneSprite> endSceneSprites = null!;
         
         [SerializeField] Image endSceneImage = null!;
-        [SerializeField] public TextMeshProUGUI endSceneText = null!; // フレーバーテキストを表示　（クレジットの関係でpublic）
 
         void Awake()
         {
             endSceneImage.sprite = endSceneSprites
                 .Where(x => x.endSceneEnum == EndSceneStatic.EndSceneEnum)
                 .Select(x => x.sprite).FirstOrDefault();
-            
-            endSceneText.text =  GetEndSceneText(EndSceneStatic.EndSceneEnum); 
         }
         
         static string GetEndSceneText(EndSceneEnum endSceneEnum)
