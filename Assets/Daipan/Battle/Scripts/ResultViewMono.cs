@@ -39,11 +39,11 @@ namespace Daipan.Battle.scripts
         [SerializeField] Sprite successBackground = null!;
         [SerializeField] Sprite failureBackground = null!;
         [SerializeField] Image background = null!;
-        
+
         // new result ui
         [SerializeField] Image backgroundJapanese = null!;
         [SerializeField] Image backgroundEnglish = null!;
-        
+
         [SerializeField] DigitSplitResultNumberMono viewerNumberMono = null!;
         [SerializeField] DigitSplitResultNumberMono daipanCountMono = null!;
         [SerializeField] DigitSplitResultNumberMono playerHpMono = null!;
@@ -93,10 +93,7 @@ namespace Daipan.Battle.scripts
                 .AddTo(this);
             Observable.EveryUpdate()
                 .Where(_ => viewObject.activeInHierarchy)
-                .Subscribe(_ =>
-                {
-                    lastWaveMono.SetDigit(waveState.CurrentWaveIndex+1);
-                })
+                .Subscribe(_ => { lastWaveMono.SetDigit(waveState.CurrentWaveIndex + 1); })
                 .AddTo(this);
 
             _languageConfig = languageConfig;
@@ -115,7 +112,6 @@ namespace Daipan.Battle.scripts
                     backgroundJapanese.gameObject.SetActive(false);
                     break;
             }
-            
         }
 
         public void ShowResult(bool isClear, Action onComplete)
