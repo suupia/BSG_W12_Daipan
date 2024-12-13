@@ -119,6 +119,7 @@ namespace Daipan.Battle.scripts
             }
 
             playerHpText.text = $"{playerMono.Hp.Value} / {playerMono.MaxHp}"; // 本当はObserveしたいけど生成順序の関係でここで取得
+            playerHpMono.SetDigit((int)playerMono.Hp.Value);
 
             if (playerMono.Hp.Value <= 0)
                 background.sprite = failureBackground;
