@@ -1,6 +1,7 @@
 #nullable enable
 using System.Collections.Generic;
 using System.Linq;
+using Cysharp.Threading.Tasks;
 using Daipan.Sound.MonoScripts;
 using Daipan.Tutorial.MonoScripts;
 using Daipan.Tutorial.Scripts;
@@ -28,6 +29,8 @@ namespace Daipan.Streamer.MonoScripts
 
         //矢印の画像
         [SerializeField] GameObject TutorialUIyazirushi = null!;
+        
+        [SerializeField] Animator speechBubbleAnimator = null!;
 
         const float DurationSec = 0.5f;
         const double MinShowSec = 0.5;
@@ -45,12 +48,14 @@ namespace Daipan.Streamer.MonoScripts
                 .AddTo(this);
         }
 
-        void Awake()
+        async void Awake()
         {
             // 初期状態は非表示
-            transform.localScale = Vector3.zero;
+             // transform.localScale = Vector3.zero;
             _speechSprites = FindObjectOfType<TutorialSpeechSpritesMono>();
             Assert.IsNotNull(_speechSprites);
+            
+
         }
 
         void Update()
@@ -62,40 +67,42 @@ namespace Daipan.Streamer.MonoScripts
             if (_speechQueue.Any())
                 if (Timer > MinShowSec)
                 {
-                    ShowSpeechBubble(_speechQueue.Dequeue());
+                    ShowSpeechBubble(_speechQueue.Dequeue()).Forget();
                     Timer = 0;
                 }
         }
 
-        void ShowSpeechBubble(Speech speech)
+        async UniTaskVoid ShowSpeechBubble(Speech speech)
         {
-            // DoTweenでDoScaleで拡大して表示
-            transform.DOScale(Vector3.one, DurationSec).OnComplete(() =>
+            // 少し待ってからに吹き出しを表示
+            await UniTask.Delay(100);
+            speechBubbleAnimator.SetTrigger("StartTrigger");
+            await UniTask.Delay(500);
+            
+            if (speech.SpriteKey != string.Empty)
             {
-                if (speech.SpriteKey != string.Empty)
-                {
-                    speechParent.gameObject.SetActive(false);
-                    speechText.text = string.Empty;
-                    // nextButtonImage.sprite = null; 
-                    // TutorialUIyazirushi.SetActive(false);
-                    speechWithSpriteParent.gameObject.SetActive(true);
-                    speechWithSpriteText.text = speech.Message;
-                    speechImage.sprite = _speechSprites.GetSprite(speech.SpriteKey);
-
-                }
-                else
-                {
-                    speechParent.gameObject.SetActive(true);
-                    speechText.text = speech.Message;
-                    // nextButtonImage.sprite = _speechSprites.GetSprite("red");
-                    // TutorialUIyazirushi.SetActive(true);
-                    speechWithSpriteParent.gameObject.SetActive(false);
-                    speechWithSpriteText.text = string.Empty;
-                    speechImage.sprite = null;
-                }
-
-                if (speech.Message != string.Empty) SoundManager.Instance?.PlaySe(SeEnum.Text);
-            });
+                speechParent.gameObject.SetActive(false);
+                speechText.text = string.Empty;
+                // nextButtonImage.sprite = null; 
+                // TutorialUIyazirushi.SetActive(false);
+                speechWithSpriteParent.gameObject.SetActive(true);
+                speechWithSpriteText.text = speech.Message;
+                speechImage.sprite = _speechSprites.GetSprite(speech.SpriteKey);
+            
+            }
+            else
+            {
+                speechParent.gameObject.SetActive(true);
+                speechText.text = speech.Message;
+                // nextButtonImage.sprite = _speechSprites.GetSprite("red");
+                // TutorialUIyazirushi.SetActive(true);
+                speechWithSpriteParent.gameObject.SetActive(false);
+                speechWithSpriteText.text = string.Empty;
+                speechImage.sprite = null;
+            }
+            
+            if (speech.Message != string.Empty) SoundManager.Instance?.PlaySe(SeEnum.Text);
+            
         }
 
         void EnqueueSpeechMessage(Speech message)
