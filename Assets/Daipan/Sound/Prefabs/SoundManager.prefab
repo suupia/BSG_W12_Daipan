@@ -2144,7 +2144,10 @@ MonoBehaviour:
   - seEnum: 20
     audioSource: {fileID: 2494106140373508381}
     audioClip: {fileID: 8300000, guid: d63e48467285741969fe4e77aa80fd06, type: 3}
-    volumeMultiplier: 1.4
+    volumeMultiplier: 1.3
+  delayFrameCount: 2
+  maxQueuedItemCount: 4
+  concurrencyLimit: 1
 --- !u!1 &6842311396710771111
 GameObject:
   m_ObjectHideFlags: 0
