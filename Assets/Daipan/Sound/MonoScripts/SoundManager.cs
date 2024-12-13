@@ -51,7 +51,7 @@ namespace Daipan.Sound.MonoScripts
             {
                 seParam.audioSource.clip = seParam.audioClip;
             }
-            BgmVolume = 4;
+            BgmVolume = 3;
             SeVolume = 4;
             
             _disposable.Add(Observable.EveryUpdate().Subscribe(_ =>
