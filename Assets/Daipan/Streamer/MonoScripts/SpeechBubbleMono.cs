@@ -102,33 +102,6 @@ namespace Daipan.Streamer.MonoScripts
             
             if (speech.Message != string.Empty) SoundManager.Instance?.PlaySe(SeEnum.Text);
             
-            // // DoTweenでDoScaleで拡大して表示
-            // transform.DOScale(Vector3.one, DurationSec).OnComplete(() =>
-            // {
-            //     if (speech.SpriteKey != string.Empty)
-            //     {
-            //         speechParent.gameObject.SetActive(false);
-            //         speechText.text = string.Empty;
-            //         // nextButtonImage.sprite = null; 
-            //         // TutorialUIyazirushi.SetActive(false);
-            //         speechWithSpriteParent.gameObject.SetActive(true);
-            //         speechWithSpriteText.text = speech.Message;
-            //         speechImage.sprite = _speechSprites.GetSprite(speech.SpriteKey);
-            //
-            //     }
-            //     else
-            //     {
-            //         speechParent.gameObject.SetActive(true);
-            //         speechText.text = speech.Message;
-            //         // nextButtonImage.sprite = _speechSprites.GetSprite("red");
-            //         // TutorialUIyazirushi.SetActive(true);
-            //         speechWithSpriteParent.gameObject.SetActive(false);
-            //         speechWithSpriteText.text = string.Empty;
-            //         speechImage.sprite = null;
-            //     }
-            //
-            //     if (speech.Message != string.Empty) SoundManager.Instance?.PlaySe(SeEnum.Text);
-            // });
         }
 
         void EnqueueSpeechMessage(Speech message)
