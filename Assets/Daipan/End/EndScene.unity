@@ -237,21 +237,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   endSceneSprites:
   - endSceneEnum: 0
-    sprite: {fileID: 21300000, guid: 04bc2c56221cd492fac2c204619a42e4, type: 3}
+    sprite: {fileID: 21300000, guid: e7146d1cb4fd141a89c0badd9b9e8f40, type: 3}
   - endSceneEnum: 1
-    sprite: {fileID: 21300000, guid: a3e33a0d1f3f74c569ce3549b394976a, type: 3}
+    sprite: {fileID: 21300000, guid: 1aa50e4cc71544522bdd4a36b55f16a5, type: 3}
   - endSceneEnum: 2
-    sprite: {fileID: 21300000, guid: 9f585bfe93cea4bdc8857312c971a01e, type: 3}
+    sprite: {fileID: 21300000, guid: 0a6ededb6f4a94573b3ce65e9a9acaaa, type: 3}
   - endSceneEnum: 3
-    sprite: {fileID: 21300000, guid: 6d01a7f361b5a40bca2e8c9c0f745ecb, type: 3}
+    sprite: {fileID: 21300000, guid: a9289cc575aa144b79d9ce1a0bfdb7a4, type: 3}
   - endSceneEnum: 4
-    sprite: {fileID: 21300000, guid: 83512407c113a43f589deee075b666bd, type: 3}
+    sprite: {fileID: 21300000, guid: ac722572b7d544069bed19d132fd7643, type: 3}
   - endSceneEnum: 5
-    sprite: {fileID: 21300000, guid: 9f46021c3264844a0a8e7532150a6a93, type: 3}
+    sprite: {fileID: 21300000, guid: 2a2b613a980b64dfb8b00ba7a2100f82, type: 3}
   - endSceneEnum: 6
-    sprite: {fileID: 21300000, guid: 8d7210fc3cd714b25882bff58b11b211, type: 3}
+    sprite: {fileID: 21300000, guid: 4d70e5afb9d784d4799dca6af5de4945, type: 3}
   - endSceneEnum: 7
-    sprite: {fileID: 21300000, guid: f43e3710801644b83ae351081fa15ea2, type: 3}
+    sprite: {fileID: 21300000, guid: d11046b2d6d164aa187899063ceeeb9a, type: 3}
   endSceneImage: {fileID: 865121936}
 --- !u!1 &793867596
 GameObject:
