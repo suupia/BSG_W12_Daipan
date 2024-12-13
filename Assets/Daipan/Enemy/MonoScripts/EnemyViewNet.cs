@@ -135,7 +135,7 @@ namespace Daipan.Enemy.MonoScripts
         public static async UniTaskVoid PlayEnemyDieSe()
         {
             SoundManager.Instance?.PlaySe(SeEnum.EnemyDieContraction);
-            await UniTask.Delay(260);
+            await UniTask.Delay(280);
             SoundManager.Instance?.PlaySe(SeEnum.EnemyDieExplosion);
         }
     }
