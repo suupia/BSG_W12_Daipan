@@ -1,7 +1,9 @@
 #nullable enable
 using System;
+using Cysharp.Threading.Tasks;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.Scripts;
+using Daipan.Sound.MonoScripts;
 using Fusion;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -108,6 +110,12 @@ namespace Daipan.Enemy.MonoScripts
         {
             Debug.Log($"[EnemyViewNet] Died() , Object.StateAuthority: {Object.HasStateAuthority}");
             _selectedEnemyViewMono.Died(_onDied);
+            RpcDiedSe();
+        }
+        [Rpc(RpcSources.All, RpcTargets.All)]
+        void RpcDiedSe()
+        {
+            EnemyDieSe.PlayEnemyDieSe().Forget();
         }
 
         public override void Daipaned()
@@ -119,6 +127,16 @@ namespace Daipan.Enemy.MonoScripts
         public override void Highlight(bool isHighlighted)
         {
             _selectedEnemyViewMono.Highlight(isHighlighted);
+        }
+    }
+    
+    public static class EnemyDieSe
+    {
+        public static async UniTaskVoid PlayEnemyDieSe()
+        {
+            SoundManager.Instance?.PlaySe(SeEnum.EnemyDieContraction);
+            await UniTask.Delay(260);
+            SoundManager.Instance?.PlaySe(SeEnum.EnemyDieExplosion);
         }
     }
 }
