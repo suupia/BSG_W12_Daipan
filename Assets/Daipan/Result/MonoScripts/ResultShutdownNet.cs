@@ -12,18 +12,18 @@ namespace Daipan.Result.MonoScripts
         [OnChangedRender(nameof(OnInResultPlayerChanged))]
         NetworkDictionary<PlayerRef, NetworkBool> InResultSceneDictionary => default;
 
-        PlayerDataTransporterNet _playerDataTransporterNetWrapper = null!;
+        PlayerDataTransporterNet _playerDataTransporterNet = null!;
    
         public override void Spawned()
         {
-            _playerDataTransporterNetWrapper = FindObjectOfType<PlayerDataTransporterNet>();
+            _playerDataTransporterNet = FindObjectOfType<PlayerDataTransporterNet>();
             InResultSceneDictionary.Set(Runner.LocalPlayer, true);
         }
    
         void OnInResultPlayerChanged()
         {
             // Check if the count matches
-            var condition1 = InResultSceneDictionary.Count == _playerDataTransporterNetWrapper.GetPlayerCount();
+            var condition1 = InResultSceneDictionary.Count == _playerDataTransporterNet.GetPlayerCount();
 
             // Check if all values are true
             var condition2 = true;

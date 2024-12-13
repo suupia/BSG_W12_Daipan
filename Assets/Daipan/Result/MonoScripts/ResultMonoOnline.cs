@@ -64,8 +64,8 @@ namespace Daipan.Result.MonoScripts
     public enum NetworkPlayerResultEnum
     {
         None,
-        Win,
-        Lose,
+        StreamerWin,
+        AntiWin,
         QuitByPlayerLeft,
     }
 }
