@@ -4148,6 +4148,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 00b3bcc6bd1554049ac0c8f159536e51, type: 3}
   - {fileID: 21300000, guid: a8ebea92a5d3f4191a9c546be142b4f3, type: 3}
   - {fileID: 21300000, guid: 41357b8e26493494e8f9b0fb0daecd14, type: 3}
+  transparentSprite: {fileID: 21300000, guid: 04279b53c55d24534a463db56830e0a5, type: 3}
 --- !u!1001 &322859763119474602
 PrefabInstance:
   m_ObjectHideFlags: 0

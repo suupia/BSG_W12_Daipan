@@ -32,7 +32,7 @@ namespace Daipan.Stream.MonoScripts
                 }
                 else
                 {
-                    digitSprites[i].sprite = null;
+                    digitSprites[i].sprite = digitSpritesMono.TransparentSprite;
                 }
         }
     }
