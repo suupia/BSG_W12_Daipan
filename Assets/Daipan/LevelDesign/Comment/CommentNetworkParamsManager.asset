@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CommentNetworkParamsManager
   m_EditorClassIdentifier: 
   commentSpeed: 8
-  diffCommentViewer: 1000
+  diffCommentViewer: 500
   diffAntiCommentViewer: 1500
   irritationIncreasePerSec: 8
   commentWords:
