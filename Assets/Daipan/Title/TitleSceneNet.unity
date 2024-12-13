@@ -4389,9 +4389,9 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.055555552
+    x: 0
     y: 0
-    width: 0.8888889
+    width: 1
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
@@ -6041,6 +6041,10 @@ PrefabInstance:
       propertyPath: m_Volume
       value: 0.5714286
       objectReference: {fileID: 0}
+    - target: {fileID: 2494106140373508381, guid: e867836528ba344398ad325a2342615c, type: 3}
+      propertyPath: m_Volume
+      value: 0.74285716
+      objectReference: {fileID: 0}
     - target: {fileID: 3623247836378579756, guid: e867836528ba344398ad325a2342615c, type: 3}
       propertyPath: m_Volume
       value: 0.5714286
@@ -6123,23 +6127,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7090445617284254253, guid: e867836528ba344398ad325a2342615c, type: 3}
       propertyPath: m_Volume
-      value: 0.5714286
+      value: 0.42857143
       objectReference: {fileID: 0}
     - target: {fileID: 7145546137016082415, guid: e867836528ba344398ad325a2342615c, type: 3}
       propertyPath: m_Volume
-      value: 0.5714286
+      value: 0.42857143
       objectReference: {fileID: 0}
     - target: {fileID: 7237032824240752480, guid: e867836528ba344398ad325a2342615c, type: 3}
       propertyPath: m_Volume
-      value: 0.5714286
+      value: 0.42857143
       objectReference: {fileID: 0}
     - target: {fileID: 7633982755601000026, guid: e867836528ba344398ad325a2342615c, type: 3}
       propertyPath: m_Volume
       value: 0.5714286
       objectReference: {fileID: 0}
-    - target: {fileID: 8056484053290543210, guid: e867836528ba344398ad325a2342615c, type: 3}
+    - target: {fileID: 7714886131589545589, guid: e867836528ba344398ad325a2342615c, type: 3}
       propertyPath: m_Volume
       value: 0.5714286
+      objectReference: {fileID: 0}
+    - target: {fileID: 8056484053290543210, guid: e867836528ba344398ad325a2342615c, type: 3}
+      propertyPath: m_Volume
+      value: 0.42857143
       objectReference: {fileID: 0}
     - target: {fileID: 8743332960708640993, guid: e867836528ba344398ad325a2342615c, type: 3}
       propertyPath: m_Volume
