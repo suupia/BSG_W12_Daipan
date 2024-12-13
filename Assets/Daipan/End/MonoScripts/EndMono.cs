@@ -15,7 +15,6 @@ namespace Daipan.End.MonoScripts
 {
     public class EndMono : MonoBehaviour
     {
-        [SerializeField] AudioSource audioSource = null!;
         [SerializeField] List<EndSceneSEParam> _endSceneSEParams = new ();
         [SerializeField] Image _creditImage = null!;
         IGetEnterKey _getEnterKey = null!;
@@ -28,14 +27,6 @@ namespace Daipan.End.MonoScripts
             SoundManager.Instance?.StopAllBgm();
             Debug.Log("EndMono is created");
             
-            foreach (var endSceneSeParam in _endSceneSEParams)
-            {
-                if (endSceneSeParam.endSceneEnum == EndSceneHolder.EndSceneEnum)
-                {
-                    audioSource.clip = endSceneSeParam.audioClip;
-                    audioSource.Play();
-                }
-            }
             _getEnterKey = getEnterKey;
             _creditImage.gameObject.SetActive(false); // 最初は非表示
 
@@ -57,7 +48,6 @@ namespace Daipan.End.MonoScripts
                     FindObjectOfType<EndBackgroundViewMono>().endSceneText.gameObject.SetActive(false);
                     _creditImage.gameObject.SetActive(true);
 
-                    audioSource.mute = true;
                     // audioSourceをフェードアウト
                     while (SoundManager.SeVolume > 0)
                     {
