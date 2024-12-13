@@ -4120,6 +4120,8 @@ MonoBehaviour:
   successBackground: {fileID: 21300000, guid: 04f1c5fc9606c4f7b8fb3f6b33c184c7, type: 3}
   failureBackground: {fileID: 21300000, guid: e42d903def64b4f5288fece21738dab3, type: 3}
   background: {fileID: 5712304764369138122}
+  backgroundJapanese: {fileID: 6314016746921465016}
+  backgroundEnglish: {fileID: 4301311228396134649}
   viewerNumberMono: {fileID: 8497869585430019753}
   daipanCountMono: {fileID: 2888202746050639949}
   playerHpMono: {fileID: 2131307237787305888}
@@ -4255,7 +4257,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1779811306790220047, guid: 88de8eb2e800943e2bb949f586b1cfb8, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 97
+      value: 116
       objectReference: {fileID: 0}
     - target: {fileID: 1779811306790220047, guid: 88de8eb2e800943e2bb949f586b1cfb8, type: 3}
       propertyPath: m_ConstrainProportionsScale
@@ -4496,7 +4498,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1779811306790220047, guid: 88de8eb2e800943e2bb949f586b1cfb8, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 97
+      value: 115.99996
       objectReference: {fileID: 0}
     - target: {fileID: 1779811306790220047, guid: 88de8eb2e800943e2bb949f586b1cfb8, type: 3}
       propertyPath: m_ConstrainProportionsScale
@@ -4737,7 +4739,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1779811306790220047, guid: 88de8eb2e800943e2bb949f586b1cfb8, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 97
+      value: 115.99996
       objectReference: {fileID: 0}
     - target: {fileID: 1779811306790220047, guid: 88de8eb2e800943e2bb949f586b1cfb8, type: 3}
       propertyPath: m_ConstrainProportionsScale
@@ -4978,7 +4980,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1779811306790220047, guid: 88de8eb2e800943e2bb949f586b1cfb8, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 97
+      value: 115.99996
       objectReference: {fileID: 0}
     - target: {fileID: 1779811306790220047, guid: 88de8eb2e800943e2bb949f586b1cfb8, type: 3}
       propertyPath: m_ConstrainProportionsScale

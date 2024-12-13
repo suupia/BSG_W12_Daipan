@@ -40,6 +40,10 @@ namespace Daipan.Battle.scripts
         [SerializeField] Sprite failureBackground = null!;
         [SerializeField] Image background = null!;
         
+        // new result ui
+        [SerializeField] Image backgroundJapanese = null!;
+        [SerializeField] Image backgroundEnglish = null!;
+        
         [SerializeField] DigitSplitResultNumberMono viewerNumberMono = null!;
         [SerializeField] DigitSplitResultNumberMono daipanCountMono = null!;
         [SerializeField] DigitSplitResultNumberMono playerHpMono = null!;
@@ -96,6 +100,22 @@ namespace Daipan.Battle.scripts
                 .AddTo(this);
 
             _languageConfig = languageConfig;
+            switch (languageConfig.CurrentLanguage)
+            {
+                case LanguageEnum.English:
+                    backgroundEnglish.gameObject.SetActive(true);
+                    backgroundJapanese.gameObject.SetActive(false);
+                    break;
+                case LanguageEnum.Japanese:
+                    backgroundEnglish.gameObject.SetActive(false);
+                    backgroundEnglish.gameObject.SetActive(true);
+                    break;
+                default:
+                    backgroundEnglish.gameObject.SetActive(true);
+                    backgroundJapanese.gameObject.SetActive(false);
+                    break;
+            }
+            
         }
 
         public void ShowResult(bool isClear, Action onComplete)
