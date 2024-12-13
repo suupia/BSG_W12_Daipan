@@ -340,5 +340,6 @@ namespace Daipan.Sound.MonoScripts
         FeverTime,
         CountUpViewer,
         CountDownViewer,
+        SummonEnemy,
     }
 }
