@@ -41,6 +41,10 @@ public class TitleMonoOnline : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI errorMessageText = null!;
 
+    [Header("TipsPanel")]
+    [SerializeField] Image streamerTipsPanel = null!;
+    [SerializeField] Image antiTipsPanel = null!;
+
     readonly PlayerDataTransporterNetWrapper _playerDataTransporterNetWrapper = new();
 
     void Awake()
@@ -144,6 +148,22 @@ public class TitleMonoOnline : MonoBehaviour
 
         // Transit to DaipanScene
         SceneTransition.TransitionSceneWithNetworkRunner(runner, SceneName.DaipanSceneNet);
+        ShowTipsRPC();
+    }
+
+    [Rpc(RpcSources.All, RpcTargets.All)]
+    public void ShowTipsRPC()
+    {
+        var runner = FindObjectOfType<NetworkRunner>();
+        var playerRole = _playerDataTransporterNetWrapper.GetPlayerRoleEnum(runner.LocalPlayer);
+        if (playerRole == PlayerRoleEnum.Streamer)
+        {
+            streamerTipsPanel.gameObject.SetActive(true);
+        }
+        else if (playerRole == PlayerRoleEnum.Anti)
+        {
+            antiTipsPanel.gameObject.SetActive(true);
+        }
     }
 
     public void CheckAllReady()
