@@ -338,5 +338,7 @@ namespace Daipan.Sound.MonoScripts
         DaipanWord,
         DaipanInput,
         FeverTime,
+        CountUpViewer,
+        CountDownViewer,
     }
 }
