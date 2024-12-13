@@ -337,5 +337,6 @@ namespace Daipan.Sound.MonoScripts
         EnemyDieExplosion,
         DaipanWord,
         DaipanInput,
+        FeverTime,
     }
 }
