@@ -193,5 +193,8 @@ namespace Daipan.Sound.MonoScripts
         BAN,
         SelectLanguage,
         Cancel,
+        
+        EnemyDieContraction,
+        EnemyDieExplosion,
     }
 }
