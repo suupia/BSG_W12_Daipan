@@ -105,6 +105,7 @@ namespace Daipan.Enemy.MonoScripts
         public override void Died()
         {
             _selectedEnemyViewMono.Died(_onDied);
+            EnemyDieSe.PlayEnemyDieSe().Forget();
         }
 
         public override void Daipaned()

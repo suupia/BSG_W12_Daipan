@@ -33,11 +33,11 @@ namespace Daipan.Enemy.Scripts
                 _enemyMono.DeleteSelf();
                 return;
             }
-
-            SoundManager.Instance?.PlaySe(SeEnum.EnemyDieContraction);
-
+            
             enemyViewMono.Died();
         }
+        
+
 
         public void DiedByDaipan(IEnemyViewEndCallbacksFacade? enemyViewMono)
         {

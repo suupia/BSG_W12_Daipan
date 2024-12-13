@@ -113,7 +113,6 @@ namespace Daipan.Enemy.MonoScripts
 
         public void DeleteSelf()
         { 
-            SoundManager.Instance?.PlaySe(SeEnum.EnemyDieExplosion);
             Destroy(gameObject);
         }
 
