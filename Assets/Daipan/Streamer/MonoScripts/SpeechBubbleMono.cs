@@ -75,8 +75,9 @@ namespace Daipan.Streamer.MonoScripts
         async UniTaskVoid ShowSpeechBubble(Speech speech)
         {
             // 少し待ってからに吹き出しを表示
-            await UniTask.Delay(1000);
+            await UniTask.Delay(100);
             speechBubbleAnimator.SetTrigger("StartTrigger");
+            await UniTask.Delay(500);
             
             if (speech.SpriteKey != string.Empty)
             {
