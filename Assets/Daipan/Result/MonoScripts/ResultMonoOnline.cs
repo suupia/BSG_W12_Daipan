@@ -23,6 +23,13 @@ namespace Daipan.Result.MonoScripts
         void Start()
         {
             resultText.text = NetworkPlayerResultHolder.NetworkPlayerResultEnum.ToString();
+            foreach (var resultSpriteParam in resultSpriteParams)
+            {
+                if (resultSpriteParam.networkPlayerResultEnum == NetworkPlayerResultHolder.NetworkPlayerResultEnum)
+                {
+                    resultImage.sprite = resultSpriteParam.resultSprite;
+                }
+            }
 
             // 念のため、残っている敵を削除
             var remainingEnemies = FindObjectsByType<EnemyNet>(FindObjectsSortMode.None);
