@@ -86,20 +86,14 @@ namespace Daipan.Battle.scripts
         {
             var result = sceneName switch
             {
-                EndSceneEnum.NoobGamer => playerMono.Hp.Value / playerMono.MaxHp <=
-                                          endSceneTransitionParam.hpPercentThresholdForNoobGamerEnd,
-                EndSceneEnum.Seijo => daipanExecutor.DaipanCount <=
-                                      endSceneTransitionParam.daipanCountThresholdForSacredLadyEnd,
-                EndSceneEnum.ProGamer => counter.MaxComboCount >=
-                                         endSceneTransitionParam.maxComboCountThresholdForProGamerEnd,
-                EndSceneEnum.Enjou => daipanExecutor.DaipanCount >=
-                                      endSceneTransitionParam.daipanCountThresholdForBacklashEnd,
-                EndSceneEnum.Hakononaka => viewerNumber.Number <=
-                                             endSceneTransitionParam.viewerCountThresholdForInsideTheBoxEnd,
-                EndSceneEnum.Kansyasai => viewerNumber.Number >=
-                                             endSceneTransitionParam.viewerCountThresholdForThanksgivingEnd,
-                EndSceneEnum.Heibon => endSceneTransitionParam.viewerCountThresholdForHeibonEndMin <= viewerNumber.Number &&
-                                        viewerNumber.Number <= endSceneTransitionParam.viewerCountThresholdForHeibonEndMax,
+                EndSceneEnum.NoobGamer => playerMono.Hp.Value / playerMono.MaxHp <= endSceneTransitionParam.hpPercentThresholdForNoobGamerEnd,
+                EndSceneEnum.Seijo => daipanExecutor.DaipanCount <= endSceneTransitionParam.daipanCountThresholdForSacredLadyEnd,
+                EndSceneEnum.ProGamer => counter.MaxComboCount >= endSceneTransitionParam.maxComboCountThresholdForProGamerEnd,
+                EndSceneEnum.Enjou => daipanExecutor.DaipanCount >= endSceneTransitionParam.daipanCountThresholdForBacklashEnd,
+                EndSceneEnum.Hakononaka => viewerNumber.Number <= endSceneTransitionParam.viewerCountThresholdForInsideTheBoxEnd,
+                EndSceneEnum.Kansyasai => viewerNumber.Number >= endSceneTransitionParam.viewerCountThresholdForThanksgivingEnd,
+                EndSceneEnum.Heibon => endSceneTransitionParam.viewerCountThresholdForHeibonEndMin <= viewerNumber.Number 
+                                       && viewerNumber.Number <= endSceneTransitionParam.viewerCountThresholdForHeibonEndMax,
                 EndSceneEnum.Genkai => true,
                 _ => false
             };

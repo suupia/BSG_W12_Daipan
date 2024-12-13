@@ -1,6 +1,7 @@
 #nullable enable
 using System;
 using System.Linq;
+using Cysharp.Threading.Tasks;
 using Daipan.Daipan;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.LevelDesign.Interfaces;
@@ -172,13 +173,16 @@ namespace Daipan.Enemy.MonoScripts
                 Debug.Log("[EnemyNet] All players died");
                 RpcDespawn(); 
             } 
-            SoundManager.Instance?.PlaySe(SeEnum.EnemyDieExplosion);
+
         }
+        
         [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
         void RpcDespawn()
         {
             Runner.Despawn(Object);
         }
+        
+
 
         public void OnAttacked(IPlayerParamData playerParamData)
         {

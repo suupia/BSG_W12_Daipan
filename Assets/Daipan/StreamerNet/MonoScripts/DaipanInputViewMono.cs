@@ -1,11 +1,10 @@
 #nullable enable
+using Daipan.Sound.MonoScripts;
 using Daipan.Stream.Interfaces;
 using Daipan.Stream.Scripts;
 using DG.Tweening;
-using ExitGames.Client.Photon.StructWrapping;
 using R3;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
 using VContainer;
 
@@ -25,11 +24,12 @@ namespace Daipan.StreamerNet.MonoScripts
         [SerializeField] Vector2 handMove;
         [SerializeField] float duration;
 
+        Sequence? _sequence = null!;
 
+        // SE再生フラグ（Hideでリセット）
+        bool _hasPlayedInitialWordSe;
+        bool _hasPlayedInitialInputSe;
 
-        private Sequence? _sequence = null!;
-
-        [SerializeField] bool testFlag;
         [Inject]
         public void Initialize(
             IIrritatedGaugeValue irritatedGaugeValue
@@ -70,66 +70,93 @@ namespace Daipan.StreamerNet.MonoScripts
 
             _sequence.Append(
                 wordImage.GetComponent<RectTransform>().DOAnchorPos(wordPosition, 0.5f)
-                .SetEase(Ease.Linear)
+                    .SetEase(Ease.Linear)
             )
             .Join(
                 headImage.GetComponent<RectTransform>().DOAnchorPos(headPosition, 0.5f)
-                .SetEase(Ease.Linear)
+                    .SetEase(Ease.Linear)
             )
             .Join(
                 handImage.GetComponent<RectTransform>().DOAnchorPos(handPosition, 0.5f)
-                .SetEase(Ease.Linear)
-            ).OnComplete(() =>
+                    .SetEase(Ease.Linear)
+            )
+            .OnComplete(() =>
             {
                 AnimationView();
             });
         }
+
         void AnimationView()
         {
             _sequence?.Kill();
             _sequence = DOTween.Sequence();
             _sequence
-                .Append(
-                    wordImage.GetComponent<RectTransform>().DOAnchorPos(wordPosition + wordMove, duration)
-                    .SetEase(Ease.InQuart)
-                )
-                .Join(
-                    headImage.GetComponent<RectTransform>().DOAnchorPos(headPosition + headMove, duration)
-                    .SetEase(Ease.InQuart)
-                )
-                .Join(
-                    handImage.GetComponent<RectTransform>().DOAnchorPos(handPosition + handMove, duration)
-                    .SetEase(Ease.InQuart)
-                )
-                .Append(
-                    wordImage.GetComponent<RectTransform>().DOAnchorPos(wordPosition, duration * 1.5f)
-                    .SetEase(Ease.Linear)
-                )
-                .Join(
-                    headImage.GetComponent<RectTransform>().DOAnchorPos(headPosition, duration * 1.5f)
-                    .SetEase(Ease.Linear)
-                )
-                .Join(
-                    handImage.GetComponent<RectTransform>().DOAnchorPos(handPosition, duration * 1.5f)
-                    .SetEase(Ease.Linear)
-                )
+                // Wordが降りてきた時に1回だけSE再生
+                .AppendCallback(() =>
+                {
+                    if (!_hasPlayedInitialWordSe)
+                    {
+                        SoundManager.Instance?.PlaySe(SeEnum.DaipanWord);
+                        _hasPlayedInitialWordSe = true;
+                    }
+                })
+                // 手が動いた時に1回だけSE再生
+                .AppendCallback(() =>
+                {
+                    if (!_hasPlayedInitialInputSe)
+                    {
+                        SoundManager.Instance?.PlaySe(SeEnum.DaipanInput);
+                        _hasPlayedInitialInputSe = true;
+                    }
+                })
+
+                // 前方向への移動アニメーション
+                .Append(wordImage.GetComponent<RectTransform>()
+                    .DOAnchorPos(wordPosition + wordMove, duration)
+                    .SetEase(Ease.InQuart))
+                .Join(headImage.GetComponent<RectTransform>()
+                    .DOAnchorPos(headPosition + headMove, duration)
+                    .SetEase(Ease.InQuart))
+                .Join(handImage.GetComponent<RectTransform>()
+                    .DOAnchorPos(handPosition + handMove, duration)
+                    .SetEase(Ease.InQuart))
+
+                // 元の位置へ戻るアニメーション
+                .Append(wordImage.GetComponent<RectTransform>()
+                    .DOAnchorPos(wordPosition, duration * 1.5f)
+                    .SetEase(Ease.Linear))
+                .Join(headImage.GetComponent<RectTransform>()
+                    .DOAnchorPos(headPosition, duration * 1.5f)
+                    .SetEase(Ease.Linear))
+                .Join(handImage.GetComponent<RectTransform>()
+                    .DOAnchorPos(handPosition, duration * 1.5f)
+                    .SetEase(Ease.Linear))
+
+                // 繰り返し
                 .SetLoops(-1, LoopType.Restart);
         }
+
         void HideView()
         {
+            // Hide時にSE再生状態をリセット
+            _hasPlayedInitialWordSe = false;
+            _hasPlayedInitialInputSe = false;
+
             _sequence?.Kill();
+            _sequence = DOTween.Sequence();
             _sequence.Append(
                 wordImage.GetComponent<RectTransform>().DOAnchorPos(wordPosition + new Vector2(0, 2000f), 1.5f)
-                .SetEase(Ease.Linear)
+                    .SetEase(Ease.Linear)
             )
             .Join(
                 headImage.GetComponent<RectTransform>().DOAnchorPos(headPosition + new Vector2(0, 2000f), 1.5f)
-                .SetEase(Ease.Linear)
+                    .SetEase(Ease.Linear)
             )
             .Join(
                 handImage.GetComponent<RectTransform>().DOAnchorPos(handPosition + new Vector2(-2000, 0), 1.5f)
-                .SetEase(Ease.Linear)
-            ).OnComplete(() =>
+                    .SetEase(Ease.Linear)
+            )
+            .OnComplete(() =>
             {
                 wordImage.gameObject.SetActive(false);
                 headImage.gameObject.SetActive(false);

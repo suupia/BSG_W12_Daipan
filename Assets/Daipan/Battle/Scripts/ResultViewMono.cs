@@ -4,6 +4,7 @@ using Daipan.Option.Scripts;
 using Daipan.Player.MonoScripts;
 using Daipan.Player.Scripts;
 using Daipan.Stream.Interfaces;
+using Daipan.Stream.MonoScripts;
 using Daipan.Stream.Scripts;
 using R3;
 using TMPro;
@@ -39,6 +40,16 @@ namespace Daipan.Battle.scripts
         [SerializeField] Sprite failureBackground = null!;
         [SerializeField] Image background = null!;
 
+        // new result ui
+        [SerializeField] Image backgroundJapanese = null!;
+        [SerializeField] Image backgroundEnglish = null!;
+
+        [SerializeField] DigitSplitResultNumberMono viewerNumberMono = null!;
+        [SerializeField] DigitSplitResultNumberMono daipanCountMono = null!;
+        [SerializeField] DigitSplitResultNumberMono playerHpMono = null!;
+        [SerializeField] DigitSplitResultNumberMono comboCountMono = null!;
+        [SerializeField] DigitSplitResultNumberMono lastWaveMono = null!;
+
         LanguageConfig _languageConfig = null!;
 
         void Awake()
@@ -52,23 +63,55 @@ namespace Daipan.Battle.scripts
             , ComboCounter comboCounter
             , IDaipanExecutor daipanExecutor
             , LanguageConfig languageConfig
+            , WaveState waveState
         )
         {
             Debug.Log("ResultViewMono Constructor");
             Observable.EveryUpdate()
                 .Where(_ => viewObject.activeInHierarchy)
-                .Subscribe(_ => viewerNumberText.text = $"{viewerNumber.Number}")
+                .Subscribe(_ =>
+                {
+                    viewerNumberText.text = $"{viewerNumber.Number}";
+                    viewerNumberMono.SetDigit(viewerNumber.Number);
+                })
                 .AddTo(this);
             Observable.EveryUpdate()
                 .Where(_ => viewObject.activeInHierarchy)
-                .Subscribe(_ => daipanCountText.text = $"{daipanExecutor.DaipanCount}")
+                .Subscribe(_ =>
+                {
+                    daipanCountText.text = $"{daipanExecutor.DaipanCount}";
+                    daipanCountMono.SetDigit(daipanExecutor.DaipanCount);
+                })
                 .AddTo(this);
             Observable.EveryUpdate()
                 .Where(_ => viewObject.activeInHierarchy)
-                .Subscribe(_ => comboCountText.text = $"{comboCounter.MaxComboCount}")
+                .Subscribe(_ =>
+                {
+                    comboCountText.text = $"{comboCounter.MaxComboCount}";
+                    comboCountMono.SetDigit(comboCounter.MaxComboCount);
+                })
+                .AddTo(this);
+            Observable.EveryUpdate()
+                .Where(_ => viewObject.activeInHierarchy)
+                .Subscribe(_ => { lastWaveMono.SetDigit(waveState.CurrentWaveIndex + 1); })
                 .AddTo(this);
 
             _languageConfig = languageConfig;
+            switch (languageConfig.CurrentLanguage)
+            {
+                case LanguageEnum.English:
+                    backgroundEnglish.gameObject.SetActive(true);
+                    backgroundJapanese.gameObject.SetActive(false);
+                    break;
+                case LanguageEnum.Japanese:
+                    backgroundEnglish.gameObject.SetActive(false);
+                    backgroundEnglish.gameObject.SetActive(true);
+                    break;
+                default:
+                    backgroundEnglish.gameObject.SetActive(true);
+                    backgroundJapanese.gameObject.SetActive(false);
+                    break;
+            }
         }
 
         public void ShowResult(bool isClear, Action onComplete)
@@ -92,6 +135,7 @@ namespace Daipan.Battle.scripts
             }
 
             playerHpText.text = $"{playerMono.Hp.Value} / {playerMono.MaxHp}"; // 本当はObserveしたいけど生成順序の関係でここで取得
+            playerHpMono.SetDigit((int)playerMono.Hp.Value); // なんか更新が遅れることがある？？処理が重いだけか？
 
             if (playerMono.Hp.Value <= 0)
                 background.sprite = failureBackground;
