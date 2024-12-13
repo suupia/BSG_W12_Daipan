@@ -8,6 +8,7 @@ using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Player.MonoScripts;
 using Daipan.Player.Scripts;
+using Daipan.Sound.MonoScripts;
 using DG.Tweening;
 using R3;
 using UnityEngine;
@@ -111,8 +112,9 @@ namespace Daipan.Enemy.MonoScripts
         }
 
         public void DeleteSelf()
-        {
-           Destroy(gameObject);
+        { 
+            SoundManager.Instance?.PlaySe(SeEnum.EnemyDieExplosion);
+            Destroy(gameObject);
         }
 
         public void OnAttacked(IPlayerParamData playerParamData)

@@ -10,6 +10,7 @@ using Daipan.LevelDesign.Enemy.Scripts;
 using Daipan.Player.LevelDesign.Interfaces;
 using Daipan.Player.MonoScripts;
 using Daipan.Player.Scripts;
+using Daipan.Sound.MonoScripts;
 using DG.Tweening;
 using Fusion;
 using R3;
@@ -171,6 +172,7 @@ namespace Daipan.Enemy.MonoScripts
                 Debug.Log("[EnemyNet] All players died");
                 RpcDespawn(); 
             } 
+            SoundManager.Instance?.PlaySe(SeEnum.EnemyDieExplosion);
         }
         [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
         void RpcDespawn()

@@ -2,6 +2,7 @@
 using System;
 using Daipan.Enemy.Interfaces;
 using Daipan.Enemy.MonoScripts;
+using Daipan.Sound.MonoScripts;
 using DG.Tweening;
 using UnityEngine;
 
@@ -32,6 +33,8 @@ namespace Daipan.Enemy.Scripts
                 _enemyMono.DeleteSelf();
                 return;
             }
+
+            SoundManager.Instance?.PlaySe(SeEnum.EnemyDieContraction);
 
             enemyViewMono.Died();
         }
