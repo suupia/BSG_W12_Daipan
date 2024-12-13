@@ -8,6 +8,7 @@ namespace Daipan.Stream.MonoScripts
     public class DigitSpritesMono : MonoBehaviour
     {
         [SerializeField] List<Sprite> numberSprites = new(); // 0~9までの画像 
-    } 
-}
 
+        public Sprite this[int index] => numberSprites[index];
+    }
+}

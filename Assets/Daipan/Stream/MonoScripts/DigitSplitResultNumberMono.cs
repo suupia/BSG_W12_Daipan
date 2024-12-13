@@ -5,13 +5,14 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 namespace Daipan.Stream.MonoScripts
 {
     public sealed class DigitSplitResultNumberMono : MonoBehaviour
     {
-        [SerializeField] List<Sprite> numberSprites = new(); // 0~ 9までの画像
-        [SerializeField] List<SpriteRenderer> digitSprites = new(); // 桁を表す画像
+        [SerializeField] DigitSpritesMono digitSpritesMono = new(); // 0~ 9までの画像
+        [SerializeField] List<Image> digitSprites = new(); // 桁を表す画像
 
         public void SetDigit(int digit)
         {
@@ -27,7 +28,7 @@ namespace Daipan.Stream.MonoScripts
             for (var i = 0; i < digitSprites.Count; i++)
                 if (i < digitString.Length)
                 {
-                    digitSprites[i].sprite = numberSprites[int.Parse(digitString[i].ToString())];
+                    digitSprites[i].sprite = digitSpritesMono[int.Parse(digitString[i].ToString())];
                 }
                 else
                 {

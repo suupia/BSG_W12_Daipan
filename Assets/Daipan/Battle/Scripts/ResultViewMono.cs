@@ -4,6 +4,7 @@ using Daipan.Option.Scripts;
 using Daipan.Player.MonoScripts;
 using Daipan.Player.Scripts;
 using Daipan.Stream.Interfaces;
+using Daipan.Stream.MonoScripts;
 using Daipan.Stream.Scripts;
 using R3;
 using TMPro;
@@ -38,6 +39,12 @@ namespace Daipan.Battle.scripts
         [SerializeField] Sprite successBackground = null!;
         [SerializeField] Sprite failureBackground = null!;
         [SerializeField] Image background = null!;
+        
+        [SerializeField] DigitSplitResultNumberMono viewerNumberMono = null!;
+        [SerializeField] DigitSplitResultNumberMono daipanCountMono = null!;
+        [SerializeField] DigitSplitResultNumberMono playerHpMono = null!;
+        [SerializeField] DigitSplitResultNumberMono comboCountMono = null!;
+        [SerializeField] DigitSplitResultNumberMono lastWaveMono = null!;
 
         LanguageConfig _languageConfig = null!;
 
@@ -57,15 +64,27 @@ namespace Daipan.Battle.scripts
             Debug.Log("ResultViewMono Constructor");
             Observable.EveryUpdate()
                 .Where(_ => viewObject.activeInHierarchy)
-                .Subscribe(_ => viewerNumberText.text = $"{viewerNumber.Number}")
+                .Subscribe(_ =>
+                {
+                    viewerNumberText.text = $"{viewerNumber.Number}";
+                    viewerNumberMono.SetDigit(viewerNumber.Number);
+                })
                 .AddTo(this);
             Observable.EveryUpdate()
                 .Where(_ => viewObject.activeInHierarchy)
-                .Subscribe(_ => daipanCountText.text = $"{daipanExecutor.DaipanCount}")
+                .Subscribe(_ =>
+                {
+                    daipanCountText.text = $"{daipanExecutor.DaipanCount}";
+                    daipanCountMono.SetDigit(daipanExecutor.DaipanCount);
+                })
                 .AddTo(this);
             Observable.EveryUpdate()
                 .Where(_ => viewObject.activeInHierarchy)
-                .Subscribe(_ => comboCountText.text = $"{comboCounter.MaxComboCount}")
+                .Subscribe(_ =>
+                {
+                    comboCountText.text = $"{comboCounter.MaxComboCount}";
+                    comboCountMono.SetDigit(comboCounter.MaxComboCount);
+                })
                 .AddTo(this);
 
             _languageConfig = languageConfig;
