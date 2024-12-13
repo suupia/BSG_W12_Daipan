@@ -1,5 +1,6 @@
 #nullable enable
 using System.Linq;
+using Cysharp.Threading.Tasks;
 using Daipan.Battle.scripts;
 using Daipan.Core;
 using Daipan.Daipan;
@@ -44,6 +45,7 @@ public class TitleMonoOnline : MonoBehaviour
     [Header("TipsPanel")]
     [SerializeField] Image streamerTipsPanel = null!;
     [SerializeField] Image antiTipsPanel = null!;
+    int shownTipsClientCount = 0;
 
     readonly PlayerDataTransporterNetWrapper _playerDataTransporterNetWrapper = new();
 
@@ -121,7 +123,7 @@ public class TitleMonoOnline : MonoBehaviour
                 playerStatsUnit.IsReady = !playerStatsUnit.IsReady;
     }
 
-    void StartGameButtonClicked()
+    async void StartGameButtonClicked()
     {
         var runner = FindObjectOfType<NetworkRunner>();
         if (runner.IsSharedModeMasterClient)
@@ -146,9 +148,15 @@ public class TitleMonoOnline : MonoBehaviour
         }
 
 
+        ShowTipsRPC();
+        Debug.Log($"runner.ActivePlayers.Count() {runner.ActivePlayers.Count()}");
+
+
+        var token = this.GetCancellationTokenOnDestroy();
+        await UniTask.WaitUntil(() => shownTipsClientCount == runner.ActivePlayers.Count(), cancellationToken: token);
+
         // Transit to DaipanScene
         SceneTransition.TransitionSceneWithNetworkRunner(runner, SceneName.DaipanSceneNet);
-        ShowTipsRPC();
     }
 
     [Rpc(RpcSources.All, RpcTargets.All)]
@@ -164,6 +172,13 @@ public class TitleMonoOnline : MonoBehaviour
         {
             antiTipsPanel.gameObject.SetActive(true);
         }
+        DoneShowingTipsRpc();
+    }
+    [Rpc(RpcSources.All, RpcTargets.All)]
+    public void DoneShowingTipsRpc()
+    {
+        shownTipsClientCount++;
+        Debug.Log($"shownTipsClientCount++; {shownTipsClientCount}");
     }
 
     public void CheckAllReady()
