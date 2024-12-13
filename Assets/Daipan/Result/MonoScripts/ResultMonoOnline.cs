@@ -1,4 +1,5 @@
 #nullable enable
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,16 +9,27 @@ using Daipan.Battle.scripts;
 using Daipan.Enemy.MonoScripts;
 using Fusion;
 using System.Linq;
+using UnityEngine.UI;
 
 namespace Daipan.Result.MonoScripts
 {
     public class ResultMonoOnline : MonoBehaviour
     {
+        [SerializeField] Image resultImage = null!;
+        [SerializeField] ResultSpriteParam[] resultSpriteParams = null!; 
+        
         [SerializeField] TMP_Text resultText = null!;
 
         void Start()
         {
             resultText.text = NetworkPlayerResultHolder.NetworkPlayerResultEnum.ToString();
+            foreach (var resultSpriteParam in resultSpriteParams)
+            {
+                if (resultSpriteParam.networkPlayerResultEnum == NetworkPlayerResultHolder.NetworkPlayerResultEnum)
+                {
+                    resultImage.sprite = resultSpriteParam.resultSprite;
+                }
+            }
 
             // 念のため、残っている敵を削除
             var remainingEnemies = FindObjectsByType<EnemyNet>(FindObjectsSortMode.None);
@@ -36,6 +48,13 @@ namespace Daipan.Result.MonoScripts
             }
         }
     }
+    
+    [Serializable]
+    public sealed class ResultSpriteParam
+    {
+        public NetworkPlayerResultEnum networkPlayerResultEnum;
+        public Sprite? resultSprite;
+    }
 
     public static class NetworkPlayerResultHolder
     {
@@ -45,8 +64,8 @@ namespace Daipan.Result.MonoScripts
     public enum NetworkPlayerResultEnum
     {
         None,
-        Win,
-        Lose,
+        StreamerWin,
+        AntiWin,
         QuitByPlayerLeft,
     }
 }

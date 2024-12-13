@@ -20,11 +20,11 @@ namespace Daipan.Battle.Scripts
 {
     public class ResultStateNetwork : IDisposable, IResultState
     {
+        public ResultEnum CurrentResultEnum { get; private set; } = ResultEnum.None;
         readonly ResultViewMono _resultViewMono;
         readonly List<IDisposable> _disposables = new();
         readonly NetworkRunner _runner;
-
-        public ResultEnum CurrentResultEnum { get; private set; } = ResultEnum.None;
+        readonly PlayerRoleEnum _localPlayerRoleEnum;
 
         [Inject]
         public ResultStateNetwork(
@@ -64,14 +64,26 @@ namespace Daipan.Battle.Scripts
                     rpcReceiverNetWrapper.RpcReceiverNet.ShowResultRPC(PlayerRoleEnum.Anti);
                 }
             }));
+            _localPlayerRoleEnum = playerDataTransporterNetWrapper.GetPlayerRoleEnum(runner.LocalPlayer);
         }
 
         public void ShowResult(bool isClear)
         {
-            NetworkPlayerResultHolder.NetworkPlayerResultEnum = isClear ? NetworkPlayerResultEnum.Win : NetworkPlayerResultEnum.Lose;
+            NetworkPlayerResultHolder.NetworkPlayerResultEnum = isClear
+                ? _localPlayerRoleEnum switch
+                {
+                    PlayerRoleEnum.Streamer => NetworkPlayerResultEnum.StreamerWin,
+                    PlayerRoleEnum.Anti => NetworkPlayerResultEnum.AntiWin,
+                    _ => NetworkPlayerResultEnum.StreamerWin // フェールセーフ 
+                }
+                : _localPlayerRoleEnum switch
+                {
+                    PlayerRoleEnum.Streamer => NetworkPlayerResultEnum.AntiWin,
+                    PlayerRoleEnum.Anti => NetworkPlayerResultEnum.StreamerWin,
+                    _ => NetworkPlayerResultEnum.StreamerWin // フェールセーフ
+                };
 
             SceneTransition.TransitionSceneWithNetworkRunner(_runner, SceneName.ResultSceneNet);
-      
         }
 
         public void ShowDetails()
