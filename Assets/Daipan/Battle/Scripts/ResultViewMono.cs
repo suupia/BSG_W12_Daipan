@@ -135,7 +135,7 @@ namespace Daipan.Battle.scripts
             }
 
             playerHpText.text = $"{playerMono.Hp.Value} / {playerMono.MaxHp}"; // 本当はObserveしたいけど生成順序の関係でここで取得
-            playerHpMono.SetDigit((int)playerMono.Hp.Value);
+            playerHpMono.SetDigit((int)playerMono.Hp.Value); // なんか更新が遅れることがある？？処理が重いだけか？
 
             if (playerMono.Hp.Value <= 0)
                 background.sprite = failureBackground;
