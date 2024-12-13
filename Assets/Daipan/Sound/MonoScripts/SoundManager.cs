@@ -8,30 +8,34 @@ using UnityEngine;
 
 namespace Daipan.Sound.MonoScripts
 {
-    public sealed class SoundManager : MonoBehaviour , IDisposable
+    public sealed class SoundManager : MonoBehaviour, IDisposable
     {
         [SerializeField] List<BgmParam> bgmParams = null!;
         [SerializeField] List<SeParam> seParams = null!;
         static SoundManager? _instance;
         public static SoundManager? Instance => _instance;
+
         public static float BgmVolume
         {
             set => _bgmVolume = Mathf.Clamp(value / 7f, 0, 1);
             get => (int)(_bgmVolume * 7);
         }
+
         static float _bgmVolume;
+
         public static float SeVolume
         {
             set => _seVolume = Mathf.Clamp(value / 7f, 0, 1);
             get => (int)(_seVolume * 7);
         }
+
         static float _seVolume;
-        
-        readonly CompositeDisposable _disposable = new ();
+
+        readonly CompositeDisposable _disposable = new();
 
         public void Initialize()
         {
-            if(_instance == null) 
+            if (_instance == null)
             {
                 _instance = this;
                 DontDestroyOnLoad(gameObject);
@@ -40,30 +44,18 @@ namespace Daipan.Sound.MonoScripts
             else
             {
                 Debug.Log("SoundManager is already created");
-            } 
-            
-            foreach (var bgmParam in bgmParams)
-            {
-                bgmParam.audioSource.clip = bgmParam.audioClip;
             }
-            
-            foreach (var seParam in seParams)
-            {
-                seParam.audioSource.clip = seParam.audioClip;
-            }
+
+            foreach (var bgmParam in bgmParams) bgmParam.audioSource.clip = bgmParam.audioClip;
+
+            foreach (var seParam in seParams) seParam.audioSource.clip = seParam.audioClip;
             BgmVolume = 3;
             SeVolume = 4;
-            
+
             _disposable.Add(Observable.EveryUpdate().Subscribe(_ =>
             {
-                foreach (var bgmParam in bgmParams)
-                {
-                    bgmParam.audioSource.volume = _bgmVolume;
-                }
-                foreach (var seParam in seParams)
-                {
-                    seParam.audioSource.volume = _seVolume;
-                }
+                foreach (var bgmParam in bgmParams) bgmParam.audioSource.volume = _bgmVolume;
+                foreach (var seParam in seParams) seParam.audioSource.volume = _seVolume;
             }));
         }
 
@@ -75,17 +67,13 @@ namespace Daipan.Sound.MonoScripts
                 Debug.LogError($"Not found BGM: {bgmEnum}");
                 return;
             }
-            
+
             const float fadeSec = 1f;
 
             // Stop other BGMs with fade-out
             foreach (var param in bgmParams)
-            {
                 if (param.bgmEnum != bgmEnum && param.audioSource.isPlaying)
-                {
                     param.audioSource.DOFade(0, fadeSec).OnComplete(() => param.audioSource.Stop());
-                }
-            }
 
             Debug.Log("Sound is Good");
             // Play the selected BGM
@@ -105,11 +93,11 @@ namespace Daipan.Sound.MonoScripts
             }
 
             seParam.audioSource.clip = seParam.audioClip;
-            seParam.audioSource.volume = _seVolume;
+            seParam.audioSource.volume = _seVolume * seParam.volumeMultiplier;
             seParam.audioSource.Play();
             Debug.Log($"Play SE: {seEnum}, volume: {seParam.audioSource.volume}, seParam.seEnum: {seParam.seEnum}, audioClip.name: {seParam.audioClip.name}");
         }
-        
+
         public void FadOutBgm(float fadeSec)
         {
             foreach (var param in bgmParams)
@@ -117,27 +105,24 @@ namespace Daipan.Sound.MonoScripts
                 Debug.Log($"FadOutBgm param : {param.bgmEnum}, {param.audioSource.isPlaying}");
                 if (param.audioSource.isPlaying)
                 {
-                    Debug.Log($"FadOutBgm enum : {param.bgmEnum}"); 
+                    Debug.Log($"FadOutBgm enum : {param.bgmEnum}");
                     param.audioSource.DOFade(0, fadeSec).OnComplete(() => param.audioSource.Stop());
                 }
             }
         }
-        
+
         public void StopAllBgm()
         {
             foreach (var param in bgmParams)
-            {
                 if (param.audioSource.isPlaying)
-                {
                     param.audioSource.Stop();
-                }
-            }
         }
-        
+
         public void Dispose()
         {
             _disposable.Dispose();
         }
+
         ~SoundManager()
         {
             Dispose();
@@ -158,6 +143,7 @@ namespace Daipan.Sound.MonoScripts
         public SeEnum seEnum;
         public AudioSource audioSource = null!;
         public AudioClip audioClip = null!;
+        [Range(0f, 2f)] public float volumeMultiplier = 1;
     }
 
     public enum BgmEnum
@@ -165,7 +151,7 @@ namespace Daipan.Sound.MonoScripts
         Title,
         Tutorial,
         Daipan,
-        EndScene,
+        EndScene
     }
 
 
@@ -176,25 +162,25 @@ namespace Daipan.Sound.MonoScripts
         AttackDeflect,
         Attack,
         Daipan,
-        
+
         // EndScene
-        Hakononaka,  // 箱の中END
-        Kansyasai,  // 配信者ちゃん感謝祭END
-        NoobGamer,     // ゲーム下手配信者END
-        ProGamer,      // プロゲーマーEND
-        Seijo,    // 聖女END
-        Enjou,      // 炎上END
+        Hakononaka, // 箱の中END
+        Kansyasai, // 配信者ちゃん感謝祭END
+        NoobGamer, // ゲーム下手配信者END
+        ProGamer, // プロゲーマーEND
+        Seijo, // 聖女END
+        Enjou, // 炎上END
         Genkai, // 限界配信者END
         Heibon, // 平凡な配信者END
-        
+
         Decide,
         Text,
         TowerDamage,
         BAN,
         SelectLanguage,
         Cancel,
-        
+
         EnemyDieContraction,
-        EnemyDieExplosion,
+        EnemyDieExplosion
     }
 }
