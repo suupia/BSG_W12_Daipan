@@ -50,8 +50,13 @@ namespace Daipan.AntiNet.Scripts
                 {
                     SoundManager.Instance?.PlaySe(SeEnum.Cancel);
                 }
+                else
+                {
+                    SoundManager.Instance?.PlaySe(SeEnum.Cancel);  // 同じSEを使うことにする（独断）
+                }
                 return;
             }
+            SoundManager.Instance?.PlaySe(SeEnum.SummonEnemy); 
 
             _spawnEnemyCost.DecreaseValue(GetCost(enemyEnum));
             _rpcReceiverNetWrapper.RpcReceiverNet.SpawnAntiEnemyRPC(enemyEnum, _runner.LocalPlayer);
