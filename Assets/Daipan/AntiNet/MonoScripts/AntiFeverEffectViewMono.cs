@@ -19,6 +19,7 @@ namespace Daipan.AntiNet.MonoScripts
     {
         [SerializeField] GameObject particleEffect = null!;
         [SerializeField] Animator particleAnimation = null!;
+        [SerializeField] GameObject becameFeverEffect = null!;
         [SerializeField] float fadeTime = 0.5f;
         private Sequence? _sequence = null!;
         private IDisposable? _disposable = null!;
@@ -27,6 +28,7 @@ namespace Daipan.AntiNet.MonoScripts
         public void Initialize(AntiStateValue antiStateValue)
         {
             particleEffect.SetActive(false);
+            becameFeverEffect.gameObject.SetActive(false);
             Observable
                 .EveryValueChanged(antiStateValue, x => x.AntiStateEnum)
                 .Subscribe(value =>
@@ -49,6 +51,7 @@ namespace Daipan.AntiNet.MonoScripts
         {
             particleEffect.SetActive(true);
             particleEffect.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
+            becameFeverEffect.gameObject.SetActive(true);
         }
 
         void HideEffect()
@@ -65,7 +68,12 @@ namespace Daipan.AntiNet.MonoScripts
                         particleEffect.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, value);
                     })
                     .SetEase(Ease.Linear)
-                    .OnComplete(() => particleEffect.gameObject.SetActive(false))
+                    .OnComplete(() =>
+                    {
+                        particleEffect.gameObject.SetActive(false);
+                        becameFeverEffect.gameObject.SetActive(false);
+                    }
+                    )
             );
         }
     }
