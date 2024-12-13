@@ -94,7 +94,7 @@ namespace Daipan.Sound.MonoScripts
 
             seParam.audioSource.clip = seParam.audioClip;
             seParam.audioSource.volume = _seVolume * seParam.volumeMultiplier;
-            seParam.audioSource.Play();
+            seParam.audioSource.PlayOneShot(seParam.audioClip);
             Debug.Log($"Play SE: {seEnum}, volume: {seParam.audioSource.volume}, seParam.seEnum: {seParam.seEnum}, audioClip.name: {seParam.audioClip.name}");
         }
 
