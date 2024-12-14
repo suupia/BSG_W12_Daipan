@@ -40,6 +40,7 @@ namespace Daipan.Battle.Scripts
             _resultViewMono = resultViewMono;
             _runner = runner;
 
+
             if (playerDataTransporterNetWrapper.GetPlayerRoleEnum(runner.LocalPlayer) != PlayerRoleEnum.Streamer) return;
             _disposables.Add(Observable.EveryUpdate()
                 .Where(_ => CurrentResultEnum == ResultEnum.None)
@@ -83,7 +84,8 @@ namespace Daipan.Battle.Scripts
                     _ => NetworkPlayerResultEnum.StreamerWin // フェールセーフ
                 };
 
-            SceneTransition.TransitionSceneWithNetworkRunner(_runner, SceneName.ResultSceneNet);
+            if (_runner.IsSharedModeMasterClient)
+                SceneTransition.TransitionSceneWithNetworkRunner(_runner, SceneName.ResultSceneNet);
         }
 
         public void ShowDetails()
