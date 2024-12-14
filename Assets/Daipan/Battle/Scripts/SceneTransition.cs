@@ -34,16 +34,17 @@ namespace Daipan.Battle.scripts
             }
         }
 
-        public static void TransitionSceneWithNetworkRunner(NetworkRunner runner, SceneName nextScene)
+        public static NetworkSceneAsyncOp? TransitionSceneWithNetworkRunner(NetworkRunner runner, SceneName nextScene)
         {
             if (SceneNameTable.TryGetValue(nextScene, out var sceneName))
             {
                 Debug.Log($"Transitioning to {sceneName}");
-                runner.LoadScene(sceneName);
+                return runner.LoadScene(sceneName);
             }
             else
             {
                 Debug.LogError($"{nextScene} is not registered in sceneNameTable.");
+                return null;
             }
         }
     }
