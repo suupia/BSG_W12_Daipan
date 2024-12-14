@@ -85,12 +85,6 @@ namespace Daipan.Player.MonoScripts
                 _antiCommentInputViewMono.CloseChat();
                 _antiCommentSpawnerNetwork.SpawnAntiComment(antiCommentInput.text);
                 antiCommentInput.text = "";
-
-                // if (EventSystem.current.currentSelectedGameObject != null)
-                // {
-                //     EventSystem.current.SetSelectedGameObject(null);
-                // }
-                // antiCommentInput.DeactivateInputField(false);
             });
             // Enterを押して入力終了
             antiCommentInput.onSubmit.AddListener(_ =>
