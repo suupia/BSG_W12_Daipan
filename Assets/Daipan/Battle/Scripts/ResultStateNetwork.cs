@@ -70,6 +70,7 @@ namespace Daipan.Battle.Scripts
 
         public void ShowResult(bool isClear)
         {
+            Debug.Log($"_localPlayerRoleEnum:{_localPlayerRoleEnum}, isClear:{isClear}, IsSharedModeMasterClient:{_runner.IsSharedModeMasterClient}");
             NetworkPlayerResultHolder.NetworkPlayerResultEnum = isClear
                 ? _localPlayerRoleEnum switch
                 {
