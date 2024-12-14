@@ -53,7 +53,7 @@ public class TitleMonoOnline : MonoBehaviour
         JoinButton.onClick.AddListener(JoinButtonOnClicked);
         // PlayerStatsPanel
         readyButton.onClick += ReadyButtonClicked;
-        startGameButton.gameObject.SetActive(false);
+        startGameButton.GetComponent<Button>().interactable = false;
         startGameButton.onClick += StartGameButtonClicked;
     }
 
@@ -141,7 +141,6 @@ public class TitleMonoOnline : MonoBehaviour
             _playerDataTransporterNetWrapper.SetPlayerData(playerStatsUnit.NetworkedPlayerRef, playerData);
         }
 
-
         // Transit to DaipanScene
         SceneTransition.TransitionSceneWithNetworkRunner(runner, SceneName.DaipanSceneNet);
     }
@@ -156,9 +155,9 @@ public class TitleMonoOnline : MonoBehaviour
         var runner = FindObjectOfType<NetworkRunner>();
         if (runner.IsSharedModeMasterClient)
         {
-            startGameButton.gameObject.SetActive(isAllReady);
+            startGameButton.GetComponent<Button>().interactable = isAllReady;
 #if UNITY_EDITOR
-            startGameButton.gameObject.SetActive(true);
+            startGameButton.GetComponent<Button>().interactable = true;
 #endif
         }
     }
