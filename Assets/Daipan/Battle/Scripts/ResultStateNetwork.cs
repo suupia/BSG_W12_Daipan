@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Codice.Client.BaseCommands;
 using Daipan.Battle.interfaces;
 using Daipan.Battle.scripts;
 using Daipan.Enemy.Scripts;
@@ -25,6 +26,7 @@ namespace Daipan.Battle.Scripts
         readonly List<IDisposable> _disposables = new();
         readonly NetworkRunner _runner;
         readonly PlayerRoleEnum _localPlayerRoleEnum;
+        readonly RpcReceiverNetWrapper _rpcReceiverNetWrapper;
 
         [Inject]
         public ResultStateNetwork(
@@ -58,14 +60,12 @@ namespace Daipan.Battle.Scripts
                     }
                 }));
             _disposables.Add(Observable.EveryValueChanged(viewerNumber, x => x.Number)
-            .Subscribe(_ =>
-            {
-                if (viewerNumber.Number <= 0)
+                .Subscribe(_ =>
                 {
-                    rpcReceiverNetWrapper.RpcReceiverNet.ShowResultRPC(PlayerRoleEnum.Anti);
-                }
-            }));
+                    if (viewerNumber.Number <= 0) rpcReceiverNetWrapper.RpcReceiverNet.ShowResultRPC(PlayerRoleEnum.Anti);
+                }));
             _localPlayerRoleEnum = playerDataTransporterNetWrapper.GetPlayerRoleEnum(runner.LocalPlayer);
+            _rpcReceiverNetWrapper = rpcReceiverNetWrapper;
         }
 
         public void ShowResult(bool isClear)
@@ -85,8 +85,7 @@ namespace Daipan.Battle.Scripts
                     _ => NetworkPlayerResultEnum.StreamerWin // フェールセーフ
                 };
 
-            if (_runner.IsSharedModeMasterClient)
-                SceneTransition.TransitionSceneWithNetworkRunner(_runner, SceneName.ResultSceneNet);
+            _rpcReceiverNetWrapper.RpcReceiverNet.AddTransitionScenePlayerRefRPC();
         }
 
         public void ShowDetails()
