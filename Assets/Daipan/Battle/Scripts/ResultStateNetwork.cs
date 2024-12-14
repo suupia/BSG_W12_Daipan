@@ -39,6 +39,7 @@ namespace Daipan.Battle.Scripts
         {
             _resultViewMono = resultViewMono;
             _runner = runner;
+            _rpcReceiverNetWrapper = rpcReceiverNetWrapper;
 
 
             if (playerDataTransporterNetWrapper.GetPlayerRoleEnum(runner.LocalPlayer) != PlayerRoleEnum.Streamer) return;
@@ -63,7 +64,6 @@ namespace Daipan.Battle.Scripts
                     if (viewerNumber.Number <= 0) rpcReceiverNetWrapper.RpcReceiverNet.ShowResultRPC(PlayerRoleEnum.Anti);
                 }));
             _localPlayerRoleEnum = playerDataTransporterNetWrapper.GetPlayerRoleEnum(runner.LocalPlayer);
-            _rpcReceiverNetWrapper = rpcReceiverNetWrapper;
         }
 
         public void ShowResult(bool isClear)
