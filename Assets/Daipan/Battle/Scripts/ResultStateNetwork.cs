@@ -84,8 +84,8 @@ namespace Daipan.Battle.Scripts
                     _ => NetworkPlayerResultEnum.StreamerWin // フェールセーフ
                 };
 
-            // if (_runner.IsSharedModeMasterClient)
-            SceneTransition.TransitioningScene(SceneName.ResultSceneNet);
+            if (_runner.IsSharedModeMasterClient)
+                SceneTransition.TransitionSceneWithNetworkRunner(_runner, SceneName.ResultSceneNet);
         }
 
         public void ShowDetails()
