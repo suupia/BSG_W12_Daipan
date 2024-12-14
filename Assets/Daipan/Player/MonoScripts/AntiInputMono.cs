@@ -92,6 +92,14 @@ namespace Daipan.Player.MonoScripts
                 // }
                 // antiCommentInput.DeactivateInputField(false);
             });
+            // Enterを押して入力終了
+            antiCommentInput.onSubmit.AddListener(_ =>
+            {
+                if (EventSystem.current.currentSelectedGameObject != null)
+                {
+                    EventSystem.current.SetSelectedGameObject(null);
+                }
+            });
             antiCommentInput.onDeselect.AddListener(_ =>
             {
                 Debug.Log("DeSelect");
