@@ -34,6 +34,11 @@ namespace Daipan.Comment.MonoScripts
         {
             base.Spawned();
             var daipanScopeNet = DaipanScopeNet.BuiltContainer;
+            if (daipanScopeNet == null)
+            {
+                Debug.LogWarning("DaipanScopeNet is not found");
+                return;
+            }
             Initialize(
                 daipanScopeNet.Container.Resolve<AntiCommentCluster>()
                , daipanScopeNet.Container.Resolve<CommentParamsServer>()

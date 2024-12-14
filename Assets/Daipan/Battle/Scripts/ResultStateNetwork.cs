@@ -8,7 +8,6 @@ using Daipan.Enemy.Scripts;
 using Daipan.Result.MonoScripts;
 using Daipan.Stream.Interfaces;
 using Daipan.Stream.Scripts;
-using Daipan.StreamerNet.MonoScripts;
 using Daipan.Transporter;
 using Daipna.StreamerNet.Scripts;
 using Fusion;
@@ -25,6 +24,7 @@ namespace Daipan.Battle.Scripts
         readonly List<IDisposable> _disposables = new();
         readonly NetworkRunner _runner;
         readonly PlayerRoleEnum _localPlayerRoleEnum;
+        readonly RpcReceiverNetWrapper _rpcReceiverNetWrapper;
 
         [Inject]
         public ResultStateNetwork(
@@ -39,6 +39,8 @@ namespace Daipan.Battle.Scripts
         {
             _resultViewMono = resultViewMono;
             _runner = runner;
+            _rpcReceiverNetWrapper = rpcReceiverNetWrapper;
+            _localPlayerRoleEnum = playerDataTransporterNetWrapper.GetPlayerRoleEnum(runner.LocalPlayer);
 
             if (playerDataTransporterNetWrapper.GetPlayerRoleEnum(runner.LocalPlayer) != PlayerRoleEnum.Streamer) return;
             _disposables.Add(Observable.EveryUpdate()
@@ -57,18 +59,15 @@ namespace Daipan.Battle.Scripts
                     }
                 }));
             _disposables.Add(Observable.EveryValueChanged(viewerNumber, x => x.Number)
-            .Subscribe(_ =>
-            {
-                if (viewerNumber.Number <= 0)
+                .Subscribe(_ =>
                 {
-                    rpcReceiverNetWrapper.RpcReceiverNet.ShowResultRPC(PlayerRoleEnum.Anti);
-                }
-            }));
-            _localPlayerRoleEnum = playerDataTransporterNetWrapper.GetPlayerRoleEnum(runner.LocalPlayer);
+                    if (viewerNumber.Number <= 0) rpcReceiverNetWrapper.RpcReceiverNet.ShowResultRPC(PlayerRoleEnum.Anti);
+                }));
         }
 
         public void ShowResult(bool isClear)
         {
+            Debug.Log($"_localPlayerRoleEnum:{_localPlayerRoleEnum}, isClear:{isClear}, IsSharedModeMasterClient:{_runner.IsSharedModeMasterClient}");
             NetworkPlayerResultHolder.NetworkPlayerResultEnum = isClear
                 ? _localPlayerRoleEnum switch
                 {
@@ -83,7 +82,7 @@ namespace Daipan.Battle.Scripts
                     _ => NetworkPlayerResultEnum.StreamerWin // フェールセーフ
                 };
 
-            SceneTransition.TransitionSceneWithNetworkRunner(_runner, SceneName.ResultSceneNet);
+            _rpcReceiverNetWrapper.RpcReceiverNet.AddTransitionScenePlayerRefRPC();
         }
 
         public void ShowDetails()
