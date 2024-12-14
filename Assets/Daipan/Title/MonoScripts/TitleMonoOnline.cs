@@ -53,7 +53,7 @@ public class TitleMonoOnline : MonoBehaviour
         JoinButton.onClick.AddListener(JoinButtonOnClicked);
         // PlayerStatsPanel
         readyButton.onClick += ReadyButtonClicked;
-        startGameButton.GetComponent<Button>().interactable = false;
+        startGameButton.gameObject.SetActive(false);
         startGameButton.onClick += StartGameButtonClicked;
     }
 
@@ -155,8 +155,11 @@ public class TitleMonoOnline : MonoBehaviour
         var runner = FindObjectOfType<NetworkRunner>();
         if (runner.IsSharedModeMasterClient)
         {
+            // Masterだけ、半透明で表示したい
+            startGameButton.gameObject.SetActive(true);
             startGameButton.GetComponent<Button>().interactable = isAllReady;
 #if UNITY_EDITOR
+            startGameButton.gameObject.SetActive(true);
             startGameButton.GetComponent<Button>().interactable = true;
 #endif
         }
