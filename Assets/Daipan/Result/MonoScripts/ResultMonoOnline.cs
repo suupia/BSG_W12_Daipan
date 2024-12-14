@@ -55,8 +55,11 @@ namespace Daipan.Result.MonoScripts
                 finalBoss?.DeleteSelf();
             // アンチコメントも削除
             var remainingAntiComments = FindObjectsByType<AntiCommentNet>(FindObjectsSortMode.None);
-
+            foreach (var antiComment in remainingAntiComments)
+                antiComment?.DeleteSelf();
             var remainingSpecialAntiComments = FindObjectsByType<AntiCommentNet>(FindObjectsSortMode.None);
+            foreach (var specialAntiComment in remainingSpecialAntiComments)
+                specialAntiComment?.DeleteSelf();
         }
 
         void Update()
