@@ -100,6 +100,16 @@ namespace Daipan.Player.MonoScripts
             });
         }
 
+        void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.Alpha1)) _antiEnemySpawnerNetwork.SpawnEnemy(EnemyEnum.Yellow);
+            if(Input.GetKeyDown(KeyCode.Alpha2)) _antiEnemySpawnerNetwork.SpawnEnemy(EnemyEnum.Red);
+            if(Input.GetKeyDown(KeyCode.Alpha3)) _antiEnemySpawnerNetwork.SpawnEnemy(EnemyEnum.Blue);
+            if(Input.GetKeyDown(KeyCode.Alpha4)) _antiEnemySpawnerNetwork.SpawnEnemy(EnemyEnum.YellowBoss);
+            if(Input.GetKeyDown(KeyCode.Alpha5)) _antiEnemySpawnerNetwork.SpawnEnemy(EnemyEnum.RedBoss);
+            if(Input.GetKeyDown(KeyCode.Alpha6)) _antiEnemySpawnerNetwork.SpawnEnemy(EnemyEnum.BlueBoss);
+        }
+
 
     }
 }
