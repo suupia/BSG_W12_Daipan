@@ -157,9 +157,11 @@ public class TitleMonoOnline : MonoBehaviour
         {
             // Masterだけ、半透明で表示したい
             startGameButton.gameObject.SetActive(true);
+            startGameButton.IsInteractable = isAllReady;  // ラップしていない。。。
             startGameButton.GetComponent<Button>().interactable = isAllReady;
 #if UNITY_EDITOR
             startGameButton.gameObject.SetActive(true);
+            startGameButton.IsInteractable = true;  // ラップしていない。。。
             startGameButton.GetComponent<Button>().interactable = true;
 #endif
         }
