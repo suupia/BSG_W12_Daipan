@@ -25,9 +25,11 @@ namespace Daipan.Player.MonoScripts
         [SerializeField] CustomButton blueBossButton = null!;
         [SerializeField] TMP_InputField antiCommentInput = null!;
 
-        private AntiEnemySpawnerNetwork _antiEnemySpawnerNetwork = null!;
-        private AntiCommentSpawnerNetwork _antiCommentSpawnerNetwork = null!;
-        private AntiCommentInputViewMono _antiCommentInputViewMono = null!;
+        AntiEnemySpawnerNetwork _antiEnemySpawnerNetwork = null!;
+        AntiCommentSpawnerNetwork _antiCommentSpawnerNetwork = null!;
+        AntiCommentInputViewMono _antiCommentInputViewMono = null!;
+        bool _isAnti;
+        bool _isInitialized;
 
         [Inject]
         public void Initialize(
@@ -42,6 +44,7 @@ namespace Daipan.Player.MonoScripts
             Debug.Log($"AntiInputMono Initialize isAnti: {playerDataTransporterNetWrapper.GetPlayerRoleEnum(runner.LocalPlayer) == PlayerRoleEnum.Anti}");
             var isAnti = playerDataTransporterNetWrapper.GetPlayerRoleEnum(runner.LocalPlayer) == PlayerRoleEnum.Anti;
             viewObject.SetActive(isAnti);
+            _isAnti = isAnti;
 
             Observable.EveryValueChanged(antiStateValue, x => x.AntiStateEnum)
             .Subscribe(value =>
@@ -58,6 +61,8 @@ namespace Daipan.Player.MonoScripts
             _antiEnemySpawnerNetwork = antiEnemySpawnerNetwork;
             _antiCommentSpawnerNetwork = antiCommentSpawnerNetwork;
             _antiCommentInputViewMono = commentInputViewMono;
+
+            _isInitialized = true;
         }
 
         void Start()
@@ -102,6 +107,8 @@ namespace Daipan.Player.MonoScripts
 
         void Update()
         {
+            if (!_isInitialized) return;
+            if (!_isAnti) return;
             if(Input.GetKeyDown(KeyCode.Alpha1)) _antiEnemySpawnerNetwork.SpawnEnemy(EnemyEnum.Yellow);
             if(Input.GetKeyDown(KeyCode.Alpha2)) _antiEnemySpawnerNetwork.SpawnEnemy(EnemyEnum.Red);
             if(Input.GetKeyDown(KeyCode.Alpha3)) _antiEnemySpawnerNetwork.SpawnEnemy(EnemyEnum.Blue);
