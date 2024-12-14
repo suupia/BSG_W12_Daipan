@@ -77,16 +77,19 @@ namespace Daipan.Player.MonoScripts
             // 入力開始
             antiCommentInput.onSelect.AddListener(_ =>
             {
+                Debug.Log($"[AntiInputMono] OnSelect");
                 _antiCommentInputViewMono.OpenChat();
             });
             // 入力更新
             antiCommentInput.onValueChanged.AddListener(_ =>
             {
+                Debug.Log($"[AntiInputMono] OnValueChanged");
                 _antiCommentInputViewMono.UpdateCharacters(antiCommentInput.text);
             });
             // 入力終了
             antiCommentInput.onEndEdit.AddListener(_ =>
             {
+                Debug.Log($"[AntiInputMono] OnEndEdit");
                 _antiCommentInputViewMono.CloseChat();
                 _antiCommentSpawnerNetwork.SpawnAntiComment(antiCommentInput.text);
                 antiCommentInput.text = "";
@@ -94,8 +97,10 @@ namespace Daipan.Player.MonoScripts
             // Enterを押して入力終了
             antiCommentInput.onSubmit.AddListener(_ =>
             {
+                Debug.Log($"[AntiInputMono] OnSubmit");
                 if (EventSystem.current.currentSelectedGameObject != null)
                 {
+                    Debug.Log("SetSelectedGameObject(null)");
                     EventSystem.current.SetSelectedGameObject(null);
                 }
             });
@@ -115,6 +120,24 @@ namespace Daipan.Player.MonoScripts
             if(Input.GetKeyDown(KeyCode.Alpha4)) _antiEnemySpawnerNetwork.SpawnEnemy(EnemyEnum.YellowBoss);
             if(Input.GetKeyDown(KeyCode.Alpha5)) _antiEnemySpawnerNetwork.SpawnEnemy(EnemyEnum.RedBoss);
             if(Input.GetKeyDown(KeyCode.Alpha6)) _antiEnemySpawnerNetwork.SpawnEnemy(EnemyEnum.BlueBoss);
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                if (_antiCommentInputViewMono.IsChatOpen) return;
+                
+                // 既にInputFieldが選択されていなければ、Enterキーで選択状態にしてキーボードからの入力を開始可能にする
+                if (EventSystem.current.currentSelectedGameObject != antiCommentInput.gameObject)
+                {
+                    // イベントシステムで該当のInputFieldを選択オブジェクトとして設定
+                    EventSystem.current.SetSelectedGameObject(antiCommentInput.gameObject);
+                    // InputFieldのSelectメソッドでフォーカスを当てる
+                    antiCommentInput.Select();
+                }
+                else
+                {
+                    // フォーカスがある場合の処理はない
+                } 
+            }
+
         }
 
 

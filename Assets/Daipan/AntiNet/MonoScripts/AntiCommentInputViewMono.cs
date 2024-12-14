@@ -20,7 +20,9 @@ namespace Daipan.AntiNet.MonoScripts
         [SerializeField] List<TMP_Text> characterTexts = null!;
         [SerializeField] float duration;
 
-        private Sequence _sequence = null!;
+        public bool IsChatOpen => writingImage.gameObject.activeSelf;
+        Sequence _sequence = null!;
+        
 
         [Inject]
         public void Initialize(AntiStateValue antiStateValue)
