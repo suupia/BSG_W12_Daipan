@@ -161,9 +161,9 @@ namespace Daipan.Enemy.MonoScripts
         void RpcDeleteSelf()
         {
             Debug.Log($"[EnemyNet] RpcDeleteSelf()");
-            DeleteSelfBody();
+            DeleteSelfBody().Forget();
         }
-        void DeleteSelfBody()
+        async UniTaskVoid DeleteSelfBody()
         {
             Debug.Log("[EnemyNet] DeleteSelf. LocalPlayer : " + Runner.LocalPlayer);
             IsDiedList.Add(Runner.LocalPlayer);
@@ -172,8 +172,11 @@ namespace Daipan.Enemy.MonoScripts
             {
                 Debug.Log("[EnemyNet] All players died");
                 RpcDespawn(); 
-            } 
-
+            }
+            
+            // フェールセーフ
+            await UniTask.Delay(TimeSpan.FromSeconds(1));
+            RpcDespawn();
         }
         
         [Rpc(RpcSources.All, RpcTargets.StateAuthority)]

@@ -5,16 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Daipan/Title/TitleScene.unity
     guid: d824328e34219409cbe9d486c219a84f
-  - enabled: 1
+  - enabled: 0
     path: Assets/Daipan/Tutorial/TutorialScene.unity
     guid: ea9e74573fa604cffb7b682b5ca8f95d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Daipan/Daipan/DaipanScene.unity
     guid: cc51f33e1c7e48d46a18498a4478b735
-  - enabled: 1
+  - enabled: 0
     path: Assets/Daipan/End/EndScene.unity
     guid: 51af049e46c3d4d448c81c2d5a8879a2
   - enabled: 1
