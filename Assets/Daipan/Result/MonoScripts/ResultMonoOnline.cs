@@ -18,13 +18,15 @@ namespace Daipan.Result.MonoScripts
     {
         [SerializeField] Image resultImage = null!;
         [SerializeField] Image quiteImage = null!;
+        [SerializeField] CustomButton quitButton = null!;
         [SerializeField] ResultSpriteParam[] resultSpriteParams = null!;
         [SerializeField] ResultQuitImage[] resultQuitImages = null!;
-
         [SerializeField] TMP_Text resultText = null!;
 
         void Start()
         {
+            quitButton.onClick += () => SceneTransition.TransitioningScene(SceneName.TitleSceneNet);
+
             resultText.text = NetworkPlayerResultHolder.NetworkPlayerResultEnum.ToString();
 
             // Resultの結果を表す画像
@@ -59,14 +61,6 @@ namespace Daipan.Result.MonoScripts
             var remainingSpecialAntiComments = FindObjectsByType<AntiCommentNet>(FindObjectsSortMode.None);
             foreach (var specialAntiComment in remainingSpecialAntiComments)
                 specialAntiComment?.DeleteSelf();
-        }
-
-        void Update()
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                SceneTransition.TransitioningScene(SceneName.TitleSceneNet);
-            }
         }
     }
 
