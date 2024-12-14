@@ -17,6 +17,11 @@ namespace Daipan.Player.MonoScripts
             // onClickでボタンが押されたときに状態を更新
             enterButton.onClick += () =>  EnterButton = true;
         }
+        
+        void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Return)) EnterButton = true;
+        }
 
         void LateUpdate()
         {
