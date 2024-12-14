@@ -239,7 +239,7 @@ MonoBehaviour:
   - endSceneEnum: 0
     sprite: {fileID: 21300000, guid: e7146d1cb4fd141a89c0badd9b9e8f40, type: 3}
   - endSceneEnum: 1
-    sprite: {fileID: 21300000, guid: 1aa50e4cc71544522bdd4a36b55f16a5, type: 3}
+    sprite: {fileID: 21300000, guid: c89afd3bdbdd14fb69dfd3892023eaaf, type: 3}
   - endSceneEnum: 2
     sprite: {fileID: 21300000, guid: 0a6ededb6f4a94573b3ce65e9a9acaaa, type: 3}
   - endSceneEnum: 3
