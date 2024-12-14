@@ -10,6 +10,7 @@ using Daipan.Enemy.MonoScripts;
 using Fusion;
 using System.Linq;
 using UnityEngine.UI;
+using Daipan.Comment.MonoScripts;
 
 namespace Daipan.Result.MonoScripts
 {
@@ -17,15 +18,15 @@ namespace Daipan.Result.MonoScripts
     {
         [SerializeField] Image resultImage = null!;
         [SerializeField] Image quiteImage = null!;
-        [SerializeField] ResultSpriteParam[] resultSpriteParams = null!; 
+        [SerializeField] ResultSpriteParam[] resultSpriteParams = null!;
         [SerializeField] ResultQuitImage[] resultQuitImages = null!;
-        
+
         [SerializeField] TMP_Text resultText = null!;
 
         void Start()
         {
             resultText.text = NetworkPlayerResultHolder.NetworkPlayerResultEnum.ToString();
-            
+
             // Resultの結果を表す画像
             foreach (var resultSpriteParam in resultSpriteParams)
             {
@@ -34,7 +35,7 @@ namespace Daipan.Result.MonoScripts
                     resultImage.sprite = resultSpriteParam.resultSprite;
                 }
             }
-            
+
             // 実装を断念
             // // 「終了」ボタンの画像
             // foreach (var resultQuitImage in resultQuitImages)
@@ -52,6 +53,13 @@ namespace Daipan.Result.MonoScripts
             var remainingFinalBosses = FindObjectsByType<FinalBossNet>(FindObjectsSortMode.None);
             foreach (var finalBoss in remainingFinalBosses)
                 finalBoss?.DeleteSelf();
+            // アンチコメントも削除
+            var remainingAntiComments = FindObjectsByType<AntiCommentNet>(FindObjectsSortMode.None);
+            foreach (var antiComment in remainingAntiComments)
+                antiComment?.DeleteSelf();
+            var remainingSpecialAntiComments = FindObjectsByType<AntiCommentNet>(FindObjectsSortMode.None);
+            foreach (var specialAntiComment in remainingSpecialAntiComments)
+                specialAntiComment?.DeleteSelf();
         }
 
         void Update()
@@ -62,14 +70,14 @@ namespace Daipan.Result.MonoScripts
             }
         }
     }
-    
+
     [Serializable]
     public sealed class ResultSpriteParam
     {
         public NetworkPlayerResultEnum networkPlayerResultEnum;
         public Sprite? resultSprite;  // 勝敗に応じて表示する画像
     }
-    
+
     [Serializable]
     public sealed class ResultQuitImage
     {

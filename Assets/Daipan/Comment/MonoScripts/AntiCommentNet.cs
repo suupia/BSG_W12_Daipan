@@ -95,5 +95,16 @@ namespace Daipan.Comment.MonoScripts
         {
             commentText.text = (string)CommentText;
         }
+
+        public void DeleteSelf()
+        {
+            DeleteSelfRpc();
+        }
+
+        [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
+        void DeleteSelfRpc()
+        {
+            _runner.Despawn(gameObject.GetComponent<NetworkObject>());
+        }
     }
 }
