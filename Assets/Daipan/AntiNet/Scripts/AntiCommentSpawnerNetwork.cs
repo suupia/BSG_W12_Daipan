@@ -25,6 +25,7 @@ namespace Daipan.AntiNet.Scripts
         readonly IAntiCommentParam _antiCommentParam;
         readonly NetworkRunner _runner;
         readonly IViewerNumber _viewerNumber;
+        private AntiCommentNet? _antiCommentPrefab;
 
 
         [Inject]
@@ -86,10 +87,11 @@ namespace Daipan.AntiNet.Scripts
         }
         void SpawnNormalAntiComment(string commentWord)
         {
-            var antiCommentPrefab = _antiCommentLoader.Load();
+            if (_antiCommentPrefab == null)
+                _antiCommentPrefab = _antiCommentLoader.Load();
             var spawnPosition = _commentParamsServer.GetAntiSpawnedPosition();
 
-            var antiComment = _runner.Spawn(antiCommentPrefab, spawnPosition, Quaternion.identity);
+            var antiComment = _runner.Spawn(_antiCommentPrefab, spawnPosition, Quaternion.identity);
 
             antiComment.SetParameter(commentWord);
             _antiCommentCluster.Add(antiComment);
