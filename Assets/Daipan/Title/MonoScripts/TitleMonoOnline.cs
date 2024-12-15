@@ -20,7 +20,7 @@ public class TitleMonoOnline : MonoBehaviour
     [SerializeField] DTONet dtoNetPrefab = null!;
     [SerializeField] PlayerDataTransporterNet playerDataTransporterNetPrefab = null!;
 
-    [Header("JoinPanel")] [SerializeField] GameObject joinPanel = null!;
+    [Header("JoinPanel")][SerializeField] GameObject joinPanel = null!;
     [SerializeField] TMP_InputField localPlayerNameInputField = null!;
 
     [SerializeField] TMP_InputField localRoomNameInputField = null!;
@@ -28,7 +28,8 @@ public class TitleMonoOnline : MonoBehaviour
     //[SerializeField] CustomButton joinRoomButton = null!;
     [SerializeField] CustomButton closeJoinPanelButton = null!;
 
-    [Header("PlayerStatsPanel")] [SerializeField]
+    [Header("PlayerStatsPanel")]
+    [SerializeField]
     GameObject playerStatsPanel = null!;
 
     [SerializeField] TextMeshProUGUI roomName = null!;
@@ -36,7 +37,8 @@ public class TitleMonoOnline : MonoBehaviour
     [SerializeField] CustomButton readyButton = null!;
     [SerializeField] CustomButton startGameButton = null!; // MasterClient only
 
-    [Header("ErrorPanel")] [SerializeField]
+    [Header("ErrorPanel")]
+    [SerializeField]
     GameObject errorMessagePanel = null!;
 
     [SerializeField] TextMeshProUGUI errorMessageText = null!;
@@ -151,7 +153,7 @@ public class TitleMonoOnline : MonoBehaviour
         var isAllReady = playerStatsUnits.All(playerStatsUnit => playerStatsUnit.IsReady)
                          && playerStatsUnits.Length > 1
                          && playerStatsUnits.Count(p => p.PlayerRole == PlayerRoleEnum.Streamer) == 1
-                         && playerStatsUnits.Count(p => p.PlayerRole == PlayerRoleEnum.Anti) == 3;
+                         && playerStatsUnits.Count(p => p.PlayerRole == PlayerRoleEnum.Anti) >= 1;
         var runner = FindObjectOfType<NetworkRunner>();
         if (runner.IsSharedModeMasterClient)
         {
