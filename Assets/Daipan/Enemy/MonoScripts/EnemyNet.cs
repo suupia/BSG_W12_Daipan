@@ -37,17 +37,17 @@ namespace Daipan.Enemy.MonoScripts
         [Networked]
         [OnChangedRender(nameof(OnEnemyEnumChanged))]
         public EnemyEnum EnemyEnum { get; set; } = EnemyEnum.None;
-        
+
         [Networked]
         [OnChangedRender(nameof(OnIsSpawnedByAntiChanged))]
         NetworkBool IsSpawnedByAnti { get; set; }
 
         public bool IsReachedPlayer { get; set; }
-        [Networked] 
+        [Networked]
         [Capacity(4)]
         NetworkLinkedList<PlayerRef> IsDiedList => default;
 
-        Hp _hp; 
+        Hp _hp;
 
         public Hp Hp
         {
@@ -96,7 +96,7 @@ namespace Daipan.Enemy.MonoScripts
                 Debug.Log("Special enemy die by ReachedPlayer");
                 DieBySpecialBlack();
             }
-            
+
             if (transform.position.x < _enemySpawnPoint.GetEnemyDespawnedPoint().x) Die();
 
             enemyViewMono?.SetHpGauge(Hp.Value, _enemyParamContainer.GetEnemyParamData(EnemyEnum).GetMaxHp());
@@ -134,7 +134,7 @@ namespace Daipan.Enemy.MonoScripts
             _enemyOnDied = enemyOnDied;
             Hp = new Hp(_enemyParamContainer.GetEnemyParamData(EnemyEnum).GetMaxHp());
         }
-        
+
         public void SetIsSpawnedByAnti(bool isSpawnedByAnti)
         {
             IsSpawnedByAnti = isSpawnedByAnti;
@@ -150,13 +150,13 @@ namespace Daipan.Enemy.MonoScripts
         {
             enemyViewMono?.Highlight(isHighlighted);
         }
-        
+
         public void DeleteSelf()
         {
             Debug.Log($"[EnemyNet] DeleteSelf()");
             RpcDeleteSelf();
         }
-        
+
         [Rpc(RpcSources.All, RpcTargets.All)]
         void RpcDeleteSelf()
         {
@@ -171,26 +171,29 @@ namespace Daipan.Enemy.MonoScripts
             if (IsDiedList.Count == Runner.ActivePlayers.Count())
             {
                 Debug.Log("[EnemyNet] All players died");
-                RpcDespawn(); 
+                RpcDespawn();
             }
-            
+
             // フェールセーフ
             await UniTask.Delay(TimeSpan.FromSeconds(1));
-            RpcDespawn();
+            if (HasStateAuthority)
+            {
+                RpcDespawn();
+            }
         }
-        
+
         [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
         void RpcDespawn()
         {
             Runner.Despawn(Object);
         }
-        
+
 
 
         public void OnAttacked(IPlayerParamData playerParamData)
         {
             // Hpの増減より先に判定する必要がある
-            if (EnemyEnum.IsSpecial() == true && 
+            if (EnemyEnum.IsSpecial() == true &&
                 !EnemySpecialOnAttacked.IsSameColor(EnemyEnum, playerParamData.PlayerEnum()))
             {
                 // Die
@@ -235,7 +238,7 @@ namespace Daipan.Enemy.MonoScripts
             _isCallOnChangedIsSpawnedByAntiChanged = true;
             TryEnemyViewMonoSetDomain();
         }
-        
+
         void TryEnemyViewMonoSetDomain()
         {
             if (_isCallOnChangedEnemyEnumChanged && _isCallOnChangedIsSpawnedByAntiChanged)
@@ -259,7 +262,7 @@ namespace Daipan.Enemy.MonoScripts
             enemyViewMono?.SetDomain(enemyViewParamData);
             enemyViewMono?.SetOnDiedCallback(DeleteSelf);
             enemyViewMono?.SetOnDaipanedCallback(DeleteSelf);
-            enemyViewMono?.SetSpecialBlackCallback(DeleteSelf); 
+            enemyViewMono?.SetSpecialBlackCallback(DeleteSelf);
         }
     }
 }

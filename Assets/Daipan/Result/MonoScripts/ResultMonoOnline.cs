@@ -10,6 +10,7 @@ using Daipan.Enemy.MonoScripts;
 using Fusion;
 using System.Linq;
 using UnityEngine.UI;
+using Daipan.Comment.MonoScripts;
 
 namespace Daipan.Result.MonoScripts
 {
@@ -17,15 +18,17 @@ namespace Daipan.Result.MonoScripts
     {
         [SerializeField] Image resultImage = null!;
         [SerializeField] Image quiteImage = null!;
-        [SerializeField] ResultSpriteParam[] resultSpriteParams = null!; 
+        [SerializeField] CustomButton quitButton = null!;
+        [SerializeField] ResultSpriteParam[] resultSpriteParams = null!;
         [SerializeField] ResultQuitImage[] resultQuitImages = null!;
-        
         [SerializeField] TMP_Text resultText = null!;
 
         void Start()
         {
+            quitButton.onClick += () => SceneTransition.TransitioningScene(SceneName.TitleSceneNet);
+
             resultText.text = NetworkPlayerResultHolder.NetworkPlayerResultEnum.ToString();
-            
+
             // Resultの結果を表す画像
             foreach (var resultSpriteParam in resultSpriteParams)
             {
@@ -34,16 +37,15 @@ namespace Daipan.Result.MonoScripts
                     resultImage.sprite = resultSpriteParam.resultSprite;
                 }
             }
-            
-            // 実装を断念
-            // // 「終了」ボタンの画像
-            // foreach (var resultQuitImage in resultQuitImages)
-            // {
-            //     if (resultQuitImage.localPlayerRoleEnum == NetworkPlayerResultHolder.LocalPlayerRoleEnum)
-            //     {
-            //         quiteImage.sprite = resultQuitImage.quitSprite;
-            //     }
-            // }
+
+            // 「終了」ボタンの画像
+            foreach (var resultQuitImage in resultQuitImages)
+            {
+                if (resultQuitImage.networkPlayerResultEnum == NetworkPlayerResultHolder.NetworkPlayerResultEnum)
+                {
+                    quiteImage.sprite = resultQuitImage.quitSprite;
+                }
+            }
 
             // 念のため、残っている敵を削除
             var remainingEnemies = FindObjectsByType<EnemyNet>(FindObjectsSortMode.None);
@@ -52,29 +54,35 @@ namespace Daipan.Result.MonoScripts
             var remainingFinalBosses = FindObjectsByType<FinalBossNet>(FindObjectsSortMode.None);
             foreach (var finalBoss in remainingFinalBosses)
                 finalBoss?.DeleteSelf();
-        }
+            // アンチコメントも削除
+            var remainingAntiComments = FindObjectsByType<AntiCommentNet>(FindObjectsSortMode.None);
+            foreach (var antiComment in remainingAntiComments)
+                antiComment?.DeleteSelf();
+            var remainingSpecialAntiComments = FindObjectsByType<AntiCommentNet>(FindObjectsSortMode.None);
+            foreach (var specialAntiComment in remainingSpecialAntiComments)
+                specialAntiComment?.DeleteSelf();
 
-        void Update()
-        {
-            if (Input.GetMouseButtonDown(0))
+            var runner = FindObjectOfType<NetworkRunner>();
+            if (runner != null)
             {
-                SceneTransition.TransitioningScene(SceneName.TitleSceneNet);
+                runner.Shutdown();
             }
         }
+        
     }
-    
+
     [Serializable]
     public sealed class ResultSpriteParam
     {
         public NetworkPlayerResultEnum networkPlayerResultEnum;
         public Sprite? resultSprite;  // 勝敗に応じて表示する画像
     }
-    
+
     [Serializable]
     public sealed class ResultQuitImage
     {
-        public PlayerRoleEnum localPlayerRoleEnum;
-        public Sprite? quitSprite;  // プレイヤーのRoleに応じて、画像を変更 
+        public NetworkPlayerResultEnum networkPlayerResultEnum;
+        public Sprite? quitSprite;  // ResultSpriteに応じて表示
     }
 
     public static class NetworkPlayerResultHolder

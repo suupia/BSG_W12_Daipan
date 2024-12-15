@@ -22,7 +22,9 @@ public class TitleMonoOnline : MonoBehaviour
 
     [Header("JoinPanel")][SerializeField] GameObject joinPanel = null!;
     [SerializeField] TMP_InputField localPlayerNameInputField = null!;
+
     [SerializeField] TMP_InputField localRoomNameInputField = null!;
+
     //[SerializeField] CustomButton joinRoomButton = null!;
     [SerializeField] CustomButton closeJoinPanelButton = null!;
 
@@ -135,12 +137,11 @@ public class TitleMonoOnline : MonoBehaviour
             var playerData = new PlayerData()
             {
                 Name = playerStatsUnit.PlayerName,
-                Role = playerStatsUnit.PlayerRole,
+                Role = playerStatsUnit.PlayerRole
             };
             Debug.Log($"playerData.Role = {playerData.Role}");
             _playerDataTransporterNetWrapper.SetPlayerData(playerStatsUnit.NetworkedPlayerRef, playerData);
         }
-
 
         // Transit to DaipanScene
         SceneTransition.TransitionSceneWithNetworkRunner(runner, SceneName.DaipanSceneNet);
@@ -150,13 +151,20 @@ public class TitleMonoOnline : MonoBehaviour
     {
         var playerStatsUnits = playerStatsUnitParent.GetComponentsInChildren<PlayerStatsUnitNet>();
         var isAllReady = playerStatsUnits.All(playerStatsUnit => playerStatsUnit.IsReady)
-                         && playerStatsUnits.Length > 1;
+                         && playerStatsUnits.Length > 1
+                         && playerStatsUnits.Count(p => p.PlayerRole == PlayerRoleEnum.Streamer) == 1
+                         && playerStatsUnits.Count(p => p.PlayerRole == PlayerRoleEnum.Anti) >= 1;
         var runner = FindObjectOfType<NetworkRunner>();
         if (runner.IsSharedModeMasterClient)
         {
-            startGameButton.gameObject.SetActive(isAllReady);
+            // Masterだけ、半透明で表示したい
+            startGameButton.gameObject.SetActive(true);
+            startGameButton.IsInteractable = isAllReady;  // ラップしていない。。。
+            startGameButton.GetComponent<Button>().interactable = isAllReady;
 #if UNITY_EDITOR
             startGameButton.gameObject.SetActive(true);
+            startGameButton.IsInteractable = true;  // ラップしていない。。。
+            startGameButton.GetComponent<Button>().interactable = true;
 #endif
         }
     }

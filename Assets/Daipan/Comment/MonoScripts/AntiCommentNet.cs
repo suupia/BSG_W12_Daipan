@@ -34,6 +34,11 @@ namespace Daipan.Comment.MonoScripts
         {
             base.Spawned();
             var daipanScopeNet = DaipanScopeNet.BuiltContainer;
+            if (daipanScopeNet == null)
+            {
+                Debug.LogWarning("DaipanScopeNet is not found");
+                return;
+            }
             Initialize(
                 daipanScopeNet.Container.Resolve<AntiCommentCluster>()
                , daipanScopeNet.Container.Resolve<CommentParamsServer>()
@@ -94,6 +99,17 @@ namespace Daipan.Comment.MonoScripts
         void OnCommentTextChanged()
         {
             commentText.text = (string)CommentText;
+        }
+
+        public void DeleteSelf()
+        {
+            DeleteSelfRpc();
+        }
+
+        [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
+        void DeleteSelfRpc()
+        {
+            _runner.Despawn(gameObject.GetComponent<NetworkObject>());
         }
     }
 }

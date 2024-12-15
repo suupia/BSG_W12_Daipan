@@ -32,22 +32,22 @@ namespace Daipan.DebugInput.MonoScripts
         void Update()
         {
 #if UNITY_EDITOR
-            if (Input.GetKeyDown(KeyCode.Alpha1))
+            if (Input.GetKeyDown(KeyCode.F1))
             {
                 ForceNextWave(_waveState, 0); 
             }
 
-            if (Input.GetKeyDown(KeyCode.Alpha2))
+            if (Input.GetKeyDown(KeyCode.F2))
             {
                 ForceNextWave (_waveState, 1);
             }
 
-            if (Input.GetKeyDown(KeyCode.Alpha3))
+            if (Input.GetKeyDown(KeyCode.F3))
             {
                 ForceNextWave(_waveState, 2); 
             }
 
-            if (Input.GetKeyDown(KeyCode.Alpha4))
+            if (Input.GetKeyDown(KeyCode.F4))
             {
                 ForceNextWave(_waveState, 3);  
             }

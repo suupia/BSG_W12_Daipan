@@ -23,7 +23,7 @@ MonoBehaviour:
   antiCommentParam:
     maxCharacterNumber: 5
     banCount: 5
-    specialAntiCommentHp: 2
+    specialAntiCommentHp: 1
   antiStateParam:
     banTime: 10
     feverTime: 5

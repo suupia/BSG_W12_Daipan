@@ -21,7 +21,7 @@ MonoBehaviour:
         attackRange: 5
         increaseIrritatedValueOnAttack: 10
       enemyHpParam:
-        maxHp: 700
+        maxHp: 600
       enemyMoveParam:
         moveSpeedPerSec: 0.5
       enemySpawnParam:

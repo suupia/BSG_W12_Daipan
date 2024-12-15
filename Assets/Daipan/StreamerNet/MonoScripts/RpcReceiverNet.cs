@@ -1,6 +1,9 @@
 #nullable enable
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Fusion;
 using VContainer;
@@ -29,6 +32,8 @@ namespace Daipan.StreamerNet.MonoScripts
         private IResultState _resultState = null!;
         private IViewerNumber _viewerNumber = null!;
         private FinalBossColorChangerNetwork _finalBossColorChangerNetwork = null!;
+        List<PlayerRef> _showResultPlayerRefs = new();
+
 
         [Inject]
         public void Initialize(
@@ -117,6 +122,29 @@ namespace Daipan.StreamerNet.MonoScripts
 
             Debug.Log("Show Result RPC received");
         }
+        
+        [Rpc(RpcSources.All, RpcTargets.All)]
+        public void AddTransitionScenePlayerRefRPC()
+        {
+            _showResultPlayerRefs.Add(_runner.LocalPlayer);
+            if (_showResultPlayerRefs.Count == _runner.ActivePlayers.Count())
+            {
+                TransitionSceneRPC();
+            }
+            
+        }
+
+        [Rpc(RpcSources.All, RpcTargets.All)]
+        void TransitionSceneRPC()
+        {
+            if(_runner.IsSharedModeMasterClient)
+                 SceneTransition.TransitionSceneWithNetworkRunner(_runner, SceneName.ResultSceneNet);
+        }
+
+
+        
+        
+        
         [Rpc(RpcSources.All, RpcTargets.All)]
         public void SetViewerRPC(PlayerRef caller, int amount)
         {
