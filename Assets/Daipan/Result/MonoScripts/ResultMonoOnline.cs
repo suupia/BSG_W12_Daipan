@@ -61,7 +61,14 @@ namespace Daipan.Result.MonoScripts
             var remainingSpecialAntiComments = FindObjectsByType<AntiCommentNet>(FindObjectsSortMode.None);
             foreach (var specialAntiComment in remainingSpecialAntiComments)
                 specialAntiComment?.DeleteSelf();
+
+            var runner = FindObjectOfType<NetworkRunner>();
+            if (runner != null)
+            {
+                runner.Shutdown();
+            }
         }
+        
     }
 
     [Serializable]
