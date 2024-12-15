@@ -47,16 +47,13 @@ namespace Daipan.Player.MonoScripts
             _isAnti = isAnti;
 
             Observable.EveryValueChanged(antiStateValue, x => x.AntiStateEnum)
-            .Subscribe(value =>
-            {
-                if (value == AntiStateEnum.BAN) antiCommentInput.interactable = false;
-                else antiCommentInput.interactable = true;
-            }).AddTo(this);
+                .Subscribe(value =>
+                {
+                    if (value == AntiStateEnum.BAN) antiCommentInput.interactable = false;
+                    else antiCommentInput.interactable = true;
+                }).AddTo(this);
 
-            foreach (var player in runner.ActivePlayers)
-            {
-                Debug.Log($"GetPlayerRoleEnum({player}): {playerDataTransporterNetWrapper.GetPlayerRoleEnum(player)}");
-            }
+            foreach (var player in runner.ActivePlayers) Debug.Log($"GetPlayerRoleEnum({player}): {playerDataTransporterNetWrapper.GetPlayerRoleEnum(player)}");
 
             _antiEnemySpawnerNetwork = antiEnemySpawnerNetwork;
             _antiCommentSpawnerNetwork = antiCommentSpawnerNetwork;
@@ -104,26 +101,23 @@ namespace Daipan.Player.MonoScripts
                     EventSystem.current.SetSelectedGameObject(null);
                 }
             });
-            antiCommentInput.onDeselect.AddListener(_ =>
-            {
-                Debug.Log("DeSelect");
-            });
+            antiCommentInput.onDeselect.AddListener(_ => { Debug.Log("DeSelect"); });
         }
 
         void Update()
         {
             if (!_isInitialized) return;
             if (!_isAnti) return;
-            if(Input.GetKeyDown(KeyCode.Alpha1)) _antiEnemySpawnerNetwork.SpawnEnemy(EnemyEnum.Yellow);
-            if(Input.GetKeyDown(KeyCode.Alpha2)) _antiEnemySpawnerNetwork.SpawnEnemy(EnemyEnum.Red);
-            if(Input.GetKeyDown(KeyCode.Alpha3)) _antiEnemySpawnerNetwork.SpawnEnemy(EnemyEnum.Blue);
-            if(Input.GetKeyDown(KeyCode.Alpha4)) _antiEnemySpawnerNetwork.SpawnEnemy(EnemyEnum.YellowBoss);
-            if(Input.GetKeyDown(KeyCode.Alpha5)) _antiEnemySpawnerNetwork.SpawnEnemy(EnemyEnum.RedBoss);
-            if(Input.GetKeyDown(KeyCode.Alpha6)) _antiEnemySpawnerNetwork.SpawnEnemy(EnemyEnum.BlueBoss);
-            if (Input.GetKeyDown(KeyCode.Return))
+            if (Input.GetKeyDown(KeyCode.Alpha1)) _antiEnemySpawnerNetwork.SpawnEnemy(EnemyEnum.Yellow);
+            if (Input.GetKeyDown(KeyCode.Alpha2)) _antiEnemySpawnerNetwork.SpawnEnemy(EnemyEnum.Red);
+            if (Input.GetKeyDown(KeyCode.Alpha3)) _antiEnemySpawnerNetwork.SpawnEnemy(EnemyEnum.Blue);
+            if (Input.GetKeyDown(KeyCode.Alpha4)) _antiEnemySpawnerNetwork.SpawnEnemy(EnemyEnum.YellowBoss);
+            if (Input.GetKeyDown(KeyCode.Alpha5)) _antiEnemySpawnerNetwork.SpawnEnemy(EnemyEnum.RedBoss);
+            if (Input.GetKeyDown(KeyCode.Alpha6)) _antiEnemySpawnerNetwork.SpawnEnemy(EnemyEnum.BlueBoss);
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 if (_antiCommentInputViewMono.IsChatOpen) return;
-                
+
                 // 既にInputFieldが選択されていなければ、Enterキーで選択状態にしてキーボードからの入力を開始可能にする
                 if (EventSystem.current.currentSelectedGameObject != antiCommentInput.gameObject)
                 {
@@ -135,12 +129,8 @@ namespace Daipan.Player.MonoScripts
                 else
                 {
                     // フォーカスがある場合の処理はない
-                } 
+                }
             }
-
         }
-
-
     }
 }
-
