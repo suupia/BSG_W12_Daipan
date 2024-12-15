@@ -28,6 +28,7 @@ namespace Daipan.Player.MonoScripts
         AntiEnemySpawnerNetwork _antiEnemySpawnerNetwork = null!;
         AntiCommentSpawnerNetwork _antiCommentSpawnerNetwork = null!;
         AntiCommentInputViewMono _antiCommentInputViewMono = null!;
+        AntiStateValue _antiStateValue = null!;
         bool _isAnti;
         bool _isInitialized;
 
@@ -58,7 +59,7 @@ namespace Daipan.Player.MonoScripts
             _antiEnemySpawnerNetwork = antiEnemySpawnerNetwork;
             _antiCommentSpawnerNetwork = antiCommentSpawnerNetwork;
             _antiCommentInputViewMono = commentInputViewMono;
-
+            _antiStateValue = antiStateValue;
             _isInitialized = true;
         }
 
@@ -116,6 +117,7 @@ namespace Daipan.Player.MonoScripts
             if (Input.GetKeyDown(KeyCode.Alpha6)) _antiEnemySpawnerNetwork.SpawnEnemy(EnemyEnum.BlueBoss);
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                if(_antiStateValue.AntiStateEnum == AntiStateEnum.BAN) return;
                 if (_antiCommentInputViewMono.IsChatOpen) return;
 
                 // 既にInputFieldが選択されていなければ、Enterキーで選択状態にしてキーボードからの入力を開始可能にする
@@ -130,6 +132,12 @@ namespace Daipan.Player.MonoScripts
                 {
                     // フォーカスがある場合の処理はない
                 }
+            }
+
+            if (_antiCommentInputViewMono.IsChatOpen && _antiStateValue.AntiStateEnum == AntiStateEnum.BAN)
+            {
+                // フォーカスを外す
+                EventSystem.current.SetSelectedGameObject(null);
             }
         }
     }
